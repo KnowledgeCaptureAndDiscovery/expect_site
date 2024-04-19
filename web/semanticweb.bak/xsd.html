@@ -1,0 +1,226 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.76 [en] (Windows NT 5.0; U) [Netscape]">
+   <meta name="Author" content="Jihie Kim">
+   <title>XMLSchema</title>
+</head>
+<body text="#E5E5E5" bgcolor="#FFFFFF" link="#0000EE" vlink="#551A8B" alink="#FF0000">
+
+<pre><span style="background-color: #ffffcc"><font color="#F5DEB3">&lt;?</span></font><font color="#000000"><b>xml version = </b>"1.0"<b> encoding = </b>"UTF-8"<span style="background-color: #ffffcc">?></span>
+<a NAME="namespace"></a>
+<span style="background-color: #ffffcc">&lt;!</span><span style="background-color: #ffffcc">-- Namespace Declarations in XMLSchema --</span><span style="background-color: #ffffcc">></span>
+&lt;xsd:schema xmlns:xsd = "http://www.w3.org/2001/XMLSchema"&nbsp; version = "1.0">
+
+
+<a NAME="global"></a><span style="background-color: #ffffcc">&lt;!</span><span style="background-color: #ffffcc">-- Declaring global Elements --</span><span style="background-color: #ffffcc">></span>
+<a NAME="range"></a>&lt;xsd:element name = "FirstName" type = "xsd:string">
+&nbsp;&nbsp;&nbsp; &lt;xsd:annotation>
+&nbsp;&nbsp;&nbsp;&nbsp; &lt;xsd:documentation>First Name of the Person&lt;/xsd:documentation>
+&nbsp;&nbsp;&nbsp; &lt;/xsd:annotation>
+&lt;/xsd:element>
+
+
+<a NAME="restriction"></a>
+<span style="background-color: #ffffcc">&lt;!</span><span style="background-color: #ffffcc">-- Derived type MI by a restriction on the length of base type string --</span><span style="background-color: #ffffcc">></span>
+&lt;xsd:element name = "MiddleInitial">
+
+&nbsp;&nbsp;&nbsp;&nbsp;<a NAME="simpleType"></a><span style="background-color: #ffffcc">&lt;!</span><span style="background-color: #ffffcc">-- A SimpleType (comprises of only one type of element - here string) --</span><span style="background-color: #ffffcc">></span>
+&nbsp;&nbsp;&nbsp; &lt;xsd:simpleType>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="background-color: #ffffcc">&lt;!</span><span style="background-color: #ffffcc">-- Restriction --</span><span style="background-color: #ffffcc">></span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;xsd:restriction base = "xsd:string">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;xsd:maxLength value = "1"/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/xsd:restriction>
+&nbsp;&nbsp;&nbsp; &lt;/xsd:simpleType>
+&lt;/xsd:element>
+
+<a NAME="complexType"></a>
+<span style="background-color: #ffffcc">&lt;!</span><span style="background-color: #ffffcc">-- ComplexType Element (comprises of multiple types of elements) --</span><span style="background-color: #ffffcc">></span>
+&lt;xsd:complexType name = "Staff">
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a NAME="sequence"></a><span style="background-color: #ffffcc">&lt;!</span><span style="background-color: #ffffcc">-- sequence (ordered set) of elements --</span><span style="background-color: #ffffcc">></span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;xsd:sequence>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a NAME="local"></a><span style="background-color: #ffffcc">&lt;!</span><span style="background-color: #ffffcc">-- Declaring a local Element --</span><span style="background-color: #ffffcc">></span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;xsd:element name = "LastName" type = "xsd:string">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;xsd:annotation>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;xsd:documentation>Last Name of the Person&lt;/xsd:documentation>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/xsd:annotation>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/xsd:element>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a NAME="globalref"></a><span style="background-color: #ffffcc">&lt;!</span><span style="background-color: #ffffcc">-- Referencing global elements --</span><span style="background-color: #ffffcc">></span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;xsd:element ref="FName" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;xsd:element ref="MI" />
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="background-color: #ffffcc">&lt;!</span><span style="background-color: #ffffcc">-- Declaring local Elements --</span><span style="background-color: #ffffcc">></span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;xsd:element name = "EMail" type = "xsd:string" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;xsd:element name = "HomePage" type = "xsd:anyURI" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;xsd:element name = "TelNo" type = "xsd:string" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;xsd:element name = "Group" type = "xsd:string" maxOccurs="unbounded"/>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="background-color: #ffffcc">&lt;!</span><span style="background-color: #ffffcc">-- Restriction on the range of values of OfficeNo --</span><span style="background-color: #ffffcc">></span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;xsd:element name = "OfficeNo">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;xsd:simpleType>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;xsd:restriction base = "xsd:nonNegativeInteger">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;xsd:maxInclusive value = "1300"/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;xsd:minInclusive value = "100"/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/xsd:restriction>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/xsd:simpleType>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/xsd:element>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/xsd:sequence>
+&lt;/xsd:complexType>
+
+
+<a NAME="extension"></a>&lt;xsd:complexType name = "Researcher">
+&nbsp;&nbsp; &lt;xsd:complexContent>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="background-color: #ffffcc">&lt;!</span><span style="background-color: #ffffcc">-- Extension of Previous Type Staff --</span><span style="background-color: #ffffcc">></span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;xsd:extension base = "Staff">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;xsd:sequence>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a NAME="minmax"></a>&lt;xsd:element name = "Project" type = "xsd:string" maxOccurs = "unbounded"/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;xsd:element name = "Papers" type = "xsd:string" minOccurs = "0" maxOccurs = "unbounded"/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/xsd:sequence>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/xsd:extension>
+&nbsp;&nbsp; &lt;/xsd:complexContent>
+&lt;/xsd:complexType>
+
+<span style="background-color: #ffffcc">&lt;!</span><span style="background-color: #ffffcc">-- Further Extensions to Researcher --</span><span style="background-color: #ffffcc">></span>
+&lt;xsd:complexType name = "ISIResearchStaff">
+&nbsp;&nbsp; &lt;xsd:complexContent>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="background-color: #ffffcc">&lt;!</span><span style="background-color: #ffffcc">-- Extension of Previous Type Staff --</span><span style="background-color: #ffffcc">></span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;xsd:extension base = "Researcher">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;xsd:sequence>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;xsd:element name = "NumProjPrincipal" type = "xsd:integer" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/xsd:sequence>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/xsd:extension>
+&nbsp;&nbsp; &lt;/xsd:complexContent>
+&lt;/xsd:complexType></font></pre>
+
+<pre>
+<span style="background-color: #ffffcc"><font color="#000000">&lt;!</span><span style="background-color: #ffffcc">-- Declaring Global Element 'Major' --</span><span style="background-color: #ffffcc">></span>
+<a NAME="enumeration"></a>&lt;xsd:element name = "Major">
+&nbsp;&nbsp; &lt;xsd:simpleType>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="background-color: #ffffcc">&lt;!</span><span style="background-color: #ffffcc">-- Restricting the values to a set of value using 'enumeration' --</span><span style="background-color: #ffffcc">></span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;xsd:restriction base = "xsd:string">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;xsd:enumeration value = "CS"/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;xsd:enumeration value = "CSCN"/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;xsd:enumeration value = "EE"/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;xsd:enumeration value = "EECN"/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/xsd:restriction>
+&nbsp;&nbsp; &lt;/xsd:simpleType>
+&lt;/xsd:element>
+
+
+
+<span style="background-color: #ffffcc">&lt;!</span><span style="background-color: #ffffcc">-- Declaring Global Element 'DegreeObjective'</span>
+<span style="background-color: #ffffcc">&nbsp;&nbsp; - using enumeration --</span><span style="background-color: #ffffcc">></span>
+
+&lt;xsd:element name = "DegreeObjective">
+&nbsp;&nbsp; &lt;xsd:simpleType>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;xsd:restriction base = "xsd:string">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;xsd:enumeration value = "MS"/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;xsd:enumeration value = "PhD"/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/xsd:restriction>
+&nbsp;&nbsp; &lt;/xsd:simpleType>
+&lt;/xsd:element>
+
+
+&lt;xsd:complexType name = "GRA">
+&nbsp;&nbsp; &lt;xsd:complexContent>
+&nbsp;&nbsp; &lt;xsd:extension base = "Researcher">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;xsd:sequence>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;xsd:element ref="Major" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;xsd:element ref="DegreeObjective" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/xsd:sequence>
+&nbsp;&nbsp; &lt;/xsd:extension>
+&nbsp;&nbsp; &lt;/xsd:complexContent>
+&lt;/xsd:complexType>
+
+
+&lt;xsd:complexType name = "Intern">
+&nbsp;&nbsp; &lt;xsd:complexContent>
+&nbsp;&nbsp; &lt;xsd:extension base = "Researcher">
+&nbsp;&nbsp;&nbsp;&nbsp; &lt;xsd:sequence>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;xsd:element name = "College" type = "xsd:string"/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;xsd:element name = "StartDate" type = "xsd:date"/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;xsd:element name = "EndDate" type = "xsd:date"/></font></pre>
+
+<pre><font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp; &lt;/xsd:sequence>
+&nbsp;&nbsp; &lt;/xsd:extension>
+&nbsp;&nbsp; &lt;/xsd:extension>
+&nbsp;&nbsp; &lt;/xsd:complexContent>
+&lt;/xsd:complexType>
+
+
+&lt;xsd:complexType name = "Admin">
+&nbsp;&nbsp; &lt;xsd:complexContent>
+&nbsp;&nbsp; &lt;xsd:extension base = "Staff">
+&nbsp;&nbsp;&nbsp;&nbsp; &lt;xsd:sequence>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;xsd:element name = "AdminGroup" type = "xsd:string"/>
+&nbsp;&nbsp;&nbsp;&nbsp; &lt;/xsd:sequence>
+&nbsp;&nbsp; &lt;/xsd:extension>
+&nbsp;&nbsp; &lt;/xsd:complexContent>
+&lt;/xsd:complexType>
+
+
+&lt;xsd:complexType name = "ProjAssistant">
+&nbsp;&nbsp; &lt;xsd:complexContent>
+&nbsp;&nbsp; &lt;xsd:extension base = "Admin">
+&nbsp;&nbsp;&nbsp;&nbsp; &lt;xsd:sequence>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;xsd:element name = "Project" type = "xsd:string"/>
+&nbsp;&nbsp;&nbsp;&nbsp; &lt;/xsd:sequence>
+&nbsp;&nbsp; &lt;/xsd:extension>
+&nbsp;&nbsp; &lt;/xsd:complexContent>
+&lt;/xsd:complexType>
+
+
+&lt;xsd:complexType name = "Coordinator">
+&nbsp;&nbsp; &lt;xsd:complexContent>
+&nbsp;&nbsp;&nbsp;&nbsp; &lt;xsd:extension base = "Admin"/>
+&nbsp;&nbsp; &lt;/xsd:complexContent>
+&lt;/xsd:complexType>
+
+
+&lt;xsd:element name = "Coordinator" type = "Coordinator"/>
+&lt;xsd:element name = "ProjAssistant" type = "ProjAssistant"/>
+&lt;xsd:element name = "Intern" type = "Intern"/>
+&lt;xsd:element name = "GRA" type = "GRA"/>
+&lt;xsd:element name = "ProjLeader" type = "ISIResearchStaff"/>
+&lt;xsd:element name = "SRSci" type = "ISIResearchStaff"/>
+
+&lt;xsd:element name = "ISIPeople">
+&nbsp;&nbsp; &lt;xsd:complexType>
+&nbsp;&nbsp;&nbsp;<a NAME="choice"></a><span style="background-color: #ffffcc">&lt;!</span><span style="background-color: #ffffcc">-- ISIPeople can be one of the following --</span><span style="background-color: #ffffcc">></span>
+&nbsp;&nbsp; &lt;xsd:choice minOccurs = "0" maxOccurs = "unbounded">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;xsd:element ref = "ProjLeader"/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;xsd:element ref = "SRSci"/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;xsd:element ref = "GRA"/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;xsd:element ref = "Intern"/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;xsd:element ref = "Coordinator"/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;xsd:element ref = "ProjAssistant"/>
+&nbsp;&nbsp;&nbsp;&nbsp; &lt;/xsd:choice>
+&nbsp;&nbsp; &lt;/xsd:complexType>
+&lt;/xsd:element></font></pre>
+
+<pre><span style="background-color: #ffffcc"><font color="#000000">&lt;!</span><span style="background-color: #ffffcc">-- Just Examples to illustrate a few points --</span><span style="background-color: #ffffcc">></font></span></pre>
+
+<pre><a NAME="union"></a><span style="background-color: #ffffcc"><font color="#000000">&lt;!</span><span style="background-color: #ffffcc">-- UNION -- (a definition of maxOccurs as either a +'ve integer or 'unbounded'&nbsp;</span><span style="background-color: #ffffcc">></font></span></pre>
+
+<pre>&nbsp; <font color="#000000">&lt;xsd:simpleType name="maxOccurs">
+&nbsp;&nbsp;&nbsp; &lt;xsd:union>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;xsd:simpleType>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;xsd:restriction base='nonNegativeInteger'/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/xsd:simpleType>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;xsd:simpleType>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;xsd:restriction base='string'>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;xsd:enumeration value='unbounded'/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/xsd:restriction>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/xsd:simpleType>
+&nbsp;&nbsp;&nbsp; &lt;/xsd:union>
+&nbsp; &lt;/xsd:simpleType>
+
+&lt;/xsd:schema></font></pre>
+
+</body>
+</html>

@@ -1,0 +1,196 @@
+<HTML>
+<HEAD>
+   <TITLE>Y2 Plan</TITLE>
+
+ 
+
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+
+<TABLE  align=center WIDTH=730 border=0>
+<TR><TD colspan=3>
+
+<P ALIGN=CENTER>
+
+
+
+<TR><TD WIDTH=100></TD>
+
+<TD WIDTH=550>
+
+<BR><BR>
+
+<P align=center><B><FONT FACE=ARIAL COLOR=blue SIZE=+1>Y2 Plan</A> </FONT></B></P>
+
+
+<PRE>
+       
+       Yolanda Gil (gil@isi.edu, (310)448-8794) 
+       Jihie Kim (jihie@isi.edu, (310)448-8769) 
+       Jim Blythe (blythe@isi.edu, (310)448-8251) 
+</PRE>
+
+<HR> 
+
+<p>
+
+
+
+These are the topics that we would like to work on next year.  The emphasis
+will be on the first two (Dialog Management and Expression Composer), which
+are aimed at making the interaction with the user more natural and flexible.
+
+(Please goto <a href="http://www.isi.edu/expect/rkf/">
+http://www.isi.edu/expect/rkf/</a> to see other work in RKF.) 
+<p>
+
+<HR> 
+<B><I><FONT SIZE=+1>1. DIALOGUE MANAGEMENT</B></FONT></I>
+
+(Powerpoint slides that describe our plan are available
+<A HREF="pi-mtg-10-01/dm-rkf-pi-meeting.ppt">
+http://www.isi.edu/expect/projects/rkf/dm-rkf-pi-meeting.ppt</A> (10/15/01).)
+
+<p>
+We'd like to develop a dialogue manager that uses KA plans to keep 
+track of the user's actions and can make suggestions for how to 
+proceed.  The dialogue manager would support: 1) generation, to 
+suggest to the user what to do next based on the library of KA plans, 
+2) recognition, to track what the user is doing in terms of the KA 
+plans.  The dialogue state would be shown to the user as a "status" 
+window, where the user could see the currently active KA plans as a 
+list of bullets and sub-bullets, each bullet would be checked if 
+completed and collapsed when all its sub-bullets are completed.  The 
+user could choose to toggle between a "suggest" mode (generation) and 
+a "comment" mode (recognition).  We could also keep a history of the 
+user's sessions, and be more forceful to impose the "suggest" mode to 
+new users or when a more experience user tries a new 
+feature/capability of the system.
+
+<p>
+A new capability that we'd like to support with this work is 
+meta-level interaction with the user.  By allowing users to 
+manipulate/edit the status window, they could indicate whether a 
+certain task is completed (e.g., I'm done adding sub-steps).
+
+<p>
+To develop the library of KA plans we would draw ideas from 
+Intelligent Tutoring Systems, in effect trying to make SHAKEN a 
+smarter student.  An initial (old) outline is posted at 
+ <A HREF="http://www.isi.edu/~gil/rkf/ITS.ppt">
+http://www.isi.edu/~gil/rkf/ITS.ppt</A>.  For example, ITS often start by 
+showing the student the purpose of a lesson, partly to give the 
+student a roadmap but also to detect any gaps in the student's prior 
+knowledge assumed by the lesson.  There are many other interesting 
+points about controlling nested subdialogues, teaching strategies, 
+providing immediate feedback, etc.
+
+<p>
+An intriguing possibility is to use this as a way to 
+determine/compare the quality of human tutors by looking at how and 
+how much they complete the KA plans (how organized their lessons are, 
+how thorough with details), and eventually to train human tutors 
+through practicing with the system.
+
+<p>
+We have done some previous work in this area on KA Scripts and 
+PSMTool, several papers are available at 
+<A HREF="http://www.isi.edu/expect/link/papers-ka.html">
+http://www.isi.edu/expect/link/papers-ka.html</A>.
+<p>
+
+More details are available at 
+<A HREF="http://www.isi.edu/expect/projects/rkf/dialog-manager.html">
+http://www.isi.edu/expect/projects/rkf/dialog-manager.html</A>.
+<p>
+
+<HR> 
+
+<B><I><FONT SIZE=+1>2. EXPRESSION COMPOSER </B></FONT></I>
+
+<p>
+We have already built an Expression Composer (EC) that works with the
+EXPECT English editor, which sparked quite a bit of interest when we
+demoed it in Tucson.  Our current EC takes an expression that the user
+types such as "max airport landing" and shows the user precise
+expressions based on the exact representation of those terms in the KB,
+such as "find the maximum of the available landing distance of the
+runways of the airport" (see
+<a href="http://www.isi.edu/expect/rkf/composer.ppt">
+http://www.isi.edu/expect/rkf/composer.ppt</a>). 
+We'd like to integrate it with SHAKEN and KM, and extend it to support
+not only KB search but also search/expansions on a CMAP to support
+faster knowledge entry.  Another extension would be to use
+lexical/linguistic resources such as thesauri (our SME dictionary and
+others).
+
+<p>
+A very important new area that this would allow us to embark on is 
+helping a user teach the system techno-speak, i.e., domain-specific 
+vocabulary that will make the student use more technical terms to 
+describe what was learned.  this is something human teachers do once 
+the student has conceptually understood the material, and we can see 
+that SHAKEN this past year was built to do that part of understanding 
+the material but had no facilities to let a user teach it to speak in 
+domain terms proficiently.
+
+<p>
+More details are available at
+<a
+href="http://www.isi.edu/expect/projects/rkf/expression-composer.html">
+http://www.isi.edu/expect/projects/rkf/expression-composer.html</a>.
+
+<HR> 
+
+<B><I><FONT SIZE=+1>3. SADL </B></FONT></I>
+
+<p>
+The first version of the SADL language for specifying process 
+structures was produced last year (see 
+<A HREF="http://www.isi.edu/expect/rkf/action-language.html">
+http://www.isi.edu/expect/rkf/action-language.html</A>).  All SMEs 
+pointed out that they would have liked to express concurrent events 
+and iteration, which were included in the language but only a subset 
+of it (SADL-Lite) made it to SHAKEN.
+
+<p>
+A first step is to move SHAKEN from SADL-Lite to full SADL.  Many 
+pieces are already done, we just need to integrate them and make it 
+happen.
+
+<p>
+We also need to extend the language, some of the issues were 
+described in (see <A
+HREF="http://www.isi.edu/expect/rkf/action-language.html">
+http://www.isi.edu/expect/rkf/action-language.html</A>
+) and included an important set of extensions to accomodate the 
+execution/simulation of components (UMass).
+
+
+
+<HR>
+<B><I><FONT SIZE=+1>4. KANAL </B></FONT></I>
+
+<p>
+We will work with SRI to update it as needed.  KANAL already supports 
+most of SADL.  For those of you who have not had a chance to see the 
+latest version, it had a much improved interface and included 
+documentation.  A slide demo can be downloaded from 
+<A HREF="http://www.isi.edu/expect/projects/KANAL/">
+http://www.isi.edu/expect/projects/KANAL/ </A>.
+
+
+<HR>
+<p> <A HREF="http://www.isi.edu/expect/"> EXPECT Homepage</A>.</P>
+
+<HR SIZE=2>
+
+
+
+<TD WIDTH=100></TD>
+
+</TR>
+
+</TABLE>
+</BODY>
+</HTML>

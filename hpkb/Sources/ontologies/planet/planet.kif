@@ -1,0 +1,533 @@
+
+(IN-PACKAGE "PLANET")
+(DEFRELATION IKB-SYNONYM (?A ?B)
+ (DOCUMENTATION IKB-SYNONYM "This relation is used to indicate the
+name of an equivalent entity used in PLANET's translation into the IKB"))
+(FORALL (?B) (=> (IKB-SYNONYM ?A ?B) (STRING ?B)))
+(DEFRELATION PLANNING-PROBLEM (?SELF) :=>
+ (AND (THING ?SELF)
+      (EXISTS (?A) (AND (INITIAL-STATE ?SELF ?A) (WORLD-STATE ?A)))
+      (FORALL (?A ?B)
+       (=> (AND (INITIAL-STATE ?SELF ?A) (INITIAL-STATE ?SELF ?B))
+        (= ?A ?B)))
+      (FORALL (?C)
+       (=> (PROBLEM-GOAL ?SELF ?C) (GOAL-SPECIFICATION ?C)))
+      (> (CARDINALITY (SETOFALL ?D (CONSTRAINTS ?SELF ?D))) 0)
+      (FORALL (?E)
+       (=> (POSSIBLE-TASK ?SELF ?E) (PLAN-TASK-TEMPLATE ?E)))
+      (FORALL (?F) (=> (CANDIDATE-PLAN ?SELF ?F) (PLAN ?F)))
+      (EXISTS (?G) (AND (COMPARISON ?SELF ?G) (COMPARISON-STRUCTURE ?G))))
+ :AXIOM
+ (DOCUMENTATION PLANNING-PROBLEM "A planning problem specifies
+requirements on a plan such as goals and constraints, and may lead to
+several plans being generated, which share the initial state, goals and
+constraints that are specified in the problem. Information used to
+compare candidate plans is also found here."))
+(=> (PLANNING-PROBLEM ?SELF)
+ (FORALL (?H)
+  (=> (PROBLEM-REFINEMENT ?SELF ?H) (PLANNING-PROBLEM ?H))))
+(DEFRELATION PLANNING-PROBLEM-CONTEXT (?SELF) :=> (PLANNING-PROBLEM ?SELF)
+ :AXIOM
+ (DOCUMENTATION PLANNING-PROBLEM-CONTEXT "A planning problem context represents
+the initial, given assumptions about the planning problem. As such it is not
+an alternative for any other planning problem."))
+(DEFRELATION CANDIDATE (?A ?B)
+ (DOCUMENTATION CANDIDATE " A planning problem, planning problem
+context or plan may have a number of candidate alternatives which are
+(or at one point were) potential solutions. With respect to a particular
+item, a candidate may be untried, feasible, selected or rejected, and these are
+sub-relations of candidate. They are not properties of the plan or problem,
+because a candidate may be rejected for one planning problem but acceptable
+for another (for example a relaxation of the first planning
+problem). This relation is also specialised for each item that can have
+candidates: planning problem contexts, planning problems and plans"))
+(DEFRELATION UNTRIED-CANDIDATE (?A ?B) :=> (CANDIDATE ?A ?B) :AXIOM
+ (DOCUMENTATION UNTRIED-CANDIDATE "A candidate plan or other item which has
+not yet been tested"))
+(DEFRELATION FEASIBLE-CANDIDATE (?A ?B) :=> (CANDIDATE ?A ?B) :AXIOM
+ (DOCUMENTATION FEASIBLE-CANDIDATE "A candidate plan or other item which has
+been tested and passed its feasibility test."))
+(DEFRELATION UNFEASIBLE-CANDIDATE (?A ?B) :=> (CANDIDATE ?A ?B) :AXIOM
+ (DOCUMENTATION UNFEASIBLE-CANDIDATE "A candidate plan or other item which has
+been tested and failed its feasibility test. This need not mean it is a
+rejected candidate because some relaxation of the constraints may be
+applied (for example if there are no feasible candidates)."))
+(DEFRELATION SELECTED-CANDIDATE (?A ?B) :=> (CANDIDATE ?A ?B) :AXIOM
+ (DOCUMENTATION SELECTED-CANDIDATE "A candidate plan or other item which has
+been selected as a solution at this level"))
+(DEFRELATION REJECTED-CANDIDATE (?A ?B) :=> (CANDIDATE ?A ?B) :AXIOM
+ (DOCUMENTATION REJECTED-CANDIDATE "A candidate plan or other item which for
+some reason has been rejected as the preferred item"))
+(DEFRELATION PROBLEM-REFINEMENT (?A ?B) :=> (CANDIDATE ?A ?B) :AXIOM
+ (DOCUMENTATION PROBLEM-REFINEMENT "A planning problem may have a number of
+alternative problems, which impose (or relax) different constraints on
+the original problem or may assume variations of the initial state. For
+example, the alternatives might specify different ways to achieve some
+goal to allow alternative plans to be explored systematically."))
+(FORALL (?B) (=> (PROBLEM-REFINEMENT ?A ?B) (PLANNING-PROBLEM ?B)))
+(FORALL (?A) (=> (PROBLEM-REFINEMENT ?A ?B) (PLANNING-PROBLEM ?A)))
+(DEFRELATION UNFEASIBLE-ALTERNATIVE-PROBLEM (?A ?B) :=>
+ (AND (PROBLEM-REFINEMENT ?A ?B) (UNFEASIBLE-CANDIDATE ?A ?B)) :AXIOM
+ (DOCUMENTATION UNFEASIBLE-ALTERNATIVE-PROBLEM
+                "The alternative problems that contained
+no feasible plans. This is not represented as a property of the planning
+problem because one problem might be unfeasible with respect to one
+initial state, represented at the parent planning problem, and feasible
+with respect to another."))
+(DEFRELATION PLAN (?SELF) :=>
+ (AND (THING ?SELF)
+      (> (CARDINALITY (SETOFALL ?A (PLAN-COMMITMENTS ?SELF ?A))) 0)
+      (FORALL (?B) (=> (TASK-OF ?SELF ?B) (PLAN-TASK ?B)))
+      (EXISTS (?C) (AND (COMPARISON ?SELF ?C) (COMPARISON-STRUCTURE ?C)))
+      (FORALL (?D)
+       (=> (INTERMEDIATE-GOAL ?SELF ?D) (GOAL-SPECIFICATION ?D)))
+      (EXISTS (?E) (AND (EVALUATION ?SELF ?E) (EVALUATION-STRUCTURE ?E))))
+ :AXIOM
+ (AND (DOCUMENTATION PLAN "
+A plan represents a set of commitments to actions
+taken by an agent in order to achieve some specified goals.
+
+Commitments may be in the form of actions at variously detailed levels
+of specification, ordering constraints among actions, constraints that
+an action will be used to establish a particular condition and other
+constraints on a plan such as a cost profile.
+
+A feasible plan P is one for which *there exists* some plan that has
+a consistent superset of the commitments in P and will successfully
+achieve the goals.
+
+A consistent plan is one whose commitments are consistent with each
+other, with what is known about the state and with the model of action.
+
+A complete plan is one that includes the tasks necessary to achieve the
+goals to the required level of detail (this depends on the planning
+agent's concerns).
+
+A justified plan is a plan with a minimal set of commitments that are
+complete for the goals it addresses (which may be an explicit subset of
+the full plan goal set).
+
+There is no requirement for a plan to be justified or correct. This is 
+important because we can represent not only machine-generated plans but also
+human-generated plans, which are likely to contain errors.
+
+Note: These definitions accomodate different approaches that planners 
+use.  For example, we can represent that a hierarchical planner
+generates a feasible plan at each planning level, while generating 
+a complete plan only at the lowest level.  A partial-order planner, 
+such as UCPOP, would successively refine feasible plans (called 
+candidate plans) until finding a solution which is a complete plan.
+")
+      (IKB-SYNONYM PLAN PLAN)))
+(DEFRELATION FEASIBLE-PLAN (?SELF) :=> (PLAN ?SELF) :AXIOM
+ (DOCUMENTATION FEASIBLE-PLAN "A feasible plan P is a plan for which
+*there exists* some plan that has a consistent superset of the
+commitments in P and will successfully achieve the goals."))
+(DEFRELATION COMPLETE-PLAN (?SELF) :=> (PLAN ?SELF) :AXIOM
+ (DOCUMENTATION COMPLETE-PLAN "A complete plan is one that includes the
+tasks necessary to achieve the goals to the required level of detail
+(this depends on the planning agent's concerns)."))
+(DEFRELATION JUSTIFIED-PLAN (?SELF) :=> (PLAN ?SELF) :AXIOM
+ (DOCUMENTATION JUSTIFIED-PLAN "A justified plan is a plan with a
+minimal set of commitments that are complete for the goals it addresses
+(which may be an explicit subset of the full plan goal set)."))
+(DEFRELATION CONSISTENT-PLAN (?SELF) :=> (PLAN ?SELF) :AXIOM
+ (DOCUMENTATION CONSISTENT-PLAN "A consistent plan is one whose
+commitments are consistent with each other, with what is known about the
+state and with the model of action."))
+(DEFRELATION SUB-PLAN (?A ?B)
+ (DOCUMENTATION SUB-PLAN "Sometimes it is useful to state that a
+plan forms a sub-plan of another one. For example in the HPKB COAs, the
+close battle and security plans are sub-plans of the COA."))
+(FORALL (?B) (=> (SUB-PLAN ?A ?B) (PLAN ?B)))
+(FORALL (?A) (=> (SUB-PLAN ?A ?B) (PLAN ?A)))
+(DEFRELATION CANDIDATE-PLAN (?A ?B) :=> (CANDIDATE ?A ?B))
+(FORALL (?B) (=> (CANDIDATE-PLAN ?A ?B) (PLAN ?B)))
+(FORALL (?A) (=> (CANDIDATE-PLAN ?A ?B) (PLANNING-PROBLEM ?A)))
+(DEFRELATION PLAN-TASK-DESCRIPTION (?SELF) :=>
+ (AND (THING ?SELF)
+      (EXISTS (?A) (AND (CAPABILITY ?SELF ?A) (GOAL-SPECIFICATION ?A)))
+      (FORALL (?B) (=> (EFFECTS ?SELF ?B) (STATE-BASED-GOAL-SPEC ?B)))
+      (FORALL (?C)
+       (=> (PRECONDITIONS ?SELF ?C) (PRECONDITION-EXPRESSION ?C)))
+      (EXISTS (?D)
+              (AND (PLANNING-LEVEL ?SELF ?D) (PLANNING-LEVEL-SPECIFIER ?D)))
+      (EXISTS (?E)
+       (AND (HUMAN-READABLE-DESCRIPTION-OF ?SELF ?E)
+            (HUMAN-READABLE-TASK-DESCRIPTION ?E)))
+      (FORALL (?E ?F)
+       (=>
+        (AND (HUMAN-READABLE-DESCRIPTION-OF ?SELF ?E)
+             (HUMAN-READABLE-DESCRIPTION-OF ?SELF ?F))
+        (= ?E ?F)))
+      (FORALL (?G)
+       (=> (REQUIRED-RESOURCE ?SELF ?G) (RESOURCE-REQUIREMENT ?G)))
+      (EXISTS (?H) (AND (EVALUATION ?SELF ?H) (EVALUATION-STRUCTURE ?H))))
+ :AXIOM
+ (DOCUMENTATION PLAN-TASK-DESCRIPTION "Subclasses of this class include the
+class of specific tasks that appear in plans (plan-task) and the class
+of task templates that describe patterns of tasks
+(plan-task-template). For example in some planners the two classes
+correspond to operator instances and operator schemas respectively, and
+in some planners they are called tasks and task decomposition
+patterns."))
+(DEFRELATION PLAN-TASK (?SELF) :=>
+ (AND (PLAN-TASK-DESCRIPTION ?SELF)
+      (EXISTS (?A) (AND (TASK-TEMPLATE ?SELF ?A) (PLAN-TASK-TEMPLATE ?A)))
+      (> (CARDINALITY (SETOFALL ?B (TASK-COMMITMENTS ?SELF ?B))) 0))
+ :AXIOM
+ (AND (DOCUMENTATION PLAN-TASK "A plan task is an instantiation
+of a task template and appears in a plan. It can be a partial or full
+instantiation.")
+      (IKB-SYNONYM PLAN-TASK ACTION)))
+(DEFRELATION PRIMITIVE-PLAN-TASK-DESCRIPTION (?SELF) :=
+ (AND (PLAN-TASK-DESCRIPTION ?SELF)
+      (NOT (EXISTS (?A) (SUB-TASK ?SELF ?A))))
+ :AXIOM
+ (DOCUMENTATION PRIMITIVE-PLAN-TASK-DESCRIPTION "This is a task that cannot be
+decomposed into a subtask."))
+(DEFRELATION PRIMITIVE-PLAN-TASK (?SELF) :=
+ (AND (PLAN-TASK ?SELF) (PRIMITIVE-PLAN-TASK-DESCRIPTION ?SELF)) :AXIOM
+ (DOCUMENTATION PRIMITIVE-PLAN-TASK "This is a task that cannot be
+decomposed into a subtask."))
+(DEFRELATION PLAN-STEP (?SELF) :=
+ (AND (PRIMITIVE-PLAN-TASK ?SELF) (EXISTS (?A) (EFFECTS ?SELF ?A))) :AXIOM
+ (DOCUMENTATION PLAN-STEP "A subgoaling planner such as UCPOP
+will compose plans out of plan-steps"))
+(DEFRELATION PLAN-TASK-TEMPLATE (?SELF) :=> (PLAN-TASK-DESCRIPTION ?SELF)
+ :AXIOM
+ (AND (DOCUMENTATION PLAN-TASK-TEMPLATE "A template that denotes a set
+of actions that can be performed, eg (pickup ?x).")
+      (IKB-SYNONYM PLAN-TASK-TEMPLATE SCRIPT-TYPE)))
+(DEFRELATION POSSIBLE-TASK (?A ?B)
+ (DOCUMENTATION POSSIBLE-TASK "(possible-task <problem> <template>) means
+that <template> is a task template for a set of tasks that are legal
+and reasonable to perform in plans that are solutions to the planning
+problem <problem>."))
+(FORALL (?B) (=> (POSSIBLE-TASK ?A ?B) (PLAN-TASK-TEMPLATE ?B)))
+(FORALL (?A) (=> (POSSIBLE-TASK ?A ?B) (PLANNING-PROBLEM ?A)))
+(DEFRELATION TASK-TEMPLATE (?A ?B)
+ (DOCUMENTATION TASK-TEMPLATE "This relates a plan task to the 
+template that describes it."))
+(FORALL (?B) (=> (TASK-TEMPLATE ?A ?B) (PLAN-TASK-TEMPLATE ?B)))
+(FORALL (?A) (=> (TASK-TEMPLATE ?A ?B) (PLAN-TASK ?A)))
+(DEFRELATION CAPABILITY (?A ?B)
+ (DOCUMENTATION CAPABILITY "The capability of a task or task template
+describes a goal for which the task can be used."))
+(FORALL (?B) (=> (CAPABILITY ?A ?B) (GOAL-SPECIFICATION ?B)))
+(FORALL (?A) (=> (CAPABILITY ?A ?B) (PLAN-TASK-DESCRIPTION ?A)))
+(DEFRELATION PRECONDITIONS (?A ?B)
+ (DOCUMENTATION PRECONDITIONS "A necessary condition for the task, or a 
+task fitting this template description, to be executed."))
+(FORALL (?B) (=> (PRECONDITIONS ?A ?B) (PRECONDITION-EXPRESSION ?B)))
+(FORALL (?A) (=> (PRECONDITIONS ?A ?B) (PLAN-TASK-DESCRIPTION ?A)))
+(DEFRELATION EFFECTS (?A ?B)
+ (DOCUMENTATION EFFECTS "If the task is executed, the effect
+typically holds in the resulting world state. An effect of a task
+need not be a capability of that task because the task may never be
+explicitly used to achieve it, for example firing a weapon to achieve
+that it is not loaded, instead of just unloading it. This distinction is
+sometimes referred to as 'primary effects' versus effects in the planning
+ literature."))
+(FORALL (?B) (=> (EFFECTS ?A ?B) (STATE-BASED-GOAL-SPEC ?B)))
+(FORALL (?A) (=> (EFFECTS ?A ?B) (PLAN-TASK-DESCRIPTION ?A)))
+(DEFRELATION PRIMARY-EFFECTS (?A ?B) :=> (EFFECTS ?A ?B) :AXIOM
+ (DOCUMENTATION PRIMARY-EFFECTS "Primary effects are those effects that
+are considered the 'important' effects of a task, typically these are
+the effects for which the task was originally modelled as a possible
+task to execute in the domain. For example one might fire a gun in order
+to shoot something, so this is a primary effect. The fact that the
+barrel gets hot is a secondary effect or side-effect. It is not usually
+a reason to fire the weapon but may need to be modelled as a state
+change for other reasons. Some (but not all) planning systems only allow
+a task to be added to a plan in order to achieve a primary effect."))
+(DEFRELATION PLAN-RESTRICTIONS (?A ?B)
+ (DOCUMENTATION PLAN-RESTRICTIONS "A plan-restriction can be any relation
+on a plan, planning problem, context or task that constrains the forms
+of refinements of instantiations possible. One partition is in terms of
+the source of the restriction: constraints are external restrictions
+that are part of the problem definition, commitments are restrictions
+added by the planning agent to denote choices made during
+search. Constraints and commitments are equally expressive and can both
+be any of the other types of plan-restrictions, eg temporal or task
+choice. It is interesting to note that when different planning agents
+collaborate, one agent may make commitments and impose them as
+constraints on another agent (this approach is taken in Gratch's
+planner)."))
+(DEFRELATION CONSTRAINTS (?A ?B) :=> (PLAN-RESTRICTIONS ?A ?B) :AXIOM
+ (DOCUMENTATION CONSTRAINTS "Some plan constraints are not commitments
+made by the planning agent but represent top-level constraints posted
+by the agent requesting the plan. Examples could include avoiding
+a certain resource or action."))
+(DEFRELATION COMMITMENTS (?A ?B) :=> (PLAN-RESTRICTIONS ?A ?B) :AXIOM
+ (DOCUMENTATION COMMITMENTS "In a search or design task, a number of
+choices typically need to be made to find or create a desired object.
+Relations that are subtypes of commitments represent such choices that
+have been made on the domain object of the relation during the search or
+design process. For example, (task-of <plan> <task>) represents a design
+choice made in the creation of a plan, that it include the indicated task."))
+(DEFRELATION PLAN-COMMITMENTS (?A ?B) :=> (COMMITMENTS ?A ?B) :AXIOM
+ (DOCUMENTATION PLAN-COMMITMENTS "The class of relations that are commitments
+on plans. (See comment on commitments)"))
+(FORALL (?A) (=> (PLAN-COMMITMENTS ?A ?B) (PLAN ?A)))
+(DEFRELATION PLAN-CONSTRAINTS (?A ?B) :=> (CONSTRAINTS ?A ?B) :AXIOM
+ (DOCUMENTATION PLAN-CONSTRAINTS "The class of relations that are
+constraints on plans. (See comments on the concepts 'commitments',
+'constraints' and 'plan-restrictions'.)"))
+(FORALL (?A) (=> (PLAN-CONSTRAINTS ?A ?B) (PLAN ?A)))
+(DEFRELATION TASK-OF (?A ?B) :=> (PLAN-COMMITMENTS ?A ?B) :AXIOM
+ (DOCUMENTATION TASK-OF "The tasks that will form part of the
+plan can be viewed as part of the commitments made by the plan. This is
+probably a sub-relation of eventOfPlan in the task interaction submission.
+Alignment has not been done since that is a preliminary submissin."))
+(FORALL (?B) (=> (TASK-OF ?A ?B) (PLAN-TASK ?B)))
+(FORALL (?A) (=> (TASK-OF ?A ?B) (PLAN ?A)))
+(DEFRELATION TASK-OF-CONSTRAINT (?A ?B) :=> (PLAN-CONSTRAINTS ?A ?B)
+ :AXIOM
+ (DOCUMENTATION TASK-OF-CONSTRAINT "The same restriction as task-of, but
+imposed as a constraint that a plan include a particular task."))
+(FORALL (?B) (=> (TASK-OF-CONSTRAINT ?A ?B) (PLAN-TASK ?B)))
+(FORALL (?A) (=> (TASK-OF-CONSTRAINT ?A ?B) (PLAN ?A)))
+(DEFRELATION PROBLEM-GOAL (?A ?B)
+ (DOCUMENTATION PROBLEM-GOAL "The goal of the planning problem"))
+(FORALL (?B) (=> (PROBLEM-GOAL ?A ?B) (GOAL-SPECIFICATION ?B)))
+(FORALL (?A) (=> (PROBLEM-GOAL ?A ?B) (PLANNING-PROBLEM ?A)))
+(DEFRELATION PLAN-GOAL (?A ?B)
+ (DOCUMENTATION PLAN-GOAL "The goal of the plan"))
+(FORALL (?B) (=> (PLAN-GOAL ?A ?B) (GOAL-SPECIFICATION ?B)))
+(FORALL (?A) (=> (PLAN-GOAL ?A ?B) (PLAN ?A)))
+(DEFRELATION INTERMEDIATE-GOAL (?A ?B) :=> (PLAN-GOAL ?A ?B) :AXIOM
+ (DOCUMENTATION INTERMEDIATE-GOAL "A goal of a plan that is not a top-level
+objective, but arises from tasks or other constraints chosen in service
+of the top-level objective(s). Note that this is different from subGoal
+in the HPKB upper ontology because the domain of this relation is the plan. If 
+(intermediate-goal <plan> <goal>) holds, then (subGoal <supergoal> <goal>)
+holds for some supergoal."))
+(DEFRELATION REFINEMENT-PLAN (?A ?B) :=> (CANDIDATE ?A ?B) :AXIOM
+ (DOCUMENTATION REFINEMENT-PLAN "(refinement-plan <plan-1> <plan-2>)
+means that <plan-2> contains a strict superset of the commitments of
+<plan-1>, for example by refining an action or adding a new ordering
+relation. This relation captures the act of making a plan more complete,
+as opposed to specifying a coherent piece of a plan, which is done by
+the relation sub-plan. It is a subrelation of candidate, and there can
+be untried, feasible, unfeasible, selected and rejected refinement
+plans."))
+(FORALL (?B) (=> (REFINEMENT-PLAN ?A ?B) (PLAN ?B)))
+(FORALL (?A) (=> (REFINEMENT-PLAN ?A ?B) (PLAN ?A)))
+(DEFRELATION UNTRIED-REFINEMENT-PLAN (?A ?B) :=>
+ (AND (REFINEMENT-PLAN ?A ?B) (UNTRIED-CANDIDATE ?A ?B)) :AXIOM
+ (DOCUMENTATION UNTRIED-REFINEMENT-PLAN "This relation holds if the plan
+represents an alternative that has not yet been tried or evaluated."))
+(DEFRELATION REJECTED-REFINEMENT-PLAN (?A ?B) :=>
+ (AND (REFINEMENT-PLAN ?A ?B) (REJECTED-CANDIDATE ?A ?B)) :AXIOM
+ (DOCUMENTATION REJECTED-REFINEMENT-PLAN "This relation holds if the plan
+represents an alternative that has not been tried and rejected by
+some agent, for example the planning agent or an evaluating agent."))
+(DEFRELATION ALTERNATIVE-PLAN (?A ?B)
+ (DOCUMENTATION ALTERNATIVE-PLAN "The alternative plans are the sibling
+refinements. In other words this relation is formed by composing the
+inverse of refinement-plan with refinement-plan and removing the
+identical plan from the set obtained."))
+(FORALL (?B) (=> (ALTERNATIVE-PLAN ?A ?B) (PLAN ?B)))
+(FORALL (?A) (=> (ALTERNATIVE-PLAN ?A ?B) (PLAN ?A)))
+(DEFRELATION ACCOMPLISHES (?A ?B ?C)
+ (DOCUMENTATION ACCOMPLISHES "This relation records the intent
+of the planning agent for the task. The goal specification
+can be state or objective oriented, and is in service of some
+other task. If the goal is a top-level goal, the other task is
+left empty."))
+(FORALL (?C) (=> (ACCOMPLISHES ?A ?B ?C) (PLAN-TASK ?C)))
+(FORALL (?A ?B)
+ (=> (ACCOMPLISHES ?A ?B ?C)
+  (AND (PLAN-TASK-DESCRIPTION ?A) (GOAL-SPECIFICATION ?B))))
+(DEFRELATION PRECONDITION-EXPRESSION (?SELF) :=> (THING ?SELF) :AXIOM
+ (DOCUMENTATION PRECONDITION-EXPRESSION "A logical expression over the state
+predicates, which may include quantification"))
+(DEFRELATION CONJUNCTIVE-PRECONDITION-EXPRESSION (?SELF) :=>
+ (PRECONDITION-EXPRESSION ?SELF) :AXIOM
+ (DOCUMENTATION CONJUNCTIVE-PRECONDITION-EXPRESSION
+                "A conjunctive precondition expression
+is expressed as a list of predicates."))
+(DEFRELATION PLANNING-LEVEL-SPECIFIER (?SELF) :=> (THING ?SELF) :AXIOM
+ (DOCUMENTATION PLANNING-LEVEL-SPECIFIER "Some planners assign levels to tasks,
+for example SIPE uses numbers. Other planners assign levels to
+predicates, for example ABSTRIPS and Alpine. Levels can be numeric or
+symbolic, for example in JFACC symbolic designations such as 'CINC
+level' are used. "))
+(DEFRELATION PLANNING-LEVEL (?A ?B)
+ (AND (DOCUMENTATION PLANNING-LEVEL "Many planners assign levels to tasks,
+for example SIPE uses numbers while in JFACC symbolic designations such
+as 'strategic level' are used.")
+      (SINGLE-VALUED PLANNING-LEVEL)))
+(FORALL (?B) (=> (PLANNING-LEVEL ?A ?B) (PLANNING-LEVEL-SPECIFIER ?B)))
+(FORALL (?A)
+ (=> (PLANNING-LEVEL ?A ?B)
+  (OR (PLAN-TASK-DESCRIPTION ?A) (GOAL-SPECIFICATION ?A))))
+(DEFRELATION HUMAN-READABLE-DESCRIPTION (?SELF) :=> (THING ?SELF) :AXIOM
+ (DOCUMENTATION HUMAN-READABLE-DESCRIPTION
+                "Instances of this are descriptions of
+objects intended for people.  They could be simple strings or objects
+with clausal structure."))
+(DEFRELATION HUMAN-READABLE-TASK-DESCRIPTION (?SELF) :=>
+ (HUMAN-READABLE-DESCRIPTION ?SELF) :AXIOM
+ (DOCUMENTATION HUMAN-READABLE-TASK-DESCRIPTION
+                "A human-readable-description for a pan-task
+or plan-task-template.  In some planners this is done by specifying which
+parameters of a task get printed."))
+(DEFRELATION HUMAN-READABLE-DESCRIPTION-OF (?A ?B)
+ (DOCUMENTATION HUMAN-READABLE-DESCRIPTION-OF
+                "Specifies a human-readable-description
+for a plan-task or plan-task-template. For more info see the
+documentation on the concepts human-readable-task-description and
+human-readable-description. "))
+(FORALL (?B)
+ (=> (HUMAN-READABLE-DESCRIPTION-OF ?A ?B)
+  (HUMAN-READABLE-TASK-DESCRIPTION ?B)))
+(FORALL (?A)
+ (=> (HUMAN-READABLE-DESCRIPTION-OF ?A ?B) (PLAN-TASK-DESCRIPTION ?A)))
+(DEFRELATION TASK-COMMITMENTS (?A ?B) :=> (COMMITMENTS ?A ?B) :AXIOM
+ (DOCUMENTATION TASK-COMMITMENTS "The class of relations that are commitments
+on tasks. (See comment on commitments)"))
+(FORALL (?A) (=> (TASK-COMMITMENTS ?A ?B) (PLAN-TASK ?A)))
+(DEFRELATION TASK-CONSTRAINTS (?A ?B) :=> (CONSTRAINTS ?A ?B) :AXIOM
+ (DOCUMENTATION TASK-CONSTRAINTS "The class of constraints on tasks"))
+(FORALL (?A) (=> (TASK-CONSTRAINTS ?A ?B) (PLAN-TASK ?A)))
+(DEFRELATION ORDERING-RESTRICTION (?A ?B) :=> (PLAN-RESTRICTIONS ?A ?B)
+ :AXIOM
+ (DOCUMENTATION ORDERING-RESTRICTION
+                "An ordering relation between tasks such as
+(before A B)."))
+(FORALL (?B) (=> (ORDERING-RESTRICTION ?A ?B) (PLAN-TASK ?B)))
+(DEFRELATION ORDERING-COMMITMENT (?A ?B) :=>
+ (AND (ORDERING-RESTRICTION ?A ?B) (TASK-COMMITMENTS ?A ?B)) :AXIOM
+ (DOCUMENTATION ORDERING-COMMITMENT "An ordering commitment between tasks"))
+(DEFRELATION ORDERING-CONSTRAINT (?A ?B) :=>
+ (AND (ORDERING-RESTRICTION ?A ?B) (TASK-CONSTRAINTS ?A ?B)) :AXIOM
+ (DOCUMENTATION ORDERING-CONSTRAINT "An ordering constraint between tasks"))
+(DEFRELATION TEMPORAL-RESTRICTION (?A ?B) :=> (PLAN-RESTRICTIONS ?A ?B)
+ :AXIOM
+ (AND (DOCUMENTATION TEMPORAL-RESTRICTION "A restriction on a task with respect
+to time, such as (before <task> <time-stamp>)")
+      (IKB-SYNONYM TEMPORAL-RESTRICTION COMPLEX-TEMPORAL-RELATION)))
+(DEFRELATION TEMPORAL-COMMITMENT (?A ?B) :=>
+ (AND (TEMPORAL-RESTRICTION ?A ?B) (TASK-COMMITMENTS ?A ?B)) :AXIOM
+ (DOCUMENTATION TEMPORAL-COMMITMENT "A temporal commitment on a task"))
+(DEFRELATION TEMPORAL-CONSTRAINT (?A ?B) :=>
+ (AND (TEMPORAL-RESTRICTION ?A ?B) (TASK-CONSTRAINTS ?A ?B)) :AXIOM
+ (DOCUMENTATION TEMPORAL-CONSTRAINT "A temporal constraint on a task"))
+(DEFRELATION WORLD-STATE (?SELF) :=> (THING ?SELF) :AXIOM
+ (DOCUMENTATION WORLD-STATE "When using a rich KB system, the state
+may be represented in a context or microtheory, and it may not be
+possible to express this in the KR language."))
+(DEFRELATION INITIAL-STATE (?A ?B)
+ (DOCUMENTATION INITIAL-STATE "An initial state for all plans that
+are solutions of this planning problem"))
+(FORALL (?B) (=> (INITIAL-STATE ?A ?B) (WORLD-STATE ?B)))
+(FORALL (?A) (=> (INITIAL-STATE ?A ?B) (PLANNING-PROBLEM ?A)))
+(DEFRELATION GOAL-SPECIFICATION (?SELF) :=>
+ (AND (THING ?SELF)
+      (> (CARDINALITY (SETOFALL ?A (PLANNING-LEVEL ?SELF ?A))) 0)
+      (> (CARDINALITY
+          (SETOFALL ?B (HUMAN-READABLE-GOAL-DESCRIPTION ?SELF ?B)))
+         0))
+ :AXIOM
+ (DOCUMENTATION GOAL-SPECIFICATION "Something that gets accomplished by a
+plan, subplan or task. This may correspond to 'Goal' in the HPKB
+ontology, or that might correspond to state-based-goal-spec."))
+(DEFRELATION STATE-BASED-GOAL-SPEC (?SELF) :=> (GOAL-SPECIFICATION ?SELF)
+ :AXIOM
+ (AND (DOCUMENTATION STATE-BASED-GOAL-SPEC
+                     "Typically these are goals that refer
+to some predicate used to describe the state of the world, for example
+'achieve (at Jim LAX)', 'deny (at red-brigade south-pass)' or 
+'maintain (temperature room5 30)'
+
+Note that 'state-based-goal-spec' is a subclass of 'goal' but
+'goal-specification' is not. This is because the HPKB upper concept
+'goal' is explicitly state-based. Ideally, this should be
+generalised.")
+      (IKB-SYNONYM STATE-BASED-GOAL-SPEC GOAL)))
+(DEFRELATION OBJECTIVE-BASED-GOAL-SPEC (?SELF) :=>
+ (GOAL-SPECIFICATION ?SELF) :AXIOM
+ (DOCUMENTATION OBJECTIVE-BASED-GOAL-SPEC "Typically these are verb- or
+action-based goal expressions, for example
+'transport brigade5 to Ryad'"))
+(DEFRELATION HUMAN-READABLE-GOAL-SPECIFICATION-DESCRIPTION (?SELF) :=>
+ (HUMAN-READABLE-DESCRIPTION ?SELF) :AXIOM
+ (DOCUMENTATION HUMAN-READABLE-GOAL-SPECIFICATION-DESCRIPTION
+                "Something used to provide a description
+of a goal to an end user. Could be a string or a more complex structure."))
+(DEFRELATION HUMAN-READABLE-GOAL-DESCRIPTION (?A ?B)
+ (DOCUMENTATION HUMAN-READABLE-GOAL-DESCRIPTION "Provides a description
+of the goal for an end user."))
+(FORALL (?B)
+ (=> (HUMAN-READABLE-GOAL-DESCRIPTION ?A ?B)
+  (HUMAN-READABLE-GOAL-SPECIFICATION-DESCRIPTION ?B)))
+(FORALL (?A)
+ (=> (HUMAN-READABLE-GOAL-DESCRIPTION ?A ?B) (GOAL-SPECIFICATION ?A)))
+(DEFRELATION SUPER-TASK (?A ?B)
+ (DOCUMENTATION SUPER-TASK "(super-task <task-sub> <task-super>) means
+that <task-sub> is performed in service of <task-super>. For example
+in an HTN planner, <task-sub> might appear in the expansion of <task-super>"))
+(FORALL (?B) (=> (SUPER-TASK ?A ?B) (PLAN-TASK-DESCRIPTION ?B)))
+(FORALL (?A) (=> (SUPER-TASK ?A ?B) (PLAN-TASK-DESCRIPTION ?A)))
+(DEFRELATION SUB-TASK (?A ?B) := (SUPER-TASK ?B ?A) :AXIOM
+ (AND (DOCUMENTATION SUB-TASK "(sub-task <task-super> <task-sub>) means
+that <task-sub> is performed in service of <task-super>. For example in
+an HTN planner, <task-sub> might appear in the expansion of
+<task-super>.
+
+This is a more specific relation than subEvents in the HPKB ontology,
+but it is not linked because it can apply both to events
+(plan-task-templates) and event-types (plan-tasks) so syntactically it
+is not a subrelation of subEvents.")
+      (IKB-SYNONYM SUB-TASK SUB-EVENTS)))
+(DEFRELATION EVALUATION-STRUCTURE (?SELF) :=> (THING ?SELF) :AXIOM
+ (DOCUMENTATION EVALUATION-STRUCTURE "An object used to hold the results
+of evaluating and critiquing a plan, objective or task.."))
+(DEFRELATION EVALUATION (?A ?B)
+ (DOCUMENTATION EVALUATION "This relation provides an evaluation
+structure for some object that has been evaluated, for example a plan or
+task. This is more general than the criterionOfSuccess relation in the
+CPR ontology."))
+(FORALL (?B) (=> (EVALUATION ?A ?B) (EVALUATION-STRUCTURE ?B)))
+(DEFRELATION COMPARISON-STRUCTURE (?SELF) :=> (THING ?SELF) :AXIOM
+ (DOCUMENTATION COMPARISON-STRUCTURE "An object that holds information
+used to compare a set of objects, for example the different candidate
+plans for some planning-problem."))
+(DEFRELATION COMPARISON (?A ?B)
+ (DOCUMENTATION COMPARISON "This relation links a planning-problem
+or plan to the corresponding comparison structure if comparisons
+have been made on the sub-problems, candidate plans or sub-plans"))
+(FORALL (?B) (=> (COMPARISON ?A ?B) (COMPARISON-STRUCTURE ?B)))
+(DEFRELATION RESOURCE-REQUIREMENT (?SELF) :=>
+ (AND (THING ?SELF)
+      (EXISTS (?A) (AND (RESOURCE ?SELF ?A) (PLANNING-RESOURCE ?A)))
+      (FORALL (?A ?B)
+       (=> (AND (RESOURCE ?SELF ?A) (RESOURCE ?SELF ?B)) (= ?A ?B))))
+ :AXIOM
+ (DOCUMENTATION RESOURCE-REQUIREMENT "A resource requirement that is made by a
+plan or plan task, which includes information about the resource
+required and may include further information such as the time interval
+over which the resource is required, the amount and/or state of the
+resource. The resource can be either a specific instance or a type."))
+(DEFRELATION REQUIRED-RESOURCE (?A ?B)
+ (DOCUMENTATION REQUIRED-RESOURCE "Links a plan-task-description or plan to
+a resource-requirement implicated by the task or plan. This plays
+roughly the same role as resourceOfTask in the CPR ontology except that
+(1) it can apply to a task or plan, (2) the resource-requirement can
+specify more information such as required amount and time interval for
+requirement and (3) the resource is not required to be a physical thing."))
+(FORALL (?B) (=> (REQUIRED-RESOURCE ?A ?B) (RESOURCE-REQUIREMENT ?B)))
+(FORALL (?A)
+ (=> (REQUIRED-RESOURCE ?A ?B) (OR (PLAN-TASK-DESCRIPTION ?A) (PLAN ?A))))
+(DEFRELATION RESOURCE (?A ?B)
+ (DOCUMENTATION RESOURCE "Links a resource-requirement object
+to the resource or resource type that is required."))
+(FORALL (?B) (=> (RESOURCE ?A ?B) (PLANNING-RESOURCE ?B)))
+(FORALL (?A) (=> (RESOURCE ?A ?B) (RESOURCE-REQUIREMENT ?A)))
+(DEFRELATION PLANNING-RESOURCE (?SELF) :=> (THING ?SELF) :AXIOM
+ (DOCUMENTATION PLANNING-RESOURCE "Any object that is considered a resource
+in a planning domain. It could be a physical thing such as an F-15 or an
+abstract thing such as force ratio. Sometimes time can be considered a
+resource."))

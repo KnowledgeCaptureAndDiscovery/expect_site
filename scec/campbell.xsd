@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.isi.edu/expect/scec/campbell" xmlns:campbell="http://www.isi.edu/expect/scec/campbell" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:scec="http://www.isi.edu/expect/scec" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://www.isi.edu/expect/scec" schemaLocation="scec_schema.xsd"/>
+	<xs:simpleType name="gmp">
+		<xs:annotation>
+			<xs:documentation>Ground Motion Parameter</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="scec:gmp"/>
+	</xs:simpleType>
+	<xs:simpleType name="basindepth">
+		<xs:annotation>
+			<xs:documentation>The Depth of the Basin</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="scec:depth"/>
+	</xs:simpleType>
+	<xs:simpleType name="magnitude">
+		<xs:annotation>
+			<xs:documentation>The Magnitude of the Earthquake</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="scec:magnitude">
+			<xs:minInclusive value="5.0"/>
+			<xs:maxInclusive value="8.5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="distance">
+		<xs:annotation>
+			<xs:documentation>Distance to the Rupture</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="scec:distance">
+			<xs:maxInclusive value="60.0"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="camp_sitetype">
+		<xs:annotation>
+			<xs:documentation>The Site Types</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="scec:sitetype">
+			<xs:enumeration value="hard rock"/>
+			<xs:enumeration value="soft rock"/>
+			<xs:enumeration value="firm soil"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="faulttype">
+		<xs:annotation>
+			<xs:documentation>The Fault Type</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="scec:faulttype">
+			<xs:enumeration value="strike slip"/>
+			<xs:enumeration value="normal"/>
+			<xs:enumeration value="other"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="uncertainties">
+		<xs:restriction base="scec:uncertainties"/>
+	</xs:simpleType>
+</xs:schema>

@@ -1,0 +1,64 @@
+<advertisement>
+<agent-id>flight-status</agent-id>
+
+
+<capability>
+<MethodGoal>
+<VarGoalForm>
+<GoalName>MONITOR</GoalName>
+<ManyVarGoalArgument>
+	<VarGoalArgument>
+		<ParameterName>OBJ</ParameterName>
+			<MethodGoalArgument>
+				<VariableName>?o</VariableName>
+					<ComplexData>
+					<ConceptName>airfare</ConceptName></ComplexData>		
+	</MethodGoalArgument>
+	</VarGoalArgument>
+	
+	<VarGoalArgument>
+		<ParameterName>OF</ParameterName>
+			<MethodGoalArgument>
+				<VariableName>?f</VariableName>
+					<ComplexData>
+					<ConceptName>airline</ConceptName></ComplexData>		
+	</MethodGoalArgument>
+	</VarGoalArgument>	
+	
+	<VarGoalArgument>
+		<ParameterName>OF2</ParameterName>
+			<MethodGoalArgument>
+				<VariableName>?f</VariableName>
+					<ComplexData>
+					<ConceptName>flight-number</ConceptName></ComplexData>		
+	</MethodGoalArgument>
+	</VarGoalArgument>					
+	
+	<VarGoalArgument>
+		<ParameterName>ON</ParameterName>
+			<MethodGoalArgument>
+				<VariableName>?a</VariableName>
+					<ComplexData>
+					<ConceptName>date</ConceptName></ComplexData>		
+	</MethodGoalArgument>
+	</VarGoalArgument>
+	<VarGoalArgument>
+		<ParameterName>FROM</ParameterName>
+			<MethodGoalArgument>
+				<VariableName>?a</VariableName>
+					<ComplexData>
+					<ConceptName>airport</ConceptName></ComplexData>		
+	</MethodGoalArgument>
+	</VarGoalArgument>
+
+
+</ManyVarGoalArgument>
+</VarGoalForm>
+</MethodGoal>
+</capability>
+<result>
+	<ComplexData><ConceptName>price-drop</ConceptName></ComplexData>
+</result>
+</advertisement>
+
+

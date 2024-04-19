@@ -1,0 +1,709 @@
+
+
+;; Already existing Cyc Constants that are not part of the IKB release
+
+;; or whose definition has changed. These constants are referenced in the
+
+;; ontologies for tactical tasks and militarily siginificant areas. 
+
+
+
+
+
+constant : HPKBDisplayConstant .
+
+in Mt : BaseKB .
+
+isa : Collection .
+
+genls : Thing .
+
+comment : "Constants in this collection are included in the
+
+          documentation vocab files for HPKB evaluators."  .
+
+F : (quotedCollection HPKBDisplayConstant). 
+
+
+
+constant : IKBConstant .
+
+in Mt : BaseKB .
+
+isa : Collection .
+
+genls : HPKBDisplayConstant .
+
+F : (quotedCollection IKBConstant) .
+
+
+
+constant : Event-Organized .
+
+in Mt : BaseKB .
+
+isa :  ScriptType .
+
+genls :  Event  .
+
+comment : "A collection of individual events. An event is an
+
+          instance of Event-Organized if it is planned and
+
+          directed by some instance of Person or Organization.
+
+          Elements of MusicalPerformance, Trial, and Bombing
+
+          would all be instances. Elements of Earthquake and
+
+          Breathing would not." .
+
+
+
+constant : MilitaryAttack .
+
+in Mt : BaseKB .
+
+isa : IKBConstant TemporalObjectType ScriptType .
+
+genls : Event-Organized MilitaryEvent AttackOnTangible
+
+          ViolentAction .
+
+comment : "The collection of all instances of #$MilitaryEvent
+
+          that are also considered to be instances of
+
+          #$AttackOnTangible. The characteristics that define a
+
+          military 'attack' are somewhat loose: military units
+
+          are involved, deadly force is involved, and the event
+
+          in question is of an immediately 'offensive' character
+
+          (although an attack can be a #$subEvents in the course of
+
+          either a 'defensive' or 'offensive' #$MilitaryEvent).
+
+          Both instances of #$MilitaryTask and #$MilitaryOperation
+
+          can be considered instances of #$MilitaryAttack, and for
+
+          this reason, #$MilitaryAttack is not a specialization of
+
+          either collection. Instances may be complex
+
+          ScriptTypes: that is, they may involve more than just
+
+          physical attack events and may include a measure of
+
+          planning and preparation." .
+
+
+
+constant : TakingCareOfSomething  .
+
+in Mt : BaseKB .
+
+isa : ScriptType DefaultDisjointScriptType  .
+
+genls : ActionOnObject CompositePhysicalAndMentalEvent
+
+          PurposefulAction .
+
+
+
+in Mt : HumanActivitiesMt. 
+
+genls : HumanActivity .
+
+
+
+
+
+
+
+constant : ProtectingSomething .
+
+in Mt : BaseKB .
+
+isa : TemporalObjectType DefaultDisjointScriptType
+
+        ScriptType .
+
+genls : TakingCareOfSomething  .
+
+ 
+
+constant : ApplicationContext .
+
+in Mt : BaseKB .
+
+isa :  MicrotheoryType .
+
+genls :  Microtheory .
+
+comment : "Contexts which are persistent yet contain knowledge
+
+          specific to a certain application. An example would be
+
+          a context that contains all the meaning formulae and
+
+          other descriptions of the tables in a certain
+
+          database." .
+
+
+
+constant : ConstrainingEvent .
+
+in Mt : BaseKB .
+
+isa : ScriptType TemporalObjectType
+
+        DefaultDisjointScriptType .
+
+genls : PhysicalEvent .
+
+comment : "Constrainment events involve the constrainment
+
+          (blocking, containing, guiding etc.) of one body (solid
+
+          or fluid) by another." .
+
+ 
+
+constant : LeavingAPlace .
+
+in Mt : BaseKB .
+
+isa :  TemporalObjectType ScriptType .
+
+genls : TransferOut Translation-SingleTrajectory
+
+          Translation-LocationChange .
+
+comment : "A physical transfer in which the performer moves to
+
+          a location other than that where they started from. " .
+
+ 
+
+
+
+constant : HarmingSomething .
+
+in Mt : BaseKB .
+
+isa : TemporalObjectType DefaultDisjointScriptType ScriptType .
+
+genls : Action .
+
+
+
+F : (implies 
+
+       (and 
+
+           (isa ?HARM HarmingSomething) 
+
+           (objectActedOn ?HARM ?HARMED) 
+
+           (isa ?HARMED Agent)) 
+
+       (maleficiary ?HARM ?HARMED)).
+
+
+
+
+
+constant : StructureMicrotheory .
+
+in Mt : BaseKB .
+
+isa : IKBConstant MicrotheoryType. 
+
+genls : Microtheory .
+
+comment: "StructureMicrotheory is a class of microtheories each of which
+
+          define the structure of some conplex object. You can think of
+
+          this kind of microtheory as a basic template." .
+
+
+
+
+
+ 
+
+constant : MilitaryForceStructureMt .
+
+in Mt : BaseKB .
+
+isa : StructureMicrotheory  .
+
+genlMt : BaseKB HumanActivitiesMt  .
+
+comment : "This microtheory was created to house the modified
+
+          representation of the model order of battle developed
+
+          by Peterson and Andersen. Since the modifications
+
+          involved are in some cases nontrivial, and since the KE
+
+          is being done by conventional methods, it was not
+
+          considered appropriate to make this a
+
+          #$KnowledgeSource-Represented. Note that most
+
+          microtheories requiring access to the
+
+          #$MilitaryForceStructureMt should have it through the
+
+          #$ModernMilitaryMt, which has access to the
+
+          #$MilitaryForceStructureMt, the #$ModernMilitaryVehiclesMt,
+
+          and the #$ModernMilitaryWeaponsMt." .
+
+
+
+constant : ModernMilitaryUnit-Deployable .
+
+in Mt : BaseKB.
+
+isa :  ExistingObjectType .
+
+genls :  ModernMilitaryOrganization .
+
+comment : "The collection of all military units capable of
+
+          being deployed to the field in combat conditions for
+
+          purposes of reconnaissance, combat, or combat support.
+
+          It also includes any military units that are ordinarily
+
+          equipped to be sent to far-away places on short
+
+          notice." .
+
+
+
+
+
+constant : preconditionFor-PropSit .
+
+in Mt : BaseKB .
+
+isa : BinaryPredicate .
+
+arg1Isa : CycFormula .
+
+arg2Isa : Situation  .
+
+comment : "The predicate #$preconditionFor-PropSit is used to
+
+          state a necessary precondition for a certain event or
+
+          situation. (#$preconditionFor-PropSit PROP SIT) means
+
+         that unless the proposition PROP is true, the Situation
+
+          SIT won't obtain." .
+
+
+
+constant : sitResultsInProp .
+
+in Mt : BaseKB .
+
+isa : QuaternaryPredicate .
+
+arg1Isa : CycFormula .
+
+arg2Isa : CycFormula .
+
+arg3Isa : SituationType .
+
+arg3Genl : Situation-Temporal .
+
+arg4Isa : Predicate .
+
+comment : "(#$sitResultsInProp FORMULA1 FORMULA2 SIT-TYPE PRED)
+
+          means that FORMULA2 becomes true when FORMULA1 becomes
+
+          true, where FORMULA1 contains a clause of the form
+
+          (thereExists ?SIT SIT-TYPE), and where ?SIT changes
+
+          some assertion of the form (PRED ...)." .
+
+
+
+
+
+constant: GeographicalThing .
+
+in Mt : BaseKB .
+
+isa : ObjectType .
+
+genls : SpatialThing-Localized .
+
+comment : "This collection may be thought of as consisting of all the
+
+          entities which are localizable within the context of a
+
+          geography, in the sense that they might plausibly be
+
+          represented on a map. This includes both #$PartiallyTangible
+
+          entities like GeographicalRegions, and also entities that may
+
+          be wholly Intangible, like territorial borders and
+
+          boundaries, LatitudeLines and LongitudeLines, trajectories of
+
+          missiles and courses of ships, and the Equator." .
+
+
+
+
+
+
+
+constant: formsBorderPart .
+
+in Mt : BaseKB .
+
+isa : BinaryPredicate .
+
+genlPreds :  spatiallyIntersects .
+
+arg1Isa : SpatialThing .
+
+arg2Isa : SpatialThing .
+
+comment : "This predicate is used to assert that a particular
+
+          #$SpatialThing-Localized is part of the conventional
+
+          abstraction that is a #$GeopoliticalBorder. (#$formsBorderPart
+
+          PART WHOLE) means that all of the points along the
+
+          border-part PART are also points along the border WHOLE. We
+
+          would use this predicate, eg, to say that the border between
+
+          Texas and Mexico forms part of the border of the United
+
+          States: (#$formsBorderPart (#$BorderBetweenFn #$Texas-State #$Mexico)
+
+          (#$BorderFn #$UnitedStatesOfAmerica))." .
+
+
+
+
+
+constant: BlockingAnOpponent .
+
+in Mt : BaseKB .
+
+isa : ScriptType .
+
+genls : HumanActivity PurposefulAction .
+
+comment : "Placing yourself in front of an opponent, thereby getting
+
+          in his way and limiting his movements, e.g. in a race, or
+
+          being screened in basketball." .
+
+
+
+
+
+constant: Plan .
+
+in Mt : BaseKB .
+
+isa : ObjectType MicrotheoryType .
+
+genls : SupposedToBeMicrotheory .
+
+comment : "Supposed to be mts which talk about things that are
+
+          supposed to happen." . 
+
+
+
+
+
+constant : RemovalFn .
+
+in Mt : BaseKB .
+
+isa : UnaryFunction CollectionDenotingFunction .
+
+resultIsa : TemporalObjectType ScriptType  .
+
+resultGenl : RemovingSomething .
+
+arg1Isa : TemporalStuffType  .
+
+arg1Genl : PartiallyTangible .
+
+
+
+
+
+constant : ModalityMt .
+
+in Mt : BaseKB .
+
+isa : Microtheory .
+
+genlMt : BaseKB .
+
+
+
+constant : modalInArg .
+
+in Mt : ModalityMt.
+
+isa : BinaryPredicate .
+
+arg1Isa : Predicate .
+
+arg2Isa : Integer .
+
+
+
+constant : SituationFn .
+
+in Mt : BaseKB .
+
+isa : BinaryFunction CollectionDenotingFunction
+
+        ScopingRelation .
+
+resultIsa :  SituationType .
+
+resultGenl : Situation .
+
+arg1Isa : CycSystemVariable .
+
+arg2Isa : CycFormula .
+
+comment : "#$SituationFn is a Cyc function. (#$SituationFn ?VAR
+
+          ?FORM) denotes a collection of situations, whose
+
+          instances satisfy ?VAR as used in the #$CycFormula ?FORM.
+
+          ?FORM will contain ?VAR as a free variable, and may
+
+          contain other variables. For now (11/97), quantification
+
+          of all other variables must be explicit, and we do not
+
+          allow variables bound outside of SituationFn to appear
+
+          within ?FORM. For example, ?FORM might describe the
+
+          general situation in which a person speaks to their
+
+          boss: (#$SituationFn ?SPK (#$thereExists ?PER (#$thereExists
+
+          ?BOSS (#$and (#$isa ?SPK Speaking) (#$senderOfInfo ?SPK ?PER)
+
+          (#$communicationTarget ?SPK ?BOSS) (#$boss ?PER ?BOSS))))).
+
+          Every collection denoted by a #$SituationFn expression is
+
+          an element of (#$isa) SituationType." .
+
+F : (scopingArg SituationFn 1) .
+
+
+
+Constant : OrganizationMt .
+
+In Mt : BaseKB .
+
+isa : GeneralMicrotheory .
+
+genlMt : HumanSocialLifeMt BaseKB .
+
+comment : "This microtheory assumes that organizations can be
+
+          appropriately thought of as IntelligentAgents." .
+
+
+
+Constant : armamentOfUnit .
+
+in Mt : MilitaryForceStructureMt .
+
+isa : IKBConstant BinaryPredicate .
+
+arity : 2 .
+
+arg1Isa : ModernMilitaryOrganization .
+
+arg2Isa : Weapon .
+
+comment : "This predicate is used to assert that a particular unit is armed with
+
+          a particular weapon. It is like typicalArmamentOfUnitType, but with
+
+          both arguments given as instances rather than as collections." . 
+
+cyclistNotes : "Instead of creating typicalArmamentOfUnitType and
+
+            typicalArmamentOfUnit, we could have defined both these
+
+            predicates using armamentOfUnit and the 'relation-typing'
+
+            predicates relationAllExists and relationAllInstance. However, the
+
+            number of times we will want to say that a particular unit is armed
+
+            with a particular weapon are extremely rare, in comparison with
+
+            how often we will want to say either that a particular unit is armed
+
+            with a particular kind of weapon or that a certain kind of unit is
+
+            typically armed with a certain kind of weapon. Therefore, all three
+
+            predicates have been reified in the interest of ease of usage." .
+
+
+
+Constant : typicalArmamentOfUnit .
+
+in Mt : MilitaryForceStructureMt .
+
+isa : IKBConstant BinaryPredicate .
+
+arity : 2 .
+
+arg1Isa : ModernMilitaryOrganization .
+
+arg2Isa : Collection .
+
+arg2Genl : Weapon .
+
+comment : "This predicate is used to assert that a particular unit is armed with
+
+          a particular kind of weapon. It is like typicalArmamentOfUnitType,
+
+          but with the first argument given as an instance rather than a
+
+          collection." .
+
+cyclistNotes : "Instead of creating typicalArmamentOfUnitType and
+
+            typicalArmamentOfUnit, we could have defined both these
+
+            predicates using armamentOfUnit and the 'relation-typing'
+
+            predicates relationAllExists and relationAllInstance. However, the
+
+            number of times we will want to say that a particular unit is armed
+
+            with a particular weapon are extremely rare, in comparison with
+
+            how often we will want to say either that a particular unit is armed
+
+            with a particular kind of weapon or that a certain kind of unit is
+
+            typically armed with a certain kind of weapon. Therefore, all three
+
+            predicates have been reified in the interest of ease of usage." .
+
+
+
+Constant : typicalArmamentOfUnitType .
+
+in Mt : MilitaryForceStructureMt .
+
+isa : IKBConstant BinaryPredicate .
+
+arity : 2 .
+
+arg1Isa : Collection .
+
+arg1Genl : ModernMilitaryOrganization .
+
+arg2Isa : Collection .
+
+arg2Genl : Weapon .
+
+comment : "(typicalArmamentOfUnitType UNITTYPE ARMSTYPE) means
+
+          that individual military units of type UNITTYPE typically have one or
+
+          more instances of ARMSTYPE as weapons or armaments." .
+
+cyclistNotes : "Instead of creating typicalArmamentOfUnitType and
+
+            typicalArmamentOfUnit, we could have defined both these
+
+            predicates using armamentOfUnit and the 'relation-typing'
+
+            predicates relationAllExists and relationAllInstance. However, the
+
+            number of times we will want to say that a particular unit is armed
+
+            with a particular weapon are extremely rare, in comparison with
+
+            how often we will want to say either that a particular unit is armed
+
+            with a particular kind of weapon or that a certain kind of unit is
+
+            typically armed with a certain kind of weapon. Therefore, all three
+
+            predicates have been reified in the interest of ease of usage." .
+
+
+
+Constant : CenterFn .
+
+in Mt : BaseKB .
+
+isa : UnaryFunction ReifiableFunction .
+
+resultIsa : SpacePoint .
+
+arity : 1 .
+
+arg1Isa : SpatialThing .
+
+comment : "(CenterFn OBJ) denotes the point at the spatial center of an object.
+
+          Formally, this can be defined as a point such that the average of the
+
+          distances from this point to all points which are 'in' (see spatiallySubsumes)
+
+          OBJ is minimized. Note that for objects whose density is not homogeneous
+
+          (CenterFn OBJ) may be different from the 'center of gravity' of the object.
+
+          Also, for objects which aren't spatially continuous (see
+
+          spatiallyContinuous), (CenterFn OBJ) is not necessarily 'in' (see
+
+          spatiallySubsumes) OBJ. For example, the centroid of a
+
+          non-spatially-continuous object such as a flock of seagulls is not necessarily
+
+          a point in one of the seagulls." .

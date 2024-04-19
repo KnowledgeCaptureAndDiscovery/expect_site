@@ -1,0 +1,717 @@
+;;; Main CP spec example COA -
+;;;
+;;; Last modified: April 27 99
+;;; by Jihie Kim
+
+(in-package "EVALUATION")
+;(in-package "PLANET")
+;(loom:use-loom "PLANET")
+;(use-package "EXPECT")
+
+;(defcontext PLANET-COA--MAIN-CP-SPEC-EXAMPLE
+;  :theory (PLANET-COA))
+  
+;(in-context 'planet-coa--main-cp-spec-example)
+
+(tellm 
+ (COA-problem-context COA-problem-context1)
+ (COA-scenario COA-scenario1)
+ (COA-problem COA-problem1)
+ (goal-specification goal-spec1)
+ 
+ (scenario COA-problem-context1 COA-scenario1)
+ (possible-COA-problem COA-problem-context1 COA-problem1)
+ (problem-goal COA-problem1 goal-spec1)
+ (candidate-plan COA-problem1 COA1)
+ )
+
+(tellm (about COA1 COA
+	      (Close Close-COA1)
+	      (Reserve Reserve-COA1)
+	      (Security Security-COA1)
+	      (Deep Deep-COA1)
+	      (Rear Rear-COA1)
+	      (Fires Fires-COA1)
+	      (Obstacles Obstacles-COA1)
+	      
+	      (task-of top-level-task1)
+	      )
+       )
+
+;;********************************************************************
+;;           MISSION statement
+;;********************************************************************
+;; 
+;; A mechanized division attacks to seize  OBJ SLAM 130400 Aug in order to 
+;; protect the north boundary of the corps main effort
+
+
+(tellm
+ (|MechanizedUnit-MilitarySpecialty| Blue1)
+ (|echelonOfUnit| Blue1 |Division-UnitDesignation|)
+
+ (|GeographicalRegion| north-boundary-of-corps-main-effort)
+ ;(time-specifier Aug-130400)
+ 
+ (attack Blue1-attack)
+ (who Blue1-attack Blue1)   
+
+ (seize Blue1-seize)
+ (who Blue1-seize Blue1)
+ (action-obj Blue1-seize OBJ-SLAM)
+ (when Blue1-seize Aug-130400)
+ 
+ ;; purpose
+ (protect Blue1-protect)
+ (purpose-action Blue1-protect)
+ (action-obj Blue1-protect north-boundary-of-corps-main-effort)
+ 
+ ;; how they're linked
+ (operation-type mission-task-stmt1 Blue1-attack)
+ (description mission-task-stmt1 Blue1-seize)
+ (purpose-of mission-task-stmt1 Blue1-protect) 
+ 
+ (description top-level-task-statement1 Blue1-seize)
+ (operation-type top-level-task-statement1 Blue1-attack)
+ (purpose-of top-level-task-statement1 Blue1-protect)
+ )
+
+(tellm  
+ (mission-statement mission-statement1)
+ (human-readable-description-of mission-statement1 "A mechanized division attacks to seize OBJ SLAM 130400 Aug in order to protect the north boundary of the corps main effort")
+ (structured-mission-statement mission-task-stmt1)
+ (structured-statement mission-statement1 mission-task-stmt1)
+ (commander-products COA-scenario1 mission-statement1)
+)
+
+(tellm 
+ (structured-statement goal-spec1 Blue1-protect)
+ (human-readable-description-of goal-spec1 "protect north boundary of the corps main effort")
+
+ ;; top-level-task of COA1
+ (accomplish top-level-task1 Blue1-protect)
+ (structured-statement top-level-task1 top-level-task-statement1)
+
+ )
+
+;;********************************************************************
+;;          CLOSE
+;;********************************************************************
+
+(tellm 
+ (Close-COA-task plan-task1)
+ (task-of COA1 plan-task1)
+ (task-of Close-COA1 plan-task1)
+ 
+ (human-readable-description-of plan-task1 "A mechanized division attacks to seize OBJ SLAM 130400 Aug")
+ (main-effort-of plan-task1 main-effort1)
+
+ (sub-task main-effort1 main-effort-task-1)
+ (sub-task main-effort1 main-effort-task-2)
+ (supporting-effort-of plan-task1 supporting-effort-1-task)
+ (supporting-effort-of plan-task1 supporting-effort-2-task) 
+ 
+ )
+
+;;********************************************************************
+;;
+;; A mechanized brigade (supporting effort 1) attacks in the north to
+;; fix enemy forces (EF) in the area of operations of Supporting Effort 1
+;; in order to prevent EF from intefering with main effort.
+
+
+(tellm 
+  
+ (red-unit Red1)
+ (|MechanizedUnit-MilitarySpecialty| Blue11)
+ (|echelonOfUnit| Blue11 |Brigade-UnitDesignation|)
+ (|GeographicalRegion| north-quadrant-4)
+ (|GeographicalRegion| Blue11-AreaOfOperations)
+       
+ ;; tasks in this effort
+ ;; type of operation
+ (attack Blue11-attack)
+ (who Blue11-attack Blue11)   
+ (where Blue11-attack north-quadrant-4)
+
+ ;; task action
+ (fix Blue11-fix)
+ (action-obj Blue11-fix Red-1)
+ (who Blue11-fix Blue11)
+ (where Blue11-fix Blue11-AreaOfOperations)
+
+ (prevent-action Blue11-prevent)
+ (purpose-action Blue11-prevent)
+ (who Blue11-prevent Blue11)
+ (action-obj Blue11-prevent interfere1)
+ (interfere-action interfere1)
+ (who interfere1 Red1)
+ (action-obj interfere1 main-effort1)
+ ;; this should infer that interfere1 is an enemy action
+
+ (structured-task-statement supporting-effort-task-stmt1)
+ (operation-type supporting-effort-task-stmt1 Blue11-attack)
+ (description supporting-effort-task-stmt1 Blue11-fix)
+ (purpose-of supporting-effort-task-stmt1 Blue11-prevent)
+	     
+ )
+
+;;********************************************************************
+;;
+;; A mechanized brigade (supporting effort 2) attacks in the south to
+;; penetrate enemy forces vicinity PL Amber in order to enable main effort
+;; to conduct forward passage of lines and seize OBJ SLAM.
+
+
+(tellm
+
+ (|MechanizedUnit-MilitarySpecialty| Blue12)
+ (|echelonOfUnit| Blue12 |Brigade-UnitDesignation|)
+ (red-unit Red2)
+
+ (|GeographicalRegion| south-quadrant-5)
+ (|PhaseLine| pl-amber)
+
+ ;; tasks in this effort
+ ;; type of operation
+ (attack Blue12-attack)
+ (who Blue12-attack Blue12)
+ (where Blue12-attack south-quadrant-5)
+
+ ;; task action
+ ;; Here, the location is attributed to the action rather than to the
+ ;; forces which are the object of the penetration.
+ (penetrate Blue12-penetrate)
+ (who Blue12-penetrate Blue12)
+ (action-obj Blue12-penetrate Red2)
+ (|eventOccursNear| Blue12-penetrate pl-amber)
+
+
+ ;; purpose
+ ;; supporting-effort-purpose2 is what supporting-effort-2-task accomplishes.
+ ;; so we should infer that penetrate establishes a necessary condition for
+ ;; the main effort
+ (enable-action Blue12-enable)
+ (purpose-action Blue12-enable)
+ (who Blue12-enable Blue12)
+ (action-obj Blue12-enable main-effort1)
+
+ ;; how they're linked
+ (structured-task-statement supporting-effort-task-stmt2)
+ (operation-type supporting-effort-task-stmt2 Blue12-attack)
+ (description supporting-effort-task-stmt2 Blue12-penetrate)
+ (purpose-of supporting-effort-task-stmt2 Blue12-enable)
+)
+
+;;********************************************************************
+;;
+;; An armor brigade (main effort) conducts forward passage of lines
+;; through SE2 then attacks to seize the terrain vicinity of OBJ SLAM
+;; (terrain-obj-slam) in order to prevent Red-7 from gaining
+;; access to the area south of RIVER TOWN (south-of-river-town)
+;; and west of RIVER TOWN (west-of-river-town).
+
+
+(tellm
+
+ (|ArmoredUnit-MilitarySpecialty| Blue13)
+ (|echelonOfUnit| Blue13 |Brigade-UnitDesignation|)
+ (red-unit Red-7)
+
+ ;; detailed specification of geographical areas is beyond the scope of
+ ;; this upper action ontology.
+ (|GeographicalRegion| terrain-obj-slam)
+ (|GeographicalRegion| south-of-river-town)
+ (|GeographicalRegion| west-of-river-town)
+
+ ;; first task action
+ (forward-passage-of-lines Blue13-conduct)
+ (through Blue13-conduct supporting-effort-2-task)
+ (who Blue13-conduct Blue13)
+
+ ;; type of operation
+ (attack Blue13-attack)
+ (who Blue13-attack Blue13)
+
+ ;; second task action
+ (seize Blue13-seize)
+ (action-obj Blue13-seize terrain-obj-slam)
+ (who Blue13-seize Blue13)
+
+ (prevent-action Blue13-prevent)
+ (purpose-action Blue13-prevent)
+ (action-obj Blue13-prevent Red-7)
+ (action-from Blue13-prevent gaining-access)
+ (action-to Blue13-prevent south-of-river-town)
+ (action-to Blue13-prevent west-of-river-town)
+ 
+ (structured-task-statement main-effort-task-stmt1)
+ (description main-effort-task-stmt1 Blue13-conduct)
+ 
+ (structured-task-statement main-effort-task-stmt2) 
+ (operation-type main-effort-task-stmt2 Blue13-attack)
+ (description main-effort-task-stmt2 Blue13-seize)
+ (purpose-of main-effort-task-stmt2 Blue13-prevent)
+ )
+
+
+
+(tellm 
+       ;;; for main effort
+       (about main-effort-purpose2 purpose
+	      (structured-statement Blue13-prevent)
+	      (human-readable-description-of "prevent enemy forces from gaining access to the area south of River Town and wet of River Town"))
+       (about main-effort-task-1 COA-task
+	      (structured-statement main-effort-task-stmt1)
+              (human-readable-description-of "conduct forward passage of lines through supporting effort")
+	      (before main-effort-task-2))
+       (about main-effort-task-2 COA-task
+	      (accomplish main-effort-purpose2)
+	      (structured-statement main-effort-task-stmt2)
+              (human-readable-description-of "attack to seize the terrain vicinity of OBJ SLAM"))
+       
+       
+       ;;; for supporting effort 1
+       (about supporting-effort-purpose1 purpose
+	      (structured-statement Blue11-prevent)
+	      (human-readable-description-of "prevent EF from interfering main effort"))
+       (about supporting-effort-1-task COA-task
+	      (accomplish supporting-effort-purpose1)
+	      (structured-statement supporting-effort-task-stmt1)
+              (human-readable-description-of "attack to fix EF in the area of supporting effort 2"))
+
+       ;;; for supporting effort 2
+       (about supporting-effort-purpose2 purpose
+	      (structured-statement Blue12-enable)
+	      (human-readable-description-of "enable main effort to conduct forward passage of lines and seize OBJ SLAM"))
+       (about supporting-effort-2-task COA-task
+	      (accomplish supporting-effort-purpose2)
+	      (structured-statement supporting-effort-task-stmt2)
+              (human-readable-description-of "attack in the south to penetrate EF vicinity PL AMBER"))
+)
+
+
+(tellm (COA-task plan-task2)
+       (task-of COA1 plan-task2)
+       (task-of Reserve-COA1 plan-task2))
+
+
+;;********************************************************************
+;;          RESERVE
+;;********************************************************************
+
+(tellm (COA-task plan-task2)
+       (task-of COA1 plan-task2)
+       (task-of Reserve-COA1 plan-task2)
+       (sub-task plan-task2 reserve-task1)
+       (sub-task plan-task2 reserve-task2)
+       (sub-task plan-task2 reserve-task3)
+       )
+
+;;********************************************************************
+;;
+;; The reserver, an armor task force, follows Supporting Effort 2
+(tellm 
+
+ (|ArmoredUnit-MilitarySpecialty| Blue14)
+ (|echelonOfUnit| Blue14 |TaskForce-UnitDesignation|)
+
+ ;; task
+ (follow Blue14-follow)
+ (who Blue14-follow Blue14)
+ (action-obj Blue14-follow Blue12)
+
+ ;; grammar
+ (structured-task-statement reserve-task-stmt1)
+ (description reserve-task-stmt1 Blue14-follow)
+ )
+
+(tellm (about reserve-task1 COA-task
+	      (structured-statement reserve-task-stmt1)
+	      (human-readable-description-of "follows Supporting Effort 2")))
+
+;;********************************************************************
+;;
+;; be prepared to contain enemy forces (EF) in order to prevent EF from
+;; interfering with forward passage of lines through Supporting Effort 2
+;; by Main Effort
+
+(tellm
+ (red-unit Red4)  ;; Red4 is any enemy force?
+ ;; task
+ (contain Blue14-contain)
+ (who Blue14-contain Blue14)
+ (action-obj Blue14-contain Red4)
+ 
+ ;; purpose
+ (prevent-action Blue14-prevent)
+ (purpose-action Blue14-prevent)
+ (who Blue14-prevent Blue14)
+ (action-obj Blue14-prevent interfere2)
+ (interfere-action interfere2)
+ (who interfere2 Red4)
+ (action-obj interfere2 main-effort-task-1)
+
+ ;; grammar
+ (structured-task-statement reserve-task-stmt2)
+ (description reserve-task-stmt2 Blue14-contain)
+ (purpose-of reserve-task-stmt2 Blue14-prevent)
+ (prepare-desc-of reserve-task-stmt2 be-prepared-to)
+ )
+
+(tellm (about reserve-task2-purpose purpose
+	      (structured-statement Blue14-prevent)
+	      (human-readable-description-of "prevent EF from interfering with forward passage of lines through Supporting Effort 2 by Main Effort" ))
+       (about reserve-task2 COA-task
+	      (accomplish reserve-task2-purpose)
+	      (structured-statement reserve-task-stmt2)
+	      (human-readable-description-of "be prepared to contain enemy forces (EF)")
+	      )
+       )
+
+;;********************************************************************
+;;
+;; if not engaged in operations west of PL GREEN,
+;; follows Main Effort and be prepared to block enemy forces
+;; in order to enable Main Effort to seize OBJ SLAM
+
+(tellm
+ (|PhaseLine| pl-green)
+ (|GeographicalRegion| west-pl-green)
+
+ ;; event
+ (engage Blue14-engage)
+ (who Blue14-engage Blue14)
+ (where Blue14-engage west-pl-green)
+
+ ;; first task action
+ (follow Blue14-follow)
+ (who Blue14-follow Blue14)
+ (action-obj Blue14-follow Blue13)
+ 
+ ;; second task action
+ (block-action Blue14-block)
+ (who Blue14-block Blue14)
+ (action-obj Blue14-block Red4)
+ 
+ ;; purpose
+ (enable-action Blue14-enable)
+ (purpose-action Blue14-enable)
+ (who Blue14-enable Blue14)
+ (action-obj Blue14-enable main-effort-task-2)
+
+ ;; grammar
+ (event-task-statement event-task-statement1)
+ (condition-desc-of event-task-statement1 if)
+ (not-desc-of event-task-statement1 not)
+ 
+ (structured-task-statement reserve-task-stmt3)
+ (event-task-statement-of reserve-task-stmt3 event-task-statement1) ;;**
+ (description reserve-task-stmt3 Blue14-follow)
+
+ (structured-task-statement reserve-task-stmt4)
+ (description reserve-task-stmt4 Blue14-block)
+ (purpose-of reserve-task-stmt4 Blue14-enable)
+ (prepare-desc-of reserve-task-stmt4 be-prepared-to)
+ )
+
+;; in COA grammar an event-stmt is associated with one task
+;; but the example seems to associate one event to two different tasks.
+
+(tellm (sub-task reserve-task3 reserve-task3-1)
+       (sub-task reserve-task3 reserve-task3-2)
+       (about event-task-statement event-spec
+	      (structured-statement event-task-statement1)
+	      (human-readable-description-of "if not engaged in operations west of PL GREEN"))
+ 
+       (about reserve-task3-1 COA-task
+	      (structured-statement reserve-task-stmt3)
+	      (human-readable-description-of "follow Main Effort"))
+
+       (about reserve-task3-2-purpose purpose
+	      (structured-statement Blue14-enable)
+	      (human-readable-description-of "enable Main Effort to seize OBJ SLAM" ))
+	      
+       (about reserve-task3-2 COA-task
+	      (accomplish reserve-task4-purpose)
+	      (structured-statement reserve-task-stmt4)
+	      (human-readable-description-of "be prepared to block enemy forces")
+	      )
+       )
+
+;;*************************************
+;; NOTES
+;;  reprentation of enemy forces??
+
+;;********************************************************************
+;;          SECURITY
+;;********************************************************************
+ 
+(tellm (COA-task plan-task3)
+       (task-of COA1 plan-task3)
+       (task-of Security-COA1 plan-task3)
+       (sub-task plan-task3 security-task1)
+       )
+
+;;********************************************************************
+;;
+;; In the security zone, a cavalry squadron (Security Force) screens
+;; the north boundary of the division in order to enable Supporting Effort 1
+;; to fix enemy forces in the security zone
+
+(tellm
+ (|CavalryUnit-MilitarySpecialty| Blue15)
+ (|echelonOfUnit| Blue15 |Squadron-UnitDesignation|)
+ (|GeographicalRegion| north-boundary-of-division)
+ 
+ ;; task action
+ (screen Blue15-screen)
+ (who Blue15-screen Blue15)
+ (action-obj Blue15-screen north-boundary-of-division)
+
+ ;; purpose
+ (enable-action Blue15-enable)
+ (purpose-action Blue15-enable)
+ (who Blue15-enable Blue15)
+ (action-obj Blue15-enable supporting-effort-1-task)
+
+ ;; grammar
+ (structured-task-statement security-task-stmt1)
+ (description security-task-stmt1 Blue15-screen)
+ (purpose-of security-task-stmt1 Blue15-enable)
+ )
+
+(tellm (about security-task1-purpose purpose
+	      (structured-statement Blue15-enable)
+	      (human-readable-description-of "enable Supporting Effort 1 to fix enemy forces in the security zone"))
+       (about security-task1 COA-task
+	      (accomplish security-task1-purpose)
+	      (structured-statement security-task-stmt1)
+	       (human-readable-description-of "screens the north boundary of the division"))
+       )
+
+
+;;********************************************************************
+;;          DEEP
+;;********************************************************************
+
+(tellm (COA-task plan-task4)
+       (task-of COA1 plan-task4)
+       (task-of Deep-COA1 plan-task4)
+       (sub-task plan-task4 deep-task1)
+       (sub-task plan-task4 deep-task2)
+       (sub-task plan-task4 deep-task3)
+       )
+
+;;********************************************************************
+;;
+;; Deep operations will
+;; attrit RED artillery regiment 1 in
+;; order to prevent RED artillery regiment 1 from interfering with the
+;; conduct of the Main Effort and interfering with the conduct of
+;; Supporting Effort 2,
+
+(tellm
+ ;; task
+ (attrit attrit1)
+ (action-obj attrit1 RedArtillaryRegment1)
+
+ ;; purpose
+ (prevent-action prevent1)
+ (purpose-action prevent1)
+ (action-obj prevent1 interfere2)
+ (interfere-action interfere2)
+ (who interfere2 RedArtillaryRegment1)
+ (action-obj interfere2 main-effort1)
+ (action-obj interfere2 supporting-effort-2-task) 
+
+ ;; grammar
+ (structured-task-statement deep-task-stmt1)
+ (description deep-task-stmt1 attrit1)
+ (purpose-of deep-task-stmt1 prevent1)
+)
+
+(tellm (about deep-task1-purpose purpose
+	      (structured-statement prevent1)
+	      (human-readable-description-of "prevent RED artillery regiment 1 from interfering with the conduct of the Main Effort and interfering with the conduct of Supporting Effort 2"))
+       (about deep-task1 COA-task
+	      (accomplish deep-task1-purpose)
+	      (structured-statement deep-task-stmt1)
+	      (human-readable-description-of "attrit RED artillery regiment 1")))
+	      
+;;********************************************************************
+;; then interdicts RED tank battalion 1 in order to
+;; prevent RED tank battalion 1 from interfering with the conduct of the
+;; Main Effort,
+
+(tellm
+ ;; task
+ (interdict interdict1)
+ (action-obj interdict1 RedTankBattalion1)
+
+ ;; purpose
+ (prevent-action prevent2)
+ (purpose-action prevent2)
+ (action-obj prevent2 interfere3)
+ (interfere-action interfere3)
+ (who interfere3 RedTankBattalion1)
+ (action-obj interfere3 main-effort1)
+ 
+ ;; grammar
+ (structured-task-statement deep-task-stmt2)
+ (description deep-task-stmt2 interdict1)
+ (purpose-of deep-task-stmt2 prevent2)
+ )
+
+(tellm (about deep-task2-purpose purpose
+	      (structured-statement prevent2)
+	      (human-readable-description-of "prevent RED tank battalion 1 from interfering with the conduct of the Main Effort"))
+       (about deep-task2 COA-task
+	      (accomplish deep-task2-purpose)
+	      (structured-statement deep-task-stmt2)
+	      (human-readable-description-of "interdicts RED tank battalion 1")))
+	
+;;********************************************************************
+;; then interdicts RED tank regiment 1 in order to prevent
+;; RED tank regiment 1 from moving to west of PL_BLUE and interfering
+;; with the conduct of Supporting Effort 2 and interfering with the
+;; conduct of the Main Effort
+
+(tellm
+ (|PhaseLine| pl-blue)
+ (|GeographicalRegion| west-pl-blue)
+
+ ;; task
+ (interdict interdict2)
+ (action-obj interdict2 RedTankRegiment1)
+
+ ;; purpose
+ (prevent-action prevent3)
+ (purpose-action prevent3)
+
+ (action-obj prevent3 move1)
+ (move move1)
+ (who move1 RedTankRegiment1)
+ (action-to move1 west-pl-blue)
+ 
+ (action-obj prevent3 interfere4)
+ (interfere-action interfere4)
+ (who interfere4 RedTankRegiment1)
+ (action-obj interfere4 main-effort1)
+ (action-obj interfere4 supporting-effort-2-task)
+ 
+ ;; grammar
+ (structured-task-statement deep-task-stmt3)
+ (description deep-task-stmt3 interdict2)
+ (purpose-of deep-task-stmt3 prevent3)
+ )
+
+(tellm (about deep-task3-purpose purpose
+	      (structured-statement prevent3)
+	      (human-readable-description-of "prevent RED tank regiment 1 from moving to west of PL_BLUE and interfering with the conduct of Supporting Effort 2 and interfering with the conduct of the Main Effort"))
+
+       (about deep-task3 COA-task
+	      (accomplish deep-task3-purpose)
+	      (structured-statement deep-task-stmt3)
+	      (human-readable-description-of "interdicts RED tank regiment 1")))
+
+
+;;********************************************************************
+;;          REAR
+;;********************************************************************
+
+(tellm (COA-task plan-task5)
+       (task-of COA1 plan-task5)
+       (task-of Rear-COA1 plan-task5)
+       (sub-task plan-task5 rear-task1)
+       )
+
+;;********************************************************************
+;; a mechanized infantry team unit responds to threats in the rear area with
+;; priority to level III threats against the Class III supply point in order
+;; to ensure the ability to resupply with Class III
+
+(tellm
+ (|MechanizedUnit-MilitarySpecialty| Blue16)
+ (|echelonOfUnit| Blue16 |Team-UnitDesignation|)
+ (|GeographicalRegion| rear-area)
+ (threat-level level-III)
+ (combat-support-asset Class-III-supply-point)
+ 
+ ;; task
+ (respond Blue16-respond)
+ (who Blue16-respond Blue16)
+ (action-to Blue16-repond threat1)
+ (threat threat1)
+ (where threat1 rear-area)
+ (action-with threat1 level-III)
+ (against threat1 Class-III-supply-point)
+
+ ;; purpose
+ (ensure Blue16-ensure)
+ (who Blue16-ensure Blue16)
+ (action-obj Blue16-ensure ability1)
+ (capability ability1)
+ (action-to ability1 resupply1)
+ (resupply resupply1)
+ (action-with resupply1 Class-III)
+ (supply-class Class-III)
+
+ ;; grammar
+ (structured-task-statement rear-task-stmt1)
+ (description rear-task-stmt1 Blue16-respond)
+ (purpose-of rear-task-stmt1 Blue16-ensure)
+ )
+
+(tellm (about rear-task1-purpose purpose
+	      (structured-statement Blue16-ensure)
+	      (human-readable-description-of "ensure the ability to resupply with Class III"))
+       (about rear-task1 COA-task
+	      (accomplish rear-task1-purpose)
+	      (structured-statement rear-task-stmt1)
+	      (human-readable-description-of "responds to threats in the rear area with priority to level III threats against the Class III supply point")))
+
+
+;;********************************************************************
+;;          FIRE
+;;********************************************************************
+
+(tellm (COA-task plan-task6)
+       (task-of COA1 plan-task6)
+       (task-of Fire-COA1 plan-task6)
+       (sub-task plan-task6 fire-task1)
+       )
+
+;;********************************************************************
+;; Fires will enable Supporting Effort 2 to penetrate enemy forces
+;; and prevent enemy artillery from interfering with Supporting Effort 2
+;; and Main Effort
+
+(tellm
+ (red-unit enemy-artillery)
+
+ ;; first event
+ (enable-action Fire-enable)
+ (action-obj Fire-enable supporting-effort-2-task) 
+
+ ;; second event
+ (prevent-action prevent4)
+ (action-obj prevent4 interfere5)
+ (interfere-action interfere5)
+ (who interfere5 enemy-artillery)
+ (action-obj interfere5 main-effort1)
+ (action-obj interfere5 supporting-effort-2-task)
+
+ (event-statement fire-event-stmt1)
+ (description fire-event-stmt1 Fire-enable)
+
+ (event-statement fire-event-stmt2)
+ (description fire-event-stmt2 prevent4)
+
+ (structured-task-statement fire-task-stmt1) ;; ?
+
+)
+
+(tellm (about fire-task1 COA-task
+	      (structured-statement fire-task-stmt1)
+	      (human-readable-description-of "enable Supporting Effort 2 to penetrate enemy forces and prevent enemy artillery from interfering with Supporting Effort 2 and Main Effort")))

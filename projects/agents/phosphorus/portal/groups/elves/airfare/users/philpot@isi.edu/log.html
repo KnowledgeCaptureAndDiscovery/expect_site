@@ -1,0 +1,117 @@
+<html>
+<head>
+<script>
+var limit="0:30"
+if (document.images){
+  var parselimit=limit.split(":");
+  parselimit=parselimit[0]*60+parselimit[1]*1;
+  }
+function resubmit(val) {
+    var myform = eval("document.form"+val);
+    myform.submit();
+}
+function beginrefresh(){
+  if (!document.images)
+      return;
+   if (parselimit==1)
+      window.location.reload();
+   else {
+      parselimit-=1;
+      curmin=Math.floor(parselimit/60);
+      cursec=parselimit%60;
+      if (curmin!=0)
+         curtime=curmin+" minutes and "+cursec+" seconds left until page refresh!";
+      else
+         curtime=cursec+" seconds left until page refresh!";
+      window.status=curtime
+      setTimeout("beginrefresh()",1000)
+   }
+ }
+window.onload=beginrefresh;
+</script>
+</head>
+<table>
+<tr><td colspan=2>----Mon Apr  8 16:36:54 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>from outbound departure airport</b></td><td>LAX</td></tr>
+<tr><td><b>to outbound arrival airport</b></td><td>CLT</td></tr>
+<tr><td><b>from return departure airport</b></td><td>CLT</td></tr>
+<tr><td><b>to return arrival airport</b></td><td>LAX</td></tr>
+<tr><td><b>of airline</b></td><td>American Airlines</td></tr>
+<tr><td><b>of outbound flight number</b></td><td>2446</td></tr>
+<tr><td><b>of outbound flight number2</b></td><td>1732</td></tr>
+<tr><td><b>of return flight number</b></td><td>2838</td></tr>
+<tr><td><b>of return flight number2</b></td><td>2721</td></tr>
+<tr><td><b>on outbound departure date</b></td><td>4/20/2002</td></tr>
+<tr><td><b>on return departure date</b></td><td>5/5/2002</td></tr>
+<tr><td><b>with original price</b></td><td>1205</td></tr>
+<tr><td><b>notify on</b></td><td>Decrease only</td></tr>
+<tr><td><b>for user id</b></td><td>philpot@isi.edu</td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;ack&gt;OK&lt;/ack&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1018309014)'></td></tr>
+</table><br>
+<form name='form1018309014' action="/cgi-bin/portal/agent-req.pl" target="_blank" method="post">
+<input type='hidden' name='val0' value='LAX'>
+<input type='hidden' name='val1' value='CLT'>
+<input type='hidden' name='val2' value='CLT'>
+<input type='hidden' name='val3' value='LAX'>
+<input type='hidden' name='val4' value='American Airlines'>
+<input type='hidden' name='val5' value='2446'>
+<input type='hidden' name='val6' value='1732'>
+<input type='hidden' name='val7' value='2838'>
+<input type='hidden' name='val8' value='2721'>
+<input type='hidden' name='val9' value='4/20/2002'>
+<input type='hidden' name='val10' value='5/5/2002'>
+<input type='hidden' name='val11' value='1205'>
+<input type='hidden' name='val12' value='Decrease only'>
+<input type='hidden' name='val13' value='philpot@isi.edu'>
+<input type='hidden' name='agent' value='airfare'>
+<input type='hidden' name='email' value='philpot@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Mon Apr  8 16:36:42 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>from outbound departure airport</b></td><td>LAX</td></tr>
+<tr><td><b>to outbound arrival airport</b></td><td>CLT</td></tr>
+<tr><td><b>from return departure airport</b></td><td>CLT</td></tr>
+<tr><td><b>to return arrival airport</b></td><td>LAX</td></tr>
+<tr><td><b>of airline</b></td><td>American Airlines</td></tr>
+<tr><td><b>of outbound flight number</b></td><td>2954</td></tr>
+<tr><td><b>of outbound flight number2</b></td><td>1196</td></tr>
+<tr><td><b>of return flight number</b></td><td>1205</td></tr>
+<tr><td><b>of return flight number2</b></td><td>3037</td></tr>
+<tr><td><b>on outbound departure date</b></td><td>4/20/2002</td></tr>
+<tr><td><b>on return departure date</b></td><td>5/5/2002</td></tr>
+<tr><td><b>with original price</b></td><td>652</td></tr>
+<tr><td><b>notify on</b></td><td>Decrease only</td></tr>
+<tr><td><b>for user id</b></td><td>philpot@isi.edu</td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;ack&gt;OK&lt;/ack&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1018309002)'></td></tr>
+</table><br>
+<form name='form1018309002' action="/cgi-bin/portal/agent-req.pl" target="_blank" method="post">
+<input type='hidden' name='val0' value='LAX'>
+<input type='hidden' name='val1' value='CLT'>
+<input type='hidden' name='val2' value='CLT'>
+<input type='hidden' name='val3' value='LAX'>
+<input type='hidden' name='val4' value='American Airlines'>
+<input type='hidden' name='val5' value='2954'>
+<input type='hidden' name='val6' value='1196'>
+<input type='hidden' name='val7' value='1205'>
+<input type='hidden' name='val8' value='3037'>
+<input type='hidden' name='val9' value='4/20/2002'>
+<input type='hidden' name='val10' value='5/5/2002'>
+<input type='hidden' name='val11' value='652'>
+<input type='hidden' name='val12' value='Decrease only'>
+<input type='hidden' name='val13' value='philpot@isi.edu'>
+<input type='hidden' name='agent' value='airfare'>
+<input type='hidden' name='email' value='philpot@isi.edu'>
+</form>
+
+</html>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:campbell="http://www.isi.edu/expect/scec/campbell" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://www.isi.edu/expect/scec/campbell" schemaLocation="campbell.xsd"/>
+	<xs:element name="ground_motion_param" type="campbell:gmp"/>
+	<xs:element name="depth_of_basin" type="campbell:basindepth"/>
+	<xs:element name="magnitude_of_earthquake" type="campbell:magnitude"/>
+	<xs:element name="distance_from_site" type="campbell:distance"/>
+	<xs:element name="site_type" type="campbell:camp_sitetype"/>
+	<xs:element name="fault_type" type="campbell:faulttype"/>
+	<xs:element name="uncertainties" type="campbell:uncertainties"/>
+	<xs:element name="campbell_message">
+		<xs:complexType mixed="0">
+			<xs:sequence>
+				<xs:element ref="ground_motion_param"/>
+				<xs:element ref="magnitude_of_earthquake"/>
+				<xs:element ref="distance_from_site"/>
+				<xs:element ref="depth_of_basin"/>
+				<xs:element ref="fault_type"/>
+				<xs:element ref="site_type"/>
+				<xs:element ref="uncertainties"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

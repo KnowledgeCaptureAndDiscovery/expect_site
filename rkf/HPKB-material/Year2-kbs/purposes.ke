@@ -1,0 +1,345 @@
+;May 19:
+;unassert
+; (arg2Isa  prevents-SitSitType SituationType)
+;assert
+; (arg2Isa  prevents-SitSitType Collection)
+; (arg2Genl prevents-SitSitType Situation)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;Purpose-file
+
+;added
+constant: causes-SitSitType .
+in Mt : BaseKB .
+isa : IKBConstant BinaryPredicate .
+arg1Isa : Situation  .
+arg2Isa : Collection  .
+arg2Genl : Situation  .
+comment : "(#$causes-SitSitType CAUSING-SIT EFFECTED-SITTYPE) means
+          that CAUSING-SIT will cause an instance of EFFECTED-SITTYPE
+          to come about." .
+
+;added Mar. 18:
+;;prevents-SitSitType
+ 
+constant: prevents-SitSitType.
+in Mt: ModernMilitaryTacticsMt.
+isa : BinaryPredicate IKBConstant .
+arg1Isa: Situation .
+;arg2Isa: SituationType .
+comment: "(prevents-SitSitType SIT SITTYPE) means that SIT prevents any
+situation of type SITTYPE from coming about.".
+
+in Mt: ModernMilitaryTacticsMt.
+F :  (arg2Isa  prevents-SitSitType Collection) .
+F :  (arg2Genl prevents-SitSitType Situation) .
+
+
+;;add
+
+In Mt : BaseKB.
+
+F : (genlMt ModernMilitaryTacticsMt ModalityMt) .
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;; Purposes - primarily associated with Tasks
+ 
+
+
+;;add
+constant: IntangibleStuffDescribingPredicate .
+in Mt : BaseKB .
+isa: PredicateCategory .
+genls : IntangibleObjectPredicate  .
+comment : "Slots describing intangible substances" .
+
+constant: taskHasPurpose.
+in Mt : ModernMilitaryTacticsMt .
+isa : BinaryPredicate IntangibleStuffDescribingPredicate.
+arg1Isa: MilitaryTask.
+arg2Isa: CycFormula. 
+modalInArg : 2. 
+comment: "A Purpose is a #$Goal FM-101-5: purpose (Army) - The desired 
+or intended result of the tactical operation stated in terms relating to 
+the enemy or to the desired situation (for example, to allow passage of
+follow-on forces or to set the conditions for the counterattack). It
+is the why of the mission statement expressed using an action
+verb. (For example, allow, cause, influence, prevent, protect).".
+
+constant: unitHasPurpose.
+in Mt: ModernMilitaryTacticsMt.
+isa: BinaryPredicate IntangibleStuffDescribingPredicate
+PropositionalAttitudeSlot.
+arity: 2.
+arg1Isa: ModernMilitaryUnit-Deployable.
+arg2Isa: CycFormula.
+modalInArg : 2. 
+comment: "(#$unitHasPurpose UNIT PROP) means that PROP is the purpose
+assigned to UNIT in the context of the Course of Action representation of
+which the assertion is a part.  This means that PROP is a proposition which
+UNIT is explicitly ordered to make true.". 
+
+F: (genlPreds unitHasPurpose goals).
+
+
+constant: operationHasPurpose.
+in Mt: ModernMilitaryTacticsMt.
+isa: BinaryPredicate.
+arity: 2.
+arg1Isa: MilitaryOperation.
+arg2Isa: CycFormula. 
+modalInArg : 2. 
+comment: "Occasionally in a COA statement a purpose is associated with an 
+operation rather than a task. This predicate is reserved for those cases.".
+ 
+;; The prevent, enable, protect and control predicates qualify 
+;; the truth values CYC formulas or the properties of terms 
+;; in the Goal (or Purpose) context.
+;; The further interpretation of 'enable' in terms of a temporal model
+;; is unspecified - limiting the degree to which goals can be checked for
+;; consistency etc. However, this scheme does allow goals to be represented
+;; by CYC terms, rather than by strings (text). 
+;; [this approach is loosely derived from email exchanges]
+;; enabling and preventing
+ 
+;; unary 
+ 
+constant: propPendingVerification.  
+in Mt: ModernMilitaryTacticsMt.
+isa: UnaryPredicate.
+arg1Isa: CycFormula.
+modalInArg : 1.
+comment: "CycFormula is to be enabled, i.e. become true, in the goal
+context.".
+ 
+;; binary
+ 
+constant: enables-SitProp.  
+in Mt: ModernMilitaryTacticsMt.
+isa : BinaryPredicate.
+arg1Isa: Situation.
+arg2Isa: CycFormula.
+modalInArg: 2.
+comment : "(enables-SitProp SIT PROP) means that SIT enables PROP to become
+          true." .
+
+;; unary 
+ 
+constant: propPendingFalsification.
+in Mt: ModernMilitaryTacticsMt.
+isa: UnaryPredicate.
+arg1Isa: CycFormula.
+modalInArg: 1.
+comment: "CycFormula is to be prevented in the goal context, typically, 
+some types of enemy actions are to be prevented.".
+ 
+;; binary
+ 
+constant: prevents-SitProp.
+in Mt: ModernMilitaryTacticsMt.
+isa : BinaryPredicate .
+arg1Isa: Situation .
+arg2Isa: CycFormula.
+modalInArg : 2.
+comment: "(prevents-SitProp SIT PROP) means that SIT prevents PROP from
+          becoming true." .
+
+;; for cases where the event to be enabled is already defined in the COA
+ 
+;; unary 
+ 
+constant: eventToOccur.
+in Mt: ModernMilitaryTacticsMt.
+isa: UnaryPredicate.         
+arg1Isa: Event.
+comment: "an event which is already specified in the COA context is to be
+enabled in the goal context, for example, its preconditions could be achieved
+or maintained.".
+ 
+;; binary 
+ 
+constant: enables-EventEvent.
+in Mt: ModernMilitaryTacticsMt.
+isa: BinaryPredicate .
+arg1Isa: Event . 
+arg2Isa: Event .    
+comment : "(enables-EventEvent EVENT1 EVENT2) means that EVENT1 enables EVENT2
+          to take place." .  
+
+;; protecting and controlling
+ 
+ 
+constant: thingToProtect.
+in Mt: ModernMilitaryTacticsMt.
+isa: UnaryPredicate.
+arg1Isa: SomethingExisting.
+comment: "SomethingExisting is to be protected in the goal context.".
+ 
+ 
+constant: areaToControl.
+in Mt: ModernMilitaryTacticsMt.
+isa: UnaryPredicate.
+arg1Isa: GeographicalRegion.
+comment: "a MilitarilySignificantArea is to be controlled in the goal
+context.". 
+ 
+;; alternative to thingToProtect
+ 
+constant: areaToProtect.
+in Mt: ModernMilitaryTacticsMt.
+isa: UnaryPredicate.
+arg1Isa: GeographicalThing.
+comment: "(areaToProtect ?ENTITY) means that ?ENTITY is being protected. This
+predicate is used in the context of goals and causes. ". 
+F:
+(genlPreds areaToProtect thingToProtect).
+ 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Missions - Roles of Units in Missions 
+ 
+;; Missions are MilitaryOperations in CYC
+ 
+;; MainEffort
+
+ 
+constant: unitAssignedMainOpEffort .
+in Mt: ModernMilitaryTacticsMt.
+isa: ActorSlot.
+arg1Isa: MilitaryOperation.
+arg2Isa: ModernMilitaryUnit-Deployable.
+comment: "(unitAssignedMainOpEffort MISSION UNIT) means that UNIT
+undertakes the main effort in carrying through MISSION." .
+in Mt: ModernMilitaryTacticsMt.
+F:
+(implies
+  (and
+    (unitAssignedMainOpEffort ?OP ?UNIT)
+    (mainTaskOfOperation ?OP ?TASK))
+  (unitAssignedToTask ?TASK ?UNIT)).
+F:
+(implies
+  (and
+    (unitAssignedMainOpEffort ?OP ?UNIT)
+    (unitAssignedToTask ?TASK ?UNIT))
+  (mainTaskOfOperation ?OP ?TASK)).
+ 
+;; SupportingEffort
+ 
+constant: unitAssignedSuppOpEffort.
+in Mt: ModernMilitaryTacticsMt.
+isa: ActorSlot.
+arg1Isa: MilitaryOperation.
+arg2Isa: ModernMilitaryUnit-Deployable.
+comment: "(unitAssignedSuppOpEffort MISSION UNIT) means that UNIT
+undertakes one of the supporting efforts in carrying through MISSION." .
+in Mt: ModernMilitaryTacticsMt.
+F:
+(implies
+  (and
+    (unitAssignedSuppOpEffort ?OP ?UNIT)
+    (unitAssignedToTask ?TASK ?UNIT))
+  (supportingTaskOfOperation ?OP ?TASK)).
+ 
+;; reserves
+ 
+ 
+constant: reserveUnitInMission.
+in Mt: ModernMilitaryTacticsMt.
+isa: ActorSlot.
+arg1Isa: MilitaryOperation.
+arg2Isa: ModernMilitaryUnit-Deployable.
+comment: "(#$reserveUnitInMission MISSION  UNIT) means that UNIT 
+is a reserve during MISSION.".
+
+;; Security
+ 
+;;rename to performsSecurityOperationsInMission (j. donlon)
+;;rename to unitForSecurityOperationsInMission 
+
+;constant: securityUnitInMission.
+constant:  unitForSecurityOperationsInMission .
+in Mt: ModernMilitaryTacticsMt.
+isa: ActorSlot.
+arg1Isa: MilitaryOperation.
+arg2Isa: ModernMilitaryUnit-Deployable.
+comment: "(#$unitForSecurityOperationsInMission MISSION  UNIT) means that UNIT 
+performs security-related operations  during MISSION.".
+;comment: "(#$securityUnitInMission MISSION  UNIT) means that UNIT 
+;is a security unit during MISSION.".
+ 
+
+;; Deep Operations - tasks and purposes may be part of these -
+;; represented as properties holding of tasks/purposes
+;; without an explicit unit or Mission reference
+ 
+constant: deepOperationTask.
+in Mt: ModernMilitaryTacticsMt.
+isa: BinaryPredicate IKBConstant.
+arg1Isa: MilitaryOperation.
+arg2Isa: MilitaryTask. 
+comment: "(#$deepOperationTask MISSION TASK) means that during MISSION TASK 
+is directed against enemy forces and functions which are not in contact
+at the forward line of troops (FLOT), line of departure (LD), or
+friendly perimeter and are between the FLOT or perimeter and the
+forward boundary of the unit conducting the operation.  From KF723.1
+in the HPKB COA CP spec v1.0.".
+ 
+
+;; Tactical Control Force
+ 
+;;rename to tacticalCombatForceInMission (j donlon)
+
+;constant: tacticalControlForceInMission.
+constant: tacticalCombatForceInMission.
+in Mt: ModernMilitaryTacticsMt.
+isa: ActorSlot.
+arg1Isa: MilitaryOperation.
+arg2Isa: ModernMilitaryUnit-Deployable.
+comment: "(#$tacticalCombatForceInMission MISSION  UNIT) means that UNIT 
+plays the role of tactical combat force during MISSION.".
+;comment: "(#$tacticalControlForceInMission MISSION  UNIT) means that UNIT 
+;plays the role of tactical control force during MISSION.".
+ 
+
+
+;; Fires
+ 
+;;rename to fireSupportToOperation (j donlon)
+
+;constant: divisionFires.
+constant: fireSupportToOperation .
+in Mt: ModernMilitaryTacticsMt.
+isa: ActorSlot.
+arg1Isa: MilitaryOperation.
+arg2Isa: ModernMilitaryUnit-Deployable.
+comment: "(#$fireSupportToOperation MISSION  UNIT) means that UNIT 
+provides fire support during MISSION.".
+;comment: "(#$divisionFires MISSION  UNIT) means that UNIT 
+;plays the role of controlling division fires during MISSION.".
+
+;;; Threat
+ 
+
+constant: MilitaryThreat.
+in Mt: ModernMilitaryTacticsMt.
+isa: LinearOrderAttributeType.
+genls: AttributeValue.
+comment: "A collection of attributes: a unit with an attribute value
+from this collection is a hostile force which presents a friendly
+force with a threat of some degree in the context of a Course of
+Action representation.".
+ 
+constant: presentsThreatInCOA.
+in Mt: ModernMilitaryTacticsMt.
+isa: BinaryPredicate.
+genlPreds: hasAttributes.
+arg1Isa: ModernMilitaryUnit-Deployable.
+arg2Isa: MilitaryThreat.
+comment: "(#$presentsThreatInCOA UNIT THREATLEVEL) means that
+UNIT presents a threat of level THREATLEVEL in the context of a particular
+Course of Action.".
+
+

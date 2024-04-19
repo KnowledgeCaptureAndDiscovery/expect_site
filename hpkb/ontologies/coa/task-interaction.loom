@@ -1,0 +1,210 @@
+;;; -*- Mode: Lisp; Package: CYC; Syntax: COMMON-LISP; Base: 10 -*-
+
+(in-package "CYC")
+
+
+;;; ******************** CONCEPTS ********************
+
+
+
+;;; ******************** FUNCTIONS AND RELATIONS ********************
+
+(DEFRELATION |eventDisables|
+  :ARITY 2
+  :IS-PRIMITIVE |startsAfterStartingOf|
+  :DOMAIN |Situation|
+  :RANGE |Situation|
+  :ANNOTATIONS (|IKBConstant|
+                |IrreflexiveBinaryPredicate|
+                |AntiSymmetricBinaryPredicate|
+                |TransitiveBinaryPredicate|
+                |AsymmetricBinaryPredicate|
+                (DOCUMENTATION "If (#$eventDisables SIT1 SIT2) and there is a known propositional precondition PRECON for SIT2, then SIT1 causes the negation of PRECON to become true.")))
+
+(DEFRELATION |eventEnables|
+  :ARITY 2
+  :IS-PRIMITIVE |startsAfterStartingOf|
+  :DOMAIN |Situation|
+  :RANGE |Situation|
+  :ANNOTATIONS (|IKBConstant|
+                |IrreflexiveBinaryPredicate|
+                |AntiSymmetricBinaryPredicate|
+                |TransitiveBinaryPredicate|
+                |AsymmetricBinaryPredicate|
+                (DOCUMENTATION "If (#$eventEnables SIT1 SIT2) and PRECON is a known propositional precondition for SIT2, then SIT1 causes PRECON to become true.")))
+
+(DEFRELATION |eventOfPlan|
+  :ARITY 2
+  :DOMAIN |Event|
+  :RANGE |Plan|
+  :ANNOTATIONS (|IKBConstant|
+                |BinaryPredicate|
+                (DOCUMENTATION "(#$eventOfPlan EVENT PLANMT) means that EVENT is a hypothetical #$Event referenced in the description of a plan that is represented in the #$Plan microtheory PLANMT. Ordinarily, such an assertion will be made within PLANMT itself, and every event in the plan that figures as a 'planned' event will have such an assertion made of it. The reason for having this predicate is twofold. First, we may wish to have dependent on PLANMT (via a #$genlMt link) a microtheory that describes the 'real world'--e.g., a description of an attempted execution of the plan. In that microtheory, we will wish to distinguish between events that occur in reality from 'hypothetical' events that are part of the planning context: because the #$eventOfPlan assertions will inherit to the dependent mt, we will have a ready means of doing this. Second, we will want to distinguish within the planning context itself between 'hypothetical' events in the plan and real-world events which hypothetical events in the plan may be contingent on. It may, in other words, be necessary at times to give planning contexts access to non-hypothetical events are mentioned. Again, the #$eventOfPlan assertions will give us a ready means for distinguishing, within the hypothetical mt, between events which are considered to be hypothetical and events which are not.")))
+
+(DEFRELATION |eventSupports|
+  :ARITY 2
+  :IS-PRIMITIVE |startsAfterStartingOf|
+  :DOMAIN |Situation|
+  :RANGE |Situation|
+  :ANNOTATIONS (|IKBConstant|
+                |IrreflexiveBinaryPredicate|
+                |AntiSymmetricBinaryPredicate|
+                |AsymmetricBinaryPredicate|
+                |TransitiveBinaryPredicate|
+                (DOCUMENTATION "If there is a propositional precondition PRECON for SIT2 such that SIT1 causes PRECON to become true, then (#$eventSupports SIT1 SIT2).")))
+
+(DEFRELATION |eventUndermines|
+  :ARITY 2
+  :IS-PRIMITIVE |startsAfterStartingOf|
+  :DOMAIN THING
+  :RANGE THING
+  :ANNOTATIONS (|IKBConstant|
+                |IrreflexiveBinaryPredicate|
+                |AntiSymmetricBinaryPredicate|
+                |TransitiveBinaryPredicate|
+                |AsymmetricBinaryPredicate|
+                (DOCUMENTATION "If there is a known propositional precondition PRECON for SIT2 such that SIT1 causes the negation of PRECON to become true, then (#$eventUndermines SIT1 SIT2).")))
+
+(DEFRELATION |globalRequisiteFor|
+  :ARITY 2
+  :DOMAIN |Situation|
+  :RANGE |Situation|
+  :ANNOTATIONS (|IKBConstant|
+                |TransitiveBinaryPredicate|
+                |AsymmetricBinaryPredicate|
+                (DOCUMENTATION "If PRECON is any known propositional precondition for SIT2 and (#$globalRequisiteFor SIT1 SIT2), then SIT1's 'obtaining' or 'happening' is a necessary precondition for PRECON becoming true.")))
+
+(DEFRELATION |globalRequisiteForAnti|
+  :ARITY 2
+  :DOMAIN THING
+  :RANGE THING
+  :ANNOTATIONS (|IKBConstant|
+                |TransitiveBinaryPredicate|
+                |AsymmetricBinaryPredicate|
+                (DOCUMENTATION "If (#$globalRequisiteForAnti SIT1 SIT2) and PRECON is any know propositional precondition for SIT2, then SIT1's happening is a necessary precondition for the negation of PRECON becoming true.")))
+
+(DEFRELATION |potentialDutyOfAgent|
+  :ARITY 3
+  :DOMAINS (|Agent| |Set-Mathematical|)
+  :RANGE |ActorSlot|
+  :ANNOTATIONS (|IKBConstant| |TernaryPredicate|))
+
+(DEFRELATION |preconditionFor-SitProp|
+  :ARITY 2
+  :DOMAIN |Situation|
+  :RANGE |CycFormula|
+  :ANNOTATIONS (|IKBConstant|
+                |BinaryPredicate|
+                (DOCUMENTATION "#$preconditionFor-SitProp is used to state a situational precondition for a proposition's being veridical. (#$preconditionFor-SitProp SIT PROP) means that unless the situation SIT 'occurs' or 'obtains', the proposition PROP won't be true.")))
+
+(DEFRELATION |purposeOfEvent|
+  :ARITY 2
+  :DOMAIN (:and |Event| |PurposefulAction|)
+  :RANGE |Goal|
+  :ANNOTATIONS (|IKBConstant|
+                |BinaryPredicate|
+                (DOCUMENTATION "When (#$purposeOfEvent EVENT GOAL) is asserted within the context of a particular planning context, this means that the purpose of EVENT within the planning context is GOAL. What this => will vary from context to context: however there will often be the entailment that rational agents in the context who are tasked with performing the EVENT in question will themselves have GOAL as a #$goals.")))
+
+(DEFRELATION |purposeOfScriptTypeInPlan|
+  :ARITY 3
+  :DOMAINS ((:AND |ScriptType| (:FILLED-BY SUPERRELATIONS |PurposefulAction|))
+            |Plan|)
+  :RANGE |Goal|
+  :ANNOTATIONS (|IKBConstant|
+                |TernaryPredicate|
+                (DOCUMENTATION "(#$purposeOfScriptTypeInPlan SCRIPTTYPE PLANMT GOAL) means that within the #$Plan (i.e., the microtheoretic planning context) PLAN, events of the type SCRIPTTYPE are ordinarily associated with a purpose represented by GOAL. In many but not all contexts this entails that is an event of type SCRIPTTYPE is performed by someone, that agent will have GOAL as a #$goals. It is true generally that if (#$purposeOfScriptTypeInPlan SCRIPTTYPE PLANMT GOAL) and it is true in the PLANMT that (isa EVENT SCRIPTTYPE), it will be true in the PLANMT that(#$purposeOfEvent EVENT GOAL).")))
+
+(DEFRELATION |requisiteFor|
+  :ARITY 2
+  :DOMAIN |Situation|
+  :RANGE |Situation|
+  :ANNOTATIONS (|IKBConstant|
+                |TransitiveBinaryPredicate|
+                |AsymmetricBinaryPredicate|
+                (DOCUMENTATION "If there is a propositional precondition PRECON for SIT2 such that SIT1's 'happening' is a precondition for PRECON becoming true, then (#$requisiteFor SIT1 SIT2).")))
+
+(DEFRELATION |requisiteForAnti|
+  :ARITY 2
+  :DOMAIN THING
+  :RANGE THING
+  :ANNOTATIONS (|IKBConstant|
+                |TransitiveBinaryPredicate|
+                |AsymmetricBinaryPredicate|
+                (DOCUMENTATION "If there is a known propositional precondition PRECON for SIT2 such that SIT1's happening is a necessary precondition for the negation ofPRECON becoming true, then (#$requisiteForAnti SIT1 SIT2).")))
+
+(DEFRELATION |timeConstraintOfTask|
+  :ARITY 2
+  :DOMAIN |MilitaryTask|
+  :RANGE |TemporalThing|
+  :ANNOTATIONS (|IKBConstant|
+                |BinaryPredicate|
+                (DOCUMENTATION "(timeConstraintOfTask TASK TIMESPEC) means that within a particular plan specification or course of action context, TASK is to be completed within the time extent of the #$TemporalThing TIMESPEC.")))
+
+(DEFRELATION |toFacilitateInPlan-Prop|
+  :ARITY 2
+  :DOMAIN (:and |CycFormula| |Plan|)
+  :RANGE (:and |Plan| |CycFormula|)
+  :ANNOTATIONS (|IKBConstant|
+                |BinaryPredicate|
+                (DOCUMENTATION "(#$toFacilitateInPlan-Prop PROP PLAN) means that the success of the plan represented by the #$SupposedToBeMicrotheory PLAN is contingent upon PROP becoming true in the course of the plan.")))
+
+(DEFRELATION |toFacilitateInPlan-Sit|
+  :ARITY 2
+  :DOMAIN |Situation|
+  :RANGE |Plan|
+  :ANNOTATIONS (|IKBConstant|
+                |BinaryPredicate|
+                (DOCUMENTATION "(#$toFacilitateInPlan-Sit SIT PLAN) means that the success of the plan represented by the #$SupposedToBeMicrotheory PLAN is contingent upon SIT 'happening' in the course of PLAN.")))
+
+(DEFRELATION |toFacilitateInSit-Prop|
+  :ARITY 2
+  :DOMAIN (:and |CycFormula| |Situation|)
+  :RANGE (:and |Situation| |CycFormula|)
+  :ANNOTATIONS (|IKBConstant|
+                |BinaryPredicate|
+                (DOCUMENTATION "(#$toFacilitateInSit-Prop PROP SIT) means that SIT is a #$Situation whose success in a planning context is contingent upon its making PROP true.")))
+
+(DEFRELATION |toFacilitateInSit-Sit|
+  :ARITY 2
+  :DOMAIN |Situation|
+  :RANGE |Situation|
+  :ANNOTATIONS (|IKBConstant|
+                |BinaryPredicate|
+                (DOCUMENTATION "(#$toFacilitateInSit-Sit SIT1 SIT2) means that SIT2 isa a #$Situation whose success in a planning context is contingent on SIT1 'happening'.")))
+
+(DEFRELATION |toPreventInPlan-Prop|
+  :ARITY 2
+  :DOMAIN (:and |CycFormula| |Plan|)
+  :RANGE (:and |Plan| |CycFormula|)
+  :ANNOTATIONS (|IKBConstant|
+                |BinaryPredicate|
+                (DOCUMENTATION "(#$toPreventInPlan-Prop PROP PLAN) means that the success of the plan represented by the #$SupposedToBeMicrotheory PLAN is contingent upon PROP not becoming true in the course of the plan.")))
+
+(DEFRELATION |toPreventInPlan-Sit|
+  :ARITY 2
+  :DOMAIN |Situation|
+  :RANGE |Plan|
+  :ANNOTATIONS (|IKBConstant|
+                |BinaryPredicate|
+                (DOCUMENTATION "(#$toPreventInPlan-Sit SIT PLAN) means that the success of the plan represented by the #$SupposedToBeMicrotheory PLAN is contingent upon the #$Situation SIT not 'happening' in the course of the plan.")))
+
+(DEFRELATION |toPreventInSit-Prop|
+  :ARITY 2
+  :DOMAIN (:and |CycFormula| |Situation|)
+  :RANGE (:and |Situation| |CycFormula|)
+  :ANNOTATIONS (|IKBConstant|
+                |BinaryPredicate|
+                (DOCUMENTATION "(#$toPreventInSit-Prop PROP SIT) means that SIT is a #$Situation whose success in a planning context is contingent upon PROP not becoming true.")))
+
+(DEFRELATION |toPreventInSit-Sit|
+  :ARITY 2
+  :DOMAIN |Situation|
+  :RANGE |Situation|
+  :ANNOTATIONS (|IKBConstant|
+                |BinaryPredicate|
+                (DOCUMENTATION "(#$toPreventInSit-Sit SIT1 SIT2) means that SIT2 is a situation whose success in a planning context is contingent upon SIT1 not 'happening' in the course of the plan.")))
+
+
+
+;;; ******************** GENERAL ASSERTIONS ********************
+

@@ -1,0 +1,72 @@
+<html>
+<head>
+<script>
+var limit="0:30"
+if (document.images){
+  var parselimit=limit.split(":");
+  parselimit=parselimit[0]*60+parselimit[1]*1;
+  }
+function resubmit(val) {
+    var myform = eval("document.form"+val);
+    myform.submit();
+}
+function beginrefresh(){
+  if (!document.images)
+      return;
+   if (parselimit==1)
+      window.location.reload();
+   else {
+      parselimit-=1;
+      curmin=Math.floor(parselimit/60);
+      cursec=parselimit%60;
+      if (curmin!=0)
+         curtime=curmin+" minutes and "+cursec+" seconds left until page refresh!";
+      else
+         curtime=cursec+" seconds left until page refresh!";
+      window.status=curtime
+      setTimeout("beginrefresh()",1000)
+   }
+ }
+window.onload=beginrefresh;
+</script>
+</head>
+<table>
+<tr><td colspan=2>----Mon Jul 29 05:29:10 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>of outbound flight number</b></td><td>0191</td></tr>
+<tr><td><b>on outbound departure date</b></td><td>7/28/2002</td></tr>
+<tr><td><b>at outbound departure time (e.g. 12:30pm no space please)</b></td><td>5:00pm</td></tr>
+<tr><td><b>from outbound departure airport</b></td><td>IAD</td></tr>
+<tr><td><b>to outbound arrival airport</b></td><td>LAX</td></tr>
+<tr><td><b>of return flight number</b></td><td>0200</td></tr>
+<tr><td><b>on return departure date</b></td><td>8/2/2002</td></tr>
+<tr><td><b>at return departure time</b></td><td>3:50pm</td></tr>
+<tr><td><b>from return departure airport</b></td><td>LAX</td></tr>
+<tr><td><b>to return arrival airport</b></td><td>IAD</td></tr>
+<tr><td><b>for user id</b></td><td>dschmorrow@darpa.mil</td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;error&gt;&lt;type&gt;Date passed&lt;/type&gt;&lt;attr&gt;date&lt;/attr&gt;&lt;/error&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1027945750)'></td></tr>
+</table><br>
+<form name='form1027945750' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='0191'>
+<input type='hidden' name='val2' value='7/28/2002'>
+<input type='hidden' name='val3' value='5:00pm'>
+<input type='hidden' name='val4' value='IAD'>
+<input type='hidden' name='val5' value='LAX'>
+<input type='hidden' name='val6' value='0200'>
+<input type='hidden' name='val7' value='8/2/2002'>
+<input type='hidden' name='val8' value='3:50pm'>
+<input type='hidden' name='val9' value='LAX'>
+<input type='hidden' name='val10' value='IAD'>
+<input type='hidden' name='val11' value='dschmorrow@darpa.mil'>
+<input type='hidden' name='agent' value='flight-schedule'>
+<input type='hidden' name='email' value='dschmorrow@darpa.mil'>
+</form>
+
+<p>
+</html>

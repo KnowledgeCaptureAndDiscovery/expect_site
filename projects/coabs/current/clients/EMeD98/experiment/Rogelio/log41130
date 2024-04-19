@@ -1,0 +1,1245 @@
+select: copy and create button
+   at Tue Jun 01 16:13:32 PDT 1999
+
+ done editing:((name estimate-time-to-emplace-AVLB)
+ (capability (estimate
+                (obj (?t is (spec-of time)))
+                (for (?s is (inst-of emplace-avlb)))
+                ))
+ (result-type (inst-of number))
+ (method (find 
+	  (obj (spec-of maximum))
+	       (of (estimate (obj (spec-of time))
+			     (of (bridge-of ?s))
+                    )
+		   )
+	       )
+	 )
+ )
+
+   at Tue Jun 01 16:20:17 PDT 1999
+
+built new method:((name estimate-time-to-emplace-AVLB)
+ (capability (estimate
+                (obj (?t is (spec-of time)))
+                (for (?s is (inst-of emplace-avlb)))
+                ))
+ (result-type (inst-of number))
+ (method (find 
+	  (obj (spec-of maximum))
+	       (of (estimate (obj (spec-of time))
+			     (of (bridge-of ?s))
+                    )
+		   )
+	       )
+	 )
+ )
+
+   at Tue Jun 01 16:20:17 PDT 1999
+
+check: All Agenda
+   at Tue Jun 01 16:20:17 PDT 1999
+
+check: Method Sub-Method Relation
+   at Tue Jun 01 16:20:17 PDT 1999
+
+select: show error button
+   at Tue Jun 01 16:20:21 PDT 1999
+
+checked error:((name max-numbers)
+ (primitivep t)
+ (capability (find
+                (obj (?m is (spec-of maximum)))
+                (of (?ns is (set-of (inst-of number)))
+                ))
+ (result-type (inst-of number))
+ (method (primitive-max-numbers ?ns))
+)
+   at Tue Jun 01 16:20:21 PDT 1999
+
+check: Method Capability Hierarchy
+   at Tue Jun 01 16:20:34 PDT 1999
+
+select: copy and create button
+   at Tue Jun 01 16:21:21 PDT 1999
+
+ done editing:((name estimate-time-to-emplace-individual-AVLB)
+ (capability (estimate
+                (obj (?t is (spec-of time)))
+                (for (?b is (inst-of avlb)))
+                ))
+ (result-type (inst-of number))
+ (method (if 
+	     (is-greater-or-equal-than
+	      (obj (emplacement-time ?b))
+	      (than 0.5))
+	     then (emplacement-time ?b)
+	     else 0.5)
+	 )
+ )
+
+   at Tue Jun 01 16:25:31 PDT 1999
+
+built new method:((name estimate-time-to-emplace-individual-AVLB)
+ (capability (estimate
+                (obj (?t is (spec-of time)))
+                (for (?b is (inst-of avlb)))
+                ))
+ (result-type (inst-of number))
+ (method (if 
+	     (is-greater-or-equal-than
+	      (obj (emplacement-time ?b))
+	      (than 0.5))
+	     then (emplacement-time ?b)
+	     else 0.5)
+	 )
+ )
+
+   at Tue Jun 01 16:25:31 PDT 1999
+
+check: All Agenda
+   at Tue Jun 01 16:25:31 PDT 1999
+
+check: Method Sub-Method Relation
+   at Tue Jun 01 16:25:31 PDT 1999
+
+ select: get ps tree success
+   at Tue Jun 01 16:25:37 PDT 1999
+
+ [ps-en1] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-PLAN)))
+[ps-en1] < NIL
+
+   at Tue Jun 01 16:25:37 PDT 1999
+
+check: Method Capability Hierarchy
+   at Tue Jun 01 16:25:45 PDT 1999
+
+select: modify button
+   at Tue Jun 01 16:27:09 PDT 1999
+
+select: modify button
+   at Tue Jun 01 16:27:25 PDT 1999
+
+ done editing:((name estimate-time-to-emplace-individual-AVLB)
+ (capability (estimate
+                (obj (?t is (spec-of time)))
+                (for (?b is (inst-of avlb)))
+                ))
+ (result-type (inst-of number))
+ (method (if 
+	     (is-greater-or-equal
+	      (obj (emplacement-time ?b))
+	      (than 0.5))
+	     then (emplacement-time ?b)
+	     else 0.5)
+	 )
+ )
+
+   at Tue Jun 01 16:27:35 PDT 1999
+
+modified method:((name estimate-time-to-emplace-individual-AVLB)
+ (capability (estimate
+                (obj (?t is (spec-of time)))
+                (for (?b is (inst-of avlb)))
+                ))
+ (result-type (inst-of number))
+ (method (if 
+	     (is-greater-or-equal
+	      (obj (emplacement-time ?b))
+	      (than 0.5))
+	     then (emplacement-time ?b)
+	     else 0.5)
+	 )
+ )
+
+   at Tue Jun 01 16:27:35 PDT 1999
+
+check: All Agenda
+   at Tue Jun 01 16:27:35 PDT 1999
+
+check: Method Sub-Method Relation
+   at Tue Jun 01 16:27:35 PDT 1999
+
+ select: get ps tree success
+   at Tue Jun 01 16:27:40 PDT 1999
+
+ [ps-en1] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-PLAN)))
+[ps-en1] < NIL
+
+   at Tue Jun 01 16:27:40 PDT 1999
+
+check: Method Capability Hierarchy
+   at Tue Jun 01 16:27:44 PDT 1999
+
+check: Method Sub-Method Relation
+   at Tue Jun 01 16:28:17 PDT 1999
+
+ select: get ps tree all
+   at Tue Jun 01 16:28:18 PDT 1999
+
+ [ps-en1] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-PLAN)))
+[ps-en1] < NIL
+   X[ps-an2: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-PLAN)))
+    [ps-an2: METHOD] < NIL
+    [ps-en3] > (ADD (OBJ (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (WORKAROUND-OF (INST-OF WORKAROUND-PLAN))))))
+    [ps-en3] < NIL
+     [ps-en4] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (WORKAROUND-OF (INST-OF WORKAROUND-PLAN))))
+     [ps-en4]   (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF WORKAROUND-STEP))))
+     [ps-en4] < NIL
+      [ps-en5] > (WORKAROUND-OF (INST-OF WORKAROUND-PLAN))
+      [ps-en5] < (SET-OF (INST-OF WORKAROUND-STEP))
+       -[ps-an6: RETRIEVE-R] > (WORKAROUND-OF (INST-OF WORKAROUND-PLAN))
+        [ps-an6: RETRIEVE-R] < (SET-OF (INST-OF WORKAROUND-STEP))
+      X[ps-an7: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF WORKAROUND-STEP))))
+       [ps-an7: METHOD]   *** NO METHOD FOUND ***
+       [ps-an7: METHOD] < NIL
+      X[ps-an8: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF WORKAROUND-STEP))))
+       [ps-an8: SET] < NIL
+       [ps-en9] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-STEP)))
+       [ps-en9] < NIL
+        X[ps-an10: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-STEP)))
+         [ps-an10: METHOD]   *** NO METHOD FOUND ***
+         [ps-an10: METHOD] < NIL
+        X[ps-an11: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-STEP)))
+         [ps-an11: SET] < NIL
+        X[ps-an12: COVERING] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-STEP)))
+         [ps-an12: COVERING] < NIL
+         [ps-en13] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+         [ps-en13] < NIL
+          X[ps-an15: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+           [ps-an15: METHOD]   *** NO METHOD FOUND ***
+           [ps-an15: METHOD] < NIL
+          X[ps-an16: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+           [ps-an16: SET] < NIL
+          X[ps-an17: COVERING] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+           [ps-an17: COVERING] < NIL
+          X[ps-an18: INPUT] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+           [ps-an18: INPUT] < NIL
+         [ps-en14] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF TANK-PLOW-MINEFIELD)))
+         [ps-en14] < (INST-OF NUMBER)
+          -[ps-an19: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF TANK-PLOW-MINEFIELD)))
+           [ps-an19: METHOD] < (INST-OF NUMBER)
+           [ps-en20] > (MULTIPLY (OBJ (FIND (OBJ (SPEC-OF LENGTH)) (OF (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))))) (BY 25/3))
+           [ps-en20]   (MULTIPLY (OBJ (INST-OF NUMBER)) (BY 25/3))
+           [ps-en20] < (INST-OF NUMBER)
+            [ps-en21] > (FIND (OBJ (SPEC-OF LENGTH)) (OF (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))))
+            [ps-en21]   (FIND (OBJ (SPEC-OF LENGTH)) (OF (INST-OF MINEFIELD)))
+            [ps-en21] < (INST-OF NUMBER)
+             [ps-en22] > (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))
+             [ps-en22] < (INST-OF MINEFIELD)
+              -[ps-an23: RETRIEVE-R] > (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))
+               [ps-an23: RETRIEVE-R] < (INST-OF MINEFIELD)
+             -[ps-an24: METHOD] > (FIND (OBJ (SPEC-OF LENGTH)) (OF (INST-OF MINEFIELD)))
+              [ps-an24: METHOD] < (INST-OF NUMBER)
+              [ps-en25] > (LENGTH-OF (INST-OF MINEFIELD))
+              [ps-en25] < (INST-OF NUMBER)
+               -[ps-an26: RETRIEVE-R] > (LENGTH-OF (INST-OF MINEFIELD))
+                [ps-an26: RETRIEVE-R] < (INST-OF NUMBER)
+            -[ps-an27: METHOD] > (MULTIPLY (OBJ (INST-OF NUMBER)) (BY 25/3))
+             [ps-an27: METHOD] < (INST-OF NUMBER)
+        X[ps-an28: INPUT] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-STEP)))
+         [ps-an28: INPUT] < NIL
+         [ps-en13] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+         [ps-en13] < NIL
+          X[ps-an15: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+           [ps-an15: METHOD]   *** NO METHOD FOUND ***
+           [ps-an15: METHOD] < NIL
+          X[ps-an16: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+           [ps-an16: SET] < NIL
+          X[ps-an17: COVERING] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+           [ps-an17: COVERING] < NIL
+          X[ps-an18: INPUT] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+           [ps-an18: INPUT] < NIL
+         [ps-en14] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF TANK-PLOW-MINEFIELD)))
+         [ps-en14] < (INST-OF NUMBER)
+          -[ps-an19: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF TANK-PLOW-MINEFIELD)))
+           [ps-an19: METHOD] < (INST-OF NUMBER)
+           [ps-en20] > (MULTIPLY (OBJ (FIND (OBJ (SPEC-OF LENGTH)) (OF (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))))) (BY 25/3))
+           [ps-en20]   (MULTIPLY (OBJ (INST-OF NUMBER)) (BY 25/3))
+           [ps-en20] < (INST-OF NUMBER)
+            [ps-en21] > (FIND (OBJ (SPEC-OF LENGTH)) (OF (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))))
+            [ps-en21]   (FIND (OBJ (SPEC-OF LENGTH)) (OF (INST-OF MINEFIELD)))
+            [ps-en21] < (INST-OF NUMBER)
+             [ps-en22] > (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))
+             [ps-en22] < (INST-OF MINEFIELD)
+              -[ps-an23: RETRIEVE-R] > (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))
+               [ps-an23: RETRIEVE-R] < (INST-OF MINEFIELD)
+             -[ps-an24: METHOD] > (FIND (OBJ (SPEC-OF LENGTH)) (OF (INST-OF MINEFIELD)))
+              [ps-an24: METHOD] < (INST-OF NUMBER)
+              [ps-en25] > (LENGTH-OF (INST-OF MINEFIELD))
+              [ps-en25] < (INST-OF NUMBER)
+               -[ps-an26: RETRIEVE-R] > (LENGTH-OF (INST-OF MINEFIELD))
+                [ps-an26: RETRIEVE-R] < (INST-OF NUMBER)
+            -[ps-an27: METHOD] > (MULTIPLY (OBJ (INST-OF NUMBER)) (BY 25/3))
+             [ps-an27: METHOD] < (INST-OF NUMBER)
+      X[ps-an29: COVERING] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF WORKAROUND-STEP))))
+       [ps-an29: COVERING] < NIL
+       [ps-en30] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF EMPLACE-AVLB))))
+       [ps-en30] < NIL
+        X[ps-an32: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF EMPLACE-AVLB))))
+         [ps-an32: METHOD]   *** NO METHOD FOUND ***
+         [ps-an32: METHOD] < NIL
+        X[ps-an33: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF EMPLACE-AVLB))))
+         [ps-an33: SET] < NIL
+         [ps-en13] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+         [ps-en13] < NIL
+          X[ps-an15: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+           [ps-an15: METHOD]   *** NO METHOD FOUND ***
+           [ps-an15: METHOD] < NIL
+          X[ps-an16: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+           [ps-an16: SET] < NIL
+          X[ps-an17: COVERING] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+           [ps-an17: COVERING] < NIL
+          X[ps-an18: INPUT] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+           [ps-an18: INPUT] < NIL
+        X[ps-an34: COVERING] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF EMPLACE-AVLB))))
+         [ps-an34: COVERING] < NIL
+        X[ps-an35: INPUT] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF EMPLACE-AVLB))))
+         [ps-an35: INPUT] < NIL
+       [ps-en31] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF TANK-PLOW-MINEFIELD))))
+       [ps-en31] < (SET-OF (INST-OF NUMBER))
+        -[ps-an37: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF TANK-PLOW-MINEFIELD))))
+         [ps-an37: SET]   (APPEND (INST-OF NUMBER))
+         [ps-an37: SET] < (SET-OF (INST-OF NUMBER))
+         [ps-en14] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF TANK-PLOW-MINEFIELD)))
+         [ps-en14] < (INST-OF NUMBER)
+          -[ps-an19: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF TANK-PLOW-MINEFIELD)))
+           [ps-an19: METHOD] < (INST-OF NUMBER)
+           [ps-en20] > (MULTIPLY (OBJ (FIND (OBJ (SPEC-OF LENGTH)) (OF (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))))) (BY 25/3))
+           [ps-en20]   (MULTIPLY (OBJ (INST-OF NUMBER)) (BY 25/3))
+           [ps-en20] < (INST-OF NUMBER)
+            [ps-en21] > (FIND (OBJ (SPEC-OF LENGTH)) (OF (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))))
+            [ps-en21]   (FIND (OBJ (SPEC-OF LENGTH)) (OF (INST-OF MINEFIELD)))
+            [ps-en21] < (INST-OF NUMBER)
+             [ps-en22] > (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))
+             [ps-en22] < (INST-OF MINEFIELD)
+              -[ps-an23: RETRIEVE-R] > (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))
+               [ps-an23: RETRIEVE-R] < (INST-OF MINEFIELD)
+             -[ps-an24: METHOD] > (FIND (OBJ (SPEC-OF LENGTH)) (OF (INST-OF MINEFIELD)))
+              [ps-an24: METHOD] < (INST-OF NUMBER)
+              [ps-en25] > (LENGTH-OF (INST-OF MINEFIELD))
+              [ps-en25] < (INST-OF NUMBER)
+               -[ps-an26: RETRIEVE-R] > (LENGTH-OF (INST-OF MINEFIELD))
+                [ps-an26: RETRIEVE-R] < (INST-OF NUMBER)
+            -[ps-an27: METHOD] > (MULTIPLY (OBJ (INST-OF NUMBER)) (BY 25/3))
+             [ps-an27: METHOD] < (INST-OF NUMBER)
+        X[ps-an36: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF TANK-PLOW-MINEFIELD))))
+         [ps-an36: METHOD]   *** NO METHOD FOUND ***
+         [ps-an36: METHOD] < NIL
+      X[ps-an38: INPUT] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF WORKAROUND-STEP))))
+       [ps-an38: INPUT] < NIL
+       [ps-en30] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF EMPLACE-AVLB))))
+       [ps-en30] < NIL
+        X[ps-an32: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF EMPLACE-AVLB))))
+         [ps-an32: METHOD]   *** NO METHOD FOUND ***
+         [ps-an32: METHOD] < NIL
+        X[ps-an33: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF EMPLACE-AVLB))))
+         [ps-an33: SET] < NIL
+         [ps-en13] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+         [ps-en13] < NIL
+          X[ps-an15: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+           [ps-an15: METHOD]   *** NO METHOD FOUND ***
+           [ps-an15: METHOD] < NIL
+          X[ps-an16: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+           [ps-an16: SET] < NIL
+          X[ps-an17: COVERING] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+           [ps-an17: COVERING] < NIL
+          X[ps-an18: INPUT] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+           [ps-an18: INPUT] < NIL
+        X[ps-an34: COVERING] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF EMPLACE-AVLB))))
+         [ps-an34: COVERING] < NIL
+        X[ps-an35: INPUT] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF EMPLACE-AVLB))))
+         [ps-an35: INPUT] < NIL
+       [ps-en31] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF TANK-PLOW-MINEFIELD))))
+       [ps-en31] < (SET-OF (INST-OF NUMBER))
+        -[ps-an37: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF TANK-PLOW-MINEFIELD))))
+         [ps-an37: SET]   (APPEND (INST-OF NUMBER))
+         [ps-an37: SET] < (SET-OF (INST-OF NUMBER))
+         [ps-en14] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF TANK-PLOW-MINEFIELD)))
+         [ps-en14] < (INST-OF NUMBER)
+          -[ps-an19: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF TANK-PLOW-MINEFIELD)))
+           [ps-an19: METHOD] < (INST-OF NUMBER)
+           [ps-en20] > (MULTIPLY (OBJ (FIND (OBJ (SPEC-OF LENGTH)) (OF (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))))) (BY 25/3))
+           [ps-en20]   (MULTIPLY (OBJ (INST-OF NUMBER)) (BY 25/3))
+           [ps-en20] < (INST-OF NUMBER)
+            [ps-en21] > (FIND (OBJ (SPEC-OF LENGTH)) (OF (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))))
+            [ps-en21]   (FIND (OBJ (SPEC-OF LENGTH)) (OF (INST-OF MINEFIELD)))
+            [ps-en21] < (INST-OF NUMBER)
+             [ps-en22] > (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))
+             [ps-en22] < (INST-OF MINEFIELD)
+              -[ps-an23: RETRIEVE-R] > (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))
+               [ps-an23: RETRIEVE-R] < (INST-OF MINEFIELD)
+             -[ps-an24: METHOD] > (FIND (OBJ (SPEC-OF LENGTH)) (OF (INST-OF MINEFIELD)))
+              [ps-an24: METHOD] < (INST-OF NUMBER)
+              [ps-en25] > (LENGTH-OF (INST-OF MINEFIELD))
+              [ps-en25] < (INST-OF NUMBER)
+               -[ps-an26: RETRIEVE-R] > (LENGTH-OF (INST-OF MINEFIELD))
+                [ps-an26: RETRIEVE-R] < (INST-OF NUMBER)
+            -[ps-an27: METHOD] > (MULTIPLY (OBJ (INST-OF NUMBER)) (BY 25/3))
+             [ps-an27: METHOD] < (INST-OF NUMBER)
+        X[ps-an36: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF TANK-PLOW-MINEFIELD))))
+         [ps-an36: METHOD]   *** NO METHOD FOUND ***
+         [ps-an36: METHOD] < NIL
+   X[ps-an39: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-PLAN)))
+    [ps-an39: SET] < NIL
+   X[ps-an40: COVERING] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-PLAN)))
+    [ps-an40: COVERING] < NIL
+   X[ps-an41: INPUT] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-PLAN)))
+    [ps-an41: INPUT] < NIL
+
+   at Tue Jun 01 16:28:21 PDT 1999
+
+ select: get ps tree pretty
+   at Tue Jun 01 16:28:26 PDT 1999
+
+ Node ps-en1: (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-PLAN)))
+Node ps-en1 result: NIL
+   Node ps-en3: (ADD (OBJ (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (WORKAROUND-OF (INST-OF WORKAROUND-PLAN))))))
+   Node ps-en3 expands to: NIL
+   Node ps-en3 result: NIL
+    Node ps-en4: (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (WORKAROUND-OF (INST-OF WORKAROUND-PLAN))))
+    Node ps-en4 expands to: (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF WORKAROUND-STEP))))
+    Node ps-en4 result: NIL
+     Node ps-en5: retrieve (WORKAROUND-OF (INST-OF WORKAROUND-PLAN))
+     Node ps-en5 result: (SET-OF (INST-OF WORKAROUND-STEP))
+     Node ps-en9: (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-STEP)))
+     Node ps-en9 result: NIL
+      Node ps-en13: (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+      Node ps-en13 result: NIL
+      Node ps-en14: (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF TANK-PLOW-MINEFIELD)))
+      Node ps-en14 result: (INST-OF NUMBER)
+       Node ps-en20: (MULTIPLY (OBJ (FIND (OBJ (SPEC-OF LENGTH)) (OF (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))))) (BY 25/3))
+       Node ps-en20 expands to: (MULTIPLY (OBJ (INST-OF NUMBER)) (BY 25/3))
+       Node ps-en20 result: (INST-OF NUMBER)
+        Node ps-en21: (FIND (OBJ (SPEC-OF LENGTH)) (OF (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))))
+        Node ps-en21 expands to: (FIND (OBJ (SPEC-OF LENGTH)) (OF (INST-OF MINEFIELD)))
+        Node ps-en21 result: (INST-OF NUMBER)
+         Node ps-en22: retrieve (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))
+         Node ps-en22 result: (INST-OF MINEFIELD)
+         Node ps-en25: retrieve (LENGTH-OF (INST-OF MINEFIELD))
+         Node ps-en25 result: (INST-OF NUMBER)
+      Node ps-en13: (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+      Node ps-en13 result: NIL
+      Node ps-en14: (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF TANK-PLOW-MINEFIELD)))
+      Node ps-en14 result: (INST-OF NUMBER)
+       Node ps-en20: (MULTIPLY (OBJ (FIND (OBJ (SPEC-OF LENGTH)) (OF (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))))) (BY 25/3))
+       Node ps-en20 expands to: (MULTIPLY (OBJ (INST-OF NUMBER)) (BY 25/3))
+       Node ps-en20 result: (INST-OF NUMBER)
+        Node ps-en21: (FIND (OBJ (SPEC-OF LENGTH)) (OF (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))))
+        Node ps-en21 expands to: (FIND (OBJ (SPEC-OF LENGTH)) (OF (INST-OF MINEFIELD)))
+        Node ps-en21 result: (INST-OF NUMBER)
+         Node ps-en22: retrieve (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))
+         Node ps-en22 result: (INST-OF MINEFIELD)
+         Node ps-en25: retrieve (LENGTH-OF (INST-OF MINEFIELD))
+         Node ps-en25 result: (INST-OF NUMBER)
+     Node ps-en30: (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF EMPLACE-AVLB))))
+     Node ps-en30 result: NIL
+      Node ps-en13: (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+      Node ps-en13 result: NIL
+     Node ps-en31: (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF TANK-PLOW-MINEFIELD))))
+     Node ps-en31 result: (SET-OF (INST-OF NUMBER))
+      Node ps-en14: (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF TANK-PLOW-MINEFIELD)))
+      Node ps-en14 result: (INST-OF NUMBER)
+       Node ps-en20: (MULTIPLY (OBJ (FIND (OBJ (SPEC-OF LENGTH)) (OF (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))))) (BY 25/3))
+       Node ps-en20 expands to: (MULTIPLY (OBJ (INST-OF NUMBER)) (BY 25/3))
+       Node ps-en20 result: (INST-OF NUMBER)
+        Node ps-en21: (FIND (OBJ (SPEC-OF LENGTH)) (OF (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))))
+        Node ps-en21 expands to: (FIND (OBJ (SPEC-OF LENGTH)) (OF (INST-OF MINEFIELD)))
+        Node ps-en21 result: (INST-OF NUMBER)
+         Node ps-en22: retrieve (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))
+         Node ps-en22 result: (INST-OF MINEFIELD)
+         Node ps-en25: retrieve (LENGTH-OF (INST-OF MINEFIELD))
+         Node ps-en25 result: (INST-OF NUMBER)
+     Node ps-en30: (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF EMPLACE-AVLB))))
+     Node ps-en30 result: NIL
+      Node ps-en13: (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+      Node ps-en13 result: NIL
+     Node ps-en31: (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF TANK-PLOW-MINEFIELD))))
+     Node ps-en31 result: (SET-OF (INST-OF NUMBER))
+      Node ps-en14: (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF TANK-PLOW-MINEFIELD)))
+      Node ps-en14 result: (INST-OF NUMBER)
+       Node ps-en20: (MULTIPLY (OBJ (FIND (OBJ (SPEC-OF LENGTH)) (OF (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))))) (BY 25/3))
+       Node ps-en20 expands to: (MULTIPLY (OBJ (INST-OF NUMBER)) (BY 25/3))
+       Node ps-en20 result: (INST-OF NUMBER)
+        Node ps-en21: (FIND (OBJ (SPEC-OF LENGTH)) (OF (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))))
+        Node ps-en21 expands to: (FIND (OBJ (SPEC-OF LENGTH)) (OF (INST-OF MINEFIELD)))
+        Node ps-en21 result: (INST-OF NUMBER)
+         Node ps-en22: retrieve (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))
+         Node ps-en22 result: (INST-OF MINEFIELD)
+         Node ps-en25: retrieve (LENGTH-OF (INST-OF MINEFIELD))
+         Node ps-en25 result: (INST-OF NUMBER)
+
+   at Tue Jun 01 16:28:27 PDT 1999
+
+select: modify button
+   at Tue Jun 01 16:29:55 PDT 1999
+
+check: Method Capability Hierarchy
+   at Tue Jun 01 16:31:02 PDT 1999
+
+ done editing:((name estimate-time-to-emplace-AVLB)
+ (capability (estimate
+                (obj (?t is (spec-of time)))
+                (for (?s is (inst-of emplace-avlb)))
+                ))
+ (result-type (inst-of number))
+ (method (find 
+	  (obj (spec-of maximum))
+	       (of (estimate (obj (spec-of time))
+			     (for (bridge-of ?s))
+                    )
+		   )
+	       )
+	 )
+ )
+
+   at Tue Jun 01 16:32:24 PDT 1999
+
+modified method:((name estimate-time-to-emplace-AVLB)
+ (capability (estimate
+                (obj (?t is (spec-of time)))
+                (for (?s is (inst-of emplace-avlb)))
+                ))
+ (result-type (inst-of number))
+ (method (find 
+	  (obj (spec-of maximum))
+	       (of (estimate (obj (spec-of time))
+			     (for (bridge-of ?s))
+                    )
+		   )
+	       )
+	 )
+ )
+
+   at Tue Jun 01 16:32:24 PDT 1999
+
+check: All Agenda
+   at Tue Jun 01 16:32:24 PDT 1999
+
+check: Method Sub-Method Relation
+   at Tue Jun 01 16:32:24 PDT 1999
+
+ select: get ps tree success
+   at Tue Jun 01 16:32:31 PDT 1999
+
+ [ps-en1] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-PLAN)))
+[ps-en1] < NIL
+
+   at Tue Jun 01 16:32:31 PDT 1999
+
+check: Method Capability Hierarchy
+   at Tue Jun 01 16:32:35 PDT 1999
+
+check: Method Sub-Method Relation
+   at Tue Jun 01 16:33:12 PDT 1999
+
+ select: get ps tree all
+   at Tue Jun 01 16:33:15 PDT 1999
+
+ [ps-en1] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-PLAN)))
+[ps-en1] < NIL
+   X[ps-an2: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-PLAN)))
+    [ps-an2: METHOD] < NIL
+    [ps-en3] > (ADD (OBJ (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (WORKAROUND-OF (INST-OF WORKAROUND-PLAN))))))
+    [ps-en3] < NIL
+     [ps-en4] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (WORKAROUND-OF (INST-OF WORKAROUND-PLAN))))
+     [ps-en4]   (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF WORKAROUND-STEP))))
+     [ps-en4] < NIL
+      [ps-en5] > (WORKAROUND-OF (INST-OF WORKAROUND-PLAN))
+      [ps-en5] < (SET-OF (INST-OF WORKAROUND-STEP))
+       -[ps-an6: RETRIEVE-R] > (WORKAROUND-OF (INST-OF WORKAROUND-PLAN))
+        [ps-an6: RETRIEVE-R] < (SET-OF (INST-OF WORKAROUND-STEP))
+      X[ps-an7: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF WORKAROUND-STEP))))
+       [ps-an7: METHOD]   *** NO METHOD FOUND ***
+       [ps-an7: METHOD] < NIL
+      X[ps-an8: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF WORKAROUND-STEP))))
+       [ps-an8: SET] < NIL
+       [ps-en9] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-STEP)))
+       [ps-en9] < NIL
+        X[ps-an10: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-STEP)))
+         [ps-an10: METHOD]   *** NO METHOD FOUND ***
+         [ps-an10: METHOD] < NIL
+        X[ps-an11: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-STEP)))
+         [ps-an11: SET] < NIL
+        X[ps-an12: COVERING] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-STEP)))
+         [ps-an12: COVERING] < NIL
+         [ps-en13] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+         [ps-en13] < NIL
+          X[ps-an15: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+           [ps-an15: METHOD]   *** NO METHOD FOUND ***
+           [ps-an15: METHOD] < NIL
+          X[ps-an16: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+           [ps-an16: SET] < NIL
+          X[ps-an17: COVERING] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+           [ps-an17: COVERING] < NIL
+          X[ps-an18: INPUT] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+           [ps-an18: INPUT] < NIL
+         [ps-en14] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF TANK-PLOW-MINEFIELD)))
+         [ps-en14] < (INST-OF NUMBER)
+          -[ps-an19: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF TANK-PLOW-MINEFIELD)))
+           [ps-an19: METHOD] < (INST-OF NUMBER)
+           [ps-en20] > (MULTIPLY (OBJ (FIND (OBJ (SPEC-OF LENGTH)) (OF (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))))) (BY 25/3))
+           [ps-en20]   (MULTIPLY (OBJ (INST-OF NUMBER)) (BY 25/3))
+           [ps-en20] < (INST-OF NUMBER)
+            [ps-en21] > (FIND (OBJ (SPEC-OF LENGTH)) (OF (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))))
+            [ps-en21]   (FIND (OBJ (SPEC-OF LENGTH)) (OF (INST-OF MINEFIELD)))
+            [ps-en21] < (INST-OF NUMBER)
+             [ps-en22] > (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))
+             [ps-en22] < (INST-OF MINEFIELD)
+              -[ps-an23: RETRIEVE-R] > (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))
+               [ps-an23: RETRIEVE-R] < (INST-OF MINEFIELD)
+             -[ps-an24: METHOD] > (FIND (OBJ (SPEC-OF LENGTH)) (OF (INST-OF MINEFIELD)))
+              [ps-an24: METHOD] < (INST-OF NUMBER)
+              [ps-en25] > (LENGTH-OF (INST-OF MINEFIELD))
+              [ps-en25] < (INST-OF NUMBER)
+               -[ps-an26: RETRIEVE-R] > (LENGTH-OF (INST-OF MINEFIELD))
+                [ps-an26: RETRIEVE-R] < (INST-OF NUMBER)
+            -[ps-an27: METHOD] > (MULTIPLY (OBJ (INST-OF NUMBER)) (BY 25/3))
+             [ps-an27: METHOD] < (INST-OF NUMBER)
+        X[ps-an28: INPUT] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-STEP)))
+         [ps-an28: INPUT] < NIL
+         [ps-en13] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+         [ps-en13] < NIL
+          X[ps-an15: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+           [ps-an15: METHOD]   *** NO METHOD FOUND ***
+           [ps-an15: METHOD] < NIL
+          X[ps-an16: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+           [ps-an16: SET] < NIL
+          X[ps-an17: COVERING] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+           [ps-an17: COVERING] < NIL
+          X[ps-an18: INPUT] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+           [ps-an18: INPUT] < NIL
+         [ps-en14] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF TANK-PLOW-MINEFIELD)))
+         [ps-en14] < (INST-OF NUMBER)
+          -[ps-an19: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF TANK-PLOW-MINEFIELD)))
+           [ps-an19: METHOD] < (INST-OF NUMBER)
+           [ps-en20] > (MULTIPLY (OBJ (FIND (OBJ (SPEC-OF LENGTH)) (OF (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))))) (BY 25/3))
+           [ps-en20]   (MULTIPLY (OBJ (INST-OF NUMBER)) (BY 25/3))
+           [ps-en20] < (INST-OF NUMBER)
+            [ps-en21] > (FIND (OBJ (SPEC-OF LENGTH)) (OF (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))))
+            [ps-en21]   (FIND (OBJ (SPEC-OF LENGTH)) (OF (INST-OF MINEFIELD)))
+            [ps-en21] < (INST-OF NUMBER)
+             [ps-en22] > (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))
+             [ps-en22] < (INST-OF MINEFIELD)
+              -[ps-an23: RETRIEVE-R] > (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))
+               [ps-an23: RETRIEVE-R] < (INST-OF MINEFIELD)
+             -[ps-an24: METHOD] > (FIND (OBJ (SPEC-OF LENGTH)) (OF (INST-OF MINEFIELD)))
+              [ps-an24: METHOD] < (INST-OF NUMBER)
+              [ps-en25] > (LENGTH-OF (INST-OF MINEFIELD))
+              [ps-en25] < (INST-OF NUMBER)
+               -[ps-an26: RETRIEVE-R] > (LENGTH-OF (INST-OF MINEFIELD))
+                [ps-an26: RETRIEVE-R] < (INST-OF NUMBER)
+            -[ps-an27: METHOD] > (MULTIPLY (OBJ (INST-OF NUMBER)) (BY 25/3))
+             [ps-an27: METHOD] < (INST-OF NUMBER)
+      X[ps-an29: COVERING] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF WORKAROUND-STEP))))
+       [ps-an29: COVERING] < NIL
+       [ps-en30] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF EMPLACE-AVLB))))
+       [ps-en30] < NIL
+        X[ps-an32: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF EMPLACE-AVLB))))
+         [ps-an32: METHOD]   *** NO METHOD FOUND ***
+         [ps-an32: METHOD] < NIL
+        X[ps-an33: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF EMPLACE-AVLB))))
+         [ps-an33: SET] < NIL
+         [ps-en13] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+         [ps-en13] < NIL
+          X[ps-an15: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+           [ps-an15: METHOD]   *** NO METHOD FOUND ***
+           [ps-an15: METHOD] < NIL
+          X[ps-an16: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+           [ps-an16: SET] < NIL
+          X[ps-an17: COVERING] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+           [ps-an17: COVERING] < NIL
+          X[ps-an18: INPUT] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+           [ps-an18: INPUT] < NIL
+        X[ps-an34: COVERING] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF EMPLACE-AVLB))))
+         [ps-an34: COVERING] < NIL
+        X[ps-an35: INPUT] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF EMPLACE-AVLB))))
+         [ps-an35: INPUT] < NIL
+       [ps-en31] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF TANK-PLOW-MINEFIELD))))
+       [ps-en31] < (SET-OF (INST-OF NUMBER))
+        -[ps-an37: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF TANK-PLOW-MINEFIELD))))
+         [ps-an37: SET]   (APPEND (INST-OF NUMBER))
+         [ps-an37: SET] < (SET-OF (INST-OF NUMBER))
+         [ps-en14] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF TANK-PLOW-MINEFIELD)))
+         [ps-en14] < (INST-OF NUMBER)
+          -[ps-an19: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF TANK-PLOW-MINEFIELD)))
+           [ps-an19: METHOD] < (INST-OF NUMBER)
+           [ps-en20] > (MULTIPLY (OBJ (FIND (OBJ (SPEC-OF LENGTH)) (OF (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))))) (BY 25/3))
+           [ps-en20]   (MULTIPLY (OBJ (INST-OF NUMBER)) (BY 25/3))
+           [ps-en20] < (INST-OF NUMBER)
+            [ps-en21] > (FIND (OBJ (SPEC-OF LENGTH)) (OF (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))))
+            [ps-en21]   (FIND (OBJ (SPEC-OF LENGTH)) (OF (INST-OF MINEFIELD)))
+            [ps-en21] < (INST-OF NUMBER)
+             [ps-en22] > (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))
+             [ps-en22] < (INST-OF MINEFIELD)
+              -[ps-an23: RETRIEVE-R] > (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))
+               [ps-an23: RETRIEVE-R] < (INST-OF MINEFIELD)
+             -[ps-an24: METHOD] > (FIND (OBJ (SPEC-OF LENGTH)) (OF (INST-OF MINEFIELD)))
+              [ps-an24: METHOD] < (INST-OF NUMBER)
+              [ps-en25] > (LENGTH-OF (INST-OF MINEFIELD))
+              [ps-en25] < (INST-OF NUMBER)
+               -[ps-an26: RETRIEVE-R] > (LENGTH-OF (INST-OF MINEFIELD))
+                [ps-an26: RETRIEVE-R] < (INST-OF NUMBER)
+            -[ps-an27: METHOD] > (MULTIPLY (OBJ (INST-OF NUMBER)) (BY 25/3))
+             [ps-an27: METHOD] < (INST-OF NUMBER)
+        X[ps-an36: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF TANK-PLOW-MINEFIELD))))
+         [ps-an36: METHOD]   *** NO METHOD FOUND ***
+         [ps-an36: METHOD] < NIL
+      X[ps-an38: INPUT] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF WORKAROUND-STEP))))
+       [ps-an38: INPUT] < NIL
+       [ps-en30] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF EMPLACE-AVLB))))
+       [ps-en30] < NIL
+        X[ps-an32: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF EMPLACE-AVLB))))
+         [ps-an32: METHOD]   *** NO METHOD FOUND ***
+         [ps-an32: METHOD] < NIL
+        X[ps-an33: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF EMPLACE-AVLB))))
+         [ps-an33: SET] < NIL
+         [ps-en13] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+         [ps-en13] < NIL
+          X[ps-an15: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+           [ps-an15: METHOD]   *** NO METHOD FOUND ***
+           [ps-an15: METHOD] < NIL
+          X[ps-an16: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+           [ps-an16: SET] < NIL
+          X[ps-an17: COVERING] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+           [ps-an17: COVERING] < NIL
+          X[ps-an18: INPUT] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+           [ps-an18: INPUT] < NIL
+        X[ps-an34: COVERING] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF EMPLACE-AVLB))))
+         [ps-an34: COVERING] < NIL
+        X[ps-an35: INPUT] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF EMPLACE-AVLB))))
+         [ps-an35: INPUT] < NIL
+       [ps-en31] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF TANK-PLOW-MINEFIELD))))
+       [ps-en31] < (SET-OF (INST-OF NUMBER))
+        -[ps-an37: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF TANK-PLOW-MINEFIELD))))
+         [ps-an37: SET]   (APPEND (INST-OF NUMBER))
+         [ps-an37: SET] < (SET-OF (INST-OF NUMBER))
+         [ps-en14] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF TANK-PLOW-MINEFIELD)))
+         [ps-en14] < (INST-OF NUMBER)
+          -[ps-an19: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF TANK-PLOW-MINEFIELD)))
+           [ps-an19: METHOD] < (INST-OF NUMBER)
+           [ps-en20] > (MULTIPLY (OBJ (FIND (OBJ (SPEC-OF LENGTH)) (OF (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))))) (BY 25/3))
+           [ps-en20]   (MULTIPLY (OBJ (INST-OF NUMBER)) (BY 25/3))
+           [ps-en20] < (INST-OF NUMBER)
+            [ps-en21] > (FIND (OBJ (SPEC-OF LENGTH)) (OF (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))))
+            [ps-en21]   (FIND (OBJ (SPEC-OF LENGTH)) (OF (INST-OF MINEFIELD)))
+            [ps-en21] < (INST-OF NUMBER)
+             [ps-en22] > (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))
+             [ps-en22] < (INST-OF MINEFIELD)
+              -[ps-an23: RETRIEVE-R] > (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))
+               [ps-an23: RETRIEVE-R] < (INST-OF MINEFIELD)
+             -[ps-an24: METHOD] > (FIND (OBJ (SPEC-OF LENGTH)) (OF (INST-OF MINEFIELD)))
+              [ps-an24: METHOD] < (INST-OF NUMBER)
+              [ps-en25] > (LENGTH-OF (INST-OF MINEFIELD))
+              [ps-en25] < (INST-OF NUMBER)
+               -[ps-an26: RETRIEVE-R] > (LENGTH-OF (INST-OF MINEFIELD))
+                [ps-an26: RETRIEVE-R] < (INST-OF NUMBER)
+            -[ps-an27: METHOD] > (MULTIPLY (OBJ (INST-OF NUMBER)) (BY 25/3))
+             [ps-an27: METHOD] < (INST-OF NUMBER)
+        X[ps-an36: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF TANK-PLOW-MINEFIELD))))
+         [ps-an36: METHOD]   *** NO METHOD FOUND ***
+         [ps-an36: METHOD] < NIL
+   X[ps-an39: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-PLAN)))
+    [ps-an39: SET] < NIL
+   X[ps-an40: COVERING] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-PLAN)))
+    [ps-an40: COVERING] < NIL
+   X[ps-an41: INPUT] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-PLAN)))
+    [ps-an41: INPUT] < NIL
+
+   at Tue Jun 01 16:33:17 PDT 1999
+
+select: modify button
+   at Tue Jun 01 16:35:51 PDT 1999
+
+ done editing:((name estimate-time-to-emplace-AVLB)
+ (capability (estimate
+                (obj (?t is (spec-of time)))
+                (for (?s is (inst-of emplace-avlb)))
+                ))
+ (result-type (inst-of number))
+ (method (find 
+	  (obj (spec-of maximum))
+	       (of (estimate (obj (spec-of time))
+			     (for (bridge-of ?s))
+                    )
+		   )
+	       )
+	 )
+ )
+
+   at Tue Jun 01 16:38:28 PDT 1999
+
+modified method:((name estimate-time-to-emplace-AVLB)
+ (capability (estimate
+                (obj (?t is (spec-of time)))
+                (for (?s is (inst-of emplace-avlb)))
+                ))
+ (result-type (inst-of number))
+ (method (find 
+	  (obj (spec-of maximum))
+	       (of (estimate (obj (spec-of time))
+			     (for (bridge-of ?s))
+                    )
+		   )
+	       )
+	 )
+ )
+
+   at Tue Jun 01 16:38:28 PDT 1999
+
+check: All Agenda
+   at Tue Jun 01 16:38:28 PDT 1999
+
+check: Method Sub-Method Relation
+   at Tue Jun 01 16:38:28 PDT 1999
+
+select: show error button
+   at Tue Jun 01 16:38:33 PDT 1999
+
+checked error:((name estimate-time-to-emplace-AVLB)
+ (capability (estimate
+                (obj (?t is (spec-of time)))
+                (for (?s is (inst-of emplace-avlb)))
+                ))
+ (result-type (inst-of number))
+ (method (find 
+	  (obj (spec-of maximum))
+	       (of (estimate (obj (spec-of time))
+			     (for (bridge-of ?s))
+                    )
+		   )
+	       )
+	 )
+ )
+
+   at Tue Jun 01 16:38:33 PDT 1999
+
+select: show error button
+   at Tue Jun 01 16:38:34 PDT 1999
+
+checked error:((name estimate-time-to-emplace-AVLB)
+ (capability (estimate
+                (obj (?t is (spec-of time)))
+                (for (?s is (inst-of emplace-avlb)))
+                ))
+ (result-type (inst-of number))
+ (method (find 
+	  (obj (spec-of maximum))
+	       (of (estimate (obj (spec-of time))
+			     (for (bridge-of ?s))
+                    )
+		   )
+	       )
+	 )
+ )
+
+   at Tue Jun 01 16:38:34 PDT 1999
+
+select: show error button
+   at Tue Jun 01 16:38:35 PDT 1999
+
+checked error:((name estimate-time-to-emplace-AVLB)
+ (capability (estimate
+                (obj (?t is (spec-of time)))
+                (for (?s is (inst-of emplace-avlb)))
+                ))
+ (result-type (inst-of number))
+ (method (find 
+	  (obj (spec-of maximum))
+	       (of (estimate (obj (spec-of time))
+			     (for (bridge-of ?s))
+                    )
+		   )
+	       )
+	 )
+ )
+
+   at Tue Jun 01 16:38:35 PDT 1999
+
+select: show error button
+   at Tue Jun 01 16:38:37 PDT 1999
+
+checked error:((name estimate-time-to-emplace-AVLB)
+ (capability (estimate
+                (obj (?t is (spec-of time)))
+                (for (?s is (inst-of emplace-avlb)))
+                ))
+ (result-type (inst-of number))
+ (method (find 
+	  (obj (spec-of maximum))
+	       (of (estimate (obj (spec-of time))
+			     (for (bridge-of ?s))
+                    )
+		   )
+	       )
+	 )
+ )
+
+   at Tue Jun 01 16:38:37 PDT 1999
+
+select: modify button
+   at Tue Jun 01 16:38:42 PDT 1999
+
+ done editing:((name estimate-time-to-emplace-AVLB)
+ (capability (estimate
+                (obj (?t is (spec-of time)))
+                (for (?s is (inst-of emplace-avlb)))
+                ))
+ (result-type (inst-of number))
+ (method (find 
+	  (obj (spec-of maximum))
+	       (of (estimate (obj (spec-of time))
+			     (for (bridge-of ?s1))
+                    )
+		   )
+	       )
+	 )
+ )
+
+   at Tue Jun 01 16:38:49 PDT 1999
+
+modified method:((name estimate-time-to-emplace-AVLB)
+ (capability (estimate
+                (obj (?t is (spec-of time)))
+                (for (?s is (inst-of emplace-avlb)))
+                ))
+ (result-type (inst-of number))
+ (method (find 
+	  (obj (spec-of maximum))
+	       (of (estimate (obj (spec-of time))
+			     (for (bridge-of ?s1))
+                    )
+		   )
+	       )
+	 )
+ )
+
+   at Tue Jun 01 16:38:49 PDT 1999
+
+check: All Agenda
+   at Tue Jun 01 16:38:49 PDT 1999
+
+check: Method Sub-Method Relation
+   at Tue Jun 01 16:38:49 PDT 1999
+
+select: show error button
+   at Tue Jun 01 16:38:51 PDT 1999
+
+checked error:((name estimate-time-to-emplace-AVLB)
+ (capability (estimate
+                (obj (?t is (spec-of time)))
+                (for (?s is (inst-of emplace-avlb)))
+                ))
+ (result-type (inst-of number))
+ (method (find 
+	  (obj (spec-of maximum))
+	       (of (estimate (obj (spec-of time))
+			     (for (bridge-of ?s1))
+                    )
+		   )
+	       )
+	 )
+ )
+
+   at Tue Jun 01 16:38:51 PDT 1999
+
+select: show error button
+   at Tue Jun 01 16:38:54 PDT 1999
+
+checked error:((name estimate-time-to-emplace-AVLB)
+ (capability (estimate
+                (obj (?t is (spec-of time)))
+                (for (?s is (inst-of emplace-avlb)))
+                ))
+ (result-type (inst-of number))
+ (method (find 
+	  (obj (spec-of maximum))
+	       (of (estimate (obj (spec-of time))
+			     (for (bridge-of ?s1))
+                    )
+		   )
+	       )
+	 )
+ )
+
+   at Tue Jun 01 16:38:54 PDT 1999
+
+select: show error button
+   at Tue Jun 01 16:38:56 PDT 1999
+
+checked error:((name estimate-time-to-emplace-AVLB)
+ (capability (estimate
+                (obj (?t is (spec-of time)))
+                (for (?s is (inst-of emplace-avlb)))
+                ))
+ (result-type (inst-of number))
+ (method (find 
+	  (obj (spec-of maximum))
+	       (of (estimate (obj (spec-of time))
+			     (for (bridge-of ?s1))
+                    )
+		   )
+	       )
+	 )
+ )
+
+   at Tue Jun 01 16:38:56 PDT 1999
+
+check: Method Capability Hierarchy
+   at Tue Jun 01 16:39:02 PDT 1999
+
+select: modify button
+   at Tue Jun 01 16:39:13 PDT 1999
+
+ done editing:((name estimate-time-to-emplace-AVLB)
+ (capability (estimate
+                (obj (?t is (spec-of time)))
+                (for (?s is (inst-of emplace-avlb)))
+                ))
+ (result-type (inst-of number))
+ (method (find 
+	  (obj (spec-of maximum))
+	       (of (estimate (obj (spec-of time))
+			     (for (bridge-of ?s))
+                    )
+		   )
+	       )
+	 )
+ )
+
+   at Tue Jun 01 16:39:19 PDT 1999
+
+modified method:((name estimate-time-to-emplace-AVLB)
+ (capability (estimate
+                (obj (?t is (spec-of time)))
+                (for (?s is (inst-of emplace-avlb)))
+                ))
+ (result-type (inst-of number))
+ (method (find 
+	  (obj (spec-of maximum))
+	       (of (estimate (obj (spec-of time))
+			     (for (bridge-of ?s))
+                    )
+		   )
+	       )
+	 )
+ )
+
+   at Tue Jun 01 16:39:19 PDT 1999
+
+check: All Agenda
+   at Tue Jun 01 16:39:19 PDT 1999
+
+check: Method Sub-Method Relation
+   at Tue Jun 01 16:39:19 PDT 1999
+
+check: Method Capability Hierarchy
+   at Tue Jun 01 16:39:23 PDT 1999
+
+check: Method Sub-Method Relation
+   at Tue Jun 01 16:40:59 PDT 1999
+
+check: Method Capability Hierarchy
+   at Tue Jun 01 17:26:25 PDT 1999
+
+check: Method Sub-Method Relation
+   at Tue Jun 01 17:27:51 PDT 1999
+
+ select: get ps tree all
+   at Tue Jun 01 17:27:58 PDT 1999
+
+ [ps-en1] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-PLAN)))
+[ps-en1] < NIL
+   X[ps-an2: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-PLAN)))
+    [ps-an2: METHOD] < NIL
+    [ps-en3] > (ADD (OBJ (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (WORKAROUND-OF (INST-OF WORKAROUND-PLAN))))))
+    [ps-en3] < NIL
+     [ps-en4] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (WORKAROUND-OF (INST-OF WORKAROUND-PLAN))))
+     [ps-en4]   (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF WORKAROUND-STEP))))
+     [ps-en4] < NIL
+      [ps-en5] > (WORKAROUND-OF (INST-OF WORKAROUND-PLAN))
+      [ps-en5] < (SET-OF (INST-OF WORKAROUND-STEP))
+       -[ps-an6: RETRIEVE-R] > (WORKAROUND-OF (INST-OF WORKAROUND-PLAN))
+        [ps-an6: RETRIEVE-R] < (SET-OF (INST-OF WORKAROUND-STEP))
+      X[ps-an7: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF WORKAROUND-STEP))))
+       [ps-an7: METHOD]   *** NO METHOD FOUND ***
+       [ps-an7: METHOD] < NIL
+      X[ps-an8: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF WORKAROUND-STEP))))
+       [ps-an8: SET] < NIL
+       [ps-en9] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-STEP)))
+       [ps-en9] < NIL
+        X[ps-an10: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-STEP)))
+         [ps-an10: METHOD]   *** NO METHOD FOUND ***
+         [ps-an10: METHOD] < NIL
+        X[ps-an11: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-STEP)))
+         [ps-an11: SET] < NIL
+        X[ps-an12: COVERING] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-STEP)))
+         [ps-an12: COVERING] < NIL
+         [ps-en13] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+         [ps-en13] < NIL
+          X[ps-an15: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+           [ps-an15: METHOD]   *** NO METHOD FOUND ***
+           [ps-an15: METHOD] < NIL
+          X[ps-an16: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+           [ps-an16: SET] < NIL
+          X[ps-an17: COVERING] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+           [ps-an17: COVERING] < NIL
+          X[ps-an18: INPUT] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+           [ps-an18: INPUT] < NIL
+         [ps-en14] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF TANK-PLOW-MINEFIELD)))
+         [ps-en14] < (INST-OF NUMBER)
+          -[ps-an19: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF TANK-PLOW-MINEFIELD)))
+           [ps-an19: METHOD] < (INST-OF NUMBER)
+           [ps-en20] > (MULTIPLY (OBJ (FIND (OBJ (SPEC-OF LENGTH)) (OF (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))))) (BY 25/3))
+           [ps-en20]   (MULTIPLY (OBJ (INST-OF NUMBER)) (BY 25/3))
+           [ps-en20] < (INST-OF NUMBER)
+            [ps-en21] > (FIND (OBJ (SPEC-OF LENGTH)) (OF (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))))
+            [ps-en21]   (FIND (OBJ (SPEC-OF LENGTH)) (OF (INST-OF MINEFIELD)))
+            [ps-en21] < (INST-OF NUMBER)
+             [ps-en22] > (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))
+             [ps-en22] < (INST-OF MINEFIELD)
+              -[ps-an23: RETRIEVE-R] > (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))
+               [ps-an23: RETRIEVE-R] < (INST-OF MINEFIELD)
+             -[ps-an24: METHOD] > (FIND (OBJ (SPEC-OF LENGTH)) (OF (INST-OF MINEFIELD)))
+              [ps-an24: METHOD] < (INST-OF NUMBER)
+              [ps-en25] > (LENGTH-OF (INST-OF MINEFIELD))
+              [ps-en25] < (INST-OF NUMBER)
+               -[ps-an26: RETRIEVE-R] > (LENGTH-OF (INST-OF MINEFIELD))
+                [ps-an26: RETRIEVE-R] < (INST-OF NUMBER)
+            -[ps-an27: METHOD] > (MULTIPLY (OBJ (INST-OF NUMBER)) (BY 25/3))
+             [ps-an27: METHOD] < (INST-OF NUMBER)
+        X[ps-an28: INPUT] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-STEP)))
+         [ps-an28: INPUT] < NIL
+         [ps-en13] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+         [ps-en13] < NIL
+          X[ps-an15: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+           [ps-an15: METHOD]   *** NO METHOD FOUND ***
+           [ps-an15: METHOD] < NIL
+          X[ps-an16: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+           [ps-an16: SET] < NIL
+          X[ps-an17: COVERING] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+           [ps-an17: COVERING] < NIL
+          X[ps-an18: INPUT] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+           [ps-an18: INPUT] < NIL
+         [ps-en14] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF TANK-PLOW-MINEFIELD)))
+         [ps-en14] < (INST-OF NUMBER)
+          -[ps-an19: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF TANK-PLOW-MINEFIELD)))
+           [ps-an19: METHOD] < (INST-OF NUMBER)
+           [ps-en20] > (MULTIPLY (OBJ (FIND (OBJ (SPEC-OF LENGTH)) (OF (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))))) (BY 25/3))
+           [ps-en20]   (MULTIPLY (OBJ (INST-OF NUMBER)) (BY 25/3))
+           [ps-en20] < (INST-OF NUMBER)
+            [ps-en21] > (FIND (OBJ (SPEC-OF LENGTH)) (OF (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))))
+            [ps-en21]   (FIND (OBJ (SPEC-OF LENGTH)) (OF (INST-OF MINEFIELD)))
+            [ps-en21] < (INST-OF NUMBER)
+             [ps-en22] > (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))
+             [ps-en22] < (INST-OF MINEFIELD)
+              -[ps-an23: RETRIEVE-R] > (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))
+               [ps-an23: RETRIEVE-R] < (INST-OF MINEFIELD)
+             -[ps-an24: METHOD] > (FIND (OBJ (SPEC-OF LENGTH)) (OF (INST-OF MINEFIELD)))
+              [ps-an24: METHOD] < (INST-OF NUMBER)
+              [ps-en25] > (LENGTH-OF (INST-OF MINEFIELD))
+              [ps-en25] < (INST-OF NUMBER)
+               -[ps-an26: RETRIEVE-R] > (LENGTH-OF (INST-OF MINEFIELD))
+                [ps-an26: RETRIEVE-R] < (INST-OF NUMBER)
+            -[ps-an27: METHOD] > (MULTIPLY (OBJ (INST-OF NUMBER)) (BY 25/3))
+             [ps-an27: METHOD] < (INST-OF NUMBER)
+      X[ps-an29: COVERING] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF WORKAROUND-STEP))))
+       [ps-an29: COVERING] < NIL
+       [ps-en30] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF EMPLACE-AVLB))))
+       [ps-en30] < NIL
+        X[ps-an32: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF EMPLACE-AVLB))))
+         [ps-an32: METHOD]   *** NO METHOD FOUND ***
+         [ps-an32: METHOD] < NIL
+        X[ps-an33: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF EMPLACE-AVLB))))
+         [ps-an33: SET] < NIL
+         [ps-en13] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+         [ps-en13] < NIL
+          X[ps-an15: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+           [ps-an15: METHOD]   *** NO METHOD FOUND ***
+           [ps-an15: METHOD] < NIL
+          X[ps-an16: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+           [ps-an16: SET] < NIL
+          X[ps-an17: COVERING] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+           [ps-an17: COVERING] < NIL
+          X[ps-an18: INPUT] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+           [ps-an18: INPUT] < NIL
+        X[ps-an34: COVERING] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF EMPLACE-AVLB))))
+         [ps-an34: COVERING] < NIL
+        X[ps-an35: INPUT] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF EMPLACE-AVLB))))
+         [ps-an35: INPUT] < NIL
+       [ps-en31] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF TANK-PLOW-MINEFIELD))))
+       [ps-en31] < (SET-OF (INST-OF NUMBER))
+        -[ps-an37: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF TANK-PLOW-MINEFIELD))))
+         [ps-an37: SET]   (APPEND (INST-OF NUMBER))
+         [ps-an37: SET] < (SET-OF (INST-OF NUMBER))
+         [ps-en14] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF TANK-PLOW-MINEFIELD)))
+         [ps-en14] < (INST-OF NUMBER)
+          -[ps-an19: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF TANK-PLOW-MINEFIELD)))
+           [ps-an19: METHOD] < (INST-OF NUMBER)
+           [ps-en20] > (MULTIPLY (OBJ (FIND (OBJ (SPEC-OF LENGTH)) (OF (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))))) (BY 25/3))
+           [ps-en20]   (MULTIPLY (OBJ (INST-OF NUMBER)) (BY 25/3))
+           [ps-en20] < (INST-OF NUMBER)
+            [ps-en21] > (FIND (OBJ (SPEC-OF LENGTH)) (OF (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))))
+            [ps-en21]   (FIND (OBJ (SPEC-OF LENGTH)) (OF (INST-OF MINEFIELD)))
+            [ps-en21] < (INST-OF NUMBER)
+             [ps-en22] > (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))
+             [ps-en22] < (INST-OF MINEFIELD)
+              -[ps-an23: RETRIEVE-R] > (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))
+               [ps-an23: RETRIEVE-R] < (INST-OF MINEFIELD)
+             -[ps-an24: METHOD] > (FIND (OBJ (SPEC-OF LENGTH)) (OF (INST-OF MINEFIELD)))
+              [ps-an24: METHOD] < (INST-OF NUMBER)
+              [ps-en25] > (LENGTH-OF (INST-OF MINEFIELD))
+              [ps-en25] < (INST-OF NUMBER)
+               -[ps-an26: RETRIEVE-R] > (LENGTH-OF (INST-OF MINEFIELD))
+                [ps-an26: RETRIEVE-R] < (INST-OF NUMBER)
+            -[ps-an27: METHOD] > (MULTIPLY (OBJ (INST-OF NUMBER)) (BY 25/3))
+             [ps-an27: METHOD] < (INST-OF NUMBER)
+        X[ps-an36: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF TANK-PLOW-MINEFIELD))))
+         [ps-an36: METHOD]   *** NO METHOD FOUND ***
+         [ps-an36: METHOD] < NIL
+      X[ps-an38: INPUT] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF WORKAROUND-STEP))))
+       [ps-an38: INPUT] < NIL
+       [ps-en30] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF EMPLACE-AVLB))))
+       [ps-en30] < NIL
+        X[ps-an32: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF EMPLACE-AVLB))))
+         [ps-an32: METHOD]   *** NO METHOD FOUND ***
+         [ps-an32: METHOD] < NIL
+        X[ps-an33: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF EMPLACE-AVLB))))
+         [ps-an33: SET] < NIL
+         [ps-en13] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+         [ps-en13] < NIL
+          X[ps-an15: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+           [ps-an15: METHOD]   *** NO METHOD FOUND ***
+           [ps-an15: METHOD] < NIL
+          X[ps-an16: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+           [ps-an16: SET] < NIL
+          X[ps-an17: COVERING] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+           [ps-an17: COVERING] < NIL
+          X[ps-an18: INPUT] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+           [ps-an18: INPUT] < NIL
+        X[ps-an34: COVERING] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF EMPLACE-AVLB))))
+         [ps-an34: COVERING] < NIL
+        X[ps-an35: INPUT] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF EMPLACE-AVLB))))
+         [ps-an35: INPUT] < NIL
+       [ps-en31] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF TANK-PLOW-MINEFIELD))))
+       [ps-en31] < (SET-OF (INST-OF NUMBER))
+        -[ps-an37: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF TANK-PLOW-MINEFIELD))))
+         [ps-an37: SET]   (APPEND (INST-OF NUMBER))
+         [ps-an37: SET] < (SET-OF (INST-OF NUMBER))
+         [ps-en14] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF TANK-PLOW-MINEFIELD)))
+         [ps-en14] < (INST-OF NUMBER)
+          -[ps-an19: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF TANK-PLOW-MINEFIELD)))
+           [ps-an19: METHOD] < (INST-OF NUMBER)
+           [ps-en20] > (MULTIPLY (OBJ (FIND (OBJ (SPEC-OF LENGTH)) (OF (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))))) (BY 25/3))
+           [ps-en20]   (MULTIPLY (OBJ (INST-OF NUMBER)) (BY 25/3))
+           [ps-en20] < (INST-OF NUMBER)
+            [ps-en21] > (FIND (OBJ (SPEC-OF LENGTH)) (OF (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))))
+            [ps-en21]   (FIND (OBJ (SPEC-OF LENGTH)) (OF (INST-OF MINEFIELD)))
+            [ps-en21] < (INST-OF NUMBER)
+             [ps-en22] > (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))
+             [ps-en22] < (INST-OF MINEFIELD)
+              -[ps-an23: RETRIEVE-R] > (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))
+               [ps-an23: RETRIEVE-R] < (INST-OF MINEFIELD)
+             -[ps-an24: METHOD] > (FIND (OBJ (SPEC-OF LENGTH)) (OF (INST-OF MINEFIELD)))
+              [ps-an24: METHOD] < (INST-OF NUMBER)
+   

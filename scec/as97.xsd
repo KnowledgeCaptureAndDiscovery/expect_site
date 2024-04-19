@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.isi.edu/expect/scec/as97" xmlns:scec="http://www.isi.edu/expect/scec" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:as97="http://www.isi.edu/expect/scec/as97" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://www.isi.edu/expect/scec" schemaLocation="scec_schema.xsd"/>
+	<xs:simpleType name="gmp">
+		<xs:restriction base="scec:gmp"/>
+	</xs:simpleType>
+	<xs:simpleType name="magnitude">
+		<xs:restriction base="scec:magnitude">
+			<xs:minInclusive value="5.0"/>
+			<xs:maxInclusive value="8.0"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="distance">
+		<xs:restriction base="scec:distance">
+			<xs:maxInclusive value="200.0"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="sitetype">
+		<xs:restriction base="scec:sitetype">
+			<xs:enumeration value="rock"/>
+			<xs:enumeration value="deep soil"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="faulttype">
+		<xs:restriction base="scec:faulttype">
+			<xs:enumeration value="strike slip"/>
+			<xs:enumeration value="reverse"/>
+			<xs:enumeration value="reverse/oblique"/>
+			<xs:enumeration value="reverse/hanging-wall"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="uncertainties">
+		<xs:restriction base="scec:uncertainties"/>
+	</xs:simpleType>
+</xs:schema>

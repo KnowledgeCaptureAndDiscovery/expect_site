@@ -1,0 +1,175 @@
+;;;
+;;; These are concepts and relations that must exist in every evaluation
+;;; domain, but which can be overwritten - for example objective-parents.
+;;;
+
+(in-package "EVALUATION")
+(use-package '("EXPECT" "PLANET"))
+(loom::use-loom "EVALUATION" :dont-create-context-p t)
+;;(in-package "EXPECT")
+
+(defrelation plan-task-children
+  :domain plan-task
+  :range plan-task)
+
+(defrelation plan-task-parents
+  :is (:inverse plan-task-children))
+
+(defrelation plan-tasks-to-be-inspected
+  :domain plan
+  :range plan-task)
+
+;;; These came from Andre's ontology
+
+(defconcept time-specifier
+  "A time specifier is either a time range or a time point. Time range
+and time point (with corresponding relations) are imported from
+context time-jfacc."
+  :is (:or time-range time-point)
+)
+
+(defconcept time-bound-concept
+  "This is the superconcept that allows access to all time
+relations. In practice, all subconcepts of this concept can have the
+role occurs, which means they may refer to a time interval or a
+time-point."
+  :is-primitive domain-concept
+  :roles ((occurs :type time-specifier :max 1))
+;  :partitions ($RANGE-OR-POINT$))
+)
+
+(defrelation occurs
+  :domain time-bound-concept
+  :range time-specifier
+  :characteristics (single-valued))
+
+(defconcept time-range-bound-concept
+  "This is a specialization of time-bound-concept for the case in
+which the time specifier is a time range (interval)."
+  :is (:and time-bound-concept
+	  (:all occurs time-range))
+;  :in-partition $RANGE-OR-POINT$)
+)
+
+(defconcept time-point-bound-concept
+  "This is a specialization of time-bound-concept for the case in
+which the time specifier is a time point."
+  :is (:and time-bound-concept
+	  (:all occurs time-point))
+;  :in-partition $RANGE-OR-POINT$)
+)
+
+;; Time relations about time-range-bound-concepts in general (apply to
+;; phases and military-tasks, for example)
+
+(defrelation starts-at-time
+  :is (:compose occurs
+	      time-range.start-time))
+
+(defrelation start-time-of
+  :is (:inverse starts-at-time))
+
+(defrelation ends-at-time
+  :is (:compose occurs
+	      time-range.end-time))
+
+(defrelation end-time-of
+  :is (:inverse starts-at-time))
+
+(defrelation precedes
+  :domain time-bound-concept
+  :range time-bound-concept)
+
+#|
+(defrelation precedes-in-range
+  :is (:satisfies (?c1 ?c2)
+	        (:and (time-range-bound-concept ?c1)
+		    (time-range-bound-concept ?c2)
+		    (time-point< (starts-at-time ?c1)
+			       (starts-at-time ?c2))))
+  :domain time-range-bound-concept
+  :range time-range-bound-concept)
+
+
+(defrelation precedes-in-point
+  :is (:satisfies (?c1 ?c2)
+	        (:and (time-point-bound-concept ?c1)
+		    (time-point-bound-concept ?c2)
+		    (time-point< (occurs ?c1)
+			       (occurs ?c2))))
+  :domain time-point-bound-concept
+  :range time-point-bound-concept)
+
+(implies precedes-in-range precedes)
+(implies precedes-in-point precedes)
+|#
+
+
+;; Time restrictions are a bit different, though
+
+(defrelation plan-task-time-restriction
+  :domain plan-task
+  :range time-restriction)
+
+(defconcept time-restriction
+  :is-primitive domain-concept
+  :roles ((time-restriction-relation :type time-relation :min 1 :max 1)
+	(time-restriction-specification :type time-specifier :min 1 :max 1))
+  )
+
+(defrelation time-restriction-relation
+  :domain time-restriction
+  :range time-relation)
+
+(defrelation time-restriction-specification
+  :domain time-restriction
+  :range time-specification)
+
+(defconcept time-relation
+  :is-primitive domain-concept)
+
+#|
+(tellm (time-relation before)
+       (time-relation after))
+|#
+
+(defconcept time-specification
+  :is-primitive domain-concept
+  :roles ((time-specification-base :type base-date :min 1 :max 1)
+	(time-specification-operation :type plus-or-minus :min 1 :max 1)
+	(time-specification-duration-value :type integer :min 1 :max 1)
+	(time-specification-duration-measure :type temporal-measure :min 1 :max 1)))
+
+(defrelation time-specification-base
+  :domain time-specification
+  :range base-date)
+
+(defrelation time-specification-operation
+  :domain time-specification
+  :range plus-or-minus)
+
+(defrelation time-specification-duration-value
+  :domain time-specification
+  :range integer)
+
+(defrelation time-specification-duration-measure
+  :domain time-specification
+  :range temporal-measure)
+	
+(defconcept base-date
+  :is-primitive domain-concept)
+
+#|
+(tellm (base-date c)
+       (base-date d))
+|#
+
+
+(defconcept plus-or-minus
+  :is (:or plus minus))
+
+(defconcept plus
+  :is-primitive domain-concept)
+
+(defconcept minus
+  :is-primitive domain-concept)

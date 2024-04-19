@@ -1,0 +1,168 @@
+;;; -*- Mode: Lisp; Package: CYC; Syntax: COMMON-LISP; Base: 10 -*-
+
+(in-package "CYC")
+
+
+;;; ******************** CONCEPTS ********************
+
+(DEFCONCEPT |IntangibleStuffDescribingPredicate|
+  :IS-PRIMITIVE |IntangibleObjectPredicate|
+  :ANNOTATIONS (|PredicateCategory|
+                (DOCUMENTATION "Slots describing intangible substances")))
+
+(DEFCONCEPT |MilitaryThreat|
+  :IS-PRIMITIVE |AttributeValue|
+  :ANNOTATIONS (|LinearOrderAttributeType|
+                (DOCUMENTATION "A collection of attributes: a unit with an attribute value from this collection is a hostile force which presents a friendly force with a threat of some degree in the context of a Course of Action representation.")))
+
+
+
+;;; ******************** FUNCTIONS AND RELATIONS ********************
+
+(DEFPROPERTY |areaToControl| :ARITY 1 :DOMAIN |GeographicalRegion|
+ :ANNOTATIONS
+ (|UnaryPredicate|
+  (DOCUMENTATION "a MilitarilySignificantArea is to be controlled in the goal context.")))
+
+(DEFPROPERTY |areaToProtect| :ARITY 1 :IS-PRIMITIVE |thingToProtect| :DOMAIN
+ |GeographicalThing| :ANNOTATIONS
+ (|UnaryPredicate|
+  (DOCUMENTATION "(areaToProtect ?ENTITY) means that ?ENTITY is being protected. This predicate is used in the context of goals and causes. ")))
+
+(DEFRELATION |deepOperationTask|
+  :ARITY 2
+  :DOMAIN |MilitaryOperation|
+  :RANGE |MilitaryTask|
+  :ANNOTATIONS (|IKBConstant|
+                |BinaryPredicate|
+                (DOCUMENTATION "(#$deepOperationTask MISSION TASK) means that during MISSION TASK is directed against enemy forces and functions which are not in contact at the forward line of troops (FLOT), line of departure (LD), or friendly perimeter and are between the FLOT or perimeter and the forward boundary of the unit conducting the operation. From KF723.1 in the HPKB COA CP spec v1.0.")))
+
+(DEFRELATION |enables-EventEvent|
+  :ARITY 2
+  :DOMAIN |Event|
+  :RANGE |Event|
+  :ANNOTATIONS (|BinaryPredicate|
+                (DOCUMENTATION "(enables-EventEvent EVENT1 EVENT2) means that EVENT1 enables EVENT2      to take place.")))
+
+(DEFRELATION |enables-SitProp|
+  :ARITY 2
+  :DOMAIN |Situation|
+  :RANGE |CycFormula|
+  :ANNOTATIONS (|BinaryPredicate|
+                (DOCUMENTATION "(enables-SitProp SIT PROP) means that SIT enables PROP to become      true.")))
+
+(DEFPROPERTY |eventToOccur| :ARITY 1 :DOMAIN |Event| :ANNOTATIONS
+ (|UnaryPredicate|
+  (DOCUMENTATION "an event which is already specified in the COA context is to be enabled in the goal context, for example, its preconditions could be achieved or maintained.")))
+
+(DEFRELATION |fireSupportToOperation|
+  :ARITY 2
+  :DOMAIN |MilitaryOperation|
+  :RANGE |ModernMilitaryUnit-Deployable|
+  :ANNOTATIONS (|ActorSlot|
+                (DOCUMENTATION "(#$fireSupportToOperation MISSION UNIT) means that UNIT provides fire support during MISSION.")))
+
+(DEFRELATION |operationHasPurpose|
+  :ARITY 2
+  :DOMAIN |MilitaryOperation|
+  :RANGE |CycFormula|
+  :ANNOTATIONS (|BinaryPredicate|
+                (DOCUMENTATION "Occasionally in a COA statement a purpose is associated with an operation rather than a task. This predicate is reserved for those cases.")))
+
+(DEFRELATION |presentsThreatInCOA|
+  :ARITY 2
+  :IS-PRIMITIVE |hasAttributes|
+  :DOMAIN |ModernMilitaryUnit-Deployable|
+  :RANGE |MilitaryThreat|
+  :ANNOTATIONS (|BinaryPredicate|
+                |TernaryPredicate|
+                (DOCUMENTATION "(#$presentsThreatInCOA UNIT THREATLEVEL) means that UNIT presents a threat of level THREATLEVEL in the context of a particular Course of Action.")))
+
+(DEFRELATION |prevents-SitProp|
+  :ARITY 2
+  :DOMAIN |Situation|
+  :RANGE |CycFormula|
+  :ANNOTATIONS (|BinaryPredicate|
+                (DOCUMENTATION "(prevents-SitProp SIT PROP) means that SIT prevents PROP from      becoming true.")))
+
+(DEFRELATION |prevents-SitSitType|
+  :ARITY 2
+  :DOMAIN |Situation|
+  :RANGE |SituationType|
+  :ANNOTATIONS (|IKBConstant|
+                |BinaryPredicate|
+                (DOCUMENTATION "(prevents-SitSitType SIT SITTYPE) means that SIT prevents any situation of type SITTYPE from coming about.")))
+
+(DEFPROPERTY |propPendingFalsification| :ARITY 1 :DOMAIN |CycFormula|
+ :ANNOTATIONS
+ (|UnaryPredicate|
+  (DOCUMENTATION "CycFormula is to be prevented in the goal context, typically, some types of enemy actions are to be prevented.")))
+
+(DEFPROPERTY |propPendingVerification| :ARITY 1 :DOMAIN |CycFormula|
+ :ANNOTATIONS
+ (|UnaryPredicate|
+  (DOCUMENTATION "CycFormula is to be enabled, i.e. become true, in the goal context.")))
+
+(DEFRELATION |reserveUnitInMission|
+  :ARITY 2
+  :DOMAIN |MilitaryOperation|
+  :RANGE |ModernMilitaryUnit-Deployable|
+  :ANNOTATIONS (|ActorSlot|
+                (DOCUMENTATION "(#$reserveUnitInMission MISSION UNIT) means that UNIT is a reserve during MISSION.")))
+
+(DEFRELATION |tacticalCombatForceInMission|
+  :ARITY 2
+  :DOMAIN |MilitaryOperation|
+  :RANGE |ModernMilitaryUnit-Deployable|
+  :ANNOTATIONS (|ActorSlot|
+                (DOCUMENTATION "(#$tacticalCombatForceInMission MISSION UNIT) means that UNIT plays the role of tactical combat force during MISSION.")))
+
+(DEFRELATION |taskHasPurpose|
+  :ARITY 2
+  :IS-PRIMITIVE |purposeOfEvent|
+  :DOMAIN |MilitaryTask|
+  :RANGE (:and |CycFormula| |Goal|)
+  :ANNOTATIONS (|IntangibleStuffDescribingPredicate|
+                |BinaryPredicate|
+                (DOCUMENTATION "A Purpose is a #$Goal FM-101-5: purpose (Army) - The desired or intended result of the tactical operation stated in terms relating to the enemy or to the desired situation (for example, to allow passage of follow-on forces or to set the conditions for the counterattack). It is the why of the mission statement expressed using an action verb. (For example, allow, cause, influence, prevent, protect).")))
+
+(DEFPROPERTY |thingToProtect| :ARITY 1 :DOMAIN |SomethingExisting|
+ :ANNOTATIONS
+ (|UnaryPredicate|
+  (DOCUMENTATION "SomethingExisting is to be protected in the goal context.")))
+
+(DEFRELATION |unitAssignedMainOpEffort|
+  :ARITY 2
+  :DOMAIN |MilitaryOperation|
+  :RANGE |ModernMilitaryUnit-Deployable|
+  :ANNOTATIONS (|ActorSlot|
+                (DOCUMENTATION "(unitAssignedMainOpEffort MISSION UNIT) means that UNIT undertakes the main effort in carrying through MISSION.")))
+
+(DEFRELATION |unitAssignedSuppOpEffort|
+  :ARITY 2
+  :DOMAIN |MilitaryOperation|
+  :RANGE |ModernMilitaryUnit-Deployable|
+  :ANNOTATIONS (|ActorSlot|
+                (DOCUMENTATION "(unitAssignedSuppOpEffort MISSION UNIT) means that UNIT undertakes one of the supporting efforts in carrying through MISSION.")))
+
+(DEFRELATION |unitForSecurityOperationsInMission|
+  :ARITY 2
+  :DOMAIN |MilitaryOperation|
+  :RANGE |ModernMilitaryUnit-Deployable|
+  :ANNOTATIONS (|ActorSlot|
+                (DOCUMENTATION "(#$unitForSecurityOperationsInMission MISSION UNIT) means that UNIT performs security-related operations during MISSION.")))
+
+(DEFRELATION |unitHasPurpose|
+  :ARITY 2
+  :IS-PRIMITIVE |goals|
+  :DOMAIN |ModernMilitaryUnit-Deployable|
+  :RANGE |CycFormula|
+  :ANNOTATIONS (|IntangibleStuffDescribingPredicate|
+                |BinaryPredicate|
+                |PropositionalAttitudeSlot|
+                (DOCUMENTATION "(#$unitHasPurpose UNIT PROP) means that PROP is the purpose assigned to UNIT in the context of the Course of Action representation of which the assertion is a part. This means that PROP is a proposition which UNIT is explicitly ordered to make true.")))
+
+
+
+;;; ******************** GENERAL ASSERTIONS ********************
+

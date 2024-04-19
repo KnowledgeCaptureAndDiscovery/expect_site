@@ -1,0 +1,404 @@
+;;added specializations of military vehicles and weapons April 23, 1999.
+;;06/10/99 added InfantryFightingVehicle-BMP-2.
+;06/16/99 added BattleTank-T80.
+
+
+;STANDARD EQUIPMENT
+
+constant: equipmentOfUnit.
+in Mt: ModernMilitaryTacticsMt.
+isa: BinaryPredicate IKBConstant.
+arg1Isa: ModernMilitaryUnit-Deployable .
+arg2Isa: Artifact.
+genlPreds: possesses.
+comment: "(#$equipmentOfUnit ?UNIT ?DEVICE) means that ?DEVICE is part
+of the equipment possessed by unit.  This is an instance-level
+predicate, relating a particular unit to a particular piece of
+equipment.".
+cyclistNotes: "Type-level analogs may be created using typing preds
+such as #$relationAllExists.  However, see also
+#$standardEquipmentOfUnitType.".
+
+constant: vehicleOfUnit.
+in Mt: ModernMilitaryVehiclesMt.
+isa: BinaryPredicate IKBConstant.
+genlPreds: possesses.
+arg1Isa: ModernMilitaryUnit-Deployable.
+arg2Isa: ModernMilitaryUnit-Deployable.
+comment: "(#$vehicleOfUnit ?UNIT ?VEHICLE) means that ?VEHICLE is a
+#$TransportationDevice that is possessed and used by ?UNIT.  This is
+an instance-level predicate, relating a particular unit to a
+particular vehicle.".
+In Mt: ModernMilitaryTacticsMt.
+F: (genlPreds vehicleOfUnit equipmentOfUnit).
+
+constant: standardVehicleOfUnitType.
+in Mt: ModernMilitaryVehiclesMt.
+isa: BinaryPredicate IKBConstant.
+arg1Isa: ExistingObjectType.
+arg1Genl: ModernMilitaryUnit-Deployable.
+arg2Isa: ExistingObjectType.
+arg2Genl: TransportationDevice.
+comment: "(#$standardVehicleOfUnitType ?UNITTYPE ?VEHICLETYPE) means
+that under 'ordinary' or 'normal' conditions, we should expect to find
+any instances of ?UNITTYPE equipped with one or more instances of
+?VEHICLETYPE.".
+cyclistNotes: "While (#$standardVehicleOfUnitType ?UNITTYPE
+?VEHICLETYPE) entails (#$relationAllExists #$vehicleOfUnit ?UNITTYPE
+?VEHICLETYPE) in 'normal' reasoning contexts, it entails more than this:
+the use of the predicate carries the imputation that the equipping is
+'standard' and that we would expect it, other things being equal.
+This is not something we would capture simply by use of
+#$relationAllExists in conjunction with #$vehicleOfUnit.".
+
+constant: standardEquipmentOfUnitType.
+in Mt: ModernMilitaryTacticsMt.
+isa: BinaryPredicate IKBConstant.
+arg1Isa: ExistingObjectType.
+arg1Genl: ModernMilitaryUnit-Deployable.
+arg2Isa: ExistingObjectType.
+arg2Genl: Artifact.
+comment: "(#$standardEquipmentOfUnitType ?UNITTYPE ?THINGTYPE) means
+that under 'ordinary' or 'normal' circumstances we should expect to
+find any instances of?UNITTYPE equipped with one or more instances of
+?THINGTYPE.".
+cyclistNotes: "While (#$standardEquipmentOfUnitType ?UNITTYPE
+?THINGTYPE) entails (#$relationAllExists #$equipmentOfUnit ?UNITTYPE
+?THINGTYPE) in 'normal' reasoning contexts, it entails more than this:
+the use of the predicate carries the imputation that the equipping is
+'standard' and that we would expect it, other things being equal.
+This is not something we would capture simply by use of
+#$relationAllExists in conjunction with #$equipmentOfUnit.".
+in Mt: ModernMilitaryTacticsMt.
+F: (genlPreds standardVehicleOfUnitType standardEquipmentOfUnitType).
+
+constant: standardVehicleOfUnitTypeCount.
+in Mt: ModernMilitaryVehiclesMt.
+isa: TernaryPredicate IKBConstant.
+arg1Isa: ExistingObjectType.
+arg1Genl: ModernMilitaryUnit-Deployable.
+arg2Isa: ExistingObjectType.
+arg2Genl: TransportationDevice.
+arg3Isa: PositiveInteger.
+comment: "(#$standardVehicleOfUnitTypeCount ?UNITTYPE ?VEHICLETYPE
+?NUMBER) means that under 'ordinary' or 'normal' circumstances we
+would expect to find an instance of ?UNITTYPE equipped with exactly
+?NUMBER #$TransportationDevices of type ?VEHICLETYPE.".
+F:
+(implies
+  (standardVehicleOfUnitTypeCount ?UNITTYPE ?TRANSTYPE ?COUNT)
+  (standardVehicleOfUnitType ?UNITTYPE ?TRANSTYPE)).
+
+constant: standardEquipmentOfUnitTypeCount.
+in Mt: ModernMilitaryTacticsMt.
+isa: BinaryPredicate IKBConstant.
+arg1Isa: ExistingObjectType.
+arg1Genl: Artifact.
+arg2Isa: ExistingObjectType.
+arg2Genl: ModernMilitaryUnit-Deployable.
+arg3Isa: PositiveInteger.
+comment: "(#$standardEquipmentOfUnitTypeCount ?UNITTYPE ?EQUIPMENTTYPE
+?NUMBER) means that under 'ordinary' or 'normal' circumstances we
+would expect to find an instance of ?UNITTYPE equipped with exactly
+?NUMBER #$Artifacts of type ?EQUIPMENTTYPE.".
+F:
+(implies
+  (standardEquipmentOfUnitTypeCount ?UNITTYPE ?THINGTYPE ?COUNT)
+  (standardEquipmentOfUnitType ?UNITTYPE ?THINGTYPE)).
+
+in Mt: ModernMilitaryTacticsMt.
+F:
+(implies
+  (standardEquipmentOfUnitType ?UNITTYPE ?THINGTYPE)
+  (relationAllExists equipmentOfUnit ?UNITTYPE ?THINGTYPE)).
+
+in Mt: ModernMilitaryVehiclesMt.
+F:
+(implies
+  (standardVehicleOfUnitType ?UNITTYPE ?VEHICLETYPE)
+  (relationAllExists equipmentOfUnit ?UNITTYPE ?VEHICLETYPE)).
+
+
+in Mt: ModernMilitaryTacticsMt.
+F:
+(implies
+  (standardEquipmentOfUnitType ?UNITTYPE ?THINGTYPE)
+  (relationAllExistsMany equipmentOfUnit ?UNITTYPE ?THINGTYPE)).
+F:
+(exceptWhen 
+  (standardEquipmentOfUnitTypeCount ?UNITTYPE ?THINGTYPE 1)
+(implies
+  (standardEquipmentOfUnitType ?UNITTYPE ?THINGTYPE)
+  (relationAllExistsMany equipmentOfUnit ?UNITTYPE ?THINGTYPE))).
+F:
+(exceptWhen 
+  (standardEquipmentOfUnitTypeCount ?UNITTYPE ?THINGTYPE 2)
+(implies
+  (standardEquipmentOfUnitType ?UNITTYPE ?THINGTYPE)
+  (relationAllExistsMany equipmentOfUnit ?UNITTYPE ?THINGTYPE))).
+F:
+(exceptWhen 
+  (standardEquipmentOfUnitTypeCount ?UNITTYPE ?THINGTYPE 3)
+(implies
+  (standardEquipmentOfUnitType ?UNITTYPE ?THINGTYPE)
+  (relationAllExistsMany equipmentOfUnit ?UNITTYPE ?THINGTYPE))).
+
+
+in Mt: ModernMilitaryVehiclesMt.
+F:
+(implies
+  (standardVehicleOfUnitType ?UNITTYPE ?TRANSTYPE)
+  (relationAllExistsMany vehicleOfUnit ?UNTITYPE ?TRANSTYPE)).
+F:
+(exceptWhen
+  (standardVehicleOfUnitTypeCount ?UNITTYPE ?TRANSTYPE 1)
+(implies
+  (standardVehicleOfUnitType ?UNITTYPE ?TRANSTYPE)
+  (relationAllExistsMany vehicleOfUnit ?UNTITYPE ?TRANSTYPE))).
+F:
+(exceptWhen
+  (standardVehicleOfUnitTypeCount ?UNITTYPE ?TRANSTYPE 2)
+(implies
+  (standardVehicleOfUnitType ?UNITTYPE ?TRANSTYPE)
+  (relationAllExistsMany vehicleOfUnit ?UNTITYPE ?TRANSTYPE))).
+F:
+(exceptWhen
+  (standardVehicleOfUnitTypeCount ?UNITTYPE ?TRANSTYPE 3)
+(implies
+  (standardVehicleOfUnitType ?UNITTYPE ?TRANSTYPE)
+  (relationAllExistsMany vehicleOfUnit ?UNTITYPE ?TRANSTYPE))).
+
+
+in Mt: ModernMilitaryTacticsMt.
+F:
+(implies
+   (standardEquipmentOfUnitTypeCount ?UNITTYPE ?THINGTYPE ?COUNT)
+   (relationAllExistsCount equipmentOfUnit ?UNITTYPE ?THINGTYPE ?COUNT)).
+
+
+in Mt: ModernMilitaryVehiclesMt.
+F:
+(implies
+  (standardVehicleOfUnitTypeCount ?UNITTYPE ?VEHICLETYPE ?COUNT)
+  (relationAllExistsCount vehicleOfUnit ?UNITTYPE ?VEHICLETYPE ?COUNT)). 
+
+
+
+
+;SPECIALIZATIONS OF VEHICLES AND WEAPONS
+
+;in cyc
+constant: BradleyFightingVehicle.
+in Mt: ModernMilitaryVehiclesMt.
+isa: ExistingObjectType IKBConstant.
+genls: ArmoredPersonnelCarrier.
+comment: "Specialized type of #$ArmoredPersonnelCarrier used regularly
+by the modern US Army.".
+
+;in cyc
+constant: ArmoredPersonnelCarrier-BTR60 .
+in Mt: ModernMilitaryVehiclesMt.
+isa: ExistingObjectType IKBConstant.
+genls: ArmoredPersonnelCarrier.
+comment : "A type of armored personnel carrier which Iran is
+          known to possess." .
+
+;in cyc but IKB in BaseKB, the rest in SaudiArabia-IranMilitaryBalanceMt on
+;April 23, 1999 
+; changed mt to ModernMilitaryVehiclesMt.
+constant: BattleTank-T54 .
+in Mt: ModernMilitaryVehiclesMt.
+isa: ExistingObjectType IKBConstant.
+genls:  Tank-Vehicle   .
+comment : "Class of battle tank currently (1998) used by Iran." .
+
+
+;in cyc but IKB in BaseKB, the rest in SaudiArabia-IranMilitaryBalanceMt on
+;April 23 
+; changed mt to ModernMilitaryVehiclesMt.
+constant: BattleTank-T55 .
+in Mt: ModernMilitaryVehiclesMt.
+isa: ExistingObjectType IKBConstant.
+genls:  Tank-Vehicle  .
+comment : "Class of battle tank currently (1998) used by Iran." .
+
+
+;in cyc  partly in ModernMilitaryVehiclesMt, partly in BaseKB, partly in
+; SaudiArabia-IranMilitaryBalanceMt 
+; changed mt to ModernMilitaryVehiclesMt.
+constant: BattleTank-T62 .
+in Mt: ModernMilitaryVehiclesMt.
+isa: ExistingObjectType IKBConstant.
+genls:  Tank-Vehicle   .
+comment : "Class of battle tank currently (1998) used by Iran." .
+
+;in cyc but  IKB in BaseKB, the rest in SaudiArabia-IranMilitaryBalanceMt
+; changed mt to ModernMilitaryVehiclesMt.
+constant: BattleTank-T72 .
+in Mt: ModernMilitaryVehiclesMt.
+isa: ExistingObjectType IKBConstant.
+genls:  Tank-Vehicle   .
+comment : "Class of battle tank currently (1998) used by Iran." .
+
+;new - added to cyc 04/23/99
+constant: BattleTank-T64.
+in Mt: ModernMilitaryVehiclesMt.
+isa: ExistingObjectType.
+genls: Tank-Vehicle.
+comment: "A type of battle tank.".
+
+;in cyc but not IKB constant
+; made IKB changed mt of isa, genls and comment to ModernMilitaryWeaponsMt 
+constant: Howitzer .
+in Mt: ModernMilitaryWeaponsMt .
+isa: ExistingObjectType IKBConstant.
+genls: Cannon .
+comment: "A collection. Each instance is a large Weapon too
+          large for one person to carry and used for indirect
+          shooting. A Howitzer has a caliber larger than 15mm and
+          fires projectiles at medium muzzle speed with a
+          trajectory over 45 degrees." .
+
+
+;new - added to cyc 04/23/99
+constant: Howitzer-122mmSelfPropelled.
+in Mt: ModernMilitaryWeaponsMt.
+isa: ExistingObjectType IKBConstant.
+genls: Howitzer Artillery-SelfPropelled.
+comment: "The collection of self-propelled 122mm #$Howitzers.".
+ 
+;new - added to cyc 04/23/99
+constant: Howitzer-152mmSelfPropelled.
+in Mt: ModernMilitaryWeaponsMt.
+isa: ExistingObjectType.
+genls: Howitzer Artillery-SelfPropelled.
+comment: "The collection of self-propelled 152mm #$Howitzers.".
+ 
+;new - added to cyc 04/23/99
+constant: Howitzer-155mmSelfPropelled.
+in Mt: ModernMilitaryWeaponsMt.
+isa: ExistingObjectType IKBConstant.
+genls: Howitzer Artillery-SelfPropelled.
+comment: "The collection of self-propelled 155mm #$Howitzers.".
+                        
+
+;new - added to cyc 04/23/99
+constant: SupportHelicopter-OH58DKW.
+in Mt: ModernMilitaryVehiclesMt.
+isa: ExistingObjectType IKBConstant.
+genls: SupportHelicopter.
+comment: "The collection of helicopters used to provide reconnaissance
+and close air support duties. The OH58DKW is generally equipped with
+anti-tank missiles and rockets, thermal imaging equipment for
+providing target information to other air and ground-based units.".
+ 
+;new   - added to cyc 04/23/99                      
+constant: MultipleRocketLauncher-122mmMRL.
+in Mt: ModernMilitaryWeaponsMt.
+isa: IKBConstant ExistingObjectType.
+genls: MultipleRocketLauncher.
+ 
+comment: "The collection of 122mm multiple rocket launchers. The MRL
+is a Soviet-made, truck mounted rocket launcher, similar to the
+American Multiple Launch Rocket system (MLRS), but much older.".
+ 
+sourceOfTerm-Person: Rasch.
+ 
+
+;new   - added to cyc 04/23/99  
+constant: BradleyFightingVehicle-M2.
+in Mt: ModernMilitaryVehiclesMt.
+isa: IKBConstant ExistingObjectType.
+genls: BradleyFightingVehicle.
+sourceOfTerm-Person: Rasch.
+ 
+comment: "A model of #$BradleyFightingVehicle." .
+
+;new    - added to cyc 04/23/99 
+constant: BradleyFightingVehicle-M3.
+in Mt: ModernMilitaryVehiclesMt.
+isa: IKBConstant ExistingObjectType.
+genls: BradleyFightingVehicle.
+sourceOfTerm-Person: Rasch.
+comment: "A model of #$BradleyFightingVehicle used by scouts and 
+designed to carry more TOW missiles than the model
+#$BradleyFightingVehicle-M2.". 
+ 
+in Mt: ModernMilitaryTacticsMt .
+F: (standardEquipmentOfUnitType ScoutUnit-MilitarySpecialty
+BradleyFightingVehicle-M3). 
+ 
+;in cyc 
+constant: M1A1AbramsTank .
+in Mt: ModernMilitaryVehiclesMt.
+isa: ExistingObjectType IKBConstant.
+genls: Tank-Vehicle.
+comment : "A type of tank. Since its deployment in 1983, the
+          M1A1Abrams has been the principal tank used by the United
+          States Army and Marine Corps." .
+
+
+;new   - added to cyc 04/23/99 
+constant: M1A2AbramsTank.
+in Mt: ModernMilitaryVehiclesMt.
+isa: ExistingObjectType IKBConstant.
+genls: Tank-Vehicle.
+comment: "A newer version of #$M1A1AbramsTank.".
+ 
+
+;new  - added to cyc 04/23/99 
+constant: MultipleRocketLauncherSystem-MLRS.
+in Mt: ModernMilitaryWeaponsMt.
+isa: IKBConstant ExistingObjectType.
+genls: MultipleRocketLauncher.
+ comment: "The collection of American-made multiple rocket launchers,
+similar to the Soviet #$MultipleRocketLauncher-122mmMRL, but much
+newer.".
+ 
+ 
+;in Cyc isa in BaseKB, genls in ModernMilitaryVehiclesMt
+;changed isa to ModernMilitaryVehiclesMt
+constant: AH-64A-Helicopter .
+in Mt : ModernMilitaryVehiclesMt .
+isa: IKBConstant ExistingObjectType.
+genls: AttackHelicopter .
+comment: "The Collection of AH-64A Apache #$Helicopters." .
+
+
+constant: InfantryFightingVehicle-BMP-2.
+in Mt: ModernMilitaryWeaponsMt.
+isa: IKBConstant ExistingObjectType.
+genls: ArmoredFightingVehicle.
+comment: "#$InfantryFightingVehicle-BMP-2 is the collection BMP-2's. The
+BMP-2  is an infantry fighting vehicle of Russian origin, first seen
+publicly in 1982, but in use for some time before that.  It has been used
+in combat by the Russian army in Afghanistan, and apparently by armies of
+both Iraq and Kuwait during Desert Storm.  In addition to Russian
+manufacture, it is also manufactured under license by India (and known as
+the `Sarath') and in the former Czechoslovakia.  Russia was marketing the
+BMP-2 for $200,000 in 1993.  It is amphibious, floating and being propelled
+on the water by its tracks. BMP-2's are associated primarily with Red
+mechanized infantry units (rather than armored units), at least at the
+battalion level.  At higher levels, various types of divisions may have
+lower-level components of several types, so mechanized infantry (with
+BMP-2s) and armored (with T-64 tanks, for instance) may very well be found
+in the same division.". 
+
+cyclistNotes : "Relation between #$BradleyFightingVehicle-M2 and
+#$InfantryFightingVehicle-BMP-2: 
+#$BradleyFightingVehicle-M2 is a US
+infantry fighting vehicle which takes basically the same type of role as
+the Red BMP-2s though not necessarily with the same capability, as
+reflected in the combat power values of 1.0 and 0.58 for battalions of M2
+and BMP-2, respectively." . 
+
+sourceOfTerm-PIT : ST100-7Mt .
+
+in Mt : COAContributorsMt .
+sourceOfTerm-Person : Rigby .
+
+constant: BattleTank-T80 .
+in Mt : ModernMilitaryVehiclesMt .
+isa: IKBConstant ExistingObjectType.
+genls : Tank-Vehicle .
+comment : "A type of battle tank.". 

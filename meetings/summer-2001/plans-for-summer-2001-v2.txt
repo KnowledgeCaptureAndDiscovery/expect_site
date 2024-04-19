@@ -1,0 +1,103 @@
+
+=================================================================================
+SUMMARY OF PLANS FOR SOFTWARE DEVELOPMENT IN EXPECT
+
+                    JULY 6, 2001
+=================================================================================
+
+
+* Status of software:
+- Current working system is Constable-2001, it has:
+     - client, which we'll call UberClient version 0.0 (UC 0.0)
+     - server, which we'll call UberServer version 0.0 (US 0.0)
+- Older versions of the software (same server as Constable-2001 (but 
+older version of it!), client has additional functionality we want to 
+use):
+    - EMED'98
+    - IUI-2001
+
+
+* Overall plan:
+- Muchta will revive and integrate client functionality of various 
+versions of the software, email detailed requests to Norm pointing up 
+what functions need to be fixed in the server
+- Norm will maintain a server that Muchta can connect new versions of 
+the clients to and test
+
+
+
+WEEK OF JULY 9-13
+------------------------------
+- Norm to setup his own copy of the server (US 0.0) that Muchta's 
+clients will talk to
+
+- Norm to familiarize himself with EXPECT's server functions, Lisp 
+tracing and debugging, etc.
+
+- Muchta to revive EMED'98 client
+   - using Java 1.3 (instead of Java 1.1.8)
+   - using sockets (instead of http connection)
+   - talking to US 0.0 (instead of server EMED 1998)
+
+- Muchta to revive IUI-2001 client
+   - using Java 1.3 (instead of Java 1.2 beta)
+   - using sockets
+   - talking to US 0.0 (instead of server IUI-2001)
+
+- Norm to revise and improve travel domain
+
+
+WEEK OF JULY 16-20
+____________________
+
+- Muchta: fix shaky functions from EMED'98 that are now in Constable, 
+including PS tree and agenda
+
+- Muchta: integrate client functionality in EMED'98 into UC, 
+including method browser, structured editor, and method/error 
+search/views
+
+- Norm: support extensions to server US required by above
+
+- Norm: begin work on importing/experting knowledge in XML and XMLS
+
+
+WEEK OF JULY 23-27
+____________________
+
+- Muchta: integrate client functionality in IUI-2001 into UC, 
+including relation and instance editor, agenda, and problem execution
+
+- Norm: support extensions to server US required by above
+
+- Norm: continue work on importing/experting knowledge in XML and XMLS
+
+
+WEEK OF JULY 30-AUGUST 3
+____________________________
+
+- Muchta: continue integration and testing
+
+- Norm: support extensions to server US required by above
+
+- Norm: finalize work on importing/experting knowledge in XML and XMLS
+
+
+WEEK OF AUGUST 6-10
+_______________________
+
+- Muchta and Norm: design and develop main interaction window
+
+
+WEEK OF AUGUST 13-17
+_______________________
+
+- Muchta and Norm: extend system with new functionality (as discussed 
+on 6/26/01)
+
+
+WEEK OF AUGUST 20-24
+--------------------------------------
+
+- Muchta: continue to extend system with new functionality
+

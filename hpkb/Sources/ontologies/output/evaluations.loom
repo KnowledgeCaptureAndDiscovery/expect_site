@@ -1,0 +1,572 @@
+#|
+
+Plan evaluation ontology,
+Yolanda Gil and Jim Blythe, ISI, Dec 22 1998
+(Last modified Mar 11 99 - see below for history)
+
+The latest version of this ontology can be found from 
+http://www.isi.edu/output-ontology
+				
+This is a general ontology for plan evaluations and critiques.
+It contains representations for a wide range of plan evaluations
+and critiques that in our experience are useful to analyze a plan
+at various levels and with different perspectives.  These representations
+should be adequate to represent critiques in the HPKB COA CP
+as they are described in the CP document, and it should provide a
+good starting point for a more extensive critiquing framework
+in future work.
+
+Plan critiquing is a special kind of plan evaluation where the
+user is alerted about problems in the plan.  Plan critiquing
+systems are often used in medical and software applications.
+An example of a plan critiquing tool is INSPECT, which has
+been part of several ARPI and JFACC demonstrations.  INSPECT
+works at the higher-levels of air campaign planning, which is
+a manual process operating in a large and complex plan and as
+a result is prone to errors. INSPECT takes a manually created
+plan and checks it for commonly occurring plan flaws.
+These include incompleteness, problems with plan structure,
+and unfeasibility due to lack of resources.
+INSPECT shows the user an agenda with all the problems
+found with the plan, and can provide a detailed explanation
+of each problem as well as suggest ways to fix each problem.
+Critiquers typically point out problems in the plan,
+but one would also like to be able to communicate to the user
+that the tool checked the plan for a type of problem and none
+was found.  The ontology below can represent these different
+alternative outputs of a critiquer, including those of INSPECT.
+
+Critiques are often based on some computation that takes
+the given plan and deduces additional properties of it.
+For example, given all the missions stated in the plan
+a tool can calculate how much fuel will be consumed and
+if it is in excess of what is available then alert the user with
+a critique.  Sometimes it is useful to store the intermediate
+results that lead to this critique, such as the total fuel
+consumption of the plan.  This ontology can represent these
+computed properties of an overall plan or an individual task
+and relate them to the critique.
+
+A more general view of critiquing is to judge the plan according to a
+given norm and inform the user about how much the plan complies
+with and/or deviates from it.  A critique is a special case of this
+where the user is informed only of failure to comply with the norm.
+
+Generally, plan evaluations do not necessarily offer judgements
+on a plan, but may just state how the plan fares with respect to
+various evaluation criteria.  For example, a plan evaluation tool
+can estimate that the plan takes 10 days to execute.
+This fact is not good or bad in principle, it is just something
+that the tool evaluates about the plan.  This ontology
+accomodates this representational need.
+
+Evalutions are often grouped into meaningful aspects or
+perspectives.  In the HPKB COA domain, viability is a top-level
+criterion, feasibility is one aspect within that, etc.
+In a tool that we developed
+to evaluate and compare transportation plans, the system
+evaluated the plan under different dimensions
+(e.g., capacity of
+ports of embarcation and debarcation used),
+and for each dimension it considered different aspects
+(e.g., how many ports, available facilities, etc).
+The ontology below allows links to a structured grouping a set of
+evaluations with a common theme to a sub-theme, for example a link from
+the structure for viability evaluations to the one for feasibility
+evaluations.
+
+History:
+
+Mar 11 99: (Jim) Removed evaluation-criterion and analysis-type and their
+           relations on the assumption that any information associated 
+           with them can be stored at the concept level.
+Mar 10 99: (Jim) Second version with a major overhaul. "estimate" object
+           added along with "analysis" and "constructive-evaluation".
+           Now agrees with slides presented in Austin Tx.
+Feb 24 99: (Jim) corrected the range of the "reasons" relation after
+  a mistake was pointed out by Don Henager.
+
+|#
+
+;;; Package and context for this ontology
+(unless (find-package "PLAN-EVALUATION")
+  (make-package "PLAN-EVALUATION"))
+(in-package "PLAN-EVALUATION")
+(loom:use-loom "PLAN-EVALUATION")
+
+;;; PLANET is the context for our general planning ontology.
+(defcontext PLAN-EVALUATION :theory (BUILT-IN-THEORY PLANET))
+(in-context 'plan-evaluation)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defconcept evaluation-structure
+  :is-primitive (:and thing
+		  (:all with-respect-to evaluation-criterion)
+		  (:all factor analysis)
+		  (:the priority evaluation-priority)
+		  )
+  :annotations ((documentation "An evaluation structure captures a set
+of evaluations made about a plan or a task. The set probably has some
+cohesion, for example evaluations about viability. There may be
+sub-structures, for example a structure concerned with feasibility may
+be a sub-structure of one concerned with viability.")))
+
+(defrelation sub-evaluation-structure
+  :domain evaluation-structure
+  :range evaluation-structure
+  :annotations ((documentation "Links a structure grouping a set of
+evaluations with a common theme to a sub-theme, for example a link from
+the structure for viability evaluations to the one for feasibility
+evaluations.")))
+
+
+(defconcept analysis ; was "evaluation-item"
+  :is-primitive (:and thing
+		  ;;(:the item-type analysis-type)
+
+		  ;; The priority is a measure of the importance of
+		  ;; this evaluation.
+		  (:the priority evaluation-priority)
+		  
+		  (:all analysis-estimate estimate)
+		  (:all reasons analysis-explanation)
+		  (:at-least 0 description)
+		  
+		  )
+  :annotations ((documentation "An evaluation item represents the
+outcome of a particular evaluation. It may be an evaluation --- a
+comparison of some plan feature against some normal value --- or just a
+computation of some value such as the number of ships used.")))
+
+(defrelation factor
+  :domain evaluation-structure
+  :range analysis
+  :annotations ((documentation "Links an evaluation structure to a
+component analysis"))
+  )
+
+(defrelation analysis-estimate
+  :domain analysis
+  :range estimate
+  :annotations ((documentation "Links an analysis to an estimate
+for the analysis"))
+  )
+
+(defconcept analysis-explanation
+  :is-primitive thing
+  :annotations ((documentation "An explanation for an evaluation
+may be a string or a more complicated object.")))
+
+(defrelation reasons
+  :domain analysis
+  :range analysis-explanation
+  :annotations ((documentation "The reason for an analysis.
+See the COA example for an example."))
+  )
+
+
+(defconcept object-property
+  :is-primitive thing
+  :annotations ((documentation "A property that is the subject
+of the analysis, for example fuel-usage."
+			 )))
+
+(defconcept stated-property
+  :is-primitive object-property
+  :annotations ((documentation "An object-property that is
+explicitly stated in the representation of the object
+(eg plan or task) being analysed.")))
+
+(defconcept deduced-property
+  :is-primitive object-property
+  :annotations ((documentation "An object-property that is
+not explicitly stated in the representation of the object
+(eg plan or task) being analysed but is deduced by some mechanism.")))
+
+
+(defrelation analysis-property
+  :domain analysis
+  :range object-property
+  :annotations ((documentation "Links an analysis to the property
+being analysed."))
+  )
+
+(defrelation description
+  :domain analysis
+  :annotations ((documentation "A more detailed description of the
+result of the analysis. Could be represented as a string or a
+more structured object. See the COA example below for an example."))
+  )
+
+;;; Special kinds of analysis
+
+
+(defconcept evaluation
+  :is-primitive (:and analysis
+		  (:at-least 1 normal-value)
+		  (:at-least 0 value-comparison))
+  :annotations ((documentation "An evaluation is an analysis
+that mentions some normal value for the analysis. For example,
+the normal value for fuel usage for a certain kind of plan
+may be 100 gallons")))
+
+(defrelation normal-value
+  :domain evaluation
+  :annotations ((documentation "The normal value that this
+evaluation would be expected to yield for the object being
+evaluated.")))
+
+(defrelation value-comparison
+  :domain evaluation
+  :range number
+  :annotations ((documentation "A comparison of the normal
+value with an estimated value for the evaluation.")))
+
+(defrelation norm
+  :domain critique
+  :annotations ((documentation "An indication of the value
+range for which the critique would be considered to be violated.
+Could be absolute or proportional. For example, if the evaluation is on fuel
+consumption for a particular task, the normal-value might be the amount
+typically expected to be used by a task or plan of this kind.
+The norm might say that this critique is violated if the estimate
+goes more that 15% over the normal-value."))
+  )
+
+(defrelation dismissed
+  :domain critique
+  :annotations ((documentation "Records that the critique has been
+dealt with in some way."))
+  )
+
+(defrelation user-dismissed
+  :is-primitive dismissed
+  :annotations ((documentation "Records that the critique has been
+indicated dealt with by the user."))
+  )
+
+(defrelation overridden 
+  :is-primitive dismissed
+  :range analysis
+  :annotations ((documentation "Records that the critique has been
+made inapplicable by some other related analysis, perhaps defeating it
+or perhaps superseding it."))
+  )
+
+(defrelation degree-of-violation
+  :domain critique
+  :annotations ((documentation "Records how seriously a critique
+is violated. The range depends on the KBS using the ontology. A simple
+KBS might use boolean, so the critique is either violated or not. The
+air campaign planning domain might use the standard nomenclature including
+'note' and 'warning'."))
+  )
+
+(defrelation violated
+  :is-primitive degree-of-violation
+  :range boolean
+  :annotations ((documentation "A specialized degree-of-violation
+relation with boolean range. A KBS using the ontology doesn't have
+to use this relation, it is provided for convenience")))
+
+(defconcept critique
+  :is-primitive (:and evaluation
+		  (:at-least 1 norm)
+		  (:at-least 0 degree-of-violation)
+		  (:at-least 0 dismissed)
+		  )
+  :annotations ((documentation "A comparison of some factor of the plan
+or task against a norm. For example, if the evaluation is on fuel
+consumption for a particular task, the normal-value might be the amount
+typically expected to be used by a task or plan of this kind.
+The norm might say that this critique is violated if the estimate
+goes more that 15% over the normal-value.")))
+
+(defconcept critique--non-violated-constraint
+  :is (:and critique
+            (:filled-by violated FALSE))
+  :annotations ((documentation "A non-violated constraint."))
+  )
+
+(defconcept critique--violated-constraint
+  :is (:and critique
+            (:filled-by violated TRUE))
+  :annotations ((documentation "A violated constraint,
+based on the boolean-ranged degree-of-violation relation.")))
+
+
+
+(defconcept constructive-evaluation
+  :is-primitive (:and evaluation
+		  (:at-least 1 suggested-corrective-action))
+  :annotations ((documentation "A constructive-evaluation is one that
+attempts to suggest some corrective action if the estimates deviate from
+the normal value. For instance if a task requires more fuel than is
+stored in the vehicle, the action suggested might be to add a task to
+re-fuel at some point."))
+  )
+
+(defrelation suggested-corrective-action
+  :domain constructive-evaluation
+  :annotations ((documentation "A possible correction for a value that
+deviates from the normal value. For instance if a task requires more
+fuel than is stored in the vehicle, the action suggested might be to add
+a task to re-fuel at some point.  In some domains this might be
+represented as a simple string, in others it might have more
+structure."))
+  )
+
+(defconcept constructive-critique
+  :is-primitive (:and critique constructive-evaluation)
+  :annotations ((documentation "An evaluation that combines the
+properties of both a critique and a constructive evaluation."))
+  )
+
+;;; Estimates of analyses
+
+(defconcept estimate
+  :is-primitive (:and thing
+		  (:at-least 1 value)
+		  (:at-least 1 source)
+		  (:at-least 1 method-used)
+		  (:at-least 1 quality)
+		  (:at-least 1 confidence))
+  :annotations ((documentation "An estimate is a value for the
+analysis, produced by some recorded source, using a particular method.
+Attached to the estimate is a 'quality' or precision rating and a
+'confidence' in the value given."))
+  )
+
+(defrelation value
+  :domain estimate
+  :annotations ((documentation "The value for this estimate of the analysis"))
+  )
+
+(defrelation source
+  :domain estimate
+  :annotations ((documentation "The source of this estimate of the
+analysis. For instance in the HPKB domain this would be one of the
+critiquers"))
+  )
+
+(defrelation method-used
+  :domain estimate
+  :annotations ((documentation "An indication of the method used to provide
+the estimate, with different ranges for different domains. Examples are
+simulation, algebraic computation, heuristic approximation."))
+  )
+
+(defrelation quality
+  :domain estimate
+  :annotations ((documentation "An indication of the level of precision
+provided by the method used in the estimate.  The range depends on the
+KBS using the ontology, but a suggestion is the estimate-quality-value
+set."))
+  )
+
+(defset estimate-quality-value
+  :is (:the-ordered-set 'gross 'fair 'good 'detailed))
+
+(defrelation confidence
+  :domain estimate
+  :annotations ((documentation "An indication of the reliability of the
+estimate given. This is separate from the quality, which is a precision
+measure. Range of values depends on the domain."))
+  )
+
+;;; Priority and severity
+
+(defconcept evaluation-priority
+  :is-primitive thing
+  :annotations ((documentation "The importance or interest of an
+evaluation structure or item. This is different from the seriousness of
+a judgment. For example, a fuel judgment might have moderate importance
+(and hence priority), while the over-use of fuel (ie seriousness of the
+critique) in some task is very bad, and an ammunition judgment might have
+high importance while the over-use in the task is slight. In the HPKB
+domain each priority is currently a number, while in the JFACC domain 
+it is symbolic.")))
+
+(defrelation priority
+  :domain (:or evaluation-structure analysis)
+  :range evaluation-priority
+  :annotations ((documentation "Links an evaluation structure or
+analysis to its priority. For example, a fuel judgment might have
+moderate importance (and hence priority), while the over-use of fuel (ie
+seriousness of the critique) in some task is very bad, and an ammunition
+judgment might have high importance while the over-use in the task is
+slight. In the HPKB domain each priority is currently a number, while in
+the JFACC domain it is symbolic."))
+  )
+
+;;;
+;;; Example COA critique
+;;;
+
+;;; COA-specific KB supporting the example critique.
+
+(defconcept coa-critiquing-structure
+  :is-primitive (:and evaluation-structure
+		  (:all sub-evaluation-structure 
+		        coa-facet-evaluation-structure))
+  :constraints (:all factors coa-critique)
+  :annotations ((documentation "An evaluation structure used for
+COA critiques."))
+  )
+
+(defconcept coa-facet-evaluation-structure
+  :is-primitive (:and evaluation-structure
+		  ;;(:the with-respect-to coa-evaluation-criterion)
+		  )
+  :annotations ((documentation "An evaluation structure used for
+facets of a complete COA critique, eg viability"))
+  )
+
+(defconcept viability-evaluation-structure
+  :is (:and coa-facet-evaluation-structure
+	  ;;(:filled-by with-respect-to viability-evaluation-criterion)
+	  (:all sub-evaluation-structure 
+	        viability-facet-evaluation-structure))
+  :annotations ((documentation "An evaluation structure for the 
+viability analysis of a COA"))
+  )
+
+(defconcept viability-facet-evaluation-structure
+  :is-primitive (:and evaluation-structure
+		  ;;(:the with-respect-to viability-evaluation-criterion)
+		  )
+  :annotations ((documentation "An evaluation structure used for a
+facet of the viability critique of a COA, eg feasibility"))
+  )
+
+
+(defconcept feasibility-evaluation-structure
+  :is (:and evaluation-structure
+	  ;;(:filled-by with-respect-to feasibility-criterion)
+	  (:all factor feasibility-critique))
+  :annotations ((documentation "An evaluation structure used for
+the analyses related to the feasibility of a COA"))
+  )
+
+
+(defconcept COA-estimate
+  :is-primitive (:and estimate
+		  (:all source critique-source))
+  :annotations ((documentation "An estimate used in a COA critique")))
+
+;;; is "critiquing-aspect" necessary? Same Q about critiquing-perspective
+;;; and critiquing-facet.
+(defconcept COA-critique
+  :is-primitive (:and constructive-critique
+		  (:all value coa-estimate)
+                      ;;(:the critiquing-aspect aspect)
+                      )
+  :exhaustive-partitions
+    (($COA-critiques$ (viability-critique correctness-critique
+                       strengths-and-weaknesses-critique
+                       missing-elements-critique)))
+    :annotations ((documentation "A critique of a COA"))
+    )
+
+;;; I don't recall what critiquing-perspective was supposed to be
+;;; - can it be covered by item-type?
+(defconcept viability-critique
+  :is-primitive (:and COA-critique
+		  ;;(:filled-by critiquing-perspective viability)
+		  )
+  ;; :defaults (:filled-by critiquing-perspective viability)
+  :exhaustive-partitions
+  (($viability-critiques$ (suitability-critique feasibility-critique
+				        acceptability-critique
+				        completeness-critique)))
+    :annotations ((documentation "A critique of the viability of a COA"))
+    )
+  
+
+(defconcept feasibility-critique
+  :is-primitive (:and viability-critique
+		  ;;(:filled-by critiquing-aspect feasibility)
+		  )
+  ;; :defaults (:filled-by critiquing-aspect feasibility)
+  :annotations ((documentation "A critique of the feasibility of a COA"))
+  )
+
+(defconcept inadequate-forces-critique
+   :is (:and feasibility-critique
+	   ;;(:filled-by critiquing-facet inadequate-forces)
+	   ;;(:filled-by item-type inadequate-forces-critique-type)
+	   (:the analysis-property task-force-ratio)
+	   (:filled-by priority 1)
+	   )
+   ;; :defaults (:filled-by critiquing-facet inadequate-forces)
+   :annotations ((documentation "A critique on the adequacy of the
+forces assigned to a task in a COA. This is a feasibility critique."))
+   )
+
+;;; This axiom relates the critique to the constraints of units KB.
+;;; It says that if a critique is an inadequate-forces-critique, then
+;;; its norm is the historical-minimum-force-ratio of the task being
+;;; critiqued.
+(implies (:satisfies (?critique ?ratio)
+             (:and (inadequate-forces-critique ?critique)
+	         (:for-some (?property)
+	            (:and (analysis-property ?critique ?property)
+		        (:for-some (?task)
+			 (:and (evaluated-task ?property ?task)
+			       (historical-minimum-force-ratio
+			        ?task ?ratio)))))))
+	norm)
+
+(defconcept task-force-ratio
+  :is object-property
+  :annotations ((documentation "The force ratio of a task
+is a task property, and as such we can record the critiquer that computed
+it and the level of precision used to compute it.")))
+
+(defrelation evaluated-task
+  :domain object-property
+  :range plan-task
+  :annotations ((documentation "Links an analysis property about a task
+to the task being analysed"))
+  )
+
+(defset critique-source
+  :is (:one-of 'expect-critiquer 'gmu-critiquer 'smi-critiquer))
+
+;;; Although the ontology is detailed, the information required from a
+;;; critiquer is quite simple but there is provision for the critiquer
+;;; to provide more information, as can be seen from this example.
+
+(tellm 
+
+ (about task-force-ratio-se1 task-force-ratio
+        (evaluated-task se1-penetrate))
+
+ (about coa131-inadequate-forces-estimate1 COA-estimate
+        (source expect-critiquer)
+        (value 1.8)
+        (quality fair)
+        )
+
+ (about coa131-inadequate-forces inadequate-forces-critique
+        (analysis-property task-force-ratio-se1)
+        (violated TRUE)
+        (description "The COA is not feasible because unit3 has
+ inadequate forces to seize OBJ SLAM")
+        (reasons "Supporting effort 1 has a less favorable
+ratio than is estimated to be necessary for the task 'penetrate'. SE1's
+combat power is 6.3, and the enemy's is 3.5.  If we estimate a 2:1 force
+ratio for 'penetrate', then SE1's force ratio falls short.")
+        (suggested-corrective-action
+         "Re-allocate a battalion from the main effort to SE1.")
+        (analysis-estimate coa131-inadequate-forces-estimate1)
+        )
+
+ (about coa131-evaluation coa-critiquing-structure
+        (sub-evaluation-structure coa131-viability-evaluation))
+ (about coa131-viability-evaluation viability-evaluation-structure
+        (sub-evaluation-structure coa131-feasibility-evaluation))
+ (about coa131-feasibility-evaluation feasibility-evaluation-structure
+        (factor coa131-inadequate-forces))
+ )

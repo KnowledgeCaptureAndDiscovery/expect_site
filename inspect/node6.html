@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<BODY BGCOLOR="FFFFFF">
+<TITLE>6 Implementation Issues</TITLE>
+<META NAME="description" CONTENT="6 Implementation Issues">
+<META NAME="keywords" CONTENT="inspect">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="inspect.css">
+</HEAD>
+<BODY LANG="EN">
+ <H1><A NAME="SECTION00060000000000000000">6 Implementation Issues</A></H1>
+<P>
+<H2><A NAME="SECTION00061000000000000000">6.1 Integration with ACPT</A></H2>
+<P>
+<A NAME="integration">&#160;</A>
+<P>
+As it was described in section&nbsp;<A HREF="node4.html#architecture">4</A>, INSPECT interfaces
+with the user through ACPT. It receives most of its inputs (such as
+the plan to be inspected) from ACPT, and it returns its output to be
+displayed by ACPT. Therefore, the two systems were built with a tight
+integration. The schema for integration is shown on
+Figure&nbsp;<A HREF="node6.html#figintegration">2</A>.
+<P>
+<P><A NAME="78">&#160;</A><A NAME="figintegration">&#160;</A><A NAME="tex2htmlfigure44" HREF="img2.gif">[IMAGE ]</A><BR>
+<STRONG>Figure 2:</STRONG> Schema of the integration between
+      INSPECT and ACPT.<BR>
+<P>
+<P>
+The integration between INSPECT and ACPT makes use of the ACPT
+architecture. Its main component is the <EM>ACPT Foreign Agent</EM>, a
+program that handles all the communication. The ACPT Foreign Agent is
+composed of two parts. The first is a NOM client (developed in C++) to
+exchange data with ACPT by communicating with ACPT's NOM server. The
+second is the CLOS repository controller, a CommonLisp program that
+calls and is called by INSPECT, and whose main function is to build,
+in the CommonLisp image, a mirror of the current plan and the current
+INSPECT preferences. These data are both edited and stored in ACPT.
+The CommonLisp mirror stores the information as CLOS objects, which
+simplifies the translation from the C++ object format used by ACPT.
+The communication between the NOM server and client is made via
+TCP/IP. The communication between the NOM client and the CLOS
+repository controller is made by linking the C++ program to the
+CommonLisp image using the Lisp foreign function interface. The
+connections between the Foreign Agent and INSPECT, as well as within
+INSPECT, are all made within a single CommonLisp image.
+<P>
+Since INSPECT needs the information to be stored in the Loom knowledge
+representation language, the second main component is a group of
+CommonLisp modules that translate the objects in the CLOS mirror into
+appropriate Loom structures (more specifically, they are represented
+as Loom facts).  Both the data about the plans and the preferences are
+integrated into INSPECT's knowledge base.
+<P>
+An execution of INSPECT occurs basically as follows:
+<P>
+<OL><LI> The user employs the appropriate ACPT interfaces for specifying
+  the preferences for INSPECT's execution. This step is optional;
+  default values are used if necessary.<LI> After having built (part of) an air campaign plan, the user uses
+  the ACPT interface to request that the plan is checked by INSPECT. A
+  message is sent (through the NOM server) to the foreign agent to
+  execute this request.<LI> The foreign agent exchanges the appropriate messages with the
+  NOM server and creates the necessary CLOS objects in order to build
+  the mirror of the current plan and the INSPECT preferences on the
+  Lisp side. When this translation is ready, the foreign agent
+  requests INSPECT to check the plan.<LI> INSPECT translates the CLOS objects to Loom facts in its
+  knowledge base. The INSPECT reasoner then scans the plan for
+  problems, obeying the specified preferences. For each problem found,
+  an agenda item is created. These items are then ordered by type
+  (warning, caution, note), grouped into an agenda object and the set
+  is translated into CLOS objects which can be read by the ACPT-Lisp
+  interface. This agenda includes already the explanations and fixes
+  for each of the agenda items.<LI> Control is regained by the foreign agent, which sends the
+  appropriate message to the NOM server so as to update the agenda,
+  which can be in turn displayed by ACPT and browsed by the ACPT user.
+</OL><H2><A NAME="SECTION00062000000000000000">6.2 Some statistics</A></H2>
+<P>
+<DL ><DT><STRONG>KB size</STRONG>
+<DD> Without any plan or FOB loaded, the current KB has
+  aproximately 360 concepts, 120 relations and 190 instances. Also,
+  there are 35 EXPECT problem solving methods. There are several other
+  components as well, e.g. tables, definitions of explanations and
+  fixes, which are built in a different way and are difficult to
+  quantify.
+<P>
+<DT><STRONG>performance</STRONG>
+<DD> In order to give a rough idea of execution times,
+  the following are approximate data about the execution of the above
+  cycle for the scenario which was employed in IFD-4. The whole
+  execution takes about four and a half minutes, distributed roughly
+  as follows: two minutes for creating the CLOS mirror of the plan and
+  preferences, one minute to translate the CLOS objects into Loom, one
+  minute for INSPECT to scan the plan and generate the agenda, half
+  minute to send the agenda back to ACPT.
+<P>
+<DT><STRONG>knowledge engineering and acquisition</STRONG>
+<DD> The knowledge engineering
+  effort in building the IFD-4 version of INSPECT was considerable. We
+  had about 50 hours of interviews with Checkmate and ISX experts, and
+  about the same amount of time preparing for the interviews. It took
+  on the order of 250 person-hours of knowledge engineering, not
+  including system building.
+<P>
+ </DL>
+<P>
+<P>
+<P>
+<BR> <HR>
+<P><ADDRESS>
+<I>Andre Valente <BR>
+Fri Sep 13 19:10:15 PDT 1996</I>
+</ADDRESS>
+</BODY>
+</HTML>

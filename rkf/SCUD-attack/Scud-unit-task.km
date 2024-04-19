@@ -1,0 +1,220 @@
+
+#|
+;;; INFORMAL SKETCH OF THIS PROTOTYPE:
+
+Scud-unit-task
+  first-subevent(i): Move
+                       next-event(i): Fire-SCUD...
+  subevent(i): Move
+                 next-event(i): Fire-SCUD...
+               Fire-SCUD
+                 next-event(i): Conceal...
+                 destination(o): Tangible-Entity
+                 origin(o): Tangible-Entity
+                 recipient(o): Tangible-Entity
+                 donor(o): Tangible-Entity
+                 subevent(i): Relinquish
+                                next-event(i): Move...
+                                donor(o): Tangible-Entity
+                                object(o): SCUD...
+                                agent(o): Tangible-Entity
+                              Move
+                                next-event(i): Deliver...
+                                destination(o): Tangible-Entity
+                                origin(o): Tangible-Entity
+                                object(o): SCUD...
+                              Deliver
+                                recipient(o): Tangible-Entity
+                                donor(o): Tangible-Entity
+                                object(o): SCUD...
+                 first-subevent(i): Relinquish
+                                      next-event(i): Move...
+                                      donor(o): Tangible-Entity
+                                      object(o): SCUD...
+                                      agent(o): Tangible-Entity
+                 object{SME->SCUD}(o): SCUD
+                              location(o): Place
+                 agent(o): Tangible-Entity
+               Conceal
+                 next-event(i): Activate
+               Activate
+
+|#
+
+;;; KM REPRESENTATION OF THIS PROTOTYPE
+
+(Scud-unit-task has (superclasses (Action)))
+
+(Scud-unit-task now-has (prototypes (_Scud-unit-task1271)))
+
+(_Scud-unit-task1271 has
+  (prototype-of (Scud-unit-task))
+  (prototype-scope (Scud-unit-task))
+  (prototype-participants (_Scud-unit-task1271 _Move1272 _Fire-SCUD1273
+                           _Conceal1274 _Activate1275
+                           _Tangible-Entity1276 _Move1277 _Deliver1278
+                           _Relinquish1279 _SCUD1280
+                           _Tangible-Entity1281 _Place1282)))
+
+(_Scud-unit-task1271 has
+  (instance-of (Scud-unit-task))
+  (subevent (_Move1272 _Fire-SCUD1273 _Conceal1274 _Activate1275))
+  (first-subevent (_Move1272))
+  (new-objects (_Move1272 _Fire-SCUD1273 _Conceal1274 _Activate1275)))
+
+(_Move1272 has (instance-of (Move)) (next-event (_Fire-SCUD1273)))
+
+(_Fire-SCUD1273 has
+  (instance-of (Fire-SCUD))
+  (called (""))
+  (agent (_Tangible-Entity1281))
+  (object (_SCUD1280))
+  (first-subevent (_Relinquish1279))
+  (subevent (_Relinquish1279 _Move1277 _Deliver1278))
+  (donor (_Tangible-Entity1281))
+  (recipient (_Tangible-Entity1276))
+  (origin (_Tangible-Entity1281))
+  (destination (_Tangible-Entity1276))
+  (next-event (_Conceal1274)))
+
+(_Conceal1274 has (instance-of (Conceal)) (next-event (_Activate1275)))
+
+(_Activate1275 has (instance-of (Activate)) (called ("Reload")))
+
+(_Tangible-Entity1276 has (instance-of (Tangible-Entity)))
+
+(_Move1277 has
+  (instance-of (Move))
+  (object (_SCUD1280))
+  (origin (_Tangible-Entity1281))
+  (destination (_Tangible-Entity1276))
+  (next-event (_Deliver1278)))
+
+(_Deliver1278 has
+  (instance-of (Deliver))
+  (object (_SCUD1280))
+  (donor (_Tangible-Entity1281))
+  (recipient (_Tangible-Entity1276)))
+
+(_Relinquish1279 has
+  (instance-of (Relinquish))
+  (agent (_Tangible-Entity1281))
+  (object (_SCUD1280))
+  (donor (_Tangible-Entity1281))
+  (next-event (_Move1277)))
+
+(_SCUD1280 has (instance-of (SCUD)) (location (_Place1282)))
+
+(_Tangible-Entity1281 has (instance-of (Tangible-Entity)))
+
+(_Place1282 has (instance-of (Place)))
+
+(explanation (:triple _Scud-unit-task1271 first-subevent _Move1272)
+ (((@ SME entered))
+  (every Scud-unit-task has
+   (first-subevent ((the first of (the subevent of Self)))))))
+
+(explanation (:triple _Scud-unit-task1271 subevent _Move1272)
+ (((@ SME entered))
+  (every Scud-unit-task has
+   (subevent
+    ((the first of (the first-subevent of Self)) (a Fire-SCUD)
+     (a Conceal) (a Activate))))))
+
+(explanation (:triple _Scud-unit-task1271 subevent _Fire-SCUD1273)
+ (((@ SME entered))
+  (every Scud-unit-task has
+   (subevent
+    ((a Move)
+     (the first of
+      (the next-event of (the first of (the subevent of Self))))
+     (a Conceal) (a Activate))))))
+
+(explanation (:triple _Scud-unit-task1271 subevent _Conceal1274)
+ (((@ SME entered))
+  (every Scud-unit-task has
+   (subevent
+    ((a Move) (a Fire-SCUD)
+     (the first of
+      (the next-event of (the second of (the subevent of Self))))
+     (a Activate))))))
+
+(explanation (:triple _Scud-unit-task1271 subevent _Activate1275)
+ (((@ SME entered))
+  (every Scud-unit-task has
+   (subevent
+    ((a Move) (a Fire-SCUD) (a Conceal)
+     (the first of
+      (the next-event of (the third of (the subevent of Self)))))))))
+
+(explanation (:triple _Move1272 next-event _Fire-SCUD1273)
+ (((@ SME entered))
+  (every Scud-unit-task has
+   (subevent
+    ((a Move with
+      (next-event ((the second of (the subevent of Self)))))
+     (a Fire-SCUD) (a Conceal) (a Activate))))))
+
+(explanation (:triple _Fire-SCUD1273 next-event _Conceal1274)
+ (((@ SME entered))
+  (every Scud-unit-task has
+   (subevent
+    ((a Move)
+     (a Fire-SCUD with
+      (next-event ((the third of (the subevent of Self)))))
+     (a Conceal) (a Activate))))))
+
+(explanation (:triple _Conceal1274 next-event _Activate1275)
+ (((@ SME entered))
+  (every Scud-unit-task has
+   (subevent
+    ((a Move) (a Fire-SCUD)
+     (a Conceal with
+      (next-event ((the fourth of (the subevent of Self)))))
+     (a Activate))))))
+
+
+#|
+;;; TRADITIONAL FORMAT FOR SME'S LAST ACTIONS WOULD HAVE LOOKED:
+
+(every Scud-unit-task has
+ (first-subevent ((the first of (the subevent of Self)))))
+(every Scud-unit-task has
+ (subevent
+  ((the first of (the first-subevent of Self)) (a Fire-SCUD)
+   (a Conceal) (a Activate))))
+(every Scud-unit-task has
+ (subevent
+  ((a Move)
+   (the first of
+    (the next-event of (the first of (the subevent of Self))))
+   (a Conceal) (a Activate))))
+(every Scud-unit-task has
+ (subevent
+  ((a Move) (a Fire-SCUD)
+   (the first of
+    (the next-event of (the second of (the subevent of Self))))
+   (a Activate))))
+(every Scud-unit-task has
+ (subevent
+  ((a Move) (a Fire-SCUD) (a Conceal)
+   (the first of
+    (the next-event of (the third of (the subevent of Self)))))))
+(every Scud-unit-task has
+ (subevent
+  ((a Move with (next-event ((the second of (the subevent of Self)))))
+   (a Fire-SCUD) (a Conceal) (a Activate))))
+(every Scud-unit-task has
+ (subevent
+  ((a Move)
+   (a Fire-SCUD with
+    (next-event ((the third of (the subevent of Self)))))
+   (a Conceal) (a Activate))))
+(every Scud-unit-task has
+ (subevent
+  ((a Move) (a Fire-SCUD)
+   (a Conceal with
+    (next-event ((the fourth of (the subevent of Self)))))
+   (a Activate))))
+
+|#

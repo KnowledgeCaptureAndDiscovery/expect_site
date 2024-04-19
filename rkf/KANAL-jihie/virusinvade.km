@@ -1,0 +1,1113 @@
+
+#|
+This is a concatenation of the various KM files used in this
+simulation demo, so they can be downloaded and used as a single unit.
+|#
+
+(reset-kb)
+
+#|
+                            TELEOLOGY
+
+Teleological relations describe the purpose of an object or event.
+Examples include prevent, enable, and deter.  Work on these relations
+has only just begun.
+
+|#
+
+(prevent has
+	 (instance-of (Slot))
+	 (domain (Thing))
+	 (range (Change))
+	 (cardinality (N-to-N)))
+#|
+                  SEPARATOR, BARRIER, and ENCLOSURE
+
+A Separator is a TangibleThing that separates two spaces.
+A Barrier is a Separator that prevents movement through it.
+An Enclosure is a Barrier that separates two spaces -- inside and outside.
+|#
+
+;(load-kb "teleology.km")
+
+;; I. Define Separator
+(Separator has
+	   (superclasses (TangibleThing)))
+(every Separator has
+       (separates ((:args 
+		    (a Space)        ;; the two spaces are beside each other
+		    (a Space with 
+		       (beside ((the1 of (Self separates)))))))))
+
+(separates has
+	 (instance-of (Slot))
+	 (domain (Separator))
+	 (range1 (Space))
+	 (range2 (Space))
+	 (cardinality (1-to-N)))
+
+(beside has
+	 (instance-of (Slot))
+	 (domain (Thing))
+	 (range (Thing))
+	 (cardinality (N-to-N))
+	 (inverse (beside)))
+
+
+;; II. Define Barrier
+;;       A Barrier blocks Move's through the Barrier;
+;;       However, a Barrier might have a Portal, which is a Space
+;;       that intersects the Barrier and enables Move'ments through
+;;     To Do:
+;;     Currently, we say that a Barrier prevents every Move 
+;;     through it.  In the future, we should permit specifying the
+;;     things which the Barrier is impervious to.
+
+(Barrier has 
+	 (superclasses (Separator)))
+(every Barrier has
+       (prevent ('(every Move with
+			 (source ((the1 of #,(Self separates))))
+			 (dest ((the2 of #,(Self separates))))
+			 (path ((a Path with
+				   (through (#,(Self)))))))
+		 '(every Move with
+			(source ((the2 of #,(Self separates))))
+			(dest ((the1 of #,(Self separates))))
+			(path ((a Path with
+				  (through (#,(Self))))))))))
+
+
+;;; III. Define Enclosure
+
+(Enclosure has
+	(superclasses (Barrier)))
+
+(every Enclosure has
+       (inside ((the1 of (Self separates))))
+       (outside ((the2 of (Self separates))))
+       (surrounds ((Self inside)))
+       (encloses ((must-be-a TangibleThing with
+			     (surrounded-by ((Self)))
+			     (in ((Self inside)))))))
+(inside has 
+	(instance-of (Slot))
+	(domain (Enclosure))
+	(range (Space))
+	(cardinality (N-to-N)))
+
+(outside has
+	 (instance-of (Slot))
+	 (domain (Enclosure))
+	 (range (Space))
+	 (cardinality (N-to-N)))
+
+(outside-of has
+	    (cardinality (N-to-N)))
+(inside-of has
+	    (cardinality (N-to-N)))
+
+(encloses has 
+  (instance-of (Slot))
+  (domain (Enclosure))
+  (range (TangibleThing))
+  (cardinality (N-to-N)))
+
+
+
+
+
+
+
+
+
+;(load-kb "change.km")
+
+(location has
+	  (instance-of (Slot))
+	  (domain (TangibleThing))
+	  (range (Space))
+	  (cardinality (N-to-1))
+	  (fluent-status (*Inertial-Fluent))
+	  (inverse (location-of)))
+
+(location-of has
+	     (instance-of (Slot))
+	     (domain (Space))
+	     (range (TangibleThing))
+	     (fluent-status (*Inertial-Fluent)))
+	     
+(Move has (superclasses (Change)))
+ 
+(every Move has
+       (patient ((a TangibleThing)))
+       (affect ((forall (the patient of Self)
+			 ((a Affect with
+			     (affectedThing (It))
+			     (affectedSlot (location))
+			     (oldValue ((the source of Self)))
+			     (newValue ((the destination of Self))))))))
+       (source ((a Space)))
+       (destination ((a Space)))
+       (path ((a Path with 
+		 (endpoints ((Self source) (Self destination))))))
+       (text ((:seq "Move" (the patient of Self) "from" (the source of Self) "to" (the destination of Self) ((if ((the agent of Self)) then (:seq "by" (the agent of Self))))))))
+	
+
+(source has
+ 	(instance-of (Slot))
+	(domain (Move))
+	(range (Place))
+	;(cardinality (N-to-1))
+	(cardinality (N-to-N)))
+;;	(fluent-status (*Inertial-Fluent)))	- surely not? It's a action role!
+(destination has
+	     (instance-of (Slot))
+	     (domain (Move))
+	     (range (Place))
+	     (cardinality (N-to-1)))
+;;	     (cardinality (N-to-N)))
+(path has
+      (instance-of (Slot))
+      (domain (Move))
+      (range (Path))
+      (cardinality (N-to-N)))
+
+(PassThroughSeparator has 
+		      (superclasses (Move)))
+(every PassThroughSeparator has
+       (theme ((a Separator)))
+       (source ((the2 of (the separates of (Self theme)))))
+       (destination ((the1 of (the separates of (Self theme)))))
+       (path ((a Path with
+		 (through ((Self theme))))))
+       (text ((:seq (Self patient) 
+		    "passes through" 
+		    (Self theme) 
+		    "from" (Self source) "to" (Self destination)
+		    (if ((Self agent)) then ((:seq "caused by" (Self agent))))))))
+
+(every Penetrate has-definition
+       (instance-of (PassThroughSeparator))
+       (theme ((a Barrier)))
+       (text ((:seq (Self patient)
+		     "penetrates through" (Self theme)
+		     "from" (Self source)
+		     "to" (Self destination)
+		     ((if ((Self agent)) then (:seq "caused by" (Self agent))))))))
+
+
+#| test of Move:
+
+(*bruce has (instance-of (PhysicalThing)))
+(*home has (instance-of (Place)))
+(*ut has (instance-of (Place)))
+(new-situation)
+(*bruce has (location (*home)))
+(a Move with (patient (*bruce))
+             (source (*home))
+	     (destination (*ut)))
+(the del-list of (thelast Move))
+(the add-list of (thelast Move))
+(do-action (thelast Move))
+((the location of *bruce) = *ut)
+|#
+
+
+#|
+                           CONTAINER's
+                   and their associated Events: 
+            CONTAIN, ENTER, EXIT, CONVEY, TAKEIN, and FUSE
+
+
+A Container is an Enclosure that effects a Contain of its contents.
+Contain has three aspects:
+[1] it prevents Dispersion of the contents outside the Container.
+[2] it restricts Movement of the contents, even within the Container.
+[3] it protects the contents from forces outside the Container.
+
+Enter is a Move from a container's outside space to inside space, through
+a portal of the container.  Exit is similarly defined.
+
+Convey is the Move of a container, thereby causing Move's of its contents.
+These "secondary Move's" are co-temporal with the Convey and share properties
+such as source and destination.
+
+Fuse is the Join of two containers, one filling the agent role, the other
+filling the patient role.  The former persists after the Fuse, and takes on 
+the contents of the latter container.
+
+|#
+
+;(load-kb "barrier.km")
+;(load-kb "move.km")
+
+(Container has (superclasses (Enclosure)))
+(every Container has
+       (shape (*HollowVolume))
+       (intersects ((must-be-a Portal))))
+
+(Contain has (superclasses (Change)))
+(every Contain has 
+       (effector ((a Container)))  
+       (patient ((a TangibleThing)))
+       (aspect (                          ; for now, we can implement 
+		(a HoldTogether with      ; "aspect" as "superclass"
+		   (effector ((Self effector)))
+		   (patient ((Self patient)))
+		   (prevent ('(every Dispersion with
+			       (patient (#,(Self patient)))
+			       (destination (#,(the Space outside of 
+						    (Self effector))))))))
+
+		(a HoldInPlace with
+		   (effector ((Self effector)))
+		   (patient ((Self patient)))
+		   (restricts ('(every Move with
+				 (patient (#,(Self patient)))))))
+
+		(a Protect with
+		   (effector ((Self effector)))
+		   (patient ((Self patient)))
+		   (prevent ('(every Damage with
+			       (patient ((Self patient)))
+			       (effector ('(every Thing with 
+					    (location 
+					     ((a Place with
+						 (outside (#,(Self effector))
+				      ))))))))))))))
+
+
+;;; Define Enter and Exit
+
+(Enter has (superclasses (Move)))
+(every Enter has
+       (beneficiary ((a Enclosure)))
+       (patient ((a TangibleThing)))
+       (affect ((a Affect with
+		   (affectedThing ((Self beneficiary)))
+		   (affectedSlot (contains))
+		   (newValue ((Self patient))))))
+       (source ((the outside of (Self beneficiary))))
+       (destination ((the inside of (Self beneficiary))))
+       (through ((the Portal intersects of (Self beneficiary))))
+       (text ((:seq (Self patient) "enters" (Self beneficiary) "into" (Self destination) "from" (Self source)))))
+
+(Exit has (superclasses (Move)))
+(every Exit has
+;       (donor ((the Enclosure with (contains ((Self patient))))))
+;       (donor ((ignore-result (trace)) (the contains-of of (the patient of Self))))
+       (donor ((the contains-of of (the patient of Self))))
+       (affect ((a Affect with
+		   (affectedThing ((Self donor)))
+		   (affectedSlot (contains))
+		   (oldValue ((Self patient))))))
+       (source ((the inside of (Self donor))))
+       (destination ((the outside of (Self donor))))
+       (through ((the Portal intersects of (Self donor))))
+       (text ((:seq (Self patient) "exits" (Self donor) "into" (Self destination) "from" (Self source)))))
+      
+
+(beneficiary has 
+	(instance-of (Slot))
+	(domain (Container))
+	(range (TangibleThing))
+	(cardinality (N-to-N)))
+(donor has 
+	(instance-of (Slot))
+	(domain (Container))
+	(range (TangibleThing))
+	(cardinality (N-to-N)))
+
+
+;;; Convey: if a container moves, so do its contents.
+
+(Convey has (superclasses (Move)))
+
+;(every Convey has-definition  ;; KANAL;; to prevent the is-possible definition 
+;       (instance-of (Move))           ;; of Convey from affecting the is-possible 
+;       (patient ((a Container))))     ;; value of other Move steps
+
+(every Convey has
+       (patient ((a Container))))
+
+(every Convey has
+       (text ((:seq "Move" (the patient of Self) "along with its contents from" (the source of Self) "to" (the destination of Self) ((if ((the agent of Self)) then (:seq "by" (the agent of Self)))))))
+       (causes ((forall (the contains of (the patient of Self))
+			(a Move with 
+			   (patient ((It)))
+			   (source ((the source of Self)))
+			   (destination ((the destination of Self)))
+			   (concurrent-with ((Self)))
+			   )))))
+
+;;; TakeIn is an Enter, in which the Container being entered is the causative
+;;; agent of the TakeIn.
+;;; To Do: Notice that the beneficiary is a Container contained within 
+;;;        the agent.  This allows TakeIn to describe Endocytosis, in 
+;;;        which the agent is a cell, and the beneficiary is a Vesicle
+;;;        contained within the cell.  We need a more flexible representation
+;;;        that will permit saying the beneficiary is the cell or some 
+;;;        part of subregion of it.
+
+(TakeIn has (superclasses (Enter)))
+(every TakeIn has
+       (agent ((a Container)))
+       (beneficiary ((a Container with (contains-of ((Self agent))))))
+       (patient ((a TangibleThing))))
+
+;;; Fuse is the Join of two containers, one filling the agent role, the other
+;;; filling the patient role.  The former persists after the Fuse, and 
+;;; takes on the contents of the latter container.
+;;; To Do: Define Join, and make Fuse a subclass of it
+(Fuse has (superclasses (Change))) 
+(every Fuse has
+       (agent ((a Container)))
+       (patient ((a Container)))
+       (text ((:seq "the contents of" (Self patient) "is fused with" (Self agent))))
+       (affect ((forall (the contains of (Self patient))
+			(a Affect with 
+			   (affectedThing ((It)))
+			   (affectedSlot (contains-of))
+			   (oldVal ((Self patient)))
+			   (newVal ((Self agent))))))))
+
+
+;;; a Portal is a Space that intersects a Barrier.  For example, a
+;;; Doorway is a portal in a wall. 
+#| - omitted for now. This is future work.
+(Portal has (superclasses (Space)))
+(every Portal has-definition
+       (instance-of (Space))
+       (intersects ((a Barrier))))
+
+(every Portal has
+       (aperture ((a Volume-measurement with
+		     (landmarks (*Open *Closed))))))
+
+;;; a Portal might be covered by a "lid" - i.e. a Barrier that covers the 
+;;; Portal space.  For example, a Door covers a Doorway.
+
+(covered-by has 
+	    (instance-of (Slot))
+	    (domain (Portal))
+	    (range (Barrier))
+	    (cardinality (1-to-1)))
+;;;	    (inverse (covers))) ; can't say this because "covers" is a 
+;;;				; reserved word in KM.
+|#
+
+;;; Define HoldTogether, HoldInPlace, and Protect
+
+(HoldTogether has (superclasses (Hold)))
+(every HoldTogether has 
+       (patient ((a TangibleThing))) ;; usually a liquid, gas, or 
+                                     ;; decomposable aggregate
+       (prevent ('(every Dispersion with
+			 (patient (#,(Self patient)))))))
+
+(HoldInPlace has (superclasses (Hold)))
+(every HoldInPlace has
+       (patient ((a TangibleThing)))
+       (prevent ('(every Move with
+		   (patient (#,(Self patient)))))))
+
+(Protect has (superclasses (Change)))  ; actually, it's the LACK of change...
+(every Protect has 
+       (patient ((Self patient)))
+       (prevent ('(every Damage with
+		   (patient (#,(Self patient)))))))
+
+(Damage has (superclasses (Change)))
+(every Damage has 
+       (patient ((a TangibleThing)))
+       (decreases ('(the integrity of #,(Self patient)))))
+
+(contains has 
+  (instance-of (Slot))
+  (superslots (encloses))
+  (domain (Container))
+  (range (TangibleThing))
+  (cardinality (N-to-N))
+  (fluent-status (*Inertial-Fluent)))
+
+
+#|
+                          GOALs
+
+NOTE: This representation of Goal's is only preliminary; much work remains to
+be done.
+
+An agent of an Event may have a Goal, and Goal's can be of various types.
+One type of Goal, and the only one we've experimented with so far, is
+a ToBe goal.  A ToBe goal has two properties:
+  [1] a case role slot, such as agent, patient, or instrument
+  [2] a Change event
+A ToBe goal states that the agent's goal is to play the role of [1] in the
+event [2].  For example:
+ 
+"John's goal in proposing to Sally is to marry her."
+(JohnsProposes has 
+   (agent (John with 
+		(goal ((a ToBe with
+			  (role (groom))
+			  (roleIn ((a Marriage with 
+				      (groom (John))
+				      (bride (Sally)))))))))))
+
+"John's goal in pulling the ripcord is to deploy the parachute."
+(JohnOpensParachute has
+   (agent (John with 
+                (goal ((a ToBe with
+			  (role (agent))
+			  (roleIn ((a Deploy with
+				      (agent (John))
+				      (patient ((a Parachute with
+						   (user (John)))))))))))))
+|#
+
+(Goal has (superclasses (Thing)))
+
+(ToBe has (superclasses (Goal)))
+(every ToBe has
+       (role ((a Slot)))
+       (roleIn ((a Change))))
+
+(role has 
+      (instance-of (Slot))
+      (domain (ToBe))
+      (range (caseRoleSlot))
+      (cardinality (N-to-N)))
+
+(roleIn has 
+      (instance-of (Slot))
+      (domain (ToBe))
+      (range (Change))
+      (cardinality (N-to-N)))
+
+;; just a stub at the moment
+
+(TakeControl has (superclasses (Change)))
+#| 
+                             INVADE
+
+An Invade is:
+   1. a Penetrate (of a Barrier), followed by 
+   2. an Enter (into an Enclosure), followed by 
+   3. a TakeControl (of the Patient by the agent).
+Furthermore, an Invade is deliberate - the goal of the agent is to 
+TakeControl of the patient.
+|#
+
+; load the referenced components 
+;(load-kb "container.km")
+;(load-kb "goal.km")
+;(load-kb "takeControl.km")
+
+(Invade has (superclasses (Change)))
+(every Invade has 
+       (agent ((a TangibleThing with 
+		  (goal ((a ToBe with
+			    (role (agent))
+			    (roleIn ((the TakeControl subevents of Self)))))
+			))))
+       (patient ((a Container)))
+       (firstevent ((the Penetrate subevents of Self)))
+       (text ((:seq (Self agent) "invades" (Self patient))))
+       (subevents (
+		   (a Enter with 
+		      ))))
+		      ;(patient ((Self agent)))
+		      ;(beneficiary ((Self patient)))))))
+		      
+
+#|
+                            CHANGE
+
+This is the root of the taxonomy of Change's.
+It introduces several important case roles, including:
+   - agent: the Thing(s) responsible for the Change
+   - patient: the Thing(s) affected by the Change
+   - instrument: the TangibleThing(s) used by the agent to help
+              effect the Change
+
+A Change may have various other slots, such as force, rate, and subevents.
+
+A Change may have one or more affect's, which are "syntactic sugar"
+for KM's add-list and del-list.
+
+Only the patient slot is required on a Change; all others are optional.
+ 
+|#
+
+(Change has (superclasses (Thing)))
+
+(every Change has
+   (patient ((a Thing)))
+#|   (agent ((must-be-a TangibleThing with
+	      (capable-of (Self))
+	      (agent-of ((a Exert-force with
+			    (creates ((the force of Self)))
+			    (patient ((the patient of Self)))))))))
+   (force ((must-be-a Force with
+	      (when ((a TimePeriod with 
+			(overlaps ((the when of Self))))))
+	      (created-by ((the agent of Self))))))
+   (instrument ((must-be-a TangibleThing with
+		   (controlled-by ((the agent of Self))))))
+   (rate ((must-be-a RateQuantity)))
+   (subevents ((must-be-a Change with
+			  (rate ((a RateQuantity with
+				    (influences ((the rate of Self)))))))))|#
+   (actions ((the actions of (Self firstevent))
+	     (the actions of (the nextevent of (Self firstevent)))
+;	     (the actions of (the nextevent of Self))
+	     ((if (not (Self self-contained)) then (Self)))))
+   (description ((make-sentence (oneof (Self text) where (t)))))
+   (del-list ((forall (the affect of Self)
+		      (:triple 
+		       (the affectedThing of It)
+		       (the affectedSlot of It)
+		       (the oldValue of It)))))
+;		       (the unification of (the oldValue of It))
+   (add-list ((forall (the affect of Self)
+		      (:triple 
+		       (the affectedThing of It) 
+		       (the affectedSlot of It)
+		       (the newValue of It))))))
+;		       (the unification of (the newValue of It))
+
+;;; Some Changes cause other Changes.  The following definition serves to
+;;; implement the "causes" slot which might appear on a Change.  Because
+;;; this is a KM *definition*, the knowledge engineer need not explicitly
+;;; reference CauseAction, but instead can simply use the "causes" slot
+;;; on a Change, with confidence that this definition will implement it.
+
+(every CauseAction has-definition
+       (instance-of (Change))
+       (causes ((a Change))))
+(every CauseAction has
+       (affect ((the affect of (Self causes)))))
+
+;;; The following serves to reify an "Affect".  This should insulate
+;;; components from future changes (if any) to the representation of
+;;; add-lists and del-lists
+
+(Affect has (superclasses (Thing)))
+(every Affect has 
+   (affectedThing ((a Thing)))
+   (affectedSlot ((a Slot))))
+;   (oldValue ((a Thing)))
+;   (newValue ((a Thing))))
+
+(affectedThing has 
+   (instance-of (Slot))
+   (domain (Affect))
+   (range (Thing))
+   (cardinality (N-to-1)))
+
+(affectedSlot has 
+   (instance-of (Slot))
+   (domain (Affect))
+   (range (Slot))
+   (cardinality (N-to-1)))
+
+(oldValue has 
+   (instance-of (Slot))
+   (domain (Affect))
+   (range (Thing))
+;   (cardinality (N-to-1)))
+   (cardinality (N-to-N)))
+(newValue has 
+   (instance-of (Slot))
+   (domain (Affect))
+   (range (Thing))
+;   (cardinality (N-to-1)))
+   (cardinality (N-to-N)))
+
+#|
+effector is a superslot of agent and instrument.  It's a new case role
+that might prove useful.  It might be used, for example, to describe
+the role of an airplane in a flight event in which we don't want to
+commit whether the airplane is an agent or an instrument in the event.
+|#
+
+(effector has 
+	  (instance-of (Slot))
+	  (subslots (agent instrument))
+	  (domain (TangibleThing))
+	  (range (TangibleThing))
+	  (cardinality (N-to-N)))
+
+(agent has
+       (instance-of (Slot))
+       (subslots-of (actor))
+       (domain (Change))
+       (range (Thing))
+       (cardinality (N-to-N))
+       (inverse (agent-of)))
+
+(patient has
+	 (instance-of (Slot))
+	 (subslots-of (actor))
+	 (domain (Change))
+	 (range (Thing))
+	 (cardinality (N-to-N))
+	 (inverse (patient-of)))
+
+(instrument has
+	    (instance-of (Slot))
+	    (subslots-of (actor))
+	    (domain (Change))
+	    (range (Physical-object))
+	    (cardinality (N-to-N))
+	    (inverse (instrument-of)))
+
+(affect has
+	(instance-of (Slot))
+	(domain (Change))
+	(range (Affect))
+	(cardinality (N-to-N))
+	(inverse (affect-of))
+	(subslots (majorAffects minorAffects)))
+
+(force has
+       (instance-of (Slot))
+       (subslots-of (actor))
+       (domain (Change))
+       (range (Force))
+       (cardinality (N-to-N))
+       (inverse (force-of)))
+
+(rate has
+      (instance-of (Slot))
+      (domain (Change))
+      (range (Rate))
+      (cardinality (N-to-1))
+      (inverse (rate-of)))
+
+(actions has
+	(instance-of (Slot))
+	(domain (Change))
+	(range (Change))
+;	(fluent-status (*Non-Fluent))
+	(cardinality (N-to-N)))
+
+(subevents has
+	   (instance-of (Slot))
+	   (domain (Change))
+	   (range (Change))
+	   (cardinality (N-to-N)))
+
+(nextevent has
+	   (instance-of (Slot))
+	   (domain (Change))
+	   (range (Change))
+	   (cardinality (N-to-N)))
+
+(firstevent has
+	   (instance-of (Slot))
+	   (domain (Change))
+	   (range (Change))
+;	   (cardinality (N-to-N)))
+	   (cardinality (N-to-1))) ;; modified for Arrive case  -- KANAL
+
+
+
+
+;(load-kb "change.km")
+
+(location has
+	  (instance-of (Slot))
+	  (domain (TangibleThing))
+	  (range (Space))
+	  (cardinality (N-to-1))
+	  (fluent-status (*Inertial-Fluent))
+	  (inverse (location-of)))
+
+(location-of has
+	     (instance-of (Slot))
+	     (domain (Space))
+	     (range (TangibleThing))
+	     (fluent-status (*Inertial-Fluent)))
+	     
+(Move has (superclasses (Change)))
+ 
+(every Move has
+       (patient ((a TangibleThing)))
+       (affect ((forall (the patient of Self)
+			 ((a Affect with
+			     (affectedThing (It))
+			     (affectedSlot (location))
+			     (oldValue ((the source of Self)))
+			     (newValue ((the destination of Self))))))))
+       (source ((a Space)))
+       (destination ((a Space)))
+       (path ((a Path with 
+		 (endpoints ((Self source) (Self destination))))))
+       (text ((:seq "Move" (the patient of Self) "from" (the source of Self) "to" (the destination of Self) ((if ((the agent of Self)) then (:seq "by" (the agent of Self))))))))
+	
+
+(source has
+ 	(instance-of (Slot))
+	(domain (Move))
+	(range (Place))
+	;(cardinality (N-to-1))
+	(cardinality (N-to-N)))
+;	(fluent-status (*Inertial-Fluent))) surely not?
+(destination has
+	     (instance-of (Slot))
+	     (domain (Move))
+	     (range (Place))
+	     (cardinality (N-to-1)))
+	     ;(cardinality (N-to-N)))
+(path has
+      (instance-of (Slot))
+      (domain (Move))
+      (range (Path))
+      (cardinality (N-to-N)))
+
+(PassThroughSeparator has 
+		      (superclasses (Move)))
+(every PassThroughSeparator has
+       (theme ((a Separator)))
+;       (source ((the2 of (the separates of (Self theme)))))
+;       (destination ((the1 of (the separates of (Self theme)))))
+       (source ((the separated-space1 of (Self theme))))
+       (destination ((the separated-space2 of (Self theme))))
+       (path ((a Path with
+		 (through ((Self theme))))))
+       (text ((:seq (Self patient) 
+		    "passes through" 
+		    (Self theme) 
+		    "from" (Self source) "to" (Self destination)
+		    (if ((Self agent)) then ((:seq "caused by" (Self agent))))))))
+
+(every Penetrate has-definition
+       (instance-of (PassThroughSeparator))
+       (theme ((a Barrier)))
+       (text ((:seq (Self patient)
+		     "penetrates through" (Self theme)
+		     "from" (Self source)
+		     "to" (Self destination)
+		     ((if ((Self agent)) then (:seq "caused by" (Self agent))))))))
+
+
+#| test of Move:
+
+(*bruce has (instance-of (PhysicalThing)))
+(*home has (instance-of (Place)))
+(*ut has (instance-of (Place)))
+(new-situation)
+(*bruce has (location (*home)))
+(a Move with (patient (*bruce))
+             (source (*home))
+	     (destination (*ut)))
+(the del-list of (thelast Move))
+(the add-list of (thelast Move))
+(do-action (thelast Move))
+((the location of *bruce) = *ut)
+|#;;; to do: these Events need to be defined. Just stubs for now.
+
+(Break has (superclasses (Change)))
+(Degrade has (superclasses (Break)))
+(every Degrade has
+       (text ((:seq (Self patient) "is degraded by" (Self agent)))))#|
+                            DELIVER
+
+A Deliver is a Convey (by a Container of its contents) followed by a
+Release (by the Container of its contents).
+
+To Do: 
+  - the superclass of Deliver should be Move, not Change
+  - the patient of the Deliver should be the contents of the Container
+  - Release needs to be defined
+
+|#
+
+;(load-kb "container.km")
+;(load-kb "change.km")
+
+;; NOTE: as coded, the agent of Deliver is a Container, which
+;;       becomes the patient of the Convey subevent
+
+
+(Deliver has (superclasses (Change)))
+(every Deliver has 
+       (agent ((a Container)))
+       (patient ((a TangibleThing)))
+       (firstevent ((the Convey subevents of Self)))
+       (text ((:seq (Self agent) "delivers" (Self patient) 
+		    ((if ((Self destination)) then (:seq "to" (Self destination)))))))
+       (subevents ((a Convey with 
+		      (patient ((Self agent)))
+		      (nextevent ((the Release subevents of Self))))
+		   (a Release with 
+		      (agent ((Self agent)))
+		      (patient ((Self patient)))))))
+
+(Release has (superclasses (Change)))
+(every Release has
+       (text ((:seq (Self agent) "releases" (Self patient)))))#|
+                      VIRUS INVADES CELL
+
+This tells the story of a virus invading a cell.  The primary framework
+(template) for the story is the component Invade.  According to this 
+component, Invade is:
+   1. a Penetrate (of a Barrier), followed by 
+   2. an Enter (into an Enclosure), followed by 
+   3. a TakeControl (of the Patient by the agent).
+Furthermore, an Invade is deliberate - the agent has the intent of 
+controlling the patient.
+
+This story specializes Invade in the following ways:
+   1. The agent is a virus, and the patient is a cell.
+   2. The Penetrate is byMeansOf Endocytosis.
+   3. The Enter is the means by which a Deliver is accomplished -
+      The virus Deliver's its DNA to the cytoplasm of the cell.
+
+In this way, the story pulls-in the component for Deliver.  According
+to this component, Deliver is:
+   1. a Convey (by a container of its contents to a destination), 
+      followed by
+   2. a Release (by the container of its contents)
+
+This story specializes the Deliver in the following ways:
+   1. the container is the virus, its contents is DNA, and the 
+      destination is the cytoplasmFluid of the cell
+   2. the Convey is byMeansOf a Fuse (of the vesicle containing the 
+      virus with a lysosome of the cell).  
+      (Fuse is a separate component.)
+   3. the Release is byMeansOf a Degrade of the virus's ProteinCoat
+      by the acid in the lysosome.  (Degrade is a separate component.)
+      The virus's DNA is Release'd.
+|#
+
+;;; load the components referenced in the story
+;(load-kb "container.km")
+;(load-kb "invade.km")
+;(load-kb "deliver.km")
+;(load-kb "break.km")
+
+(self-contained has
+		(instance-of (Slot))
+		(cardinality (N-to-1))
+		(fluent-status (*Non-Fluent)))
+
+(VirusInvadesCell has (superclasses (Invade)))
+
+(every VirusInvadesCell has 
+       (agent ((a Virus)))
+       (patient ((a Cell)))
+
+       (firstevent ((the Enter subevents of (Self))))
+       (subevents 
+	((a Enter with 
+	    (self-contained (t))
+	    (patient ((Self agent)))
+	    (beneficiary ((Self patient)))
+	    (firstevent ((the Penetrate subevents of 
+			      (the Enter subevents of Self))))
+	    (prereq ((a Penetrate with 
+			(self-contained (t))
+			(agent ((Self agent)))
+			(patient (Self agent))
+			(firstevent ((the Endocytosis byMeansOf of 
+					  (the Penetrate prereq of (the Enter subevents of Self)))))
+			(byMeansOf ((a Endocytosis with 
+				       (agent ((Self patient)))
+				       (patient ((Self agent)))
+				       (source ((a Space with (location-of ((Self agent)))))))))
+			(nextevent ((the Deliver enables of (the Enter subevents of Self)))))))
+	    (enables
+	     ((a Deliver with   ; Deliver = Convey + Release
+		 (agent ((Self agent)))     ; coerced to be a Container
+		 (patient ((the Dna contains of (Self agent))))
+		 (destination ((the inside of ((the Cytoplasm contains of 
+						    (Self patient))))))
+		 (subevents 
+		  ((a Convey with 
+		      (patient ((Self agent)))
+		      (firstevent ((the Fuse byMeansOf of 
+					(the Convey subevents of 
+					     (the Deliver subevents of 
+						  (the Enter subevents 
+						       of Self))))))
+;		      (source ((a Space with (location-of ((Self agent))))))
+		      (source ((the destination of 
+				    (the Endocytosis byMeansOf of 
+					 (the Penetrate prereq of 
+					      (the Enter subevents of Self))))))
+		      (destination ((the destination of 
+					 (the Deliver subevents of 
+					      (the Enter subevents of Self))
+					 )))
+		      (byMeansOf 
+		       ((a Fuse with 
+			   (agent ((oneof (the Lysosome contains of 
+					       (the Cytoplasm contains of 
+						    (Self patient))) 
+					  where (t))))
+			   (patient ((the Vesicle creates of 
+					  (the Endocytosis byMeansOf
+					       of (the Penetrate 
+						       prereq of
+						       (the Enter subevents of Self)))))))))
+		      (nextevent ((the Release subevents of 
+				       (the Deliver subevents of 
+					    (the Enter subevents of Self)))
+				  )))
+		   (a Release with   
+#| 
+                      note: the agent of the Release is
+                            set by the Deliver component, to be *virus
+|#
+; incompleteness in KM! (patient ((the Dna contains of (Self agent))))
+			(patient ((the Dna parts of (Self agent))))
+		      (destination ((a Space with (location-of ((the CytoplasmFluid contains of
+					 (the Cytoplasm contains of 
+					      (Self patient))))))))
+		      (firstevent ((the Degrade subevents of 
+					(the Release subevents of 
+					     (the Deliver subevents of 
+						  (the Enter subevents 
+						       of Self))))))
+		      (subevents 
+		       ((a Degrade with 
+			   (agent ((Self patient)))
+			   (patient ((the ProteinCoat 
+					  parts of (Self agent))))
+			   (nextevent ((the Exit subevents of 
+					    (the Release subevents of
+						 (the Deliver subevents of
+						      (the Enter subevents
+							   of Self))))))
+			   (instrument 
+			    ((the Acid contains of 
+				  (the Lysosome agent of 
+				       (the Fuse byMeansOf of 
+					    (the Convey subevents of
+						 (the Deliver
+						      subevents of
+						      (the Enter 
+							   subevents 
+							   of Self)))))))))
+			(a Exit with	
+; incompleteness in KM!    (patient ((the Dna contains of (Self agent))))
+			   (patient ((the Dna parts of (Self agent))))
+			   (destination ((a Space with (location-of ((the CytoplasmFluid contains of
+					      (the Cytoplasm contains of 
+						   (Self patient)))))))))
+		   ))))))))))))
+
+   
+#| 
+Endocytosis is a TakeIn (which is an Enter) by a Cell of an extracellular 
+particle -- i.e. a TangibleThing outside the Cell.  The particle enters
+a Vesicle, which is created inside the Cell by the steps of Invaginate and
+Pinchoff.
+|#
+
+(Endocytosis has (superclasses (TakeIn)))	
+(every Endocytosis has 
+       (agent ((a Cell)))
+       (patient ((a TangibleThing)))
+       (creates ((a Vesicle with
+		    (contains-of ((Self agent))))))
+       (beneficiary ((the Vesicle creates of Self)))
+       (destination ((the inside of (the Vesicle creates of Self))))
+       (subevents ((a Invaginate)(a Pinchoff)))
+       (text ((:seq "incorporating" (Self patient) "into" (Self agent) "by endocytosis"))))
+       
+#| 
+Simple anatomy of cells and viruses 
+|#
+(Cell has (superclasses (Container)))
+(every Cell has 
+       (contains ((a Cytoplasm with 
+                     (contains ((a CytoplasmFluid)
+                                (a Lysosome) 
+                                (a Lysosome)))))))
+
+(Virus has (superclasses (Container)))
+
+; No! These are fluents!
+(every Virus has 
+       (parts ((a Dna) (a ProteinCoat))))
+;       (contains ((the Dna parts of Self))))
+
+(Dna has (superclasses (TangibleThing)))
+(Cytoplasm has (superclasses (Container)))
+(CytoplasmFluid has (superclasses (TangibleThing)))
+(Lysosome has (superclasses (Container)))
+(every Lysosome has (contains ((a Acid))))
+(ProteinCoat has (superclasses (TangibleThing)))
+(Vesicle has (superclasses (Container)))
+
+
+#| 
+byMeansOf and meansOf are relations from an Event to an Event.
+Here's an intuitive example of their use, from the domain of soccer:
+  ScoreGoal byMeansOf Header
+  Header meansOf ScoreGoal
+This suggests that the relations are inverses of each other.
+|#
+
+(byMeansOf has
+	   (instance-of (Slot))
+	   (superslots (subevents))
+	   (domain (Change))
+	   (range (Change))
+	   (cardinality (N-to-N)))
+
+(meansOf has
+	   (instance-of (Slot))
+	   (superslots (subevents))
+	   (domain (Change))
+	   (range (Change))
+	   (cardinality (N-to-N)))
+
+(enables has
+	 (instance-of (Slot))
+	 (superslots (subevents))
+	 (domain (Change))
+	 (range (Change))
+	 (cardinality (N-to-N)))
+
+(prereq has
+	 (instance-of (Slot))
+	 (superslots (subevents))
+	 (domain (Change))
+	 (range (Change))
+	 (cardinality (N-to-N)))
+
+(a Partition with (members (Vesicle Cytoplasm)))
+(a Partition with (members (Cell Virus Dna Cytoplasm CytoplasmFluid Lysosome)))
+
+(case-role has
+    (instance-of (Slot))
+    (subslots (agent patient instrument theme donor beneficiary)))
+
+
+(every TangibleThing has
+  (contains ((<> Self))))
+
+;;; NOW - Add in this extra information for proper handling of events...
+
+;;; This doubles the efficiency...
+(forall (:set agent patient source donor creates beneficiary affect destination instrument subevents affect theme path text effector prevent restricts affectedSlot affectedThing oldValue 
+newValue through causes decreases rate actions firstevent nextevent add-list del-list
+pcs-list ncs-list)
+	(It has (fluent-status (*Non-Fluent))))
+
+
+;;; This improves efficiency by a factor of 20 (!)
+;;; Event is a built-in class, and KM will only reason about Events in the situations
+;;; in which they actually occur.
+(Change has (superclasses (Event)))
+(Hold has (superclasses (Event)))
+
+
+
+(nocomments)	; suppress comments during reasoning
+		; (comments) will turn it back on again

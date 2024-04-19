@@ -1,0 +1,208 @@
+
+
+Yolanda Gil.
+"A Specification of Manufacturing Processes for Planning".
+<i>Technical Report CMU-CS-91-179</i>, School of Computer Science, 
+Carnegie Mellon University, Pittsburgh PA 15213.
+(<A HREF="gil-processp91.ps">Postscript file </A>) 
+<P>
+
+Abstract: 
+Much research is being done on the 
+automation of manufacturing processes.
+The planning component in the production stage is very significant, 
+due to the variety of alternative processes, their complexity, and 
+their interactions.
+This document describes a specification of some manufacturing processes,
+including the machining, 
+joining, and finishing of parts. 
+The aim of this specification is not to be comprehensive or detailed, but to
+present the AI community with a model of a complex and realistic 
+application, and to use it to demonstrate
+the feasibility of effective implementations of 
+large-scale complex domains in a general-purpose architecture.
+This specification has been successfully demonstrated in the PRODIGY 
+architecture, and is one of the largest domains 
+available for general-purpose planners.<P>
+
+<P><HR>
+
+
+
+Yolanda Gil.
+"Integrated Architectures for Artificial Intelligence".
+<i>Proceedings of the International Congress on New Horizons of 
+Articicial Intelligence: Nonconventional Computing: Towards
+Intelligent 
+Systems</i> (invited paper). Mexico City, Mexico. April, 1991.
+(<A HREF="gil-teccomp91.ps">Postscript file </A>) 
+<P>
+
+Abstract: 
+Artificial Intelligence researchers have produced models of different
+components required for 
+intelligence such as knowledge representation, reasoning, 
+natural language processing, learning,
+neural computation, and robotics.
+While isolating these components is vital for studying the 
+important issues in each area, nobody believes that
+these subfields have been completely solved.
+The field has produced many systems that exhibit 
+interesting behavior or intelligent results,
+yet we know very little about how to combine their power.
+In recent years, there has been an increasing interest in 
+the integration of different aspects of intelligence in 
+systems known as integrated architectures and that are
+capable of producing general intelligent behavior.
+The design space of integrated architectures is large and not well 
+understood. 
+Researchers are exploring the different issues by exploring points
+in that space, trying to gain a better understanding in the process.
+This paper discusses what constitutes
+an integrated architecture, and what
+the desired capabilities of such a system are.
+Next, we introduce some of the architectures that have been proposed.
+We conclude with a discussion that compares the 
+architectures and their stands on different design issues
+and a 
+reflection on what is still missing in
+the current systems.
+<P>
+
+<P><HR>
+
+
+
+Yolanda Gil.
+"Efficient Domain-Independent Experimentation".
+<i>Proceedings of the Tenth International
+Conference on Machine Learning</i>,
+Amherst, MA, June 1993.
+(<A HREF="gil-mlc93.ps">Postscript file </A>) 
+<P>
+
+Abstract: 
+Planning systems often make the assumption that omniscient 
+world knowledge is available.
+Our approach makes the more realistic assumption that the 
+initial knowledge about the actions 
+is incomplete,
+and uses experimentation as a learning mechanism when
+the missing knowledge causes an execution failure.
+Previous work on learning by experimentation
+has not addressed the issue of how to choose good experiments,
+and much research on learning from failure 
+has relied on background knowledge to build 
+explanations that pinpoint directly the causes of failures.
+We want to investigate the potential
+of a system 
+for efficient learning by experimentation without such background knowledge.
+This paper describes domain-independent heuristics 
+that compare possible hypotheses and choose the ones most likely to 
+cause the failure.
+These heuristics extract information solely from
+the domain operators 
+initially available for planning
+(incapable of producing such explanations)
+and the planner's experiences in interacting with the environment.
+Our approach has been implemented in EXPO, a system that uses PRODIGY
+as a baseline planner and improves its domain knowledge in several
+domains.
+The empirical results presented show that EXPO's heuristics 
+dramatically reduce the number of experiments needed to 
+refine incomplete operators.
+<P>
+
+<P><HR>
+
+
+
+Yolanda Gil.
+"Acquiring Domain Knowledge for Planning by Experimentation".
+<i>Ph.D. Thesis</i>, School of Computer Science, Carnegie Mellon
+University, Pittsburgh PA 15213.  August 1992.  
+Available as CMU Technical Report CMU-CS-92-175.
+<P>
+
+Abstract: 
+In order for autonomous systems to interact with their environment in an
+intelligent way, they must be given the ability to adapt and learn
+incrementally and deliberately. It is virtually impossible to devise 
+and hand code all potentially relevant domain knowledge for complex 
+dynamic tasks. This thesis describes a framework to acquire domain
+knowledge for planning by failure-driven experimentation with the 
+environment.  The initial domain knowledge in the system is an 
+approximate model for planning in the environment, defining the
+system's expectations.  The framework exploits the characteristics 
+of planning domains in order to search the space of plausible 
+hypotheses without the need for additional background knowledge to
+build causal explanations for expectation failures.   Plans are 
+executed while the external environment is monitored, and 
+differences between the internal state and external observations 
+are detected by various methods each correlated with a typical 
+cause for the expectation failure.  The methods also construct a 
+set of concrete hypotheses to repair the knowledge deficit.
+After being heuristically filtered, each hypothesis is tested in turn
+with an experiment.  After the experiment is designed,
+a plan is constructed to achieve the situation required to 
+carry out the experiment.  The experiment plan must meet 
+constraints such as minimizing plan length and negative 
+interference with the main goals.  The thesis describes a set of 
+domain-independent constraints for experiments and their 
+incorporation in the planning search space.  After the execution
+of the plan and the experiment, observations are collected to conclude if
+the experiment was successful or not.  Upon success, the hypothesis is
+confirmed and  the domain knowledge is adjusted.  Upon failure, the
+experimentation process is iterated on the remaining hypotheses 
+until success or until no more hypotheses are left to be considered.  
+This framework has shown to be an effective way to address incomplete 
+planning knowledge and is demonstrated in a system called EXPO, 
+implemented on the PRODIGY planning architecture.
+The effectiveness and efficiency of EXPO's methods is 
+empirically demonstrated in several domains, including a large-scale
+process planning task, where the planner can recover from situations 
+missing up to 50% of domain knowledge through repeated experimentation.
+<P>
+
+<P><HR>
+
+
+
+Jaime Carbonell and Yolanda Gil.
+"Learning by Experimentation:
+The Operator Refinement Method".
+<i>Machine Learning: An Artificial Intelligence
+Approach, Volume III</i>,  Michalski, R. S. and Kodratoff, Y. (Eds.),
+Morgan Kaufmann, 1990.
+(<A HREF="gil-mlbook3.ps">Postscript file </A>) 
+<P>
+
+Abstract: 
+Autonomous systems require the ability to plan effective courses of action
+under potentially uncertain or unpredictable contingencies. 
+Planning requires knowledge of the environment that is accurate enough to
+allow reasoning about actions.
+If the environment
+is too complex or very dynamic, goal-driven learning with
+reactive feedback becomes a necessity.  This chapter addresses the issue of
+learning by experimentation as an integral component of PRODIGY.
+PRODIGY is a flexible planning system that 
+encodes its domain knowledge as declarative operators, and applies
+the operator refinement method to acquire additional preconditions
+or postconditions when observed consequences
+diverge from internal expectations.  When multiple explanations for
+the observed divergence are consistent with the existing domain knowledge, 
+experiments to discriminate among these explanations are generated.
+The experimentation process isolates the deficient operator and inserts the
+discriminant condition or unforeseen side-effect to
+avoid similar impasses in future planning. 
+Thus, experimentation is demand-driven and exploits both the internal state
+of the planner and any external feedback received.  A detailed example of
+integrated experiment formulation in presented as the basis for a
+systematic approach to extending an incomplete domain theory or correcting
+a potentially inaccurate 
+one.
+<P>
+
+<P><HR>
+

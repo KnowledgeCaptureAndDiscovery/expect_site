@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.isi.edu/expect/scec" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:scec="http://www.isi.edu/expect/scec" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:simpleType name="gmp">
+		<xs:annotation>
+			<xs:documentation>Ground Motion Parameter</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="PGA"/>
+			<xs:enumeration value="0.1-sec SA"/>
+			<xs:enumeration value="0.3-sec SA"/>
+			<xs:enumeration value="1.0-sec SA"/>
+			<xs:enumeration value="3.0-sec SA"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="magnitude">
+		<xs:annotation>
+			<xs:documentation>Magnitude of the Earthquake (Richter Scale)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:double">
+			<xs:minInclusive value="0.0"/>
+			<xs:maxInclusive value="12.0"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="distance">
+		<xs:annotation>
+			<xs:documentation>Distance from the Rupture (km)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:double">
+			<xs:minInclusive value="0.0"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="sitetype">
+		<xs:annotation>
+			<xs:documentation>The Site Type</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="faulttype">
+		<xs:annotation>
+			<xs:documentation>Fault Type</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="depth">
+		<xs:annotation>
+			<xs:documentation>Depth (km)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:double"/>
+	</xs:simpleType>
+	<xs:simpleType name="swave_vel">
+		<xs:annotation>
+			<xs:documentation>Site Shear Wave Velocity (m/s)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:double">
+			<xs:minInclusive value="0.0"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="uncertainties">
+		<xs:annotation>
+			<xs:documentation>Uncertainties</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="none"/>
+			<xs:enumeration value="1 sigma"/>
+			<xs:enumeration value="2 sigma"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

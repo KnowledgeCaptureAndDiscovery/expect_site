@@ -1,0 +1,84 @@
+ <?xml version="1.0"?>
+<!DOCTYPE conceptDescription SYSTEM "concept.dtd">
+
+<conceptDescription name="BRIDGE"> 
+
+<Definition> (defconcept <concept>BRIDGE</concept>
+   :IS-PRIMITIVE (:AND <concept>DOMAIN-CONCEPT</concept>
+                       <concept>FIXED-STRUCTURE</concept>
+                       <concept>GEOGRAPHICAL-REGION</concept>)
+   :ROLES ((CROSS-SECTION :TYPE
+                       <concept>GEOGRAPHICAL-GAP</concept>)
+           (DAMAGED-GAP-WIDTH :TYPE
+                       <concept>DISTANCE-QUANTITY</concept>)
+           (MAX-TRAFFIC-CLASS :TYPE
+                       <concept>INTEGER</concept>)))
+
+ </Definition><subConcepts> 
+<concept> MILITARY-BRIDGE </concept> </subConcepts><superConcepts> 
+<concept> GEOGRAPHICAL-REGION </concept>
+<concept> FIXED-STRUCTURE </concept> </superConcepts><Siblings> 
+<WithCommonParent name="GEOGRAPHICAL-REGION">
+<concept>MINEFIELD</concept>
+<concept>TUNNEL</concept>
+</WithCommonParent>
+<WithCommonParent name="FIXED-STRUCTURE">
+<concept>TUNNEL</concept>
+</WithCommonParent> </Siblings><Roles> <DetailedRole> <Relation> CROSS-SECTION </Relation>
+<Type>
+<concept>GEOGRAPHICAL-GAP</concept>
+</Type><MinCardinality> 0 </MinCardinality><MaxCardinality> 1 </MaxCardinality>
+<StrictValues>
+</StrictValues>
+<DefaultValues>
+</DefaultValues> </DetailedRole><DetailedRole> <Relation> DAMAGED-GAP-WIDTH </Relation>
+<Type>
+<concept>DISTANCE-QUANTITY</concept>
+</Type><MinCardinality> 0 </MinCardinality><MaxCardinality> 1 </MaxCardinality>
+<StrictValues>
+</StrictValues>
+<DefaultValues>
+</DefaultValues> </DetailedRole><DetailedRole> <Relation> FAR-APPROACH </Relation>
+<Type>
+<concept>GEOGRAPHICAL-APPROACH</concept>
+</Type><MinCardinality> 0 </MinCardinality><MaxCardinality>  </MaxCardinality>
+<StrictValues>
+</StrictValues>
+<DefaultValues>
+</DefaultValues> </DetailedRole><DetailedRole> <Relation> MAX-SLOPE </Relation>
+<Type>
+<concept>QUANTITY</concept>
+</Type><MinCardinality> 0 </MinCardinality><MaxCardinality>  </MaxCardinality>
+<StrictValues>
+</StrictValues>
+<DefaultValues>
+</DefaultValues> </DetailedRole><DetailedRole> <Relation> MAX-TRAFFIC-CLASS </Relation>
+<Type>
+<concept>INTEGER</concept>
+</Type><MinCardinality> 0 </MinCardinality><MaxCardinality> 1 </MaxCardinality>
+<StrictValues>
+</StrictValues>
+<DefaultValues>
+</DefaultValues> </DetailedRole><DetailedRole> <Relation> NEAR-APPROACH </Relation>
+<Type>
+<concept>GEOGRAPHICAL-APPROACH</concept>
+</Type><MinCardinality> 0 </MinCardinality><MaxCardinality>  </MaxCardinality>
+<StrictValues>
+</StrictValues>
+<DefaultValues>
+</DefaultValues> </DetailedRole><DetailedRole> <Relation> SOIL-OF </Relation>
+<Type>
+<concept>SOIL-TYPE</concept>
+</Type><MinCardinality> 0 </MinCardinality><MaxCardinality>  </MaxCardinality>
+<StrictValues>
+</StrictValues>
+<DefaultValues>
+</DefaultValues> </DetailedRole><DetailedRole> <Relation> VEGETATION-OF </Relation>
+<Type>
+<concept>VEGETATION-TYPE</concept>
+</Type><MinCardinality> 0 </MinCardinality><MaxCardinality>  </MaxCardinality>
+<StrictValues>
+</StrictValues>
+<DefaultValues>
+</DefaultValues> </DetailedRole> </Roles><Instances total="2" nonDirect="2" direct="0"> <DirectInstances>  </DirectInstances>
+<NonDirectInstances> <instance> AVLB1 </instance><instance> MGB1 </instance> </NonDirectInstances> </Instances> </conceptDescription>

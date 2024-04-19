@@ -1,0 +1,1444 @@
+
+#|
+;;; INFORMAL SKETCH OF THIS PROTOTYPE:
+
+COA1
+  subevent(i): SCUD-attack
+                 recipient{SME->Target and Tangible-Entity}(o): Target and Tangible-Entity
+                 subevent{SME->Move}{SME->Fire-SCUD}{SME->Conceal}{SME->Reload}(i): Move
+                                next-event(i): Fire-SCUD...
+                              Fire-SCUD
+                                next-event(i): Conceal...
+                                destination(o): Target and Tangible-Entity
+                                origin(o): Tangible-Entity
+                                recipient(o): Target and Tangible-Entity
+                                donor(o): Tangible-Entity
+                                subevent(i): Relinquish
+                                               next-event(i): Move...
+                                               donor(o): Tangible-Entity
+                                               object(o): SCUD...
+                                               agent(o): Tangible-Entity
+                                             Move
+                                               next-event(i): Deliver...
+                                               destination(o): Target and Tangible-Entity
+                                               origin(o): Tangible-Entity
+                                               object(o): SCUD...
+                                             Deliver
+                                               recipient(o): Target and Tangible-Entity
+                                               donor(o): Tangible-Entity
+                                               object(o): SCUD...
+                                first-subevent(i): Relinquish
+                                                     next-event(i): Move...
+                                                     donor(o): Tangible-Entity
+                                                     object(o): SCUD...
+                                                     agent(o): Tangible-Entity
+                                object(o): SCUD
+                                             location(o): Place
+                                agent(o): Tangible-Entity
+                              Conceal
+                                next-event(i): Reload...
+                              Reload
+                                resulting-state(o): Be-Activated
+                                object(o): Weapon and Entity
+                 first-subevent(i): Move
+                                      next-event(i): Fire-SCUD...
+                 object{SME->Target and Tangible-Entity}(o): Target and Tangible-Entity
+               SCUD-attack
+                 first-subevent(i): Move
+                                      next-event(i): Fire-SCUD...
+                 subevent{SME->Move}{SME->Fire-SCUD}{SME->Conceal}{SME->Reload}(i): Move
+                                next-event(i): Fire-SCUD...
+                              Fire-SCUD
+                                next-event(i): Conceal...
+                                destination(o): Target and Tangible-Entity
+                                origin(o): Tangible-Entity
+                                recipient(o): Target and Tangible-Entity
+                                donor(o): Tangible-Entity
+                                subevent(i): Relinquish
+                                               next-event(i): Move...
+                                               donor(o): Tangible-Entity
+                                               object(o): SCUD...
+                                               agent(o): Tangible-Entity
+                                             Move
+                                               next-event(i): Deliver...
+                                               destination(o): Target and Tangible-Entity
+                                               origin(o): Tangible-Entity
+                                               object(o): SCUD...
+                                             Deliver
+                                               recipient(o): Target and Tangible-Entity
+                                               donor(o): Tangible-Entity
+                                               object(o): SCUD...
+                                first-subevent(i): Relinquish
+                                                     next-event(i): Move...
+                                                     donor(o): Tangible-Entity
+                                                     object(o): SCUD...
+                                                     agent(o): Tangible-Entity
+                                object(o): SCUD
+                                             location(o): Place
+                                agent(o): Tangible-Entity
+                              Conceal
+                                next-event(i): Reload...
+                              Reload
+                                resulting-state(o): Be-Activated
+                                object(o): Weapon and Entity
+               SCUD-attack
+                 first-subevent(i): Move
+                                      next-event(i): Fire-SCUD...
+                 subevent{SME->Move}{SME->Fire-SCUD}{SME->Conceal}{SME->Reload}(i): Move
+                                next-event(i): Fire-SCUD...
+                              Fire-SCUD
+                                next-event(i): Conceal...
+                                destination(o): Brigade and Target...
+                                origin(o): Tangible-Entity
+                                recipient(o): Brigade and Target...
+                                donor(o): Tangible-Entity
+                                subevent(i): Relinquish
+                                               next-event(i): Move...
+                                               donor(o): Tangible-Entity
+                                               object(o): SCUD...
+                                               agent(o): Tangible-Entity
+                                             Move
+                                               next-event(i): Deliver...
+                                               destination(o): Brigade and Target...
+                                               origin(o): Tangible-Entity
+                                               object(o): SCUD...
+                                             Deliver
+                                               recipient(o): Brigade and Target...
+                                               donor(o): Tangible-Entity
+                                               object(o): SCUD...
+                                first-subevent(i): Relinquish
+                                                     next-event(i): Move...
+                                                     donor(o): Tangible-Entity
+                                                     object(o): SCUD...
+                                                     agent(o): Tangible-Entity
+                                object(o): SCUD
+                                             location(o): Place
+                                agent(o): Tangible-Entity
+                              Conceal
+                                next-event(i): Reload...
+                              Reload
+                                resulting-state(o): Be-Activated
+                                object(o): Weapon and Entity
+                 recipient{SME->Brigade and Target}(o): Brigade and Target
+                                 has-part(i): Living-Entity
+                 object{SME->Brigade and Target}(o): Brigade and Target
+                              has-part(i): Living-Entity
+               SCUD-attack
+                 first-subevent(i): Move
+                                      next-event(i): Fire-SCUD...
+                 subevent{SME->Move}{SME->Fire-SCUD}{SME->Conceal}{SME->Reload}(i): Move
+                                next-event(i): Fire-SCUD...
+                              Fire-SCUD
+                                next-event(i): Conceal...
+                                destination(o): Area-of-operations and Target
+                                origin(o): Tangible-Entity
+                                recipient(o): Area-of-operations and Target
+                                donor(o): Tangible-Entity
+                                subevent(i): Relinquish
+                                               next-event(i): Move...
+                                               donor(o): Tangible-Entity
+                                               object(o): SCUD...
+                                               agent(o): Tangible-Entity
+                                             Move
+                                               next-event(i): Deliver...
+                                               destination(o): Area-of-operations and Target
+                                               origin(o): Tangible-Entity
+                                               object(o): SCUD...
+                                             Deliver
+                                               recipient(o): Area-of-operations and Target
+                                               donor(o): Tangible-Entity
+                                               object(o): SCUD...
+                                first-subevent(i): Relinquish
+                                                     next-event(i): Move...
+                                                     donor(o): Tangible-Entity
+                                                     object(o): SCUD...
+                                                     agent(o): Tangible-Entity
+                                object(o): SCUD
+                                             location(o): Place
+                                agent(o): Tangible-Entity
+                              Conceal
+                                next-event(i): Reload...
+                              Reload
+                                resulting-state(o): Be-Activated
+                                object(o): Weapon and Entity
+                 recipient{SME->Area-of-operations and Target}(o): Area-of-operations and Target
+                 object{SME->Area-of-operations and Target}(o): Area-of-operations and Target
+
+|#
+
+;;; KM REPRESENTATION OF THIS PROTOTYPE
+
+(COA1 has (superclasses (COA)))
+
+(COA1 now-has (prototypes (_COA1936)))
+
+(every COA1 has (some-associated-scud-attack ((a SCUD-attack)))
+ (subevent
+  ((((the some-associated-scud-attack of Self)) &&
+    ((a SCUD-attack) (the some-associated-scud-attack2 of Self)))))
+ (some-associated-scud-attack2 ((a SCUD-attack))))
+
+(_COA1936 has
+  (prototype-of (COA1))
+  (prototype-scope (COA1))
+  (prototype-participants (_COA1936 _Brigade1937
+                           _Area-of-operations1938 _SCUD-attack1939
+                           _SCUD-attack1940 _SCUD-attack1941
+                           _SCUD-attack1942 _Fire-SCUD1943 _Conceal1944
+                           _Reload1945 _Move1946 _Target1947 _Move1948
+                           _Fire-SCUD1949 _Conceal1950 _Reload1951
+                           _Move1952 _Conceal1953 _Reload1954 _Move1955
+                           _Conceal1956 _Reload1957 _Fire-SCUD1958
+                           _Living-Entity1959 _Fire-SCUD1960 _Move1961
+                           _Deliver1962 _Move1963 _Deliver1964
+                           _Relinquish1965 _SCUD1966
+                           _Tangible-Entity1967 _Be-Activated1968
+                           _Weapon1969 _Move1970 _Deliver1971
+                           _Relinquish1972 _SCUD1973
+                           _Tangible-Entity1974 _Be-Activated1975
+                           _Weapon1976 _Be-Activated1977 _Weapon1978
+                           _Be-Activated1979 _Weapon1980
+                           _Relinquish1981 _Relinquish1982 _Move1983
+                           _Deliver1984 _Tangible-Entity1985 _SCUD1986
+                           _Tangible-Entity1987 _SCUD1988 _Target1989
+                           _Place1990 _Place1991 _Place1992 _Place1993)))
+
+(_COA1936 has
+  (instance-of (COA1))
+  (subevent (_SCUD-attack1939 _SCUD-attack1940 _SCUD-attack1941
+             _SCUD-attack1942))
+  (new-objects (_SCUD-attack1939 _SCUD-attack1940 _SCUD-attack1941
+                _SCUD-attack1942 _Brigade1937 _Area-of-operations1938)))
+
+(_Brigade1937 has
+  (instance-of (Brigade Target))
+  (called ("Blue brigade 1"))
+  (has-part (_Living-Entity1959)))
+
+(_Area-of-operations1938 has (instance-of (Area-of-operations Target))
+ (called ("OBJ SLAM")))
+
+(_SCUD-attack1939 has
+  (instance-of (SCUD-attack))
+  (called ("SA1"))
+  (object (_Target1947))
+  (first-subevent (_Move1946))
+  (subevent (_Move1946 _Fire-SCUD1943 _Conceal1944 _Reload1945))
+  (recipient (_Target1947)))
+
+(_SCUD-attack1940 has
+  (instance-of (SCUD-attack))
+  (called ("SA2"))
+  (subevent (_Move1948 _Fire-SCUD1949 _Conceal1950 _Reload1951))
+  (first-subevent (_Move1948)))
+
+(_SCUD-attack1941 has
+  (instance-of (SCUD-attack))
+  (called ("S1"))
+  (object (_Brigade1937))
+  (recipient (_Brigade1937))
+  (subevent (_Move1952 _Fire-SCUD1958 _Conceal1953 _Reload1954))
+  (first-subevent (_Move1952)))
+
+(_SCUD-attack1942 has
+  (instance-of (SCUD-attack))
+  (called ("S2"))
+  (object (_Area-of-operations1938))
+  (recipient (_Area-of-operations1938))
+  (subevent (_Move1955 _Fire-SCUD1960 _Conceal1956 _Reload1957))
+  (first-subevent (_Move1955)))
+
+(_Fire-SCUD1943 has
+  (instance-of (Fire-SCUD))
+  (called (""))
+  (agent (_Tangible-Entity1967))
+  (object (_SCUD1966))
+  (first-subevent (_Relinquish1965))
+  (subevent (_Relinquish1965 _Move1983 _Deliver1984))
+  (donor (_Tangible-Entity1967))
+  (recipient (_Target1947))
+  (origin (_Tangible-Entity1967))
+  (destination (_Target1947))
+  (next-event (_Conceal1944)))
+
+(_Conceal1944 has (instance-of (Conceal)) (next-event (_Reload1945)))
+
+(_Reload1945 has
+  (instance-of (Reload))
+  (called (""))
+  (object (_Weapon1969))
+  (resulting-state (_Be-Activated1968)))
+
+(_Move1946 has (instance-of (Move)) (next-event (_Fire-SCUD1943)))
+
+(_Target1947 has (instance-of (Target Tangible-Entity)))
+
+(_Move1948 has (instance-of (Move)) (next-event (_Fire-SCUD1949)))
+
+(_Fire-SCUD1949 has
+  (instance-of (Fire-SCUD))
+  (called (""))
+  (agent (_Tangible-Entity1974))
+  (object (_SCUD1973))
+  (first-subevent (_Relinquish1972))
+  (subevent (_Relinquish1972 _Move1970 _Deliver1971))
+  (donor (_Tangible-Entity1974))
+  (recipient (_Target1989))
+  (origin (_Tangible-Entity1974))
+  (destination (_Target1989))
+  (next-event (_Conceal1950)))
+
+(_Conceal1950 has (instance-of (Conceal)) (next-event (_Reload1951)))
+
+(_Reload1951 has
+  (instance-of (Reload))
+  (called (""))
+  (object (_Weapon1976))
+  (resulting-state (_Be-Activated1975)))
+
+(_Move1952 has (instance-of (Move)) (next-event (_Fire-SCUD1958)))
+
+(_Conceal1953 has (instance-of (Conceal)) (next-event (_Reload1954)))
+
+(_Reload1954 has
+  (instance-of (Reload))
+  (called (""))
+  (object (_Weapon1978))
+  (resulting-state (_Be-Activated1977)))
+
+(_Move1955 has (instance-of (Move)) (next-event (_Fire-SCUD1960)))
+
+(_Conceal1956 has (instance-of (Conceal)) (next-event (_Reload1957)))
+
+(_Reload1957 has
+  (instance-of (Reload))
+  (called (""))
+  (object (_Weapon1980))
+  (resulting-state (_Be-Activated1979)))
+
+(_Fire-SCUD1958 has
+  (instance-of (Fire-SCUD))
+  (called (""))
+  (agent (_Tangible-Entity1985))
+  (object (_SCUD1986))
+  (first-subevent (_Relinquish1981))
+  (subevent (_Relinquish1981 _Move1961 _Deliver1962))
+  (donor (_Tangible-Entity1985))
+  (recipient (_Brigade1937))
+  (origin (_Tangible-Entity1985))
+  (destination (_Brigade1937))
+  (next-event (_Conceal1953)))
+
+(_Living-Entity1959 has (instance-of (Living-Entity)))
+
+(_Fire-SCUD1960 has
+  (instance-of (Fire-SCUD))
+  (called (""))
+  (agent (_Tangible-Entity1987))
+  (object (_SCUD1988))
+  (first-subevent (_Relinquish1982))
+  (subevent (_Relinquish1982 _Move1963 _Deliver1964))
+  (donor (_Tangible-Entity1987))
+  (recipient (_Area-of-operations1938))
+  (origin (_Tangible-Entity1987))
+  (destination (_Area-of-operations1938))
+  (next-event (_Conceal1956)))
+
+(_Move1961 has
+  (instance-of (Move))
+  (object (_SCUD1986))
+  (origin (_Tangible-Entity1985))
+  (destination (_Brigade1937))
+  (next-event (_Deliver1962)))
+
+(_Deliver1962 has
+  (instance-of (Deliver))
+  (object (_SCUD1986))
+  (donor (_Tangible-Entity1985))
+  (recipient (_Brigade1937)))
+
+(_Move1963 has
+  (instance-of (Move))
+  (object (_SCUD1988))
+  (origin (_Tangible-Entity1987))
+  (destination (_Area-of-operations1938))
+  (next-event (_Deliver1964)))
+
+(_Deliver1964 has
+  (instance-of (Deliver))
+  (object (_SCUD1988))
+  (donor (_Tangible-Entity1987))
+  (recipient (_Area-of-operations1938)))
+
+(_Relinquish1965 has
+  (instance-of (Relinquish))
+  (agent (_Tangible-Entity1967))
+  (object (_SCUD1966))
+  (donor (_Tangible-Entity1967))
+  (next-event (_Move1983)))
+
+(_SCUD1966 has (instance-of (SCUD)) (location (_Place1990)))
+
+(_Tangible-Entity1967 has (instance-of (Tangible-Entity)))
+
+(_Be-Activated1968 has (instance-of (Be-Activated)))
+
+(_Weapon1969 has (instance-of (Weapon Entity)))
+
+(_Move1970 has
+  (instance-of (Move))
+  (object (_SCUD1973))
+  (origin (_Tangible-Entity1974))
+  (destination (_Target1989))
+  (next-event (_Deliver1971)))
+
+(_Deliver1971 has
+  (instance-of (Deliver))
+  (object (_SCUD1973))
+  (donor (_Tangible-Entity1974))
+  (recipient (_Target1989)))
+
+(_Relinquish1972 has
+  (instance-of (Relinquish))
+  (agent (_Tangible-Entity1974))
+  (object (_SCUD1973))
+  (donor (_Tangible-Entity1974))
+  (next-event (_Move1970)))
+
+(_SCUD1973 has (instance-of (SCUD)) (location (_Place1991)))
+
+(_Tangible-Entity1974 has (instance-of (Tangible-Entity)))
+
+(_Be-Activated1975 has (instance-of (Be-Activated)))
+
+(_Weapon1976 has (instance-of (Weapon Entity)))
+
+(_Be-Activated1977 has (instance-of (Be-Activated)))
+
+(_Weapon1978 has (instance-of (Weapon Entity)))
+
+(_Be-Activated1979 has (instance-of (Be-Activated)))
+
+(_Weapon1980 has (instance-of (Weapon Entity)))
+
+(_Relinquish1981 has
+  (instance-of (Relinquish))
+  (agent (_Tangible-Entity1985))
+  (object (_SCUD1986))
+  (donor (_Tangible-Entity1985))
+  (next-event (_Move1961)))
+
+(_Relinquish1982 has
+  (instance-of (Relinquish))
+  (agent (_Tangible-Entity1987))
+  (object (_SCUD1988))
+  (donor (_Tangible-Entity1987))
+  (next-event (_Move1963)))
+
+(_Move1983 has
+  (instance-of (Move))
+  (object (_SCUD1966))
+  (origin (_Tangible-Entity1967))
+  (destination (_Target1947))
+  (next-event (_Deliver1984)))
+
+(_Deliver1984 has
+  (instance-of (Deliver))
+  (object (_SCUD1966))
+  (donor (_Tangible-Entity1967))
+  (recipient (_Target1947)))
+
+(_Tangible-Entity1985 has (instance-of (Tangible-Entity)))
+
+(_SCUD1986 has (instance-of (SCUD)) (location (_Place1992)))
+
+(_Tangible-Entity1987 has (instance-of (Tangible-Entity)))
+
+(_SCUD1988 has (instance-of (SCUD)) (location (_Place1993)))
+
+(_Target1989 has (instance-of (Target Tangible-Entity)))
+
+(_Place1990 has (instance-of (Place)))
+
+(_Place1991 has (instance-of (Place)))
+
+(_Place1992 has (instance-of (Place)))
+
+(_Place1993 has (instance-of (Place)))
+
+(explanation (:triple _COA1936 subevent _SCUD-attack1939)
+ (((@ SME entered))
+  (every COA1 has
+   (subevent
+    ((a SCUD-attack) (a SCUD-attack) (a SCUD-attack)
+     (a SCUD-attack))))))
+
+(explanation (:triple _COA1936 subevent _SCUD-attack1940)
+ (((@ SME entered))
+  (every COA1 has
+   (subevent
+    ((a SCUD-attack) (a SCUD-attack) (a SCUD-attack)
+     (a SCUD-attack))))))
+
+(explanation (:triple _COA1936 subevent _SCUD-attack1941)
+ (((@ SME entered))
+  (every COA1 has
+   (subevent
+    ((a SCUD-attack) (a SCUD-attack) (a SCUD-attack)
+     (a SCUD-attack))))))
+
+(explanation (:triple _COA1936 subevent _SCUD-attack1942)
+ (((@ SME entered))
+  (every COA1 has
+   (subevent
+    ((a SCUD-attack) (a SCUD-attack) (a SCUD-attack)
+     (a SCUD-attack))))))
+
+(explanation (:triple _SCUD-attack1939 recipient _Target1947)
+ (((@ SME entered))
+  (every COA1 has
+   (subevent
+    ((a SCUD-attack with
+      (recipient
+       ((the first of
+         (the object of (the first of (the subevent of Self)))))))
+     (a SCUD-attack) (a SCUD-attack) (a SCUD-attack))))))
+
+(explanation (:triple _SCUD-attack1939 subevent _Move1946)
+ (((@ SME entered))
+  (every COA1 has
+   (subevent
+    ((a SCUD-attack with
+      (subevent
+       ((the first of
+         (the first-subevent of (the first of (the subevent of Self))))
+        (a Fire-SCUD) (a Conceal) (a Reload))))
+     (a SCUD-attack) (a SCUD-attack) (a SCUD-attack))))))
+
+(explanation (:triple _SCUD-attack1939 subevent _Fire-SCUD1943)
+ (((@ SME entered))
+  (every COA1 has
+   (subevent
+    ((a SCUD-attack with
+      (subevent
+       ((a Move)
+        (the first of
+         (the next-event of
+          (the first of
+           (the subevent of (the first of (the subevent of Self))))))
+        (a Conceal) (a Reload))))
+     (a SCUD-attack) (a SCUD-attack) (a SCUD-attack))))))
+
+(explanation (:triple _SCUD-attack1939 subevent _Conceal1944)
+ (((@ SME entered))
+  (every COA1 has
+   (subevent
+    ((a SCUD-attack with
+      (subevent
+       ((a Move) (a Fire-SCUD)
+        (the first of
+         (the next-event of
+          (the second of
+           (the subevent of (the first of (the subevent of Self))))))
+        (a Reload))))
+     (a SCUD-attack) (a SCUD-attack) (a SCUD-attack))))))
+
+(explanation (:triple _SCUD-attack1939 subevent _Reload1945)
+ (((@ SME entered))
+  (every COA1 has
+   (subevent
+    ((a SCUD-attack with
+      (subevent
+       ((a Move) (a Fire-SCUD) (a Conceal)
+        (the first of
+         (the next-event of
+          (the third of
+           (the subevent of
+            (the first of (the subevent of Self)))))))))
+     (a SCUD-attack) (a SCUD-attack) (a SCUD-attack))))))
+
+(explanation (:triple _SCUD-attack1939 first-subevent _Move1946)
+ (((@ SME entered))
+  (every COA1 has
+   (subevent
+    ((a SCUD-attack with
+      (first-subevent
+       ((the first of
+         (the subevent of (the first of (the subevent of Self)))))))
+     (a SCUD-attack) (a SCUD-attack) (a SCUD-attack))))))
+
+(explanation (:triple _SCUD-attack1939 object _Target1947)
+ (((@ SME entered))
+  (every COA1 has
+   (subevent
+    ((a SCUD-attack with
+      (object
+       ((the first of
+         (the recipient of (the first of (the subevent of Self)))))))
+     (a SCUD-attack) (a SCUD-attack) (a SCUD-attack))))))
+
+(explanation (:triple _SCUD-attack1940 first-subevent _Move1948)
+ (((@ SME entered))
+  (every COA1 has
+   (subevent
+    ((a SCUD-attack)
+     (a SCUD-attack with
+      (first-subevent
+       ((the first of
+         (the subevent of (the second of (the subevent of Self)))))))
+     (a SCUD-attack) (a SCUD-attack))))))
+
+(explanation (:triple _SCUD-attack1940 subevent _Move1948)
+ (((@ SME entered))
+  (every COA1 has
+   (subevent
+    ((a SCUD-attack)
+     (a SCUD-attack with
+      (subevent
+       ((the first of
+         (the first-subevent of
+          (the second of (the subevent of Self))))
+        (a Fire-SCUD) (a Conceal) (a Reload))))
+     (a SCUD-attack) (a SCUD-attack))))))
+
+(explanation (:triple _SCUD-attack1940 subevent _Fire-SCUD1949)
+ (((@ SME entered))
+  (every COA1 has
+   (subevent
+    ((a SCUD-attack)
+     (a SCUD-attack with
+      (subevent
+       ((a Move)
+        (the first of
+         (the next-event of
+          (the first of
+           (the first-subevent of
+            (the second of (the subevent of Self))))))
+        (a Conceal) (a Reload))))
+     (a SCUD-attack) (a SCUD-attack))))))
+
+(explanation (:triple _SCUD-attack1940 subevent _Conceal1950)
+ (((@ SME entered))
+  (every COA1 has
+   (subevent
+    ((a SCUD-attack)
+     (a SCUD-attack with
+      (subevent
+       ((a Move) (a Fire-SCUD)
+        (the first of
+         (the next-event of
+          (the second of
+           (the subevent of (the second of (the subevent of Self))))))
+        (a Reload))))
+     (a SCUD-attack) (a SCUD-attack))))))
+
+(explanation (:triple _SCUD-attack1940 subevent _Reload1951)
+ (((@ SME entered))
+  (every COA1 has
+   (subevent
+    ((a SCUD-attack)
+     (a SCUD-attack with
+      (subevent
+       ((a Move) (a Fire-SCUD) (a Conceal)
+        (the first of
+         (the next-event of
+          (the third of
+           (the subevent of
+            (the second of (the subevent of Self)))))))))
+     (a SCUD-attack) (a SCUD-attack))))))
+
+(explanation (:triple _SCUD-attack1941 first-subevent _Move1952)
+ (((@ SME entered))
+  (every COA1 has
+   (subevent
+    ((a SCUD-attack) (a SCUD-attack)
+     (a SCUD-attack with
+      (first-subevent
+       ((the first of
+         (the subevent of (the third of (the subevent of Self)))))))
+     (a SCUD-attack))))))
+
+(explanation (:triple _SCUD-attack1941 subevent _Move1952)
+ (((@ SME entered))
+  (every COA1 has
+   (subevent
+    ((a SCUD-attack) (a SCUD-attack)
+     (a SCUD-attack with
+      (subevent
+       ((the first of
+         (the first-subevent of (the third of (the subevent of Self))))
+        (a Fire-SCUD) (a Conceal) (a Reload))))
+     (a SCUD-attack))))))
+
+(explanation (:triple _SCUD-attack1941 subevent _Fire-SCUD1958)
+ (((@ SME entered))
+  (every COA1 has
+   (subevent
+    ((a SCUD-attack) (a SCUD-attack)
+     (a SCUD-attack with
+      (subevent
+       ((a Move)
+        (the first of
+         (the next-event of
+          (the first of
+           (the first-subevent of
+            (the third of (the subevent of Self))))))
+        (a Conceal) (a Reload))))
+     (a SCUD-attack))))))
+
+(explanation (:triple _SCUD-attack1941 subevent _Conceal1953)
+ (((@ SME entered))
+  (every COA1 has
+   (subevent
+    ((a SCUD-attack) (a SCUD-attack)
+     (a SCUD-attack with
+      (subevent
+       ((a Move) (a Fire-SCUD)
+        (the first of
+         (the next-event of
+          (the second of
+           (the subevent of (the third of (the subevent of Self))))))
+        (a Reload))))
+     (a SCUD-attack))))))
+
+(explanation (:triple _SCUD-attack1941 subevent _Reload1954)
+ (((@ SME entered))
+  (every COA1 has
+   (subevent
+    ((a SCUD-attack) (a SCUD-attack)
+     (a SCUD-attack with
+      (subevent
+       ((a Move) (a Fire-SCUD) (a Conceal)
+        (the first of
+         (the next-event of
+          (the third of
+           (the subevent of
+            (the third of (the subevent of Self)))))))))
+     (a SCUD-attack))))))
+
+(explanation (:triple _SCUD-attack1941 recipient _Brigade1937)
+ (((@ SME entered))
+  (every COA1 has
+   (subevent
+    ((a SCUD-attack) (a SCUD-attack)
+     (a SCUD-attack with
+      (recipient
+       ((the first of
+         (the object of (the third of (the subevent of Self)))))))
+     (a SCUD-attack))))))
+
+(explanation (:triple _SCUD-attack1941 object _Brigade1937)
+ (((@ SME entered))
+  (every COA1 has
+   (subevent
+    ((a SCUD-attack) (a SCUD-attack)
+     (a SCUD-attack with
+      (object
+       ((the first of
+         (the recipient of (the third of (the subevent of Self)))))))
+     (a SCUD-attack))))))
+
+(explanation (:triple _SCUD-attack1942 first-subevent _Move1955)
+ (((@ SME entered))
+  (every COA1 has
+   (subevent
+    ((a SCUD-attack) (a SCUD-attack) (a SCUD-attack)
+     (a SCUD-attack with
+      (first-subevent
+       ((the first of
+         (the subevent of
+          (the fourth of (the subevent of Self))))))))))))
+
+(explanation (:triple _SCUD-attack1942 subevent _Move1955)
+ (((@ SME entered))
+  (every COA1 has
+   (subevent
+    ((a SCUD-attack) (a SCUD-attack) (a SCUD-attack)
+     (a SCUD-attack with
+      (subevent
+       ((the first of
+         (the first-subevent of
+          (the fourth of (the subevent of Self))))
+        (a Fire-SCUD) (a Conceal) (a Reload)))))))))
+
+(explanation (:triple _SCUD-attack1942 subevent _Fire-SCUD1960)
+ (((@ SME entered))
+  (every COA1 has
+   (subevent
+    ((a SCUD-attack) (a SCUD-attack) (a SCUD-attack)
+     (a SCUD-attack with
+      (subevent
+       ((a Move)
+        (the first of
+         (the next-event of
+          (the first of
+           (the first-subevent of
+            (the fourth of (the subevent of Self))))))
+        (a Conceal) (a Reload)))))))))
+
+(explanation (:triple _SCUD-attack1942 subevent _Conceal1956)
+ (((@ SME entered))
+  (every COA1 has
+   (subevent
+    ((a SCUD-attack) (a SCUD-attack) (a SCUD-attack)
+     (a SCUD-attack with
+      (subevent
+       ((a Move) (a Fire-SCUD)
+        (the first of
+         (the next-event of
+          (the second of
+           (the subevent of (the fourth of (the subevent of Self))))))
+        (a Reload)))))))))
+
+(explanation (:triple _SCUD-attack1942 subevent _Reload1957)
+ (((@ SME entered))
+  (every COA1 has
+   (subevent
+    ((a SCUD-attack) (a SCUD-attack) (a SCUD-attack)
+     (a SCUD-attack with
+      (subevent
+       ((a Move) (a Fire-SCUD) (a Conceal)
+        (the first of
+         (the next-event of
+          (the third of
+           (the subevent of
+            (the fourth of (the subevent of Self))))))))))))))
+
+(explanation
+ (:triple _SCUD-attack1942 recipient _Area-of-operations1938)
+ (((@ SME entered))
+  (every COA1 has
+   (subevent
+    ((a SCUD-attack) (a SCUD-attack) (a SCUD-attack)
+     (a SCUD-attack with
+      (recipient
+       ((the first of
+         (the object of (the fourth of (the subevent of Self))))))))))))
+
+(explanation (:triple _SCUD-attack1942 object _Area-of-operations1938)
+ (((@ SME entered))
+  (every COA1 has
+   (subevent
+    ((a SCUD-attack) (a SCUD-attack) (a SCUD-attack)
+     (a SCUD-attack with
+      (object
+       ((the first of
+         (the recipient of
+          (the fourth of (the subevent of Self))))))))))))
+
+(explanation (:triple _Fire-SCUD1943 next-event _Conceal1944)
+ (((@ SME entered))
+  (every COA1 has
+   (subevent
+    ((a SCUD-attack with
+      (subevent
+       ((a Move)
+        (a Fire-SCUD with
+         (next-event
+          ((the third of
+            (the subevent of (the first of (the subevent of Self)))))))
+        (a Conceal) (a Reload))))
+     (a SCUD-attack) (a SCUD-attack) (a SCUD-attack))))))
+
+(explanation (:triple _Conceal1944 next-event _Reload1945)
+ (((@ SME entered))
+  (every COA1 has
+   (subevent
+    ((a SCUD-attack with
+      (subevent
+       ((a Move) (a Fire-SCUD)
+        (a Conceal with
+         (next-event
+          ((the fourth of
+            (the subevent of (the first of (the subevent of Self)))))))
+        (a Reload))))
+     (a SCUD-attack) (a SCUD-attack) (a SCUD-attack))))))
+
+(explanation (:triple _Move1946 next-event _Fire-SCUD1943)
+ (((@ SME entered))
+  (every COA1 has
+   (subevent
+    ((a SCUD-attack with
+      (subevent
+       ((a Move with
+         (next-event
+          ((the second of
+            (the subevent of (the first of (the subevent of Self)))))))
+        (a Fire-SCUD) (a Conceal) (a Reload))))
+     (a SCUD-attack) (a SCUD-attack) (a SCUD-attack))))))
+
+(explanation (:triple _Move1948 next-event _Fire-SCUD1949)
+ (((@ SME entered))
+  (every COA1 has
+   (subevent
+    ((a SCUD-attack)
+     (a SCUD-attack with
+      (first-subevent
+       ((a Move with
+         (next-event
+          ((the second of
+            (the subevent of
+             (the second of (the subevent of Self))))))))))
+     (a SCUD-attack) (a SCUD-attack))))))
+
+(explanation (:triple _Fire-SCUD1949 next-event _Conceal1950)
+ (((@ SME entered))
+  (every COA1 has
+   (subevent
+    ((a SCUD-attack)
+     (a SCUD-attack with
+      (subevent
+       ((a Move)
+        (a Fire-SCUD with
+         (next-event
+          ((the third of
+            (the subevent of
+             (the second of (the subevent of Self)))))))
+        (a Conceal) (a Reload))))
+     (a SCUD-attack) (a SCUD-attack))))))
+
+(explanation (:triple _Conceal1950 next-event _Reload1951)
+ (((@ SME entered))
+  (every COA1 has
+   (subevent
+    ((a SCUD-attack)
+     (a SCUD-attack with
+      (subevent
+       ((a Move) (a Fire-SCUD)
+        (a Conceal with
+         (next-event
+          ((the fourth of
+            (the subevent of
+             (the second of (the subevent of Self)))))))
+        (a Reload))))
+     (a SCUD-attack) (a SCUD-attack))))))
+
+(explanation (:triple _Move1952 next-event _Fire-SCUD1958)
+ (((@ SME entered))
+  (every COA1 has
+   (subevent
+    ((a SCUD-attack) (a SCUD-attack)
+     (a SCUD-attack with
+      (first-subevent
+       ((a Move with
+         (next-event
+          ((the second of
+            (the subevent of
+             (the third of (the subevent of Self))))))))))
+     (a SCUD-attack))))))
+
+(explanation (:triple _Fire-SCUD1958 next-event _Conceal1953)
+ (((@ SME entered))
+  (every COA1 has
+   (subevent
+    ((a SCUD-attack) (a SCUD-attack)
+     (a SCUD-attack with
+      (subevent
+       ((a Move)
+        (a Fire-SCUD with
+         (next-event
+          ((the third of
+            (the subevent of (the third of (the subevent of Self)))))))
+        (a Conceal) (a Reload))))
+     (a SCUD-attack))))))
+
+(explanation (:triple _Conceal1953 next-event _Reload1954)
+ (((@ SME entered))
+  (every COA1 has
+   (subevent
+    ((a SCUD-attack) (a SCUD-attack)
+     (a SCUD-attack with
+      (subevent
+       ((a Move) (a Fire-SCUD)
+        (a Conceal with
+         (next-event
+          ((the fourth of
+            (the subevent of (the third of (the subevent of Self)))))))
+        (a Reload))))
+     (a SCUD-attack))))))
+
+(explanation (:triple _Move1955 next-event _Fire-SCUD1960)
+ (((@ SME entered))
+  (every COA1 has
+   (subevent
+    ((a SCUD-attack) (a SCUD-attack) (a SCUD-attack)
+     (a SCUD-attack with
+      (first-subevent
+       ((a Move with
+         (next-event
+          ((the second of
+            (the subevent of
+             (the fourth of (the subevent of Self)))))))))))))))
+
+(explanation (:triple _Fire-SCUD1960 next-event _Conceal1956)
+ (((@ SME entered))
+  (every COA1 has
+   (subevent
+    ((a SCUD-attack) (a SCUD-attack) (a SCUD-attack)
+     (a SCUD-attack with
+      (subevent
+       ((a Move)
+        (a Fire-SCUD with
+         (next-event
+          ((the third of
+            (the subevent of
+             (the fourth of (the subevent of Self)))))))
+        (a Conceal) (a Reload)))))))))
+
+(explanation (:triple _Conceal1956 next-event _Reload1957)
+ (((@ SME entered))
+  (every COA1 has
+   (subevent
+    ((a SCUD-attack) (a SCUD-attack) (a SCUD-attack)
+     (a SCUD-attack with
+      (subevent
+       ((a Move) (a Fire-SCUD)
+        (a Conceal with
+         (next-event
+          ((the fourth of
+            (the subevent of
+             (the fourth of (the subevent of Self)))))))
+        (a Reload)))))))))
+
+(explanation (:triple _Target1989 instance-of Target)
+ (((@ SME entered))
+  (every COA1 has
+   (subevent
+    ((a SCUD-attack)
+     (a SCUD-attack with
+      (subevent
+       ((a Move)
+        (a Fire-SCUD with
+         (destination
+          ((a Target with
+            (instance-of ((a Target) Tangible-Entity))))))
+        (a Conceal) (a Reload))))
+     (a SCUD-attack) (a SCUD-attack))))))
+
+(explanation (:triple _Target1947 instance-of Target)
+ (((@ SME entered))
+  (every COA1 has
+   (subevent
+    ((a SCUD-attack with
+      (recipient
+       ((a Target with (instance-of ((a Target) Tangible-Entity))))))
+     (a SCUD-attack) (a SCUD-attack) (a SCUD-attack))))))
+
+(explanation (:triple _Brigade1937 instance-of Target)
+ (((@ SME entered))
+  (every COA1 has
+   (subevent
+    ((a SCUD-attack) (a SCUD-attack)
+     (a SCUD-attack with
+      (recipient
+       ((a Brigade with (instance-of (Brigade (a Target)))))))
+     (a SCUD-attack))))))
+
+(explanation (:triple _Area-of-operations1938 instance-of Target)
+ (((@ SME entered))
+  (every COA1 has
+   (subevent
+    ((a SCUD-attack) (a SCUD-attack) (a SCUD-attack)
+     (a SCUD-attack with
+      (recipient
+       ((a Area-of-operations with
+         (instance-of (Area-of-operations (a Target))))))))))))
+
+
+#|
+;;; TRADITIONAL FORMAT FOR SME'S LAST ACTIONS WOULD HAVE LOOKED:
+
+(every COA1 has
+ (subevent
+  ((a SCUD-attack) (a SCUD-attack) (a SCUD-attack) (a SCUD-attack))))
+(every COA1 has
+ (subevent
+  ((a SCUD-attack) (a SCUD-attack) (a SCUD-attack) (a SCUD-attack))))
+(every COA1 has
+ (subevent
+  ((a SCUD-attack) (a SCUD-attack) (a SCUD-attack) (a SCUD-attack))))
+(every COA1 has
+ (subevent
+  ((a SCUD-attack) (a SCUD-attack) (a SCUD-attack) (a SCUD-attack))))
+(every COA1 has
+ (subevent
+  ((a SCUD-attack with
+    (recipient
+     ((the first of
+       (the object of (the first of (the subevent of Self)))))))
+   (a SCUD-attack) (a SCUD-attack) (a SCUD-attack))))
+(every COA1 has
+ (subevent
+  ((a SCUD-attack with
+    (subevent
+     ((the first of
+       (the first-subevent of (the first of (the subevent of Self))))
+      (a Fire-SCUD) (a Conceal) (a Reload))))
+   (a SCUD-attack) (a SCUD-attack) (a SCUD-attack))))
+(every COA1 has
+ (subevent
+  ((a SCUD-attack with
+    (subevent
+     ((a Move)
+      (the first of
+       (the next-event of
+        (the first of
+         (the subevent of (the first of (the subevent of Self))))))
+      (a Conceal) (a Reload))))
+   (a SCUD-attack) (a SCUD-attack) (a SCUD-attack))))
+(every COA1 has
+ (subevent
+  ((a SCUD-attack with
+    (subevent
+     ((a Move) (a Fire-SCUD)
+      (the first of
+       (the next-event of
+        (the second of
+         (the subevent of (the first of (the subevent of Self))))))
+      (a Reload))))
+   (a SCUD-attack) (a SCUD-attack) (a SCUD-attack))))
+(every COA1 has
+ (subevent
+  ((a SCUD-attack with
+    (subevent
+     ((a Move) (a Fire-SCUD) (a Conceal)
+      (the first of
+       (the next-event of
+        (the third of
+         (the subevent of (the first of (the subevent of Self)))))))))
+   (a SCUD-attack) (a SCUD-attack) (a SCUD-attack))))
+(every COA1 has
+ (subevent
+  ((a SCUD-attack with
+    (first-subevent
+     ((the first of
+       (the subevent of (the first of (the subevent of Self)))))))
+   (a SCUD-attack) (a SCUD-attack) (a SCUD-attack))))
+(every COA1 has
+ (subevent
+  ((a SCUD-attack with
+    (object
+     ((the first of
+       (the recipient of (the first of (the subevent of Self)))))))
+   (a SCUD-attack) (a SCUD-attack) (a SCUD-attack))))
+(every COA1 has
+ (subevent
+  ((a SCUD-attack)
+   (a SCUD-attack with
+    (first-subevent
+     ((the first of
+       (the subevent of (the second of (the subevent of Self)))))))
+   (a SCUD-attack) (a SCUD-attack))))
+(every COA1 has
+ (subevent
+  ((a SCUD-attack)
+   (a SCUD-attack with
+    (subevent
+     ((the first of
+       (the first-subevent of (the second of (the subevent of Self))))
+      (a Fire-SCUD) (a Conceal) (a Reload))))
+   (a SCUD-attack) (a SCUD-attack))))
+(every COA1 has
+ (subevent
+  ((a SCUD-attack)
+   (a SCUD-attack with
+    (subevent
+     ((a Move)
+      (the first of
+       (the next-event of
+        (the first of
+         (the first-subevent of
+          (the second of (the subevent of Self))))))
+      (a Conceal) (a Reload))))
+   (a SCUD-attack) (a SCUD-attack))))
+(every COA1 has
+ (subevent
+  ((a SCUD-attack)
+   (a SCUD-attack with
+    (subevent
+     ((a Move) (a Fire-SCUD)
+      (the first of
+       (the next-event of
+        (the second of
+         (the subevent of (the second of (the subevent of Self))))))
+      (a Reload))))
+   (a SCUD-attack) (a SCUD-attack))))
+(every COA1 has
+ (subevent
+  ((a SCUD-attack)
+   (a SCUD-attack with
+    (subevent
+     ((a Move) (a Fire-SCUD) (a Conceal)
+      (the first of
+       (the next-event of
+        (the third of
+         (the subevent of (the second of (the subevent of Self)))))))))
+   (a SCUD-attack) (a SCUD-attack))))
+(every COA1 has
+ (subevent
+  ((a SCUD-attack) (a SCUD-attack)
+   (a SCUD-attack with
+    (first-subevent
+     ((the first of
+       (the subevent of (the third of (the subevent of Self)))))))
+   (a SCUD-attack))))
+(every COA1 has
+ (subevent
+  ((a SCUD-attack) (a SCUD-attack)
+   (a SCUD-attack with
+    (subevent
+     ((the first of
+       (the first-subevent of (the third of (the subevent of Self))))
+      (a Fire-SCUD) (a Conceal) (a Reload))))
+   (a SCUD-attack))))
+(every COA1 has
+ (subevent
+  ((a SCUD-attack) (a SCUD-attack)
+   (a SCUD-attack with
+    (subevent
+     ((a Move)
+      (the first of
+       (the next-event of
+        (the first of
+         (the first-subevent of
+          (the third of (the subevent of Self))))))
+      (a Conceal) (a Reload))))
+   (a SCUD-attack))))
+(every COA1 has
+ (subevent
+  ((a SCUD-attack) (a SCUD-attack)
+   (a SCUD-attack with
+    (subevent
+     ((a Move) (a Fire-SCUD)
+      (the first of
+       (the next-event of
+        (the second of
+         (the subevent of (the third of (the subevent of Self))))))
+      (a Reload))))
+   (a SCUD-attack))))
+(every COA1 has
+ (subevent
+  ((a SCUD-attack) (a SCUD-attack)
+   (a SCUD-attack with
+    (subevent
+     ((a Move) (a Fire-SCUD) (a Conceal)
+      (the first of
+       (the next-event of
+        (the third of
+         (the subevent of (the third of (the subevent of Self)))))))))
+   (a SCUD-attack))))
+(every COA1 has
+ (subevent
+  ((a SCUD-attack) (a SCUD-attack)
+   (a SCUD-attack with
+    (recipient
+     ((the first of
+       (the object of (the third of (the subevent of Self)))))))
+   (a SCUD-attack))))
+(every COA1 has
+ (subevent
+  ((a SCUD-attack) (a SCUD-attack)
+   (a SCUD-attack with
+    (object
+     ((the first of
+       (the recipient of (the third of (the subevent of Self)))))))
+   (a SCUD-attack))))
+(every COA1 has
+ (subevent
+  ((a SCUD-attack) (a SCUD-attack) (a SCUD-attack)
+   (a SCUD-attack with
+    (first-subevent
+     ((the first of
+       (the subevent of (the fourth of (the subevent of Self))))))))))
+(every COA1 has
+ (subevent
+  ((a SCUD-attack) (a SCUD-attack) (a SCUD-attack)
+   (a SCUD-attack with
+    (subevent
+     ((the first of
+       (the first-subevent of (the fourth of (the subevent of Self))))
+      (a Fire-SCUD) (a Conceal) (a Reload)))))))
+(every COA1 has
+ (subevent
+  ((a SCUD-attack) (a SCUD-attack) (a SCUD-attack)
+   (a SCUD-attack with
+    (subevent
+     ((a Move)
+      (the first of
+       (the next-event of
+        (the first of
+         (the first-subevent of
+          (the fourth of (the subevent of Self))))))
+      (a Conceal) (a Reload)))))))
+(every COA1 has
+ (subevent
+  ((a SCUD-attack) (a SCUD-attack) (a SCUD-attack)
+   (a SCUD-attack with
+    (subevent
+     ((a Move) (a Fire-SCUD)
+      (the first of
+       (the next-event of
+        (the second of
+         (the subevent of (the fourth of (the subevent of Self))))))
+      (a Reload)))))))
+(every COA1 has
+ (subevent
+  ((a SCUD-attack) (a SCUD-attack) (a SCUD-attack)
+   (a SCUD-attack with
+    (subevent
+     ((a Move) (a Fire-SCUD) (a Conceal)
+      (the first of
+       (the next-event of
+        (the third of
+         (the subevent of
+          (the fourth of (the subevent of Self))))))))))))
+(every COA1 has
+ (subevent
+  ((a SCUD-attack) (a SCUD-attack) (a SCUD-attack)
+   (a SCUD-attack with
+    (recipient
+     ((the first of
+       (the object of (the fourth of (the subevent of Self))))))))))
+(every COA1 has
+ (subevent
+  ((a SCUD-attack) (a SCUD-attack) (a SCUD-attack)
+   (a SCUD-attack with
+    (object
+     ((the first of
+       (the recipient of (the fourth of (the subevent of Self))))))))))
+(every COA1 has
+ (subevent
+  ((a SCUD-attack with
+    (subevent
+     ((a Move)
+      (a Fire-SCUD with
+       (next-event
+        ((the third of
+          (the subevent of (the first of (the subevent of Self)))))))
+      (a Conceal) (a Reload))))
+   (a SCUD-attack) (a SCUD-attack) (a SCUD-attack))))
+(every COA1 has
+ (subevent
+  ((a SCUD-attack with
+    (subevent
+     ((a Move) (a Fire-SCUD)
+      (a Conceal with
+       (next-event
+        ((the fourth of
+          (the subevent of (the first of (the subevent of Self)))))))
+      (a Reload))))
+   (a SCUD-attack) (a SCUD-attack) (a SCUD-attack))))
+(every COA1 has
+ (subevent
+  ((a SCUD-attack with
+    (subevent
+     ((a Move with
+       (next-event
+        ((the second of
+          (the subevent of (the first of (the subevent of Self)))))))
+      (a Fire-SCUD) (a Conceal) (a Reload))))
+   (a SCUD-attack) (a SCUD-attack) (a SCUD-attack))))
+(every COA1 has
+ (subevent
+  ((a SCUD-attack)
+   (a SCUD-attack with
+    (first-subevent
+     ((a Move with
+       (next-event
+        ((the second of
+          (the subevent of
+           (the second of (the subevent of Self))))))))))
+   (a SCUD-attack) (a SCUD-attack))))
+(every COA1 has
+ (subevent
+  ((a SCUD-attack)
+   (a SCUD-attack with
+    (subevent
+     ((a Move)
+      (a Fire-SCUD with
+       (next-event
+        ((the third of
+          (the subevent of (the second of (the subevent of Self)))))))
+      (a Conceal) (a Reload))))
+   (a SCUD-attack) (a SCUD-attack))))
+(every COA1 has
+ (subevent
+  ((a SCUD-attack)
+   (a SCUD-attack with
+    (subevent
+     ((a Move) (a Fire-SCUD)
+      (a Conceal with
+       (next-event
+        ((the fourth of
+          (the subevent of (the second of (the subevent of Self)))))))
+      (a Reload))))
+   (a SCUD-attack) (a SCUD-attack))))
+(every COA1 has
+ (subevent
+  ((a SCUD-attack) (a SCUD-attack)
+   (a SCUD-attack with
+    (first-subevent
+     ((a Move with
+       (next-event
+        ((the second of
+          (the subevent of
+           (the third of (the subevent of Self))))))))))
+   (a SCUD-attack))))
+(every COA1 has
+ (subevent
+  ((a SCUD-attack) (a SCUD-attack)
+   (a SCUD-attack with
+    (subevent
+     ((a Move)
+      (a Fire-SCUD with
+       (next-event
+        ((the third of
+          (the subevent of (the third of (the subevent of Self)))))))
+      (a Conceal) (a Reload))))
+   (a SCUD-attack))))
+(every COA1 has
+ (subevent
+  ((a SCUD-attack) (a SCUD-attack)
+   (a SCUD-attack with
+    (subevent
+     ((a Move) (a Fire-SCUD)
+      (a Conceal with
+       (next-event
+        ((the fourth of
+          (the subevent of (the third of (the subevent of Self)))))))
+      (a Reload))))
+   (a SCUD-attack))))
+(every COA1 has
+ (subevent
+  ((a SCUD-attack) (a SCUD-attack) (a SCUD-attack)
+   (a SCUD-attack with
+    (first-subevent
+     ((a Move with
+       (next-event
+        ((the second of
+          (the subevent of
+           (the fourth of (the subevent of Self)))))))))))))
+(every COA1 has
+ (subevent
+  ((a SCUD-attack) (a SCUD-attack) (a SCUD-attack)
+   (a SCUD-attack with
+    (subevent
+     ((a Move)
+      (a Fire-SCUD with
+       (next-event
+        ((the third of
+          (the subevent of (the fourth of (the subevent of Self)))))))
+      (a Conceal) (a Reload)))))))
+(every COA1 has
+ (subevent
+  ((a SCUD-attack) (a SCUD-attack) (a SCUD-attack)
+   (a SCUD-attack with
+    (subevent
+     ((a Move) (a Fire-SCUD)
+      (a Conceal with
+       (next-event
+        ((the fourth of
+          (the subevent of (the fourth of (the subevent of Self)))))))
+      (a Reload)))))))
+
+|#

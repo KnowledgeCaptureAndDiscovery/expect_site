@@ -1,0 +1,3341 @@
+
+
+;;;; COA Constraints Ontology
+
+;;;; coa-constraints.loom        version: 0.0.1 	11/23/98
+;;;; by lei wang
+
+
+( in-package "BATTLE-SPACE" )
+
+;;;==============================================
+;;; define all the set used in this ontology
+
+(defset Terrain-Set :is
+    ( :one-of 'Unrestricted 'Restricted 'Severly-Restricted 'Open 'Closed ))
+
+(defset Day-Or-Night-Set
+    :is ( :one-of 'Day 'Night 'Night-With-Lights 'Night-Blackedout-Drive ))
+
+(defset Ammunition-Status-Set
+    :is (:one-of  'UNKNOWN  'GREEN  'RED  'BLACK 'AMBER ))
+
+(defset Formation-Set
+    :is (:one-of    'ECHELON 'BOX 'COLUMN 'DIAMOND  'LINE 'VEE 'WEDGE ))
+
+(defset Preparation-Position-Set
+    :is (:one-of 'Prepared 'Fortified 'Hasty 'Flank))
+
+;;; Hasty is less than 24 hours of preparation
+
+(defset Evaluation-Rates-Set
+    :is (:one-of    'Best 'Better 'Good 'Poor))
+
+(defset Characteristics-Rating-Set
+    :is (:one-of 'High  'Moderate  'Low ))
+
+(defset Likelihood-Of-Contact-Set
+    :is (:one-of 'Not-Expected 'Possible 'Expected 'Possible-or-Expected ))
+
+(defset Unit-Category-Set
+    :is (:one-of 'UNKNWON 'Airborne 'Armor 'Artillery 'Self-Propelled-Artillery 'Towed-Artillery
+         'Cavalry 'Ground-Maneuver 'Assault-Helicopter 'Attack-Helicopter 'Self-Propelled-Howitzer
+         'Towed-Howitzer 'Infantry 'Light-Infantry  'Mechanized 'Mechanized-Infantry 'Heavy-Mechanized-Infantry
+         'MLRS 'Tank 'Supply 'Foot-Infantry 'Armored-Infantry 'Mechanized-Infantry
+         ))
+
+ (defset Weapon-Type-Set
+    :is (:one-of  'M19A1 'M102 'M101A1 'M114A1 'M114A2  'M109A3 'M109A4 'M109A5 'M109A6 'M198 'M270
+                    '2S9 'D30 '2S1 'D20 '2S3 '2S5 '2S19 '2A36 '2A65 '2S7 '2B11 'M160 'M240
+                    'BM21 'BM22 '9A52
+         ))
+
+
+
+(defconcept Geographical-Area)
+
+;;;this concept relate to logic geographical area.
+
+;;;;;;;; Constraints
+;;;=================================================================
+;;; Root Concept Constraints
+
+(defconcept Constraints)
+
+;;;======================================================
+;;; subtype of constraints
+
+(defconcept Time-Constraints
+    :is-primitive Constraints
+    :annotations ((documentation "Constraints related to time")))
+
+(defconcept Resource-Constraints
+    :is-primitive Constraints
+    :annotations ((documentation "Constraints related to resource")))
+
+(defconcept Geospatial-Constraints
+    :is-primitive Constraints
+    :annotations ((documentation "Constraints related to geographical factors, space,etc.")))
+
+
+;;;========================================================================
+;;; subtype of Time-Constraints
+
+(defconcept Unit-Time-Related-Constraints
+     :is-primitive Time-Constraints
+     :roles(( unit-category     :type Unit-Category-Set)
+             ( echelon :type Military-Unit)
+             ( description       :type String)
+             ( terrain-type    :type Terrain-Set )
+             ( day-or-night    :type  Day-Or-Night-Set))
+     :annotations ((documentation "Time constraints relate to units type,
+     terrain type, and day-or-night conditions")))
+
+
+
+
+    ;;;**************************************************************
+    ;;;subtype of Unit-Time-Related-Constraints
+
+    (defconcept Unit-Rate-Of-Movement
+        :is-primitive  Unit-Time-Related-Constraints
+        :roles (( maximum-speed        :type  Number
+                :facets (( documentation "Maximum moving speed in Kmph")))
+              ( nominal-speed     :type Number
+                :facets (( documentation "Nominal moving speed in Kmph"))))
+        :annotations ((documentation "Unit's maximum and nominal rate of movement.It is depended on
+        the unit-category, terrain-type and day-or-night-conditions")))
+
+
+;;============================================================================
+ ;;;==============================================================================
+ ;;; subtype of Resource-Constraints
+
+    (defconcept Artillery-Capability
+        :is-primitive Resource-Constraints
+        :roles (( weapon-type   :type Weapon-Type-Set)
+                ( description   :type String)
+                ( minimum-range :type Integer
+                    :facets ((documentation "meters")))
+                ( maximum-range  :type Integer
+                    :facets (( documentation "meters")))
+                ( maximum-range-with-RAP :type Integer
+                    :facets(( documentation " meters. RAP:Rocket-Assisted-Projectile")))
+                (minimum-rate-of-fire :type Integer
+                    :facets (( documentation "rounds per minute")))
+                (maximum-rate-of-fire :type Integer
+                    :facets (( documentation "rounds per minute"))))
+        :annotations (( documentation "The artillery's capabilities can be used in determining/evaluating
+                    position selections")))
+
+
+	 ;;;*******************************************************
+            ;;; subtype of Artillery-Capability
+
+            (defconcept US-Artillery-Capability
+                :is-primitive Artillery-Capability
+                :roles (( maximum-FPF-width     :type Integer
+                            :facets ((documentation "meters")))
+                         (weight    :type Integer
+                            :facets ((documentation "pounds")))
+                        ))
+
+
+
+
+ (defconcept Relative-Force-Ratios
+    :is-primitive  Resource-Constraints
+    :roles (( friendly-number   :type Number
+                :facets (( documentation "For a specific combat mission, the number of friendly units")))
+            ( enemy-number      :type  Number
+                :facets ((documentation "For a specific combat mission, the number of enemy units"))))
+    :annotations (( documentation "The relative ratios of friendly units number to enemy units number
+    for a specific task. The division planners compare all types of combat units two level down
+    when analysis the relative force ratios." )))
+
+  ;;;;;;;;; RelativeForce-Ratio is depended on the specific COA. This works as a place holder here.
+
+
+     ;;;*************************************************
+     ;;;;;;subtype of Relative-Force-Ratios
+     ;;;; mission type should be Action, now just put string for load test
+     (defconcept Historical-Minimum-Planning-Ratios
+         :is-primitive   Relative-Force-Ratios
+         :roles (( mission-type      :type  String )
+                    ( preparation-position          :type Preparation-Position-Set
+                        :facets (( documentation " The preparation position for conduct a mission"))))
+        :annotations (( documentation "The histocial minimum-planning ratios of friendly to enemy units
+        required for each combat mission. \n\r\It is used to determine if the unit has the overwhelming odds
+        that would give hime the flexibility to conduct the type of operation he desires. \n\r During development of the scheme of
+        maneuver the planner compare these ratios to the ones he can generate in specific portions of the
+        battlefield.")))
+
+;;;========================================================================
+   ;;; concept Unit-Resource-Related-Constraints
+
+    (defconcept Unit-Resource-Related-Constraints
+        :is-primitive  Resource-Constraints
+        :roles (( unit-category     :type Unit-Category-Set)
+            ( echelon    :type Military-Unit )
+            ( description       :type String))
+        :annotations ((documentation "This works as a superconcept for all unit related resource
+                constraints. It define the roles unit-category, echelon, and description which are the
+                common roles for all subconcpet")))
+
+;***************************************************************
+     ;;; subtype of Unit-Resource-Related-Constraints
+
+        ;;;;------------------------------------------------------------------------
+        ;;;; define concept relate to Unit-Combat-Power-Doctrinal-Constraints's role
+
+        (defconcept Fuel-Capacity-Consumption-Constraint
+        :roles ((maximum-fuel-capacity      :type  Number
+                    :facets (( documentation "The maximum fuel capacity in gallons")))
+                (fuel-consumption-in-idle    :type Number
+                    :facets (( documentation "The consumption rate in gallons/hour when vehicle
+                in idle state")))
+                (fuel-consumption-moving  :type Number
+                    :facets ((documentation "The consumption rate in gallons/hour when vehicle
+                    in moving state"))))
+        :annotations ((documentation "For each echelon and unit type, there will be its maximum capacity
+        of fuel in gallons and consumption rate in gallons per hour when it is idle or moving")))
+
+
+
+        (defconcept  Deployment-Size
+            :roles ((width  :type Number)
+                    (length   :type Number))
+            :annotations ((documentation "There are serveral kinds of formaiton type for each echelon and
+            unit type. Deployment size define the length and width sizes relate to each kind of formation. It works
+            as a abstract type")))
+
+        (defconcept Line-Size
+            :is-primitive  Deployment-Size)
+
+        (defconcept Wedge-Size
+            :is-primitive Deployment-Size)
+
+        (defconcept  Column-Size
+            :is-primitive  Deployment-Size)
+
+        (defconcept Box-Size
+            :is-primitive  Deployment-Size)
+
+        (defconcept Diamond-Size
+            :is-primitive  Deployment-Size)
+
+        (defconcept  Echelon-Size
+            :is-primitive  Deployment-Size)
+
+        (defconcept Vee-Size
+            :is-primitive  Deployment-Size)
+
+        (defconcept Deployment
+            :roles ((line      :type Deployment-Size)
+             (wedge     :type Deployment-Size)
+             (column    :type Deployment-Size)
+             (box       :type Deployment-Size)
+             (diamond   :type Deployment-Size)
+             (echelon   :type Deployment-Size)
+             (vee       :type Deployment-Size))
+        :annotations ((documentation " For each echelon and unit type, there are different kinds of deployment
+            formation" )))
+
+
+;;;;----------------------------------------------------
+    ;;;;  Unit-Combat-Power-Doctrinal-Constraints
+
+    (defconcept Unit-Combat-Power-Doctrinal-Constraints
+        :is-primitive  Unit-Resource-Related-Constraints
+        :roles (( combat-power    :type  Number )
+            ( artillery-area   :type Number )
+            ( unit-equivalent   :type Number)
+            ( fuel-capacity-and-consumption   :type Fuel-Capacity-Consumption-Constraint)
+            ( unit-deployment-size   :type Deployment)
+         )
+        :annotations (( documentation "For each echelon and unit type, there are a bunch of information such as
+        combat-power, artillery-area, unit-equipment , fuel-capacity-and consumption,and deployment-size
+         relate to it.")))
+
+
+    (defconcept Unit-Readiness-Strength-Ammunition-Status
+        :is-primitive Unit-Resource-Related-Constraints
+        :roles (( readiness     :type Number )
+                ( strength      :type Number )
+                ( ammunition-status :type Ammunition-Status-Set)
+            )
+   )
+
+     ;;;; A place holder which is relate to a specific task action.
+     ;;;; Provide informaiton about the unit's status before or after performing an action, the unit's status.
+
+
+
+    ;;;; from document Task Move tactically, this is define a doctinal frontage size.
+
+    (defconcept Unit-Firing-Power
+        :is-primitive Unit-Resource-Related-Constraints
+        :roles (( range     :type Number)
+                 ( rate      :type Number))
+        :annotations ((documentation "The fire covered range and rate of fire which
+        may be delivered by a unit, or weapon system.")))
+
+
+
+
+    (defconcept Unit-Enviromental-Conditions
+        :is-primitive Unit-Resource-Related-Constraints
+        :roles (( sound        :type String)
+             ( illumination :type   String)
+             ( heat         :type   String)
+             ( visibility    :type   String))
+        :annotations ((documentation "This is related to assembly area. If an assembly area is choosen
+        and unit moving to it requires minimum noise, heat, radio, traffic, and visible light." )))
+
+    (defconcept Artillery-Unit-Firing-Position
+        :is-primitive Unit-Resource-Related-Constraints
+        :roles (( artillery-type :type String )
+            ( minimum-position   :type Number
+                :facets ((documentation "square kilometer")))
+            ( desired-position   :type Number
+                 :facets ((documentation "square kilometer"))))
+        :annotations (( documentation " The minimum and desired position sizes in  for
+        each kinds of artillery units"))
+        )
+
+
+
+;;;==========================================================================
+;;;=========================================================================
+;;; subtype of Geospatial-Constraints
+
+(defconcept Unit-Doctrinal-Frontage-Size
+        :is-primitive  Geospatial-Constraints
+        :roles((unit-category   :type Military-Unit)
+               (number-of-units :type Integer)
+               (frontage-size   :type Integer
+                    :facets ((documentation "The unit's doctrinal frontage size in km"))))
+        :annotations ((documentation "A units calculates the width of its frontage by adding
+        the width of all its subordinate units with the total width between each of its subordinate units."))
+    )
+
+(defconcept Area-Of-Operation
+      :is (:and Geospatial-Constraints
+            Geographical-Area)
+    :roles (( offense-or-defense    :type Integer)
+            ( axis-of-advance       :type Geographical-Region)
+            ( zone-of-action        :type Geographical-Region)
+            ( sector                :type Geographical-Region)
+            ( battle-position       :type Geographical-Region))
+    :annotations ((documentation "An operational area defined by the joint force commander for
+    land and naval forces. Areas of operation do not typically encompass the entire operational
+    area of the joint force commander, but should be large enough for component commanders to
+    accomplish their missions and protect their forces. (Army) - A geographical area, usually
+    defined by lateral, forward, and rear boundaries assigned to a commander, by a higher
+    commander, in which he has responsibility and the authority to conduct military operations."
+    )))
+
+ (defconcept Mobility-Corridor-Doctrinal-Width
+     :is (:and Geospatial-Constraints
+            Geographical-Area)
+     :roles (( unit-category    :type Military-Unit)
+             ( width        :type Number
+                :facets (( documentation "Kilometers"))))
+    )
+
+ (defconcept Mobility-Corridor
+     :is (:and Geospatial-Constraints
+            Geographical-Area)
+    :roles (( echelon-level-of-concern  :type Military-Unit)
+            ( concerned-mobility-corridor          :type Mobility-Corridor-Doctrinal-Width
+                :facets ((documentation "A unit looks down two echelons when it is looking
+                            for mobility-corridors"))))
+     :annotations ((documentation "Areas where a force will be canalized due to terrain constructions.
+     mobility corridor is relatively free of obstacles and allows military forces to
+    capitalize on the principles of mass and speed. When identifying a mobility corridor a unit
+    is looking for relatively open areas through which it can move when deployed. Mobility corridors
+    characteristically follow the direction of roads and trails and, generally traverse unrestricted
+    terrain.")))
+
+
+
+
+
+    (defconcept Approach-Avenue
+     :is (:and Geospatial-Constraints
+                Geographical-Area
+               (exactly  1  type-of-echelon)
+               (at-least 1  corridor-of-moving)
+               (exactly  1  max-distance-between-mobility-corridor))
+     :annotations ((documentation "Avenues of Approach are determined by combining two or more
+     mobility corridors, provide the corridors are close enough together to provide for mutual support.
+     A unit will look down one echelon when it is looking for Avenues of Approach.")))
+
+     ;;;;;
+     ;;;;Note: we need add a LOOM axiom to calculate an Avenue-Of-Approach width
+     ;;;;based on number of mobility corridors (MCs), width
+     ;;;;of mobility corridors and distances between MCs.
+
+
+
+
+(defconcept Maneuver-Room
+   :is  (:and Geospatial-Constraints
+               Geographical-Area
+               (at-least 1 avenue-of-approach)
+               (exactly  1 open-or-closed-terrain))
+   :annotations ((documentation "Maneuver Room is defined as the total number of avenue of
+                 approaches(AA) and the maneuver space(width) of each of the AAs, and whether the
+                 terrain is open ot close.")))
+
+
+
+   ;;;;
+   ;;;;Note: we need add a LOOM axiom to calculate a maneuver
+   ;;;;romm size based on number of avenue of approaches (AAs), widths of AAs and open or
+   ;;;;close terrain.
+
+
+
+ ;;;;;;;;;;;;; relations  ;;;;;;;;;;;;;;;;;;;;;;
+(defrelation    type-of-echelon
+    :domain     Approach-Avenue
+    :range      Military-Unit)
+
+(defrelation      corridor-of-moving
+    :domain      Approach-Avenue
+    :range       Mobility-Corridor)
+
+(defrelation    max-distance-between-mobility-corridor
+    :domain     Approach-Avenue
+    :range      Number
+    :annotations ((documentation "Kilometers")))
+
+(defrelation      avenue-of-approach
+        :domain   Maneuver-Room
+        :range    Approach-Avenue)
+
+(defrelation    open-or-closed-terrain
+        :domain     Maneuver-Room
+        :range      Terrain-Set)
+
+
+;;;;;;;;;;;;;;;;;;; subtype of Geospatial-Constraints;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defconcept Engagement-Area
+    :is (:and Geospatial-Constraints
+            Geographical-Area)
+    :roles (( range  :type Integer)
+            (ideal-planning-range   :type Integer))
+    :annotations ((documentation "engagement area (EA) is an area along an enemy avenue of
+    approach where the commander intends to contain and destroy an enemy force with the massed
+    fires of all available weapons. The size and shape of the engagement area is determined by
+    the relatively unobstructed intervisibility from the weapon systems in their firing positions
+    and the maximum range of those weapons. Sectors of fire are usually assigned to subordinates
+    to prevent fratricide.")))
+
+;;;comment Engagement-Criteria is a place holder for possible roles relate to this class
+(defconcept Engagement-Criteria
+   :is-primitive  Geospatial-Constraints
+   :annotations ((documentation "Those circumstances that allow engagement of an enemy force
+   without a specific command to do so. Examples are a point or line on the ground that an
+   enemy crosses or an event or action that an enemy does."))
+   )
+
+;;;comment Engagement-Priority is a place holder for possible roles relate to this class
+(defconcept Engagement-Priority
+   :is-primitive  Geospatial-Constraints
+   :annotations ((documentation "The sequence for attack of targets in order of importance
+   assigned to specific weapon systems to facilitate the destruction of threat vehicles
+   expected in an armored formation. Engagement priorities are assigned based on the type
+   or level of threat at different ranges to best match organic weapon system capabilities
+   against threat vulnerabilities."))
+   )
+
+;;;;======================
+;;; Assembly-Area (AA)
+
+(defconcept Assembly-Area
+   :is (:and Geospatial-Constraints
+            Geographical-Area
+              (exactly 1 accessibility)
+              (exactly 1 intervisibility)
+              (exactly 1 trafficability)
+              (at-least 1 criteria-of-evaluation)
+              (at-least 1 fields-of-fire)
+              (at-least 1 size-enumeration))
+   :annotations ((documentation "An area in which a command is assembled preparatory
+   to further action.")))
+
+(defconcept Evaluation-Ranking
+    :is-primitive Geospatial-Constraints
+    :roles ((rate           :type Evaluation-Rates-Set)
+            (point-weight    :type Integer)))
+
+
+(defconcept Evaluation-Criteria
+     :is-primitive Geospatial-Constraints
+     :roles ((woods  :type Evaluation-Ranking)
+             (severly-restricted-terrain-inside-AA  :type Evaluation-Ranking)
+             (roads-and-trails  :type Evaluation-Ranking)
+             (terrain-shielding :type Evaluation-Ranking)
+             (fields-of-fire    :type Evaluation-Ranking)
+             (grouping          :type Evaluation-Ranking))
+     :annotations ((documentation "The evaluation criteria are derived from a careful examination of each
+     particular case and collective judgement in rank ording and weighting. It evaluates the selection of a Assembly Area in
+     quantitatively based on a point system.")))
+
+
+
+
+;;;;;;==========================
+;;;; relation relate to AA
+
+(defrelation accessibility
+    "Assembly Area (AA) needs to be accessible for all units that will
+    entry AA."
+    :domain Assembly-Area
+    :range String
+   )
+
+
+(defrelation  intervisibility
+    "Desire to place an Assembly Area(AA) with high ground dividing AA
+    and enemy."
+    :domain Assembly-Area
+    :range String
+)
+
+(defrelation  trafficability
+     "Terrain within Assembly Area must be trafficable by all."
+    :domain Assembly-Area
+    :range String
+)
+
+(defrelation  criteria-Of-Evaluation
+    "in quantitatively evaluated the selection of a Assembly-Area based
+                on a point system."
+    :domain  Assembly-Area
+    :range  Evaluation-Criteria
+)
+
+
+ (defrelation size-enumeration
+    :domain Assembly-Area
+    :range String)
+
+
+;;;;;;;;================================
+;;; concept Boundary
+
+(defconcept  Boundary
+    :is-primitive  Geospatial-Constraints)
+
+;;;;;;; subtype of Boundary;;;;;;;
+
+(defconcept Forward-Line-Of-Troops
+    :is-primitive Boundary
+    :annotations ((documentation "A line which indicates the most forward positions of friendly forces
+    in any kind of military operation at a specific time.")))
+
+
+
+(defconcept Line-Of-Departure
+    :is-primitive Boundary
+    :annotations (( documentation "A line designated to coordinate the departure of attack elements.")))
+
+(defconcept Phase-Line
+    :is-primitive
+        ( :and Boundary
+           (at-least 1 coordination-of-line)
+           (at-least 1 limit-of-advance)
+           (at-least 1 passage-lane))
+    :annotations ((documentation "A line used to control and coordination.")))
+
+
+
+(defconcept Coordination-fire-Line
+    :is-primitive Boundary
+    :annotations (( documentation "A Line beyond which conventional surface fires support.")))
+
+(defconcept Limit-Of-Advance
+    :is-primitive Boundary
+    :annotations (( documentation "An easily recognized terrain feature beyond
+    which attacking elements will not advance.")))
+
+(defconcept Passage-Lane
+	:is-primitive (:and Boundary
+	(exactly 1 size-of-force))
+)
+(defrelation size-of-force
+	:domain Boundary
+	:range Number)
+
+
+
+;;;;;; relations relate to Phase-Line  ;;;;;;
+(defrelation coordination-of-line
+    :domain Phase-Line
+    :range Coordination-fire-Line)
+
+(defrelation    limit-of-advance
+    :domain Phase-Line
+    :range  Limit-Of-Advance)
+
+(defrelation passage-lane
+    :domain  Phase-Line
+   :range  Passage-Lane)
+
+
+
+;;;==================================================
+;;; concept Position
+
+(defconcept Position
+   :is-primitive (:and Geospatial-Constraints
+          (at-least 1 location-of-position)
+	  (exactly 1 friendly-or-enemy))
+)
+;; now after comment  out it is ok
+ (defconcept Location
+    :is (:and  Geographical-Area
+      Geospatial-Constraints))           ;;;;?????????
+
+ (defrelation friendly-or-enemy
+	:domain Position
+	:range String)
+
+ (defrelation location-of-position
+    :domain Position
+    :range Location)
+
+
+
+ ;;;;=============================
+ ;;; subtype of Position
+
+ (defconcept Attack-Position
+    :is-primitive Position
+    :annotations ((documentation "The last position occupied by the assault echelon
+    before crossing the line of departure.")))
+
+
+ (defconcept  ListingPost
+    :is-primitive Position)
+
+ (defconcept  Passage-Point
+    :is-primitive Position
+    :annotations ((documentation "A specifically designated place where units will pass through
+    on another.")))
+
+(defconcept  Patrolling-Area
+    :is-primitive Position
+    )
+
+(defconcept Target-Reference-Point
+    :is-primitive Position
+    :annotations ((documentation "An easily recongnized point on the ground used to initate distribute
+    and control fire.")))
+
+
+;;;;===================================
+;;;;concept Unit-Immediate-Area
+
+(defconcept Unit-Immediate-Area
+    :is-primitive (:and Geospatial-Constraints
+              (at-least 1 of-battle))
+    :annotations ((documentation "A unit's immediate area encompasses an area extending out
+    from its current defensive positions to the range of an enemy's direct fire weapons. It is
+    defined by \"position\" and \"Enemy weapon system\".")))
+
+(defrelation of-battle
+    :domain Unit-Immediate-Area
+    :range Battle)
+
+
+
+
+;;;NEW VERSION
+ ;;;;;;;;;;;;;;;==========================================
+ ;;;;;;;;;; concept Formation-Selection-Constraint
+
+ (defconcept Formation-Selection-Constraint
+   :is (:and Geospatial-Constraints
+            Geographical-Area
+          (exactly 1 formation-type)
+          (exactly 1 minimum-subunit-required)
+          (at-least 1 requirement-of-frontage)
+          (exactly 1 room-of-maneuver)
+          (exactly 1 characteristic-of-formation))
+   :annotations ((documentation "How a unit selects a particular formation is determined by
+   applying four criteria: Formation size, Maneuver Room, Frontage Requirement, and Enemy Situation.
+   All these information will help a critiquer to check the feasibility of the unit formations
+   chosen in a COA.")))
+
+
+
+
+(defconcept Formation-Characteristic
+    :is (:and Geospatial-Constraints
+            Geographical-Area)
+    :roles (( formation      :type Formation-Set)
+            ( likelihood-of-contact-enemy      :type Likelihood-Of-Contact-Set
+                :facets(( documentation "Using a base figure of five kilometers a unit can
+                    determine the likelihood of contact with enemy forces" )))
+            ( combat-power-forward      :type  Characteristics-Rating-Set
+                :facets (( documentation "Provides maximum firepower forward")))
+            ( command-and-control       :type Characteristics-Rating-Set
+                :facets (( documentation "Control of subordinate units is easier")))
+            ( flexibility               :type  Characteristics-Rating-Set
+                :facets (( documentation "Provides for quick transition to another foramtion or
+                            movement against a detected threat" )))
+            ( flank-security             :type  Characteristics-Rating-Set
+                :facets (( documentation "Provides all around security of the force")))
+            ( speed                      :type  Characteristics-Rating-Set
+                :facets (( documentation "Facilitates speed of movement")))
+            ( maneuver-space             :type  Characteristics-Rating-Set
+                :facets (( documentation "Allows sufficient space for a higher headquarters to maneuver
+                                        subordinates in and/or out of various formations" )))
+          )
+     :annotations (( documentation " A unit selects a formation by comparing what is known or unknown
+                    about the enemy with the advantages and disadvantages of ezch possible formation." ))
+  )
+
+
+
+(defconcept Frontage-Requirement
+    :is (:and Geospatial-Constraints
+            Geographical-Area)
+    :roles (( formation     :type Formation-Set)
+            ( subunit-numbers   :type Integer)
+            ( units-frontage-requirement  :type Integer))
+    :annotations ((documentation "Frontage Requirement is defined as the total width of a unit's
+    frontage. A unit calculated the width of its frontage by adding the width of all of its
+    subordinate unit's with the total width between each of its subordinate units.")))
+
+;;;;;;;;;;;;relations relate to Formation-Selection-Constraint;;;;;;;;;;;;;;;;;;
+
+ (defrelation  formation-type
+    :domain Constraints
+    :range Formation-Set)
+
+(defrelation minimum-subunit-required
+   :domain  Formation-Selection-Constraint
+   :range Integer)
+
+  (defrelation   requirement-of-frontage
+    :domain     Formation-Selection-Constraint
+    :range      Frontage-Requirement)
+
+ (defrelation   room-of-maneuver
+    :domain     Formation-Selection-Constraint
+    :range      Maneuver-Room)
+
+ (defrelation   characteristic-of-formation
+    :domain     Formation-Selection-Constraint
+    :range      Formation-Characteristic )
+
+
+
+
+;;(defconcept Passage-Lane
+ ;;   :is-primitive  Boundary
+  ;;  :roles ( :type Number)
+   ;; :annotations ((documentation "A route through an enemy or friendly obstacle that
+    ;;provides a passing force safe passage.")))
+;;)
+
+
+
+;;The above concept definition generate Error: Cannot change the value of :COA-CONSTRAINTS^TYPE -- it is a
+ ;;      constant.
+  ;;[condition type: PROGRAM-ERROR]
+
+
+;;(defconcept OPFOR-Artillery-And-Mortar-Capability
+ ;;               :is-primitive Artillery-Capability
+  ;;              :roles ( sustained-rounds-per-hour   :type Integer))
+   ;;                         :facets ((documentation "rounds-per-hour"))))
+
+;; this generate Syntax Error:   Illegal expression (DOCUMENTATION
+                ;;                    "rounds-per-hour") where symbol expected.
+;;Error occurred in the definition:
+ ;;  (DEFCONCEPT OPFOR-ARTILLERY-AND-MORTAR-CAPABILITY :IS-PRIMITIVE
+  ;;             ARTILLERY-CAPABILITY :ROLES
+   ;;            (SUSTAINED-ROUNDS-PER-HOUR :TYPE INTEGER :FACETS
+    ;;            ((DOCUMENTATION "rounds-per-hour"))))
+
+
+(defconcept OPFOR-Artillery-And-Mortar-Capability
+               :is-primitive (:and Artillery-Capability
+		(exactly 1 sustained-rounds  )))
+(defrelation sustained-rounds
+	" unit is rounnds/hour"
+	:domain Artillery-Capability
+	:range Integer
+)
+
+;;;;;; finally it is successfully loaded
+
+
+ ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;; Instance of Unit-Rate-Of-Movement
+;;;;; consider the terrain type and day-or-night conditions
+;;;;; ( from document Task Move Tactically)
+
+;;;;; Foot Infantry
+( tellm
+    (Unit-Rate-Of-Movement Foot-Unrestricted-Day0)
+    (unit-category Foot-Unrestricted-Day0 'Foot-Infantry)
+    (echelon    Foot-Unrestricted-Day0 Infantry-Unit)
+    (terrain-type  Foot-Unrestricted-Day0 'Unrestricted)
+    (day-or-night  Foot-Unrestricted-Day0   'Day)
+    (nominal-speed  Foot-Unrestricted-Day0 4.0))
+
+
+
+( tellm
+    (Unit-Rate-Of-Movement Foot-Unrestricted-Night0)
+    (unit-category Foot-Unrestricted-Night0 'Foot-Infantry)
+    (echelon    Foot-Unrestricted-Night0 Infantry-Unit)
+    (terrain-type  Foot-Unrestricted-Night0 'Unrestricted)
+    (day-or-night  Foot-Unrestricted-Night0   'Night)
+    (nominal-speed  Foot-Unrestricted-Night0 3.2))
+
+( tellm
+    (Unit-Rate-Of-Movement Foot-Restricted-Day0)
+    (unit-category Foot-Restricted-Day0 'Foot-Infantry)
+    (echelon    Foot-Restricted-Day0 Infantry-Unit)
+    (terrain-type  Foot-Restricted-Day0 'Restricted)
+    (day-or-night  Foot-Restricted-Day0   'Day)
+    (nominal-speed  Foot-Restricted-Day0 2.4))
+
+( tellm
+    (Unit-Rate-Of-Movement Foot-SeverelyRestricted-Day0)
+    (unit-category Foot-SeverelyRestricted-Day0 'Foot-Infantry)
+    (echelon    Foot-SeverelyRestricted-Day0 Infantry-Unit)
+    (terrain-type  Foot-SeverelyRestricted-Day0 'SeverelyRestricted)
+    (day-or-night  Foot-SeverelyRestricted-Day0   'Day)
+    (nominal-speed  Foot-SeverelyRestricted-Day0 1.0))
+
+  ( tellm
+    (Unit-Rate-Of-Movement Foot-SeverelyRestricted-Night0)
+    (unit-category Foot-SeverelyRestricted-Night0 'Foot-Infantry)
+    (echelon    Foot-SeverelyRestricted-Night0 Infantry-Unit)
+    (terrain-type  Foot-SeverelyRestricted-Night0 'SeverelyRestricted)
+    (day-or-night  Foot-SeverelyRestricted-Night0   'Night)
+    (nominal-speed  Foot-SeverelyRestricted-Night0  0.25))
+
+    ;;;;data in form is 0.1-0.5. Here is the average value
+
+    ;;;; Armored or Mechanized Infantry
+
+    ( tellm
+    (Unit-Rate-Of-Movement Armored-Or-Mechanized-Unrestricted-Day0)
+    (unit-category Armored-Or-Mechanized-Unrestricted-Day0 'Armored-Or-Mechanized-Infantry)
+    (echelon    Armored-Or-Mechanized-Unrestricted-Day0 Infantry-Unit)
+    (terrain-type  Armored-Or-Mechanized-Unrestricted-Day0 'Unrestricted)
+    (day-or-night  Armored-Or-Mechanized-Unrestricted-Day0   'Day)
+    (nominal-speed  Armored-Or-Mechanized-Unrestricted-Day0  24))
+
+ ( tellm
+    (Unit-Rate-Of-Movement Armored-Or-Mechanized-Unrestricted-Night0)
+    (unit-category Armored-Or-Mechanized-Unrestricted-Night0 'Armored-Or-Mechanized-Infantry)
+    (echelon    Armored-Or-Mechanized-Unrestricted-Night0 Infantry-Unit)
+    (terrain-type  Armored-Or-Mechanized-Unrestricted-Night0 'Unrestricted)
+    (day-or-night  Armored-Or-Mechanized-Unrestricted-Night0   'Night-With-Lights)
+    (nominal-speed  Armored-Or-Mechanized-Unrestricted-Night0 24))
+
+( tellm
+    (Unit-Rate-Of-Movement Armored-Or-Mechanized-Restricted-Day0)
+    (unit-category Armored-Or-Mechanized-Restricted-Day0 'Armored-Or-Mechanized-Infantry)
+    (echelon    Armored-Or-Mechanized-Restricted-Day0 Infantry-Unit)
+    (terrain-type  Armored-Or-Mechanized-Restricted-Day0 'Restricted)
+    (day-or-night  Armored-Or-Mechanized-Restricted-Day0   'Day)
+    (nominal-speed  Armored-Or-Mechanized-Restricted-Day0 16))
+
+
+( tellm
+    (Unit-Rate-Of-Movement Armored-Or-Mechanized-Restricted-Night0)
+    (unit-category Armored-Or-Mechanized-Restricted-Night0 'Armored-Or-Mechanized-Infantry)
+    (echelon    Armored-Or-Mechanized-Restricted-Night0 Infantry-Unit)
+    (terrain-type  Armored-Or-Mechanized-Restricted-Night0 'Restricted)
+    (day-or-night  Armored-Or-Mechanized-Restricted-Night0   'Night-Blockedout-Drive)
+    (nominal-speed  Armored-Or-Mechanized-Restricted-Night0 8))
+
+   ( tellm
+    (Unit-Rate-Of-Movement Armored-Or-Mechanized-SeverelyRestricted-Day0)
+    (unit-category Armored-Or-Mechanized-SeverelyRestricted-Day0 'Armored-Or-Mechanized-Infantry)
+    (echelon    Armored-Or-Mechanized-SeverelyRestricted-Day0 Infantry-Unit)
+    (terrain-type  Armored-Or-Mechanized-SeverelyRestricted-Day0 'SeverelyRestricted)
+    (day-or-night  Armored-Or-Mechanized-SeverelyRestricted-Day0   'Day)
+    (nominal-speed  Armored-Or-Mechanized-SeverelyRestricted-Day0 1.0))
+
+  ( tellm
+    (Unit-Rate-Of-Movement Armored-Or-Mechanized-SeverelyRestricted-Night0)
+    (unit-category Armored-Or-Mechanized-SeverelyRestricted-Night0 'Armored-Or-Mechanized-Infantry)
+    (echelon    Armored-Or-Mechanized-SeverelyRestricted-Night0 Infantry-Unit)
+    (terrain-type  Armored-Or-Mechanized-SeverelyRestricted-Night0 'SeverelyRestricted)
+    (day-or-night  Armored-Or-Mechanized-SeverelyRestricted-Night0   'Night)
+    (nominal-speed  Armored-Or-Mechanized-SeverelyRestricted-Night0  1.0))
+
+   ;;; form's data is 1.5 - 0.5, Here is the average value
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;Instance of Unit-Rate-Of-Movement
+;;;;;; ( get data from unit information form )
+
+;;; Unit-Category ARMOR
+(tellm
+     (Unit-Rate-Of-Movement  Armor-Rate-Of-Movement0)
+     (unit-category     Armor-Rate-Of-Movement0 'ARMOR)
+     (echelon   Armor-Rate-Of-Movement0    Battalion)
+     (description Armor-Rate-Of-Movement0 "Self-Propelled-Artillery-Battalion")
+     (Maximum-Speed   Armor-Rate-Of-Movement0  55)
+     (Nominal-Speed   Armor-Rate-Of-Movement0  24))
+
+
+
+
+(tellm
+     (Unit-Rate-Of-Movement  Armor-Rate-Of-Movement1)
+     (unit-category     Armor-Rate-Of-Movement1 'ARMOR)
+     (echelon   Armor-Rate-Of-Movement1    Brigade)
+     (description Armor-Rate-Of-Movement1 "Division-Artillery-Brigade")
+     (Maximum-Speed  Armor-Rate-Of-Movement1  65)
+     (Nominal-Speed  Armor-Rate-Of-Movement1  24))
+
+
+;;; Unit-Category  Artillery
+(tellm
+     (Unit-Rate-Of-Movement  Arty-Rate-Of-Movement0)
+     (unit-category     Arty-Rate-Of-Movement0 'Artillery)
+     (echelon   Arty-Rate-Of-Movement0    Battalion)
+     (description Arty-Rate-Of-Movement0 "Self-Propelled-Artillery-Battalion")
+     (Maximum-Speed  Arty-Rate-Of-Movement0  55)
+     (Nominal-Speed  Arty-Rate-Of-Movement0  24))
+
+ (tellm
+     (Unit-Rate-Of-Movement  Arty-Rate-Of-Movement1)
+     (unit-category     Arty-Rate-Of-Movement1 'Artillery)
+     (echelon   Arty-Rate-Of-Movement1    Battery)
+     (description Arty-Rate-Of-Movement1 "Rocket-9-units")
+     (Maximum-Speed  Arty-Rate-Of-Movement1  55)
+     (Nominal-Speed  Arty-Rate-Of-Movement1  24))
+
+ (tellm
+     (Unit-Rate-Of-Movement  Arty-Rate-Of-Movement2)
+     (unit-category     Arty-Rate-Of-Movement2 'Artillery)
+     (echelon   Arty-Rate-Of-Movement2    Brigade)
+     (description Arty-Rate-Of-Movement2 "Division-Artillery-Brigade" )
+     (Maximum-Speed  Arty-Rate-Of-Movement2  65)
+     (Nominal-Speed  Arty-Rate-Of-Movement2  24))
+
+ (tellm
+     (Unit-Rate-Of-Movement  Arty-Rate-Of-Movement3)
+     (unit-category     Arty-Rate-Of-Movement3 'Artillery)
+     (echelon   Arty-Rate-Of-Movement3   Battalion)
+     (description Arty-Rate-Of-Movement3 "Rocket-27-units")
+     (Maximum-Speed  Arty-Rate-Of-Movement3  55)
+     (Nominal-Speed  Arty-Rate-Of-Movement3  24))
+
+ ;;; Unit-Category Self-Propelled-Artillery
+
+ (tellm
+     (Unit-Rate-Of-Movement  ArtySP-Rate-Of-Movement0)
+     (unit-category     ArtySP-Rate-Of-Movement0 'Self-Propelled-Artillery)
+     (echelon   ArtySP-Rate-Of-Movement0    Battalion)
+     (description ArtySP-Rate-Of-Movement0 "Self-Propelled-Artillery-Battalion")
+     (Maximum-Speed  ArtySP-Rate-Of-Movement0  40)
+     (Nominal-Speed  ArtySP-Rate-Of-Movement0  15))
+
+(tellm
+     (Unit-Rate-Of-Movement  ArtySP-Rate-Of-Movement1)
+     (unit-category     ArtySP-Rate-Of-Movement1 'Self-Propelled-Artillery)
+     (echelon   ArtySP-Rate-Of-Movement1    Brigade)
+     (description ArtySP-Rate-Of-Movement1 "Division-Artillery-Brigade"  )
+     (Maximum-Speed  ArtySP-Rate-Of-Movement1  40)
+     (Nominal-Speed  ArtySP-Rate-Of-Movement1  15))
+
+ (tellm
+     (Unit-Rate-Of-Movement  ArtySP-Rate-Of-Movement2)
+     (unit-category     ArtySP-Rate-Of-Movement2 'Self-Propelled-Artillery)
+     (echelon   ArtySP-Rate-Of-Movement2    Battalion)
+     (description ArtySP-Rate-Of-Movement2 "Mech")
+     (Maximum-Speed  ArtySP-Rate-Of-Movement2  65)
+     (Nominal-Speed  ArtySP-Rate-Of-Movement2  24))
+
+ (tellm
+     (Unit-Rate-Of-Movement  ArtySP-Rate-Of-Movement3)
+     (unit-category     ArtySP-Rate-Of-Movement3 'Self-Propelled-Artillery)
+     (echelon   ArtySP-Rate-Of-Movement3     Squadron)
+     (description ArtySP-Rate-Of-Movement3 "48TOW,40,CFV, 6 Mort, 12")
+     (Maximum-Speed  ArtySP-Rate-Of-Movement3  64)
+     (Nominal-Speed  ArtySP-Rate-Of-Movement3  24))
+
+
+ ;;; Unit-Category Ground Maneuver
+
+ (tellm
+     (Unit-Rate-Of-Movement   GroundMNVR-Rate-Of-Movement0)
+     (unit-category     GroundMNVR-Rate-Of-Movement0 'Ground-Maneuver)
+     (echelon   GroundMNVR-Rate-Of-Movement0    Brigade)
+     (description GroundMNVR-Rate-Of-Movement0 "Helo-Assault"  )
+     (Maximum-Speed  GroundMNVR-Rate-Of-Movement0  200)
+     (Nominal-Speed  GroundMNVR-Rate-Of-Movement0  24))
+
+
+ (tellm
+     (Unit-Rate-Of-Movement   GroundMNVR-Rate-Of-Movement1)
+     (unit-category     GroundMNVR-Rate-Of-Movement1 'Ground-Maneuver)
+     (echelon   GroundMNVR-Rate-Of-Movement1    Individual)
+     (description GroundMNVR-Rate-Of-Movement1 "Kiowa-Helo-Transport")
+     (Maximum-Speed  GroundMNVR-Rate-Of-Movement1  152)
+     (Nominal-Speed  GroundMNVR-Rate-Of-Movement1  24))
+
+
+ ;;; Unit-Category Self-Propelled-Howitzer
+(tellm
+     (Unit-Rate-Of-Movement  HowSP-Rate-Of-Movement0)
+     (unit-category     HowSP-Rate-Of-Movement0 'Self-Propelled-Howitzer)
+     (echelon   HowSP-Rate-Of-Movement0    Battalion)
+     (description HowSP-Rate-Of-Movement0 "122-mm Towed Howitze")
+     (Maximum-Speed  HowSP-Rate-Of-Movement0  40)
+     (Nominal-Speed  HowSP-Rate-Of-Movement0  20))
+
+
+;;; Unit-Category Towed-Howitzer
+
+ (tellm
+     (Unit-Rate-Of-Movement  HowTOW-Rate-Of-Movement0)
+     (unit-category     HowTOW-Rate-Of-Movement0 ' Towed-Howitzer)
+     (echelon   HowTOW-Rate-Of-Movement0    Individual)
+     (description HowTOW-Rate-Of-Movement0 "Infantry")
+     (Maximum-Speed  HowTOW-Rate-Of-Movement0  5)
+     (Nominal-Speed  HowTOW-Rate-Of-Movement0  2))
+
+ (tellm
+    (Unit-Rate-Of-Movement  HowTOW-Rate-Of-Movement1)
+     (unit-category     HowTOW-Rate-Of-Movement1 'Towed-Howitzer )
+     (echelon   HowTOW-Rate-Of-Movement1    Brigade)
+     (description HowTOW-Rate-Of-Movement1 "18-Tow,27-Drgn,4-107mm,9")
+     (Maximum-Speed  HowTOW-Rate-Of-Movement1  64)
+     (Nominal-Speed  HowTOW-Rate-Of-Movement1  24))
+
+ (tellm
+    (Unit-Rate-Of-Movement  HowTOW-Rate-Of-Movement2)
+     (unit-category     HowTOW-Rate-Of-Movement2 'Towed-Howitzer)
+     (echelon   HowTOW-Rate-Of-Movement2     Battalion)
+     (description HowTOW-Rate-Of-Movement2 "BMP,120mm,Mortar,SAM,30")
+     (Maximum-Speed  HowTOW-Rate-Of-Movement2  40)
+     (Nominal-Speed  HowTOW-Rate-Of-Movement2  24))
+
+ (tellm
+    (Unit-Rate-Of-Movement  HowTOW-Rate-Of-Movement3)
+     (unit-category     HowTOW-Rate-Of-Movement3 'Towed-Howitzer)
+     (echelon   HowTOW-Rate-Of-Movement3     Division)
+     (description HowTOW-Rate-Of-Movement3 "Infantry")
+     (Maximum-Speed  HowTOW-Rate-Of-Movement3  5)
+     (Nominal-Speed  HowTOW-Rate-Of-Movement3  2))
+
+  (tellm
+     (Unit-Rate-Of-Movement  HowTOW-Rate-Of-Movement4)
+     (unit-category     HowTOW-Rate-Of-Movement4 'Towed-Howitzer)
+     (echelon   HowTOW-Rate-Of-Movement4     Battalion)
+     (description HowTOW-Rate-Of-Movement4 "18-Tow,27-Drgn,4-107mm,9")
+     (Maximum-Speed  HowTOW-Rate-Of-Movement4  64)
+     (Nominal-Speed  HowTOW-Rate-Of-Movement4  24))
+
+
+;;;Unit-Category Infantry
+
+ (tellm
+    (Unit-Rate-Of-Movement   Infantry-Rate-Of-Movement0)
+     (unit-category      Infantry-Rate-Of-Movement0 'Infantry)
+     (echelon    Infantry-Rate-Of-Movement0     Individual)
+     (description  Infantry-Rate-Of-Movement0 "AntiArmor")
+     (Maximum-Speed  Infantry-Rate-Of-Movement0   300)
+     (Nominal-Speed  Infantry-Rate-Of-Movement0  24))
+
+ (tellm
+     (Unit-Rate-Of-Movement   Infantry-Rate-Of-Movement1)
+     (unit-category      Infantry-Rate-Of-Movement1 'Infantry)
+     (echelon    Infantry-Rate-Of-Movement1      Brigade)
+     (description  Infantry-Rate-Of-Movement1 "4-Tow,18-Drgn,4-81mm,6-60mm")
+     (Maximum-Speed  Infantry-Rate-Of-Movement1   64)
+     (Nominal-Speed  Infantry-Rate-Of-Movement1  24))
+
+ (tellm
+     (Unit-Rate-Of-Movement   Infantry-Rate-Of-Movement2)
+     (unit-category      Infantry-Rate-Of-Movement2 'Infantry)
+     (echelon    Infantry-Rate-Of-Movement2     Battalion)
+     (description  Infantry-Rate-Of-Movement2 "4-Tow,18-Drgn,4-81mm,6-60mm")
+     (Maximum-Speed  Infantry-Rate-Of-Movement2   64)
+     (Nominal-Speed  Infantry-Rate-Of-Movement2  24))
+
+ ;;;Unit-Category Light-Infantry
+
+  (tellm
+     (Unit-Rate-Of-Movement   InfantryLT-Rate-Of-Movement0)
+     (unit-category      InfantryLT-Rate-Of-Movement0 'Light-Infantry)
+     (echelon    InfantryLT-Rate-Of-Movement0   Brigade   )
+     (description  InfantryLT-Rate-Of-Movement0 "Mechanized,2-Mechanized-Bn,1-tank-Bn" )
+     (Maximum-Speed  InfantryLT-Rate-Of-Movement0   64)
+     (Nominal-Speed  InfantryLT-Rate-Of-Movement0  24))
+
+   (tellm
+     (Unit-Rate-Of-Movement   InfantryLT-Rate-Of-Movement1)
+     (unit-category      InfantryLT-Rate-Of-Movement1 'Light-Infantry)
+     (echelon    InfantryLT-Rate-Of-Movement1    Individual   )
+     (description  InfantryLT-Rate-Of-Movement1 "AntiArmor-Missile" )
+     (Maximum-Speed  InfantryLT-Rate-Of-Movement1   64)
+     (Nominal-Speed  InfantryLT-Rate-Of-Movement1  24))
+
+ (tellm
+    (Unit-Rate-Of-Movement   InfantryLT-Rate-Of-Movement2)
+     (unit-category      InfantryLT-Rate-Of-Movement2 'Light-Infantry)
+     (echelon    InfantryLT-Rate-Of-Movement2    Regiment )
+     (description  InfantryLT-Rate-Of-Movement2 "Mechanized" )
+     (Maximum-Speed  InfantryLT-Rate-Of-Movement2   65)
+     (Nominal-Speed  InfantryLT-Rate-Of-Movement2  24))
+
+ (tellm
+     (Unit-Rate-Of-Movement   InfantryLT-Rate-Of-Movement3)
+     (unit-category      InfantryLT-Rate-Of-Movement3 'Light-Infantry)
+     (echelon    InfantryLT-Rate-Of-Movement3    Individual   )
+     (description  InfantryLT-Rate-Of-Movement3 "Mechanized" )
+     (Maximum-Speed  InfantryLT-Rate-Of-Movement3   67)
+     (Nominal-Speed  InfantryLT-Rate-Of-Movement3  24))
+
+
+  (tellm
+     (Unit-Rate-Of-Movement   InfantryLT-Rate-Of-Movement4)
+     (unit-category      InfantryLT-Rate-Of-Movement4 'Light-Infantry)
+     (echelon    InfantryLT-Rate-Of-Movement4    Battalion  )
+     (description  InfantryLT-Rate-Of-Movement4 "Rocket-Launcher,BM21"  )
+     (Maximum-Speed  InfantryLT-Rate-Of-Movement4   64)
+     (Nominal-Speed  InfantryLT-Rate-Of-Movement4  24))
+
+ (tellm
+     (Unit-Rate-Of-Movement   InfantryLT-Rate-Of-Movement5)
+     (unit-category      InfantryLT-Rate-Of-Movement5 'Light-Infantry)
+     (echelon    InfantryLT-Rate-Of-Movement5    Individual   )
+     (description  InfantryLT-Rate-Of-Movement5 "AntiArmor-Missile-Carrier" )
+     (Maximum-Speed  InfantryLT-Rate-Of-Movement5   64)
+     (Nominal-Speed  InfantryLT-Rate-Of-Movement5  24))
+
+ (tellm
+     (Unit-Rate-Of-Movement   InfantryLT-Rate-Of-Movement6)
+     (unit-category      InfantryLT-Rate-Of-Movement6 'Light-Infantry)
+     (echelon    InfantryLT-Rate-Of-Movement6    Battalion   )
+     (description  InfantryLT-Rate-Of-Movement6 "Mechanized,44-IFV,14-M1A1" )
+     (Maximum-Speed  InfantryLT-Rate-Of-Movement6  65)
+     (Nominal-Speed  InfantryLT-Rate-Of-Movement6  24))
+
+
+
+ ;;; Unit-Category  Mechanized Infantry
+
+ (tellm
+     (Unit-Rate-Of-Movement   Mech-Rate-Of-Movement0)
+     (unit-category       Mech-Rate-Of-Movement0 'Mechanized-Infantry )
+     (echelon     Mech-Rate-Of-Movement0    Battalion   )
+     (description   Mech-Rate-Of-Movement0 "Mech-Heavy,12-Tow,36-Dr,54"  )
+     (Maximum-Speed   Mech-Rate-Of-Movement0   64)
+     (Nominal-Speed   Mech-Rate-Of-Movement0  24))
+
+ (tellm
+     (Unit-Rate-Of-Movement   Mech-Rate-Of-Movement1)
+     (unit-category       Mech-Rate-Of-Movement1 'Mechanized-Infantry )
+     (echelon     Mech-Rate-Of-Movement1     Battalion   )
+     (description   Mech-Rate-Of-Movement1 "Mechanized,44-IFV,14-M1A1")
+     (Maximum-Speed   Mech-Rate-Of-Movement1   65)
+     (Nominal-Speed   Mech-Rate-Of-Movement1  24))
+
+  (tellm
+     (Unit-Rate-Of-Movement   Mech-Rate-Of-Movement2)
+     (unit-category       Mech-Rate-Of-Movement2 'Mechanized-Infantry )
+     (echelon     Mech-Rate-Of-Movement2  Individual    )
+     (description   Mech-Rate-Of-Movement2 "Mechanized"  )
+     (Maximum-Speed   Mech-Rate-Of-Movement2   67)
+     (Nominal-Speed   Mech-Rate-Of-Movement2  24))
+
+  (tellm
+     (Unit-Rate-Of-Movement   Mech-Rate-Of-Movement3)
+     (unit-category       Mech-Rate-Of-Movement3 'Mechanized-Infantry )
+     (echelon     Mech-Rate-Of-Movement3   Brigade    )
+     (description   Mech-Rate-Of-Movement3 '"Mechanized-Heavy,Mechanized-Bn,1-Tk-Bn" )
+     (Maximum-Speed   Mech-Rate-Of-Movement3   65)
+     (Nominal-Speed   Mech-Rate-Of-Movement3  24))
+
+ (tellm
+     (Unit-Rate-Of-Movement   Mech-Rate-Of-Movement4)
+     (unit-category       Mech-Rate-Of-Movement4 'Mechanized-Infantry )
+     (echelon     Mech-Rate-Of-Movement4   Regiment    )
+     (description   Mech-Rate-Of-Movement4 "Armor" )
+     (Maximum-Speed   Mech-Rate-Of-Movement4   64)
+     (Nominal-Speed   Mech-Rate-Of-Movement4  24))
+
+
+ ;;; Unit-Category MLRS
+ (tellm
+     (Unit-Rate-Of-Movement    MLRS-Rate-Of-Movement0)
+     (unit-category         MLRS-Rate-Of-Movement0 'MLRS)
+     (echelon     MLRS-Rate-Of-Movement0  Individual    )
+     (description    MLRS-Rate-Of-Movement0 "Artillery-Support"  )
+     (Maximum-Speed    MLRS-Rate-Of-Movement0   64)
+     (Nominal-Speed    MLRS-Rate-Of-Movement0  24))
+
+   (tellm
+     (Unit-Rate-Of-Movement    MLRS-Rate-Of-Movement1)
+     (unit-category         MLRS-Rate-Of-Movement1 'MLRS )
+     (echelon     MLRS-Rate-Of-Movement1  Battalion    )
+     (description    MLRS-Rate-Of-Movement1 "Mortar-Battalion"  )
+     (Maximum-Speed    MLRS-Rate-Of-Movement1   55)
+     (Nominal-Speed    MLRS-Rate-Of-Movement1  24))
+
+ (tellm
+     (Unit-Rate-Of-Movement    MLRS-Rate-Of-Movement2)
+     (unit-category         MLRS-Rate-Of-Movement2 'MLRS )
+     (echelon     MLRS-Rate-Of-Movement2   Individual   )
+     (description    MLRS-Rate-Of-Movement2 "Artillery" )
+     (Maximum-Speed    MLRS-Rate-Of-Movement2    64)
+     (Nominal-Speed    MLRS-Rate-Of-Movement2  24))
+
+
+;;;Unit-Category Supply
+
+ (tellm
+     (Unit-Rate-Of-Movement     Supply-Rate-Of-Movement0)
+     (unit-category          Supply-Rate-Of-Movement0 'Supply  )
+     (echelon      Supply-Rate-Of-Movement0   Battalion   )
+     (description     Supply-Rate-Of-Movement0 "T-72,Medium-Tank" )
+     (Maximum-Speed     Supply-Rate-Of-Movement0    40)
+     (Nominal-Speed     Supply-Rate-Of-Movement0  24))
+
+(tellm
+     (Unit-Rate-Of-Movement     Supply-Rate-Of-Movement1)
+     (unit-category          Supply-Rate-Of-Movement1 'Supply  )
+     (echelon      Supply-Rate-Of-Movement1   Individual    )
+     (description     Supply-Rate-Of-Movement1 "Amor" )
+     (Maximum-Speed     Supply-Rate-Of-Movement1   55)
+     (Nominal-Speed     Supply-Rate-Of-Movement1  24))
+
+
+   ;;;Unit-Category Tank
+
+ (tellm
+     (Unit-Rate-Of-Movement     Tank-Rate-Of-Movement0)
+     (unit-category           Tank-Rate-Of-Movement0 'TANK)
+     (echelon       Tank-Rate-Of-Movement0   Brigade   )
+     (description      Tank-Rate-Of-Movement0  "Armor,2-Tank-Bn,1-Mech-Bn" )
+     (Maximum-Speed      Tank-Rate-Of-Movement0     64)
+     (Nominal-Speed      Tank-Rate-Of-Movement0  24))
+
+
+  (tellm
+     (Unit-Rate-Of-Movement     Tank-Rate-Of-Movement1)
+     (unit-category           Tank-Rate-Of-Movement1 'TANK)
+     (echelon       Tank-Rate-Of-Movement1    Battalion   )
+     (description      Tank-Rate-Of-Movement1 "Armor,58-M1A1,6-CFV,6" )
+     (Maximum-Speed      Tank-Rate-Of-Movement1     64)
+     (Nominal-Speed      Tank-Rate-Of-Movement1  24))
+
+   (tellm
+     (Unit-Rate-Of-Movement     Tank-Rate-Of-Movement2)
+     (unit-category           Tank-Rate-Of-Movement2 'TANK)
+     (echelon       Tank-Rate-Of-Movement2   Brigade   )
+     (description      Tank-Rate-Of-Movement2 "Tank-Heavy,2-Tk_Bn,1-Mechanized-Bn" )
+     (Maximum-Speed      Tank-Rate-Of-Movement2     65)
+     (Nominal-Speed      Tank-Rate-Of-Movement2  24))
+
+
+  (tellm
+     (Unit-Rate-Of-Movement     Tank-Rate-Of-Movement3)
+     (unit-category           Tank-Rate-Of-Movement3 'TANK)
+     (echelon       Tank-Rate-Of-Movement3   Battalion   )
+     (description      Tank-Rate-Of-Movement3  "Armor,44-M1A1,14-IFV")
+     (Maximum-Speed      Tank-Rate-Of-Movement3     65)
+     (Nominal-Speed      Tank-Rate-Of-Movement3  24))
+
+
+ (tellm
+     (Unit-Rate-Of-Movement     Tank-Rate-Of-Movement4)
+     (unit-category           Tank-Rate-Of-Movement4 'TANK)
+     (echelon       Tank-Rate-Of-Movement4   Individual   )
+     (description      Tank-Rate-Of-Movement4  "Armor"  )
+     (Maximum-Speed      Tank-Rate-Of-Movement4     65)
+     (Nominal-Speed      Tank-Rate-Of-Movement4  24))
+
+
+   (tellm
+     (Unit-Rate-Of-Movement     Tank-Rate-Of-Movement5)
+     (unit-category           Tank-Rate-Of-Movement5 'TANK)
+     (echelon       Tank-Rate-Of-Movement5    Individual )
+     (description      Tank-Rate-Of-Movement5  "Armor"  )
+     (Maximum-Speed      Tank-Rate-Of-Movement5     65)
+     (Nominal-Speed      Tank-Rate-Of-Movement5  24))
+
+   (tellm
+     (Unit-Rate-Of-Movement     Tank-Rate-Of-Movement6)
+     (unit-category           Tank-Rate-Of-Movement6 'TANK)
+     (echelon       Tank-Rate-Of-Movement6   Brigade   )
+     (description      Tank-Rate-Of-Movement6  "Tank-Heavy-J" )
+     (Maximum-Speed      Tank-Rate-Of-Movement6     65)
+     (Nominal-Speed      Tank-Rate-Of-Movement6  24))
+
+
+
+
+
+
+
+
+	;;; define Resource-Constraint instance
+
+ ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;;; define all Fuel-Capacity-Consumption-Constraints instance
+  ;;; Data come from COAA Unit-Infromation Report
+
+    ;;; Unit-Category Armor
+    (tellm
+        (Fuel-Capacity-Consumption-Constraint   Armor-Unit-Fuel-Constraint0)
+        (maximum-fuel-capacity  Armor-Unit-Fuel-Constraint0 2500)
+        (fuel-consumption-in-idle   Armor-Unit-Fuel-Constraint0  52.0)
+        (fuel-consumption-moving  Armor-Unit-Fuel-Constraint0  300))
+
+    (tellm
+        (Fuel-Capacity-Consumption-Constraint   Armor-Unit-Fuel-Constraint1)
+        (maximum-fuel-capacity  Armor-Unit-Fuel-Constraint1 7000)
+        (fuel-consumption-in-idle   Armor-Unit-Fuel-Constraint1  130.0)
+        (fuel-consumption-moving  Armor-Unit-Fuel-Constraint1  600))
+
+    ;;;Unit-Category Artillery
+    (tellm
+        (Fuel-Capacity-Consumption-Constraint   Artillery-Unit-Fuel-Constraint0)
+        (maximum-fuel-capacity  Artillery-Unit-Fuel-Constraint0 2500)
+        (fuel-consumption-in-idle   Artillery-Unit-Fuel-Constraint0  52.0)
+        (fuel-consumption-moving  Artillery-Unit-Fuel-Constraint0  300))
+
+    (tellm
+        (Fuel-Capacity-Consumption-Constraint   Artillery-Unit-Fuel-Constraint1)
+        (maximum-fuel-capacity  Artillery-Unit-Fuel-Constraint1 1500)
+        (fuel-consumption-in-idle   Artillery-Unit-Fuel-Constraint1  17.6)
+        (fuel-consumption-moving  Artillery-Unit-Fuel-Constraint1  94.4))
+
+   (tellm
+        (Fuel-Capacity-Consumption-Constraint   Artillery-Unit-Fuel-Constraint2)
+        (maximum-fuel-capacity  Artillery-Unit-Fuel-Constraint2 7000)
+        (fuel-consumption-in-idle   Artillery-Unit-Fuel-Constraint2  130.0)
+        (fuel-consumption-moving  Artillery-Unit-Fuel-Constraint2  600))
+
+   (tellm
+        (Fuel-Capacity-Consumption-Constraint   Artillery-Unit-Fuel-Constraint1)
+        (maximum-fuel-capacity  Artillery-Unit-Fuel-Constraint1 4500)
+        (fuel-consumption-in-idle   Artillery-Unit-Fuel-Constraint1  52.8)
+        (fuel-consumption-moving  Artillery-Unit-Fuel-Constraint1  283.2))
+
+
+   ;;;;Unit-Category Self-Propelled-Artillery
+
+   (tellm
+        (Fuel-Capacity-Consumption-Constraint   SP-Artillery-Unit-Fuel-Constraint0)
+        (maximum-fuel-capacity  SP-Artillery-Unit-Fuel-Constraint0 7000)
+        (fuel-consumption-in-idle   SP-Artillery-Unit-Fuel-Constraint0  130.0)
+        (fuel-consumption-moving  SP-Artillery-Unit-Fuel-Constraint0  600))
+
+   (tellm
+        (Fuel-Capacity-Consumption-Constraint   SP-Artillery-Unit-Fuel-Constraint1)
+        (maximum-fuel-capacity  SP-Artillery-Unit-Fuel-Constraint1 1500)
+        (fuel-consumption-in-idle   SP-Artillery-Unit-Fuel-Constraint1  30.0)
+        (fuel-consumption-moving  SP-Artillery-Unit-Fuel-Constraint1  150))
+
+
+  ;;;; Unit-Category Towed-Artillery
+
+
+  (tellm
+        (Fuel-Capacity-Consumption-Constraint   Towed-Artillery-Unit-Fuel-Constraint0)
+        (maximum-fuel-capacity  Towed-Artillery-Unit-Fuel-Constraint0 14000)
+        (fuel-consumption-in-idle   Towed-Artillery-Unit-Fuel-Constraint0  120.0)
+        (fuel-consumption-moving  Towed-Artillery-Unit-Fuel-Constraint0  800))
+
+
+   (tellm
+        (Fuel-Capacity-Consumption-Constraint   Towed-Artillery-Unit-Fuel-Constraint1)
+        (maximum-fuel-capacity  Towed-Artillery-Unit-Fuel-Constraint1 17622)
+        (fuel-consumption-in-idle   Towed-Artillery-Unit-Fuel-Constraint1  220.0)
+        (fuel-consumption-moving  Towed-Artillery-Unit-Fuel-Constraint1  2420))
+
+   ;;;; Unit-Category Ground Maneuver
+    (tellm
+        (Fuel-Capacity-Consumption-Constraint   Ground-Maneuver-Unit-Fuel-Constraint0)
+        (maximum-fuel-capacity  Ground-Maneuver-Unit-Fuel-Constraint0 30000)
+        (fuel-consumption-in-idle   Ground-Maneuver-Unit-Fuel-Constraint0  5000.0)
+        (fuel-consumption-moving  Ground-Maneuver-Unit-Fuel-Constraint0  5000))
+
+   (tellm
+        (Fuel-Capacity-Consumption-Constraint   Ground-Maneuver-Unit-Fuel-Constraint1)
+        (maximum-fuel-capacity  Ground-Maneuver-Unit-Fuel-Constraint1 92)
+        (fuel-consumption-in-idle   Ground-Maneuver-Unit-Fuel-Constraint1  40.0)
+        (fuel-consumption-moving  Ground-Maneuver-Unit-Fuel-Constraint1  40))
+
+
+   ;;;; Unit-Category Self-Propelled-Howitzer
+   (tellm
+        (Fuel-Capacity-Consumption-Constraint    Howitzer-SP-Unit-Fuel-Constraint0)
+        (maximum-fuel-capacity   SP-Howitzer-Unit-Fuel-Constraint0  10000)
+        (fuel-consumption-in-idle    SP-Howitzer-Unit-Fuel-Constraint0  50.0)
+        (fuel-consumption-moving   SP-Howitzer-Unit-Fuel-Constraint0   750))
+
+   ;;;; Unit-Category   Towed-Howitzer
+
+   (tellm
+        (Fuel-Capacity-Consumption-Constraint   Towed-Howitzer-Unit-Fuel-Constraint0)
+        (maximum-fuel-capacity  Towed-Howitzer-Unit-Fuel-Constraint0  0)
+        (fuel-consumption-in-idle   Towed-Howitzer-Unit-Fuel-Constraint0  0.0)
+        (fuel-consumption-moving  Towed-Howitzer-Unit-Fuel-Constraint0   0))
+
+  (tellm
+        (Fuel-Capacity-Consumption-Constraint   Towed-Howitzer-Unit-Fuel-Constraint1)
+        (maximum-fuel-capacity  Towed-Howitzer-Unit-Fuel-Constraint1 15000)
+        (fuel-consumption-in-idle   Towed-Howitzer-Unit-Fuel-Constraint1  160.0)
+        (fuel-consumption-moving  Towed-Howitzer-Unit-Fuel-Constraint1  2000))
+
+  (tellm
+        (Fuel-Capacity-Consumption-Constraint   Towed-Howitzer-Unit-Fuel-Constraint2)
+        (maximum-fuel-capacity  Towed-Howitzer-Unit-Fuel-Constraint2 15000)
+        (fuel-consumption-in-idle   Towed-Howitzer-Unit-Fuel-Constraint2  200.0)
+        (fuel-consumption-moving  Towed-Howitzer-Unit-Fuel-Constraint2 2000))
+
+   (tellm
+        (Fuel-Capacity-Consumption-Constraint   Towed-Howitzer-Unit-Fuel-Constraint3)
+        (maximum-fuel-capacity  Towed-Howitzer-Unit-Fuel-Constraint3 30000)
+        (fuel-consumption-in-idle   Towed-Howitzer-Unit-Fuel-Constraint3 580.5)
+        (fuel-consumption-moving  Towed-Howitzer-Unit-Fuel-Constraint3  6426))
+
+   (tellm
+        (Fuel-Capacity-Consumption-Constraint   Towed-Howitzer-Unit-Fuel-Constraint4)
+        (maximum-fuel-capacity  Towed-Howitzer-Unit-Fuel-Constraint4 5575)
+        (fuel-consumption-in-idle   Towed-Howitzer-Unit-Fuel-Constraint4  64.5)
+        (fuel-consumption-moving  Towed-Howitzer-Unit-Fuel-Constraint4  714))
+
+   ;;;; Unit-Category Infantry
+   (tellm
+        (Fuel-Capacity-Consumption-Constraint   Infantry-Unit-Fuel-Constraint0)
+        (maximum-fuel-capacity  Infantry-Unit-Fuel-Constraint0  150)
+        (fuel-consumption-in-idle   Infantry-Unit-Fuel-Constraint0  100.0)
+        (fuel-consumption-moving  Infantry-Unit-Fuel-Constraint0   100))
+
+
+   (tellm
+        (Fuel-Capacity-Consumption-Constraint   Infantry-Unit-Fuel-Constraint1)
+        (maximum-fuel-capacity  Infantry-Unit-Fuel-Constraint1 9000)
+        (fuel-consumption-in-idle   Infantry-Unit-Fuel-Constraint1  100.0)
+        (fuel-consumption-moving  Infantry-Unit-Fuel-Constraint1  1100))
+
+   (tellm
+        (Fuel-Capacity-Consumption-Constraint   Infantry-Unit-Fuel-Constraint2)
+        (maximum-fuel-capacity  Infantry-Unit-Fuel-Constraint2  3090)
+        (fuel-consumption-in-idle   Infantry-Unit-Fuel-Constraint2  37.0)
+        (fuel-consumption-moving  Infantry-Unit-Fuel-Constraint2   396))
+
+
+   ;;; Unit-Category Light Infantry
+   (tellm
+        (Fuel-Capacity-Consumption-Constraint   Light-Infantry-Unit-Fuel-Constraint0)
+        (maximum-fuel-capacity  Light-Infantry-Unit-Fuel-Constraint0  60150)
+        (fuel-consumption-in-idle   Light-Infantry-Unit-Fuel-Constraint0  1315.0)
+        (fuel-consumption-moving  Light-Infantry-Unit-Fuel-Constraint0   7072))
+
+   (tellm
+        (Fuel-Capacity-Consumption-Constraint   Light-Infantry-Unit-Fuel-Constraint1)
+        (maximum-fuel-capacity  Light-Infantry-Unit-Fuel-Constraint1  95)
+        (fuel-consumption-in-idle   Light-Infantry-Unit-Fuel-Constraint1  1.0)
+        (fuel-consumption-moving  Light-Infantry-Unit-Fuel-Constraint1   12.6))
+
+   (tellm
+        (Fuel-Capacity-Consumption-Constraint   Light-Infantry-Unit-Fuel-Constraint2)
+        (maximum-fuel-capacity  Light-Infantry-Unit-Fuel-Constraint2  20000)
+        (fuel-consumption-in-idle   Light-Infantry-Unit-Fuel-Constraint2  450.0)
+        (fuel-consumption-moving  Light-Infantry-Unit-Fuel-Constraint2   3600))
+
+    (tellm
+        (Fuel-Capacity-Consumption-Constraint   Light-Infantry-Unit-Fuel-Constraint3)
+        (maximum-fuel-capacity  Light-Infantry-Unit-Fuel-Constraint3  140)
+        (fuel-consumption-in-idle   Light-Infantry-Unit-Fuel-Constraint3 4.0)
+        (fuel-consumption-moving  Light-Infantry-Unit-Fuel-Constraint3   18))
+
+   (tellm
+        (Fuel-Capacity-Consumption-Constraint   Light-Infantry-Unit-Fuel-Constraint4)
+        (maximum-fuel-capacity  Light-Infantry-Unit-Fuel-Constraint4  10000)
+        (fuel-consumption-in-idle   Light-Infantry-Unit-Fuel-Constraint4  100.0)
+        (fuel-consumption-moving  Light-Infantry-Unit-Fuel-Constraint4   1000))
+
+  (tellm
+        (Fuel-Capacity-Consumption-Constraint   Light-Infantry-Unit-Fuel-Constraint5)
+        (maximum-fuel-capacity  Light-Infantry-Unit-Fuel-Constraint5   95)
+        (fuel-consumption-in-idle   Light-Infantry-Unit-Fuel-Constraint5  1.0)
+        (fuel-consumption-moving  Light-Infantry-Unit-Fuel-Constraint5   12.6))
+
+   (tellm
+        (Fuel-Capacity-Consumption-Constraint   Light-Infantry-Unit-Fuel-Constraint6)
+        (maximum-fuel-capacity  Light-Infantry-Unit-Fuel-Constraint6  14630)
+        (fuel-consumption-in-idle   Light-Infantry-Unit-Fuel-Constraint6  360.0)
+        (fuel-consumption-moving  Light-Infantry-Unit-Fuel-Constraint6   1739))
+
+
+  ;;;; Unit-Category Mechanized
+
+  (tellm
+        (Fuel-Capacity-Consumption-Constraint   Mechanized-Unit-Fuel-Constraint0)
+        (maximum-fuel-capacity  Mechanized-Unit-Fuel-Constraint0   15450)
+        (fuel-consumption-in-idle   Mechanized-Unit-Fuel-Constraint0  351.0)
+        (fuel-consumption-moving  Mechanized-Unit-Fuel-Constraint0   2150))
+
+  (tellm
+        (Fuel-Capacity-Consumption-Constraint   Mechanized-Unit-Fuel-Constraint1)
+        (maximum-fuel-capacity  Mechanized-Unit-Fuel-Constraint1   14630)
+        (fuel-consumption-in-idle   Mechanized-Unit-Fuel-Constraint1  360.0)
+        (fuel-consumption-moving  Mechanized-Unit-Fuel-Constraint1   1739))
+
+  (tellm
+        (Fuel-Capacity-Consumption-Constraint   Mechanized-Unit-Fuel-Constraint2)
+        (maximum-fuel-capacity  Mechanized-Unit-Fuel-Constraint2   175)
+        (fuel-consumption-in-idle   Mechanized-Unit-Fuel-Constraint2  5.0)
+        (fuel-consumption-moving  Mechanized-Unit-Fuel-Constraint2   25.3))
+
+  (tellm
+        (Fuel-Capacity-Consumption-Constraint   Mechanized-Unit-Fuel-Constraint3)
+        (maximum-fuel-capacity  Mechanized-Unit-Fuel-Constraint3   40000)
+        (fuel-consumption-in-idle   Mechanized-Unit-Fuel-Constraint3  1000.0)
+        (fuel-consumption-moving  Mechanized-Unit-Fuel-Constraint3   5500))
+
+  (tellm
+        (Fuel-Capacity-Consumption-Constraint   Mechanized-Unit-Fuel-Constraint4)
+        (maximum-fuel-capacity  Mechanized-Unit-Fuel-Constraint4   80000)
+        (fuel-consumption-in-idle   Mechanized-Unit-Fuel-Constraint4  1650.0)
+        (fuel-consumption-moving  Mechanized-Unit-Fuel-Constraint4  7500))
+
+
+  ;;;; Unit-Category Multiple-Launch-Rocket-System
+  (tellm
+        (Fuel-Capacity-Consumption-Constraint   MLRS-Unit-Fuel-Constraint0)
+        (maximum-fuel-capacity  MLRS-Unit-Fuel-Constraint0   127)
+        (fuel-consumption-in-idle   MLRS-Unit-Fuel-Constraint0  1.0)
+        (fuel-consumption-moving  MLRS-Unit-Fuel-Constraint0   11.8))
+  (tellm
+        (Fuel-Capacity-Consumption-Constraint   MLRS-Unit-Fuel-Constraint1)
+        (maximum-fuel-capacity  MLRS-Unit-Fuel-Constraint1   2500)
+        (fuel-consumption-in-idle   MLRS-Unit-Fuel-Constraint1 52.0)
+        (fuel-consumption-moving  MLRS-Unit-Fuel-Constraint1   300))
+  (tellm
+        (Fuel-Capacity-Consumption-Constraint   MLRS-Unit-Fuel-Constraint2)
+        (maximum-fuel-capacity  MLRS-Unit-Fuel-Constraint2   128)
+        (fuel-consumption-in-idle   MLRS-Unit-Fuel-Constraint2  2.2)
+        (fuel-consumption-moving  MLRS-Unit-Fuel-Constraint2  11.8))
+
+  (tellm
+        (Fuel-Capacity-Consumption-Constraint   MLRS-Unit-Fuel-Constraint3)
+        (maximum-fuel-capacity  MLRS-Unit-Fuel-Constraint3   100)
+        (fuel-consumption-in-idle   MLRS-Unit-Fuel-Constraint3  1.5)
+        (fuel-consumption-moving  MLRS-Unit-Fuel-Constraint3   12))
+
+   (tellm
+        (Fuel-Capacity-Consumption-Constraint   MLRS-Unit-Fuel-Constraint4)
+        (maximum-fuel-capacity  MLRS-Unit-Fuel-Constraint4   95)
+        (fuel-consumption-in-idle   MLRS-Unit-Fuel-Constraint4  1.0)
+        (fuel-consumption-moving  MLRS-Unit-Fuel-Constraint4   8.6))
+
+;;;; Unit-Category Supply
+
+    (tellm
+        (Fuel-Capacity-Consumption-Constraint   Supply-Unit-Fuel-Constraint0)
+        (maximum-fuel-capacity  Supply-Unit-Fuel-Constraint0    18000)
+        (fuel-consumption-in-idle   Supply-Unit-Fuel-Constraint0  250.0)
+        (fuel-consumption-moving  Supply-Unit-Fuel-Constraint0   2500))
+
+    (tellm
+        (Fuel-Capacity-Consumption-Constraint   Supply-Unit-Fuel-Constraint1)
+        (maximum-fuel-capacity  Supply-Unit-Fuel-Constraint1   375)
+        (fuel-consumption-in-idle   Supply-Unit-Fuel-Constraint1  8.0)
+        (fuel-consumption-moving  Supply-Unit-Fuel-Constraint1  40.2))
+
+
+    ;;;; Unit-Category Tank
+
+    (tellm
+        (Fuel-Capacity-Consumption-Constraint   Tank-Unit-Fuel-Constraint0)
+        (maximum-fuel-capacity  Tank-Unit-Fuel-Constraint0   75750)
+        (fuel-consumption-in-idle   Tank-Unit-Fuel-Constraint0  1577.0)
+        (fuel-consumption-moving  Tank-Unit-Fuel-Constraint0  7694))
+
+
+    (tellm
+        (Fuel-Capacity-Consumption-Constraint   Tank-Unit-Fuel-Constraint1)
+        (maximum-fuel-capacity  Tank-Unit-Fuel-Constraint1  30150)
+        (fuel-consumption-in-idle   Tank-Unit-Fuel-Constraint1 613.0)
+        (fuel-consumption-moving  Tank-Unit-Fuel-Constraint1   2772))
+
+
+     (tellm
+        (Fuel-Capacity-Consumption-Constraint   Tank-Unit-Fuel-Constraint2)
+        (maximum-fuel-capacity  Tank-Unit-Fuel-Constraint2   50000)
+        (fuel-consumption-in-idle   Tank-Unit-Fuel-Constraint2  1500.0)
+        (fuel-consumption-moving  Tank-Unit-Fuel-Constraint2   7000))
+
+     (tellm
+        (Fuel-Capacity-Consumption-Constraint   Tank-Unit-Fuel-Constraint3)
+        (maximum-fuel-capacity  Tank-Unit-Fuel-Constraint3   24230)
+        (fuel-consumption-in-idle   Tank-Unit-Fuel-Constraint3  510.0)
+        (fuel-consumption-moving  Tank-Unit-Fuel-Constraint3   2321))
+
+
+     (tellm
+        (Fuel-Capacity-Consumption-Constraint   Tank-Unit-Fuel-Constraint4)
+        (maximum-fuel-capacity  Tank-Unit-Fuel-Constraint4   495)
+        (fuel-consumption-in-idle   Tank-Unit-Fuel-Constraint4  8.0)
+        (fuel-consumption-moving  Tank-Unit-Fuel-Constraint4   40))
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+   ;;;; define deployment size instance
+   ;;;; There are only 6 different kinds of deployment size, so create 6 Deployment instance
+
+
+   (tellm
+        (Line-Size  Line0)
+        (width   Line0 167.5)
+        (length  Line0 2680))
+
+   (tellm
+        (Wedge-Size  Wedge0)
+        (width  Wedge0 2010)
+        (length  Wedge0 670)  )
+
+
+   (tellm
+        (Column-Size Column0)
+        (width  Column0 6.7)
+        (length  Column0  5360))
+
+   (tellm
+        (Deployment Deployment0)
+        (line    Deployment0  Line0)
+        (wedge   Deployment0  Wedge0)
+        (column  Deployment0  Column0))
+ ;;;--------------------------------------------------------------
+
+   (tellm
+        (Line-Size  Line1)
+        (width  Line1 250)
+        (length  Line1 4000))
+
+   (tellm
+        (Wedge-Size  Wedge1)
+        (width Wedge1 3000)
+        (length  Wedge1 1000)  )
+
+
+  (tellm
+        (Column-Size Column1)
+        (width Column1 10)
+        (length  Column1  8000))
+
+  (tellm
+        (Deployment  Deployment1)
+        (line    Deployment1  Line1)
+        (wedge   Deployment1  Wedge1)
+        (column  Deployment1  Column1))
+
+   ;;;;-------------------------------------------------------------------------------
+    (tellm
+        (Line-Size  Line2)
+        (width   Line0 750)
+        (length  Line0 6000))
+
+   (tellm
+        (Wedge-Size  Wedge2)
+        (width  Wedge0 2000)
+        (length  Wedge0 800)  )
+
+
+   (tellm
+        (Column-Size Column2)
+        (width  Column0 10)
+        (length  Column0  3000))
+
+   (tellm
+        (Deployment Deployment2)
+        (line    Deployment2  Line2)
+        (wedge   Deployment2  Wedge2)
+        (column  Deployment2  Column2))
+  ;;;-----------------------------------------------------------------
+
+   (tellm
+        (Line-Size  Line3)
+        (width  Line3 250)
+        (length  Line3 800))
+
+   (tellm
+        (Wedge-Size  Wedge3)
+        (width Wedge3 600)
+        (length  Wedge3 2000)  )
+
+
+  (tellm
+        (Column-Size Column3)
+        (width Column3 10)
+        (length  Column3 1000))
+
+  (tellm
+        (Deployment  Deployment3)
+        (line   Deployment3  Line3)
+        (wedge  Deployment3  Wedge3)
+        (column Deployment3  Column3))
+
+;;;-----------------------------------------------------------------
+
+   (tellm
+        (Line-Size  Line4)
+        (width  Line4  0)
+        (length  Line4  0))
+
+   (tellm
+        (Wedge-Size  Wedge4)
+        (width Wedge4  0)
+        (length  Wedge4  0)  )
+
+
+  (tellm
+        (Column-Size Column4)
+        (width Column4 10)
+        (length  Column4 1000))
+
+  (tellm
+        (Deployment  Deployment4)
+        (line   Deployment4  Line4)
+        (wedge  Deployment4  Wedge4)
+        (column Deployment4  Column4))
+
+  ;;;-----------------------------------------------------------------
+
+   (tellm
+        (Line-Size  Line5)
+        (width  Line5  0)
+        (length  Line5  0))
+
+   (tellm
+        (Wedge-Size  Wedge5)
+        (width Wedge5  0)
+        (length  Wedge5  0)  )
+
+
+  (tellm
+        (Column-Size Column5)
+        (width Column5 10)
+        (length  Column5  600))
+
+  (tellm
+        (Deployment  Deployment5)
+        (line   Deployment5  Line5)
+        (wedge  Deployment5  Wedge5)
+        (column Deployment5  Column5))
+
+
+   (tellm
+     (Unit-Combat-Power-Doctrinal-Constraints  Armor-Unit-Combat-Power-Doctrinal-Constraints0 )
+     (unit-category     Armor-Unit-Combat-Power-Doctrinal-Constraints0 'Armor )
+     (echelon   Armor-Unit-Combat-Power-Doctrinal-Constraints0    Battalion)
+     (description Armor-Unit-Combat-Power-Doctrinal-Constraints0 "Self-Propelled-Artillery-Battalion" )
+     (combat-power   Armor-Unit-Combat-Power-Doctrinal-Constraints0    50.0 )
+     (artillery-area   Armor-Unit-Combat-Power-Doctrinal-Constraints0  100000 )
+     (fuel-capacity-and-consumption Armor-Unit-Combat-Power-Doctrinal-Constraints0 Armor-Unit-Fuel-Constraint0 )
+     (unit-deployment-size Armor-Unit-Combat-Power-Doctrinal-Constraints0  Deployment0 ))
+
+
+(tellm
+     (Unit-Combat-Power-Doctrinal-Constraints  Armor-Unit-Combat-Power-Doctrinal-Constraints1)
+     (unit-category     Armor-Unit-Combat-Power-Doctrinal-Constraints1 'Armor)
+     (echelon   Armor-Unit-Combat-Power-Doctrinal-Constraints1     Brigade)
+     (description Armor-Unit-Combat-Power-Doctrinal-Constraints1 "Division-Artillery-Brigade")
+     (Combat-Power  Armor-Unit-Inforamtion1    110.0)
+     (artillery-area   Armor-Unit-Combat-Power-Doctrinal-Constraints1  100000)
+     (fuel-capacity-and-consumption Armor-Unit-Combat-Power-Doctrinal-Constraints1 Armor-Unit-Fuel-Constraint1)
+     (unit-deployment-size Armor-Unit-Combat-Power-Doctrinal-Constraints1 Deployment1))
+
+
+   ;;;Unit-Category Artillery
+   (tellm
+     (Unit-Combat-Power-Doctrinal-Constraints  Artillery-Unit-Combat-Power-Doctrinal-Constraints0)
+     (unit-category     Artillery-Unit-Combat-Power-Doctrinal-Constraints0 'Artillery)
+     (echelon   Artillery-Unit-Combat-Power-Doctrinal-Constraints0    Battalion)
+     (description Artillery-Unit-Combat-Power-Doctrinal-Constraints0 "Self-Propelled-Artillery-Battalion")
+     (combat-power   Artillery-Unit-Combat-Power-Doctrinal-Constraints0    72.0)
+     (artillery-area   Artillery-Unit-Combat-Power-Doctrinal-Constraints0  100000)
+     (fuel-capacity-and-consumption Artillery-Unit-Combat-Power-Doctrinal-Constraints0 Artillery-Unit-Fuel-Constraint0)
+     (unit-deployment-size Artillery-Unit-Combat-Power-Doctrinal-Constraints0 Deployment0))
+
+
+    (tellm
+     (Unit-Combat-Power-Doctrinal-Constraints  Artillery-Unit-Combat-Power-Doctrinal-Constraints1)
+     (unit-category     Artillery-Unit-Combat-Power-Doctrinal-Constraints1 'Artillery)
+     (echelon   Artillery-Unit-Combat-Power-Doctrinal-Constraints1    Battery)
+     (description Artillery-Unit-Combat-Power-Doctrinal-Constraints1 "Rocket, 9 units")
+     (combat-power   Artillery-Unit-Combat-Power-Doctrinal-Constraints1    39.0)
+     (fuel-capacity-and-consumption Artillery-Unit-Combat-Power-Doctrinal-Constraints1 Artillery-Unit-Fuel-Constraint1)
+    )
+
+    (tellm
+     (Unit-Combat-Power-Doctrinal-Constraints  Artillery-Unit-Combat-Power-Doctrinal-Constraints2)
+     (unit-category     Artillery-Unit-Combat-Power-Doctrinal-Constraints2 'Artillery)
+     (echelon   Artillery-Unit-Combat-Power-Doctrinal-Constraints2    Battalion)
+     (description Artillery-Unit-Combat-Power-Doctrinal-Constraints2 "Division-Artillery-Brigade")
+     (combat-power   Artillery-Unit-Combat-Power-Doctrinal-Constraints2    110.0)
+     (artillery-area   Artillery-Unit-Combat-Power-Doctrinal-Constraints2  100000)
+     (fuel-capacity-and-consumption Artillery-Unit-Combat-Power-Doctrinal-Constraints2 Artillery-Unit-Fuel-Constraint2)
+     (unit-deployment-size Artillery-Unit-Combat-Power-Doctrinal-Constraints2 Deployment1))
+
+     (tellm
+     (Unit-Combat-Power-Doctrinal-Constraints  Artillery-Unit-Combat-Power-Doctrinal-Constraints3)
+     (unit-category     Artillery-Unit-Combat-Power-Doctrinal-Constraints3 'Artillery)
+     (echelon   Artillery-Unit-Combat-Power-Doctrinal-Constraints3    Battalion)
+     (description Artillery-Unit-Combat-Power-Doctrinal-Constraints3 "Rocket, 27 units")
+     (combat-power   Artillery-Unit-Combat-Power-Doctrinal-Constraints3    150.0)
+     (fuel-capacity-and-consumption Artillery-Unit-Combat-Power-Doctrinal-Constraints3 Artillery-Unit-Fuel-Constraint3 )
+     )
+
+
+    ;;;Unit-Category Self-Propelled-Artillery
+    (tellm
+     (Unit-Combat-Power-Doctrinal-Constraints  SP-Artillery-Unit-Combat-Power-Doctrinal-Constraints0)
+     (unit-category     SP-Artillery-Unit-Combat-Power-Doctrinal-Constraints0 'SP-Artillery)
+     (echelon   SP-Artillery-Unit-Combat-Power-Doctrinal-Constraints0    Brigade)
+     (description SP-Artillery-Unit-Combat-Power-Doctrinal-Constraints0 "Division-Artillery-Brigade")
+     (combat-power   SP-Artillery-Unit-Combat-Power-Doctrinal-Constraints0    50.0)
+     (artillery-area   SP-Artillery-Unit-Combat-Power-Doctrinal-Constraints0  100000)
+     (fuel-capacity-and-consumption SP-Artillery-Unit-Combat-Power-Doctrinal-Constraints0 SP-Artillery-Unit-Fuel-Constraint0)
+     (unit-deployment-size SP-Artillery-Unit-Combat-Power-Doctrinal-Constraints0 Deployment1))
+
+    (tellm
+     (Unit-Combat-Power-Doctrinal-Constraints  SP-Artillery-Unit-Combat-Power-Doctrinal-Constraints1)
+     (unit-category     SP-Artillery-Unit-Combat-Power-Doctrinal-Constraints1 'SP-Artillery)
+     (echelon   SP-Artillery-Unit-Combat-Power-Doctrinal-Constraints1    Battalion)
+     (description SP-Artillery-Unit-Combat-Power-Doctrinal-Constraints1 "Self-Propelled-Artillery-Battalion")
+     (combat-power   SP-Artillery-Unit-Combat-Power-Doctrinal-Constraints1    50.0)
+     (artillery-area   SP-Artillery-Unit-Combat-Power-Doctrinal-Constraints1  100000)
+     (fuel-capacity-and-consumption SP-Artillery-Unit-Combat-Power-Doctrinal-Constraints1 SP-Artillery-Unit-Fuel-Constraint1)
+     (unit-deployment-size SP-Artillery-Unit-Combat-Power-Doctrinal-Constraints1 Deployment0))
+
+
+    (tellm
+     (Unit-Combat-Power-Doctrinal-Constraints  SP-Artillery-Unit-Combat-Power-Doctrinal-Constraints2)
+     (unit-category     SP-Artillery-Unit-Combat-Power-Doctrinal-Constraints2 'SP-Artillery)
+     (echelon   SP-Artillery-Unit-Combat-Power-Doctrinal-Constraints2    Battalion)
+     (description SP-Artillery-Unit-Combat-Power-Doctrinal-Constraints2 "Mechanized")
+     (combat-power   SP-Artillery-Unit-Combat-Power-Doctrinal-Constraints2    130.0)
+     (fuel-capacity-and-consumption SP-Artillery-Unit-Combat-Power-Doctrinal-Constraints2 SP-Artillery-Unit-Fuel-Constraint2)
+     )
+
+     (tellm
+     (Unit-Combat-Power-Doctrinal-Constraints  SP-Artillery-Unit-Combat-Power-Doctrinal-Constraints3)
+     (unit-category     SP-Artillery-Unit-Combat-Power-Doctrinal-Constraints3 'SP-Artillery)
+     (echelon   SP-Artillery-Unit-Combat-Power-Doctrinal-Constraints3     Squadron)
+     (description SP-Artillery-Unit-Combat-Power-Doctrinal-Constraints3 "48 Tow, 40 CFV, 6 Mort")
+     (combat-power   SP-Artillery-Unit-Combat-Power-Doctrinal-Constraints3    120.0)
+     (fuel-capacity-and-consumption SP-Artillery-Unit-Combat-Power-Doctrinal-Constraints3 SP-Artillery-Unit-Fuel-Constraint3)
+     (unit-deployment-size SP-Artillery-Unit-Combat-Power-Doctrinal-Constraints3 Deployment2))
+
+     ;;;Unit-Category Ground Maneuver
+   (tellm
+     (Unit-Combat-Power-Doctrinal-Constraints Ground-Maneuver-Unit-Combat-Power-Doctrinal-Constraints0)
+     (unit-category    Ground-Maneuver-Unit-Combat-Power-Doctrinal-Constraints0 'Ground-Maneuver)
+     (echelon  Ground-Maneuver-Unit-Combat-Power-Doctrinal-Constraints0    Brigade)
+     (description   Ground-Maneuver-Unit-Combat-Power-Doctrinal-Constraints0 "Helo Assault")
+     (combat-power  Ground-Maneuver-Unit-Combat-Power-Doctrinal-Constraints0    120.0)
+     (fuel-capacity-and-consumption     Ground-Maneuver-Unit-Combat-Power-Doctrinal-Constraints0    Ground-Maneuver-Unit-Fuel-Constraint0)
+     (unit-deployment-size Ground-Maneuver-Unit-Combat-Power-Doctrinal-Constraints0 Deployment1))
+
+   (tellm
+     (Unit-Combat-Power-Doctrinal-Constraints Ground-Maneuver-Unit-Combat-Power-Doctrinal-Constraints1)
+     (unit-category    Ground-Maneuver-Unit-Combat-Power-Doctrinal-Constraints1 'Ground-Maneuver )
+     (echelon  Ground-Maneuver-Unit-Combat-Power-Doctrinal-Constraints1    Individual)
+     (description   Ground-Maneuver-Unit-Combat-Power-Doctrinal-Constraints1 "Kiowa Helo Transport")
+     (combat-power  Ground-Maneuver-Unit-Combat-Power-Doctrinal-Constraints1    1.0)
+     (fuel-capacity-and-consumption    Ground-Maneuver-Unit-Combat-Power-Doctrinal-Constraints1 Ground-Maneuver-Unit-Fuel-Constraint1)
+     )
+
+;;;Unit-Category Self-Propelled-Howitzer
+   (tellm
+     (Unit-Combat-Power-Doctrinal-Constraints Howitzer-SP-Unit-Combat-Power-Doctrinal-Constraints0)
+     (unit-category    Howitzer-SP-Unit-Combat-Power-Doctrinal-Constraints0 'Self-Propelled-Howitzer)
+     (echelon  Howitzer-SP-Unit-Combat-Power-Doctrinal-Constraints0    Battalion)
+     (description   Howitzer-SP-Unit-Combat-Power-Doctrinal-Constraints0 "122mm Towed Howitzer")
+     (combat-power  Howitzer-SP-Unit-Combat-Power-Doctrinal-Constraints0   27.0)
+     (fuel-capacity-and-consumption     Howitzer-SP-Unit-Combat-Power-Doctrinal-Constraints0    Howitzer-SP-Unit-Fuel-Constraint0)
+     (unit-deployment-size Howitzer-SP-Unit-Combat-Power-Doctrinal-Constraints0 Deployment4))
+
+
+     ;;;;Unit-Category Towed-Howitzer
+
+    (tellm
+     (Unit-Combat-Power-Doctrinal-Constraints Towed-Howitzer-Unit-Combat-Power-Doctrinal-Constraints0)
+     (unit-category    Towed-Howitzer-Unit-Combat-Power-Doctrinal-Constraints0 'Towed-Howitzer)
+     (echelon  Towed-Howitzer-Unit-Combat-Power-Doctrinal-Constraints0     Individual)
+     (description   Towed-Howitzer-Unit-Combat-Power-Doctrinal-Constraints0 "Infantry")
+     (combat-power  Towed-Howitzer-Unit-Combat-Power-Doctrinal-Constraints0   45.0)
+     (fuel-capacity-and-consumption     Towed-Howitzer-Unit-Combat-Power-Doctrinal-Constraints0    Towed-Howitzer-Unit-Fuel-Constraint0)
+     (unit-deployment-size Towed-Howitzer-Unit-Combat-Power-Doctrinal-Constraints0 Deployment5))
+
+   (tellm
+     (Unit-Combat-Power-Doctrinal-Constraints Towed-Howitzer-Unit-Combat-Power-Doctrinal-Constraints1)
+     (unit-category    Towed-Howitzer-Unit-Combat-Power-Doctrinal-Constraints1 'Towed-Howitzer)
+     (echelon  Towed-Howitzer-Unit-Combat-Power-Doctrinal-Constraints1     Brigade)
+     (description   Towed-Howitzer-Unit-Combat-Power-Doctrinal-Constraints1 "18 TOW, 27 Drgn, 4 107mm")
+     (combat-power  Towed-Howitzer-Unit-Combat-Power-Doctrinal-Constraints1   210.0)
+     (fuel-capacity-and-consumption     Towed-Howitzer-Unit-Combat-Power-Doctrinal-Constraints1    Towed-Howitzer-Unit-Fuel-Constraint1)
+     (unit-deployment-size Towed-Howitzer-Unit-Combat-Power-Doctrinal-Constraints1 Deployment1
+     ))
+
+
+  (tellm
+     (Unit-Combat-Power-Doctrinal-Constraints Towed-Howitzer-Unit-Combat-Power-Doctrinal-Constraints2)
+     (unit-category    Towed-Howitzer-Unit-Combat-Power-Doctrinal-Constraints2 'Towed-Howitzer)
+     (echelon  Towed-Howitzer-Unit-Combat-Power-Doctrinal-Constraints2     Battalion)
+     (description   Towed-Howitzer-Unit-Combat-Power-Doctrinal-Constraints2 "BMP, 120mm Mortar, SAM")
+     (combat-power  Towed-Howitzer-Unit-Combat-Power-Doctrinal-Constraints2  36.0)
+     (fuel-capacity-and-consumption     Towed-Howitzer-Unit-Combat-Power-Doctrinal-Constraints2    Towed-Howitzer-Unit-Fuel-Constraint2)
+     (unit-deployment-size Towed-Howitzer-Unit-Combat-Power-Doctrinal-Constraints2 Deployment3))
+
+  (tellm
+     (Unit-Combat-Power-Doctrinal-Constraints Towed-Howitzer-Unit-Combat-Power-Doctrinal-Constraints3)
+     (unit-category    Towed-Howitzer-Unit-Combat-Power-Doctrinal-Constraints3 'Towed-Howitzer)
+     (echelon  Towed-Howitzer-Unit-Combat-Power-Doctrinal-Constraints3     Division)
+     (description   Towed-Howitzer-Unit-Combat-Power-Doctrinal-Constraints3 "Infantry")
+     (combat-power  Towed-Howitzer-Unit-Combat-Power-Doctrinal-Constraints3  775.0)
+     (fuel-capacity-and-consumption     Towed-Howitzer-Unit-Combat-Power-Doctrinal-Constraints3    Towed-Howitzer-Unit-Fuel-Constraint3 )
+ )
+
+
+   (tellm
+     (Unit-Combat-Power-Doctrinal-Constraints Towed-Howitzer-Unit-Combat-Power-Doctrinal-Constraints4)
+     (unit-category    Towed-Howitzer-Unit-Combat-Power-Doctrinal-Constraints4 'Towed-Howitzer)
+     (echelon  Towed-Howitzer-Unit-Combat-Power-Doctrinal-Constraints4     Battalion)
+     (description   Towed-Howitzer-Unit-Combat-Power-Doctrinal-Constraints4 "18 TOW, 27 Drgn, 4 107mm")
+     (combat-power  Towed-Howitzer-Unit-Combat-Power-Doctrinal-Constraints4   70.0)
+     (fuel-capacity-and-consumption     Towed-Howitzer-Unit-Combat-Power-Doctrinal-Constraints4    Towed-Howitzer-Unit-Fuel-Constraint4)
+     (unit-deployment-size Towed-Howitzer-Unit-Combat-Power-Doctrinal-Constraints4 Deployment1 )
+     )
+
+
+    ;;;;;Unit-Category Infantry
+    (tellm
+     (Unit-Combat-Power-Doctrinal-Constraints Infantry-Unit-Combat-Power-Doctrinal-Constraints0)
+     (unit-category    Infantry-Unit-Combat-Power-Doctrinal-Constraints0 'Infantry)
+     (echelon  Infantry-Unit-Combat-Power-Doctrinal-Constraints0     Individual)
+     (description   Infantry-Unit-Combat-Power-Doctrinal-Constraints0 "AntiArmor")
+     (combat-power  Infantry-Unit-Combat-Power-Doctrinal-Constraints0   1.0)
+     (fuel-capacity-and-consumption     Infantry-Unit-Combat-Power-Doctrinal-Constraints0    Infantry-Unit-Fuel-Constraint0)
+   )
+
+   (tellm
+     (Unit-Combat-Power-Doctrinal-Constraints Infantry-Unit-Combat-Power-Doctrinal-Constraints1)
+     (unit-category    Infantry-Unit-Combat-Power-Doctrinal-Constraints1 'Infantry)
+     (echelon  Infantry-Unit-Combat-Power-Doctrinal-Constraints1      Brigade)
+     (description   Infantry-Unit-Combat-Power-Doctrinal-Constraints1 "4 TOW, 18 Drgn, 4 81mm, 6 60mm")
+     (combat-power  Infantry-Unit-Combat-Power-Doctrinal-Constraints1   220.0)
+     (fuel-capacity-and-consumption     Infantry-Unit-Combat-Power-Doctrinal-Constraints1    Infantry-Unit-Fuel-Constraint1)
+     (unit-deployment-size Infantry-Unit-Combat-Power-Doctrinal-Constraints1 Deployment1 )
+     )
+
+   (tellm
+     (Unit-Combat-Power-Doctrinal-Constraints Infantry-Unit-Combat-Power-Doctrinal-Constraints2)
+     (unit-category    Infantry-Unit-Combat-Power-Doctrinal-Constraints2 'Infantry)
+     (echelon  Infantry-Unit-Combat-Power-Doctrinal-Constraints2      Battalion)
+     (description   Infantry-Unit-Combat-Power-Doctrinal-Constraints2 "4 TOW, 18 Drgn, 4 81mm, 6 60mm")
+     (combat-power  Infantry-Unit-Combat-Power-Doctrinal-Constraints2   80.0)
+     (fuel-capacity-and-consumption     Infantry-Unit-Combat-Power-Doctrinal-Constraints2    Infantry-Unit-Fuel-Constraint2)
+     (unit-deployment-size Infantry-Unit-Combat-Power-Doctrinal-Constraints1 Deployment0 )
+    )
+
+    ;;;;Unit-Category Light-Infantry
+
+    (tellm
+     (Unit-Combat-Power-Doctrinal-Constraints Light-Infantry-Unit-Combat-Power-Doctrinal-Constraints0)
+     (unit-category    Light-Infantry-Unit-Combat-Power-Doctrinal-Constraints0 'Light-Infantry)
+     (echelon  Light-Infantry-Unit-Combat-Power-Doctrinal-Constraints0    Brigade)
+     (description   Light-Infantry-Unit-Combat-Power-Doctrinal-Constraints0 "Mechanized,2 Mechanized Bn,1 Tank Bn")
+     (combat-power  Light-Infantry-Unit-Combat-Power-Doctrinal-Constraints0  390.0)
+     (fuel-capacity-and-consumption     Light-Infantry-Unit-Combat-Power-Doctrinal-Constraints0    Light-Infantry-Unit-Fuel-Constraint0)
+   )
+
+   (tellm
+     (Unit-Combat-Power-Doctrinal-Constraints Light-Infantry-Unit-Combat-Power-Doctrinal-Constraints1)
+     (unit-category    Light-Infantry-Unit-Combat-Power-Doctrinal-Constraints1 'Light-Infantry)
+     (echelon  Light-Infantry-Unit-Combat-Power-Doctrinal-Constraints1      Individual)
+     (description   Light-Infantry-Unit-Combat-Power-Doctrinal-Constraints1 "AntiArmor missile")
+     (combat-power  Light-Infantry-Unit-Combat-Power-Doctrinal-Constraints1   1.0)
+     (fuel-capacity-and-consumption     Light-Infantry-Unit-Combat-Power-Doctrinal-Constraints1    Light-Infantry-Unit-Fuel-Constraint1)
+   )
+
+
+   (tellm
+     (Unit-Combat-Power-Doctrinal-Constraints Light-Infantry-Unit-Combat-Power-Doctrinal-Constraints2)
+     (unit-category    Light-Infantry-Unit-Combat-Power-Doctrinal-Constraints2 'Light-Infantry)
+     (echelon  Light-Infantry-Unit-Combat-Power-Doctrinal-Constraints2      Regiment)
+     (description   Light-Infantry-Unit-Combat-Power-Doctrinal-Constraints2 "Mechanized")
+     (combat-power  Light-Infantry-Unit-Combat-Power-Doctrinal-Constraints2   85.0)
+     (fuel-capacity-and-consumption     Light-Infantry-Unit-Combat-Power-Doctrinal-Constraints2    Light-Infantry-Unit-Fuel-Constraint2)
+   )
+
+   (tellm
+     (Unit-Combat-Power-Doctrinal-Constraints Light-Infantry-Unit-Combat-Power-Doctrinal-Constraints3)
+     (unit-category    Light-Infantry-Unit-Combat-Power-Doctrinal-Constraints3 'Light-Infantry)
+     (echelon  Light-Infantry-Unit-Combat-Power-Doctrinal-Constraints3      Individual)
+     (description   Light-Infantry-Unit-Combat-Power-Doctrinal-Constraints3 "Mechanized")
+     (combat-power  Light-Infantry-Unit-Combat-Power-Doctrinal-Constraints3   1.0)
+     (fuel-capacity-and-consumption     Light-Infantry-Unit-Combat-Power-Doctrinal-Constraints3    Light-Infantry-Unit-Fuel-Constraint3)
+   )
+
+
+    (tellm
+     (Unit-Combat-Power-Doctrinal-Constraints Light-Infantry-Unit-Combat-Power-Doctrinal-Constraints4)
+     (unit-category    Light-Infantry-Unit-Combat-Power-Doctrinal-Constraints4 'Light-Infantry)
+     (echelon  Light-Infantry-Unit-Combat-Power-Doctrinal-Constraints4     Battalion)
+     (description   Light-Infantry-Unit-Combat-Power-Doctrinal-Constraints4 "Rocket launcher,BM21")
+     (combat-power  Light-Infantry-Unit-Combat-Power-Doctrinal-Constraints4   54.0)
+     (fuel-capacity-and-consumption     Light-Infantry-Unit-Combat-Power-Doctrinal-Constraints4    Light-Infantry-Unit-Fuel-Constraint4)
+     (artillery-area    Light-Infantry-Unit-Combat-Power-Doctrinal-Constraints0  50000)
+     (unit-deployment-size Light-Infantry-Unit-Combat-Power-Doctrinal-Constraints0 Deployment4))
+
+     (tellm
+     (Unit-Combat-Power-Doctrinal-Constraints Light-Infantry-Unit-Combat-Power-Doctrinal-Constraints5)
+     (unit-category    Light-Infantry-Unit-Combat-Power-Doctrinal-Constraints5 'Light-Infantry)
+     (echelon  Light-Infantry-Unit-Combat-Power-Doctrinal-Constraints5      Individual)
+     (description   Light-Infantry-Unit-Combat-Power-Doctrinal-Constraints5 "AntiArmor missile carier")
+     (combat-power  Light-Infantry-Unit-Combat-Power-Doctrinal-Constraints5   1.0)
+     (fuel-capacity-and-consumption     Light-Infantry-Unit-Combat-Power-Doctrinal-Constraints5    Light-Infantry-Unit-Fuel-Constraint5)
+   )
+
+
+    (tellm
+     (Unit-Combat-Power-Doctrinal-Constraints Light-Infantry-Unit-Combat-Power-Doctrinal-Constraints6)
+     (unit-category    Light-Infantry-Unit-Combat-Power-Doctrinal-Constraints6 'Light-Infantry)
+     (echelon  Light-Infantry-Unit-Combat-Power-Doctrinal-Constraints6     Battalion)
+     (description   Light-Infantry-Unit-Combat-Power-Doctrinal-Constraints6 "Rocket launcher,BM21")
+     (combat-power  Light-Infantry-Unit-Combat-Power-Doctrinal-Constraints6   72.0)
+     (fuel-capacity-and-consumption     Light-Infantry-Unit-Combat-Power-Doctrinal-Constraints6    Light-Infantry-Unit-Fuel-Constraint6)
+     (unit-deployment-size Light-Infantry-Unit-Combat-Power-Doctrinal-Constraints0 Deployment1))
+
+
+     ;;;Unit-Category Mechanized
+
+   (tellm
+     (Unit-Combat-Power-Doctrinal-Constraints Mechanized-Unit-Combat-Power-Doctrinal-Constraints0)
+     (unit-category    Mechanized-Unit-Combat-Power-Doctrinal-Constraints0 'Mechanized)
+     (echelon  Mechanized-Unit-Combat-Power-Doctrinal-Constraints0    Battalion)
+     (description   Mechanized-Unit-Combat-Power-Doctrinal-Constraints0 "Heavy Mechanized, 12 Tow, 36 Dr")
+     (combat-power  Mechanized-Unit-Combat-Power-Doctrinal-Constraints0  130.0)
+     (fuel-capacity-and-consumption     Mechanized-Unit-Combat-Power-Doctrinal-Constraints0    Mechanized-Unit-Fuel-Constraint0)
+     (unit-deployment-size  Mechanized-Unit-Combat-Power-Doctrinal-Constraints0 Deployment0))
+
+
+    (tellm
+     (Unit-Combat-Power-Doctrinal-Constraints Mechanized-Unit-Combat-Power-Doctrinal-Constraints1)
+     (unit-category    Mechanized-Unit-Combat-Power-Doctrinal-Constraints1 'Mechanized)
+     (echelon  Mechanized-Unit-Combat-Power-Doctrinal-Constraints1    Battalion)
+     (description   Mechanized-Unit-Combat-Power-Doctrinal-Constraints1 "Heavy Mechanized, 12 Tow, 36 Dr")
+     (combat-power  Mechanized-Unit-Combat-Power-Doctrinal-Constraints1  72.0)
+     (fuel-capacity-and-consumption     Mechanized-Unit-Combat-Power-Doctrinal-Constraints1    Mechanized-Unit-Fuel-Constraint1)
+     (unit-deployment-size  Mechanized-Unit-Combat-Power-Doctrinal-Constraints1 Deployment0))
+
+    (tellm
+     (Unit-Combat-Power-Doctrinal-Constraints Mechanized-Unit-Combat-Power-Doctrinal-Constraints2)
+     (unit-category    Mechanized-Unit-Combat-Power-Doctrinal-Constraints2 'Mechanized)
+     (echelon  Mechanized-Unit-Combat-Power-Doctrinal-Constraints2    Individual)
+     (description   Mechanized-Unit-Combat-Power-Doctrinal-Constraints2 "Mechanized")
+     (combat-power  Mechanized-Unit-Combat-Power-Doctrinal-Constraints2  1.0)
+     (fuel-capacity-and-consumption     Mechanized-Unit-Combat-Power-Doctrinal-Constraints2    Mechanized-Unit-Fuel-Constraint2)
+    )
+
+    (tellm
+     (Unit-Combat-Power-Doctrinal-Constraints Mechanized-Unit-Combat-Power-Doctrinal-Constraints3)
+     (unit-category    Mechanized-Unit-Combat-Power-Doctrinal-Constraints3 'Mechanized)
+     (echelon  Mechanized-Unit-Combat-Power-Doctrinal-Constraints3    Brigade)
+     (description   Mechanized-Unit-Combat-Power-Doctrinal-Constraints3 "Heavy Mechanized,Mechanized battalion, 1 Tank battalion")
+     (combat-power  Mechanized-Unit-Combat-Power-Doctrinal-Constraints3  396.0)
+     (fuel-capacity-and-consumption     Mechanized-Unit-Combat-Power-Doctrinal-Constraints3    Mechanized-Unit-Fuel-Constraint3)
+     (unit-deployment-size  Mechanized-Unit-Combat-Power-Doctrinal-Constraints3 Deployment0))
+
+    (tellm
+     (Unit-Combat-Power-Doctrinal-Constraints Mechanized-Unit-Combat-Power-Doctrinal-Constraints4)
+     (unit-category    Mechanized-Unit-Combat-Power-Doctrinal-Constraints4 'Mechanized)
+     (echelon  Mechanized-Unit-Combat-Power-Doctrinal-Constraints4     Regiment)
+     (description   Mechanized-Unit-Combat-Power-Doctrinal-Constraints4 "Armor")
+     (combat-power  Mechanized-Unit-Combat-Power-Doctrinal-Constraints4  360.0)
+     (fuel-capacity-and-consumption     Mechanized-Unit-Combat-Power-Doctrinal-Constraints4    Mechanized-Unit-Fuel-Constraint4)
+     (unit-deployment-size  Mechanized-Unit-Combat-Power-Doctrinal-Constraints4 Deployment0))
+
+    ;;;Unit-type MLRS
+    (tellm
+     (Unit-Combat-Power-Doctrinal-Constraints MLRS-Unit-Combat-Power-Doctrinal-Constraints0)
+     (unit-category    MLRS-Unit-Combat-Power-Doctrinal-Constraints0 'MLRS)
+     (echelon  MLRS-Unit-Combat-Power-Doctrinal-Constraints0    Individual)
+     (description   MLRS-Unit-Combat-Power-Doctrinal-Constraints0 "Artillery Support")
+     (combat-power  MLRS-Unit-Combat-Power-Doctrinal-Constraints0   0.0)
+     (fuel-capacity-and-consumption     MLRS-Unit-Combat-Power-Doctrinal-Constraints0    MLRS-Unit-Fuel-Constraint0)
+    )
+
+    (tellm
+     (Unit-Combat-Power-Doctrinal-Constraints MLRS-Unit-Combat-Power-Doctrinal-Constraints1)
+     (unit-category    MLRS-Unit-Combat-Power-Doctrinal-Constraints1 'MLRS)
+     (echelon  MLRS-Unit-Combat-Power-Doctrinal-Constraints1    Battalion)
+     (description   MLRS-Unit-Combat-Power-Doctrinal-Constraints1 "Mortar Battalion")
+     (combat-power  MLRS-Unit-Combat-Power-Doctrinal-Constraints1  50.0)
+     (fuel-capacity-and-consumption     MLRS-Unit-Combat-Power-Doctrinal-Constraints1    MLRS-Unit-Fuel-Constraint1)
+     (unit-deployment-size  MLRS-Unit-Combat-Power-Doctrinal-Constraints1 Deployment0))
+
+    (tellm
+     (Unit-Combat-Power-Doctrinal-Constraints MLRS-Unit-Combat-Power-Doctrinal-Constraints2)
+     (unit-category    MLRS-Unit-Combat-Power-Doctrinal-Constraints2 'MLRS)
+     (echelon  MLRS-Unit-Combat-Power-Doctrinal-Constraints2    Individual)
+     (description   MLRS-Unit-Combat-Power-Doctrinal-Constraints2 "Artillery")
+     (combat-power  MLRS-Unit-Combat-Power-Doctrinal-Constraints2  2.0)
+     (fuel-capacity-and-consumption     MLRS-Unit-Combat-Power-Doctrinal-Constraints2    MLRS-Unit-Fuel-Constraint2)
+    )
+
+    (tellm
+     (Unit-Combat-Power-Doctrinal-Constraints MLRS-Unit-Combat-Power-Doctrinal-Constraints3)
+     (unit-category    MLRS-Unit-Combat-Power-Doctrinal-Constraints3 'MLRS)
+     (echelon  MLRS-Unit-Combat-Power-Doctrinal-Constraints3    Individual)
+     (description   MLRS-Unit-Combat-Power-Doctrinal-Constraints3 "Artillery")
+     (combat-power  MLRS-Unit-Combat-Power-Doctrinal-Constraints3  1.0)
+     (fuel-capacity-and-consumption     MLRS-Unit-Combat-Power-Doctrinal-Constraints3    MLRS-Unit-Fuel-Constraint3)
+    )
+
+    (tellm
+     (Unit-Combat-Power-Doctrinal-Constraints MLRS-Unit-Combat-Power-Doctrinal-Constraints4)
+     (unit-category    MLRS-Unit-Combat-Power-Doctrinal-Constraints4 'MLRS)
+     (echelon  MLRS-Unit-Combat-Power-Doctrinal-Constraints4    Individual)
+     (description   MLRS-Unit-Combat-Power-Doctrinal-Constraints4 "Artillery")
+     (combat-power  MLRS-Unit-Combat-Power-Doctrinal-Constraints4  1.0)
+     (fuel-capacity-and-consumption     MLRS-Unit-Combat-Power-Doctrinal-Constraints4    MLRS-Unit-Fuel-Constraint4)
+    )
+
+    ;;;Unit-type Supply
+
+    (tellm
+     (Unit-Combat-Power-Doctrinal-Constraints Supply-Unit-Combat-Power-Doctrinal-Constraints0)
+     (unit-category    Supply-Unit-Combat-Power-Doctrinal-Constraints0 'Supply)
+     (echelon  Supply-Unit-Combat-Power-Doctrinal-Constraints0    Battalion)
+     (description   Supply-Unit-Combat-Power-Doctrinal-Constraints0 "T-72, Medium Tank")
+     (combat-power  Supply-Unit-Combat-Power-Doctrinal-Constraints0  60.0)
+     (fuel-capacity-and-consumption     Supply-Unit-Combat-Power-Doctrinal-Constraints0    Supply-Unit-Fuel-Constraint0)
+     (unit-deployment-size  Supply-Unit-Combat-Power-Doctrinal-Constraints0 Deployment3))
+
+   (tellm
+     (Unit-Combat-Power-Doctrinal-Constraints Supply-Unit-Combat-Power-Doctrinal-Constraints1)
+     (unit-category    Supply-Unit-Combat-Power-Doctrinal-Constraints1 'Supply)
+     (echelon  Supply-Unit-Combat-Power-Doctrinal-Constraints1    Individual)
+     (description   Supply-Unit-Combat-Power-Doctrinal-Constraints1 "Armor")
+     (combat-power  Supply-Unit-Combat-Power-Doctrinal-Constraints1  50.0)
+     (fuel-capacity-and-consumption     Supply-Unit-Combat-Power-Doctrinal-Constraints1    Supply-Unit-Fuel-Constraint1)
+    )
+
+    ;;;Unit-Category Tank
+
+    (tellm
+     (Unit-Combat-Power-Doctrinal-Constraints Tank-Unit-Combat-Power-Doctrinal-Constraints0)
+     (unit-category    Tank-Unit-Combat-Power-Doctrinal-Constraints0 'Tank)
+     (echelon  Tank-Unit-Combat-Power-Doctrinal-Constraints0    Brigade)
+     (description   Tank-Unit-Combat-Power-Doctrinal-Constraints0 "Armor, 2 Tank Battalion, 1 Mecahnized Battalion")
+     (combat-power  Tank-Unit-Combat-Power-Doctrinal-Constraints0  400.0)
+     (artillery-area  Tank-Unit-Combat-Power-Doctrinal-Constraints0  100000 )
+     (fuel-capacity-and-consumption     Tank-Unit-Combat-Power-Doctrinal-Constraints0    Tank-Unit-Fuel-Constraint0)
+     (unit-deployment-size  Tank-Unit-Combat-Power-Doctrinal-Constraints0 Deployment1))
+
+
+    (tellm
+     (Unit-Combat-Power-Doctrinal-Constraints Tank-Unit-Combat-Power-Doctrinal-Constraints1)
+     (unit-category    Tank-Unit-Combat-Power-Doctrinal-Constraints1 'Tank)
+     (echelon  Tank-Unit-Combat-Power-Doctrinal-Constraints1    Battalion)
+     (description   Tank-Unit-Combat-Power-Doctrinal-Constraints1 "Armor,58 M1A1, 6 CFV")
+     (combat-power  Tank-Unit-Combat-Power-Doctrinal-Constraints1  130.0)
+     (fuel-capacity-and-consumption     Tank-Unit-Combat-Power-Doctrinal-Constraints1    Tank-Unit-Fuel-Constraint1)
+     (unit-deployment-size  Tank-Unit-Combat-Power-Doctrinal-Constraints1 Deployment0))
+
+   (tellm
+     (Unit-Combat-Power-Doctrinal-Constraints Tank-Unit-Combat-Power-Doctrinal-Constraints2)
+     (unit-category    Tank-Unit-Combat-Power-Doctrinal-Constraints2 'Tank)
+     (echelon  Tank-Unit-Combat-Power-Doctrinal-Constraints2    Brigade)
+     (description   Tank-Unit-Combat-Power-Doctrinal-Constraints2 "Armor,58 M2A2, 6 CFV")
+     (combat-power  Tank-Unit-Combat-Power-Doctrinal-Constraints2  396.0)
+     (fuel-capacity-and-consumption     Tank-Unit-Combat-Power-Doctrinal-Constraints2    Tank-Unit-Fuel-Constraint2)
+     (unit-deployment-size  Tank-Unit-Combat-Power-Doctrinal-Constraints2 Deployment1))
+
+   (tellm
+     (Unit-Combat-Power-Doctrinal-Constraints Tank-Unit-Combat-Power-Doctrinal-Constraints3)
+     (unit-category    Tank-Unit-Combat-Power-Doctrinal-Constraints3 'Tank)
+     (echelon  Tank-Unit-Combat-Power-Doctrinal-Constraints3    Battalion)
+     (description   Tank-Unit-Combat-Power-Doctrinal-Constraints3 "Armor,44 M1A1, 14 CFV")
+     (combat-power  Tank-Unit-Combat-Power-Doctrinal-Constraints3  102.0)
+     (fuel-capacity-and-consumption     Tank-Unit-Combat-Power-Doctrinal-Constraints3    Tank-Unit-Fuel-Constraint3)
+     (unit-deployment-size  Tank-Unit-Combat-Power-Doctrinal-Constraints3 Deployment0))
+
+    (tellm
+     (Unit-Combat-Power-Doctrinal-Constraints Tank-Unit-Combat-Power-Doctrinal-Constraints4)
+     (unit-category    Tank-Unit-Combat-Power-Doctrinal-Constraints4 'Tank)
+     (echelon  Tank-Unit-Combat-Power-Doctrinal-Constraints4    Individual)
+     (description   Tank-Unit-Combat-Power-Doctrinal-Constraints4 "Armor")
+     (combat-power  Tank-Unit-Combat-Power-Doctrinal-Constraints4  2.0)
+     (fuel-capacity-and-consumption     Tank-Unit-Combat-Power-Doctrinal-Constraints4    Tank-Unit-Fuel-Constraint4)
+    )
+
+    (tellm
+     (Unit-Combat-Power-Doctrinal-Constraints Tank-Unit-Combat-Power-Doctrinal-Constraints5)
+     (unit-category    Tank-Unit-Combat-Power-Doctrinal-Constraints5 'Tank)
+     (echelon  Tank-Unit-Combat-Power-Doctrinal-Constraints5    Brigade)
+     (description   Tank-Unit-Combat-Power-Doctrinal-Constraints5 "Tank Heavy")
+     (combat-power  Tank-Unit-Combat-Power-Doctrinal-Constraints5  300.0)
+     (fuel-capacity-and-consumption     Tank-Unit-Combat-Power-Doctrinal-Constraints5    Tank-Unit-Fuel-Constraint5)
+     (unit-deployment-size  Tank-Unit-Combat-Power-Doctrinal-Constraints0 Deployment1))
+
+
+ ;;;;===================================================================
+    ;;;; Instances of Artillery-Unit-firing-Position
+    ;;;; Data come from doc "Artillery Battalion Occupation of a Firing position Task"
+    ;;;comment The desired position size in the doc is a range( such as 3-6 km2) , not a specific number
+    ;;; here just using the largest one. (??? should we using the average value???)
+
+    ;;; Echelon Platoon
+    (tellm
+        (Artillery-Unit-Firing-Position Cannon-Platoon-Firing-Position)
+        (echelon    Cannon-Platoon-Firing-Position Platoon)
+        (artillery-type     Cannon-Platoon-Firing-Position  "Cannon")
+        (minimum-position   Cannon-Platoon-Firing-Position  0.8)
+        (desired-position   Cannon-Platoon-Firing-Position  1))
+
+    (tellm
+        (Artillery-Unit-Firing-Position  M109A6-Cannon-Platoon-Firing-Position)
+        (echelon    M109A6-Cannon-Platoon-Firing-Position Platoon)
+        (artillery-type     M109A6-Cannon-Platoon-Firing-Position  "Cannon(M109A6)")
+        (minimum-position   M109A6-Cannon-Platoon-Firing-Position  1)
+        (desired-position   M109A6-Cannon-Platoon-Firing-Position  2))
+
+        ;;;comment The desired position size in the doc is a range( such as 3-6 km2) , not a specific number
+        ;;; here just using the largest one.
+
+
+      (tellm
+        (Artillery-Unit-Firing-Position  MLRS-Platoon-Firing-Position)
+        (echelon   MLRS-Platoon-Firing-Position Platoon)
+        (artillery-type     MLRS-Platoon-Firing-Position  "MLRS")
+        (minimum-position   MLRS-Platoon-Firing-Position  2)
+        (desired-position   MLRS-Platoon-Firing-Position  9))
+
+
+     ;;;;Echelon Battery
+
+    (tellm
+        (Artillery-Unit-Firing-Position Cannon-Battery-Firing-Position)
+        (echelon    Cannon-Battery-Firing-Position Battery)
+        (artillery-type     Cannon-Battery-Firing-Position  "Cannon")
+        (minimum-position   Cannon-Battery-Firing-Position  1.5)
+        (desired-position   Cannon-Battery-Firing-Position  2))
+
+    (tellm
+        (Artillery-Unit-Firing-Position  M109A6-Cannon-Battery-Firing-Position)
+        (echelon    M109A6-Cannon-Battery-Firing-Position Battery)
+        (artillery-type     M109A6-Cannon-Battery-Firing-Position  "Cannon(M109A6)")
+        (minimum-position   M109A6-Cannon-Battery-Firing-Position  2.5)
+        (desired-position   M109A6-Cannon-Battery-Firing-Position  6))
+
+
+
+
+      (tellm
+        (Artillery-Unit-Firing-Position  MLRS-Battery-Firing-Position)
+        (echelon   MLRS-Battery-Firing-Position Battery)
+        (artillery-type     MLRS-Battery-Firing-Position  "MLRS")
+        (minimum-position   MLRS-Battery-Firing-Position  7)
+        (desired-position   MLRS-Battery-Firing-Position 27))
+
+
+     ;;;Echelon Battalion
+     (tellm
+        (Artillery-Unit-Firing-Position Cannon-Battalion-Firing-Position)
+        (echelon    Cannon-Battalion-Firing-Position Battalion)
+        (artillery-type     Cannon-Battalion-Firing-Position  "Cannon")
+        (minimum-position   Cannon-Battalion-Firing-Position  4.5)
+        (desired-position   Cannon-Battalion-Firing-Position  6))
+
+    (tellm
+        (Artillery-Unit-Firing-Position  M109A6-Cannon-Battalion-Firing-Position)
+        (echelon    M109A6-Cannon-Battalion-Firing-Position Battalion)
+        (artillery-type     M109A6-Cannon-Battalion-Firing-Position  "Cannon(M109A6)")
+        (minimum-position   M109A6-Cannon-Battalion-Firing-Position  8.5)
+        (desired-position   M109A6-Cannon-Battalion-Firing-Position  18))
+
+
+      (tellm
+        (Artillery-Unit-Firing-Position  MLRS-Battalion-Firing-Position)
+        (echelon   MLRS-Battalion-Firing-Position Battalion)
+        (artillery-type     MLRS-Battalion-Firing-Position  "MLRS")
+        (minimum-position   MLRS-Battalion-Firing-Position  21)
+        (desired-position   MLRS-Battalion-Firing-Position  81))
+
+
+     ;;;;==========================================================
+     ;;;; Instances of Unit-Doctrinal-Frontage-Size
+     ;;;; Data come from doc "Task Move Tactically"
+     ;;;  Frontage size data is in a range, here just using the largest one.
+
+     ;;;Echelon Platoon
+     (tellm
+        (Unit-Doctrinal-Frontage-Size   Platoon-Doctrinal-Frontage-Size0)
+        (echelon    Platoon-Doctrinal-Frontage-Size0  Platoon)
+        (number-of-units Platoon-Doctrinal-Frontage-Size0 4)
+        (frontage-size  Platoon-Doctrinal-Frontage-Size0  0.3))
+
+      ;;; Echelon Company
+    (tellm
+        (Unit-Doctrinal-Frontage-Size   Company-Doctrinal-Frontage-Size0)
+        (echelon    Company-Doctrinal-Frontage-Size0  Company)
+        (number-of-units Company-Doctrinal-Frontage-Size0 2)
+        (frontage-size  Company-Doctrinal-Frontage-Size0  0.7))
+
+     (tellm
+        (Unit-Doctrinal-Frontage-Size   Company-Doctrinal-Frontage-Size1)
+        (echelon    Company-Doctrinal-Frontage-Size1  Company)
+        (number-of-units Company-Doctrinal-Frontage-Size1 3)
+        (frontage-size  Company-Doctrinal-Frontage-Size1  1.1))
+
+    (tellm
+        (Unit-Doctrinal-Frontage-Size   Company-Doctrinal-Frontage-Size2)
+        (echelon    Company-Doctrinal-Frontage-Size2  Company)
+        (number-of-units Company-Doctrinal-Frontage-Size2 4)
+        (frontage-size  Company-Doctrinal-Frontage-Size2  1.5))
+
+     (tellm
+        (Unit-Doctrinal-Frontage-Size   Company-Doctrinal-Frontage-Size3)
+        (echelon    Company-Doctrinal-Frontage-Size3  Company)
+        (number-of-units Company-Doctrinal-Frontage-Size3 5)
+        (frontage-size  Company-Doctrinal-Frontage-Size3  1.9))
+
+
+         ;;;Echelon Battalion
+
+    (tellm
+        (Unit-Doctrinal-Frontage-Size   Battalion-Doctrinal-Frontage-Size0)
+        (echelon    Battalion-Doctrinal-Frontage-Size0  Battalion)
+        (number-of-units Battalion-Doctrinal-Frontage-Size0 2)
+        (frontage-size  Battalion-Doctrinal-Frontage-Size0  4.2))
+
+     (tellm
+        (Unit-Doctrinal-Frontage-Size   Battalion-Doctrinal-Frontage-Size1)
+        (echelon    Battalion-Doctrinal-Frontage-Size1  Battalion)
+        (number-of-units Battalion-Doctrinal-Frontage-Size1 3)
+        (frontage-size  Battalion-Doctrinal-Frontage-Size1  7.3))
+
+    (tellm
+        (Unit-Doctrinal-Frontage-Size   Battalion-Doctrinal-Frontage-Size2)
+        (echelon    Battalion-Doctrinal-Frontage-Size2  Battalion)
+        (number-of-units Battalion-Doctrinal-Frontage-Size2 4)
+        (frontage-size  Battalion-Doctrinal-Frontage-Size2  10.4))
+
+     (tellm
+        (Unit-Doctrinal-Frontage-Size   Battalion-Doctrinal-Frontage-Size3)
+        (echelon    Battalion-Doctrinal-Frontage-Size3  Battalion)
+        (number-of-units Battalion-Doctrinal-Frontage-Size3 5)
+        (frontage-size  Battalion-Doctrinal-Frontage-Size3  13.5))
+
+
+       ;;; Echelon Brigade
+    (tellm
+        (Unit-Doctrinal-Frontage-Size   Brigade-Doctrinal-Frontage-Size0)
+        (echelon    Brigade-Doctrinal-Frontage-Size0  Brigade)
+        (number-of-units Brigade-Doctrinal-Frontage-Size0 2)
+        (frontage-size  Brigade-Doctrinal-Frontage-Size0  20.8))
+
+     (tellm
+        (Unit-Doctrinal-Frontage-Size   Brigade-Doctrinal-Frontage-Size1)
+        (echelon    Brigade-Doctrinal-Frontage-Size1  Brigade)
+        (number-of-units Brigade-Doctrinal-Frontage-Size1 3)
+        (frontage-size  Brigade-Doctrinal-Frontage-Size1  31.2))
+
+    (tellm
+        (Unit-Doctrinal-Frontage-Size   Brigade-Doctrinal-Frontage-Size2)
+        (echelon    Brigade-Doctrinal-Frontage-Size2  Brigade)
+        (number-of-units Brigade-Doctrinal-Frontage-Size2 4)
+        (frontage-size  Brigade-Doctrinal-Frontage-Size2  41.6))
+
+     (tellm
+        (Unit-Doctrinal-Frontage-Size   Brigade-Doctrinal-Frontage-Size3)
+        (echelon    Brigade-Doctrinal-Frontage-Size3  Brigade)
+        (number-of-units Brigade-Doctrinal-Frontage-Size3 5)
+        (frontage-size  Brigade-Doctrinal-Frontage-Size3  52))
+
+         ;;; Echelon Division
+    (tellm
+        (Unit-Doctrinal-Frontage-Size   Division-Doctrinal-Frontage-Size0)
+        (echelon    Division-Doctrinal-Frontage-Size0  Division)
+        (number-of-units Division-Doctrinal-Frontage-Size0 2)
+        (frontage-size  Division-Doctrinal-Frontage-Size0  80.4))
+
+     (tellm
+        (Unit-Doctrinal-Frontage-Size   Division-Doctrinal-Frontage-Size1)
+        (echelon    Division-Doctrinal-Frontage-Size1  Division)
+        (number-of-units Division-Doctrinal-Frontage-Size1 3)
+        (frontage-size  Division-Doctrinal-Frontage-Size1  126.6))
+
+    (tellm
+        (Unit-Doctrinal-Frontage-Size   Division-Doctrinal-Frontage-Size2)
+        (echelon    Division-Doctrinal-Frontage-Size2  Division)
+        (number-of-units Division-Doctrinal-Frontage-Size2 4)
+        (frontage-size  Division-Doctrinal-Frontage-Size2  170.8))
+
+     (tellm
+        (Unit-Doctrinal-Frontage-Size   Division-Doctrinal-Frontage-Size3)
+        (echelon    Division-Doctrinal-Frontage-Size3  Division)
+        (number-of-units Division-Doctrinal-Frontage-Size3 5)
+        (frontage-size  Division-Doctrinal-Frontage-Size3  216))
+
+
+
+
+    ;;;;================================================================
+    ;;;; Instances of Historical-Minmum-Planning-Ratios
+    ;;;; Data come from doc "Task Attack"
+    ;;;; (???? mission type-- origianl define its type as action, but there are
+    ;;;   delay, defend counterattack defined in isi actions ontology, here just
+    ;;;; use string. ?????)
+
+
+
+    (tellm
+        ( Historical-Minimum-Planning-Ratios   Delay-Historical-Minimum-Planning-Ratios)
+        ( mission-type Delay-Historical-Minimum-Planning-Ratios "Delay")
+        ( friendly-number Delay-Historical-Minimum-Planning-Ratios 1)
+        ( enemy-number Delay-Historical-Minimum-Planning-Ratios 6))
+
+    (tellm
+        ( Historical-Minimum-Planning-Ratios   Defend-Historical-Minimum-Planning-Ratios0)
+        ( mission-type Defend-Historical-Minimum-Planning-Ratios0 "Defend")
+        ( friendly-number Defend-Historical-Minimum-Planning-Ratios0 1)
+        ( enemy-number Defend-Historical-Minimum-Planning-Ratios0 3)
+        ( preparation-position Defend-Historical-Minimum-Planning-Ratios0 'Prepared ))
+
+    (tellm
+        ( Historical-Minimum-Planning-Ratios   Defend-Historical-Minimum-Planning-Ratios2)
+        ( mission-type Defend-Historical-Minimum-Planning-Ratios2 "Defend")
+        ( friendly-number Defend-Historical-Minimum-Planning-Ratios2 1)
+        ( enemy-number Defend-Historical-Minimum-Planning-Ratios2 3)
+        ( preparation-position Defend-Historical-Minimum-Planning-Ratios2 'Fortified ))
+
+     (tellm
+        ( Historical-Minimum-Planning-Ratios   Defend-Historical-Minimum-Planning-Ratios1)
+        ( mission-type Defend-Historical-Minimum-Planning-Ratios1 "Defend")
+        ( friendly-number Defend-Historical-Minimum-Planning-Ratios1 1)
+        ( enemy-number Defend-Historical-Minimum-Planning-Ratios1 2.5)
+        ( preparation-position Defend-Historical-Minimum-Planning-Ratios1 'Hasty))
+
+     (tellm
+        ( Historical-Minimum-Planning-Ratios   Attack-Historical-Minimum-Planning-Ratios0)
+        ( mission-type Attack-Historical-Minimum-Planning-Ratios0 "Attack")
+        ( friendly-number Attack-Historical-Minimum-Planning-Ratios0 3)
+        ( enemy-number Attack-Historical-Minimum-Planning-Ratios0 1)
+        ( preparation-position Attack-Historical-Minimum-Planning-Ratios0 'Prepared ))
+
+     (tellm
+        ( Historical-Minimum-Planning-Ratios   Attack-Historical-Minimum-Planning-Ratios2)
+        ( mission-type Attack-Historical-Minimum-Planning-Ratios2 "Attack")
+        ( friendly-number Attack-Historical-Minimum-Planning-Ratios2 3)
+        ( enemy-number Attack-Historical-Minimum-Planning-Ratios2 1)
+        ( preparation-position Attack-Historical-Minimum-Planning-Ratios2 'Fortified))
+
+     (tellm
+        ( Historical-Minimum-Planning-Ratios   Attack-Historical-Minimum-Planning-Ratios1)
+        ( mission-type Attack-Historical-Minimum-Planning-Ratios1 "Attack")
+        ( friendly-number Attack-Historical-Minimum-Planning-Ratios1 2.5)
+        ( enemy-number Attack-Historical-Minimum-Planning-Ratios1 1)
+        ( preparation-position Attack-Historical-Minimum-Planning-Ratios1 'Hasty))
+
+     (tellm
+        ( Historical-Minimum-Planning-Ratios   CounterAttack-Historical-Minimum-Planning-Ratios)
+        ( mission-type CounterAttack-Historical-Minimum-Planning-Ratios "CounterAttack")
+        ( friendly-number CounterAttack-Historical-Minimum-Planning-Ratios 1)
+        ( enemy-number CounterAttack-Historical-Minimum-Planning-Ratios 1)
+        ( preparation-position CounterAttack-Historical-Minimum-Planning-Ratios 'Flank))
+
+
+     ;;;;===============================================================================
+     ;;;; Instances of US-Artillery-Capability
+     ;;;; Data from doc "Artillery Battalion Occupation of a Firing Position Task"
+
+     (tellm
+        ( US-Artillery-Capability   M119A1-Capability)
+        ( weapon-type   M119A1-Capability 'M119A1)
+        ( description   M119A1-Capability "105mm")
+        ( maximum-range M119A1-Capability   14000)
+        ( maximum-range-with-RAP M119A1-Capability   19000)
+        ( maximum-FPF-width M119A1-Capability   210)
+        ( weight    M119A1-Capability   4250)
+        ( minimum-rate-of-fire M119A1-Capability    3)
+        ( maximum-rate-of-fire M119A1-Capability    6))
+
+    (tellm
+        ( US-Artillery-Capability   M102-Capability)
+        ( weapon-type   M102-Capability 'M102)
+        ( description   M102-Capability "105mm")
+        ( maximum-range M102-Capability   11500)
+        ( maximum-range-with-RAP M102-Capability   15000)
+        ( maximum-FPF-width M102-Capability   210)
+        ( weight    M102-Capability   3338)
+        ( minimum-rate-of-fire M102-Capability    3)
+        ( maximum-rate-of-fire M102-Capability    10))
+
+     (tellm
+        ( US-Artillery-Capability   M101A1-Capability)
+        ( weapon-type   M101A1-Capability 'M101A1)
+        ( description   M101A1-Capability "105mm")
+        ( maximum-range M101A1-Capability   11270)
+        ( maximum-range-with-RAP M101A1-Capability   15000)
+        ( maximum-FPF-width M101A1-Capability   210)
+        ( weight    M101A1-Capability   4980)
+        ( minimum-rate-of-fire M101A1-Capability    3)
+        ( maximum-rate-of-fire M101A1-Capability    10))
+
+      (tellm
+        ( US-Artillery-Capability   M114A1-Capability)
+        ( weapon-type   M114A1-Capability 'M114A1/2)
+        ( description   M114A1-Capability "155mm")
+        ( maximum-range M114A1-Capability   14600)
+        ( maximum-range-with-RAP M114A1-Capability   19400)
+        ( maximum-FPF-width M114A1-Capability   300)
+        ( weight    M114A1-Capability   12700)
+        ( minimum-rate-of-fire M114A1-Capability    1)
+        ( maximum-rate-of-fire M114A1-Capability    4))
+
+
+       (tellm
+        ( US-Artillery-Capability   M109A3-Capability)
+        ( weapon-type   M109A3-Capability 'M109A3)
+        ( description   M109A3-Capability "155mm")
+        ( maximum-range M109A3-Capability   18100)
+        ( maximum-range-with-RAP M109A3-Capability   23500)
+        ( maximum-FPF-width M109A3-Capability   400)
+        ( weight    M109A3-Capability   55000)
+        ( minimum-rate-of-fire M109A3-Capability    1)
+        ( maximum-rate-of-fire M109A3-Capability    4))
+
+
+       (tellm
+        ( US-Artillery-Capability   M109A5-Capability)
+        ( weapon-type   M109A5-Capability 'M109A5)
+        ( description   M109A5-Capability "155mm")
+        ( maximum-range M109A5-Capability  22200)
+        ( maximum-range-with-RAP M109A5-Capability   30000)
+        ( maximum-FPF-width M109A5-Capability   400)
+        ( weight    M109A5-Capability   55000)
+        ( minimum-rate-of-fire M109A5-Capability    1)
+        ( maximum-rate-of-fire M109A5-Capability    4))
+
+       (tellm
+        ( US-Artillery-Capability   M109A5-Capability)
+        ( weapon-type   M109A5-Capability 'M109A6)
+        ( description   M109A5-Capability "155mm")
+        ( maximum-range M109A5-Capability  22200)
+        (  maximum-range-with-RAP M109A5-Capability   30000)
+        ( maximum-FPF-width M109A5-Capability   400)
+        ( weight    M109A5-Capability   63000)
+        ( minimum-rate-of-fire M109A5-Capability    1)
+        ( maximum-rate-of-fire M109A5-Capability    4))
+
+      (tellm
+        ( US-Artillery-Capability   M198-Capability)
+        ( weapon-type   M198-Capability 'M198)
+        ( description   M198-Capability "155mm")
+        ( maximum-range M198-Capability  18100)
+        ( maximum-range-with-RAP M198-Capability   30000)
+        ( maximum-FPF-width M198-Capability   400)
+        ( weight    M198-Capability   15800)
+        ( maximum-rate-of-fire M198-Capability    4))
+
+     (tellm
+        ( US-Artillery-Capability   M270-Capability)
+        ( weapon-type   M270-Capability 'M270)
+        ( description   M270-Capability "Multiple launch rocket system")
+        ( minimum-range M270-Capability  8000)
+        ( maximum-range M270-Capability  32000)
+        ( weight    M270-Capability   54600)
+        ( maximum-rate-of-fire M270-Capability    12))
+
+
+
+     ;;;================================================================
+     ;;; Instances of OPFOR-Artillery-And-Mortar-Capability
+     ;;; Data from doc "Artillery Battalion Occupation of a Firing Position Task"
+
+     (tellm
+        (create 2S9-Capability  OPFOR-Artillery-And-Mortar-Capability)
+            (about 2S9-Capability
+            ( weapon-type     '2S9)
+            ( description    "120mm self-propelled-artillery")
+            ( maximum-range   11500)
+            ( sustained-rounds   100)))
+
+
+
+     (tellm
+        (create D30-Capability OPFOR-Artillery-And-Mortar-Capability)
+          (about D30-Capability
+        ( weapon-type  'D30)
+        ( description    "120mm")
+        ( maximum-range   15300)
+        ( sustained-rounds   75)
+        ( maximum-rate-of-fire  8 )))
+
+
+      (tellm
+        ( OPFOR-Artillery-And-Mortar-Capability  2S1-Capability)
+            (about 2S1-Capability
+        ( weapon-type    '2S1)
+        ( description  "122mm")
+        ( maximum-range    15300)
+        ( sustained-rounds  70)
+        ( maximum-rate-of-fire  8 )))
+
+      (tellm
+        ( create D20-Capability  OPFOR-Artillery-And-Mortar-Capability   )
+            (about D20-Capability
+        ( weapon-type   'D20)
+        ( description  "152mm")
+        ( maximum-range 17230)
+        ( maximum-range-with-RAP   24000)
+        ( sustained-rounds   65)
+        ( maximum-rate-of-fire    5 )))
+
+       (tellm
+        ( create  2S3-Capability OPFOR-Artillery-And-Mortar-Capability )
+            (about  2S3-Capability
+        ( weapon-type   '2S3)
+        ( description  "152mm SP")
+        ( maximum-range  17230)
+        ( maximum-range-with-RAP 24000)
+        ( sustained-rounds   60)
+        ( maximum-rate-of-fire  4 )) )
+
+     (tellm
+        ( create 2S5-Capability OPFOR-Artillery-And-Mortar-Capability  )
+            (about 2S5-Capability
+        ( weapon-type    '2S5)
+        ( description  "152mm SP")
+        ( maximum-range   28000)
+        ( maximum-range-with-RAP   33000)
+        ( sustained-rounds   60)
+        ( maximum-rate-of-fire   5 )) )
+
+    (tellm
+        (create  2S19-Capability OPFOR-Artillery-And-Mortar-Capability  )
+            (about  2S19-Capability
+        ( weapon-type   '2S19)
+        ( description    "152mm SP")
+        ( maximum-range   30000)
+        ( maximum-range-with-RAP   40000)
+        ( maximum-rate-of-fire    10 )) )
+
+    (tellm
+        (create 2A36-Capability  OPFOR-Artillery-And-Mortar-Capability )
+            (about 2A36-Capability
+        ( weapon-type   '2A36)
+        ( description     "152mm")
+        ( maximum-range    28000)
+        ( maximum-range-with-RAP   33000)
+        ( sustained-rounds  60)
+        ( maximum-rate-of-fire   5 )))
+
+    (tellm
+        (create 2A65-Capability  OPFOR-Artillery-And-Mortar-Capability )
+            (about 2A65-Capability
+        ( weapon-type    '2A65)
+        ( description    "152mm")
+        ( maximum-range    30000)
+        ( maximum-range-with-RAP  40000)
+        ( maximum-rate-of-fire   6 )))
+
+     (tellm
+        (create 2S7-Capability OPFOR-Artillery-And-Mortar-Capability   )
+            (about 2S7-Capability
+        ( weapon-type   '2S7)
+        ( description    "203mm")
+        ( maximum-range   37500)
+        ( maximum-range-with-RAP   50000)
+         ( sustained-rounds   60)
+        ( maximum-rate-of-fire  2 )))
+
+     (tellm
+        ( create 2B11-Capability OPFOR-Artillery-And-Mortar-Capability  )
+            (about 2B11-Capability
+        ( weapon-type   '2B11)
+        ( description   "120mm mortar")
+        ( minimum-range    460)
+        ( maximum-range   7200)
+        ( maximum-rate-of-fire   10)) )
+
+     (tellm
+        ( create M160-Capability OPFOR-Artillery-And-Mortar-Capability  )
+            (about M160-Capability
+        ( weapon-type   'M160)
+        ( description     "160mm mortar")
+        ( minimum-range     750)
+        ( maximum-range   8040)
+        ( sustained-rounds   48)
+        ( maximum-rate-of-fire  3 )))
+
+    (tellm
+        ( create M240-Capability OPFOR-Artillery-And-Mortar-Capability  )
+            (about M240-Capability
+        ( weapon-type    'M240)
+        ( description    "240mm mortar")
+        ( minimum-range   500)
+        ( maximum-range   9700)
+        ( sustained-rounds  38)
+        ( maximum-rate-of-fire  1 )) )
+
+
+    (tellm
+        ( create BM21-Capability OPFOR-Artillery-And-Mortar-Capability )
+            (about BM21-Capability
+        ( weapon-type     'BM21)
+        ( description      "122mm MRL")
+        ( minimum-range     500)
+        ( maximum-range   20380)
+        ( maximum-rate-of-fire   40 )) )
+
+    (tellm
+        ( create BM22-Capability OPFOR-Artillery-And-Mortar-Capability )
+            (about BM22-Capability
+        ( weapon-type    'BM22)
+        ( description    "220mm MRL")
+        ( maximum-range   40000)
+        ( maximum-rate-of-fire  16 )) )
+
+     (tellm
+        ( create 9A52-Capability OPFOR-Artillery-And-Mortar-Capability  )
+            (about 9A52-Capability
+        ( weapon-type    '9A52)
+        ( description     "300mm MRL")
+        ( maximum-range    70000)
+        ( maximum-rate-of-fire    14 ) ))
+
+
+
+
+
+;;;define instances of Geospatial-Constraints
+
+;;;==================================================
+;;; instances of Mobility-Corridor-Doctrinal-Width
+;;; Data come from doc "Task Move Tactically"
+
+ (tellm
+    (Mobility-Corridor-Doctrinal-Width  Division-Mobility-Corridor-Doctrinal-Width)
+    (unit-category  Division-Mobility-Corridor-Doctrinal-Width  Division)
+    (width      Division-Mobility-Corridor-Doctrinal-Width  6))
+
+
+ (tellm
+    (Mobility-Corridor-Doctrinal-Width  Brigade-Mobility-Corridor-Doctrinal-Width)
+    (unit-category  Brigade-Mobility-Corridor-Doctrinal-Width  Brigade)
+    (width      Brigade-Mobility-Corridor-Doctrinal-Width  3))
+
+  (tellm
+    (Mobility-Corridor-Doctrinal-Width  Regiment-Mobility-Corridor-Doctrinal-Width)
+    (unit-category  Regiment-Mobility-Corridor-Doctrinal-Width  Regiment)
+    (width      Regiment-Mobility-Corridor-Doctrinal-Width  3))
+
+  (tellm
+    (Mobility-Corridor-Doctrinal-Width  Battalion-Mobility-Corridor-Doctrinal-Width)
+    (unit-category  Battalion-Mobility-Corridor-Doctrinal-Width  Battalion)
+    (width      Battalion-Mobility-Corridor-Doctrinal-Width  1.5))
+
+  (tellm
+    (Mobility-Corridor-Doctrinal-Width  Company-Mobility-Corridor-Doctrinal-Width)
+    (unit-category  Company-Mobility-Corridor-Doctrinal-Width  Company)
+    (width      Company-Mobility-Corridor-Doctrinal-Width  0.5))
+
+  (tellm
+    (Mobility-Corridor-Doctrinal-Width Platoon-Mobility-Corridor-Doctrinal-Width)
+    (unit-category Platoon-Mobility-Corridor-Doctrinal-Width Platoon)
+    (width     Platoon-Mobility-Corridor-Doctrinal-Width  0.15))
+
+
+   ;;;====================================================================
+   ;;;instances of Mobility-Corridor
+    ;;; Data come from doc "Task Move Tactically"
+
+  (tellm
+    (Mobility-Corridor   Corps-Mobility-Corridor )
+    (echelon-level-of-concern   Corps-Mobility-Corridor    Corps)
+    (concerned-mobility-corridor  Corps-Mobility-Corridor  Brigade-Mobility-Corridor-Doctrinal-Width))
+
+  (tellm
+    (Mobility-Corridor   Division-Mobility-Corridor )
+    (echelon-level-of-concern   Division-Mobility-Corridor    Division)
+    (concerned-mobility-corridor  Division-Mobility-Corridor   Battalion-Mobility-Corridor-Doctrinal-Width))
+
+  (tellm
+    (Mobility-Corridor   Brigade-Mobility-Corridor )
+    (echelon-level-of-concern   Brigade-Mobility-Corridor    Brigade)
+    (concerned-mobility-corridor  Brigade-Mobility-Corridor  Company-Mobility-Corridor-Doctrinal-Width))
+
+  (tellm
+    (Mobility-Corridor   Regiment-Mobility-Corridor )
+    (echelon-level-of-concern   Regiment-Mobility-Corridor    Regiment)
+    (concerned-mobility-corridor  Regiment-Mobility-Corridor  Company-Mobility-Corridor-Doctrinal-Width))
+
+  (tellm
+    (Mobility-Corridor   Battalion-Mobility-Corridor )
+    (echelon-level-of-concern   Battalion-Mobility-Corridor    Battalion)
+    (concerned-mobility-corridor  Battalion-Mobility-Corridor  Platoon-Mobility-Corridor-Doctrinal-Width))
+
+  (tellm
+    (Mobility-Corridor   Company-Mobility-Corridor )
+    (echelon-level-of-concern   Company-Mobility-Corridor    Company))
+   ;;; There are no doctrinal width data of unit "Squad"
+
+
+   ;;;=======================================================================
+   ;;; Instances of Approach-Avenue
+   ;;; Data come from doc "Task move tactically"
+
+   (tellm
+        (create Corps-Approach-Avenue Approach-Avenue)
+                    (about Corps-Approach-Avenue
+                (type-of-echelon    Corps)
+                (corridor-of-moving  Division-Mobility-Corridor)
+                (max-distance-between-mobility-corridor 10)))
+
+   (tellm
+        (create Division-Approach-Avenue Approach-Avenue)
+                    (about Division-Approach-Avenue
+                (type-of-echelon    Division)
+                (corridor-of-moving  Brigade-Mobility-Corridor)
+                (max-distance-between-mobility-corridor 10)))
+
+  (tellm
+        (create Brigade-Approach-Avenue Approach-Avenue)
+                    (about Brigade-Approach-Avenue
+                (type-of-echelon   Brigade)
+                (corridor-of-moving  Battalion-Mobility-Corridor)
+                (max-distance-between-mobility-corridor 6)))
+
+  (tellm
+        (create Regiment-Approach-Avenue Approach-Avenue)
+                    (about Regiment-Approach-Avenue
+                (type-of-echelon   Regiment)
+                (corridor-of-moving  Battalion-Mobility-Corridor)
+                (max-distance-between-mobility-corridor 6)))
+
+  (tellm
+        (create Battalion-Approach-Avenue Approach-Avenue)
+                    (about Battalion-Approach-Avenue
+                (type-of-echelon   Battalion)
+                (corridor-of-moving  Company-Mobility-Corridor)
+                (max-distance-between-mobility-corridor 2)))
+  (tellm
+        (create Company-Approach-Avenue Approach-Avenue)
+                    (about Company-Approach-Avenue
+                (type-of-echelon   Company)
+                (corridor-of-moving  Platoon-Mobility-Corridor)
+                (max-distance-between-mobility-corridor 0.1)))
+
+ ;;;==============================================================
+ ;;; Instances of Frontage-Requirement
+ ;;; Data come from doc "Task Move Tactically"
+
+ ;;;(defconcept Frontage-Requirement
+ ;;;   is (:and Geospatatial-Constraints
+ ;;;           Geographical-Area)
+ ;;;   :roles (( formation     :type Formation-Set)
+ ;;;           ( subunit-numbers   :type Integer)
+ ;;;           ( units-frontage-requirements  :type Integer)))
+
+ ;;;; Formation Type: COLUMN
+
+ (tellm
+    (Frontage-Requirement   Column-Frontage-Requirement0 )
+    (formation    Column-Frontage-Requirement0  'COLUMN  )
+    (subunit-numbers    Column-Frontage-Requirement0    2 )
+    (units-frontage-requirement  Column-Frontage-Requirement0   1 )
+ )
+
+
+ (tellm
+    (Frontage-Requirement   Column-Frontage-Requirement1 )
+    (formation    Column-Frontage-Requirement1  'COLUMN )
+    (subunit-numbers    Column-Frontage-Requirement1    3 )
+    (units-frontage-requirement  Column-Frontage-Requirement1   1))
+
+ (tellm
+    (Frontage-Requirement   Column-Frontage-Requirement2 )
+    (formation    Column-Frontage-Requirement2  'COLUMN )
+    (subunit-numbers    Column-Frontage-Requirement2    4 )
+    (units-frontage-requirement  Column-Frontage-Requirement2   1 ))
+
+ (tellm
+    (Frontage-Requirement   Column-Frontage-Requirement3 )
+    (formation    Column-Frontage-Requirement3  'COLUMN )
+    (subunit-numbers    Column-Frontage-Requirement3    5 )
+    (units-frontage-requirement  Column-Frontage-Requirement3   1))
+
+ ;;;Formation Type: ECHELON
+
+ (tellm
+    (Frontage-Requirement   Echelon-Frontage-Requirement0 )
+    (formation    Echelon-Frontage-Requirement0  'ECHELON )
+    (subunit-numbers    Echelon-Frontage-Requirement0    2)
+    (units-frontage-requirement  Echelon-Frontage-Requirement0   2))
+
+(tellm
+    (Frontage-Requirement   Echelon-Frontage-Requirement1 )
+    (formation    Echelon-Frontage-Requirement1  'ECHELON )
+    (subunit-numbers    Echelon-Frontage-Requirement1    3)
+    (units-frontage-requirement  Echelon-Frontage-Requirement1   3))
+
+(tellm
+    (Frontage-Requirement   Echelon-Frontage-Requirement2 )
+    (formation    Echelon-Frontage-Requirement2  'ECHELON )
+    (subunit-numbers    Echelon-Frontage-Requirement2    4)
+    (units-frontage-requirement  Echelon-Frontage-Requirement2   4))
+
+(tellm
+    (Frontage-Requirement   Echelon-Frontage-Requirement3 )
+    (formation    Echelon-Frontage-Requirement3  'ECHELON )
+    (subunit-numbers    Echelon-Frontage-Requirement3    5)
+    (units-frontage-requirement  Echelon-Frontage-Requirement3   5))
+
+
+ ;;;;Formation Type: LINE
+
+ (tellm
+    (Frontage-Requirement   Line-Frontage-Requirement0 )
+    (formation    Line-Frontage-Requirement0  'LINE )
+    (subunit-numbers    Line-Frontage-Requirement0    2)
+    (units-frontage-requirement  Line-Frontage-Requirement0   2))
+
+ (tellm
+    (Frontage-Requirement   Line-Frontage-Requirement1 )
+    (formation    Line-Frontage-Requirement1  'LINE )
+    (subunit-numbers    Line-Frontage-Requirement1    3)
+    (units-frontage-requirement  Line-Frontage-Requirement1   3))
+
+ (tellm
+    (Frontage-Requirement   Line-Frontage-Requirement2 )
+    (formation    Line-Frontage-Requirement2  'LINE )
+    (subunit-numbers    Line-Frontage-Requirement2    4)
+    (units-frontage-requirement  Line-Frontage-Requirement2   4))
+
+ (tellm
+    (Frontage-Requirement   Line-Frontage-Requirement3 )
+    (formation    Line-Frontage-Requirement2  'LINE )
+    (subunit-numbers    Line-Frontage-Requirement2    5)
+    (units-frontage-requirement  Line-Frontage-Requirement2   5))
+
+ ;;;Formaiton Type : VEE
+
+ (tellm
+    (Frontage-Requirement   Vee-Frontage-Requirement0 )
+    (formation    Vee-Frontage-Requirement0  'VEE )
+    (subunit-numbers    Vee-Frontage-Requirement0    3)
+    (units-frontage-requirement  Vee-Frontage-Requirement0   3))
+
+ (tellm
+    (Frontage-Requirement   Vee-Frontage-Requirement1 )
+    (formation    Vee-Frontage-Requirement1  'VEE )
+    (subunit-numbers    Vee-Frontage-Requirement1    4)
+    (units-frontage-requirement  Vee-Frontage-Requirement1   3))
+
+ (tellm
+    (Frontage-Requirement   Vee-Frontage-Requirement2 )
+    (formation    Vee-Frontage-Requirement2  'VEE )
+    (subunit-numbers    Vee-Frontage-Requirement2    5)
+    (units-frontage-requirement  Vee-Frontage-Requirement2   5))
+
+ ;;;Formation Type : WEDGE
+
+ (tellm
+    (Frontage-Requirement   Wedge-Frontage-Requirement0 )
+    (formation    Wedge-Frontage-Requirement0  'WEDGE )
+    (subunit-numbers    Wedge-Frontage-Requirement0    3)
+    (units-frontage-requirement  Wedge-Frontage-Requirement0   3))
+
+ (tellm
+    (Frontage-Requirement   Wedge-Frontage-Requirement1 )
+    (formation    Wedge-Frontage-Requirement1  'WEDGE )
+    (subunit-numbers    Wedge-Frontage-Requirement1    4 )
+    (units-frontage-requirement  Wedge-Frontage-Requirement1   3))
+
+ (tellm
+    (Frontage-Requirement   Wedge-Frontage-Requirement2 )
+    (formation    Wedge-Frontage-Requirement2  'WEDGE )
+    (subunit-numbers    Wedge-Frontage-Requirement2    5)
+    (units-frontage-requirement  Wedge-Frontage-Requirement2   5))
+
+ ;;;Formation Type : BOX
+
+ (tellm
+    (Frontage-Requirement   Box-Frontage-Requirement1 )
+    (formation    Box-Frontage-Requirement1  'BOX )
+    (subunit-numbers    Box-Frontage-Requirement1    4 )
+    (units-frontage-requirement  Box-Frontage-Requirement1   2))
+
+ (tellm
+    (Frontage-Requirement   Box-Frontage-Requirement2 )
+    (formation    Box-Frontage-Requirement2  'BOX )
+    (subunit-numbers    Box-Frontage-Requirement2    5 )
+    (units-frontage-requirement  Box-Frontage-Requirement2   3))
+
+ ;;;Formation Type : DIAMOND
+
+ (tellm
+    (Frontage-Requirement   Diamond-Frontage-Requirement1 )
+    (formation    Diamond-Frontage-Requirement1  'DIAMOND)
+    (subunit-numbers    Diamond-Frontage-Requirement1    4 )
+    (units-frontage-requirement  Diamond-Frontage-Requirement1   3))
+
+ (tellm
+    (Frontage-Requirement   Diamond-Frontage-Requirement2 )
+    (formation    Diamond-Frontage-Requirement2  'DIAMOND)
+    (subunit-numbers    Diamond-Frontage-Requirement2    5 )
+    (units-frontage-requirement  Diamond-Frontage-Requirement2   3))
+
+
+  ;;;========================================================================
+  ;;; Instances of Formaiton-Characteristic
+  ;;; Data come from doc "Task Move Tactically"
+
+  (tellm
+    (Formation-Characteristic   Column-Formation-Characteristic)
+    (formation  Column-Formation-Characteristic  'COLUMN)
+    (likelihood-of-contact-enemy    Column-Formation-Characteristic 'Not-Expected )
+    (combat-power-forward   Column-Formation-Characteristic     'Low )
+    (command-and-control    Column-Formation-Characteristic     'High )
+    (flexibility     Column-Formation-Characteristic     'High )
+    (flank-security     Column-Formation-Characteristic  'High )
+    (speed          Column-Formation-Characteristic     'High )
+    (maneuver-space     Column-Formation-Characteristic 'High )
+   )
+
+
+  (tellm
+    (Formation-Characteristic   Line-Formation-Characteristic)
+    (formation  Line-Formation-Characteristic  'LINE)
+    (likelihood-of-contact-enemy    Line-Formation-Characteristic 'Expected )
+    (combat-power-forward   Line-Formation-Characteristic     'High)
+    (command-and-control    Line-Formation-Characteristic     'Low )
+    (flexibility     Line-Formation-Characteristic     'Low )
+    (flank-security     Line-Formation-Characteristic  'Low )
+    (speed          Line-Formation-Characteristic     'Low )
+    (maneuver-space     Line-Formation-Characteristic 'Low )
+   )
+
+  (tellm
+    (Formation-Characteristic   Echelon-Formation-Characteristic)
+    (formation  Echelon-Formation-Characteristic  'ECHELON)
+    (likelihood-of-contact-enemy    Echelon-Formation-Characteristic 'Possible )
+    (combat-power-forward   Echelon-Formation-Characteristic     'Moderate)
+    (command-and-control    Echelon-Formation-Characteristic     'High )
+    (flexibility     Echelon-Formation-Characteristic     'Low )
+    (flank-security     Echelon-Formation-Characteristic  'High )
+    (speed          Echelon-Formation-Characteristic     'Moderate )
+    (maneuver-space     Echelon-Formation-Characteristic 'Low )
+   )
+
+  (tellm
+    (Formation-Characteristic   Vee-Formation-Characteristic)
+    (formation  Vee-Formation-Characteristic  'Vee)
+    (likelihood-of-contact-enemy    Vee-Formation-Characteristic 'Possible-or-Expected )
+    (combat-power-forward   Vee-Formation-Characteristic     'Low)
+    (command-and-control    Vee-Formation-Characteristic     'Moderate )
+    (flexibility     Vee-Formation-Characteristic     'Moderate )
+    (flank-security     Vee-Formation-Characteristic  'Moderate )
+    (speed          Vee-Formation-Characteristic     'Low)
+    (maneuver-space     Vee-Formation-Characteristic 'High )
+   )
+
+   (tellm
+    (Formation-Characteristic   Wedge-Formation-Characteristic)
+    (formation  Wedge-Formation-Characteristic  'WEDGE)
+    (likelihood-of-contact-enemy    Wedge-Formation-Characteristic 'Possible-or-Expected )
+    (combat-power-forward   Wedge-Formation-Characteristic     'High)
+    (command-and-control    Wedge-Formation-Characteristic     'Moderate )
+    (flexibility     Wedge-Formation-Characteristic     'High)
+    (flank-security     Wedge-Formation-Characteristic  'Moderate )
+    (speed          Wedge-Formation-Characteristic     'Low)
+    (maneuver-space     Wedge-Formation-Characteristic 'High )
+   )
+
+   (tellm
+    (Formation-Characteristic   Box-Formation-Characteristic)
+    (formation  Box-Formation-Characteristic  'BOX)
+    (likelihood-of-contact-enemy    Box-Formation-Characteristic 'Possible-or-Expected )
+    (combat-power-forward   Box-Formation-Characteristic     'High)
+    (command-and-control    Box-Formation-Characteristic     'High )
+    (flexibility     Box-Formation-Characteristic     'High)
+    (flank-security     Box-Formation-Characteristic  'High )
+    (speed          Box-Formation-Characteristic     'Low)
+    (maneuver-space     Box-Formation-Characteristic 'Moderate )
+   )
+
+   (tellm
+    (Formation-Characteristic   Diamond-Formation-Characteristic)
+    (formation  Diamond-Formation-Characteristic  'DIAMOND)
+    (likelihood-of-contact-enemy    Diamond-Formation-Characteristic 'Possible-or-Expected )
+    (combat-power-forward   Diamond-Formation-Characteristic     'Low)
+    (command-and-control    Diamond-Formation-Characteristic     'High )
+    (flexibility     Diamond-Formation-Characteristic     'High)
+    (flank-security     Diamond-Formation-Characteristic  'High )
+    (speed          Diamond-Formation-Characteristic     'Low)
+    (maneuver-space     Diamond-Formation-Characteristic 'Moderate )
+   )
+
+
+ ;;;;======================================================================================
+ ;;;; Instances of Formation-Selection-Constraint
+ ;;;;
+
+ (tellm
+   (create Echelon-Formation-Selection-Constraint Formation-Selection-Constraint )
+       ( about Echelon-Formation-Selection-Constraint
+            ( formation   'ECHELON )
+            ( minimum-subunit-required 2)
+            ( requirement-of-frontage    Echelon-Frontage-Requirement0 )
+            ( requirement-of-frontage    Echelon-Frontage-Requirement1 )
+            ( requirement-of-frontage    Echelon-Frontage-Requirement2 )
+            ( requirement-of-frontage    Echelon-Frontage-Requirement3 )
+            ( characteristic-of-formation    Echelon-Formation-Characteristic )
+        )
+  )
+
+  (tellm
+   (create Column-Formation-Selection-Constraint Formation-Selection-Constraint )
+       ( about Column-Formation-Selection-Constraint
+            ( formation   'COLUMN )
+            ( minimum-subunit-required 2)
+            ( requirement-of-frontage    Column-Frontage-Requirement0 )
+            ( requirement-of-frontage    Column-Frontage-Requirement1 )
+            ( requirement-of-frontage    Column-Frontage-Requirement2 )
+            ( requirement-of-frontage    Column-Frontage-Requirement3 )
+            ( characteristic-of-formation    Column-Formation-Characteristic )
+        )
+  )
+
+ (tellm
+   (create Line-Formation-Selection-Constraint Formation-Selection-Constraint )
+       ( about Line-Formation-Selection-Constraint
+            ( formation   'LINE)
+            ( minimum-subunit-required 2)
+            ( requirement-of-frontage    Line-Frontage-Requirement0 )
+            ( requirement-of-frontage    Line-Frontage-Requirement1 )
+            ( requirement-of-frontage    Line-Frontage-Requirement2 )
+            ( requirement-of-frontage    Line-Frontage-Requirement3 )
+            ( characteristic-of-formation    Line-Formation-Characteristic )
+        ) )
+
+
+ (tellm
+   (create Vee-Formation-Selection-Constraint Formation-Selection-Constraint )
+       ( about Vee-Formation-Selection-Constraint
+            ( formation   'VEE )
+            ( minimum-subunit-required 3)
+            ( requirement-of-frontage    Vee-Frontage-Requirement0 )
+            ( requirement-of-frontage    Vee-Frontage-Requirement1 )
+            ( requirement-of-frontage    Vee-Frontage-Requirement2 )
+            ( characteristic-of-formation    Vee-Formation-Characteristic )
+         )
+  )
+
+ (tellm
+   (create Wedge-Formation-Selection-Constraint Formation-Selection-Constraint )
+       ( about Wedge-Formation-Selection-Constraint
+            ( formation   'WEDGE )
+            ( minimum-subunit-required 3)
+            ( requirement-of-frontage    Wedge-Frontage-Requirement0 )
+            ( requirement-of-frontage    Wedge-Frontage-Requirement1 )
+            ( requirement-of-frontage    Wedge-Frontage-Requirement2 )
+            ( characteristic-of-formation    Wedge-Formation-Characteristic )
+        )
+  )
+
+  (tellm
+   (create Box-Formation-Selection-Constraint Formation-Selection-Constraint )
+       ( about Box-Formation-Selection-Constraint
+            ( formation   'BOX)
+            ( minimum-subunit-required 4)
+            ( requirement-of-frontage    Box-Frontage-Requirement1 )
+            ( requirement-of-frontage    Box-Frontage-Requirement2 )
+            ( characteristic-of-formation    Box-Formation-Characteristic )
+        )
+  )
+
+  (tellm
+   (create Diamond-Formation-Selection-Constraint Formation-Selection-Constraint )
+       ( about Diamond-Formation-Selection-Constraint
+            ( formation   'DIAMOND )
+            ( minimum-subunit-required 4)
+            ( requirement-of-frontage    Diamond-Frontage-Requirement1 )
+            ( requirement-of-frontage    Diamond-Frontage-Requirement2 )
+            ( characteristic-of-formation    Diamond-Formation-Characteristic )
+        )
+  )
+
+
+  ;;;===================================================================
+ ;;; Instances of Formaiton-Size
+
+ ;; ( tellm
+ ;;   (Formation-Size Echelon-Fromation-size )
+ ;;   (formation  Echelon-Fromation-size  'ECHELON)
+ ;;   (minimum-subunit-required   Echelon-Fromation-size  2 )
+
+
+ ;;(tellm
+ ;;   (Formation-Size Column-Fromation-size )
+ ;;   (formation  Column-Fromation-size  'COLUMN)
+ ;;   (minimum-subunit-required   Column-Fromation-size  2))
+
+ ;;(tellm
+ ;;   (Formation-Size Line-Fromation-size )
+ ;;   (formation  Line-Fromation-size  'LINE)
+ ;;   (minimum-subunit-required   Line-Fromation-size  2))
+
+ ;;(tellm
+ ;;   (Formation-Size Vee-Fromation-size )
+ ;;   (formation  Vee-Fromation-size  'VEE)
+ ;;   (minimum-subunit-required   Vee-Fromation-size  3))
+
+ ;;(tellm
+ ;;   (Formation-Size Wedge-Fromation-size )
+ ;;   (formation  Wedge-Fromation-size  'WEDGE)
+ ;;   (minimum-subunit-required   Wedge-Fromation-size  3))
+
+ ;; (tellm
+ ;;   (Formation-Size Box-Fromation-size )
+ ;;   (formation  Box-Fromation-size  'BOX)
+ ;;   (minimum-subunit-required   Box-Fromation-size  4))
+
+ ;; (tellm
+ ;;   (Formation-Size Diamond-Fromation-size )
+ ;;   (formation  Diamond-Fromation-size  'DIAMOND)
+ ;;   (minimum-subunit-required   Diamond-Fromation-size  4))
+ ;;
+ ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+ ;;;=======================================================
+ ;;; Instances of Evaluation-Ranking
+ ;;; Data from "Task Occupy an Assembly Area"
+
+ (tellm
+    (Evaluation-Ranking  Road-Evaluation-Ranking0)
+    (rate  Road-Evaluation-Ranking0 'Best)
+    (point-weight Road-Evaluation-Ranking0 8 )
+ )
+
+ (tellm
+    (Evaluation-Ranking  Road-Evaluation-Ranking1)
+    (rate  Road-Evaluation-Ranking1 'Good)
+    (point-weight Road-Evaluation-Ranking1 6)
+ )
+
+(tellm
+    (Evaluation-Ranking  Terrain-Shielding-Evaluation-Ranking0)
+    (rate   Terrain-Shielding-Evaluation-Ranking0 'Best)
+    (point-weight  Terrain-Shielding-Evaluation-Ranking0 6 )
+ )
+
+ (tellm
+    (Evaluation-Ranking  Terrain-Shielding-Evaluation-Ranking1)
+    (rate   Terrain-Shielding-Evaluation-Ranking1 'Good)
+    (point-weight  Terrain-Shielding-Evaluation-Ranking1 4 )
+ )
+
+ (tellm
+    (Evaluation-Ranking  Terrain-Shielding-Evaluation-Ranking2)
+    (rate   Terrain-Shielding-Evaluation-Ranking2 'Poor)
+    (point-weight  Terrain-Shielding-Evaluation-Ranking2 2 )
+ )
+
+ (tellm
+    (Evaluation-Ranking  Fields-Of-Fire-Evaluation-Ranking0)
+    (rate   Fields-Of-Fire-Evaluation-Ranking0 'Best)
+    (point-weight  Fields-Of-Fire-Evaluation-Ranking0 6 )
+ )
+
+ (tellm
+    (Evaluation-Ranking  Fields-Of-Fire-Evaluation-Ranking1)
+    (rate   Fields-Of-Fire-Evaluation-Ranking1 'Good)
+    (point-weight  Fields-Of-Fire-Evaluation-Ranking1 4 )
+ )
+
+ (tellm
+    (Evaluation-Ranking  Fields-Of-Fire-Evaluation-Ranking2)
+    (rate   Fields-Of-Fire-Evaluation-Ranking2 'Poor)
+    (point-weight  Fields-Of-Fire-Evaluation-Ranking2 2 )
+ )
+
+ (tellm
+    (Evaluation-Ranking  Woods-Evaluation-Ranking0)
+    (rate   Woods-Evaluation-Ranking0 'Best)
+    (point-weight  Woods-Evaluation-Ranking0 5 )
+ )
+
+ (tellm
+    (Evaluation-Ranking  Woods-Evaluation-Ranking1)
+    (rate   Woods-Evaluation-Ranking1 'Good)
+    (point-weight  Woods-Evaluation-Ranking1 3 )
+ )
+
+ (tellm
+    (Evaluation-Ranking  Woods-Evaluation-Ranking2)
+    (rate   Woods-Evaluation-Ranking2 'Poor)
+    (point-weight  Woods-Evaluation-Ranking2 2 )
+ )
+
+ (tellm
+    (Evaluation-Ranking  Severely-Restricted-Terraion-Evaluation-Ranking0)
+    (rate   Severely-Restricted-Terraion-Evaluation-Ranking0 'Best)
+    (point-weight  Severely-Restricted-Terraion-Evaluation-Ranking0 3 )
+ )
+
+ (tellm
+    (Evaluation-Ranking  Severely-Restricted-Terraion-Evaluation-Ranking1)
+    (rate   Severely-Restricted-Terraion-Evaluation-Ranking1 'Good)
+    (point-weight  Severely-Restricted-Terraion-Evaluation-Ranking1 2 )
+ )
+
+
+ (tellm
+    (Evaluation-Ranking  Grouping-Evaluation-Ranking0)
+    (rate   Grouping-Evaluation-Ranking0 'Best)
+    (point-weight  Grouping-Evaluation-Ranking0 2)
+ )
+
+ (tellm
+    (Evaluation-Ranking  Grouping-Evaluation-Ranking1)
+    (rate   Grouping-Evaluation-Ranking1 'Good)
+    (point-weight  Grouping-Evaluation-Ranking1 1 )
+ )
+
+ (tellm
+    (Evaluation-Ranking  Grouping-Evaluation-Ranking2)
+    (rate   Grouping-Evaluation-Ranking2 'Poor)
+    (point-weight  Grouping-Evaluation-Ranking2 0 )
+ )
+
+
+
+
+
+

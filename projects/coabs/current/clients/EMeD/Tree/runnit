@@ -1,0 +1,19 @@
+#!/bin/sh
+#
+# @(#)runnit	1.4 97/10/14
+
+SDKHOME=/nfs/v2/jihie/java/sdk
+
+
+# Compute an absolute pathname here because Class.getResource()
+# fails if $CLASSPATH contains "../".
+
+#SCLASSPATH=.:classes:/nfs/v2/jihie/expect/EMeD/Client2:${SDKHOME}/lib/dt.jar:${SDKHOME}/lib/tools.jar:/nfs/v2/jihie/java/jaxp/jaxp.jar:/nfs/v2/jihie/java/sdk/saxon.zip:/nfs/v2/jihie/java/XML/xml4j3/xml4j.jar:/nfs/v2/jihie/java/XML/saxon
+
+SCLASSPATH=.:classes:/nfs/v2/jihie/expect/EMeD/Client2:${SDKHOME}/lib/dt.jar:${SDKHOME}/lib/tools.jar:/nfs/v2/jihie/java/XML/xml4j3/xml4j.jar:/nfs/v2/jihie/java/XML/xml4j3/xerces.jar:/nfs/v2/jihie/java/XML/saxon
+
+
+CMD="${SDKHOME}/bin/java -classpath ${SCLASSPATH} treePanel"
+
+echo ${CMD}
+${CMD}

@@ -1,0 +1,798 @@
+select: add new button
+   at Mon Jun 21 16:07:39 PDT 1999
+
+select: add new button
+   at Mon Jun 21 16:07:54 PDT 1999
+
+select: copy and create button
+   at Mon Jun 21 16:08:09 PDT 1999
+
+select: add new button
+   at Mon Jun 21 16:12:51 PDT 1999
+
+ done editing:((name estimate-adjustment-rate-of-soil)
+ (primitivep t)
+ (capability (find
+                (obj (?ar is (inst-of number)))
+                (of (?s is (inst-of earth-stuff)))))
+  (result-type (inst-of number))
+ (method (primitive-find-adjustment-rate-for-soil ?s))
+)
+   at Mon Jun 21 16:13:06 PDT 1999
+
+added New method:((name estimate-adjustment-rate-of-soil)
+ (primitivep t)
+ (capability (find
+                (obj (?ar is (inst-of number)))
+                (of (?s is (inst-of earth-stuff)))))
+  (result-type (inst-of number))
+ (method (primitive-find-adjustment-rate-for-soil ?s))
+)
+   at Mon Jun 21 16:13:06 PDT 1999
+
+check: All Agenda
+   at Mon Jun 21 16:13:06 PDT 1999
+
+check: Method Sub-Method Relation
+   at Mon Jun 21 16:13:06 PDT 1999
+
+check: Method Capability Hierarchy
+   at Mon Jun 21 16:13:10 PDT 1999
+
+select: copy and create button
+   at Mon Jun 21 16:13:31 PDT 1999
+
+select: copy and create button
+   at Mon Jun 21 16:17:25 PDT 1999
+
+ done editing:((name compute-earth-volume-of-crater)
+ (capability (find
+                (obj (?v is (spec-of dirt-volume)))
+                (of (?c is (inst-of crater)))))
+  (result-type (inst-of number))
+ (method (multiply (obj (height-of-object ?c))
+		   (by (multiply (obj 1/3)
+				 (by (multiply (3.141592)
+					       (by (multiply 1/4)
+						   (by (multiply (obj (width-of-object ?c))
+								 (by (multiply (obj (length-of-object ?c)))))))))))))
+)
+   at Mon Jun 21 16:25:24 PDT 1999
+
+built new method:((name compute-earth-volume-of-crater)
+ (capability (find
+                (obj (?v is (spec-of dirt-volume)))
+                (of (?c is (inst-of crater)))))
+  (result-type (inst-of number))
+ (method (multiply (obj (height-of-object ?c))
+		   (by (multiply (obj 1/3)
+				 (by (multiply (3.141592)
+					       (by (multiply 1/4)
+						   (by (multiply (obj (width-of-object ?c))
+								 (by (multiply (obj (length-of-object ?c)))))))))))))
+)
+   at Mon Jun 21 16:25:24 PDT 1999
+
+check: All Agenda
+   at Mon Jun 21 16:25:24 PDT 1999
+
+check: Method Sub-Method Relation
+   at Mon Jun 21 16:25:24 PDT 1999
+
+check: Method Capability Hierarchy
+   at Mon Jun 21 16:25:30 PDT 1999
+
+select: modify button
+   at Mon Jun 21 16:26:07 PDT 1999
+
+ done editing:((name compute-earth-volume-of-crater)
+ (capability (find
+                (obj (?v is (spec-of dirt-volume)))
+                (of (?c is (inst-of crater)))))
+  (result-type (inst-of number))
+ (method (multiply (obj (height-of-object ?c))
+		   (by (multiply (obj 1/3)
+				 (by (multiply (obj 3.141592)
+					       (by (multiply (obj 1/4)
+						   (by (multiply (obj (width-of-object ?c))
+								 (by (obj (length-of-object ?c))))))))))))))
+)
+   at Mon Jun 21 16:33:09 PDT 1999
+
+modified method:((name compute-earth-volume-of-crater)
+ (capability (find
+                (obj (?v is (spec-of dirt-volume)))
+                (of (?c is (inst-of crater)))))
+  (result-type (inst-of number))
+ (method (multiply (obj (height-of-object ?c))
+		   (by (multiply (obj 1/3)
+				 (by (multiply (obj 3.141592)
+					       (by (multiply (obj 1/4)
+						   (by (multiply (obj (width-of-object ?c))
+								 (by (obj (length-of-object ?c))))))))))))))
+)
+   at Mon Jun 21 16:33:09 PDT 1999
+
+check: All Agenda
+   at Mon Jun 21 16:33:09 PDT 1999
+
+check: Method Sub-Method Relation
+   at Mon Jun 21 16:33:09 PDT 1999
+
+check: Method Capability Hierarchy
+   at Mon Jun 21 16:33:14 PDT 1999
+
+select: copy and create button
+   at Mon Jun 21 16:33:37 PDT 1999
+
+select: copy and create button
+   at Mon Jun 21 16:42:46 PDT 1999
+
+ done editing:((name compute-eartg-moving-rate)
+ (capability (estimate (obj (?emr is (inst-of number)))
+                (for (?c is (inst-of crater)))))
+ (result-type (inst-of number))
+ (method (multiply (obj (find
+			 (obj (spec-of adjustment-rate))
+			 (of (soil-of ?s))))
+		   (by (obj 250))))
+)
+
+   at Mon Jun 21 16:47:15 PDT 1999
+
+built new method:((name compute-eartg-moving-rate)
+ (capability (estimate (obj (?emr is (inst-of number)))
+                (for (?c is (inst-of crater)))))
+ (result-type (inst-of number))
+ (method (multiply (obj (find
+			 (obj (spec-of adjustment-rate))
+			 (of (soil-of ?s))))
+		   (by (obj 250))))
+)
+
+   at Mon Jun 21 16:47:15 PDT 1999
+
+check: All Agenda
+   at Mon Jun 21 16:47:15 PDT 1999
+
+check: Method Sub-Method Relation
+   at Mon Jun 21 16:47:15 PDT 1999
+
+check: Method Capability Hierarchy
+   at Mon Jun 21 16:47:20 PDT 1999
+
+select: modify button
+   at Mon Jun 21 16:47:40 PDT 1999
+
+select: modify button
+   at Mon Jun 21 16:47:58 PDT 1999
+
+ done editing:((name compute-eartg-moving-rate)
+ (capability (estimate (obj (?emr is (spec-of earthmovin-rate)))
+                (for (?c is (inst-of crater)))))
+ (result-type (inst-of number))
+ (method (multiply (obj (find
+			 (obj (spec-of adjustment-rate))
+			 (of (soil-of ?c))))
+		   (by (obj 250))))
+)
+   at Mon Jun 21 16:49:23 PDT 1999
+
+modified method:((name compute-eartg-moving-rate)
+ (capability (estimate (obj (?emr is (spec-of earthmovin-rate)))
+                (for (?c is (inst-of crater)))))
+ (result-type (inst-of number))
+ (method (multiply (obj (find
+			 (obj (spec-of adjustment-rate))
+			 (of (soil-of ?c))))
+		   (by (obj 250))))
+)
+   at Mon Jun 21 16:49:23 PDT 1999
+
+check: All Agenda
+   at Mon Jun 21 16:49:23 PDT 1999
+
+check: Method Sub-Method Relation
+   at Mon Jun 21 16:49:23 PDT 1999
+
+check: Method Capability Hierarchy
+   at Mon Jun 21 16:49:28 PDT 1999
+
+select: add new button
+   at Mon Jun 21 16:49:37 PDT 1999
+
+select: modify button
+   at Mon Jun 21 16:49:42 PDT 1999
+
+ done editing:((name compute-eartg-moving-rate)
+ (capability (estimate (obj (?emr is (spec-of earthmoving-rate)))
+                (for (?c is (inst-of crater)))))
+ (result-type (inst-of number))
+ (method (multiply (obj (find
+			 (obj (spec-of adjustment-rate))
+			 (of (soil-of ?c))))
+		   (by (obj 250))))
+)
+   at Mon Jun 21 16:49:56 PDT 1999
+
+modified method:((name compute-eartg-moving-rate)
+ (capability (estimate (obj (?emr is (spec-of earthmoving-rate)))
+                (for (?c is (inst-of crater)))))
+ (result-type (inst-of number))
+ (method (multiply (obj (find
+			 (obj (spec-of adjustment-rate))
+			 (of (soil-of ?c))))
+		   (by (obj 250))))
+)
+   at Mon Jun 21 16:49:56 PDT 1999
+
+check: All Agenda
+   at Mon Jun 21 16:49:56 PDT 1999
+
+check: Method Sub-Method Relation
+   at Mon Jun 21 16:49:56 PDT 1999
+
+check: Method Capability Hierarchy
+   at Mon Jun 21 16:49:58 PDT 1999
+
+select: copy and create button
+   at Mon Jun 21 16:50:25 PDT 1999
+
+select: copy and create button
+   at Mon Jun 21 16:54:07 PDT 1999
+
+ done editing:((name estimate-time-to-fill-crater)
+ (capability (estimate (obj (?t is (spec-of time)))
+                (for (?c is (inst-of fill-crater)))))
+ (result-type (inst-of number))
+ (method (divide (obj (volume-of-object ?c))
+		 (by (obj (estimate (obj (spec-of earthmoving-rate))
+				    (for (crater-of ?c)))))))
+)
+   at Mon Jun 21 16:57:57 PDT 1999
+
+built new method:((name estimate-time-to-fill-crater)
+ (capability (estimate (obj (?t is (spec-of time)))
+                (for (?c is (inst-of fill-crater)))))
+ (result-type (inst-of number))
+ (method (divide (obj (volume-of-object ?c))
+		 (by (obj (estimate (obj (spec-of earthmoving-rate))
+				    (for (crater-of ?c)))))))
+)
+   at Mon Jun 21 16:57:57 PDT 1999
+
+check: All Agenda
+   at Mon Jun 21 16:57:57 PDT 1999
+
+check: Method Sub-Method Relation
+   at Mon Jun 21 16:57:57 PDT 1999
+
+check: Method Capability Hierarchy
+   at Mon Jun 21 16:58:01 PDT 1999
+
+select: modify button
+   at Mon Jun 21 16:58:27 PDT 1999
+
+select: copy and create button
+   at Mon Jun 21 16:59:01 PDT 1999
+
+ done editing:((name estimate-time-to-fill-crater)
+ (capability (estimate (obj (?t is (spec-of time)))
+                (for (?c is (inst-of fill-crater)))))
+ (result-type (inst-of number))
+ (method (divide (obj (find
+		       (obj (spec-of dirt-volume))
+		       (of (crater-of ?c))))
+		 (by (obj (estimate (obj (spec-of earthmoving-rate))
+				    (for (crater-of ?c)))))))
+)
+   at Mon Jun 21 17:00:58 PDT 1999
+
+built new method:((name estimate-time-to-fill-crater)
+ (capability (estimate (obj (?t is (spec-of time)))
+                (for (?c is (inst-of fill-crater)))))
+ (result-type (inst-of number))
+ (method (divide (obj (find
+		       (obj (spec-of dirt-volume))
+		       (of (crater-of ?c))))
+		 (by (obj (estimate (obj (spec-of earthmoving-rate))
+				    (for (crater-of ?c)))))))
+)
+   at Mon Jun 21 17:00:58 PDT 1999
+
+check: All Agenda
+   at Mon Jun 21 17:00:58 PDT 1999
+
+check: Method Sub-Method Relation
+   at Mon Jun 21 17:00:58 PDT 1999
+
+check: Method Capability Hierarchy
+   at Mon Jun 21 17:01:01 PDT 1999
+
+select: copy and create button
+   at Mon Jun 21 17:03:25 PDT 1999
+
+ done editing:((name estimate-earth-moving-rate-of-gap)
+ (capability (estimate (obj (?emr is (spec-of earthmoving-rate)))
+                (for (?g is (inst-of geographical-region)))))
+ (result-type (inst-of number))
+ (method (multiply (obj (find
+			 (obj (spec-of adjustment-rate))
+			 (of (soil-of ?g))))
+		   (by (obj 250))))
+)
+   at Mon Jun 21 17:07:14 PDT 1999
+
+built new method:((name estimate-earth-moving-rate-of-gap)
+ (capability (estimate (obj (?emr is (spec-of earthmoving-rate)))
+                (for (?g is (inst-of geographical-region)))))
+ (result-type (inst-of number))
+ (method (multiply (obj (find
+			 (obj (spec-of adjustment-rate))
+			 (of (soil-of ?g))))
+		   (by (obj 250))))
+)
+   at Mon Jun 21 17:07:14 PDT 1999
+
+check: All Agenda
+   at Mon Jun 21 17:07:14 PDT 1999
+
+check: Method Sub-Method Relation
+   at Mon Jun 21 17:07:14 PDT 1999
+
+check: Method Capability Hierarchy
+   at Mon Jun 21 17:07:19 PDT 1999
+
+select: modify button
+   at Mon Jun 21 17:07:36 PDT 1999
+
+ done editing:((name estimate-earth-moving-rate-of-gap)
+ (capability (estimate (obj (?emr is (spec-of earthmoving-rate)))
+                (for (?g is (inst-of geographical-region)))))
+ (result-type (inst-of number))
+ (method (multiply (obj (find
+			 (obj (spec-of adjustment-rate))
+			 (of (soil-of ?g))))
+		   (by 250)))
+)
+
+   at Mon Jun 21 17:10:21 PDT 1999
+
+modified method:((name estimate-earth-moving-rate-of-gap)
+ (capability (estimate (obj (?emr is (spec-of earthmoving-rate)))
+                (for (?g is (inst-of geographical-region)))))
+ (result-type (inst-of number))
+ (method (multiply (obj (find
+			 (obj (spec-of adjustment-rate))
+			 (of (soil-of ?g))))
+		   (by 250)))
+)
+
+   at Mon Jun 21 17:10:21 PDT 1999
+
+check: All Agenda
+   at Mon Jun 21 17:10:21 PDT 1999
+
+check: Method Sub-Method Relation
+   at Mon Jun 21 17:10:21 PDT 1999
+
+check: Method Capability Hierarchy
+   at Mon Jun 21 17:10:24 PDT 1999
+
+select: copy and create button
+   at Mon Jun 21 17:10:41 PDT 1999
+
+ done editing:((name estimate-dirt-volume-of-gap)
+ (capability (estimate (obj (?v is (spec-of dirt-volume)))
+                (for (?g is (inst-of narrow-gap-with-buldozer)))))
+ (result-type (inst-of number))
+ (method (multiply (obj (height-of-object (bank-of ?g)))
+		   (by (multitply (obj (subtract (obj (desired-width ?g))
+						 (from (width-of-object (bank-of ?g)))))
+				  (by 8)))))
+ )
+
+   at Mon Jun 21 17:26:53 PDT 1999
+
+built new method:((name estimate-dirt-volume-of-gap)
+ (capability (estimate (obj (?v is (spec-of dirt-volume)))
+                (for (?g is (inst-of narrow-gap-with-buldozer)))))
+ (result-type (inst-of number))
+ (method (multiply (obj (height-of-object (bank-of ?g)))
+		   (by (multitply (obj (subtract (obj (desired-width ?g))
+						 (from (width-of-object (bank-of ?g)))))
+				  (by 8)))))
+ )
+
+   at Mon Jun 21 17:26:53 PDT 1999
+
+check: All Agenda
+   at Mon Jun 21 17:26:53 PDT 1999
+
+check: Method Sub-Method Relation
+   at Mon Jun 21 17:26:53 PDT 1999
+
+check: Method Capability Hierarchy
+   at Mon Jun 21 17:26:59 PDT 1999
+
+select: modify button
+   at Mon Jun 21 17:27:25 PDT 1999
+
+ done editing:((name estimate-dirt-volume-of-gap)
+ (capability (estimate (obj (?v is (spec-of dirt-volume)))
+                (for (?g is (inst-of narrow-gap-with-buldozer)))))
+ (result-type (inst-of number))
+ (method (multiply (obj (height-of-object (bank-of ?g)))
+		   (by (multiply (obj (subtract (obj (desired-width ?g))
+						 (from (width-of-object (bank-of ?g)))))
+				  (by 8)))))
+ )
+
+   at Mon Jun 21 17:27:51 PDT 1999
+
+modified method:((name estimate-dirt-volume-of-gap)
+ (capability (estimate (obj (?v is (spec-of dirt-volume)))
+                (for (?g is (inst-of narrow-gap-with-buldozer)))))
+ (result-type (inst-of number))
+ (method (multiply (obj (height-of-object (bank-of ?g)))
+		   (by (multiply (obj (subtract (obj (desired-width ?g))
+						 (from (width-of-object (bank-of ?g)))))
+				  (by 8)))))
+ )
+
+   at Mon Jun 21 17:27:51 PDT 1999
+
+check: All Agenda
+   at Mon Jun 21 17:27:51 PDT 1999
+
+check: Method Sub-Method Relation
+   at Mon Jun 21 17:27:51 PDT 1999
+
+check: Method Capability Hierarchy
+   at Mon Jun 21 17:27:55 PDT 1999
+
+select: modify button
+   at Mon Jun 21 17:28:11 PDT 1999
+
+ done editing:((name estimate-dirt-volume-of-gap)
+ (capability (estimate (obj (?v is (spec-of dirt-volume)))
+                (for (?g is (inst-of narrow-gap-with-bulldozer)))))
+ (result-type (inst-of number))
+ (method (multiply (obj (height-of-object (bank-of ?g)))
+		   (by (multiply (obj (subtract (obj (desired-width ?g))
+						 (from (width-of-object (bank-of ?g)))))
+				  (by 8)))))
+ )
+
+   at Mon Jun 21 17:28:26 PDT 1999
+
+modified method:((name estimate-dirt-volume-of-gap)
+ (capability (estimate (obj (?v is (spec-of dirt-volume)))
+                (for (?g is (inst-of narrow-gap-with-bulldozer)))))
+ (result-type (inst-of number))
+ (method (multiply (obj (height-of-object (bank-of ?g)))
+		   (by (multiply (obj (subtract (obj (desired-width ?g))
+						 (from (width-of-object (bank-of ?g)))))
+				  (by 8)))))
+ )
+
+   at Mon Jun 21 17:28:26 PDT 1999
+
+check: All Agenda
+   at Mon Jun 21 17:28:26 PDT 1999
+
+check: Method Sub-Method Relation
+   at Mon Jun 21 17:28:26 PDT 1999
+
+check: Method Capability Hierarchy
+   at Mon Jun 21 17:28:32 PDT 1999
+
+select: copy and create button
+   at Mon Jun 21 17:28:59 PDT 1999
+
+select: copy and create button
+   at Mon Jun 21 17:29:38 PDT 1999
+
+select: copy and create button
+   at Mon Jun 21 17:31:06 PDT 1999
+
+select: copy and create button
+   at Mon Jun 21 17:35:08 PDT 1999
+
+ done editing:((name estimate-time-to-fill-gap)
+ (capability (estimate (obj (?t is (spec-of time)))
+                (for (?g is (inst-of narrow-gap-with-bulldozer)))))
+ (result-type (inst-of number))
+ (method (divide (obj (estimate (obj (spec-of dirt-volume))
+				(for (?g))))
+		 (by (estimate (obj (spec-of earthmoving-rate))
+			       (for (region-of ?g))))))
+)
+   at Mon Jun 21 17:37:58 PDT 1999
+
+built new method:((name estimate-time-to-fill-gap)
+ (capability (estimate (obj (?t is (spec-of time)))
+                (for (?g is (inst-of narrow-gap-with-bulldozer)))))
+ (result-type (inst-of number))
+ (method (divide (obj (estimate (obj (spec-of dirt-volume))
+				(for (?g))))
+		 (by (estimate (obj (spec-of earthmoving-rate))
+			       (for (region-of ?g))))))
+)
+   at Mon Jun 21 17:37:58 PDT 1999
+
+check: All Agenda
+   at Mon Jun 21 17:37:58 PDT 1999
+
+check: Method Sub-Method Relation
+   at Mon Jun 21 17:37:58 PDT 1999
+
+check: Method Capability Hierarchy
+   at Mon Jun 21 17:38:01 PDT 1999
+
+select: modify button
+   at Mon Jun 21 17:40:40 PDT 1999
+
+select: modify button
+   at Mon Jun 21 17:41:08 PDT 1999
+
+ done editing:((name estimate-adjustment-rate-of-soil)
+ (primitivep t)
+ (capability (find
+                (obj (?ar is (spec-of adjustment-rate)))
+                (of (?s is (inst-of earth-stuff)))))
+  (result-type (inst-of number))
+ (method (primitive-find-adjustment-rate-for-soil ?s))
+)
+   at Mon Jun 21 17:42:07 PDT 1999
+
+modified method:((name estimate-adjustment-rate-of-soil)
+ (primitivep t)
+ (capability (find
+                (obj (?ar is (spec-of adjustment-rate)))
+                (of (?s is (inst-of earth-stuff)))))
+  (result-type (inst-of number))
+ (method (primitive-find-adjustment-rate-for-soil ?s))
+)
+   at Mon Jun 21 17:42:07 PDT 1999
+
+check: All Agenda
+   at Mon Jun 21 17:42:07 PDT 1999
+
+check: Method Sub-Method Relation
+   at Mon Jun 21 17:42:07 PDT 1999
+
+check: Method Capability Hierarchy
+   at Mon Jun 21 17:42:09 PDT 1999
+
+select: modify button
+   at Mon Jun 21 17:43:30 PDT 1999
+
+select: copy and create button
+   at Mon Jun 21 17:46:02 PDT 1999
+
+ done editing:((name estimate-time-to-fill-crater)
+ (capability (estimate (obj (?t is (spec-of time)))
+                (for (?c is (inst-of fill-crater)))))
+ (result-type (inst-of number))
+ (method (divide (obj (find (obj (spec-of dirt-volume))
+			    (of (crater-of ?c))))
+		 (by (estimate (obj (spec-of earthmoving-rate))
+			       (for (crater-of ?c))))))
+)
+   at Mon Jun 21 17:48:41 PDT 1999
+
+built new method:((name estimate-time-to-fill-crater)
+ (capability (estimate (obj (?t is (spec-of time)))
+                (for (?c is (inst-of fill-crater)))))
+ (result-type (inst-of number))
+ (method (divide (obj (find (obj (spec-of dirt-volume))
+			    (of (crater-of ?c))))
+		 (by (estimate (obj (spec-of earthmoving-rate))
+			       (for (crater-of ?c))))))
+)
+   at Mon Jun 21 17:48:41 PDT 1999
+
+check: All Agenda
+   at Mon Jun 21 17:48:41 PDT 1999
+
+check: Method Sub-Method Relation
+   at Mon Jun 21 17:48:41 PDT 1999
+
+check: Method Capability Hierarchy
+   at Mon Jun 21 17:48:50 PDT 1999
+
+check: Method Sub-Method Relation
+   at Mon Jun 21 17:48:56 PDT 1999
+
+ select: get ps tree success
+   at Mon Jun 21 17:48:58 PDT 1999
+
+ [ps-en1] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-PLAN)))
+[ps-en1] < (INST-OF NUMBER)
+   -[ps-an2: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-PLAN)))
+    [ps-an2: METHOD] < (INST-OF NUMBER)
+    [ps-en3] > (ADD (OBJ (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (WORKAROUND-OF (INST-OF WORKAROUND-PLAN))))))
+    [ps-en3]   (ADD (OBJ (SET-OF (INST-OF NUMBER))))
+    [ps-en3] < (INST-OF NUMBER)
+     [ps-en4] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (WORKAROUND-OF (INST-OF WORKAROUND-PLAN))))
+     [ps-en4]   (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF WORKAROUND-STEP))))
+     [ps-en4] < (SET-OF (INST-OF NUMBER))
+      [ps-en5] > (WORKAROUND-OF (INST-OF WORKAROUND-PLAN))
+      [ps-en5] < (SET-OF (INST-OF WORKAROUND-STEP))
+       -[ps-an6: RETRIEVE-R] > (WORKAROUND-OF (INST-OF WORKAROUND-PLAN))
+        [ps-an6: RETRIEVE-R] < (SET-OF (INST-OF WORKAROUND-STEP))
+      -[ps-an8: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF WORKAROUND-STEP))))
+       [ps-an8: SET]   (APPEND (SET-OF (INST-OF NUMBER)))
+       [ps-an8: SET] < (SET-OF (INST-OF NUMBER))
+       [ps-en9] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-STEP)))
+       [ps-en9] < (SET-OF (INST-OF NUMBER))
+        -[ps-an12: COVERING] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-STEP)))
+         [ps-an12: COVERING]   (APPEND (INST-OF NUMBER) NIL)
+         [ps-an12: COVERING] < (SET-OF (INST-OF NUMBER))
+         [ps-en13] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+         [ps-en13] < (INST-OF NUMBER)
+          -[ps-an15: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+           [ps-an15: METHOD] < (INST-OF NUMBER)
+           [ps-en16] > (DIVIDE (OBJ (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (FOR ((INST-OF NARROW-GAP-WITH-BULLDOZER))))) (BY (ESTIMATE (OBJ (SPEC-OF EARTHMOVING-RATE)) (FOR (REGION-OF (INST-OF NARROW-GAP-WITH-BULLDOZER))))))
+           [ps-en16]   (DIVIDE (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+           [ps-en16] < (INST-OF NUMBER)
+            [ps-en17] > (ESTIMATE (OBJ (SPEC-OF EARTHMOVING-RATE)) (FOR (REGION-OF (INST-OF NARROW-GAP-WITH-BULLDOZER))))
+            [ps-en17]   (ESTIMATE (OBJ (SPEC-OF EARTHMOVING-RATE)) (FOR (INST-OF GEOGRAPHICAL-REGION)))
+            [ps-en17] < (INST-OF NUMBER)
+             [ps-en19] > (REGION-OF (INST-OF NARROW-GAP-WITH-BULLDOZER))
+             [ps-en19] < (INST-OF GEOGRAPHICAL-REGION)
+              -[ps-an20: RETRIEVE-R] > (REGION-OF (INST-OF NARROW-GAP-WITH-BULLDOZER))
+               [ps-an20: RETRIEVE-R] < (INST-OF GEOGRAPHICAL-REGION)
+             -[ps-an21: METHOD] > (ESTIMATE (OBJ (SPEC-OF EARTHMOVING-RATE)) (FOR (INST-OF GEOGRAPHICAL-REGION)))
+              [ps-an21: METHOD] < (INST-OF NUMBER)
+              [ps-en22] > (MULTIPLY (OBJ (FIND (OBJ (SPEC-OF ADJUSTMENT-RATE)) (OF (SOIL-OF (INST-OF GEOGRAPHICAL-REGION))))) (BY 250))
+              [ps-en22]   (MULTIPLY (OBJ (INST-OF NUMBER)) (BY 250))
+              [ps-en22] < (INST-OF NUMBER)
+               [ps-en23] > (FIND (OBJ (SPEC-OF ADJUSTMENT-RATE)) (OF (SOIL-OF (INST-OF GEOGRAPHICAL-REGION))))
+               [ps-en23]   (FIND (OBJ (SPEC-OF ADJUSTMENT-RATE)) (OF (INST-OF EARTH-STUFF)))
+               [ps-en23] < (INST-OF NUMBER)
+                [ps-en24] > (SOIL-OF (INST-OF GEOGRAPHICAL-REGION))
+                [ps-en24] < (INST-OF EARTH-STUFF)
+                 -[ps-an25: RETRIEVE-R] > (SOIL-OF (INST-OF GEOGRAPHICAL-REGION))
+                  [ps-an25: RETRIEVE-R] < (INST-OF EARTH-STUFF)
+                -[ps-an26: METHOD] > (FIND (OBJ (SPEC-OF ADJUSTMENT-RATE)) (OF (INST-OF EARTH-STUFF)))
+                 [ps-an26: METHOD] < (INST-OF NUMBER)
+               -[ps-an27: METHOD] > (MULTIPLY (OBJ (INST-OF NUMBER)) (BY 250))
+                [ps-an27: METHOD] < (INST-OF NUMBER)
+            [ps-en18] > (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (FOR ((INST-OF NARROW-GAP-WITH-BULLDOZER))))
+            [ps-en18]   (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+            [ps-en18] < (INST-OF NUMBER)
+             [ps-en28] > ((INST-OF NARROW-GAP-WITH-BULLDOZER))
+             [ps-en28] < (INST-OF NARROW-GAP-WITH-BULLDOZER)
+             -[ps-an29: METHOD] > (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+              [ps-an29: METHOD] < (INST-OF NUMBER)
+              [ps-en30] > (MULTIPLY (OBJ (HEIGHT-OF-OBJECT (BANK-OF (INST-OF NARROW-GAP-WITH-BULLDOZER)))) (BY (MULTIPLY (OBJ (SUBTRACT (OBJ (DESIRED-WIDTH (INST-OF NARROW-GAP-WITH-BULLDOZER))) (FROM (WIDTH-OF-OBJECT (BANK-OF (INST-OF NARROW-GAP-WITH-BULLDOZER)))))) (BY 8))))
+              [ps-en30]   (MULTIPLY (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+              [ps-en30] < (INST-OF NUMBER)
+               [ps-en31] > (MULTIPLY (OBJ (SUBTRACT (OBJ (DESIRED-WIDTH (INST-OF NARROW-GAP-WITH-BULLDOZER))) (FROM (WIDTH-OF-OBJECT (BANK-OF (INST-OF NARROW-GAP-WITH-BULLDOZER)))))) (BY 8))
+               [ps-en31]   (MULTIPLY (OBJ (INST-OF NUMBER)) (BY 8))
+               [ps-en31] < (INST-OF NUMBER)
+                [ps-en33] > (SUBTRACT (OBJ (DESIRED-WIDTH (INST-OF NARROW-GAP-WITH-BULLDOZER))) (FROM (WIDTH-OF-OBJECT (BANK-OF (INST-OF NARROW-GAP-WITH-BULLDOZER)))))
+                [ps-en33]   (SUBTRACT (OBJ (INST-OF NUMBER)) (FROM (INST-OF NUMBER)))
+                [ps-en33] < (INST-OF NUMBER)
+                 [ps-en34] > (WIDTH-OF-OBJECT (BANK-OF (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+                 [ps-en34]   (WIDTH-OF-OBJECT (INST-OF GEOGRAPHICAL-BANK))
+                 [ps-en34] < (INST-OF NUMBER)
+                  [ps-en36] > (BANK-OF (INST-OF NARROW-GAP-WITH-BULLDOZER))
+                  [ps-en36] < (INST-OF GEOGRAPHICAL-BANK)
+                   -[ps-an37: RETRIEVE-R] > (BANK-OF (INST-OF NARROW-GAP-WITH-BULLDOZER))
+                    [ps-an37: RETRIEVE-R] < (INST-OF GEOGRAPHICAL-BANK)
+                  -[ps-an38: RETRIEVE-R] > (WIDTH-OF-OBJECT (INST-OF GEOGRAPHICAL-BANK))
+                   [ps-an38: RETRIEVE-R] < (INST-OF NUMBER)
+                 [ps-en35] > (DESIRED-WIDTH (INST-OF NARROW-GAP-WITH-BULLDOZER))
+                 [ps-en35] < (INST-OF NUMBER)
+                  -[ps-an39: RETRIEVE-R] > (DESIRED-WIDTH (INST-OF NARROW-GAP-WITH-BULLDOZER))
+                   [ps-an39: RETRIEVE-R] < (INST-OF NUMBER)
+                 -[ps-an40: METHOD] > (SUBTRACT (OBJ (INST-OF NUMBER)) (FROM (INST-OF NUMBER)))
+                  [ps-an40: METHOD] < (INST-OF NUMBER)
+                -[ps-an41: METHOD] > (MULTIPLY (OBJ (INST-OF NUMBER)) (BY 8))
+                 [ps-an41: METHOD] < (INST-OF NUMBER)
+               [ps-en32] > (HEIGHT-OF-OBJECT (BANK-OF (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+               [ps-en32]   (HEIGHT-OF-OBJECT (INST-OF GEOGRAPHICAL-BANK))
+               [ps-en32] < (INST-OF NUMBER)
+                [ps-en36] > (BANK-OF (INST-OF NARROW-GAP-WITH-BULLDOZER))
+                [ps-en36] < (INST-OF GEOGRAPHICAL-BANK)
+                 -[ps-an37: RETRIEVE-R] > (BANK-OF (INST-OF NARROW-GAP-WITH-BULLDOZER))
+                  [ps-an37: RETRIEVE-R] < (INST-OF GEOGRAPHICAL-BANK)
+                -[ps-an42: RETRIEVE-R] > (HEIGHT-OF-OBJECT (INST-OF GEOGRAPHICAL-BANK))
+                 [ps-an42: RETRIEVE-R] < (INST-OF NUMBER)
+               -[ps-an43: METHOD] > (MULTIPLY (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+                [ps-an43: METHOD] < (INST-OF NUMBER)
+            -[ps-an44: METHOD] > (DIVIDE (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+             [ps-an44: METHOD] < (INST-OF NUMBER)
+         [ps-en14] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF FILL-CRATER)))
+         [ps-en14] < NIL
+          -[ps-an45: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF FILL-CRATER)))
+           [ps-an45: METHOD] < NIL
+           [ps-en46] > (DIVIDE (OBJ (FIND (OBJ (SPEC-OF DIRT-VOLUME)) (OF (CRATER-OF (INST-OF FILL-CRATER))))) (BY (ESTIMATE (OBJ (SPEC-OF EARTHMOVING-RATE)) (FOR (CRATER-OF (INST-OF FILL-CRATER))))))
+           [ps-en46]   (DIVIDE (OBJ NIL) (BY NIL))
+           [ps-en46] < NIL
+            [ps-en47] > (ESTIMATE (OBJ (SPEC-OF EARTHMOVING-RATE)) (FOR (CRATER-OF (INST-OF FILL-CRATER))))
+            [ps-en47]   (ESTIMATE (OBJ (SPEC-OF EARTHMOVING-RATE)) (FOR (INST-OF CRATER)))
+            [ps-en47] < NIL
+             [ps-en49] > (CRATER-OF (INST-OF FILL-CRATER))
+             [ps-en49] < (INST-OF CRATER)
+              -[ps-an50: RETRIEVE-R] > (CRATER-OF (INST-OF FILL-CRATER))
+               [ps-an50: RETRIEVE-R] < (INST-OF CRATER)
+             -[ps-an51: METHOD] > (ESTIMATE (OBJ (SPEC-OF EARTHMOVING-RATE)) (FOR (INST-OF CRATER)))
+              [ps-an51: METHOD] < NIL
+              [ps-en52] > (MULTIPLY (OBJ (FIND (OBJ (SPEC-OF ADJUSTMENT-RATE)) (OF (SOIL-OF (INST-OF CRATER))))) (BY (OBJ 250)))
+              [ps-en52]   (MULTIPLY (OBJ (INST-OF NUMBER)) (BY NIL))
+              [ps-en52] < NIL
+               [ps-en53] > (OBJ 250)
+               [ps-en53] < NIL
+               [ps-en54] > (FIND (OBJ (SPEC-OF ADJUSTMENT-RATE)) (OF (SOIL-OF (INST-OF CRATER))))
+               [ps-en54]   (FIND (OBJ (SPEC-OF ADJUSTMENT-RATE)) (OF (INST-OF EARTH-STUFF)))
+               [ps-en54] < (INST-OF NUMBER)
+                [ps-en55] > (SOIL-OF (INST-OF CRATER))
+                [ps-en55] < (INST-OF EARTH-STUFF)
+                 -[ps-an56: RETRIEVE-R] > (SOIL-OF (INST-OF CRATER))
+                  [ps-an56: RETRIEVE-R] < (INST-OF EARTH-STUFF)
+                -[ps-an26: METHOD] > (FIND (OBJ (SPEC-OF ADJUSTMENT-RATE)) (OF (INST-OF EARTH-STUFF)))
+                 [ps-an26: METHOD] < (INST-OF NUMBER)
+               -[ps-an58: SET] > (MULTIPLY (OBJ (INST-OF NUMBER)) (BY NIL))
+                [ps-an58: SET]   (APPEND)
+                [ps-an58: SET] < NIL
+            [ps-en48] > (FIND (OBJ (SPEC-OF DIRT-VOLUME)) (OF (CRATER-OF (INST-OF FILL-CRATER))))
+            [ps-en48]   (FIND (OBJ (SPEC-OF DIRT-VOLUME)) (OF (INST-OF CRATER)))
+            [ps-en48] < NIL
+             [ps-en49] > (CRATER-OF (INST-OF FILL-CRATER))
+             [ps-en49] < (INST-OF CRATER)
+              -[ps-an50: RETRIEVE-R] > (CRATER-OF (INST-OF FILL-CRATER))
+               [ps-an50: RETRIEVE-R] < (INST-OF CRATER)
+             -[ps-an59: METHOD] > (FIND (OBJ (SPEC-OF DIRT-VOLUME)) (OF (INST-OF CRATER)))
+              [ps-an59: METHOD] < NIL
+              [ps-en60] > (MULTIPLY (OBJ (HEIGHT-OF-OBJECT (INST-OF CRATER))) (BY (MULTIPLY (OBJ 1/3) (BY (MULTIPLY (OBJ 3.141592) (BY (MULTIPLY (OBJ 1/4) (BY (MULTIPLY (OBJ (WIDTH-OF-OBJECT (INST-OF CRATER))) (BY (OBJ (LENGTH-OF-OBJECT (INST-OF CRATER)))))))))))))
+              [ps-en60]   (MULTIPLY (OBJ (INST-OF NUMBER)) (BY NIL))
+              [ps-en60] < NIL
+               [ps-en61] > (MULTIPLY (OBJ 1/3) (BY (MULTIPLY (OBJ 3.141592) (BY (MULTIPLY (OBJ 1/4) (BY (MULTIPLY (OBJ (WIDTH-OF-OBJECT (INST-OF CRATER))) (BY (OBJ (LENGTH-OF-OBJECT (INST-OF CRATER)))))))))))
+               [ps-en61]   (MULTIPLY (OBJ 1/3) (BY NIL))
+               [ps-en61] < NIL
+                [ps-en63] > (MULTIPLY (OBJ 3.141592) (BY (MULTIPLY (OBJ 1/4) (BY (MULTIPLY (OBJ (WIDTH-OF-OBJECT (INST-OF CRATER))) (BY (OBJ (LENGTH-OF-OBJECT (INST-OF CRATER)))))))))
+                [ps-en63]   (MULTIPLY (OBJ 3.141592) (BY NIL))
+                [ps-en63] < NIL
+                 [ps-en64] > (MULTIPLY (OBJ 1/4) (BY (MULTIPLY (OBJ (WIDTH-OF-OBJECT (INST-OF CRATER))) (BY (OBJ (LENGTH-OF-OBJECT (INST-OF CRATER)))))))
+                 [ps-en64]   (MULTIPLY (OBJ 1/4) (BY NIL))
+                 [ps-en64] < NIL
+                  [ps-en65] > (MULTIPLY (OBJ (WIDTH-OF-OBJECT (INST-OF CRATER))) (BY (OBJ (LENGTH-OF-OBJECT (INST-OF CRATER)))))
+                  [ps-en65]   (MULTIPLY (OBJ (INST-OF NUMBER)) (BY NIL))
+                  [ps-en65] < NIL
+                   [ps-en66] > (OBJ (LENGTH-OF-OBJECT (INST-OF CRATER)))
+                   [ps-en66] < NIL
+                   [ps-en67] > (WIDTH-OF-OBJECT (INST-OF CRATER))
+                   [ps-en67] < (INST-OF NUMBER)
+                    -[ps-an68: RETRIEVE-R] > (WIDTH-OF-OBJECT (INST-OF CRATER))
+                     [ps-an68: RETRIEVE-R] < (INST-OF NUMBER)
+                   -[ps-an58: SET] > (MULTIPLY (OBJ (INST-OF NUMBER)) (BY NIL))
+                    [ps-an58: SET]   (APPEND)
+                    [ps-an58: SET] < NIL
+                  -[ps-an70: SET] > (MULTIPLY (OBJ 1/4) (BY NIL))
+                   [ps-an70: SET]   (APPEND)
+                   [ps-an70: SET] < NIL
+                 -[ps-an72: SET] > (MULTIPLY (OBJ 3.141592) (BY NIL))
+                  [ps-an72: SET]   (APPEND)
+                  [ps-an72: SET] < NIL
+                -[ps-an74: SET] > (MULTIPLY (OBJ 1/3) (BY NIL))
+                 [ps-an74: SET]   (APPEND)
+                 [ps-an74: SET] < NIL
+               [ps-en62] > (HEIGHT-OF-OBJECT (INST-OF CRATER))
+               [ps-en62] < (INST-OF NUMBER)
+                -[ps-an75: RETRIEVE-R] > (HEIGHT-OF-OBJECT (INST-OF CRATER))
+                 [ps-an75: RETRIEVE-R] < (INST-OF NUMBER)
+               -[ps-an58: SET] > (MULTIPLY (OBJ (INST-OF NUMBER)) (BY NIL))
+                [ps-an58: SET]   (APPEND)
+                [ps-an58: SET] < NIL
+            -[ps-an77: SET] > (DIVIDE (OBJ NIL) (BY NIL))
+             [ps-an77: SET]   (APPEND)
+             [ps-an77: SET] < NIL
+     -[ps-an79: METHOD] > (ADD (OBJ (SET-OF (INST-OF NUMBER))))
+      [ps-an79: METHOD] < (INST-OF NUMBER)
+
+   at Mon Jun 21 17:49:00 PDT 1999
+

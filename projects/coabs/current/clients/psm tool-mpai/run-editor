@@ -1,0 +1,18 @@
+#!/bin/sh
+#
+# @(#)runnit	1.4 97/10/14
+
+SDKHOME=/nfs/v2/jihie/java/sdk
+#SDKHOME=/local/java
+
+# Compute an absolute pathname here because Class.getResource()
+# fails if $CLASSPATH contains "../".
+
+SCLASSPATH=.:classes:/nfs/v2/expect/current/clients:/nfs/v2/expect/current/clients/EMeD/classes:${SDKHOME}/lib/dt.jar:${SDKHOME}/lib/tools.jar:/nfs/v2/jihie/java/XML/xml4j3/xml4j.jar:/nfs/v2/jihie/java/XML/xml4j3/xerces.jar:/nfs/v2/jihie/java/XML/saxon
+
+CMD="${SDKHOME}/bin/java -classpath ${SCLASSPATH} MethodEditor planet::check-forces-have-the-right-type"
+
+
+echo ${CMD}
+${CMD}
+

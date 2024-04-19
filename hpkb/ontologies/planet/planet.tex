@@ -1,0 +1,1369 @@
+%\documentstyle[aaai-99,times]{article}
+%\documentstyle[aaai,my-times,psfig]{article}
+\documentstyle[named,my-times,fullpage,psfig,12pt]{article}
+
+
+%% Like "bullist" environment, but with more reasonable spacing.
+\newenvironment{bullist}
+    {\begin{list}{$\bullet$}
+        {\parsep 0pt \topsep 0pt \itemsep 0pt
+\setlength{\rightmargin}{\leftmargin}}}%
+    {\end{list}}
+
+
+%% Smaller typewriter font
+\newcommand{\stt}[1]{{\footnotesize {\tt #1}}}
+
+%% Even smaller typewriter font
+\newcommand{\sstt}[1]{{\scriptsize {\tt #1}}}
+
+
+
+\begin{document}
+
+\title{PLANET: A Shareable and Reusable Ontology for Representing Plans}
+
+%\author{Area: Knowledge representation and reasoning \\
+%Category: Techniques or algorithms \\
+%Keyword: Design, analysis, or evaluation of ontologies \\
+%Secondary Category: Tasks or problems \\
+%Secondary Keyword: Representations of belief, intention, 
+%time, space, action, or events.\\
+%Tracking number: A354}
+
+\author{Yolanda Gil and Jim Blythe\\
+Information Sciences Institute\\
+University of Southern California\\
+Marina del Rey, CA 90292\\
+{\tt gil@isi.edu, blythe@isi.edu}}
+
+
+
+\maketitle
+%\footnotetext[1]{Copyright \copyright 1999, 
+%American Association for Artificial Intelligence (www.aaai.org). 
+%All rights reserved.}
+
+%for camera ready copy remove next three commands
+%\vspace*{-7.3cm}
+%\centerline{\it \hspace*{9cm}*** DRAFT (Sunday a.m.) -- Comments Welcome ****}
+%\vspace*{6cm}
+
+
+\begin{abstract}
+%\begin{quote}
+\input{abstract}
+%\end{quote}
+\end{abstract}
+
+
+
+
+% **********************************************************************
+% **********************************************************************
+\section{Introduction}
+
+As we develop larger and more complex intelligent systems 
+in knowledge-intensive domains,
+it becomes impractical and even infeasible to develop
+knowledge bases from scratch.  
+Recent research investigates how to 
+develop intelligent systems by
+drawing from libraries of reusable components
+that include both ontologies 
+\cite{neches91}
+and problem-solving methods \cite{kads-book}.  
+This paper introduces {\sc planet}\footnote{{\sc planet}: a {\sc plan}
+semantic {\sc net}},		  %
+a reusable ontology for representing plans.  
+{\sc planet} complements recent efforts on formalizing, organizing, 
+and unifying AI planning algorithms 
+\cite{kambhampati-aij95,tate-aips96,yang-90,nunes-ijcai97}
+by focusing on the representation of plans, 
+and adds a practical perspective 
+in that it is designed 
+to accomodate a diverse range of real-world plans
+(including manually created ones).  
+As more complex planning systems are developed
+to operate in knowledge-intensive environments, 
+ontologies present an approach to 
+enable richer plan representations \cite{hpkb-aimag98,valente-ieee99}.
+
+We have drawn from our past experience in 
+designing, developing and integrating planning tools,
+and expect {\sc planet} to ease these tasks in the future 
+in three ways.  
+First, we have already found it useful for {\em knowledge modelling}.
+By providing a structure that formalizes useful distinctions for
+reasoning about states and actions, a knowledge engineer 
+can find the semantics of informal expressions of plans 
+(e.g., textual or domain-specific) through designing mappings to the 
+ontology.  
+Reports on efforts to model plans in various application domains 
+\cite{nau-ijcai95,knoblock-aips96} 
+indicate the difficulties of representing real-world domains,
+and point out the need for better methodologies for knowledge modelling 
+for planning and for richer representations of planning knowledge.  
+We believe that {\sc planet} takes a step in that direction.
+Second, a plan ontology can be a central vehicle 
+for {\em knowledge reuse} across planning applications.
+{\sc planet} contains general, domain-independent definitions that 
+are common and useful across planning domains.  To create a 
+plan representation in a new domain, 
+these general definitions can be used directly and 
+would not need to be redefined for every new domain.
+Only domain-dependent extensions will need to be added.
+Third, {\sc planet} should facilitate integration of planning tools
+through {\em knowledge sharing}.  
+Currently, practical efforts to integrate planning tools 
+are done by designing separate interchange formats for 
+(almost) each pair of tools,
+since designing a more universal format is costly and often more difficult
+than designing the entire set of pairwise formats.
+These difficulties are in part because
+these systems include decision-support tools such as 
+plan editors, plan evaluation tools, and plan critiquers \cite{IFD4},
+which represent plans in ways that are different from 
+traditional AI plan generation systems. 
+An ontology like {\sc planet} can provide a
+shared plan representation for systems to communicate 
+and exhange information about the plan,
+and can facilitate the creation of a
+common, overarching knowledge base for 
+future integrations of planning tools.
+An example of a successful integration of planning tools through a 
+knowledge base is shown in \cite{valente-ieee99}.
+
+{\sc planet} makes the following representational commitments to provide broad
+coverage.  First, planning contexts that refer to domain information and
+constraints that form the background of a planning problem are represented
+explicitly. Planning problems, which supplement the context with
+information about the initial state of the world and the goals, are
+represented explicitly and are accessible from the context. Alternative
+plans themselves are then accessible from each planning problem for which
+they are relevant.
+Second, {\sc planet} maintains an explicit distinction between {\em
+external constraints}, which are imposed on a context or planning problem
+externally to a planning agent (including 
+user advice and preferences), and {\em commitments} which 
+the planning agent elects to add as a partial specification of a plan
+(for example, a step ordering commitment).
+The current version of {\sc planet} does not represent aspects related to
+the execution of plans and actions, adversarial planning, 
+or agent beliefs and intentions.
+
+The paper begins presenting the main definitions in
+{\sc planet}, including initial planning context, goals, 
+actions and tasks, and choice points.  
+Next, the paper describes three specializations of {\sc planet} 
+for three real-world domains where plans are of a very different nature.  
+The paper concludes with a discussion of related work and 
+some anticipated directions for future work.
+
+
+
+
+% **********************************************************************
+% **********************************************************************
+
+\section{PLANET: An Ontology for Representing Plans}
+
+This section describes how different aspects of a plan are 
+represented in {\sc planet}.  
+%First, several aspects and components of the
+%ontology are described, then we show how they all come together to 
+%describe a plan.  
+%We also discuss some add-on ontologies that can be 
+%used to extend {\sc planet} in order to cover additional aspects of 
+%planning that we have not included
+%so far.
+As a convention, we use boldface to highlight terms 
+that are defined in {\sc planet} when they are first introduced 
+and described in the text.
+% omitting dashes and capital letters for readability. 
+Figure~\ref{planet-ont} shows a diagram of the major
+concepts and relations in the ontology.
+
+%\begin{figure*}[tb]
+\begin{figure}[tb]
+% Can't get powerpoint to shrink-wrap
+\centerline{\psfig{figure=planet-ont.eps,width=6in}}
+\vspace*{-2in}
+\caption{An overview of the {\sc planet} ontology.}
+\label{planet-ont}
+\end{figure}
+
+% --------------------------------------------------------------------
+\subsection{Planning Problems, Scenarios, and Contexts}
+
+A {\bf planning problem context} represents
+the initial, given assumptions about the planning problem. 
+It describes the background scenario in which plans
+are designed and must operate on.
+This context includes the initial state, 
+desired goals, and the external constraints.
+
+A {\bf world state} is a model of the environment for which the plan
+is intended.
+When using a rich knowledge representation system, the state
+may be represented in a context or microtheory.
+A certain world state description can be chosen as the {\bf initial state} 
+of a given planning problem,
+and all plans that
+are solutions of this planning problem must assume this initial state.
+
+
+The {\bf desired goals} express what is to be accomplished in the process of 
+solving the planning problem.
+Sometimes the initial planning context may not directly 
+specify the goals to be achieved, instead these are deduced from some
+initial information about the situation and 
+some abstract guidance provided as constraints on the problem.
+
+
+We make a distinction between {\em external constraints} imposed on 
+planning problems and the {\em commitments} made by the plan.
+{\bf External constraints} may be specified as part of the
+planning context to express desirable or undesirable
+properties or effects of potential solutions to the problem.  
+External constraints include user advice and preferences.
+Examples of external constraints are that the plan accomplishes a mission 
+in a period of seven days, 
+that the plan does not use a certain type of resource,
+or that transportation is preferrably done in tracked vehicles.
+
+The ontology does not require that all the initial 
+requirements expressed in the planning problem context are 
+consistent and achievable  
+(for example, initial external constraints and goals may be incompatible),
+rather its aim is to represent these requirements as given.
+A plan may satisfy or not satisfy external constraints.
+For example, in order to satisfy the external constraint that 
+a plan takes less than seven days, the plan 
+may commit to using certain tasks that take less time
+than others,
+or commit to using a certain resource 
+that results in a faster turnaround.  
+It is also possible for a plan to ignore this 
+external constraint, especially if it is in conflict with 
+other such constraints such as keeping cost below a threshold
+(commitments are discussed further below).
+PLANET represents these options by having 
+a planning problem context span off 
+into {\bf planning problems}, which may
+add new constraints and goals,
+or relax or drop given ones.  
+A planning problem is created by forming
+specific goals, constraints and assumptions about the initial state.
+Several plans can be created 
+as alternative solutions for a given planning problem.
+A planning problem also includes information used to
+compare alternative candidate plans.
+Planning problems can span off other planning problems, 
+which impose (or relax) different constraints on
+the original problem or may assume variations of the initial state. For
+example, the alternatives might specify different constraints 
+for achieving some
+goal to allow alternative plans to be explored systematically
+or to explore a space of qualitatively different solutions. 
+Typically, AI planning systems assume one given planning problem 
+and do not address the process just described that is so 
+necessary when working with real-world environments.
+
+A planning problem may have a number of
+{\bf candidate plans} which are (or at one point were) potential
+solutions. 
+A candidate plan can be {\bf untried} (i.e., it is yet to be explored or
+tested), {\bf rejected} (i.e., a candidate plan which for some reason
+has been rejected as the preferred plan)
+or {\bf feasible} (i.e., tried and not rejected).
+One or more feasible plans may be marked as {\bf selected}.
+All of these are sub-relations of candidate plan. 
+Notice that some planning problems may not contain
+any feasible plans.  
+Notice that they are not represented as a property of the plan itself,
+rather they are a feature of the plan with respect to the goals and state
+assumed in a given planning problem. 
+For example, a plan might be unfeasible with respect to one
+initial state in a given planning problem, and feasible
+with respect to another.
+
+
+
+% --------------------------------------------------------------------
+\subsection{Goals, Objectives, Capabilities, and Effects}
+
+
+A {\bf goal specification} represents  
+anything that gets accomplished by a
+plan, subplan or task.
+This is used to represent both capabilities and
+effects of actions and tasks
+(i.e., they are both subtypes of goal specification), 
+as well as posted goals and objectives.
+Goals may be variabilized or instantiated.
+{\bf State-based goal specifications} 
+are a subclass of goal specifications that 
+typically represent goals that refer
+to some predicate used to describe the state of the world, for example
+`achieve (at Jim LAX)', `deny (at Red-Brigade South-Pass)' or 
+`maintain (temperature Room5 30)'.
+{\bf Objective-based goal specifications} 
+are a subclass of goal specifications that 
+are typically stated as verb- or
+action-based expressions, such as
+`transport brigade5 to Ryad'.
+
+Goal specifications also include a
+{\bf human readable description} used to provide a description
+of a goal to an end user. 
+This is useful because often times users want to view information
+in a format that is different from the internal format 
+used to store it.  
+This could be a simple string or a more complex structure.
+
+
+% --------------------------------------------------------------------
+\subsection{Actions, Operators, and Tasks}
+
+{\bf Plan task descriptions} represent 
+the actions or operations that can be taken in the world state.
+These include templates and instantiations of them, 
+and can be abstract or specific.
+AI planning systems often refer to these as operators or task decompositions.
+%actions, operators, and 
+%tasks, including 
+A plan task description models one or more {\bf actions}
+in the external world.  
+Notice that there is not necessarily a one-to-one correspondence between
+actions in the external world (typically physical actions) and the 
+task descriptions in a planner.  For example, 
+giving a present to a friend implies the same physical activity
+as giving a present to a public official, yet the effects of each 
+are so different that they would 
+often be represented as two distinct operators
+by a planner.  
+
+A {\bf plan task} is a subclass of {\bf plan task description}
+and represents an instantiation
+of a task as it appears in a plan. It can be a partial or full
+instantiation.
+A {\bf plan task template} is also a subclass of 
+{\bf plan task description} that denotes an action or set
+of actions that can be performed
+in the world state.  
+In some AI planners the two classes
+correspond to operator instances and operator schemas respectively, and
+in others they are called tasks and task decomposition
+patterns.
+
+For a given planning domain, 
+there may be a set of given task templates that are legal
+and reasonable to perform in plans that are solutions to planning
+problems in that domain
+(i.e., an initial set of operators, rules, or task templates).  
+We represent this with the role {\bf possible tasks}
+on the class planning problem.
+
+Plan task descriptions have a set of preconditions, 
+a set of effects,
+a capability, 
+and can be decomposed into a set of subtasks.  
+Not all these properties need to be specified 
+for a given task description,
+and typically planners represent tasks differently depending on 
+their approach to reasoning about action.
+The {\bf capability} of a task or task template
+describes a goal for which the task can be used.
+A {\bf precondition} represents a necessary condition for the task.
+If the task is executed, its {\bf effects} take place in 
+the given world state.
+Tasks can be decomposed into {\bf subtasks}
+that are themselves task descriptions.
+Hierarchical task network planners use task decomposition 
+or operator templates 
+(represented here as plan task templates) and 
+instantiate them to generate a plan.  Each template includes a
+statement of the kind of goal it can achieve 
+(represented here as a {\bf capability}), 
+a decomposition
+network into {\bf subtasks}, each subtask is matched against the 
+task templates all the way down to primitive templates
+(represented here as {\bf primitive plan task descriptions}.
+Other planners compose plans as an ordered set of primitive {\bf plan steps}
+(often called operators, as in {\sc strips} and {\sc ucpop} \cite{weld94}).  
+Plan steps are specializations of primitive plan task descriptions that have 
+some set of effects, as they are typically used in means-ends analysis planners.  
+
+Like goal specifications, plan task descriptions also include a
+{\bf human readable description}.
+Some AI planners specify this information as a set of parameters
+of the task that are used to determine which subset of arguments 
+need to be printed when the plan is displayed.
+
+{\bf Planning levels} can be associated to task descriptions as well as
+to goal specifications.  Some AI planners assign levels to tasks (e.g.,
+{\sc sipe} \cite{wilkins88}), others assign levels to particular
+predicates or goals (e.g., {\sc abstrips}).  Levels are also used in
+real-world domains, for example military plans are often described in
+different levels according to the command structure, echelons, or nature
+of the tasks.
+
+
+% --------------------------------------------------------------------
+\subsection{Plans}
+
+A {\bf plan} represents a set of commitments to actions
+taken by an agent in order to achieve some specified goals.
+We define the following subclasses of plans:
+%A {\bf correct plan} P is one for which {\em every} plan with a consistent superset 
+%of the commitments in P will successfully achieve the goals.
+A {\bf feasible plan} P is one for which {\em there exists} some plan that has
+a consistent superset of the commitments in P and will successfully
+achieve the goals.
+A {\bf justified plan} is a plan with a minimal set of commitments.
+A {\bf consistent plan} is one whose
+commitments are consistent with each other, with what is known about the
+state and with the model of action.
+A {\bf complete plan} is one that includes the tasks necessary to achieve the goals
+to the required level of detail 
+(this depends on the planning agent's concerns).
+These definitions are useful to 
+describe properties of plans 
+and to accomodate different approaches that planners use.  
+For example, we can represent that a hierarchical planner
+generates a feasible plan at each planning level, while generating 
+a complete plan only at the lowest level.  A partial-order planner, 
+such as {\sc ucpop}, would successively refine feasible plans (called 
+candidate plans) until finding a solution which is a complete plan.
+There is no requirement for a plan to be justified or consistent
+in order for it to be represented in {\sc planet}. This is 
+important because we can represent not only machine-generated plans but also
+human-generated plans, which are likely to contain errors.
+Notice that plans can be represented as instances or classes, 
+the ontology does not commit to either and leaves the option open.
+
+
+Sometimes it is useful to state that a
+plan forms a {\bf sub-plan} of another one. 
+For example,
+military plans often include subplans that represent the 
+movement of assets to the area of operations
+(i.e., logistics tasks),
+and subplans that group the operations themselves 
+(i.e., force application tasks).
+
+
+% --------------------------------------------------------------------
+\subsection{Choice Points, Alternatives, Decisions, and Commitments}
+
+In searching or designing a plan, a number of
+choices typically need to be made to find or create a solution.
+At a given choice point, several alternatives may be considered, and 
+one (or more) chosen as selected.  
+Such choices are represented in {\sc planet} as a type of commitment.
+{\bf Commitments} can be made in both plans and tasks.
+{\bf Plan commitments} are a subclass of commitments 
+on the plan as a whole.  
+Commitments may be in the form of actions at variously detailed levels
+of specification, orderings among actions, a decision that a certain
+action will be used to establish a particular condition and other
+requirements on a plan such as a cost profile.
+The tasks that will form part of the plan
+are represented as a subset of the commitments made by the plan.
+{\bf Task commitments} are a subclass of commitments 
+that affect individual tasks or pairs of tasks.  
+An {\bf ordering commitment} is a relation between tasks such as
+(before A B).  A {\bf temporal commitment} is a commitment 
+on a task with respect
+to time, such as (before ?task ?time-stamp).  
+Another kind of commitment is the selection of a plan task 
+description because it {\bf accomplishes}
+a goal specification.  
+This relation records the intent 
+of the planning agent for the task, 
+and is used in {\sc planet} to represent causal links.  
+
+
+% --------------------------------------------------------------------
+\subsection{Discussion}
+
+{\sc planet} does not include representations for 
+some entities that are typically associated with planning domains.
+These include agents, resources, time, and location.  
+Different systems that reason about plans 
+(planners, schedulers, multi-agent systems, execution environments) use 
+different approaches to representing and reasoning about these entities.
+Separate ontologies for these can be developed and 
+integrated with {\sc planet}.  
+We use {\sc planet} in combination with an ontology of 
+Allen's time relations \cite{allen83} and the {\sc ozone} resource ontology
+\cite{smith96}.
+We are also using {\sc planet} in combination with an
+ontology of plan evaluations and critiques that we have developed
+for our work.
+For systems and domains where there is no need for complex 
+representations of agents, resources, time, and location,
+it is trivial to extend {\sc planet} 
+with simple representations of them
+and we have done so ourselves 
+for some of the domains described below.
+{\sc planet} is still evolving and may be extended in the future 
+to cover these and/or 
+other definitions related to representing plans.  
+
+
+% **********************************************************************
+% **********************************************************************
+\section{Specializations of PLANET for Real-World Domains}
+
+This section describes how we used {\sc planet} to represent plans
+in three different domains.  
+Although all three are military domains, 
+the plans are of a radically different nature in each case.  
+In the first two domains, the plans were built manually by users
+and needed to be represented as given, i.e., 
+containing potential flaws and often serious errors. 
+The JFACC domain deals with plans that are hierarchically decomposed 
+and with verb-based objectives.  Information about causal links 
+and task decomposition templates is not provided.
+The COA domain has plans that have a hierarchical flavor that
+is not always explicitly represented in the plan.  
+In the third domain, Workarounds, plans were generated automatically by
+an AI planner.  These plans are not hierarchical, consisting of 
+a set of partially ordered steps and causal information in terms of
+the enabling conditions and achieved effects of each step.  
+The rest of the section describes these three domains in more detail.
+
+
+% --------------------------------------------------------------------
+\subsection{PLANET-JFACC}
+
+This is a domain of air campaign planning where 
+users follow the strategies-to-tasks methodology
+\cite{todd-94,thaler-93}. 
+In this approach, users start with high-level
+objectives and decompose them into subobjectives all
+the way down to the missions to be flown.  
+Using a plan editing tool, a user defines objectives
+and decomposes them into subobjectives through parent/child links, 
+and can specify temporal orderings among plan steps.  
+Some subobjectives may be handed to an automated 
+planner to be flushed out to lower levels.  
+The rest of this discussion 
+will focus on the representation
+of the manually created plans, since 
+we discuss elsewhere in this paper how plans 
+generated by an automated planner can be mapped to the 
+ontology.  
+
+Figure \ref{acp} shows an excerpt of an air campaign plan
+as it would be specified by a domain expert,
+indicating the hierarchical decomposition through indentation.
+Options (marked with stars) indicate 
+disjunctive branches of the plan that are explored as alternatives.
+%Square brackets indicate omitted or abbreviated objectives.
+The bottom of the figure shows how  a user can specify an objective.
+
+\begin{figure}[tb]
+%\rule{\textwidth}{0.3mm}
+\begin{scriptsize} %tiny
+\begin{center}
+\begin{minipage}{3.5in}
+% footnotesize is so big we need a 2-column figure (figure*)
+% scriptsize and tiny are smaller but font can't be found
+%\begin{verbatim}
+O1: Gain air and space dominance over both nations by D+5\\
+\hspace*{2ex}  *Option1: Establish and enforce an enemy no-fly zone\\
+\hspace*{2ex}\hspace*{2ex}              O111: Clear corridor through IADS\\
+\hspace*{2ex}  *Option2: Preemptively strike all enemy air assets on the ground\\
+\hspace*{2ex}  *Option3: Disrupt and disable enemy C2 infrastructure supporting air ops\\
+O2: Elliminate enemy SSM threat to US allies by D+5\\
+\hspace*{2ex}  *Option1: Destroy all known enemy SSM launchers and launch facilities by D+5\\
+\hspace*{2ex}\hspace*{2ex}              O211: Destroy fixed enemy SSM launch sites by D+5\\
+\hspace*{2ex}\hspace*{2ex}\hspace*{2ex}                     O2111: Destroy [them] on NW area using precision weapons\\
+\hspace*{2ex}\hspace*{2ex}\hspace*{2ex}\hspace*{2ex}                     	*Option1: Destroy [them] using stealth aircraft\\
+\hspace*{2ex}\hspace*{2ex}\hspace*{2ex}\hspace*{2ex}\hspace*{2ex}                     	      O211111: Destroy [them] using F117 with GBU-27\\
+\hspace*{2ex}\hspace*{2ex}\hspace*{2ex}\hspace*{2ex}                     	*Option2: Destroy [them] using SEAD aircraft\\
+\hspace*{2ex}\hspace*{2ex}              O212: Destroy mobile enemy SSM launch sites by D+5\\
+\hspace*{2ex}\hspace*{2ex}              O213: Destroy storage facilities for SSM equipment by D+5\\
+\hspace*{2ex}  *Option2: Disrupt and disable the enemy C2 infrastructure for SSM \\
+\hspace*{2ex}  *Option3: Destroy all known SSM storage, maintenance and hide sites by D+5\\
+O3: Airlift wounded and civilian non-combatants by D+2\\
+%\end{verbatim}
+%\rule{\textwidth}{0.3mm}
+
+%\begin{verbatim}
+{\em Objective ID:} O-152    {\em Level:} AO    {\em Phase:} II    {\em Parents:} O-98, O-61\\
+{\em Statement:} Maintain air superiority over NW sector\\
+{\em Measures of merit:} No loss of allied aircraft\\
+{\em Sequence restrictions:} Before O-138, Before O-124\\
+%\end{verbatim}
+\end{minipage}
+\end{center}
+\end{scriptsize}
+\caption{An excerpt of an air campaign plan and the specification of an objective.}
+\label{acp}
+%\rule{\textwidth}{0.3mm}
+\end{figure}
+
+%========
+%\begin{verbatim}
+%O1: Gain air and space dominance over both nations by D+5
+%  *Option1: Establish and enforce an enemy no-fly zone
+%              O111: Clear corridor through IADS
+%              [...]
+%  *Option2: Preemptively strike all enemy air assets on the ground
+%              [...]
+%  *Option3: Disrupt and disable enemy C2 infrastructure supporting air ops
+%              [...]
+%O2: Elliminate enemy SSM threat to US allies by D+5
+%  *Option1: Destroy all known enemy SSM launchers and launch facilities by D+5
+%              O211: Destroy fixed enemy SSM launch sites by D+5
+%                     O2111: Destroy [them] on NW area using precision weapons
+%                     	*Option1: Destroy [them] using stealth aircraft
+%                     	      O211111: Destroy [them] using F117 with GBU-27
+%                     	*Option2: Destroy [them] using SEAD aircraft
+%                     [...]
+%              O212: Destroy mobile enemy SSM launch sites by D+5
+%                     [...]
+%              O213: Destroy storage facilities for SSM equipment by D+5
+%                     [...]
+%  *Option2: Disrupt and disable the enemy C2 infrastructure for SSM 
+%              [...]
+%  *Option3: Destroy all known SSM storage, maintenance and hide sites by D+5
+%              [...]
+%O3: Airlift wounded and civilian non-combatants by D+2
+%     [...]
+%\end{verbatim}
+%=======
+
+{\bf Air campaign plans} are a subclass of the class plan.
+When they are manually created the plans do not 
+capture very well the rationale behind the 
+objective decompositions.  
+For example, users do not indicate causal links, i.e., which
+intended effects enable the conditions needed by other tasks.  
+Also, users do not indicate the 
+plan tasks that they have in mind and instead capture 
+only the goals that these tasks are supposed to accomplish. 
+
+
+
+{\bf Air campaign objectives} are always verb-based statements,
+so we represent them as a 
+subclass of objective-based goal specifications.
+Some of the clauses of an objective statement 
+are turned into constraints on the goal, including
+temporal constraints (e.g., {\em within 21 days}), 
+geographical constraints (e.g., {\em in Western Region}),
+and resource constraints (e.g., {\em using B-52s from airbase XYZ}).
+Each objective may have several children and several parents
+(unlike plans generated by hierarchical AI planners where 
+there is only one parent).  
+In the strategy-to-tasks methodology, users are asked to provide a 
+measure of merit that indicates how to measure progress towards 
+the completion of the task.  The use of measures of merit 
+is not well understood nor is it routine practice, 
+and there is no standard specification
+(sometimes they are qualitative, 
+sometimes they are quantitatively expressed as a percentage)
+or clear semantics for them 
+(sometimes they refer to future world states, 
+sometimes they refer to tasks that are done in accomplishing 
+the objective).  
+We simply annotate them as a role of the objective,
+and could represent their meaning more explicitly when
+they become better understood.
+{\bf Options} indicate alternative ways to decompose 
+an objective, and 
+are represented as a specialization of alternative plans.  
+
+The decomposition hierarchy is divided into levels,
+including low-level air tasks 
+and other higher-level air objectives.  
+Objectives belong to one 
+{\bf phase} of the campaign
+(e.g., deployment phase, operations phase, redeployment phase, etc.),
+which we represent by grouping objectives into subplans.  
+Each objective also belongs 
+to an {\bf air campaign objective level} 
+in the decomposition hierarchy
+(e.g., air tasks are considered to be at a higher level than
+air activities),
+which we define as subclasses of planning level.  
+
+In this domain, 
+human planners create air campaign plans in the context of 
+an overall military campaign and 
+the specific guidance provided by the 
+Joint Forces Air Component Commander (JFACC).
+We define {\bf JFACC-context} as a subclass of planning problem context,
+and attach to it information such as 
+the available resources specified in the Air Order of Battle, 
+the capabilities of the airbases in the theater of operations, 
+and the commander's guidance.
+This guidance includes the top level objectives of the plan as well as
+rules of engagement, e.g., not to fly over certain areas, which turn
+into constraints of the planning problem.
+
+
+
+% --------------------------------------------------------------------
+\subsection{PLANET-COA}
+
+This is a Course of Action (COA) analysis problem in a military domain of
+relevance to the DARPA High Performance Knowledge Bases Program.  
+We are developing a critiquing tool that finds flaws on manually 
+developed COAs for Army operations at the division level 
+\cite{FM-101-5}.  
+A COA is specified by a user as a set of textual statements 
+({\em who} does {\em what}, {\em when}, {\em where}, and {\em why}),
+together with a sketch drawn over a map.  
+The {\sc planet}-COA ontology allows us to represent the COA 
+that results from joining both text and sketch, 
+which is the input to our critiquing tool.  
+An example of a COA textual statement follows:
+
+\begin{small}
+\begin{quote}
+{\em 
+On H hour D day, a mechanized division attacks to seize
+OBJ SLAM to protect the northern flank of the corps main effort.
+A mechanized brigade attacks in the north, as an economy of force,
+to fix enemy forces in zone denying them the ability to interfere 
+with the main effort's attack in the south.  A mechanized brigade 
+in the south attacks to penetrate enemy forces in the vicinity of PL-A
+to create sufficient maneuver space to allow the main effort to pass 
+to the east without interference from the defending enemy infantry regiment.
+A tank heavy brigade, the main effort, passes through the southern mechanized
+brigade and attacks to seize the terrain vicinity of OBJ SLAM
+denying the enemy access to the terrain southwest of RIVER TOWN.
+[...]
+}
+\end{quote}
+\end{small}
+
+A typical COA includes a statement of the overall mission and
+a set of statements about tasks that need to be performed
+divided into five categories: close, reserve, security, deep
+and rear (not shown here).  The close statements always contain
+a main effort for the COA and a set of supporting efforts.
+We represent the COA as a plan.  The mission 
+is turned into two important features of the plan:
+its top-level goal 
+(e.g., {\em protect the northern flank of the corps main effort}), 
+and an indication of what is the 
+top-level task that is to be used to accomplish that goal
+(e.g., {\em attack to seize OBJ SLAM}).  
+We define {\bf COA problem} as a subclass of 
+{\sc planet}'s planning problem, make its 
+problem goal the top-level goal indicated in the mission statement,
+and add the rest of the mission statement as a constraint on how to
+select tasks in the plan.
+The {\em close}, {\em reserve}, {\em security}, {\em deep}, and {\em rear}
+statements 
+are represented as sub-plans (they are not subtasks or 
+subgoals but useful categories to group the unit's activities).
+Each sentence in the statement is turned into a plan task
+as follows.
+There is a specification of {\em who} is doing the task,
+e.g., {\em a mechanized brigade}, which is represented as the 
+agent of the plan-task.  
+There is an indication of {\em what} is to be done,
+e.g., {\em attacks to fix enemy forces},
+which is interpreted as a fix plan-task 
+(where fix is a kind of task that is a subclass of the class attack).
+The {\em why} (or {\em purpose})
+e.g., {\em to deny enemy forces the ability to interfere with the COA's main effort}
+can be a state-based (``enable P'', ``prevent P'') 
+or an action-based expression (``protect another unit from enemy'').
+In order to accomodate this, the ontology defines the {\bf purpose}
+of a COA task
+as a goal specification that can then be turned into an 
+effect or a capability of the plan-task.  
+The {\em where}, e.g., {\em in the 
+North\footnote{The graphical sketch specifies ``the North'' more
+precisely.}}
+is the location of the plan task. 
+The {\em when} clause (e.g., {\em H hour D day}) 
+is represented as a temporal commitment or as
+an ordering commitment if it is specified with respect to another task.
+Finally, the {\bf main effort} and {\bf supporting efforts} 
+were defined as specializations of the role subtask.  
+
+The {\sc planet} ontology also represents the 
+context, assumptions, and situation in which the plan is supposed to work
+in this domain.
+A COA is supposed to accomplish the mission
+and other guidance provided by the commander,
+and work in the context of the given situation 
+as analyzed by the commander's staff,
+which includes terrain information and 
+enemy characteristics.  
+We define {\bf COA problem context} as a subclass of 
+planning-problem-context, and define its scenario 
+to be composed of
+{\bf commander products} and {\bf staff products}.  
+All COA problems are attached to this problem context.
+
+
+% --------------------------------------------------------------------
+\subsection{PLANET-Workarounds}
+
+We developed a tool to aid in military target analysis 
+by analyzing how an enemy force may react to the
+damage of a geographic feature (e.g., a bridge, a tunnel, etc.)
+The possible workarounds for this kind of damage
+include bypassing by using alternative routes,
+repairing the damage, or breaching using engineering techniques such as
+installing a temporary bridge.  
+Because the purpose of damaging the target is typically to delay 
+the movement of some enemy unit or supply,
+an important part of the problem is to 
+estimate how long the implementation 
+of the workaround will take.  
+Note that the time to complete a workaround 
+depends on what actions can be performed in
+parallel.  
+The system was also designed to show not one possible 
+workaround plan but several possible options 
+that the enemy may take. 
+An example of a workaround solution is
+shown in Figure \ref{workaround}.
+
+\begin{figure}[tb]
+%\rule{\textwidth}{0.3mm}
+\begin{scriptsize} %tiny
+% footnotesize is so big we need a 2-column figure (figure*)
+% scriptsize and tiny are smaller but font can't be found
+%\begin{verbatim}
+% The minipage stops latex from stretching this out to fill
+% up the page - a very bad habit!
+\begin{center}
+\begin{minipage}{3in}
+OPTION B: Use Medium Girder Bridge (MGB) bridge \\
+Minimum delay to enemy: 10 hrs\\
+Transportation time: 4.5 hrs\\
+Engineering time: 3.5 hrs\\
+Required Assets:\\
+\hspace*{0.3in}  	- MGB of Engineering Company 201 (double story, 11 bays)\\
+\hspace*{0.3in} 	- Bulldozer of Engineering Company 201\\
+Substep: Move MGB to bridge site (Time: 4.5 hours)\\
+\hspace*{0.3in}  	- Ordering: Before assemble MGB\\
+Substep: Move Bulldozer to bridge site (Time: 4.5 hours)\\
+\hspace*{0.3in} 	- Ordering: Before narrow gap width\\
+Substep: Narrow gap width with bulldozer (Time: 3 hours)\\
+\hspace*{0.3in} 	- Technique: earthmoving \\
+\hspace*{0.3in}	- Ordering: Before emplace MGB\\
+Substep: Assemble MGB (Time: 1.8 hours)\\
+\hspace*{0.3in}  	- Technique: Double story, 11 bays\\
+\hspace*{0.3in} 	- Ordering: Before emplace MGB\\
+Substep: Emplace MGB (Time: 0.5 hours)\\
+\hspace*{0.3in}  	- Ordering: Before Move unit across MGB\\
+Substep: Move unit across MGB (Time: 2 hours)\\
+%\end{verbatim}
+\end{minipage}
+\end{center}
+\end{scriptsize}
+\caption{An example of a workaround plan.}
+\label{workaround}
+%\rule{\textwidth}{0.3mm}
+\end{figure}
+
+We divided the problem in two subproblems.  
+First, we used an AI planner to generate a 
+workarounds plan.
+The planner uses operators to generate a partial order of 
+workaround steps.  We added information to the operators about the
+resources used for each step, and which resources are non-shareable.  
+The planner generated a partial order of workaround steps.
+The second phase is a plan evaluation system that estimates the 
+time that each step takes to complete and calculates the overall 
+duration taking into account the partial order.  
+This is a knowledge-based system that used several ontologies of 
+engineering assets, units, and workaround steps and plans.  
+
+{\sc planet} did not yet exist when this workarounds plan ontology 
+was first developed,
+so we describe a reimplementation that uses {\sc planet}.
+Actions in the workarounds plan were represented as primitive plan
+steps. The ordering commitments and resources used were straightforward
+to represent in {\sc planet}. We also marked some steps as being of
+interest only to the planner: those that affected plan feasibility but
+not the time, and that were not to be reported in a plan summary. In
+the planner we subdivided the step parameters into those whose values
+affected plan correctness and those that were only used to determine the 
+length of the plan after it was created. These distinctions had not
+been captured in the original system, that used two largely disjoint
+representations. 
+
+%{\em Here we should explain that each step was represented as
+%an operator, that there were steps used by the planner that 
+%were "hidden" from (i.e., never passed on to) the time estimator,
+%and that many steps had parameters added that were not strictly needed
+%by the planner to generate a partial order but that were needed 
+%by the evaluation system to estimate the step duration.}
+
+
+% **********************************************************************
+% **********************************************************************
+\section{Benefits of PLANET}
+
+Ontologies are generally accepted to be useful 
+often just on the basis of their existence.  
+There is not yet an agreed methodology to 
+evaluate the quality of ontologies and their 
+actual use in systems (they can be present in a KB 
+but that does not tell us how much they are actually used). 
+We claim that {\sc planet} can be (and already has been) useful in
+knowledge reuse, modelling and sharing.
+This section presents some estimates that show the reuse of 
+{\sc planet} in the three domains discussed in this paper, 
+describes the benefits of using it as a modelling tool
+in the COA 
+domain\footnote{{\sc planet} did not exist when we worked 
+on the JFACC and workarounds domains.},
+and discusses how it can be used as a shared knowledge base
+to integrate planning systems.
+
+\nopagebreak
+% --------------------------------------------------------------------
+\subsection{Coverage and Knowledge Reuse}
+
+We wanted to measure the amount of reuse of 
+the general {\sc planet} ontology in each specific domain.
+Here we present estimates of reuse in creating new terms,
+since we are interested in understanding the generality and coverage 
+of {\sc planet}.
+To do this, we estimated how many axioms of 
+{\sc planet} were actually used in each domain,
+and how many new axioms were needed.
+
+One important issue is to factor out 
+domain definitions that are part of what is often described as
+populating the knowledge base, or knowledge base
+{\em stuffing}.  For example, the fact that there may be fifty or
+five hundred possible tasks in a domain that share the same 
+basic structure should not distort a measure of how
+reusable a general-purpose ontology is.
+For this evaluation we take these definitions out of 
+the domain-specific ontologies and 
+leave only those definitions that specified the basic 
+structure of the plans.
+
+We estimated the size of each ontology by counting its
+axioms.  We considered an axiom to be any statement about the world,
+including {\bf isa} predicates, class constraints, and role constraints. 
+We make strong use of inheritance among classes, so 
+axioms are only stated and thus counted once.  
+
+We counted how many of the concepts in each domain were subconcepts of 
+a concept in the {\sc planet} ontology, as a measure of the coverage of the 
+domain that the ontology provided.
+Next, we estimated how many axioms of the {\sc planet} ontology were actually
+used in each domain.  This was estimated by computing the ``upward
+closure'' of the definitions used in the domain-specific ontologies.
+
+The results are as shown in Table \ref{reuse}. Coverage can be seen to
+be high: on average, 82\% 
+of the concepts defined in each domain are subconcepts of concepts in
+{\sc planet}. However, the proportion of the ontology that gets used by each
+domain is much lower, averaging 31\% 
+of the axioms. This is not surprising. First, {\sc planet} is designed
+to cover a range of planning styles, including actions with
+preconditions and effects and decomposition patterns, but none of the
+domains has all of these. Second, {\sc planet} has a representation
+for incremental decisions of planners, including commitments and untried
+alternatives, but the domains only represented complete plans. In
+general we would not expect a single domain to exercise a high
+proportion of the ontology.
+
+\begin{table}[tb]
+%\rule{\textwidth}{0.3mm}
+%\begin{scriptsize}
+\begin{center}
+\begin{tabular}{|r|r|r|r|r|r|}
+\hline
+{\scriptsize Domain} & {\scriptsize Axioms} & {\scriptsize Concepts}
+ & {\scriptsize Rels} & {\scriptsize \parbox{4em}{Covered\\ concepts}} & 
+{\scriptsize Coverage} \\
+\hline
+{\sc planet} & 305 & 26 & 37 & &\\
+\hline
+COA & 267 & 58 & 37 & 39 & 67\% \\
+COA u.c & 106 & 7 & 12 & & 35\%\\
+\hline
+JFACC & 102 & 15 & 12 & 12 & 80\%\\
+JFACC u.c & 86 & 9 & 6 & & 28\%\\
+\hline
+WA & 100 & 13 & 10 & 13 & 100\%\\
+WA u.c & 91 & 12 & 4 & & 30\%\\
+\hline
+\end{tabular}
+\end{center}
+%\begin{verbatim}
+%{\sc planet}: 305 axioms (26 classes, 37 relations)
+%
+%PLANET-COA: 267 axioms (58 classes, 37 relations)\\
+%covered:  39 of 58 classes\\
+%PLANET-COA upward: 106 axioms (7 classes, 12 relations)
+%
+%PLANET-JFACC: 102 axioms (15 classes, 12 relations)\\
+%covered: 12 of 15 classes\\
+%PLANET-JFACC upward: 86 (9 classes, 6 relations)
+%
+%PLANET-WA: 84 axioms (11 classes, 8 relations)\\
+%covered: 11 of 11 classes\\
+%PLANET-WA upward: 64 axioms (10 classes, 0 relations)
+%\end{verbatim}
+%\end{scriptsize}
+\caption{Estimates of reuse of the {\sc planet} ontology.}
+\label{reuse}
+%\rule{\textwidth}{0.3mm}
+\end{table}
+
+There are various other ways to reuse knowledge.  
+One can measure the 
+reuse of ontologies 
+by estimating how many terms are used during problem solving or 
+reasoning.  
+We did an 
+informal analysis of the JFACC and Workarounds domains
+(the problem solvers for 
+the COA domain are still under development)
+and we believe that most (if not all) the new definitions would be used 
+during problem solving, but this will 
+need to be determined empirically. 
+Another way in which the ontology is reused is 
+in modelling a new domain.  
+Even if a term ends up not being used in the 
+new system, it may still have been used to 
+understand how to model certain aspects of the domain
+as we discuss next.
+
+% --------------------------------------------------------------------
+\subsection{Knowledge Modelling}
+
+We used {\sc planet} to develop a representation of plans in 
+the COA domain.%\footnote{The JFACC and Workarounds applications 
+%were done before PLANET was created.}.
+We had developed an initial model without using {\sc planet}, 
+which changed significantly once we created the COA
+definitions within the context of the {\sc planet} definitions.
+Here are some examples.
+{\sc planet} was useful in modelling the 
+close/security/deep/reserve/rear categories.  
+At first, they appeared to be subtasks of the COA.  
+We realized that the individual statements 
+are the real subtasks in this domain, and that those categories 
+are just meaningful groupings of the statements that are meaningful and helpful
+to human planners and as a result represented them as subplans.
+A similar thing occurred when modelling the main and supporting 
+efforts, which turn out to be subtasks instead of subplans.
+{\sc planet} also helped us understand 
+how to interpret the mission 
+statement, and its relationship with the COA main effort.
+The mission statement turns out to specify 
+top-level goals and constraints for the top-level task 
+as we explain above.
+
+
+% --------------------------------------------------------------------
+\subsection{Knowledge Sharing}
+
+We can only speculate about the benefits of {\sc planet} in terms of 
+knowledge sharing, since we have not used it yet to integrate 
+various systems.  
+In the Workarounds domain, we are able to represent
+the workarounds plans that were exchanged between an AI planner
+and a plan evaluation tool.  
+In the JFACC domain, we have been able to subsume the 
+representation of air campaign plans that we used in an integration 
+of a plan editing tool and a plan critiquing tool.
+We are planning to use the {\sc planet} and {\sc planet-coa} ontologies as a 
+vehicle to integrate various COA analysis tools and COA editors
+in the near future.
+
+
+% **********************************************************************
+% **********************************************************************
+\section{Related Work}
+
+In creating {\sc planet}, we 
+have drawn from previous work on languages 
+to represent plans and planning knowledge 
+\cite{ghallab98,act,kambhampati-aij95,tate-aips96,yang-90}.  
+These languages are often constrained by the reasoning capabilities that
+can be provided in practice by AI planning systems.  {\sc planet} is an
+ontology, and as such it does not make specific commitments about the
+language in which various items are expressed.  The planning knowledge
+represented in these languages can be mapped into {\sc planet}.  {\sc
+planet} also accomodates plans that are not created by AI planning
+systems, and provides a representation for the context of the planning
+problems that are given to these systems.
+
+{\sc spar} \cite{SPAR} 
+is an ongoing effort to create a standard vocabulary to describe plans
+that is compatible with other standards, such as the Process Interchange
+Format ({\sc pif}).  {\sc spar} currently comprises a set of textual statements
+that will be used to develop the model.  
+{\sc cpr} \cite{CPR} was developed as an overarching plan representation 
+across various military domains.
+These efforts are aimed at
+plan representations of a more general nature than ours, 
+and both cover aspects of plan execution.  
+However, as a result of their generality 
+they would require many more extensions than {\sc planet}
+in order to create plan representations in the domains
+discussed in this paper.  
+
+Related work on problem-solving methods for planning 
+\cite{valente-98,nunes-ijcai97}%,valente-94}
+analyzes AI planning algorithms (or planning methods) and 
+identifies the typical knowledge roles that characterize the main types of 
+domain knowledge used by these planning methods.  
+This study makes an interesting distinction 
+between static and dynamic roles.
+Static roles are 
+filled by knowledge that is constant for the given domain,
+for example the planning task templates are considered
+static plan composition knowledge.  
+Plans are dynamic knowledge roles 
+that consist of plan steps, ordering constraints, 
+auxiliary constraints 
+(which group temporal constraints and causal links),
+and variable binding constraints.  
+It is easy to see the connection with the various 
+roles of the class plan in {\sc planet}.
+Goals are also considered dynamic roles, and 
+can be either conditions or actions to be accomplished.
+Thus, they map directly to {\sc planet}'s goal specifications.
+Overall, the main knowledge roles in this study map directly 
+to classes in {\sc planet}.  {\sc planet} adds many more relations between 
+the roles and contains many more classes and axioms.
+{\sc planet} was also designed from the perspective of 
+planning environments where plans are manually created
+(instead of representing only plans of AI planning systems), 
+and as a result can also represent 
+the errors and flaws that these plans often contain.  
+It would be useful to add to {\sc planet} the static vs dynamic 
+distinctions contributed by this study.
+
+% **********************************************************************
+% **********************************************************************
+\section{Conclusions}
+
+We described {\sc planet}, an ontology for representing plans, and
+showed its use in three real-world plan evaluation domains, two where
+plans are created by humans and one where they are created by an AI
+planner. We have found {\sc planet} useful in {\em knowledge modelling}
+by structuring important distinctions in planning domains, and we have
+found it to ease the task of creating new planning or plan evaluation
+systems. In the problems we studied, a high proportion of the classes
+created were usefully covered by {\sc planet}. Finally, the ontology
+shows promise as a tool for integrating different systems that combine
+to solve a planning problem.
+
+\section*{Acknowledgements}
+
+We gratefully acknowledge the support of DARPA with
+contract DABT63-95-C-0059 as part of the DARPA/Rome
+Laboratory Planning Initiative,
+and with
+grant F30602-97-1-0195 as part of the DARPA
+High Performance Knowledge Bases Program.
+
+% **********************************************************************
+% **********************************************************************
+\begin{thebibliography}{}
+%\begin{footnotesize}
+\bibitem[\protect\citeauthoryear{Allen}{1983}]{allen83}
+Allen, J.~F.
+\newblock 1983.
+\newblock Maintaining knowledge about temporal intervals.
+\newblock {\em Communications of the ACM} 26:823--843.
+
+\bibitem[\protect\citeauthoryear{Bienkowski and Hoebel}{1998}]{IFD4}
+Bienkowski, M. and Hoebel, L.
+\newblock 1998. 
+\newblock Integrating AI Components for a Military Planning Application.   
+\newblock In {\em Proceedings of the Tenth Innovative Applications of 
+Artificial Intelligence Conference (IAAI-98)}.
+
+\bibitem[\protect\citeauthoryear{Breuker and Van de Velde}{1994}]{kads-book}
+Breuker, J. and Van de Velde W. (Eds.)
+\newblock 1994.
+\newblock {\em CommonKADS Library for Expertise Modelling}. 
+IOS Press, Amsterdam, The Netherlands, 1994.
+
+\bibitem[\protect\citeauthoryear{Ghallab \bgroup \em et al.\egroup
+  }{1998}]{ghallab98}
+Ghallab, M.; Howe, A.; Knoblock, C.; McDermott, D.; Ram, A.; Veloso, M.; Weld,
+  D.; and Wilkins, D.
+\newblock 1998.
+\newblock Pddl --- the planning domain definition language.
+\newblock Technical report.
+\newblock Available at
+  http://www.cs.yale.edu/pub/mcdermott/software/pddl.tar.gz.
+
+\bibitem[\protect\citeauthoryear{Kambhampati et al}{1995}]{kambhampati-aij95}
+Kambhampati, S., Knoblock, C.~A., and Yang, Q.
+\newblock 1995.
+\newblock Planing as Refinement Search: A Unified Framework for 
+Evaluating Design Tradeoffs in Partial-Order Planning. 
+\newblock {\em Artificial Intelligence}, 76, pp 167--238.
+
+\bibitem[\protect\citeauthoryear{Knoblock}{1996}]{knoblock-aips96}
+Knoblock, C.~A.
+\newblock 1996.
+\newblock Building a Planner for Information Gathering: 
+A Report from the Trenches. 
+\newblock In {\em Proceedings of the Third International Conference
+on Artificial Intelligence Planning Systems (AIPS-96)}.
+
+\bibitem[\protect\citeauthoryear{Myers}{1996}]{myers-kr96}
+Myers, K.~L.
+\newblock 1996.
+\newblock Strategic Advice for Hierarchical Planners. 
+\newblock In {\em Proceedings of the Fifth International 
+Conference on Principles of Knowledge Representation and Reasoning (KR-96)}.
+
+\bibitem[\protect\citeauthoryear{Nau et al}{1995}]{nau-ijcai95}
+Nau, D.~S., Gupta, S.~K., and Regli, W.~C.
+\newblock 1995. 
+\newblock {{AI} Planning Versus Manufacturing-Operation
+Planning: A Case Study}.   
+\newblock In {\em Proceedings of the Fourteenth International 
+Conference on Artificial Intelligence (IJCAI-95)}.
+
+\bibitem[\protect\citeauthoryear{Neches \bgroup \em et al.\egroup
+  }{1991}]{neches91}
+Neches, R.; Fikes, R.; Finin, T.; Gruber, T.; Patil, R.; Senator, T.; and
+  Swartout, W.
+\newblock 1991.
+\newblock Enabling technology for knowledge sharing.
+\newblock {\em AI Magazine}  36--56.
+
+\bibitem[\protect\citeauthoryear{Nunes et al}{1997}]{nunes-ijcai97}
+Nunes de Barros, L., Hendler, J., and Benjamins, V.~R.
+\newblock 1995. 
+\newblock {{AI} Planning Versus Manufacturing-Operation
+Planning: A Case Study}.   
+\newblock In {\em Proceedings of the Fifteenth International 
+Conference on Artificial Intelligence (IJCAI-97)}.
+
+\bibitem[\protect\citeauthoryear{Pease}{1998}]{CPR}
+Pease, R.~A.
+\newblock 1997.
+\newblock Object Model Focus Group Core Plan Representation--Request
+for comment. 
+\newblock {\em Defense Advanced Research Projects Agency}.   
+Available at {http://www.teknowledge.com/CPR2/Reports/CPR-RFC4/}.  
+
+%\bibitem[\protect\citeauthoryear{Pednault}{1987}]{adl}
+%Pednault, E.
+%\newblock 1987. 
+%\newblock ADL.   
+%\newblock ???.
+
+\bibitem[\protect\citeauthoryear{Smith, Lassila, \& Becker}{1996}]{smith96}
+Smith, S.~F.; Lassila, O.; and Becker, M.
+\newblock 1996.
+\newblock Configurable, mixed-initiative systems for planning and scheduling.
+\newblock In {\em Advanced Planning Technology}.
+
+\bibitem[\protect\citeauthoryear{Tate}{1998}]{SPAR}
+Tate, A.
+\newblock 1998.
+\newblock Roots of SPAR--Shared Planning and Activity Representation. 
+\newblock {\em The Knowledge Engineering Review} 13:1, pp 121--128, March 1998. 
+See also {http://www.aiai.ed.ac.uk/~arpi/spar}.  
+
+\bibitem[\protect\citeauthoryear{Tate}{1998}]{tate-aips96}
+Tate, A.
+\newblock 1996.
+\newblock Representing Plans as a Set of Constraints -- The <I-N-OVA> Model. 
+\newblock In {\em Proceedings of the Third International Conference
+on Artificial Intelligence Planning Systems (AIPS-96)}.
+
+\bibitem[\protect\citeauthoryear{Thaler}{1993}]{thaler-93}
+Thaler, D.~E.
+\newblock 1993.
+\newblock Strategies to Tasks, A Framework for Linking Means
+and Ends. 
+\newblock {\em RAND Technical Report}.   
+
+\bibitem[\protect\citeauthoryear{Todd}{1994}]{todd-94}
+Todd, D.~F.
+\newblock 1994.
+\newblock Strategies-to-Tasks Baseline for USAF Planning.
+\newblock {\em Internal Document, Strategic Planning
+Division, HQ United States Air Force}.   
+
+\bibitem[\protect\citeauthoryear{Valente et al.}{1998}]{valente-98}
+Valente, A., Benjamins, V.~R., Nunes de Barros, L.
+\newblock 1998.
+\newblock A Library of System-Derived Problem-Solving Methods for Planning.
+\newblock {\em International Journal of Human-Computer Studies}, 48, 
+pp 417-447, 1998.   
+
+%\bibitem[\protect\citeauthoryear{Valente}{1994}]{valente-94}
+%Valente, A.
+%\newblock 1994.
+%\newblock Planning.
+%\newblock In {\em CommonKADS Library for Expertise Modelling}. 
+%J. Breuker and W. Van de Velde (Eds.), IOS Press, Amsterdam, The Netherlands,
+%1994.
+
+\bibitem[\protect\citeauthoryear{Weld}{1994}]{weld94}
+Weld, D.
+\newblock 1994.
+\newblock A gentle introduction to least-commitment planning.
+\newblock {\em AI Magazine}.
+
+\bibitem[\protect\citeauthoryear{Wilkins}{1988}]{wilkins88}
+Wilkins, D.~E.
+\newblock 1988.
+\newblock {\em Practical Planning: Extending the Classical AI Planning
+  Paradigm}.
+\newblock Morgan Kaufmann.
+
+\bibitem[\protect\citeauthoryear{Wilkins and Myers}{1995}]{act}
+Wilkins, D.~E. and Myers, K.~L.
+\newblock 1995.
+\newblock A Common Knowledge Representation for Plan Generation and 
+Reactive Execution. 
+\newblock {\em Journal of Logic and Computation}, 5(6), pp 731--761, 
+December 1995.
+
+\bibitem[\protect\citeauthoryear{Yang}{1990}]{yang-90}
+Yang, Q.
+\newblock 1990.
+\newblock Formalizing Planning Knowledge for Hierarchical Planning. 
+\newblock {\em Computational Intelligence}, 6(1), pp 12--24, 1990.
+
+\bibitem[\protect\citeauthoryear{Army Field Manual 101-5}{1997}]{FM-101-5}
+Headquarters, Department of the Army.
+\newblock 1997.
+\newblock Staff Organizations and Operations. 
+\newblock {\em Army Field Manual 101-5}.
+%\end{footnotesize}
+\end{thebibliography}
+
+
+
+
+\end{document}
+
+Figure \ref{planet-diagram} shows graphically some of the main
+classes and relations defined in {\sc planet}.
+
+\begin{figure*}[tb]
+\rule{\textwidth}{0.3mm}
+\vspace{3in}
+\caption{A schematic representation of a portion of the {\sc planet} ontology.}
+\label{planet-diagram}
+\rule{\textwidth}{0.3mm}
+\end{figure*}
+

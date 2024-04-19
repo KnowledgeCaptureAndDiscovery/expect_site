@@ -1,0 +1,903 @@
+;;; Based on planet.lisp in the directory above but with the extra terms
+;;; used in Ben's planet.ke file.
+
+(defpackage "CYC" (:nicknames "PLANET")) ; creates or just adds the nickname
+;;(defpackage "EXPECT" (:nicknames "PLANET"))
+
+;;;(defpackage "PLANET")
+(in-package "PLANET")
+(loom:use-loom "PLANET" :dont-create-context-p t)
+(use-package "EXPECT")
+
+#|
+(export '(planning-problem planning-problem-context
+          candidate untried-candidate feasible-candidate unfeasible-candidate selected-candidate
+	rejected-candidate
+	problem-refinement unfeasible-alternative-problem 
+	plan sub-plan candidate-plan 
+	plan-task-description plan-task primitive-plan-task-description primitive-plan-task
+	plan-step plan-task-template possible-task task-template
+	capability preconditions effects primary-effects plan-restrictions
+	constraints commitments plan-commitments plan-constraints 
+	task-of task-of-constraint problem-goal plan-goal intermediate-goal 
+	refinement-plan untried-refinement-plan rejected-refinement-plan alternative-plan
+	accomplishes precondition-expression conjunctive-precondition-expression
+	planning-level-specifier planning-level
+	human-readable-description human-readable-description-of 
+	task-commitments task-constraints 
+	ordering-restriction ordering-commitment ordering-constraint
+	temporal-restriction temporal-commitment temporal-constraint
+	world-state initial-state goal-specification state-based-goal-spec 
+	objective-based-goal-spec
+	human-readable-goal-specification-description human-readable-goal-description
+	super-task sub-task evaluation-structure evaluation comparison-structure comparison
+	resource-requirement required-resource resource planning-resource
+	))
+|#
+
+
+#|
+(unless (loom:find-context "CYC-KB")
+  (load (make-pathname :name "planet-upper-stubs.lisp" 
+		   :directory (pathname-directory *load-truename*))))
+|#
+
+;;;(loom:defcontext PLANET :theory (EXPECT-THEORY)) ;;(CYC-KB))
+
+;;;(in-context 'PLANET)
+
+(in-context 'CYC-KB)
+
+
+(defrelation ikb-synonym
+  :range string
+  :annotations ((documentation "This relation is used to indicate the
+name of an equivalent entity used in PLANET's translation into the IKB"))
+  )
+
+(defconcept Planning-problem
+  :is-primitive (:and thing
+
+		  ;; a plan may or may not assume a particular
+		  ;; initial state. When using a rich KB system, the
+		  ;; state may be represented in a context or
+		  ;; microtheory, and it may not be possible to
+		  ;; express this in the KR language.
+		  (:the initial-state world-state)
+
+		  (:all problem-goal goal-specification)
+
+		  ;;;Some plan constraints are not commitments made
+		  ;;;by the planning agent but represent top-level
+		  ;;;constraints posted by the agent requesting the
+		  ;;;plan. Examples could include avoiding a certain
+		  ;;;resource or action.
+		  (:at-least 0 constraints)
+		  (:all possible-task plan-task-template)
+
+		  ;; A planning problem may have a number of
+		  ;; candidate plans which are (or at one point
+		  ;; were) potential solutions. With respect to a
+		  ;; particular planning problem, a candidate may be
+		  ;; untried or rejected, and these are
+		  ;; sub-relations of candidate plan. They are not
+		  ;; properties of the plan, because a plan may be
+		  ;; rejected for one planning problem but
+		  ;; acceptable for another (for example a
+		  ;; relaxation of the first planning problem).
+		  (:all candidate-plan plan)
+
+		  ;; A comparison-structure object stores
+		  ;; information used to compare the candidate
+		  ;; plans, for example a matrix of costs in a
+		  ;; transportation domain.
+		  (:some comparison comparison-structure)
+		  )
+
+  ;; A planning problem may have a number of alternative problems, which
+  ;; impose (or relax) different constraints on the original problem or
+  ;; may assume variations of the initial state. For example, the
+  ;; alternatives might specify different ways to achieve some goal to
+  ;; allow alternative plans to be explored systematically.
+  :constraints (:all problem-refinement planning-problem)
+  :annotations (|IKBConstant| |MicrotheoryType|
+	      (documentation "A planning problem specifies
+requirements on a plan such as goals and constraints, and may lead to
+several plans being generated, which share the initial state, goals and
+constraints that are specified in the problem. Information used to
+compare candidate plans is also found here.")))
+
+(defconcept planning-problem-context
+  :is-primitive planning-problem
+  :annotations (|IKBConstant|
+	       (documentation "A planning problem context represents
+the initial, given assumptions about the planning problem. As such it is not
+an alternative for any other planning problem.")))
+
+(defrelation candidate
+  :annotations (|RuleMacroPredicate| |TransitiveBinaryPredicate|
+|ReflexiveBinaryPredicate| |PublicConstant| |MicrotheoryPredicate|
+	      (documentation " A planning problem, planning problem
+context or plan may have a number of candidate alternatives which are
+(or at one point were) potential solutions. With respect to a particular
+item, a candidate may be untried, feasible, selected or rejected, and these are
+sub-relations of candidate. They are not properties of the plan or problem,
+because a candidate may be rejected for one planning problem but acceptable
+for another (for example a relaxation of the first planning
+problem). This relation is also specialised for each item that can have
+candidates: planning problem contexts, planning problems and plans")))
+
+(defrelation untried-candidate
+  :is-primitive candidate
+  :annotations (|RuleMacroPredicate| |TransitiveBinaryPredicate|
+|ReflexiveBinaryPredicate| |PublicConstant| |MicrotheoryPredicate|
+(documentation "A candidate plan or other item which has
+not yet been tested"))
+  )
+
+(defrelation feasible-candidate
+  :is-primitive candidate
+  :annotations (|RuleMacroPredicate| |TransitiveBinaryPredicate|
+|ReflexiveBinaryPredicate| |PublicConstant| |MicrotheoryPredicate|
+(documentation "A candidate plan or other item which has
+been tested and passed its feasibility test."))
+  )
+
+(defrelation unfeasible-candidate
+  :is-primitive candidate
+  :annotations (|RuleMacroPredicate| |TransitiveBinaryPredicate|
+|ReflexiveBinaryPredicate| |PublicConstant| |MicrotheoryPredicate|
+(documentation "A candidate plan or other item which has
+been tested and failed its feasibility test. This need not mean it is a
+rejected candidate because some relaxation of the constraints may be
+applied (for example if there are no feasible candidates)."))
+  )
+
+(defrelation selected-candidate
+  :is-primitive candidate
+  :annotations (|RuleMacroPredicate| |TransitiveBinaryPredicate|
+|ReflexiveBinaryPredicate| |PublicConstant| |MicrotheoryPredicate|
+(documentation "A candidate plan or other item which has
+been selected as a solution at this level"))
+  )
+
+(defrelation rejected-candidate
+  :is-primitive candidate
+  :annotations (|RuleMacroPredicate| |TransitiveBinaryPredicate|
+|ReflexiveBinaryPredicate| |PublicConstant| |MicrotheoryPredicate|
+(documentation "A candidate plan or other item which for
+some reason has been rejected as the preferred item"))
+  )
+
+(defrelation problem-refinement
+  :is-primitive candidate
+  :domain planning-problem
+  :range planning-problem
+  :annotations (|RuleMacroPredicate| |TransitiveBinaryPredicate|
+			        |ReflexiveBinaryPredicate| |PublicConstant| |MicrotheoryPredicate|
+			        |DefaultMonotonicPredicate| |BinaryPredicate|
+			        (documentation "A planning problem may have a number of
+alternative problems, which impose (or relax) different constraints on
+the original problem or may assume variations of the initial state. For
+example, the alternatives might specify different ways to achieve some
+goal to allow alternative plans to be explored systematically.")))
+
+;;; This is one example - all the others are possible.
+(defrelation unfeasible-alternative-problem
+  :is-primitive (:and problem-refinement unfeasible-candidate)
+  :annotations (|RuleMacroPredicate| |TransitiveBinaryPredicate|
+|ReflexiveBinaryPredicate| |PublicConstant| |MicrotheoryPredicate|
+(documentation "The alternative problems that contained
+no feasible plans. This is not represented as a property of the planning
+problem because one problem might be unfeasible with respect to one
+initial state, represented at the parent planning problem, and feasible
+with respect to another.")))
+
+
+(defconcept Plan
+  :is-primitive (:and thing
+
+		  ;; Plan-commitments should store global
+		  ;; commitments in the plan, such as cost profiles
+		  ;; on the plan.  Local commitments such as
+		  ;; variable binding and resources used by tasks
+		  ;; are usually represented with the tasks but can
+		  ;; be here.
+		  (:at-least 0 plan-commitments)
+		  
+		  (:all task-of plan-task)
+
+		  ;; the planner may explicitly keep track of
+		  ;; refinements and alternatives
+		  ;;(:all refinement-plan plan)
+
+		  ;; stores information used to compare the
+		  ;; refinement plans.
+		  (:some comparison comparison-structure)
+
+		  ;; The alternative plans are the sibling
+		  ;; refinements. In other words this relation is
+		  ;; formed by composing the inverse of
+		  ;; refinement-plan with refinement-plan and
+		  ;; removing the identical plan from the set obtained.
+		  ;;(:all alternative-plan plan)
+
+		  ;; Sometimes it is useful to state that a plan
+		  ;; forms a sub-plan of another one.
+		  ;;(:all sub-plan plan)
+
+		  ;; Sometimes it is useful to explicitly represent
+		  ;; intermediate goals of a plan.
+		  (:all intermediate-goal goal-specification)
+
+		  ;; An evaluation object is used to store all the results
+		  ;; of evaluating and critiquing a plan.
+		  (:some evaluation evaluation-structure)
+		  )
+  :annotations (|IKBConstant|
+	      (documentation "
+A plan represents a set of commitments to actions
+taken by an agent in order to achieve some specified goals.
+
+Commitments may be in the form of actions at variously detailed levels
+of specification, ordering constraints among actions, constraints that
+an action will be used to establish a particular condition and other
+constraints on a plan such as a cost profile.
+
+A feasible plan P is one for which *there exists* some plan that has
+a consistent superset of the commitments in P and will successfully
+achieve the goals.
+
+A consistent plan is one whose commitments are consistent with each
+other, with what is known about the state and with the model of action.
+
+A complete plan is one that includes the tasks necessary to achieve the
+goals to the required level of detail (this depends on the planning
+agent's concerns).
+
+A justified plan is a plan with a minimal set of commitments that are
+complete for the goals it addresses (which may be an explicit subset of
+the full plan goal set).
+
+There is no requirement for a plan to be justified or correct. This is 
+important because we can represent not only machine-generated plans but also
+human-generated plans, which are likely to contain errors.
+
+Note: These definitions accomodate different approaches that planners 
+use.  For example, we can represent that a hierarchical planner
+generates a feasible plan at each planning level, while generating 
+a complete plan only at the lowest level.  A partial-order planner, 
+such as UCPOP, would successively refine feasible plans (called 
+candidate plans) until finding a solution which is a complete plan.
+"
+			 )
+	      (ikb-synonym plan)
+  )
+  )
+
+
+(defconcept Feasible-plan
+  :is-primitive Plan
+  :annotations (|IKBConstant|
+	       (documentation "A feasible plan P is a plan for which
+*there exists* some plan that has a consistent superset of the
+commitments in P and will successfully achieve the goals.")))
+
+
+(defconcept Complete-plan
+  :is-primitive Plan
+  :annotations (|IKBConstant|
+	       |RuleMacroPredicate| |TransitiveBinaryPredicate|
+|ReflexiveBinaryPredicate| |PublicConstant| |MicrotheoryPredicate|
+|DefaultMonotonicPredicate| |BinaryPredicate|
+	       (documentation "A complete plan is one that includes the
+tasks necessary to achieve the goals to the required level of detail
+(this depends on the planning agent's concerns).")))
+
+
+(defconcept Justified-plan
+  :is-primitive Plan
+  :annotations (|IKBConstant|
+	       |RuleMacroPredicate| |TransitiveBinaryPredicate|
+|ReflexiveBinaryPredicate| |PublicConstant| |MicrotheoryPredicate|
+|DefaultMonotonicPredicate| |BinaryPredicate|
+	       (documentation "A justified plan is a plan with a
+minimal set of commitments that are complete for the goals it addresses
+(which may be an explicit subset of the full plan goal set).")))
+
+
+(defconcept Consistent-plan
+  :is-primitive Plan
+  :annotations (|IKBConstant|
+	       |RuleMacroPredicate| |TransitiveBinaryPredicate|
+|ReflexiveBinaryPredicate| |PublicConstant| |MicrotheoryPredicate|
+|DefaultMonotonicPredicate| |BinaryPredicate|
+	       (documentation "A consistent plan is one whose
+commitments are consistent with each other, with what is known about the
+state and with the model of action.")))
+
+(defrelation sub-plan
+  :domain plan
+  :range plan
+  :annotations ((documentation "Sometimes it is useful to state that a
+plan forms a sub-plan of another one. For example in the HPKB COAs, the
+close battle and security plans are sub-plans of the COA.")))
+
+(defrelation candidate-plan
+  :is-primitive candidate
+  :domain planning-problem
+  :range plan
+  :annotations (|RuleMacroPredicate| |TransitiveBinaryPredicate|
+|ReflexiveBinaryPredicate| |PublicConstant| |MicrotheoryPredicate|
+|DefaultMonotonicPredicate| |BinaryPredicate|))
+
+(defconcept plan-task-description
+  :is-primitive (:and thing
+
+		  (:some capability goal-specification)
+
+		  (:all effects state-based-goal-spec)
+		  (:all preconditions precondition-expression)
+
+		  ;; Many planners assign levels to tasks, for
+		  ;; example SIPE uses numbers while in JFACC
+		  ;; symbolic designations such as "strategic level"
+		  ;; are used.
+		  (:some planning-level planning-level-specifier)
+
+		  ;(:all super-task plan-task-description)
+		  ;(:all sub-task plan-task-description)
+
+		  ;; This slot specifies how to
+		  ;; describe the task to a person.  It could be a
+		  ;; simple string or an object with clausal
+		  ;; structure. In some planners this is done by
+		  ;; specifying which parameters of a task get
+		  ;; printed.
+		  (:the human-readable-description-of
+		        human-readable-task-description)
+
+		  ;; This relation plays roughly the same role as 
+		  ;; resourceOfTask in the CPR ontology except that
+		  ;; (1) it can apply to a task or plan, 
+		  ;; (2) the resource-requirement can specify more
+		  ;; information such as required amount and time 
+		  ;; interval for requirement and 
+		  ;; (3) the resource is not required to be a physical
+		  ;; thing.
+		  (:all required-resource
+		        resource-requirement)
+
+		  ;; For a template, this may be a function for evaluating 
+		  ;; instantiations.
+		  (:some evaluation evaluation-structure)
+
+		  )
+  :annotations (|IKBConstant|
+	       (documentation "Subclasses of this class include the
+class of specific tasks that appear in plans (plan-task) and the class
+of task templates that describe patterns of tasks
+(plan-task-template). For example in some planners the two classes
+correspond to operator instances and operator schemas respectively, and
+in some planners they are called tasks and task decomposition
+patterns."))
+  )
+
+
+(defconcept plan-task
+  :is-primitive (:and plan-task-description
+
+		  (:some task-template plan-task-template)
+		  (:at-least 0 task-commitments)
+
+		  ;; The intended effect of the task, which is a
+		  ;; goal-specification in service of another task
+		  ;; (except if the task accomplishes a
+		  ;; top-level-goal, when the plan-task part of the
+		  ;; relation is left empty).
+
+		  ;; This is temporarily commented out until we
+		  ;; figure out the syntax for this 3-way relation.
+		  ;; (:all accomplishes goal-specification plan-task)
+
+		  )
+  :annotations (|IKBConstant|
+	       (documentation "A plan task is an instantiation
+of a task template and appears in a plan. It can be a partial or full
+instantiation.")
+	      (ikb-synonym action)
+	      )
+  )
+			  
+
+(defconcept primitive-plan-task-description
+  :is (:and plan-task-description
+	  (:exactly 0 sub-task))
+  :annotations (|IKBConstant|
+	       (documentation "This is a task that cannot be
+decomposed into a subtask.")))
+
+(defconcept primitive-plan-task
+  :is (:and plan-task primitive-plan-task-description)
+  :annotations (|IKBConstant|
+	       (documentation "This is a task that cannot be
+decomposed into a subtask."))
+  )
+
+(defconcept plan-step
+  :is (:and primitive-plan-task
+	  (:at-least 1 effects))
+  :annotations (|IKBConstant|
+	       (documentation "A subgoaling planner such as UCPOP
+will compose plans out of plan-steps")))
+
+
+(defconcept plan-task-template
+  :is-primitive plan-task-description
+  :annotations (|IKBConstant|
+	       (documentation "A template that denotes a set
+of actions that can be performed, eg (pickup ?x).")
+	      (ikb-synonym script-type)
+	      ))
+
+(defrelation possible-task
+  :domain planning-problem
+  :range plan-task-template
+  :annotations ((documentation "(possible-task <problem> <template>) means
+that <template> is a task template for a set of tasks that are legal
+and reasonable to perform in plans that are solutions to the planning
+problem <problem>."))
+  )
+
+(defrelation task-template
+  :domain plan-task
+  :range plan-task-template
+  :annotations ((documentation "This relates a plan task to the 
+template that describes it."))
+  )
+
+(defrelation capability
+  :domain plan-task-description
+  :range goal-specification
+  :annotations ((documentation "The capability of a task or task template
+describes a goal for which the task can be used.")))
+
+(defrelation preconditions
+  :domain plan-task-description
+  :range precondition-expression
+  :annotations ((documentation "A necessary condition for the task, or a 
+task fitting this template description, to be executed."))
+  )
+
+(defrelation effects
+  :domain plan-task-description
+  :range state-based-goal-spec
+  :annotations ((documentation "If the task is executed, the effect
+typically holds in the resulting world state. An effect of a task
+need not be a capability of that task because the task may never be
+explicitly used to achieve it, for example firing a weapon to achieve
+that it is not loaded, instead of just unloading it. This distinction is
+sometimes referred to as 'primary effects' versus effects in the planning
+ literature."))
+  )
+
+(defrelation primary-effects
+  :is-primitive effects
+  :annotations ((documentation "Primary effects are those effects that
+are considered the 'important' effects of a task, typically these are
+the effects for which the task was originally modelled as a possible
+task to execute in the domain. For example one might fire a gun in order
+to shoot something, so this is a primary effect. The fact that the
+barrel gets hot is a secondary effect or side-effect. It is not usually
+a reason to fire the weapon but may need to be modelled as a state
+change for other reasons. Some (but not all) planning systems only allow
+a task to be added to a plan in order to achieve a primary effect."))
+  )
+
+;;;===================================
+;;; Constraints and commitments
+;;;===================================
+
+(defrelation plan-restrictions
+  :annotations (|IKBConstant| |PredicateCategory|
+(documentation "A plan-restriction can be any relation
+on a plan, planning problem, context or task that constrains the forms
+of refinements of instantiations possible. One partition is in terms of
+the source of the restriction: constraints are external restrictions
+that are part of the problem definition, commitments are restrictions
+added by the planning agent to denote choices made during
+search. Constraints and commitments are equally expressive and can both
+be any of the other types of plan-restrictions, eg temporal or task
+choice. It is interesting to note that when different planning agents
+collaborate, one agent may make commitments and impose them as
+constraints on another agent (this approach is taken in Gratch's
+planner).")))
+
+;;; This name may cause conflicts.
+(defrelation constraints
+  :is-primitive plan-restrictions
+  :annotations (|IKBConstant| |PredicateCategory|
+(documentation "Some plan constraints are not commitments
+made by the planning agent but represent top-level constraints posted
+by the agent requesting the plan. Examples could include avoiding
+a certain resource or action.")))
+
+(defrelation commitments
+  :is-primitive plan-restrictions
+  :annotations ((documentation "In a search or design task, a number of
+choices typically need to be made to find or create a desired object.
+Relations that are subtypes of commitments represent such choices that
+have been made on the domain object of the relation during the search or
+design process. For example, (task-of <plan> <task>) represents a design
+choice made in the creation of a plan, that it include the indicated task."))
+  )
+
+(defrelation plan-commitments
+  :is-primitive commitments
+  :domain plan
+  :annotations (|BinaryPredicate| |IKBConstant|
+(documentation "The class of relations that are commitments
+on plans. (See comment on commitments)"))
+  )
+
+(defrelation plan-constraints
+  :is-primitive constraints
+  :domain plan
+  :annotations ((documentation "The class of relations that are
+constraints on plans. (See comments on the concepts 'commitments',
+'constraints' and 'plan-restrictions'.)"))
+  )
+
+(defrelation task-of
+  :is-primitive plan-commitments
+  :domain plan
+  :range plan-task
+  :annotations (|BinaryPredicate| |IKBConstant| 
+			     |PlanContextCommitmentPredicate|
+(documentation "The tasks that will form part of the
+plan can be viewed as part of the commitments made by the plan. This is
+probably a sub-relation of eventOfPlan in the task interaction submission.
+Alignment has not been done since that is a preliminary submissin.")))
+
+(defrelation task-of-constraint
+  :is-primitive plan-constraints
+  :domain plan
+  :range plan-task
+  :annotations ((documentation "The same restriction as task-of, but
+imposed as a constraint that a plan include a particular task.")))
+
+(defrelation problem-goal
+  :domain planning-problem
+  :range goal-specification
+  :annotations (|BinaryPredicate| |IKBConstant| 
+			     |PlanContextConstraintPredicate|
+(documentation "The goal of the planning problem"))
+  )
+
+(defrelation plan-goal
+  :domain plan
+  :range goal-specification
+  :annotations (|BinaryPredicate| |IKBConstant| 
+			     |PlanContextConstraintPredicate|
+	      (documentation "The goal of the plan"))
+  )
+
+(defrelation intermediate-goal
+  :is-primitive plan-goal
+  :annotations ((documentation "A goal of a plan that is not a top-level
+objective, but arises from tasks or other constraints chosen in service
+of the top-level objective(s). Note that this is different from subGoal
+in the HPKB upper ontology because the domain of this relation is the plan. If 
+(intermediate-goal <plan> <goal>) holds, then (subGoal <supergoal> <goal>)
+holds for some supergoal."))
+  )
+
+(defrelation refinement-plan
+  :is-primitive candidate
+  :domain plan
+  :range plan
+  :annotations ((documentation "(refinement-plan <plan-1> <plan-2>)
+means that <plan-2> contains a strict superset of the commitments of
+<plan-1>, for example by refining an action or adding a new ordering
+relation. This relation captures the act of making a plan more complete,
+as opposed to specifying a coherent piece of a plan, which is done by
+the relation sub-plan. It is a subrelation of candidate, and there can
+be untried, feasible, unfeasible, selected and rejected refinement
+plans."))
+  )
+
+;;; For instance:
+(defrelation untried-refinement-plan
+  :is-primitive (:and refinement-plan untried-candidate)
+  :annotations ((documentation "This relation holds if the plan
+represents an alternative that has not yet been tried or evaluated.")))
+
+(defrelation rejected-refinement-plan
+  :is-primitive (:and refinement-plan rejected-candidate)
+  :annotations ((documentation "This relation holds if the plan
+represents an alternative that has not been tried and rejected by
+some agent, for example the planning agent or an evaluating agent.")))
+
+
+(defrelation alternative-plan
+  :domain plan
+  :range plan
+  :annotations ((documentation "The alternative plans are the sibling
+refinements. In other words this relation is formed by composing the
+inverse of refinement-plan with refinement-plan and removing the
+identical plan from the set obtained."))
+  )
+
+
+(defrelation accomplishes
+  :arity 3
+  :domains (plan-task-description goal-specification)
+  :range plan-task
+  :annotations (|TernaryPredicate| |IKBConstant| 
+			      |PlanContextConstraintPredicate|
+	      (documentation "This relation records the intent
+of the planning agent for the task. The goal specification
+can be state or objective oriented, and is in service of some
+other task. If the goal is a top-level goal, the other task is
+left empty.")))
+
+(defconcept precondition-expression
+  :is-primitive thing
+  :annotations (|IKBConstant|
+	       (documentation "A logical expression over the state
+predicates, which may include quantification")))
+
+(defconcept conjunctive-precondition-expression
+  :is-primitive precondition-expression
+  :annotations (|IKBConstant|
+	       (documentation "A conjunctive precondition expression
+is expressed as a list of predicates.")))
+
+(defconcept planning-level-specifier
+  :is-primitive thing
+  :annotations (|IKBConstant|
+	       (documentation "Some planners assign levels to tasks,
+for example SIPE uses numbers. Other planners assign levels to
+predicates, for example ABSTRIPS and Alpine. Levels can be numeric or
+symbolic, for example in JFACC symbolic designations such as 'CINC
+level' are used. ")))
+
+(defrelation planning-level
+  :domain (:or plan-task-description goal-specification)
+  :range planning-level-specifier
+  :characteristics :single-valued
+  :annotations ((documentation "Many planners assign levels to tasks,
+for example SIPE uses numbers while in JFACC symbolic designations such
+as 'strategic level' are used."))
+  )
+
+
+(defconcept human-readable-description
+  :is-primitive thing
+  :annotations ((documentation "Instances of this are descriptions of
+objects intended for people.  They could be simple strings or objects
+with clausal structure.")))
+
+
+(defconcept human-readable-task-description
+  :is-primitive human-readable-description
+  :annotations (|IKBConstant|
+	       (documentation "A human-readable-description for a pan-task
+or plan-task-template.  In some planners this is done by specifying which
+parameters of a task get printed.")))
+
+(defrelation human-readable-description-of
+  :domain plan-task-description
+  :range human-readable-task-description
+  :annotations ((documentation "Specifies a human-readable-description
+for a plan-task or plan-task-template. For more info see the
+documentation on the concepts human-readable-task-description and
+human-readable-description. "))
+  )
+
+
+(defrelation task-commitments
+  :is-primitive commitments
+  :domain plan-task
+  :annotations (|BinaryPredicate|  |PublicConstant|
+	      (documentation "The class of relations that are commitments
+on tasks. (See comment on commitments)"))
+  )
+
+(defrelation task-constraints
+  :is-primitive constraints
+  :domain plan-task
+  :annotations ((documentation "The class of constraints on tasks")))
+
+(defrelation ordering-restriction
+  :is-primitive plan-restrictions
+  :range plan-task
+  :annotations ((:arguments |ScriptType| |ComplexTemporalRelation|
+|PurposefulAction|)
+(documentation "An ordering relation between tasks such as
+(before A B)."))
+  )
+
+(defrelation ordering-commitment
+  :is-primitive (:and ordering-restriction task-commitments)
+  :annotations ((documentation "An ordering commitment between tasks")))
+
+(defrelation ordering-constraint
+  :is-primitive (:and ordering-restriction task-constraints)
+  :annotations ((documentation "An ordering constraint between tasks")))
+
+(defrelation temporal-restriction
+  :is-primitive plan-restrictions
+  :annotations ((documentation "A restriction on a task with respect
+to time, such as (before <task> <time-stamp>)")
+	      (ikb-synonym complex-temporal-relation)
+	      )
+)
+
+(defrelation temporal-commitment
+  :is-primitive (:and temporal-restriction task-commitments)
+  :annotations ((documentation "A temporal commitment on a task")))
+
+(defrelation temporal-constraint
+  :is-primitive (:and temporal-restriction task-constraints)
+  :annotations (|BinaryPredicate| |PlanActionRestrictionPredicate| 
+			     |PublicConstant|
+	      (documentation "A temporal constraint on a task")))
+
+
+(defconcept world-state
+  :is-primitive thing
+  :annotations (|IKBConstant|
+	       (documentation "When using a rich KB system, the state
+may be represented in a context or microtheory, and it may not be
+possible to express this in the KR language.")))
+
+(defrelation initial-state
+  :domain planning-problem
+  :range world-state
+  :annotations ((documentation "An initial state for all plans that
+are solutions of this planning problem")))
+
+
+(defconcept goal-specification
+  :is-primitive (and thing
+		 (:at-least 0 planning-level)
+		 ;;(:exactly 1 goal-description)
+		 (:at-least 0 human-readable-goal-description))
+  :annotations (|IKBConstant|
+	       (documentation "Something that gets accomplished by a
+plan, subplan or task. This may correspond to 'Goal' in the HPKB
+ontology, or that might correspond to state-based-goal-spec.")))
+
+(defconcept state-based-goal-spec
+  :is-primitive goal-specification 
+  :annotations (|IKBConstant|
+	       (documentation "Typically these are goals that refer
+to some predicate used to describe the state of the world, for example
+'achieve (at Jim LAX)', 'deny (at red-brigade south-pass)' or 
+'maintain (temperature room5 30)'
+
+Note that 'state-based-goal-spec' is a subclass of 'goal' but
+'goal-specification' is not. This is because the HPKB upper concept
+'goal' is explicitly state-based. Ideally, this should be
+generalised.")
+	      (ikb-synonym goal)
+	      ;; the Cyc middle-layer concept "goal" is of this form
+	      ))
+
+(defconcept objective-based-goal-spec
+  :is-primitive goal-specification
+  :annotations (|IKBConstant|
+	       (documentation "Typically these are verb- or
+action-based goal expressions, for example
+'transport brigade5 to Ryad'")))
+
+(defconcept human-readable-goal-specification-description
+  :is-primitive human-readable-description
+  :annotations (|IKBConstant|
+	       (documentation "Something used to provide a description
+of a goal to an end user. Could be a string or a more complex structure.")))
+
+(defrelation human-readable-goal-description
+  :domain goal-specification
+  :range human-readable-goal-specification-description
+  :annotations ((documentation "Provides a description
+of the goal for an end user."))
+  )
+
+
+(defrelation super-task
+  :domain plan-task-description
+  :range plan-task-description
+  :annotations ((documentation "(super-task <task-sub> <task-super>) means
+that <task-sub> is performed in service of <task-super>. For example
+in an HTN planner, <task-sub> might appear in the expansion of <task-super>"))
+  )
+
+(defrelation sub-task
+  :is (:inverse super-task)
+  :annotations (|BinaryPredicate| |PlanActionRestrictionPredicate| 
+			     |PublicConstant|
+	      (documentation "(sub-task <task-super> <task-sub>) means
+that <task-sub> is performed in service of <task-super>. For example in
+an HTN planner, <task-sub> might appear in the expansion of
+<task-super>.
+
+This is a more specific relation than subEvents in the HPKB ontology,
+but it is not linked because it can apply both to events
+(plan-task-templates) and event-types (plan-tasks) so syntactically it
+is not a subrelation of subEvents.")
+                (ikb-synonym sub-events)
+)
+  )
+
+(defconcept evaluation-structure
+  :is-primitive thing
+  :annotations (|IKBConstant|
+	       (documentation "An object used to hold the results
+of evaluating and critiquing a plan, objective or task..")))
+
+(defrelation evaluation
+  :range evaluation-structure
+  :annotations ((documentation "This relation provides an evaluation
+structure for some object that has been evaluated, for example a plan or
+task. This is more general than the criterionOfSuccess relation in the
+CPR ontology."))
+  )
+
+(defconcept comparison-structure
+  :is-primitive thing
+  :annotations (|IKBConstant|
+	       (documentation "An object that holds information
+used to compare a set of objects, for example the different candidate
+plans for some planning-problem."))
+  )
+
+(defrelation comparison
+  ;;:domain (:or planning-problem plan)
+  :range comparison-structure
+  :annotations ((documentation "This relation links a planning-problem
+or plan to the corresponding comparison structure if comparisons
+have been made on the sub-problems, candidate plans or sub-plans"))
+  )
+
+
+(defconcept resource-requirement
+  :is-primitive (:and thing
+		  (:the resource planning-resource)
+		  )
+  :annotations (|IKBConstant| |QuaternaryPredicate| |Role|
+			 |PurposefulAction| |TemporalThing|
+	       (documentation "A resource requirement that is made by a
+plan or plan task, which includes information about the resource
+required and may include further information such as the time interval
+over which the resource is required, the amount and/or state of the
+resource. The resource can be either a specific instance or a type.")))
+
+(defrelation required-resource
+  :domain (:or plan-task-description plan)
+  :range resource-requirement
+  :annotations ((documentation "Links a plan-task-description or plan to
+a resource-requirement implicated by the task or plan. This plays
+roughly the same role as resourceOfTask in the CPR ontology except that
+(1) it can apply to a task or plan, (2) the resource-requirement can
+specify more information such as required amount and time interval for
+requirement and (3) the resource is not required to be a physical thing.")) )
+
+(defrelation resource
+  :domain resource-requirement
+  :range planning-resource
+  :annotations (|ActorSlot| |IKBConstant| |PurposefulAction|
+		         |SomethingExisting|
+(documentation "Links a resource-requirement object
+to the resource or resource type that is required."))
+  )
+
+(defconcept planning-resource
+  :is-primitive thing
+  :annotations (|IKBConstant| |Role| |BinaryPredicate|
+			 |SomethingExisting|
+	       (documentation "Any object that is considered a resource
+in a planning domain. It could be a physical thing such as an F-15 or an
+abstract thing such as force ratio. Sometimes time can be considered a
+resource.")))

@@ -1,0 +1,120 @@
+<html>
+<head>
+<META HTTP-EQUIV="Expires" CONTENT="0">
+<script>
+var limit="0:30"
+if (document.images){
+  var parselimit=limit.split(":");
+  parselimit=parselimit[0]*60+parselimit[1]*1;
+  }
+function resubmit(val) {
+    var myform = eval("document.form"+val);
+    myform.submit();
+}
+function beginrefresh(){
+  if (!document.images)
+      return;
+   if (parselimit==1)
+      window.location.reload();
+   else {
+      parselimit-=1;
+      curmin=Math.floor(parselimit/60);
+      cursec=parselimit%60;
+      if (curmin!=0)
+         curtime=curmin+" minutes and "+cursec+" seconds left until page refresh!";
+      else
+         curtime=cursec+" seconds left until page refresh!";
+      window.status=curtime
+      setTimeout("beginrefresh()",1000)
+   }
+ }
+window.onload=beginrefresh;
+</script>
+</head>
+<table>
+<tr><td colspan=2>----Wed Mar  6 23:23:44 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>at institution</b></td><td>STANFORD-UNIVERSITY</td></tr>
+<tr><td><b>for user id</b></td><td>jeanoh@isi.edu</td></tr>
+<tr><td><b>with interest</b></td><td>DISTRIBUTED-OPERATING-SYSTEMS</td></tr>
+<tr><td><b>with interest</b></td><td></td></tr>
+<tr><td><b>with interest</b></td><td></td></tr>
+<tr><td><b>with interest</b></td><td></td></tr>
+<tr><td><b>with interest</b></td><td></td></tr>
+<tr><td><b>with interest</b></td><td></td></tr>
+<tr><td><b>with interest</b></td><td></td></tr>
+<tr><td><b>using combinator</b></td><td>OR</td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+<b>DAVID CHERITON, MARY GRAY BAKER, ARMANDO FOX, HECTOR GARCIA MOLINA, MENDEL ROSENBLUM, TERRY WINOGRAD, </b></td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1015485824)'></td></tr>
+</table><br>
+<form name='form1015485824' action="/cgi-bin/portal/agent-req.pl" target="_blank" method="post">
+<input type='hidden' name='val0' value='STANFORD-UNIVERSITY'>
+<input type='hidden' name='val1' value='jeanoh@isi.edu'>
+<input type='hidden' name='val2' value='DISTRIBUTED-OPERATING-SYSTEMS'>
+<input type='hidden' name='val3' value=''>
+<input type='hidden' name='val4' value=''>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='val7' value=''>
+<input type='hidden' name='val8' value=''>
+<input type='hidden' name='val9' value='OR'>
+<input type='hidden' name='agent' value='ISIMatchmaker'>
+<input type='hidden' name='email' value='jeanoh@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Wed Mar  6 23:20:42 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>at institution</b></td><td>INFORMATION-SCIENCES-INSTITUTE</td></tr>
+<tr><td><b>for user id</b></td><td>jeanoh@isi.edu</td></tr>
+<tr><td><b>with interest</b></td><td>ROBOTICS</td></tr>
+<tr><td><b>with interest</b></td><td></td></tr>
+<tr><td><b>with interest</b></td><td></td></tr>
+<tr><td><b>with interest</b></td><td></td></tr>
+<tr><td><b>with interest</b></td><td></td></tr>
+<tr><td><b>with interest</b></td><td></td></tr>
+<tr><td><b>with interest</b></td><td></td></tr>
+<tr><td><b>using combinator</b></td><td>OR</td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+<b>YOLANDA GIL, WEI MIN SHEN, </b></td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1015485642)'></td></tr>
+</table><br>
+<form name='form1015485642' action="/cgi-bin/portal/agent-req.pl" target="_blank" method="post">
+<input type='hidden' name='val0' value='INFORMATION-SCIENCES-INSTITUTE'>
+<input type='hidden' name='val1' value='jeanoh@isi.edu'>
+<input type='hidden' name='val2' value='ROBOTICS'>
+<input type='hidden' name='val3' value=''>
+<input type='hidden' name='val4' value=''>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='val7' value=''>
+<input type='hidden' name='val8' value=''>
+<input type='hidden' name='val9' value='OR'>
+<input type='hidden' name='agent' value='ISIMatchmaker'>
+<input type='hidden' name='email' value='jeanoh@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Thu Feb 21 15:46:23 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>institution</b></td><td>UNIVERSITY-OF-SOUTHERN-CALIFORNIA</td></tr>
+<tr><td><b>user id</b></td><td>jeanoh@isi.edu</td></tr>
+<tr><td><b>interest</b></td><td>KNOWLEDGE-ACQUISITION</td></tr>
+<tr><td><b>interest</b></td><td></td></tr>
+<tr><td><b>interest</b></td><td></td></tr>
+<tr><td><b>interest</b></td><td></td></tr>
+<tr><td><b>interest</b></td><td></td></tr>
+<tr><td><b>interest</b></td><td></td></tr>
+<tr><td><b>interest</b></td><td></td></tr>
+<tr><td><b>combinator</b></td><td>OR</td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+<b>THOMAS A RUSS, JEFF RICKEL, YOLANDA GIL, </b></td></tr>
+
+</table><br>
+</html>

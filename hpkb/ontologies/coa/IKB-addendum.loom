@@ -1,0 +1,230 @@
+;;; -*- Mode: Lisp; Package: CYC; Syntax: COMMON-LISP; Base: 10 -*-
+
+(in-package "CYC")
+
+
+;;; ******************** CONCEPTS ********************
+
+(DEFCONCEPT |ApplicationContext|
+  :IS-PRIMITIVE |Microtheory|
+  :ANNOTATIONS (|MicrotheoryType|
+                (DOCUMENTATION "Contexts which are persistent yet contain knowledge      specific to a certain application. An example would be      a context that contains all the meaning formulae and      other descriptions of the tables in a certain      database.")))
+
+(DEFCONCEPT |BlockingAnOpponent|
+  :IS-PRIMITIVE (:and |HumanActivity| |PurposefulAction|)
+  :ANNOTATIONS (|ScriptType|
+                (DOCUMENTATION "Placing yourself in front of an opponent, thereby getting      in his way and limiting his movements, e.g. in a race, or      being screened in basketball.")))
+
+(DEFCONCEPT |ConstrainingEvent|
+  :IS-PRIMITIVE (:and |PhysicalEvent| |CompositePhysicalAndMentalEvent|)
+  :ANNOTATIONS (|ScriptType|
+                |TemporalObjectType|
+                |DefaultDisjointScriptType|
+                (DOCUMENTATION "Constrainment events involve the constrainment      (blocking, containing, guiding etc.) of one body (solid      or fluid) by another.")))
+
+(DEFCONCEPT |Event-Organized|
+  :IS-PRIMITIVE (:and |Event| |CompositePhysicalAndMentalEvent| |HumanActivity|)
+  :ANNOTATIONS (|TemporalObjectType|
+                |ScriptType|
+                (DOCUMENTATION "A collection of individual events. An event is an      instance of Event-Organized if it is planned and      directed by some instance of Person or Organization.      Elements of MusicalPerformance, Trial, and Bombing      would all be instances. Elements of Earthquake and      Breathing would not.")))
+
+(DEFCONCEPT |GeographicalThing|
+  :IS-PRIMITIVE |SpatialThing-Localized|
+  :ANNOTATIONS (|ObjectType|
+                (DOCUMENTATION "This collection may be thought of as consisting of all the      entities which are localizable within the context of a      geography, in the sense that they might plausibly be      represented on a map. This includes both #$PartiallyTangible      entities like GeographicalRegions, and also entities that may      be wholly Intangible, like territorial borders and      boundaries, LatitudeLines and LongitudeLines, trajectories of      missiles and courses of ships, and the Equator.")))
+
+(DEFCONCEPT |HarmingSomething|
+  :IS-PRIMITIVE |Action|
+  :ANNOTATIONS (|ScriptType| |TemporalObjectType| |DefaultDisjointScriptType|))
+
+(DEFCONCEPT |HPKBDisplayConstant|
+  :IS-PRIMITIVE |Cyc_Thing|
+  :ANNOTATIONS (|Cyc_Collection|
+                (DOCUMENTATION "Constants in this collection are included in the      documentation vocab files for HPKB evaluators.")))
+
+(DEFCONCEPT |IKBConstant|
+  :IS-PRIMITIVE |HPKBDisplayConstant|
+  :ANNOTATIONS (|Cyc_Collection|))
+
+(DEFCONCEPT |LeavingAPlace|
+  :IS-PRIMITIVE (:and |TransferOut|
+                      |Translation-SingleTrajectory|
+                      |Translation-LocationChange|)
+  :ANNOTATIONS (|TemporalObjectType|
+                |ScriptType|
+                (DOCUMENTATION "A physical transfer in which the performer moves to      a location other than that where they started from. ")))
+
+(DEFCONCEPT |MilitaryAttack|
+  :IS-PRIMITIVE (:and |Event-Organized|
+                      |MilitaryEvent|
+                      |AttackOnTangible|
+                      |ViolentAction|)
+  :ANNOTATIONS (|IKBConstant|
+                |TemporalObjectType|
+                |ScriptType|
+                (DOCUMENTATION "The collection of all instances of #$MilitaryEvent      that are also considered to be instances of      #$AttackOnTangible. The characteristics that define a      military 'attack' are somewhat loose: military units      are involved, deadly force is involved, and the event      in question is of an immediately 'offensive' character      (although an attack can be a #$subEvents in the course of      either a 'defensive' or 'offensive' #$MilitaryEvent).      Both instances of #$MilitaryTask and #$MilitaryOperation      can be considered instances of #$MilitaryAttack, and for      this reason, #$MilitaryAttack is not a specialization of      either collection. Instances may be complex      ScriptTypes: that is, they may involve more than just      physical attack events and may include a measure of      planning and preparation.")))
+
+(DEFCONCEPT |ModernMilitaryUnit-Deployable|
+  :IS-PRIMITIVE |ModernMilitaryOrganization|
+  :ANNOTATIONS (|ConventionalClassificationType|
+                |ExistingObjectType|
+                (DOCUMENTATION "The collection of all military units capable of      being deployed to the field in combat conditions for      purposes of reconnaissance, combat, or combat support.      It also includes any military units that are ordinarily      equipped to be sent to far-away places on short      notice.")))
+
+(DEFCONCEPT |Plan|
+  :IS-PRIMITIVE |SupposedToBeMicrotheory|
+  :ANNOTATIONS (|MicrotheoryType|
+                |ObjectType|
+                (DOCUMENTATION "Supposed to be mts which talk about things that are      supposed to happen.")))
+
+(DEFCONCEPT |ProtectingSomething|
+  :IS-PRIMITIVE |TakingCareOfSomething|
+  :ANNOTATIONS (|ScriptType| |TemporalObjectType| |DefaultDisjointScriptType|))
+
+(DEFCONCEPT |StructureMicrotheory|
+  :IS-PRIMITIVE |Microtheory|
+  :ANNOTATIONS (|IKBConstant|
+                |MicrotheoryType|
+                (DOCUMENTATION "StructureMicrotheory is a class of microtheories each of which      define the structure of some conplex object. You can think of      this kind of microtheory as a basic template.")))
+
+(DEFCONCEPT |TakingCareOfSomething|
+  :IS-PRIMITIVE (:and |HumanActivity|
+                      |ActionOnObject|
+                      |CompositePhysicalAndMentalEvent|
+                      |PurposefulAction|)
+  :ANNOTATIONS (|ScriptType|
+                |TemporalObjectType|
+                |DefaultDisjointScriptType|
+                (DOCUMENTATION "A collection of events.  Each element of #$TakingCareOfSomething is a purposeful action in which an agent acts to maintain, preserve, or promote the health or good condition of someone or something (the #$objectTakenCareOf or #$objectActedOn).  Examples of #$TakingCareOfSomething include Mary working in her garden last Saturday, or Jeff putting anti-freeze in his car, as well as my mom nursing me through the measles, or what happens every day at my nephew's child care center.")))
+
+
+
+;;; ******************** FUNCTIONS AND RELATIONS ********************
+
+(DEFRELATION |armamentOfUnit|
+  :ARITY 2
+  :DOMAIN |ModernMilitaryOrganization|
+  :RANGE |Weapon|
+  :ANNOTATIONS (|IKBConstant|
+                |BinaryPredicate|
+                (DOCUMENTATION "This predicate is used to assert that a particular unit is armed with      a particular weapon. It is like typicalArmamentOfUnitType, but with      both arguments given as instances rather than as collections.")))
+
+(DEFRELATION |causes-SitSitType|
+  :ARITY 2
+  :DOMAIN |Situation|
+  :RANGE (:and |Cyc_Collection| (:FILLED-BY SUPERRELATIONS |Situation|))
+  :ANNOTATIONS (|BinaryPredicate|
+                |IKBConstant|
+                (DOCUMENTATION "(#$causes-SitSitType CAUSING-SIT EFFECTED-SITTYPE) means that CAUSING-SIT will cause an instance of EFFECTED-SITTYPE to come about.")))
+
+(DEFPROPERTY |CenterFn| :ARITY 1 :DOMAIN |SpatialThing| :ANNOTATIONS
+ (|ReifiableFunction| |Cyc_Unary-Function|
+  (DOCUMENTATION "(CenterFn OBJ) denotes the point at the spatial center of an object.      Formally, this can be defined as a point such that the average of the      distances from this point to all points which are 'in' (see spatiallySubsumes)      OBJ is minimized. Note that for objects whose density is not homogeneous      (CenterFn OBJ) may be different from the 'center of gravity' of the object.      Also, for objects which aren't spatially continuous (see      spatiallyContinuous), (CenterFn OBJ) is not necessarily 'in' (see      spatiallySubsumes) OBJ. For example, the centroid of a      non-spatially-continuous object such as a flock of seagulls is not necessarily      a point in one of the seagulls.")))
+
+(DEFRELATION |directionBetweenObjects|
+  :ARITY 3
+  :DOMAINS (|SpatialThing| |SpatialThing|)
+  :RANGE |UnitVectorInterval|
+  :ANNOTATIONS (|PublicConstant|
+                |TernaryPredicate|
+                (DOCUMENTATION "(directionBetweenObjects OBJ1 OBJ2 UVI) means that UVI, an      element of UnitVectorInterval, is a vector or set of vectors which      point(s) from a point (or set of points) in OBJ1 to a point (or set of      points) in OBJ2. See also VectorFromToFn which is roughly      interchangeable with directionBetweenObjects.      directionBetweenObjects has the advantage that an arbitrarily precise      direction may be specified. VectorFromToFn saves the user from doing      the labor involved with reifiing and from having to know the direction      between OBJ1 and OBJ2.")))
+
+(DEFRELATION |formsBorderPart|
+  :ARITY 2
+  :IS-PRIMITIVE |spatiallyIntersects|
+  :DOMAIN |SpatialThing|
+  :RANGE |SpatialThing|
+  :ANNOTATIONS (|BinaryPredicate|
+                (DOCUMENTATION "This predicate is used to assert that a particular      #$SpatialThing-Localized is part of the conventional      abstraction that is a #$GeopoliticalBorder. (#$formsBorderPart      PART WHOLE) means that all of the points along the      border-part PART are also points along the border WHOLE. We      would use this predicate, eg, to say that the border between      Texas and Mexico forms part of the border of the United      States: (#$formsBorderPart (#$BorderBetweenFn #$Texas-State #$Mexico)      (#$BorderFn #$UnitedStatesOfAmerica)).")))
+
+(DEFRELATION |modalInArg|
+  :ARITY 2
+  :DOMAIN |Cyc_Predicate|
+  :RANGE |Cyc_Integer|
+  :ANNOTATIONS (|BinaryPredicate|))
+
+(DEFRELATION |objectFollowedInMovement|
+  :ARITY 2
+  :IS-PRIMITIVE (:and |preActors| |postActors|)
+  :DOMAIN |MovementEvent|
+  :RANGE |SpatialThing|
+  :ANNOTATIONS (|IKBConstant|
+                |ActorSlot|
+                (DOCUMENTATION "(#$objectFollowedInMovement MOVE OBJ) means that the #$objectMoving of MOVE is following OBJ during MOVE. ")))
+
+(DEFRELATION |preconditionFor-PropSit|
+  :ARITY 2
+  :DOMAIN |CycFormula|
+  :RANGE |Situation|
+  :ANNOTATIONS (|BinaryPredicate|
+                (DOCUMENTATION "The predicate #$preconditionFor-PropSit is used to      state a necessary precondition for a certain event or      situation. (#$preconditionFor-PropSit PROP SIT) means     that unless the proposition PROP is true, the Situation      SIT won't obtain.")))
+
+(DEFPROPERTY |RemovalFn| :ARITY 1 :DOMAIN
+ (:AND |TemporalStuffType| (:FILLED-BY SUPERRELATIONS |PartiallyTangible|))
+ :ANNOTATIONS
+ (|Cyc_Unary-Function| |CollectionDenotingFunction|
+  (DOCUMENTATION "(#$RemovalFn ?OBJ-TYPE) denotes the class of #$RemovingSomething instances in which some instance of ?OBJ-TYPE is removed from its previous position.")))
+
+(DEFRELATION |sitResultsInProp|
+  :ARITY 4
+  :DOMAINS (|CycFormula|
+            |CycFormula|
+            (:AND |SituationType|
+             (:FILLED-BY SUPERRELATIONS |Situation-Temporal|)))
+  :RANGE |Cyc_Predicate|
+  :ANNOTATIONS (|QuaternaryPredicate|
+                (DOCUMENTATION "(#$sitResultsInProp FORMULA1 FORMULA2 SIT-TYPE PRED)      means that FORMULA2 becomes true when FORMULA1 becomes      true, where FORMULA1 contains a clause of the form      (thereExists ?SIT SIT-TYPE), and where ?SIT changes      some assertion of the form (PRED ...).")))
+
+(DEFRELATION |SituationFn|
+  :ARITY 2
+  :DOMAIN |CycSystemVariable|
+  :RANGE |CycFormula|
+  :ANNOTATIONS (|BinaryFunction|
+                |CollectionDenotingFunction|
+                |ScopingRelation|
+                (DOCUMENTATION "#$SituationFn is a Cyc function. (#$SituationFn ?VAR      ?FORM) denotes a collection of situations, whose      instances satisfy ?VAR as used in the #$CycFormula ?FORM.      ?FORM will contain ?VAR as a free variable, and may      contain other variables. For now (11/97), quantification      of all other variables must be explicit, and we do not      allow variables bound outside of SituationFn to appear      within ?FORM. For example, ?FORM might describe the      general situation in which a person speaks to their      boss: (#$SituationFn ?SPK (#$thereExists ?PER (#$thereExists      ?BOSS (#$and (#$isa ?SPK Speaking) (#$senderOfInfo ?SPK ?PER)      (#$communicationTarget ?SPK ?BOSS) (#$boss ?PER ?BOSS))))).      Every collection denoted by a #$SituationFn expression is      an element of (#$isa) SituationType.")))
+
+(DEFRELATION |typicalArmamentOfUnit|
+  :ARITY 2
+  :DOMAIN |ModernMilitaryOrganization|
+  :RANGE (:and |Cyc_Collection| (:FILLED-BY SUPERRELATIONS |Weapon|))
+  :ANNOTATIONS (|IKBConstant|
+                |BinaryPredicate|
+                (DOCUMENTATION "This predicate is used to assert that a particular unit is armed with      a particular kind of weapon. It is like typicalArmamentOfUnitType,      but with the first argument given as an instance rather than a      collection.")))
+
+(DEFRELATION |typicalArmamentOfUnitType|
+  :ARITY 2
+  :DOMAIN (:and |Cyc_Collection|
+                (:FILLED-BY SUPERRELATIONS |ModernMilitaryOrganization|))
+  :RANGE (:and |Cyc_Collection| (:FILLED-BY SUPERRELATIONS |Weapon|))
+  :ANNOTATIONS (|IKBConstant|
+                |BinaryPredicate|
+                (DOCUMENTATION "(typicalArmamentOfUnitType UNITTYPE ARMSTYPE) means      that individual military units of type UNITTYPE typically have one or      more instances of ARMSTYPE as weapons or armaments.")))
+
+
+
+;;; ******************** GENERAL ASSERTIONS ********************
+
+(TELL
+ (:ABOUT |MilitaryForceStructureMt| |StructureMicrotheory|
+  (DOCUMENTATION "This microtheory was created to house the modified      representation of the model order of battle developed      by Peterson and Andersen. Since the modifications      involved are in some cases nontrivial, and since the KE      is being done by conventional methods, it was not      considered appropriate to make this a      #$KnowledgeSource-Represented. Note that most      microtheories requiring access to the      #$MilitaryForceStructureMt should have it through the      #$ModernMilitaryMt, which has access to the      #$MilitaryForceStructureMt, the #$ModernMilitaryVehiclesMt,      and the #$ModernMilitaryWeaponsMt.")))
+
+(TELL (|genlMt| |MilitaryForceStructureMt| |HumanActivitiesMt|))
+
+(TELL (|genlMt| |MilitaryForceStructureMt| |OrganizationMt|))
+
+(TELL (|genlMt| |MilitaryForceStructureMt| |BaseKB|))
+
+(TELL
+ (:ABOUT |ModalityMt| |Microtheory|
+  (DOCUMENTATION "This #$Microtheory was originally created by MingXu to house a theory for reasoning with 'modal' predicates--i.e., predicates which take propositions as arguments.")))
+
+(TELL (|genlMt| |ModalityMt| |BaseKB|))
+
+(TELL
+ (:ABOUT |OrganizationMt| |GeneralMicrotheory|
+  (DOCUMENTATION "This microtheory assumes that organizations can be      appropriately thought of as IntelligentAgents.")))
+
+(TELL (|genlMt| |OrganizationMt| |HumanSocialLifeMt|))
+
+(TELL (|genlMt| |OrganizationMt| |BaseKB|))
+

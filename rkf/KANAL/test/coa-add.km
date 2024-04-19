@@ -1,0 +1,19 @@
+(every Military-Unit has
+     (location ((a Place with 
+                   (nuSketch-coordinate ((the nuSketch-coordinate of Self)))))))
+
+(every Destroy-Unit has
+     (first-subevent ((if
+			(not (oneof (the agent of Self) 
+                                          where (It isa Artillery-Unit)))
+                       then
+                          (a Move-Military-Unit with
+                            (object ((the agent of Self)))
+                            (destination ((the location of (the object of Self)))))))))
+
+(every Follow-and-Support has
+	(destination ((if (has-value (the base of Self))
+			then (the destination of (the base of Self))
+		        else (if ((has-value (the location of Self))
+                                  and ((the location of Self) isa Military-Unit))
+                               then (the destination of (the location of Self)))))))

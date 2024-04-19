@@ -1,0 +1,173 @@
+====================================================================
+====================================================================
+
+   INTERESTMATCHER AGENT SPECS FOR "MEET THE ELVES" PHOSPHORUS PORTAL
+
+                       Version 0.1  (1/9/02)
+====================================================================
+
+
+====================================================================
+AGENT DESCRIPTION:
+
+The agent takes an institution that the user is visiting and a set of 
+interests of the user, and returns a set of people with similar interests.
+
+====================================================================
+
+INPUT PARAMETER SPECS 
+
+The following spec helps the current portal acquire the set of inputs
+required, further extensions will be more adequate for the kind of
+data input required by this agent.  In particular, the current poral 
+interface does not support selection of elements from sets or trees.  
+
+The user will be able to specify up to 8 interests, each selected 
+independently from a list (flattened version of the interests
+tree structure).  The order of the interests does not matter. 
+Names of institutions or interests are not case sensitive.
+Some parameters may be empty.
+
+  - institution: an instution that the user is visiting.  A string.  
+     Must be one of a prespecified set.
+  - interest: a string.  One of a prespecified set of interests.
+  - combinator: a string, one of "OR", "AND".
+  - email: the user unique id as his/her email address.
+
+====================================================================
+REPLIES FROM THE AGENT
+
+The agent will send a single reply to a given request.  The 
+reply contains a list of names.
+The portal will treat it as a string.  Teamcore agents will receive 
+the same messages and will be responsible for notifying the user 
+in an appropriate manner and device.
+
+====================================================================
+
+ERROR REPORTS
+
+Users may make errors when they specify the arguments.
+Some errors will be detected in the interface, since each
+input parameter will be described in a schema/ontology
+and this information will be used to check the parameters.
+For example, the interface will check that the institution
+is chosen from the pre-specified list.
+
+Other errors cannot or should not be checked by the interface 
+in practice.  They will be errors or not depending on what the 
+agent chooses to do with the inputs provided.  For
+example, if the user repeats an interest more than one time.  
+The agent can choose to treat this as an error and report it back 
+to the user in an error message (the format of these messages is shown below).
+The error message will not be interpreted by the portal, it will be 
+treated as a string and shown to the user.
+
+Other errors may not be detected by the agent, and in those cases
+the agent will send no replies.
+
+====================================================================
+
+SAMPLE MESSAGES
+
+Below are examples of the messages that the Phosphorus Portal 
+exchanges with the Interest Matcher agent.  
+
+By convention, the KQML message tag will be a string containing the content.
+The string contains line breaks in the examples here for readability 
+but will not contain line breaks in the actual messages. 
+
+Sample request message:
+
+(find-match
+   :sender PhosphorusPortal
+   :receiver ISIMatchmaker
+   :language XML
+   :reply-with "<institution>INFORMATION-SCIENCES-INSTITUTE</institution>
+                <interest>automated-planning</interest>
+                <interest>intelligent-agents</interest>
+                <interest>knowledge-representation</interest>
+                <interest>ontologies</interest>
+                <interest>robotics</interest>
+                <interest></interest>
+                <interest></interest>
+                <interest></interest>
+                <combinator>OR</combinator>
+                <email>jhendler@darpa.mil</email>"
+   :content ("<institution>INFORMATION-SCIENCES-INSTITUTE</institution>
+             <interest>automated-planning</interest>
+             <interest>intelligent-agents</interest>
+             <interest>knowledge-representation</interest>
+             <interest>ontologies</interest>
+             <interest>robotics</interest>
+             <interest></interest>
+             <interest></interest>
+             <interest></interest>
+             <combinator>OR</combinator>
+             <email>jhendler@darpa.mil</email>"
+			 )
+			)
+
+
+Sample reply:
+
+(reply
+  :sender ISIMatchmaker
+  :receiver PhosphorusPortal
+  :language XML
+  :in-reply-to "<institution>INFORMATION-SCIENCES-INSTITUTE</institution>
+                <interest>automated-planning</interest>
+                <interest>intelligent-agents</interest>
+                <interest>knowledge-representation</interest>
+                <interest>ontologies</interest>
+                <interest>robotics</interest>
+                <interest></interest>
+                <interest></interest>
+                <interest></interest>
+                <combinator>OR</combinator>
+                <email>jhendler@darpa.mil</email>"
+  :content ("<persons><person>Craig Knoblock</person><person>Tom Russ</person></persons>"
+            ))
+
+If no matches are found:
+    
+(reply
+  :sender ISIMatchmaker
+  :receiver PhosphorusPortal
+  :language XML
+  :in-reply-to "<institution>INFORMATION-SCIENCES-INSTITUTE</institution>
+                <interest>PROGRAM-VERIFICATION </interest>
+                <interest>NEURAL-NETWORKS</interest>
+                <interest></interest>
+                <interest></interest>
+                <interest></interest>
+                <interest></interest>
+                <interest></interest>
+                <interest></interest>
+                <combinator>OR</combinator>
+                <email>feather@aig.jpl.gov</email>"
+  :content ("<persons></persons>"))
+
+
+Sample error message (also a reply) when the agent considers the parameters provided by 
+the user as incorrect:
+
+(error
+  :sender ISIMatchmaker
+  :receiver PhosphorusPortal
+  :language XML  
+  :in-reply-to "<institution>INFORMATION-SCIENCES-INSTITUTE</institution>
+                <interest>ontologies</interest>
+                <interest></interest>
+                <interest></interest>
+                <interest></interest>
+                <interest></interest>
+                <interest></interest>
+                <interest></interest>
+                <interest></interest>
+                <combinator>OR</combinator>
+                <email>me@isi.mil</email>"
+  :content ("<error><type>Invalid input</type><attr>email</attr></error>")
+
+
+

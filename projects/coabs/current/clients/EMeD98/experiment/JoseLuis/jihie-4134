@@ -1,0 +1,416 @@
+select: add new button
+   at Tue Jun 08 16:13:45 PDT 1999
+
+ done editing:((name find-distance)
+ (primitivep t)
+ (capability (find
+                (from (?from is (inst-of location)))
+                (to (?to is (inst-of location)))
+                ))
+ (result-type (inst-of number))
+ (method (find-distance ?from ?to))
+)
+   at Tue Jun 08 16:13:56 PDT 1999
+
+select: add new button
+   at Tue Jun 08 16:14:05 PDT 1999
+
+ done editing:((name find-distance)
+ (primitivep t)
+ (capability (find
+                (from (?from is (inst-of location)))
+                (to (?to is (inst-of location)))
+                ))
+ (result-type (inst-of number))
+ (method (find-distance ?from ?to))
+)
+   at Tue Jun 08 16:14:15 PDT 1999
+
+added New method:((name find-distance)
+ (primitivep t)
+ (capability (find
+                (from (?from is (inst-of location)))
+                (to (?to is (inst-of location)))
+                ))
+ (result-type (inst-of number))
+ (method (find-distance ?from ?to))
+)
+   at Tue Jun 08 16:14:16 PDT 1999
+
+check: All Agenda
+   at Tue Jun 08 16:14:16 PDT 1999
+
+check: Method Sub-Method Relation
+   at Tue Jun 08 16:14:16 PDT 1999
+
+select: add new button
+   at Tue Jun 08 16:14:51 PDT 1999
+
+ done editing:((name estimate-time-to-move-asset)
+ (capability (estimate
+	      (obj (?t is (spec-of time)))
+	      (for (?s is (inst-of move-asset)))
+	      ))
+ (result-type (inst-of number))
+ (method 
+  (add (obj (find (obj (spec-of maximum))
+		  (of (estimate (obj (spec-of opcon-time))
+				(for (asset-of ?s))))))
+       (to (find (obj (spec-of maximum))
+		 (of (estimate (obj (spec-of moving-time))
+			       (for (asset-of ?s))))))
+       ))
+ )
+   at Tue Jun 08 16:15:04 PDT 1999
+
+added New method:((name estimate-time-to-move-asset)
+ (capability (estimate
+	      (obj (?t is (spec-of time)))
+	      (for (?s is (inst-of move-asset)))
+	      ))
+ (result-type (inst-of number))
+ (method 
+  (add (obj (find (obj (spec-of maximum))
+		  (of (estimate (obj (spec-of opcon-time))
+				(for (asset-of ?s))))))
+       (to (find (obj (spec-of maximum))
+		 (of (estimate (obj (spec-of moving-time))
+			       (for (asset-of ?s))))))
+       ))
+ )
+   at Tue Jun 08 16:15:04 PDT 1999
+
+check: All Agenda
+   at Tue Jun 08 16:15:04 PDT 1999
+
+check: Method Sub-Method Relation
+   at Tue Jun 08 16:15:05 PDT 1999
+
+select: add new button
+   at Tue Jun 08 16:15:18 PDT 1999
+
+ done editing:((name estimate-asset-opcon-time  )
+ (capability (estimate (obj (?ot is (spec-of opcon-time))) 
+		       (for (?a is (inst-of asset))))) 
+ (result-type (inst-of number))
+ (method   
+  (if (is-it-a (obj ?a)
+	       (of (spec-of corps-level-asset)))
+      then 4
+      else 2))
+)
+   at Tue Jun 08 16:15:30 PDT 1999
+
+added New method:((name estimate-asset-opcon-time  )
+ (capability (estimate (obj (?ot is (spec-of opcon-time))) 
+		       (for (?a is (inst-of asset))))) 
+ (result-type (inst-of number))
+ (method   
+  (if (is-it-a (obj ?a)
+	       (of (spec-of corps-level-asset)))
+      then 4
+      else 2))
+)
+   at Tue Jun 08 16:15:30 PDT 1999
+
+check: All Agenda
+   at Tue Jun 08 16:15:30 PDT 1999
+
+check: Method Sub-Method Relation
+   at Tue Jun 08 16:15:31 PDT 1999
+
+select: modify button
+   at Tue Jun 08 16:15:39 PDT 1999
+
+ done editing:((name estimate-time-to-move-asset)
+ (capability (estimate
+	      (obj (?t is (spec-of time)))
+	      (for (?s is (inst-of move-asset)))
+	      ))
+ (result-type (inst-of number))
+ (method 
+  (add (obj (find (obj (spec-of maximum))
+		  (of (estimate (obj (spec-of opcon-time))
+				(for (asset-of ?s))))))
+       (to (find (obj (spec-of maximum))
+		 (of (estimate (obj (spec-of moving-time))
+			       (for (asset-of ?s))
+			       (to (destination ?s))))))
+				    
+       ))
+ )
+   at Tue Jun 08 16:15:56 PDT 1999
+
+modified method:((name estimate-time-to-move-asset)
+ (capability (estimate
+	      (obj (?t is (spec-of time)))
+	      (for (?s is (inst-of move-asset)))
+	      ))
+ (result-type (inst-of number))
+ (method 
+  (add (obj (find (obj (spec-of maximum))
+		  (of (estimate (obj (spec-of opcon-time))
+				(for (asset-of ?s))))))
+       (to (find (obj (spec-of maximum))
+		 (of (estimate (obj (spec-of moving-time))
+			       (for (asset-of ?s))
+			       (to (destination ?s))))))
+				    
+       ))
+ )
+   at Tue Jun 08 16:15:56 PDT 1999
+
+check: All Agenda
+   at Tue Jun 08 16:15:56 PDT 1999
+
+check: Method Sub-Method Relation
+   at Tue Jun 08 16:15:57 PDT 1999
+
+select: add new button
+   at Tue Jun 08 16:16:15 PDT 1999
+
+ done editing:((name estimate-asset-moving-time  )
+ (capability (estimate (obj (?mt is (spec-of moving-time)))
+		       (for (?a is (inst-of asset))) 
+		       (to (?to is (inst-of location))))) 
+ (result-type (inst-of number))
+ (method 
+  (divide (obj (find (from (object-found-in-location ?a))
+		     (to ?to)))
+	 (by  60000)))
+ )
+   at Tue Jun 08 16:16:34 PDT 1999
+
+added New method:((name estimate-asset-moving-time  )
+ (capability (estimate (obj (?mt is (spec-of moving-time)))
+		       (for (?a is (inst-of asset))) 
+		       (to (?to is (inst-of location))))) 
+ (result-type (inst-of number))
+ (method 
+  (divide (obj (find (from (object-found-in-location ?a))
+		     (to ?to)))
+	 (by  60000)))
+ )
+   at Tue Jun 08 16:16:34 PDT 1999
+
+check: All Agenda
+   at Tue Jun 08 16:16:34 PDT 1999
+
+check: Method Sub-Method Relation
+   at Tue Jun 08 16:16:36 PDT 1999
+
+check: Undefined Capabilities
+   at Tue Jun 08 16:16:50 PDT 1999
+
+select: show error button
+   at Tue Jun 08 16:17:42 PDT 1999
+
+checked error:((name estimate-asset-opcon-time  )
+ (capability (estimate (obj (?ot is (spec-of opcon-time))) 
+		       (for (?a is (inst-of asset))))) 
+ (result-type (inst-of number))
+ (method   
+  (if (is-it-a (obj ?a)
+	       (of (spec-of corps-level-asset)))
+      then 4
+      else 2))
+)
+   at Tue Jun 08 16:17:42 PDT 1999
+
+check: Describe PS Tree
+   at Tue Jun 08 16:17:58 PDT 1999
+
+ select: get ps tree success
+   at Tue Jun 08 16:17:59 PDT 1999
+
+ [ps-en1] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-PLAN)))
+[ps-en1] < (INST-OF NUMBER)
+   -[ps-an2: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-PLAN)))
+    [ps-an2: METHOD] < (INST-OF NUMBER)
+    [ps-en3] > (ADD (OBJ (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (WORKAROUND-OF (INST-OF WORKAROUND-PLAN))))))
+    [ps-en3]   (ADD (OBJ (SET-OF (INST-OF NUMBER))))
+    [ps-en3] < (INST-OF NUMBER)
+     [ps-en4] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (WORKAROUND-OF (INST-OF WORKAROUND-PLAN))))
+     [ps-en4]   (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF WORKAROUND-STEP))))
+     [ps-en4] < (SET-OF (INST-OF NUMBER))
+      [ps-en5] > (WORKAROUND-OF (INST-OF WORKAROUND-PLAN))
+      [ps-en5] < (SET-OF (INST-OF WORKAROUND-STEP))
+       -[ps-an6: RETRIEVE-R] > (WORKAROUND-OF (INST-OF WORKAROUND-PLAN))
+        [ps-an6: RETRIEVE-R] < (SET-OF (INST-OF WORKAROUND-STEP))
+      -[ps-an8: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF WORKAROUND-STEP))))
+       [ps-an8: SET]   (APPEND (SET-OF (INST-OF NUMBER)))
+       [ps-an8: SET] < (SET-OF (INST-OF NUMBER))
+       [ps-en9] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-STEP)))
+       [ps-en9] < (SET-OF (INST-OF NUMBER))
+        -[ps-an12: COVERING] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-STEP)))
+         [ps-an12: COVERING]   (APPEND (INST-OF NUMBER) (INST-OF NUMBER) 1.0 1.5)
+         [ps-an12: COVERING] < (SET-OF (INST-OF NUMBER))
+         [ps-en13] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF MOVE-ASSET)))
+         [ps-en13] < (INST-OF NUMBER)
+          -[ps-an17: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF MOVE-ASSET)))
+           [ps-an17: METHOD] < (INST-OF NUMBER)
+           [ps-en18] > (ADD (OBJ (FIND (OBJ (SPEC-OF MAXIMUM)) (OF (ESTIMATE (OBJ (SPEC-OF OPCON-TIME)) (FOR (ASSET-OF (INST-OF MOVE-ASSET))))))) (TO (FIND (OBJ (SPEC-OF MAXIMUM)) (OF (ESTIMATE (OBJ (SPEC-OF MOVING-TIME)) (FOR (ASSET-OF (INST-OF MOVE-ASSET))) (TO (DESTINATION (INST-OF MOVE-ASSET))))))))
+           [ps-en18]   (ADD (OBJ (INST-OF NUMBER)) (TO (INST-OF NUMBER)))
+           [ps-en18] < (INST-OF NUMBER)
+            [ps-en19] > (FIND (OBJ (SPEC-OF MAXIMUM)) (OF (ESTIMATE (OBJ (SPEC-OF MOVING-TIME)) (FOR (ASSET-OF (INST-OF MOVE-ASSET))) (TO (DESTINATION (INST-OF MOVE-ASSET))))))
+            [ps-en19]   (FIND (OBJ (SPEC-OF MAXIMUM)) (OF (SET-OF (INST-OF NUMBER))))
+            [ps-en19] < (INST-OF NUMBER)
+             [ps-en21] > (ESTIMATE (OBJ (SPEC-OF MOVING-TIME)) (FOR (ASSET-OF (INST-OF MOVE-ASSET))) (TO (DESTINATION (INST-OF MOVE-ASSET))))
+             [ps-en21]   (ESTIMATE (OBJ (SPEC-OF MOVING-TIME)) (FOR (SET-OF (INST-OF ASSET))) (TO (INST-OF LOCATION)))
+             [ps-en21] < (SET-OF (INST-OF NUMBER))
+              [ps-en22] > (DESTINATION (INST-OF MOVE-ASSET))
+              [ps-en22] < (INST-OF LOCATION)
+               -[ps-an24: RETRIEVE-R] > (DESTINATION (INST-OF MOVE-ASSET))
+                [ps-an24: RETRIEVE-R] < (INST-OF LOCATION)
+              [ps-en23] > (ASSET-OF (INST-OF MOVE-ASSET))
+              [ps-en23] < (SET-OF (INST-OF ASSET))
+               -[ps-an25: RETRIEVE-R] > (ASSET-OF (INST-OF MOVE-ASSET))
+                [ps-an25: RETRIEVE-R] < (SET-OF (INST-OF ASSET))
+              -[ps-an27: SET] > (ESTIMATE (OBJ (SPEC-OF MOVING-TIME)) (FOR (SET-OF (INST-OF ASSET))) (TO (INST-OF LOCATION)))
+               [ps-an27: SET]   (APPEND (INST-OF NUMBER))
+               [ps-an27: SET] < (SET-OF (INST-OF NUMBER))
+               [ps-en28] > (ESTIMATE (OBJ (SPEC-OF MOVING-TIME)) (FOR (INST-OF ASSET)) (TO (INST-OF LOCATION)))
+               [ps-en28] < (INST-OF NUMBER)
+                -[ps-an29: METHOD] > (ESTIMATE (OBJ (SPEC-OF MOVING-TIME)) (FOR (INST-OF ASSET)) (TO (INST-OF LOCATION)))
+                 [ps-an29: METHOD] < (INST-OF NUMBER)
+                 [ps-en30] > (DIVIDE (OBJ (FIND (FROM (OBJECT-FOUND-IN-LOCATION (INST-OF ASSET))) (TO (INST-OF LOCATION)))) (BY 60000))
+                 [ps-en30]   (DIVIDE (OBJ (INST-OF NUMBER)) (BY 60000))
+                 [ps-en30] < (INST-OF NUMBER)
+                  [ps-en31] > (FIND (FROM (OBJECT-FOUND-IN-LOCATION (INST-OF ASSET))) (TO (INST-OF LOCATION)))
+                  [ps-en31]   (FIND (FROM (INST-OF LOCATION)) (TO (INST-OF LOCATION)))
+                  [ps-en31] < (INST-OF NUMBER)
+                   [ps-en32] > (OBJECT-FOUND-IN-LOCATION (INST-OF ASSET))
+                   [ps-en32] < (INST-OF LOCATION)
+                    -[ps-an33: RETRIEVE-R] > (OBJECT-FOUND-IN-LOCATION (INST-OF ASSET))
+                     [ps-an33: RETRIEVE-R] < (INST-OF LOCATION)
+                   -[ps-an34: METHOD] > (FIND (FROM (INST-OF LOCATION)) (TO (INST-OF LOCATION)))
+                    [ps-an34: METHOD] < (INST-OF NUMBER)
+                  -[ps-an35: METHOD] > (DIVIDE (OBJ (INST-OF NUMBER)) (BY 60000))
+                   [ps-an35: METHOD] < (INST-OF NUMBER)
+             -[ps-an36: METHOD] > (FIND (OBJ (SPEC-OF MAXIMUM)) (OF (SET-OF (INST-OF NUMBER))))
+              [ps-an36: METHOD] < (INST-OF NUMBER)
+            [ps-en20] > (FIND (OBJ (SPEC-OF MAXIMUM)) (OF (ESTIMATE (OBJ (SPEC-OF OPCON-TIME)) (FOR (ASSET-OF (INST-OF MOVE-ASSET))))))
+            [ps-en20]   (FIND (OBJ (SPEC-OF MAXIMUM)) (OF (SET-OF (INST-OF NUMBER))))
+            [ps-en20] < (INST-OF NUMBER)
+             [ps-en37] > (ESTIMATE (OBJ (SPEC-OF OPCON-TIME)) (FOR (ASSET-OF (INST-OF MOVE-ASSET))))
+             [ps-en37]   (ESTIMATE (OBJ (SPEC-OF OPCON-TIME)) (FOR (SET-OF (INST-OF ASSET))))
+             [ps-en37] < (SET-OF (INST-OF NUMBER))
+              [ps-en23] > (ASSET-OF (INST-OF MOVE-ASSET))
+              [ps-en23] < (SET-OF (INST-OF ASSET))
+               -[ps-an25: RETRIEVE-R] > (ASSET-OF (INST-OF MOVE-ASSET))
+                [ps-an25: RETRIEVE-R] < (SET-OF (INST-OF ASSET))
+              -[ps-an39: SET] > (ESTIMATE (OBJ (SPEC-OF OPCON-TIME)) (FOR (SET-OF (INST-OF ASSET))))
+               [ps-an39: SET]   (APPEND (INST-OF NUMBER))
+               [ps-an39: SET] < (SET-OF (INST-OF NUMBER))
+               [ps-en40] > (ESTIMATE (OBJ (SPEC-OF OPCON-TIME)) (FOR (INST-OF ASSET)))
+               [ps-en40] < (INST-OF NUMBER)
+                -[ps-an41: METHOD] > (ESTIMATE (OBJ (SPEC-OF OPCON-TIME)) (FOR (INST-OF ASSET)))
+                 [ps-an41: METHOD] < (INST-OF NUMBER)
+                 [ps-en42] > (IF (IS-IT-A (OBJ (INST-OF ASSET)) (OF (SPEC-OF CORPS-LEVEL-ASSET))) THEN 4 ELSE 2)
+                 [ps-en42]   (IF (INST-OF BOOLEAN) THEN 4 ELSE 2)
+                 [ps-en42] < (INST-OF NUMBER)
+                  [ps-en43] > (IS-IT-A (OBJ (INST-OF ASSET)) (OF (SPEC-OF CORPS-LEVEL-ASSET)))
+                  [ps-en43] < (INST-OF BOOLEAN)
+                   -[ps-an44: METHOD] > (IS-IT-A (OBJ (INST-OF ASSET)) (OF (SPEC-OF CORPS-LEVEL-ASSET)))
+                    [ps-an44: METHOD] < (INST-OF BOOLEAN)
+             -[ps-an36: METHOD] > (FIND (OBJ (SPEC-OF MAXIMUM)) (OF (SET-OF (INST-OF NUMBER))))
+              [ps-an36: METHOD] < (INST-OF NUMBER)
+            -[ps-an45: METHOD] > (ADD (OBJ (INST-OF NUMBER)) (TO (INST-OF NUMBER)))
+             [ps-an45: METHOD] < (INST-OF NUMBER)
+         [ps-en14] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF MOVE-ASSET-ACROSS-BRIDGE)))
+         [ps-en14] < (INST-OF NUMBER)
+          -[ps-an46: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF MOVE-ASSET-ACROSS-BRIDGE)))
+           [ps-an46: METHOD] < (INST-OF NUMBER)
+           [ps-en47] > (ESTIMATE (OBJ (SPEC-OF TIME)) (THROUGH (BRIDGE-OF (INST-OF MOVE-ASSET-ACROSS-BRIDGE))))
+           [ps-en47]   (ESTIMATE (OBJ (SPEC-OF TIME)) (THROUGH (INST-OF MILITARY-BRIDGE)))
+           [ps-en47] < (INST-OF NUMBER)
+            [ps-en48] > (BRIDGE-OF (INST-OF MOVE-ASSET-ACROSS-BRIDGE))
+            [ps-en48] < (INST-OF MILITARY-BRIDGE)
+             -[ps-an49: RETRIEVE-R] > (BRIDGE-OF (INST-OF MOVE-ASSET-ACROSS-BRIDGE))
+              [ps-an49: RETRIEVE-R] < (INST-OF MILITARY-BRIDGE)
+            -[ps-an50: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (THROUGH (INST-OF MILITARY-BRIDGE)))
+             [ps-an50: METHOD] < (INST-OF NUMBER)
+         [ps-en15] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF MOVE-ASSET-ACROSS-GAP)))
+         [ps-en15] < 1.0
+          -[ps-an51: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF MOVE-ASSET-ACROSS-GAP)))
+           [ps-an51: METHOD] < 1.0
+         [ps-en16] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF MOVE-ASSET-AROUND-TUNNEL)))
+         [ps-en16] < 1.5
+          -[ps-an52: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF MOVE-ASSET-AROUND-TUNNEL)))
+           [ps-an52: METHOD] < 1.5
+     -[ps-an53: METHOD] > (ADD (OBJ (SET-OF (INST-OF NUMBER))))
+      [ps-an53: METHOD] < (INST-OF NUMBER)
+
+   at Tue Jun 08 16:18:00 PDT 1999
+
+check: Undefined Capabilities
+   at Tue Jun 08 16:18:04 PDT 1999
+
+create method for goal from undefined capabilities
+   at Tue Jun 08 16:18:10 PDT 1999
+
+undefined goal:
+Reformulated Goal:
+(estimate (obj (spec-of opcon-time)) (for (inst-of asset)))  
+Expected Result:UNDEFINED
+Capability:(capability (estimate (obj (?v4621 is (spec-of opcon-time))) (for (?v4622 is (inst-of asset)))))  
+   at Tue Jun 08 16:18:10 PDT 1999
+
+select: modify button
+   at Tue Jun 08 16:18:24 PDT 1999
+
+ done editing:((name method4618  )
+(capability (estimate (obj (?v4621 is (spec-of opcon-time))) (for (?a is (inst-of asset)))))  
+(result-type (inst-of number))
+ (method   
+  (if (is-it-a (obj ?a)
+	       (of (spec-of corps-level-asset)))
+      then 4
+      else 2))
+)
+   at Tue Jun 08 16:19:05 PDT 1999
+
+modified method:((name method4618  )
+(capability (estimate (obj (?v4621 is (spec-of opcon-time))) (for (?a is (inst-of asset)))))  
+(result-type (inst-of number))
+ (method   
+  (if (is-it-a (obj ?a)
+	       (of (spec-of corps-level-asset)))
+      then 4
+      else 2))
+)
+   at Tue Jun 08 16:19:05 PDT 1999
+
+check: All Agenda
+   at Tue Jun 08 16:19:05 PDT 1999
+
+check: Method Sub-Method Relation
+   at Tue Jun 08 16:19:06 PDT 1999
+
+check: Describe PS Tree
+   at Tue Jun 08 16:19:10 PDT 1999
+
+check: Method Sub-Method Relation
+   at Tue Jun 08 16:30:26 PDT 1999
+
+check: Undefined Capabilities
+   at Tue Jun 08 16:30:30 PDT 1999
+
+check: Method Sub-Method Relation
+   at Tue Jun 08 16:30:32 PDT 1999
+
+check: Method Capability Hierarchy
+   at Tue Jun 08 16:30:33 PDT 1999
+
+check: Search Methods
+   at Tue Jun 08 16:30:35 PDT 1999
+
+check: Method Capability Hierarchy
+   at Tue Jun 08 16:32:31 PDT 1999
+
+check: Method Sub-Method Relation
+   at Tue Jun 08 16:32:49 PDT 1999
+
+check: Undefined Capabilities
+   at Tue Jun 08 16:33:01 PDT 1999
+

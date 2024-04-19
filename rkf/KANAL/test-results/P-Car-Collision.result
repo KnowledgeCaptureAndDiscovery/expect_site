@@ -1,0 +1,508 @@
+
+
+ ===============================================
+ start test-knowledge 
+"2001/6/25  17:30:47"
+
+(P-Car-Collision has 
+  (superclasses (Scenario))
+  (instances (_P-Car-Collision981
+              _P-Car-Collision2610
+              _P-Car-Collision2771
+              _P-Car-Collision2932
+              _P-Car-Collision3083)))
+
+(every P-Car-Collision has 
+  (some-associated-move-to3 ((a Move-To)))
+  (some-associated-move-to4 ((a Move-To)))
+  (some-associated-make-contact2 ((a Make-Contact)))
+  (some-associated-car3 ((a Car)))
+  (some-associated-car4 ((a Car)))
+  (some-associated-spatial-entity2 ((a Spatial-Entity)))
+  (first-subevent ((((the some-associated-move-to4 of Self)) && ((a Move-To) (the some-associated-move-to3 of Self)) && ((a Move-To with (next-event ((the some-associated-make-contact2 of Self)))) (a Move-To)) && ((a Move-To) (a Move-To with (next-event ((the next-event of (the first of (the first-subevent of Self))))))))))
+  (subevent ((((the first of (the first-subevent of Self))) && ((a Move-To) (the second of (the first-subevent of Self))) && ((a Move-To) (a Move-To) (the next-event of (the first of (the subevent of Self)))) && ((a Move-To with (destination ((the some-associated-spatial-entity2 of Self)))) (a Move-To) (a Make-Contact)) && ((a Move-To) (a Move-To with (destination ((the destination of (the first of (the subevent of Self)))))) (a Make-Contact)) && ((a Move-To with (object ((the some-associated-car4 of Self)))) (a Move-To) (a Make-Contact)) && ((a Move-To) (a Move-To with (object ((the some-associated-car3 of Self)))) (a Make-Contact)) && ((a Move-To) (a Move-To) (a Make-Contact with (base ((the object of (the first of (the subevent of Self))))))) && ((a Move-To) (a Move-To) (a Make-Contact with (object ((the object of (the second of (the subevent of Self))))))))))
+  (base ((the object of (the first of (the subevent of Self)))))
+  (object ((the object of (the second of (the subevent of Self))))))
+
+
+
+ ===============================================
+ Start testing user::|P-Car-Collision| with 
+   user::|_P-Car-Collision3958| in user::|_Situation3957|
+
+
+  -----------------------------------------------------------
+  step: user::|_Move-To3959|
+  -----------------------------------------------------------
+   preconditions:((:|triple| user::|_Car3967| user::|object-of|
+                   (user::|mustnt-be-a| user::|Be-Restrained|))
+                  (:|triple| user::|_Tangible-Entity3976| user::|object-of|
+                   (user::|mustnt-be-a| user::|Be-Restrained|))) 
+
+   succeeded preconditions:((:|triple| user::|_Tangible-Entity3976|
+                             user::|object-of|
+                             (user::|mustnt-be-a| user::|Be-Restrained|))
+                            (:|triple| user::|_Car3967| user::|object-of|
+                             (user::|mustnt-be-a| user::|Be-Restrained|))) 
+
+ ... EXECUTE _move-to3959 in _situation3957...
+      deleting ((:|triple| user::|_Car3967| user::|location| nil)
+                (:|triple| user::|_Tangible-Entity3976| user::|location|
+                 user::|_Place3987|))
+      adding ((:|triple| user::|_Car3967| user::|is-near| nil)
+              (:|triple| user::|_Car3967| user::|abuts| nil)
+              (:|triple| user::|_Car3967| user::|is-above| nil)
+              (:|triple| user::|_Car3967| user::|is-below| nil)
+              (:|triple| user::|_Car3967| user::|is-along| nil)
+              (:|triple| user::|_Car3967| user::|is-at| nil)
+              (:|triple| user::|_Car3967| user::|is-at-of| nil)
+              (:|triple| user::|_Car3967| user::|is-beside| nil)
+              (:|triple| user::|_Car3967| user::|is-between| nil)
+              (:|triple| user::|_Car3967| user::|is-behind| nil)
+              (:|triple| user::|_Car3967| user::|is-in-front-of| nil)
+              (:|triple| user::|_Car3967| user::|is-inside| nil)
+              (:|triple| user::|_Car3967| user::|encloses| nil)
+              (:|triple| user::|_Car3967| user::|is-on| nil)
+              (:|triple| user::|_Car3967| user::|has-on-it| nil)
+              (:|triple| user::|_Car3967| user::|is-opposite| nil)
+              (:|triple| user::|_Car3967| user::|is-outside| nil)
+              (:|triple| user::|_Car3967| user::|does-not-enclose| nil)
+              (:|triple| user::|_Car3967| user::|is-over| nil)
+              (:|triple| user::|_Car3967| user::|is-under| nil)
+              (:|triple| user::|_Car3967| user::|location| nil)
+              (:|triple| user::|_Tangible-Entity3976| user::|is-near| nil)
+              (:|triple| user::|_Tangible-Entity3976| user::|abuts| nil)
+              (:|triple| user::|_Tangible-Entity3976| user::|is-above| nil)
+              (:|triple| user::|_Tangible-Entity3976| user::|is-below| nil)
+              (:|triple| user::|_Tangible-Entity3976| user::|is-along| nil)
+              (:|triple| user::|_Tangible-Entity3976| user::|is-at| nil)
+              (:|triple| user::|_Tangible-Entity3976| user::|is-at-of| nil)
+              (:|triple| user::|_Tangible-Entity3976| user::|is-beside| nil)
+              (:|triple| user::|_Tangible-Entity3976| user::|is-between| nil)
+              (:|triple| user::|_Tangible-Entity3976| user::|is-behind| nil)
+              (:|triple| user::|_Tangible-Entity3976| user::|is-in-front-of|
+               nil)
+              (:|triple| user::|_Tangible-Entity3976| user::|is-inside| nil)
+              (:|triple| user::|_Tangible-Entity3976| user::|encloses| nil)
+              (:|triple| user::|_Tangible-Entity3976| user::|is-on| nil)
+              (:|triple| user::|_Tangible-Entity3976| user::|has-on-it| nil)
+              (:|triple| user::|_Tangible-Entity3976| user::|is-opposite| nil)
+              (:|triple| user::|_Tangible-Entity3976| user::|is-outside| nil)
+              (:|triple| user::|_Tangible-Entity3976| user::|does-not-enclose|
+               nil)
+              (:|triple| user::|_Tangible-Entity3976| user::|is-over| nil)
+              (:|triple| user::|_Tangible-Entity3976| user::|is-under| nil)
+              (:|triple| user::|_Tangible-Entity3976| user::|location| nil)) becoming _situation3988
+
+      canceling effects: adding (:|triple| user::|_Car3967| user::|location|
+                                 nil) 
+         which has been deleted by earlier (or current) action user::|_Move-To3959|
+
+  -----------------------------------------------------------
+  step: user::|_Move-To3960|
+  -----------------------------------------------------------
+   preconditions:((:|triple| user::|_Car3971| user::|object-of|
+                   (user::|mustnt-be-a| user::|Be-Restrained|))
+                  (:|triple| user::|_Tangible-Entity3980| user::|object-of|
+                   (user::|mustnt-be-a| user::|Be-Restrained|))) 
+
+   succeeded preconditions:((:|triple| user::|_Tangible-Entity3980|
+                             user::|object-of|
+                             (user::|mustnt-be-a| user::|Be-Restrained|))
+                            (:|triple| user::|_Car3971| user::|object-of|
+                             (user::|mustnt-be-a| user::|Be-Restrained|))) 
+
+ ... EXECUTE _move-to3960 in _situation3988...
+      deleting ((:|triple| user::|_Car3971| user::|location| nil)
+                (:|triple| user::|_Tangible-Entity3980| user::|location|
+                 user::|_Place4025|))
+      adding ((:|triple| user::|_Car3971| user::|is-near| nil)
+              (:|triple| user::|_Car3971| user::|abuts| nil)
+              (:|triple| user::|_Car3971| user::|is-above| nil)
+              (:|triple| user::|_Car3971| user::|is-below| nil)
+              (:|triple| user::|_Car3971| user::|is-along| nil)
+              (:|triple| user::|_Car3971| user::|is-at| nil)
+              (:|triple| user::|_Car3971| user::|is-at-of| nil)
+              (:|triple| user::|_Car3971| user::|is-beside| nil)
+              (:|triple| user::|_Car3971| user::|is-between| nil)
+              (:|triple| user::|_Car3971| user::|is-behind| nil)
+              (:|triple| user::|_Car3971| user::|is-in-front-of| nil)
+              (:|triple| user::|_Car3971| user::|is-inside| nil)
+              (:|triple| user::|_Car3971| user::|encloses| nil)
+              (:|triple| user::|_Car3971| user::|is-on| nil)
+              (:|triple| user::|_Car3971| user::|has-on-it| nil)
+              (:|triple| user::|_Car3971| user::|is-opposite| nil)
+              (:|triple| user::|_Car3971| user::|is-outside| nil)
+              (:|triple| user::|_Car3971| user::|does-not-enclose| nil)
+              (:|triple| user::|_Car3971| user::|is-over| nil)
+              (:|triple| user::|_Car3971| user::|is-under| nil)
+              (:|triple| user::|_Car3971| user::|location| nil)
+              (:|triple| user::|_Tangible-Entity3980| user::|is-near| nil)
+              (:|triple| user::|_Tangible-Entity3980| user::|abuts| nil)
+              (:|triple| user::|_Tangible-Entity3980| user::|is-above| nil)
+              (:|triple| user::|_Tangible-Entity3980| user::|is-below| nil)
+              (:|triple| user::|_Tangible-Entity3980| user::|is-along| nil)
+              (:|triple| user::|_Tangible-Entity3980| user::|is-at| nil)
+              (:|triple| user::|_Tangible-Entity3980| user::|is-at-of| nil)
+              (:|triple| user::|_Tangible-Entity3980| user::|is-beside| nil)
+              (:|triple| user::|_Tangible-Entity3980| user::|is-between| nil)
+              (:|triple| user::|_Tangible-Entity3980| user::|is-behind| nil)
+              (:|triple| user::|_Tangible-Entity3980| user::|is-in-front-of|
+               nil)
+              (:|triple| user::|_Tangible-Entity3980| user::|is-inside| nil)
+              (:|triple| user::|_Tangible-Entity3980| user::|encloses| nil)
+              (:|triple| user::|_Tangible-Entity3980| user::|is-on| nil)
+              (:|triple| user::|_Tangible-Entity3980| user::|has-on-it| nil)
+              (:|triple| user::|_Tangible-Entity3980| user::|is-opposite| nil)
+              (:|triple| user::|_Tangible-Entity3980| user::|is-outside| nil)
+              (:|triple| user::|_Tangible-Entity3980| user::|does-not-enclose|
+               nil)
+              (:|triple| user::|_Tangible-Entity3980| user::|is-over| nil)
+              (:|triple| user::|_Tangible-Entity3980| user::|is-under| nil)
+              (:|triple| user::|_Tangible-Entity3980| user::|location| nil)) becoming _situation4027
+
+      canceling effects: adding (:|triple| user::|_Car3971| user::|location|
+                                 nil) 
+         which has been deleted by earlier (or current) action user::|_Move-To3960|
+
+  -----------------------------------------------------------
+  step: user::|_Make-Contact3963|
+  -----------------------------------------------------------
+   preconditions:((:|triple| user::|_Car3971| user::|object-of|
+                   (user::|mustnt-be-a| user::|Be-Touching| user::|with|
+                    (user::|object|
+                     ((user::|the| user::|base| user::|of|
+                       user::|_Make-Contact3963|)))))
+                  (:|triple| user::|_Car3967| user::|object-of|
+                   (user::|mustnt-be-a| user::|Be-Touching| user::|with|
+                    (user::|object|
+                     ((user::|the| user::|object| user::|of|
+                       user::|_Make-Contact3963|)))))) 
+
+   succeeded preconditions:((:|triple| user::|_Car3967| user::|object-of|
+                             (user::|mustnt-be-a| user::|Be-Touching|
+                              user::|with|
+                              (user::|object|
+                               ((user::|the| user::|object| user::|of|
+                                 user::|_Make-Contact3963|)))))
+                            (:|triple| user::|_Car3971| user::|object-of|
+                             (user::|mustnt-be-a| user::|Be-Touching|
+                              user::|with|
+                              (user::|object|
+                               ((user::|the| user::|base| user::|of|
+                                 user::|_Make-Contact3963|)))))) 
+
+ ... EXECUTE _make-contact3963 in _situation4027...
+      deleting nil
+      adding ((:|triple| user::|_Be-Touching4034| user::|object|
+               user::|_Car3971|)
+              (:|triple| user::|_Be-Touching4034| user::|object|
+               user::|_Car3967|)
+              (:|triple| user::|_Car3967| user::|abuts| user::|_Car3971|)
+              (:|triple| user::|_Car3971| user::|abuts| user::|_Car3967|)) becoming _situation4037
+
+
+  ************************************************
+          Summary of Paths Simulated
+  ************************************************
+
+  These are the simulated paths: 
+     (user::|_Move-To3959| user::|_Move-To3960| user::|_Make-Contact3963|)
+
+
+  ************************************************
+                check expected effects
+  ************************************************
+    we check each simulated path
+
+
+  ------------------------------------------------
+    The overall effects for path
+        (user::|_Move-To3959| user::|_Move-To3960| user::|_Make-Contact3963|)
+  ------------------------------------------------
+   added:   
+             (:|triple| user::|_Car3967| user::|is-near| nil)
+             (:|triple| user::|_Car3967| user::|abuts| nil)
+             (:|triple| user::|_Car3967| user::|is-above| nil)
+             (:|triple| user::|_Car3967| user::|is-below| nil)
+             (:|triple| user::|_Car3967| user::|is-along| nil)
+             (:|triple| user::|_Car3967| user::|is-at| nil)
+             (:|triple| user::|_Car3967| user::|is-at-of| nil)
+             (:|triple| user::|_Car3967| user::|is-beside| nil)
+             (:|triple| user::|_Car3967| user::|is-between| nil)
+             (:|triple| user::|_Car3967| user::|is-behind| nil)
+             (:|triple| user::|_Car3967| user::|is-in-front-of| nil)
+             (:|triple| user::|_Car3967| user::|is-inside| nil)
+             (:|triple| user::|_Car3967| user::|encloses| nil)
+             (:|triple| user::|_Car3967| user::|is-on| nil)
+             (:|triple| user::|_Car3967| user::|has-on-it| nil)
+             (:|triple| user::|_Car3967| user::|is-opposite| nil)
+             (:|triple| user::|_Car3967| user::|is-outside| nil)
+             (:|triple| user::|_Car3967| user::|does-not-enclose| nil)
+             (:|triple| user::|_Car3967| user::|is-over| nil)
+             (:|triple| user::|_Car3967| user::|is-under| nil)
+             (:|triple| user::|_Tangible-Entity3976| user::|is-near| nil)
+             (:|triple| user::|_Tangible-Entity3976| user::|abuts| nil)
+             (:|triple| user::|_Tangible-Entity3976| user::|is-above| nil)
+             (:|triple| user::|_Tangible-Entity3976| user::|is-below| nil)
+             (:|triple| user::|_Tangible-Entity3976| user::|is-along| nil)
+             (:|triple| user::|_Tangible-Entity3976| user::|is-at| nil)
+             (:|triple| user::|_Tangible-Entity3976| user::|is-at-of| nil)
+             (:|triple| user::|_Tangible-Entity3976| user::|is-beside| nil)
+             (:|triple| user::|_Tangible-Entity3976| user::|is-between| nil)
+             (:|triple| user::|_Tangible-Entity3976| user::|is-behind| nil)
+             (:|triple| user::|_Tangible-Entity3976| user::|is-in-front-of|
+              nil)
+             (:|triple| user::|_Tangible-Entity3976| user::|is-inside| nil)
+             (:|triple| user::|_Tangible-Entity3976| user::|encloses| nil)
+             (:|triple| user::|_Tangible-Entity3976| user::|is-on| nil)
+             (:|triple| user::|_Tangible-Entity3976| user::|has-on-it| nil)
+             (:|triple| user::|_Tangible-Entity3976| user::|is-opposite| nil)
+             (:|triple| user::|_Tangible-Entity3976| user::|is-outside| nil)
+             (:|triple| user::|_Tangible-Entity3976| user::|does-not-enclose|
+              nil)
+             (:|triple| user::|_Tangible-Entity3976| user::|is-over| nil)
+             (:|triple| user::|_Tangible-Entity3976| user::|is-under| nil)
+             (:|triple| user::|_Tangible-Entity3976| user::|location| nil)
+             (:|triple| user::|_Car3971| user::|is-near| nil)
+             (:|triple| user::|_Car3971| user::|abuts| nil)
+             (:|triple| user::|_Car3971| user::|is-above| nil)
+             (:|triple| user::|_Car3971| user::|is-below| nil)
+             (:|triple| user::|_Car3971| user::|is-along| nil)
+             (:|triple| user::|_Car3971| user::|is-at| nil)
+             (:|triple| user::|_Car3971| user::|is-at-of| nil)
+             (:|triple| user::|_Car3971| user::|is-beside| nil)
+             (:|triple| user::|_Car3971| user::|is-between| nil)
+             (:|triple| user::|_Car3971| user::|is-behind| nil)
+             (:|triple| user::|_Car3971| user::|is-in-front-of| nil)
+             (:|triple| user::|_Car3971| user::|is-inside| nil)
+             (:|triple| user::|_Car3971| user::|encloses| nil)
+             (:|triple| user::|_Car3971| user::|is-on| nil)
+             (:|triple| user::|_Car3971| user::|has-on-it| nil)
+             (:|triple| user::|_Car3971| user::|is-opposite| nil)
+             (:|triple| user::|_Car3971| user::|is-outside| nil)
+             (:|triple| user::|_Car3971| user::|does-not-enclose| nil)
+             (:|triple| user::|_Car3971| user::|is-over| nil)
+             (:|triple| user::|_Car3971| user::|is-under| nil)
+             (:|triple| user::|_Tangible-Entity3980| user::|is-near| nil)
+             (:|triple| user::|_Tangible-Entity3980| user::|abuts| nil)
+             (:|triple| user::|_Tangible-Entity3980| user::|is-above| nil)
+             (:|triple| user::|_Tangible-Entity3980| user::|is-below| nil)
+             (:|triple| user::|_Tangible-Entity3980| user::|is-along| nil)
+             (:|triple| user::|_Tangible-Entity3980| user::|is-at| nil)
+             (:|triple| user::|_Tangible-Entity3980| user::|is-at-of| nil)
+             (:|triple| user::|_Tangible-Entity3980| user::|is-beside| nil)
+             (:|triple| user::|_Tangible-Entity3980| user::|is-between| nil)
+             (:|triple| user::|_Tangible-Entity3980| user::|is-behind| nil)
+             (:|triple| user::|_Tangible-Entity3980| user::|is-in-front-of|
+              nil)
+             (:|triple| user::|_Tangible-Entity3980| user::|is-inside| nil)
+             (:|triple| user::|_Tangible-Entity3980| user::|encloses| nil)
+             (:|triple| user::|_Tangible-Entity3980| user::|is-on| nil)
+             (:|triple| user::|_Tangible-Entity3980| user::|has-on-it| nil)
+             (:|triple| user::|_Tangible-Entity3980| user::|is-opposite| nil)
+             (:|triple| user::|_Tangible-Entity3980| user::|is-outside| nil)
+             (:|triple| user::|_Tangible-Entity3980| user::|does-not-enclose|
+              nil)
+             (:|triple| user::|_Tangible-Entity3980| user::|is-over| nil)
+             (:|triple| user::|_Tangible-Entity3980| user::|is-under| nil)
+             (:|triple| user::|_Tangible-Entity3980| user::|location| nil)
+             (:|triple| user::|_Be-Touching4034| user::|object|
+              user::|_Car3971|)
+             (:|triple| user::|_Be-Touching4034| user::|object|
+              user::|_Car3967|)
+             (:|triple| user::|_Car3967| user::|abuts| user::|_Car3971|)
+             (:|triple| user::|_Car3971| user::|abuts| user::|_Car3967|)
+
+   deleted: 
+             (:|triple| user::|_Tangible-Entity3976| user::|location|
+              user::|_Place3987|)
+             (:|triple| user::|_Tangible-Entity3980| user::|location|
+              user::|_Place4025|)
+
+  .............................................
+ The expected effects for p-car-collision is not specified yet!
+
+
+  ************************************************
+          Summary of Loops Found
+  ************************************************
+       -->  NO LOOP FOUND! 
+
+ Test Output 
+(((source . user::|_Move-To3959|) (success . t) (level . :error)
+  (type . :precondition)
+  (constraint
+   (:|triple| user::|_Tangible-Entity3976| user::|object-of|
+    (user::|mustnt-be-a| user::|Be-Restrained|))
+   (:|triple| user::|_Car3967| user::|object-of|
+    (user::|mustnt-be-a| user::|Be-Restrained|)))
+  (id . |error-item-196|))
+ ((source . user::|_Move-To3959|) (success . t) (level . :warning)
+  (type . :no-effect)
+  (constraint
+   ((:|triple| user::|_Car3967| user::|is-near| nil)
+    (:|triple| user::|_Car3967| user::|abuts| nil)
+    (:|triple| user::|_Car3967| user::|is-above| nil)
+    (:|triple| user::|_Car3967| user::|is-below| nil)
+    (:|triple| user::|_Car3967| user::|is-along| nil)
+    (:|triple| user::|_Car3967| user::|is-at| nil)
+    (:|triple| user::|_Car3967| user::|is-at-of| nil)
+    (:|triple| user::|_Car3967| user::|is-beside| nil)
+    (:|triple| user::|_Car3967| user::|is-between| nil)
+    (:|triple| user::|_Car3967| user::|is-behind| nil)
+    (:|triple| user::|_Car3967| user::|is-in-front-of| nil)
+    (:|triple| user::|_Car3967| user::|is-inside| nil)
+    (:|triple| user::|_Car3967| user::|encloses| nil)
+    (:|triple| user::|_Car3967| user::|is-on| nil)
+    (:|triple| user::|_Car3967| user::|has-on-it| nil)
+    (:|triple| user::|_Car3967| user::|is-opposite| nil)
+    (:|triple| user::|_Car3967| user::|is-outside| nil)
+    (:|triple| user::|_Car3967| user::|does-not-enclose| nil)
+    (:|triple| user::|_Car3967| user::|is-over| nil)
+    (:|triple| user::|_Car3967| user::|is-under| nil)
+    (:|triple| user::|_Car3967| user::|location| nil)
+    (:|triple| user::|_Tangible-Entity3976| user::|is-near| nil)
+    (:|triple| user::|_Tangible-Entity3976| user::|abuts| nil)
+    (:|triple| user::|_Tangible-Entity3976| user::|is-above| nil)
+    (:|triple| user::|_Tangible-Entity3976| user::|is-below| nil)
+    (:|triple| user::|_Tangible-Entity3976| user::|is-along| nil)
+    (:|triple| user::|_Tangible-Entity3976| user::|is-at| nil)
+    (:|triple| user::|_Tangible-Entity3976| user::|is-at-of| nil)
+    (:|triple| user::|_Tangible-Entity3976| user::|is-beside| nil)
+    (:|triple| user::|_Tangible-Entity3976| user::|is-between| nil)
+    (:|triple| user::|_Tangible-Entity3976| user::|is-behind| nil)
+    (:|triple| user::|_Tangible-Entity3976| user::|is-in-front-of| nil)
+    (:|triple| user::|_Tangible-Entity3976| user::|is-inside| nil)
+    (:|triple| user::|_Tangible-Entity3976| user::|encloses| nil)
+    (:|triple| user::|_Tangible-Entity3976| user::|is-on| nil)
+    (:|triple| user::|_Tangible-Entity3976| user::|has-on-it| nil)
+    (:|triple| user::|_Tangible-Entity3976| user::|is-opposite| nil)
+    (:|triple| user::|_Tangible-Entity3976| user::|is-outside| nil)
+    (:|triple| user::|_Tangible-Entity3976| user::|does-not-enclose| nil)
+    (:|triple| user::|_Tangible-Entity3976| user::|is-over| nil)
+    (:|triple| user::|_Tangible-Entity3976| user::|is-under| nil)
+    (:|triple| user::|_Tangible-Entity3976| user::|location| nil))
+   ((:|triple| user::|_Car3967| user::|location| nil)
+    (:|triple| user::|_Tangible-Entity3976| user::|location|
+     user::|_Place3987|)))
+  (id . |error-item-197|))
+ ((source . user::|_Move-To3960|) (success . t) (level . :error)
+  (type . :precondition)
+  (constraint
+   (:|triple| user::|_Tangible-Entity3980| user::|object-of|
+    (user::|mustnt-be-a| user::|Be-Restrained|))
+   (:|triple| user::|_Car3971| user::|object-of|
+    (user::|mustnt-be-a| user::|Be-Restrained|)))
+  (id . |error-item-198|))
+ ((source . user::|_Move-To3960|) (success . t) (level . :warning)
+  (type . :no-effect)
+  (constraint
+   ((:|triple| user::|_Car3971| user::|is-near| nil)
+    (:|triple| user::|_Car3971| user::|abuts| nil)
+    (:|triple| user::|_Car3971| user::|is-above| nil)
+    (:|triple| user::|_Car3971| user::|is-below| nil)
+    (:|triple| user::|_Car3971| user::|is-along| nil)
+    (:|triple| user::|_Car3971| user::|is-at| nil)
+    (:|triple| user::|_Car3971| user::|is-at-of| nil)
+    (:|triple| user::|_Car3971| user::|is-beside| nil)
+    (:|triple| user::|_Car3971| user::|is-between| nil)
+    (:|triple| user::|_Car3971| user::|is-behind| nil)
+    (:|triple| user::|_Car3971| user::|is-in-front-of| nil)
+    (:|triple| user::|_Car3971| user::|is-inside| nil)
+    (:|triple| user::|_Car3971| user::|encloses| nil)
+    (:|triple| user::|_Car3971| user::|is-on| nil)
+    (:|triple| user::|_Car3971| user::|has-on-it| nil)
+    (:|triple| user::|_Car3971| user::|is-opposite| nil)
+    (:|triple| user::|_Car3971| user::|is-outside| nil)
+    (:|triple| user::|_Car3971| user::|does-not-enclose| nil)
+    (:|triple| user::|_Car3971| user::|is-over| nil)
+    (:|triple| user::|_Car3971| user::|is-under| nil)
+    (:|triple| user::|_Car3971| user::|location| nil)
+    (:|triple| user::|_Tangible-Entity3980| user::|is-near| nil)
+    (:|triple| user::|_Tangible-Entity3980| user::|abuts| nil)
+    (:|triple| user::|_Tangible-Entity3980| user::|is-above| nil)
+    (:|triple| user::|_Tangible-Entity3980| user::|is-below| nil)
+    (:|triple| user::|_Tangible-Entity3980| user::|is-along| nil)
+    (:|triple| user::|_Tangible-Entity3980| user::|is-at| nil)
+    (:|triple| user::|_Tangible-Entity3980| user::|is-at-of| nil)
+    (:|triple| user::|_Tangible-Entity3980| user::|is-beside| nil)
+    (:|triple| user::|_Tangible-Entity3980| user::|is-between| nil)
+    (:|triple| user::|_Tangible-Entity3980| user::|is-behind| nil)
+    (:|triple| user::|_Tangible-Entity3980| user::|is-in-front-of| nil)
+    (:|triple| user::|_Tangible-Entity3980| user::|is-inside| nil)
+    (:|triple| user::|_Tangible-Entity3980| user::|encloses| nil)
+    (:|triple| user::|_Tangible-Entity3980| user::|is-on| nil)
+    (:|triple| user::|_Tangible-Entity3980| user::|has-on-it| nil)
+    (:|triple| user::|_Tangible-Entity3980| user::|is-opposite| nil)
+    (:|triple| user::|_Tangible-Entity3980| user::|is-outside| nil)
+    (:|triple| user::|_Tangible-Entity3980| user::|does-not-enclose| nil)
+    (:|triple| user::|_Tangible-Entity3980| user::|is-over| nil)
+    (:|triple| user::|_Tangible-Entity3980| user::|is-under| nil)
+    (:|triple| user::|_Tangible-Entity3980| user::|location| nil))
+   ((:|triple| user::|_Car3971| user::|location| nil)
+    (:|triple| user::|_Tangible-Entity3980| user::|location|
+     user::|_Place4025|)))
+  (id . |error-item-199|))
+ ((source . user::|_Make-Contact3963|) (success . t) (level . :error)
+  (type . :precondition)
+  (constraint
+   (:|triple| user::|_Car3967| user::|object-of|
+    (user::|mustnt-be-a| user::|Be-Touching| user::|with|
+     (user::|object|
+      ((user::|the| user::|object| user::|of| user::|_Make-Contact3963|)))))
+   (:|triple| user::|_Car3971| user::|object-of|
+    (user::|mustnt-be-a| user::|Be-Touching| user::|with|
+     (user::|object|
+      ((user::|the| user::|base| user::|of| user::|_Make-Contact3963|))))))
+  (id . |error-item-200|))
+ ((source . user::|_Make-Contact3963|) (success . t) (level . :warning)
+  (type . :no-effect)
+  (constraint
+   ((:|triple| user::|_Be-Touching4034| user::|object| user::|_Car3971|)
+    (:|triple| user::|_Be-Touching4034| user::|object| user::|_Car3967|)
+    (:|triple| user::|_Car3967| user::|abuts| user::|_Car3971|)
+    (:|triple| user::|_Car3971| user::|abuts| user::|_Car3967|))
+   nil)
+  (id . |error-item-201|))
+ ((source (user::|_Move-To3959| before user::|_Make-Contact3963|)
+   (user::|_Move-To3960| before user::|_Make-Contact3963|))
+  (success) (level . :warning) (type . :unnecessary-link)
+  (constraint . ordering) (id . |error-item-202|))
+ ((source . user::|P-Car-Collision|) (success . t) (level . :warning)
+  (type . :loop) (constraint) (id . |error-item-204|))
+ ((source . user::|P-Car-Collision|)
+  (content
+   (user::|_Move-To3959| user::|_Move-To3960| user::|_Make-Contact3963|))
+  (type . :simulated-paths) (id . |info-item-203|)))
+====================================
+ Error Items and Their Fixes
+====================================
+
+((source (user::|_Move-To3959| before user::|_Make-Contact3963|)
+  (user::|_Move-To3960| before user::|_Make-Contact3963|))
+ (success) (level . :warning) (type . :unnecessary-link)
+ (constraint . ordering) (id . |error-item-202|)) 
+
+
+ --------------------
+ "2001/6/25  17:30:53" -- Getting fixes for |error-item-202|
+
+ FIX ITEMS 
+(((type . :delete-or-modify-link)
+  (fix delete-or-modify ordering constraints in
+   ((user::|_Move-To3959| before user::|_Make-Contact3963|)
+    (user::|_Move-To3960| before user::|_Make-Contact3963|)))))
+==> fixes (((type . :delete-or-modify-link)
+            (fix delete-or-modify ordering constraints in
+             ((user::|_Move-To3959| before user::|_Make-Contact3963|)
+              (user::|_Move-To3960| before user::|_Make-Contact3963|))))) 
+
+
+======================
+ Info Items
+======================
+(((source . user::|P-Car-Collision|)
+  (content
+   (user::|_Move-To3959| user::|_Move-To3960| user::|_Make-Contact3963|))
+  (type . :simulated-paths) (id . |info-item-203|))) 

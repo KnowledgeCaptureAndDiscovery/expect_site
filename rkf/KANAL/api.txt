@@ -1,0 +1,142 @@
+;;; ======================================================================
+;;;		APIs to KANAL
+;;;           
+;;;            Jihie Kim   7/30/01
+;;; ======================================================================
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; event structure
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+o get-parent-events (event-instance)
+  return value: set of events
+
+o get-next-events (event-instance)
+  return value: set of events
+  NOTE: If there are multiple next events we assume they are conjunctive.
+ 
+o get-prev-events (event-instance)
+  return value: set of events
+
+o get-subevents (event-instance)
+  return value: set of events
+
+o get-first-subevents (event-instance)
+  return value: set of events
+
+;o get-disjunctive-next-events (event-instance)
+;  return value: set of events
+  NOTE: We are planning to support disjunctive branches in year 2 (2002).
+
+;o get-all-events-involved (process)
+;  return value: set of events
+  NOTE: This function should return all the events used for describing 
+        the process model.
+        We are planning to use them to find any unlinked/dangling events.
+ 
+o execute-step (event-instance)
+  return value: nil
+  NOTE: If there is no simulation function, KANAL can use a dummy function
+        and still perform static checks.
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; preconditions & effects
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+o get-preconditions (event-instance)
+  return value: the preconditions of the event
+ 
+o get-deletions (event-instance)
+  return value: the deleted effects
+
+o get-assertions (event-instance)
+  return value: the added effects
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;  expressions
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+o equal-objects (obj1 obj2)
+  return value: true/false
+
+;; test if the expr is true or false
+o test-expr (expr &optional (situation nil)) 
+  return value: true/false
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; concepts/roles/instances
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+o get-role-values (instance role)
+  return value: the role value of the instance
+  EXAMPLE: (the color of the roof --> Red)
+
+o create-instance (concept &optional (situation nil))
+  return value: an instance
+
+o get-inverse (role)
+  return value: the inverse of role
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; to handle situation
+;;
+;; NOTE: KANAL needs these only if the KBS support situations and the
+;;       simulation done based on the situations (e.g., KM)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+o goto (situation-instance)
+  return value: the situation
+
+o goto-global-situation ()
+  return value: the global situation
+
+o create-situation ()
+  return value: the new situation
+
+o current-situation ()
+  return value: the current situation
+
+o previous-situation (situation-instance)
+  return value: the previous situation
+
+o get-after-situation (event-instance)
+  return value: the after situation
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; for proposing fixes
+;;
+;; NOTE: KANAL needs these only if you want 'proposed fixes from KANAL',
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+o assert-role-value (instance role val)
+  return value: nil
+
+o get-concepts-from-instance (instance)
+  return value: the classes the instance belongs
+
+o get-subclasses (class)
+  retun value: classes
+
+o get-superclasses (class)
+  return value: classes
+
+o isa-class (obj class)
+  return value: true/false
+
+o get-concept-action ()
+  return value: the class Action/Event
+  NOTE: the root of all the event classes
+
+;o get-all-subclasses (class)
+;  retun value: classes
+   NOTE: optional
+
+;o get-all-superclasses (class)
+;  return value: classes
+   NOTE: optional
+
+o evaluate-expr (expr)
+  return value: the result of the evaluation

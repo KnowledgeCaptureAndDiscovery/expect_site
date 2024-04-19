@@ -1,0 +1,39 @@
+Agenda:
+ In the method to compute the combat power of a military unit with respect to a military task, ?T is not used
+   at Fri Sep 17 16:20:36 PDT 1999
+
+select: add new button
+   at Fri Sep 17 16:20:49 PDT 1999
+
+select Button:expect-expression:EXPRESSION
+ TO become:((name _method42049)
+(capability    ( VERB PARAM1 PARAM2 ... )
+)
+(result-type  DATA-TYPE)
+(method  SUB-GOAL 
+)
+)
+   at Fri Sep 17 16:20:58 PDT 1999
+
+create method for goal from undefined capabilities
+   at Fri Sep 17 16:21:43 PDT 1999
+
+undefined goal:
+(check (obj (spec-of force-ratio)) (of (inst-of military-task)) (in (inst-of coa)))  
+Expected Result:(inst-of yes-no)  
+Callers:(check-force-ratio-for-main-task)  
+Capability:(capability (check (obj (?v824 is (spec-of force-ratio))) (of (?v825 is (inst-of military-task))) (in (?v826 is (inst-of coa)))))  
+   at Fri Sep 17 16:21:43 PDT 1999
+
+select Button:expect-expression:EXPRESSION
+ TO become:((name _method802  )
+(capability    ( check   ( obj   ( ?v824 is   ( spec-of force-ratio ) ) )
+         ( of   ( ?v825 is   ( inst-of military-task ) ) )
+         ( in   ( ?v826 is   ( inst-of coa ) ) ) )
+)
+(result-type  (inst-of yes-no)  )
+(method  SUB-GOAL 
+)
+)
+   at Fri Sep 17 16:21:52 PDT 1999
+

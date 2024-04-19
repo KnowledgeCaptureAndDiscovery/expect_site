@@ -1,0 +1,422 @@
+<html>
+<head>
+<script>
+var limit="0:30"
+if (document.images){
+  var parselimit=limit.split(":");
+  parselimit=parselimit[0]*60+parselimit[1]*1;
+  }
+function resubmit(val) {
+    var myform = eval("document.form"+val);
+    myform.submit();
+}
+function beginrefresh(){
+  if (!document.images)
+      return;
+   if (parselimit==1)
+      window.location.reload();
+   else {
+      parselimit-=1;
+      curmin=Math.floor(parselimit/60);
+      cursec=parselimit%60;
+      if (curmin!=0)
+         curtime=curmin+" minutes and "+cursec+" seconds left until page refresh!";
+      else
+         curtime=cursec+" seconds left until page refresh!";
+      window.status=curtime
+      setTimeout("beginrefresh()",1000)
+   }
+ }
+window.onload=beginrefresh;
+</script>
+</head>
+<table>
+<tr><td colspan=2>----Fri Mar 15 09:05:16 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>with latitude</b></td><td>111222</td></tr>
+<tr><td><b>with longitude</b></td><td>111222</td></tr>
+<tr><td><b>for user id</b></td><td>jeanoh@isi.edu</td></tr>
+
+<tr><td colspan=2><b>Closest Restaurants</b></td></tr>
+<tr><td colspan=2>Dear jeanoh_at_isi_edu,<br/>These are the five closest restaurants from your location.<br/><br/>We're sorry, but we couldn't find any restaurants for your current location.<br/>-- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1016211916)'></td></tr>
+</table><br>
+<form name='form1016211916' action="/cgi-bin/portal/agent-req.pl" target="_blank" method="post">
+<input type='hidden' name='val0' value='111222'>
+<input type='hidden' name='val1' value='111222'>
+<input type='hidden' name='val2' value='jeanoh@isi.edu'>
+<input type='hidden' name='agent' value='restaurant'>
+<input type='hidden' name='email' value='jeanoh@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Fri Mar 15 08:58:15 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>with latitude</b></td><td>111222</td></tr>
+<tr><td><b>with longitude</b></td><td>111222</td></tr>
+<tr><td><b>for user id</b></td><td>jeanoh@isi.edu</td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;ack&gt;OK&lt;/ack&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1016211495)'></td></tr>
+</table><br>
+<form name='form1016211495' action="/cgi-bin/portal/agent-req.pl" target="_blank" method="post">
+<input type='hidden' name='val0' value='111222'>
+<input type='hidden' name='val1' value='111222'>
+<input type='hidden' name='val2' value='jeanoh@isi.edu'>
+<input type='hidden' name='agent' value='restaurant'>
+<input type='hidden' name='email' value='jeanoh@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Fri Mar 15 08:55:14 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>with latitude</b></td><td>111</td></tr>
+<tr><td><b>with longitude</b></td><td>111</td></tr>
+<tr><td><b>for user id</b></td><td>jeanoh@isi.edu</td></tr>
+
+<tr><td colspan=2><b>Closest Restaurants</b></td></tr>
+<tr><td colspan=2>Dear jeanoh_at_isi_edu,<br/>These are the five closest restaurants from your location.<br/><br/>We're sorry, but we couldn't find any restaurants for your current location.<br/>-- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1016211314)'></td></tr>
+</table><br>
+<form name='form1016211314' action="/cgi-bin/portal/agent-req.pl" target="_blank" method="post">
+<input type='hidden' name='val0' value='111'>
+<input type='hidden' name='val1' value='111'>
+<input type='hidden' name='val2' value='jeanoh@isi.edu'>
+<input type='hidden' name='agent' value='restaurant'>
+<input type='hidden' name='email' value='jeanoh@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Fri Mar 15 08:53:57 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>with latitude</b></td><td>111</td></tr>
+<tr><td><b>with longitude</b></td><td>111</td></tr>
+<tr><td><b>for user id</b></td><td>jeanoh@isi.edu</td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;ack&gt;OK&lt;/ack&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1016211237)'></td></tr>
+</table><br>
+<form name='form1016211237' action="/cgi-bin/portal/agent-req.pl" target="_blank" method="post">
+<input type='hidden' name='val0' value='111'>
+<input type='hidden' name='val1' value='111'>
+<input type='hidden' name='val2' value='jeanoh@isi.edu'>
+<input type='hidden' name='agent' value='restaurant'>
+<input type='hidden' name='email' value='jeanoh@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Wed Mar 13 16:40:21 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>with latitude</b></td><td>3452354</td></tr>
+<tr><td><b>with longitude</b></td><td>24554</td></tr>
+<tr><td><b>for user id</b></td><td>jeanoh@isi.edu</td></tr>
+
+<tr><td colspan=2><b>Closest Restaurants</b></td></tr>
+<tr><td colspan=2>Dear jeanoh_at_isi_edu,<br/>These are the five closest restaurants from your location.<br/><br/>We're sorry, but we couldn't find any restaurants for your current location.<br/>-- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1016066421)'></td></tr>
+</table><br>
+<form name='form1016066421' action="/cgi-bin/portal/agent-req.pl" target="_blank" method="post">
+<input type='hidden' name='val0' value='3452354'>
+<input type='hidden' name='val1' value='24554'>
+<input type='hidden' name='val2' value='jeanoh@isi.edu'>
+<input type='hidden' name='agent' value='restaurant'>
+<input type='hidden' name='email' value='jeanoh@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Wed Mar 13 16:39:04 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>with latitude</b></td><td>3452354</td></tr>
+<tr><td><b>with longitude</b></td><td>24554</td></tr>
+<tr><td><b>for user id</b></td><td>jeanoh@isi.edu</td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;ack&gt;OK&lt;/ack&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1016066344)'></td></tr>
+</table><br>
+<form name='form1016066344' action="/cgi-bin/portal/agent-req.pl" target="_blank" method="post">
+<input type='hidden' name='val0' value='3452354'>
+<input type='hidden' name='val1' value='24554'>
+<input type='hidden' name='val2' value='jeanoh@isi.edu'>
+<input type='hidden' name='agent' value='restaurant'>
+<input type='hidden' name='email' value='jeanoh@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Wed Mar 13 16:36:20 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>with latitude</b></td><td>38.88</td></tr>
+<tr><td><b>with longitude</b></td><td>-77.09</td></tr>
+<tr><td><b>for user id</b></td><td>jeanoh@isi.edu</td></tr>
+
+<tr><td colspan=2><b>Closest Restaurants</b></td></tr>
+<tr><td colspan=2>Dear jeanoh_at_isi_edu,<br/>These are the five closest restaurants from your location.<br/><br/>Mandarin Cafe<br/>Chinese Mandarin<br/>2607 Wilson Blvd<br/>703-527-2828<br/>$5-10<br/>Lat: 38.88976<br/>Lon: -77.08961<br/>0.67 miles<br/><br/>Ya Shue Yuen<br/>Chinese<br/>2607 Wilson Blvd<br/>703-527-9785<br/>$5-10<br/>Lat: 38.88976<br/>Lon: -77.08961<br/>0.67 miles<br/><br/>Good Food Company<br/>American<br/>1523 N Danville St<br/>703-527-2095<br/>$5-10<br/>Lat: 38.88993<br/>Lon: -77.09054<br/>0.68 miles<br/><br/>Genes Food Store<br/>American<br/>1317 N Court House Rd<br/>703-525-7668<br/>$5-10<br/>Lat: 38.88819<br/>Lon: -77.08351<br/>0.66 miles<br/><br/>On The Run<br/>American<br/>2420 Wilson Blvd<br/>703-527-9000<br/>$5-10<br/>Lat: 38.89051<br/>Lon: -77.08781<br/>0.73 miles<br/><br/><br/>-- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1016066180)'></td></tr>
+</table><br>
+<form name='form1016066180' action="/cgi-bin/portal/agent-req.pl" target="_blank" method="post">
+<input type='hidden' name='val0' value='38.88'>
+<input type='hidden' name='val1' value='-77.09'>
+<input type='hidden' name='val2' value='jeanoh@isi.edu'>
+<input type='hidden' name='agent' value='restaurant'>
+<input type='hidden' name='email' value='jeanoh@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Wed Mar 13 16:32:20 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>with latitude</b></td><td>8888</td></tr>
+<tr><td><b>with longitude</b></td><td>9999</td></tr>
+<tr><td><b>for user id</b></td><td>jeanoh@isi.edu</td></tr>
+
+<tr><td colspan=2><b>Closest Restaurants</b></td></tr>
+<tr><td colspan=2>Dear jeanoh_at_isi_edu,<br/>These are the five closest restaurants from your location.<br/><br/>We're sorry, but we couldn't find any restaurants. Please check your inputs and try again.<br/>-- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1016065940)'></td></tr>
+</table><br>
+<form name='form1016065940' action="/cgi-bin/portal/agent-req.pl" target="_blank" method="post">
+<input type='hidden' name='val0' value='8888'>
+<input type='hidden' name='val1' value='9999'>
+<input type='hidden' name='val2' value='jeanoh@isi.edu'>
+<input type='hidden' name='agent' value='restaurant'>
+<input type='hidden' name='email' value='jeanoh@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Wed Mar 13 16:28:02 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>with latitude</b></td><td>8888</td></tr>
+<tr><td><b>with longitude</b></td><td>9999</td></tr>
+<tr><td><b>for user id</b></td><td>jeanoh@isi.edu</td></tr>
+
+<tr><td colspan=2><b>Closest Restaurants</b></td></tr>
+<tr><td colspan=2>Dear jeanoh_at_isi_edu,<br/>These are the five closest restaurants from your location.<br/><br/><br/>-- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1016065682)'></td></tr>
+</table><br>
+<form name='form1016065682' action="/cgi-bin/portal/agent-req.pl" target="_blank" method="post">
+<input type='hidden' name='val0' value='8888'>
+<input type='hidden' name='val1' value='9999'>
+<input type='hidden' name='val2' value='jeanoh@isi.edu'>
+<input type='hidden' name='agent' value='restaurant'>
+<input type='hidden' name='email' value='jeanoh@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Wed Mar 13 16:24:48 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>with latitude</b></td><td>38.88</td></tr>
+<tr><td><b>with longitude</b></td><td>-77.09</td></tr>
+<tr><td><b>for user id</b></td><td>jeanoh@isi.edu</td></tr>
+
+<tr><td colspan=2><b>Closest Restaurants</b></td></tr>
+<tr><td colspan=2>Dear jeanoh_at_isi_edu,<br/>These are the five closest restaurants from your location.<br/><br/>Mandarin Cafe<br/>Chinese Mandarin<br/>2607 Wilson Blvd<br/>703-527-2828<br/>$5-10<br/>Lat: 38.88976<br/>Lon: -77.08961<br/>0.67 miles<br/><br/>Ya Shue Yuen<br/>Chinese<br/>2607 Wilson Blvd<br/>703-527-9785<br/>$5-10<br/>Lat: 38.88976<br/>Lon: -77.08961<br/>0.67 miles<br/><br/>Good Food Company<br/>American<br/>1523 N Danville St<br/>703-527-2095<br/>$5-10<br/>Lat: 38.88993<br/>Lon: -77.09054<br/>0.68 miles<br/><br/>Genes Food Store<br/>American<br/>1317 N Court House Rd<br/>703-525-7668<br/>$5-10<br/>Lat: 38.88819<br/>Lon: -77.08351<br/>0.66 miles<br/><br/>On The Run<br/>American<br/>2420 Wilson Blvd<br/>703-527-9000<br/>$5-10<br/>Lat: 38.89051<br/>Lon: -77.08781<br/>0.73 miles<br/><br/><br/>-- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1016065488)'></td></tr>
+</table><br>
+<form name='form1016065488' action="/cgi-bin/portal/agent-req.pl" target="_blank" method="post">
+<input type='hidden' name='val0' value='38.88'>
+<input type='hidden' name='val1' value='-77.09'>
+<input type='hidden' name='val2' value='jeanoh@isi.edu'>
+<input type='hidden' name='agent' value='restaurant'>
+<input type='hidden' name='email' value='jeanoh@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Wed Mar 13 16:17:30 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>with latitude</b></td><td>38.88</td></tr>
+<tr><td><b>with longitude</b></td><td>-77.09</td></tr>
+<tr><td><b>for user id</b></td><td>jeanoh@isi.edu</td></tr>
+
+<tr><td colspan=2><b>Closest Restaurants</b></td></tr>
+<tr><td colspan=2>Dear jeanoh_at_isi_edu,<br/>These are the five closest restaurants from your location.<br/><br/>360 Club<br/>American<br/>476 K St NW<br/>202-682-4008<br/>$5-10<br/>Lat: 38.95601<br/>Lon: -77.0195<br/>6.47 miles<br/><br/>Aka Friscos<br/>American<br/>4115 Wisconsin Ave NW<br/>202-244-7847<br/>$5-10<br/>Lat: 38.94226<br/>Lon: -77.07708<br/>4.35 miles<br/><br/>America on Massachusetts Ave<br/>American<br/>50 Massachusetts Ave NE<br/>202-682-9555<br/>$5-10<br/>Lat: 38.89723<br/>Lon: -77.00848<br/>4.54 miles<br/><br/>American Cultured Dairy Products Institute<br/>American<br/>888 16th St NW<br/>202-223-1931<br/>$5-10<br/>Lat: 38.901<br/>Lon: -77.0362<br/>3.23 miles<br/><br/>Assab<br/>American<br/>1938 9th St NW<br/>202-588-0064<br/>$5-10<br/>Lat: 38.91753<br/>Lon: -76.99427<br/>5.76 miles<br/><br/><br/>-- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1016065050)'></td></tr>
+</table><br>
+<form name='form1016065050' action="/cgi-bin/portal/agent-req.pl" target="_blank" method="post">
+<input type='hidden' name='val0' value='38.88'>
+<input type='hidden' name='val1' value='-77.09'>
+<input type='hidden' name='val2' value='jeanoh@isi.edu'>
+<input type='hidden' name='agent' value='restaurant'>
+<input type='hidden' name='email' value='jeanoh@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Wed Mar 13 16:15:52 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>with latitude</b></td><td>38.88</td></tr>
+<tr><td><b>with longitude</b></td><td>-77.09</td></tr>
+<tr><td><b>for user id</b></td><td>jeanoh@isi.edu</td></tr>
+
+<tr><td colspan=2><b>Closest Restaurants</b></td></tr>
+<tr><td colspan=2>Dear jeanoh_at_isi_edu,<br/>These are the five closest restaurants from your location.<br/><br/>America on Massachusetts Ave<br/>American<br/>50 Massachusetts Ave NE<br/>202-682-9555<br/>$5-10<br/>Lat: 38.89723<br/>Lon: -77.00848<br/>4.54 miles<br/><br/>American Cultured Dairy Products Institute<br/>American<br/>888 16th St NW<br/>202-223-1931<br/>$5-10<br/>Lat: 38.901<br/>Lon: -77.0362<br/>3.23 miles<br/><br/>Auger Enterprises<br/>American<br/>1217 22nd St Nw<br/>202-331-7100<br/>$5-10<br/>Lat: 38.90546<br/>Lon: -77.04846<br/>2.84 miles<br/><br/>Box Lunch Specialists<br/>American<br/>1612 14th St NW<br/>202-387-1033 202-387-1072<br/>$5-10<br/>Lat: 38.91129<br/>Lon: -77.03204<br/>3.79 miles<br/><br/>Bread & Chocolate Tenley Mall<br/>American<br/>4200 Wisconsin Ave NW<br/>202-363-3744<br/>$5-10<br/>Lat: 38.94311<br/>Lon: -77.0775<br/>4.4 miles<br/><br/><br/>-- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1016064952)'></td></tr>
+</table><br>
+<form name='form1016064952' action="/cgi-bin/portal/agent-req.pl" target="_blank" method="post">
+<input type='hidden' name='val0' value='38.88'>
+<input type='hidden' name='val1' value='-77.09'>
+<input type='hidden' name='val2' value='jeanoh@isi.edu'>
+<input type='hidden' name='agent' value='restaurant'>
+<input type='hidden' name='email' value='jeanoh@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Wed Mar 13 14:54:06 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>with latitude</b></td><td>99999</td></tr>
+<tr><td><b>with longitude</b></td><td>88888</td></tr>
+<tr><td><b>for user id</b></td><td>jeanoh@isi.edu</td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;ack&gt;OK&lt;/ack&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1016060046)'></td></tr>
+</table><br>
+<form name='form1016060046' action="/cgi-bin/portal/agent-req.pl" target="_blank" method="post">
+<input type='hidden' name='val0' value='99999'>
+<input type='hidden' name='val1' value='88888'>
+<input type='hidden' name='val2' value='jeanoh@isi.edu'>
+<input type='hidden' name='agent' value='restaurant'>
+<input type='hidden' name='email' value='jeanoh@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Tue Mar 12 17:03:02 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>with latitude</b></td><td>11111</td></tr>
+<tr><td><b>with longitude</b></td><td>11111</td></tr>
+<tr><td><b>for user id</b></td><td>jeanoh@isi.edu</td></tr>
+
+<tr><td colspan=2><b>Closest Restaurants</b></td></tr>
+<tr><td colspan=2>Dear jeanoh_at_isi_edu,<br/>These are the five closest restaurants from your location.<br/><br/>Youngs Carry Out<br/>American<br/>5929 E Cap St<br/>202-581-6011<br/>$5-10<br/>Lat: 38.88978<br/>Lon: -76.91582<br/>6303.9 miles<br/><br/>Just Us Two Carry Out<br/>American<br/>721 50th St NE<br/>202-396-6817<br/>$5-10<br/>Lat: 38.89877<br/>Lon: -76.9296<br/>6304.72 miles<br/><br/>Dar Es Salem<br/>American<br/>3056 M St NW<br/>202-337-6680<br/>$5-10<br/>Lat: 38.93293<br/>Lon: -76.96562<br/>6307.56 miles<br/><br/>Capricorn Wine & Cheese<br/>American<br/>2130 P St NW<br/>202-833-2428<br/>$5-10<br/>Lat: 38.93625<br/>Lon: -76.97502<br/>6307.94 miles<br/><br/>Palais Du Chocolat on Willow St NW<br/>American<br/>6925 Willow St NW<br/>202-723-4280<br/>$5-10<br/>Lat: 38.97254<br/>Lon: -77.01507<br/>6310.98 miles<br/><br/><br/>-- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1015981382)'></td></tr>
+</table><br>
+<form name='form1015981382' action="/cgi-bin/portal/agent-req.pl" target="_blank" method="post">
+<input type='hidden' name='val0' value='11111'>
+<input type='hidden' name='val1' value='11111'>
+<input type='hidden' name='val2' value='jeanoh@isi.edu'>
+<input type='hidden' name='agent' value='restaurant'>
+<input type='hidden' name='email' value='jeanoh@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Tue Mar 12 17:03:01 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>with latitude</b></td><td>999</td></tr>
+<tr><td><b>with longitude</b></td><td>888</td></tr>
+<tr><td><b>for user id</b></td><td>jeanoh@isi.edu</td></tr>
+
+<tr><td colspan=2><b>Closest Restaurants</b></td></tr>
+<tr><td colspan=2>Dear jeanoh_at_isi_edu,<br/>These are the five closest restaurants from your location.<br/><br/>Youngs Carry Out<br/>American<br/>5929 E Cap St<br/>202-581-6011<br/>$5-10<br/>Lat: 38.88978<br/>Lon: -76.91582<br/>9128.37 miles<br/><br/>Just Us Two Carry Out<br/>American<br/>721 50th St NE<br/>202-396-6817<br/>$5-10<br/>Lat: 38.89877<br/>Lon: -76.9296<br/>9128.84 miles<br/><br/>Dar Es Salem<br/>American<br/>3056 M St NW<br/>202-337-6680<br/>$5-10<br/>Lat: 38.93293<br/>Lon: -76.96562<br/>9130.78 miles<br/><br/>Capricorn Wine & Cheese<br/>American<br/>2130 P St NW<br/>202-833-2428<br/>$5-10<br/>Lat: 38.93625<br/>Lon: -76.97502<br/>9130.91 miles<br/><br/>Palais Du Chocolat on Willow St NW<br/>American<br/>6925 Willow St NW<br/>202-723-4280<br/>$5-10<br/>Lat: 38.97254<br/>Lon: -77.01507<br/>9132.96 miles<br/><br/><br/>-- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1015981381)'></td></tr>
+</table><br>
+<form name='form1015981381' action="/cgi-bin/portal/agent-req.pl" target="_blank" method="post">
+<input type='hidden' name='val0' value='999'>
+<input type='hidden' name='val1' value='888'>
+<input type='hidden' name='val2' value='jeanoh@isi.edu'>
+<input type='hidden' name='agent' value='restaurant'>
+<input type='hidden' name='email' value='jeanoh@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Tue Mar 12 16:54:50 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>with latitude</b></td><td>999</td></tr>
+<tr><td><b>with longitude</b></td><td>888</td></tr>
+<tr><td><b>for user id</b></td><td>jeanoh@isi.edu</td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;ack&gt;OK&lt;/ack&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1015980890)'></td></tr>
+</table><br>
+<form name='form1015980890' action="/cgi-bin/portal/agent-req.pl" target="_blank" method="post">
+<input type='hidden' name='val0' value='999'>
+<input type='hidden' name='val1' value='888'>
+<input type='hidden' name='val2' value='jeanoh@isi.edu'>
+<input type='hidden' name='agent' value='restaurant'>
+<input type='hidden' name='email' value='jeanoh@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Tue Mar 12 16:54:20 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>for user id</b></td><td>jeanoh@isi.edu</td></tr>
+<tr><td><b>with latitude</b></td><td>11111</td></tr>
+<tr><td><b>with longitude</b></td><td>11111</td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;ack&gt;OK&lt;/ack&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1015980860)'></td></tr>
+</table><br>
+<form name='form1015980860' action="/cgi-bin/portal/agent-req.pl" target="_blank" method="post">
+<input type='hidden' name='val0' value='jeanoh@isi.edu'>
+<input type='hidden' name='val1' value='11111'>
+<input type='hidden' name='val2' value='11111'>
+<input type='hidden' name='agent' value='restaurant'>
+<input type='hidden' name='email' value='jeanoh@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Tue Mar 12 16:53:21 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>for user id</b></td><td>jeanoh@isi.edu</td></tr>
+<tr><td><b> </b></td><td>11111</td></tr>
+<tr><td><b> </b></td><td>11111</td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;ack&gt;OK&lt;/ack&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1015980801)'></td></tr>
+</table><br>
+<form name='form1015980801' action="/cgi-bin/portal/agent-req.pl" target="_blank" method="post">
+<input type='hidden' name='val0' value='jeanoh@isi.edu'>
+<input type='hidden' name='val1' value='11111'>
+<input type='hidden' name='val2' value='11111'>
+<input type='hidden' name='agent' value='restaurant'>
+<input type='hidden' name='email' value='jeanoh@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Mon Mar 11 17:01:55 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>with latitude</b></td><td>1</td></tr>
+<tr><td><b>with longitude</b></td><td>1</td></tr>
+<tr><td><b>for user id</b></td><td>jeanoh@isi.edu</td></tr>
+
+<tr><td colspan=2><b>Closest Restaurants</b></td></tr>
+<tr><td colspan=2>Dear jeanoh_at_isi_edu,<br/>These are the five closest restaurants from your location.<br/><br/>Youngs Carry Out<br/>American<br/>5929 E Cap St<br/>202-581-6011<br/>$5-10<br/>Lat: 38.88978<br/>Lon: -76.91582<br/>5523.06 miles<br/><br/>Just Us Two Carry Out<br/>American<br/>721 50th St NE<br/>202-396-6817<br/>$5-10<br/>Lat: 38.89877<br/>Lon: -76.9296<br/>5523.87 miles<br/><br/>Yums Carry Out<br/>American<br/>4512 Benning Rd SE<br/>202-581-4308<br/>$5-10<br/>Lat: 38.88917<br/>Lon: -76.93702<br/>5524.19 miles<br/><br/>Johnnys Sub Shop<br/>Sandwich<br/>4139 Wheeler Rd SE<br/>202-562-5114<br/>$1-5<br/>Lat: 38.83409<br/>Lon: -76.99009<br/>5526.57 miles<br/><br/>Positive Pop Corn<br/>American<br/>1225 Good Hope Rd SE<br/>202-678-5612<br/>$5-10<br/>Lat: 38.86721<br/>Lon: -76.98822<br/>5526.74 miles<br/><br/><br/>-- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1015894915)'></td></tr>
+</table><br>
+<form name='form1015894915' action="/cgi-bin/portal/agent-req.pl" target="_blank" method="post">
+<input type='hidden' name='val0' value='1'>
+<input type='hidden' name='val1' value='1'>
+<input type='hidden' name='val2' value='jeanoh@isi.edu'>
+<input type='hidden' name='agent' value='restaurant'>
+<input type='hidden' name='email' value='jeanoh@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Mon Mar 11 16:53:04 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>with latitude</b></td><td>1</td></tr>
+<tr><td><b>with longitude</b></td><td>1</td></tr>
+<tr><td><b>for user id</b></td><td>jeanoh@isi.edu</td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;ack&gt;OK&lt;/ack&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1015894384)'></td></tr>
+</table><br>
+<form name='form1015894384' action="/cgi-bin/portal/agent-req.pl" target="_blank" method="post">
+<input type='hidden' name='val0' value='1'>
+<input type='hidden' name='val1' value='1'>
+<input type='hidden' name='val2' value='jeanoh@isi.edu'>
+<input type='hidden' name='agent' value='restaurant'>
+<input type='hidden' name='email' value='jeanoh@isi.edu'>
+</form>
+
+<p>
+</html>

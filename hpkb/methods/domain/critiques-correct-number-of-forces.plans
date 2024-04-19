@@ -1,0 +1,246 @@
+;;; This file separates out the correct-number-of-force critique methods
+;;; so we can figure out their overall size. 
+
+(in-package "CYC")
+
+(defplan check-arrayed-forces-owned
+  :capability (evaluate (obj (?c is (inst-of coa)))
+		    (with-respect-to (?a is (inst-of all-arrayed-forces-owned-critique))))
+  :result-type (inst-of boolean)
+  :method (there-are-any
+	 (obj (find-not-owned (obj (|operationalControlMilitaryOrg|
+			         (|unitAssignedToOperation|
+				 (the-coa-operation ?c))))
+			  (by (|unitAssignedToOperation|
+			        (the-coa-operation ?c)))
+			  (for ?a))))
+  :post-processing (add-to-evaluation ?method-result ?a ?c))
+
+(defplan check-not-all-forces-arrayed
+  :capability (evaluate (obj (?c is (inst-of coa)))
+		    (with-respect-to
+		     (?a is (inst-of all-forces-arrayed-critique))))
+  :result-type (inst-of boolean)
+  :method (there-are-any 
+	   (obj (find-unarrayed (obj (sub-unit (|unitAssignedToOperation|
+					 (the-coa-operation ?c))))
+			    (in ?c) 
+			    (for ?a))))
+  :post-processing (add-to-evaluation ?method-result ?a ?c)
+  )
+
+(defplan find-unarrayed-forces
+  :capability (find-unarrayed (obj (?s is (set-of (inst-of military-unit))))
+			(in (?c is (inst-of coa)))
+			(for (?a is (inst-of all-forces-arrayed-critique))))
+  :result-type (set-of (inst-of military-unit))
+  :method (filter (obj ?s)
+	        (with (check-not-arrayed 
+		     (obj ?s)
+		     (in ?c)
+		     (for ?a))))
+  :annotations ((:skip-in-explanation t))
+  :post-processing (if ?method-result
+		   (add-value ?a 'analysis-estimate ?method-result)))
+
+(defplan check-unit-not-arrayed
+  :capability (check-not-arrayed (obj (?u is (inst-of military-unit)))
+			   (in (?c is (inst-of coa)))
+			   (for (?a is (inst-of all-forces-arrayed-critique))))
+  :result-type (inst-of boolean)
+  :method (if (there-are-any (obj (controlling-org ?u)))
+	    then false
+	    else (if (check-some-arrayed 
+		    (obj (sub-unit ?u))
+		    (in ?c)
+		    (for ?a))
+		   then false
+		   else true);; all sub-units not arrayed
+	    )
+  )
+
+(defplan check-if-some-units-arrayed
+  :capability (check-some-arrayed
+	     (obj (?us is (set-of (inst-of military-unit))));;sub-units
+	     (in (?c is (inst-of coa)))
+	     (for (?a is (inst-of all-forces-arrayed-critique))))
+  :result-type (inst-of boolean)
+  :method (if (there-are-any (obj ?us))
+	    then (if (there-are-any (obj (find-unarrayed 
+				    (obj ?us)
+				    (in ?c)
+				    (for ?a))))
+		   then (if (same-objects
+			   (obj (find-unarrayed (obj ?us)
+					    (in ?c)
+					    (for ?a)))
+			   (with ?us))
+			  then false
+			  else true)
+		   else true)
+	    else false)
+  )
+	      
+(defplan same-sets
+  :capability (same-objects
+	     (obj (?s1 is (set-of (inst-of thing))));; to check nil?
+	     (with (?s2 is (set-of (inst-of thing))))
+	     )
+  :result-type (inst-of boolean)
+  :method (primitive-same ?s1 ?s2)
+  :primitivep t)
+
+(defun primitive-same (x y)
+  (if (equal x y)
+      'TRUE
+    'FALSE))
+
+
+;;; The arguments that used to be ModernMilitaryUnit-Deployable in the
+;;; next three methods were changed to Organization because that's the
+;;; range of the relation operationalControlMilitaryOrg, so otherwise
+;;; the method wouldn't be able to match its own recursive calls at
+;;; problem solving time.
+
+(defplan find-unowned-forces
+  :capability (find-not-owned 
+	     (obj (?s is (inst-of |Organization|)))
+	     (by (?o is (inst-of |Organization|)))
+	     (for (?a is (inst-of coa-critique))))
+  :result-type (set-of (inst-of |Organization|))
+  :method (if (there-are-any (obj (|operationalControlMilitaryOrg| ?s)))
+	    then (find-not-owned
+		(obj (|operationalControlMilitaryOrg| ?s))
+		(by ?o) (for ?a))
+	    else (if (or (there-is-not-any (obj (top-super-unit ?s)))
+		       (not (determine-whether (obj ?o)
+					 (is-a (spec-of set-member))
+					 (of (all-super-unit ?s)))))
+		   then (make-set (obj ?s))
+		   else (make-empty-set (obj ?s))))
+  :post-processing (if ?method-result
+		   (add-value ?a 'analysis-estimate ?method-result))
+  )
+
+(defplan make-set
+  :capability (make-set 
+	     (obj (?s is (inst-of |Organization|))))
+  :result-type (set-of (inst-of |Organization|))
+  :primitivep t
+  :method (list ?s))
+
+(defplan make-empty-set
+  :capability (make-empty-set 
+	     (obj (?s is (inst-of |Organization|))))
+  :result-type (set-of (inst-of |Organization|))
+  :primitivep t
+  :method nil)
+
+(defplan same-thing
+  :capability (is-equal (obj (?a is (inst-of thing)))
+		    (to  (?b is (inst-of thing))))
+  :result-type (inst-of boolean)
+  :primitivep t
+  :method (primitive-equal ?a ?b))
+
+(defun primitive-equal (?a ?b)
+  (if (equal ?a ?b)
+      'true
+    'false))
+
+#|
+;;; This needs to be rewritten to use the operationalcontrol predicate
+(defplan check-not-all-forces-arrayed
+  :capability (evaluate (obj (?c is (inst-of coa)))
+		    (with-respect-to 
+		     (?a is (inst-of all-forces-arrayed-critique))))
+  :result-type (inst-of boolean)
+  :method (there-are-any
+	 (obj (find-unarrayed (obj (sub-unit (|WHO| (coa-operation ?c))))
+			  (in ?c)
+			  (for ?a))))
+  :post-processing (add-to-evaluation ?method-result ?a ?c)
+  )
+
+(defplan find-unarrayed-forces
+  :capability (find-unarrayed (obj (?s is (set-of (inst-of military-unit))))
+			(in (?c is (inst-of coa)))
+			(for (?a is (inst-of all-forces-arrayed-critique))))
+  :result-type (set-of (inst-of military-unit))
+  :method (filter (obj ?s)
+	        (with (check-not-arrayed 
+		     (obj ?s)
+		     (of (coa-operation ?c)))))
+  :post-processing (if ?method-result
+		   (add-value ?a 'analysis-estimate ?method-result))
+  :annotations ((:skip-in-explanation t)))
+
+
+(defplan check-unit-not-arrayed
+  :capability (check-not-arrayed (obj (?u is (inst-of military-unit)))
+			   (of (?o is (inst-of |MilitaryOperation|))))
+  :result-type (inst-of boolean)
+  :method (if (not (or (there-are-any (obj (assigned-action ?u)))
+	         (determine-whether
+		(obj ?u)
+		(is-a (spec-of set-member))
+		(of (append (|reserveUnitInMission| ?o)
+			  (|securityUnitInMission| ?o)
+			  (|unitOperatingInRear| ?o))))))
+	    then true
+	    else false)
+  )
+|#
+
+
+#|
+(defplan check-unit-not-arrayed
+    :capability (check-not-arrayed (obj (?u is (inst-of military-unit)))
+				   (of (?o is (inst-of |MilitaryOperation|))))
+    :result-type (inst-of boolean)
+    :method (if (and (there-is-not-any (obj (assigned-action ?u)))
+		     (check-not-arrayed (obj ?u)
+					(in (spec-of |RESERVE-COA|))
+					(of ?o))
+		     (check-not-arrayed (obj ?u)
+					(in (spec-of |SECURITY-COA|))
+					(of ?o))
+		     (check-not-arrayed (obj ?u)
+					(in (spec-of |REAR-COA|))
+					(of ?o)))
+	      then true
+	      else false))
+
+(defplan check-unit-is-not-reserve-unit-in-mission
+    :capability (check-not-arrayed (obj (?u is (inst-of military-unit)))
+				   (in (?r is (spec-of |RESERVE-COA|)))
+				   (of (?o is (inst-of |MilitaryOperation|))))
+    :result-type (inst-of boolean)
+    :method (determine-whether
+	     (obj ?u)
+	     (is-a (spec-of set-member))
+	     (of (|reserveUnitInMission| ?o)))
+    )
+
+(defplan check-unit-is-not-security-unit-in-mission
+    :capability (check-not-arrayed (obj (?u is (inst-of military-unit)))
+				   (in (?r is (spec-of |SECURITY-COA|)))
+				   (of (?o is (inst-of |MilitaryOperation|))))
+    :result-type (inst-of boolean)
+    :method (determine-whether
+	     (obj ?u)
+	     (is-a (spec-of set-member))
+	     (of (|securityUnitInMission| ?o)))
+    )
+  
+(defplan check-unit-is-not-unit-operating-in-rear
+    :capability (check-not-arrayed (obj (?u is (inst-of military-unit)))
+				   (in (?r is (spec-of |REAR-COA|)))
+				   (of (?o is (inst-of |MilitaryOperation|))))
+    :result-type (inst-of boolean)
+    :method (determine-whether
+	     (obj ?u)
+	     (is-a (spec-of set-member))
+	     (of (|unitOperatingInRear| ?o)))
+    )
+|#

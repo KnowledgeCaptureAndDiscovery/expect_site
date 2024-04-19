@@ -1,0 +1,141 @@
+<HTML>
+<HEAD>
+   <TITLE>Research in Multi-Agent Communication</TITLE>
+
+  <SCRIPT language="javascript">
+
+  about_on = new Image();
+  about_on.src = "./exp-about.gif";
+
+  research_on = new Image();
+  research_on.src = "./exp-research.gif"; 
+
+  projectmemb_on = new Image();
+  projectmemb_on.src = "./exp-pr-members.gif";
+
+  publications_on = new Image();
+  publications_on.src = "./exp-publ.gif";
+
+  movie_on = new Image();
+  movie_on.src = "./exp-mov.gif";  
+
+  projects_on = new Image();
+  projects_on.src = "./exp-projects.gif"; 
+ 
+   
+function swampImages(imagename, cimage)
+  {
+      imgsrc = './' + cimage;
+      document[imagename].src = imgsrc;
+  } 
+  </SCRIPT>
+ 
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+
+<TABLE  ALIGN=CENTER WIDTH=730>
+<TR><TD colspan=3>
+
+<P  ALIGN=CENTER>
+<A HREF="../l"
+onmouseover="swampImages('About','exp-about.gif'); return true"
+onmouseout="swampImages('About','exp-about-bl.gif');return true"><IMG
+SRC="exp-about-bl.gif" BORDER=0 NAME="About"></A>
+
+<A HREF="./research.html"
+onmouseover="swampImages('Research','exp-research.gif'); return true"
+onmouseout="swampImages('Research','exp-research-bl.gif');return
+true"><IMG SRC="exp-research-bl.gif" BORDER=0 NAME="Research"></A>
+
+<A HREF="./projects.html"
+onmouseover="swampImages('Projects','exp-projects.gif'); return true"
+onmouseout="swampImages('Projects','exp-projects-bl.gif');return
+true"><IMG SRC="./exp-projects-bl.gif" BORDER=0 NAME="Projects"></A>
+
+
+<A HREF="./pr-members.html"
+onmouseover="swampImages('Members','exp-pr-members.gif'); return true"
+onmouseout="swampImages('Members','exp-pr-members-bl.gif');return true"><IMG
+SRC="exp-pr-members-bl.gif" BORDER=0 NAME="Members"></A>
+
+<A HREF="./publications.html"
+onmouseover="swampImages('Publ','exp-publ.gif'); return true"
+onmouseout="swampImages('Publ','exo-publ-bl.gif');return true"
+onclick="return false"><IMG
+SRC="exo-publ-bl.gif" BORDER=0 NAME="Publ"></A>
+
+<A HREF="./demo.html"
+onmouseover="swampImages('Demo','exp-mov.gif'); return true"
+onmouseout="swampImages('Demo','exp-mov-bl.gif');return true"><IMG
+SRC="exp-mov-bl.gif" BORDER=0 NAME="Demo"></A>
+</TD></TR>
+
+<TR><TD width=50></TD>
+
+
+
+<TD WIDTH=550>
+<BR>
+<P ALIGN=CENTER><B><FONT SIZE=+2 FACE=ARIAL>Research in Multi-Agent
+Communication and Coordination</B></FONT><BR>
+
+
+<HR>
+
+<P><FONT FACE=ARIAL><B>Research in <A HREF="./ka-research.html">Knowledge Acquisition</A></P>
+<P>Research in <A HREF="./ontos-research.html">Ontologies and
+Problem-Solving Methods</A></P>
+<P>Research in <A HREF="./plan-research.html">Planning</A></B></FONT></P>
+
+<HR SIZE=2>
+
+
+<P ALIGN=JUSTIFY>The main goal of our work in this area is to
+investigate how ontologies help in agent coordination and
+communication.  In the EXPECT framework, agents can be viewed as
+entities with some problem-solving capability that need to be brought
+together in order to solve more complex problems.  This work is joint
+with ISI's Loom/Powerloom project. </P>
+
+<BR>
+<P><B><I><FONT FACE="Helvetica" SIZE=+1>1. Finding Agents</FONT></B></I></P>
+
+<P ALIGN=JUSTIFY>This work addresses the issue of how to match requests and agent capabilities through ontologies. The hypothesis is that a broad and shallow ontology (such as the HPKB upper ontology or SENSUS) is sufficient for locating agents.  This work builds on EXPECT's matcher to find capabilities of problem-solving methods that match a given problem-solving goal.</P>
+
+<BLOCKQUOTE>
+<P>"Phosphorus: A Knowledge and Experience-based Agent Capabilities Matcher". Y. Gil and R. MacGregor.  Available from <A HREF="http://www.isi.edu/expect/projects/agents/phosphorus.html">http://www.isi.edu/expect/projects/agents/phosphorus.html</A></P>
+
+<P>"Using Description Logics to Match Goals".  Y. Gil and P. Gonzalez.  Proceedings of the 1996 Workshop on Description Logics.</P>
+</BLOCKQUOTE>
+
+<BR>
+<P><B><I><FONT FACE="Helvetica" SIZE=+1>2. Ontology-Based Agent Communication</FONT></B></I></P>
+
+<P ALIGN=JUSTIFY>Once you have found agents with the right capability (for example through Phosporus), then they need to use richer ontologies for communicating with each other. For this work, we will be using ontologies and tools that we are developing under the HPKB program.  These include the PLANET ontology for representing plans, and the Ontomorph ontology mapping toolkit. </P>
+
+<BLOCKQUOTE>
+<P>"Ontology-based Agent Communication with Rosetta".  J. Blythe, Y. Gil, R. MacGregor, and B. Swartout.  Available from <A HREF="http://www.isi.edu/expect/projects/agents/rosetta.html">http://www.isi.edu/expect/projects/agents/rosetta.html</A></P>
+
+<P>"PLANET: A shareable and reusable ontology for representing plans".  Y. Gil and J. Blythe.  Available from <A HREF="http://www.isi.edu/isd/HPKB/planet/">http://www.isi.edu/isd/HPKB/planet/</A></P>
+</BLOCKQUOTE>
+
+<HR SIZE=2>
+
+<P ALIGN=CENTER><FONT FACE=ARIAL SIZE=-1><A
+HREF="./EXPECT.html">About EXPECT</A> |
+Research | <A
+HREF="./pr-members.html">Project Members</A> | <A
+HREF="./publications.html">Publications</A> | <A
+HREF="./demo.html">Movie</A> | <BR>
+| <A HREF="http://www.isi.edu/divisions/div3">Intelligent Systems
+Division</A> | <A HREF="http://www.isi.edu">Information Sciences
+Institute</A> | <A HREF="http://www.usc.edu">USC</A> |</P>
+</TD>
+
+<TD width=50></TD>
+
+</TR>
+
+</TABLE>
+</BODY>
+</HTML>

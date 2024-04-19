@@ -1,0 +1,412 @@
+<html>
+<head>
+<script>
+var limit="0:30"
+if (document.images){
+  var parselimit=limit.split(":");
+  parselimit=parselimit[0]*60+parselimit[1]*1;
+  }
+function resubmit(val) {
+    var myform = eval("document.form"+val);
+    myform.submit();
+}
+function beginrefresh(){
+  if (!document.images)
+      return;
+   if (parselimit==1)
+      window.location.reload();
+   else {
+      parselimit-=1;
+      curmin=Math.floor(parselimit/60);
+      cursec=parselimit%60;
+      if (curmin!=0)
+         curtime=curmin+" minutes and "+cursec+" seconds left until page refresh!";
+      else
+         curtime=cursec+" seconds left until page refresh!";
+      window.status=curtime
+      setTimeout("beginrefresh()",1000)
+   }
+ }
+window.onload=beginrefresh;
+</script>
+</head>
+<table>
+<tr><td colspan=2>----Fri Jun 21 00:01:54 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>American Airlines</td></tr>
+<tr><td><b>than flight number</b></td><td>834</td></tr>
+<tr><td><b>connecting-to flight number2</b></td><td></td></tr>
+<tr><td><b>on date</b></td><td>6/20/2002</td></tr>
+<tr><td><b>from airport</b></td><td>lax</td></tr>
+<tr><td><b>to airport</b></td><td>sjc</td></tr>
+<tr><td><b>for user id</b></td><td>gil@isi.edu</td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;error&gt;&lt;type&gt;Date passed&lt;/type&gt;&lt;attr&gt;date&lt;/attr&gt;&lt;/error&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1024642914)'></td></tr>
+</table><br>
+<form name='form1024642914' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='American Airlines'>
+<input type='hidden' name='val1' value='834'>
+<input type='hidden' name='val2' value=''>
+<input type='hidden' name='val3' value='6/20/2002'>
+<input type='hidden' name='val4' value='lax'>
+<input type='hidden' name='val5' value='sjc'>
+<input type='hidden' name='val6' value='gil@isi.edu'>
+<input type='hidden' name='agent' value='earlier-flight'>
+<input type='hidden' name='email' value='gil@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Thu Jun 20 13:31:55 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>Delta Air Lines</td></tr>
+<tr><td><b>than flight number</b></td><td>89</td></tr>
+<tr><td><b>connecting-to flight number2</b></td><td></td></tr>
+<tr><td><b>on date</b></td><td>6/16/2002</td></tr>
+<tr><td><b>from airport</b></td><td>JFK</td></tr>
+<tr><td><b>to airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>gil@isi.edu</td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;error&gt;&lt;type&gt;Date passed&lt;/type&gt;&lt;attr&gt;date&lt;/attr&gt;&lt;/error&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1024605115)'></td></tr>
+</table><br>
+<form name='form1024605115' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='Delta Air Lines'>
+<input type='hidden' name='val1' value='89'>
+<input type='hidden' name='val2' value=''>
+<input type='hidden' name='val3' value='6/16/2002'>
+<input type='hidden' name='val4' value='JFK'>
+<input type='hidden' name='val5' value='LAX'>
+<input type='hidden' name='val6' value='gil@isi.edu'>
+<input type='hidden' name='agent' value='earlier-flight'>
+<input type='hidden' name='email' value='gil@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Wed Jun 19 11:53:33 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>than flight number</b></td><td>834</td></tr>
+<tr><td><b>connecting-to flight number2</b></td><td></td></tr>
+<tr><td><b>of airline</b></td><td>American Airlines</td></tr>
+<tr><td><b>on date</b></td><td>6/20/2002</td></tr>
+<tr><td><b>from airport</b></td><td>lax</td></tr>
+<tr><td><b>to airport</b></td><td>sjc</td></tr>
+<tr><td><b>for user id</b></td><td>gil@isi.edu</td></tr>
+<tr><td><b> </b></td><td>1 pm</td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;ack&gt;OK&lt;/ack&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1024512813)'></td></tr>
+</table><br>
+<form name='form1024512813' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='834'>
+<input type='hidden' name='val1' value=''>
+<input type='hidden' name='val2' value='American Airlines'>
+<input type='hidden' name='val3' value='6/20/2002'>
+<input type='hidden' name='val4' value='lax'>
+<input type='hidden' name='val5' value='sjc'>
+<input type='hidden' name='val6' value='gil@isi.edu'>
+<input type='hidden' name='val7' value='1 pm'>
+<input type='hidden' name='agent' value='earlier-flight'>
+<input type='hidden' name='email' value='gil@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Sun Jun  9 00:00:55 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>than flight number</b></td><td>934</td></tr>
+<tr><td><b>connecting-to flight number2</b></td><td></td></tr>
+<tr><td><b>on date</b></td><td>6/8/2002</td></tr>
+<tr><td><b>from airport</b></td><td>LAX</td></tr>
+<tr><td><b>to airport</b></td><td>LHR</td></tr>
+<tr><td><b>for user id</b></td><td>gil@isi.edu</td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;error&gt;&lt;type&gt;Date passed&lt;/type&gt;&lt;attr&gt;date&lt;/attr&gt;&lt;/error&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1023606055)'></td></tr>
+</table><br>
+<form name='form1023606055' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='934'>
+<input type='hidden' name='val2' value=''>
+<input type='hidden' name='val3' value='6/8/2002'>
+<input type='hidden' name='val4' value='LAX'>
+<input type='hidden' name='val5' value='LHR'>
+<input type='hidden' name='val6' value='gil@isi.edu'>
+<input type='hidden' name='agent' value='earlier-flight'>
+<input type='hidden' name='email' value='gil@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Thu Jun  6 18:41:20 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>than flight number</b></td><td>1823</td></tr>
+<tr><td><b>connecting-to flight number2</b></td><td></td></tr>
+<tr><td><b>on date</b></td><td>6/5/2002</td></tr>
+<tr><td><b>from airport</b></td><td>SFO</td></tr>
+<tr><td><b>to airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>gil@isi.edu</td></tr>
+
+<tr><td colspan=2><b>Earlier Flights</b></td></tr>
+<tr><td colspan=2>Dear gil_at_isi_edu,<br/>The status of your currently scheduled flight(s) are:<br/># 1823 SFO (6:20 PM) - LAX (7:28 PM) 20 minutes Late<br/><br/>If you would like to return earlier, the following United Airlines flights will arrive earlier than your scheduled flights:<br/><br/>Earlier flights not found<br/> Thank you, <br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1023414080)'></td></tr>
+</table><br>
+<form name='form1023414080' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='1823'>
+<input type='hidden' name='val2' value=''>
+<input type='hidden' name='val3' value='6/5/2002'>
+<input type='hidden' name='val4' value='SFO'>
+<input type='hidden' name='val5' value='LAX'>
+<input type='hidden' name='val6' value='gil@isi.edu'>
+<input type='hidden' name='agent' value='earlier-flight'>
+<input type='hidden' name='email' value='gil@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Thu Jun  6 18:40:52 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>than flight number</b></td><td>1823</td></tr>
+<tr><td><b>connecting-to flight number2</b></td><td></td></tr>
+<tr><td><b>on date</b></td><td>6/5/2002</td></tr>
+<tr><td><b>from airport</b></td><td>SFO</td></tr>
+<tr><td><b>to airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>gil@isi.edu</td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;error&gt;&lt;type&gt;Date passed&lt;/type&gt;&lt;attr&gt;date&lt;/attr&gt;&lt;/error&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1023414052)'></td></tr>
+</table><br>
+<form name='form1023414052' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='1823'>
+<input type='hidden' name='val2' value=''>
+<input type='hidden' name='val3' value='6/5/2002'>
+<input type='hidden' name='val4' value='SFO'>
+<input type='hidden' name='val5' value='LAX'>
+<input type='hidden' name='val6' value='gil@isi.edu'>
+<input type='hidden' name='agent' value='earlier-flight'>
+<input type='hidden' name='email' value='gil@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Mon Jun  3 16:02:32 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>than flight number</b></td><td>7165</td></tr>
+<tr><td><b>connecting-to flight number2</b></td><td>203</td></tr>
+<tr><td><b>on date</b></td><td>6/3/2002</td></tr>
+<tr><td><b>from airport</b></td><td>SYR</td></tr>
+<tr><td><b>to airport</b></td><td>SFO</td></tr>
+<tr><td><b>for user id</b></td><td>gil@isi.edu</td></tr>
+
+<tr><td colspan=2><b>Earlier Flights</b></td></tr>
+<tr><td colspan=2>Dear gil_at_isi_edu,<br/>The status of your currently scheduled flight(s) are:<br/># 7165 SYR (7:00 PM) - IAD (8:00 PM) 10 minutes Late<br/># 203 IAD (8:55 PM) - SFO (11:21 PM) On Time<br/><br/>If you would like to return earlier, the following United Airlines flights will arrive earlier than your scheduled flights:<br/><br/>Earlier flights not found<br/> Thank you, <br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1023145352)'></td></tr>
+</table><br>
+<form name='form1023145352' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='7165'>
+<input type='hidden' name='val2' value='203'>
+<input type='hidden' name='val3' value='6/3/2002'>
+<input type='hidden' name='val4' value='SYR'>
+<input type='hidden' name='val5' value='SFO'>
+<input type='hidden' name='val6' value='gil@isi.edu'>
+<input type='hidden' name='agent' value='earlier-flight'>
+<input type='hidden' name='email' value='gil@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Fri May 31 15:08:48 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>than flight number</b></td><td>89</td></tr>
+<tr><td><b>connecting-to flight number2</b></td><td></td></tr>
+<tr><td><b>of airline</b></td><td>Delta Air Lines</td></tr>
+<tr><td><b>on date</b></td><td>6/16/2002</td></tr>
+<tr><td><b>from airport</b></td><td>JFK</td></tr>
+<tr><td><b>to airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>gil@isi.edu</td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;ack&gt;OK&lt;/ack&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1022882928)'></td></tr>
+</table><br>
+<form name='form1022882928' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='89'>
+<input type='hidden' name='val1' value=''>
+<input type='hidden' name='val2' value='Delta Air Lines'>
+<input type='hidden' name='val3' value='6/16/2002'>
+<input type='hidden' name='val4' value='JFK'>
+<input type='hidden' name='val5' value='LAX'>
+<input type='hidden' name='val6' value='gil@isi.edu'>
+<input type='hidden' name='agent' value='earlier-flight'>
+<input type='hidden' name='email' value='gil@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Fri May 31 15:08:17 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>than flight number</b></td><td>127</td></tr>
+<tr><td><b>connecting-to flight number2</b></td><td>89</td></tr>
+<tr><td><b>of airline</b></td><td>Delta Air Lines</td></tr>
+<tr><td><b>on date</b></td><td>6/16/2002</td></tr>
+<tr><td><b>from airport</b></td><td>MAD</td></tr>
+<tr><td><b>to airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>gil@isi.edu</td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;ack&gt;OK&lt;/ack&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1022882897)'></td></tr>
+</table><br>
+<form name='form1022882897' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='127'>
+<input type='hidden' name='val1' value='89'>
+<input type='hidden' name='val2' value='Delta Air Lines'>
+<input type='hidden' name='val3' value='6/16/2002'>
+<input type='hidden' name='val4' value='MAD'>
+<input type='hidden' name='val5' value='LAX'>
+<input type='hidden' name='val6' value='gil@isi.edu'>
+<input type='hidden' name='agent' value='earlier-flight'>
+<input type='hidden' name='email' value='gil@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Fri May 31 15:06:59 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>than flight number</b></td><td>127</td></tr>
+<tr><td><b>connecting-to flight number2</b></td><td>89</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>on date</b></td><td>6/16/2002</td></tr>
+<tr><td><b>from airport</b></td><td>MAD</td></tr>
+<tr><td><b>to airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>gil@isi.edu</td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;ack&gt;OK&lt;/ack&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1022882819)'></td></tr>
+</table><br>
+<form name='form1022882819' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='127'>
+<input type='hidden' name='val1' value='89'>
+<input type='hidden' name='val2' value='United Airlines'>
+<input type='hidden' name='val3' value='6/16/2002'>
+<input type='hidden' name='val4' value='MAD'>
+<input type='hidden' name='val5' value='LAX'>
+<input type='hidden' name='val6' value='gil@isi.edu'>
+<input type='hidden' name='agent' value='earlier-flight'>
+<input type='hidden' name='email' value='gil@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Fri May 31 15:06:35 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>than flight number</b></td><td>934</td></tr>
+<tr><td><b>connecting-to flight number2</b></td><td></td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>on date</b></td><td>6/8/2002</td></tr>
+<tr><td><b>from airport</b></td><td>LAX</td></tr>
+<tr><td><b>to airport</b></td><td>LHR</td></tr>
+<tr><td><b>for user id</b></td><td>gil@isi.edu</td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;ack&gt;OK&lt;/ack&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1022882795)'></td></tr>
+</table><br>
+<form name='form1022882795' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='934'>
+<input type='hidden' name='val1' value=''>
+<input type='hidden' name='val2' value='United Airlines'>
+<input type='hidden' name='val3' value='6/8/2002'>
+<input type='hidden' name='val4' value='LAX'>
+<input type='hidden' name='val5' value='LHR'>
+<input type='hidden' name='val6' value='gil@isi.edu'>
+<input type='hidden' name='agent' value='earlier-flight'>
+<input type='hidden' name='email' value='gil@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Fri May 31 15:03:41 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>than flight number</b></td><td>1823</td></tr>
+<tr><td><b>connecting-to flight number2</b></td><td></td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>on date</b></td><td>6/5/2002</td></tr>
+<tr><td><b>from airport</b></td><td>SFO</td></tr>
+<tr><td><b>to airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>gil@isi.edu</td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;ack&gt;OK&lt;/ack&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1022882621)'></td></tr>
+</table><br>
+<form name='form1022882621' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='1823'>
+<input type='hidden' name='val1' value=''>
+<input type='hidden' name='val2' value='United Airlines'>
+<input type='hidden' name='val3' value='6/5/2002'>
+<input type='hidden' name='val4' value='SFO'>
+<input type='hidden' name='val5' value='LAX'>
+<input type='hidden' name='val6' value='gil@isi.edu'>
+<input type='hidden' name='agent' value='earlier-flight'>
+<input type='hidden' name='email' value='gil@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Fri May 31 14:57:06 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>than flight number</b></td><td>7165</td></tr>
+<tr><td><b>connecting-to flight number2</b></td><td>203</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>on date</b></td><td>6/3/2002</td></tr>
+<tr><td><b>from airport</b></td><td>SYR</td></tr>
+<tr><td><b>to airport</b></td><td>SFO</td></tr>
+<tr><td><b>for user id</b></td><td>gil@isi.edu</td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;ack&gt;OK&lt;/ack&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1022882226)'></td></tr>
+</table><br>
+<form name='form1022882226' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='7165'>
+<input type='hidden' name='val1' value='203'>
+<input type='hidden' name='val2' value='United Airlines'>
+<input type='hidden' name='val3' value='6/3/2002'>
+<input type='hidden' name='val4' value='SYR'>
+<input type='hidden' name='val5' value='SFO'>
+<input type='hidden' name='val6' value='gil@isi.edu'>
+<input type='hidden' name='agent' value='earlier-flight'>
+<input type='hidden' name='email' value='gil@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Mon Mar  4 16:39:20 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>flight number</b></td><td>1826</td></tr>
+<tr><td><b>flight number</b></td><td>1238</td></tr>
+<tr><td><b>date</b></td><td>3/8/2002</td></tr>
+<tr><td><b>airport</b></td><td>LAX</td></tr>
+<tr><td><b>airport</b></td><td>SEA</td></tr>
+<tr><td><b>user id</b></td><td>gil@isi.edu</td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;ack&gt;61&lt;/ack&gt;</td></tr>
+
+</table><br>
+</html>

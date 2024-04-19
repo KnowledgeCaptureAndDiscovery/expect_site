@@ -1,0 +1,31 @@
+
+#|
+;;; INFORMAL SKETCH OF THIS PROTOTYPE:
+
+Brigade
+  has-part(i): Living-Entity
+
+|#
+
+;;; KM REPRESENTATION OF THIS PROTOTYPE
+
+(Brigade has (superclasses (Living-Group)))
+
+(Brigade now-has (prototypes (_Living-Group1554)))
+
+(_Living-Group1554 has
+  (prototype-of (Brigade))
+  (prototype-scope (Brigade))
+  (prototype-participants (_Living-Group1554 _Living-Entity1555)))
+
+(_Living-Group1554 has (instance-of (Brigade))
+ (has-part (_Living-Entity1555)))
+
+(_Living-Entity1555 has (instance-of (Living-Entity)))
+
+
+#|
+;;; TRADITIONAL FORMAT FOR SME'S LAST ACTIONS WOULD HAVE LOOKED:
+
+
+|#

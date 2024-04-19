@@ -1,0 +1,147 @@
+;;; -*- Mode: Lisp; Package: CYC; Syntax: COMMON-LISP; Base: 10 -*-
+
+(in-package "CYC")
+
+
+;;; ******************** CONCEPTS ********************
+
+
+
+;;; ******************** FUNCTIONS AND RELATIONS ********************
+
+(DEFRELATION |choiceOfManeuverInAction|
+  :ARITY 2
+  :DOMAIN |MilitaryEvent|
+  :RANGE (:and |TemporalObjectType|
+               (:FILLED-BY SUPERRELATIONS |MilitaryManeuver|))
+  :ANNOTATIONS (|IKBConstant|
+                |BinaryPredicate|
+                (DOCUMENTATION "(#$choiceOfManeuverInAction ACT MANEUVERTYPE) means that in the plannning context there exists a requirement such that the #$MilitaryEvent ACT incorporate a #$MilitaryManeuver of type MANEUVERTYPE.")))
+
+(DEFRELATION |finalRedPosDesiredByBlueMt|
+  :ARITY 2
+  :DOMAIN |COASpecificationMicrotheory|
+  :RANGE |COASpecificationMicrotheory|
+  :ANNOTATIONS (|IKBConstant|
+                |BinaryPredicate|
+                (DOCUMENTATION "(#$finalRedPosDesiredByBlueMt FRIENDMT ENEMYMT) means that ENEMYMT represents the final position that the friendly force whose position is detailed in FRIENDMT desires its opponent force to be in at the end of the COA represented in FRIENDMT.")))
+
+(DEFRELATION |finalRedPosDesiredByRedMt|
+  :ARITY 2
+  :DOMAIN |COASpecificationMicrotheory|
+  :RANGE |COASpecificationMicrotheory|
+  :ANNOTATIONS (|IKBConstant|
+                |BinaryPredicate|
+                (DOCUMENTATION "(#$finalRedPosDesiredByRedMt FRIENDMT ENEMYMT) means that ENEMYMT represents the final position that it is anticipated the threat force desires to attain, relative to the friendly force position detailed in FRIENDMT.")))
+
+(DEFPROPERTY |FlanksOfUnitFn| :ARITY 1 :DOMAIN |ModernMilitaryUnit-Deployable|
+ :ANNOTATIONS
+ (|Cyc_Unary-Function| |IKBConstant| |IndividualDenotingFunction|
+  |ReifiableFunction|
+  (DOCUMENTATION "#$FlanksOfUnitFn is a function which applied to      UNIT, an instance of #$ModernMilitaryUnit-Deployable, yields the      #$GeographicalThing-Intangible-MovableLocation that      constitutes the 'flanks' of UNIT.")))
+
+(DEFRELATION |forceRatioRequForActionType|
+  :ARITY 2
+  :DOMAIN (:and |ScriptType| (:FILLED-BY SUPERRELATIONS |MilitaryEvent|))
+  :RANGE |RealNumber|
+  :ANNOTATIONS (|IKBConstant|
+                |BinaryPredicate|
+                (DOCUMENTATION "(#$forceRatioRequForActionType ACT_TYPE RATIO) means that in a military action of type ACT_TYPE the force ratio of units should be at least RATIO in order to keep the operation within the limits of acceptable risk. Ordinarily, having the ratio at or above this level may be considered a precondition for the action's success.")))
+
+(DEFRELATION |FunctionValueForCondFn|
+  :ARITY 3
+  :DOMAINS (|CycFormula| |Cyc_Unary-Function|)
+  :RANGE |Cyc_Thing|
+  :ANNOTATIONS (|PublicConstant|
+                |TernaryFunction|
+                |ReifiableFunction|
+                (DOCUMENTATION "(#$FunctionValueForCondFn COND FUNCTION ARG) is a term for denoting whatever results from applying FUNCTION TO ARG, given that COND is true. Since this is a #$Reifiable function, one can use it to refer to and talk about the result of applying a function to an argument, given a certain condition, even if one does not know (or does not care) what the actual resulting value is, or whether the condition is provable. See also #$FunctionValueFn.")))
+
+(DEFRELATION |initialRedPosMt|
+  :ARITY 2
+  :DOMAIN |COASpecificationMicrotheory|
+  :RANGE |COASpecificationMicrotheory|
+  :ANNOTATIONS (|IKBConstant|
+                |BinaryPredicate|
+                (DOCUMENTATION "(#$initialRedPosMt FRIENDMT ENEMYMT) means that ENEMYMT represents the initial position of a threat force with respect to the position of a friendly force detailed in FRIENDMT.")))
+
+(DEFRELATION |istDecreasesSlotValue|
+  :ARITY 3
+  :DOMAINS (|CycFormula| |CycFormula|)
+  :RANGE (:and |FunctionalSlot| |IntervalBasedQuantitySlot|)
+  :ANNOTATIONS (|PublicConstant|
+                |TernaryPredicate|
+                |SlotTrendPredicate|
+                (DOCUMENTATION "(#$istDecreasesSlotValue INDPROP DEPPROP SLOT) means that the value that SLOT takes in the arg2 position for DEPPROP will be less if INDPROP is provable than it will be if INDPROP is not provable.")))
+
+(DEFRELATION |istIncreasesSlotValue|
+  :ARITY 3
+  :DOMAINS (|CycFormula| |CycFormula|)
+  :RANGE (:and |FunctionalSlot| |IntervalBasedQuantitySlot|)
+  :ANNOTATIONS (|PublicConstant|
+                |TernaryPredicate|
+                |SlotTrendPredicate|
+                (DOCUMENTATION "(#$istIncreasesSlotValue INDPROP DEPPROP SLOT) means that the value that SLOT takes in the arg2 position for DEPPROP will be greater if INDPROP is provable than it will be if INDPROP is not provable.")))
+
+(DEFRELATION |NorthEasternRegionFn|
+  :ANNOTATIONS (|IKBConstant|
+                |GeographicDirectionFunction|
+                |ReifiableFunction|
+                (DOCUMENTATION "A unary function that returns the `northeastern region' of      an instance of #$GeographicalRegion. What counts as the      `northeastern region' is contextually determined. Some of the      factors influencing the determination may be local      geography, cultural identity, and political considerations.")))
+
+(DEFRELATION |NorthWesternRegionFn|
+  :ANNOTATIONS (|IKBConstant|
+                |GeographicDirectionFunction|
+                |ReifiableFunction|
+                (DOCUMENTATION "A unary function that returns the `northwestern region' of      an instance of #$GeographicalRegion. What counts as the      `northwestern region' is contextually determined. Some of the      factors influencing the determination may be local      geography, cultural identity, and political considerations.")))
+
+(DEFRELATION |orgAssignedToAction|
+  :ARITY 2
+  :DOMAIN |MilitaryEvent|
+  :RANGE |ModernMilitaryOrganization|
+  :ANNOTATIONS (|IKBConstant| |ActorSlot|))
+
+(DEFRELATION |SouthEasternRegionFn|
+  :ANNOTATIONS (|IKBConstant|
+                |GeographicDirectionFunction|
+                |ReifiableFunction|
+                (DOCUMENTATION "A unary function that returns the `southeastern region' of      an instance of #$GeographicalRegion. What counts as the      `southeastern region' is contextually determined. Some of the      factors influencing the determination may be local      geography, cultural identity, and political considerations.")))
+
+(DEFRELATION |SouthWesternRegionFn|
+  :ANNOTATIONS (|IKBConstant|
+                |GeographicDirectionFunction|
+                |ReifiableFunction|
+                (DOCUMENTATION "A unary function that returns the `southwestern region' of      an instance of #$GeographicalRegion. What counts as the      `southwestern region' is contextually determined. Some of the      factors influencing the determination may be local      geography, cultural identity, and political considerations.")))
+
+(DEFRELATION |SubAbsFn|
+  :ARITY 2
+  :DOMAIN |SomethingExisting|
+  :RANGE |TemporalThing|
+  :ANNOTATIONS (|BinaryFunction|
+                (DOCUMENTATION "(#$SubAbsFn THING TEMP) denotes the subabstraction of THING picked out by the #$TemporalThing TEMP. Use presupposes that (#$temporalBoundsContain THING TEMP).")))
+
+(DEFRELATION |temporalStage|
+  :ARITY 3
+  :DOMAINS (|SomethingExisting| |Microtheory|)
+  :RANGE |SomethingExisting|
+  :ANNOTATIONS (|IKBConstant|
+                |FunctionalPredicate|
+                |TernaryPredicate|
+                (DOCUMENTATION "(#$temporalStage WHOLE MT SUB) means that SUB is the temporal subastraction of WHOLE that is picked out by the #$mtTime of the #$Microtheory, MT. This presupposes that WHOLE #$temporallySubsumes the specified #$mtTime of MT. In general, assertions of the form (#$temporalStage WHOLE MT SUB) will be made in contexts to which MT itself has access.")))
+
+
+
+;;; ******************** GENERAL ASSERTIONS ********************
+
+(TELL
+ (:ABOUT |Troop-UnitDesignation| |IKBConstant| |MilitaryEchelon|
+  (DOCUMENTATION "The cavalry equivalent of a #$Company-UnitDesignation. U.S. cavalry troops usually consist of three to five cavalry platoons.")))
+
+;;(TELL (|direction| |Troop-UnitDesignation| |Forward|))
+
+(TELL (|commandRankOfEchelon| |Troop-UnitDesignation| |Captain-Rank|))
+
+(TELL
+ (|subEchelonsInOrg| |Troop-UnitDesignation| |Platoon-UnitDesignation|
+  |USArmyEchelon|))
+

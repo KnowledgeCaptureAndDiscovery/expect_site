@@ -1,0 +1,84 @@
+<html>
+
+<head>
+<title>EXPECT</title>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+<p>
+<p><H2>CONCEPT aircraft</H2>
+
+<HR>
+
+<P><H3>DEFINITION:</H3><br>
+<TT>
+<SPACES=2>(defconcept <popup type="Concept">aircraft</popup><br>
+<SPACES=12>:is-primitive <popup type="Concept">order-of-battle-concept</popup><br>
+<SPACES=12>:roles ((<popup type="Relation">r-aircraft-model</popup> :type<br>
+<SPACES=32><popup type="Concept">aircraft-model</popup>)<br>
+<SPACES=20>(<popup type="Relation">r-aircraft-special-capability</popup> :type<br>
+<SPACES=32><popup type="Concept">special-capability</popup>)<br>
+<SPACES=20>(<popup type="Relation">r-aircraft-primary-mission-types</popup> :type<br>
+<SPACES=32><popup type="Concept">mission-type</popup>)<br>
+<SPACES=20>(<popup type="Relation">r-aircraft-mission-types</popup> :type<br>
+<SPACES=32><popup type="Concept">mission-type</popup>)))<br>
+</TT>
+
+<P><H3>SUPERCONCEPTS:</H3><br>
+<TT>
+<SPACES=2> <popup type="Concept">order-of-battle-concept</popup> <br>
+<SPACES=12> <popup type="Concept">domain-concept</popup> <br>
+<SPACES=22> <popup type="Concept">thing</popup> <br>
+</TT>
+
+<P><H3>SUBCONCEPTS:</H3>
+<TT>
+<SPACES=2>  <popup type="Concept">air-rescue-aircraft</popup>  <br>
+<SPACES=2>  <popup type="Concept">airborne-early-warning-aircraft</popup> <br>
+<SPACES=2>  <popup type="Concept">available-aircraft</popup>  <br>
+<SPACES=2>  <popup type="Concept">fighter-attack-aircraft</popup>  <br>
+<SPACES=2>  <popup type="Concept">heavy-bomber-aircraft</popup>  <br>
+<SPACES=2>  <popup type="Concept">helicopter</popup>  <br>
+<SPACES=2>  <popup type="Concept">recce-aircraft</popup>  <br>
+<SPACES=2>  <popup type="Concept">special-operations-aircraft</popup>  <br>
+<SPACES=2>  <popup type="Concept">tactical-airlift-aircraft</popup>  <br>
+<SPACES=2>  <popup type="Concept">tanker-aircraft</popup>  <br>
+</TT>
+
+<P><H3>SIBLINGS:</H3>
+<SPACES=2> <bf> Common parent: </bf> <TT> <popup type="Concept">order-of-battle-concept</popup> <br>
+<SPACES=12>  <popup type="Concept">af-unit</popup>  <br>
+<SPACES=12>  <popup type="Concept">aircraft-model</popup> <br>
+<SPACES=12>  <popup type="Concept">code</popup> <br>
+<SPACES=12>  <popup type="Concept">mission-type</popup> <br>
+<SPACES=12>  <popup type="Concept">special-capability</popup> <br>
+<SPACES=12>  <popup type="Concept">supply-support</popup> <br>
+</TT>
+
+<P><H3>RELATIONS/ROLES INVOLVING THE CONCEPT:</H3><br>
+<TT>
+<popup type="Relation">r-aircraft-mission-types</popup><br>
+<popup type="Relation">r-aircraft-model</popup><br>
+<popup type="Relation">r-aircraft-primary-mission-types</popup><br>
+<popup type="Relation">r-aircraft-special-capability</popup><br>
+<popup type="Relation">r-unit-employment-date</popup><br>
+</TT>
+
+<P><H3>INSTANCES OF THE CONCEPT:</H3><br>
+<TT>
+<popup type="Instance">F16</popup><br>
+<popup type="Instance">JAGUAR</popup><br>
+<popup type="Instance">TORNADO</popup><br>
+</TT>
+
+<P><H3>AGENDA ITEMS THAT REFER TO THIS CONCEPT:</H3><br>
+None
+
+<P><H3>GROUPS THIS CONCEPT BELONGS TO:</H3><br>
+No groups available
+
+<P><H3>MACROCOMPONENTS THIS CONCEPT IS PART OF:</H3><br>
+No macrocomponents available
+
+</html>

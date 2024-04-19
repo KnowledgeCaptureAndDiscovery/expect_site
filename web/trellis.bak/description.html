@@ -1,0 +1,150 @@
+<HTML>
+<HEAD>
+  <TITLE>
+  The TRELLIS Project at ISI
+  </TITLE>
+<STYLE TYPE="text/css">
+  BODY { background-color: white }
+  TD { background-color: #CCCCCC }
+  TD.b { background-color: white }
+
+</STYLE>
+</HEAD>
+<BODY style="FONT-FAMILY: Verdana; FONT-SIZE: 10pt" text='black'>
+<TABLE border='0' cellspacing='1' cellpadding='5' bgcolor='black'>
+<TR>
+  <TD class='top' align='center'><A href='http://www.isi.edu/expect'>
+   <IMG border='1' SRC='../expect.jpg'></A></TD>
+  <TD class='top' width='100%' align='center'><A href='./'>
+   <IMG border='1' SRC='logo.jpg'></A>&nbsp;<A HREF="http://www.isi.edu"><IMG border='1' SRC="../isi.gif"></A><BR>
+<B>Capturing and Exploiting Semantic Relationships for Information and Knowledge Management</B>
+ </TD>
+</TR>
+<TR>
+  <TD valign='top' align='right'>
+  <P><A HREF='./'><B>Main</B></A>
+  <P><A HREF='description.html'><B>Description</B></A>
+  <P><A HREF='demo.html'><B>Demo</B></A>
+  <P><A HREF='people.html'><B>People</B></A>
+  <P><A HREF='publications.html'><B>Publications</B></A>
+  <P><A HREF='research.html'><B>Research</B></A>
+  <P><A HREF='funding.html'><B>Funding</B></A>
+  <P><A HREF='links.html'><B>Links</B></A>
+  <P><A HREF='status.html'><B>Status</B></A>
+  </TD>
+  <TD class='b' valign='top'>
+<H2>Description</H2>
+<P>    	   	 
+<b>Trellis</b> is an interactive environment that allows users to add their observations, viewpoints, and conclusions as they  analyze information by making semantic annotations to documents and other on-line resources. We view this as a knowledge acquisition problem, where users are adding new knowledge to the system based on their expertise as they analyze information.
+     <p>The key innovative ideas behind our approach are:</p>
+     <ul>
+     <li>
+     Supporting users to create knowledge fragments from the original sources
+     as well as from other fragments. The key is to capture how a developer
+     progressively generates new knowledge that results in added value to the
+     original raw information sources. Our goal is to support users to
+     highlight key salient information from large reports and documents, to
+     add new knowledge fragments based on their analysis and integration of
+     existing information, and to finally create semi-formal fragments.</li>
+     </ul>
+
+     <ul>
+     <li>
+     Capturing and exploiting semantic interrelationships among information
+     items. <b>Trellis</b> will 1) facilitate semantic markup of relationships
+     between different pieces of knowledge, 2) exploit semantic markups
+     in given problem solving contexts, and 3) suggest additional relationships
+     based on those already specified by the user. Users will be encouraged
+     and rewarded to add valuable annotations over raw information sources,
+     since the more annotations they add the more help the system can provide
+     in their work. When the user chooses to do little or no annotation,
+     the system will provide weaker support (based on default heuristics and
+     strategies) and will still help the user as much as possible.</li>
+     </ul>
+
+     <ul>
+     <li>
+     Extensible semantic markup of information items and their relationships.
+     Users will be able to draw from a core semantic markup language that will
+     contain a basic domain-independent vocabulary to formulate annotations.
+     They will also be able to extend this core language with additional terminology
+     useful in their particular domain. Using this language, users will
+     be able to annotate not only the information items themselves, but they
+     will also be able to annotate the relationships among them, which will
+     enable them to qualify and describe interdependencies between different
+     information sources and how they relate to a new conclusion or assessment
+     added by the developer. In essence, links between the information
+     items will be first class citizens in the knowledge base.</li>
+     </ul>
+
+     <p>Below is a diagram of the current <b>Trellis</b> architecture. A
+     User typically starts searching the Web for a certain document, or indicating
+     a pointer to a specific Web resource that contains useful information.
+     Each is considered an information item. Information items may include
+     raw information sources (an image, a text document, a video, etc.) as well
+     as products of previous analysis (by the user or by other users.)
+     All the information items are in some sense the knowledge base that <b>Trellis</b>
+     operates on, and we refer to it as the Semantically Marked Information
+     Base, or SMIB. We refer to an information item as an EI2 (Extended
+     Information Items).</p>
+
+     <center>
+	  <img src="arch.jpg"/>
+	  </center>
+
+     <p>Users extend the SMIB using two tools: the Annotation Tool and the Creation
+     Tool. They can use the EI2 Annotation Tool to add semantic annotations
+     to an EI2 to describe its contents and to relate them to other EI2.
+     For example, an EI2 may be annotated as containing a map, or an interesting
+     event. The Annotation tool can also be used to relate EI2.
+     The tool will provide an editor with a set of connectors. An example
+     is a connector to denote that two EI2s are contradictory. This way,
+     the user may link an EI2 that contains a description of a product as having
+     a tag price of $20 to another EI2 that has the same product with
+     a price of $25.</p>
+     <p>The Annotation tool draws on a library of semantic annotations and connectors
+     that will be based on a core domain-independent language defined by the
+     Semantic Annotation Vocabulary. An Interdependency Schema defines
+     a vocabulary for connectors based on a variety of dimensions: pertinence,
+     reliability, credibility, structural (x is example of y, x is part of y,
+     x describes y, etc.) causality (x1 x2...xn contribute to y, x1 x2...xn
+     indicate y, etc.) temporal ordering (x before y, x after y, x simultaneous
+     with y, etc.), argumentation (x may be reason for y, x supports y, etc.).
+     The Domain Schema contains a core vocabulary to annotate the content of
+     documents that extends the Interdependency Schema with domain terms.
+     Our plan is that <b>Trellis</b> will provide a core vocabulary, and users will
+     be able to extend it with additional terms.</p>
+     <p>The Creation Tool enables users to create new EI2. For example,
+     a user may create an EI2 as an assessment that he or she formulates based
+     on existing EI2. If a combination of some subparts of EI2 lets a
+     user conclude or decide on some definition, then the subparts can be captured
+     into a new Information Item, that drops all other irrelevant parts of the
+     original EI2. A new EI2 can be added by extracting or summarizing
+     some of the previous results.</p>
+     <p>Below is a snapshot of the current user interface of <b>Trellis</b>.
+     In this case, a user is using <b>Trellis</b> to decide whether a mission to take
+     Navy SEALs to Athens is feasible. Given the Web sources consulted
+     and the indicated capabilities of the SEAL team (shown on the left), the
+     user has entered the rationale for deciding that the operation is not feasible.</p>
+
+     <center>
+	  <img src="snapshot.jpg"/>
+	  </center>
+
+     <p/><p>We plan to extend <b>Trellis</b> with learning and adaptive techniques
+     in order to offer to the user improved and extended capabilities over time.
+     As users annotate more EI2 and create new EI2 that capture their analysis,
+     <b>Trellis</b> will be able to exploit this information and become increasingly
+     more proactive. We also plan to add a Query Facility that will allow
+     users to search the SMIB based on the semantic annotations of the EI2.
+     It will include a structured editor to guide users to formulate queries
+     using the semantic annotation vocabulary defined in the schemas.</p>
+     <p>In summary, <b>Trellis</b> provides users with tools that enable them to specify
+     information in increasingly more structured form, and to specify semantic
+     annotations that can be exploited for processing and integration of separate
+     information items.</p><br/>
+  </TD>
+</TR>
+</TABLE>
+</BODY>
+</HTML>

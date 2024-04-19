@@ -1,0 +1,69 @@
+;;; This file contains loom definitions for objective levels. It comes
+;;; from Andre's method-ontology.loom, but I didn't want the other stuff
+;;; in that file.
+
+(in-package "EVALUATION")
+(use-package '("EXPECT" "PLANET"))
+(loom::use-loom "EVALUATION" :dont-create-context-p t)
+;;(in-package "EXPECT")
+
+;;; This comes from acp-ontology
+(defconcept level
+  :is-primitive domain-concept
+  :roles ((level-abbreviation :type String)
+	(level-number :type Integer)
+;;          (level-description :type String)))
+	)
+  )
+
+(defconcept objective
+  :is-primitive plan-task)
+
+(defrelation objective-level
+  :domain objective
+  :range level
+  :characteristics :single-valued)
+
+(defconcept objective-at-the-lowest-level
+  :is (:and objective
+	  (:the objective-level lowest-level)))
+
+(defconcept lowest-level
+  #|
+  :is (:and level
+	  (:satisfies ?l1
+		    (:and (level ?l1)
+			(:not (:for-some
+			       (?l2 ?i1 ?i2)
+			       (:and (level ?l2)
+				   (integer ?i1)
+				   (integer ?i2)
+				   (level-number ?l1 ?i1) 
+				   (level-number ?l2 ?i2) 
+				   (< ?i1 ?i2)))))))
+  |#
+  ;; the code above doesn't parse. I'll fill it in explicitly.
+  :is-primitive level
+  )
+
+(defconcept objective-at-the-highest-level
+  :is (:and objective
+	  (:the objective-level highest-level)))
+
+(defconcept highest-level
+  #|
+  :is (:and level
+	  (:satisfies ?l1
+		    (:and (level ?l1)
+			(:not (:for-some
+			       (?l2 ?i1 ?i2)
+			       (:and (level ?l2)
+				   (integer ?i1)
+				   (integer ?i2)
+				   (level-number ?l1 ?i1) 
+				   (level-number ?l2 ?i2) 
+				   (< ?i2 ?i1)))))))
+  |#
+  ;; the code above doesn't parse - I'll fill it in explicitly.
+  :is-primitive level
+  )

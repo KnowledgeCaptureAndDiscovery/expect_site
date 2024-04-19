@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<BODY BGCOLOR="FFFFFF">
+<TITLE>4 The Architecture of INSPECT</TITLE>
+<META NAME="description" CONTENT="4 The Architecture of INSPECT">
+<META NAME="keywords" CONTENT="inspect">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="inspect.css">
+</HEAD>
+<BODY LANG="EN">
+ <H1><A NAME="SECTION00040000000000000000">4 The Architecture of INSPECT</A></H1>
+<P>
+<A NAME="architecture">&#160;</A>
+<P>
+Figure&nbsp;<A HREF="node4.html#figinspectarch">1</A> displays the architecture of INSPECT.
+The system takes the following inputs:
+<P>
+<UL><LI> <EM>An air campaign plan stored in ACPT.</EM> The plan does not
+  need to be complete. However, since many of the problems in
+  INSPECT's library refer to completeness, INSPECT may detect an
+  inordinate number of errors in draft plans. Also, for several of its
+  checks, INSPECT relies on the availability of structured
+  descriptions of the objectives according to the grammar proposed in
+  another related document and incorporated in an extended objectives
+  editor in the IFD-4 version of ACPT [<A HREF="node8.html#Valente96b">Valente <EM>et al.</EM>, 1996</A>]. If those
+  descriptions are not available,<A NAME="tex2html3" HREF="footnode.html#18"><IMG  ALIGN=BOTTOM ALT="gif" SRC="http://www.isi.edu/~valente/images/icons/foot_motif.gif"></A> INSPECT's evaluation capability
+  may become severely limited.<LI> <EM>The friendly order of battle (FOB).</EM> The FOB contains
+  information on the units available for the campaign. This
+  information is used to check, for instance, if all the types of
+  aircraft needed for executing the plan are effectively available.
+</UL>
+<P>
+<P><A NAME="24">&#160;</A><A NAME="figinspectarch">&#160;</A><A NAME="tex2htmlfigure23" HREF="img1.gif">[IMAGE ]</A><BR>
+<STRONG>Figure 1:</STRONG> The architecture of the INSPECT system.<BR>
+<P>
+<P>
+Future versions of INSPECT will use other inputs, such as the Enemy
+Order of Battle (EOB, which contains information about enemy targets),
+measures of measure (MOM, also known as measures of effect or MOE),
+Rules of Engagement (RoE) and Commander's Guidance.
+<P>
+INSPECT produces as output an <EM>agenda</EM> of items which represent
+problems or inconsistencies detected in the plan. The INSPECT agenda is
+presented to the user, who need to revise and eventually solve the
+problems indicated.
+<P>
+INSPECT is seamlessly integrated with ACPT. As a result, INSPECT does
+not interact directly with the user (an air campaign planner); all
+interfacing is done through ACPT. The version of ACPT demonstrated in
+IFD-4 contains a new menu for controlling INSPECT that submits a plan
+to INSPECT and controls a window for displaying an agenda with the
+problems detected by INSPECT. Further, it has a specific window for
+specifying several preference parameters for INSPECT's operation, such
+as which types of inconsistencies INSPECT will report. Technical
+details about the integration of INSPECT and ACPT can be found in
+section&nbsp;<A HREF="node6.html#integration">6.1</A>.
+<P>
+<H2><A NAME="SECTION00041000000000000000">4.1 The Role of EXPECT</A></H2>
+<P>
+As shown in figure&nbsp;<A HREF="node4.html#figinspectarch">1</A>, INSPECT is a
+knowledge-based system created by EXPECT. INSPECT includes a knowledge
+base (entered through EXPECT) of plan evaluation criteria that it uses
+to analyze air campaign plans. EXPECT provides support for acquiring
+knowledge about new criteria and changing existing knowledge. The main
+advantage of using EXPECT to build INSPECT is to achieve adaptability.
+To continue to be useful, INSPECT must be adaptable. Over time, it
+will be desirable to expand its library of problems and modify it as
+new techniques and military technologies become available. In
+addition, since INSPECT will be used in different theaters, it may be
+necessary to modify INSPECT's knowledge base to handle a particular
+campaign. In either case, we would like expert planners to be able to
+make these changes themselves, thus reducing their need to rely on
+programmers.
+<P>
+The EXPECT framework, which was used to construct INSPECT, was
+designed to allow non-programmers to modify a system, while freeing
+them from the need to understand implementation details.  The key idea
+behind EXPECT is that it captures important information about how a
+knowledge-based system was put together and uses this info to guide a
+user in modifying the knowledge base. In the case of INSPECT, this
+empowers planning experts to change the system and thus helps assure
+that it will grow and remain relevant and useful in the years to come.
+<P>
+<H2><A NAME="SECTION00042000000000000000">4.2 Scope of INSPECT</A></H2>
+<P>
+The following are assumptions that restrict the scope of the current
+version of INSPECT. Most were introduced to make feasible the effort
+of building a version of the system for IFD-4, and can be raised for
+future versions.
+<P>
+<UL><LI> INSPECT detects inconsistencies in Air Objectives and Air Tasks.
+  It may be able to check some aspects of CINC's Objectives.  Some
+  inconsistencies can easily be extended for other levels of the plan,
+  while others would require a specific knowledge acquisition effort.<LI> INSPECT does not try to find problems in the global strategy
+  used by the planner in constructing the air campaign plan. Instead,
+  it tries to find local errors and mistakes. In other words, INSPECT
+  concentrates on the product (the air campaign plan) instead of the
+  process (of producing this plan). As a consequence, many of the
+  errors INSPECT tries to find have a ``grammatical' flavor.
+  Therefore, the current version of INSPECT can be compared roughly to
+  a spell and grammar-checker for air campaign plans.<LI> INSPECT does not guarantee that all the errors it finds are
+  actual mistakes in the plan. This is due to the limitations in the
+  current knowledge about air campaign plans: what looks like an error
+  may be in fact a creative (and unusual) solution used by a planner.
+  The last word on what is correct or good in ACPlans is always that
+  of the experts in the Air Force.<LI> Using INSPECT does not create the best plan. INSPECT does not
+  try to evaluate the quality of a plan with respect to the campaign
+  it is related to and its goals, but rather concentrates on the
+  quality of the <EM>formulation</EM> of the plan.<LI> INSPECT only finds the errors that are in its library of types
+  of plan problems. This means that an error not in the library will
+  most likely pass undetected.
+</UL><H2><A NAME="SECTION00043000000000000000">4.3 Future Extensions</A></H2>
+<P>
+Within the same concept (consistency of an air campaign plan) several
+extensions of INSPECT can be proposed:
+<P>
+<DL ><DT><STRONG>Evaluate doctrine</STRONG>
+<DD> The system can be extended to evaluate which
+  aspects of the doctrine are being followed and which are not. This
+  evaluation can be used in a proactive way, i.e. would not only have
+  available a report of the evaluation of the plan doctrinewise, but
+  would allow the user to e.g. ask what changes can be made to
+  improve the plan in terms of doctrine.
+<DT><STRONG>Commander's guidance</STRONG>
+<DD> The system can be extended to evaluate
+  whether or not the current plan is consistent with the policies and
+  guidance defined by the commanders (CinC/JFACC).
+<P>
+ </DL>
+<P>
+These extensions have been discussed with Checkmate during the design
+of INSPECT. They explore the idea that some of the critiquing they
+would do can be seen in a way as a consistency verification.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+<I>Andre Valente <BR>
+Fri Sep 13 19:10:15 PDT 1996</I>
+</ADDRESS>
+</BODY>
+</HTML>

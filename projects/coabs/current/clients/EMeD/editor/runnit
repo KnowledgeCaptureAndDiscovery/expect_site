@@ -1,0 +1,14 @@
+#!/bin/sh
+#
+# @(#)runnit	1.2 97/10/14
+
+# Compute an absolute pathname here because Class.getResource()
+# fails if $CLASSPATH contains "../".
+
+SDKHOME = /nfs/v2/jihie/java/sdk
+SCLASSPATH =.:classes:$(SDKHOME)/lib/dt.jar:$(SDKHOME)/lib/tools.jar:/nfs/v2/jihie/java/XML/xml4j/xml4j.jar:/nfs/v2/jihie/java/XML/saxon
+
+CMD="${SDKHOME}/bin/java -classpath ${SCLASSPATH} MEditor"
+
+echo ${CMD}
+${CMD}

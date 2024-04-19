@@ -1,0 +1,513 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+
+<HTML>
+<HEAD>
+<TITLE>Design of the EXPECT Graphical User Interface</TITLE>
+<META NAME="description" CONTENT="Design of the EXPECT Graphical User Interface">
+<META NAME="keywords" CONTENT="design-document">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+</HEAD>
+<BODY LANG="EN">
+<BODY BGCOLOR="#EEFFFF">
+
+<H1 ALIGN=CENTER>Design of the EXPECT Graphical User Interface</H1> <P
+ALIGN=CENTER><a href="http:http://www.isi.edu/~valente/">Andre
+Valente</a>, Dilip Jain, <a
+href="http:http://www.isi.edu/~gil">Yolanda Gil</a> and Bill
+Swartout</a> <BR>
+  University of Southern California<BR> 
+  Information Sciences Institute<BR> 
+  4676 Admiralty Way, Marina del Rey, CA 90292<BR> 
+  e-mail: valente@isi.edu</P><P>
+<P>
+
+<H1><A>Architecture</A></H1>
+<P>
+The architecture of the EXPECT interface is shown in Figure 1. The
+interface works as a client in a basic client-server architecture
+where the server is a program running EXPECT. The server is currently
+implemented in CommonLisp.
+<P>
+
+<A NAME="figure1"><STRONG>Figure 1:</STRONG> </A>Architecture of the
+EXPECT interface.
+<P>
+<P><IMG ALIGN=center ALT="figure1" SRC="interface-architecture.gif">
+<p>
+
+
+<H2><A>Hardware and Software Decisions</A></H2>
+<P>
+The following decisions were made with respect to the software and
+hwardware to be used in the interface:
+<P>
+<ul>
+
+<li> <b> Active design document </b> This design document is an
+active (dynamic) description of the current design. Whenever the
+interface is finished, it will be possible to start it from here. The
+document refers to some files that have specifications of syntax and
+other features used in EXPECT.
+
+<li> <b> Java Client </b> We use Java for coding the client. <a
+href="http:http://www.symantec.com/">Symantec's</a> <a
+href="http:http://www.symantec.com/vcafe/">Visual Cafe</a> is being
+used as the primary IDE for developing the program. We are using <a
+href="http: http://java.sun.com/products/jdk/1.1/index.html">JDK
+1.1</a> (the latest available is currently JDK 1.1.3), and we will
+change to JDK 1.2 as soon as it is available and Visual Cafe is made
+compatible with it.
+
+<li> <b> Graphical Libraries </b> We are currently using the graphical
+object classes from Symantec. We intend to migrate to using the Java
+Foundation Clas Library (JFC, made by Sun and Netscape, and also known
+as <A HREF="http://java.sun.com/products/jfc/swingdoc-current/doc/index.html">Swing</A>) as soon as it becomes available.
+
+<li> <b> General Libraries </b> We use whenever necessary a library
+called <a
+href="http:http://www.objectspace.com/jgl/jgl_overview.html">JGL</a>,
+freely available and widely used, that provides (among other things)
+for data structures such as sequential containers, sets, maps, and
+queues; reusable algorithms such as sorting, union, and intersection;
+and lightweight object persistence.
+
+<li> <b> Grapher </b> In order to display tree-like structures in the
+EXPECT interface, we are using a Java grapher developed by <a
+href="http:http://www.isi.edu/~zhang/">Wayne Zhang</a> as part of the
+<a href="http:http://panda.isi.edu:80/jake/">JAKE</a> tool.
+
+<li> <b> Client-server communication </b> The initial solution is to
+use sockets over TCP/IP connections, and building our own API over
+it. We will pass structured data through the sockets. To parse it on
+the Java side, we use <a
+href="http:http://www.suntest.com/JavaCC/">JavaCC</a>. However, this
+is not an ideal solution.  We would like to use CORBA (and more
+specifically IIOP) to handle the client-server
+comunication. Unfortunately, while the are already ORBs for Java,
+there is no good ORB for CommonLisp, so we have to wait and see if the
+market evolves and a solution comes up (hopefully soon).
+
+<li> <b> Hypertext </b> A central part of the interface is the use of
+a real hypertext system, more flexible than the one allowed by Web
+Browsers. Since there was no such system available in Java, we
+developed one. Dilip Jain created a hypertext Java class based on a
+similar (but less flexible) class that displays a subset of HTML. This
+HTML displaying class is part of of the <a
+href="http:http://w3.nai.net/~rvdi/jhelp/jhelp.html">jHelp</a>
+package, created by William Giel, who gracefully sent us his source
+code.  jHelp was created originally to build help systems, and we are
+adapting only part of the code. It supports most of HTML2.
+
+We call the extension of HTML handled by our hypertext package
+"JTML". JTML has an additional tag called "popup", where one can
+specify a popup window to appear when an item is clicked. The tag is
+parameterized, so for example: <br>
+<pre> &lt;popup type="Concept"&gtdomain-concept&lt;/popup&gt </pre><br>
+refers to a popup menu called "Concept"; the set of available menus in
+a given system is specified in Java. Below you can find examples of
+JTML files, linked to the specification of how the interface should
+display EXPECT objects. In the future, we may want to redo the
+adaptation departing from a full HTML-displaying package, if such
+class becomes publicly available.
+
+<li> <b> Editor </b> EXPECT asks for very specific and powerful
+editors that reflect EXPECT's repreentation language as closely as
+possible. However, in a first phase, all editors in the EXPECT
+interface are only "dumb", generic, Java text panes. As soon as Swing
+becomes available, we are going to use a more powerful text editing
+tool available in that package. In the long run, we will create
+specialized editors. 
+</ul>
+
+
+<H1><A>Basic GUI Design</A></H1>
+<P>
+
+The basic structure of the EXPECT interface is shown in Figure 2. The
+user starts from window were s/he can select or create a knowledge
+base (KB) to work. Each knowledge base opened has a control panel,
+from where all windows displaying elements of that KB can be
+accessed.
+
+
+<P><A NAME="figure2"> <STRONG>Figure 2:</STRONG> </A>Basic
+organization of the windows in the EXPECT interface.
+<p>
+<P><IMG ALIGN=center ALT="figure2" SRC="interface-window-organiz.gif">
+<P>
+
+From the KB control panel, the user can open or access four basic
+windows, each of them controlling a type of component used in EXPECT:
+domain (concepts, relations, instances), methods, problem-solving
+(tree) and agenda. These four windows share the same structure. They
+have two panels divided vertically. The panel on the left displays the
+structure, and the panel on the right display elements of this
+structure, as set in Table 3.
+<p>
+
+<p>
+<TABLE ALIGN=center BORDER>
+<caption>Table 3: Structures and elements in EXPECT.</caption>
+<tr><th align=left>STRUCTURE <th align=left>ELEMENTS <TD></tr>
+<tr><td>Goal tree </TD> <td>methods (capabilities)</td></tr>
+<tr><td>PS/EXE tree </TD> <td>PS/EXE nodes</td></tr>
+<tr><td>Concept/relation tree </TD><TD> concepts, relations (instances)</td></tr>
+<tr><td>Agenda </TD><TD> agenda Items</td></tr>
+</TABLE>
+<P>
+
+From each of the element or structure-diaplying window, all presented
+or references elements are presented with hypertext links, that is
+clicked lead to their presentation. In principle, the presentation of
+an item is made in the appropriate window (see Table
+3). Alternatively, (see Figure 2), the popu menu accessible from the
+hypertext link enables the user to request to either open a separate
+(smaller) window to browse the element, or open a separate window to
+edit the element (editing is done always in a separate editing
+window).
+
+<H2><A>Contents of the windows presenting elements</A></H2>
+<P>
+
+Each window presenting an element contains a list of data about that
+element. This list can be set up by the user (using Preferences) from
+a basic list of possible types of information pertaining to each type
+of element. Below, we list the possible types of data that can be
+displayed in the presentation of each type of element. For each item,
+a JTML file exemplifying a disply of all the available data is
+offered.
+
+<H4>Method presentation <A href="method-window.jtml">(JTML example)</A></H4>
+<P>
+<UL>
+<LI> Method name
+<LI> Documentation
+<LI> Capability
+<LI> Result type
+<LI> Method Body
+<LI> Result refiner
+<LI> Storage info
+<LI> Post processing
+<LI> Primitivep
+<LI> Natural language description
+<LI> Methods that subsume the method
+<LI> Methods subsumed by the method
+<LI> PS nodes that refer to the method
+<LI> EXE nodes that refer to the method
+<LI> Agenda items that refer to the method/goal
+<LI> Groups the method belongs to
+<LI> Macrocomponents the method belongs to
+</UL>
+
+<H4>Concept presentation <A href="concept-window.jtml">(JTML example)</A></H4>
+<P>
+<UL>
+<LI> Concept name
+<LI> Documentation
+<LI> Concept definition
+<LI> Documentation
+<LI> Superconcepts of the concept
+<LI> Subconcepts of the concept
+<LI> Siblings of the concept
+<LI> Relations/roles involving the concept
+<LI> Instances of the concept
+<LI> Agenda items that refer to the concept
+<LI> Groups the concept belongs to
+<LI> Macrocomponents the concept belongs to
+</UL>
+
+<H4>Relation presentation <A href="relation-window.jtml">(JTML example)</A></H4>
+<P>
+<UL>
+<LI> Relation name
+<LI> Documentation
+<LI> Relation definition
+<LI> Superrelations of the relation
+<LI> Subrelations of the relation
+<LI> Value pairs of the relation
+<LI> Agenda items that refer to the relation
+<LI> Groups the relation belongs to
+<LI> Macrocomponents the relation belongs to
+</UL>
+
+<H4>Instance presentation <A href="instance-window.jtml">(JTML
+example)</A></H4>
+<P>
+<UL
+<LI> Instance name
+<LI> Documentation
+<LI> Instance assertions
+<LI> Groups the instance belongs to
+<LI> Macrocomponents the instance belongs to
+<LI> Agenda items that refer to the instance
+</UL>
+
+<H4>PS node presentation <A href="psnode-window.jtml">(JTML example)</A></H4>
+<P>
+<UL>
+<LI> PS node name
+<LI> PS node type
+<LI> Type-specific info
+<LI> Has-failed
+<LI> Expression
+<LI> Expanded expression
+<LI> Result
+<LI> Subexpressions
+<LI> Parents
+<LI> Children
+<LI> Agenda items that refer to the node
+</UL>
+
+<H4>EXE node presentation <A href="exenode-window.jtml">(JTML example)</A></H4>
+<P>
+<UL>
+<LI> EXE node name
+<LI> EXE node type
+<LI> Type-specific info
+<LI> Has-failed
+<LI> Expanded
+<LI> Expression
+<LI> Expanded expression
+<LI> Result
+<LI> Subexpressions
+<LI> Parents
+<LI> Children
+<LI> Agenda items that refer to the node
+</UL>
+
+
+<H4>Agenda item presentation <A href="agendaitem-window.jtml">(JTML
+example)</A></H4>
+<P>
+<UL>
+<LI> Item type
+<LI> Description
+<LI> Item causes
+<LI> Suggestions of how to handle this item
+<LI> Detailed Description
+  <UL>
+  <LI> Method name OR Concept name OR Relation name OR Instance name
+  <LI> Node
+  <LI> Item class 
+  <LI> Item source
+  <LI> Parameters
+  </UL>
+</UL>
+
+<H4>Agenda error class presentation <A href="agendaerrorclass-window.jtml">(JTML
+example)</A></H4>
+<P>
+<UL>
+<LI> Error type name
+<LI> Current agenda items belonging to this type
+</UL>
+
+<H2><A>Syntax of the Description Languages</A></H2>
+<P>
+
+<H4><A href="method-syntax.html">Syntax of the method language (BNF
+form)</A></H4>
+<P>
+
+<H4><A href="loom-objects-syntax.html">Syntax of Loom objects (concepts,
+instances, relations (BNF form)</A></H4>
+<P>
+
+
+<H2><A>Data structures</A></H2>
+<P>
+
+The definition of the objects in the client is determined in principle
+by EXPECT. There is one class per each type of element/component in
+EXPECT. The class contains the same slots that are defined for that
+element/component in EXPECT. These slots are duplicated in the client:
+one slot holds the contents of the type specified by the server
+(perhaps including some adaptation), and one slots holds the JTML
+string that is used to display that same contents. Specific slots can
+be added by the client in order to store additional display
+information about the EXPECT components, which is specific to the
+client.
+
+In the class definition in Java, all slots are private. Methods to
+access/set the slot values are defined for each slot. These basic
+methods will not make assumptions about the actual behaviour of the
+interface, or the specific client-server model chosen. More complex
+functions (e.g. to update some slots when a certain slot value is set)
+may defined if needed.
+
+<UL>
+<LI> The definition of the contents of a method is defined in the file
+/shared/plans.lisp, in the definition of the structure used to
+represent a method (plan). Additional slots are defined by the client
+to store cross-indexing information. The slots are as follows:
+
+
+<TABLE BORDER>
+    <CAPTION>Method Slots and their Contents</CAPTION>
+    <TR><TH>Slot
+        <TH>Contents
+        <TH>Defined in
+    <TR><TD>name
+        <TD>symbol/string
+        <TD>client & server
+    <TR><TD>capability
+        <TD>sexp, string
+        <TD>client & server
+    <TR><TD>result type
+        <TD>sexp, string
+        <TD>client & server
+    <TR><TD>result-refiner
+        <TD>sexp, string
+        <TD>client & server
+    <TR><TD>storage-info
+        <TD>sexp, string
+        <TD>client & server
+    <TR><TD>post-processing
+        <TD>sexp, string
+        <TD>client & server
+    <TR><TD>method-body
+        <TD>sexp, string
+        <TD>client & server
+    <TR><TD>primitivep
+        <TD>boolean
+        <TD>client & server
+    <TR><TD>capability-nl
+        <TD>string
+        <TD>client & server
+    <TR><TD>super-methods
+        <TD>list of strings
+        <TD>client
+    <TR><TD>sub-methods
+        <TD>list of strings
+        <TD>client
+    <TR><TD>referenced-ps-nodes
+        <TD>list of strings
+        <TD>client
+    <TR><TD>referenced-exe-nodes
+        <TD>list of strings
+        <TD>client
+    <TR><TD>referenced-agenda-items
+        <TD>list of strings
+        <TD>client
+    <TR><TD>groups
+        <TD>list of strings
+        <TD>client
+    <TR><TD>macrocomponents
+        <TD>list of strings
+        <TD>client
+</TABLE>
+</UL>
+
+
+
+<H2><A>Client-Server Communication API</A></H2>
+<P>
+
+The communication is made through sockets. There may be several
+sockets open at the same time, and the code will try to explore the
+inherent parallelism in this setting by using threads. However, it
+will be assumed that every transaction is going to occur using one
+socket only.<P>
+
+All the information in the transaction is going to be
+"serialized". The serialization protocol is as follows.
+
+The character sequence <SAMP>#?</SAMP> indicates the beginning and end
+of a transaction request or answer. A character <SAMP>#</SAMP> is used
+as a separator. The transaction request string has the format:<P>
+
+<SAMP>#?</SAMP><VAR>request-name</VAR><SAMP></SAMP><VAR>parameter-list</VAR><SAMP>#?</SAMP><P>
+
+The <VAR>request-name</VAR> contains the name of the request
+(alphanumeric only, with dashes, e.g., <SAMP>get-concept</SAMP>). The
+<VAR>request-parameters</VAR> is a string-encoded version of the list of
+parameters in the request.<P>
+
+The transaction answer string has the format: <P>
+
+<SAMP>#?</SAMP><VAR>parameter-list</VAR><SAMP>#?</SAMP><P>
+
+The
+<VAR>parameter-list</VAR> is a string-encoded version of the list of
+parameters in the answer.<P>
+
+The encoding of the <VAR>parameter-lists</VAR> obeys the following
+rules:
+<P>
+
+<UL>
+<li> Each parameter is prefixed with an indication of its type, that
+also works as a separator between parameters. The prefixes are
+summarized in the table below.
+
+<li> All parameters are either numbers, strings, booleans, symbols,
+lists or s-expressions.
+
+<li> Numbers and strings are represented as they normally are in Java
+or Lisp, but no quotes are added. In order not to cause any
+confusions, strings that contain the character <SAMP>#</SAMP> must
+escape it as: <SAMP>\#</SAMP>), and cannot start with the character
+<SAMP>-</SAMP> in order to avoid confusing with a number. Strings are
+prefixed with <SAMP>#S</SAMP>. Numbers are prefixed with <SAMP>#N</SAMP>.
+
+<li> Symbols are represented by their symbol-names, prefixed with
+<SAMP>#Y</SAMP>.
+
+<li> Since Lisp does not have an explicit boolean type booleans are
+sent as symbols --- NIL means false, T means true.
+
+<li> Lisp s-expressions (sexp) are sent as a single string. For
+example, a result-type <VAR>(set-of boolean)</VAR> is sent as a string
+<SAMP>(set-of boolean)</SAMP>. They are prefixed with
+<SAMP>#X</SAMP>. Some of them and stored in the Java side as strings,
+while others are decoded ito real JGL lists.
+
+</UL>
+
+
+Not all data types in Lisp or Java can be transmitted as they normally
+are. The correspondence between the types in each side (Lisp, Java)
+and in the transmission are as follows:
+
+<TABLE BORDER>
+  <CAPTION>Type correspondence</CAPTION>
+  <TR><TH>Lisp type
+      <TH>Java type
+      <TH>Transmission type
+      <TH>Prefix
+  <TR><TD>string
+      <TD>string
+      <TD>string
+      <TD>#S
+  <TR><TD>symbol
+      <TD>string
+      <TD>string
+      <TD>#Y
+  <TR><TD>number
+      <TD>number
+      <TD>number
+      <TD>#N
+  <TR><TD>T or NIL
+      <TD>boolean
+      <TD>symbol
+      <TD>#Y
+  <TR><TD>s-expression
+      <TD>list of objects/lists (JGL type "list")
+      <TD>string
+      <TD>#L
+  <TR><TD>s-expression
+      <TD>string
+      <TD>string
+      <TD>#L
+</TABLE>
+
+
+<BR> <HR>
+<P><ADDRESS>
+<I>Andre Valente (valente@isi.edu)<BR>
+Fri Sep  5 19:19:05 PDT 1997</I>
+</ADDRESS>
+</BODY>
+</HTML>

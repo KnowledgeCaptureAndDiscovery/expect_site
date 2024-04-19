@@ -1,0 +1,1352 @@
+
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;;Military Task subtypes from GMU's ontology
+
+
+
+
+
+constant : Surprise-MilitaryTask .
+
+in Mt: ModernMilitaryTacticsMt .
+
+isa : ScriptType TemporalObjectType IKBConstant.
+
+genls : MilitaryTask .
+
+comment : "This is a collection of tasks which are performed covertly, are
+
+used to deceive or decoy enemy forces away from the main body, or are designed
+
+to catch the enemy unawares." .
+
+
+
+constant : ComplexMilitaryTask .
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ScriptType TemporalObjectType IKBConstant.
+
+genls : MilitaryTask .
+
+comment : "A collection of military tasks which require special
+
+coordination efforts in order to be effective." .
+
+
+
+constant : MilitaryEnablingTask .
+
+in Mt: ModernMilitaryTacticsMt .
+
+isa : ScriptType TemporalObjectType IKBConstant.
+
+genls : MilitaryTask .
+
+comment : "A collection of tasks which are transition operations that lead to
+
+the active prosecution of one of the types or forms of military operations. FM
+
+100-40, p18-1." .
+
+
+
+constant : MilitaryCSSTask .
+
+in Mt: ModernMilitaryTacticsMt .
+
+isa : ScriptType TemporalObjectType IKBConstant.
+
+genls : MilitaryTask .
+
+comment: "A collection of tasks normally executed by Combat Service
+
+Support units. In this case, we are considering COA Logistics
+
+functions." .
+
+
+
+
+
+
+
+
+
+
+
+;======================================================================
+
+;======================================================================
+
+; ADDITIONAL OPERATIONS AND TASKS FROM  GMU'S ONTOLOGY
+
+
+
+constant : MobileDefense-MilitaryOperation .
+
+in Mt: ModernMilitaryTacticsMt .
+
+isa: ScriptType TemporalObjectType IKBConstant.
+
+genls: MilitaryDefensiveOperation.
+
+comment : "The mobile defense operation focuses on defeating or
+
+destroying the enemy force by allowing him to advance to a point where
+
+he is exposed to a decisive counterattack by the striking force. The
+
+commander organizes his force into two principal groups: the fixing
+
+force and the striking force. The primary defeat mechanism, the
+
+counterattack, is supplemented by the fires of the fixing force. The
+
+mobile defense is normally conducted by brigades, divisions and corps.
+
+Battalions and smaller units do not conduct a mobile defense because
+
+they are incapable of conducting operations in depth and fighting
+
+multiple engagements while resourcing the striking force, the fixing
+
+force, and a reserve.  FM100- 40, Ch12." .
+
+ 
+
+constant : Envelopment-MilitaryOperation.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ScriptType TemporalObjectType IKBConstant.
+
+genls : MilitaryOffensiveOperation.
+
+comment : "In an envelopment, the main attack focuses on seizing an
+
+objective in the enemy rear that cuts his escape routes and subjects
+
+him to destruction in his current positions. In an envelopment
+
+operation, the commander seeks to strike an assailable flank. It
+
+avoids the enemy's strength - his front - where the effects of his
+
+fires and obstacles are the greatest. FM100-40, p3-18. ".
+
+ 
+
+
+
+
+
+constant : FrontalAttack-MilitaryOperation .
+
+in Mt: ModernMilitaryTacticsMt .
+
+isa : ScriptType TemporalObjectType IKBConstant.
+
+genls : MilitaryOffensiveOperation.
+
+comment : "The frontal attack is a military operation employed either
+
+to overrun or destroy a weaker enemy force or as a supporting or
+
+secondary force in conjunction with other choices of maneuver. ... It
+
+is also used by a friendly force that has overwhelming combat power to
+
+maintain momentum. ... Whereas the penetration is designed as a sharp
+
+attack to rupture the enemy position, the frontal attack is designed
+
+to maintain continuous pressure along the entire front until either a
+
+breach occurs or forces succeed in pushing the enemy back. FM100-40,
+
+p3-16." .
+
+ 
+
+constant : SingleEnvelopment-MilitaryOperation .
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa : ScriptType TemporalObjectType IKBConstant.
+
+genls : Envelopment-MilitaryOperation .
+
+comment : "A military operation which primarily consists of a single
+
+enveloping force (main effort) and a fixing force (supporting effort).".
+
+
+
+constant : DoubleEnvelopment-MilitaryOperation .
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa : ScriptType TemporalObjectType IKBConstant.
+
+genls : Envelopment-MilitaryOperation .
+
+comment : "Consists of a frontal attack (supporting effort) and two
+
+enveloping forces (main effort and supporting effort). FM100-40." .
+
+ 
+
+
+
+
+
+constant : Encirclement-MilitaryOperation .
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa : ScriptType TemporalObjectType IKBConstant.
+
+genls : Envelopment-MilitaryOperation .
+
+comment : "Encirclements are intended to enclose and capture or defeat large
+
+enemy forces. Typically, encirclements either result from penetrations and
+
+envelopments or are an extension of exploitation and pursuit
+
+operations. .. They may be planned sequels or result from the exploitation of
+
+an unforeseen opportunity. They usually result from the linkup of two forces
+
+conducting a double envelopment. However, they can occur in situations where a
+
+major obstacle such as a shoreline can be used as the second encircling wing
+
+by the attacking commander. Although terrain objectives may be designated in
+
+an encirclement, isolation and defeat of enemy forces are the primary
+
+goals. FM100-40, p9-7." .
+
+
+
+constant : TurningMovement-MilitaryOperation .
+
+in Mt: ModernMilitaryTacticsMt .
+
+isa : ScriptType TemporalObjectType IKBConstant.
+
+genls : MilitaryAttack .
+
+comment : "In a turning movement, an attacking force seeks to pass
+
+around and avoid the enemy's main force, then secure an objective deep
+
+in the hostile rear area that causes the enemy to move out of its
+
+current positions or divert major forces to meet the threat. A
+
+commander uses this choice of maneuver when the opportunity exists to
+
+seize vital areas in the hostile rear before the main enemy force can
+
+withdraw or receive support or reinforcements. A supporting effort may
+
+be required to fix the enemy, such as an envelopment. However, a
+
+turning movement is not always accompanied by a supporting effort. A
+
+turning movement differs from an envelopment because the force
+
+conducting a turning movement is normally out of supporting range of
+
+the main body but is within supporting distance. This choice of
+
+maneuver frequently transitions from the attack into an exploitation
+
+or pursuit. Although the turning force is frequently the main force,
+
+it may not always be. FM100-40." .
+
+
+
+;constant : MilitaryCSSTask .
+
+;in Mt: ModernMilitaryTacticsMt .
+
+;isa : ScriptType TemporalObjectType IKBConstant.
+
+;genls : MilitaryTask .
+
+;comment: "A collection of tasks normally executed by Combat Service
+
+;Support units. In this case, we are considering COA Logistics
+
+;functions." .
+
+
+
+;constant : MilitaryEnablingTask .
+
+;in Mt: ModernMilitaryTacticsMt .
+
+;isa : ScriptType TemporalObjectType IKBConstant.
+
+;genls : MilitaryTask .
+
+;comment : "A collection of tasks which are transition operations that lead to
+
+;the active prosecution of one of the types or forms of military operations. FM
+
+;100-40, p18-1." .
+
+
+
+;constant : Surprise-MilitaryTask .
+
+;in Mt: ModernMilitaryTacticsMt .
+
+;isa : ScriptType TemporalObjectType IKBConstant.
+
+;genls : MilitaryTask .
+
+;comment : "This is a collection of tasks which are performed covertly, are
+
+;used to deceive or decoy enemy forces away from the main body, or are designed
+
+;to catch the enemy unawares." .
+
+
+
+;constant : ComplexMilitaryTask .
+
+;in Mt: ModernMilitaryTacticsMt.
+
+;isa: ScriptType TemporalObjectType IKBConstant.
+
+;genls : MilitaryTask .
+
+;comment : "A collection of military tasks which require special
+
+;coordination efforts in order to be effective." .
+
+
+
+
+
+;;;Up TO here everything OK 
+
+;;;
+
+
+
+
+
+;;not in Cyc
+
+
+
+constant : OffensiveTaskForOffensiveMission . 
+
+in Mt: ModernMilitaryTacticsMt .
+
+isa : ScriptType TemporalObjectType IKBConstant.
+
+genls : MilitaryTask .
+
+comment : "The side that retains the initiative through offensive
+
+action forces the enemy to react rather than act (FM100-5, p2-4). This
+
+classification is for those tasks which are viewed as positive means
+
+to seize or maintain the initiative. We consider that maintaining the
+
+initiative requires control of the enemy and control of the
+
+battlefield (maintain mobility / freedom of maneuver; seizure and
+
+control of key / decisive terrain). Accordingly, included here are all
+
+those tasks which could be assigned and whose ultimate
+
+objective/purpose could be to maintain enemy contact, to
+
+preserve/maintain battlefield mobility, to defeat or destroy the
+
+enemy, or to capture terrain." .
+
+ 
+
+;not in Cyc
+
+
+
+constant : OffensiveEconomyOfForceTask .
+
+in Mt: ModernMilitaryTacticsMt .
+
+isa : ScriptType TemporalObjectType IKBConstant.
+
+genls : MilitaryTask .
+
+comment : "A collection of offensive tasks which satisfy the economy of
+
+force principle of war." .
+
+ 
+
+;not in Cyc
+
+
+
+constant : DefensiveEconomyOfForceTask .
+
+in Mt: ModernMilitaryTacticsMt .
+
+isa : ScriptType TemporalObjectType IKBConstant.
+
+genls : MilitaryTask .
+
+comment : "A collection of defensive tasks which satisfy the economy of
+
+force principle of war." .
+
+ 
+
+ 
+
+constant : DenyInformationTask .
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ScriptType TemporalObjectType IKBConstant.
+
+genls : MilitaryEnablingTask ProtectingSomethin
+
+comment : "This is to be a collection of tasks which protect the force
+
+by denying the enemy information." .
+
+ 
+
+constant : DenyPhysicalAccess-MilitaryTask .
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ScriptType TemporalObjectType IKBConstant.
+
+genls : MilitaryEnablingTask  .
+
+comment :  "This is to be a collection of tasks which specifically deny
+
+enemy USE of a specified area (whether for passage or for occupancy or
+
+for reconnaissance). The enemy may or may not already be present in the
+
+area. This includes operations to prevent/impede enemy
+
+mobility/maneuvers, to secure an area, and to disrupt enemy offensive
+
+operations." .
+
+
+
+
+
+ 
+
+constant : IntelligenceCollection-MilitaryTask.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ScriptType TemporalObjectType IKBConstant.
+
+genls : MilitaryEnablingTask .
+
+comment : "The tasks which may be used for the collection of
+
+information." .
+
+ 
+
+constant : TroopMovement .
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ScriptType TemporalObjectType IKBConstant.
+
+genls : MilitaryEnablingTask Translation-LocationChange.
+
+comment : "Troop movement is the transporting of troops from one place
+
+to another by any available means. ... Troop movements are either
+
+administrative or tactical. FM100-40, p17-1." .
+
+ 
+
+;defined above
+
+
+
+;constant : PassageOfLines-MilitaryTask .
+
+;isa: ScriptType TemporalObjectType IKBConstant.
+
+;genls : MilitaryEnablingTask ComplexMilitaryTask 
+
+;       Translation-LocationChange CooperationEvent .
+
+;Comment : "A passage of lines is an generally an operation in which
+
+;one unit moves through another unit's positions with the intent of
+
+;moving into or out of enemy contact. It involves the transfer of
+
+;responsibility for fighting an enemy force from one unit to another in
+
+;close operations.  The commander's reasons for conducting a passage of
+
+;lines are to sustain the tempo of an offensive operation with fresh
+
+;forces; to maintain viability of the defense by introducing fresh
+
+;forces; to transition from a delay or security operation by one force
+
+;to a defense; and to free a unit for another mission or
+
+;task. FM100-40, p18-2. (However, note that a passage of lines could be
+
+;done with or without the enemy being involved. Passage of lines is
+
+;primarily the task of moving one unit through another unit without
+
+;shooting one another. This is sometimes refined by saying passage of
+
+;lines "with contact" - meaning the enemy is shooting at you while you
+
+;do the passage. A passage of lines is usually associated with
+
+;additional tasks such as "withdraw and conduct passage of lines
+
+;through the 1st Brigade," or "conduct a forward passage of lines and
+
+;attack to seize objective slam.  Our source has not seen forward
+
+;passage of lines used to indicate an attack all on its own.)" .
+
+ 
+
+constant : MilitaryDecoyTask .
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ScriptType TemporalObjectType IKBConstant.
+
+genls : Surprise-MilitaryTask DenyInformationTask .
+
+comment : "This is the collection of tasks which may be used as a decoy
+
+to lure enemy forces away from a main area of interest." .
+
+ 
+
+constant : AreaSecurity-MilitaryTask .
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ScriptType TemporalObjectType IKBConstant.
+
+genls : DenyPhysicalAccess-MilitaryTask OffensiveEconomyOfForceTask .
+
+comment : "Area security operations are conducted to protect friendly
+
+forces, installations, and actions in a specific area. ... They focus
+
+on the force, installation, or area to be protected. ... During
+
+conventional operations, area security operations are normally an
+
+economy of force measure designed to ensure the continued sustainment
+
+of the main effort." .
+
+
+
+constant : Camouflage-MilitaryTask .
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ScriptType TemporalObjectType IKBConstant.
+
+genls : DenyInformationTask .
+
+comment : "Camouflage means using some mechanical means (e.g.
+
+camouflage net, bushes, etc.) to mask the identity or location of a
+
+unit." .
+
+ 
+
+constant : Cover-MilitaryTask .
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ScriptType TemporalObjectType IKBConstant.
+
+genls : DenyInformationTask DenyPhysicalAccess-MilitaryTask
+
+IntelligenceCollection-MilitaryTask .
+
+comment : "A covering force accomplishes all the tasks of screening or a guard
+
+forces. ... A covering force operates outside supporting range of the main
+
+body to promote early situational development as it deceives,
+
+disorganizes and destroys enemy forces. ... Unlike a screening or guard
+
+force, a covering force is self-contained and capable of operating
+
+independently of the main body. FM100-40, P16-31/2." .
+
+ 
+
+constant : Deception-MilitaryTask .
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ScriptType TemporalObjectType IKBConstant.
+
+genls : DenyInformationTask Surprise-MilitaryTask
+
+OffensiveEconomyOfForceTask .
+
+comment : "Military deception involves all measures taken to mislead
+
+the enemy by manipulation, distortion, or falsification of evidence to
+
+induce him to react in a manner prejudicial to his interests. Military
+
+deception is the primary means to influence the enemy commander's
+
+decisions through distortion, concealment, and falsification of
+
+friendly intentions, status, dispositions, capabilities, courses of
+
+action, and strengths. FM 100-40, pB- 5." .
+
+
+
+
+
+
+
+constant : Demonstration-MilitaryTask .
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ScriptType TemporalObjectType IKBConstant.
+
+genls : MilitaryDecoyTask OffensiveEconomyOfForceTask .
+
+comment : "A demonstration is a show of force in a location where the
+
+commander does not seek to conduct decisive operations.  Its aim is to
+
+deceive the enemy. It is similar to a feint, except that contact with
+
+the enemy is not sought. FM100-40, p3-8." .
+
+
+
+
+
+constant : Deny-MilitaryTask.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ScriptType TemporalObjectType IKBConstant.
+
+genls : DenyInformationTask DenyPhysicalAccess-MilitaryTask .
+
+comment :  "Deny" taken from FM 100-40, Appendix A, Figure A-1, p
+
+A-2." .
+
+ 
+
+constant : Detect-MilitaryTask .
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ScriptType TemporalObjectType IKBConstant.
+
+genls : IntelligenceCollection-MilitaryTask .
+
+comment: " Detect is to employ units (e.g.patrols, long-range reconnaissance
+
+unit) or some mechanical means (e.g. sensors) to identify presence and / or
+
+intent of enemy forces. Taken from FM 100-40, Appendix A, Figure A-1, p A-2."
+
+.
+
+
+
+constant : EmplaceObstacle .
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ScriptType TemporalObjectType IKBConstant.
+
+genls :  DenyPhysicalAccess-MilitaryTask .
+
+comment : "EmplaceObstacle involves the positioning of physical
+
+barriers, such as mines, tank ditches, barbed wire, etc.  "Emplace"
+
+taken from FM 100-40, Appendix A, Figure A-1, p A-2." .
+
+ 
+
+constant : Encircle-MilitaryTask .
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ScriptType TemporalObjectType IKBConstant.
+
+genls : MilitaryOffensiveTask ComplexMilitaryTask Translation-LocationChange .
+
+comment : "This task is assigned to a unit which is an encircling
+
+force in an encirclement operation (see FM100-40, pp 9-7 - 9-16). The
+
+unit may be designated as the main effort or a supporting effort (if a
+
+major obstacle, such as a shoreline, cannot serve as a second
+
+encircling wing). Although terrain objectives may be designated in an
+
+encirclement, isolation and defeat of enemy forces are the primary
+
+goals." .
+
+
+
+constant : Envelope-MilitaryTask .
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ScriptType TemporalObjectType IKBConstant.
+
+genls : MilitaryOffensiveTask ComplexMilitaryTask Translation-LocationChange .
+
+comment : "This task is assigned to a unit which is an enveloping force
+
+in an envelopment operation (see FM100-40, pp3-18 - 3-22. The unit may be
+
+designated as the main effort or a supporting effort (for a double
+
+envelopment or encirclement operation only)." .
+
+ 
+
+constant : Exploit-MilitaryTask .
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ScriptType TemporalObjectType IKBConstant.
+
+genls : MilitaryOffensiveTask .
+
+;genls : OffensiveTaskForOffensiveMission .
+
+comment : "The purpose of exploitation is to destroy the opposing enemy
+
+unit. FM 100-40, p6-1." .
+
+
+
+constant : Feint-MilitaryTask .
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ScriptType TemporalObjectType IKBConstant.
+
+genls : MilitaryDecoyTask AttackOnTangible
+
+OffensiveEconomyOfForceTask .
+
+comment: "...a commander employs a feint when he intends to draw the
+
+enemy's attention away from the area of the main attack and induce the
+
+enemy to move his reserves or shift his fire support in reaction to the
+
+feint. A feint must appear real; therefore some contact with the enemy is
+
+required. However, a feint does not attempt to seize or occupy terrain.
+
+FM100-40, p3-7." .
+
+
+
+constant : Guard-MilitaryTask .
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ScriptType TemporalObjectType IKBConstant.
+
+genls : DenyInformationTask DenyPhysicalAccess-MilitaryTask
+
+IntelligenceCollection-MilitaryTask  .         
+
+comment : "A guard accomplishes all the tasks of a screen. A guard
+
+differs from a screen in that a guard force contains sufficient combat
+
+power to defeat, repel or fix the lead elements of an enemy ground
+
+force before they can engage the main body with direct fire. FM100-40,
+
+P16- 17." .
+
+ 
+
+constant : Identify-MilitaryTask .
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ScriptType TemporalObjectType IKBConstant.
+
+genls : IntelligenceCollection-MilitaryTask  .
+
+comment: "Identify is to employ units (e.g.patrols, long-range
+
+reconnaissance unit) or some mechanical means (e.g. sensors) to
+
+determine type and/or designation of enemy forces (e.g. is it a tank
+
+unit?).  Taken from FM 100-40, Appendix A, Figure A-1, p A-2." .
+
+ 
+
+constant : Infiltrate-MilitaryTask .
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ScriptType TemporalObjectType IKBConstant.
+
+genls : Surprise-MilitaryTask ComplexMilitaryTask Translation-LocationChange .
+
+comment : "An infiltration is the covert movement through or into an
+
+area occupied by enemy forces to occupy a position of advantage in the
+
+enemy's rear while exposing only small elements to enemy defensive
+
+fires. ... To successfully infiltrate, the force must avoid detection
+
+and engagement. Since this requirement limits the size of the
+
+infiltrating force, infiltration is normally used in conjunction with,
+
+and in support of, the other choices of maneuver. Infiltration is also
+
+a movement technique used within friendly territory to move forces in
+
+
+
+small groups at extended or irregular intervals. FM100-40, p3-27,28."
+
+.
+
+ 
+
+constant : Locate-MilitaryTask .
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ScriptType TemporalObjectType IKBConstant.
+
+genls : IntelligenceCollection-MilitaryTask  .
+
+comment:   "Locate is to employ units (e.g.patrols, long-range
+
+reconnaissance unit) or some mechanical means (e.g. sensors)  to
+
+identify
+
+location of enemy forces. Taken from FM 100-40, Appendix A, Figure A-
+
+1, p A-2."
+
+ 
+
+constant : MobileDefenseFix-MilitaryTask .
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ScriptType TemporalObjectType IKBConstant.
+
+genls : Delay-MilitaryTask ComplexMilitaryTask Fix-MilitaryTask
+
+MilitaryDefensiveTask. 
+
+comment : "This task is assigned to a unit which is the fixing force
+
+in a mobile defense operation. Organized by the commander with the
+
+minimum combat power needed to accomplish its mission, the fixing
+
+force turns, blocks and delays the attacking enemy force. It tries to
+
+shape the enemy penetration or contain his advance. Typically, it has
+
+the majority of the countermobility assets of the defending unit. The
+
+operations of the fixing force establish the conditions for a decisive
+
+attack by the striking force at a favorable tactical location. (see
+
+FM100-40, Ch12)" .
+
+
+
+F:
+
+(implies
+
+   (and 
+
+     (isa ?OP MobileDefenseOperation)
+
+     (isa ?TASK Fix-MilitaryTask)
+
+     (unitAssignedToTask ?TASK ?UNIT)
+
+     (or
+
+       (mainTaskOfOperation ?OP ?TASK)
+
+       (supportingTaskOfOperation ?OP ?TASK)))
+
+   (isa ?TASK MobileDefenseFix-MilitaryTask)).
+
+
+
+
+
+constant : MobileDefenseStrike-MilitaryTask .
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ScriptType TemporalObjectType IKBConstant.
+
+genls : MilitaryDefensiveTask ComplexMilitaryTask AttackOnTangible .
+
+comment : "This task is assigned to a unit which is the striking force
+
+in a mobile defense operation. The striking force decisively engages
+
+the enemy as he becomes exposed in his attempts to overcome the fixing
+
+force. The striking force contains the maximum combat power available
+
+to the commander at the time of its force's counterattack. (see
+
+FM100-40, Ch12)" .
+
+ 
+
+constant : MovementToContact-MilitaryTask .
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ScriptType TemporalObjectType IKBConstant.
+
+genls : OffensiveTaskForOffensiveMission Translation-LocationChange
+
+IntelligenceCollection-MilitaryTask  .
+
+comment: "A movement to contact is an attack to gain or reestablish
+
+contact with the enemy. A properly executed movement to contact
+
+develops the combat situation and maintains the commander's freedom of
+
+action after contact is gained.  This flexibility is essential in
+
+maintaining the initiative. Enemy forces (other than the final
+
+objective) within the assigned area will be put at a disadvantage by
+
+being disrupted, fixed or defeated. The movement to contact terminates
+
+when it reaches its final objective or limit of advance, or must
+
+conduct a deliberate attack, a hasty defense, or retrograde. FM100-40,
+
+Ch4." .
+
+
+
+constant : NightAttack-MilitaryTask .
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ScriptType TemporalObjectType IKBConstant.
+
+genls : ComplexMilitaryTask AttackOnTangible .
+
+comment : "A commander orders a night attack or an attack under
+
+conditions of limited visibility when a day attack continues into the
+
+night or when a day attack could result in heavy losses." .
+
+
+
+constant : Obscure-MilitaryTask .
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ScriptType TemporalObjectType IKBConstant.
+
+genls : DenyInformationTask .
+
+comment : "Obscure means using some smoke-like means  to mask the
+
+identity, location or direction of movement of a unit." .
+
+ 
+
+
+
+constant : Patrol-MilitaryTask .
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ScriptType TemporalObjectType IKBConstant.
+
+genls : IntelligenceCollection-MilitaryTask  .
+
+comment: "Patrol is a task which can be assigned to any kind of unit
+
+to gather all available information in a geographical region Very
+
+similar to reconnaissance, except reconnaissance is usually assigned
+
+to a larger unit."  .
+
+
+
+constant : Pursue-MilitaryTask .
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ScriptType TemporalObjectType IKBConstant.
+
+genls : OffensiveTaskForOffensiveMission .
+
+comment: "The goal of a pursuit is to destroy enemy forces. FM 100-40,
+
+p7-1." .
+
+ 
+
+constant : Raid-MilitaryTask .
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ScriptType TemporalObjectType IKBConstant.
+
+genls : IntelligenceCollection-MilitaryTask  OffensiveTaskForDefensiveMission
+
+MilitaryInterferenceAction .
+
+comment : "A raid is usually a limited objective, small-scale
+
+operation involving swift penetration of enemy territory. It is
+
+designed to secure information, confuse the enemy, or destroy his
+
+installations. FM100-40, p3-7." .
+
+
+
+ 
+
+constant : ReArm-MilitaryTask .
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ScriptType TemporalObjectType IKBConstant.
+
+genls : MilitaryCSSTask ComplexMilitaryTask .
+
+ 
+
+constant : RearwardPassageOfLines-MilitaryTask .
+
+isa: ScriptType TemporalObjectType IKBConstant.
+
+genls : PassageOfLines-MilitaryTask MilitaryDefensiveTask .
+
+comment : "A rearward passage of lines occurs when a unit passes
+
+through another unit while moving away from the enemy. FM100-40, p18-
+
+2. A rearward passage of lines is similar in concept to a forward
+
+passage of lines. It continues the defense or retrograde operation. It
+
+maintains enemy contact while allowing for the recovery of the
+
+security force or the replacement of a unit that is
+
+combat-ineffective." .
+
+ 
+
+constant : ReconnaissanceInForce .
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ScriptType TemporalObjectType IKBConstant.
+
+genls : MilitaryOffensiveTask.
+
+;; genls : Reconnaissance-MilitaryTask . ;; there is no such task defined.
+
+comment : "ReconnaissanceInForce is a focused collection effort in a
+
+geographic area with a force large enough to engage the enemy if
+
+detected.  It is performed before, during, and after other operations
+
+to provide information used by the commander to confirm or modify his
+
+course of action. FM100-40, p15-1." .
+
+ 
+
+constant : ReConstitute-MilitaryTask .
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ScriptType TemporalObjectType IKBConstant.
+
+genls : MilitaryCSSTask .
+
+comment : "This is the task to add personnel to an attrited force." .
+
+ 
+
+constant : ReFuel-MilitaryTask .
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ScriptType TemporalObjectType IKBConstant.
+
+genls : MilitaryCSSTask ComplexMilitaryTask .
+
+ 
+
+constant : RelieveInPlace-MilitaryTask.
+
+isa: ScriptType TemporalObjectType IKBConstant.
+
+genls : MilitaryEnablingTask ComplexMilitaryTask .
+
+comment : "A relief in place is an enabling operation in which ... all
+
+or part of a unit is replaced in an area by an incoming
+
+unit. ... Normally, the unit relieved is defending. However, a relief
+
+may set the stage for a resumption of offensive operations. A relief
+
+may also serve to free the relieved unit for other tasks, such as
+
+decontamination, reconstitution, routine rest, resupply, maintenance,
+
+or specialized training. Sometimes, as part of a larger operation, a
+
+commander wants the enemy to discover the relief because it will cause
+
+the enemy to do something in response that is prejudicial to his
+
+interest, such as move reserves from an area where the friendly
+
+commander wants to conduct a penetration. FM100-40, p18- 14,15." .
+
+ 
+
+constant : Retire-MilitaryTask .
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ScriptType TemporalObjectType IKBConstant.
+
+genls : MilitaryDefensiveTask DefensiveEconomyOfForceTask
+
+Translation-LocationChange Withdrawal.
+
+comment : "A retirement is a task in a retrograde operation in which a
+
+force out of contact with the enemy moves away from the enemy, usually
+
+to the rear. A retiring unit organizes for combat but does not
+
+anticipate interference by enemy ground forces. FM100-40, p13-29." .
+
+ 
+
+constant : Screen-MilitaryTask .
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ScriptType TemporalObjectType IKBConstant.
+
+genls : DenyInformationTask DenyPhysicalAccess-MilitaryTask
+
+IntelligenceCollection-MilitaryTask  OffensiveEconomyOfForceTask .
+
+comment : "A screen provides primarily early warning. It observes,
+
+identifies and reports enemy actions. Generally, a screening force
+
+engages and destroys enemy reconnaissance elements within its
+
+capabilities (thereby helping to deny information to the enemy), but
+
+otherwise fights only in self-defense. ... A screen lacks combat power
+
+to develop the situation. FM100-40, P16-17."
+
+ 
+
+constant : SearchAndAttack-MilitaryTask .
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ScriptType TemporalObjectType IKBConstant.
+
+genls : IntelligenceCollection-MilitaryTask  DenyPhysicalAccess-MilitaryTask Ambush-MilitaryTask .
+
+comment : "Search and attack missions are conducted by smaller
+
+dismounted maneuver units and air cavalry in large areas of find and
+
+destroy enemy forces or to collect information. [Units] may also carry
+
+them out ... as an area security mission to clear assigned zones. FM100-
+
+40, p3-6,7." .
+
+ 
+
+constant : SpoilingAttack-MilitaryTask.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ScriptType TemporalObjectType IKBConstant.
+
+genls : DenyPhysicalAccess-MilitaryTask OffensiveTaskForDefensiveMission
+
+AttackOnTangible MilitaryDefensiveTask MilitaryInterferenceAction .
+
+comment : "Denies enemy use of assembly areas or positions during
+
+enemy attack preparations (i.e. in advance of the main battle in the
+
+engagement area)." .
+
+
+
+constant : Suppress-MilitaryTask .
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ScriptType TemporalObjectType IKBConstant.
+
+genls : MilitaryDefensiveTask MilitaryInterferenceAction .
+
+comment : "To suppress is to integrate direct and indirect fires to
+
+upset an enemy's accuracy and rate of fire. Suppression is never an
+
+ends in itself, it is the means to an end. "Suppress" taken from FM
+
+100-40, Appendix A, Figure A-1, p A-2." .
+
+ 
+
+constant : TurningMovement-MilitaryTask .
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ScriptType TemporalObjectType IKBConstant.
+
+genls : MilitaryOffensiveTask .
+
+comment : "This task is assigned to a unit which is conducting the
+
+turning movement in a turning movement operation. In a turning
+
+movement, an attacking force seeks to pass around and avoid the
+
+enemy's main force, then secure an objective deep in the hostile rear
+
+area that causes the enemy to move out of its current positions or
+
+divert major forces to meet the threat. A turning movement differs
+
+from an envelopment because the force conducting a turning movement is
+
+normally out of supporting range of the main body but is within
+
+supporting distance. FM100-40." .
+
+ 
+
+ 
+
+constant : WithdrawFromCombat-MilitaryTask .
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ScriptType TemporalObjectType IKBConstant.
+
+genls : MilitaryDefensiveTask DefensiveEconomyOfForceTask LeavingAPlace .
+
+comment : "This task is a planned, voluntary disengagement from the
+
+enemy." .
+
+
+
+constant : WithdrawUnderPressure-MilitaryTask .
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ScriptType TemporalObjectType IKBConstant.
+
+genls : WithdrawFromCombat-MilitaryTask .
+
+comment : "This task is a planned, voluntary disengagement from the
+
+enemy which is performed under enemy pressure." .
+
+ 
+

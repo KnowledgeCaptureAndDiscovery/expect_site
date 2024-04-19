@@ -1,0 +1,220 @@
+<html>
+<head>
+<script>
+var limit="0:30"
+if (document.images){
+  var parselimit=limit.split(":");
+  parselimit=parselimit[0]*60+parselimit[1]*1;
+  }
+function resubmit(val) {
+    var myform = eval("document.form"+val);
+    myform.submit();
+}
+function beginrefresh(){
+  if (!document.images)
+      return;
+   if (parselimit==1)
+      window.location.reload();
+   else {
+      parselimit-=1;
+      curmin=Math.floor(parselimit/60);
+      cursec=parselimit%60;
+      if (curmin!=0)
+         curtime=curmin+" minutes and "+cursec+" seconds left until page refresh!";
+      else
+         curtime=cursec+" seconds left until page refresh!";
+      window.status=curtime
+      setTimeout("beginrefresh()",1000)
+   }
+ }
+window.onload=beginrefresh;
+</script>
+</head>
+<table>
+<tr><td colspan=2>----Sun Nov 10 14:18:54 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>0399</td></tr>
+<tr><td><b>of connecting flight number</b></td><td>1473</td></tr>
+<tr><td><b>on date</b></td><td>11/12/2002</td></tr>
+<tr><td><b>from airport</b></td><td>IAD</td></tr>
+<tr><td><b>to airport</b></td><td>PDX</td></tr>
+<tr><td><b>at departs</b></td><td>6 am</td></tr>
+<tr><td><b> </b></td><td>anytime</td></tr>
+<tr><td><b>for user id</b></td><td>dschmorrow@darpa.mil</td></tr>
+
+<tr><td colspan=2><b>Connectinh Flights</b></td></tr>
+<tr><td colspan=2>Dear dschmorrow_at_darpa_mil,<br/>Your connecting United Airlines flight 1473 will depart at 9:15 AM (On Time) at gate Not Available.<br/><br/>If you would like to leave earlier, the following United Airlines flights will depart earlier than your scheduled flight:<br/><br/>Earlier flights not found<br/> Thank you, <br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1036966734)'></td></tr>
+</table><br>
+<form name='form1036966734' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='0399'>
+<input type='hidden' name='val2' value='1473'>
+<input type='hidden' name='val3' value='11/12/2002'>
+<input type='hidden' name='val4' value='IAD'>
+<input type='hidden' name='val5' value='PDX'>
+<input type='hidden' name='val6' value='6 am'>
+<input type='hidden' name='val7' value='anytime'>
+<input type='hidden' name='val8' value='dschmorrow@darpa.mil'>
+<input type='hidden' name='agent' value='connect-flight'>
+<input type='hidden' name='email' value='dschmorrow@darpa.mil'>
+</form>
+
+<table>
+<tr><td colspan=2>----Sun Nov 10 14:18:54 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>1410</td></tr>
+<tr><td><b>of connecting flight number</b></td><td>0962</td></tr>
+<tr><td><b>on date</b></td><td>11/14/2002</td></tr>
+<tr><td><b>from airport</b></td><td>PDX</td></tr>
+<tr><td><b>to airport</b></td><td>IAD</td></tr>
+<tr><td><b>at departs</b></td><td>6 am</td></tr>
+<tr><td><b> </b></td><td>anytime</td></tr>
+<tr><td><b>for user id</b></td><td>dschmorrow@darpa.mil</td></tr>
+
+<tr><td colspan=2><b>Connectinh Flights</b></td></tr>
+<tr><td colspan=2>Dear dschmorrow_at_darpa_mil,<br/>Your connecting United Airlines flight 0962 will depart at 10:25 AM (On Time) at gate Not Available.<br/><br/>If you would like to leave earlier, the following United Airlines flights will depart earlier than your scheduled flight:<br/><br/>Earlier flights not found<br/> Thank you, <br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1036966734)'></td></tr>
+</table><br>
+<form name='form1036966734' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='1410'>
+<input type='hidden' name='val2' value='0962'>
+<input type='hidden' name='val3' value='11/14/2002'>
+<input type='hidden' name='val4' value='PDX'>
+<input type='hidden' name='val5' value='IAD'>
+<input type='hidden' name='val6' value='6 am'>
+<input type='hidden' name='val7' value='anytime'>
+<input type='hidden' name='val8' value='dschmorrow@darpa.mil'>
+<input type='hidden' name='agent' value='connect-flight'>
+<input type='hidden' name='email' value='dschmorrow@darpa.mil'>
+</form>
+
+<table>
+<tr><td colspan=2>----Sun Nov 10 14:09:09 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>0399</td></tr>
+<tr><td><b>of connecting flight number</b></td><td>1473</td></tr>
+<tr><td><b>on date</b></td><td>11/12/2002</td></tr>
+<tr><td><b>from airport</b></td><td>IAD</td></tr>
+<tr><td><b>to airport</b></td><td>PDX</td></tr>
+<tr><td><b>at departs</b></td><td>6 am</td></tr>
+<tr><td><b> </b></td><td>anytime</td></tr>
+<tr><td><b>for user id</b></td><td>dschmorrow@darpa.mil</td></tr>
+
+<tr><td colspan=2><b>Connectinh Flights</b></td></tr>
+<tr><td colspan=2>Dear dschmorrow_at_darpa_mil,<br/>Your connecting United Airlines flight 1473 will depart at 9:16 AM (On Time) at gate Not Available.<br/><br/>If you would like to leave earlier, the following United Airlines flights will depart earlier than your scheduled flight:<br/><br/>Earlier flights not found<br/> Thank you, <br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1036966149)'></td></tr>
+</table><br>
+<form name='form1036966149' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='0399'>
+<input type='hidden' name='val2' value='1473'>
+<input type='hidden' name='val3' value='11/12/2002'>
+<input type='hidden' name='val4' value='IAD'>
+<input type='hidden' name='val5' value='PDX'>
+<input type='hidden' name='val6' value='6 am'>
+<input type='hidden' name='val7' value='anytime'>
+<input type='hidden' name='val8' value='dschmorrow@darpa.mil'>
+<input type='hidden' name='agent' value='connect-flight'>
+<input type='hidden' name='email' value='dschmorrow@darpa.mil'>
+</form>
+
+<table>
+<tr><td colspan=2>----Sun Nov 10 14:08:44 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>1410</td></tr>
+<tr><td><b>of connecting flight number</b></td><td>0962</td></tr>
+<tr><td><b>on date</b></td><td>11/14/2002</td></tr>
+<tr><td><b>from airport</b></td><td>PDX</td></tr>
+<tr><td><b>to airport</b></td><td>IAD</td></tr>
+<tr><td><b>at departs</b></td><td>6 am</td></tr>
+<tr><td><b> </b></td><td>anytime</td></tr>
+<tr><td><b>for user id</b></td><td>dschmorrow@darpa.mil</td></tr>
+
+<tr><td colspan=2><b>Connectinh Flights</b></td></tr>
+<tr><td colspan=2>Dear dschmorrow_at_darpa_mil,<br/>Your connecting United Airlines flight 0962 will depart at 10:25 AM (On Time) at gate Not Available.<br/><br/>If you would like to leave earlier, the following United Airlines flights will depart earlier than your scheduled flight:<br/><br/>Earlier flights not found<br/> Thank you, <br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1036966124)'></td></tr>
+</table><br>
+<form name='form1036966124' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='1410'>
+<input type='hidden' name='val2' value='0962'>
+<input type='hidden' name='val3' value='11/14/2002'>
+<input type='hidden' name='val4' value='PDX'>
+<input type='hidden' name='val5' value='IAD'>
+<input type='hidden' name='val6' value='6 am'>
+<input type='hidden' name='val7' value='anytime'>
+<input type='hidden' name='val8' value='dschmorrow@darpa.mil'>
+<input type='hidden' name='agent' value='connect-flight'>
+<input type='hidden' name='email' value='dschmorrow@darpa.mil'>
+</form>
+
+<table>
+<tr><td colspan=2>----Wed Oct 23 14:59:14 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>0435</td></tr>
+<tr><td><b>of connecting flight number</b></td><td>0214</td></tr>
+<tr><td><b>on date</b></td><td>10/23/2002</td></tr>
+<tr><td><b>from airport</b></td><td>SAT</td></tr>
+<tr><td><b>to airport</b></td><td>IAD</td></tr>
+<tr><td><b>at departs</b></td><td>6 pm</td></tr>
+<tr><td><b> </b></td><td>anytime</td></tr>
+<tr><td><b>for user id</b></td><td>dschmorrow@darpa.mil</td></tr>
+
+<tr><td colspan=2><b>Connectinh Flights</b></td></tr>
+<tr><td colspan=2>Dear dschmorrow_at_darpa_mil,<br/>Your connecting United Airlines flight 0214 will depart at 12:37 PM (2 minutes Late) at gate 12.<br/><br/>If you would like to leave earlier, the following United Airlines flights will depart earlier than your scheduled flight:<br/><br/>Earlier flights not found<br/> Thank you, <br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1035410354)'></td></tr>
+</table><br>
+<form name='form1035410354' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='0435'>
+<input type='hidden' name='val2' value='0214'>
+<input type='hidden' name='val3' value='10/23/2002'>
+<input type='hidden' name='val4' value='SAT'>
+<input type='hidden' name='val5' value='IAD'>
+<input type='hidden' name='val6' value='6 pm'>
+<input type='hidden' name='val7' value='anytime'>
+<input type='hidden' name='val8' value='dschmorrow@darpa.mil'>
+<input type='hidden' name='agent' value='connect-flight'>
+<input type='hidden' name='email' value='dschmorrow@darpa.mil'>
+</form>
+
+<table>
+<tr><td colspan=2>----Tue Oct 22 20:10:41 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>Delta Air Lines</td></tr>
+<tr><td><b>of flight number</b></td><td>0975</td></tr>
+<tr><td><b>of connecting flight number</b></td><td>1797</td></tr>
+<tr><td><b>on date</b></td><td>10/22/2002</td></tr>
+<tr><td><b>from airport</b></td><td>DCA</td></tr>
+<tr><td><b>to airport</b></td><td>SAT</td></tr>
+<tr><td><b>at departs</b></td><td>6 pm</td></tr>
+<tr><td><b> </b></td><td>anytime</td></tr>
+<tr><td><b>for user id</b></td><td>dschmorrow@darpa.mil</td></tr>
+
+<tr><td colspan=2><b>Connectinh Flights</b></td></tr>
+<tr><td colspan=2>Dear dschmorrow_at_darpa_mil,<br/>Your connecting Delta Air Lines flight 1797 will depart at 9:04 PM (1 minute Early) at gate Not Available.<br/><br/>If you would like to leave earlier, the following Delta Air Lines flights will depart earlier than your scheduled flight:<br/><br/>Earlier flights not found<br/> Thank you, <br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1035342641)'></td></tr>
+</table><br>
+<form name='form1035342641' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='Delta Air Lines'>
+<input type='hidden' name='val1' value='0975'>
+<input type='hidden' name='val2' value='1797'>
+<input type='hidden' name='val3' value='10/22/2002'>
+<input type='hidden' name='val4' value='DCA'>
+<input type='hidden' name='val5' value='SAT'>
+<input type='hidden' name='val6' value='6 pm'>
+<input type='hidden' name='val7' value='anytime'>
+<input type='hidden' name='val8' value='dschmorrow@darpa.mil'>
+<input type='hidden' name='agent' value='connect-flight'>
+<input type='hidden' name='email' value='dschmorrow@darpa.mil'>
+</form>
+
+<p>
+</html>

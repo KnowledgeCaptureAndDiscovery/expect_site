@@ -1,0 +1,513 @@
+Agenda:
+   at Tue Sep 21 13:14:44 PDT 1999
+
+select: modify button
+   at Tue Sep 21 13:15:00 PDT 1999
+
+select Button:?u:?u
+ TO become:((name ESTIMATE-COMBAT-POWER-OF-A-UNIT)
+(capability    ( estimate   ( obj   ( ?o is   ( spec-of combat-power ) ) )
+         ( of   ( ?u is   ( inst-of military-unit ) ) ) )
+)
+(result-type    ( inst-of number ))
+(method    ( find   ( obj   ( spec-of combat-power ) )
+         ( of   ( echelon-of ?t ) )
+         ( with   ( main-equipment-of ?u ) )
+         ( with-respect-to   ( spec-of m2-battalion ) ) )
+)
+)
+   at Tue Sep 21 13:15:12 PDT 1999
+
+ From sketch:(Capability): This method can be used to estimate the combat power of a military unit.
+(Body)To do that, find the combat power of the echelon of of the military unit with the main equipment of of the military unit with respect to the m2 battalion.
+
+   at Tue Sep 21 13:15:13 PDT 1999
+
+ done editing:((name ESTIMATE-COMBAT-POWER-OF-A-UNIT)
+(capability    ( estimate   ( obj   ( ?o is   ( spec-of combat-power ) ) )
+         ( of   ( ?u is   ( inst-of military-unit ) ) ) )
+)
+(result-type    ( inst-of number ))
+(method    ( find   ( obj   ( spec-of combat-power ) )
+         ( of   ( echelon-of ?t ) )
+         ( with   ( main-equipment-of ?u ) )
+         ( with-respect-to   ( spec-of m2-battalion ) ) )
+)
+)
+   at Tue Sep 21 13:15:13 PDT 1999
+
+modified method:((name estimate-combat-power-of-a-unit)
+ (capability (estimate
+                (obj (?o is (spec-of combat-power)))
+                (of (?u is (inst-of military-unit)))
+                ))
+ (result-type (inst-of number))
+ (method  (find
+            (obj (spec-of combat-power))
+            (of ( echelon-of ?t))
+            (with ( main-equipment-of ?u))
+            (with-respect-to (spec-of m2-battalion))
+            ))
+)
+   at Tue Sep 21 13:15:15 PDT 1999
+
+check tab:-1
+   at Tue Sep 21 13:15:15 PDT 1999
+
+check tab:0
+   at Tue Sep 21 13:15:15 PDT 1999
+
+Agenda:
+ Error: In the method to estimate the combat power of a military unit, I don't know what ?T is
+   at Tue Sep 21 13:15:16 PDT 1999
+
+select: modify button
+   at Tue Sep 21 13:15:20 PDT 1999
+
+select Button:?t:?t
+ TO become:((name ESTIMATE-COMBAT-POWER-OF-A-UNIT)
+(capability    ( estimate   ( obj   ( ?o is   ( spec-of combat-power ) ) )
+         ( of   ( ?u is   ( inst-of military-unit ) ) ) )
+)
+(result-type    ( inst-of number ))
+(method    ( find   ( obj   ( spec-of combat-power ) )
+         ( of   ( echelon-of ?u ) )
+         ( with   ( main-equipment-of ?u ) )
+         ( with-respect-to   ( spec-of m2-battalion ) ) )
+)
+)
+   at Tue Sep 21 13:15:32 PDT 1999
+
+ From sketch:To do what(Capability):
+Do(Method Body):
+
+The result will be(Result Type):
+   at Tue Sep 21 13:15:34 PDT 1999
+
+ done editing:((name ESTIMATE-COMBAT-POWER-OF-A-UNIT)
+(capability    ( estimate   ( obj   ( ?o is   ( spec-of combat-power ) ) )
+         ( of   ( ?u is   ( inst-of military-unit ) ) ) )
+)
+(result-type    ( inst-of number ))
+(method    ( find   ( obj   ( spec-of combat-power ) )
+         ( of   ( echelon-of ?u ) )
+         ( with   ( main-equipment-of ?u ) )
+         ( with-respect-to   ( spec-of m2-battalion ) ) )
+)
+)
+   at Tue Sep 21 13:15:34 PDT 1999
+
+modified method:((name estimate-combat-power-of-a-unit)
+ (capability (estimate
+                (obj (?o is (spec-of combat-power)))
+                (of (?u is (inst-of military-unit)))
+                ))
+ (result-type (inst-of number))
+ (method  (find
+            (obj (spec-of combat-power))
+            (of ( echelon-of ?u))
+            (with ( main-equipment-of ?u))
+            (with-respect-to (spec-of m2-battalion))
+            ))
+)
+   at Tue Sep 21 13:15:36 PDT 1999
+
+check tab:-1
+   at Tue Sep 21 13:15:36 PDT 1999
+
+check tab:0
+   at Tue Sep 21 13:15:36 PDT 1999
+
+Agenda:
+   at Tue Sep 21 13:15:37 PDT 1999
+
+7check: Method Sub-Method Relation
+   at Tue Sep 21 13:15:40 PDT 1999
+
+select: modify button
+   at Tue Sep 21 13:15:45 PDT 1999
+
+select: copy and create button
+   at Tue Sep 21 13:15:51 PDT 1999
+
+select Button:appropriate-unit:appropriate-unit
+ TO become:((name _method11551)
+(capability    ( check   ( obj   ( ?a is   ( spec-of force-ratio ) ) )
+         ( of   ( ?t is   ( inst-of military-task ) ) ) )
+)
+(result-type    ( inst-of yes-no ))
+(method    ( set-member   ( obj ?t )   ( of
+               ( unit-can-perform   ( unit-assigned ?t ) ) ) )
+)
+)
+   at Tue Sep 21 13:16:27 PDT 1999
+
+select Button:expect-expression: 
+ TO become:((name _method11551)
+(capability    ( check   ( obj   ( ?a is   ( spec-of force-ratio ) ) )
+         ( of   ( ?t is   ( inst-of military-task ) ) ) )
+)
+(result-type    ( inst-of yes-no ))
+(method  EXPRESSION
+)
+)
+   at Tue Sep 21 13:16:36 PDT 1999
+
+6check: Method Capability Hierarchy
+   at Tue Sep 21 13:16:39 PDT 1999
+
+check tab:0
+   at Tue Sep 21 13:16:45 PDT 1999
+
+select Button:expect-expression:EXPRESSION
+ TO become:((name _method11551)
+(capability    ( check   ( obj   ( ?a is   ( spec-of force-ratio ) ) )
+         ( of   ( ?t is   ( inst-of military-task ) ) ) )
+)
+(result-type    ( inst-of yes-no ))
+(method    ( is-less-or-equal   ( obj (inst-of number) )   ( than (inst-of number) ) )
+)
+)
+   at Tue Sep 21 13:16:57 PDT 1999
+
+5check: Undefined Capabilities
+   at Tue Sep 21 13:17:02 PDT 1999
+
+check tab:0
+   at Tue Sep 21 13:17:26 PDT 1999
+
+select Button:expect-expression:(inst-of number)
+ TO become:((name _method11551)
+(capability    ( check   ( obj   ( ?a is   ( spec-of force-ratio ) ) )
+         ( of   ( ?t is   ( inst-of military-task ) ) ) )
+)
+(result-type    ( inst-of yes-no ))
+(method    ( is-less-or-equal   ( obj   ( estimate   ( obj
+                           ( spec-of required-force-ratio ) )
+                     ( for (inst-of military-task) ) ) )
+         ( than (inst-of number) ) )
+)
+)
+   at Tue Sep 21 13:17:37 PDT 1999
+
+select Button:expect-expression:(inst-of military-task)
+ TO become:((name _method11551)
+(capability    ( check   ( obj   ( ?a is   ( spec-of force-ratio ) ) )
+         ( of   ( ?t is   ( inst-of military-task ) ) ) )
+)
+(result-type    ( inst-of yes-no ))
+(method    ( is-less-or-equal   ( obj   ( estimate   ( obj
+                           ( spec-of required-force-ratio ) )
+                     ( for ?t ) ) )
+         ( than (inst-of number) ) )
+)
+)
+   at Tue Sep 21 13:17:48 PDT 1999
+
+select Button:expect-expression:(inst-of number)
+ TO become:((name _method11551)
+(capability    ( check   ( obj   ( ?a is   ( spec-of force-ratio ) ) )
+         ( of   ( ?t is   ( inst-of military-task ) ) ) )
+)
+(result-type    ( inst-of yes-no ))
+(method    ( is-less-or-equal   ( obj   ( estimate   ( obj
+                           ( spec-of required-force-ratio ) )
+                     ( for ?t ) ) )
+         ( than   ( estimate   ( obj
+                           ( spec-of required-force-ratio ) )
+                     ( for ?t ) ) ) )
+)
+)
+   at Tue Sep 21 13:18:12 PDT 1999
+
+select Button:required-force-ratio:required-force-ratio
+ TO become:((name _method11551)
+(capability    ( check   ( obj   ( ?a is   ( spec-of force-ratio ) ) )
+         ( of   ( ?t is   ( inst-of military-task ) ) ) )
+)
+(result-type    ( inst-of yes-no ))
+(method    ( is-less-or-equal   ( obj   ( estimate   ( obj
+                           ( spec-of required-force-ratio ) )
+                     ( for ?t ) ) )
+         ( than   ( estimate   ( obj
+                           ( spec-of available-force-ratio ) )
+                     ( for ?t ) ) ) )
+)
+)
+   at Tue Sep 21 13:18:28 PDT 1999
+
+ From sketch:(Capability): This method can be used to check the appropriate unit of a military task.
+(Body)To do that, set member the military task of the unit can perform of the unit assigned of the military task.
+
+   at Tue Sep 21 13:18:35 PDT 1999
+
+ done editing:((name _method11551)
+(capability    ( check   ( obj   ( ?a is   ( spec-of force-ratio ) ) )
+         ( of   ( ?t is   ( inst-of military-task ) ) ) )
+)
+(result-type    ( inst-of yes-no ))
+(method    ( is-less-or-equal   ( obj   ( estimate   ( obj
+                           ( spec-of required-force-ratio ) )
+                     ( for ?t ) ) )
+         ( than   ( estimate   ( obj
+                           ( spec-of available-force-ratio ) )
+                     ( for ?t ) ) ) )
+)
+)
+   at Tue Sep 21 13:18:35 PDT 1999
+
+built new method:((name _method11551)
+ (capability (check
+                (obj (?a is (spec-of force-ratio)))
+                (of (?t is (inst-of military-task)))
+                ))
+ (result-type (inst-of yes-no))
+ (method  (is-less-or-equal
+            (obj (estimate
+                    (obj (spec-of required-force-ratio))
+                    (for ?t)
+                    ))
+             (than (estimate
+                      (obj (spec-of available-force-ratio))
+                      (for ?t)
+                      ))
+               ))
+)
+   at Tue Sep 21 13:18:36 PDT 1999
+
+check tab:-1
+   at Tue Sep 21 13:18:36 PDT 1999
+
+check tab:0
+   at Tue Sep 21 13:18:36 PDT 1999
+
+Agenda:
+   at Tue Sep 21 13:18:38 PDT 1999
+
+7check: Method Sub-Method Relation
+   at Tue Sep 21 13:18:41 PDT 1999
+
+check tab:8
+   at Tue Sep 21 13:18:44 PDT 1999
+
+7check: Method Sub-Method Relation
+   at Tue Sep 21 13:18:54 PDT 1999
+
+create method for goal from undefined capabilities
+   at Tue Sep 21 13:19:00 PDT 1999
+
+undefined goal:
+(estimate (obj (spec-of available-force-ratio)) (for (inst-of military-task)))  
+Expected Result:(inst-of number)  
+Callers:(_method11551)  
+Capability:(capability (estimate (obj (?v1805 is (spec-of available-force-ratio))) (for (?v1806 is (inst-of military-task)))))  
+   at Tue Sep 21 13:19:00 PDT 1999
+
+create method for goal from undefined capabilities
+   at Tue Sep 21 13:19:07 PDT 1999
+
+undefined goal:
+(estimate (obj (spec-of available-force-ratio)) (for (inst-of military-task)))  
+Expected Result:(inst-of number)  
+Callers:(_method11551)  
+Capability:(capability (estimate (obj (?v1805 is (spec-of available-force-ratio))) (for (?v1806 is (inst-of military-task)))))  
+   at Tue Sep 21 13:19:07 PDT 1999
+
+6check: Method Capability Hierarchy
+   at Tue Sep 21 13:19:12 PDT 1999
+
+select Button:expect-expression:EXPRESSION
+ TO become:((name _method1795  )
+(capability    ( estimate   ( obj   ( ?v1805 is   ( spec-of available-force-ratio ) ) )
+         ( for   ( ?v1806 is   ( inst-of military-task ) ) ) )
+)
+(result-type  (inst-of number)  )
+(method    ( divide   ( obj (inst-of number) )   ( by (inst-of number) ) ) 
+)
+)
+   at Tue Sep 21 13:19:25 PDT 1999
+
+5check: Undefined Capabilities
+   at Tue Sep 21 13:19:40 PDT 1999
+
+select Button:expect-expression:(inst-of number)
+ TO become:((name _method1795  )
+(capability    ( estimate   ( obj   ( ?v1805 is   ( spec-of available-force-ratio ) ) )
+         ( for   ( ?v1806 is   ( inst-of military-task ) ) ) )
+)
+(result-type  (inst-of number)  )
+(method    ( divide   ( obj   ( compute   ( obj
+                           ( spec-of combat-power ) )
+                     ( of (set-of (inst-of military-unit)) ) ) )
+         ( by (inst-of number) ) ) 
+)
+)
+   at Tue Sep 21 13:20:08 PDT 1999
+
+select Button:expect-expression:(set-of (inst-of military-unit))
+ TO become:((name _method1795  )
+(capability    ( estimate   ( obj   ( ?v1805 is   ( spec-of available-force-ratio ) ) )
+         ( for   ( ?v1806 is   ( inst-of military-task ) ) ) )
+)
+(result-type  (inst-of number)  )
+(method    ( divide   ( obj   ( compute   ( obj
+                           ( spec-of combat-power ) )
+                     ( of THE SOMETHING OF A CLASS ) ) )
+         ( by (inst-of number) ) ) 
+)
+)
+   at Tue Sep 21 13:20:24 PDT 1999
+
+select Button:expect-relation-form:THE SOMETHING OF A CLASS
+ TO become:((name _method1795  )
+(capability    ( estimate   ( obj   ( ?v1805 is   ( spec-of available-force-ratio ) ) )
+         ( for   ( ?v1806 is   ( inst-of military-task ) ) ) )
+)
+(result-type  (inst-of number)  )
+(method    ( divide   ( obj   ( compute   ( obj
+                           ( spec-of combat-power ) )
+                     ( of
+                           ( RELATION EXPRESSION ) ) ) )
+         ( by (inst-of number) ) ) 
+)
+)
+   at Tue Sep 21 13:20:26 PDT 1999
+
+select Button:expect-relation-name:RELATION
+ TO become:((name _method1795  )
+(capability    ( estimate   ( obj   ( ?v1805 is   ( spec-of available-force-ratio ) ) )
+         ( for   ( ?v1806 is   ( inst-of military-task ) ) ) )
+)
+(result-type  (inst-of number)  )
+(method    ( divide   ( obj   ( compute   ( obj
+                           ( spec-of combat-power ) )
+                     ( of
+                           ( unit-assigned EXPRESSION ) ) ) )
+         ( by (inst-of number) ) ) 
+)
+)
+   at Tue Sep 21 13:20:37 PDT 1999
+
+select Button:expect-expression:EXPRESSION
+ TO become:((name _method1795  )
+(capability    ( estimate   ( obj   ( ?v1805 is   ( spec-of available-force-ratio ) ) )
+         ( for   ( ?v1806 is   ( inst-of military-task ) ) ) )
+)
+(result-type  (inst-of number)  )
+(method    ( divide   ( obj   ( compute   ( obj
+                           ( spec-of combat-power ) )
+                     ( of
+                           ( unit-assigned VARIABLE ) ) ) )
+         ( by (inst-of number) ) ) 
+)
+)
+   at Tue Sep 21 13:20:46 PDT 1999
+
+1check: Evaluation Result
+   at Tue Sep 21 13:20:47 PDT 1999
+
+select Button:expect-variable-name:VARIABLE
+ TO become:((name _method1795  )
+(capability    ( estimate   ( obj   ( ?v1805 is   ( spec-of available-force-ratio ) ) )
+         ( for   ( ?v1806 is   ( inst-of military-task ) ) ) )
+)
+(result-type  (inst-of number)  )
+(method    ( divide   ( obj   ( compute   ( obj
+                           ( spec-of combat-power ) )
+                     ( of
+                           ( unit-assigned ?v1806 ) ) ) )
+         ( by (inst-of number) ) ) 
+)
+)
+   at Tue Sep 21 13:21:20 PDT 1999
+
+select Button:expect-expression:(inst-of number)
+ TO become:((name _method1795  )
+(capability    ( estimate   ( obj   ( ?v1805 is   ( spec-of available-force-ratio ) ) )
+         ( for   ( ?v1806 is   ( inst-of military-task ) ) ) )
+)
+(result-type  (inst-of number)  )
+(method    ( divide   ( obj   ( compute   ( obj
+                           ( spec-of combat-power ) )
+                     ( of
+                           ( unit-assigned ?v1806 ) ) ) )
+         ( by   ( compute   ( obj
+                           ( spec-of combat-power ) )
+                     ( of
+                           ( unit-assigned ?v1806 ) ) ) ) ) 
+)
+)
+   at Tue Sep 21 13:21:42 PDT 1999
+
+select Button:unit-assigned:unit-assigned
+ TO become:((name _method1795  )
+(capability    ( estimate   ( obj   ( ?v1805 is   ( spec-of available-force-ratio ) ) )
+         ( for   ( ?v1806 is   ( inst-of military-task ) ) ) )
+)
+(result-type  (inst-of number)  )
+(method    ( divide   ( obj   ( compute   ( obj
+                           ( spec-of combat-power ) )
+                     ( of
+                           ( unit-assigned ?v1806 ) ) ) )
+         ( by   ( compute   ( obj
+                           ( spec-of combat-power ) )
+                     ( of
+                           ( unit-acted-on ?v1806 ) ) ) ) ) 
+)
+)
+   at Tue Sep 21 13:21:55 PDT 1999
+
+ From sketch:To do what(Capability): estimate the available force ratio for the military task
+Do(Method Body):
+
+The result will be(Result Type):(inst-of number)  
+   at Tue Sep 21 13:22:00 PDT 1999
+
+ done editing:((name _method1795  )
+(capability    ( estimate   ( obj   ( ?v1805 is   ( spec-of available-force-ratio ) ) )
+         ( for   ( ?v1806 is   ( inst-of military-task ) ) ) )
+)
+(result-type  (inst-of number)  )
+(method    ( divide   ( obj   ( compute   ( obj
+                           ( spec-of combat-power ) )
+                     ( of
+                           ( unit-assigned ?v1806 ) ) ) )
+         ( by   ( compute   ( obj
+                           ( spec-of combat-power ) )
+                     ( of
+                           ( unit-acted-on ?v1806 ) ) ) ) ) 
+)
+)
+   at Tue Sep 21 13:22:00 PDT 1999
+
+added New method:((name _method1795)
+ (capability (estimate
+                (obj (?v1805 is (spec-of available-force-ratio)))
+                (for (?v1806 is (inst-of military-task)))
+                ))
+ (result-type (inst-of number))
+ (method  (divide
+            (obj (compute
+                    (obj (spec-of combat-power))
+                    (of ( unit-assigned ?v1806))
+                    ))
+              (by (compute
+                     (obj (spec-of combat-power))
+                     (of ( unit-acted-on ?v1806))
+                     ))
+               ))
+)
+   at Tue Sep 21 13:22:03 PDT 1999
+
+check tab:-1
+   at Tue Sep 21 13:22:03 PDT 1999
+
+check tab:0
+   at Tue Sep 21 13:22:03 PDT 1999
+
+Agenda:
+   at Tue Sep 21 13:22:07 PDT 1999
+
+7check: Method Sub-Method Relation
+   at Tue Sep 21 13:22:11 PDT 1999
+

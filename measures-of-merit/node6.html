@@ -1,0 +1,192 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<BODY BGCOLOR="FFFFFF">
+<TITLE>6 Loom Specification of the MOE Grammar</TITLE>
+<META NAME="description" CONTENT="6 Loom Specification of the MOE Grammar">
+<META NAME="keywords" CONTENT="measures-of-merit">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="measures-of-merit.css">
+</HEAD>
+<BODY LANG="EN">
+ <H1><A NAME="SECTION00060000000000000000">6 Loom Specification of the MOE Grammar</A></H1>
+<P>
+<A NAME="loomspec">&#160;</A>
+<P>
+The following is a specification of a set of Loom definitions that is
+(roughly) equivalent to the representation described above. This can
+ be seen as an ontology of measures of effect.
+<P>
+<PRE>(defconcept moe-grammar-concept
+  &quot;This concept is the top of the hierarchy of the concepts related to the representation (grammar) for measures of effect in air campaign plans.&quot;
+  :is :primitive)
+
+(defconcept measure-of-effect
+  :is-primitive (:and moe-grammar-concept
+                      (:exactly 1 moe.measurable-element)
+                      (:all moe.measurable-element measurable-element)
+                      (:exactly 1 moe.quantification)
+                      (:all moe.quantification quantification))
+  :roles ((moe.measurable-element :type measurable-element :min 1 :max 1)
+          (moe.quantification :type quantification :min 1 :max 1))) 
+
+(defconcept moe
+  :is measure-of-effect)
+
+(defconcept measure-of-merit
+  :is measure-of-effect)
+
+(defrelation moe.measurable-element
+  :domain moe
+  :range measurable-element
+  :characteristics :single-valued)
+
+(defrelation moe.quantification
+  :domain moe
+  :range quantification
+  :characteristics :single-valued)
+
+(defconcept quantification
+  :is-primitive moe-grammar-concept)
+
+(defconcept percentage-change
+  :is-primitive (:and quantification
+                      (:the percentage-change.change-verb change-verb)
+                      (:the percentage-change.value number))
+  :roles ((percentage-change.change-verb :type change-verb
+                                         :min 1 :max 1)
+          (percentage-change.value :type number)
+                                   :min 1 :max 1)))
+
+(defrelation percentage-change.change-verb
+  :domain percentage-change
+  :range change-verb
+  :characteristics :single-valued)
+
+(defrelation percentage-change.value
+  :domain percentage-change
+  :range number
+  :characteristics :single-valued)
+
+
+(defconcept time-change
+  :is-primitive (:and quantification
+                      (:the time-change.change-verb time-change-verb)
+                      (:the time-change.value time-value))
+  :roles ((time-change.change-verb :type time-change-verb
+                                   :min 1 :max 1)
+          (time-change.value :type time-value
+                             :min 1 :max 1)))
+
+(defconcept time-value
+  :is-primitive (:and moe-grammar-concept
+                      (:the time-value.unit time-unit)
+                      (:the time-value.value numeric-value))
+  :roles ((time-value.unit :type time-unit :min 1 :max 1)
+          (time-value.value :type numeric-value :min 1 :max 1)))
+
+(defrelation time-value.unit
+  :domain time-value
+  :range time-unit
+  :characteristics :single-valued)
+
+(defrelation time-value.value
+  :domain time-value
+  :range numeric-value
+  :characteristics :single-valued)
+
+(defconcept time-unit
+  :is-primitive (:and moe-grammar-concept
+                      (:one-of hours days months minutes)))
+
+(defconcept change-verb
+  :is (:and moe-grammar-concept (:one-of reduced degraded)))
+
+(defconcept time-change-verb
+  :is (:and moe-grammar-concept (:one-of delayed)))
+
+(defconcept change-from-reference-value
+  :is-primitive
+     (:and quantification
+           (:the change-from-reference.change-verb change-verb)
+           (:the change-from-reference.change-percentage number)
+           (:the change-from-reference.reference reference))
+  :roles ((change-from-reference.change-verb
+           :min 1 :max 1
+           :type change-verb)
+          (change-from-reference.change-percentage
+           :min 1 :max 1
+           :type number)
+          (change-from-reference.reference
+           :min 1 :max 1
+           :type reference)))
+
+(defrelation change-from-reference.change-verb
+  :domain change-from-reference
+  :range change-verb
+  :characteristics :single-valued)
+
+(defrelation change-from-reference.change-percentage
+  :domain change-from-reference
+  :range number
+  :characteristics :single-valued)
+
+(defrelation change-from-reference.reference
+  :domain change-from-reference
+  :range reference
+  :characteristics :single-valued)
+
+(defconcept reference
+  :is-primitive (:and moe-grammar-concept
+                      (:or number
+                           date
+                           (:one-of pre-conflict-levels)))) 
+
+(defconcept value-restriction
+  :is-primitive (:and quantification
+                      (:the value-restriction.restriction restriction)
+                      (:the value-restriction.value
+                            (:or numeric-value non-numeric-value)))
+  :roles ((value-restriction.restriction :type restriction
+                                         :min 1 :max 1)
+          (value-restriction.value :type number
+                                   :min 1 :max 1)))
+
+(defrelation value-restriction.restriction
+  :domain  value-restriction
+  :range restriction
+  :characteristics :single-valued)
+
+(defrelation value-restriction.value
+  :domain  value-restriction
+  :range number
+  :characteristics :single-valued)
+
+(defconcept restriction
+  :is (:and moe-grammar-concept
+            (:one-of at-most at-least)))
+  
+(defconcept measurable-element
+  :is-primitive moe-grammar-concept)
+
+(defconcept event
+  :is-primitive measurable-element)
+
+(defconcept object 
+  :is-primitive measurable-element)
+
+(defconcept aspect
+  :is-primitive measurable-element)
+
+(defconcept capability
+  :is-primitive measurable-element)</PRE>
+<P>
+<BR> <HR>
+<P><ADDRESS>
+<I>Andre Valente <BR>
+Fri Nov 22 19:21:57 PST 1996</I>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,76 @@
+<!--- This is HTML created by conceptRenderer. --->
+<HTML>
+<BODY bgcolor="#00bbbb" text="#000000">
+<TITLE>CONCEPT: BRIDGE</TITLE>
+ <H4>CONCEPT <A HREF = "BRIDGE.concept">BRIDGE</A> </H4><br>
+<H5>Definition: </H5>
+<P>
+<pre>(defconcept <A HREF ="BRIDGE.concept">BRIDGE</A> 
+    :is-primitive (:and <A HREF ="DOMAIN-CONCEPT.concept">DOMAIN-CONCEPT</A>  <A HREF ="GEOGRAPHICAL-REGION.concept">GEOGRAPHICAL-REGION</A> )
+    :roles ((cross-section :type
+                        <A HREF ="GEOGRAPHICAL-GAP.concept">GEOGRAPHICAL-GAP</A> )
+            (damaged-gap-width :type
+                        <A HREF ="NUMBER.concept">NUMBER</A> )
+            (max-traffic-class :type
+                        <A HREF ="INTEGER.concept">INTEGER</A> )))
+
+</P></pre>
+<H5>Subconcepts: </H5>
+<pre>
+     <li>  <A HREF ="MILITARY-BRIDGE.concept">MILITARY-BRIDGE</A> 
+</pre> <BR>
+<H5>Superconcepts: </H5><br>
+<pre>
+     <li>  <A HREF ="GEOGRAPHICAL-REGION.concept">GEOGRAPHICAL-REGION</A> 
+</pre><BR>
+<H5>Siblings: </H5><br>
+Siblings with the common parent: <A HREF="GEOGRAPHICAL-REGION.concept">GEOGRAPHICAL-REGION</A> <pre>
+     <li>  <A HREF ="MINEFIELD.concept">MINEFIELD</A> 
+     <li>  <A HREF ="TUNNEL.concept">TUNNEL</A> </pre><br>
+<p><H5>Roles: </H5>
+<pre>
+     <li>  <A HREF ="CROSS-SECTION.relation">CROSS-SECTION</A> 
+     -- 
+     <A HREF ="GEOGRAPHICAL-GAP.concept">GEOGRAPHICAL-GAP</A> </Type>
+
+     <li>  <A HREF ="DAMAGED-GAP-WIDTH.relation">DAMAGED-GAP-WIDTH</A> 
+     -- 
+     <A HREF ="NUMBER.concept">NUMBER</A> </Type>
+
+     <li>  <A HREF ="FAR-APPROACH.relation">FAR-APPROACH</A> 
+     -- 
+     <A HREF ="GEOGRAPHICAL-APPROACH.concept">GEOGRAPHICAL-APPROACH</A> </Type>
+
+     <li>  <A HREF ="MAX-SLOPE.relation">MAX-SLOPE</A> 
+     -- 
+     <A HREF ="NUMBER.concept">NUMBER</A> </Type>
+
+     <li>  <A HREF ="MAX-TRAFFIC-CLASS.relation">MAX-TRAFFIC-CLASS</A> 
+     -- 
+     <A HREF ="INTEGER.concept">INTEGER</A> </Type>
+
+     <li>  <A HREF ="NEAR-APPROACH.relation">NEAR-APPROACH</A> 
+     -- 
+     <A HREF ="GEOGRAPHICAL-APPROACH.concept">GEOGRAPHICAL-APPROACH</A> </Type>
+
+     <li>  <A HREF ="SOIL-OF.relation">SOIL-OF</A> 
+     -- 
+     <A HREF ="SOIL-TYPE.concept">SOIL-TYPE</A> </Type>
+
+     <li>  <A HREF ="VEGETATION-OF.relation">VEGETATION-OF</A> 
+     -- 
+     <A HREF ="VEGETATION-TYPE.concept">VEGETATION-TYPE</A> </Type>
+</pre>
+<H5>Number of Instances: </H5> 2 (0 direct, 2 inferred)<BR>
+<p>Direct Instances:
+<BR>
+
+<p>Inferred Instances:
+<pre>
+     <li>  <A HREF ="MGB1.instance">MGB1</A> 
+
+     <li>  <A HREF ="AVLB1.instance">AVLB1</A> 
+</pre><BR>
+</BODY>
+</HTML>
+<!--- End of HTML. --->

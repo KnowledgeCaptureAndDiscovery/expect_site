@@ -1,0 +1,212 @@
+====================================================================
+====================================================================
+
+     "MEET THE ELVES" PHOSPHORUS PORTAL DOCUMENTATION
+
+                       Version 0.1  (1/9/02)
+====================================================================
+
+OUTLINE:
+   1.  Overview
+   2.  How to add new agents
+   3.  Agent replies and error messages
+   4.  Limitations and upcoming extensions
+
+====================================================================
+
+1. OVERVIEW
+
+The Elves Portal enables users to task agents and to see what 
+actions those agents took for each given task.
+
+The system is designed to have generic functionality and 
+to enable easy incorporation of new agents.  A user input
+interface for an agent is generated automatically from the 
+specs provided for that agent.
+
+====================================================================
+
+2. HOW TO ADD NEW AGENTS
+
+The easiest thing is to take any of the existing agents as an example, and
+follow the formats that you find in the files.  Each agent is a subdirectory
+of ~http/expect/projects/agents/phosphorus/portal/groups/elves/.  There are
+four files per agent, with the content indicated below.
+
+Suppose for example that we want to add an agent that faxes a message to 
+a fax number.
+
+STEP 1:  Give the agent a unique id.
+
+  This id will be used by the Portal as the :receiver field of the messages
+  it sends out.
+  
+  The id should be used as the name of a new directory under 
+  ~http/expect/projects/agents/phosphorus/portal/groups/elves/
+  
+
+STEP 1:  Specify agent inputs.
+
+  Figure out a list of input parameters that the agent needs.  The content of 
+  the message that the Portal will send to the agent will have each of the 
+  parameters surrounded by an XML tag.
+  
+  Example: <fax>3104488794</fax><from>admin@isi.edu</from><message>Happy New Year!</message>
+  
+STEP 2:  Specify agent capability in a user-friendly format.
+
+  The portal uses a capability description based on case frames,
+  which is basically a verb and a list of parameters (each parameter
+  with a name).
+  
+  Describe the task that the agent performs as well as you can,
+  following the format below and using an example.
+  
+  Example:
+     Send 
+       fax
+       from userid gil@isi.edu
+       to fax-number 3104488794
+       with message "It works!"
+       
+  Write this example to a file, example.txt, and put it in the agent's
+  portal directory.
+  
+  This file will be shown to the user if he/she requests the interface
+  to show examples of usage of the agent.  You can add as many examples
+  as you think will help the user understand how to use the agent.
+
+STEP 3:  Specify the agent's capability in the portal's format.
+
+  The Portal uses the EXPECT language to specify capabilities.  
+  This language has some important advantages: it is user-friendly,
+  it is reasonably expressive to describe tasks, and it is useful 
+  for ontology-based matching.
+  
+  To write the capabilities for your agnet you can do one of three
+  things: 1) look at the specs of other agents and write one based 
+  on what you find there; 2) ask one of us to write it for you; 
+  3) read a manual that describes this language.  Try these
+  options in this order.
+  
+  Put the capabilities in a file capabilities.xml in the agent's
+  portal directory.
+  
+STEP 4:  Specify the constraints on parameters.
+
+  Some of these parameter types have constraints that are defined separately and 
+  that we use in the interface to check that the user provides adequate 
+  information.  For example, if a parameter that is constrained to be a number
+  the interface will not allow the user to enter an arbitrary string. 
+
+  Here is the ad-hoc syntax that we use for now (in the future this 
+  will be specified in an XML schema):
+
+  <type><name>airline</name>
+  <constraints>
+    <enumeration-ctr><ctr-descr>one-of</ctr-descr>
+	    <ctr-enum>Air Canada;Air France;AirTran
+  Airways;Alaska Airlines;America West;American Airlines;Canadian
+  Airlines;Continental Airlines;Delta Air Lines;Frontier Airlines;KLM
+  Airlines;Lufthansa;Midwest Express Airlines;Northwest Airlines;TWA
+  Airlines;United Airlines;US Airways	</ctr-enum>
+     <enumeration-ctr>
+  </constraints>
+  </type>
+  
+  <type><name>flight-number</name>
+     <constraints>
+       <type-ctr>number</type-ctr>
+     </constraints>
+    </type>
+
+  <type><name>location</name>
+     <constraints>
+       <type-ctr>string</type-ctr>
+     </constraints>
+    </type>
+
+  Put these constraints in the file constraints.xml in the agent's
+  portal directory.
+  
+
+STEP 5:  Specify the mappings between tags and capability parameters.
+
+  The parameters that specify the inputs to the agent may have
+  different names than the tags that the agent takes.  For example,
+  the user may see in the interface "from airport LAX" while the agent takes 
+  "<O_AIRPORT>LAX</O_AIRPORT>.  The translation is done by the Portal 
+  using mappings.
+  
+  Put these mappings in the file tag-mapping.xml in the agent's
+  portal directory.
+  
+STEP 6:  Test and hope for the best.
+
+
+====================================================================
+
+3.  AGENT REPLIES AND ERROR MESSAGES
+
+The Portal does not keep track of the requests formulated by the
+user for your agent, does not know if the user expects to hear
+a response from your agent or not, and leaves up to the agent 
+to detect and report errors.
+  
+We recommend that you consider carefully what kinds of replies 
+you would like the user to see from your agent, and what kinds
+of errors your agent should report.  
+
+The Portal will turn the request to your agent into a string 
+and use it to indentify what request your response is addressing.
+
+As you can imagine, users may make errors when they 
+specify the input parameters for agents, which is 
+not a typical problem when only agents invoke your agents.
+Some errors will be detected in the interface, since each
+input parameter will be described in a schema/ontology
+and this information will be used to check the parameters.
+The interface will check the constraints that you specified 
+for the input parameters.  This will ensure for example 
+that a fax number will always be sent to your agent 
+as a 10 digits number if you specified this constraint.
+
+Other errors cannot be checked by the interface in practice.  
+For example, the flight number needs to be validated depending
+on the airline and date.  The agents may be able to detect
+some of these errors and report them back in an error message.
+Other errors may not be detected by an agent, and in those cases
+the agent may send no replies.
+
+You may want to take a look at the specs of some of the 
+existing agents to see what kinds of errors and responses
+they consider.  The specs are available at 
+~http/expect/projects/agents/phosphorus/portal/groups/elves/,
+see for example Theseus-agents-specs.txt.
+
+====================================================================
+
+4.  LIMITATIONS
+
+There are several limitations of the system that we plan to address 
+in the near future:
+
+- extending the parameter language
+	- indicating input parameters that are optional
+	- input parameters that are sets
+	- nested parameters
+	- trees to show option choices for input parameters
+- extending the capability description
+	- showing which other agents are called by an agent to do a task
+	- same agent with several capabilities
+	- agents that are replicas of agents (ex: user proxies)
+- markup language
+    - using XML schemas to specify constraints
+    - using XML/XSLT to specify tag mappings
+    - using RDFS and/or DAML+OIL
+    
+    
+====================================================================
+
+
+

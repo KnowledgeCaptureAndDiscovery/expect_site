@@ -1,0 +1,65 @@
+<html>
+<head>
+<script>
+var limit="0:30"
+if (document.images){
+  var parselimit=limit.split(":");
+  parselimit=parselimit[0]*60+parselimit[1]*1;
+  }
+function resubmit(val) {
+    var myform = eval("document.form"+val);
+    myform.submit();
+}
+function beginrefresh(){
+  if (!document.images)
+      return;
+   if (parselimit==1)
+      window.location.reload();
+   else {
+      parselimit-=1;
+      curmin=Math.floor(parselimit/60);
+      cursec=parselimit%60;
+      if (curmin!=0)
+         curtime=curmin+" minutes and "+cursec+" seconds left until page refresh!";
+      else
+         curtime=cursec+" seconds left until page refresh!";
+      window.status=curtime
+      setTimeout("beginrefresh()",1000)
+   }
+ }
+window.onload=beginrefresh;
+</script>
+</head>
+<table>
+<tr><td colspan=2>----Fri Jun  7 10:31:59 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>5572</td></tr>
+<tr><td><b>of connecting flight number</b></td><td>1891</td></tr>
+<tr><td><b>on date</b></td><td>6/7/2002</td></tr>
+<tr><td><b>from airport</b></td><td>SBA</td></tr>
+<tr><td><b>to airport</b></td><td>ORD</td></tr>
+<tr><td><b>at </b></td><td>anytime</td></tr>
+<tr><td><b>at </b></td><td>anytime</td></tr>
+<tr><td><b>for user id</b></td><td>barish@isi.edu</td></tr>
+
+<tr><td colspan=2><b>Connectinh Flights</b></td></tr>
+<tr><td colspan=2>Dear barish_at_isi_edu,<br/>Your connecting United Airlines flight 1891 will depart at 9:25 AM (25 minutes Late) at gate A3.<br/><br/>If you would like to leave earlier, the following United Airlines flights will depart earlier than your scheduled flight:<br/><br/>Earlier flights not found<br/> Thank you, <br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1023471119)'></td></tr>
+</table><br>
+<form name='form1023471119' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='5572'>
+<input type='hidden' name='val2' value='1891'>
+<input type='hidden' name='val3' value='6/7/2002'>
+<input type='hidden' name='val4' value='SBA'>
+<input type='hidden' name='val5' value='ORD'>
+<input type='hidden' name='val6' value='anytime'>
+<input type='hidden' name='val7' value='anytime'>
+<input type='hidden' name='val8' value='barish@isi.edu'>
+<input type='hidden' name='agent' value='connect-flight'>
+<input type='hidden' name='email' value='barish@isi.edu'>
+</form>
+
+<p>
+</html>

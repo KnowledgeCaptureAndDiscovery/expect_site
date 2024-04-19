@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<methodDescription primitivep="F"
+ name="COMPUTE-COMBAT-POWER"
+> 
+<nlDescription> compute the combat power of a battalion unit for a military task </nlDescription>
+
+<MethodGoal>
+<VarGoalForm>
+<GoalName>COMPUTE</GoalName>
+<ManyVarGoalArgument>
+<VarGoalArgument>
+<ParameterName>OBJ</ParameterName>
+<MethodGoalArgument>
+<VariableName>?O</VariableName><t name="IS"></t>
+<ComplexData><t name="SPEC-OF"></t>
+<ConceptName>COMBAT-POWER</ConceptName></ComplexData></MethodGoalArgument></VarGoalArgument>
+<VarGoalArgument>
+<ParameterName>OF</ParameterName>
+<MethodGoalArgument>
+<VariableName>?U</VariableName><t name="IS"></t>
+<ComplexData><t name="INST-OF"></t>
+<ConceptName>BATTALION-UNIT</ConceptName></ComplexData></MethodGoalArgument></VarGoalArgument>
+<VarGoalArgument>
+<ParameterName>FOR</ParameterName>
+<MethodGoalArgument>
+<VariableName>?T</VariableName><t name="IS"></t>
+<ComplexData><t name="INST-OF"></t>
+<ConceptName>MILITARY-TASK</ConceptName></ComplexData></MethodGoalArgument></VarGoalArgument></ManyVarGoalArgument></VarGoalForm></MethodGoal>
+
+
+<MethodResult>
+<ComplexData><t name="INST-OF"></t>
+<ConceptName>NUMBER</ConceptName></ComplexData></MethodResult>
+
+
+<MethodBody>
+<BlockExpression>
+<Expression>
+<Form>
+<GoalForm>
+<GoalName>ESTIMATE</GoalName>
+<ManyGoalParameters>
+<GoalParameter>
+<ParameterName>OBJ</ParameterName>
+<Expression>
+<ComplexData><t name="SPEC-OF"></t>
+<ConceptName>COMBAT-POWER</ConceptName></ComplexData></Expression></GoalParameter>
+<GoalParameter>
+<ParameterName>OF</ParameterName>
+<Expression>
+<Data>
+<VariableName>?U</VariableName></Data></Expression></GoalParameter></ManyGoalParameters></GoalForm></Form></Expression></BlockExpression></MethodBody>
+<resultRefiner></resultRefiner><StorageInfo></StorageInfo><PostProcessing></PostProcessing> </methodDescription>

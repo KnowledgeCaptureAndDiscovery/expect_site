@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE relationDescription SYSTEM "relation.dtd">
+
+<relationDescription name="R-ACPLAN-ACP-OBJECTIVES"> 
+
+<Definition> (defrelation <relation>R-ACPLAN-ACP-OBJECTIVES</relation>
+   :IS-PRIMITIVE :PRIMITIVE
+   :IMPLIES (:AND (:DOMAIN <concept>ACPLAN</concept>)
+                  (:RANGE <concept>ACP-OBJECTIVE</concept>))
+   :ANTECEDENTS (:OR <relation>R-ACPLAN-CINC-AND-AIR-OBJECTIVES</relation>
+                     <relation>R-ACPLAN-TASK-OBJECTIVES</relation>))
+
+ </Definition><Documentation>  </Documentation><subRelations> 
+<relation> R-ACPLAN-OBJECTIVES-TO-BE-INSPECTED </relation> </subRelations><superRelations> 
+<relation> BINARY-TUPLE </relation> </superRelations><Siblings>  </Siblings> </relationDescription>

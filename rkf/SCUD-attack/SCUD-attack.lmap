@@ -1,0 +1,341 @@
+(_SCUD-attack1125
+ ((_SCUD-attack1125 new-objects _Move1131)
+  (_SCUD-attack1125 new-objects _Fire-SCUD1128)
+  (_SCUD-attack1125 new-objects _Conceal1141)
+  (_SCUD-attack1125 new-objects _Reload1143)
+  (_SCUD-attack1125 new-objects _Move1142)
+  (_SCUD-attack1125 new-objects _Conceal1283)
+  (_SCUD-attack1125 recipient _Tangible-Entity1137)
+  (_SCUD-attack1125 object _Tangible-Entity1137)
+  (_SCUD-attack1125 subevent _Move1131)
+  (_SCUD-attack1125 subevent _Fire-SCUD1128)
+  (_SCUD-attack1125 subevent _Conceal1141)
+  (_SCUD-attack1125 subevent _Reload1143)
+  (_SCUD-attack1125 subevent _Move1142)
+  (_Tangible-Entity1137 location _Place1126)
+  (_Move1131 next-event _Fire-SCUD1128)
+  (_Move1131 object _Tangible-Entity1127)
+  (_Move1131 destination _Tangible-Entity1150)
+  (_Fire-SCUD1128 next-event _Conceal1141)
+  (_Fire-SCUD1128 next-event _Conceal1283)
+  (_Fire-SCUD1128 destination _Tangible-Entity1137)
+  (_Fire-SCUD1128 origin _Tangible-Entity1150)
+  (_Fire-SCUD1128 recipient _Tangible-Entity1137)
+  (_Fire-SCUD1128 donor _Tangible-Entity1150)
+  (_Fire-SCUD1128 subevent _Relinquish1134)
+  (_Fire-SCUD1128 subevent _Move1136)
+  (_Fire-SCUD1128 subevent _Deliver1139)
+  (_Fire-SCUD1128 first-subevent _Relinquish1134)
+  (_Fire-SCUD1128 object _SCUD1149)
+  (_Fire-SCUD1128 agent _Tangible-Entity1150)
+  (_Conceal1141 resulting-state _Be-Concealed1129)
+  (_Conceal1141 object _Tangible-Entity1130)
+  (_Reload1143 next-event _Move1131)
+  (_Reload1143 resulting-state _Be-Activated1132)
+  (_Reload1143 object _Entity1133) (_Move1142 next-event _Reload1143)
+  (_Relinquish1134 next-event _Move1136)
+  (_Relinquish1134 donor _Tangible-Entity1150)
+  (_Relinquish1134 object _SCUD1149)
+  (_Relinquish1134 agent _Tangible-Entity1150)
+  (_SCUD1149 location _Place1135) (_Move1136 next-event _Deliver1139)
+  (_Move1136 destination _Tangible-Entity1137)
+  (_Move1136 origin _Tangible-Entity1150) (_Move1136 object _SCUD1149)
+  (_Deliver1139 recipient _Tangible-Entity1137)
+  (_Deliver1139 donor _Tangible-Entity1150)
+  (_Deliver1139 object _SCUD1149) (_Conceal1283 next-event _Move1142)
+  (_SCUD-attack1125 instance-of SCUD-attack)
+  (_SCUD-attack1125 node-coordinate (:pair 1000 50))
+  (_SCUD-attack1125 edge-coordinate
+   (:seq recipient _Tangible-Entity1137 1280 60))
+  (_SCUD-attack1125 edge-coordinate
+   (:seq object _Tangible-Entity1137 1314 98))
+  (_SCUD-attack1125 edge-coordinate (:seq subevent _Move1131 1004 94))
+  (_SCUD-attack1125 edge-coordinate
+   (:seq subevent _Fire-SCUD1128 1004 94))
+  (_SCUD-attack1125 edge-coordinate
+   (:seq subevent _Conceal1141 1004 94))
+  (_SCUD-attack1125 edge-coordinate
+   (:seq subevent _Reload1143 1004 94))
+  (_SCUD-attack1125 edge-coordinate (:seq subevent _Move1142 1004 94))
+  (_SCUD-attack1125 node-visibility t)
+  (_SCUD-attack1125 edge-visibility
+   (:seq recipient _Tangible-Entity1137 t))
+  (_SCUD-attack1125 edge-visibility
+   (:seq object _Tangible-Entity1137 t))
+  (_SCUD-attack1125 edge-visibility (:seq subevent _Move1131 t))
+  (_SCUD-attack1125 edge-visibility (:seq subevent _Fire-SCUD1128 t))
+  (_SCUD-attack1125 edge-visibility (:seq subevent _Conceal1141 t))
+  (_SCUD-attack1125 edge-visibility (:seq subevent _Reload1143 t))
+  (_SCUD-attack1125 edge-visibility (:seq subevent _Move1142 t))
+  (_SCUD-attack1125 internally-expanded t)
+  (_Place1126 instance-of Place)
+  (_Place1126 node-coordinate (:pair 1208 476))
+  (_Place1126 internally-expanded f)
+  (_Tangible-Entity1127 instance-of Tangible-Entity)
+  (_Tangible-Entity1127 node-coordinate (:pair 852 364))
+  (_Tangible-Entity1127 internally-expanded f)
+  (_Fire-SCUD1128 instance-of Fire-SCUD) (_Fire-SCUD1128 called "")
+  (_Fire-SCUD1128 node-coordinate (:pair 1084 234))
+  (_Fire-SCUD1128 edge-coordinate
+   (:seq next-event _Conceal1141 1135 203))
+  (_Fire-SCUD1128 edge-coordinate
+   (:seq next-event _Conceal1283 1135 203))
+  (_Fire-SCUD1128 edge-coordinate
+   (:seq destination _Tangible-Entity1137 1109 334))
+  (_Fire-SCUD1128 edge-coordinate
+   (:seq origin _Tangible-Entity1150 1051 319))
+  (_Fire-SCUD1128 edge-coordinate
+   (:seq recipient _Tangible-Entity1137 1171 312))
+  (_Fire-SCUD1128 edge-coordinate
+   (:seq donor _Tangible-Entity1150 849 291))
+  (_Fire-SCUD1128 edge-coordinate
+   (:seq subevent _Relinquish1134 962 291))
+  (_Fire-SCUD1128 edge-coordinate (:seq subevent _Move1136 962 291))
+  (_Fire-SCUD1128 edge-coordinate (:seq subevent _Deliver1139 962 291))
+  (_Fire-SCUD1128 edge-coordinate
+   (:seq first-subevent _Relinquish1134 962 291))
+  (_Fire-SCUD1128 edge-coordinate (:seq object _SCUD1149 1064 291))
+  (_Fire-SCUD1128 edge-coordinate
+   (:seq agent _Tangible-Entity1150 849 291))
+  (_Fire-SCUD1128 node-visibility t)
+  (_Fire-SCUD1128 edge-visibility (:seq next-event _Conceal1141 t))
+  (_Fire-SCUD1128 edge-visibility (:seq next-event _Conceal1283 t))
+  (_Fire-SCUD1128 edge-visibility
+   (:seq destination _Tangible-Entity1137 t))
+  (_Fire-SCUD1128 edge-visibility (:seq origin _Tangible-Entity1150 t))
+  (_Fire-SCUD1128 edge-visibility
+   (:seq recipient _Tangible-Entity1137 t))
+  (_Fire-SCUD1128 edge-visibility (:seq donor _Tangible-Entity1150 f))
+  (_Fire-SCUD1128 edge-visibility (:seq subevent _Relinquish1134 f))
+  (_Fire-SCUD1128 edge-visibility (:seq subevent _Move1136 f))
+  (_Fire-SCUD1128 edge-visibility (:seq subevent _Deliver1139 f))
+  (_Fire-SCUD1128 edge-visibility
+   (:seq first-subevent _Relinquish1134 f))
+  (_Fire-SCUD1128 edge-visibility (:seq object _SCUD1149 f))
+  (_Fire-SCUD1128 edge-visibility (:seq agent _Tangible-Entity1150 f))
+  (_Fire-SCUD1128 internally-expanded t)
+  (_Fire-SCUD1128 node-comment "")
+  (_Be-Concealed1129 instance-of Be-Concealed)
+  (_Be-Concealed1129 node-coordinate (:pair 1089 406))
+  (_Be-Concealed1129 node-visibility t)
+  (_Be-Concealed1129 internally-expanded f)
+  (_Tangible-Entity1130 instance-of Tangible-Entity)
+  (_Tangible-Entity1130 node-coordinate (:pair 1312 344))
+  (_Tangible-Entity1130 node-visibility t)
+  (_Tangible-Entity1130 internally-expanded f)
+  (_Move1131 instance-of Move) (_Move1131 called "move-to-firing")
+  (_Move1131 node-coordinate (:pair 925 272))
+  (_Move1131 edge-coordinate (:seq next-event _Fire-SCUD1128 1017 198))
+  (_Move1131 edge-coordinate
+   (:seq object _Tangible-Entity1127 912 318))
+  (_Move1131 edge-coordinate
+   (:seq destination _Tangible-Entity1150 947 328))
+  (_Move1131 node-visibility t)
+  (_Move1131 edge-visibility (:seq next-event _Fire-SCUD1128 t))
+  (_Move1131 edge-visibility (:seq object _Tangible-Entity1127 f))
+  (_Move1131 edge-visibility (:seq destination _Tangible-Entity1150 t))
+  (_Move1131 internally-expanded t) (_Move1131 node-comment "")
+  (_Be-Activated1132 instance-of Be-Activated)
+  (_Be-Activated1132 node-coordinate (:pair 723 374))
+  (_Be-Activated1132 node-visibility t)
+  (_Be-Activated1132 internally-expanded f)
+  (_Entity1133 instance-of Weapon) (_Entity1133 instance-of Entity)
+  (_Entity1133 node-coordinate (:pair 852 420))
+  (_Entity1133 node-visibility t) (_Entity1133 internally-expanded f)
+  (_Relinquish1134 instance-of Relinquish)
+  (_Relinquish1134 node-coordinate (:pair 972 354))
+  (_Relinquish1134 edge-coordinate (:seq next-event _Move1136 743 379))
+  (_Relinquish1134 edge-coordinate
+   (:seq donor _Tangible-Entity1150 416 202))
+  (_Relinquish1134 edge-coordinate (:seq object _SCUD1149 582 270))
+  (_Relinquish1134 edge-coordinate
+   (:seq agent _Tangible-Entity1150 461 200))
+  (_Relinquish1134 edge-visibility (:seq next-event _Move1136 f))
+  (_Relinquish1134 edge-visibility (:seq donor _Tangible-Entity1150 f))
+  (_Relinquish1134 edge-visibility (:seq object _SCUD1149 f))
+  (_Relinquish1134 edge-visibility (:seq agent _Tangible-Entity1150 f))
+  (_Relinquish1134 internally-expanded f)
+  (_Place1135 instance-of Place)
+  (_Place1135 node-coordinate (:pair 200000 200000))
+  (_Place1135 internally-expanded f) (_Move1136 instance-of Move)
+  (_Move1136 node-coordinate (:pair 986 367))
+  (_Move1136 edge-coordinate (:seq next-event _Deliver1139 910 368))
+  (_Move1136 edge-coordinate
+   (:seq destination _Tangible-Entity1137 1081 378))
+  (_Move1136 edge-coordinate
+   (:seq origin _Tangible-Entity1150 492 195))
+  (_Move1136 edge-coordinate (:seq object _SCUD1149 626 242))
+  (_Move1136 edge-visibility (:seq next-event _Deliver1139 f))
+  (_Move1136 edge-visibility (:seq destination _Tangible-Entity1137 f))
+  (_Move1136 edge-visibility (:seq origin _Tangible-Entity1150 f))
+  (_Move1136 edge-visibility (:seq object _SCUD1149 f))
+  (_Move1136 internally-expanded f)
+  (_Tangible-Entity1137 instance-of Target)
+  (_Tangible-Entity1137 instance-of Tangible-Entity)
+  (_Tangible-Entity1137 node-coordinate (:pair 1210 380))
+  (_Tangible-Entity1137 edge-coordinate
+   (:seq location _Place1126 1246 426))
+  (_Tangible-Entity1137 node-visibility t)
+  (_Tangible-Entity1137 edge-visibility (:seq location _Place1126 f))
+  (_Tangible-Entity1137 internally-expanded t)
+  (_Tangible-Entity1150 instance-of Tangible-Entity)
+  (_Tangible-Entity1150 node-coordinate (:pair 970 368))
+  (_Tangible-Entity1150 node-visibility t)
+  (_Tangible-Entity1150 internally-expanded f)
+  (_Deliver1139 instance-of Deliver)
+  (_Deliver1139 node-coordinate (:pair 860 444))
+  (_Deliver1139 edge-coordinate
+   (:seq recipient _Tangible-Entity1137 1037 463))
+  (_Deliver1139 edge-coordinate
+   (:seq donor _Tangible-Entity1150 690 212))
+  (_Deliver1139 edge-coordinate (:seq object _SCUD1149 680 267))
+  (_Deliver1139 edge-visibility
+   (:seq recipient _Tangible-Entity1137 f))
+  (_Deliver1139 edge-visibility (:seq donor _Tangible-Entity1150 f))
+  (_Deliver1139 edge-visibility (:seq object _SCUD1149 f))
+  (_Deliver1139 internally-expanded f) (_SCUD1149 instance-of SCUD)
+  (_SCUD1149 node-coordinate (:pair 1176 354))
+  (_SCUD1149 edge-coordinate (:seq location _Place1135 200000 200000))
+  (_SCUD1149 edge-visibility (:seq location _Place1135 f))
+  (_SCUD1149 internally-expanded f) (_Conceal1283 instance-of Conceal)
+  (_Conceal1283 node-coordinate (:pair 200000 200000))
+  (_Conceal1283 edge-coordinate
+   (:seq next-event _Move1142 200000 200000))
+  (_Conceal1283 edge-visibility (:seq next-event _Move1142 f))
+  (_Conceal1283 internally-expanded f)
+  (_Conceal1141 instance-of Conceal)
+  (_Conceal1141 node-coordinate (:pair 1230 244))
+  (_Conceal1141 edge-coordinate
+   (:seq resulting-state _Be-Concealed1129 1175 302))
+  (_Conceal1141 edge-coordinate
+   (:seq object _Tangible-Entity1130 1290 308))
+  (_Conceal1141 node-visibility t)
+  (_Conceal1141 edge-visibility
+   (:seq resulting-state _Be-Concealed1129 t))
+  (_Conceal1141 edge-visibility (:seq object _Tangible-Entity1130 t))
+  (_Conceal1141 internally-expanded t) (_Move1142 instance-of Move)
+  (_Move1142 called "move-to-reload")
+  (_Move1142 node-coordinate (:pair 635 248))
+  (_Move1142 edge-coordinate (:seq next-event _Reload1143 785 208))
+  (_Move1142 node-visibility t)
+  (_Move1142 edge-visibility (:seq next-event _Reload1143 t))
+  (_Move1142 internally-expanded f) (_Move1142 node-comment "")
+  (_Reload1143 instance-of Reload) (_Reload1143 called "")
+  (_Reload1143 node-coordinate (:pair 857 236))
+  (_Reload1143 edge-coordinate (:seq next-event _Move1131 915 212))
+  (_Reload1143 edge-coordinate
+   (:seq resulting-state _Be-Activated1132 753 310))
+  (_Reload1143 edge-coordinate (:seq object _Entity1133 886 332))
+  (_Reload1143 node-visibility t)
+  (_Reload1143 edge-visibility (:seq next-event _Move1131 t))
+  (_Reload1143 edge-visibility
+   (:seq resulting-state _Be-Activated1132 t))
+  (_Reload1143 edge-visibility (:seq object _Entity1133 t))
+  (_Reload1143 internally-expanded t) (_Reload1143 node-comment ""))
+ ((explanation
+   (:triple _SCUD-attack1125 recipient _Tangible-Entity1137)
+   (((@ SME entered))
+    (every SCUD-attack has
+     (recipient ((the first of (the object of Self)))))))
+  (explanation (:triple _SCUD-attack1125 object _Tangible-Entity1137)
+   (((@ SME entered))
+    (every SCUD-attack has
+     (object ((the first of (the recipient of Self)))))))
+  (explanation (:triple _SCUD-attack1125 subevent _Move1131)
+   (((@ SME entered))
+    (every SCUD-attack has
+     (subevent
+      ((the first of
+        (the next-event of (the third of (the subevent of Self))))
+       (a Fire-SCUD) (a Conceal) (a Reload) (a Move))))))
+  (explanation (:triple _SCUD-attack1125 subevent _Fire-SCUD1128)
+   (((@ SME entered))
+    (every SCUD-attack has
+     (subevent
+      ((a Move)
+       (the first of
+        (the next-event of (the first of (the subevent of Self))))
+       (a Conceal) (a Reload) (a Move))))))
+  (explanation (:triple _SCUD-attack1125 subevent _Conceal1141)
+   (((@ SME entered))
+    (every SCUD-attack has
+     (subevent
+      ((a Move) (a Fire-SCUD)
+       (the first of
+        (the next-event of (the second of (the subevent of Self))))
+       (a Reload) (a Move))))))
+  (explanation (:triple _SCUD-attack1125 subevent _Reload1143)
+   (((@ SME entered))
+    (every SCUD-attack has
+     (subevent
+      ((a Move) (a Fire-SCUD) (a Conceal)
+       (the first of
+        (the next-event of (the fourth of (the subevent of Self))))
+       (a Move))))))
+  (explanation (:triple _SCUD-attack1125 subevent _Move1142)
+   (((@ SME entered))
+    (every SCUD-attack has
+     (subevent
+      ((a Move) (a Fire-SCUD) (a Conceal) (a Reload)
+       (the first of
+        (the next-event of
+         (the second of
+          (the next-event of
+           (the second of (the subevent of Self)))))))))))
+  (explanation (:triple _Move1131 next-event _Fire-SCUD1128)
+   (((@ SME entered))
+    (every SCUD-attack has
+     (subevent
+      ((a Move with
+        (next-event ((the second of (the subevent of Self)))))
+       (a Fire-SCUD) (a Conceal) (a Reload) (a Move))))))
+  (explanation (:triple _Move1131 destination _Tangible-Entity1150)
+   (((@ SME entered))
+    (every SCUD-attack has
+     (subevent
+      ((a Move with
+        (destination
+         ((the origin of (the second of (the subevent of Self))))))
+       (a Fire-SCUD) (a Conceal) (a Reload) (a Move))))))
+  (explanation (:triple _Fire-SCUD1128 next-event _Conceal1141)
+   (((@ SME entered))
+    (every SCUD-attack has
+     (subevent
+      ((a Move)
+       (a Fire-SCUD with
+        (next-event
+         ((the third of (the subevent of Self)) (a Conceal)
+          (a Conceal))))
+       (a Conceal) (a Reload) (a Move))))))
+  (explanation (:triple _Fire-SCUD1128 next-event _Conceal1283)
+   (((@ SME entered))
+    (every SCUD-attack has
+     (subevent
+      ((a Move)
+       (a Fire-SCUD with
+        (next-event
+         ((a Conceal)
+          (the first of
+           (the prev-event of (the fifth of (the subevent of Self))))
+          (a Conceal))))
+       (a Conceal) (a Reload) (a Move))))))
+  (explanation (:triple _Reload1143 next-event _Move1131)
+   (((@ SME entered))
+    (every SCUD-attack has
+     (subevent
+      ((a Move) (a Fire-SCUD) (a Conceal)
+       (a Reload with
+        (next-event ((the first of (the subevent of Self)))))
+       (a Move))))))
+  (explanation (:triple _Move1142 next-event _Reload1143)
+   (((@ SME entered))
+    (every SCUD-attack has
+     (subevent
+      ((a Move) (a Fire-SCUD) (a Conceal) (a Reload)
+       (a Move with
+        (next-event ((the fourth of (the subevent of Self))))))))))
+  (explanation (:triple _Tangible-Entity1137 instance-of Target)
+   (((@ SME entered))
+    (every SCUD-attack has
+     (recipient
+      ((a Target with (instance-of ((a Target) Tangible-Entity))))))))))

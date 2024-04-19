@@ -1,0 +1,68 @@
+(in-package "EVALUATION")
+
+(tell (|echelonOfUnit| |BlueMechBgd1| |Brigade-UnitDesignation|))
+(TELL (|MilitaryOffensiveOperation| |Attack2|))
+(TELL (|WHO| |Attack2| |BlueMechBgd1|))
+(TELL (|taskOfOperation| |Attack2| |Fix1|))
+(TELL (|FIX| |Fix1|))
+(TELL (|WHO| |Fix1| |BlueMechBgd1|))
+(TELL (|objectActedOn| |Fix1| |RedMechRegt1|))
+(TELL (|objectActedOn| |Fix1| |RedTankBn1|))
+(TELL (|eventOccursAt| |Fix1| |Location1|))
+(TELL (|ArmoredUnit-MilitarySpecialty| |BlueMechBgd1|))
+(TELL (|MechanizedInfantryUnit-MilitarySpecialty| |BlueMechBgd1|))
+
+(TELL (|troopStrengthOfUnit| |BlueMechBgd1| |RegularStatus|))
+(TELL
+ (:ABOUT
+  |BlueMechBgd1|
+  (:EXACTLY 1 |subOrgs-Direct| |ArmoredUnit-MilitarySpecialty|)))
+(TELL
+ (:ABOUT
+  |BlueMechBgd1|
+  (:EXACTLY 2 |subOrgs-Direct| |MechanizedUnit-MilitarySpecialty|)))
+
+;; Stuff grafted from fusion0504... SR
+(TELL (|MechanizedInfantryUnit-MilitarySpecialty| |RedMechRegt1|))
+(TELL (|echelonOfUnit| |RedMechRegt1| |Regiment-UnitDesignation|))
+(TELL (|sovereignAllegianceOfOrg| |RedMechRegt1| |Red-Side|))
+(TELL (|troopStrengthOfUnit| |RedMechRegt1| |ReducedStatus|))
+(TELL (|ArmoredUnit-MilitarySpecialty| |RedTankBn1|))
+(TELL (|MechanizedInfantryUnit-MilitarySpecialty| |RedMechRegt1|))
+(TELL (|echelonOfUnit| |RedTankRegt1| |Regiment-UnitDesignation|))
+(TELL (|echelonOfUnit| |RedTankBn1| |Battalion-UnitDesignation|))
+;;(TELL (|SUB-UNIT| |REDMECHDIVISION1| |RedTankBn1|))
+(TELL (|SUB-UNIT| |REDMECHDIVISION1| |RedTankBn1|))
+(TELL (|BattleTank-T64| |BattleTank-T64-prototype|))
+(TELL (|MechanizedInfantryUnit-MilitarySpecialty| |RedMechRegt1|))
+(TELL (|MechanizedInfantryUnit-MilitarySpecialty| |RedMechInfantryBattalion2|))
+(TELL (|ArmoredPersonnelCarrier-BTR60| |ArmoredPersonnelCarrier-BTR60-prototype|))
+
+;;  (|PROTOTYPE| |BattleTank-T64-prototype|)
+;;  (|PROTOTYPICAL-INSTANCE| |BattleTank-T64| |BattleTank-T64-prototype|)
+;;  (|equipmentOfUnit| |RedTankBn1| |BattleTank-T64-prototype|)))
+
+
+
+;; how to retrieve the number
+;;(qualified-role-cardinality |BlueMechBgd1|  |subOrgs-Direct|
+;;			    |MechanizedUnit-MilitarySpecialty| ?n)
+			    
+;;; added by jihie
+
+(tellm (sub-unit |RedMechRegt1| |RedMechInfantryBattalion2|)
+       (|echelonOfUnit| |RedMechInfantryBattalion2| 
+		     |Battalion-UnitDesignation|)
+       (|equipmentOfUnit| |RedMechInfantryBattalion2|
+		       |ArmoredPersonnelCarrier-BTR60-prototype|)
+       (|equipmentOfUnit| |RedTankBn1| |BattleTank-T64-prototype|)
+       )
+
+;;; added by Jim
+
+(tellm (hpkb-plan example-coa)
+       (critical-event-of example-coa |Fix1|))
+
+;;; Currently you need to call the function (set-up-evaluation-aspects 'example-coa)
+;;; before you can solve the problem (evaluate (obj example-coa)).
+;;; Later this will be done in the PSM.

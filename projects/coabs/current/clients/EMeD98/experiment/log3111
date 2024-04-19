@@ -1,0 +1,120 @@
+Agenda:
+   at Tue Oct 05 15:11:25 PDT 1999
+
+select: modify button
+   at Tue Oct 05 15:11:41 PDT 1999
+
+select Button:operation-of:operation-of
+ TO become:((name COMPUTE-REQUIRED-FORCE-RATIO)
+(capability    ( estimate   ( obj   ( ?f is   ( spec-of required-force-ratio ) ) )
+         ( for   ( ?s is   ( inst-of military-task ) ) ) )
+)
+(result-type    ( inst-of number ))
+(method    ( if   ( is-it-a   ( obj   ( unit-assigned ?s ) )
+               ( of   ( spec-of military-offensive-operation ) ) ) then 3 else 1/3 )
+)
+)
+   at Tue Oct 05 15:11:48 PDT 1999
+
+ From sketch:(Capability): This method can be used to estimate the required force ratio for a military task.
+(Body)To do that, if is it a the operation of of the military task of the military offensive operation, then take 3, else take 1/3.
+
+   at Tue Oct 05 15:11:50 PDT 1999
+
+ done editing:((name COMPUTE-REQUIRED-FORCE-RATIO)
+(capability    ( estimate   ( obj   ( ?f is   ( spec-of required-force-ratio ) ) )
+         ( for   ( ?s is   ( inst-of military-task ) ) ) )
+)
+(result-type    ( inst-of number ))
+(method    ( if   ( is-it-a   ( obj   ( unit-assigned ?s ) )
+               ( of   ( spec-of military-offensive-operation ) ) ) then 3 else 1/3 )
+)
+)
+   at Tue Oct 05 15:11:50 PDT 1999
+
+modified method:((name compute-required-force-ratio)
+ (capability (estimate
+                (obj (?f is (spec-of required-force-ratio)))
+                (for (?s is (inst-of military-task)))
+                ))
+ (result-type (inst-of number))
+ (method  ( if (is-it-a
+            (obj ( unit-assigned ?s))
+            (of (spec-of military-offensive-operation))
+            ) 
+         then 3 
+         else 1/3))
+)
+   at Tue Oct 05 15:11:51 PDT 1999
+
+check tab:-1
+   at Tue Oct 05 15:11:51 PDT 1999
+
+check tab:0
+   at Tue Oct 05 15:11:51 PDT 1999
+
+Agenda:
+   at Tue Oct 05 15:11:52 PDT 1999
+
+7check: Method Sub-Method Relation
+   at Tue Oct 05 15:11:55 PDT 1999
+
+3check: Describe PS Tree
+   at Tue Oct 05 15:11:58 PDT 1999
+
+select: modify button
+   at Tue Oct 05 15:12:11 PDT 1999
+
+select Button:unit-assigned:unit-assigned
+ TO become:((name COMPUTE-REQUIRED-FORCE-RATIO)
+(capability    ( estimate   ( obj   ( ?f is   ( spec-of required-force-ratio ) ) )
+         ( for   ( ?s is   ( inst-of military-task ) ) ) )
+)
+(result-type    ( inst-of number ))
+(method    ( if   ( is-it-a   ( obj   ( aaa-of ?s ) )
+               ( of   ( spec-of military-offensive-operation ) ) ) then 3 else 1/3 )
+)
+)
+   at Tue Oct 05 15:12:36 PDT 1999
+
+ From sketch:(Capability): This method can be used to estimate the required force ratio for a military task.
+(Body)To do that, if is it a the unit assigned of the military task of the military offensive operation, then take 3, else take 1/3.
+
+   at Tue Oct 05 15:12:38 PDT 1999
+
+ done editing:((name COMPUTE-REQUIRED-FORCE-RATIO)
+(capability    ( estimate   ( obj   ( ?f is   ( spec-of required-force-ratio ) ) )
+         ( for   ( ?s is   ( inst-of military-task ) ) ) )
+)
+(result-type    ( inst-of number ))
+(method    ( if   ( is-it-a   ( obj   ( aaa-of ?s ) )
+               ( of   ( spec-of military-offensive-operation ) ) ) then 3 else 1/3 )
+)
+)
+   at Tue Oct 05 15:12:38 PDT 1999
+
+modified method:((name compute-required-force-ratio)
+ (capability (estimate
+                (obj (?f is (spec-of required-force-ratio)))
+                (for (?s is (inst-of military-task)))
+                ))
+ (result-type (inst-of number))
+ nil)
+   at Tue Oct 05 15:12:38 PDT 1999
+
+check tab:-1
+   at Tue Oct 05 15:12:38 PDT 1999
+
+check tab:0
+   at Tue Oct 05 15:12:38 PDT 1999
+
+Agenda:
+ Error: In the method to COMPUTE-REQUIRED-FORCE-RATIO, I cannot understand AAA-OF
+   at Tue Oct 05 15:12:39 PDT 1999
+
+7check: Method Sub-Method Relation
+   at Tue Oct 05 15:12:41 PDT 1999
+
+select: modify button
+   at Tue Oct 05 15:12:56 PDT 1999
+

@@ -1,0 +1,336 @@
+<html>
+<head>
+<script>
+var limit="0:30"
+if (document.images){
+  var parselimit=limit.split(":");
+  parselimit=parselimit[0]*60+parselimit[1]*1;
+  }
+function resubmit(val) {
+    var myform = eval("document.form"+val);
+    myform.submit();
+}
+function beginrefresh(){
+  if (!document.images)
+      return;
+   if (parselimit==1)
+      window.location.reload();
+   else {
+      parselimit-=1;
+      curmin=Math.floor(parselimit/60);
+      cursec=parselimit%60;
+      if (curmin!=0)
+         curtime=curmin+" minutes and "+cursec+" seconds left until page refresh!";
+      else
+         curtime=cursec+" seconds left until page refresh!";
+      window.status=curtime
+      setTimeout("beginrefresh()",1000)
+   }
+ }
+window.onload=beginrefresh;
+</script>
+</head>
+<table>
+<tr><td colspan=2>----Sun Jun 30 16:37:37 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>with original price</b></td><td>540</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>of outbound flight number</b></td><td>174</td></tr>
+<tr><td><b>of outbound connecting flight number</b></td><td></td></tr>
+<tr><td><b>on outbound departure date</b></td><td>6/29/2002</td></tr>
+<tr><td><b>from outbound departure airport</b></td><td>LAX</td></tr>
+<tr><td><b>to outbound arrival airport</b></td><td>BOS</td></tr>
+<tr><td><b>of return flight number</b></td><td>31</td></tr>
+<tr><td><b>of return connecting flight number</b></td><td></td></tr>
+<tr><td><b>on return departure date</b></td><td>7/7/2002</td></tr>
+<tr><td><b>from return departure airport</b></td><td>BOS</td></tr>
+<tr><td><b>to return arrival airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>knoblock@isi.edu</td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;error&gt;&lt;type&gt;Date passed&lt;/type&gt;&lt;attr&gt;date&lt;/attr&gt;&lt;/error&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1025480257)'></td></tr>
+</table><br>
+<form name='form1025480257' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='540'>
+<input type='hidden' name='val1' value='United Airlines'>
+<input type='hidden' name='val2' value='174'>
+<input type='hidden' name='val3' value=''>
+<input type='hidden' name='val4' value='6/29/2002'>
+<input type='hidden' name='val5' value='LAX'>
+<input type='hidden' name='val6' value='BOS'>
+<input type='hidden' name='val7' value='31'>
+<input type='hidden' name='val8' value=''>
+<input type='hidden' name='val9' value='7/7/2002'>
+<input type='hidden' name='val10' value='BOS'>
+<input type='hidden' name='val11' value='LAX'>
+<input type='hidden' name='val12' value='knoblock@isi.edu'>
+<input type='hidden' name='agent' value='airfare'>
+<input type='hidden' name='email' value='knoblock@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Sun Jun 30 04:27:47 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>with original price</b></td><td>540</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>of outbound flight number</b></td><td>174</td></tr>
+<tr><td><b>of outbound connecting flight number</b></td><td></td></tr>
+<tr><td><b>on outbound departure date</b></td><td>6/29/2002</td></tr>
+<tr><td><b>from outbound departure airport</b></td><td>LAX</td></tr>
+<tr><td><b>to outbound arrival airport</b></td><td>BOS</td></tr>
+<tr><td><b>of return flight number</b></td><td>31</td></tr>
+<tr><td><b>of return connecting flight number</b></td><td></td></tr>
+<tr><td><b>on return departure date</b></td><td>7/7/2002</td></tr>
+<tr><td><b>from return departure airport</b></td><td>BOS</td></tr>
+<tr><td><b>to return arrival airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>knoblock@isi.edu</td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;error&gt;&lt;type&gt;Date passed&lt;/type&gt;&lt;attr&gt;date&lt;/attr&gt;&lt;/error&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1025436467)'></td></tr>
+</table><br>
+<form name='form1025436467' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='540'>
+<input type='hidden' name='val1' value='United Airlines'>
+<input type='hidden' name='val2' value='174'>
+<input type='hidden' name='val3' value=''>
+<input type='hidden' name='val4' value='6/29/2002'>
+<input type='hidden' name='val5' value='LAX'>
+<input type='hidden' name='val6' value='BOS'>
+<input type='hidden' name='val7' value='31'>
+<input type='hidden' name='val8' value=''>
+<input type='hidden' name='val9' value='7/7/2002'>
+<input type='hidden' name='val10' value='BOS'>
+<input type='hidden' name='val11' value='LAX'>
+<input type='hidden' name='val12' value='knoblock@isi.edu'>
+<input type='hidden' name='agent' value='airfare'>
+<input type='hidden' name='email' value='knoblock@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Fri Jun 28 15:58:04 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>with original price</b></td><td>540</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>of outbound flight number</b></td><td>174</td></tr>
+<tr><td><b>of outbound connecting flight number</b></td><td></td></tr>
+<tr><td><b>on outbound departure date</b></td><td>6/29/2002</td></tr>
+<tr><td><b>from outbound departure airport</b></td><td>LAX</td></tr>
+<tr><td><b>to outbound arrival airport</b></td><td>BOS</td></tr>
+<tr><td><b>of return flight number</b></td><td>31</td></tr>
+<tr><td><b>of return connecting flight number</b></td><td></td></tr>
+<tr><td><b>on return departure date</b></td><td>7/7/2002</td></tr>
+<tr><td><b>from return departure airport</b></td><td>BOS</td></tr>
+<tr><td><b>to return arrival airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>knoblock@isi.edu</td></tr>
+
+<tr><td colspan=2><b>Airfare changed</b></td></tr>
+<tr><td colspan=2>Dear knoblock_at_isi_edu,<br/><br/> The airfare for your United Airlines itinerary (LAX - BOS) has increased to $2490.<br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1025305084)'></td></tr>
+</table><br>
+<form name='form1025305084' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='540'>
+<input type='hidden' name='val1' value='United Airlines'>
+<input type='hidden' name='val2' value='174'>
+<input type='hidden' name='val3' value=''>
+<input type='hidden' name='val4' value='6/29/2002'>
+<input type='hidden' name='val5' value='LAX'>
+<input type='hidden' name='val6' value='BOS'>
+<input type='hidden' name='val7' value='31'>
+<input type='hidden' name='val8' value=''>
+<input type='hidden' name='val9' value='7/7/2002'>
+<input type='hidden' name='val10' value='BOS'>
+<input type='hidden' name='val11' value='LAX'>
+<input type='hidden' name='val12' value='knoblock@isi.edu'>
+<input type='hidden' name='agent' value='airfare'>
+<input type='hidden' name='email' value='knoblock@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Fri Jun 21 10:47:57 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>with original price</b></td><td>500</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>of outbound flight number</b></td><td>1800</td></tr>
+<tr><td><b>of outbound connecting flight number</b></td><td></td></tr>
+<tr><td><b>on outbound departure date</b></td><td>6/20/2002</td></tr>
+<tr><td><b>from outbound departure airport</b></td><td>LAX</td></tr>
+<tr><td><b>to outbound arrival airport</b></td><td>LAX</td></tr>
+<tr><td><b>of return flight number</b></td><td>1841</td></tr>
+<tr><td><b>of return connecting flight number</b></td><td></td></tr>
+<tr><td><b>on return departure date</b></td><td>6/21/2002</td></tr>
+<tr><td><b>from return departure airport</b></td><td>SFO</td></tr>
+<tr><td><b>to return arrival airport</b></td><td>SFO</td></tr>
+<tr><td><b>for user id</b></td><td>knoblock@isi.edu</td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;error&gt;&lt;type&gt;Date passed&lt;/type&gt;&lt;attr&gt;date&lt;/attr&gt;&lt;/error&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1024681677)'></td></tr>
+</table><br>
+<form name='form1024681677' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='500'>
+<input type='hidden' name='val1' value='United Airlines'>
+<input type='hidden' name='val2' value='1800'>
+<input type='hidden' name='val3' value=''>
+<input type='hidden' name='val4' value='6/20/2002'>
+<input type='hidden' name='val5' value='LAX'>
+<input type='hidden' name='val6' value='LAX'>
+<input type='hidden' name='val7' value='1841'>
+<input type='hidden' name='val8' value=''>
+<input type='hidden' name='val9' value='6/21/2002'>
+<input type='hidden' name='val10' value='SFO'>
+<input type='hidden' name='val11' value='SFO'>
+<input type='hidden' name='val12' value='knoblock@isi.edu'>
+<input type='hidden' name='agent' value='airfare'>
+<input type='hidden' name='email' value='knoblock@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Fri Jun  7 01:01:15 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>with original price</b></td><td>500</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>of outbound flight number</b></td><td>130</td></tr>
+<tr><td><b>of outbound connecting flight number</b></td><td>5537</td></tr>
+<tr><td><b>on outbound departure date</b></td><td>6/6/2002</td></tr>
+<tr><td><b>from outbound departure airport</b></td><td>SFO</td></tr>
+<tr><td><b>to outbound arrival airport</b></td><td>MSN</td></tr>
+<tr><td><b>of return flight number</b></td><td>5772</td></tr>
+<tr><td><b>of return connecting flight number</b></td><td>105</td></tr>
+<tr><td><b>on return departure date</b></td><td>6/7/2002</td></tr>
+<tr><td><b>from return departure airport</b></td><td>MSN</td></tr>
+<tr><td><b>to return arrival airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>knoblock@isi.edu</td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;error&gt;&lt;type&gt;Date passed&lt;/type&gt;&lt;attr&gt;date&lt;/attr&gt;&lt;/error&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1023436875)'></td></tr>
+</table><br>
+<form name='form1023436875' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='500'>
+<input type='hidden' name='val1' value='United Airlines'>
+<input type='hidden' name='val2' value='130'>
+<input type='hidden' name='val3' value='5537'>
+<input type='hidden' name='val4' value='6/6/2002'>
+<input type='hidden' name='val5' value='SFO'>
+<input type='hidden' name='val6' value='MSN'>
+<input type='hidden' name='val7' value='5772'>
+<input type='hidden' name='val8' value='105'>
+<input type='hidden' name='val9' value='6/7/2002'>
+<input type='hidden' name='val10' value='MSN'>
+<input type='hidden' name='val11' value='LAX'>
+<input type='hidden' name='val12' value='knoblock@isi.edu'>
+<input type='hidden' name='agent' value='airfare'>
+<input type='hidden' name='email' value='knoblock@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Tue May 21 07:38:20 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>with original price</b></td><td>2000</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>of outbound flight number</b></td><td>116</td></tr>
+<tr><td><b>of outbound flight number2</b></td><td>7814</td></tr>
+<tr><td><b>on outbound departure date</b></td><td>5/20/2002</td></tr>
+<tr><td><b>from outbound departure airport</b></td><td>LAX</td></tr>
+<tr><td><b>to outbound arrival airport</b></td><td>SAV</td></tr>
+<tr><td><b>of return flight number</b></td><td>7204</td></tr>
+<tr><td><b>of return flight number2</b></td><td>197</td></tr>
+<tr><td><b>on return departure date</b></td><td>5/24/2002</td></tr>
+<tr><td><b>from return departure airport</b></td><td>SAV</td></tr>
+<tr><td><b>to return arrival airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>knoblock@isi.edu</td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;error&gt;&lt;type&gt;Date passed&lt;/type&gt;&lt;attr&gt;date&lt;/attr&gt;&lt;/error&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1021991900)'></td></tr>
+</table><br>
+<form name='form1021991900' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='2000'>
+<input type='hidden' name='val1' value='United Airlines'>
+<input type='hidden' name='val2' value='116'>
+<input type='hidden' name='val3' value='7814'>
+<input type='hidden' name='val4' value='5/20/2002'>
+<input type='hidden' name='val5' value='LAX'>
+<input type='hidden' name='val6' value='SAV'>
+<input type='hidden' name='val7' value='7204'>
+<input type='hidden' name='val8' value='197'>
+<input type='hidden' name='val9' value='5/24/2002'>
+<input type='hidden' name='val10' value='SAV'>
+<input type='hidden' name='val11' value='LAX'>
+<input type='hidden' name='val12' value='knoblock@isi.edu'>
+<input type='hidden' name='agent' value='airfare'>
+<input type='hidden' name='email' value='knoblock@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Thu May 16 06:33:33 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>with original price</b></td><td>2000</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>of outbound flight number</b></td><td>116</td></tr>
+<tr><td><b>of outbound flight number2</b></td><td>7814</td></tr>
+<tr><td><b>on outbound departure date</b></td><td>5/20/2002</td></tr>
+<tr><td><b>from outbound departure airport</b></td><td>LAX</td></tr>
+<tr><td><b>to outbound arrival airport</b></td><td>SAV</td></tr>
+<tr><td><b>of return flight number</b></td><td>7204</td></tr>
+<tr><td><b>of return flight number2</b></td><td>197</td></tr>
+<tr><td><b>on return departure date</b></td><td>5/24/2002</td></tr>
+<tr><td><b>from return departure airport</b></td><td>SAV</td></tr>
+<tr><td><b>to return arrival airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>knoblock@isi.edu</td></tr>
+<tr><td><b>notify on</b></td><td>Any change</td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;ack&gt;OK&lt;/ack&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1021556013)'></td></tr>
+</table><br>
+<form name='form1021556013' action="/cgi-bin/portal/agent-req.pl" target="_blank" method="post">
+<input type='hidden' name='val0' value='2000'>
+<input type='hidden' name='val1' value='United Airlines'>
+<input type='hidden' name='val2' value='116'>
+<input type='hidden' name='val3' value='7814'>
+<input type='hidden' name='val4' value='5/20/2002'>
+<input type='hidden' name='val5' value='LAX'>
+<input type='hidden' name='val6' value='SAV'>
+<input type='hidden' name='val7' value='7204'>
+<input type='hidden' name='val8' value='197'>
+<input type='hidden' name='val9' value='5/24/2002'>
+<input type='hidden' name='val10' value='SAV'>
+<input type='hidden' name='val11' value='LAX'>
+<input type='hidden' name='val12' value='knoblock@isi.edu'>
+<input type='hidden' name='val13' value='Any change'>
+<input type='hidden' name='agent' value='airfare'>
+<input type='hidden' name='email' value='knoblock@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Wed Feb 27 16:15:41 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>outbound departure airport</b></td><td>LAX</td></tr>
+<tr><td><b>outbound arrival airport</b></td><td>IAD</td></tr>
+<tr><td><b>return departure airport</b></td><td>IAD</td></tr>
+<tr><td><b>return arrival airport</b></td><td>LAX</td></tr>
+<tr><td><b>airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>outbound flight number</b></td><td>200</td></tr>
+<tr><td><b>outbound flight number2</b></td><td></td></tr>
+<tr><td><b>return flight number</b></td><td>947</td></tr>
+<tr><td><b>return flight number2</b></td><td></td></tr>
+<tr><td><b>outbound departure date</b></td><td>3/4/2002</td></tr>
+<tr><td><b>return departure date</b></td><td>3/6/2002</td></tr>
+<tr><td><b>original price</b></td><td>2272</td></tr>
+<tr><td><b>on</b></td><td>Decrease only</td></tr>
+<tr><td><b>user id</b></td><td>knoblock@isi.edu</td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;ack&gt;59&lt;/ack&gt;</td></tr>
+
+</table><br>
+</html>

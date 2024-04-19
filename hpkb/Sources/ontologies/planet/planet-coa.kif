@@ -1,0 +1,306 @@
+
+(IN-PACKAGE "PLANET")
+(DEFRELATION COA-PROBLEM-CONTEXT (?SELF) :=>
+ (AND (PLANNING-PROBLEM-CONTEXT ?SELF)
+      (EXISTS (?A) (AND (SCENARIO ?SELF ?A) (COA-SCENARIO ?A)))
+      (FORALL (?A ?B)
+       (=> (AND (SCENARIO ?SELF ?A) (SCENARIO ?SELF ?B)) (= ?A ?B)))
+      (FORALL (?C)
+       (=> (POSSIBLE-COA-PROBLEM ?SELF ?C) (COA-PROBLEM ?C))))
+ :AXIOM
+ (DOCUMENTATION COA-PROBLEM-CONTEXT "A problem context captures the input
+ information in which any alternative plans or COAs are considered.
+ In the COA domain, this is given as a 'scenario' that contains selected
+ products of mission analysis."))
+(DEFRELATION POSSIBLE-COA-PROBLEM (?A ?B)
+ (DOCUMENTATION POSSIBLE-COA-PROBLEM
+                "Links an object (such as the COA-problem-context) to a
+COA-problem."))
+(FORALL (?B) (=> (POSSIBLE-COA-PROBLEM ?A ?B) (COA-PROBLEM ?B)))
+(DEFRELATION COA-PROBLEM (?SELF) :=> (PLANNING-PROBLEM ?SELF) :AXIOM
+ (DOCUMENTATION COA-PROBLEM "The scenario given in the problem
+context is then broken down into what every item means in terms of
+planning.  For example, the mission statement contains the top level
+goal and the top level task to be done.  Other items in the scenario,
+such as assets available, turn into assertions to be made as part of the
+initial state."))
+(DEFRELATION ACCOMPLISH (?A ?B))
+(FORALL (?B) (=> (ACCOMPLISH ?A ?B) (PURPOSE ?B)))
+(FORALL (?A) (=> (ACCOMPLISH ?A ?B) (COA-TASK ?A)))
+(DEFRELATION COA-TASK (?SELF) :=>
+ (AND (PLAN-TASK ?SELF)
+      (EXISTS (?A)
+       (AND (STRUCTURED-STATEMENT ?SELF ?A) (STRUCTURED-TASK-STATEMENT ?A)))
+      (FORALL (?A ?B)
+       (=>
+        (AND (STRUCTURED-STATEMENT ?SELF ?A) (STRUCTURED-STATEMENT ?SELF ?B))
+        (= ?A ?B)))
+      (EXISTS (?C)
+       (AND (HUMAN-READABLE-DESCRIPTION-OF ?SELF ?C)
+            (HUMAN-READABLE-TASK-DESCRIPTION ?C)))
+      (FORALL (?C ?D)
+       (=>
+        (AND (HUMAN-READABLE-DESCRIPTION-OF ?SELF ?C)
+             (HUMAN-READABLE-DESCRIPTION-OF ?SELF ?D))
+        (= ?C ?D)))
+      (> (CARDINALITY (SETOFALL ?E (ACCOMPLISH ?SELF ?E))) 0)))
+(DEFRELATION PURPOSE (?SELF) :=>
+ (AND (GOAL-SPECIFICATION ?SELF)
+      (EXISTS (?A)
+       (AND (STRUCTURED-STATEMENT ?SELF ?A)
+            (STRUCTURED-PURPOSE-STATEMENT ?A)))
+      (FORALL (?A ?B)
+       (=>
+        (AND (STRUCTURED-STATEMENT ?SELF ?A) (STRUCTURED-STATEMENT ?SELF ?B))
+        (= ?A ?B)))
+      (EXISTS (?C)
+       (AND (HUMAN-READABLE-DESCRIPTION-OF ?SELF ?C)
+            (HUMAN-READABLE-TASK-DESCRIPTION ?C)))
+      (FORALL (?C ?D)
+       (=>
+        (AND (HUMAN-READABLE-DESCRIPTION-OF ?SELF ?C)
+             (HUMAN-READABLE-DESCRIPTION-OF ?SELF ?D))
+        (= ?C ?D))))
+ :AXIOM
+ (DOCUMENTATION PURPOSE "Purposes are a kind of goal.  Sometimes they
+ seem to be state-based and other times they seem to be objective-based.
+ The ontology does not commit purpose to being either, i.e., it defines purpose
+ to be in their parent class 'goal-specification'."))
+(DEFRELATION COA (?SELF) :=>
+ (AND (PLAN ?SELF) (FORALL (?A) (=> (TASK-OF ?SELF ?A) (COA-TASK ?A)))
+      (EXISTS (?B) (AND (CLOSE ?SELF ?B) (CLOSE-COA ?B)))
+      (FORALL (?B ?C)
+       (=> (AND (CLOSE ?SELF ?B) (CLOSE ?SELF ?C)) (= ?B ?C)))
+      (EXISTS (?D) (AND (RESERVE ?SELF ?D) (RESERVE-COA ?D)))
+      (FORALL (?D ?E)
+       (=> (AND (RESERVE ?SELF ?D) (RESERVE ?SELF ?E)) (= ?D ?E)))
+      (EXISTS (?F) (AND (SECURITY ?SELF ?F) (SECURITY-COA ?F)))
+      (FORALL (?F ?G)
+       (=> (AND (SECURITY ?SELF ?F) (SECURITY ?SELF ?G)) (= ?F ?G)))
+      (EXISTS (?H) (AND (DEEP ?SELF ?H) (DEEP-COA ?H)))
+      (FORALL (?H ?I)
+       (=> (AND (DEEP ?SELF ?H) (DEEP ?SELF ?I)) (= ?H ?I)))
+      (EXISTS (?J) (AND (REAR ?SELF ?J) (REAR-COA ?J)))
+      (FORALL (?J ?K)
+       (=> (AND (REAR ?SELF ?J) (REAR ?SELF ?K)) (= ?J ?K)))
+      (EXISTS (?L) (AND (FIRES ?SELF ?L) (FIRES-COA ?L)))
+      (FORALL (?L ?M)
+       (=> (AND (FIRES ?SELF ?L) (FIRES ?SELF ?M)) (= ?L ?M)))
+      (EXISTS (?N) (AND (OBSTACLES ?SELF ?N) (OBSTACLES-COA ?N)))
+      (FORALL (?N ?O)
+       (=> (AND (OBSTACLES ?SELF ?N) (OBSTACLES ?SELF ?O)) (= ?N ?O))))
+ :AXIOM
+ (DOCUMENTATION COA "COAs are plans.  A COA has many tasks,
+and the tasks are grouped into six conceptually related subplans (close,
+reserve, security, deep, rear, fires, and obstacles."))
+(DEFRELATION BEFORE (?A ?B) :=>
+ (AND (ORDERING-COMMITMENT ?A ?B) (TEMPORAL-COMMITMENT ?A ?B)) :AXIOM
+ (DOCUMENTATION BEFORE ""))
+(DEFRELATION CLOSE (?A ?B) :=> (SUB-PLAN ?A ?B) :AXIOM
+ (DOCUMENTATION CLOSE "Links a COA to the sub-plan describing
+the close battle"))
+(FORALL (?B) (=> (CLOSE ?A ?B) (CLOSE-COA ?B)))
+(DEFRELATION RESERVE (?A ?B) :=> (SUB-PLAN ?A ?B) :AXIOM
+ (DOCUMENTATION RESERVE "Links a COA to the sub-plan concerning
+the reserve forces"))
+(FORALL (?B) (=> (RESERVE ?A ?B) (RESERVE-COA ?B)))
+(DEFRELATION SECURITY (?A ?B) :=> (SUB-PLAN ?A ?B) :AXIOM
+ (DOCUMENTATION SECURITY "Links a COA to the sub-plan concerned
+with security"))
+(FORALL (?B) (=> (SECURITY ?A ?B) (SECURITY-COA ?B)))
+(DEFRELATION DEEP (?A ?B) :=> (SUB-PLAN ?A ?B) :AXIOM
+ (DOCUMENTATION DEEP "Links a COA to the sub-plan concerned
+with deep fires"))
+(FORALL (?B) (=> (DEEP ?A ?B) (DEEP-COA ?B)))
+(DEFRELATION REAR (?A ?B) :=> (SUB-PLAN ?A ?B) :AXIOM
+ (DOCUMENTATION REAR "Links a COA to the sub-plan concerned
+with rear action"))
+(FORALL (?B) (=> (REAR ?A ?B) (REAR-COA ?B)))
+(DEFRELATION FIRES (?A ?B) :=> (SUB-PLAN ?A ?B) :AXIOM
+ (DOCUMENTATION FIRES "Links a COA to the sub-plan concerned
+with fires"))
+(FORALL (?B) (=> (FIRES ?A ?B) (FIRES-COA ?B)))
+(DEFRELATION OBSTACLES (?A ?B) :=> (SUB-PLAN ?A ?B) :AXIOM
+ (DOCUMENTATION OBSTACLES "Links a COA to the sub-plan concerned
+with obstacles"))
+(FORALL (?B) (=> (OBSTACLES ?A ?B) (OBSTACLES-COA ?B)))
+(DEFRELATION CLOSE-COA (?SELF) :=> (PLAN ?SELF) :AXIOM
+ (DOCUMENTATION CLOSE-COA "A sub-plan describing
+the close battle"))
+(DEFRELATION RESERVE-COA (?SELF) :=> (PLAN ?SELF) :AXIOM
+ (DOCUMENTATION RESERVE-COA "A sub-plan concerned with
+reserve forces"))
+(DEFRELATION SECURITY-COA (?SELF) :=> (PLAN ?SELF) :AXIOM
+ (DOCUMENTATION SECURITY-COA "A sub-plan concerned with security"))
+(DEFRELATION DEEP-COA (?SELF) :=> (PLAN ?SELF) :AXIOM
+ (DOCUMENTATION DEEP-COA "A sub-plan concerned with deep fires"))
+(DEFRELATION REAR-COA (?SELF) :=> (PLAN ?SELF) :AXIOM
+ (DOCUMENTATION REAR-COA "A sub-plan concerned with rear action"))
+(DEFRELATION FIRES-COA (?SELF) :=> (PLAN ?SELF) :AXIOM
+ (DOCUMENTATION FIRES-COA "A sub-plan concerned with fires"))
+(DEFRELATION OBSTACLES-COA (?SELF) :=> (PLAN ?SELF) :AXIOM
+ (DOCUMENTATION OBSTACLES-COA "A sub-plan concerned with obstacles"))
+(DEFRELATION CLOSE-COA-TASK (?SELF) :=>
+ (AND (COA-TASK ?SELF)
+      (EXISTS (?A) (AND (MAIN-EFFORT-OF ?SELF ?A) (MAIN-EFFORT ?A)))
+      (FORALL (?A ?B)
+       (=> (AND (MAIN-EFFORT-OF ?SELF ?A) (MAIN-EFFORT-OF ?SELF ?B))
+        (= ?A ?B)))
+      (FORALL (?C)
+       (=> (SUPPORTING-EFFORT-OF ?SELF ?C) (COA-TASK ?C))))
+ :AXIOM (DOCUMENTATION CLOSE-COA-TASK "A task that is part of a close-COA"))
+(DEFRELATION COA-SCENARIO (?SELF) :=>
+ (AND (THING ?SELF)
+      (FORALL (?A) (=> (STAFF-PRODUCTS ?SELF ?A) (STAFF-PRODUCT ?A)))
+      (FORALL (?B)
+       (=> (COMMANDER-PRODUCTS ?SELF ?B) (COMMANDER-PRODUCT ?B))))
+ :AXIOM (DOCUMENTATION COA-SCENARIO ""))
+(DEFRELATION SCENARIO (?A ?B))
+(FORALL (?A) (=> (SCENARIO ?A ?B) (COA-SCENARIO ?A)))
+(DEFRELATION COMMANDER-PRODUCT (?SELF) :=> (THING ?SELF))
+(DEFRELATION COMMANDER-PRODUCTS (?A ?B))
+(FORALL (?A) (=> (COMMANDER-PRODUCTS ?A ?B) (COMMANDER-PRODUCT ?A)))
+(DEFRELATION MISSION-STATEMENT (?SELF) :=>
+ (AND (COMMANDER-PRODUCT ?SELF)
+      (EXISTS (?A)
+       (AND (STRUCTURED-STATEMENT ?SELF ?A)
+            (STRUCTURED-MISSION-STATEMENT ?A)))
+      (FORALL (?A ?B)
+       (=>
+        (AND (STRUCTURED-STATEMENT ?SELF ?A) (STRUCTURED-STATEMENT ?SELF ?B))
+        (= ?A ?B)))
+      (EXISTS (?C)
+       (AND (HUMAN-READABLE-DESCRIPTION-OF ?SELF ?C)
+            (HUMAN-READABLE-TASK-DESCRIPTION ?C)))
+      (FORALL (?C ?D)
+       (=>
+        (AND (HUMAN-READABLE-DESCRIPTION-OF ?SELF ?C)
+             (HUMAN-READABLE-DESCRIPTION-OF ?SELF ?D))
+        (= ?C ?D)))))
+(DEFRELATION STRUCTURED-MISSION-STATEMENT (?SELF) :=>
+ (AND (GRAMMAR-OBJECT ?SELF)
+      (EXISTS (?A) (AND (DESCRIPTION ?SELF ?A) (TASK-ACTION ?A)))
+      (FORALL (?A ?B)
+       (=> (AND (DESCRIPTION ?SELF ?A) (DESCRIPTION ?SELF ?B)) (= ?A ?B)))
+      (=< (CARDINALITY (SETOFALL ?C (OPERATION-TYPE ?SELF ?C))) 1)
+      (EXISTS (?D) (AND (PURPOSE-OF ?SELF ?D) (PURPOSE ?D)))
+      (FORALL (?D ?E)
+       (=> (AND (PURPOSE-OF ?SELF ?D) (PURPOSE-OF ?SELF ?E)) (= ?D ?E)))))
+(DEFRELATION PURPOSE-OF (?A ?B))
+(FORALL (?B) (=> (PURPOSE-OF ?A ?B) (PURPOSE ?B)))
+(FORALL (?A) (=> (PURPOSE-OF ?A ?B) (GRAMMAR-OBJECT ?A)))
+(DEFRELATION STRUCTURED-STATEMENT (?A ?B))
+(DEFRELATION GRAMMAR-OBJECT (?SELF) :=> (THING ?SELF) :AXIOM
+ (DOCUMENTATION GRAMMAR-OBJECT "This is going to be used to hook
+    the given object to components in the COA Grammar."))
+(DEFRELATION STAFF-PRODUCT (?SELF) :=> (THING ?SELF))
+(DEFRELATION STAFF-PRODUCTS (?A ?B))
+(FORALL (?A) (=> (STAFF-PRODUCTS ?A ?B) (STAFF-PRODUCT ?A)))
+(DEFRELATION THREAT-COAS (?A ?B) :=> (STAFF-PRODUCTS ?A ?B))
+(DEFRELATION ENEMY-COA (?SELF) :=>
+ (AND (STAFF-PRODUCT ?SELF) (PLAN ?SELF)
+      (FORALL (?A)
+       (=> (POSSIBLE-TASK-OF ?SELF ?A) (ENEMY-COA-TASK ?A)))))
+(DEFRELATION POSSIBLE-TASK-OF (?A ?B))
+(FORALL (?B) (=> (POSSIBLE-TASK-OF ?A ?B) (ENEMY-COA-TASK ?B)))
+(DEFRELATION ENEMY-COA-TASK (?SELF) :=> (PLAN-TASK ?SELF) :AXIOM
+ (DOCUMENTATION ENEMY-COA-TASK "A COA task performed by an 
+enemy unit or units"))
+(DEFRELATION ENEMY-TASK-ACTION (?SELF) :=> (TASK-ACTION ?SELF))
+(DEFRELATION OPERATION-TYPE (?A ?B))
+(FORALL (?B) (=> (OPERATION-TYPE ?A ?B) (TYPE-OF-OPERATION ?B)))
+(DEFRELATION DESCRIPTION (?A ?B))
+(FORALL (?B) (=> (DESCRIPTION ?A ?B) (TASK-ACTION ?B)))
+(DEFRELATION STRUCTURED-TASK-STATEMENT (?SELF) :=>
+ (AND (GRAMMAR-OBJECT ?SELF)
+      (EXISTS (?A) (AND (DESCRIPTION ?SELF ?A) (TASK-ACTION ?A)))
+      (FORALL (?A ?B)
+       (=> (AND (DESCRIPTION ?SELF ?A) (DESCRIPTION ?SELF ?B)) (= ?A ?B)))
+      (=< (CARDINALITY (SETOFALL ?C (OPERATION-TYPE ?SELF ?C))) 1)
+      (=< (CARDINALITY (SETOFALL ?D (PURPOSE-OF ?SELF ?D))) 1)
+      (=<
+       (CARDINALITY (SETOFALL ?E (EVENT-TASK-STATEMENT-OF ?SELF ?E)))
+       1)
+      (=< (CARDINALITY (SETOFALL ?F (PREPARE-DESC-OF ?SELF ?F)))
+       1)))
+(DEFRELATION STRUCTURED-PURPOSE-STATEMENT (?SELF) :=>
+ (AND (GRAMMAR-OBJECT ?SELF) (ACTION ?SELF)))
+(DEFRELATION CAPABILITY (?SELF) :=> (GRAMMAR-OBJECT ?SELF))
+(DEFRELATION EVENT-TASK-STATEMENT-OF (?A ?B))
+(FORALL (?B)
+ (=> (EVENT-TASK-STATEMENT-OF ?A ?B) (EVENT-TASK-STATEMENT ?B)))
+(FORALL (?A)
+ (=> (EVENT-TASK-STATEMENT-OF ?A ?B) (STRUCTURED-TASK-STATEMENT ?A)))
+(DEFRELATION EVENT-TASK-STATEMENT (?SELF) :=>
+ (AND (GRAMMAR-OBJECT ?SELF)
+      (EXISTS (?A)
+       (AND (EVENT-STATEMENT-OF ?SELF ?A) (EVENT-STATEMENT ?A)))
+      (FORALL (?A ?B)
+       (=>
+        (AND (EVENT-STATEMENT-OF ?SELF ?A) (EVENT-STATEMENT-OF ?SELF ?B))
+        (= ?A ?B)))
+      (EXISTS (?C) (AND (CONDITION-DESC-OF ?SELF ?C) (CONDITION-DESC ?C)))
+      (FORALL (?C ?D)
+       (=> (AND (CONDITION-DESC-OF ?SELF ?C) (CONDITION-DESC-OF ?SELF ?D))
+        (= ?C ?D)))
+      (=< (CARDINALITY (SETOFALL ?E (NOT-DESC-OF ?SELF ?E))) 1)))
+(DEFRELATION EVENT-STATEMENT-OF (?A ?B))
+(FORALL (?B) (=> (EVENT-STATEMENT-OF ?A ?B) (EVENT-STATEMENT ?B)))
+(DEFRELATION EVENT-STATEMENT (?SELF) :=> (GRAMMAR-OBJECT ?SELF))
+(DEFRELATION EVENT-SPEC (?SELF) :=>
+ (AND (THING ?SELF)
+      (EXISTS (?A)
+       (AND (STRUCTURED-STATEMENT ?SELF ?A) (EVENT-TASK-STATEMENT ?A)))
+      (FORALL (?A ?B)
+       (=>
+        (AND (STRUCTURED-STATEMENT ?SELF ?A) (STRUCTURED-STATEMENT ?SELF ?B))
+        (= ?A ?B)))
+      (EXISTS (?C)
+       (AND (HUMAN-READABLE-DESCRIPTION-OF ?SELF ?C)
+            (HUMAN-READABLE-TASK-DESCRIPTION ?C)))
+      (FORALL (?C ?D)
+       (=>
+        (AND (HUMAN-READABLE-DESCRIPTION-OF ?SELF ?C)
+             (HUMAN-READABLE-DESCRIPTION-OF ?SELF ?D))
+        (= ?C ?D))))
+ :AXIOM
+ (DOCUMENTATION EVENT-SPEC "Event spec in COA grammar. Needs to be aligned
+  with other definitions"))
+(DEFRELATION PREPARE-DESC-OF (?A ?B))
+(FORALL (?B) (=> (PREPARE-DESC-OF ?A ?B) (PREPARE-DESC ?B)))
+(DEFRELATION PREPARE-DESC (?SELF) :=> (GRAMMAR-OBJECT ?SELF))
+(DEFRELATION NOT-DESC-OF (?A ?B))
+(FORALL (?B) (=> (NOT-DESC-OF ?A ?B) (NOT-DESC ?B)))
+(DEFRELATION NOT-DESC (?SELF) :=> (GRAMMAR-OBJECT ?SELF))
+(DEFRELATION CONDITION-DESC-OF (?A ?B))
+(FORALL (?B) (=> (CONDITION-DESC-OF ?A ?B) (CONDITION-DESC ?B)))
+(DEFRELATION CONDITION-DESC (?SELF) :=> (GRAMMAR-OBJECT ?SELF))
+(DEFRELATION THREAT-LEVEL (?SELF) :=> (GRAMMAR-OBJECT ?SELF))
+(DEFRELATION THREAT (?SELF) :=> (GRAMMAR-OBJECT ?SELF))
+(DEFRELATION COMBAT-SUPPORT-ASSET (?SELF) :=> (GRAMMAR-OBJECT ?SELF))
+(DEFRELATION SUPPLY-CLASS (?SELF) :=> (GRAMMAR-OBJECT ?SELF))
+(DEFRELATION SUPPORTING-COA-TASK (?SELF) :=> (COA-TASK ?SELF) :AXIOM
+ (DOCUMENTATION SUPPORTING-COA-TASK ""))
+(DEFRELATION MAIN-EFFORT (?SELF) :=> (COA-TASK ?SELF) :AXIOM
+ (DOCUMENTATION MAIN-EFFORT "A task that is part of the main effort"))
+(DEFRELATION MAIN-EFFORT-OF (?A ?B) :=> (SUB-TASK ?A ?B) :AXIOM
+ (DOCUMENTATION MAIN-EFFORT-OF "The main effort consists of one or more tasks
+    (e.g., conduct forward passage and attack to seize)."))
+(FORALL (?B) (=> (MAIN-EFFORT-OF ?A ?B) (MAIN-EFFORT ?B)))
+(FORALL (?A) (=> (MAIN-EFFORT-OF ?A ?B) (CLOSE-COA-TASK ?A)))
+(DEFRELATION SUPPORTING-EFFORT-OF (?A ?B) :=> (SUB-TASK ?A ?B))
+(DEFRELATION ENEMY-UNIT (?SELF) :=> (MILITARY-UNIT ?SELF))
+(DEFRELATION GEOGRAPHICAL-AREA (?SELF) :=> (THING ?SELF))
+(DEFRELATION MILITARY-UNIT (?SELF) :=> (THING ?SELF))
+(DEFRELATION TIME-SPECIFIER (?SELF) :=> (THING ?SELF))
+(DEFRELATION DIVISION-UNITDESIGNATION (?SELF) :=> (THING ?SELF))
+(DEFRELATION MECHANIZEDUNIT-MILITARYSPECIALTY (?SELF) :=> (THING ?SELF))
+(DEFRELATION ARMOREDUNIT-MILITARYSPECIALTY (?SELF) :=> (THING ?SELF))
+(DEFRELATION BRIGADE-UNITDESIGNATION (?SELF) :=> (THING ?SELF))
+(DEFRELATION LOCATION (?A ?B))
+(DEFRELATION VICINITY (?A ?B))
+(DEFRELATION PHASE-LINE (?SELF) :=> (THING ?SELF))
+(DEFRELATION TASKFORCE-UNITDESIGNATION (?SELF) :=> (THING ?SELF))
+(DEFRELATION SQUADRON-UNITDESIGNATION (?SELF) :=> (THING ?SELF))
+(DEFRELATION CAVALRY-MILITARYSPECIALTY (?SELF) :=> (THING ?SELF))
+(DEFRELATION TEAM-UNITDESIGNATION (?SELF) :=> (THING ?SELF))

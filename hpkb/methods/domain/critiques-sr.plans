@@ -1,0 +1,1282 @@
+(in-package "EVALUATION")
+(use-package '("EXPECT" "PLANET"))
+(loom::use-loom "EVALUATION" :dont-create-context-p t)
+
+
+
+(setf *top-level-goal*      
+;     '(estimate (obj force-ratio)
+;       (available-to (inst-of task-action)))
+
+  '(evaluate (obj (inst-of coa))
+    (with-respect-to not-all-forces-arrayed))
+	   
+    )
+
+
+(setq *exe-top-level-goal* 
+    '(evaluate (obj |BlueBrigadeCOA2-4Mt|)
+	       (with-respect-to not-all-forces-arrayed))
+
+
+;    '(estimate (obj force-ratio)
+;               (available-to |Destroy3|))
+    )
+
+(setq *exe-top-level-goals* 
+  '(
+;    (estimate (obj (spec-of combat-power))
+;     (of |BlueTaskForce1|)
+;     (with-respect-to |Destroy4|))
+
+   
+    (estimate (obj force-ratio)
+     (available-to |Destroy3|))
+     (estimate (obj force-ratio)
+     (available-to |Destroy4|))
+    
+;    (estimate (obj amount)
+;     (of force-ratio)
+;     (needed-by-set |Destroy3|))
+    
+;    (estimate (obj force-ratio)
+;     (available-to |Block3|))
+    
+;    (estimate (obj force-ratio)
+;     (available-to |Block4|))
+    
+    (estimate (obj amount)
+     (of force-ratio)
+     (needed-by-set |Block4|))
+    
+    (evaluate (obj |BlueBrigadeCOA2-4Mt|)
+     (with-respect-to reserve-unit-identified))
+    (evaluate (obj |BlueBrigadeCOA2-4Mt|)
+     (with-respect-to security-unit-identified))
+    (evaluate (obj |BlueBrigadeCOA2-4Mt|)
+     (with-respect-to rear-unit-identified))
+	  
+	  )
+	)
+
+(setf *top-level-goals*
+   '(
+     (evaluate (obj (inst-of coa))
+	       (with-respect-to not-all-forces-arrayed))
+     (evaluate (obj (inst-of coa))
+		    (with-respect-to reserve-unit-identified))
+     
+
+     (estimate (obj force-ratio)
+       (available-to (inst-of task-action)))
+
+       (estimate (obj amount) 
+	  (of force-ratio)
+	 (needed-by-set (inst-of task-action)))
+    ))
+
+(def-expect-action 'check-not-arrayed)
+
+(def-expect-action 'find-unarrayed)
+
+(def-expect-action 'evaluate-ratio)
+
+(def-expect-action 'or-objs)
+
+#|
+(defmacro defplan (name &key capability result-type method primitivep)
+  `(push '((name ,name) 
+	 (capability ,capability) 
+	 (result-type ,result-type)
+	 (method ,method)
+	 (primitivep ,primitivep)
+	 )
+         *domain-plans*))
+|#
+;; **********************************************************************
+;; **********************************************************************
+;; FEASIBILITY
+;; **********************************************************************
+;; **********************************************************************
+
+;; SR. The following methods will be used to calculate the total combat
+;; power of the red and blue force in battle.
+;; For this we will need definitions of the type :
+;; (defconcept combat-sides :is military-unit)
+;; (defconcept blue-side :is combat-sides)
+;; (defconcept red-side :is combat-sides)
+;; and a function called (find-main-units-of <combat-side>)
+;; that returns the top-level military units of that side.
+
+(def-expect-action 'estimate-power)
+(defrelation for :is-primitive expect-action-role)
+
+(defplan calculate-total-combat-ratio-for-battle
+  :capability (calculate (obj (?c is (spec-of combat-power)))
+		     (with-respect-to (?f is (inst-of coa))))
+  :result-type (inst-of number)
+  :method (divide (obj (calculate (obj ?c)
+		    (with-respect-to ?f)
+		    (for (spec-of blue-side))))
+	        (by (calculate (obj ?c)
+		    (with-respect-to ?f)
+		    (for (spec-of red-side))))))
+
+(defplan calculate-total-combat-power-for-a-side
+  :capability (calculate (obj (?c is (spec-of combat-power)))
+		     (with-respect-to (?f is (inst-of coa)))
+		     (for (?who is (spec-of combat-sides))))
+  :result-type (inst-of number)
+  :method (add (obj 
+	         (estimate-power (obj ?c)
+		               (of (find-main-units-of ?who))))))
+
+(defplan calculate-combat-power-for-individual-units
+  :capability (estimate-power (obj (?c is (spec-of combat-power)))
+		    (of (?u is (inst-of military-unit))))
+  :result-type (inst-of number)
+  :method (estimate (obj ?c)
+		(of (|operationalControlMilitaryOrg| ?u))))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+
+;;; task-forces-in-coa gets all the who's of all the critical events in
+;;; the COA.
+(defplan evaluate-force-ratio-as-global-constraint
+  :capability (evaluate (obj (?c is (inst-of coa)))
+		    (with-respect-to (?if is (inst-of inadequate-forces-critique))))
+  :result-type (inst-of boolean)
+  :method (determine-whether (obj true)
+		         (is-a (spec-of set-member))
+		         (of (evaluate (obj (task-forces-in-coa ?c))
+				   (in ?c)
+				   (with-respect-to ?if))))
+  )
+
+(defplan evaluate-force-ratio-for-task-force
+  :capability (evaluate (obj (?u is (inst-of military-unit)))
+		    (in (?c is (inst-of coa)))
+		    (with-respect-to
+		     (?if is (inst-of inadequate-forces-critique))))
+  :result-type (inst-of boolean)
+  :method (determine-whether (obj true)
+		         (is-a (spec-of set-member))
+		         (of (evaluate (obj (events-undertaken ?u))
+				   (with-respect-to amount-used)
+				   (of (coa-inadequate-forces-for-task-critique ?c)))))
+  :post-processing (let ((new-crit (replicate-critique ?if)))
+		 (add-value new-crit 'analysis-object ?u)
+		 (add-to-evaluation ?method-result new-crit ?u))
+  )
+
+
+;;; Since force-ratio is a locally-computed resource, we just need to
+;;; fill in how much is needed and available in each military-task.
+;;; No, now we have actual code to calculate combat power
+
+
+(defplan evaluate-combat-power-of-a-COA
+    :capability (evaluate (obj (?c is (inst-of coa)))
+			  (with-respect-to (?p is (spec-of combat-power))))
+    :result-type (set-of (inst-of boolean))
+    :method (evaluate-ratio (obj ?c)
+			    (for (critical-event-of ?c))))
+
+
+;(defplan evaluate-force-ratio-for-task-actions
+;    :capability (evaluate-ratio (obj (?c is (inst-of coa)))
+;		(for (?ce is (inst-of task-action))))
+;    :result-type (inst-of boolean)
+;    :method (is-less-or-equal
+;	     (obj (estimate (obj (inst amount))
+;			    (of (inst force-ratio))
+;			    (needed-by-set ?ce)))
+;	     (than (estimate (obj (inst force-ratio))
+;			(available-to ?ce)))))
+
+(def-expect-action 'estimate)
+(def-expect-action 'check-if)
+(def-expect-action 'find-the-evaluation-aspects)
+(def-expect-action 'find-the-instances)
+(def-expect-action 'count-the-elements)
+(def-expect-action 'check-no-amount-needed)
+(def-expect-action 'compute-remnants)
+(def-expect-action 'check-existence)
+(def-expect-action 'pick-one)
+
+(defrelation with-respect-to :is-primitive expect-action-role)
+(defrelation needed-by :is-primitive expect-action-role)
+(defrelation needed-by-set :is-primitive expect-action-role)
+(defrelation considering :is-primitive expect-action-role)
+(defrelation available-to :is-primitive expect-action-role)
+(defrelation among :is-primitive expect-action-role)
+
+#|
+(defplan required-force-ratio-for-set-of-tasks
+    :capability (estimate (obj (inst amount)) 
+			  (of (inst force-ratio))
+			  (needed-by-set 
+			   (?s is (inst-of task-action))))
+    :result-type (inst-of number)
+    :method (estimate (obj amount) (of force-ratio)
+		      (needed-by ?s)))
+|#
+
+
+
+;; SR. This method ensures that for a critical event called attrit, we do not
+;; calculate combat power. We just assume that attrit takes place without the 
+;; need to find if there is enough CP or not! (at least this what I understand)
+
+(defplan skip-evlauation-of-combat-power-for-attrit-actions
+    :capability (evaluate-ratio (obj (?c is (inst-of coa)))
+			  (for (?p is (inst-of |ATTRIT|))))
+    :result-type (inst-of boolean)
+    :method (false))
+
+
+;;jihie
+;; in case of delay military task, the ratio is 1/6
+;;; This is never called by the critiquer - see
+;;; required-force-ratio-for-task instead (Jim).
+(defplan required-force-ratio-for-set-of-operations
+    :capability (estimate (obj (inst amount)) 
+			  (of (inst force-ratio))
+			  (needed-by-set 
+			   (?s is (inst-of task-action)))) ;; critical event
+    :result-type (inst-of number)
+    :method (if (is-it-a (obj ?s)
+			 (of (spec-of |Delay-MilitaryTask|)))
+		then 1/6
+		else (estimate (obj amount) (of force-ratio)
+			       (needed-by (find (obj (spec-of |MilitaryOperation|))
+						(for ?s)))
+			       (of ?s)))
+   :annotations ((:source "KF 713.1")))
+
+;; get the first type-of-operation assigned to the unit who performs the action
+(defplan find-type-of-operation-for-critical-event
+    :capability (find (obj (?t is (spec-of |MilitaryOperation|)))
+		      (for (?a is (inst-of task-action))))
+    :result-type (inst-of |MilitaryOperation|)
+    :method (pick-one (from (assigned-operation (|WHO| ?a))))
+    )
+
+;; for now
+(defplan first--thing
+    :capability (pick-one
+		 (from (?l is (set-of (inst-of thing))))
+		  )
+    :result-type (inst-of thing)
+    :method (first ?l)
+    :primitivep t)
+
+
+(defplan compute-force-ratio
+  :capability (estimate (obj (inst force-ratio))
+		    (available-to (?o is (inst-of task-action))))
+  :result-type (inst-of number)
+  :method (divide (obj (add (obj 
+		          (estimate (obj (spec-of combat-power)) 
+				(of (who ?o))
+				(with-respect-to ?o)))))
+	        (by (add (obj 
+	                    (estimate (obj (spec-of combat-power))
+				(of (unit-acted-on ?o))
+				(with-respect-to ?o))))))
+)
+
+
+(defplan compute-combat-power
+  :capability (estimate (obj (?o is (spec-of combat-power)))
+		    (of (?u is (inst-of military-unit)))
+		    (with-respect-to (?t is (inst-of task-action))))
+  :result-type (inst-of number)
+  :method (compute-remnants (obj (estimate (obj (spec-of combat-power))
+				    (of ?u)))
+		         (of ?u)
+		         (with-respect-to ?t))
+  )
+
+;;; Jim 7/2: check here for extendedfrontage. If the unit has extended
+;;; frontage we should assume that each of the other forces will come
+;;; into contact with one sub-unit. (For now, assume the unit with
+;;; extended frontage is a red unit so the relation WHO tells us how
+;;; many task forces are operating on the task).
+
+(defplan compute-combat-power-for-unit-with-extended-frontage
+  :capability (estimate (obj (?o is (spec-of combat-power)))
+		    (of (?u is (inst-of |unitHasExtendedFrontage|))))
+  :result-type (inst-of number)
+  :method (divide (obj (estimate (obj (spec-of combat-power))
+			   (of ?u)
+			   (with (|echelonOfUnit| ?u))))
+	        ;; should count the number of units, but I'm testing this
+	        (by 5))
+  :annotations ((:skip-in-explanation t)))
+
+
+(defplan compute-combat-power-for-unit
+    :capability (estimate (obj (?o is (spec-of combat-power)))
+			  (of (?u is (inst-of military-unit))))
+    :result-type (inst-of number)
+    :method (estimate (obj (spec-of combat-power))
+		      (of ?u)
+		      (with (|echelonOfUnit| ?u)))
+    :annotations ((:skip-in-explanation t)))
+
+(defplan compute-combat-power-for-subunits-brigade 
+    :capability (estimate (obj (?o is (spec-of combat-power)))
+			  (of (?u is (inst-of military-unit)))
+			  (with (inst |Brigade-UnitDesignation|)))
+    :result-type (inst-of number)
+    :method (if (there-is-not-any (obj (|operationalControlMilitaryOrg| ?u)))
+	      then 
+	    (add (obj (estimate (obj (spec-of combat-power))
+			    (of (sub-unit ?u)))))
+	    else 
+	    (add (obj (estimate (obj (spec-of combat-power))
+			    (of (|operationalControlMilitaryOrg| ?u))))))
+    )
+
+
+#|
+(defplan compute-combat-power-for-subunits-regiment 
+    :capability (estimate (obj (?o is (spec-of combat-power)))
+			  (of (?u is (inst-of military-unit)))
+			  (with (inst |Regiment-UnitDesignation|)))
+    :result-type (inst-of number)
+    :method (find (obj (spec-of EXPECT::maximum))
+	        (of (append
+	     (add (obj (estimate (obj (spec-of combat-power))
+			(of (sub-unit ?u))
+			(with (sub-echelon |Regiment-UnitDesignation|)))))
+	     (add (obj (estimate (obj (spec-of combat-power))
+			     (of (spec-of armored-subunit))
+			     (for ?u)))
+		  (to (estimate (obj (spec-of combat-power))
+			    (of (spec-of mechanized-subunit))
+			    (for ?u))) )    
+	     )))
+    )
+|#
+
+(defplan compute-combat-power-for-subunits-regiment 
+    :capability (estimate (obj (?o is (spec-of combat-power)))
+			  (of (?u is (inst-of military-unit)))
+			  (with (inst |Regiment-UnitDesignation|)))
+    :result-type (inst-of number)
+    :method (if (there-is-not-any (obj (|operationalControlMilitaryOrg| ?u)))
+	      then (add (obj (estimate (obj (spec-of combat-power))
+				       (of (sub-unit ?u)))))
+	      else (add (obj (estimate (obj (spec-of combat-power))
+				       (of (|operationalControlMilitaryOrg| ?u))))))
+    )
+
+;;; default is 0.1
+(defplan compute-combat-power-for-general ; default
+    :capability (estimate (obj (?o is (spec-of combat-power)))
+			  (of (?u is (inst-of military-unit)))
+			  (with (?e is (inst-of |MilitaryEchelon|))))
+    :result-type (inst-of number)
+    :method 0.1
+    )
+
+(defplan compute-combat-power-for-battalion
+  :capability (estimate (obj (?o is (spec-of combat-power)))
+		    (of (?u is (inst-of military-unit)))
+		    (with (inst |Battalion-UnitDesignation|)))
+  :result-type (inst-of number)
+  :method (if (there-is-not-any (obj (|equipmentOfUnit| ?u)))
+	    then (if (there-is-not-any (obj (|operationalControlMilitaryOrg| ?u)))
+		   then (add (obj (estimate (obj (spec-of combat-power))
+				        (of (sub-unit ?u)))))
+		   else (add (obj (estimate (obj (spec-of combat-power))
+				        (of (|operationalControlMilitaryOrg| ?u))))))
+	    else (find (obj (spec-of EXPECT::maximum))
+		     (of (find (obj (spec-of combat-power))
+			     (of (|echelonOfUnit| ?u))
+			     (with (|equipmentOfUnit| ?u));; To do 
+			     (with-respect-to (spec-of M2-Bn))))))
+  :annotations ((:documentation "A task force has component units
+designated with operationalControlMilitaryOrg. Right now this is the
+only way to distinguish one. If there are no fillers for this relation,
+assume we can break down with the habitual organisation, given with the
+sub-unit relation"))
+  )
+
+
+(defplan compute-combat-power-for-sqdn
+  :capability (estimate (obj (?o is (spec-of combat-power)))
+		    (of (?u is (inst-of military-unit)))
+		    (with (inst |Squadron-UnitDesignation|)))
+  :result-type (inst-of number)
+  :method (if (there-is-not-any (obj (|equipmentOfUnit| ?u)))
+	    then (if (there-is-not-any (obj (|operationalControlMilitaryOrg| ?u)))
+		     then (estimate (obj (spec-of combat-power))
+				    (with (sub-unit ?u))
+				    (for |Squadron-UnitDesignation|))
+		     else (estimate (obj (spec-of combat-power))
+				    (with (|operationalControlMilitaryOrg| ?u))
+				    (for |Squadron-UnitDesignation|)))
+	    else (find (obj (spec-of EXPECT::maximum))
+		     (of (find (obj (spec-of combat-power))
+			     (of (|echelonOfUnit| ?u))
+			     (with (|equipmentOfUnit| ?u));; To do 
+			     (with-respect-to (spec-of M2-Bn))))))
+  :annotations ((:documentation "A task force has component units
+designated with operationalControlMilitaryOrg. Right now this is the
+only way to distinguish one. If there are no fillers for this relation,
+assume we can break down with the habitual organisation, given with the
+sub-unit relation"))
+  )
+
+(defplan find-number-of-OH58D-unit-needed-for-Air-Cavalry
+    :capability (find (obj (?n is (spec-of number)))
+		      (of (?h is (spec-of |SupportHelicopter-OH58DKW|)))
+		      (needed-by 
+		       (?u is (spec-of |AirCavalryUnit-MilitarySpecialty|))))
+    :result-type (inst-of number)
+    :method 3)
+
+(defplan find-number-of-OH58D-equipped-unit
+    :capability (find (obj (?n is (spec-of number)))
+		      (of (?h is (spec-of |SupportHelicopter-OH58DKW|)))
+		      (in (?s is (set-of (inst-of |Artifact|)))))
+    :result-type (inst-of number)
+    :method (count-the-elements
+	     (obj (filter (obj ?s)
+		     (with (is-it-a
+			    (obj ?s)
+			    (of (spec-of |SupportHelicopter-OH58DKW|))))))
+	     )
+    )
+
+(defplan compute-combat-power-for-sqdn-with-troops
+    :capability (estimate (obj (?o is (spec-of combat-power)))
+			  (with (?s is (set-of (inst-of military-unit))))
+			  (for (inst |Squadron-UnitDesignation|)))
+							  
+    :result-type (inst-of number)
+    :method (if (is-greater-or-equal
+		 (obj (find (obj (spec-of number))
+			    (of (spec-of |SupportHelicopter-OH58DKW|))
+			    (in (|equipmentOfUnit| ?s))))
+		 (than (find (obj (spec-of number))
+			     (of (spec-of |SupportHelicopter-OH58DKW|))
+			     (needed-by
+			      (spec-of |AirCavalryUnit-MilitarySpecialty|)))))
+		then (find (obj (spec-of combat-power))
+			   (for (spec-of |AirCavalryUnit-MilitarySpecialty|))
+			   (with-respect-to (spec-of M2-Bn)))
+		else (find (obj (spec-of combat-power))
+			   (for (spec-of |ArmoredCavalryUnit-MilitarySpecialty|))
+			   (with-respect-to (spec-of M2-Bn)))
+		
+		)
+    :annotations ((:source "KF 623.2 - 623.5"))
+    )
+
+(defplan find-number-of-subunits-blue
+    :capability (find (obj (?n is (spec-of number)))
+		      (for (inst |Blue-Side|)))
+    :result-type (inst-of number)
+    :method 4)
+
+(defplan find-number-of-subunits-red
+    :capability (find (obj (?n is (spec-of number)))
+		      (for (inst |Red-Side|)))
+    :result-type (inst-of number)
+    :method 3)
+
+
+(defplan compute-combat-power-for-company
+  :capability (estimate (obj (?o is (spec-of combat-power)))
+		    (of (?u is (inst-of military-unit)))
+		    (with (inst |Company-UnitDesignation|)))
+  :result-type (inst-of number)
+  :method (divide (obj (add (obj (find (obj (spec-of combat-power))
+			         (of |Battalion-UnitDesignation|)
+			         (with (|equipmentOfUnit| ?u))
+			         (with-respect-to (spec-of M2-Bn))))))
+	        ;; This number needs to be made either a method or
+	        ;; retrieval so it is flexible - Jim
+		  (by (find (obj (spec-of number))
+			    (for (allegiance-of ?u)))))
+  :annotations ((:source "COA 2, Memo-7"))
+  )
+
+
+;; the default value for all units is 1 (comment used to say 0.1 but the
+;; body was 1. I assume 1 was meant - Jim).
+(defplan compute-combat-power-default
+    :capability (find (obj (?o is (spec-of combat-power)))
+		      (of (?u is (inst-of |MilitaryEchelon|)))
+		      (with (?a is (inst-of |Artifact|)))
+		      (with-respect-to (?m is (spec-of M2-Bn))))
+    :result-type (inst-of number)
+    :method 1
+    :annotations ((:source "Default for unrecognised forces"))
+    )
+
+;; **********************************************************************
+;; compute attrition
+;; **********************************************************************
+(defplan compute-attrited-force-values
+    :capability (compute-remnants (obj (?x is (inst-of number)))
+				   (of (?u is (inst-of military-unit)))
+				   (with-respect-to (?o is (inst-of task-action))))
+    :result-type (inst-of number)
+    :method (multiply (obj ?x) 
+		      (by (estimate
+			   (obj (spec-of remnants))
+			   (of ?u)
+			   (for ?o)))))
+
+(defplan estimate-attrition-for-military-unit-wrt-task
+    :capability (estimate (obj (?a is (spec-of remnants)))
+			  (of (?u is (inst-of military-unit)))
+			  (for (?o is (inst-of task-action))))
+    :result-type (inst-of number)
+    :method (if (there-is-not-any (obj (all-events-before ?o)))
+		then 1
+		else (multiply (obj (find (obj (spec-of remnants))
+					  (of ?u)
+					  (for (all-events-before ?o))))))
+    )
+
+(defplan accrue-attrition-values-from-previous-tasks-and-coa
+    :capability (find (obj (?a is (spec-of remnants)))
+		      (of (?u is (inst-of military-unit)))
+		      (for (?k is (inst-of task-action))))
+    :result-type (inst-of number)
+    :method (divide (obj 
+		     (if (there-is-not-any (obj (|sustainsAttritionDuringEvent| ?k ?u)))
+			 then 100
+			 else (|sustainsAttritionDuringEvent| ?k ?u)))
+		    (by 100))    
+    :annotations ((:source "Attrition Assumptions"))
+    )
+
+;;; **********************************************************************
+;;; Required Ratio (from KF 713x -- )
+;;; **********************************************************************
+
+(defplan required-force-ratio-for-task
+  :capability (estimate (obj (inst amount)) 
+		    (of (inst force-ratio))
+		    (needed-by (?s is (inst-of task-action))));; critical event
+  :result-type (inst-of number)
+  :method (if (is-it-a (obj ?s)
+		   (of (spec-of |Delay-MilitaryTask|)))
+	    then 1/6
+	    else (estimate (obj amount) (of force-ratio)
+		         (needed-by (find (obj (spec-of |MilitaryOperation|))
+				      (for ?s)))
+		         (of ?s)))
+  :annotations ((:source "KF 713.1")))
+
+
+
+(defplan default-required-force-ratio-for-MilitaryOffensiveOperation
+  :capability (estimate (obj (inst amount)) (of (inst force-ratio))
+                        (needed-by (?o is (inst-of |MilitaryOffensiveOperation|)))
+		    (of (?ce is (inst-of task-action))))
+  :result-type (inst-of number)
+  :method (if (determine-whether-there-are-any
+	       (obj (spec-of |MobileDefense-MilitaryOperation|))
+	       (in (main-operation-of (coa-of-ce ?ce))))
+	      then 1  ;; counter-attack
+	      else (estimate (obj amount)
+			     (of force-ratio)
+			     (needed-by ?o)))
+  :annotations ((:source "overall mission, Jim Donlon's comment"))
+)
+
+(defplan default-required-force-ratio-for-MilitaryOperation
+  :capability (estimate (obj (inst amount)) (of (inst force-ratio))
+                        (needed-by (?o is (inst-of |MilitaryOperation|)))
+		    (of (?ce is (inst-of task-action))))
+  :result-type (inst-of number)
+  :method (estimate (obj amount)
+		(of force-ratio)
+		(needed-by ?o)))
+
+;; (KF 713.2) Some operations, such as pursuit, exploitation, and movement to 
+;; contact, require no particular force ratio, and a ratio of 1:1 can be used.  
+;; (FM 101-5, p. 5-13) 
+(defplan default-required-force-ratio-general
+  :capability (estimate (obj (inst amount)) (of (inst force-ratio))
+                        (needed-by (?o is (inst-of |MilitaryOperation|))))
+  :result-type (inst-of number)
+  :method 1
+  :annotations ((:source "KF 713.2")))
+
+;; Destroy ans seize could be 3:1 page 134 CP Spec., Dec 2.
+;; Assumed fix to Attack (against fixed defences)
+(defplan default-required-force-ratio-for-Defendfromhastyposition
+  :capability (estimate (obj (inst amount)) (of (inst force-ratio))
+                        (needed-by (?o is (inst-of |Defendfromhastyposition-MilitaryOperation|))))
+  :result-type (inst-of number)
+  :method 2/5
+  :annotations ((:source "KF 713.1")))
+
+
+(defplan default-required-force-ratio-for-Counterattack
+  :capability (estimate (obj (inst amount)) (of (inst force-ratio))
+                        (needed-by (?o is (inst-of |Counterattack-MilitaryOperation|))))
+  :result-type (inst-of number)
+  :method 1
+  :annotations ((:source "KF 713.1")))
+
+;; attack in general, or attack against prepared defense
+(defplan default-required-force-ratio-for-attack
+  :capability (estimate (obj (inst amount)) (of (inst force-ratio))
+                        (needed-by (?o is (inst-of |MilitaryOffensiveOperation|))))
+  :result-type (inst-of number)
+  :method 3
+  :annotations ((:source "KF 713.1")))
+
+(defplan default-required-force-ratio-for-Attack-against-hasty-defense
+  :capability (estimate (obj (inst amount)) (of (inst force-ratio))
+                        (needed-by (?o is (inst-of |Attackhastydefence-MilitaryOperation|))))
+  :result-type (inst-of number)
+  :method 2.5
+  :annotations ((:source "KF 713.1")))
+
+(defplan default-required-force-ratio-for-hasty-defense
+  :capability (estimate (obj (inst amount)) (of (inst force-ratio))
+                        (needed-by (?o is (inst-of hasty-defense))))
+  :result-type (inst-of number)
+  :method 2/5
+  :annotations ((:source "KF 713.1"))
+  )
+
+(defplan default-required-force-ratio-for-defense
+  :capability (estimate (obj (inst amount)) (of (inst force-ratio))
+                        (needed-by (?o is (inst-of |MilitaryDefensiveOperation|))))
+  :result-type (inst-of number)
+  :method 1/3
+  :annotations ((:source "KF 713.1")))
+
+;; check if the main operation or the main task is mobile defense operation
+(defplan determine-whether-there-are-any-mobile-defense-operation
+    :capability (determine-whether-there-are-any
+		 (obj (?d is (spec-of |MobileDefense-MilitaryOperation|)))
+		 (in (?o is (inst-of |MilitaryOperation|))))
+    :result-type (inst-of boolean)
+    :method (is-it-a (obj ?o)
+		     (of (spec-of |MobileDefense-MilitaryOperation|)))
+    )
+
+
+
+#|
+(defplan default-required-force-ratio-general
+  :capability (estimate (obj (inst amount)) (of (inst force-ratio))
+                        (needed-by (?o is (inst-of task-action))))
+  :result-type (inst-of number)
+  :method 1)
+	
+;; Destroy ans seize could be 3:1 page 134 CP Spec., Dec 2.
+;; Assumed fix to Attack (against fixed defences)
+(defplan default-required-force-ratio-for-Defendfromhastyposition
+  :capability (estimate (obj (inst amount)) (of (inst force-ratio))
+                        (needed-by (?o is (inst-of Defendfromhastyposition-MilitaryOperation))))
+  :result-type (inst-of number)
+  :method 2/5
+  :annotations ((:source "KF 713.1")))
+
+
+(defplan default-required-force-ratio-for-Counterattack
+  :capability (estimate (obj (inst amount)) (of (inst force-ratio))
+                        (needed-by (?o is (inst-of |Counterattack-MilitaryOperation|))))
+  :result-type (inst-of number)
+  :method 1
+  :annotations ((:source "KF 713.1")))
+
+
+(defplan default-required-force-ratio-for-delay-military-task
+  :capability (estimate (obj (inst amount)) (of (inst force-ratio))
+                        (needed-by (?o is (inst-of delay))))
+  :result-type (inst-of number)
+  :method 1/6
+  :annotations ((:source "KF 713.1")))
+
+(defplan default-required-force-ratio-for-defeat-military-task
+  :capability (estimate (obj (inst amount)) (of (inst force-ratio))
+                        (needed-by (?o is (inst-of |Defeat-MilitaryTask|))))
+  :result-type (inst-of number)
+  :method (if (determine-whether-there-are-any
+	       (obj (spec-of |MilitaryDefensiveOperation|))
+	       (in (main-operation-of (coa-of-ce ?o))))
+	      then 1
+	      else 3)
+  :annotations ((:source "KF 713.1")))
+
+
+(defplan default-required-force-ratio-for-destroy-military-task
+  :capability (estimate (obj (inst amount)) (of (inst force-ratio))
+                        (needed-by (?o is (inst-of |Destroy-MilitaryTask|))))
+  :result-type (inst-of number)
+  :method (if (determine-whether-there-are-any
+	       (obj (spec-of |MilitaryDefensiveOperation|))
+	       (in (main-operation-of (coa-of-ce ?o))))
+	      then 1
+	      else 3)
+  :annotations ((:source "KF 713.1")))
+
+(defplan default-required-force-ratio-for-MilitaryAttack
+  :capability (estimate (obj (inst amount)) (of (inst force-ratio))
+                        (needed-by (?o is (inst-of |MilitaryAttack|))))
+  :result-type (inst-of number)
+  :method 3
+  :annotations ((:source "KF 713.1")))
+
+(defplan default-required-force-ratio-for-MilitaryOffensiveOperation
+  :capability (estimate (obj (inst amount)) (of (inst force-ratio))
+                        (needed-by (?o is (inst-of |MilitaryOffensiveOperation|))))
+  :result-type (inst-of number)
+  :method 3
+  :annotations ((:source "KF 713.1, KF 522.2")))
+
+
+(defplan default-required-force-ratio-for-Attackprepareddefence
+  :capability (estimate (obj (inst amount)) (of (inst force-ratio))
+                        (needed-by (?o is (inst-of Attackprepareddefence-MilitaryOperation))))
+  :result-type (inst-of number)
+  :method 3
+  :annotations ((:source "KF 713.1")))
+
+
+
+(defplan default-required-force-ratio-for-Attackhastydefence
+  :capability (estimate (obj (inst amount)) (of (inst force-ratio))
+                        (needed-by (?o is (inst-of Attackhastydefence-MilitaryOperation))))
+  :result-type (inst-of number)
+  :method 2.5
+  :annotations ((:source "KF 713.1")))
+
+(defplan default-required-force-ratio-for-fix-military-task
+  :capability (estimate (obj (inst amount)) (of (inst force-ratio))
+                        (needed-by (?o is (inst-of fix))))
+  :result-type (inst-of number)
+  :method 2
+  :annotations ((:source "KF 713.3")))
+
+;; Assumed fix to Attack (against fixed defences)
+(defplan default-required-force-ratio-for-penetrate-military-task
+  :capability (estimate (obj (inst amount)) (of (inst force-ratio))
+                        (needed-by (?o is (inst-of penetrate))))
+  :result-type (inst-of number)
+  :method 2
+  :annotations ((:source "COA 1 in CP Spec")))
+
+(defplan default-required-force-ratio-for-block-military-task
+  :capability (estimate (obj (inst amount)) (of (inst force-ratio))
+                        (needed-by (?o is (inst-of |Block-MilitaryTask|))))
+  :result-type (inst-of number)
+  :method 1/3
+  :annotations ((:source "COA 2, Memo-7")))
+
+
+(defplan default-required-force-ratio-for-hasty-defense
+  :capability (estimate (obj (inst amount)) (of (inst force-ratio))
+                        (needed-by (?o is (inst-of hasty-defense))))
+  :result-type (inst-of number)
+  :method 2/5
+  :annotations ((:source "KF 713.1"))
+  )
+
+(defplan default-required-force-ratio-for-Defendfrompreparedposition
+  :capability (estimate (obj (inst amount)) (of (inst force-ratio))
+                        (needed-by (?o is (inst-of |Defendfrompreparedposition-MilitaryOperation|))))
+  :result-type (inst-of number)
+  :method 1/3
+  :annotations ((:source "KF 713.1")))
+
+(defplan default-required-force-ratio-for-MilitaryDefensiveOperation
+  :capability (estimate (obj (inst amount)) (of (inst force-ratio))
+                        (needed-by (?o is (inst-of |MilitaryDefensiveOperation|))))
+  :result-type (inst-of number)
+  :method 1/3
+  :annotations ((:source "KF 713.1")))
+
+;; check if the main operation or the main task is defensive
+(defplan determine-whether-there-are-any-defensive-operation
+    :capability (determine-whether-there-are-any
+		 (obj (?d is (spec-of |MilitaryDefensiveOperation|)))
+		 (in (?o is (inst-of |MilitaryOperation|))))
+    :result-type (inst-of boolean)
+    :method (or
+	     (is-it-a (obj ?o)
+			  (of (spec-of |MilitaryDefensiveOperation|)))
+	     (or-objs (obj (is-it-a (obj (|taskOfOperation| ?o))
+				    (of (spec-of defensive-task))))))
+    :annotations ((:source "overall mission, Jim Donlon's comment"))
+    )
+|#
+
+;; **********************************************************************
+;; Combat Power Values from Section 6, Memo-8
+;; **********************************************************************
+
+;;; standard combat power values for cavalry sqdn 
+(defplan compute-combat-power-for-AirCavalryUnit
+    :capability (find (obj (?o is (spec-of combat-power)))
+		      (for (?u is (spec-of |AirCavalryUnit-MilitarySpecialty|)))
+		      (with-respect-to (?m is (spec-of M2-Bn))))
+    :result-type (inst-of number)
+    :method 0.91
+    :annotations ((:source "Air Cav Sqdn in Section 6, Memo-8"))
+    )
+
+(defplan compute-combat-power-for-ArmoredCavalryUnit
+    :capability (find (obj (?o is (spec-of combat-power)))
+		      (for (?u is (spec-of |ArmoredCavalryUnit-MilitarySpecialty|)))
+		      (with-respect-to (?m is (spec-of M2-Bn))))
+    :result-type (inst-of number)
+    :method 0.85
+    :annotations ((:source "Armored Cav Sqdn in Section 6, Memo-8"))
+    )
+;;; end of cavalry sqdn
+
+(defplan compute-combat-power-for-Bn-with-BradleyFightingVehicle-M2
+    :capability (find (obj (?o is (spec-of combat-power)))
+		      (of (inst |Battalion-UnitDesignation|))
+		      (with (?a is (inst-of |BradleyFightingVehicle-M2|)))
+		      (with-respect-to (?m is (spec-of M2-Bn))))
+    :result-type (inst-of number)
+    :method 1
+    :annotations ((:source "Section 6, Memo-8"))
+    )
+
+(defplan compute-combat-power-for-Bn-with-M1A2AbramsTank
+    :capability (find (obj (?o is (spec-of combat-power)))
+		      (of (inst |Battalion-UnitDesignation|))
+		      (with (?a is (inst-of |M1A2AbramsTank|)))
+		      (with-respect-to (?m is (spec-of M2-Bn))))
+    :result-type (inst-of number)
+    :method 1.21    
+    :annotations ((:source "Section 6, Memo-8"))
+    )
+
+
+;; M198?
+(defplan compute-combat-power-for-Bn-with-Howitzer-155mmSelfPropelled
+    :capability (find (obj (?o is (spec-of combat-power)))
+		      (of (inst |Battalion-UnitDesignation|))
+		      (with (?a is (inst-of |Howitzer-155mmSelfPropelled|)))
+		      (with-respect-to (?m is (spec-of M2-Bn))))
+    :result-type (inst-of number)
+    :method 1.02
+    :annotations ((:source "Section 6, Memo-8"))
+    )
+
+
+;;2S1 Bn??
+(defplan compute-combat-power-for-Bn-with-Howitzer-122mmSelfPropelled
+    :capability (find (obj (?o is (spec-of combat-power)))
+		      (of (inst |Battalion-UnitDesignation|))
+		      (with (?a is (inst-of |Howitzer-122mmSelfPropelled|)))
+		      (with-respect-to (?m is (spec-of M2-Bn))))
+    :result-type (inst-of number)
+    :method 0.65
+    :annotations ((:source "Section 6, Memo-8"))
+    )
+
+;;2S3 Bn??
+(defplan compute-combat-power-for-Bn-with-Howitzer-152mmSelfPropelled
+    :capability (find (obj (?o is (spec-of combat-power)))
+		      (of (inst |Battalion-UnitDesignation|))
+		      (with (?a is (inst-of |Howitzer-152mmSelfPropelled|)))
+		      (with-respect-to (?m is (spec-of M2-Bn))))
+    :result-type (inst-of number)
+    :method 0.79
+    :annotations ((:source "Section 6, Memo-8"))
+    )
+
+
+(defplan compute-combat-power-for-Bn-with-BattleTank-T64
+    :capability (find (obj (?o is (spec-of combat-power)))
+		      (of (inst |Battalion-UnitDesignation|))
+		      (with (?a is (inst-of |BattleTank-T64|)))
+		      (with-respect-to (?m is (spec-of M2-Bn))))
+    :result-type (inst-of number)
+    :method 0.50
+    :annotations ((:source "Section 6, Memo-8"))
+    )
+
+(defplan compute-combat-power-for-Bn-with-BattleTank-T62
+    :capability (find (obj (?o is (spec-of combat-power)))
+		      (of (inst |Battalion-UnitDesignation|))
+		      (with (?a is (inst-of |BattleTank-T62|)))
+		      (with-respect-to (?m is (spec-of M2-Bn))))
+    :result-type (inst-of number)
+    :method 0.38
+    :annotations ((:source "Section 6, Memo-8"))
+    )
+
+(defplan compute-combat-power-for-Bn-with-BattleTank-T72
+    :capability (find (obj (?o is (spec-of combat-power)))
+		      (of (inst |Battalion-UnitDesignation|))
+		      (with (?a is (inst-of |BattleTank-T72|)))
+		      (with-respect-to (?m is (spec-of M2-Bn))))
+    :result-type (inst-of number)
+    :method 0.50
+    :annotations ((:source "Section 6, Memo-8, T-72M Bn"))
+    )
+
+(defplan compute-combat-power-for-Bn-with-BattleTank-T55
+    :capability (find (obj (?o is (spec-of combat-power)))
+		      (of (inst |Battalion-UnitDesignation|))
+		      (with (?a is (inst-of |BattleTank-T55|)))
+		      (with-respect-to (?m is (spec-of M2-Bn))))
+    :result-type (inst-of number)
+    :method 0.44
+    :annotations ((:source "Section 6, Memo-8, T-55 independent Tank Bn"))
+    )
+
+;;; There seem to be 3 different values given based on MRR, TR or
+;;; "independent", which I don't understand. Using the highest, "independent".
+(defplan compute-combat-power-for-Bn-with-BattleTank-T80
+    :capability (find (obj (?o is (spec-of combat-power)))
+		      (of (inst |Battalion-UnitDesignation|))
+		      (with (?a is (inst-of |BattleTank-T80|)))
+		      (with-respect-to (?m is (spec-of M2-Bn))))
+    :result-type (inst-of number)
+    :method 0.88
+    :annotations ((:source "Section 6, Memo-8"))
+    )
+
+(defplan compute-combat-power-for-Bn-with-BattleTank-M60A3
+    :capability (find (obj (?o is (spec-of combat-power)))
+		      (of (inst |Battalion-UnitDesignation|))
+		      (with (?a is (inst-of |BattleTank-M60A3|)))
+		      (with-respect-to (?m is (spec-of M2-Bn))))
+    :result-type (inst-of number)
+    :method 0.89
+    :annotations ((:source "Section 6, Memo-8"))
+    )
+
+(defplan compute-combat-power-for-Bn-with-ArmoredPersonnelCarrier-BTR60
+    :capability (find (obj (?o is (spec-of combat-power)))
+		      (of (inst |Battalion-UnitDesignation|))
+		      (with (?a is (inst-of |ArmoredPersonnelCarrier-BTR60|)))
+		      (with-respect-to (?m is (spec-of M2-Bn))))
+    :result-type (inst-of number)
+    :method 0.41
+    :annotations ((:source "Section 6, Memo-8"))
+    )
+
+(defplan compute-combat-power-for-Bn-with-ArmoredPersonnelCarrier-M113
+    :capability (find (obj (?o is (spec-of combat-power)))
+		      (of (inst |Battalion-UnitDesignation|))
+		      (with (?a is (inst-of |ArmoredPersonnelCarrier-M113|)))
+		      (with-respect-to (?m is (spec-of M2-Bn))))
+    :result-type (inst-of number)
+    :method 0.71
+    :annotations ((:source "Section 6, Memo-8"))
+    )
+
+(defplan compute-combat-power-for-Bn-with-BMP-2
+    :capability (find (obj (?o is (spec-of combat-power)))
+		      (of (inst |Battalion-UnitDesignation|))
+		      (with (?a is (inst-of |BMP-2|)))
+		      (with-respect-to (?m is (spec-of M2-Bn))))
+    :result-type (inst-of number)
+    :method 0.58
+    :annotations ((:source "Section 6, Memo-8"))
+    )
+
+
+;;; The name changed several times while we were developing this method base,
+;;; and we need to catch all possibilities.
+(defplan compute-combat-power-for-Bn-with-infantry-fighting-vehicle-BMP-2
+    :capability (find (obj (?o is (spec-of combat-power)))
+		      (of (inst |Battalion-UnitDesignation|))
+		      (with (?a is (inst-of |InfantryFightingVehicle-BMP-2|)))
+		      (with-respect-to (?m is (spec-of M2-Bn))))
+    :result-type (inst-of number)
+    :method 0.58
+    :annotations ((:source "Section 6, Memo-8"))
+    )
+
+;;; This looks odd, but when the fusion output talks about the
+;;; infantry-fighting-vehicle-m2, they really mean the bmp-2
+(defplan compute-combat-power-for-Bn-with-infantry-fighting-vehicle-m2
+    :capability (find (obj (?o is (spec-of combat-power)))
+		      (of (inst |Battalion-UnitDesignation|))
+		      (with (?a is (inst-of |M2InfantryFightingVehicle|)))
+		      (with-respect-to (?m is (spec-of M2-Bn))))
+    :result-type (inst-of number)
+    :method 0.58
+    :annotations ((:source "Section 6, Memo-8"))
+    )
+
+
+(defplan compute-combat-power-for-Bn-with-MultipleRocketLauncherSystem-MLRS
+    :capability (find (obj (?o is (spec-of combat-power)))
+		      (of (inst |Battalion-UnitDesignation|))
+		      (with (?a is (inst-of |MultipleRocketLauncherSystem-MLRS|)))
+		      (with-respect-to (?m is (spec-of M2-Bn))))
+    :result-type (inst-of number)
+    :method 0.65
+    :annotations ((:source "Section 6, Memo-8"))
+    )
+
+
+;;; **********************************************************************
+;;; **********************************************************************
+;;; CLOSE BATTLE
+;;; **********************************************************************
+;;; **********************************************************************
+
+(defplan check-for-close-battle-statement
+  :capability (evaluate (obj (?c is (inst-of coa)))
+		    (with-respect-to 
+		      (?s is (spec-of closed-battle-statement))))
+  :result-type (inst-of boolean)
+  :method (and 
+	      (check-existence (obj (spec-of |mainTask|))
+		    (with-respect-to ?s))
+	      (check-existence (obj (spec-of |supportingTask|))
+		    (with-respect-to ?s))))
+         
+(defplan check-existance-of-main-task-of-operation
+   :capability (check-existence (obj (?t is (spec-of |mainTask|)))
+		    (with-respect-to (?s is (inst-of military-unit))))
+   :result-type (inst-of boolean)
+   :method (if (there-is-not-any (obj (|mainTaskOfOperation| ?k ?s)))
+			 then false
+		    else true))
+
+
+(defplan check-existance-of-supporting-task-of-operation
+   :capability (check-existence (obj (?t is (spec-of |supportingTask|)))
+		    (with-respect-to (?s is (inst-of military-unit))))
+   :result-type (inst-of boolean)
+   :method (if (there-is-not-any (obj (|supportingTaskOfOperation| ?k ?s)))
+			 then false
+		    else true))
+
+
+;;; **********************************************************************
+;;; **********************************************************************
+;;; CORRECTNESS
+;;; **********************************************************************
+;;; **********************************************************************
+
+;;; This needs to be rewritten to use the operationalcontrol predicate
+(defplan check-not-all-forces-arrayed
+  :capability (evaluate (obj (?c is (inst-of coa)))
+		    (with-respect-to 
+		     (?a is (inst-of all-forces-arrayed-critique))))
+  :result-type (inst-of boolean)
+  :method (there-are-any
+	 (obj (find-unarrayed (obj (sub-unit (|WHO| (coa-operation ?c))))
+			  (in ?c)
+			  (for ?a))))
+  :post-processing (add-to-evaluation ?method-result ?a ?c)
+  )
+
+(defplan find-unarrayed-forces
+  :capability (find-unarrayed (obj (?s is (set-of (inst-of military-unit))))
+			(in (?c is (inst-of coa)))
+			(for (?a is (inst-of all-forces-arrayed-critique))))
+  :result-type (set-of (inst-of military-unit))
+  :method (filter (obj ?s)
+	        (with (check-not-arrayed 
+		     (obj ?s)
+		     (of (coa-operation ?c)))))
+  :post-processing (if ?method-result
+		   (add-value ?a 'analysis-estimate ?method-result))
+  :annotations ((:skip-in-explanation t)))
+
+
+(defplan check-unit-not-arrayed
+  :capability (check-not-arrayed (obj (?u is (inst-of military-unit)))
+			   (of (?o is (inst-of |MilitaryOperation|))))
+  :result-type (inst-of boolean)
+  :method (if (not (or (there-are-any (obj (assigned-action ?u)))
+	         (determine-whether
+		(obj ?u)
+		(is-a (spec-of set-member))
+		(of (append (|reserveUnitInMission| ?o)
+			  (|securityUnitInMission| ?o)
+			  (|unitOperatingInRear| ?o))))))
+	    then true
+	    else false)
+  )
+
+#|
+(defplan check-unit-not-arrayed
+    :capability (check-not-arrayed (obj (?u is (inst-of military-unit)))
+				   (of (?o is (inst-of |MilitaryOperation|))))
+    :result-type (inst-of boolean)
+    :method (if (and (there-is-not-any (obj (assigned-action ?u)))
+		     (check-not-arrayed (obj ?u)
+					(in (spec-of |RESERVE-COA|))
+					(of ?o))
+		     (check-not-arrayed (obj ?u)
+					(in (spec-of |SECURITY-COA|))
+					(of ?o))
+		     (check-not-arrayed (obj ?u)
+					(in (spec-of |REAR-COA|))
+					(of ?o)))
+	      then true
+	      else false))
+
+(defplan check-unit-is-not-reserve-unit-in-mission
+    :capability (check-not-arrayed (obj (?u is (inst-of military-unit)))
+				   (in (?r is (spec-of |RESERVE-COA|)))
+				   (of (?o is (inst-of |MilitaryOperation|))))
+    :result-type (inst-of boolean)
+    :method (determine-whether
+	     (obj ?u)
+	     (is-a (spec-of set-member))
+	     (of (|reserveUnitInMission| ?o)))
+    )
+
+(defplan check-unit-is-not-security-unit-in-mission
+    :capability (check-not-arrayed (obj (?u is (inst-of military-unit)))
+				   (in (?r is (spec-of |SECURITY-COA|)))
+				   (of (?o is (inst-of |MilitaryOperation|))))
+    :result-type (inst-of boolean)
+    :method (determine-whether
+	     (obj ?u)
+	     (is-a (spec-of set-member))
+	     (of (|securityUnitInMission| ?o)))
+    )
+  
+(defplan check-unit-is-not-unit-operating-in-rear
+    :capability (check-not-arrayed (obj (?u is (inst-of military-unit)))
+				   (in (?r is (spec-of |REAR-COA|)))
+				   (of (?o is (inst-of |MilitaryOperation|))))
+    :result-type (inst-of boolean)
+    :method (determine-whether
+	     (obj ?u)
+	     (is-a (spec-of set-member))
+	     (of (|unitOperatingInRear| ?o)))
+    )
+  
+|#
+;; **********************************************************************
+;; **********************************************************************
+;; COMPLETENESS
+;; **********************************************************************
+;; **********************************************************************
+
+(defplan check-main-effort
+  :capability (find-fillers (of (?a is (inst-of main-effort-identified-critique)))
+		        (in (?c is (inst-of coa))))
+  :result-type (set-of (inst-of thing))
+  :method (|unitAssignedMainOpEffort| (coa-operation ?c))
+  :post-processing (if ?method-result (add-value ?a 'analysis-estimate ?method-result)))
+
+(defplan check-reserve-unit
+  :capability (find-fillers (of (?a is (inst-of reserve-identified-critique)))
+		        (in (?c is (inst-of coa))))
+  :result-type (set-of (inst-of thing))
+  :method (|reserveUnitInMission| (coa-operation ?c))
+  :post-processing (if ?method-result (add-value ?a 'analysis-estimate ?method-result)))
+
+(defplan check-security-unit
+  :capability (find-fillers (of (?a is (inst-of security-identified-critique)))
+		        (in (?c is (inst-of coa))))
+  :result-type (set-of (inst-of thing))
+  :method (|securityUnitInMission| (coa-operation ?c))
+  :post-processing (if ?method-result (add-value ?a 'analysis-estimate ?method-result)))
+
+(defplan check-rear-unit
+  :capability (find-fillers (of (?a is (inst-of rear-identified-critique)))
+		        (in (?c is (inst-of coa))))
+  :result-type (set-of (inst-of thing))
+  :method (|unitOperatingInRear| (coa-operation ?c))
+  :post-processing (if ?method-result (add-value ?a 'analysis-estimate ?method-result)))
+
+(defplan check-fire-task
+  :capability (find-fillers (of (?a is (inst-of fire-task-identified-critique)))
+		        (in (?c is (inst-of coa))))
+  :result-type (set-of (inst-of thing))
+  :method (|fireOperationTask| (coa-operation ?c))
+  :post-processing (if ?method-result (add-value ?a 'analysis-estimate ?method-result)))
+
+
+;; **********************************************************************
+;; primitive methods
+;; **********************************************************************
+(defplan THERE-IS-NOT-ANY--thing
+    :capability (there-is-not-any
+		  (obj (?l is (set-of (inst-of thing))))
+		  )
+    :result-type (inst-of boolean)
+    :method (primitive-determine-whether-there-are-no-thing ?l)
+    :primitivep t)
+
+(defplan THERE-ARE-ANY--thing
+    :capability (there-are-any
+		  (obj (?l is (set-of (inst-of thing))))
+		  )
+    :result-type (inst-of boolean)
+    :method (primitive-determine-whether-there-are-thing ?l)
+    :primitivep t)
+
+(defplan THERE-IS-NOT-object--thing
+    :capability (there-is-not-any
+		  (obj (?l is (inst-of thing)))
+		  )
+    :result-type (inst-of boolean)
+    :method (primitive-determine-whether-there-are-no-thing ?l)
+    :primitivep t)
+
+(defplan THERE-ARE-ANY-object--thing
+    :capability (there-are-any
+		  (obj (?l is (inst-of thing)))
+		  )
+    :result-type (inst-of boolean)
+    :method (primitive-determine-whether-there-are-thing ?l)
+    :primitivep t)
+
+(defplan or-boolean-objects
+    :capability (or-objs
+		  (obj (?l is (set-of (inst-of boolean))))
+		  )
+    :result-type (inst-of boolean)
+    :method (primitive-or-boolean-objects ?l)
+    :primitivep t)
+
+
+
+(defun kb-get-cardinality (i r c)
+  (if (and (EXPECT::kb-relation-p r)
+   (EXPECT::kb-instance-p i)
+   (EXPECT::kb-concept-p c))
+      (loom::get-role-cardinality (EXPECT::kb-find-object i) 
+  (EXPECT::kb-find-object r) :qualification 
+  (EXPECT::kb-find-object c))
+    0))
+
+(defun primitive-determine-whether-there-are-no-thing (x)
+  (if x
+      'FALSE
+    'TRUE))
+
+(defun primitive-determine-whether-there-are-thing (x)
+  (if x
+	'TRUE
+        'FALSE))
+
+(defun primitive-or-boolean-objects (x)
+  (cond ((null x)
+	 'TRUE)
+	((listp x)
+	 (if (member 'TRUE x)
+	     'TRUE
+	   'FALSE))
+	(t 'FALSE)))
+

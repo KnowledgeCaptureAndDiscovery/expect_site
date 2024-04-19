@@ -1,0 +1,3840 @@
+;;; -*- Mode: Lisp; Package: BATTLE-SPACE; Syntax: COMMON-LISP; Base: 10 -*-
+
+;;; Merged HPKB Vehicle ontology
+
+;;; Version: $Id: vehicles.loom,v 1.16 1998/06/14 23:35:51 hans Exp $
+
+
+;;; TO DO/NOTES:
+;;; - Add domains and ranges to relations and introduce all relations
+;;;   as roles, since EXPECT likes that.
+;;; - Add relation hierarchy information such as making `speed' a super
+;;;   relation of various speeds.
+;;; + Weight should really be `mass', since the weight will differ 
+;;;   on the moon and other far-away places.
+;;; + Properly merge in CYC's vehicle upper level.
+;;; - Think about where to hook up what kind of default information on
+;;;   intermediate classes such as LIGHT-TANK.  Maybe instead of attaching
+;;;   this information directly to LIGHT-TANK, there should be a class
+;;;   AVERAGE-LIGHT-TANK or AVERAGE-IRANIAN-LIGHT-TANK to host it.
+;;;   Also, currently, the values on these classes are way to specific.
+;;; - Possible name changes:
+;;;      max-range-on-road -> cruising-range
+;;;      max-tilt -> max-side-slope
+;;; - Figure out: What are approach and departure angles?
+;;;   Answer: These are the minimum (steepest) angles of a horizontal to
+;;;   uphill (approach) or downhill (departure) transition, e.g., _/ , that
+;;;   can be negotiated by a vehicle.  This is different from the maximum
+;;;   gradient a vehicle can handle, since it depends on the geometry of
+;;;   the wheels/tracks, its ground clearance, etc.
+
+(in-package "BATTLE-SPACE")
+
+
+(let ((?context (current-context))
+      (?version
+       "Military Land Vehicles.  Version: $Id: vehicles.loom,v 1.16 1998/06/14 23:35:51 hans Exp $")
+      (?separator " ")
+      (?documentation
+       "This theory describes modern military land vehicles.
+It is based on the following data sources:
+  (1) NWU's vehicle ontology developed by Jim Donlon,
+  (2) ISI's vehicle ontology developed by Hans Chalupsky,
+  (3) CYC's vehicle middle level ontology (copyrighted),
+  (4) Jane's Armour and Artillery 1995-96 (copyrighted),
+  (5) Jane's Military Vehicles and Logistics 1996-97 (copyrighted),
+  (6) Jane's NBC Protection Equipment 1996-97 (copyrighted),
+  (7) Periscope's USNI Military Database 1997 (copyrighted),
+  (8) various US Army field manuals, and
+  (9) various US Army and other publically accessible on-line sources.
+All images were taken from publically accessible on-line web sources."))
+
+  (tellm (:about ?context
+                 ;; Kludgy way to get documentation paragraphing,
+                 ;;    is there a better way?
+                 (documentation ?documentation)
+                 (documentation ?separator)
+                 (documentation ?version)
+                 (html-image "/images/vehicles/M60-in-exercise.jpg"))))
+
+  ;;;;
+;;;;;;;; Vehicle Middle Level Extension
+;;;;;;;; ==============================
+  ;;;;
+
+  ;;
+;;;;;; General Vehicles
+  ;;
+
+(defconcept Electric-Vehicle
+  :is-primitive Self-Powered-Device
+  :annotations
+  ((content-created-by Jim-Donlon)))
+
+(defconcept Half-Tracked-Vehicle
+  :is (:and Tracked-Vehicle Wheeled-Vehicle)
+  :annotations
+  ((content-created-by Jim-Donlon)
+   (content-modified-by Hans-Chalupsky)))
+
+(defconcept Agricultural-Vehicle
+  :is-primitive Transportation-Device--Vehicle
+  :annotations
+  ((content-created-by Jim-Donlon)
+   (content-modified-by Hans-Chalupsky)))
+
+(defconcept Recreational-Vehicle
+  :is-primitive Road-Vehicle
+  :annotations
+  ((content-created-by Jim-Donlon)))
+
+(defconcept Van
+  :is-primitive Automobile
+  :annotations
+  ((content-created-by Jim-Donlon)
+   (content-modified-by Hans-Chalupsky)))
+
+(defconcept Station-Wagon
+  :is-primitive Automobile
+  :annotations
+  ((content-created-by Jim-Donlon)
+   (content-modified-by Hans-Chalupsky)))
+
+(defconcept Cargo-Truck
+  "Trucks specifically designed to haul large amounts of cargo."
+  :is-primitive Truck
+  :annotations
+  ((content-created-by Hans-Chalupsky)))
+
+(defconcept 18wheel-Truck
+  :is-primitive Truck
+  :annotations
+  ((content-created-by Jim-Donlon)
+   (content-modified-by Hans-Chalupsky)))
+
+(defconcept 18wheel-Semi-Trailer-Truck
+  :is-primitive Truck
+  :annotations
+  ((content-created-by Jim-Donlon)
+   (content-modified-by Hans-Chalupsky)))
+
+(defconcept Tandem-Trailer-Truck
+  :is-primitive Truck
+  :annotations
+  ((content-created-by Jim-Donlon)
+   (content-modified-by Hans-Chalupsky)))
+
+(defconcept 18wheel-Flatbed-Truck
+  :is-primitive Cargo-Truck
+  :annotations
+  ((content-created-by Jim-Donlon)
+   (content-modified-by Hans-Chalupsky)))
+
+(defconcept 18wheel-Car-Carrier-Truck
+  :is-primitive Cargo-Truck
+  :annotations
+  ((content-created-by Jim-Donlon)
+   (content-modified-by Hans-Chalupsky)))
+
+(defconcept Panel-Van-Truck
+  :is-primitive Truck
+  :annotations
+  ((content-created-by Jim-Donlon)
+   (content-modified-by Hans-Chalupsky)))
+
+(defconcept Refrigerated-Truck
+  :is-primitive Cargo-Truck
+  :annotations
+  ((content-created-by Jim-Donlon)
+   (content-modified-by Hans-Chalupsky)))
+
+(defconcept Tank-Truck
+  "Trucks equipped with a cargo tank to haul liquids or compressed gases."
+  :is-primitive Cargo-Truck
+  :annotations
+  ((content-created-by Hans-Chalupsky)))
+
+#|
+;; Already exists in CYC, maybe change it, since it is not a subclass of `Tank-Truck'.
+(defconcept Fuel-Tank-Truck
+  :is-primitive Tank-Truck
+  :annotations
+  ((content-created-by Hans-Chalupsky)))
+|#
+
+(defconcept Dump-Truck
+  "Trucks equipped with a tiltable cargo bed which can be used to haul and dump gravel,
+dirt, garbage, etc."
+  :is-primitive Cargo-Truck
+  :annotations
+  ((content-created-by Hans-Chalupsky)))
+
+(defconcept Tractor
+  "Trucks designed to pull loads such as trailers, etc."
+  :is-primitive Truck
+  :annotations
+  ((content-created-by Hans-Chalupsky)))
+
+(defconcept Vehicle-Trailer
+  "Nonautomotive vehicles designed to be pulled by another vehicle.
+Trailers are usually used to haul passengers or cargo.  Subclasses
+include semi-trailers, bicycle trailers, boat trailers, mobile homes,
+etc. (what about `Train-Car's)"
+  :is-primitive (:and Land-Transportation-Device
+                      Container-Product))
+
+(defconcept Semi-Trailer
+  "Trailer whose one end is supported by usually two axles with 8 wheels,
+and whose other end rests on a saddle (the ``fifth wheel'') of the tractor
+truck pulling it.  Some semi-trailers also have wheels at the forward end
+and are called semi-trailers only because they are pulled by a fifth wheel
+device.  A commercial semi-trailer truck rig is often referred to as an
+18-Wheel-Truck."
+  :is-primitive Vehicle-Trailer
+  :defaults (:and (:filled-by number-of-wheels 8)
+                  (:filled-by number-of-axles 2)))
+
+
+  ;;
+;;;;;; Military Vehicles
+  ;;
+
+(defconcept Military-Wheeled-Vehicle
+  :is-primitive (:and Military-Vehicle Wheeled-Vehicle)
+  :annotations
+  ((content-created-by Jim-Donlon)))
+
+(defconcept Military-Tracked-Vehicle
+  :is-primitive (:and Military-Vehicle Tracked-Vehicle)
+  :annotations
+  ((content-created-by Jim-Donlon)))
+
+(defconcept Military-Obstacle-Clearing-Vehicle
+  "Military vehicles that are especially capable of negotiating obstacles,
+and that can be equipped to clear minefields."
+  :is-primitive Military-Vehicle
+  :annotations
+  ((content-created-by Jim-Donlon)))
+
+(defconcept Military-Amphibious-Vehicle
+  "Military vehicles that are capable of swimming."
+  :is-primitive (:and Military-Vehicle
+                      Military-Amphibious-Platform
+                      Water-Transportation-Device)
+  :annotations
+  ((content-created-by Jim-Donlon)
+   (content-modified-by Hans-Chalupsky)))
+
+(defconcept Military-Fording-Vehicle
+  "Military vehicles that are capable of submerged water crossing or fording."
+  :is-primitive Military-Vehicle
+  :annotations
+  ((content-created-by Jim-Donlon)
+   (content-modified-by Hans-Chalupsky)))
+
+(defconcept Military-Truck
+  :is-primitive (:and Truck
+                      Military-Wheeled-Vehicle
+                      Military-Fording-Vehicle)
+  :annotations
+  ((content-modified-by Hans-Chalupsky)))
+  
+(defconcept Military-Light-Truck
+  "Light military trucks such as HMMWVs, jeeps, and military versions of
+civilian vehicles as defined by `Military-Light-Converted-Truck'."
+  :is-primitive Military-Truck
+  :defaults (:filled-by number-of-wheels 4)
+  :annotations
+  ((content-created-by Jim-Donlon)
+   (content-modified-by Hans-Chalupsky)))
+
+(defconcept Military-Light-Converted-Truck
+  "Military versions of civilian vehicles such as pickup trucks and
+sport-utility vehicles."
+  :is-primitive Military-Light-Truck
+  :annotations
+  ((content-created-by Jim-Donlon)))
+
+(defconcept Military-Medium-Truck
+  "Medium military trucks such as the 2.5 ton M35A2."
+  :is-primitive Military-Truck
+  :annotations
+  ((content-created-by Hans-Chalupsky)))
+
+(defconcept Military-Heavy-Truck
+  "Heavy military trucks, usually with more that four wheels,
+used for logistics."
+  :is-primitive Military-Truck
+  :annotations
+  ((content-created-by Jim-Donlon)
+   (content-modified-by Hans-Chalupsky)))
+
+(defconcept Lightly-Armored-Vehicle
+  "Vehicles with light armor that protects from small guns fire and
+shell splinters."
+  :is-primitive Armored-Vehicle)
+
+(defconcept Heavily-Armored-Vehicle
+  "Vehicles with heavy armor that can only be destroyed by special-purpose
+armor piercing weapons such as anti-tank missiles."
+  :is-primitive Armored-Vehicle)
+
+(defconcept Light-Tank
+  :is-primitive (:and Tank--Vehicle
+                      Lightly-Armored-Vehicle)
+  :annotations
+  ((content-created-by Jim-Donlon)
+   (content-modified-by Hans-Chalupsky)))
+
+(defconcept Medium-Tank
+  :is-primitive (:and Tank--Vehicle
+                      Heavily-Armored-Vehicle)
+  :annotations
+  ((content-created-by Jim-Donlon)
+   (content-modified-by Hans-Chalupsky)))
+
+(defconcept Main-Battle-Tank
+  :is-primitive (:and Tank--Vehicle
+                      Heavily-Armored-Vehicle)
+  :annotations
+  ((content-created-by Jim-Donlon)
+   (content-modified-by Hans-Chalupsky)))
+
+(defconcept APC
+  "See 'Armored-Personnel-Carrier'."
+  :is Armored-Personnel-Carrier)
+
+(defconcept Infantry-Fighting-Vehicle
+  :is-primitive Military-Vehicle
+  :annotations
+  ((content-created-by Jim-Donlon)
+   (content-modified-by Hans-Chalupsky)))
+
+(defconcept Command-Vehicle
+  "Military command vehicles."
+  :is-primitive Military-Vehicle
+  :annotations
+  ((content-created-by Hans-Chalupsky)))
+
+(defconcept Military-Recovery-Vehicle
+  "Military vehicles specifically equipped to recover damaged or disabled
+equipment and vehicles."
+  :is-primitive Military-Vehicle
+  :annotations
+  ((content-created-by Hans-Chalupsky)))
+
+(defconcept Wrecker
+  "See 'Military-Recovery-Vehicle'."
+  :is Military-Recovery-Vehicle
+  :annotations
+  ((content-created-by Jim-Donlon)
+   (content-modified-by Hans-Chalupsky)))
+
+(defconcept Armored-Recovery-Vehicle
+  "Military recovery vehicles that are armored.  These are usually recovery
+variants of standard tanks."
+  :is-primitive (:and Military-Recovery-Vehicle
+                      Armored-Vehicle)
+  :annotations
+  ((content-created-by Hans-Chalupsky)))
+
+(defconcept ARV
+  "See 'Armored-Recovery-Vehicle'."
+  :is Armored-Recovery-Vehicle)
+
+(defconcept Combat-Engineer-Vehicle
+  "Military vehicles designed to prepare artillery firing positions,
+clear and prepare obstructions, recover damaged or disabled equipment
+and vehicles, etc."
+  :is-primitive (:and Military-Vehicle
+                      Military-Recovery-Vehicle)
+  :annotations
+  ((content-created-by Jim-Donlon)
+   (content-modified-by Hans-Chalupsky)))
+
+(defconcept CEV
+  "See 'Combat-Engineer-Vehicle'."
+  :is Combat-Engineer-Vehicle)
+
+(defconcept AVLB
+  "Autonomous Vehicle-Launched Bridge, usually mounted on top of the chassis
+of a tank such as the M48 or M60.  An AVLB is a compound device consisting
+of the actual bridge (see `AVLB-Bridge') and the launcher."
+  :is-primitive Military-Tracked-Vehicle
+  :annotations
+  ((content-created-by Jim-Donlon)
+   (content-modified-by Hans-Chalupsky)))
+
+(defconcept Self-Propelled-Artillery
+  :is-primitive Military-Vehicle
+  :annotations
+  ((content-created-by Hans-Chalupsky)))
+
+(defconcept Self-Propelled-Howitzer
+  "Self-propelled howitzers are field artillery weapons.  They provide
+artillery fire support for ground operations.  They are Normally arrayed
+in fixed firing battery sites of 6-8 howitzers."
+  :is-primitive Self-Propelled-Artillery
+  :annotations
+  ((content-created-by Jim-Donlon)
+   (content-modified-by Hans-Chalupsky)))
+
+(defconcept Self-Propelled-Air-Defense-Artillery
+  "Self-propelled artillery equipped with anti-aircraft guns."
+  :is-primitive Self-Propelled-Artillery
+  :annotations
+  ((content-created-by Hans-Chalupsky)))
+
+(defconcept Towed-Artillery
+  :is-primitive (:and Vehicle-Trailer
+                      Platform--Military)
+  :annotations
+  ((content-created-by Hans-Chalupsky)))
+
+(defconcept Towed-Howitzer
+  "Howitzers mounted on towed trailers."
+  :is-primitive Towed-Artillery
+  :annotations
+  ((content-created-by Hans-Chalupsky)))
+
+(defconcept Towed-Air-Defense-Artillery
+  "Anti-aircraft guns mounted on towed trailers."
+  :is-primitive Towed-Artillery
+  :annotations
+  ((content-created-by Hans-Chalupsky)))
+
+(defconcept Missile-Launcher
+  "A military platform designed to launch one ore more self-propelled
+missiles."
+  :is-primitive Platform--Military
+  :annotations
+  ((content-created-by Hans-Chalupsky)))
+
+(defconcept Multiple-Missile-Launcher
+  "A missile launcher capable of launching two or more missiles (not
+necessarily simultaneously) without reloading."
+  :is-primitive Missile-Launcher
+  :annotations
+  ((content-created-by Jim-Donlon)
+   (content-modified-by Hans-Chalupsky)))
+
+(defconcept Transporter-Erector-Launcher
+  "A self-propelled missile launching system capable of transporting,
+erecting, and launching one ore more missiles."
+  :is-primitive (:and Military-Vehicle
+                      Missile-Launcher)
+  :annotations
+  ((content-created-by Hans-Chalupsky)))
+
+(defconcept TEL :is Transporter-Erector-Launcher)
+
+
+  ;;
+;;;;;; Relations
+  ;;
+
+#|
+;; Now CYC's `width-of-object':
+(defrelation width
+  :characteristics :single-valued
+  :annotations ((output-unit "m")))
+
+;; Now CYC's `height-of-object':
+(defrelation height
+  :characteristics :single-valued
+  :annotations ((output-unit "m")))
+
+;; Now CYC's `length-of-object':
+(defrelation length
+  :characteristics :single-valued
+  :annotations ((output-unit "m")))
+
+;; Now CYC's `mass-of-object':
+(defrelation weight
+  :characteristics :single-valued
+  :annotations ((output-unit "kg")))
+|#
+
+(defrelation number-of-wheels
+  "The total number of wheels on a wheeled vehicle.  Double wheels as found
+at the back of trucks count separately, that is, every tire is associated
+with its own, separate wheel."
+  :domain Land-Transportation-Device
+  :range Integer
+  :characteristics :single-valued)
+
+(defrelation number-of-axles
+  "The total number of 'logical' wheel axles on a wheeled vehicle.  Even
+if an axles is actually separated into physical half axles, it 'logically'
+counts as one.  For example, a standard 18-wheeler truck has 5 axles."
+  :domain Land-Transportation-Device
+  :range Integer
+  :characteristics :single-valued)
+
+(defrelation engine-power
+  "The maximum combined power of all engines of a vehicle that can be
+simultaneously engaged to contribute to the 'normal' forward or backward
+thrust of a vehicle."
+  :domain Transportation-Device--Vehicle
+  :range loom::Power-Quantity
+  :characteristics :single-valued
+  :annotations ((output-unit "hp")))
+
+#|
+;; Defined/fixed in CYC's vehicle middle level:
+(defrelation max-speed-on-road
+  :characteristics :single-valued
+  :annotations ((output-unit "km/h")))
+|#
+
+(defrelation max-speed-off-road
+  "The maximum speed of a vehicle when traveling off-road (cross-country)
+in forward direction road on normal flat terrain and in calm weather."
+  :arity 2
+  :domain Land-Transportation-Device
+  :range loom::Speed-Quantity
+  :characteristics :single-valued
+  :annotations
+  (Functional-Predicate
+   Binary-Predicate
+   (output-unit "km/h")))
+
+(defrelation max-speed-on-dirt-road
+  "The maximum speed of a vehicle when traveling in forward direction along
+a 'normal' dirt road on normal flat terrain and in calm weather."
+  :arity 2
+  :domain Land-Transportation-Device
+  :range loom::Speed-Quantity
+  :characteristics :single-valued
+  :annotations
+  (Functional-Predicate
+   Binary-Predicate
+   (output-unit "km/h")))
+
+(defrelation max-speed-on-water
+  "The maximum speed of a vehicle when traveling on water in forward direction
+and in calm weather."
+  :domain Water-Transportation-Device
+  :range loom::Speed-Quantity
+  :characteristics :single-valued
+  :annotations ((output-unit "km/h")))
+
+#|
+;; Defined/fixed in CYC's vehicle middle level:
+(defrelation max-range-on-road
+  :characteristics :single-valued
+  :annotations ((output-unit "km")))
+|#
+
+(defrelation max-range-off-road
+  "The maximum distance a vehicle can travel off-road (or cross-country)
+without intermediate refueling at normal cruising speed when traveling in
+forward direction on normal flat terrain and in calm weather."
+  :arity 2
+  :domain Land-Transportation-Device
+  :range loom::Distance-Quantity
+  :characteristics :single-valued
+  :annotations
+  (Binary-Predicate
+   (output-unit "km")))
+
+(defrelation max-range-on-dirt-road
+  "The maximum distance a vehicle can travel without intermediate refueling
+on a 'normal' dirt road at normal cruising speed when traveling in forward
+direction on normal flat terrain and in calm weather."
+  :arity 2
+  :domain Land-Transportation-Device
+  :range loom::Distance-Quantity
+  :characteristics :single-valued
+  :annotations
+  (Binary-Predicate
+   (output-unit "km")))
+
+(defrelation max-gradient-on-road
+  "The maximum up/down gradient a vehicle can negotiate upwards as well as
+downwards when going in forward direction on a 'normal' paved road and in
+calm weather."
+  :domain Land-Transportation-Device
+  :range loom::Quantity
+  :characteristics :single-valued
+  :annotations ((output-unit "%")))
+
+(defrelation max-gradient-off-road
+  "The maximum up/down gradient a vehicle can negotiate upwards as well as
+downwards when going off-road (or cross-country) in forward direction and in
+calm weather."
+  :domain Land-Transportation-Device
+  :range loom::Quantity
+  :characteristics :single-valued
+  :annotations ((output-unit "%")))
+
+(defrelation max-gradient-on-dirt-road
+  "The maximum up/down gradient a vehicle can negotiate upwards as well as
+downwards when going in forward direction on a 'normal' dirt road and in
+calm weather."
+  :domain Land-Transportation-Device
+  :range loom::Quantity
+  :characteristics :single-valued
+  :annotations ((output-unit "%")))
+
+(defrelation max-gradient :is max-gradient-on-road)
+
+#|
+;; Defined/fixed in CYC's vehicle middle level:
+(defrelation min-turning-radius
+  :characteristics :single-valued
+  :annotations ((output-unit "m")))
+|#
+
+(defrelation fuel-capacity
+  :domain Transportation-Device--Vehicle
+  :range loom::Volume-Quantity
+  :characteristics :single-valued
+  :annotations ((output-unit "l")))
+
+(defrelation fuel-level
+  :domain Transportation-Device--Vehicle
+  :range loom::Quantity
+  :characteristics :single-valued
+  :annotations ((output-unit "%")))
+
+;; These should be reworked into `fuel-consumption-{idle, on-road, off-road,
+;; on-dirt-road}', where all but the idle consumption is measured in l/km.
+(defrelation fuel-efficiency
+  :domain Transportation-Device--Vehicle
+  :range loom::Quantity
+  :characteristics :single-valued
+  :annotations ((output-unit "l/km")))
+
+(defrelation fuel-consumption-idle
+  :domain Transportation-Device--Vehicle
+  :range loom::Quantity
+  :characteristics :single-valued
+  :annotations ((output-unit "l/h")))
+
+(defrelation fuel-consumption-on-dirt-road
+  :domain Land-Transportation-Device
+  :range loom::Quantity
+  :characteristics :single-valued
+  :annotations ((output-unit "l/h")))
+
+(defrelation fuel-consumption-off-road
+  :domain Land-Transportation-Device
+  :range loom::Quantity
+  :characteristics :single-valued
+  :annotations ((output-unit "l/h")))
+
+(defrelation crew-size
+  "The typical number of crew members necessary to operate a vehicle in
+its typical mission."
+  :domain Transportation-Device--Vehicle
+  :range Integer
+  :characteristics :single-valued)
+
+#|
+;; Defined/fixed in CYC's vehicle middle level:
+(defrelation max-number-of-passengers
+  :range Integer
+  :characteristics :single-valued)
+|#
+
+(defrelation ground-clearance
+  :domain Land-Transportation-Device
+  :range loom::Distance-Quantity
+  :characteristics :single-valued
+  :annotations ((output-unit "m")))
+
+(defrelation VCI-1
+  :domain Military-Vehicle
+  :range Integer
+  :characteristics :single-valued)
+
+(defrelation VCI-50
+  :domain Military-Vehicle
+  :range Integer
+  :characteristics :single-valued)
+
+(defrelation load-class
+  :domain Military-Vehicle
+  :range Integer
+  :characteristics :single-valued)
+
+(defrelation override-diameter
+  "Override diameter at breast height which refers to the maximum diameter of
+a tree that can be knocked down by a military vehicle and driven over."
+  :domain Military-Vehicle
+  :range loom::Distance-Quantity
+  :characteristics :single-valued
+  :annotations ((output-unit "m")))
+
+(defrelation max-submerged-depth
+  :domain Military-Fording-Vehicle
+  :range loom::Distance-Quantity
+  :characteristics :single-valued
+  :annotations ((output-unit "m")))
+
+;; Deleted in CYC's vehicle middle level and redefined here:
+(defrelation max-fording-depth
+  "(max-fording-depth ?VEHICLE ?HEIGHT) indicates the deepest waterlevel that
+can be crossed by ?VEHICLE."
+  :arity 2
+  :domain Military-Fording-Vehicle
+  :range loom::Distance-Quantity
+  :annotations ((output-unit "m")))
+
+(defrelation max-gap-to-traverse
+  :domain Land-Transportation-Device
+  :range loom::Distance-Quantity
+  :characteristics :single-valued
+  :annotations ((output-unit "m")))
+
+#|
+;; Defined/fixed in CYC's vehicle middle level:
+(defrelation max-step
+  :characteristics :single-valued
+  :annotations ((output-unit "m")))
+|#
+
+(defrelation max-tilt
+  :domain Transportation-Device
+  :range loom::Quantity
+  :characteristics :single-valued
+  :annotations ((output-unit "%")))
+
+(defrelation max-straddle
+  :domain Land-Transportation-Device
+  :range loom::Distance-Quantity
+  :characteristics :single-valued
+  :annotations ((output-unit "m")))
+
+(defrelation track-width
+  :domain Land-Transportation-Device
+  :range loom::Distance-Quantity
+  :characteristics :single-valued
+  :annotations ((output-unit "m")))
+
+(defrelation ground-track-length
+  :domain Tracked-Vehicle
+  :range loom::Distance-Quantity
+  :characteristics :single-valued
+  :annotations ((output-unit "m")))
+
+(defrelation number-of-litters
+  :domain Ambulance
+  :range Integer
+  :characteristics :single-valued)
+
+
+  ;;;;
+;;;;;;;; Leaf classes and their immediate parents
+;;;;;;;; ========================================
+  ;;;;
+
+  ;;
+;;;;;; Light Trucks
+  ;;
+
+(defconcept Military-Jeep
+  :is-primitive Military-Light-Truck
+  :annotations
+  ((content-created-by Jim-Donlon)
+   (content-modified-by Hans-Chalupsky)
+   ))
+
+;;; M151
+
+#| Excerpts from JANE'S MILITARY VEHICLES AND LOGISTICS 1996-97, page 293
+
+<MD>MODEL : M151 (4 x 4) 362 kg Light Vehicle and Variants
+
+<D6>DESCRIPTION : 
+The body and chassis of the M151 are integral and are of all-welded
+construction. The layout of the vehicle is conventional, with the
+engine at the front and the crew area at the rear with a removable
+canvas top and side curtains, and a windscreen that can be folded
+forward flat on the bonnet.
+  In 1964 the M151 was replaced in production by the M151A1 which had
+improved suspension as the earlier model had a tendency to oversteer.
+The M151A2 followed in 1970 with modifications to the rear suspension,
+dual brake system, collapsible steering wheel, two-speed wipers and
+modified lighting.
+
+The M107 and M108 are communications vehicles with the radios
+installed in the rear of the vehicle. The passenger seat faces the
+rear to enable the radio operator to work his equipment.
+  The M718 and M718A1 are ambulance versions and have a crew of two,
+a driver and a medical attendant. This version can carry a stretcher
+and three seated patients, two stretchers and two seated patients or
+three stretcher patients.
+  The M825 is fitted with the M40 106 mm recoilless rifle mounted in
+the rear. This model was replaced in US Army service by the Hughes TOW
+ATGW, with kits available to convert the M825 to the M151A2 standard.
+However, during mid-1987 25 M151A2s were converted to M825 standard by
+TACOM in order to meet a requirement from Somalia.
+
+</D6>
+<SP>SPECIFICATIONS : 
+Model                  M151         M151A1       M151A2       M718A1
+Cab seating            1 + 3        1 + 3        1 + 3        1 + 1
+Configuration          4 x 4        4 x 4        4 x 4        4 x 4
+Weight (empty)         1,012 kg     1,088 kg     1,107 kg     1,247 kg
+  (loaded)             1,575 kg     1,633 kg     1,652 kg     1,656 kg
+Weight on front axle
+(empty)                574 kg       607 kg       618 kg       620 kg
+Weight on rear axle
+(loaded)               448 kg       481 kg       490 kg       626 kg
+Max load (road)        554 kg       544 kg       545 kg       409 kg
+  (cross-country)      362 kg       362 kg       363 kg       409 kg
+Towed load (road)      970 kg       970 kg       970 kg       not authorised
+  (cross-country)      680 kg       680 kg       680 kg       not authorised
+Length                 3.352 m      3.371 m      3.371 m      3.631 m
+Width                  1.58 m       1.634 m      1.633 m      1.819 m
+Height (overall)       1.803 m      1.803 m      1.803 m      1.94 m
+  (reduced)            1.332 m      1.332 m      1.333 m      1.313 m
+Ground clearance       0.26 m       0.24 m       0.24 m       0.23 m
+Track                  1.346 m      1.346 m      1.346 m      1.346 m
+Wheelbase              2.159 m      2.159 m      2.159 m      2.159 m
+Angle of approach 
+departure              66ø 37ø      65ø/37ø      66ø/37ø      67ø/36ø
+Max speed              106 km h     104 km/h     90 km/h      90 km/h
+Range                  482 km       482 km       482 km       442 km
+Fuel capacity          56 l         56 l         59.8 l       59.8 l
+Max gradient           60%          60%          60%          60%
+Max side slope         40%          40%          40%          40%
+Fording
+(without preparation)  0.533 m      0.533 m      0.533 m      0.533 m
+(with preparation)     1.524 m      1.524 m      1.524 m      1.524 m
+Engine                 L-142 4-cylinder liquid-cooled OHV petrol developing
+                       72 hp at 4,000 rpm
+Gearbox                manual with 4 forward and 1 reverse gears
+Clutch                 single dry disc
+Transfer box           single-speed, integral with transmission. Driver can
+                       select either 4 x 4 or 4 x 2 drive
+Steering               worm and double roller
+Turning radius         5.486 m      5.638 m      5.638 m      5.638 m
+Suspension             coil springs with hydraulic shock-absorbers
+Tyres                  7.00 x 16    7.00 x 16    7.00 x 16    7.00 x 16
+Brakes (main)          hydraulic    hydraulic    hydraulic    hydraulic
+  (parking)            mechanical   mechanical   mechanical   mechanical
+Electrical system      24 V         24 V         24 V         24 V
+Battery                1 x 2 HN     1 x 2 HN     1 x 2 HN     1 x 2 HN
+
+Model                  M825
+Cab seating            1 + 3
+Configuration          4 x 4
+Weight (empty)         1,174 kg
+  (loaded)             1,959 kg
+Weight on front axle
+(empty)                655 kg
+Weight on rear axle
+(loaded)               519 kg
+Max load (road)        785 kg
+  (cross-country)      785 kg
+Towed load (road)      not authorised
+  (cross-country)      not authorised
+Length                 3.645 m
+Width                  1.943 m
+Height (overall)       1.621 m
+  (reduced)            1.346 m
+Ground clearance       0.21 m
+Track                  1.346 m
+Wheelbase              2.159 m
+Angle of approach 
+departure              62ø 33ø
+Max speed              80 km h
+Range                  483 km
+Fuel capacity          59.8 l
+Max gradient           50%
+Max side slope         30%
+Fording
+(without preparation)  0.533 m
+(with preparation)     1.524 m
+Engine                 L-142 4-cylinder liquid-cooled OHV petrol developing
+                       72 hp at 4,000 rpm
+Gearbox                manual with 4 forward and 1 reverse gears
+Clutch                 single dry disc
+Transfer box           single-speed, integral with transmission. Driver can
+                       select either 4 x 4 or 4 x 2 drive
+Steering               worm and double roller
+Turning radius         5.638 m
+Suspension             coil springs with hydraulic shock-absorbers
+Tyres                  7.00 x 16
+Brakes (main)          hydraulic
+  (parking)            mechanical
+Electrical system      24 V
+Battery                1 x 2 HN
+|#
+
+(tell (:about M151-source-link-1
+              Non-Web-Source-Link
+              (qv-display-text
+               "Jane's Military Vehicles and Logistics 96-97, p.293")
+              (qv-url "http://www.janes.com/")))
+
+(tell (:about M151-source-link-2
+              Web-Source-Link
+              (qv-url "http://www.ncf.carleton.ca/~bn932/m151.html")))
+
+(tell (:about M151A2-image-link-1
+              Full-Image-Link
+              (qv-url "http://www.militarymotorpool.com/m151a2.gif")))
+
+(defconcept M151
+  "1/4 ton, general purpose, 4x4 utility vehicle.  Production started in 1960.
+In the US Army the M151 Jeep is now largely replaced by the HMMWV."
+  :is-primitive Military-Jeep
+  :defaults (:and (:filled-by length-of-object 3.352m)
+                  (:filled-by width-of-object 1.58m)
+                  (:filled-by height-of-object 1.803m)
+                  (:filled-by mass-of-object 1575kg)  ;; fully loaded
+                  (:filled-by ground-clearance 0.26m)
+                  (:filled-by track-width 1.346m)
+                  (:filled-by max-speed-on-road 106km/h)
+                  (:filled-by max-range-on-road 482km)
+                  (:filled-by max-gradient-on-road 60%)
+                  (:filled-by max-tilt 40%)
+                  (:filled-by max-fording-depth 0.533m)
+                  (:filled-by min-turning-radius 5.486m)
+                  (:filled-by fuel-capacity 56l)
+                  (:filled-by engine-power 72hp)
+                  (:filled-by crew-size 1)
+                  (:filled-by max-number-of-passengers 3)
+                  (:filled-by load-class 10)
+                  (:filled-by VCI-1 19)
+                  (:filled-by VCI-50 44)
+                  (:filled-by override-diameter 0.04m))
+  :annotations
+  ((see-also  M151-source-link-1)
+   (see-also M151-source-link-2)
+   (html-image "/images/vehicles/M151A2-Jeep.jpg")
+   (see-also M151A2-image-link-1)
+   (content-created-by Hans-Chalupsky)
+   ))
+
+(defconcept M151A1
+  "Variant of the M151 Jeep with improved suspension.
+Production started in 1964."
+  :is-primitive M151
+  :defaults (:and (:filled-by length-of-object 3.371m)
+                  (:filled-by width-of-object 1.634m)
+                  (:filled-by mass-of-object 1633kg)  ;; fully loaded
+                  (:filled-by ground-clearance 0.24m)
+                  (:filled-by max-speed-on-road 104km/h)
+                  (:filled-by min-turning-radius 5.638m))
+  :annotations
+  ((see-also  M151-source-link-1)
+   (html-image "/images/vehicles/")
+   (content-created-by Hans-Chalupsky)
+   ))
+
+(defconcept M151A2
+  "Variant of the M151 Jeep with improved suspension, modified rear
+suspension, dual brake system, collapsible steering wheel, two-speed wipers
+and modified lighting.  Production started in 1970 and stopped in 1978."
+  :is-primitive M151
+  :defaults (:and (:filled-by length-of-object 3.371m)
+                  (:filled-by width-of-object 1.633m)
+                  (:filled-by height-of-object 1.803m)
+                  (:filled-by mass-of-object 1652kg)  ;; fully loaded
+                  (:filled-by ground-clearance 0.24m)
+                  (:filled-by max-speed-on-road 90km/h)
+                  (:filled-by min-turning-radius 5.638m)
+                  (:filled-by fuel-capacity 59.8l))
+  :annotations
+  ((see-also  M151-source-link-1)
+   (see-also M151-source-link-2)
+   (html-image "/images/vehicles/M151A2-Jeep.jpg")
+   (see-also M151A2-image-link-1)
+   (content-created-by Hans-Chalupsky)
+   ))
+
+(defconcept M107
+  "M151 communications vehicle with the radios installed in the rear of the
+vehicle. The passenger seat faces the rear to enable the radio operator to
+work his equipment."
+  :is-primitive M151A2
+  :annotations
+  ((see-also  M151-source-link-1)
+   (content-created-by Hans-Chalupsky)
+   ))
+
+(defconcept M108
+  :is-primitive M107
+  :annotations
+  ((see-also  M151-source-link-1)
+   (content-created-by Hans-Chalupsky)
+   ))
+
+(defconcept M718A1
+  "M151 Jeep ambulance which has a crew of two, a driver and a medical
+attendant.  This version can carry a stretcher and three seated patients,
+two stretchers and two seated patients or three stretcher patients."
+  :is-primitive (:and M151 Ambulance)
+  :defaults (:and (:filled-by length-of-object 3.631m)
+                  (:filled-by width-of-object 1.819m)
+                  (:filled-by height-of-object 1.94m)
+                  (:filled-by mass-of-object 1656kg)  ;; fully loaded
+                  (:filled-by ground-clearance 0.23m)
+                  (:filled-by max-speed-on-road 90km/h)
+                  (:filled-by max-range-on-road 442km)
+                  (:filled-by min-turning-radius 5.638m)
+                  (:filled-by fuel-capacity 59.8l)
+                  (:filled-by crew-size 2)
+                  (:filled-by max-number-of-passengers 4)
+                  (:filled-by number-of-litters 3))
+  :annotations
+  ((see-also  M151-source-link-1)
+   ;(html-image "/images/vehicles/")
+   (content-created-by Hans-Chalupsky)
+   ))
+
+(defconcept M825
+  "M151 Jeep is fitted with the M40 106 mm recoilless rifle mounted in
+the rear. This model was replaced in US Army service by the Hughes TOW
+ATGW, with kits available to convert the M825 to the M151A2 standard.
+However, during mid-1987 25 M151A2s were converted to M825 standard by
+TACOM in order to meet a requirement from Somalia."
+  :is-primitive M151
+  :defaults (:and (:filled-by length-of-object 3.645m)
+                  (:filled-by width-of-object 1.943m)
+                  (:filled-by height-of-object 1.621m)
+                  (:filled-by mass-of-object 1959kg)  ;; fully loaded
+                  (:filled-by ground-clearance 0.21m)
+                  (:filled-by max-speed-on-road 80km/h)
+                  (:filled-by max-range-on-road 483km)
+                  (:filled-by max-gradient-on-road 50%)
+                  (:filled-by max-tilt 30%)
+                  (:filled-by min-turning-radius 5.638m)
+                  (:filled-by fuel-capacity 59.8l)
+                  (:filled-by load-class 2))
+  :annotations
+  ((see-also  M151-source-link-1)
+   ;(html-image "/images/vehicles/")
+   (content-created-by Hans-Chalupsky)
+   ))
+
+
+;;; HMMWV
+
+;; The HMMWV provides a variety of wheeled vehicle platforms. These
+;; are cargo/troop carrier, armament carrier, TOW missile system
+;; carrier, shelter carrier and two ambulance variants (2- and
+;; 4-litter). The HMMWV will also be the prime mover for the
+;; AN/TRC-170 Radio Digital Terminal and the Pedestal Mounted Stinger
+;; System.
+
+(defconcept HMMWV
+  "High mobility, multi-purpose, wheeled vehicle.  Common truck in the U.S. 
+Army.  Used for many purposes, including passenger, ambulance, cargo, etc."
+  :is-primitive Military-Light-Truck
+  :defaults (:and (:filled-by max-speed-on-road 50km/h)
+                  (:filled-by fuel-efficiency 0.18l/km)
+                  (:filled-by max-range-on-road 325km)  ;;<<<RECHECK>>>
+                  (:filled-by max-gradient-on-road 60%)
+                  (:filled-by max-gradient-off-road 28%)
+                  (:filled-by width-of-object 1.69m)  ;;<<<RECHECK>>>
+                  (:filled-by override-diameter 0.04m)
+                  (:filled-by VCI-1 19)
+                  (:filled-by VCI-50 44)
+                  (:filled-by min-turning-radius 5.8m)
+                  (:filled-by length-of-object 3.35m)  ;;<<<RECHECK>>>
+                  (:filled-by height-of-object 2.4m)  ;;<<<RECHECK>>>
+                  (:filled-by mass-of-object 3629kg)  ;;<<<RECHECK>>>
+                  (:filled-by load-class 10)
+                  (:filled-by max-fording-depth 2.5m)
+                  (:filled-by fuel-capacity 94.6l)
+                  )
+  :annotations
+  ((content-created-by Jim-Donlon)
+   (content-created-by Hans-Chalupsky)
+   ))
+
+(defconcept HUMVEE
+  "See `HMMWV'."
+  :is HMMWV)
+
+(defconcept Hummer
+  "See `HMMWV'."
+  :is HMMWV)
+
+(defconcept High-Mobility-Purpose-Wheeled-Vehicle
+  "See `HMMWV'."
+  :is HMMWV)
+
+(defconcept M998
+  "Most common HMMWV cargo version, usually found configured with two 
+front seats and a cargo bed, but can also be configured as a four-seater with a 
+reduced cargo area."
+  :is-primitive HMMWV
+  :annotations
+  ((content-created-by Jim-Donlon)
+   (content-created-by Hans-Chalupsky)
+   ))
+
+(defconcept M966
+  "Hard-backed HMMWV weapons platform with turret. Normally armed with a TOW
+antitank missile system and M249 5.56 mm MG."
+  :is-primitive HMMWV
+  :annotations
+  ((content-created-by Jim-Donlon)))
+
+(defconcept HMMWV-Armament-Carrier
+  "Hard-backed HMMWV weapons platform with turret."
+  :is-primitive HMMWV
+  :annotations
+  ((content-created-by Jim-Donlon)))
+
+(defconcept M1025
+  "Armament carrier without winch. May be armed with  
+a MK-19 MG grenade launcher, M2 .50 cal MG, or an M60 7.62 mm MG."
+  :is-primitive HMMWV-Armament-Carrier
+  :annotations
+  ((content-created-by Jim-Donlon)))
+
+(defconcept M1026
+  "Armament carrier with winch. May be armed with  
+a MK-19 MG grenade launcher, M2 .50 cal MG, or an M60 7.62 mm MG."
+  :is-primitive HMMWV-Armament-Carrier
+  :annotations
+  ((content-created-by Jim-Donlon)))
+
+(defconcept M1037
+  "A heavier-suspension model of the HMMWV, designed 
+to hold the S250 reinforced shelter for command post and fire direction 
+center operations."
+  :is-primitive HMMWV
+  :annotations
+  ((content-created-by Jim-Donlon)))
+
+(defconcept S250
+  "Reinforced hard shelter mounted on the backs of M1037 HMMWVs."
+  :annotations
+  ((content-created-by Jim-Donlon)))
+
+(defconcept HMMWV-Ambulance
+  "HMMWV field ambulance variants."
+  :is-primitive (:and HMMWV Ambulance)
+  :annotations
+  ((content-created-by Jim-Donlon)
+   (content-modified-by Hans-Chalupsky)))
+
+(defconcept M996-Ambulance
+  "HMMWV two-litter mini-ambulance."
+  :is-primitive HMMWV-Ambulance
+  :defaults (:filled-by number-of-litters 2)
+  :annotations
+  ((content-created-by Jim-Donlon)))
+
+(defconcept M997-Ambulance
+  "HMMWV four-litter maxi-ambulance, climate controlled."
+  :is-primitive HMMWV-Ambulance
+  :defaults (:filled-by number-of-litters 4)
+  :annotations
+  ((content-created-by Jim-Donlon)))
+
+
+  ;;
+;;;;;; Medium trucks:
+  ;;
+
+(defconcept Military-2.5-Ton-Truck
+  "US classification for military trucks with a maximum off-road payload
+of 2.5 short tons (5000lbs, approx. 2300kg), and a maximum on-road payload
+of 5 short tons (10000lbs, approx. 4500kg).  Examples are the M35
+series, etc."
+  :is-primitive Military-Medium-Truck
+  :annotations
+  ((content-created-by Hans-Chalupsky)))
+
+(tell (:about M35-source-link-1
+              Non-Web-Source-Link
+              (qv-display-text
+               "Jane's Military Vehicles and Logistics 96-97, p.444")
+              (qv-url "http://www.janes.com/")))
+
+(tell (:about M35-image-link-1
+              Full-Image-Link
+              (qv-url "http://www.normi.nl/TRUCK1.jpg")))
+
+(tell (:about M35-image-link-2
+              Full-Image-Link
+              (qv-url "http://www.see-seco.com/jpeg/t-21.jpg")))
+
+(defconcept M35
+  "2.5 ton cargo truck series with M45 chassis.  Models come in a variety of
+different configurations and can be equipped with various kits."
+  :is-primitive Military-2.5-Ton-Truck
+  :defaults (:and (:filled-by crew-size 1)
+                  (:filled-by max-number-of-passengers 2)
+                  (:filled-by number-of-wheels 10)
+                  (:filled-by number-of-axles 3)
+                  (:filled-by width-of-object 2.4m)
+                  (:filled-by ground-clearance 0.28m)
+                  (:filled-by track-width 1.721m)
+                  (:filled-by max-speed-on-road 90km/h)
+                  (:filled-by max-range-on-road 480km)
+                  (:filled-by fuel-capacity 189l)
+                  (:filled-by max-gradient-on-road 60%)
+                  (:filled-by max-fording-depth 0.76m)
+                  (:filled-by min-turning-radius 11m)
+                  (:filled-by engine-power 140hp))
+  :annotations
+  ((content-created-by Hans-Chalupsky)
+   (see-also M35-source-link-1)
+   (html-image "/images/vehicles/M35A2-1.jpg")
+   (see-also M35-image-link-1)
+   (html-image "/images/vehicles/M35A2-2.jpg")
+   (see-also M35-image-link-2)
+   ))
+
+(defconcept M35A2
+  "Basic member of the M35 series (final production model)."
+  :is-primitive (:and M35
+                      Cargo-Truck)
+  :defaults (:and (:filled-by mass-of-object 5900kg)
+                  (:filled-by length-of-object 6.7m)
+                  (:filled-by height-of-object 2.9m))
+  :annotations
+  ((content-created-by Jim-Donlon)
+   (content-modified-by Hans-Chalupsky)
+   (see-also M35-source-link-1)
+   (html-image "/images/vehicles/M35A2-1.jpg")
+   (see-also M35-image-link-1)
+   (html-image "/images/vehicles/M35A2-2.jpg")
+   (see-also M35-image-link-2)
+   ))
+
+(defconcept M36A2
+  "The long wheelbase version of the M35 (final production model)."
+  :is-primitive (:and M35
+                      Cargo-Truck)
+  :defaults (:and (:filled-by length-of-object 8.4m)
+                  (:filled-by height-of-object 3.2m)
+                  (:filled-by min-turning-radius 13.7m))
+  :annotations
+  ((content-created-by Hans-Chalupsky)
+   (see-also M35-source-link-1)))
+
+(defconcept M49A2C
+  "Fuel tanker of the M35 series (final production model).  The
+tank holds 4542 liters of fuel for road travel or 2271 liters
+of fuel for cross-country travel. Fuel can be dispensed by gravity or
+pumped under pressure at a maximum rate of 303l/min and the pump can
+also be used to refill the tank. The tanker can be fitted with bows
+and a tarpaulin cover to make detection more difficult."
+  :is-primitive (:and M35
+                      Fuel-Tank-Truck)
+  :defaults (:and (:filled-by length-of-object 6.7m)
+                  (:filled-by height-of-object 2.6m))
+  :annotations
+  ((content-created-by Hans-Chalupsky)
+   (see-also M35-source-link-1)))
+
+(defconcept M50A3
+  "Water tanker of the M35 series (final production model). It has an
+aluminium tank which holds 3785 liters of water for road travel or
+1893 liters of water for cross-country travel. Water can be dispensed
+by gravity or pumped under pressure at a maximum rate of 303 l min and
+the pump can also be used to refill the tank. The tanker can be fitted
+with bows and a tarpaulin cover to make detection more difficult."
+  :is-primitive (:and M35
+                      Tank-Truck)
+  :defaults (:and (:filled-by length-of-object 6.7m)
+                  (:filled-by height-of-object 2.6m))
+  :annotations
+  ((content-created-by Hans-Chalupsky)
+   (see-also M35-source-link-1)))
+
+(defconcept M109A3-Van
+  "M35 series shop van with extensible sides."
+  :is-primitive (:and M35
+                      Panel-Van-Truck)
+  :defaults (:and (:filled-by length-of-object 6.8m)
+                  (:filled-by height-of-object 3.3m))
+  :annotations
+  ((content-created-by Hans-Chalupsky)
+   (see-also M35-source-link-1)))
+
+(defconcept M342A2
+  "Dump truck of the M35 series."
+  :is-primitive (:and M35
+                      Dump-Truck)
+  :defaults (:and (:filled-by length-of-object 6.6m)
+                  (:filled-by height-of-object 2.7m))
+  :annotations
+  ((content-created-by Hans-Chalupsky)
+   (see-also M35-source-link-1)))
+
+(defconcept M35A3-ESP
+  "Extended Service Program (ESP) version of the M35A2 cargo truck."
+  :is-primitive (:and M35
+                      Cargo-Truck)
+  :defaults (:and (:filled-by mass-of-object 6359kg)
+                  (:filled-by length-of-object 6.7m)
+                  (:filled-by height-of-object 3.073m)
+                  (:filled-by ground-clearance 0.35m)
+                  (:filled-by track-width 1.84m)
+                  (:filled-by max-speed-on-road 82km/h)
+                  (:filled-by max-range-on-road 644km)
+                  (:filled-by engine-power 170hp))
+  :annotations
+  ((content-created-by Hans-Chalupsky)
+   (see-also M35-source-link-1)))
+
+
+  ;;
+;;;;;; Heavy trucks:
+  ;;
+
+(defconcept Military-5-Ton-Truck
+  "US classification for military trucks with a maximum off-road payload
+of 5 short tons (10000lbs, approx. 4500kg), and a maximum on-road payload
+of 10 short tons (20000lbs, approx. 9000kg).  Examples are the M54, M923,
+M925 series, etc."
+  :is-primitive Military-Heavy-Truck
+  :annotations
+  ((content-created-by Jim-Donlon)
+   (content-modified-by Hans-Chalupsky)))
+
+#|
+M54 (6 x 6) 5 ton Cargo Truck Series:
+    - Truck, Cargo, 5 ton, M41 (6 x 6)
+    - Truck, Dump, 5 ton, M51 (6 x 6)
+    - Truck, Tractor, 5 ton, M52 (6 x 6)
+    - Truck, Cargo, 5 ton, M54 (6 x 6)
+    - Truck, Cargo, 5 ton, M55 (6 x 6)
+    - Truck, Wrecker, Medium, 5 ton, M62 (6 x 6)
+    - Truck, Cargo, Van, 5 ton, M64 (6 x 6)
+    - Truck, Tractor, Wrecker, 5 ton, M246 (6 x 6)
+    - Truck, Van, Expansible, 5 ton, M291 (6 x 6)
+    - Truck, Stake, Bridging, 5 ton, M328 (6 x 6)
+    - Truck, Wrecker, Medium, 5 ton, M543 (6 x 6)
+    - Truck, Bolster, 5 ton, M748 (6 x 6)
+    - Chassis, Truck, 5 ton, M139 (6 x 6)
+|#
+
+(tell (:about M54-source-link-1
+              Non-Web-Source-Link
+              (qv-display-text
+               "Jane's Military Vehicles and Logistics 96-97, p.447")
+              (qv-url "http://www.janes.com/")))
+
+(tell (:about M51-image-link-1
+              Full-Image-Link
+              (qv-url
+               "http://www.gsnet.com/1112/public_html/adimages/598.jpg")))
+
+(defconcept M51
+  "The M51 is part of the 5-ton M54 cargo truck series.  It has a rear tipping
+all-steel dump body and is based on the M61 chassis; it can also be used
+to carry cargo.  The engine is the same as in the M41."
+  :is-primitive (:and Military-5-Ton-Truck
+                      Dump-Truck)
+  :defaults (:and (:filled-by crew-size 1)
+                  (:filled-by max-number-of-passengers 2)
+                  (:filled-by number-of-wheels 10)
+                  (:filled-by number-of-axles 3)
+                  (:filled-by mass-of-object 9970kg)
+                  (:filled-by length-of-object 7.146m)
+                  (:filled-by width-of-object 2.463m)
+                  (:filled-by height-of-object 2.809m)
+                  (:filled-by ground-clearance 0.267m)
+                  (:filled-by track-width 1.828m)
+                  (:filled-by max-speed-on-road 84km/h)
+                  (:filled-by max-range-on-road 785km)
+                  (:filled-by fuel-capacity 416l)
+                  (:filled-by max-gradient-on-road 70%)
+                  (:filled-by max-fording-depth 0.762m)
+                  (:filled-by engine-power 196hp))
+  :annotations
+  ((content-created-by Hans-Chalupsky)
+   (see-also M54-source-link-1)
+   (html-image "/images/vehicles/M51-dump.jpg")
+   (see-also M51-image-link-1)))
+
+(defconcept M51A1
+  "M51 truck with a Mack Model ENDT-673 six-cylinder diesel engine."
+  :is-primitive M51
+  :defaults (:filled-by engine-power 211hp)
+  :annotations
+  ((content-created-by Hans-Chalupsky)
+   (see-also M54-source-link-1)
+   (html-image "/images/vehicles/M51-dump.jpg")
+   (see-also M51-image-link-1)))
+
+(defconcept M51A2
+  "M51 truck with an LD465 six-cylinder turbocharged multi-fuel engine."
+  :is-primitive M51
+  :defaults (:filled-by engine-power 230hp)
+  :annotations
+  ((content-created-by Hans-Chalupsky)
+   (see-also M54-source-link-1)
+   (html-image "/images/vehicles/M51-dump.jpg")
+   (see-also M51-image-link-1)))
+
+(defconcept M52
+  "The M52 is part of the M54 5-ton cargo truck series.  
+The chassis is designated the M61 and is powered by the same engine
+as the M41.  The M52 can tow a semi-trailer weighing up to 11340kg on
+roads or up to 6804kg across country.  The equivalent vehicle in the
+M809 series is the M818."
+  :is-primitive (:and Military-5-Ton-Truck
+                      Tractor)
+  :defaults (:and (:filled-by crew-size 1)
+                  (:filled-by max-number-of-passengers 2)
+                  (:filled-by number-of-wheels 10)
+                  (:filled-by number-of-axles 3)
+                  (:filled-by mass-of-object 8616kg)
+                  (:filled-by Length-of-object 6.933m)
+                  (:filled-by width-of-object 2.463m)
+                  (:filled-by height-of-object 2.638m)
+                  (:filled-by ground-clearance 0.267m)
+                  (:filled-by track-width 1.828m)
+                  (:filled-by max-speed-on-road 84km/h)
+                  (:filled-by max-range-on-road 483km)
+                  (:filled-by fuel-capacity 416l)
+                  (:filled-by max-gradient-on-road 77%)
+                  (:filled-by max-fording-depth 0.762m)
+                  (:filled-by engine-power 196hp))
+  :annotations
+  ((content-created-by Hans-Chalupsky)
+   (see-also M54-source-link-1)
+   (html-image "/images/vehicles/M52-tractor.jpg")))
+
+(defconcept M52A1
+  "M52 truck with a Mack Model ENDT-673 six-cylinder diesel engine."
+  :is-primitive M52
+  :defaults (:filled-by engine-power 211hp)
+  :annotations
+  ((content-created-by Hans-Chalupsky)
+   (see-also M54-source-link-1)
+   (html-image "/images/vehicles/M52-tractor.jpg")))
+
+(defconcept M52A2
+  "M52 truck with an LD465 six-cylinder turbocharged multi-fuel engine."
+  :is-primitive M52
+  :defaults (:filled-by engine-power 230hp)
+  :annotations
+  ((content-created-by Hans-Chalupsky)
+   (see-also M54-source-link-1)
+   (html-image "/images/vehicles/M52-tractor.jpg")))
+
+(defconcept M54
+  "This is the basic cargo model of the M54 cargo truck series.  Its chassis
+is designated the M40.  It has the same engine as the M41.  The equivalent in
+the M809 series is the M813."
+  :is-primitive (:and Military-5-Ton-Truck
+                      Cargo-Truck)
+  :defaults (:and (:filled-by crew-size 1)
+                  (:filled-by max-number-of-passengers 2)
+                  (:filled-by number-of-wheels 10)
+                  (:filled-by number-of-axles 3)
+                  (:filled-by mass-of-object 8732kg)
+                  (:filled-by Length-of-object 7.974m)
+                  (:filled-by width-of-object 2.463m)
+                  (:filled-by height-of-object 2.946m)
+                  (:filled-by ground-clearance 0.267m)
+                  (:filled-by track-width 1.828m)
+                  (:filled-by max-speed-on-road 84km/h)
+                  (:filled-by max-range-on-road 344km)
+                  (:filled-by fuel-capacity 295l)
+                  (:filled-by max-gradient-on-road 50%)
+                  (:filled-by max-fording-depth 0.762m)
+                  (:filled-by engine-power 196hp))
+  :annotations
+  ((content-created-by Hans-Chalupsky)
+   (see-also M54-source-link-1)))
+
+(defconcept M54A1
+  "M54 truck with a Mack Model ENDT-673 six-cylinder diesel engine."
+  :is-primitive M54
+  :defaults (:filled-by engine-power 211hp)
+  :annotations
+  ((content-created-by Hans-Chalupsky)
+   (see-also M54-source-link-1)))
+
+(defconcept M54A2
+  "M54 truck with an LD465 six-cylinder turbocharged multi-fuel engine."
+  :is-primitive M54
+  :defaults (:filled-by engine-power 230hp)
+  :annotations
+  ((content-created-by Hans-Chalupsky)
+   (see-also M54-source-link-1)))
+
+(defconcept M55
+  "This is the long wheelbase cargo model of the M54 and is based on the
+M63 chassis.  It has the same engine as the M41.  The equivalent vehicle in
+the M809 series is the M814."
+  :is-primitive (:and Military-5-Ton-Truck
+                      Cargo-Truck)
+  :defaults (:and (:filled-by crew-size 1)
+                  (:filled-by max-number-of-passengers 2)
+                  (:filled-by number-of-wheels 10)
+                  (:filled-by number-of-axles 3)
+                  (:filled-by mass-of-object 10915kg)
+                  (:filled-by length-of-object 9.797m)
+                  (:filled-by width-of-object 2.463m)
+                  (:filled-by height-of-object 2.946m)
+                  (:filled-by ground-clearance 0.267m)
+                  (:filled-by track-width 1.828m)
+                  (:filled-by max-speed-on-road 84km/h)
+                  (:filled-by max-range-on-road 344km)
+                  (:filled-by fuel-capacity 295l)
+                  (:filled-by max-gradient-on-road 65%)
+                  (:filled-by max-fording-depth 0.762m)
+                  (:filled-by engine-power 196hp))
+  :annotations
+  ((content-created-by Hans-Chalupsky)
+   (see-also M54-source-link-1)))
+
+(defconcept M55A1
+  "M55 truck with a Mack Model ENDT-673 six-cylinder diesel engine."
+  :is-primitive M55
+  :defaults (:filled-by engine-power 211hp)
+  :annotations
+  ((content-created-by Hans-Chalupsky)
+   (see-also M54-source-link-1)))
+
+(defconcept M55A2
+  "M55 truck with an LD465 six-cylinder turbocharged multi-fuel engine."
+  :is-primitive M55
+  :defaults (:filled-by engine-power 230hp)
+  :annotations
+  ((content-created-by Hans-Chalupsky)
+   (see-also M54-source-link-1)))
+
+(defconcept Military-8-Ton-Truck
+  "US classification for military trucks with a maximum off-road payload
+of 8 short tons (16000lbs, approx. 7500kg), and a maximum on-road payload
+of 16 short tons (32000lbs, approx. 14500kg).  Examples are the M520
+series, etc."
+  :is-primitive Military-Heavy-Truck
+  :defaults (:and (:filled-by width-of-object 2.6m)
+                  (:filled-by length-of-object 9.5m)
+                  (:filled-by height-of-object 2.9m)
+                  (:filled-by mass-of-object 14515kg))
+  :annotations
+  ((content-created-by Jim-Donlon)))
+
+(tell (:about HEMTT-source-link-1
+              Web-Source-Link
+              (qv-url "http://www.tacom.army.mil/dsa/pm_htv/hemtt/hemtt_programs.html")))
+
+(defconcept Heavy-Expanded-Mobility-Tactical-Truck
+  "The Heavy Expanded Mobility Tactical Truck (HEMTT) provides transport
+capabilities for re-supply of combat vehicles and weapons systems. There are
+five basic configurations of the HEMTT series trucks: M977 cargo truck with
+Material Handling Crane (MHC), M978 2500 gallon fuel tanker, M984 wrecker,
+M983 tractor and M985 cargo truck with MHC. A self-recovery winch is also
+available on certain models. This vehicle family is rapidly deployable and
+is designed to operate in any climatic condition where military operations
+are expected to occur."
+  :is-primitive Military-Heavy-Truck
+  :defaults (:and (:filled-by width-of-object 2.438m)
+                  (:filled-by height-of-object 2.8445m)
+                  (:filled-by ground-clearance 0.610m)
+                  (:filled-by max-speed-on-road 92km/h)
+                  (:filled-by max-range-on-road 480km)
+                  (:filled-by max-gradient-on-road 60%)
+                  (:filled-by max-tilt 30%)
+                  (:filled-by max-fording-depth 1.22m)
+                  (:filled-by crew-size 2)
+                  (:filled-by engine-power 450hp)
+                  (:filled-by number-of-axles 4)
+                  (:filled-by number-of-wheels 8))
+  :annotations
+  ((see-also HEMTT-source-link-1)
+   (html-image "/images/vehicles/M977-HEMTT-Cargo.gif")
+   (content-created-by Hans-Chalupsky)
+   ))
+
+(defconcept HEMTT
+  "See 'Heavy-Expanded-Mobility-Tactical-Truck'."
+    :is Heavy-Expanded-Mobility-Tactical-Truck)
+
+(defconcept M977
+  "HEMTT series cargo truck with Material Handling Crane (MHC).
+Can be optionally equipped with a self-recovery winch (400kg)."
+  :is-primitive (:and Heavy-Expanded-Mobility-Tactical-Truck
+                      Cargo-Truck)
+  :defaults (:and (:filled-by length-of-object 10.185m)
+                  (:filled-by mass-of-object 17200kg) ;; winch adds 400kg
+                  (:filled-by min-turning-radius 2.54m))
+  :annotations
+  ((see-also HEMTT-source-link-1)
+   (html-image "/images/vehicles/M977-HEMTT-Cargo.gif")
+   (content-created-by Hans-Chalupsky)
+   ))
+
+(defconcept M978
+  "HEMTT series 2500 gallon fuel tanker.  Can be optionally equipped
+with a self-recovery winch (400kg)."
+  :is-primitive (:and Heavy-Expanded-Mobility-Tactical-Truck
+                      Fuel-Tank-Truck)
+  :defaults (:and (:filled-by length-of-object 10.185m)
+                  (:filled-by mass-of-object 16900kg) ;; winch adds 400kg
+                  (:filled-by min-turning-radius 2.54m))
+  :annotations
+  ((see-also HEMTT-source-link-1)
+   (html-image "/images/vehicles/M978-HEMTT-Fueler.jpg")
+   (content-created-by Hans-Chalupsky)
+   ))
+
+(defconcept M983
+  "HEMTT series tractor.  Can be optionally equipped with a crane (450kg)."
+  :is-primitive (:and Heavy-Expanded-Mobility-Tactical-Truck
+                      Tractor)
+  :defaults (:and (:filled-by length-of-object 8.915m)
+                  (:filled-by mass-of-object 14600kg) ;; crane adds 450kg
+                  (:filled-by min-turning-radius 2.31m))
+  :annotations
+  ((see-also HEMTT-source-link-1)
+   (html-image "/images/vehicles/M983-HEMTT-Tractor.jpg")
+   (content-created-by Hans-Chalupsky)
+   ))
+
+(defconcept M984
+  "HEMTT series wrecker."
+  ;; I think this one has a crane and winch by default.
+  :is-primitive (:and Heavy-Expanded-Mobility-Tactical-Truck
+                      Wrecker)
+  :defaults (:and (:filled-by length-of-object 9.957m)
+                  (:filled-by mass-of-object 23100kg)
+                  (:filled-by min-turning-radius 2.41m))
+  :annotations
+  ((see-also HEMTT-source-link-1)
+   (html-image "/images/vehicles/M984-HEMTT-Wrecker.jpg")
+   (content-created-by Hans-Chalupsky)
+   ))
+
+(defconcept M985
+  "HEMTT series cargo truck with Material Handling Crane (MHC).
+Can be optionally equipped with a self-recovery winch (400kg)."
+  :is-primitive (:and Heavy-Expanded-Mobility-Tactical-Truck
+                      Cargo-Truck)
+  :defaults (:and (:filled-by length-of-object 10.185m)
+                  (:filled-by mass-of-object 17550kg) ;; winch adds 400kg
+                  (:filled-by min-turning-radius 2.54m))
+  :annotations
+  ((see-also HEMTT-source-link-1)
+   (html-image "/images/vehicles/M985-HEMTT-Cargo.gif")
+   (content-created-by Hans-Chalupsky)
+   ))
+
+;; Jane's 96/97 doesn't have an entry for the old ZIL-151.
+
+(tell (:about ZIL-157-source-link-1
+              Non-Web-Source-Link
+              (qv-display-text
+               "Jane's Military Vehicles and Logistics 96-97, p.321")
+              (qv-url "http://www.janes.com/")))
+
+(defconcept ZIL-157
+  "Russian (6 x 6) truck with a maximum off-road payload of 2500kg and a
+maximum on-road payload of 4500kg.  It has single rear wheels instead
+of the dual rear wheels of the ZIL-151 which it replaced."
+  :is-primitive (:and Military-Heavy-Truck
+                      Cargo-Truck)
+  :defaults (:and (:filled-by crew-size 1)
+                  (:filled-by number-of-wheels 6)
+                  (:filled-by number-of-axles 3)
+                  (:filled-by mass-of-object 5800kg)
+                  (:filled-by length-of-object 6.922m)
+                  (:filled-by width-of-object 2.315m)
+                  (:filled-by height-of-object 2.915m)
+                  (:filled-by ground-clearance 0.31m)
+                  (:filled-by track-width 1.75m)
+                  (:filled-by max-speed-on-road 65km/h)
+                  (:filled-by max-range-on-road 460km)
+                  (:filled-by fuel-capacity 150l)
+                  (:filled-by max-gradient-on-road 53%)
+                  (:filled-by max-fording-depth 0.85m)
+                  (:filled-by engine-power 109hp)
+                  (:filled-by min-turning-radius 11.2m))
+  :annotations
+  ((see-also ZIL-157-source-link-1)
+   ;(html-image "/images/vehicles/")
+   (content-created-by Hans-Chalupsky)
+   ))
+
+;;; Decontamination trucks:
+
+(tell (:about ARS-12-source-link-1
+              Non-Web-Source-Link
+              (qv-display-text
+               "Jane's NBC Protection Equipment 96-97, p.104")
+              (qv-url "http://www.janes.com/")))
+
+#|
+(defconcept ARS-12D
+  "Russian decontamination truck based on the ZIL-151 truck chassis."
+  :is-primitive (:and ZIL-151
+                      Decontamination-Vehicle)
+  :annotations
+  ((see-also ARS-12-source-link-1)
+   ;(html-image "/images/vehicles/")
+   (content-created-by Hans-Chalupsky)
+   ))
+|#
+
+(defconcept ARS-12U
+  "Russian decontamination truck based on the ZIL-157 truck chassis."
+  :is-primitive (:and ZIL-157
+                      Decontamination-Vehicle)
+  :annotations
+  ((see-also ARS-12-source-link-1)
+   ;(html-image "/images/vehicles/")
+   (content-created-by Hans-Chalupsky)
+   ))
+
+#|
+;; Other ARS-series decontamination trucks:
+ARS-14 (based on ZIL-131 3500kg truck)
+ARS-15 (based on Ural-375 4000kg truck)
+|#
+
+
+  ;;
+;;;;;; HETS
+  ;;
+
+(defconcept Heavy-Equipment-Transporter-System
+  "A heavy tractor/trailer combination used to transport tanks and other
+heavy tracked and wheeled vehicles to and from the battlefield."
+  :is-primitive Military-Heavy-Truck
+  :annotations
+  ((content-created-by Hans-Chalupsky)))
+
+(defconcept HETS :is Heavy-Equipment-Transporter-System)
+(defconcept HET :is Heavy-Equipment-Transporter-System)
+
+(defconcept HET-Tractor
+  "Tractor of a Heavy Equipment Transporter System (HETS)."
+  :is-primitive (:and Tractor
+                      Military-Heavy-Truck)
+  :annotations
+  ((content-created-by Hans-Chalupsky)))
+
+;; M870, M1000 and M747:
+
+(defconcept HET-Trailer
+  "Semi-trailer of a Heavy Equipment Transporter System (HETS)."
+  :is-primitive (:and Semi-Trailer
+                      Land-Platform--Towed)
+  :annotations
+  ((content-created-by Hans-Chalupsky)))
+
+(tell (:about M1070-M1000-source-link-1
+              Web-Source-Link
+              (qv-url "http://www.tacom.army.mil/dsa/pm_htv/hets/het_programs.html")))
+
+(tell (:about M1070-image-link-1
+              Full-Image-Link
+              (qv-url "http://www.tacom.army.mil/dsa/pm_htv/hets/hets.jpg")))
+
+(defconcept M1070
+  "Tractor of the M1070-M1000 Heavy Equipment Transporter System (HETS).
+Used to transport tanks and other heavy tracked and wheeled vehicles to
+and from  the battlefield.  Developed to accommodate the increased weight
+of the M1 Abrams Family of Main Battle Tanks.  Unlike previous HETS, the
+M1070 is designed to carry both the tank and its crew."
+  :is-primitive HET-Tractor
+  :defaults (:and (:filled-by crew-size 1)
+                  (:filled-by max-number-of-passengers 5)
+                  (:filled-by number-of-wheels 8)
+                  (:filled-by number-of-axles 4)
+                  (:filled-by mass-of-object 18600kg)
+                  (:filled-by length-of-object 9.1m)
+                  (:filled-by width-of-object 2.6m)
+                  (:filled-by height-of-object 3.6m)
+                  (:filled-by track-width 2.083m)
+                  (:filled-by max-speed-on-road 72.5km/h)
+                  (:filled-by max-speed-off-road 52km/h)
+                  (:filled-by max-range-on-road 724km)
+                  (:filled-by fuel-capacity 946l)
+                  ;(:filled-by max-gradient-on-road 15%) ;; at full load
+                  (:filled-by max-fording-depth 0.71m)
+                  (:filled-by engine-power 500hp)
+                  (:filled-by min-turning-radius 11.1m))
+  :annotations
+  ((see-also  M1070-M1000-source-link-1)
+   (html-image "/images/vehicles/M1070-Tractor-1.jpg")
+   (see-also M1070-image-link-1)
+   (content-created-by Hans-Chalupsky)
+   ))
+
+(tell (:about M1000-image-link-1
+              Full-Image-Link
+              (qv-url "http://www.tacom.army.mil/dsa/pm_htv/hets/m1000.jpg")))
+
+(defconcept M1000
+  "Semi-trailer of the M1070-M1000 Heavy Equipment Transporter System (HETS).
+Used to transport tanks and other heavy tracked and wheeled vehicles to
+and from  the battlefield.  Developed to accommodate the increased weight
+of the M1 Abrams Family of Main Battle Tanks."
+  :is-primitive HET-Trailer
+  :defaults (:and (:filled-by number-of-wheels 20)
+                  (:filled-by number-of-axles 5)
+                  (:filled-by length-of-object 15.8m)
+                  (:filled-by width-of-object 3.68m)
+                  (:filled-by height-of-object 3.66m)
+                  (:filled-by ground-clearance 0.4m)
+                  (:filled-by mass-of-object 22700kg)
+                  (:filled-by vehicle-cargo-capacity--mass 63500kg))
+  :annotations
+  ((see-also  M1070-M1000-source-link-1)
+   (html-image "/images/vehicles/M1000-Semi-Trailer.jpg")
+   (see-also M1000-image-link-1)
+   (content-created-by Hans-Chalupsky)
+   ))
+
+(tell (:about M1070-M1000-image-link-1
+              Full-Image-Link
+              (qv-url "http://www.army-technology.com/contractors/transport/sei/images/sei1.jpg")))
+
+(defconcept M1070-M1000
+  "Heavy Equipment Transporter System (HETS) based on the M1070 tractor and the
+M1000 semi-trailer.  Successor to the M911-M747 HETS.  Used to transport tanks
+and other heavy tracked and wheeled vehicles to and from  the battlefield.
+Developed to accommodate the increased weight of the M1 Abrams Family of
+Main Battle Tanks.  Unlike previous HETS, the M1070 is designed to carry both
+the tank and its crew."
+  :is-primitive Heavy-Equipment-Transporter-System
+  :defaults (:and (:filled-by crew-size 1)
+                  (:filled-by max-number-of-passengers 5)
+                  (:filled-by number-of-wheels 28)
+                  (:filled-by number-of-axles 9)
+                  (:filled-by mass-of-object 41300kg)
+                  (:filled-by length-of-object 25m)
+                  (:filled-by width-of-object 3.68m)
+                  (:filled-by height-of-object 3.66m)
+                  (:filled-by track-width 2.083m)
+                  (:filled-by ground-clearance 0.4m)
+                  (:filled-by max-speed-on-road 72.5km/h)
+                  (:filled-by max-speed-off-road 52km/h)
+                  (:filled-by max-range-on-road 724km)
+                  (:filled-by fuel-capacity 946l)
+                  (:filled-by max-gradient-on-road 15%)
+                  (:filled-by max-fording-depth 0.71m)
+                  (:filled-by engine-power 500hp)
+                  (:filled-by min-turning-radius 11.1m)
+                  (:filled-by vehicle-cargo-capacity--mass 63500kg)
+                  )
+  :annotations
+  ((see-also  M1070-M1000-source-link-1)
+   (html-image "/images/vehicles/M1070-M1000-HETS.jpg")
+   (see-also M1070-M1000-image-link-1)
+   (content-created-by Hans-Chalupsky)
+   ))
+
+(tell (:about M911-source-link-1
+              Non-Web-Source-Link
+              (qv-display-text
+               "Jane's Military Vehicles and Logistics 96-97, p.478")
+              (qv-url "http://www.janes.com/")))
+
+(tell (:about M911-M747-image-link-1
+              Full-Image-Link
+              (qv-url "http://www.tacom.army.mil/dsa/pm_htv/hets/het.jpg")))
+
+(defconcept M911
+  "Tractor (6x6) of the M911-M747 Heavy Equipment Transporter System (HETS)."
+  :is-primitive HET-Tractor
+  :defaults (:and (:filled-by crew-size 1)
+                  (:filled-by max-number-of-passengers 2)
+                  (:filled-by number-of-wheels 6)
+                  (:filled-by number-of-axles 3)
+                  (:filled-by mass-of-object 18144kg)
+                  (:filled-by length-of-object 9.37m)
+                  (:filled-by width-of-object 2.9m)
+                  (:filled-by height-of-object 3.4m)
+                  (:filled-by track-width 2.083m)
+                  (:filled-by max-speed-on-road 72km/h)
+                  (:filled-by max-range-on-road 1344km)
+                  (:filled-by fuel-capacity 757l)
+                  ;(:filled-by max-gradient-on-road 20%) ;; at full load
+                  (:filled-by max-fording-depth 0.71m)
+                  (:filled-by engine-power 450hp)
+                  (:filled-by min-turning-radius 13.7m))
+  :annotations
+  ((see-also  M911-source-link-1)
+   (html-image "/images/vehicles/M911-M747-HETS.jpg")
+   (see-also M911-M747-image-link-1)
+   (content-created-by Hans-Chalupsky)
+   ))
+
+(tell (:about SLT-50-2-source-link-1
+              Non-Web-Source-Link
+              (qv-display-text
+               "Jane's Military Vehicles and Logistics 96-97, p.526")
+              (qv-url "http://www.janes.com/")))
+
+(defconcept SLT-50-2
+  "German Heavy Equipment Transporter semi-trailer."
+  :is-primitive HET-Trailer
+  :defaults (:and (:filled-by number-of-wheels 8)
+                  (:filled-by number-of-axles 4)
+                  (:filled-by length-of-object 13.1m)
+                  (:filled-by width-of-object 3.15m)
+                  (:filled-by height-of-object 3.15m)
+                  (:filled-by track-width 2.65m)
+                  (:filled-by min-turning-radius 9m)
+                  (:filled-by ground-clearance 0.31m)
+                  (:filled-by mass-of-object 16600kg)
+                  (:filled-by vehicle-cargo-capacity--mass 52000kg))
+  :annotations
+  ((see-also  SLT-50-2-source-link-1)
+   ;(html-image "/images/vehicles/")
+   (content-created-by Hans-Chalupsky)
+   ))
+
+(defconcept M747
+  "Semi-trailer of the M911-M747 Heavy Equipment Transporter System (HETS).
+Now replaced by the M1070-M1000 HETS.  Caution: No specific data for the
+M747 was anywhere to be found, but Jane's said that its design was based
+on the German SLT 50-2."
+  :is-primitive (:and Het-Trailer
+                      SLT-50-2)
+  :annotations
+  ((content-created-by Hans-Chalupsky)))
+
+(defconcept M911-M747
+  "Heavy Equipment Transporter System (HETS) based on the M911 tractor and the
+M747 semi-trailer.  Used to transport tanks and other heavy tracked and
+wheeled vehicles to and from the battlefield.  Now replaced by the M1070-M1000
+HETS."
+  :is-primitive Heavy-Equipment-Transporter-System
+  :defaults (:and (:filled-by crew-size 1)
+                  (:filled-by max-number-of-passengers 2)
+                  (:filled-by number-of-wheels 14)
+                  (:filled-by number-of-axles 7)
+                  (:filled-by mass-of-object 35000kg)
+                  (:filled-by length-of-object 22m)
+                  (:filled-by width-of-object 3.15m)
+                  (:filled-by height-of-object 3.4m)
+                  (:filled-by track-width 2.6m)
+                  (:filled-by max-speed-on-road 72km/h)
+                  (:filled-by max-range-on-road 990km)
+                  (:filled-by fuel-capacity 757l)
+                  (:filled-by max-gradient-on-road 20%)
+                  (:filled-by max-fording-depth 0.71m)
+                  (:filled-by engine-power 450hp)
+                  (:filled-by min-turning-radius 13.7m)
+                  (:filled-by vehicle-cargo-capacity--mass 52000kg))
+  :annotations
+  ((see-also  M911-source-link-1)
+   (html-image "/images/vehicles/M911-M747-HETS.jpg")
+   (see-also M911-M747-image-link-1)
+   (content-created-by Hans-Chalupsky)
+   ))
+
+
+  ;;
+;;;;;; ARV's
+  ;;
+
+(defconcept M578
+  :is-primitive Armored-Recovery-Vehicle
+  :defaults (:and (:filled-by width-of-object 3m)
+                  (:filled-by length-of-object 6.5m)
+                  (:filled-by height-of-object 3.3m)
+                  (:filled-by mass-of-object 22680kg))
+  :annotations
+  ((content-created-by Jim-Donlon)
+   (content-modified-by Hans-Chalupsky)
+   ))
+
+(tell (:about M88-source-link-1
+              Web-Source-Link
+              (qv-url "http://www.alphatech.com/protected/hpkb/Ontologies/Periscope/w0003675.htm")))
+
+(tell (:about M88-image-link-1
+              Full-Image-Link
+              (qv-url "http://www.militarycity.com/libraries/files/m88rv.gif")))
+
+(defconcept M88
+  "First HERCULES Heavy Recovery Vehicle introduced in 1960.  No specific
+data available; use M88A1 instead."
+  :is-primitive (:and Armored-Recovery-Vehicle M60)
+  :annotations
+  ((see-also M88-source-link-1)
+   (html-image "/images/vehicles/M88-Wrecker.jpg")
+   (see-also M88-image-link-1)
+   (html-image "/images/vehicles/M88-1960.jpg"))
+  :annotations
+  ((content-created-by Jim-Donlon)
+   (content-modified-by Hans-Chalupsky)
+   ))
+
+(defconcept M88A1
+  "The M88 is the principal US medium Armored Recovery Vehicle (ARV) and
+is based on the M60 Main Battle Tank (MBT).  It is capable of
+recovering and evacuating all US armored vehicles except for some
+models of the M60 and the M1 Abrams MBT.  2 M88A1s are needed to tow an
+M1 tank.  In 1994 production began on the M88A2 Hercules which is
+capable of recovering the M1A2."
+  :is-primitive M88
+  :defaults (:and (:filled-by width-of-object 3.43m)
+                  (:filled-by length-of-object 8.27m)
+                  (:filled-by height-of-object 3.12m)
+                  (:filled-by mass-of-object 50803kg)
+                  (:filled-by max-speed-on-road 43km/h)
+                  (:filled-by max-range-on-road 450km)
+                  (:filled-by fuel-capacity 1514l)
+                  (:filled-by max-gradient-on-road 60%)
+                  (:filled-by ground-clearance 0.43m)
+                  (:filled-by track-width 0.711m)
+                  (:filled-by ground-track-length 4.61m)
+                  (:filled-by engine-power 750hp)
+                  (:filled-by max-step 1.07m)
+                  (:filled-by max-gap-to-traverse 2.62m)
+                  (:filled-by max-fording-depth 1.42m)
+                  (:filled-by crew-size 4))
+  :annotations
+  ((see-also M88-source-link-1)
+   (html-image "/images/vehicles/M88A1-1970.jpg")
+   (see-also M88-image-link-1)
+   (content-created-by Hans-Chalupsky)
+   ))
+
+
+  ;;
+;;;;;; APC's
+  ;;
+
+;; The M113 was the primary means of transportation for infantry
+;; personnel in armored and mechanized infantry units.  Although
+;; nearly all Army units now utilize the M2 BFV, the M113 serves as a
+;; prime-mover for armored engineer units, and a host of combat
+;; support and combat service support functions. In addition, several
+;; variants have been developed using the same basic chassis,
+;; including: the M981 Fire-Support Team Vehicle (FIST-V); M548A1
+;; cargo carrier; M106 mortar carrier (picture available); and M577
+;; command vehicle (picture available).
+
+;; Full specs from Jane's for M106A2, M113A1, M113A2, M113A3, M125A2, M577A2:
+#|
+Model                M106A2              M113A1              M113A2
+Crew                 6                   2 + 11              2 + 11
+Combat weight        12,094 kg           11,070 kg           11,253 kg
+Unloaded weight      11,270 kg           9,630 kg            9,957 kg
+Power-to-weight
+  ratio              17.63 hp t          19.27 hp/t          18.51 hp/t
+Ground pressure      0.59 kg cm{2}       0.54 kg/cm{2}       0.55 kg/cm{2}
+Length               4.926 m             4.863 m             4.863 m
+Width                3.117 m             2.686 m             2.686 m
+  (over tracks)      2.54 m              2.54 m              2.54 m
+Height
+  (overall)          2.52 m              2.52 m              2.52 m
+  (to hull top)      1.85 m              1.85 m              1.85 m
+Ground clearance     0.43 m              0.41 m              0.43 m
+Track                2.159 m             2.159 m             2.159 m
+Track width          381 mm              381 mm              381 mm
+Length of track
+  on ground          2.667 m             2.667 m             2.667 m
+Max speed
+  (road)             58 km h             60.7 km/h           60.7 km/h
+  (water)            5.8 km h            5.8 km/h            5.8 km/h
+Fuel capacity        360 l               360 l               360 l
+Max cruising range   480 km              480 km              480 km
+Fording              amphibious          amphibious          amphibious
+Vertical obstacle    0.61 m              0.61 m              0.61 m
+Gradient             60%                 60%                 60%
+Trench               1.68 m              1.68 m              1.68 m
+Engine               Detroit             Detroit             Detroit
+                     Diesel model        Diesel model        Diesel model
+                     6V-53               6V-53               6V-53
+                     6-cylinder          6-cylinder          6-cylinder
+                     water-cooled        water-cooled        water-cooled
+                     diesel developing   diesel developing   diesel developing
+                     212 bhp at          212 bhp at          212 bhp at
+                     2,800 rpm           2,800 rpm           2,800 rpm
+Transmission         GMC, Allison        GMC, Allison        GMC, Allison
+                     TX-100-1 with       TX-100-1 with       TX-100-1 with
+                     3 forward and       3 forward and       3 forward and
+                     1 reverse ranges    1 reverse ranges    1 reverse ranges
+Suspension           torsion bar         torsion bar         torsion bar
+Electrical system    24 V                24 V                24 V
+Batteries            2 x 12 V 6TL        2 x 12 V 6TL        2 x 12 V 6TL
+Armament             1 x 12.7 mm M2 MG   1 x 12.7 mm M2 MG   1 x 12.7 mm M2 MG
+Ammunition           1,000               2,000               2,000
+Armour               12-44 mm            12-44 mm            12-44 mm
+
+
+Model                M113A3              M125A2              M577A2
+Crew                 2 + 11              6                   5
+Combat weight        12,150 kg           11,365 kg           11,616 kg
+Unloaded weight      10,746 kg           10,541 kg           10,864 kg
+Power-to-weight
+  ratio              22.29 hp t          18.76 hp/t          18.36 hp/t
+Ground pressure      0.59 kg cm{2}       0.56 kg/cm{2}       0.57 kg/cm{2}
+Length               5.30 m              4.863 m             4.863 m
+Width                2.686 m             2.686 m             2.686 m
+  (over tracks)      2.54 m              2.54 m              2.54 m
+Height
+  (overall)          2.52 m              2.52 m              2.70 m
+  (to hull top)      1.85 m              1.85 m              2.489 m
+Ground clearance     0.43 m              0.43 m              0.43 m
+Track                2.159 m             2.159 m             2.159 m
+Track width          381 mm              381 mm              381 mm
+Length of track
+  on ground          2.667 m             2.667 m             2.667 m
+Max speed
+  (road)             65.7 km h           60.4 km/h           58.4 km/h
+  (water)            5.8 km h            5.8 km/h            5.8 km/h
+Fuel capacity        360 l               360 l               454 l
+Max cruising range   480 km              480 km              480 km
+Fording              amphibious          amphibious          amphibious
+Vertical obstacle    0.61 m              0.61 m              0.61 m
+Gradient             60%                 60%                 60%
+Trench               1.68 m              1.68 m              1.68 m
+Engine               Detroit             Detroit             Detroit
+                     Diesel model        Diesel model        Diesel model
+                     6V-53T              6V-53               6V-53
+                     6-cylinder          6-cylinder          6-cylinder
+                     water-cooled        water-cooled        water-cooled
+                     diesel developing   diesel developing   diesel developing
+                     275 bhp at          212 bhp at          212 bhp at
+                     2,800 rpm           2,800 rpm           2,800 rpm
+Transmission         GMC, Allison        GMC, Allison        GMC, Allison
+                     X-200-4 with        TX-100-1 with       TX-100-1 with
+                     4 forward and       3 forward and       3 forward and
+                     1 reverse ranges    1 reverse ranges    1 reverse ranges
+Suspension           torsion bar         torsion bar         torsion bar
+Electrical system    24 V                24 V                24 V
+Batteries            4 x 12 V 6TL        2 x 12 V 6TL        2 x 12 V 6TL
+Armament             1 x 12.7 mm M2 MG   1 x 12.7 mm M2 MG   1 x 7.62 mm MG
+Ammunition           2,000               1,000               1,000
+Armour               12-44 mm            12-44 mm            12-44 mm
+|#
+
+(tell (:about M113-image-link-1
+              Full-Image-Link
+              (qv-url "http://www.tempest.com.au/~spooner/images/m113.jpg")))
+
+;;; NOTE: M113's do not have `Tank--Vehicle' as one of their supers.
+
+(defconcept M113
+  "A common (and typical) APC, largely replaced in the US army
+by the Bradley IFV.  Found in the national guard and in many foreign
+countries.  Not primarily intended primarily as a fighting platform,
+but equipped with a weapon mount, usually for an M2 MG. Carries an
+infantry squad."
+  :is-primitive (:and Armored-Personnel-Carrier
+                      Military-Tracked-Vehicle
+                      Military-Fording-Vehicle
+                      Military-Amphibious-Vehicle)
+  :defaults (:and (:filled-by max-speed-on-road 48km/h)  ;;<<<RECHECK>>>
+                  (:filled-by fuel-capacity 360l)
+                  (:filled-by fuel-consumption-idle 3.8l/h)
+                  (:filled-by fuel-consumption-on-dirt-road 23.5l/h)
+                  (:filled-by fuel-consumption-off-road 33.7l/h)
+                  (:filled-by max-gradient-on-road 60%)
+                  (:filled-by max-gradient-off-road 45%)
+                  (:filled-by width-of-object 2.69m)
+                  (:filled-by override-diameter 0.1m)
+                  (:filled-by VCI-1 17)
+                  (:filled-by VCI-50 40)
+                  (:filled-by min-turning-radius 4.8m)
+                  (:filled-by length-of-object 4.8m)
+                  (:filled-by height-of-object 2.5m)
+                  (:filled-by mass-of-object 11793kg)
+                  (:filled-by load-class 12)
+                  (:filled-by max-straddle 1.78m)
+                  (:filled-by max-step 0.64m)
+                  (:filled-by ground-clearance 0.29m)
+                  (:filled-by max-gap-to-traverse 1.6m)
+                  (:filled-by max-speed-on-water 5.8km/h)
+                  (:filled-by max-number-of-passengers 13)
+                  (:filled-by engine-power 212hp)
+                  (:filled-by track-width 0.381m)
+                  (:filled-by ground-track-length 2.667m)
+                  (:filled-by max-range-on-road 480km))
+  :annotations
+  (;; Source-1: http://www.uniteddefense.com/m113/
+   ;; Source-2: http://www.uniteddefense.com/m113/history/historical.html
+   (html-image "/images/vehicles/M113A1-LRV.jpg")
+   (see-also M113-image-link-1)
+   (content-created-by Jim-Donlon)
+   (content-created-by Hans-Chalupsky)))
+
+(defconcept M113A1
+  :is-primitive M113
+  :annotations
+  ((content-created-by Hans-Chalupsky)))
+
+(tell (:about M113A2-image-link-1
+              Full-Image-Link
+              (qv-url "http://www.militarycity.com/libraries/files/m113f61.jpg")))
+
+(defconcept M113A2
+    :is-primitive M113
+    :defaults (:and (:filled-by mass-of-object 11253kg)
+                    (:filled-by length-of-object 4.863m)
+                    (:filled-by ground-clearance 0.41m)
+                    (:filled-by max-speed-on-road 60.7km/h)
+                    (:filled-by engine-power 212hp))
+    :annotations
+    (;; Source-1: http://www.militarycity.com/cgi-update/bigrapup.pl?level=1&lib=militarycity&sub=M113A2_in_Germany&category=imagesm.txt
+     (html-image "/images/vehicles/M113A2.jpg")
+     (see-also M113A2-image-link-1)
+     (content-created-by Hans-Chalupsky)
+     ))
+
+(tell (:about M113A3-source-link-1
+              Web-Source-Link
+              (qv-url "http://www.tacom.army.mil/dsa/pmtaws/m113_m60/apcch.htm")))
+
+(tell (:about M113A3-image-link-1
+              Full-Image-Link
+              (qv-url "http://www.fortunecity.com/olympia/carson/30/m113_a3.jpg")))
+
+(defconcept M113A3
+    :is-primitive M113
+    :defaults
+    (:and (:filled-by mass-of-object 12329kg) ;; from M113A3-source-link-1
+          (:filled-by length-of-object 5.3m)
+          (:filled-by ground-clearance 0.43m)
+          (:filled-by max-speed-on-road 66km/h)
+          (:filled-by engine-power 275hp))
+    :annotations
+    ((see-also M113A3-source-link-1)
+     (html-image "/images/vehicles/M113A3.jpg")
+     (see-also M113A3-image-link-1)
+     (html-image "/images/vehicles/M113A3-turret.jpg")
+     (content-created-by Hans-Chalupsky)
+     ))
+
+(defconcept M577
+  "Mobile command post variant of the M113 APC."
+  :is-primitive (:and M113 Command-Vehicle)
+  :defaults (:and (:filled-by length-of-object 5.8m)
+                  (:filled-by height-of-object 2.7m)
+                  (:filled-by mass-of-object 14515kg)
+                  (:filled-by width-of-object 2.7m))
+  :annotations
+  ((html-image "/images/vehicles/M577A3.jpg"))
+  :annotations
+  ((content-created-by Jim-Donlon)
+   (content-modified-by Hans-Chalupsky)))
+
+(defconcept M577A1
+  "FIX: Currently (and incorrectly) treated as a synonum for the `M577'."
+  :is M577)
+
+(defconcept M125
+  "Mortar carrier variant of the M113 APC."
+  :is-primitive M113
+  :defaults (:and (:filled-by length-of-object 4.8m)
+                  (:filled-by height-of-object 2.2m)
+                  (:filled-by width-of-object 2.9m))
+  :annotations
+  ((content-created-by Jim-Donlon)))
+
+(defconcept M106
+  "Mortar carrier variant of the M113 APC."
+  :is-primitive M113
+  :defaults (:and (:filled-by length-of-object 4.9m)
+                  (:filled-by height-of-object 2.2m)
+                  (:filled-by mass-of-object 14515kg)
+                  (:filled-by width-of-object 2.7m))
+  :annotations
+  ((content-created-by Jim-Donlon)))
+
+(defconcept M901
+  "Improved TOW Vehicle.  Anti-armor variant of the M113 that carries
+TOW missiles and an AT crew."
+  :is-primitive M113
+  :defaults (:filled-by height-of-object 3.2m)
+  :annotations
+  ((content-created-by Jim-Donlon)))
+
+(defconcept BTR-60
+  "Wheeled CIS APC"
+  :is-primitive (:and Armored-Personnel-Carrier
+                      Military-Wheeled-Vehicle
+                      Military-Amphibious-Vehicle)
+  :defaults (:and (:filled-by max-speed-on-road 80km/h)
+                  (:filled-by max-range-on-road 500km))
+  :annotations
+  ((content-created-by Jim-Donlon)))
+
+(defconcept BTR-70
+  "Wheeled CIS APC"
+  :is-primitive (:and Armored-Personnel-Carrier
+                      Military-Wheeled-Vehicle
+                      Military-Amphibious-Vehicle)
+  :defaults (:and (:filled-by max-speed-on-road 80km/h)
+                  (:filled-by max-range-on-road 600km))
+  :annotations
+  ((content-created-by Jim-Donlon)))
+
+(defconcept BTR-80
+  "Wheeled CIS APC"
+  :is-primitive (:and Armored-Personnel-Carrier
+                      Military-Wheeled-Vehicle
+                      Military-Amphibious-Vehicle)
+  :defaults (:and (:filled-by max-speed-on-road 85km/h)
+                  (:filled-by max-range-on-road 500km))
+  :annotations
+  ((content-created-by Jim-Donlon)))
+
+;; Bradley M2 Infantry Fighting Vehicle
+
+;; The M2 IFV is a fully tracked, lightly armored vehicle that offers
+;; significant improvements over the M113 series of armored personnel
+;; carriers. The M2 posses greater power, greater acceleration, and an
+;; advanced suspension for a significant increase in cross-country
+;; speed. Like the M113, the primary purpose of the M2 is to carry
+;; infantryman on the battlefield. This "battle taxi" can transport
+;; and support them with fire if necessary. The M2 can keep up with
+;; the US Army's main battle tank, the M1A1 Abramsseries, and support
+;; armor forces as well.
+
+;; Full specs from Jane's for M2, M3:
+#|
+(M2, data in square brackets relate to M3 where different)
+Crew: 3 + 6 [3 + 2]
+Combat weight: 22,940 [22,443] kg
+Unloaded weight: 19,005 [18,824] kg
+Airportable weight: 19,960 [19,732] kg
+Power-to-weight ratio: 20.38 [20.51] hp t
+Ground pressure: 0.54 [0.53] kg cm{2}
+Length: 6.55 m
+Width: 3.61 m
+  (over tracks) 2.972 m
+Height:
+  (to gunner's sight) 2.972 m
+  (to turret roof) 2.565 m
+  (reduced) 2.634 m
+Ground clearance: 0.432 m
+Track width: 533 mm
+Length of track on ground: 3.912 m
+Max speed:
+  (road) 66 km h
+  (water) 7.2 km h
+Fuel capacity: 662 l
+Cruising range: 483 km
+Fording: amphibious
+Gradient: 60%
+Side slope: 40%
+Vertical obstacle: 0.914 m
+Trench: 2.54 m
+Engine: Cummins VTA-903T turbocharged 8-cylinder diesel
+developing 600 hp at 2,600 rpm
+Transmission: Lockheed Martin Defense Systems HMPT-500-3EC
+`TEC' hydromechanical
+Steering: hydrostatic
+Suspension: torsion bar
+Electrical system: 28 V
+Batteries: 4 x 12 V 6TN
+Armament:
+  (main) 1 x 25 mm M242 cannon
+  (coaxial) 1 x 7.62 mm M240C MG
+  (ATGW) 2-tube TOW launcher
+  (firing port guns) 5.56 mm [nil]
+Smoke-laying equipment: 2 x 4 smoke grenade dischargers
+plus exhaust generator
+Ammunition:
+  (25 mm) 300 ready, 600 reserve [300 1,200]
+  (7.62 mm) 800 ready, 1,400 reserve [800 3,400]
+  (5.56 mm firing port) 4,200 reserve [2,520]
+TOW missiles: 2 in launcher, 5 in reserve [10]
+LAW (M72A2): 3 stowed
+Gun control equipment
+Turret power control: electric manual
+  (by commander) yes
+  (by gunner) yes
+Max rate power traverse: 60ø s
+Max rate power elevation: 60ø s
+Gun elevation depression: +60ø/-10ø
+Turret traverse: 360ø
+TOW launcher elevation depression: +30ø/-20ø
+Gun stabiliser: yes
+Armour:
+  (top and front slopes) 5083 aluminium
+  (vertical sides and rear) spaced laminate
+Bottom: 5083 aluminium with anti-mine applique (IFV only)
+Side slopes: 5083 aluminium
+Note: Basic specifications of the M2A2 are as follows, the
+M3A3 is identical apart from the slightly higher air transportable
+weight in brackets.
+Combat weight: 29,940 kg
+Air transportable weight: 19,640 [19,960] kg
+Ground pressure: 0.72 kg cm{2}
+Length: 6.55 m
+Width:
+  (over armour tiles) 3.61 m
+  (over skirts) 3.28 m
+  (over tracks) 2.972 m
+Height:
+  (to gunner's sight) 2.972 m
+Ground clearance: 0.46 m
+Max speed:
+  (road) 61 km h
+  (water) 6.4 km h
+Cruising range: 400 km
+Engine: 600 hp at 2,600 rpm
+Ammunition: (7.62 mm) 1,400 [3,400] reserve
+|#
+
+(defconcept M2
+  "The standard IFV of U.S. Army mechanized infantry units.
+Equipped with a 25mm chaingun, coax machinegun, and twin TOW antitank missile
+launchers.  Carries a squad of six and a crew of three."
+  :is-primitive (:and Infantry-Fighting-Vehicle
+                      Armored-Personnel-Carrier
+                      Military-Tracked-Vehicle
+                      Military-Amphibious-Vehicle)
+  :defaults (:and (:filled-by max-speed-on-road 66km/h)
+                  (:filled-by fuel-capacity 662l)
+                  (:filled-by fuel-consumption-idle 24.2l/h)
+                  (:filled-by fuel-consumption-on-dirt-road 32.6l/h)
+                  (:filled-by fuel-consumption-off-road 68.1l/h)
+                  (:filled-by max-gradient-on-road 60%)
+                  (:filled-by max-gradient-off-road 45%)
+                  (:filled-by width-of-object 3.61m)
+                  (:filled-by override-diameter 0.1m)
+                  (:filled-by VCI-1 15)
+                  (:filled-by VCI-50 35)
+                  (:filled-by min-turning-radius 6.2m)
+                  (:filled-by length-of-object 6.55m)
+                  (:filled-by height-of-object 3m)
+                  (:filled-by mass-of-object 22940kg)
+                  (:filled-by load-class 24)
+                  (:filled-by max-tilt 40%)
+                  (:filled-by max-straddle 1.87m)
+                  (:filled-by max-straddle 0.91m)
+                  (:filled-by ground-clearance 0.45m)
+                  (:filled-by max-gap-to-traverse 2.54m)
+                  (:filled-by max-speed-on-water 7.2km/h)
+                  (:filled-by crew-size 3)
+                  (:filled-by max-number-of-passengers 9)
+                  (:filled-by engine-power 600hp)
+                  (:filled-by track-width 0.533m)
+                  (:filled-by max-range-on-road 483km)
+                  (:filled-by max-step 0.914m))
+  :annotations
+  ((content-created-by Jim-Donlon)
+   (content-created-by Hans-Chalupsky)))
+
+(defconcept M3
+  "Variation of the Bradley used by armored cavalry units.
+Equipped similarly, but primarily carries out reconnaissance missions."
+  :is-primitive M2
+  :defaults (:and (:filled-by max-number-of-passengers 5)
+                  (:filled-by mass-of-object 22443kg))
+  :annotations
+  ((content-created-by Jim-Donlon)
+   (content-created-by Hans-Chalupsky)))
+
+(defconcept BRDM
+  "CIS amphibious reconnaissance vehicles with four wheels
+and a light armor hull the protects the crew from small arms fire and
+shell splinters."
+  :is-primitive (:and Military-Wheeled-Vehicle
+                      Military-Amphibious-Vehicle
+                      Lightly-Armored-Vehicle)
+  :annotations
+  ((content-created-by Jim-Donlon)
+   (content-modified-by Hans-Chalupsky)))
+
+(tell (:about BRDM-1-source-link-1
+              Non-Web-Source-Link
+              (qv-display-text
+               "Jane's Armour and Artillery 95-96, p.190")
+              (qv-url "http://www.janes.com/")))
+
+(defconcept BRDM-1
+  "First version of the CIS BRDM-series amphibious reconnaissance
+vehicles."
+  :is-primitive BRDM
+  :defaults (:and (:filled-by max-speed-on-road 80km/h)
+                  (:filled-by max-range-on-road 500km)
+                  (:filled-by max-speed-on-water 9km/h)
+                  (:filled-by crew-size 5)
+                  (:filled-by number-of-axles 2)
+                  (:filled-by number-of-wheels 2)
+                  (:filled-by mass-of-object 5600kg)
+                  (:filled-by length-of-object 5.7m)
+                  (:filled-by width-of-object 2.25m)
+                  (:filled-by height-of-object 1.9m)
+                  (:filled-by ground-clearance 0.315m)
+                  (:filled-by track-width 1.6m)
+                  (:filled-by fuel-capacity 150l)
+                  (:filled-by fuel-efficiency 0.3l/km)
+                  (:filled-by max-gradient-on-road 60%)
+                  (:filled-by max-step 0.4m)
+                  (:filled-by max-gap-to-traverse 1.22m)
+                  (:filled-by engine-power 90hp))
+  :annotations
+  ((content-created-by Jim-Donlon)
+   (content-modified-by Hans-Chalupsky)
+   (see-also BRDM-1-source-link-1)))
+
+(tell (:about BRDM-2-source-link-1
+              Non-Web-Source-Link
+              (qv-display-text
+               "Jane's Armour and Artillery 95-96, p.186")
+              (qv-url "http://www.janes.com/")))
+
+(tell (:about BRDM-2-source-link-2
+              Web-Source-Link
+              (qv-url "http://www.alphatech.com/protected/hpkb/Ontologies/Periscope/w0004231.htm")))
+
+(tell (:about BRDM-2-image-link-1
+              Full-Image-Link
+              (qv-url "http://www.portal.ca/~bcdisthq/rec-2.jpg")))
+
+(defconcept BRDM-2
+  "Improved version of the CIS BRDM-series amphibious reconnaissance
+vehicles.  The all-welded steel armour hull of the BRDM-2 provides the crew
+with protection from small arms fire and shell splinters."
+  :is-primitive BRDM
+  :defaults (:and (:filled-by max-speed-on-road 100km/h)
+                  (:filled-by max-range-on-road 750km)
+                  (:filled-by max-speed-on-water 10km/h)
+                  (:filled-by crew-size 4)
+                  (:filled-by number-of-axles 2)
+                  (:filled-by number-of-wheels 2)
+                  (:filled-by mass-of-object 7000kg)
+                  (:filled-by length-of-object 5.75m)
+                  (:filled-by width-of-object 2.35m)
+                  (:filled-by height-of-object 2.31m)
+                  (:filled-by ground-clearance 0.43m)
+                  (:filled-by track-width 1.84m)
+                  (:filled-by fuel-capacity 290l)
+                  (:filled-by fuel-efficiency 0.4l/km)
+                  (:filled-by max-gradient-on-road 60%)
+                  (:filled-by max-step 0.4m)
+                  (:filled-by max-gap-to-traverse 1.25m)
+                  (:filled-by engine-power 140hp))
+  :annotations
+  ((content-created-by Jim-Donlon)
+   (content-modified-by Hans-Chalupsky)
+   (see-also BRDM-2-source-link-1)
+   (see-also BRDM-2-source-link-2)
+   (html-image "/images/vehicles/BRDM-2-bw.jpg")
+   (see-also BRDM-2-image-link-1)))
+
+(defconcept BRDM-2-AT-3
+  "BRDM-2 with six `Sagger' AT-3 ATGWs (Anti-Tank Guided Weapons) mounted
+on top of it."
+  :is-primitive BRDM
+  :defaults (:and (:filled-by crew-size 3)
+                  (:filled-by height-of-object 2.01m))
+  :annotations
+  ((content-created-by Hans-Chalupsky)
+   (see-also BRDM-2-source-link-1)
+   (see-also BRDM-2-source-link-2)))
+
+(defconcept BRDM-2-Sagger
+  :is BRDM-2-AT-3)
+
+(defconcept BMP-1
+  "Tracked CIS IFV"
+  :is-primitive (:and Infantry-Fighting-Vehicle
+                      Military-Tracked-Vehicle
+                      Military-Amphibious-Vehicle)
+  :defaults (:and (:filled-by max-speed-on-road 65km/h)
+                  (:filled-by max-range-on-road 500km))
+  :annotations
+  ((content-created-by Jim-Donlon)))
+
+(defconcept BMP-2
+  "Tracked CIS IFV"
+  :is-primitive (:and Infantry-Fighting-Vehicle
+                      Military-Tracked-Vehicle
+                      Military-Amphibious-Vehicle)
+  :defaults (:and (:filled-by max-speed-on-road 65km/h)
+                  (:filled-by max-range-on-road 600km))
+  :annotations
+  ((content-created-by Jim-Donlon)))
+
+(defconcept BMP-3
+  "Tracked CIS IFV"
+  :is-primitive (:and Infantry-Fighting-Vehicle
+                      Military-Tracked-Vehicle
+                      Military-Amphibious-Vehicle)
+  :defaults (:and (:filled-by max-speed-on-road 65km/h)
+                  (:filled-by max-range-on-road 500km))
+  :annotations
+  ((content-created-by Jim-Donlon)))
+
+
+  ;;
+;;;;;; Light Tanks
+  ;;
+
+(defconcept M551
+  "Sheridan Airborne Tank, used in the 82d Abn, air droppable."
+  :is-primitive Light-Tank
+  :annotations
+  ((content-created-by Jim-Donlon)))
+
+(defconcept PT-76
+  :is-primitive Light-Tank
+  :defaults (:and (:filled-by max-speed-on-road 44km/h)
+                  (:filled-by max-range-on-road 450km))
+  :annotations
+  ((content-created-by Jim-Donlon)))
+
+
+  ;;
+;;;;;; Medium Tanks
+  ;;
+
+;; Full specs from Jane's for Russian T-54, T-55:
+#|
+Model                           T-54                    T-55
+Crew                            4                       4
+Combat weight                   36,000 kg               36,000 kg
+Unloaded weight                 34,000 kg               33,700 kg
+Power-to-weight ratio           14.44 hp t              16.11 hp/t
+Ground pressure                 0.81 kg cm{2}           0.81 kg/cm{2}
+Length
+  (gun forward)                 9 m                     9 m
+  (gun rear)                    8.485 m                 8.485 m
+  (hull)                        6.04 m                  6.20 m
+Width                           3.27 m                  3.27 m
+Height
+  (cupola)                      2.4 m                   2.35 m
+  (with 12.7 mm AA MG)          2.75 m                  2.70 m
+Firing height                   1.75 m                  1.75 m
+Ground clearance                0.425 m                 0.425 m
+Track                           2.64 m                  2.64 m
+Track width                     580 mm                  580 mm
+Length of track on ground       3.84 m                  3.84 m
+ Max road speed                 50 km h                 50 km/h
+Total fuel capacity             812 l                   960 l
+Max range
+  (road)                        510 km                  460 km
+  (with long-range fuel tanks)  720 km                  650 km
+Fuel consumption                1.9 l km                1.9 l/km
+Fording                         1.4 m                   1.4 m
+  (with preparation)            5 m                     5 m
+Gradient                        60%                     60%
+Vertical obstacle               0.8 m                   0.8 m
+Trench                          2.7 m                   2.7 m
+Engine model                    V-54                    V-55
+Engine type                     V-12 water-cooled       V-12 water-cooled
+                                diesel                  diesel
+Engine                          520 hp 2,000 rpm        580 hp/2,000 rpm
+Auxiliary engine                none                    none
+Transmission                    manual with 5 forward and 1 reverse gears
+Steering                        geared turn clutch and brake
+Clutch                          multi-plate             multi-plate
+Suspension                      torsion bar             torsion bar
+Electrical system               28 V                    28 V
+Batteries                       4 x 12 V, 280 Ah        4 x 12 V, 280 Ah
+Armament
+  (main)                        1 x 100 mm gun          1 x 100 mm gun
+  (coaxial)                     1 x 7.62 mm MG          1 x 7.62 mm MG
+  (bow)                         1 x 7.62 mm MG          none
+  (anti-aircraft)               1 x 12.7 mm MG          none
+Smoke-laying equipment          diesel fuel injected into exhaust system
+Ammunition
+  (main)                        34                      43
+  (7.62 mm)                     3,000                   3,500
+  (12.7 mm)                     500                     none
+Gun control equipment
+Turret power control            electrohydraulic with manual controls for
+                                         emergency use
+  (by commander)                yes                     yes
+  (by gunner)                   yes                     yes
+Max power traverse rate         360ø in 21 s            360ø in 21 s
+Gun elevation depression        +17ø/-5ø                +18ø/-5ø
+Gun stabiliser
+  (vertical)                    no                      yes
+  (horizontal)                  no                      yes
+Rangefinder type                stadiametric            stadiametric
+Elevation quadrant              yes                     yes
+Traverse indicator              yes                     yes
+Armour
+Hull front upper                97 mm at 58ø            97 mm at 58ø
+Hull front lower                99 mm at 55ø            99 mm at 55ø
+Hull sides upper                79 mm at 0ø             79 mm at 0ø
+Hull sides lower                20 mm at 0ø             20 mm at 0ø
+Hull rear upper                 46 mm at 0ø             46 mm at 0ø
+Hull rear lower                 46 mm at 0ø             46 mm at 0ø
+Hull top                        33 mm                   33 mm
+Hull floor front                20 mm                   20 mm
+Hull floor rear                 20 mm                   20 mm
+Turret front                    203 mm at 0ø            203 mm at 0ø
+Turret sides                    150 mm at 0ø            150 mm at 0ø
+Turret rear                     64 mm at 0ø             64 mm at 0ø
+Turret roof                     39 mm at 79ø            39 mm at 79ø
+Mantlet                         incl in above figures   incl in above figures
+|#
+
+(defconcept T-54
+  :is-primitive Medium-Tank
+  :defaults (:and (:filled-by max-speed-on-road 50km/h)
+                  (:filled-by max-range-on-road 400km))
+  :annotations
+  ((content-created-by Jim-Donlon)))
+
+(defconcept T-55
+  :is-primitive (:and Medium-Tank Military-Fording-Vehicle)
+  :defaults (:and (:filled-by max-speed-on-road 50km/h)
+                  (:filled-by max-range-on-road 500km) ;;<<<RECHECK>>>
+                  (:filled-by engine-power 580hp)
+                  (:filled-by track-width 0.58m)
+                  (:filled-by mass-of-object 36000kg)
+                  (:filled-by length-of-object 9m)
+                  (:filled-by width-of-object 3.27m)
+                  (:filled-by height-of-object 2.7m)
+                  (:filled-by ground-clearance 0.425m)
+                  (:filled-by max-fording-depth 5.0m)
+                  (:filled-by fuel-capacity 960l)
+                  (:filled-by max-step 0.8m))
+  :annotations
+  ((content-created-by Jim-Donlon)
+   (content-created-by Hans-Chalupsky)))
+
+(defconcept T-62
+  :is-primitive (:and Medium-Tank Military-Fording-Vehicle)
+  :defaults (:and (:filled-by max-speed-on-road 50km/h)
+                  (:filled-by max-range-on-road 430km)
+                  (:filled-by max-gradient-on-road 62%)
+                  (:filled-by max-gradient-off-road 45%)
+                  (:filled-by width-of-object 3.37m)
+                  (:filled-by override-diameter 0.15m)
+                  (:filled-by VCI-1 21)
+                  (:filled-by VCI-50 49)
+                  (:filled-by min-turning-radius 9.33m)
+                  (:filled-by length-of-object 9.33m)
+                  (:filled-by load-class 42))
+  :annotations
+  ((content-created-by Jim-Donlon)))
+
+(defconcept T-64
+  :is-primitive (:and Medium-Tank Military-Fording-Vehicle)
+  :defaults (:and (:filled-by max-speed-on-road 85km/h)
+                  (:filled-by max-range-on-road 400km))
+  :annotations
+  ((content-created-by Jim-Donlon)))
+
+(defconcept T-64B
+  :is-primitive T-64
+  :annotations
+  ((content-created-by Jim-Donlon)))
+
+
+  ;;
+;;;;;; Main Battle Tanks
+  ;;
+
+;; The M1 Abrams Main Battle Tank is the principal tank of the United
+;; States Army and Marine Corps. Originally developed and deployed in
+;; 1983, The M1 and its variants proved themselves in Operation Desert
+;; Shield/ Desert Storm as one of the premier MBTs in the
+;; world. Originally (M1) produced with a 105mm main gun, variants
+;; produced since 1986 are fitted with a 120mm main gun (M1A1). Its
+;; characteristic low profile and angular appearance set it apart from
+;; other tanks. The M1's four man crew is protected by "Chobham" armor
+;; on glacis and turret, armored bulkheads between turret and engine,
+;; blow out panels over the main gun ammunition compartment and an
+;; effective fire-suppression system.
+
+;; Full specs from Jane's for US M1:
+#|
+(Data in square brackets relate to M1A1 where different)
+Crew: 4
+Combat weight: 54,545 [57,154] kg
+Power-to-weight ratio: 27 [26.24] hp t
+Ground pressure: 0.96 kg cm{2}
+Length:
+  (gun forward) 9.766 [9.828] m
+  (gun rear) 8.971 [9.033] m
+  (hull) 7.918 m
+Width: 3.653 [3.657] m
+  (reduced) 3.479 m
+Height:
+  (to turret roof) 2.375 [2.438] m
+  (overall) 2.885 [2.886] m
+Firing height: 1.89 m
+Ground clearance:
+  (hull centre) 0.482 m
+  (hull sides) 0.432 m
+Track width: 635 mm
+Length of track on ground: 4.65 m
+Max speed:
+  (road) 72.421 [66.77] km h
+  (cross-country) 48.3 km h
+  (on 10% gradient) 32.2 [27.51] km h
+  (on 60% gradient) 7.2 [6.59] km h
+Acceleration: (0-32 km h) 7 [6.8] s
+Fuel capacity: 1,907.6 l
+Max road range: 498 [465] km
+Fording: 1.219 m
+  (with preparation) 1.98 m
+Gradient: 60%
+Vertical obstacle: 1.244 [1.066] m
+Trench: 2.743 m
+Turning radius: pivot to infinitely variable
+Engine: Textron Lycoming AGT 1500 gas turbine developing 1,500 hp at 30,000 rpm
+Transmission: Allison Transmission X-1100-3B automatic with 4 forward
+and 2 reverse gears
+Steering: double-differential with hydrostatic control
+Final reduction ratio: 4.3:1 [4.67:1]
+Braking system: hydromechanical
+Suspension: advanced torsion bar
+Electrical system: 24 V
+Batteries: 6 x 12 V
+Armament:
+  (main) 1 x 105 mm [1 x 120 mm] gun
+  (coaxial) 1 x 7.62 mm MG
+  (anti-aircraft commander) 1 x 12.7 mm MG
+  (anti-aircraft loader) 1 x 7.62 mm MG
+Smoke-laying equipment: 6 smoke grenade dischargers either
+side of turret and integral engine smoke generators
+Ammunition:
+  (main) 55 [40]
+  (12.7 mm) 1,000
+  (7.62 mm) 11,400 [12,400]
+  (smoke grenades) 24
+Gun control equipment
+Turret power control: electrohydraulic manual
+  (by commander) yes
+  (by gunner) yes
+Turret traverse: 360ø
+Max rate of power traverse:
+  (tracking) 4.2ø s
+  (slew rate with stabilisation) 42ø s
+ Max rate of power elevation:
+  (tracking) 1.4ø s
+  (slew rate with control handles) 22.5ø s
+  (slew rate with stabilisation commands) 42ø s
+Gun elevation depression: +20ø/-10ø
+  (commander's override) yes
+Commander's fire control override: yes
+Gun stabiliser:
+  (vertical) yes
+  (horizontal) yes
+Range setting device: yes (laser)
+Elevation quadrant: yes
+Traverse indicator: yes
+Armour: classified
+|#
+
+(defconcept M1
+  "Original version with 105mm main gun.
+A1 version with drive train improvements and 120mm main gun."
+  :is-primitive (:and Main-Battle-Tank Military-Fording-Vehicle)
+  :defaults (:and (:filled-by max-speed-on-road 71km/h)
+                  (:filled-by fuel-capacity 1907l)
+                  (:filled-by fuel-consumption-idle 40.9l/h)
+                  (:filled-by fuel-consumption-on-dirt-road 168.8l/h)
+                  (:filled-by fuel-consumption-off-road 214.3l/h)
+                  (:filled-by max-gradient-on-road 68.7%)
+                  (:filled-by max-gradient-off-road 53%)
+                  (:filled-by width-of-object 3.65m)
+                  (:filled-by override-diameter 0.25m)
+                  (:filled-by VCI-1 25)
+                  (:filled-by VCI-50 58)
+                  (:filled-by min-turning-radius 9.9m)
+                  (:filled-by length-of-object 8.8m)    ;;<<<RECHECK>>>
+                  (:filled-by height-of-object 2.9m)
+                  (:filled-by mass-of-object 54545kg)
+                  (:filled-by load-class 60)
+                  (:filled-by max-tilt 40%)
+                  (:filled-by max-straddle 1.24m)
+                  (:filled-by ground-clearance 0.48m)
+                  (:filled-by max-gap-to-traverse 2.66m)
+                  (:filled-by max-submerged-depth 2.37m)
+                  (:filled-by engine-power 1500hp)
+                  (:filled-by track-width 0.635m)
+                  (:filled-by max-range-on-road 498km)
+                  (:filled-by max-step 1.24m))
+  :annotations
+  ((content-created-by Jim-Donlon)
+   (content-created-by Hans-Chalupsky)))
+
+(defconcept M1A1
+  "Current state-of-the-art American MBT.
+Improved M1 with 120mm Main gun."
+  :is-primitive M1
+  :defaults (:and (:filled-by height-of-object 3m)
+                  (:filled-by mass-of-object 54431kg)
+                  (:filled-by length-of-object 9.82m)
+                  (:filled-by width-of-object 3.65m)
+                  (:filled-by max-speed-on-road 67km/h)
+                  (:filled-by max-range-on-road 465km)
+                  (:filled-by max-step 1.06m))
+  :annotations
+  ((content-created-by Jim-Donlon)
+   (content-created-by Hans-Chalupsky)))
+
+(defconcept M1A2 :is-primitive M1
+  :annotations
+  ((content-created-by Hans-Chalupsky)))
+
+;; The M48 tank series has the following distinguishing features:
+;; small driver's hatch, five track-return rollers, no tensioning
+;; idler, no dust shields on the fenders, `T' or cylindrical type
+;; blast deflector on the barrel and the commander's cupola has the
+;; 12.7 mm machine gun on an open mount rather than in a fully
+;; enclosed cupola as later production tanks in this series.
+
+(defconcept M48
+    :is-primitive (:and Main-Battle-Tank Military-Fording-Vehicle)
+    :defaults (:and (:filled-by width-of-object 3.63m)
+                    (:filled-by length-of-object 8.44m)
+                    (:filled-by height-of-object 3.24m)
+                    (:filled-by VCI-1 26)
+                    (:filled-by VCI-50 60)
+                    (:filled-by track-width 0.711m)
+                    (:filled-by max-fording-depth 2.44m)
+                    (:filled-by max-step 0.91m)
+                    (:filled-by mass-of-object 44906kg)
+                    (:filled-by ground-clearance 0.4m)
+                    (:filled-by max-speed-on-road 42km/h)
+                    (:filled-by max-range-on-road 113km)
+                    (:filled-by fuel-capacity 757l))
+    :annotations
+  ((content-created-by Hans-Chalupsky)))
+
+(defconcept M48A1
+    :is-primitive M48
+    :defaults (:and (:filled-by mass-of-object 47173kg)
+                    (:filled-by length-of-object 8.72m)
+                    (:filled-by height-of-object 3.13m)
+                    (:filled-by ground-clearance 0.38m))
+    :annotations
+  ((content-created-by Hans-Chalupsky)))
+
+(defconcept M48A2
+  :is-primitive M48
+  :defaults (:and (:filled-by mass-of-object 47173kg)
+                  (:filled-by length-of-object 8.68m)
+                  (:filled-by height-of-object 3.08m)
+                  (:filled-by ground-clearance 0.38m)
+                  (:filled-by max-speed-on-road 48km/h)
+                  (:filled-by max-range-on-road 258km)
+                  (:filled-by fuel-capacity 1268l))
+  :annotations
+  ((content-created-by Hans-Chalupsky)))
+
+(defconcept M48A3
+  :is-primitive M48
+  :defaults (:and (:filled-by mass-of-object 47173kg)
+                  (:filled-by length-of-object 8.68m)
+                  (:filled-by height-of-object 3.12m)
+                  (:filled-by ground-clearance 0.38m)
+                  (:filled-by max-range-on-road 463km)
+                  (:filled-by fuel-capacity 1420l))
+  :annotations
+  ((content-created-by Hans-Chalupsky)))
+
+;; The M60 (Patton) main battle tank is now primarily found in US
+;; Reserve and National Guard units, but served as the primary US main
+;; battle tank for two decades prior to the introduction of the
+;; M1. Developed from the M48 Patton series, the M60 was fitted with a
+;; 105mm main gun and manned by a four-man crew. Criticized for its
+;; high profile and limited cross-country mobility, this durable tank
+;; proved reliable and underwent many updates over its service
+;; life. Initially produced in 1960, over 15,000 M60s were built by
+;; Chrysler and first saw service in 1961. Production ended in 1983,
+;; but 5,400 older models were converted to the M60A3 variant ending
+;; in 1990. This tank saw action with the Israeli forces during the
+;; Yom Kippur War in both the Sinai and the Golan Heights. During
+;; Operation Desert Shield/Desert Storm the 1st Marine Expeditionary
+;; Force fielded 210 M60A1s to support the Saudi-Marine effort into
+;; Kuwait City.
+
+;; Full specs from Jane's for US M60, M60A1, M60A3:
+#|
+Model                     M60                 M60A1               M60A3
+Crew                      4                   4                   4
+Combat weight             49,714 kg           52,617 kg           52,617 kg
+Unloaded weight           45,631 kg           48,684 kg           48,684 kg
+Power-to-weight ratio     15.08 bhp t         14.24 bhp/t         14.24 bhp/t
+Ground pressure           0.8 kg cm{2}        0.87 kg/cm{2}       0.87 kg/cm{2}
+Length
+  (gun forward)           9.309 m             9.436 m             9.436 m
+  (hull)                  6.946 m             6.946 m             6.946 m
+Width                     3.631 m             3.631 m             3.631 m
+Height                    3.213 m             3.27 m              3.27 m
+Firing height             2.095 m             2.095 m             2.095 m
+Ground clearance          0.463 m             0.463 m             0.45 m
+Track                     2.921 m             2.921 m             2.921 m
+Track width               711 mm              711 mm              711 mm
+Track adjustment          mechanical          mechanical          hydraulic
+Track type                T97 T142            T97/T142            T142
+                                                                  replaceable
+                                                                  pads
+Length of track
+ on ground                4.235 m             4.235 m             4.235 m
+Max road speed            48.28 km h          48.28 km/h          48.28 km/h
+Fuel capacity             1,457 l             1,420 l             1,420 l
+Max road range            500 km              500 km              480 km
+Fording                   1.219 m             1.219 m             1.22 m
+  (with preparation)      2.438 m             2.438 m             2.4 m
+Gradient                  60%                 60%                 60%
+Side slope                30%                 30%                 30%
+Vertical obstacle         0.914 m             0.914 m             0.914 m
+Trench                    2.59 m              2.59 m              2.59 m
+Turning radius            pivot to infinity on all models
+Engine                    Continental         Continental
+                          AVDS-1790-2A        AVDS-1790-2C
+                          12-cylinder air-cooled diesel developing 750 bhp
+                          at 2,400 rpm
+Transmission              General Motors Corporation, cross-drive,
+                          single-stage with 2 forward and 1 reverse ranges
+Suspension                torsion bar         torsion bar         torsion bar
+Electrical system         24 V                24 V                24 V
+Batteries                 6 x 12 V, 100 Ah    6 x 12 V, 100 Ah    6 x 12 V,
+                                                                  100 Ah
+Armament
+  (main)                  1 x 105 mm M68 gun  1 x 105 mm M68 gun  1 x 105 mm
+                                                                  M68 gun
+  (coaxial)               1 x 7.62 mm MG      1 x 7.62 mm MG      1 x 7.62 mm MG
+  (anti-aircraft)         1 x 12.7 mm MG      1 x 12.7 mm MG      1 x 12.7 mm MG
+Smoke-laying equipment    nil                 2 x 6 smoke grenade launchers
+                                              either side of turret
+Ammunition
+  (main)                  57                  63                  63
+  (7.62 mm)               6,000               6,000               6,000
+  (12.7 mm)               900                 900                 900
+Gun control equipment
+Turret power control      electrohydraulic manual in all models
+  (by commander)          yes                 yes                 yes
+  (by gunner)             yes                 yes                 yes
+Max rate power traverse   360ø in 15 s        360ø in 15 s        360ø in 15 s
+Gun elevation depression  +20ø/-9ø            +20ø/-10ø           +20ø/-10ø
+  (commander's override)  yes                 yes                 yes
+Commander's fire control
+override                  yes                 yes                 yes
+Gun stabiliser
+  (vertical)              no                  yes*                yes
+  (horizontal)            no                  yes*                yes
+Range setting device      yes                 yes                 yes
+Elevation quadrant        yes                 yes                 yes
+Traverse indicator        yes                 yes                 yes
+Armour                    no details released, but armour protection is
+                          considered an improvement over the M48 series,
+                          especially over frontal area and turret
+|#
+
+(tell (:about M60-image-link-1
+              Full-Image-Link
+              (qv-url "http://www.airfax.com/photogallery/photos/m60_2.jpg")))
+
+(defconcept M60
+  "The MBT which was replaced by the M1 Abrams.  Still in wide use both in the 
+National Guard and in NATO countries."
+  :is-primitive (:and Main-Battle-Tank Military-Fording-Vehicle)
+  :defaults (:and (:filled-by max-speed-on-road 48km/h)
+                  (:filled-by max-gradient-on-road 60%)
+                  (:filled-by max-gradient-off-road 45%)
+                  (:filled-by width-of-object 2.5m)
+                  (:filled-by override-diameter 0.15m)
+                  (:filled-by VCI-1 20)
+                  (:filled-by VCI-50 48)
+                  (:filled-by min-turning-radius 9.4m)
+                  (:filled-by length-of-object 8.3m)  ;;<<<RECHECK>>>
+                  (:filled-by height-of-object 3.3m)
+                  (:filled-by mass-of-object 49714kg)
+                  (:filled-by load-class 54)
+                  (:filled-by max-straddle 2.21m)
+                  (:filled-by max-straddle 0.91m)  ;;; FIX
+                  (:filled-by ground-clearance 0.41m)
+                  (:filled-by max-gap-to-traverse 2.66m)
+                  (:filled-by engine-power 750hp)
+                  (:filled-by track-width 0.711m)
+                  (:filled-by max-fording-depth 2.44m)
+                  (:filled-by max-tilt 30%)
+                  (:filled-by max-step 0.91m)
+                  (:filled-by max-range-on-road 500km)
+                  (:filled-by fuel-capacity 1457l)
+                  )
+  :annotations
+  (;; Full image: 
+   (html-image "/images/vehicles/M60.jpg")
+   (see-also M60-image-link-1)
+   (content-created-by Jim-Donlon)
+   (content-created-by Hans-Chalupsky)))
+
+(tell (:about M60A1-image-link-1
+              Full-Image-Link
+              (qv-url "http://www.militarycity.com/libraries/files/m60a1mm.jpg")))
+
+(tell (:about M60A1-image-link-2
+              Full-Image-Link
+              (qv-url "http://www.militarycity.com/libraries/files/m60a1qq.jpg")))
+
+(defconcept M60A1
+  :is-primitive M60
+  :defaults (:and (:filled-by max-submerged-depth 4.11m)
+                  (:filled-by mass-of-object 52617kg)
+                  (:filled-by length-of-object 9.43m)
+                  (:filled-by height-of-object 3.27m)
+                  (:filled-by ground-clearance 0.46m)
+                  (:filled-by max-range-on-road 500km)
+                  (:filled-by fuel-capacity 1420l))
+  :annotations
+  ((html-image "/images/vehicles/M60A1.jpg")
+   (see-also M60A1-image-link-1)
+   (html-image "/images/vehicles/M60A1-bw.jpg")
+   (see-also M60A1-image-link-2)
+   (content-created-by Jim-Donlon)
+   (content-created-by Hans-Chalupsky)))
+
+(tell (:about M60A2-image-link-1
+              Full-Image-Link
+              (qv-url "http://www.militarycity.com/libraries/files/m60a2rr.jpg")))
+
+(defconcept M60A2
+  :is-primitive M60
+  :annotations
+  ((html-image "/images/vehicles/M60A2.jpg")
+   (see-also M60A2-image-link-1)
+   (content-created-by Jim-Donlon)
+   (content-created-by Hans-Chalupsky)))
+
+(tell (:about M60A3-image-link-1
+              Full-Image-Link
+              (qv-url "http://www.militarycity.com/libraries/files/m60a3ss.jpg")))
+
+(defconcept M60A3
+  :is-primitive M60
+  :defaults (:and (:filled-by mass-of-object 52617kg)
+                  (:filled-by length-of-object 9.43m)
+                  (:filled-by height-of-object 3.27m)
+                  (:filled-by ground-clearance 0.45m)
+                  (:filled-by max-range-on-road 480km)
+                  (:filled-by fuel-capacity 1420l))
+  :annotations
+  ((html-image "/images/vehicles/M60A3-bw.jpg")
+   (see-also M60A3-image-link-1)
+   (content-created-by Jim-Donlon)
+   (content-created-by Hans-Chalupsky)))
+
+(defconcept Centurion
+  "MBT used by Britain, Israel, Sweden, S-Africa.  105mm."
+  :is-primitive Main-Battle-Tank
+  :annotations
+  ((content-created-by Jim-Donlon)))
+
+(defconcept Chieftain
+  "MBT used by Britain, Iran, Jordan.  120mm."
+  :is-primitive Main-Battle-Tank
+  :annotations
+  ((content-created-by Jim-Donlon)))
+
+(defconcept Challenger
+  "Britain's state-of-the-art MBT. 120mm."
+  :is-primitive Main-Battle-Tank
+  :annotations
+  ((content-created-by Jim-Donlon)))
+
+(defconcept Leopard
+  "MBT used by NATO countries and Australia.  105mm."
+  :is-primitive Main-Battle-Tank
+  :annotations
+  ((content-created-by Jim-Donlon)))
+
+;; Full specs from Jane's for T-72:
+#|
+Crew: 3
+Combat weight: 44,500 kg
+Power-to-weight ratio: 18.9 hp t
+Ground pressure: 0.90 kg cm{2}
+Length:
+  (gun forward) 9.53 m
+  (hull) 6.95 m
+Width:
+  (without skirts) 3.37 m
+  (over skirts) 3.59 m
+Height:
+  (without AA MG): 2.222 m
+Ground clearance: 0.49 m
+Track width: 580 mm
+Length of track on ground: 4.278 m
+Max road speed: 60 km h
+Range:
+  (road, without long-range fuel tanks) 480 km
+  (road, with long-range fuel tanks) 550 km
+Fuel capacity: 1,000 l
+Fording:
+  (without preparation) 1.8 m
+  (with preparation) 5.0 m
+Gradient: 60%
+Side slope: 40%
+Vertical obstacle: 0.85 m
+Trench: 2.8 m
+Engine: V-12 multi-fuel (V-84) 840 hp at 2,000 rpm
+Transmission: synchromesh, hydraulically assisted with 7
+forward and 1 reverse gears
+Steering: clutch and brake
+Suspension: torsion bar
+Electrical system: 24 V
+Armament:
+  (main) 1 x 125 mm gun
+  (coaxial) 1 x 7.62 mm MG
+  (anti-aircraft) 1 x 12.7 mm MG
+Ammunition:
+  (main) 45 (including 6 ATGW)
+  (coaxial) 2,000
+  (anti-aircraft) 300
+Smoke grenade launchers: 8
+Gun control equipment
+Turret power control: electric manual
+Turret traverse: 360ø
+Gun elevation depression: +14ø/-6ø
+Gun stabiliser:
+  (vertical) yes
+  (horizontal) yes
+|#
+
+(defconcept T-72
+  :is-primitive (:and Main-Battle-Tank Military-Fording-Vehicle)
+  :defaults (:and (:filled-by max-speed-on-road 60km/h)
+                  (:filled-by max-range-on-road 400km)    ;;<<<RECHECK>>>
+                  (:filled-by max-gradient-on-road 62%)
+                  (:filled-by max-gradient-off-road 45%)
+                  (:filled-by width-of-object 3.38m)
+                  (:filled-by override-diameter 0.18m)
+                  (:filled-by VCI-1 25)
+                  (:filled-by VCI-50 60)
+                  (:filled-by min-turning-radius 9.2m)
+                  (:filled-by length-of-object 9.2m)
+                  (:filled-by load-class 45)
+                  (:filled-by crew-size 3)
+                  (:filled-by engine-power 840hp)
+                  (:filled-by track-width 0.58m)
+                  (:filled-by height-of-object 2.22m)
+                  (:filled-by ground-clearance 0.49m)
+                  (:filled-by fuel-capacity 1000l)
+                  (:filled-by max-fording-depth 5.0m)
+                  (:filled-by max-tilt 40%)
+                  (:filled-by max-step 0.85m)
+                  (:filled-by mass-of-object 44500kg))
+  :annotations
+  ((content-created-by Jim-Donlon)
+   (content-created-by Hans-Chalupsky)))
+
+(defconcept T-72M
+    :is-primitive T-72
+    :defaults (:and (:filled-by mass-of-object 45500kg)
+                    (:filled-by width-of-object 3.57m))
+    :annotations
+  ((content-created-by Hans-Chalupsky)))
+
+(defconcept T-80
+  :is-primitive (:and Main-Battle-Tank Military-Fording-Vehicle)
+  :defaults (:and (:filled-by max-speed-on-road 85km/h)
+                  (:filled-by max-range-on-road 500km))
+  :annotations
+  ((content-created-by Jim-Donlon)))
+
+;; Full specs from Jane's for Chinese Type-69:
+#|
+Crew: 4
+Combat weight: 36,500-37,000 kg
+Power-to-weight ratio: 15.89 hp t
+Ground pressure: 0.82-0.83 kg cm{2}
+Length:
+  (gun forward) 8.657 m
+  (gun rear) 8.485 m
+  (hull) 6.243 m
+Width:
+  (over skirts) 3.298 m
+  (over hull) 3.27 m
+Height:
+  (to axis of AA MG) 2.807 m
+  (with AA MG at max elevation) 3.909 m
+Axis of fire: 1.75 m
+Ground clearance: 425 mm
+Track: 2.64 m
+Length of track on ground: 3.845 m
+Max road speed: 50 km h
+Max road range: 420-440 km
+Vertical obstacle: 0.8 m
+Trench: 2.7 m
+Fording: 1.4 m
+Gradient: 60%
+Side slope: 40%
+Engine: Type 12150L-7BW V-12 diesel developing 580 hp at 2,000 rpm
+Suspension: torsion bar
+Armament:
+  (main) 1 x 100 mm gun
+  (coaxial) 1 x 7.62 mm MG
+  (bow) 1 x 7.62 mm MG
+  (anti-aircraft) 1 x 12.7 mm MG
+Ammunition:
+  (main) 34
+  (7.62 mm) 3,400
+  (12.7 mm) 500
+Turret traverse: 360ø
+|#
+
+(defconcept Type-69
+    :is-primitive (:and Main-Battle-Tank
+                        Military-Fording-Vehicle)
+    :defaults (:and (:filled-by mass-of-object 36500kg)
+                    (:filled-by length-of-object 8.657m)
+                    (:filled-by width-of-object 3.298m)
+                    (:filled-by height-of-object 3.909m)
+                    (:filled-by ground-clearance 0.425m)
+                    (:filled-by max-speed-on-road 50km/h)
+                    (:filled-by max-fording-depth 1.4m)
+                    (:filled-by max-range-on-road 440km)
+                    (:filled-by engine-power 580hp)
+                    (:filled-by max-step 0.8m)
+                    (:filled-by max-tilt 40%))
+    :annotations
+  ((content-created-by Hans-Chalupsky)))
+
+(defconcept Type-69-II :is-primitive Type-69
+  :annotations
+  ((content-created-by Hans-Chalupsky)))
+
+
+  ;;
+;;;;;; Combat engineering support vehicles
+  ;;
+
+;; AVLB in ENGINEERING-EQUIPMENT was replaced by AVLB-Bridge
+
+(defconcept M48-AVLB
+  "AVLB on an M48 chassis."
+  :is-primitive (:and AVLB Medium-Tank)
+  :defaults (:and (:filled-by max-speed-on-road 48km/h)
+                  (:filled-by max-gradient-on-road 30%)
+                  (:filled-by width-of-object 4.3m)
+                  (:filled-by VCI-1 26)
+                  (:filled-by VCI-50 60)
+                  (:filled-by min-turning-radius 9.6m)
+                  (:filled-by length-of-object 9.6m)
+                  (:filled-by height-of-object 4.2m)
+                  (:filled-by mass-of-object 53524kg)
+                  (:filled-by load-class 62)
+                  (:filled-by max-straddle 2.21m)
+                  (:filled-by max-step 0.91m)
+                  (:filled-by ground-clearance 0.41m)
+                  (:filled-by max-gap-to-traverse 2.59m))
+  :annotations
+  ((content-created-by Jim-Donlon)))
+
+(tell (:about M60-AVLB-source-link-1
+              Web-Source-Link
+              (qv-url "http://www.tacom.army.mil/dsa/pmtaws/m113_m60/m60.htm")))
+(tell (:about M60-AVLB-image-link-1
+              Full-Image-Link
+              (qv-url "http://www.tacom.army.mil/dsa/pmtaws/m113_m60/avlb4.gif")))
+
+(defconcept M60-AVLB
+  "AVLB on an M60 chassis."
+  :is-primitive (:and AVLB M60)
+  :defaults (:and (:filled-by max-speed-on-road 51km/h)
+                  (:filled-by max-gradient-on-road 60%)
+                  (:filled-by width-of-object 4.3m)
+                  (:filled-by VCI-1 22)
+                  (:filled-by VCI-50 51)
+                  (:filled-by min-turning-radius 9.6m)
+                  (:filled-by length-of-object 9.6m)
+                  (:filled-by height-of-object 4.2m)
+                  (:filled-by mass-of-object 53524kg)
+                  (:filled-by load-class 63))
+  :annotations
+  ((content-created-by Jim-Donlon)
+   (html-image "/images/vehicles/M60-AVLB.gif")
+   (see-also M60-AVLB-image-link-1)
+   (see-also M60-AVLB-source-link-1)))
+
+(tell (:about M9-image-link-1
+              Full-Image-Link
+              (qv-url "http://www.wood.army.mil/DCD/SYSTEMS/IMAGES/Ace3.gif")))
+
+(defconcept ACE
+  "Armored Combat Earthmover (ACE) M9"
+  :is-primitive (:and Combat-Engineer-Vehicle Military-Tracked-Vehicle)
+  :defaults (:and (:filled-by length-of-object 6.3m)
+                  (:filled-by height-of-object 2.3m)
+                  (:filled-by mass-of-object 6350kg)
+                  (:filled-by width-of-object 3.9m))
+  :annotations
+  (;; Source-1: http://www.wood.army.mil/DCD/SYSTEMS/ace.htm
+   (html-image "/images/vehicles/M9-ACE.jpg")
+   (see-also M9-image-link-1)
+   (content-created-by Jim-Donlon)))
+
+(tell (:about M728-source-link-1
+              Web-Source-Link
+              (qv-url "http://www.alphatech.com/protected/hpkb/Ontologies/Periscope/w0003674.htm")))
+
+(tell (:about M728-source-link-2
+              Web-Source-Link
+              (qv-url "http://www.wood.army.mil/DCD/SYSTEMS/cev.htm")))
+
+(tell (:about M728-image-link-1
+              Full-Image-Link
+              (qv-url "http://www.wood.army.mil/DCD/SYSTEMS/IMAGES/Cev-1a.gif")))
+
+(tell (:about M728-image-link-2
+              Full-Image-Link
+              (qv-url "http://www.algor.com/casehist/chrake.dir/images/rake1.jpg")))
+
+(defconcept M728
+  "Based on the M60A1 main battle tank, the M728 CEV recovers disabled
+vehicles, clears and prepares obstructions, prepares firing positions for
+artillery, and can be used for close-in bombardment of hostile strongpoints."
+  :is-primitive (:and Combat-Engineer-Vehicle
+                      M60A1)
+  :defaults (:and (:filled-by mass-of-object 53200kg)
+                  (:filled-by length-of-object 8.91m)
+                  (:filled-by width-of-object 3.70m)
+                  (:filled-by height-of-object 3.26m)
+                  (:filled-by ground-track-length 4.24m)
+                  (:filled-by track-width 0.711m)
+                  (:filled-by ground-clearance 0.381m)
+                  (:filled-by engine-power 750hp)
+                  (:filled-by max-speed-on-road 48km/h)
+                  (:filled-by max-range-on-road 450km)
+                  (:filled-by fuel-capacity 1420l)
+                  (:filled-by max-step 0.76m)
+                  (:filled-by max-gap-to-traverse 2.51m)
+                  (:filled-by max-fording-depth 1.22m)
+                  (:filled-by max-gradient-on-road 60%)
+                  (:filled-by crew-size 4))
+  :annotations
+  ((see-also M728-source-link-1)
+   (see-also M728-source-link-2)
+   (html-image "/images/vehicles/M728.jpg")
+   (see-also M728-image-link-1)
+   (html-image "/images/vehicles/M728+mine-rake.jpg")
+   (see-also M728-image-link-2)
+   (content-created-by Hans-Chalupsky)
+   ))
+
+
+  ;;
+;;;;;; Artillery and missile launchers
+  ;;
+
+(defconcept 120mm-Mortar
+  :is-primitive Towed-Artillery)
+
+(tell (:about M109-source-link-1
+              Web-Source-Link
+              (qv-url "http://www.alphatech.com/protected/hpkb/Ontologies/Periscope/w0003617.htm")))
+(tell (:about M109-source-link-2
+              Web-Source-Link
+              (qv-url "http://www.pica.army.mil/orgs/paladin/fleet/top.html")))
+(tell (:about M109-image-link-1
+              Full-Image-Link
+              (qv-url "http://www.militarycity.com/libraries/files/m109a3.gif")))
+
+(defconcept M109
+  "155mm US self-propelled Howitzer.  It provides primary indirect fire
+support to the maneuver brigades of armored and mechanized infantry divisions."
+  :is-primitive (:and Self-Propelled-Howitzer
+                      Lightly-Armored-Vehicle
+                      Military-Tracked-Vehicle)
+  :defaults (:and (:filled-by max-speed-on-road 56km/h)
+                  (:filled-by max-gradient-on-road 60%)
+                  (:filled-by max-gradient-off-road 45%)
+                  (:filled-by width-of-object 3.1m)
+                  (:filled-by override-diameter 0.12m)
+                  (:filled-by VCI-1 25)
+                  (:filled-by VCI-50 57)
+                  (:filled-by min-turning-radius 6.6m)
+                  (:filled-by length-of-object 6.6m)
+                  (:filled-by height-of-object 3.3m)
+                  (:filled-by mass-of-object 25401kg)
+                  (:filled-by load-class 24))
+  :annotations
+  ((content-created-by Jim-Donlon)
+   (content-modified-by Hans-Chalupsky)
+   (see-also M109-source-link-1)
+   (see-also M109-source-link-2)
+   (html-image "/images/vehicles/M109A3.jpg")
+   (see-also M109-image-link-1)))
+
+;; Synonyms for now, needs to be fixed:
+(defconcept M109A1 :is M109)
+(defconcept M109A2 :is M109)
+(defconcept M109A3 :is M109)
+
+(defconcept |2S1|
+  "122mm CIS self-propelled Howitzer"
+  :is-primitive (:and Self-Propelled-Howitzer
+                      Lightly-Armored-Vehicle
+                      Military-Tracked-Vehicle
+                      Military-Amphibious-Vehicle)
+  :defaults (:and (:filled-by max-speed-on-road 70km/h)
+                  (:filled-by max-range-on-road 500km))
+  :annotations
+  ((content-created-by Jim-Donlon)
+   (content-modified-by Hans-Chalupsky)))
+
+(defconcept |2S3|
+  "152mm CIS self-propelled Howitzer"
+  :is-primitive (:and Self-Propelled-Howitzer
+                      Lightly-Armored-Vehicle
+                      Military-Tracked-Vehicle
+                      Military-Fording-Vehicle)
+  :defaults (:and (:filled-by max-speed-on-road 50km/h)
+                  (:filled-by max-range-on-road 500km))
+  :annotations
+  ((content-created-by Jim-Donlon)
+   (content-modified-by Hans-Chalupsky)))
+
+(defconcept |2S5|
+  "152mm CIS self-propelled Howitzer"
+  :is-primitive (:and Self-Propelled-Howitzer
+                      Lightly-Armored-Vehicle
+                      Military-Tracked-Vehicle
+                      Military-Fording-Vehicle)
+  :defaults (:and (:filled-by max-speed-on-road 50km/h)
+                  (:filled-by max-range-on-road 500km))
+  :annotations
+  ((content-created-by Jim-Donlon)
+   (content-modified-by Hans-Chalupsky)))
+
+(defconcept |2S7|
+  "203mm CIS self-propelled Howitzer"
+  :is-primitive (:and Self-Propelled-Howitzer
+                      Lightly-Armored-Vehicle
+                      Military-Tracked-Vehicle
+                      Military-Fording-Vehicle)
+  :defaults (:and (:filled-by max-speed-on-road 70km/h)
+                  (:filled-by max-range-on-road 500km))
+  :annotations
+  ((content-created-by Jim-Donlon)
+   (content-modified-by Hans-Chalupsky)))
+
+(defconcept |2S9|
+  "120mm CIS self-propelled Howitzer"
+  :is-primitive (:and Self-Propelled-Howitzer
+                      Lightly-Armored-Vehicle
+                      Military-Tracked-Vehicle
+                      Military-Amphibious-Vehicle)
+  :defaults (:and (:filled-by max-speed-on-road 60km/h)
+                  (:filled-by max-range-on-road 500km))
+  :annotations
+  ((content-created-by Jim-Donlon)
+   (content-modified-by Hans-Chalupsky)))
+
+(tell (:about M101-source-link-1
+              Non-Web-Source-Link
+              (qv-display-text
+               "Jane's Armour and Artillery 95-96, p.684")
+              (qv-url "http://www.janes.com/")))
+
+(defconcept M101
+  "US 105 mm Howitzer towed by a 2 1/2 ton truck."
+  :is-primitive Towed-Howitzer
+  :defaults (:and (:filled-by mass-of-object 2030kg)
+                  (:filled-by length-of-object 5.991m)
+                  (:filled-by width-of-object 2.159m)
+                  (:filled-by height-of-object 1.524m)
+                  (:filled-by ground-clearance 0.356m)
+                  (:filled-by track-width 1.778m)
+                  (:filled-by crew-size 8)
+                  (:filled-by number-of-wheels 2)
+                  (:filled-by number-of-axles 1))
+  :annotations
+  ((see-also M101-source-link-1)
+   (content-created-by Hans-Chalupsky)))
+
+(tell (:about ZSU-23-4-source-link-1
+              Web-Source-Link
+              (qv-url "http://www.alphatech.com/protected/hpkb/Ontologies/Periscope/w0004217.htm")))
+(tell (:about ZSU-23-4-image-link-1
+              Full-Image-Link
+              (qv-url "http://www.militarycity.com/libraries/files/zsu234.jpg")))
+
+(defconcept ZSU-23-4
+  "CIS self-propelled anti-aircraft gun system with four water-cooled
+23-mm automatic cannons and its own radar.  The ZSU-23-4 was in production in
+Russia and Czechoslovakia from 1965-1983."
+  :is-primitive (:and Self-Propelled-Air-Defense-Artillery
+                      Lightly-Armored-Vehicle
+                      Military-Tracked-Vehicle
+                      Military-Fording-Vehicle)
+  :defaults (:and (:filled-by mass-of-object 20500kg)
+                  (:filled-by length-of-object 6.54m)
+                  (:filled-by width-of-object 2.95m)
+                  (:filled-by height-of-object 2.25m)
+                  (:filled-by max-speed-on-road 44km/h)
+                  (:filled-by max-range-on-road 450km)
+                  (:filled-by engine-power 280hp)
+                  (:filled-by ground-clearance 0.4m)
+                  (:filled-by max-step 1.10m)
+                  (:filled-by max-fording-depth 1.07m)
+                  (:filled-by max-gap-to-traverse 2.80m)
+                  (:filled-by ground-track-length 3.80m)
+                  (:filled-by max-gradient-on-road 60%))
+  :annotations
+  ((content-created-by Hans-Chalupsky)
+   (see-also ZSU-23-4-source-link-1)
+   (html-image "/images/vehicles/ZSU-23-4.jpg")
+   (see-also ZSU-23-4-image-link-1)))
+
+(defconcept ZSU-23-4M
+  "Later model of the ZSU-23-4 that has a digital fire-control computer
+and improved radar that can search independently of turret movement."
+  :is-primitive ZSU-23-4
+  :annotations
+  ((content-created-by Hans-Chalupsky)
+   (see-also ZSU-23-4-source-link-1)))
+
+(tell (:about ZPU-4-source-link-1
+              Non-Web-Source-Link
+              (qv-display-text
+               "Jane's Land-based Air Defence 96-97, p.183")
+              (qv-url "http://www.janes.com/")))
+
+(defconcept ZPU-4
+  "CIS 14.5mm 4-barrel automatic anti-aircraft gun mounted on
+a trailer."
+  :is-primitive Towed-Air-Defense-Artillery
+  :defaults (:and (:filled-by mass-of-object 1810kg)
+                  (:filled-by length-of-object 4.53m)
+                  (:filled-by width-of-object 1.72m)
+                  (:filled-by height-of-object 2.13m)
+                  (:filled-by ground-clearance 0.458m)
+                  (:filled-by track-width 1.641m)
+                  (:filled-by crew-size 5)
+                  (:filled-by number-of-wheels 4))
+  :annotations
+  ((see-also ZPU-4-source-link-1)
+   (content-created-by Hans-Chalupsky)))
+
+(tell (:about S-60-source-link-1
+              Non-Web-Source-Link
+              (qv-display-text
+               "Jane's Land-based Air Defence 96-97, p.178")
+              (qv-url "http://www.janes.com/")))
+
+(defconcept S-60
+  "CIS 57 mm automatic anti-aircraft gun mounted on a trailer.
+Towing vehicles are ZIL-151 and Ural-375D trucks."
+  :is-primitive Towed-Air-Defense-Artillery
+  :defaults (:and (:filled-by mass-of-object 4660kg)
+                  (:filled-by length-of-object 8.6m)
+                  (:filled-by width-of-object 2.054m)
+                  (:filled-by height-of-object 2.46m)
+                  (:filled-by ground-clearance 0.38m)
+                  (:filled-by track-width 1.935m)
+                  (:filled-by crew-size 7)
+                  (:filled-by number-of-wheels 4))
+  :annotations
+  ((see-also S-60-source-link-1)
+   (content-created-by Hans-Chalupsky)))
+
+(tell (:about M1939-source-link-1
+              Non-Web-Source-Link
+              (qv-display-text
+               "Jane's Land-based Air Defence 96-97, p.177")
+              (qv-url "http://www.janes.com/")))
+
+(defconcept M1939
+  "CIS 85 mm anti-aircraft gun mounted on a trailer.
+Towing vehicle is the ZIL-157 truck."
+  :is-primitive Towed-Air-Defense-Artillery
+  :defaults (:and (:filled-by mass-of-object 4300kg)
+                  (:filled-by length-of-object 7.049m)
+                  (:filled-by width-of-object 2.15m)
+                  (:filled-by height-of-object 2.25m)
+                  (:filled-by ground-clearance 0.4m)
+                  (:filled-by track-width 1.8m)
+                  (:filled-by crew-size 7)
+                  (:filled-by number-of-wheels 4)
+                  (:filled-by number-of-axles 2))
+  :annotations
+  ((see-also M1939-source-link-1)
+   (content-created-by Hans-Chalupsky)))
+
+(defconcept MLRS
+  "The US MLRS is a tracked vehicle containing twelve missiles designed to
+deliver long-range area artillery support.  A corps asset in the U.S. Army."
+  :is-primitive (:and Multiple-Missile-Launcher Military-Tracked-Vehicle)
+  :defaults (:and (:filled-by max-speed-on-road 64km/h)
+                  (:filled-by max-gradient-on-road 60%)
+                  (:filled-by width-of-object 2.97m)
+                  (:filled-by min-turning-radius 6.97m)
+                  (:filled-by length-of-object 6.97m)
+                  (:filled-by height-of-object 2.7m)
+                  (:filled-by mass-of-object 24494kg)
+                  (:filled-by load-class 28))
+  :annotations
+  ((content-created-by Jim-Donlon)))
+
+(defconcept BM-21
+  "The BM-21 is a multiple rocket launching system based on a variety of
+chassis but most often seen on a cross-country truck. 122mm rockets."
+  :is-primitive (:and Multiple-Missile-Launcher Military-Heavy-Truck)
+  :defaults (:and (:filled-by max-speed-on-road 75km/h)
+                  (:filled-by max-range-on-road 750km))
+  :annotations
+  ((content-created-by Jim-Donlon)))
+
+(defconcept BM-22
+  "The BM-22 is a multiple rocket launching system based on a variety of
+chassis but most often seen on a cross-country truck. 220mm rockets."
+  :is-primitive (:and Multiple-Missile-Launcher Military-Heavy-Truck)
+  :defaults (:and (:filled-by max-speed-on-road 65km/h)
+                  (:filled-by max-range-on-road 520km))
+  :annotations
+  ((content-created-by Jim-Donlon)))
+
+(defconcept BM-24
+  "The BM-22 is a multiple rocket launching system based on a variety of
+chassis but most often seen on a cross-country truck. 240mm rockets."
+  :is-primitive (:and Multiple-Missile-Launcher Military-Heavy-Truck)
+  :defaults (:and (:filled-by max-speed-on-road 65km/h)
+                  (:filled-by max-range-on-road 430km))
+  :annotations
+  ((content-created-by Jim-Donlon)))
+
+(defconcept SS-1C-SCUD-B
+  "SCUD rocket launcher."
+  :is-primitive (:and Multiple-Missile-Launcher Military-Heavy-Truck)
+  :defaults (:and (:filled-by max-speed-on-road 75km/h)
+                  (:filled-by max-range-on-road 400km))
+  :annotations
+  ((content-created-by Jim-Donlon)))
+
+(defconcept BSFV
+  "M-2, modified as an air defense platform - Bradley Stinger Fighting Vehicle.
+Carries same armaments as the BIFV, and also six stinger missiles.  Crew of 5."
+  :is-primitive (:and M2
+                      Multiple-Missile-Launcher)
+  :annotations
+  ((content-created-by Jim-Donlon)
+   (content-modified-by Hans-Chalupsky)))
+
+(tell (:about SA-6-TEL-source-link-1
+              Non-Web-Source-Link
+              (qv-display-text
+               "Jane's Land-based Air Defence 96-97, p.94")
+              (qv-url "http://www.janes.com/")))
+(tell (:about SA-6-TEL-image-link-1
+              Full-Image-Link
+              (qv-url "http://www.bharat-rakshak.com/MISSILES/SA-6A.jpg")))
+
+(defconcept SA-6-TEL
+  "TEL of the CIS SA-6 ``Gainful'' low-to-medium altitude
+surface-to-air missile system.  The chassis is related to the ZSU-23-4
+self-propelled air defense system and the ASU-85 self-propelled anti-tank
+gun.  SA-6 is the NATO designation; it is also known as 2K12, 3M9, 9M9,
+9M336, Gainful, Kub, and Kvadrat."
+  :is-primitive (:and Transporter-Erector-Launcher
+                      Lightly-Armored-Vehicle
+                      Military-Tracked-Vehicle
+                      Military-Fording-Vehicle)
+  :defaults (:and (:filled-by mass-of-object 14000kg)
+                  (:filled-by length-of-object 7.389m)
+                  (:filled-by width-of-object 3.18m)
+                  (:filled-by height-of-object 3.45m)
+                  (:filled-by max-speed-on-road 44km/h)
+                  (:filled-by max-range-on-road 260km)
+                  (:filled-by fuel-capacity 250l)
+                  (:filled-by engine-power 240hp)
+                  (:filled-by ground-clearance 0.4m)
+                  (:filled-by max-step 1m)
+                  (:filled-by max-gap-to-traverse 2.5m)
+                  (:filled-by max-fording-depth 1.1m)
+                  (:filled-by track-width 2.67m)
+                  (:filled-by ground-track-length 3.8m)
+                  (:filled-by max-gradient-on-road 60%)
+                  (:filled-by max-tilt 30%)
+                  (:filled-by crew-size 3))
+  :annotations
+  ((content-created-by Hans-Chalupsky)
+   (see-also SA-6-TEL-source-link-1)
+   (html-image "/images/vehicles/SA-6.jpg")
+   (see-also SA-6-TEL-image-link-1)))
+
+(tell (:about SA-6-Missile-image-link-1
+              Full-Image-Link
+              (qv-url "http://www.bharat-rakshak.com/MISSILES/SA-6B.jpg")))
+
+(defconcept SA-6-Missile
+  "Medium-range, low-to-medium altitude, two stage, solid-fuel SAM with
+radio guidance and semi-active radar homing."
+  :is-primitive Surface-To-Air-Missile
+  :annotations
+  ((content-created-by Hans-Chalupsky)
+   (html-image "/images/vehicles/SA-6-firing.jpg")
+   (see-also SA-6-Missile-image-link-1)))
+
+(defconcept SA-6 :is SA-6-TEL)
+
+(tell (:about SA-9-TEL-source-link-1
+              Non-Web-Source-Link
+              (qv-display-text
+               "Jane's Land-based Air Defence 96-97, p.101")
+              (qv-url "http://www.janes.com/")))
+
+(defconcept SA-9-TEL
+  "TEL of the CIS SA-9 ``Gaskin'' low altitude surface-to-air
+missile system.  Armed with four SA-9 missiles.  The SA-9 marries a BRDM
+chassis to a four-shot IR missile launcher.  This system has been almost
+completely replaced in CIS units by the SA-13 system, but the SA-9 is still
+numerous in other countries.  SA-9 is the NATO designation; it is also known
+as 9K31, 9M31, A-95, Gaskin, or Strela-1."
+  :is-primitive (:and Transporter-Erector-Launcher
+                      BRDM)
+  :defaults (:and (:filled-by mass-of-object 7000kg)
+                  (:filled-by length-of-object 5.8m)
+                  (:filled-by width-of-object 2.4m)
+                  (:filled-by height-of-object 2.3m)
+                  (:filled-by max-speed-on-road 100km/h)
+                  (:filled-by max-range-on-road 750km)
+                  (:filled-by max-speed-on-water 10km/h)
+                  (:filled-by fuel-capacity 290l)
+                  (:filled-by engine-power 140hp)
+                  (:filled-by ground-clearance 0.43m)
+                  (:filled-by max-step 0.4m)
+                  (:filled-by max-gap-to-traverse 1.2m)
+                  (:filled-by track-width 1.84m)
+                  (:filled-by max-gradient-on-road 60%)
+                  (:filled-by number-of-axles 2)
+                  (:filled-by number-of-wheels 4)
+                  (:filled-by crew-size 3))
+  :annotations
+  ((content-created-by Hans-Chalupsky)
+   (see-also SA-9-TEL-source-link-1)))
+
+(defconcept SA-9-Missile
+  "Short-range, low-altitude, infrared-guided SAM."
+  :is-primitive Surface-To-Air-Missile
+  :annotations
+  ((content-created-by Hans-Chalupsky)))
+
+(defconcept SA-9 :is SA-9-TEL)
+
+(defconcept M192
+  "Erector/launcher for the I-HAWK SAM missile system towed by a 2.5-ton
+truck such as the M35A2.  No data anywhere to be found."
+  :is-primitive (:and Missile-Launcher
+                      Vehicle-Trailer
+                      Platform--Military)
+  :annotations
+  ((content-created-by Hans-Chalupsky)))
+
+(defconcept HAWK-TEL :is M192)
+(defconcept HAWKTEL :is M192)
+
+
+  ;;
+;;;;;; Prototypical/underspecified vehicle classes
+  ;;
+
+(defconcept Generic-Iranian-Light-Wheeled-Vehicle
+  ;; Use M151 Jeep as typical.
+  :is M151)
+
+(defconcept Generic-Iranian-Heavy-Wheeled-Vehicle
+  ;; Use M51 5-ton truck as typical.
+  :is M51)
+
+(defconcept Generic-Iranian-Decontamination-Truck
+  :is ARS-12U)
+
+(tellm)

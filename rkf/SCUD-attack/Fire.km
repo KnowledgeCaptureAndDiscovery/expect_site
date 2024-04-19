@@ -1,0 +1,93 @@
+
+#|
+;;; INFORMAL SKETCH OF THIS PROTOTYPE:
+
+Fire
+  destination(o): Target and Tangible-Entity
+  origin(o): Tangible-Entity
+  recipient(o): Target and Tangible-Entity
+  donor(o): Tangible-Entity
+  subevent(i): Relinquish
+                 next-event(i): Move...
+                 donor(o): Tangible-Entity
+                 object(o): Projectile...
+                 agent(o): Tangible-Entity
+               Move
+                 next-event(i): Deliver...
+                 destination(o): Target and Tangible-Entity
+                 origin(o): Tangible-Entity
+                 object(o): Projectile...
+               Deliver
+                 recipient(o): Target and Tangible-Entity
+                 donor(o): Tangible-Entity
+                 object(o): Projectile...
+  first-subevent(i): Relinquish
+                       next-event(i): Move...
+                       donor(o): Tangible-Entity
+                       object(o): Projectile...
+                       agent(o): Tangible-Entity
+  object(o): Projectile
+               location(o): Place
+  agent(o): Tangible-Entity
+
+|#
+
+;;; KM REPRESENTATION OF THIS PROTOTYPE
+
+(Fire has (superclasses (Send)))
+
+(Fire now-has (prototypes (_Fire1149)))
+
+(_Fire1149 has
+  (prototype-of (Fire))
+  (prototype-scope (Fire))
+  (prototype-participants (_Fire1149 _Target1150 _Move1151 _Deliver1152
+                           _Relinquish1153 _Projectile1154
+                           _Tangible-Entity1155 _Place1156)))
+
+(_Fire1149 has
+  (instance-of (Fire))
+  (agent (_Tangible-Entity1155))
+  (object (_Projectile1154))
+  (first-subevent (_Relinquish1153))
+  (subevent (_Relinquish1153 _Move1151 _Deliver1152))
+  (donor (_Tangible-Entity1155))
+  (recipient (_Target1150))
+  (origin (_Tangible-Entity1155))
+  (destination (_Target1150))
+  (new-objects (_Projectile1154 _Target1150)))
+
+(_Target1150 has (instance-of (Target Tangible-Entity)))
+
+(_Move1151 has
+  (instance-of (Move))
+  (object (_Projectile1154))
+  (origin (_Tangible-Entity1155))
+  (destination (_Target1150))
+  (next-event (_Deliver1152)))
+
+(_Deliver1152 has
+  (instance-of (Deliver))
+  (object (_Projectile1154))
+  (donor (_Tangible-Entity1155))
+  (recipient (_Target1150)))
+
+(_Relinquish1153 has
+  (instance-of (Relinquish))
+  (agent (_Tangible-Entity1155))
+  (object (_Projectile1154))
+  (donor (_Tangible-Entity1155))
+  (next-event (_Move1151)))
+
+(_Projectile1154 has (instance-of (Projectile)) (location (_Place1156)))
+
+(_Tangible-Entity1155 has (instance-of (Tangible-Entity)))
+
+(_Place1156 has (instance-of (Place)))
+
+
+#|
+;;; TRADITIONAL FORMAT FOR SME'S LAST ACTIONS WOULD HAVE LOOKED:
+
+
+|#

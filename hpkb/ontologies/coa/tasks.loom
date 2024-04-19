@@ -1,0 +1,187 @@
+;;; -*- Mode: Lisp; Package: CYC; Syntax: COMMON-LISP; Base: 10 -*-
+
+(in-package "CYC")
+
+
+;;; ******************** CONCEPTS ********************
+
+(DEFCONCEPT |ImpedingMovement|
+  :IS-PRIMITIVE (:and |ConstrainingEvent| |MilitaryEvent|)
+  :ANNOTATIONS (|IKBConstant| |ScriptType| |TemporalObjectType|))
+
+(DEFCONCEPT |MilitaryContainment|
+  :IS-PRIMITIVE |MilitaryEvent|
+  :ANNOTATIONS (|IKBConstant| |ScriptType| |TemporalObjectType|))
+
+(DEFCONCEPT |MilitaryDefensiveOperation|
+  :IS-PRIMITIVE (:and |ProtectingSomething| |MilitaryOperation|)
+  :ANNOTATIONS (|IKBConstant|
+                |ScriptType|
+                |MilitaryOperationType|
+                |TemporalObjectType|
+                (DOCUMENTATION "The collection of all instances of #$MilitaryOperation where      the primary purpose or goal is defensive in nature. This      collection is inclusive of concerted operations carried out by      multiple units. For individual MilitaryTasks carried out by      particular units, see #$MilitaryDefensiveTask.      #$MilitaryDefensiveOperation is the 'defensive' analog of      #$MilitaryOffensiveOperation.")))
+
+(DEFCONCEPT |MilitaryDefensiveTask|
+  :IS-PRIMITIVE (:and |ProtectingSomething| |MilitaryTask|)
+  :ANNOTATIONS (|IKBConstant|
+                |ScriptType|
+                |TemporalObjectType|
+                (DOCUMENTATION "The collection comprised of all defensive forms of Task. This collection is *not* a specialization of #$MilitaryDefensiveOperation since #$MilitaryDefensiveOperation is a specialization of #$MilitaryOperation: instances are carried out by several units acting in concert to implement primary and support tasks. An instance of #$MilitaryDefensiveOperation will be comprised of one or more instances of #$MilitaryDefensiveTask figuring as #$subEvents.")))
+
+(DEFCONCEPT |MilitaryInterferenceAction|
+  :IS-PRIMITIVE |MilitaryEvent|
+  :ANNOTATIONS (|IKBConstant|
+                |ScriptType|
+                |TemporalObjectType|
+                (DOCUMENTATION "Any type of action that a military force undertakes to interfere with operations of an enemy military force.")))
+
+(DEFCONCEPT |MilitaryOffensiveOperation|
+  :IS-PRIMITIVE (:and |MilitaryAttack| |MilitaryOperation|)
+  :ANNOTATIONS (|IKBConstant|
+                |ScriptType|
+                |MilitaryOperationType|
+                |TemporalObjectType|
+                (DOCUMENTATION "The collection of all instances of      MilitaryOperation where the primary purpose or goal      is offensive in nature. This collection is inclusive      of concerted operations carried out by multiple      units. For individual MilitaryTasks carried out by      particular units, see MilitaryOffensiveTask.      MilitaryOffensiveOperation is the 'defensive' analog      of MilitaryDefensiveOperation.")))
+
+(DEFCONCEPT |MilitaryOffensiveTask|
+  :IS-PRIMITIVE |MilitaryTask|
+  :ANNOTATIONS (|IKBConstant|
+                |TemporalObjectType|
+                |ScriptType|
+                (DOCUMENTATION "The collection comprised of the closed class of offensive forms of MilitaryTask. The collection is not a specialization of MilitaryAttack or AttackOnTangible, since not all forms of MilitaryOffensiveTask constitute outright attacks. Some instances may be attacks, however.")))
+
+(DEFCONCEPT |MilitaryTask|
+  :IS-PRIMITIVE (:and |MilitaryEvent| |SingleDoerAction|)
+  :ANNOTATIONS (|IKBConstant|
+                |TemporalObjectType|
+                |ScriptType|
+                (DOCUMENTATION "The collection of all military Tasks such as might be assigned to deployable, modern military units. A particular task is performed by one and only one unit, although other units may function in a support capacity, and subunits of the performing unit may be assigned tasks that figure as subtasks of the performing unit's assigned task. In this case the tasks of the subordinate units should be related to the overarching task of the superior unit by the #$subTasks-Military relation. A single unit may be assigned more than one task. Notice that this collection is a specialization of #$MilitaryEvent, not #$MilitaryOperation -- instances of the latter are complex events take account of both primary tasks and their subtasks and also distinct support tasks. Instances of #$MilitaryTask may properly figure as #$subEvents in an instance of #$MilitaryOperation.")))
+
+(DEFCONCEPT |MovementAgainstResistance-Military|
+  :IS-PRIMITIVE (:and |Movement-TranslationEvent| |MilitaryEvent|)
+  :ANNOTATIONS (|IKBConstant| |ScriptType| |TemporalObjectType|))
+
+(DEFCONCEPT |WithdrawalFromCombat|
+  :IS-PRIMITIVE (:and |LeavingAPlace| |MilitaryEvent|)
+  :ANNOTATIONS (|IKBConstant| |ScriptType| |TemporalObjectType|))
+
+
+
+;;; ******************** FUNCTIONS AND RELATIONS ********************
+
+(DEFRELATION |mainTaskOfOperation|
+  :ARITY 2
+  :IS-PRIMITIVE |subEvents|
+  :DOMAIN |MilitaryOperation|
+  :RANGE |MilitaryTask|
+  :ANNOTATIONS (|IrreflexiveBinaryPredicate|
+                |AntiSymmetricBinaryPredicate|
+                |AsymmetricBinaryPredicate|
+                (DOCUMENTATION "This predicate relates an instance of      MilitaryOperation to an instance of MilitaryTask.      (mainTaskOfOperation OP TASK) means that TASK is      considered to be the principle task and raison d'etre      of the MilitaryOperation OP within the plan      specification context in which the assertion is made.      This entails (subEvents OP TASK).")))
+
+(DEFRELATION |missionLevelTaskOfCOA|
+  :ARITY 2
+  :DOMAIN |COASpecificationMicrotheory|
+  :RANGE |MilitaryTask|
+  :ANNOTATIONS (|IKBConstant|
+                |FunctionalPredicate|
+                |BinaryPredicate|
+                (DOCUMENTATION "(#$missionLevelTaskOfCOA COA TASK) means that TASK      is the 'top-level task' in the COA operation,      assigned to the unit which has as its subordinates      the units assigned the #$mainTaskOfOperation and the      units assigned principle supporting tasks (see      #$supportingTaskOfOperation). Do not confuse this with      #$mainTaskOfOperation: TASK is one level of      representation 'up' from the task identified as the      #$mainTaskOfOperation and includes that task as a      #$subTasks-Military. Although the      #$missionLevelTaskOfCOA and the unit assigned to it      are referenced in the 'mission' section of the COA      statement, neither may be represented explicitly in      the COA sketch, as both are one level above the      sketch's level of representation.")))
+
+(DEFRELATION |subTasks-Military|
+  :ARITY 2
+  :IS-PRIMITIVE |subEvents|
+  :DOMAIN |MilitaryTask|
+  :RANGE |MilitaryTask|
+  :ANNOTATIONS (|IKBConstant|
+                |Cyc_Role|
+                |NonPhysicalPartPredicate|
+                |ReflexiveBinaryPredicate|
+                |AntiSymmetricBinaryPredicate|
+                |TransitiveBinaryPredicate|
+                |SubProcessSlot|
+                |ComplexTemporalRelation|
+                (DOCUMENTATION "(subTasks-Military TASK SUBTASK) means that SUBTASK is considered a proper #$subEvents of TASK and presupposes that any unit assigned to perform SUBTASK is a #$subOrganizations of the unit assigned to perform TASK. This relation is used to express the relationship between a task assigned to a particular military unit at one level of planning in the MDMPand the task assigned to a subunit of that unit at a lower level of planning.")))
+
+(DEFRELATION |supportingTask|
+  :ARITY 2
+  :DOMAIN |MilitaryTask|
+  :RANGE |MilitaryTask|
+  :ANNOTATIONS (|IrreflexiveBinaryPredicate|
+                |AsymmetricBinaryPredicate|
+                |TransitiveBinaryPredicate|
+                (DOCUMENTATION "(#$supportingTask SUPPORTING SUPPORTED) means that SUPPORTING satisfies one or more of the preconditions for SUPPORTED, lowers the cost associated with performing SUPPORTED, and increases the utility of the consequences of SUPPORTED for the unit tasked with performing it. It is, in consequence, a specialization of #$taskAssists, #$taskComplements, and #$taskPositiveSynergyWith. In general, this will often be the relation that is asserted to hold between the #$mainTask of an instance of #$MilitaryOperation and any task that is carried out by friendly forces in the course of the operation that is not a #$subTasks-Military of the #$mainTask.")))
+
+(DEFRELATION |supportingTaskOfOperation|
+  :ARITY 2
+  :IS-PRIMITIVE |subEvents|
+  :DOMAIN |MilitaryOperation|
+  :RANGE |MilitaryTask|
+  :ANNOTATIONS (|IrreflexiveBinaryPredicate|
+                |AntiSymmetricBinaryPredicate|
+                |AsymmetricBinaryPredicate|
+                (DOCUMENTATION "(#$supportingTaskOfOperation OP SUPTASK) means that (#$subEvents OP SUPTASK) and, if (#$mainTaskOfOperation OP MAINTASK), then (#$supportingTask MAINTASK SUPTASK).")))
+
+(DEFRELATION |taskOfOperation|
+  :ARITY 2
+  :DOMAIN |MilitaryOperation|
+  :RANGE |MilitaryTask|
+  :ANNOTATIONS (|BinaryPredicate|
+                |IKBConstant|
+                (DOCUMENTATION "(taskOfOperation OPERATION TASK) means that TASK,      an instance of MilitaryTask, is the task associated with      OPERATION, an instance of MilitaryOperation.")))
+
+(DEFRELATION |timeConstraintOfTask|
+  :ARITY 2
+  :DOMAIN |MilitaryTask|
+  :RANGE |TemporalThing|
+  :ANNOTATIONS (|IKBConstant|
+                |BinaryPredicate|
+                (DOCUMENTATION "(timeConstraintOfTask TASK TIMESPEC) means that within a particular plan specification or course of action context, TASK is to be completed within the time extent of the #$TemporalThing TIMESPEC.")))
+
+(DEFRELATION |unitAssignedToOperation|
+  :ARITY 2
+  :DOMAIN |MilitaryOperation|
+  :RANGE |ModernMilitaryUnit-Deployable|
+  :ANNOTATIONS (|IKBConstant|
+                |ActorSlot|
+                (DOCUMENTATION "(unitAssignedToOperation OP UNIT) means that UNIT is the      instance of #$ModernMilitaryUnit-Deployable that is charged with      primary responsibility for implementing Operation in accordance with a      course of action (COA).")))
+
+(DEFRELATION |unitAssignedToTask|
+  :ARITY 2
+  :DOMAIN |MilitaryTask|
+  :RANGE |ModernMilitaryUnit-Deployable|
+  :ANNOTATIONS (|IKBConstant|
+                |ActorSlot|
+                (DOCUMENTATION "(unitAssignedToTask TASK UNIT) means that UNIT is the instance of #$ModernMilitaryUnit-Deployable that is charged with primary responsibility for implementing TASK in accordance with a course of action (COA).")))
+
+
+
+;;; ******************** GENERAL ASSERTIONS ********************
+
+#|
+
+(TELL
+ (:ABOUT |ModernMilitaryTacticsMt| |IKBConstant| |ApplicationContext|
+  (DOCUMENTATION "This instance of #$Microtheory is intended to contain doctrinal rules and definitions pertaining to military tactics. Since much of the information contained here references data about military force structure, vehicles, and weapons, this microtheory has access to the #$ModernMilitaryWeaponsMt #$MilitaryForceStructureMt and the #$ModernMilitaryVehiclesMt. A number of more specialized tactical microtheories in turn have access to it: each of these contains information derived from a specific source. Each of the source-specific microtheories is in turn accessed by the #$ModernMilitaryMt which is intended to have access to all aspects of modern military operations. Plan representation microtheories that specify military COAs (courses of action) will also have access to it.")))
+
+(TELL (|genlMt| |ModernMilitaryTacticsMt| |WorldGeographyDualistMt|))
+
+(TELL (|genlMt| |ModernMilitaryTacticsMt| |NWUTrafficabilityMt|))
+
+(TELL (|genlMt| |ModernMilitaryTacticsMt| |ModalityMt|))
+
+(TELL (|genlMt| |ModernMilitaryTacticsMt| |BaseKB|))
+
+(TELL (|genlMt| |ModernMilitaryTacticsMt| |ModernMilitaryWeaponsMt|))
+
+(TELL (|genlMt| |ModernMilitaryTacticsMt| |MilitaryForceStructureMt|))
+
+(TELL (|genlMt| |ModernMilitaryTacticsMt| |ModernMilitaryVehiclesMt|))
+
+(TELL
+ (:ABOUT |SpecializedTacticsSourceMt| |IKBConstant| |ApplicationContext|
+  (DOCUMENTATION "This instance of #$Microtheory and its siblings are intended to contain source-specific information concerning military tactics acquired by the knowledge acquisition tools of the Battlespace COA-critiquing project. Since this information will probably be encoded in terms of constants defined in the #$ModernMilitaryTacticsMt, this microtheory has been given access to that context. The #$ModernMilitaryMt in turn has access to this microtheory and all others like it.")))
+
+(TELL (|genlMt| |SpecializedTacticsSourceMt| |ModernMilitaryTacticsMt|))
+
+|#

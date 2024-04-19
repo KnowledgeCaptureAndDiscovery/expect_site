@@ -1,0 +1,153 @@
+<advertisement>
+<agent-id>flight-schedule</agent-id>
+
+
+<capability>
+<MethodGoal>
+<VarGoalForm>
+<GoalName>MONITOR</GoalName>
+<ManyVarGoalArgument>
+	<VarGoalArgument>
+		<ParameterName>obj</ParameterName>
+			<MethodGoalArgument>
+				<VariableName>?o</VariableName><is>IS</is>
+                 <ComplexData><edt>SPEC-OF</edt>
+					<ConceptName>airfare</ConceptName></ComplexData>
+	</MethodGoalArgument>
+	</VarGoalArgument>
+	<VarGoalArgument>
+		<ParameterName>WITH</ParameterName>
+			<MethodGoalArgument>
+				<VariableName>?d</VariableName><is>IS</is>
+					<ComplexData><edt>INST-OF</edt>
+					<ConceptName>original price</ConceptName></ComplexData>
+	</MethodGoalArgument>
+	</VarGoalArgument>
+	<VarGoalArgument>
+		<ParameterName>OF</ParameterName>
+			<MethodGoalArgument>
+				<VariableName>?f</VariableName>
+					<ComplexData>
+					<ConceptName>airline</ConceptName></ComplexData>
+	</MethodGoalArgument>
+	</VarGoalArgument>
+
+	<VarGoalArgument>
+		<ParameterName>OF2</ParameterName>
+			<MethodGoalArgument>
+				<VariableName>?n</VariableName><is>IS</is>
+					<ComplexData><edt>INST-OF</edt>
+					<ConceptName>outbound-flight-number</ConceptName></ComplexData>
+	</MethodGoalArgument>
+	</VarGoalArgument>
+
+	<VarGoalArgument>
+		<ParameterName>OF3</ParameterName>
+			<MethodGoalArgument>
+				<VariableName>?n2</VariableName><is>IS</is>
+					<ComplexData><edt>INST-OF</edt>
+					<ConceptName>outbound-flight-number2</ConceptName></ComplexData>
+	</MethodGoalArgument>
+	</VarGoalArgument>
+
+	<VarGoalArgument>
+		<ParameterName>ON</ParameterName>
+			<MethodGoalArgument>
+				<VariableName>?d</VariableName><is>IS</is>
+					<ComplexData><edt>INST-OF</edt>
+					<ConceptName>outbound-departure-date</ConceptName></ComplexData>
+	</MethodGoalArgument>
+	</VarGoalArgument>
+
+	
+	<VarGoalArgument>
+		<ParameterName>FROM</ParameterName>
+			<MethodGoalArgument>
+				<VariableName>?a</VariableName><is>IS</is>
+					<ComplexData><edt>INST-OF</edt>
+               <ConceptName>outbound-departure-airport</ConceptName></ComplexData>
+	</MethodGoalArgument>
+	</VarGoalArgument>
+
+	<VarGoalArgument>
+		<ParameterName>TO</ParameterName>
+			<MethodGoalArgument>
+				<VariableName>?a2</VariableName><is>IS</is>
+					<ComplexData><edt>INST-OF</edt>
+					<ConceptName>outbound-arrival-airport</ConceptName></ComplexData>
+	</MethodGoalArgument>
+	</VarGoalArgument>
+
+	<VarGoalArgument>
+		<ParameterName>OF4</ParameterName>
+			<MethodGoalArgument>
+				<VariableName>?n3</VariableName><is>IS</is>
+					<ComplexData><edt>INST-OF</edt>
+					<ConceptName>return-flight-number</ConceptName></ComplexData>
+	</MethodGoalArgument>
+	</VarGoalArgument>
+
+	<VarGoalArgument>
+		<ParameterName>OF5</ParameterName>
+			<MethodGoalArgument>
+				<VariableName>?n4</VariableName><is>IS</is>
+					<ComplexData><edt>INST-OF</edt>
+					<ConceptName>return-flight-number2</ConceptName></ComplexData>
+	</MethodGoalArgument>
+	</VarGoalArgument>
+
+	<VarGoalArgument>
+		<ParameterName>ON2</ParameterName>
+			<MethodGoalArgument>
+				<VariableName>?d2</VariableName><is>IS</is>
+					<ComplexData><edt>INST-OF</edt>
+					<ConceptName>return-departure-date</ConceptName></ComplexData>
+	</MethodGoalArgument>
+	</VarGoalArgument>
+
+
+	<VarGoalArgument>
+		<ParameterName>FROM2</ParameterName>
+			<MethodGoalArgument>
+				<VariableName>?a</VariableName><is>IS</is>
+					<ComplexData><edt>INST-OF</edt>
+					<ConceptName>return-departure-airport</ConceptName></ComplexData>
+	</MethodGoalArgument>
+	</VarGoalArgument>
+
+	<VarGoalArgument>
+		<ParameterName>TO2</ParameterName>
+			<MethodGoalArgument>
+				<VariableName>?a2</VariableName><is>IS</is>
+					<ComplexData><edt>INST-OF</edt>
+					<ConceptName>return-arrival-airport</ConceptName></ComplexData>
+	</MethodGoalArgument>
+	</VarGoalArgument>
+
+	<VarGoalArgument>
+		<ParameterName>FOR</ParameterName>
+			<MethodGoalArgument>
+				<VariableName>?u</VariableName><is>IS</is>
+					<ComplexData><edt>INST-OF</edt>
+					<ConceptName>user-id</ConceptName></ComplexData>
+	</MethodGoalArgument>
+	</VarGoalArgument>
+	<VarGoalArgument>
+		<ParameterName>NOTIFY</ParameterName>
+			<MethodGoalArgument>
+				<VariableName>?on</VariableName><is>IS</is>
+					<ComplexData><edt>INST-OF</edt>
+					<ConceptName>on</ConceptName></ComplexData>
+	</MethodGoalArgument>
+	</VarGoalArgument>
+
+</ManyVarGoalArgument>
+</VarGoalForm>
+</MethodGoal>
+</capability>
+<result>
+	
+<ComplexData><edt>INST-OF</edt><ConceptName>message</ConceptName></ComplexData>
+</result>
+</advertisement>
+

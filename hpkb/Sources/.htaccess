@@ -1,0 +1,8 @@
+AuthType Basic 
+AuthName HPKB
+AuthUserFile /home/www/isd/HPKB/Protected/.htpasswd 
+AuthGroupFile /dev/null
+
+<LIMIT GET POST>
+require user hpkb
+</LIMIT>

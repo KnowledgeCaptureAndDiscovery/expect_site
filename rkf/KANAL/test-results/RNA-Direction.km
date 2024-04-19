@@ -1,0 +1,67 @@
+(RNA-Direction has (superclasses (Event)))
+(every RNA-Direction has (some-associated-attach3 ((a Attach)))
+ (some-associated-be-attached-to3 ((a Be-Attached-To)))
+ (some-associated-ribonucleotide3 ((a Ribonucleotide)))
+ (some-associated-ribonucleotide4 ((a Ribonucleotide)))
+ (subevent
+  ((((the some-associated-attach3 of Self)) &&
+    ((a Attach with
+      (base ((the some-associated-ribonucleotide3 of Self)))))
+    &&
+    ((a Attach with
+      (object ((the some-associated-ribonucleotide4 of Self)))))
+    &&
+    ((a Attach with
+      (causes ((the some-associated-be-attached-to3 of Self)))))
+    &&
+    ((a Attach with
+      (base
+       ((a Ribonucleotide with
+         (has-region ((the some-associated-5-prime-end of Self))))))))
+    &&
+    ((a Attach with
+      (object
+       ((a Ribonucleotide with
+         (has-region ((the some-associated-3-prime-end of Self))))))))
+    &&
+    ((a Attach with
+      (origin
+       ((the has-region of (the base of (the subevent of Self)))))))
+    &&
+    ((a Attach with
+      (destination
+       ((the has-region of (the object of (the subevent of Self)))))))
+    &&
+    ((a Attach with
+      (destination
+       ((the first of
+         (the has-region of
+          (the some-associated-rna-molecule5 of Self)))))))
+    &&
+    ((a Attach with
+      (origin
+       ((the second of
+         (the has-region of
+          (the second of
+           (the is-region-of of
+            (the destination of (the subevent of Self))))))))))
+    &&
+    ((a Attach with
+      (object
+       ((the first of
+         (the has-basic-structural-unit of
+          (the second of
+           (the is-region-of of
+            (the origin of (the subevent of Self))))))))))
+    &&
+    ((a Attach with
+      (object
+       ((a Ribonucleotide with
+         (is-part-of
+          ((a RNA-Molecule with
+            (has-basic-structural-unit
+             ((a Ribonucleotide) (a Ribonucleoside-Monophosphate)
+              (the base of (the subevent of Self)))))))))))))))
+ (some-associated-3-prime-end ((a 3-Prime-End)))
+ (some-associated-5-prime-end ((a 5-Prime-End)))
+ (some-associated-rna-molecule5 ((a RNA-Molecule))))

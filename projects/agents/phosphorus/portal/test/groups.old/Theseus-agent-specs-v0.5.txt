@@ -1,0 +1,367 @@
+====================================================================
+====================================================================
+
+   THESEUS AGENT SPECS FOR "MEET THE ELVES" PHOSPHORUS PORTAL
+
+                       Version 0.5  (12/13/01)
+====================================================================
+
+
+NOTES:
+
+* Incorporated in version 0.5:
+ One problem in the spec of version 0.4 was that if the agent sent no
+ messages back it was not clear if this should be interpreted as 
+ nothing changed or as a sign that there were errors in the 
+ inputs specified by the user.  In this version, we added three more 
+ types of messages.  One is a message that the agent sends acknowledging
+ receipt of the request.  The second is a message when the monitoring 
+ agent has no changes to report, and it just says that everything 
+ remains the same with the flight.  The third is a message 
+ that reports an error in case the agent cannot answer the query 
+ (e.g. server that the agent is accessing goes down).
+
+* Incorporated in version 0.3:
+ One problem in version 0.2 was that the messages did not use 
+ appropriate KQML conventions.  In the new version, we use
+ the conventional KQML performatives for replies and errors.
+ We also use the conventional KQML fields to identify which
+ request a reply is for (:reply-with and :in-reply-to).
+ 
+* Incorporated in version 0.2:
+ Version 0.1 did not have all the input parameters that the
+ agent requires (eg, the user id). In the new version, we added
+ a complete parameter set.      
+
+====================================================================
+THESEUS AGENT INPUTS:
+
+Each agent has a list of inputs, each input is specified within an XML tag.
+The order of the inputs does not matter. Some inputs may be empty,
+but the tag has to be included in the messages.  No spaces should appear
+within the tags.  Tag names are case sensitive.
+
+All the input parameters are surrounded by a tag "OBJECT" (it is tradition to
+use this tag in the wrapper work).
+
+====================================================================
+USERS:
+
+Users will be identified by their email address, which the Teamcore agents
+will translate into the whole names.
+
+====================================================================
+
+INPUT PARAMETER SPECS FOR ALL THESEUS AGENTS
+
+The following constraints are applicable to all Theseus agents used in this integration:
+
+  - airline: a string (the airline name).  Must be one of a prespecified set.
+  - flight: a number
+  - date: MM/DD/YYYY.  No preceeding zeroes are allowed, so if a number is less than ten it will
+              be single digit.
+  - airport: a string that corresponds to the airport code.  It must be 3 letters long.
+  - email: the user unique id as his/her email address
+  - fax: fax numbers must be 9 digits, and should not contain parentheses or dashes.
+  - time:  one or two digits for the hour, followed by a semicolon, followed by two digits
+              for the minutes, followed by a space, followed by "am" or "pm".
+  - cost: a number (dollars).
+
+
+====================================================================
+
+REPLIES FROM THE AGENTS
+
+The agent will send a reply that includes the request and a message for the user.
+Teamcore agents will receive the same messages and will be responsible for
+notifying the user in an appropriate manner and device.
+
+The agent may send more than one reply to a given request. When the request 
+is received, the agent will send a message to acknowledge receipt.  The
+agent will send a reply message each time the flight is delayed or cancelled 
+by the airline.  If there are no changes, an agent will send a reply hours 
+before the flight to confirm to the user that there were no changes while 
+it monitored the flight.
+
+====================================================================
+
+ERRORS REPORTS
+
+Users may make errors when they specify the arguments.
+Some errors will be detected in the interface, since each
+input parameter will be described in a schema/ontology
+and this information will be used to check the parameters.
+For example, the interface will check that the airport
+is specified as a string that is 3 characters long.
+
+Other errors cannot be checked by the interface in practice.  For
+example, the flight number needs to be validated depending
+on the airline and date.  The agents may be able to detect
+some of these errors and report them back in an error message
+(the format of these messages is shown below).
+
+Other errors may not be detected by an agent, and in those cases
+the agent will send no replies.
+
+====================================================================
+
+SAMPLE MESSAGES
+
+Below are examples of the messages that the Phosphorus Portal 
+exchanges with the flight-status Theseus agent.  The formats are 
+similar for other agents.
+
+Sample request message:
+
+(ask-one
+   :receiver TheseusMA
+   :sender PhosphorusPortal
+   :reply-with "<OBJECT><airline>United 
+Airlines</airline><flight>200</flight><date>12/3/2001</date><IN_DAIRPORT
+>LAX</IN_DAIRPORT><email>gil@isi.edu</email><hfax></hfax><cfax></cfax></
+OBJECT>"
+   :content (
+     :domain ft
+     :wrapper addGridTask
+     :agentname flight-status
+     :sinput "<OBJECT>
+              <airline>United Airlines</airline>
+              <flight>200</flight>
+              <date>12/3/2001</date>
+              <IN_DAIRPORT>LAX</IN_DAIRPORT>
+              <email>gil@isi.edu</email>
+              <hfax></hfax>
+              <cfax></cfax>
+              </OBJECT>"
+   )
+)
+
+Sample message to acknowledge receipt of the request:
+
+(reply
+   :sender flight-status
+   :receiver PhosphorusPortal
+   :in-reply-to "<OBJECT><airline>United 
+Airlines</airline><flight>200</flight><date>12/3/2001</date><IN_DAIRPORT
+>LAX</IN_DAIRPORT><email>gil@isi.edu</email><hfax></hfax><cfax></cfax></
+OBJECT>"
+   :content (<ack>OK</ack>))
+
+
+Sample reply message if the monitoring agent detects a change:
+
+(reply
+   :sender flight-status
+   :receiver PhosphorusPortal
+   :in-reply-to "<OBJECT><airline>United 
+Airlines</airline><flight>200</flight><date>12/3/2001</date><IN_DAIRPORT
+>LAX</IN_DAIRPORT><email>gil@isi.edu</email><hfax></hfax><cfax></cfax></
+OBJECT>"
+   :content (
+<message>
+<subject>Flight Schedule Changed</subject>
+<content>Hello, jeanoh_at_isi_edu.
+
+     This is a message from your flight status monitoring elf.
+Your fligt United Airlines 200 schedule was changed as follows.
+
+Original schedule : depart at Mon Dec 03 11:58:00 PST 2001 arrives at
+Mon
+Dec 03 21:15:00 PST 2001
+
+New schedule : depart at Mon Dec 03 11:28:00 PST 2001 arrives at Mon Dec
+03
+20:45:00 PST 2001
+
+Please note the change. The flight will depart 30 minute early.
+
+     Thank you.
+
+          From e-elves
+</content>
+<shortcontent>CHANGED : United Airlines 200 departs at Mon Dec 03
+11:10:00
+PST 2001</shortcontent>
+</message>
+)
+)
+
+Sample reply message if the monitoring agent did not detect any changes:
+
+(reply   :sender flight-status :receiver PhosphorusPortal :in-reply-to
+"<OBJECT>
+<airline>delta air
+lines</airline><flight>11</flight><date>12/12/2001</date><IN_
+DAIRPORT>LAX</IN_DAIRPORT><email>jeanoh@isi.edu</email><hfax>3108220751</hfa
+x><c
+fax></cfax></OBJECT>"   :content (<message><subject>Departs in 2.5
+hours</subject><con
+tent>
+    Dear jeanoh_at_isi_edu,
+
+    this message was generated by your flight monitoring elf. Your flight
+delta
+air lines 11 will depart on time approximately in 2 hours and 30 minutes.
+
+
+Original Flight Schedule : depart at Wed Dec 12 11:58:00 PST 2001 arrives
+at Wed
+ Dec 12 17:15:00 PST 2001
+
+Estimated Time : departed at Wed Dec 12 11:50:00 PST 2001 arrived at Wed
+Dec 12
+18:50:00 PST 2001
+
+    Thank you.
+
+         -- Electric elves
+</content><shortcontent>delta air lines 11 On Time (Wed Dec 12 11:50:00 PST
+2001
+ - Wed Dec 12 11:50:00 PST 2001)</shortcontent></message>))
+ 
+ 
+Sample error message (also a reply) when the parameters provided by 
+the user are incorrect:
+
+(error
+   :sender flight-status
+   :receiver PhosphorusPortal
+   :in-reply-to "<OBJECT><airline>United 
+Airlines</airline><flight>200</flight><date>12/3/2001</date><IN_DAIRPORT
+>LAX</IN_DAIRPORT><email>gil@isi.edu</email><hfax></hfax><cfax></cfax></
+OBJECT>"
+   :content (<error><type>Invalid
+input</type><attr>airport</attr></error>)
+
+
+Sample error message (also a reply) when the inputs are invalid, or 
+there is a failure on the source server, an source wrapper failure, 
+or the data is no longer available on the server:
+
+(error   :sender airfare   :receiver PhosphorusPortal   :in-reply-to
+"<OBJECT><
+email>jeanoh@isi.edu</email><o_price>2500</o_price><date1>12/15/2001</date1>
+<dat
+e2>12/20/2001</date2><Airline>American
+Airlines</Airline><From1>LAX</From1><To1>
+IAD</To1><From2>IAD</From2><To2>LAX</To2><flight0_0>144</flight0_0><flight0_
+1></
+flight0_1><flight1_0>143</flight1_0><flight1_1></flight1_1></OBJECT>"
+:content
+ (<error>
+      <type>Data not available for given flights</type>
+      <attr>flight0_0</attr>
+      <attr>flight0_1</attr>
+      <attr>flight1_0</attr>
+      <attr>flight1_1</attr>
+      </error>))
+
+
+********************************************************************
+1. THESEUS-FLIGHT-STATUS: FLIGHT STATUS MONITOR AGENT
+
+AGENT: FLIGHT-STATUS (Theseus agent).  Monitors flight status on 
+the departure date.  It notifies the user of schedule delays and
+cancellations.  It also notifies the hotel and car rental of
+delayed arrivals.
+
+INPUT SPECS:
+
+   <airline>
+   <flight>
+   <date>
+   <IN_DAIRPORT>: arrival airport
+   <email>
+   <hfax>: hotel fax number, so the hotel can be notified of the delayed arrival
+             and hold the reservation.  If empty, no fax will be sent in case of delay.
+   <cfax>: car rental fax number, so they can be notified and update the reservation.
+             If empty, no fax will be sent in case of delay.
+
+SAMPLE AGENT INPUTS:
+
+             <airline>United Airlines</airline>
+             <flight>200</flight>
+             <date>12/3/2001</date>
+             <IN_DAIRPORT>LAX</IN_DAIRPORT>
+             <email>gil@isi.edu</email>
+             <hfax></hfax>
+             <cfax></cfax>
+             
+********************************************************************
+2. THESEUS-AIRFARE:  Airfare monitor for roundtrip
+
+AGENT: AIRFARE (Theseus agent).  Monitors the airfare of a 
+roundtrip.  It notifies the user if a lower airfare becomes
+available
+
+INPUT SPECS:
+
+             <email>
+             <date1>: date of the outbound flights
+             <date2>: date of the return flights
+             <Airline>
+             <From1>: departure airport of outbound
+             <To1>: destination airport of outbound
+             <From2>: departure airport of return
+             <To2>: destination airport of return
+             <flight0_0>: flight number of first leg of the outbound
+             <flight0_1>: flight number of second leg of the outbound.  It may be empty if no stopovers.
+             <flight1_0>: flight number of first leg of the return
+             <flight1_1>: flight number of second leg of the return.  It may be empty if no stopovers.
+             <o_price>: original price
+             
+SAMPLE AGENT INPUTS:
+
+             <email>gil@isi.edu</email>
+             <date1>12/20/2001</date1>
+             <date2>12/30/2001</date2>
+             <Airline>United Airlines</Airline>
+             <From1>LAX</From1>
+             <To1>IAD</To1>
+             <From2>IAD</From2>
+             <To2>LAX</To2>
+             <flight0_0>918</flight0_0>
+             <flight0_1></flight0_1>
+             <flight1_0>179</flight1_0>
+             <flight1_1></flight1_1>
+             <o_price>1000</o_price>             
+             
+
+
+********************************************************************
+3. THESEUS-SCHEDULE: Flight schedule monitor
+
+AGENT: FLIGHT-SCHEDULE (Theseus agent).  Monitors schedule changes 
+of a rountrip done by the airline up to one day before departure.  
+
+INPUT SPECS:
+
+             <email>
+             <date1>: date of outbound flight
+             <date2>: date of return flight
+             <Airline>
+             <From1>: origin airport of outbound flight
+             <To1>: destination airport of outbound flight
+             <From2>: origin airport of return flight
+             <To2>: destination airport of return flight
+             <flight0_0>: flight number of outbound flight
+             <flight1_0>: flight number of return flight
+             <depart1>: departure time of outbound flight
+             <depart2>: departure time of return flight
+
+SAMPLE AGENT INPUTS:
+
+             <email>jeanoh@isi.edu</email>
+             <date1>11/27/2001</date1>
+             <date2>11/30/2001</date2>
+             <Airline>United Airlines</Airline>
+             <From1>LAX</From1>
+             <To1>IAD</To1>
+             <From2>IAD</From2>
+             <To2>LAX</To2>
+             <flight0_0>918</flight0_0>
+             <flight1_0>179</flight1_0>
+             <depart1>3:00 pm</depart1>
+             <depart2>5:00 pm</depart2>
+             
+********************************************************************

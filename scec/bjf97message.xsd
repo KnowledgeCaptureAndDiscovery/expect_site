@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:bjf97="http://www.isi.edu/expect/scec/bjf97" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://www.isi.edu/expect/scec/bjf97" schemaLocation="bjf97.xsd"/>
+	<xs:element name="ground_motion_parameter" type="bjf97:gmp"/>
+	<xs:element name="earthquake_magnitude" type="bjf97:magnitude"/>
+	<xs:element name="distance_to_rupture" type="bjf97:distance"/>
+	<xs:element name="shear_wave_velocity" type="bjf97:swavevel"/>
+	<xs:element name="fault_type" type="bjf97:bjffault"/>
+	<xs:element name="uncertainties" type="bjf97:uncertainties"/>
+	<xs:element name="bjf97_message">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ground_motion_parameter"/>
+				<xs:element ref="earthquake_magnitude"/>
+				<xs:element ref="distance_to_rupture"/>
+				<xs:element ref="shear_wave_velocity"/>
+				<xs:element ref="fault_type"/>
+				<xs:element ref="uncertainties"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

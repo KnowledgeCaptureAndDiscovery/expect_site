@@ -1,0 +1,12 @@
+;;; This file separates out the reserve statement critique methods
+;;; so we can figure out their overall size. 
+
+(in-package "CYC")
+
+(defplan check-reserve-unit
+  :capability (find-fillers (of (?a is (inst-of reserve-identified-critique)))
+		        (in (?c is (inst-of coa))))
+  :result-type (set-of (inst-of thing))
+  :method (|reserveUnitInMission| (coa-operation ?c))
+  )
+

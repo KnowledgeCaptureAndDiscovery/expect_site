@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<!DOCTYPE methodDescription SYSTEM "method.dtd">
+
+<methodDescription primitivep="F" name="INSPECT-ACPLAN"> 
+<MethodGoal><VarGoalForm><GoalName>INSPECT</GoalName><ManyVarGoalArgument><VarGoalArgument><ParameterName>OBJ</ParameterName><MethodGoalArgument><VariableName>?P</VariableName><t name="IS"></t><ComplexData><t name="INST-OF"></t><ConceptName>ACPLAN</ConceptName></ComplexData></MethodGoalArgument></VarGoalArgument></ManyVarGoalArgument></VarGoalForm></MethodGoal>
+
+<MethodResult><ComplexData><t name="SET-OF"></t><t name="INST-OF"></t><ConceptName>BOOLEAN</ConceptName></ComplexData></MethodResult>
+
+<MethodBody><BlockExpression><Expression><Form><GoalForm><GoalName>EVALUATE</GoalName><ManyGoalParameters><GoalParameter><ParameterName>OBJ</ParameterName><Expression><Data><VariableName>?P</VariableName></Data></Expression></GoalParameter><GoalParameter><ParameterName>WRT</ParameterName><Expression><Form><GoalForm><GoalName>FIND-THE-INSTANCES</GoalName><ManyGoalParameters><GoalParameter><ParameterName>OF</ParameterName><Expression><Data><ConceptName>ACP-ASPECT</ConceptName></Data></Expression></GoalParameter></ManyGoalParameters></GoalForm></Form></Expression></GoalParameter></ManyGoalParameters></GoalForm></Form></Expression></BlockExpression></MethodBody>
+<resultRefiner></resultRefiner><StorageInfo></StorageInfo><PostProcessing></PostProcessing>
+</methodDescription>

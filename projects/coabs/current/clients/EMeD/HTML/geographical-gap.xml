@@ -1,0 +1,49 @@
+ <?xml version="1.0"?>
+<!DOCTYPE conceptDescription SYSTEM "concept.dtd">
+
+<conceptDescription name="GEOGRAPHICAL-GAP"> 
+
+<Definition> (defconcept <concept>GEOGRAPHICAL-GAP</concept>
+   :IS-PRIMITIVE (:AND <concept>DOMAIN-CONCEPT</concept>
+                       <concept>TOPOGRAPHICAL-FEATURE</concept>)
+   :ROLES ((FAR-BANK :TYPE
+                     <concept>GEOGRAPHICAL-BANK</concept>)
+           (NEAR-BANK :TYPE
+                      <concept>GEOGRAPHICAL-BANK</concept>)))
+
+ </Definition><subConcepts> 
+<concept> WATER-CROSS-SECTION </concept> </subConcepts><superConcepts> 
+<concept> TOPOGRAPHICAL-FEATURE </concept>
+<concept> DOMAIN-CONCEPT </concept> </superConcepts><Siblings> 
+<WithCommonParent name="TOPOGRAPHICAL-FEATURE">
+<concept>GEOGRAPHICAL-APPROACH</concept>
+<concept>GEOGRAPHICAL-BANK</concept>
+</WithCommonParent>
+<WithCommonParent name="DOMAIN-CONCEPT">
+<concept>ASSET</concept>
+<concept>GEOGRAPHICAL-APPROACH</concept>
+<concept>GEOGRAPHICAL-BANK</concept>
+<concept>GEOGRAPHICAL-REGION</concept>
+</WithCommonParent> </Siblings><Roles> <DetailedRole> <Relation> BRIDGE-OF </Relation>
+<Type>
+<concept>BRIDGE</concept>
+</Type><MinCardinality> 0 </MinCardinality><MaxCardinality> 1 </MaxCardinality>
+<StrictValues>
+</StrictValues>
+<DefaultValues>
+</DefaultValues> </DetailedRole><DetailedRole> <Relation> FAR-BANK </Relation>
+<Type>
+<concept>GEOGRAPHICAL-BANK</concept>
+</Type><MinCardinality> 0 </MinCardinality><MaxCardinality> 1 </MaxCardinality>
+<StrictValues>
+</StrictValues>
+<DefaultValues>
+</DefaultValues> </DetailedRole><DetailedRole> <Relation> NEAR-BANK </Relation>
+<Type>
+<concept>GEOGRAPHICAL-BANK</concept>
+</Type><MinCardinality> 0 </MinCardinality><MaxCardinality> 1 </MaxCardinality>
+<StrictValues>
+</StrictValues>
+<DefaultValues>
+</DefaultValues> </DetailedRole> </Roles><Instances total="0" nonDirect="0" direct="0"> <DirectInstances>  </DirectInstances>
+<NonDirectInstances>  </NonDirectInstances> </Instances> </conceptDescription>

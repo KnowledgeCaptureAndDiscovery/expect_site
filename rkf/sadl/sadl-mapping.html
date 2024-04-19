@@ -1,0 +1,311 @@
+<html>
+
+<style type="text/css">
+  body { color: black; background: white; 
+         margin-left: 5%; margin-right: 5%;
+       }
+  strong { font-family: monospace; font-weight: normal;}
+  h1 { margin-left: -5%; }
+  h2,h3 { margin-left: -3%; }
+</style>
+
+<head>
+   <title>Comparing SADL with other action languages</title>
+</head>
+
+<body bgcolor="#ffffff">
+
+<h1>Mappings between SADL and other action languages</h1>
+<p>Jim Blythe, Nov 1 2001
+</p>
+
+<p>
+SADL, the Shaken Action Description Language, is used to described
+processes within Shaken system. A definition of the Shaken action
+description language (SADL) can be found
+<a href="http://www.isi.edu/expect/projects/rkf/action-language.html">
+here</a>.  This document compares SADL to the PDDL language as well as
+to TAPIR used by the UMass Sim SHAKEN team and to the process ontology
+within <a href="http://www.daml.org/services/">DAML-S</a>.  In this
+comparison I focus on each as a process representation language and
+ignore other aspects of the representations.  In general, the three
+representations are compatible, allowing processes to be described in
+terms of a number of sub-processes, which may be loosely or tightly
+synchronised.  They have all been designed with slightly different
+goals, and this affects the emphasis that each has placed on different
+aspects of the language. However the languages have typically made
+similar decisions about the aspects that they do cover; therefore this
+document takes the form of a mapping of language features rather than a
+comparison that highlights differences.
+</p>
+
+<p>
+PDDL, which stands for Planning Domain Definition Language, was
+originally developed as part of the AIPS98 planning competition, and was
+intended to be a uniform domain representation for different AI planning
+systems involved in the competition. More details can be found from <a
+href="http://cs-www.cs.yale.edu/homes/dvm/">Drew McDermott's home
+page.</a> PDDL allows a wide range of things to be said about actions
+and plans; probably no single system can make use of them all. In this
+comparison I focus on its language for describing actions in terms of
+sub-actions.
+</p>
+
+<p>
+DAML-S is an ontology to support services on the semantic web as part of
+the DAML program. A process ontology is included to provide a detailed
+model of services for coordination and monitoring. The latest version of
+the ontology used for this comparison was 0.5, which can be found <a
+href="http://www.daml.org/services/daml-s/2001/05/daml-s.html">here</a>.
+The DAML-S ontology shares with PDDL the aim of supporting a wide range
+of different systems but its focus is on web services rather than
+automatic planning.
+</p>
+
+<p>
+TAPIR is the process language used by the Sim SHAKEN group at UMass, led
+by <a href="http://www-eksl.cs.umass.edu/~cohen/home.html">Paul
+Cohen</a>. The group uses simulation to uncover information about
+processes, and so this language has gone further than the others in
+representing execution-time information such as handling interruptions.
+</p>
+
+<p>
+SADL, the Shaken action description language, has been developed to
+support the Shaken system for knowledge acquisition, to allow human
+domain experts to specify information about processes. More information
+about SADL can be found <a
+href="http://www.isi.edu/expect/projects/rkf/action-language.html">
+here</a>, and information about Shaken can be found
+<a href="http://www.ai.sri.com/~rkf/">here</a>. SADL extends the action
+representation already found in the KM representation language which is
+used in Shaken. More details about KM can be found
+<a href="http://www.cs.utexas.edu/users/mfkb/RKF/km.html">here</a>.
+</p>
+
+<h2>Action language features that are compared</h2>
+
+<p>
+In each of these languages, a process is represented as having
+preconditions and postconditions, and as having a collection of
+sub-processes. Here I concentrate on the representation of a process as
+a collection of sub-processes.  The representation languages are
+compared across the following features of a process language: 
+<ul>
+<li>how the
+language represents ordering constraints among sub-processes of a
+process, 
+<li>how it represents choices and alternative decompositions of a
+process, including interruption handling, 
+<li>and how it represents iteration within a process.
+</ul>
+</p>
+
+<p>
+In the following tables I indicate the forms that can be used within
+each language to produce the desired effect without explaining precisely
+how the form is used. The reader may follow the links above to the
+language descriptions for the details.
+</p>
+
+<h3>Ordering among sub-processes of a process</h3>
+
+<table border="1">
+
+<tr>
+<th>Effect</th>
+<th>PDDL</th>
+<th>SADL</th>
+<th>TAPIR</th>
+<th>DAML+S</th>
+</tr>
+
+<tr>
+<td>A linear sequence of processes</td>
+<td>(<em>series</em> proc1 proc2 ...)</td>
+
+<td>The <em>next-step</em> link between sub-steps in a process can be
+used to create a linear sequence.</td>
+
+<td> (<em>:do</em> proc1 proc2 ...) </td>
+
+<td>The <em>Sequence</em> construct holds a list of processes.</td>
+</tr>
+
+<tr>
+<td>An unordered set of processes</td>
+
+<td>(<em>parallel</em> proc1 proc2 ...) implies no ordering
+constraints.</td>
+
+<td>The <em>sub-step</em> link points to each sub-process, no
+<em>next-step</em> link is used. With no temporal links, the processes
+are assumed to take place one at a time but in no specified
+order. Allen's interval calculus can be attached to processes to force
+parallel execution.
+</td>
+
+<td>
+Either (<em>:unordered</em> proc1 proc2 ...) or (<em>:parallel</em>
+proc1 proc2 ...). <em>:unordered</em> implies that the subprocesses are
+executed one at a time but in no specified order. <em>:parallel</em>
+implies that the subprocesses may take place concurrently.
+</td>
+
+<td>Either <em>Unordered</em> or <em>Split</em>. <em>Unordered</em>
+implies that the processes are executed one at a time but in no
+specified order. <em>Split</em> implies that the subprocesses take place
+concurrently.
+</td>
+</tr>
+
+<tr>
+<td>Combinations, including arbitrary DAG orderings</td> <td>
+<em>series</em> and <em>parallel</em> may be nested. The
+<em>constraint</em> form can also be used to assign tags to the
+beginning and end of a process which can then be ordered with respect to
+other processes, allowing arbitrary DAGs to be represented.
+</td>
+
+<td>The <em>next-step</em> link can be used to form any DAG</td>
+
+<td> <em>:do</em>, <em>:parallel</em> and <em>:unordered</em> can be
+nested to create arbitrary orderings.
+</td>
+
+<td><em>Sequence</em>, <em>Unordered</em>, <em>Split</em> and
+<em>Split+Join</em> can be nested to create arbitrary orderings.
+</td>
+
+</table>
+
+<h3>Conditional and alternative decompositions of a process</h3>
+
+<table border="1">
+
+<tr>
+<th>Effect</th>
+<th>PDDL</th>
+<th>SADL</th>
+<th>TAPIR</th>
+<th>DAML+S</th>
+</tr>
+
+<tr>
+<td>Conditional sub-processes in the decomposition of a process.</td>
+<td>
+The <em>in-context</em> form specifies conditions on the subprocesses
+that appear in a decomposition.
+</td>
+
+<td>
+The <em>next-step</em> link can be made conditional on the outcome of a
+test applied to the state at the time that the step is to be chosen
+</td>
+
+<td>The <em>:when</em> construct.</td>
+
+<td>
+The <em>If-then-else</em> construct.
+</td>
+</tr>
+
+
+<tr>
+<td>Choice between alternative decompositions of a process
+</td>
+
+<td> <em>choice</em></td>
+
+<td> The test in a conditional <em>next-step</em> link is defined as
+non-deterministic, representing that a system choice is to be made.
+</td>
+
+<td>&nbsp;</td>
+
+<td>
+<em>Choice</em> expresses that a subset of the processes described is
+chosen and executed. The precise manner is to be determined in
+subclasses of <em>Choice</em> that are yet to be described as of DAML-S
+version 0.5
+</td>
+
+</tr>
+
+<tr>
+
+<td>Interruption handling: actions to take in response to failure
+messages from subprocesses during execution</td>
+
+<td>&nbsp;</td>
+
+<td>Currently not represented. There are plans to incorporate the
+technique used in TAPIR</td>
+
+<td>The <em>:handle</em> construct specifies subprocesses to be
+instantiated when a specified message is received from a sibling or
+child subprocess during execution. The <em>:generate</em> construct
+specifies a message to send to the parent process.
+</td>
+
+<td>
+Behaviour during execution is specified in the <em>Process Control
+ontology</em> in DAML-S, which is not described in version 0.5
+</td>
+
+</tr>
+
+</table>
+
+<h2>Iterative processes</h2>
+
+<table border="1">
+
+<tr>
+<th>Effect</th>
+<th>PDDL</th>
+<th>SADL</th>
+<th>TAPIR</th>
+<th>DAML+S</th>
+</tr>
+
+<tr>
+
+<td>A process with an iterative loop</td>
+
+<td>The PDDL description does not discuss iteration in an action's
+expansion. In the spirit of the AI planning systems that inspired PDDL,
+this can probably be achieved by recursively referring to the parent
+process in the specification of sub-processes. Iterative expansion would
+terminate with a <em>Choice</em> or <em>in-context</em> form as
+described above.
+</td>
+
+<td>The <em>next-step</em> links can form a loop, with loop unrolling at
+execution time managed by instantiating different step instances on each
+iteration around the loop. A conditional <em>next-step</em> link can be
+used to represent the loop's termination condition.
+</td>
+
+<td>The <em>:repeat-:until</em> construct specifies a simple loop which
+can be combined with other language constructs.
+</td>
+
+<td>
+The <em>Iterate</em> construct represents a process whose next process
+property has the same value as the current process. The
+<em>Repeat-Until</em> and <em>Repeat-While</em> subclasses use the
+<em>If-Then-Else</em> construct to manage termination.
+</td>
+
+</table>
+
+<hr>
+<p>
+Please send comments and suggestions to 
+<a href="mailto:blythe@isi.edu">Jim Blythe</a>.
+</p>
+
+</body>
+</html>
+

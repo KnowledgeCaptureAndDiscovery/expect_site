@@ -1,0 +1,554 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XML Spy v3.0.7 NT (http://www.xmlspy.com) by pablo yanez (isi usc) -->
+<?xml-stylesheet type="text/xsl" href="gil.xsl"?>
+<!DOCTYPE person SYSTEM "yolanda.dtd">
+<person>
+	<Name>Yolanda Gil</Name>
+	<UserId>gil</UserId>
+	<projects>Kasper</projects>
+	<projects>Phosphorus</projects>
+	<projects>Trellis</projects>
+	<projects>Temple</projects>
+	<projects>KAMM</projects>
+	<systems>Expect</systems>
+	<systems>Phosphorus</systems>
+	<systems>KANAL</systems>
+	<systems>Temple</systems>
+	<topics>Knowledge acquisition</topics>
+	<topics>planning</topics>
+	<topics>Knowledge representation</topics>
+	<position>Project Leader</position>
+	<group>Expect</group>
+	<capabilities>
+		<capability>
+			<NlDescription>Give presentation of project to funder</NlDescription>
+			<MethodGoal>
+				<VarGoalForm>
+					<GoalName>give</GoalName>
+					<ManyVarGoalArgument>
+						<VarGoalArgument>
+							<ParameterName>OBJ</ParameterName>
+							<MethodGoalArgument>
+								<VariableName>?V</VariableName>
+								<t name="IS"/>
+								<ComplexData>
+									<t name="SPEC-OF"/>
+									<ConceptName>presentation</ConceptName>
+								</ComplexData>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+						<VarGoalArgument>
+							<ParameterName>OF</ParameterName>
+							<MethodGoalArgument>
+								<VariableName>?P</VariableName>
+								<t name="IS"/>
+								<ComplexData>
+									<t name="INST-OF"/>
+									<ConceptName>project</ConceptName>
+								</ComplexData>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+						<VarGoalArgument>
+							<ParameterName>TO</ParameterName>
+							<MethodGoalArgument>
+								<VariableName>?f</VariableName>
+								<t name="is"/>
+								<ComplexData>
+									<t name="INST-OF"/>
+									<ConceptName>funder</ConceptName>
+								</ComplexData>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+					</ManyVarGoalArgument>
+				</VarGoalForm>
+			</MethodGoal>
+		</capability>
+		<capability>
+			<NlDescription> Give demo of project</NlDescription>
+			<MethodGoal>
+				<VarGoalForm>
+					<GoalName>give</GoalName>
+					<ManyVarGoalArgument>
+						<VarGoalArgument>
+							<ParameterName>OBJ</ParameterName>
+							<MethodGoalArgument>
+								<VariableName>?V</VariableName>
+								<t name="IS"/>
+								<ComplexData>
+									<t name="SPEC-OF"/>
+									<ConceptName>demo</ConceptName>
+								</ComplexData>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+						<VarGoalArgument>
+							<ParameterName>OF</ParameterName>
+							<MethodGoalArgument>
+								<VariableName>?P</VariableName>
+								<t name="IS"/>
+								<ComplexData>
+									<t name="INST-OF"/>
+									<ConceptName>project</ConceptName>
+								</ComplexData>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+					</ManyVarGoalArgument>
+				</VarGoalForm>
+			</MethodGoal>
+		</capability>
+		<capability>
+			<NlDescription> Write proposal for project</NlDescription>
+			<MethodGoal>
+				<VarGoalForm>
+					<GoalName>write</GoalName>
+					<ManyVarGoalArgument>
+						<!-- (obj (?v is (spec-of visit))) -->
+						<VarGoalArgument>
+							<ParameterName>OBJ</ParameterName>
+							<MethodGoalArgument>
+								<VariableName>?V</VariableName>
+								<t name="IS"/>
+								<ComplexData>
+									<t name="SPEC-OF"/>
+									<ConceptName>proposal</ConceptName>
+								</ComplexData>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+						<!-- (of (?p is (inst-of person))) -->
+						<VarGoalArgument>
+							<ParameterName>FOR</ParameterName>
+							<MethodGoalArgument>
+								<VariableName>?P</VariableName>
+								<t name="IS"/>
+								<ComplexData>
+									<t name="INST-OF"/>
+									<ConceptName>project</ConceptName>
+								</ComplexData>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+					</ManyVarGoalArgument>
+				</VarGoalForm>
+			</MethodGoal>
+		</capability>
+		<capability>
+			<NlDescription> Write report about project</NlDescription>
+			<MethodGoal>
+				<VarGoalForm>
+					<GoalName>write</GoalName>
+					<ManyVarGoalArgument>
+						<VarGoalArgument>
+							<ParameterName>OBJ</ParameterName>
+							<MethodGoalArgument>
+								<VariableName>?V</VariableName>
+								<t name="IS"/>
+								<ComplexData>
+									<t name="SPEC-OF"/>
+									<ConceptName>report</ConceptName>
+								</ComplexData>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+						<!-- (of (?p is (inst-of person))) -->
+						<VarGoalArgument>
+							<ParameterName>about</ParameterName>
+							<MethodGoalArgument>
+								<VariableName>?P</VariableName>
+								<t name="IS"/>
+								<ComplexData>
+									<t name="INST-OF"/>
+									<ConceptName>project</ConceptName>
+								</ComplexData>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+					</ManyVarGoalArgument>
+				</VarGoalForm>
+			</MethodGoal>
+		</capability>
+		<capability>
+			<NlDescription> Write paper about project</NlDescription>
+			<MethodGoal>
+				<VarGoalForm>
+					<GoalName>write</GoalName>
+					<ManyVarGoalArgument>
+						<!---->
+						<VarGoalArgument>
+							<ParameterName>OBJ</ParameterName>
+							<MethodGoalArgument>
+								<VariableName>?V</VariableName>
+								<t name="IS"/>
+								<ComplexData>
+									<t name="SPEC-OF"/>
+									<ConceptName>paper</ConceptName>
+								</ComplexData>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+						<!-- (of (?p is (inst-of person))) -->
+						<VarGoalArgument>
+							<ParameterName>about</ParameterName>
+							<MethodGoalArgument>
+								<VariableName>?P</VariableName>
+								<t name="IS"/>
+								<ComplexData>
+									<t name="INST-OF"/>
+									<ConceptName>project</ConceptName>
+								</ComplexData>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+					</ManyVarGoalArgument>
+				</VarGoalForm>
+			</MethodGoal>
+		</capability>
+		<capability>
+			<NlDescription> Review paper for journal  </NlDescription>
+			<MethodGoal>
+				<VarGoalForm>
+					<GoalName>review</GoalName>
+					<ManyVarGoalArgument>
+						<!-- (obj (?v is (spec-of visit))) -->
+						<VarGoalArgument>
+							<ParameterName>OBJ</ParameterName>
+							<MethodGoalArgument>
+								<VariableName>?V</VariableName>
+								<t name="IS"/>
+								<ComplexData>
+									<t name="SPEC-OF"/>
+									<ConceptName>paper</ConceptName>
+								</ComplexData>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+						<!-- (of (?p is (inst-of person))) -->
+						<VarGoalArgument>
+							<ParameterName>FOR</ParameterName>
+							<MethodGoalArgument>
+								<VariableName>?P</VariableName>
+								<t name="IS"/>
+								<ComplexData>
+									<t name="INST-OF"/>
+									<ConceptName>journal</ConceptName>
+								</ComplexData>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+					</ManyVarGoalArgument>
+				</VarGoalForm>
+			</MethodGoal>
+		</capability>
+		<capability>
+			<NlDescription> Review paper for conference </NlDescription>
+			<MethodGoal>
+				<VarGoalForm>
+					<GoalName>review</GoalName>
+					<ManyVarGoalArgument>
+						<VarGoalArgument>
+							<ParameterName>OBJ</ParameterName>
+							<MethodGoalArgument>
+								<VariableName>?V</VariableName>
+								<t name="IS"/>
+								<ComplexData>
+									<t name="SPEC-OF"/>
+									<ConceptName>paper</ConceptName>
+								</ComplexData>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+						<VarGoalArgument>
+							<ParameterName>FOR</ParameterName>
+							<MethodGoalArgument>
+								<VariableName>?P</VariableName>
+								<t name="IS"/>
+								<ComplexData>
+									<t name="INST-OF"/>
+									<ConceptName>conference</ConceptName>
+								</ComplexData>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+					</ManyVarGoalArgument>
+				</VarGoalForm>
+			</MethodGoal>
+		</capability>
+		<capability>
+			<NlDescription> Provide comments for project  </NlDescription>
+			<MethodGoal>
+				<VarGoalForm>
+					<GoalName>provide</GoalName>
+					<ManyVarGoalArgument>
+						<!-- (obj (?v is (spec-of visit))) -->
+						<VarGoalArgument>
+							<ParameterName>OBJ</ParameterName>
+							<MethodGoalArgument>
+								<VariableName>?V</VariableName>
+								<t name="IS"/>
+								<ComplexData>
+									<t name="SPEC-OF"/>
+									<ConceptName>comments</ConceptName>
+								</ComplexData>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+						<!-- (of (?p is (inst-of person))) -->
+						<VarGoalArgument>
+							<ParameterName>FOR</ParameterName>
+							<MethodGoalArgument>
+								<VariableName>?P</VariableName>
+								<t name="IS"/>
+								<ComplexData>
+									<t name="INST-OF"/>
+									<ConceptName>project</ConceptName>
+								</ComplexData>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+					</ManyVarGoalArgument>
+				</VarGoalForm>
+			</MethodGoal>
+		</capability>
+		<capability>
+			<NlDescription> Advise students 
+			</NlDescription>
+			<MethodGoal>
+				<VarGoalForm>
+					<GoalName>advise</GoalName>
+					<ManyVarGoalArgument>
+						<!-- (obj (?v is (spec-of visit))) -->
+						<VarGoalArgument>
+							<ParameterName>OBJ</ParameterName>
+							<MethodGoalArgument>
+								<VariableName>?V</VariableName>
+								<t name="IS"/>
+								<ComplexData>
+									<t name="SPEC-OF"/>
+									<ConceptName>student</ConceptName>
+								</ComplexData>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+					</ManyVarGoalArgument>
+				</VarGoalForm>
+			</MethodGoal>
+		</capability>
+		<capability>
+			<NlDescription>Host visitor
+			</NlDescription>
+			<MethodGoal>
+				<VarGoalForm>
+					<GoalName>host</GoalName>
+					<ManyVarGoalArgument>
+						<VarGoalArgument>
+							<ParameterName>OBJ</ParameterName>
+							<MethodGoalArgument>
+								<VariableName>?V</VariableName>
+								<t name="IS"/>
+								<ComplexData>
+									<t name="INST-OF"/>
+									<ConceptName>visitor</ConceptName>
+								</ComplexData>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+					</ManyVarGoalArgument>
+				</VarGoalForm>
+			</MethodGoal>
+		</capability>
+		<capability>
+			<NlDescription>Take visitor to lunch 
+			</NlDescription>
+			<MethodGoal>
+				<VarGoalForm>
+					<GoalName>take</GoalName>
+					<ManyVarGoalArgument>
+						<VarGoalArgument>
+							<ParameterName>OBJ</ParameterName>
+							<MethodGoalArgument>
+								<VariableName>?V</VariableName>
+								<t name="IS"/>
+								<ComplexData>
+									<t name="INST-OF"/>
+									<ConceptName>visitor</ConceptName>
+								</ComplexData>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+						<VarGoalArgument>
+							<ParameterName>TO</ParameterName>
+							<MethodGoalArgument>
+								<VariableName>?P</VariableName>
+								<t name="IS"/>
+								<ComplexData>
+									<t name="SPEC-OF"/>
+									<ConceptName>lunch</ConceptName>
+								</ComplexData>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+					</ManyVarGoalArgument>
+				</VarGoalForm>
+			</MethodGoal>
+		</capability>
+		<capability>
+			<NlDescription> Make slides about  project</NlDescription>
+			<MethodGoal>
+				<VarGoalForm>
+					<GoalName>make</GoalName>
+					<ManyVarGoalArgument>
+						<!-- (obj (?v is (spec-of visit))) -->
+						<VarGoalArgument>
+							<ParameterName>OBJ</ParameterName>
+							<MethodGoalArgument>
+								<VariableName>?V</VariableName>
+								<t name="IS"/>
+								<ComplexData>
+									<t name="SPEC-OF"/>
+									<ConceptName>slide</ConceptName>
+								</ComplexData>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+						<VarGoalArgument>
+							<ParameterName>ABOUT</ParameterName>
+							<MethodGoalArgument>
+								<VariableName>?P</VariableName>
+								<t name="IS"/>
+								<ComplexData>
+									<t name="INST-OF"/>
+									<ConceptName>project</ConceptName>
+								</ComplexData>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+					</ManyVarGoalArgument>
+				</VarGoalForm>
+			</MethodGoal>
+		</capability>
+		<capability>
+			<NlDescription> Travel to conference	</NlDescription>
+			<MethodGoal>
+				<VarGoalForm>
+					<GoalName>travel</GoalName>
+					<ManyVarGoalArgument>
+						<!-- (obj (?v is (spec-of visit))) -->
+						<VarGoalArgument>
+							<ParameterName>TO</ParameterName>
+							<MethodGoalArgument>
+								<VariableName>?V</VariableName>
+								<t name="IS"/>
+								<ComplexData>
+									<t name="INST-OF"/>
+									<ConceptName>coference</ConceptName>
+								</ComplexData>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+					</ManyVarGoalArgument>
+				</VarGoalForm>
+			</MethodGoal>
+		</capability>
+		<capability>
+			<NlDescription> Travel to funding meeting		</NlDescription>
+			<MethodGoal>
+				<VarGoalForm>
+					<GoalName>travel</GoalName>
+					<ManyVarGoalArgument>
+						<!-- (obj (?v is (spec-of visit))) -->
+						<VarGoalArgument>
+							<ParameterName>TO</ParameterName>
+							<MethodGoalArgument>
+								<VariableName>?V</VariableName>
+								<t name="IS"/>
+								<ComplexData>
+									<t name="INST-OF"/>
+									<ConceptName>funding meeting</ConceptName>
+								</ComplexData>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+					</ManyVarGoalArgument>
+				</VarGoalForm>
+			</MethodGoal>
+		</capability>
+		<capability>
+			<NlDescription>Organize visit for visitor	 </NlDescription>
+			<MethodGoal>
+				<VarGoalForm>
+					<GoalName>organize</GoalName>
+					<ManyVarGoalArgument>
+						<!-- (obj (?v is (spec-of visit))) -->
+						<VarGoalArgument>
+							<ParameterName>OBJ</ParameterName>
+							<MethodGoalArgument>
+								<VariableName>?V</VariableName>
+								<t name="IS"/>
+								<ComplexData>
+									<t name="SPEC-OF"/>
+									<ConceptName>visit</ConceptName>
+								</ComplexData>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+						<VarGoalArgument>
+							<ParameterName>FOR</ParameterName>
+							<MethodGoalArgument>
+								<VariableName>?P</VariableName>
+								<t name="IS"/>
+								<ComplexData>
+									<t name="INST-OF"/>
+									<ConceptName>visitor</ConceptName>
+								</ComplexData>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+					</ManyVarGoalArgument>
+				</VarGoalForm>
+			</MethodGoal>
+		</capability>
+		<capability>
+			<NlDescription>Discuss about a project with a visitor	</NlDescription>
+			<MethodGoal>
+				<VarGoalForm>
+					<GoalName>discuss</GoalName>
+					<ManyVarGoalArgument>
+						<!-- (obj (?v is (spec-of visit))) -->
+						<VarGoalArgument>
+							<ParameterName>OBJ</ParameterName>
+							<MethodGoalArgument>
+								<VariableName>?V</VariableName>
+								<t name="IS"/>
+								<ComplexData>
+									<t name="INST-OF"/>
+									<ConceptName>project</ConceptName>
+								</ComplexData>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+						<VarGoalArgument>
+							<ParameterName>WITH</ParameterName>
+							<MethodGoalArgument>
+								<VariableName>?P</VariableName>
+								<t name="IS"/>
+								<ComplexData>
+									<t name="INST-OF"/>
+									<ConceptName>visitor</ConceptName>
+								</ComplexData>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+					</ManyVarGoalArgument>
+				</VarGoalForm>
+			</MethodGoal>
+		</capability>
+		<capability>
+			<NlDescription>Organize meeting for purpose</NlDescription>
+			<MethodGoal>
+				<VarGoalForm>
+					<GoalName>organize</GoalName>
+					<ManyVarGoalArgument>
+						<!-- (obj (?v is (spec-of visit))) -->
+						<VarGoalArgument>
+							<ParameterName>OBJ</ParameterName>
+							<MethodGoalArgument>
+								<VariableName>?V</VariableName>
+								<t name="IS"/>
+								<ComplexData>
+									<t name="INST-OF"/>
+									<ConceptName>meeting</ConceptName>
+								</ComplexData>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+						<VarGoalArgument>
+							<ParameterName>FOR</ParameterName>
+							<MethodGoalArgument>
+								<VariableName>?P</VariableName>
+								<t name="IS"/>
+								<ComplexData>
+									<t name="INST-OF"/>
+									<ConceptName>purpose</ConceptName>
+								</ComplexData>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+					</ManyVarGoalArgument>
+				</VarGoalForm>
+			</MethodGoal>
+		</capability>
+	</capabilities>
+</person>

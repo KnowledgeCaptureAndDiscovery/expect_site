@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XML Spy v3.0.7 NT (http://www.xmlspy.com) by pablo yanez (isi usc) -->
+<?xml-stylesheet type="text/xsl" href="tar.xsl"?>
+<!DOCTYPE person SYSTEM "yolanda.dtd">
+<person>
+	<Name>Tom russ</Name>
+	<UserId>tar</UserId>
+	<Photo>photo/russ</Photo>
+	<projects>Electric Elves</projects>
+	<projects>Loom</projects>
+	<projects>RKF</projects>
+	<projects>PowerLoom</projects>
+	<projects>CoABS</projects>
+	<systems>Loom</systems>
+	<systems>PowerLoom</systems>
+	<systems>Stella</systems>
+	<systems>Ontosaurus</systems>
+	<systems>InterestMatcher</systems>
+	<topics>Knowledge representation
+</topics>
+	<topics>Medical reasoning
+      </topics>
+	<topics>Interfaces for KB editing</topics>
+	<position>Research ScientISt</position>
+	<group>Loom</group>
+	<capabilities>
+		<capability>
+			<NlDescription>Answer questions about Loom</NlDescription>
+			<MethodGoal>
+				<VarGoalForm>
+					<GoalName>answer </GoalName>
+					<ManyVarGoalArgument>
+						<VarGoalArgument>
+							<ParameterName>OBJ</ParameterName>
+							<MethodGoalArgument>
+								<VariableName>?m</VariableName>
+								<t name="IS"/>
+								<ComplexData>
+									<t name="SET-OF"/>
+									<ComplexData>
+										<t name="INST-OF"/>
+										<ConceptName>question</ConceptName>
+									</ComplexData>
+								</ComplexData>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+						<VarGoalArgument>
+							<ParameterName>ABOUT</ParameterName>
+							<MethodGoalArgument>
+								<t name="IS"/>
+								<ComplexData>
+									<t name="INST"/>
+									<ConceptName>loom</ConceptName>
+								</ComplexData>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+					</ManyVarGoalArgument>
+				</VarGoalForm>
+			</MethodGoal>
+		</capability>
+		<capability>
+			<NlDescription>Give a demo of Ontosaurus to person</NlDescription>
+			<MethodGoal>
+				<VarGoalForm>
+					<GoalName>give </GoalName>
+					<ManyVarGoalArgument>
+						<VarGoalArgument>
+							<ParameterName>OBJ</ParameterName>
+							<MethodGoalArgument>
+								<VariableName>?V</VariableName>
+								<t name="IS"/>
+								<ComplexData>
+									<t name="INST-OF"/>
+									<InstanceName>DEMO</InstanceName>
+								</ComplexData>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+						<VarGoalArgument>
+							<ParameterName>OF</ParameterName>
+							<MethodGoalArgument>
+								<VariableName>?m</VariableName>
+								<t name="IS"/>
+								<ComplexData>
+									<t name="INST"/>
+									<ConceptName>Ontosaurus</ConceptName>
+								</ComplexData>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+						<VarGoalArgument>
+							<ParameterName>TO</ParameterName>
+							<MethodGoalArgument>
+								<VariableName>?p</VariableName>
+								<t name="IS"/>
+								<ComplexData>
+									<t name="INST-OF"/>
+									<ConceptName>person</ConceptName>
+								</ComplexData>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+					</ManyVarGoalArgument>
+				</VarGoalForm>
+			</MethodGoal>
+		</capability>
+		<capability>
+			<NlDescription>Give demo of Interest Matcher</NlDescription>
+			<MethodGoal>
+				<VarGoalForm>
+					<GoalName>give </GoalName>
+					<ManyVarGoalArgument>
+						<VarGoalArgument>
+							<ParameterName>OBJ</ParameterName>
+							<MethodGoalArgument>
+								<VariableName>?V</VariableName>
+								<t name="IS"/>
+								<ComplexData>
+									<t name="INST"/>
+									<ConceptName>demo</ConceptName>
+								</ComplexData>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+						<VarGoalArgument>
+							<ParameterName>OF</ParameterName>
+							<MethodGoalArgument>
+								<VariableName>?m</VariableName>
+								<t name="IS"/>
+								<ComplexData>
+									<t name="INST"/>
+									<ConceptName>InterestMatcher</ConceptName>
+								</ComplexData>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+						<VarGoalArgument>
+							<ParameterName>TO</ParameterName>
+							<MethodGoalArgument>
+								<VariableName>?p</VariableName>
+								<t name="IS"/>
+								<ComplexData>
+									<t name="INST-OF"/>
+									<ConceptName>person</ConceptName>
+								</ComplexData>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+					</ManyVarGoalArgument>
+				</VarGoalForm>
+			</MethodGoal>
+		</capability>
+		<capability>
+			<NlDescription>Write paper  conference</NlDescription>
+			<MethodGoal>
+				<VarGoalForm>
+					<GoalName>write</GoalName>
+					<ManyVarGoalArgument>
+						<VarGoalArgument>
+							<ParameterName>OBJ</ParameterName>
+							<MethodGoalArgument>
+								<VariableName>?m</VariableName>
+								<t name="IS"/>
+								<ComplexData>
+									<t name="SPEC-OF"/>
+									<ConceptName>technical paper</ConceptName>
+								</ComplexData>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+						<VarGoalArgument>
+							<ParameterName>FOR</ParameterName>
+							<MethodGoalArgument>
+								<VariableName>?p</VariableName>
+								<t name="IS"/>
+								<ComplexData>
+									<t name="INST-OF"/>
+									<ConceptName>conference</ConceptName>
+								</ComplexData>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+					</ManyVarGoalArgument>
+				</VarGoalForm>
+			</MethodGoal>
+		</capability>
+		<capability>
+			<NlDescription>Give demo of Powerloom</NlDescription>
+			<MethodGoal>
+				<VarGoalForm>
+					<GoalName>give demo</GoalName>
+					<ManyVarGoalArgument>
+						<VarGoalArgument>
+							<ParameterName>OBJ</ParameterName>
+							<MethodGoalArgument>
+								<VariableName>?m</VariableName>
+								<t name="IS"/>
+								<ComplexData>
+									<t name="SPEC-OF"/>
+									<ConceptName>DEMO</ConceptName>
+								</ComplexData>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+						<VarGoalArgument>
+							<ParameterName>of</ParameterName>
+							<MethodGoalArgument>
+								<VariableName>?m</VariableName>
+								<t name="IS"/>
+								<ComplexData>
+									<t name="INST"/>
+									<InstanceName>PowerLoom</InstanceName>
+								</ComplexData>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+					</ManyVarGoalArgument>
+				</VarGoalForm>
+			</MethodGoal>
+		</capability>
+		<capability>
+			<NlDescription>Present research results</NlDescription>
+			<MethodGoal>
+				<VarGoalForm>
+					<GoalName>PRESENT</GoalName>
+					<ManyVarGoalArgument>
+						<VarGoalArgument>
+							<ParameterName>obj</ParameterName>
+							<MethodGoalArgument>
+								<VariableName>?m</VariableName>
+								<t name="IS"/>
+								<ComplexData>
+									<t name="SET-OF"/>
+									<ComplexData>
+										<t name="INST-OF"/>
+										<ConceptName>Research Result</ConceptName>
+									</ComplexData>
+								</ComplexData>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+					</ManyVarGoalArgument>
+				</VarGoalForm>
+			</MethodGoal>
+		</capability>
+		<capability>
+			<NlDescription>Review papers about knowledge representation</NlDescription>
+			<MethodGoal>
+				<VarGoalForm>
+					<GoalName>review</GoalName>
+					<ManyVarGoalArgument>
+						<VarGoalArgument>
+							<ParameterName>OBJ</ParameterName>
+							<MethodGoalArgument>
+								<VariableName>?m</VariableName>
+								<t name="IS"/>
+								<ComplexData>
+									<t name="SPEC-OF"/>
+									<ConceptName>paper</ConceptName>
+								</ComplexData>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+						<VarGoalArgument>
+							<ParameterName>ABOUT</ParameterName>
+							<MethodGoalArgument>
+								<VariableName>?v</VariableName>
+								<t name="IS"/>
+								<ComplexData>
+									<t name="SPEC-OF"/>
+									<ConceptName>knowledge representation</ConceptName>
+								</ComplexData>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+					</ManyVarGoalArgument>
+				</VarGoalForm>
+			</MethodGoal>
+		</capability>
+	</capabilities>
+</person>

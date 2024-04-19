@@ -1,0 +1,252 @@
+;;; -*- Mode: Lisp; Package: CYC; Syntax: COMMON-LISP; Base: 10 -*-
+
+(in-package "CYC")
+
+
+;;; ******************** CONCEPTS ********************
+
+(DEFCONCEPT |AvenueOfApproachSystem|
+  :IS-PRIMITIVE |PathSystem|
+  :ANNOTATIONS (|IKBConstant|
+                |ExistingObjectType|
+                (DOCUMENTATION "A collection of networks of instances of #$AvenueOfApproach: more specifically, a collection of #$PathSystems such that all of the paths composing each instance are themselves instances of #$AvenueOfApproach. Such networks can include 'loops' and are not necessarily connected in the sense that, for any two points in the system, there must exist an #$AvenueOfApproach between them. See the definition of #$PathSystem for more details. See also #$pointInSystem, #$nodeInSystem, #$linkInSystem, #$linkBetweenInSystem, #$pathInSystem, #$pathBetweenInSystem, #$pointOnPath, #$betweenOnPath, #$loopInSystem, #$pointOnCycle, #$junctionInSystem, #$deadEndInSystem, #$isolatedNodeInSystem and #$connectedInSystem.")))
+
+(DEFCONCEPT |COAAlignmentAttribute|
+  :IS-PRIMITIVE |AttributeValue|
+  :ANNOTATIONS (|IKBConstant|
+                |UnorderedAttributeType|
+                (DOCUMENTATION "An unordered collection of attributes. Instances are attributes indicating whether a particular COA has been devised for a friendly force or a hostile force.")))
+
+(DEFCONCEPT |Engagement-Military|
+  :IS-PRIMITIVE (:and |IKBConstant| |ConflictEvent| |MilitaryEvent|)
+  :ANNOTATIONS (|SitutationType|
+                |TemporalObjectType|
+                |ScriptType|
+                (DOCUMENTATION "A limited tactical conflict, usually between opposing maneuver force,such as might occur between opposing units in a course of action.")))
+
+(DEFCONCEPT |potentialAdversarialCOA|
+  :IS-PRIMITIVE |genlMt|
+  :ANNOTATIONS (|BinaryPredicate|
+                |IKBConstant|
+                |IrreflexiveBinaryPredicate|
+                |AntiTransitiveBinaryPredicate|
+                |DefaultMonotonicPredicate|
+                |MicrotheoryPredicate|
+                |BaseKBPredicate|
+                |RuleMacroPredicate|
+                (DOCUMENTATION "(#$missionEssentialCriterion PROP COA-MT) means that PROP specifies one of the mission essential tasks in the products of mission analysis associated with the course of action specified in COA-MT.")))
+
+
+
+;;; ******************** FUNCTIONS AND RELATIONS ********************
+
+(DEFRELATION |alignmentOfCOA|
+  :ARITY 2
+  :DOMAIN |COASpecificationMicrotheory|
+  :RANGE |COAAlignmentAttribute|
+  :ANNOTATIONS (|IKBConstant|
+                |BinaryPredicate|
+                (DOCUMENTATION "(#$alignmentOfCOA COAMT ATT) means that the #$COAAlignmentAttribute of the #$COASpecificationMicrotheory COAMT is ATT. The two general options here are #$COAForFriendlyForce and #$COAForHostileForce.")))
+
+(DEFRELATION |candidateBattlePositionForUnitType|
+  :ARITY 3
+  :DOMAINS (|GeographicalRegion|
+            (:AND |ExistingObjectType|
+             (:FILLED-BY SUPERRELATIONS |ModernMilitaryUnit-Deployable|)))
+  :RANGE |MilitaryEchelon|
+  :ANNOTATIONS (|IKBConstant|
+                |TernaryPredicate|
+                (DOCUMENTATION "(#$candidateBattlePositionForUnitType REGION UNIT-TYPE ECHELON) means that REGION is a suitable battle position for a unit of echelon level up to ECHELON and of type UNIT-TYPE.")))
+
+(DEFRELATION |candidateBattlePositionOfCOA|
+  :ARITY 2
+  :DOMAIN |COASpecificationMicrotheory|
+  :RANGE |GeographicalRegion|
+  :ANNOTATIONS (|IKBConstant|
+                |BinaryPredicate|
+                (DOCUMENTATION "(#$candidateBattlePositionOfCOA COA REGION) means that REGION is a suitable battle position in the battlefield of the course of action COA.")))
+
+(DEFRELATION |candidateEngagementArea|
+  :ARITY 2
+  :DOMAIN (:and |ScriptType| |MilitaryEvent|)
+  :RANGE |GeographicalRegion|
+  :ANNOTATIONS (|IKBConstant|
+                |ActorSlot|
+                (DOCUMENTATION "(#$candidateEngagementArea MILEVENT REGION) means that during MILEVENT, REGION is an area in which friendly and hostile forces participating in MilEVENT may become militarily engaged with one another.")))
+
+(DEFRELATION |candidateEngagementAreaOfCOA|
+  :ARITY 2
+  :DOMAIN |COASpecificationMicrotheory|
+  :RANGE |GeographicalRegion|
+  :ANNOTATIONS (|IKBConstant|
+                |BinaryPredicate|
+                (DOCUMENTATION "(#$candidateEngagementAreaOfCOA COAMT REGION) means that in the planning context of COAMT, REGION is an area in which friendly and hostile forces involved could become militarily engaged with one another.")))
+
+(DEFRELATION |candidateEngagementAreaOfCOAForForces|
+  :ARITY 4
+  :DOMAINS (|COASpecificationMicrotheory|
+            |GeographicalRegion|
+            |ModernMilitaryUnit-Deployable|)
+  :RANGE |ModernMilitaryUnit-Deployable|
+  :ANNOTATIONS (|IKBConstant|
+                |QuaternaryPredicate|
+                (DOCUMENTATION "(#$candidateEngagementAreaOfCOAForForces COAMT REG FORCE OPPFORCE) means that in the planning context of COAMT, REG is considered to be a viable potential engagement area for FORCE and OPPFORCE.")))
+
+(DEFRELATION |controlPermitsControl|
+  :ARITY 2
+  :DOMAIN |GeographicalRegion|
+  :RANGE |GeographicalRegion|
+  :ANNOTATIONS (|IKBConstant|
+                |BinaryPredicate|
+                (DOCUMENTATION "(#$controlPermitsControl REG ZONE) means that if an #$Agent AGENT controls REG, then AGENT is #$behaviorCapable of a #$Control-MilitaryTask in which the #$zoneControlled is ZONE.")))
+
+(DEFRELATION |controlPermitsObserving|
+  :ARITY 2
+  :DOMAIN |GeographicalRegion|
+  :RANGE |SpatialThing-Localized|
+  :ANNOTATIONS (|IKBConstant|
+                |BinaryPredicate|
+                (DOCUMENTATION "(#$controlPermitsObserving REG THING) means that if an #$Agent AGENT #$controls REG, then under normal circumstances AGENT is #$behaviorCapable of an #$Observing in which THING is the #$objectObserved and the observing-event #$eventOccursAt ?REG.")))
+
+(DEFRELATION |keyControllingTerrainOfCOA|
+  :ARITY 2
+  :IS-PRIMITIVE |keyTerrainOfCOA|
+  :DOMAIN |COASpecificationMicrotheory|
+  :RANGE |GeographicalRegion|
+  :ANNOTATIONS (|IKBConstant|
+                |BinaryPredicate|
+                (DOCUMENTATION "(#$keyControllingTerrainOfCOA COAMT REG) means that it is true in the planning context of COAMT that there exists an instance INST of SpatialThing-Localized such that (#$controlPermitsObserving ?REG ?INST). In general ?INST will be a hostile force whose behavior is central to the successful development of the COA.")))
+
+(DEFRELATION |keyObservationTerrainOfCOA|
+  :ARITY 2
+  :IS-PRIMITIVE |keyTerrainOfCOA|
+  :DOMAIN |COASpecificationMicrotheory|
+  :RANGE |GeographicalRegion|
+  :ANNOTATIONS (|IKBConstant|
+                |BinaryPredicate|
+                (DOCUMENTATION "(#$keyObservationTerrainOfCOA COAMT REGION) means that REGION is an area from which friendly forces can observe important enemy positions, and which it is therefore important that friendly forces control. See #$controlPermitsObserving.")))
+
+(DEFRELATION |keyTerrainAdvantage|
+  :ARITY 2
+  :DOMAIN |GeographicalRegion|
+  :RANGE |ScriptType|
+  :ANNOTATIONS (|IKBConstant|
+                |BinaryPredicate|
+                (DOCUMENTATION "(#$keyTerrainAdvantage REGION EVT_TYPE) means that REGION is considered 'key terrain' in the context of the assertion because the agent controlling that terrain is thereby enabled to perform instances of EVT_TYPE.")))
+
+(DEFRELATION |keyTerrainOfCOA|
+  :ARITY 2
+  :DOMAIN |COASpecificationMicrotheory|
+  :RANGE |GeographicalRegion|
+  :ANNOTATIONS (|IKBConstant|
+                |BinaryPredicate|
+                (DOCUMENTATION "(#$keyTerrainOfCOA COAMT REGION) means that REGION has the attribute of being #$KeyFeatureMark in the course of action specified: i.e., it is a position from which some enemy position can be observed or controlled.")))
+
+(DEFRELATION |missionLevelTaskSquaredOfCOA|
+  :ARITY 2
+  :DOMAIN |COASpecificationMicrotheory|
+  :RANGE |MilitaryTask|
+  :ANNOTATIONS (|FunctionalSlot|
+                |IKBConstant|
+                (DOCUMENTATION "(#$missionLevelTaskSquaredOfCOA COAMT TASK) means that TASK is the assigned task of the military unit that has operational control of the unit to which the #$missionLevelTaskOfCOA of COAMT is assigned.")))
+
+(DEFRELATION |operationSquaredOfCOA|
+  :ARITY 2
+  :DOMAIN |COASpecificationMicrotheory|
+  :RANGE |MilitaryOperation|
+  :ANNOTATIONS (|BinaryPredicate|
+                |IKBConstant|
+                (DOCUMENTATION "(#$operationSquaredOfCOA COAMT OP) means that OP is the operation assigned to the military unit that has operational control of the unit to which #$operationOfCOA of COAMT is assigned.")))
+
+(DEFRELATION |potentialAdversarialCOA|
+  :ARITY 2
+  :DOMAIN (:and |COASpecificationMicrotheory| |CycFormula|)
+  :RANGE (:and |ModernMilitaryUnit-Deployable| |COASpecificationMicrotheory|)
+  :ANNOTATIONS (|BinaryPredicate|
+                |IKBConstant|
+                |IrreflexiveBinaryPredicate|
+                |AntiTransitiveBinaryPredicate|
+                |DefaultMonotonicPredicate|
+                |MicrotheoryPredicate|
+                |BaseKBPredicate|
+                |RuleMacroPredicate|
+                (DOCUMENTATION "(#$missionEssentialCriterion PROP COA-MT) means that PROP specifies one of the mission essential tasks in the products of mission analysis associated with the course of action specified in COA-MT.")))
+
+(DEFRELATION |terrainRestrictionForUnitEchelon|
+  :ARITY 4
+  :DOMAINS (|GeographicalRegion|
+            |MilitaryEchelon|
+            (:AND |MilitaryOperationType|
+             (:FILLED-BY SUPERRELATIONS |MilitaryOperation|)))
+  :RANGE |TerrainTrafficabilityLevel|
+  :ANNOTATIONS (|QuaternaryPredicate|
+                (DOCUMENTATION "(#$terrainRestrictionForUnitEchelon REGION ECHELON OP LEVEL) means that REGION has #$TerrainTrafficabilityLevel LEVEL for a unit of any specialty and of echelon level up to ECHELON undertaking military operation type OP.")))
+
+(DEFRELATION |terrainRestrictionForUnitSpecialty|
+  :ARITY 4
+  :DOMAINS (|GeographicalRegion|
+            (:AND |MilitaryUnitSpecialtyType|
+             (:FILLED-BY SUPERRELATIONS |ModernMilitaryUnit-Deployable|))
+            (:AND |MilitaryOperationType|
+             (:FILLED-BY SUPERRELATIONS |MilitaryOperation|)))
+  :RANGE |TerrainTrafficabilityLevel|
+  :ANNOTATIONS (|IKBConstant|
+                |QuaternaryPredicate|
+                (DOCUMENTATION "(#$terrainRestrictionForUnitSpecialty REGION SPECIALTY OP LEVEL) means that REGION has #$TerrainTrafficabilityLevel LEVEL for a unit of any echelon level and of military specialty SPECIALTY undertaking military operation type OP.")))
+
+(DEFRELATION |terrainRestrictionForUnitType|
+  :ARITY 5
+  :DOMAINS (|GeographicalRegion|
+            (:AND |MilitaryUnitSpecialtyType|
+             (:FILLED-BY SUPERRELATIONS |ModernMilitaryUnit-Deployable|))
+            |MilitaryEchelon|
+            (:AND |MilitaryOperationType|
+             (:FILLED-BY SUPERRELATIONS |MilitaryOperation|)))
+  :RANGE |TerrainTrafficabilityLevel|
+  :ANNOTATIONS (|IKBConstant|
+                |QuintaryPredicate|
+                (DOCUMENTATION "(#$terrainRestrictionForUnitType REGION SPECIALTY ECHELON OP LEVEL) means that REGION has #$TerrainTrafficabilityLevel LEVEL for a unit of military specialty SPECIALTY and of echelon level up to ECHELON undertaking military operation type OP.")))
+
+(DEFRELATION |trafficabilityLevelForUnitType|
+  :ARITY 5
+  :DOMAINS ((:AND |GeographicalRegion| |AvenueOfApproach|)
+            (:AND |MilitaryUnitSpecialtyType|
+             (:FILLED-BY SUPERRELATIONS |ModernMilitaryUnit-Deployable|))
+            (:AND |ScriptType|
+             (:FILLED-BY SUPERRELATIONS |Movement-TranslationEvent|))
+            |ActorSlot|)
+  :RANGE |TerrainTrafficabilityLevel|
+  :ANNOTATIONS (|IKBConstant|
+                |QuintaryPredicate|
+                (DOCUMENTATION "This quintary predicate allows us to use      TerrainTrafficabilityLevel attributes to do more than      just make a blanket attribution of trafficability level      for a certain piece of terrain.      (trafficabilityLevelForUnitType REGION UNITTYPE      MANEUVERTYPE ROLE TTL) means that the GeographicalRegion      REGION has the TerrainTrafficabilityLevel TTL for      military units of specialty UNITTYPE playing the role      ROLE in maneuvers of MANEUVERTYPE.")))
+
+
+
+;;; ******************** GENERAL ASSERTIONS ********************
+
+(TELL
+ (:ABOUT |COAForFriendlyForce| |COAAlignmentAttribute|
+  (DOCUMENTATION "Characteristic attribute of a COA that has been devised for a force that is considered 'friendly' (#$Blue-Side) in the planning context.")))
+
+(TELL
+ (:ABOUT |COAForHostileForce| |COAAlignmentAttribute|
+  (DOCUMENTATION "Characteristic attribute of a COA that has been devised for a force that is considered 'hostile' (#$Red-Side) in the planning context.")))
+
+;;(TELL (|negationAttributes| |COAForHostileForce| |COAForFriendlyForce|))
+
+(TELL
+ (:ABOUT |EngagementArea| |CombatTheaterSiteAttribute| |IKBConstant|
+  (DOCUMENTATION "An area along an enemy avenue of approach where the      commander intends to contain and destroy an enemy force      with the massed fires of all available weapons. The size      and shape of the engagement area is determined by the      relatively unobstructed intervisibility from the weapon      systems in their firing positions and the maximum range      of those weapons. Sectors of fire are usually assigned      to subordinates to prevent fratricide. See FMs 1-111,      1-112, 7-10, 7-20, 7-30, 17-95, 71-100, 71-123, 100-5,      and 100-15.")))
+
+(TELL (|sourceOfTerm-WebPage| |EngagementArea| |FM101-5-1WebPage|))
+
+(TELL (|sourceOfTerm-PIT| |EngagementArea| |FM101-5-1Mt|))
+
+(TELL
+ (:ABOUT |KeyFeatureMark| |IKBConstant| |CombatTheaterSiteAttribute|
+  (DOCUMENTATION "Characteristic attribute of terrain that is      considered to be 'key' for the execution of a military      Course of Action, insofar as controlling it enables the      realization of some critical feature of the COA.")))
+
+(TELL (|conceptuallyRelated| |KeyFeatureMark| |significantCOAArea|))
+
+(TELL (|conceptuallyRelated| |KeyFeatureMark| |Control-MilitaryTask|))
+

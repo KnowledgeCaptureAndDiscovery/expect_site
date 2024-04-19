@@ -1,0 +1,8 @@
+#!/bin/sh
+JDKHOME=/local/java
+export JDKHOME
+CLASSPATH=/nfs/v2/jihie/expect/EMeD/Client:/nfs/v2/jihie/java/XML/xml4j/xml4j.jar:/nfs/v2/jihie/java/XML/saxon:/nfs/v2/jihie/java/JFC/103/swingall.jar:.:classes:/local/java/lib/classes.zip
+export CLASSPATH
+cd /home/jihie/expect/EMeD/Client
+/local/java/bin/java ExpectWindowPanel
+

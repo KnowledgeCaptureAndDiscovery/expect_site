@@ -1,0 +1,626 @@
+<HTML>
+<HEAD>
+   <TITLE>Papers on Knowledge Acquisition</TITLE>
+
+  <SCRIPT language="javascript">
+
+  about_on = new Image();
+  about_on.src = "./exp-about.gif";
+
+  research_on = new Image();
+  research_on.src = "./exp-research.gif"; 
+
+  projectmemb_on = new Image();
+  projectmemb_on.src = "./exp-pr-members.gif";
+
+  publications_on = new Image();
+  publications_on.src = "./exp-publ.gif";
+
+  movie_on = new Image();
+  movie_on.src = "./exp-mov.gif";  
+
+  projects_on = new Image();
+  projects_on.src = "./exp-projects.gif"; 
+    
+function swampImages(imagename, cimage)
+  {
+      imgsrc = './' + cimage;
+      document[imagename].src = imgsrc;
+  } 
+  </SCRIPT>
+ 
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+
+<TABLE align=center  WIDTH=730>
+<TR><TD colspan=3>
+
+<P align=center>
+<A HREF="../"
+onmouseover="swampImages('About','exp-about.gif'); return true"
+onmouseout="swampImages('About','exp-about-bl.gif');return true"><IMG
+SRC="exp-about-bl.gif" BORDER=0 NAME="About"></A>
+
+<A HREF="./research.html"
+onmouseover="swampImages('Research','exp-research.gif'); return true"
+onmouseout="swampImages('Research','exp-research-bl.gif');return
+true"><IMG SRC="exp-research-bl.gif" BORDER=0 NAME="Research"></A>
+
+<A HREF="./projects.html"
+onmouseover="swampImages('Projects','exp-projects.gif'); return true"
+onmouseout="swampImages('Projects','exp-projects-bl.gif');return
+true"><IMG SRC="./exp-projects-bl.gif" BORDER=0 NAME="Projects"></A>
+
+
+<A HREF="./pr-members.html"
+onmouseover="swampImages('Members','exp-pr-members.gif'); return true"
+onmouseout="swampImages('Members','exp-pr-members-bl.gif');return true"><IMG
+SRC="exp-pr-members-bl.gif" BORDER=0 NAME="Members"></A>
+
+<A HREF="./"
+onmouseover="swampImages('Publ','exp-publ.gif'); return true"
+onmouseout="swampImages('Publ','exo-publ-bl.gif');return true"
+onclick="return false"><IMG
+SRC="exo-publ-bl.gif" BORDER=0 NAME="Publ"></A>
+
+<A HREF="./demo.html"
+onmouseover="swampImages('Demo','exp-mov.gif'); return true"
+onmouseout="swampImages('Demo','exp-mov-bl.gif');return true"><IMG
+SRC="exp-mov-bl.gif" BORDER=0 NAME="Demo"></A>
+</TD></TR>
+
+<TR><TD width=50></TD>
+
+
+
+<TD WIDTH=550>
+<BR>
+<P ALIGN=CENTER><B><FONT SIZE=+2 FACE=ARIAL>Publications</B></FONT><BR>
+
+
+<HR>
+
+<P><FONT FACE=ARIAL><B>Papers on <A HREF="./publications.html#EXPECT">EXPECT</A></P>
+<P>Papers on <A HREF="./papers-planning.html">Planning</A></P>
+<P>Papers on <A HREF="./papers-ka.html">Knowledge Acquisition</A></P>
+<P>Papers on <A HREF="./papers-ontos.html">Ontologies and
+Problem-Solving Methods</A></P>
+<P>Papers on <A HREF="./papers-ml.html">Machine Learning</A></P></FONT></B>
+
+
+
+<HR>
+
+<P ALIGN=LEFT><B><FONT SIZE=+2 FACE=ARIAL>Papers on Knowledge Acquisition</B></FONT><BR></P>
+
+<P><HR>
+Jim Blythe. 
+"Integrating Expectations from Different Sources to Help End Users
+Acquire Procedural Knowledge".
+<i>Proceedings of IJCAI 2001</i>
+(<A
+HREF="http://www.isi.edu/expect/papers/blythe-ijcai01.pdf">
+PDF file</A>)
+</P>
+
+<P><B>Abstract:</B> Role-limiting approaches using explicit theories of
+problem-solving have been successful for acquiring knowledge from domain
+experts. However most systems using this approach do not support
+acquiring procedural knowledge, only instance and type
+information. Approaches using interdependencies among different pieces
+of knowledge have been successful for acquiring procedural knowledge,
+but these approaches usually do not provide all the support that domain
+experts require. We show how the two approaches can be combined in such
+a way that each benefits from information provided by the other.  We
+extend the role-limiting approach with a knowledge acquisition tool that
+dynamically generates questions for the user based on the problem
+solving method. This allows a more flexible interaction pattern. When
+users add knowledge, this tool generates expectations for the procedural
+knowledge that is to be added. When these procedures are refined, new
+expectations are created from interdependency models that in turn refine
+the information used by the system. The implemented KA tool provides
+broader support than previously implemented systems.  Preliminary
+evaluations in a travel planning domain show that users who are not
+programmers can, with little training, specify executable procedural
+knowledge to customize an intelligent system.
+</P>
+
+
+<P><HR>
+Jim Blythe, Jihie Kim, Surya Ramachandran and Yolanda Gil. 
+"An Integrated Environment for Knowledge Acquisition".
+Proceedings of the <I>International Conference on Intelligent User
+Interfaces 2001</I> (Best Paper Award).
+(<A
+HREF="http://www.isi.edu/expect/papers/blythe-kim-rama-gil-iui01.pdf">
+PDF file</A>)
+</P>
+
+<P><B>Abstract:</B> This paper describes an integrated acquisition
+interface that includes several techniques previously developed to
+support users in various ways as they add new knowledge to an
+intelligent system.  As a result of this integration, the individual
+techniques can take better advantage of the context in which they are
+invoked and provide stronger guidance to users.  We describe the current
+implementation using examples from a travel planning domain, and
+demonstrate how users can add complex knowledge to the system.
+</P>
+
+
+<HR>
+<P>
+Jihie Kim and Yolanda Gil. "Acquiring Problem-Solving Knowledge from End
+Users: Putting Interdependency Models to the Test".  <i>Proceedings of
+AAAI-2000 (to appear) </i> (<a
+href="http://www.isi.edu/expect/papers/kim-gil-aaai-2000.pdf">PDF file
+</a>)</P> 
+
+<p><b>Abstract</b>: Developing tools that allow non-programmers to enter knowledge has been an
+ongoing challenge for AI.  In recent years researchers have investigated a
+variety of promising approaches to knowledge acquisition (KA), but they have
+often been driven by the needs of knowledge engineers rather than by end
+users.  This paper reports on a series of experiments that we conducted in
+order to understand how far a particular KA tool that we are developing is
+from meeting the needs of end users, and to collect valuable feedback to
+motivate our future research.  This KA tool, called EMeD, exploits
+Interdependency Models derived from a knowledge base in order to guide users
+in specifying problem-solving knowledge.  One of the challenges of this work
+is to devise a methodology and experimental procedure for conducting user
+studies of knowledge acquisition tools.  We describe how our experiments
+helped us address several questions and hypotheses regarding the acquisition
+of problem-solving knowledge from end users and the benefits of
+Interdependency Models, and discuss what we learned in terms of improving not
+only our KA tools but also about KA research.
+
+<HR>
+<P>
+Jihie Kim and Yolanda Gil. "User Studies of an Interdependency-Based Interface for
+Acquiring Problem-Solving Knowledge".  <i>Proceedings of the
+Intelligent User Interface Conference (IUI-2000)</i> (<a
+href="http://www.isi.edu/expect/papers/kim-gil-iui-2000.pdf">PDF file
+</a>)</P>
+
+<p><b>Abstract</b>: This paper describes a series of experiments with a range of users to evaluate
+an intelligent interface for acquiring problem-solving knowledge to describe
+how to accomplish a task.  The tool derives the interdependencies between
+different pieces of knowledge in the system and uses them to guide the user in
+completing the acquisition task.  The paper describes results obtained when
+the tool was tested with a wide range of users, including end users.  The
+studies show that our acquisition interface saves users an average of 32% of
+the time it takes to add new knowledge, and highlight some interesting
+differences across user groups.  The paper also describes what are the areas
+that need to be addressed in future research in order to make these tools
+usable by end users.
+
+<HR>
+
+<P>
+Marcelo Tallis. "A Script-Based Approach to Modifying Knowledge-Based Systems".  <i>To appear in the International Journal of Human-Computer Studies
+</i> (<a
+href="http://www.isi.edu/expect/papers/tallis-ijhcs.pdf">PDF file </a>)
+<p><b>Abstract: </b>Modifying knowledge-based systems is a complex
+activity.  One of its difficulties is that several related portions of
+the system might have to be changed in order to maintain the coherence
+of the system.  However, it is difficult for users to figure out what
+has to be changed and how. This paper presents a novel approach for
+building knowledge acquisition tools that overcomes some of the
+limitations of current approaches. In this approach, knowledge of
+prototypical procedures for modifying knowledge-based systems is used
+to guide users in changing all related portions of a system.  These
+procedures, which we call <i>knowledge acquisition scripts</i> (or <i>
+KA Scripts</i>), capture how related portions of a knowledge-based system
+can be changed coordinately. By using KA scripts, a knowledge
+acquisition tool would be able to relate individual changes in
+different parts of a system, enabling the analysis of each individual
+change from the perspective of the overall modification.  The paper
+also describes the implementation of ETM: a script-based tool that
+builds on the EXPECT framework for building knowledge-based systems,
+discusses how we have addressed some important
+issues of this approach, and describes a preliminary empirical
+evaluation of ETM that shows that KA Scripts allow users to perform
+knowledge-based systems modification tasks more efficiently.
+
+<HR>
+<P>Marcelo Tallis and Yolanda Gil. "Designing Scripts to Guide Users in
+Modifying Knowledge-Based Systems".  Proceedings of AAAI-99. (<a
+href="http://www.isi.edu/expect/papers/tallis-gil-aaai99.pdf">PDF
+file </a>)</P>
+
+<B> Abstract: </B> Knowledge Acquisition (KA) Scripts capture typical
+modification 
+sequences that users follow when they modify knowledge bases. KA tools can use
+these Scripts to guide users in making these modifications, ensuring that they
+follow all the ramifications of the change until it is completed. This paper
+describes our approach to design, develop, and organize a library of KA
+Scripts. We report the results of three different analysis to develop this
+library, including a detailed study of actual modification scenarios in two
+knowledge bases. In addition to identifying a good number of KA Scripts, we
+found a set of useful attributes to describe and organize the KA
+Scripts. These attributes allow us to analyze the size of the library and
+generate new KA Scripts in a systematic way. We have implemented a portion of
+this library and conducted two different studies to evaluate it. The result of
+this evaluation showed a 15 to 52 percent time savings in modifying knowledge
+bases and that the library included relevant and useful KA Scripts to assist
+users in realistic settings. 
+
+<P><HR>
+
+Jihie Kim and Yolanda Gil.  "Deriving Expectations to Guide Knowledge
+Base Creation".  Proceedings of AAAI-99.  (<A
+HREF="http://www.isi.edu/expect/papers/kim-gil-aaai99.pdf">PDF file</A>)&nbsp;
+<p>
+
+<B> Abstract: </B>
+Successful approaches to developing knowledge acquisition tools use
+expectations of what the user has to add or may want to add, based on how new
+knowledge fits within a knowledge base that already exists.  When a
+knowledge base is first created or undergoes significant extensions and
+changes, these tools cannot provide much support.  This paper presents an
+approach to creating expectations when a new knowledge base is built, and
+describes a knowledge acquisition tool that we implemented using this approach
+that supports users in creating problem-solving knowledge.  As the knowledge
+base grows, the knowledge acquisition tool derives more frequent and more
+reliable expectations that result from enforcing constraints in the knowledge
+representation system, looking for missing pieces of knowledge in the
+knowledge base, and working out incrementally the inter-dependencies among the
+different components of the knowledge base.  Our preliminary evaluations show
+a thirty percent time savings during knowledge acquisition.  Moreover, by
+providing tools to support the initial phases of knowledge base development,
+many mistakes are detected early on and even avoided altogether.  We believe
+that our approach contributes to improving the quality of the knowledge
+acquisition process and of the resulting knowledge-based systems as well.</p>
+
+<P><HR>Surya Ramachandran and Yolanda Gil."Knowledge Acquisition for
+Configuration Tasks: The EXPECT Approach".  Proceedings of the Workshop on
+Configuration, AAAI-99. (<A HREF="./papers/AAAI99.pdf">PDF file </A>)
+
+<P><B>Abstract:</B> Configuration systems often use large and complex knowledge bases that need to be maintained and extended over time. The explicit representation of problem-solving knowledge and factual knowledge can greatly enhance the role of a knowledge acquisition tool by deriving from the current knowledge base, the knowledge gaps that must be resolved. This paper details
+EXPECT's approach to knowledge acquisition in the configuration domain using the propose-and-revise strategy as an example. EXPECT  supports users in a variety of KA tasks like filling knowledge roles, making modifications to the knowledge base including entering new components, classes and even adapting problem-solving strategies for new tasks.
+EXPECT's guidance changes as the knowledge base changes, providing a more flexible approach to knowledge acquisition. The paper also examines the possible use of EXPECT as a KA tool in the complex and real world domain of computer configuration. </P>
+
+<HR>
+<A NAME="EVAL-99">
+Marcelo Tallis and Jihie Kim and Yolanda Gil.
+"User Studies of Knowledge Acquisition Tools:
+Methodology and Lessons Learned"
+<i>Proceedings of the Tenth Banff Knowledge
+Acquisition for Knowledge-Based Systems Workshop (KAW-99)</i>,
+Banff, Alberta, Canada, April 1999.
+(</a><A HREF="http://www.isi.edu/expect/papers/tallis-kim-gil-kaw99.pdf">PDF
+file</A>) 
+<P> 
+<B> Abstract: </B>
+The area of knowledge acquisition research concerned with the
+development of knowledge acquisition (KA) tools is in need of a
+methodological approach to evaluation.  Efforts such as the Sisyphus
+experiments have been useful to illustrate particular approaches, but
+have not served in practice as testbeds for comparing and evaluating different
+alternative approaches.
+This paper describes our experimental methodology to conduct studies
+and experiments of users modifying knowledge bases with KA tools.  We
+also report the lessons learned from several experiments  that we have
+performed. Our hope is that
+it will help others design or improve future user evaluations of KA
+tools.
+We found that performing these experiments is particularly hard
+because of difficulties in controlling factors that are
+unrelated to the particular claims being tested.  We discuss our
+ideas for improving our current methodology and some open issues that remain.
+<P>
+<HR>
+
+Marcelo Tallis.
+"A Script-Based Approach to Modifying Knowledge-Based Systems".
+<i>Proceedings of the Ninth Banff Knowledge
+Acquisition for Knowledge-Based Systems Workshop (KAW-98)</i>,
+Banff, Alberta, Canada, April 1998.
+(<A HREF="./papers/tallis-kaw98.pdf">PDF file</A>) 
+<P>
+
+<B> Abstract: </B>
+Modifying knowledge-based systems (KBSs) is a complex activity.  One
+of its difficulties is that several related portions of the KBS
+might have to be changed in order to maintain the coherence of the
+system.  However, it is difficult for users to figure out what has to
+be changed and how. This paper presents a novel approach for building
+knowledge acquisition (KA) tools that overcomes some of the
+limitations of current approaches. In this approach, knowledge of
+prototypical procedures for modifying KBSs is used to guide users in
+changing all related portions of a KBS.  These procedures, which we
+call <i>knowledge acquisition scripts</i> (or <i>KA Scripts</i>),
+capture how related portions of a KBS can be changed coordinately. By
+using KA scripts, a KA tool would be able to relate individual changes
+in different parts of a KBS, enabling the analysis of each individual
+change from the perspective of the overall modification.  The paper
+also describes the implementation of ETM: a script-based tool that
+builds on the EXPECT framework for building KBSs (Gil, 1994),
+discusses how we have addressed some important issues of this
+approach, and describes a preliminary empirical evaluation of ETM that
+shows that KA Scripts allow users to perform KBSs modification tasks
+more efficiently.
+
+<P><HR>
+
+Yolanda Gil and Marcelo Tallis.
+"A Script-Based Approach to Modifying Knowledge Bases".
+<i>Proceedings of the Fourteenth National Conference on Artificial 
+Intelligence (AAAI-97)</i>, Providence, RI, July 27-31, 1997.
+(<A HREF="./papers/gil-tallis-aaai97.pdf">PDF file </A>) 
+<P>
+
+<B> Abstract: </B>
+Our goal is to build knowledge acquisition tools that support users in
+modifying knowledge-based systems.  These modifications may require several
+individual changes to various components of the knowledge base, which
+need to be carefully coordinated to prevent users from leaving the
+knowledge-based system in an unusable state.  This paper
+describes an approach to building knowledge acquisition tools which capture knowledge about
+commonly occurring modification sequences and support users in completing
+the modifications they start.  These sequences, which we call 
+<i> KA Scripts</i>, 
+relate individual changes and the effects that they have on
+the knowledge base.  
+We discuss our experience in designing and compiling a library
+of KA Scripts.  We also describe the implementation of a
+tool that uses them and our preliminary evaluations that demonstrate their usability.
+
+<P><HR>
+
+Yolanda Gil and Eric Melz.
+"Explicit Representations of Problem-Solving Strategies
+to Support Knowledge Acquisition".
+<i>Proceedings of the Thirteen National Conference on Artificial 
+Intelligence (AAAI-96)</i>, Portland, OR, August 4-8, 1996.
+(<A HREF="./papers/gil-melz-aaai96.pdf">PDF file </A>) 
+<P>
+
+<B> Abstract: </B>
+Role-limiting approaches support knowledge acquisition (KA) by centering 
+knowledge base construction on common types of tasks or domain-independent 
+problem-solving strategies.  Within a particular problem-solving strategy, 
+domain-dependent knowledge plays specific roles.  A KA tool then helps a user 
+to fill these roles.  Although role-limiting approaches are useful for 
+guiding KA, they are limited because they only support users in filling 
+knowledge roles that have been built in by the designers of the KA system.  
+EXPECT takes a different approach to KA by representing problem-solving 
+knowledge explicitly, and deriving from the current knowledge base the 
+knowledge gaps that must be resolved by the user during KA.  This paper 
+contrasts role-limiting approaches and EXPECT's approach, using the 
+propose-and-revise strategy as an example.  EXPECT not only supports users in 
+filling knowledge roles, but also provides support in 1) adapting the 
+problem-solving strategy, 2) changing the types of information to be 
+acquired about a knowledge role, 3) adding new knowledge roles, and 
+4) acquiring additional background information about the domain needed 
+by the knowledge-based system.  EXPECT's guidance changes as the knowledge 
+base changes, providing a more flexible approach to knowledge acquisition.  
+This work provides evidence supporting the need for explicit representations 
+in building knowledge-based systems.
+<P>
+
+<P><HR>
+
+
+
+
+William R. Swartout and Yolanda Gil.
+"EXPECT: A User-Centered Environment for the Development  
+and Adaptation of Knowledge-Based Planning Aids".
+In <i>Advanced Planning Technology: Technological Achievements 
+of the ARPA/Rome Laboratory Planning Initiative</i>, 
+ed. Austin Tate. Menlo Park, Calif.: AAAI Press, 1996.
+(<A HREF="./papers/swartout-gil-arpi96.pdf">PDF file</A>) 
+<P>
+
+<B> Abstract: </B> 
+EXPECT provides an environment for developing knowledge-based
+systems that allows end-users to add new knowledge without needing
+to understand the details of system organization and
+implementation.  The key to EXPECT's approach is that it
+understands the structure of the knowledge-based system being
+built: how it solves problems and what knowledge it needs to
+support problem-solving. EXPECT uses this information to guide
+users in maintaining the knowledge-based system. We have used
+EXPECT to develop a tool for evaluating transportation plans.
+<P>
+
+
+<P><HR>
+
+
+
+Bill Swartout and Yolanda Gil.
+"Flexible Knowledge Acquisition Through 
+Explicit Representation of Knowledge Roles".
+<i>1996 AAAI Spring Symposium on Acquisition, Learning, and Demonstration:
+Automating Tasks for Users</i>, Stanford, CA, March 1996.
+(<A HREF="./papers/swartout-gil-sss96.pdf">PDF file </A>) 
+<P>
+
+<B> Abstract: </B> 
+A system that acquires knowledge from a user should be able to
+reflect upon the knowledge that it has - at each moment - and
+understand what kinds of new knowledge it needs to learn. For the
+past two decades, research in the area of knowledge acquisition has
+been moving towards systems that have access to richer
+representations of knowledge about their task.  This paper reviews
+some well-known knowledge acquisition tools representative of this
+trend.  It also describes our recent work in EXPECT, a system with
+explicit representations of knowledge about the task and the domain 
+that supports knowledge acquisition for a wider range of tasks and
+applications than its predecessors.  We hope our observations will
+be useful to researchers in user interfaces and in machine learning
+concerned with acquiring information from users.
+<P>
+
+
+
+
+<P><HR>
+
+
+Yolanda Gil and Marcelo Tallis.
+"Transaction-Based Knowledge Acquisition: 
+Complex Modifications Made Easier".
+<i>In Proceedings of the Ninth Knowledge Acquisition for 
+Knowledge-Based Systems Workshop</i>, February 26-March 3, 1995.
+Banff, Alberta, Canada. 
+(<A HREF="./papers/gil-tallis-kaw95.pdf">PDF file</A>) 
+<P>
+
+<B> Abstract: </B> Our goal is to build knowledge acquisition tools that 
+support users in making a broad range of changes to a knowledge 
+base, including both factual and problem-solving knowledge.  These 
+changes may require several individual modifications to various 
+parts of the knowledge base, that need to be carefully coordinated 
+to prevent users from introducing errors in the knowledge base.
+Thus, it becomes essential that our KA tools understand the 
+consequences of each kind of change that the user may initiate, 
+detect any harmful side-effects that can be introduced in the
+system, and guide the user in resolving them.  To address this 
+issue, we have developed a transaction-based approach to knowledge
+acquisition that can support users in making complex modifications
+to a knowledge base.  A transaction is a sequence of changes that
+together modify some aspect of the behavior of a knowledge-based
+system, and that when only partially carried out may leave the 
+knowledge base in an undesirable state.  If a user executes a
+transaction partially, the knowledge acquisition tool must provide 
+guidance to finish it and support the user in achieving the desired
+modification.  This paper also describes our work in extending 
+EXPECT's knowledge acquisition tool to support transaction-based 
+mechanisms.  EXPECT tracks the possible problems that arise
+as a consequence of each individual change to the knowledge base,
+keeps information about the context of each change, and uses this 
+context to resolve the problems detected and to request the user's 
+intervention if additional information is needed. 
+<P>
+
+<P><HR>
+
+Bill Swartout and Yolanda Gil.
+"EXPECT: Explicit Representations for Flexible Acquisition".
+<i>In Proceedings of the Ninth Knowledge Acquisition for 
+Knowledge-Based Systems Workshop</i>, February 26-March 3, 1995.
+Banff, Alberta, Canada. 
+(<A HREF="./papers/swartout-gil-kaw95.pdf">PDF file</A>)
+<P>
+
+<B> Abstract: </B> To create more powerful knowledge acquisition systems, we
+not only need better acquisition tools, but we need to change the
+architecture of the knowledge based systems we create so that their
+structure will provide better support for acquisition.  Current
+acquisition tools permit users to modify factual knowledge but they
+provide limited support for modifying problem solving knowledge. 
+In this paper, we argue that this limitation (and others) stem from
+the use of incomplete models of problem solving knowledge and
+inflexible specification of the interdependencies between problem
+solving and factual knowledge.  We describe the EXPECT architecture
+which addresses these problems by providing an explicit
+representation for problem solving knowledge and intent. Using this
+more explicit representation, EXPECT can automatically derive the
+interdependencies between problem solving and factual knowledge. 
+By deriving these interdependencies from the structure of the
+system itself EXPECT supports more flexible and powerful knowledge
+acquisition.
+<P>
+
+
+<P><HR>
+
+
+
+Yolanda Gil and Cecile Paris.
+"Towards Method-Independent Knowledge Acquisition".
+<i>Knowledge Acquisition</i>, Special issue on
+Machine Learning and Knowledge Acquisition, 
+Volume 6 Number 2, June 1994.
+(<A HREF="./papers/gil-paris-kaj94.pdf">PDF file</A>) 
+<P>
+
+<B> Abstract: </B> 
+Rapid prototyping and tool reusability have pushed knowledge
+acquisition research to investigate method-specific knowledge
+acquisition tools appropriate for predetermined problem-solving
+methods.  We believe that method-dependent knowledge acquisition is 
+not the only
+approach.  The aim of our research is to develop powerful yet
+versatile machine learning mechanisms that can be incorporated into
+general-purpose but practical knowledge acquisition tools.  This paper
+shows through examples the practical advantages of this approach.  In
+particular, we illustrate how existing knowledge can be used to
+facilitate knowledge acquisition through analogy mechanisms within a
+domain and across domains.
+Our sample knowledge acquisition dialogues with a
+domain expert illustrate which parts of the process are addressed by
+the human and which parts are automated by the tool, in a synergistic
+cooperation for knowledge-base extension and refinement.  The paper
+also describes briefly the EXPECT problem-solving architecture
+that facilitates this approach to knowledge acquisition.
+<P>
+
+
+<P><HR>
+Yolanda Gil.
+"Knowledge Refinement in a Reflective Architecture".
+<i>Proceedings of the Twelfth National Conference of Artificial 
+Intelligence (AAAI-94)</i>,  Seattle, WA, August 1994. 
+(<A HREF="./papers/gil-aaai94.pdf">PDF file</A>) <P>
+
+<B> Abstract: </B> 
+A knowledge acquisition tool should provide a user with
+maximum guidance in extending and debugging a knowledge base, by preventing
+inconsistencies and knowledge gaps that may arise inadvertently.  Most
+current acquisition tools are not very flexible in that they are built
+for a predetermined inference structure or problem-solving mechanism,
+and the guidance they provide is specific to that inference structure
+and hard-coded by their designer.  This paper focuses on EXPECT, a
+reflective architecture that supports knowledge acquisition 
+based on an explicit analysis of the structure of a knowledge-based     system,
+rather than on a fixed set of acquisition guidelines.
+EXPECT's problem solver is tightly integrated with LOOM, a
+state-of-the-art knowledge representation system.  Domain facts and
+goals are represented declaratively, and the problem solver keeps
+records of their functionality within the task domain.  When the user
+corrects the system's knowledge, EXPECT tracks any possible
+implications of this change in the overall system and cooperates with
+the user to correct any potential problems that may arise. The key to
+the flexibility of this knowledge acquisition tool is that it
+adapts its guidance as the knowledge bases evolve in response to
+changes introduced by the user.
+<P>
+
+<HR>
+<P ALIGN=LEFT><B><FONT SIZE=+2 FACE=ARIAL>Related Papers</B></FONT></P>
+
+<P>Yolanda Gil and Marc Linster.
+"Dimensions to Analyze Applications".
+<i>Proceedings of the Ninth Knowledge Acquisition for 
+Knowledge-Based Systems Workshop</i>, February 26-March 3, 1995.
+Banff, Alberta, Canada.
+(<A HREF="./gil-linster-kaw95.pdf">PDF file </A>) 
+<P>
+
+
+<HR SIZE=2>
+
+<P ALIGN=CENTER><FONT FACE=ARIAL SIZE=-1><A
+HREF="./EXPECT.html">About EXPECT</A> |
+<A HREF="./research.html">Research</A> | <A
+HREF="./pr-members.html">Project Members</A> | Publications | <A
+HREF="./demo.html">Movie</A> | <BR>
+| <A HREF="http://www.isi.edu/divisions/div3">Intelligent Systems
+Division</A> | <A HREF="http://www.isi.edu">Information Sciences
+Institute</A> | <A HREF="http://www.usc.edu">USC</A> |</P>
+</TD>
+
+<TD width=50></TD>
+
+</TR>
+
+</TABLE>
+</BODY>
+</HTML>
+
+
+
+
+

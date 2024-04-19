@@ -1,0 +1,47 @@
+
+(a Event with
+   (next-event (<next-event-expr>*)))
+
+<next-event-expr> = (if <expr> then (<event>+))     ;; 1 or more
+                    | <event>*
+
+Operational semantics: to find the next events for an event in a KM
+situation, check ALL the next-event expressions in that situation, and
+take the union of the events on the right hand sides of those constructs
+whose conditions are true, along with all non-conditional next events.
+
+<expr>  = (<expr> [and <expr>]*)
+	| (<expr> [or <expr>]*)
+  	| (not <expr>)
+  	| <test>
+
+
+<test> =  (<path> = <val-or-path>)
+	| (<path> /= <val-or-path>)
+	| (<path> > <val-or-path>)
+	| (<path> < <val-or-path>)
+	| (<path> includes <val-or-path>)
+
+<path> = (the <slot> of <instance-reference>)
+
+<val-or-path> = <path>
+              | <val>
+
+<instance-reference> = <instance>
+                     | <path>
+
+<val> = <atomic-value> 
+      | <property-value>
+
+<atomic-value> = <symbol> | <string> | <number>
+
+<property-value> = <scalar-value>
+                 | <cardinal-value>
+
+<scalar-value> = (:pair <symbol> <class>)
+
+<cardinal-value> = (:pair <number> <UoM>)
+
+
+Here, <instance> is an object that we can click on in the cmap. This can
+include Self as Vinay noted before.

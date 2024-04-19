@@ -1,0 +1,230 @@
+<HTML>
+<HEAD>
+   <TITLE>Research in Knowledge Acquisition</TITLE>
+
+  <SCRIPT language="javascript">
+
+  about_on = new Image();
+  about_on.src = "./exp-about.gif";
+
+  research_on = new Image();
+  research_on.src = "./exp-research.gif"; 
+
+  projectmemb_on = new Image();
+  projectmemb_on.src = "./exp-pr-members.gif";
+
+  publications_on = new Image();
+  publications_on.src = "./exp-publ.gif";
+
+  movie_on = new Image();
+  movie_on.src = "./exp-mov.gif"; 
+
+  projects_on = new Image();
+  projects_on.src = "./exp-projects.gif"; 
+  
+   
+function swampImages(imagename, cimage)
+  {
+      imgsrc = './' + cimage;
+      document[imagename].src = imgsrc;
+  } 
+  </SCRIPT>
+ 
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+
+<TABLE align=center WIDTH=730>
+<TR><TD colspan=3>
+<P ALIGN=CENTER>
+
+<A HREF="../"
+onmouseover="swampImages('About','exp-about.gif'); return true"
+onmouseout="swampImages('About','exp-about-bl.gif');return true"><IMG
+SRC="exp-about-bl.gif" BORDER=0 NAME="About"></A>
+
+<A HREF="./research.html"
+onmouseover="swampImages('Research','exp-research.gif'); return true"
+onmouseout="swampImages('Research','exp-research-bl.gif');return
+true"><IMG SRC="exp-research-bl.gif" BORDER=0 NAME="Research"></A>
+
+<A HREF="./projects.html"
+onmouseover="swampImages('Projects','exp-projects.gif'); return true"
+onmouseout="swampImages('Projects','exp-projects-bl.gif');return
+true"><IMG SRC="./exp-projects-bl.gif" BORDER=0 NAME="Projects"></A>
+
+
+<A HREF="./pr-members.html"
+onmouseover="swampImages('Members','exp-pr-members.gif'); return true"
+onmouseout="swampImages('Members','exp-pr-members-bl.gif');return true"><IMG
+SRC="exp-pr-members-bl.gif" BORDER=0 NAME="Members"></A>
+
+<A HREF="./publications.html"
+onmouseover="swampImages('Publ','exp-publ.gif'); return true"
+onmouseout="swampImages('Publ','exo-publ-bl.gif');return true"
+onclick="return false"><IMG
+SRC="exo-publ-bl.gif" BORDER=0 NAME="Publ"></A>
+
+<A HREF="./demo.html"
+onmouseover="swampImages('Demo','exp-mov.gif'); return true"
+onmouseout="swampImages('Demo','exp-mov-bl.gif');return true"><IMG
+SRC="exp-mov-bl.gif" BORDER=0 NAME="Demo"></A>
+</TD></TR>
+
+<TR><TD width=50></TD>
+
+
+
+<TD WIDTH=550>
+<BR>
+<P ALIGN=CENTER><B><FONT SIZE=+2 FACE=ARIAL>Research in Knowledge Acquisition</B></FONT><BR>
+
+
+<HR>
+
+<P><FONT FACE=ARIAL><B>Research in <A HREF="./ontos-research.html">Ontologies and
+Problem-Solving Methods</A></P>
+<P>Research in <A HREF="./plan-research.html">Planning</A></P>
+<P>Research in <A HREF="./multi-research.html">Multi-Agent Communication
+and Coordination</A></P></FONT></B>
+
+<HR SIZE=2>
+
+<P>We are working on several areas to enhance and extend EXPECT's
+current knowledge acquisition capabilities.</P>
+
+<BR>
+<P><B><I><FONT FACE="Helvetica" SIZE=+1>1.  Exploting Interdependecy
+Models</FONT></B></I></P>
+
+<P ALIGN="JUSTIFY">EXPECT analyzes the interdependencies among individual pieces of knowledge and generates an Interdependency Model (IM).  This model determines what additional knowledge needs to be acquired and thus what are the remaining KA tasks that the user must do.  The baseline EXPECT system uses an agenda mechanism as a useful way to guide users during KA.  The agenda shows the user what KA tasks remain to be done based on the IM and on different types of errors in the KB that EXPECT detects automatically, and guides the user to resolve them with the KA tools.</P>
+
+<BLOCKQUOTE>
+<P>"Knowledge Refinement in a Reflective Architecture".  Y. Gil.  Proceedings of AAAI-94.(<A HREF="papers/gil-aaai94.pdf">PDF file</A>)</P>
+
+<P>"Deriving Expectations to Guide Knowledge Base Creation".  J. Kim and
+Y. Gil.  Proceedings of AAAI-99. (<A HREF="http://www.isi.edu/expect/papers/kim-gil-aaai99.pdf">PDF
+file</A>) </P>
+
+<P>"Acquiring Problem-Solving Knowledge from End
+Users: Putting Interdependency Models to the Test".  J. Kim and Y. Gil.
+Proceedings of AAAI-2000. 
+(<A HREF="http://www.isi.edu/expect/papers/kim-gil-aaai-2000.pdf">PDF file</A>)
+</P> 
+
+<P>"User Studies of an Interdependency-Based Interface for
+Acquiring Problem-Solving Knowledge".  J. Kim and Y. Gil.
+Proceedings of IUI-2000. (<A HREF="http://www.isi.edu/expect/papers/kim-gil-iui-2000.pdf">PDF file</A>)
+</P> 
+
+<P>"Knowledge Analysis on Process Models". J. Kim and Y. Gil.
+Proceedings of IJCAI-2001. (<A HREF="papers/kim-gil-ijcai01.pdf">PDF file</A>)
+</P> 
+
+
+</BLOCKQUOTE>
+
+<BR>
+
+<P><B><I><FONT FACE="Helvetica" SIZE=+1>2. Script-Based KA</FONT></B></I></P>
+
+<P ALIGN="JUSTIFY">We are developing a new approach to KA based on the use of KA Scripts that capture typical knowledge base modification sequences.  Our tool uses these KA scripts  to help users make changes to a knowledge base.  We have a principled set of dimensions to organize and populate our library of KA Scripts.  Several evaluations have been performed with this tool.</P>
+
+<BLOCKQUOTE>
+<P>"A Scripts-Based Approach to Knowledge Acquisition".  Y. Gil and M. Tallis.  Proceedings of AAAI-97.(<A HREF="papers/gil-tallis-aaai97.pdf">PDF file</A>)</P>
+
+
+<P>"Designing Scripts to Guide Users in Modifying Knowledge-Based Systems".  M. Tallis and Y. Gil.  Proceedings of AAAI-99.(<a
+href="http://www.isi.edu/expect/papers/tallis-gil-aaai99.pdf">PDF
+file </a>)</P>
+
+<P>"A Script-Based Approach to Modifying Knowledge-Based Systems".  M. Tallis. Ph.D. Thesis.  Department of Computer Science, University of Southern California.  May 1999. </P>
+</BLOCKQUOTE>
+
+<BR>
+
+<P><B><I><FONT FACE="Helvetica" SIZE=+1>3. English-based Knowledge Acquisition</FONT></B></I></P>
+
+<P ALIGN="JUSTIFY">We are interested in developing tools that enable
+users to specify new knowledge in natural language, so that they are
+more accessible to end users.  We have developed an interface that
+allows users to modify methods by manipulating their paraphrase in
+English.  It allows the user to select a portion of the paraphrase
+that corresponds to a valid expression and picking from a menu of
+suggestions for other expressions that can be used to replace it.
+Generating sensible suggestions is one of the challenging aspects of
+this work. </P>
+
+<BLOCKQUOTE>
+<P>"Knowledge Acquisition using an English-Based Method Editor".  J. Blythe and S. Ramachandran.  Proceedings of KAW-99.(<A HREF="papers/blythe-ramachandran-kaw99.pdf">PDF file</A>)</P>
+</BLOCKQUOTE>
+
+<BR>
+
+<P><B><I><FONT FACE="Helvetica" SIZE=+1>4. Support in creating new KBs</FONT></B></I></P>
+
+<P ALIGN="JUSTIFY">There is not much knowledge at the beginning to form expectations for KA, but a KA tool can create more expectations as the user enters knowledge.  This tool tries to help a user create a KB without errors before the problem solver is run.  The tool builds expectations based on the representation language (includes a method editor with adaptive forms), based on surface interdependencies (as opposed to the deeper interdependencies detected by the problem solver), and based on a restricted language for users to specify KA constraints and tasks.  Preliminary evaluations with users show a 30% improvement in terms of the time to complete a KB modification.</P>
+
+<BLOCKQUOTE>
+<P>"Deriving Expectations to Guide Knowledge Base Creation&amp;quot;.  J. Kim
+and Y. Gil.  Proceedings of AAAI-99. 
+(<A HREF="http://www.isi.edu/expect/papers/kim-gil-aaai99.pdf">PDF
+file</A>) </P> 
+</BLOCKQUOTE>
+
+<BR>
+
+<P><B><I><FONT FACE="Helvetica" SIZE=+1>5. Experimental Methodology
+for Evaluating KA Tools </FONT></B></I></P>
+
+<P ALIGN="JUSTIFY">We are performing pioneering work in knowledge acquisition concerning the evaluation of KA tools and approaches. EXPECT's KA tools are already instrumented to collect several kinds of information during a KA session, including times when users execute KA modifications, what kind of modification is done, what pending KA tasks remain according to EXPECT's analysis of the knowledge base, what new knowledge was added and what and how existing knowledge was changed, etc.</P>
+
+<BLOCKQUOTE>
+<P>"A Scripts-Based Approach to Knowledge Acquisition".  Y. Gil and M. Tallis.  Proceedings of AAAI-97.(<A HREF="papers/gil-tallis-aaai97.pdf">PDF file</A>)</P>
+
+<P>"Designing Scripts to Guide Users in Modifying Knowledge-Based Systems".  M. Tallis and Y. Gil.  Proceedings of AAAI-99.(<a
+href="http://www.isi.edu/expect/papers/tallis-gil-aaai99.pdf">PDF
+file </a>)</P>
+
+<P>"Deriving Expectations to Guide Knowledge Base Creation".  J. Kim and
+Y. Gil.    Proceedings of AAAI-99. 
+(<A HREF="http://www.isi.edu/expect/papers/kim-gil-aaai99.pdf">PDF 
+file</A>) </P>
+
+<P>"User Studies of Knowledge Acquisition Tools:
+Methodology and Lessons Learned".  M. Tallis, J. Kim and Y. Gil.
+Proceedings of KAW-99. 
+(<A HREF="http://www.isi.edu/expect/papers/tallis-kim-gil-kaw99.pdf">PDF file</A>)
+</P> 
+
+<P>"Acquiring Problem-Solving Knowledge from End
+Users: Putting Interdependency Models to the Test".  J. Kim and Y. Gil.
+Proceedings of AAAI-2000. (<A HREF="http://www.isi.edu/expect/papers/kim-gil-aaai-2000.pdf">PDF file</A>)
+</P> 
+
+<P>"User Studies of an Interdependency-Based Interface for
+Acquiring Problem-Solving Knowledge".  J. Kim and Y. Gil.
+Proceedings of IUI-2000. (<A HREF="http://www.isi.edu/expect/papers/kim-gil-iui-2000.pdf">PDF file</A>)
+</P> 
+
+</BLOCKQUOTE>
+
+<HR SIZE=2>
+
+<P ALIGN=CENTER><FONT FACE=ARIAL SIZE=-1><A
+HREF="./EXPECT.html">About EXPECT</A> |
+Research | <A
+HREF="./pr-members.html">Project Members</A> | <A
+HREF="./publications.html">Publications</A> | <A
+HREF="./demo.html">Movie</A> | <BR>
+| <A HREF="http://www.isi.edu/divisions/div3">Intelligent Systems
+Division</A> | <A HREF="http://www.isi.edu">Information Sciences
+Institute</A> | <A HREF="http://www.usc.edu">USC</A> |</P>
+</TD>
+
+<TD width=50></TD>
+
+</TR>
+
+</TABLE>
+</BODY>
+</HTML>

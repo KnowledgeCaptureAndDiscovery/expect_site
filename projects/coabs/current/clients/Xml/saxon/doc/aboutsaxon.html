@@ -1,0 +1,157 @@
+<HTML><HEAD><TITLE>About SAXON</TITLE></HEAD>
+<BODY>
+<H1>About SAXON</H1>
+
+<HR>
+<TABLE><TR><TD WIDTH=200></TD><TD><B>Contents</B></TD></TR>
+<TR><TD></TD><TD VALIGN=TOP>
+<A HREF=#Scope>What is SAXON?</A><BR>
+<A HREF=#Background>Background</A><BR>
+<A HREF=#Conditions>Conditions of Use</A><BR>
+<A HREF=#Distribution>Distribution</A><BR>
+
+</TD></TR></TABLE><HR>
+
+<A NAME=Scope><H2>What is SAXON?</H2></A>
+The SAXON package is a Java interface for processing XML documents.
+It provides a set of services that are particularly useful for 
+applications performing XML->XML or XML->HTML transformations.<P>
+
+SAXON is designed to help you write applications to process <I>a
+specific document type</I>. If you want to write general-purpose
+XML applications such as editors, you can still use it, but the benefits are
+not as great.<P>
+
+SAXON allows you to write your own element handlers or to use
+standard element handlers supplied with SAXON. Each type of element
+can have its own element handler, enabling you to keep your
+application modular. The standard element handlers provide the
+following services:<UL>
+<LI>Copying an element unchanged to the output
+<LI>Skipping over an element, omitting it from the output
+<LI>Supplying strings to replace the start and end tags of an
+element (for example to add HTML formatting)
+<LI>Recognising a group of consecutive elements of the same type
+(for example to generate an HTML table or list structure)
+<LI>Sorting a group of consecutive elements of the same type
+</UL>
+
+When an element handler is invoked, it is provided with a range
+of information and processing services via an 
+<B>ElementInfo</B> object. These services include facilities to:<UL>
+<LI>determine the element's type and attributes
+<LI>locate the element's parent or elder siblings
+<LI>set an output destination for output from this
+element or its children (useful when splitting an XML document
+heirarchically)
+<LI>write output to this destination
+<LI>associate user data with an element
+</UL>
+
+There is an option in SAXON to build the document tree (the DOM) in memory.
+If you do this, the application can process the data in exactly the same
+way as during a direct serial parse, but there is additional flexibility:
+<UL>
+<LI>You can process any part of the document you choose, any number of times,
+with different element handlers if you wish; you are no longer constrained
+to serial processing
+<LI>You can modify the document in memory and save it back to disk as an
+XML file.
+</UL>
+
+Although you could do this directly using the DOM, without help from SAXON,
+using SAXON makes the navigation easier and allows the same code to be used
+in a direct event-driven parse and in a DOM-based application.<P>
+
+
+<A NAME=Background><H2>Background</H2></A>
+
+I wrote SAXON to support an internal project in 
+<A HREF="http://www.icl.com">ICL</A>. After writing
+several XML applications using SAX, MSXML, and other interfaces,
+I found I was writing repetitive code, and decided to package this
+code in a reusable way. It gradually grew, became lopsided, and
+as I had to revisit it to make it work with the final SAX interface,
+I restructured a great deal of it to make it as general as possible.<P>
+
+XSL was an influence on SAXON, both positive and negative. I tried
+to use early XSL implementations and found them (a) very hard to use,
+and (b) very limited in capability. But I found some useful concepts
+in the XSL specifications and tried to incorporate corresponding
+facilities into SAXON.<P>
+
+My main aim was to reduce the time it takes to write an application. I have found I can
+usually achieve a first-cut HTML rendition of a new XML document type
+in about 50 lines of new code, and have it working in half a day.<P>
+
+The name SAXON was chosen because it is a layer on top of SAX. Also,
+I was using Ælfred at the time; Ælfred of course is a Saxon king...<P>
+
+<A NAME=Conditions><H2>Conditions of Use</H2></A>
+
+ICL currently has no plans to turn SAXON into a general release product. At
+present its specification has certain limitations (for example the
+exception handling is very poor, and it has no support for the obscurer parts
+of XML such as processing instructions and notations). More importantly,
+SAXON has not been validated with any kind of thoroughness.<P>
+
+The software is therefore offered <I>as is</I>, with no warranty,
+support, guarantee, or implication that it is fit for any purpose.
+There is no implication that it will be maintained in the future.
+Using it may damage your health and your wealth, though it can
+only improve your wisdom.<P>
+
+With this proviso, feel free to use the software as you see fit,
+but do not include it in a commercial product.
+Distribute it onwards if you wish, provided you include
+ this document in full.<P>
+
+ICL retains the copyright, and therefore all rights to commercial
+exploitation in the future.<P>
+
+<FONT SIZE=2>THE SOFTWARE IS PROVIDED AS IS, WITHOUT WARRANTY OF ANY KIND, EXPRESS
+OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL ICL OR MICHAEL KAY BE LIABLE FOR ANY CLAIM, DAMAGES OR
+OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.</FONT>
+
+<A NAME=Distribution><H2>Distribution</H2></A>
+
+The SAXON software is available for download as a java package. 
+The package name is com.icl.saxon; install it on your classpath.
+The central classes are available in object form only, but 
+add-on classes such as element handlers and example applications
+are available in source.<P>
+
+User documentation is included in the form of <A HREF="packages.html">javadoc specifications</A>
+together with an <A HREF="API_users_guide.html">API User's Guide</A>.<P>
+
+The distribution includes a number of 
+<A HREF="samples.html">example applications</A>.<P>
+
+I have also used SAXON to develop <A HREF="home.iclweb.com/icl2/mhkay/GedML.html">GedML</A>,
+ a suite of applications for processing genealogical data in XML. Source code
+is available in the download.<P>
+
+<B>Prerequisites</B>:<UL>
+<LI>an XML parser with a SAX-compliant interface. See <A HREF="http://www.sil.org/sgml/xml.html">
+http://www.sil.org/sgml/xml.html</A> for available products. SAXON has been tested
+with AElfred, Lark, MSXML, xml4j, and xp.
+
+<LI>a Java (JDK 1.1) development environment. SAXON has been tested with both
+SUN's and Microsoft's Java compilers and VMs.
+</UL>
+
+The download is at <A HREF="http://www.iclweb.com/icl2/mhkay/saxon.zip">
+http://home.iclweb.com/icl2/mhkay/saxon.zip</A><P>
+
+<HR><CENTER><A HREF="mailto:M.H.Kay@eng.icl.co.uk">Michael H. Kay</A>
+<BR>16 June 1998</I></CENTER>
+
+</BODY>
+</HTML>
+
+
+

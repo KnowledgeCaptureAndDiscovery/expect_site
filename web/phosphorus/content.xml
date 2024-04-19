@@ -1,0 +1,74 @@
+
+<!-- <?xml version='1.0'?> -->
+
+<!--
+
+IF YOU CAN READ THIS, YOUR BROWSER DOESN'T SUPPORT XML.
+
+PLEASE UPDATE YOUR BROWSER, OR VIEW THE HTML VERSION OF THIS PAGE.
+
+-->
+<!-- When the schema works, here's how to reference it; change the project
+ tag below to this:
+ 
+<project xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation = "../project.xsd">
+-->
+<project>
+  <name>Phosphorus</name>
+  <title>A Knowledge and Experience-Based Agent Capabilities Matcher</title>
+  <description>
+    <short>
+    <n/> is a knowledge-based matcher that accepts a user's
+    description of a needed service as input and responds with a ranked list
+    of agents that have the capability to provide that service. The
+    <n/> matcher will exploit subsumption, goal reformulation, and
+    partial match. The matcher will also be experienced-based, using learning
+    techniques to improve the utility of its matches over time.
+    </short>
+    <long>
+    <n/> is a knowledge-based matcher that accepts a user's
+    description of a needed service as input and responds with a ranked list of
+    agents that have the capability to provide that service. The Phosphorus matcher
+    is both knowledge based and experience based. It accesses a base of ontological
+    knowledge to assist the process of performing structural matches between pairs
+    of requested and advertised capabilities, and it takes a knowledge-based
+    approach to guide a post-match decision process that determines how retrieved
+    capabilities can be selected, reformulated, and/or combined to best satisfy a
+    user request. We assume that exact matches will be relatively rare; our
+    matcher exploits domain ontologies to allow loose-coupling between agent
+    capabilities and user requests, finding agents that have more specific
+    capabilities than what was requested, or agents that can provide a related
+    service when no exact matches are found. Loose coupling is enabled by
+    using EXPECT's goal and capability language to describe agent capabilities and
+    requests are then be matched through subsumption, goal reformulation,
+    and partial match. The matcher is also experienced-based, using learning
+    techniques to improve the utility of its matches over time.
+    <p/><n/> is able to abstract the results of its learning, storing its experience in the
+    form of axioms in a knowledge base that summarize its knowledge of matching
+    requests with agents within a particular domain. Phosphorus can be used
+    standalone or be used as a service within existing agent integration
+    architectures.
+    </long>
+  </description>
+  <research>
+    <short>
+    Matching requests and agent capabilities through ontologies.
+    </short>
+    <long>
+    <ul>
+    <li>Matching requests and agent capabilities through ontologies</li>
+    <li>Knowledge-based matching.</li>
+    <li>Loose-coupling between agent capabilities and user requests</li>
+    </ul>
+    </long>
+  </research>
+  <funding>
+    <program>Control of Agent-Based Systems (CoABS) program</program>
+    <url>http://coabs.globalinfotek.com/</url>
+    <awardnumber>F30602-97-C-0068</awardnumber>
+    <startdate>June 1999</startdate>
+    <enddate>December 2001</enddate>
+  </funding>
+  <link>DARPA <a href='http://coabs.globalinfotek.com/'>CoABS</a></link>
+</project>

@@ -1,0 +1,61 @@
+<html>
+<head>
+<script>
+var limit="0:30"
+if (document.images){
+  var parselimit=limit.split(":");
+  parselimit=parselimit[0]*60+parselimit[1]*1;
+  }
+function resubmit(val) {
+    var myform = eval("document.form"+val);
+    myform.submit();
+}
+function beginrefresh(){
+  if (!document.images)
+      return;
+   if (parselimit==1)
+      window.location.reload();
+   else {
+      parselimit-=1;
+      curmin=Math.floor(parselimit/60);
+      cursec=parselimit%60;
+      if (curmin!=0)
+         curtime=curmin+" minutes and "+cursec+" seconds left until page refresh!";
+      else
+         curtime=cursec+" seconds left until page refresh!";
+      window.status=curtime
+      setTimeout("beginrefresh()",1000)
+   }
+ }
+window.onload=beginrefresh;
+</script>
+</head>
+<table>
+<tr><td colspan=2>----Tue Oct 22 12:45:50 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>Continental Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>5845</td></tr>
+<tr><td><b>on date</b></td><td>10/22/2002</td></tr>
+<tr><td><b>from airport</b></td><td>DCA</td></tr>
+<tr><td><b>for user id</b></td><td>rbrachman@darpa.mil</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2><b>Continental Airlines flight 5845</b></td></tr>
+<tr><td colspan=2>Dear rbrachman_at_darpa_mil,<br/><br/>Your Continental Airlines flight 5845 is still scheduled to depart DCA on-time at 6:00 PM Gate Not Available and is scheduled to arrive MSP at 4:07 PM Gate Not Available.<br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1035315950)'></td></tr>
+</table><br>
+<form name='form1035315950' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='Continental Airlines'>
+<input type='hidden' name='val1' value='5845'>
+<input type='hidden' name='val2' value='10/22/2002'>
+<input type='hidden' name='val3' value='DCA'>
+<input type='hidden' name='val4' value='rbrachman@darpa.mil'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='rbrachman@darpa.mil'>
+</form>
+
+<p>
+</html>

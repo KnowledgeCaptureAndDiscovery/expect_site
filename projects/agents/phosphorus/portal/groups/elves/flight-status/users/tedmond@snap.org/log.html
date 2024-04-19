@@ -1,0 +1,174 @@
+<html>
+<head>
+<script>
+var limit="0:30"
+if (document.images){
+  var parselimit=limit.split(":");
+  parselimit=parselimit[0]*60+parselimit[1]*1;
+  }
+function resubmit(val) {
+    var myform = eval("document.form"+val);
+    myform.submit();
+}
+function beginrefresh(){
+  if (!document.images)
+      return;
+   if (parselimit==1)
+      window.location.reload();
+   else {
+      parselimit-=1;
+      curmin=Math.floor(parselimit/60);
+      cursec=parselimit%60;
+      if (curmin!=0)
+         curtime=curmin+" minutes and "+cursec+" seconds left until page refresh!";
+      else
+         curtime=cursec+" seconds left until page refresh!";
+      window.status=curtime
+      setTimeout("beginrefresh()",1000)
+   }
+ }
+window.onload=beginrefresh;
+</script>
+</head>
+<table>
+<tr><td colspan=2>----Tue Aug 13 13:25:49 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>0200</td></tr>
+<tr><td><b>on date</b></td><td>8/14/2002</td></tr>
+<tr><td><b>from airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>tedmond@snap.org</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;ack&gt;OK&lt;/ack&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1029270349)'></td></tr>
+</table><br>
+<form name='form1029270349' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='0200'>
+<input type='hidden' name='val2' value='8/14/2002'>
+<input type='hidden' name='val3' value='LAX'>
+<input type='hidden' name='val4' value='tedmond@snap.org'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='tedmond@snap.org'>
+</form>
+
+<table>
+<tr><td colspan=2>----Tue Aug 13 13:24:50 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>0200</td></tr>
+<tr><td><b>on date</b></td><td>0/14/2002</td></tr>
+<tr><td><b>from airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>tedmond@snap.org</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;error&gt;&lt;type&gt; Date passed: date; &lt;/type&gt;&lt;/error&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1029270290)'></td></tr>
+</table><br>
+<form name='form1029270290' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='0200'>
+<input type='hidden' name='val2' value='0/14/2002'>
+<input type='hidden' name='val3' value='LAX'>
+<input type='hidden' name='val4' value='tedmond@snap.org'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='tedmond@snap.org'>
+</form>
+
+<table>
+<tr><td colspan=2>----Tue Aug 13 13:24:06 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>0200</td></tr>
+<tr><td><b>on date</b></td><td>8/14/2002</td></tr>
+<tr><td><b>from airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>tedmond@snap.org</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;ack&gt;OK&lt;/ack&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1029270246)'></td></tr>
+</table><br>
+<form name='form1029270246' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='0200'>
+<input type='hidden' name='val2' value='8/14/2002'>
+<input type='hidden' name='val3' value='LAX'>
+<input type='hidden' name='val4' value='tedmond@snap.org'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='tedmond@snap.org'>
+</form>
+
+<table>
+<tr><td colspan=2>----Tue Aug 13 13:23:44 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>0200</td></tr>
+<tr><td><b>on date</b></td><td>0/14/2002</td></tr>
+<tr><td><b>from airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>tedmond@snap.org</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;error&gt;&lt;type&gt; Date passed: date; &lt;/type&gt;&lt;/error&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1029270224)'></td></tr>
+</table><br>
+<form name='form1029270224' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='0200'>
+<input type='hidden' name='val2' value='0/14/2002'>
+<input type='hidden' name='val3' value='LAX'>
+<input type='hidden' name='val4' value='tedmond@snap.org'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='tedmond@snap.org'>
+</form>
+
+<table>
+<tr><td colspan=2>----Tue Aug 13 13:23:06 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>0200</td></tr>
+<tr><td><b>on date</b></td><td>0/14/2002</td></tr>
+<tr><td><b>from airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>tedmond@snap.org</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;error&gt;&lt;type&gt; Date passed: date; &lt;/type&gt;&lt;/error&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1029270186)'></td></tr>
+</table><br>
+<form name='form1029270186' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='0200'>
+<input type='hidden' name='val2' value='0/14/2002'>
+<input type='hidden' name='val3' value='LAX'>
+<input type='hidden' name='val4' value='tedmond@snap.org'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='tedmond@snap.org'>
+</form>
+
+<p>
+</html>

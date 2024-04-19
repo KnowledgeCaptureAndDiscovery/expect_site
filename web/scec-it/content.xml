@@ -1,0 +1,222 @@
+<!-- <?xml version='1.0'?> -->
+
+<!--
+
+IF YOU CAN READ THIS, YOUR BROWSER DOESN'T SUPPORT XML.
+
+PLEASE UPDATE YOUR BROWSER, OR VIEW THE HTML VERSION OF THIS PAGE.
+
+-->
+<!--
+When the schema works, reference it like this; change the project tag below to this
+<project xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation = "isd-personnel.xsd">
+-->
+<project>
+  <name>SCEC/IT</name>
+  <title>Information Infrastructure for Earthquake Research</title>
+
+  <status>
+    <short>
+      This project started in September 2001.
+    </short>
+
+    <long>
+      <p>
+      This project started in September 2001.
+      </p>
+    </long>
+  </status>
+
+  <description>
+    <short>
+      This is a multi-site collaboration to 
+provide information technology infrastructure for earthquake research, 
+including knowledge representation and reasoning, Grid technologies,
+digital libraries, and interactive knowledge acquisition.
+    </short>
+
+    <long>
+<p>
+Recent advances in geophysics have made it possible for the first time
+to create fully three-dimensional simulations of fault-rupture and
+fault-system dynamics.   Such physics-based simulations are crucial to
+gaining a fundamental understanding of 
+earthquake phenomena, and they
+can potentially provide enormous practical benefits for assessing and
+mitigating earthquake risks through improvements in seismic hazard
+analysis.  This project
+represents a collaboration among the 
+<a href="http://www.scec.org">
+Southern California Earthquake Center (SCEC)</a>, the 
+<a href="http://www.isi.edu">
+Information Sciences Institute (ISI)</a>, the 
+<a href="http://www.iris.edu">
+San Diego Supercomputer Center (SDSC)</a>, the
+<a href="http://www.iris.edu">
+Incorporated Institutions for Seismology (IRIS)</a>, 
+and the 
+<a href="http://www.usgs.gov">
+U.S. Geological
+Survey (USGS)</a>.
+</p>
+
+More on: 
+<a href="http://www.scec.org/outreach/eqbasics/eqabc.html">earthquakes</a>
+<a href="http://www.iris.washington.edu/seismic/60_2040_1_4.html">earthquake map</a>, 
+<a href="http://www.scec.org/research/master.html">shaking frequency map</a>, 
+<a href="http://www.scec.org/phase3/images/amplification.jpg">shaking amplification map</a>.
+
+<p>
+To achieve its objectives, the environment must provide a means for
+describing, configuring, instantiating, and executing complex
+computational pathways that result from the composition of various
+earthquake simulation models.  This entails solving a number of
+challenging problems in information technology. Many object types must
+be manipulated, and a number of algorithms must be employed.  Algorithm
+inputs and outputs can be very complex and take different meanings for
+users in different disciplines.  Models are developed in distributed
+collaborations, and any model component may require access to remote
+databases and data sets, as well as require remote high-performance
+computing resources for its execution.  To solve these problems, we will
+bring together research from several distinct computer science
+disciplines:
+</p>
+
+<ul>
+<li> <b>Knowledge representation and reasoning</b> techniques to manage the
+heterogeneity of the models and capture the complex relationships
+between the physical processes and the model algorithms, between the
+algorithms and the simulation codes, and between the simulation codes
+and the data products.  Knowledge-based inference will be used to apply
+these representations to the problems of pathway construction,
+constraint checking, execution planning, and information access. </li>
+
+<li> <b>Grid technologies</b> to enable access to distributed simulation codes
+and resources for the timely execution of the simulation scenarios
+defined by users, specifically by integrating high-performance computing
+resources into the execution environment available to the modeling
+framework.  By providing mechanisms for the discovery, access, and
+management of distributed computation and storage resources, Grids
+address the distributed nature of the developers, resources and user
+environments. </li>
+
+<li><b>Digital library</b> technology to manage the collections of data and
+simulation code repositories and handle multiple versions of the models.
+ Knowledge-based data management tools will provide an infrastructure
+for mediating access to existing seismic data catalogs and information
+repositories, as well as incorporating new collections of data generated
+by the simulations. </li>
+
+<li><b>Interactive knowledge acquisition</b> techniques to enable users with a
+range of sophistication to configure computational pathways.  Knowledge
+acquisition tools support this activity by selecting appropriate
+simulation software and input data files from the available code and
+information repositories.  These tools hide implementation details and
+present users with structured dialogues that guide them to provide
+information required to set up each simulation while resolving the
+constraints among the simulation models and their inputs. </li>
+</ul>
+
+<p>
+The proposed research will be conducted
+by a collaboration between leading researchers in each of these
+information technology areas and earthquake scientists.
+</p>
+    </long>
+  </description>
+
+  <research>
+    <short>
+     Interactive knowledge acquisition, semantic markup, planning and execution.
+    </short>
+    <long>
+<p>
+This project is a multi-site collaboration 
+to develop an integrated framework for creating, executing, and managing
+physics-based earthquake simulations required to predict strong ground
+motions.  
+Working with members of the 
+<a href="http://www.scec.org">
+Southern California Earthquake Center (SCEC)</a>,
+our goal is to provide effective delivery of simulation products to a
+broad-based user community of geophysicists, civil and structural
+engineers, city planners, and emergency managers.
+</p>
+
+This project will develop new
+techniques for describing, configuring and executing complex
+computational pathways resulting from the composition of various
+simulation components.  In particular, this project brings 
+together four distinct computer science disciplines: 
+<ul>
+<li> knowledge representation and reasoning, by
+<a href="http://www.isi.edu/isd/LOOM/">ISI's PowerLoom project</a>,
+to manage the heterogeneity of the simulation models
+and capture the complex relationships between physical processes,
+research simulation models, simulation code, and data products</li>
+<li> Grid resource-sharing environments, through
+ISI's Center for Grid Computing and 
+<a href="http://www.globus.org">Globus</a>,
+to support the execution of simulation scenarios in high performance 
+computing resources</li>  
+<li> digital libraries and information management,
+by UCSD, to manage the collections of data and 
+simulation code repositories as well as multiple versions of the models</li>
+<li> interactive knowledge acquisition, by
+<a href="http://www.isi.edu/expect">us</a>,
+to enable users with a wide range of sophistication to compose
+multi-step simulations from libraries of simulation codes and data</li>
+</ul>
+
+The contribution of our research group to this project
+is threefold:
+
+<ul>
+<li> interactive tools that enable users that are not geophysics experts
+to compose and run simulations</li>
+<li> distributed representations using semantic markup languages of 
+earthquake related information</li>
+<li> dynamic planning and execution techniques that will 
+enable users to run simulations in the computational Grid</li>
+</ul>
+
+
+<p>
+While we will focus on the application of
+this new computer science to the challenge problem of seismic hazard
+analysis, the techniques and integrated modeling framework that will be
+developed in this project will be directly applicable to many other
+disciplines.
+</p>
+    </long>
+  </research>
+
+  <link>
+<a href="http://www.isi/edu/expect/web/path-assembly">
+Interactive knowledge acquisition work: Pathway Assembly Tools</a>
+  </link>
+
+  <link>
+<a href="http://www.scec.org/scec2/index.html">
+The official page of the SCEC/IT project</a>
+  </link>
+
+  <link>
+<a href="http://www.scec.org">
+Southern California Earthquake Center (SCEC)</a>
+  </link>
+
+  <link>
+ISI's Center for Grid Computing and the
+<a href="http://www.globus.org">Globus</a> project
+  </link>
+
+
+<!-- Demo -->
+<demo>
+     <center>
+	  <img src="tn_comingsoon.jpg"/>
+	  </center>
+</demo>
+</project>

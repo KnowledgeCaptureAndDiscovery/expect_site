@@ -1,0 +1,2660 @@
+
+#|
+;;; INFORMAL SKETCH OF THIS PROTOTYPE:
+
+Jayhawk2
+  participants(o): Spatial-Entity
+                   Spatial-Entity
+                   Spatial-Entity
+                   Spatial-Entity
+                   Spatial-Entity
+                   Spatial-Entity
+                   Spatial-Entity
+                   Reinforce
+                     object(o): Armor-Unit and Brigade...
+                     agent(o): Military-Unit...
+                   Goal
+                     enables(o): Reinforce...
+                   Reinforce
+                     object(o): Armor-Unit and Brigade...
+                     agent(o): Military-Unit...
+                   Goal
+                     enables(o): Reinforce...
+                   Mechanized-Infantry-Unit and Brigade
+                     troop-strength(o): Troop-Strength-Value: *regular-strength Mechanized-Infantry-Unit
+                     allegiance(o): Allegiance-Value: *Blue
+                   Armor-Unit and Brigade
+                     troop-strength(o): Troop-Strength-Value: *regular-strength Armor-Unit
+                     allegiance(o): Allegiance-Value: *Blue
+                   Armor-Unit and Brigade
+                     troop-strength(o): Troop-Strength-Value: *regular-strength Armor-Unit
+                     allegiance(o): Allegiance-Value: *Blue
+                   Armor-Unit and Brigade
+                     troop-strength(o): Troop-Strength-Value: *regular-strength Armor-Unit
+                     allegiance(o): Allegiance-Value: *Blue
+                   Artillery-Unit and Battalion
+                     troop-strength(o): Troop-Strength-Value: *regular-strength Artillery-Unit
+                     allegiance(o): Allegiance-Value: *Blue
+                   Artillery-Unit and Battalion
+                     troop-strength(o): Troop-Strength-Value: *regular-strength Artillery-Unit
+                     allegiance(o): Allegiance-Value: *Blue
+                   Artillery-Unit and Battalion
+                     troop-strength(o): Troop-Strength-Value: *regular-strength Artillery-Unit
+                     allegiance(o): Allegiance-Value: *Blue
+                   Artillery-Unit and Battalion
+                     troop-strength(o): Troop-Strength-Value: *regular-strength Artillery-Unit
+                     allegiance(o): Allegiance-Value: *Blue
+                   Artillery-Unit and Battalion
+                     troop-strength(o): Troop-Strength-Value: *regular-strength Artillery-Unit
+                     allegiance(o): Allegiance-Value: *Blue
+                   Armored-Cavalry-Unit and Cavalry-Unit and Battalion
+                     troop-strength(o): Troop-Strength-Value: *regular-strength Armored-Cavalry-Unit
+                     allegiance(o): Allegiance-Value: *Blue
+                   Aviation-Unit and Battalion
+                     troop-strength(o): Troop-Strength-Value: *regular-strength Aviation-Unit
+                     allegiance(o): Allegiance-Value: *Blue
+                   Aviation-Unit and Battalion
+                     troop-strength(o): Troop-Strength-Value: *regular-strength Aviation-Unit
+                     allegiance(o): Allegiance-Value: *Blue
+                   Mechanized-Infantry-Unit and Battalion
+                     troop-strength(o): Troop-Strength-Value: *regular-strength Mechanized-Infantry-Unit
+                     allegiance(o): Allegiance-Value: *Red
+                   Mechanized-Infantry-Unit and Battalion
+                     troop-strength(o): Troop-Strength-Value: *regular-strength Mechanized-Infantry-Unit
+                     allegiance(o): Allegiance-Value: *Red
+                   Mechanized-Infantry-Unit and Battalion
+                     troop-strength(o): Troop-Strength-Value: *regular-strength Mechanized-Infantry-Unit
+                     allegiance(o): Allegiance-Value: *Red
+                   Destroy-Unit
+                     object(o): Armor-Unit and Brigade...
+                     agent(o): Armor-Unit and Brigade...
+                   Goal
+                     enables(o): Destroy-Unit...
+                   Destroy-Unit
+                     object(o): Armor-Unit and Brigade...
+                     agent(o): Armor-Unit and Brigade...
+                   Goal
+                     enables(o): Destroy-Unit...
+                   Armor-Unit and Brigade
+                     troop-strength(o): Troop-Strength-Value: *regular-strength Armor-Unit
+                     allegiance(o): Allegiance-Value: *Red
+                   Armor-Unit and Brigade
+                     troop-strength(o): Troop-Strength-Value: *regular-strength Armor-Unit
+                     allegiance(o): Allegiance-Value: *Red
+                   Armor-Unit and Brigade
+                     troop-strength(o): Troop-Strength-Value: *regular-strength Armor-Unit
+                     allegiance(o): Allegiance-Value: *Red
+                   Destroy-Unit
+                     object(o): Artillery-Unit and Regiment...
+                     agent(o): Armor-Unit and Brigade...
+                   Goal
+                     enables(o): Destroy-Unit...
+                   Artillery-Unit and Regiment
+                     troop-strength(o): Troop-Strength-Value: *regular-strength Artillery-Unit
+                     allegiance(o): Allegiance-Value: *Red
+                   Bridge
+                   Move-Military-Unit
+                     destination(o): Spatial-Entity
+                     agent(o): Mechanized-Infantry-Unit and Brigade...
+                   Goal
+                     enables(o): Move-Military-Unit...
+                   Move-Military-Unit
+                     destination(o): Spatial-Entity
+                     agent(o): Armor-Unit and Brigade...
+                   Goal
+                     enables(o): Move-Military-Unit...
+                   Move-Military-Unit
+                     destination(o): Spatial-Entity
+                     agent(o): Military-Unit...
+                   Goal
+                     enables(o): Move-Military-Unit...
+                   Seize
+                     object(o): Spatial-Entity
+                     agent(o): Armor-Unit and Brigade...
+                   Goal
+                     enables(o): Seize...
+                   Seize
+                     object(o): Spatial-Entity
+                     agent(o): Armor-Unit and Brigade...
+                   Goal
+                     enables(o): Seize...
+                   Seize
+                     object(o): Spatial-Entity
+                     agent(o): Military-Unit...
+                   Goal
+                     enables(o): Seize...
+                   Seize
+                     object(o): Spatial-Entity
+                     agent(o): Military-Unit...
+                   Goal
+                     enables(o): Seize...
+                   Move-Military-Unit
+                     destination(o): Spatial-Entity
+                     agent(o): Armor-Unit and Brigade...
+                   Goal
+                     enables(o): Move-Military-Unit...
+                   Move-Military-Unit
+                     destination(o): Spatial-Entity
+                     agent(o): Armor-Unit and Brigade...
+                   Goal
+                     enables(o): Move-Military-Unit...
+                   Spatial-Entity
+                   Spatial-Entity
+                   Spatial-Entity
+                     agent(o): Aviation-Unit and Battalion...
+                     allegiance(o): Allegiance-Value: *Blue
+                   Spatial-Entity
+                     agent(o): Armor-Unit and Brigade...
+                     allegiance(o): Allegiance-Value: *Blue
+                   Spatial-Entity
+                   Spatial-Entity
+                     allegiance(o): Allegiance-Value: *Blue
+                   Spatial-Entity and Reserve-Task
+                     agent(o): Mechanized-Infantry-Unit and Brigade...
+                     allegiance(o): Allegiance-Value: *Blue
+                   Spatial-Entity
+                     agent(o): Armor-Unit and Brigade...
+                     allegiance(o): Allegiance-Value: *Blue
+                   City
+                   Spatial-Entity
+                   Spatial-Entity
+                   Spatial-Entity
+                   Spatial-Entity
+                   Spatial-Entity
+                   Spatial-Entity
+                   Spatial-Entity
+                   Spatial-Entity
+                   River
+                   Lake
+                   Military-Task
+                   Military-Unit
+                     allegiance(o): Allegiance-Value: *Blue
+                   Seize
+                     object(o): Spatial-Entity
+                     agent(o): Military-Unit...
+                   Goal
+                     enables(o): Seize...
+                   Military-Task
+                   Fire-Support-Task and Follow-and-Support and Spatial-Entity
+                     agent(o): Artillery-Unit and Battalion...
+                     objective(o): Goal...
+                     duration(o): Duration-Value: 6.0d0 *hour
+                   Reserve-Task
+                     next-event(i): Reserve-Task and Destroy-Unit...
+                                    Supporting-Attack-Task and Attack...
+                                    Main-Attack-Task and Destroy-Unit...
+                     agent(o): Mechanized-Infantry-Unit and Brigade...
+                     objective(o): Goal...
+                                   Goal...
+                     duration(o): Duration-Value: 1.0d0 *hour
+                   Fire-Support-Task and Attack
+                     agent(o): Aviation-Unit and Battalion...
+                     objective(o): Goal...
+                     object(o): Armor-Unit and Brigade...
+                                Armor-Unit and Brigade...
+                     duration(o): Duration-Value: 2.5d0 *hour
+                   Fire-Support-Task and Follow-and-Support and Spatial-Entity
+                     agent(o): Artillery-Unit and Battalion...
+                     objective(o): Goal...
+                     duration(o): Duration-Value: 6.0d0 *hour
+                   Main-Attack-Task and Spatial-Entity and Seize
+                     agent(o): Armor-Unit and Brigade...
+                     object(o): Armor-Unit and Brigade...
+                                Armor-Unit and Brigade...
+                     objective(o): Goal...
+                     duration(o): Duration-Value: 2.0d0 *hour
+                   Main-Attack-Task and Destroy-Unit
+                     next-event(i): Supporting-Attack-Task and Destroy-Unit...
+                                    Main-Attack-Task and Spatial-Entity and Seize...
+                                    Reserve-Task and Attack...
+                                    Main-Attack-Task and Spatial-Entity and Seize...
+                     agent(o): Armored-Cavalry-Unit and Cavalry-Unit and Battalion...
+                     location(o): Mechanized-Infantry-Unit and Battalion...
+                     object(o): Mechanized-Infantry-Unit and Battalion...
+                     objective(o): Goal...
+                                   Goal...
+                     duration(o): Duration-Value: 0.5d0 *hour
+                   Fire-Support-Task and Follow-and-Support and Spatial-Entity
+                     agent(o): Artillery-Unit and Battalion...
+                     objective(o): Goal...
+                     duration(o): Duration-Value: 6.0d0 *hour
+                   Main-Attack-Task and Spatial-Entity and Seize
+                     object(o): Mechanized-Infantry-Unit and Brigade...
+                     agent(o): Armor-Unit and Brigade...
+                     objective(o): Goal...
+                     duration(o): Duration-Value: 1.0d0 *hour
+                   Reserve-Task and Attack
+                     agent(o): Aviation-Unit and Battalion...
+                     objective(o): Goal...
+                     object(o): Armor-Unit and Brigade...
+                                Armor-Unit and Brigade...
+                     duration(o): Duration-Value: 2.0d0 *hour
+                   Supporting-Attack-Task and Attack
+                     next-event(i): Supporting-Attack-Task and Destroy-Unit...
+                                    Main-Attack-Task and Spatial-Entity and Seize...
+                                    Reserve-Task and Attack...
+                                    Main-Attack-Task and Spatial-Entity and Seize...
+                     agent(o): Armor-Unit and Brigade...
+                     object(o): Mechanized-Infantry-Unit and Battalion...
+                     objective(o): Goal...
+                     duration(o): Duration-Value: 0.5d0 *hour
+                   Supporting-Attack-Task and Destroy-Unit
+                     location(o): Spatial-Entity...
+                     agent(o): Armor-Unit and Brigade...
+                     object(o): Artillery-Unit and Regiment...
+                     duration(o): Duration-Value: 2.0d0 *hour
+                   Fire-Support-Task and Follow-and-Support and Spatial-Entity
+                     object(o): Artillery-Unit and Battalion...
+                     agent(o): Artillery-Unit and Battalion...
+                     objective(o): Goal...
+                     duration(o): Duration-Value: 6.0d0 *hour
+                   Reserve-Task and Destroy-Unit
+                     next-event(i): Supporting-Attack-Task and Destroy-Unit...
+                                    Main-Attack-Task and Spatial-Entity and Seize...
+                                    Reserve-Task and Attack...
+                                    Main-Attack-Task and Spatial-Entity and Seize...
+                     location(o): Spatial-Entity and Reserve-Task...
+                     agent(o): Mechanized-Infantry-Unit and Brigade...
+                     object(o): Mechanized-Infantry-Unit and Battalion...
+                     duration(o): Duration-Value: 0.5d0 *hour
+                   Fire-Support-Task and Follow-and-Support and Spatial-Entity
+                     agent(o): Artillery-Unit and Battalion...
+                     objective(o): Goal...
+                     duration(o): Duration-Value: 6.0d0 *hour
+                   Military-Unit
+                   Military-Unit
+                   Military-Task
+                     agent(o): Military-Unit
+                   Military-Task
+                     agent(o): Military-Unit
+                   Jayhawk2...
+  first-subevent(i): Fire-Support-Task and Attack
+                       agent(o): Aviation-Unit and Battalion...
+                       objective(o): Goal...
+                       object(o): Armor-Unit and Brigade...
+                                  Armor-Unit and Brigade...
+                       duration(o): Duration-Value: 2.5d0 *hour
+                     Fire-Support-Task and Follow-and-Support and Spatial-Entity
+                       object(o): Artillery-Unit and Battalion...
+                       agent(o): Artillery-Unit and Battalion...
+                       objective(o): Goal...
+                       duration(o): Duration-Value: 6.0d0 *hour
+                     Reserve-Task
+                       next-event(i): Reserve-Task and Destroy-Unit...
+                                      Supporting-Attack-Task and Attack...
+                                      Main-Attack-Task and Destroy-Unit...
+                       agent(o): Mechanized-Infantry-Unit and Brigade...
+                       objective(o): Goal...
+                                     Goal...
+                       duration(o): Duration-Value: 1.0d0 *hour
+                     Fire-Support-Task and Follow-and-Support and Spatial-Entity
+                       agent(o): Artillery-Unit and Battalion...
+                       objective(o): Goal...
+                       duration(o): Duration-Value: 6.0d0 *hour
+                     Fire-Support-Task and Follow-and-Support and Spatial-Entity
+                       agent(o): Artillery-Unit and Battalion...
+                       objective(o): Goal...
+                       duration(o): Duration-Value: 6.0d0 *hour
+                     Fire-Support-Task and Follow-and-Support and Spatial-Entity
+                       agent(o): Artillery-Unit and Battalion...
+                       objective(o): Goal...
+                       duration(o): Duration-Value: 6.0d0 *hour
+                     Fire-Support-Task and Follow-and-Support and Spatial-Entity
+                       agent(o): Artillery-Unit and Battalion...
+                       objective(o): Goal...
+                       duration(o): Duration-Value: 6.0d0 *hour
+  subevent(i): Supporting-Attack-Task and Destroy-Unit
+                 location(o): Spatial-Entity...
+                 agent(o): Armor-Unit and Brigade...
+                 object(o): Artillery-Unit and Regiment...
+                 duration(o): Duration-Value: 2.0d0 *hour
+               Main-Attack-Task and Spatial-Entity and Seize
+                 object(o): Mechanized-Infantry-Unit and Brigade...
+                 agent(o): Armor-Unit and Brigade...
+                 objective(o): Goal...
+                 duration(o): Duration-Value: 1.0d0 *hour
+               Reserve-Task and Attack
+                 agent(o): Aviation-Unit and Battalion...
+                 objective(o): Goal...
+                 object(o): Armor-Unit and Brigade...
+                            Armor-Unit and Brigade...
+                 duration(o): Duration-Value: 2.0d0 *hour
+               Main-Attack-Task and Spatial-Entity and Seize
+                 agent(o): Armor-Unit and Brigade...
+                 object(o): Armor-Unit and Brigade...
+                            Armor-Unit and Brigade...
+                 objective(o): Goal...
+                 duration(o): Duration-Value: 2.0d0 *hour
+               Fire-Support-Task and Attack
+                 agent(o): Aviation-Unit and Battalion...
+                 objective(o): Goal...
+                 object(o): Armor-Unit and Brigade...
+                            Armor-Unit and Brigade...
+                 duration(o): Duration-Value: 2.5d0 *hour
+               Reserve-Task and Destroy-Unit
+                 next-event(i): Supporting-Attack-Task and Destroy-Unit...
+                                Main-Attack-Task and Spatial-Entity and Seize...
+                                Reserve-Task and Attack...
+                                Main-Attack-Task and Spatial-Entity and Seize...
+                 location(o): Spatial-Entity and Reserve-Task...
+                 agent(o): Mechanized-Infantry-Unit and Brigade...
+                 object(o): Mechanized-Infantry-Unit and Battalion...
+                 duration(o): Duration-Value: 0.5d0 *hour
+               Supporting-Attack-Task and Attack
+                 next-event(i): Supporting-Attack-Task and Destroy-Unit...
+                                Main-Attack-Task and Spatial-Entity and Seize...
+                                Reserve-Task and Attack...
+                                Main-Attack-Task and Spatial-Entity and Seize...
+                 agent(o): Armor-Unit and Brigade...
+                 object(o): Mechanized-Infantry-Unit and Battalion...
+                 objective(o): Goal...
+                 duration(o): Duration-Value: 0.5d0 *hour
+               Main-Attack-Task and Destroy-Unit
+                 next-event(i): Supporting-Attack-Task and Destroy-Unit...
+                                Main-Attack-Task and Spatial-Entity and Seize...
+                                Reserve-Task and Attack...
+                                Main-Attack-Task and Spatial-Entity and Seize...
+                 agent(o): Armored-Cavalry-Unit and Cavalry-Unit and Battalion...
+                 location(o): Mechanized-Infantry-Unit and Battalion...
+                 object(o): Mechanized-Infantry-Unit and Battalion...
+                 objective(o): Goal...
+                               Goal...
+                 duration(o): Duration-Value: 0.5d0 *hour
+               Fire-Support-Task and Follow-and-Support and Spatial-Entity
+                 object(o): Artillery-Unit and Battalion...
+                 agent(o): Artillery-Unit and Battalion...
+                 objective(o): Goal...
+                 duration(o): Duration-Value: 6.0d0 *hour
+               Reserve-Task
+                 next-event(i): Reserve-Task and Destroy-Unit...
+                                Supporting-Attack-Task and Attack...
+                                Main-Attack-Task and Destroy-Unit...
+                 agent(o): Mechanized-Infantry-Unit and Brigade...
+                 objective(o): Goal...
+                               Goal...
+                 duration(o): Duration-Value: 1.0d0 *hour
+               Fire-Support-Task and Follow-and-Support and Spatial-Entity
+                 agent(o): Artillery-Unit and Battalion...
+                 objective(o): Goal...
+                 duration(o): Duration-Value: 6.0d0 *hour
+               Fire-Support-Task and Follow-and-Support and Spatial-Entity
+                 agent(o): Artillery-Unit and Battalion...
+                 objective(o): Goal...
+                 duration(o): Duration-Value: 6.0d0 *hour
+               Fire-Support-Task and Follow-and-Support and Spatial-Entity
+                 agent(o): Artillery-Unit and Battalion...
+                 objective(o): Goal...
+                 duration(o): Duration-Value: 6.0d0 *hour
+               Fire-Support-Task and Follow-and-Support and Spatial-Entity
+                 agent(o): Artillery-Unit and Battalion...
+                 objective(o): Goal...
+                 duration(o): Duration-Value: 6.0d0 *hour
+  objective(o): Goal
+                  enables(o): Seize...
+
+|#
+
+;;; KM REPRESENTATION OF THIS PROTOTYPE
+
+(disable-classification)
+
+(Jayhawk2 has (superclasses (COA)))
+
+(Jayhawk2 now-has (prototypes (_Jayhawk2790)))
+
+(_Jayhawk2790 has
+  (prototype-of (Jayhawk2))
+  (prototype-scope (Jayhawk2))
+  (prototype-participants (_Jayhawk2790 _Troop-Strength-Value2791
+                   _Move-Military-Unit2kanal1  _Move-Military-Unit2kanal2 ; jihie
+		   _Move-Military-Unit2kanal3
+                           _Allegiance-Value2792 _Troop-Strength-Value2793
+                           _Allegiance-Value2794 _Troop-Strength-Value2795
+                           _Allegiance-Value2796 _Troop-Strength-Value2797
+                           _Allegiance-Value2798 _Troop-Strength-Value2799
+                           _Allegiance-Value2800 _Troop-Strength-Value2801
+                           _Allegiance-Value2802 _Troop-Strength-Value2803
+                           _Allegiance-Value2804 _Troop-Strength-Value2805
+                           _Allegiance-Value2806 _Troop-Strength-Value2807
+                           _Allegiance-Value2808 _Troop-Strength-Value2809
+                           _Allegiance-Value2810 _Troop-Strength-Value2811
+                           _Allegiance-Value2812 _Troop-Strength-Value2813
+                           _Allegiance-Value2814 _Troop-Strength-Value2815
+                           _Allegiance-Value2816 _Troop-Strength-Value2817
+                           _Allegiance-Value2818 _Troop-Strength-Value2819
+                           _Allegiance-Value2820 _Troop-Strength-Value2821
+                           _Allegiance-Value2822 _Troop-Strength-Value2823
+                           _Allegiance-Value2824 _Troop-Strength-Value2825
+                           _Allegiance-Value2826 _Troop-Strength-Value2827
+                           _Allegiance-Value2828 _Allegiance-Value2829
+                           _Allegiance-Value2830 _Allegiance-Value2831
+                           _Allegiance-Value2832 _Allegiance-Value2833
+                           _Allegiance-Value2834 _Duration-Value2835
+                           _Duration-Value2836 _Duration-Value2837
+                           _Duration-Value2838 _Duration-Value2839
+                           _Duration-Value2840 _Duration-Value2841
+                           _Duration-Value2842 _Duration-Value2843
+                           _Duration-Value2844 _Duration-Value2845
+                           _Duration-Value2846 _Duration-Value2847
+                           _Duration-Value2848 _Spatial-Entity2849
+                           _Spatial-Entity2850 _Spatial-Entity2851
+                           _Spatial-Entity2852 _Spatial-Entity2853
+                           _Spatial-Entity2854 _Spatial-Entity2855
+                           _Reinforce2856 _Goal2857 _Reinforce2858 _Goal2859
+                           _Mechanized-Infantry-Unit2860 _Armor-Unit2861
+                           _Armor-Unit2862 _Armor-Unit2863 _Artillery-Unit2864
+                           _Artillery-Unit2865 _Artillery-Unit2866
+                           _Artillery-Unit2867 _Artillery-Unit2868
+                           _Armored-Cavalry-Unit2869 _Aviation-Unit2870
+                           _Aviation-Unit2871 _Mechanized-Infantry-Unit2872
+                           _Mechanized-Infantry-Unit2873
+                           _Mechanized-Infantry-Unit2874 _Destroy-Unit2875
+                           _Goal2876 _Destroy-Unit2877 _Goal2878
+                           _Armor-Unit2879 _Armor-Unit2880 _Armor-Unit2881
+                           _Destroy-Unit2882 _Goal2883 _Artillery-Unit2884
+                           _Bridge2885 _Move-Military-Unit2886 _Goal2887 _Move-Military-Unit2888 _Goal2889
+                           _Move-Military-Unit2890 _Goal2891 _Seize2892 _Goal2893 _Seize2894
+                           _Goal2895 _Seize2896 _Goal2897 _Seize2898 _Goal2899
+                           _Move-Military-Unit2900 _Goal2901 _Move-Military-Unit2902 _Goal2903
+                           _Spatial-Entity2904 _Spatial-Entity2905
+                           _Spatial-Entity2906 _Spatial-Entity2907
+                           _Spatial-Entity2908 _Spatial-Entity2909
+                           _Spatial-Entity2910 _Spatial-Entity2911 _City2912
+                           _Spatial-Entity2913 _Spatial-Entity2914
+                           _Spatial-Entity2915 _Spatial-Entity2916
+                           _Spatial-Entity2917 _Spatial-Entity2918
+                           _Spatial-Entity2919 _Spatial-Entity2920 _River2921
+                           _Lake2922 _Military-Task2923 _Military-Unit2924
+                           _Seize2925 _Military-Task2926 _Military-Unit2927
+                           _Military-Unit2928 _Military-Task2929
+                           _Military-Task2930 _Supporting-Attack-Task2931
+                           _Main-Attack-Task2932 _Reserve-Task2933
+                           _Main-Attack-Task2934 _Fire-Support-Task2935
+                           _Reserve-Task2936 _Supporting-Attack-Task2937
+                           _Main-Attack-Task2938 _Fire-Support-Task2939
+                           _Reserve-Task2940 _Fire-Support-Task2941
+                           _Fire-Support-Task2942 _Fire-Support-Task2943
+                           _Fire-Support-Task2944 _Goal2945 _Property-Node2946
+                           _Property-Node2947 _Property-Node2948
+                           _Property-Node2949 _Property-Node2950
+                           _Property-Node2951 _Property-Node2952
+                           _Property-Node2953 _Property-Node2954
+                           _Property-Node2955 _Property-Node2956
+                           _Property-Node2957 _Property-Node2958
+                           _Property-Node2959 _Property-Node2960
+                           _Property-Node2961 _Property-Node2962
+                           _Property-Node2963 _Property-Node2964
+                           _Property-Node2965 _Property-Node2966
+                           _Property-Node2967 _Property-Node2968
+                           _Property-Node2969 _Property-Node2970
+                           _Property-Node2971 _Property-Node2972
+                           _Property-Node2973 _Property-Node2974
+                           _Property-Node2975 _Property-Node2976
+                           _Property-Node2977 _Property-Node2978
+                           _Property-Node2979 _Property-Node2980
+                           _Property-Node2981 _Property-Node2982
+                           _Property-Node2983 _Property-Node2984
+                           _Property-Node2985 _Property-Node2986
+                           _Property-Node2987 _Property-Node2988
+                           _Property-Node2989 _Property-Node2990
+                           _Property-Node2991 _Property-Node2992
+                           _Property-Node2993 _Property-Node2994
+                           _Property-Node2995 _Property-Node2996
+                           _Property-Node2997 _Property-Node2998
+                           _Property-Node2999 _Property-Node3000
+                           _Property-Node3001 _Property-Node3002
+                           _Property-Node3003 _Group-Node3004 _Group-Node3005
+                           _Group-Node3006 _Group-Node3007 _Group-Node3008
+                           _Group-Node3009 _Group-Node3010 _Group-Node3011)))
+
+(_Jayhawk2790 has
+  (instance-of (Jayhawk2))
+  (objective (_Goal2945))
+  (subevent (_Supporting-Attack-Task2931 _Main-Attack-Task2932
+             _Move-Military-Unit2kanal1  _Move-Military-Unit2kanal2 ; jihie
+	     _Move-Military-Unit2kanal3 _Reserve-Task2933 _Main-Attack-Task2934 
+	     _Fire-Support-Task2935 _Reserve-Task2936 _Supporting-Attack-Task2937
+             _Main-Attack-Task2938 _Fire-Support-Task2939 _Reserve-Task2940
+             _Fire-Support-Task2941 _Fire-Support-Task2942
+             _Fire-Support-Task2943 _Fire-Support-Task2944))
+  (first-subevent (_Fire-Support-Task2935 _Fire-Support-Task2939
+                   _Move-Military-Unit2kanal1  _Move-Military-Unit2kanal2 ; jihie
+		   _Move-Military-Unit2kanal3 _Reserve-Task2940 _Fire-Support-Task2941
+                   _Fire-Support-Task2942 _Fire-Support-Task2943
+                   _Fire-Support-Task2944))
+  (participants (_Spatial-Entity2849 _Spatial-Entity2850 _Spatial-Entity2851
+		_Move-Military-Unit2kanal1  _Move-Military-Unit2kanal2 ; jihie
+		_Move-Military-Unit2kanal3
+                 _Spatial-Entity2852 _Spatial-Entity2853 _Spatial-Entity2854
+                 _Spatial-Entity2855 _Reinforce2856 _Goal2857 _Reinforce2858
+                 _Goal2859 _Mechanized-Infantry-Unit2860 _Armor-Unit2861
+                 _Armor-Unit2862 _Armor-Unit2863 _Artillery-Unit2864
+                 _Artillery-Unit2865 _Artillery-Unit2866 _Artillery-Unit2867
+                 _Artillery-Unit2868 _Armored-Cavalry-Unit2869
+                 _Aviation-Unit2870 _Aviation-Unit2871
+                 _Mechanized-Infantry-Unit2872 _Mechanized-Infantry-Unit2873
+                 _Mechanized-Infantry-Unit2874 _Destroy-Unit2875 _Goal2876
+                 _Destroy-Unit2877 _Goal2878 _Armor-Unit2879 _Armor-Unit2880
+                 _Armor-Unit2881 _Destroy-Unit2882 _Goal2883
+                 _Artillery-Unit2884 _Bridge2885 _Move-Military-Unit2886 _Goal2887 _Move-Military-Unit2888
+                 _Goal2889 _Move-Military-Unit2890 _Goal2891 _Seize2892 _Goal2893 _Seize2894
+                 _Goal2895 _Seize2896 _Goal2897 _Seize2898 _Goal2899 _Move-Military-Unit2900
+                 _Goal2901 _Move-Military-Unit2902 _Goal2903 _Spatial-Entity2904
+                 _Spatial-Entity2905 _Spatial-Entity2906 _Spatial-Entity2907
+                 _Spatial-Entity2908 _Spatial-Entity2909 _Spatial-Entity2910
+                 _Spatial-Entity2911 _City2912 _Spatial-Entity2913
+                 _Spatial-Entity2914 _Spatial-Entity2915 _Spatial-Entity2916
+                 _Spatial-Entity2917 _Spatial-Entity2918 _Spatial-Entity2919
+                 _Spatial-Entity2920 _River2921 _Lake2922 _Military-Task2923
+                 _Military-Unit2924 _Seize2925 _Goal2945 _Military-Task2926
+                 _Fire-Support-Task2943 _Reserve-Task2940
+                 _Fire-Support-Task2935 _Fire-Support-Task2944
+                 _Main-Attack-Task2934 _Main-Attack-Task2938
+                 _Fire-Support-Task2941 _Main-Attack-Task2932
+                 _Reserve-Task2933 _Supporting-Attack-Task2937
+                 _Supporting-Attack-Task2931 _Fire-Support-Task2939
+                 _Reserve-Task2936 _Fire-Support-Task2942 _Military-Unit2927
+                 _Military-Unit2928 _Military-Task2929 _Military-Task2930
+                 _Jayhawk2790))
+  (new-objects (_Military-Task2930 _Military-Task2929 _Military-Unit2928
+		_Move-Military-Unit2kanal1  _Move-Military-Unit2kanal2 ; jihie
+		_Move-Military-Unit2kanal3
+                _Military-Unit2927 _Fire-Support-Task2942 _Reserve-Task2936
+                _Fire-Support-Task2939 _Supporting-Attack-Task2931
+                _Supporting-Attack-Task2937 _Reserve-Task2933
+                _Main-Attack-Task2932 _Fire-Support-Task2941
+                _Main-Attack-Task2938 _Main-Attack-Task2934
+                _Fire-Support-Task2944 _Fire-Support-Task2935
+                _Reserve-Task2940 _Fire-Support-Task2943 _Military-Task2926
+                _Goal2945 _Seize2925 _Military-Unit2924 _Military-Task2923
+                _Lake2922 _River2921 _Spatial-Entity2905 _Spatial-Entity2920
+                _Spatial-Entity2904 _Spatial-Entity2919 _Spatial-Entity2918
+                _Spatial-Entity2917 _Spatial-Entity2916 _Spatial-Entity2915
+                _Spatial-Entity2914 _Spatial-Entity2913 _Spatial-Entity2908
+                _Goal2903 _Move-Military-Unit2902 _Goal2901 _Move-Military-Unit2900 _Goal2899 _Seize2898
+                _Goal2897 _Seize2896 _Goal2895 _Seize2894 _Goal2893 _Seize2892
+                _Goal2891 _Move-Military-Unit2890 _Goal2889 _Move-Military-Unit2888 _Goal2887 _Move-Military-Unit2886
+                _City2912 _Bridge2885 _Artillery-Unit2884 _Goal2883
+                _Destroy-Unit2882 _Armor-Unit2881 _Armor-Unit2880
+                _Armor-Unit2879 _Goal2878 _Destroy-Unit2877 _Goal2876
+                _Destroy-Unit2875 _Mechanized-Infantry-Unit2874
+                _Mechanized-Infantry-Unit2873 _Mechanized-Infantry-Unit2872
+                _Aviation-Unit2871 _Aviation-Unit2870
+                _Armored-Cavalry-Unit2869 _Artillery-Unit2868
+                _Artillery-Unit2867 _Artillery-Unit2866 _Artillery-Unit2865
+                _Artillery-Unit2864 _Armor-Unit2863 _Goal2859 _Reinforce2858
+                _Armor-Unit2862 _Armor-Unit2861 _Goal2857 _Reinforce2856
+                _Mechanized-Infantry-Unit2860 _Spatial-Entity2855
+                _Spatial-Entity2854 _Spatial-Entity2907 _Spatial-Entity2911
+                _Spatial-Entity2910 _Spatial-Entity2909 _Spatial-Entity2906
+                _Spatial-Entity2853 _Spatial-Entity2852 _Spatial-Entity2851
+                _Spatial-Entity2850 _Spatial-Entity2849
+                _Troop-Strength-Value2791 _Property-Node2946
+                _Allegiance-Value2792 _Property-Node2947
+                _Troop-Strength-Value2793 _Property-Node2948
+                _Allegiance-Value2794 _Property-Node2949
+                _Troop-Strength-Value2795 _Property-Node2950
+                _Allegiance-Value2796 _Property-Node2951
+                _Troop-Strength-Value2797 _Property-Node2952
+                _Allegiance-Value2798 _Property-Node2953
+                _Troop-Strength-Value2799 _Property-Node2954
+                _Allegiance-Value2800 _Property-Node2955
+                _Troop-Strength-Value2801 _Property-Node2956
+                _Allegiance-Value2802 _Property-Node2957
+                _Troop-Strength-Value2803 _Property-Node2958
+                _Allegiance-Value2804 _Property-Node2959
+                _Troop-Strength-Value2805 _Property-Node2960
+                _Allegiance-Value2806 _Property-Node2961
+                _Troop-Strength-Value2807 _Property-Node2962
+                _Allegiance-Value2808 _Property-Node2963
+                _Troop-Strength-Value2809 _Property-Node2964
+                _Allegiance-Value2810 _Property-Node2965
+                _Troop-Strength-Value2811 _Property-Node2966
+                _Allegiance-Value2812 _Property-Node2967
+                _Troop-Strength-Value2813 _Property-Node2968
+                _Allegiance-Value2814 _Property-Node2969
+                _Troop-Strength-Value2815 _Property-Node2970
+                _Allegiance-Value2816 _Property-Node2971
+                _Troop-Strength-Value2817 _Property-Node2972
+                _Allegiance-Value2818 _Property-Node2973
+                _Troop-Strength-Value2819 _Property-Node2974
+                _Allegiance-Value2820 _Property-Node2975
+                _Troop-Strength-Value2821 _Property-Node2976
+                _Allegiance-Value2822 _Property-Node2977
+                _Troop-Strength-Value2823 _Property-Node2978
+                _Allegiance-Value2824 _Property-Node2979
+                _Troop-Strength-Value2825 _Property-Node2980
+                _Allegiance-Value2826 _Property-Node2981
+                _Troop-Strength-Value2827 _Property-Node2982
+                _Allegiance-Value2828 _Property-Node2983 _Allegiance-Value2829
+                _Property-Node2984 _Allegiance-Value2830 _Property-Node2985
+                _Allegiance-Value2831 _Property-Node2986 _Allegiance-Value2832
+                _Property-Node2987 _Allegiance-Value2833 _Property-Node2988
+                _Allegiance-Value2834 _Property-Node2989 _Duration-Value2835
+                _Property-Node2990 _Duration-Value2836 _Property-Node2991
+                _Duration-Value2837 _Property-Node2992 _Duration-Value2838
+                _Property-Node2993 _Duration-Value2839 _Property-Node2994
+                _Duration-Value2840 _Property-Node2995 _Duration-Value2841
+                _Property-Node2996 _Duration-Value2842 _Property-Node2997
+                _Duration-Value2843 _Property-Node2998 _Duration-Value2844
+                _Property-Node2999 _Duration-Value2845 _Property-Node3000
+                _Duration-Value2846 _Property-Node3001 _Duration-Value2847
+                _Property-Node3002 _Duration-Value2848 _Property-Node3003
+                _Group-Node3004 _Group-Node3006 _Group-Node3008
+                _Group-Node3010)))
+
+(_Troop-Strength-Value2791 has (instance-of (Troop-Strength-Value))
+ (value ((:pair *regular-strength Mechanized-Infantry-Unit))))
+
+(_Allegiance-Value2792 has (instance-of (Allegiance-Value)) (value (*Blue)))
+
+(_Troop-Strength-Value2793 has (instance-of (Troop-Strength-Value))
+ (value ((:pair *regular-strength Armor-Unit))))
+
+(_Allegiance-Value2794 has (instance-of (Allegiance-Value)) (value (*Blue)))
+
+(_Troop-Strength-Value2795 has (instance-of (Troop-Strength-Value))
+ (value ((:pair *regular-strength Armor-Unit))))
+
+(_Allegiance-Value2796 has (instance-of (Allegiance-Value)) (value (*Blue)))
+
+(_Troop-Strength-Value2797 has (instance-of (Troop-Strength-Value))
+ (value ((:pair *regular-strength Armor-Unit))))
+
+(_Allegiance-Value2798 has (instance-of (Allegiance-Value)) (value (*Blue)))
+
+(_Troop-Strength-Value2799 has (instance-of (Troop-Strength-Value))
+ (value ((:pair *regular-strength Artillery-Unit))))
+
+(_Allegiance-Value2800 has (instance-of (Allegiance-Value)) (value (*Blue)))
+
+(_Troop-Strength-Value2801 has (instance-of (Troop-Strength-Value))
+ (value ((:pair *regular-strength Artillery-Unit))))
+
+(_Allegiance-Value2802 has (instance-of (Allegiance-Value)) (value (*Blue)))
+
+(_Troop-Strength-Value2803 has (instance-of (Troop-Strength-Value))
+ (value ((:pair *regular-strength Artillery-Unit))))
+
+(_Allegiance-Value2804 has (instance-of (Allegiance-Value)) (value (*Blue)))
+
+(_Troop-Strength-Value2805 has (instance-of (Troop-Strength-Value))
+ (value ((:pair *regular-strength Artillery-Unit))))
+
+(_Allegiance-Value2806 has (instance-of (Allegiance-Value)) (value (*Blue)))
+
+(_Troop-Strength-Value2807 has (instance-of (Troop-Strength-Value))
+ (value ((:pair *regular-strength Artillery-Unit))))
+
+(_Allegiance-Value2808 has (instance-of (Allegiance-Value)) (value (*Blue)))
+
+(_Troop-Strength-Value2809 has (instance-of (Troop-Strength-Value))
+ (value ((:pair *regular-strength Armored-Cavalry-Unit))))
+
+(_Allegiance-Value2810 has (instance-of (Allegiance-Value)) (value (*Blue)))
+
+(_Troop-Strength-Value2811 has (instance-of (Troop-Strength-Value))
+ (value ((:pair *regular-strength Aviation-Unit))))
+
+(_Allegiance-Value2812 has (instance-of (Allegiance-Value)) (value (*Blue)))
+
+(_Troop-Strength-Value2813 has (instance-of (Troop-Strength-Value))
+ (value ((:pair *regular-strength Aviation-Unit))))
+
+(_Allegiance-Value2814 has (instance-of (Allegiance-Value)) (value (*Blue)))
+
+(_Troop-Strength-Value2815 has (instance-of (Troop-Strength-Value))
+ (value ((:pair *regular-strength Mechanized-Infantry-Unit))))
+
+(_Allegiance-Value2816 has (instance-of (Allegiance-Value)) (value (*Red)))
+
+(_Troop-Strength-Value2817 has (instance-of (Troop-Strength-Value))
+ (value ((:pair *regular-strength Mechanized-Infantry-Unit))))
+
+(_Allegiance-Value2818 has (instance-of (Allegiance-Value)) (value (*Red)))
+
+(_Troop-Strength-Value2819 has (instance-of (Troop-Strength-Value))
+ (value ((:pair *regular-strength Mechanized-Infantry-Unit))))
+
+(_Allegiance-Value2820 has (instance-of (Allegiance-Value)) (value (*Red)))
+
+(_Troop-Strength-Value2821 has (instance-of (Troop-Strength-Value))
+ (value ((:pair *regular-strength Armor-Unit))))
+
+(_Allegiance-Value2822 has (instance-of (Allegiance-Value)) (value (*Red)))
+
+(_Troop-Strength-Value2823 has (instance-of (Troop-Strength-Value))
+ (value ((:pair *regular-strength Armor-Unit))))
+
+(_Allegiance-Value2824 has (instance-of (Allegiance-Value)) (value (*Red)))
+
+(_Troop-Strength-Value2825 has (instance-of (Troop-Strength-Value))
+ (value ((:pair *regular-strength Armor-Unit))))
+
+(_Allegiance-Value2826 has (instance-of (Allegiance-Value)) (value (*Red)))
+
+(_Troop-Strength-Value2827 has (instance-of (Troop-Strength-Value))
+ (value ((:pair *regular-strength Artillery-Unit))))
+
+(_Allegiance-Value2828 has (instance-of (Allegiance-Value)) (value (*Red)))
+
+(_Allegiance-Value2829 has (instance-of (Allegiance-Value)) (value (*Blue)))
+
+(_Allegiance-Value2830 has (instance-of (Allegiance-Value)) (value (*Blue)))
+
+(_Allegiance-Value2831 has (instance-of (Allegiance-Value)) (value (*Blue)))
+
+(_Allegiance-Value2832 has (instance-of (Allegiance-Value)) (value (*Blue)))
+
+(_Allegiance-Value2833 has (instance-of (Allegiance-Value)) (value (*Blue)))
+
+(_Allegiance-Value2834 has (instance-of (Allegiance-Value)) (value (*Blue)))
+
+(_Duration-Value2835 has (instance-of (Duration-Value))
+ (value ((:pair 6.0d0 *hour))))
+
+(_Duration-Value2836 has (instance-of (Duration-Value))
+ (value ((:pair 1.0d0 *hour))))
+
+(_Duration-Value2837 has (instance-of (Duration-Value))
+ (value ((:pair 2.5d0 *hour))))
+
+(_Duration-Value2838 has (instance-of (Duration-Value))
+ (value ((:pair 6.0d0 *hour))))
+
+(_Duration-Value2839 has (instance-of (Duration-Value))
+ (value ((:pair 2.0d0 *hour))))
+
+(_Duration-Value2840 has (instance-of (Duration-Value))
+ (value ((:pair 0.5d0 *hour))))
+
+(_Duration-Value2841 has (instance-of (Duration-Value))
+ (value ((:pair 6.0d0 *hour))))
+
+(_Duration-Value2842 has (instance-of (Duration-Value))
+ (value ((:pair 1.0d0 *hour))))
+
+(_Duration-Value2843 has (instance-of (Duration-Value))
+ (value ((:pair 2.0d0 *hour))))
+
+(_Duration-Value2844 has (instance-of (Duration-Value))
+ (value ((:pair 0.5d0 *hour))))
+
+(_Duration-Value2845 has (instance-of (Duration-Value))
+ (value ((:pair 2.0d0 *hour))))
+
+(_Duration-Value2846 has (instance-of (Duration-Value))
+ (value ((:pair 6.0d0 *hour))))
+
+(_Duration-Value2847 has (instance-of (Duration-Value))
+ (value ((:pair 0.5d0 *hour))))
+
+(_Duration-Value2848 has (instance-of (Duration-Value))
+ (value ((:pair 6.0d0 *hour))))
+
+(_Spatial-Entity2849 has (instance-of (Spatial-Entity)))
+
+(_Spatial-Entity2850 has (instance-of (Spatial-Entity)))
+
+(_Spatial-Entity2851 has (instance-of (Spatial-Entity)))
+
+(_Spatial-Entity2852 has (instance-of (Spatial-Entity)))
+
+(_Spatial-Entity2853 has (instance-of (Spatial-Entity)))
+
+(_Spatial-Entity2854 has (instance-of (Spatial-Entity)))
+
+(_Spatial-Entity2855 has (instance-of (Spatial-Entity)))
+
+(_Reinforce2856 has
+  (instance-of (Reinforce))
+  (agent (_Military-Unit2924))
+  (object (_Armor-Unit2861)))
+
+(_Goal2857 has (instance-of (Goal)) (enables (_Reinforce2856)))
+
+(_Reinforce2858 has
+  (instance-of (Reinforce))
+  (agent (_Military-Unit2924))
+  (object (_Armor-Unit2863)))
+
+(_Goal2859 has (instance-of (Goal)) (enables (_Reinforce2858)))
+
+(_Mechanized-Infantry-Unit2860 has
+;  (instance-of (Mechanized-Infantry-Unit Brigade))
+  (instance-of (Mechanized-Infantry-Brigade)) ; jihie
+  (called ("3"))
+  (allegiance (_Allegiance-Value2792))
+  (remaining-strength ((a Remaining-Strength-Value with
+                           (value ((:pair 1 NIL))))))
+  (troop-strength (_Troop-Strength-Value2791)))
+
+(_Armor-Unit2861 has
+;  (instance-of (Armor-Unit Brigade))
+  (instance-of (Armored-Brigade)) ; jihie
+  (called ("2"))
+  (allegiance (_Allegiance-Value2794))
+  (remaining-strength ((a Remaining-Strength-Value with
+                           (value ((:pair 1 NIL))))))
+  (troop-strength (_Troop-Strength-Value2793)))
+
+(_Armor-Unit2862 has
+;  (instance-of (Armor-Unit Brigade))
+  (instance-of (Armored-Brigade)) ;jihie
+  (called ("4"))
+  (allegiance (_Allegiance-Value2796))
+  (remaining-strength ((a Remaining-Strength-Value with
+                           (value ((:pair 1 NIL))))))
+  (troop-strength (_Troop-Strength-Value2795)))
+
+(_Armor-Unit2863 has
+;  (instance-of (Armor-Unit Brigade))
+  (instance-of (Armored-Brigade)) ;jihie
+  (called ("1"))
+  (allegiance (_Allegiance-Value2798))
+  (remaining-strength ((a Remaining-Strength-Value with
+                           (value ((:pair 1 NIL))))))
+  (troop-strength (_Troop-Strength-Value2797)))
+
+(_Artillery-Unit2864 has
+;  (instance-of (Artillery-Unit Battalion))
+  (instance-of (Artillery-Battalion)) ;jihie
+  (called ("DS"))
+  (allegiance (_Allegiance-Value2800))
+  (remaining-strength ((a Remaining-Strength-Value with
+                           (value ((:pair 1 NIL))))))
+  (troop-strength (_Troop-Strength-Value2799)))
+
+(_Artillery-Unit2865 has
+;  (instance-of (Artillery-Unit Battalion))
+  (instance-of (Artillery-Battalion)) ;jihie
+  (called ("DS"))
+  (allegiance (_Allegiance-Value2802))
+  (remaining-strength ((a Remaining-Strength-Value with
+                           (value ((:pair 1 NIL))))))
+  (troop-strength (_Troop-Strength-Value2801)))
+
+(_Artillery-Unit2866 has
+;  (instance-of (Artillery-Unit Battalion))
+  (instance-of (Artillery-Battalion)) ;jihie
+  (called ("GS"))
+  (allegiance (_Allegiance-Value2804))
+  (troop-strength (_Troop-Strength-Value2803)))
+
+(_Artillery-Unit2867 has
+;  (instance-of (Artillery-Unit Battalion))
+  (instance-of (Artillery-Battalion)) ;jihie
+  (called ("DS"))
+  (remaining-strength ((a Remaining-Strength-Value with
+                           (value ((:pair 1 NIL))))))
+  (allegiance (_Allegiance-Value2806))
+  (troop-strength (_Troop-Strength-Value2805)))
+
+(_Artillery-Unit2868 has
+;  (instance-of (Artillery-Unit Battalion))
+  (instance-of (Artillery-Battalion)) ;jihie
+  (called ("DS"))
+  (remaining-strength ((a Remaining-Strength-Value with
+                           (value ((:pair 1 NIL))))))
+  (allegiance (_Allegiance-Value2808))
+  (troop-strength (_Troop-Strength-Value2807)))
+
+(_Armored-Cavalry-Unit2869 has
+;  (instance-of (Armored-Cavalry-Unit Cavalry-Unit Battalion))
+  (instance-of (Armored-Cavalry-Battalion Cavalry-Unit)) ;jihie
+  (remaining-strength ((a Remaining-Strength-Value with
+                           (value ((:pair 1 NIL))))))
+  (allegiance (_Allegiance-Value2810))
+  (troop-strength (_Troop-Strength-Value2809)))
+
+(_Aviation-Unit2870 has
+;  (instance-of (Aviation-Unit Battalion))
+  (instance-of (Aviation-Battalion))  ;jihie
+  (called ("2ND AVN"))
+  (remaining-strength ((a Remaining-Strength-Value with
+                           (value ((:pair 1 NIL))))))
+  (allegiance (_Allegiance-Value2812))
+  (troop-strength (_Troop-Strength-Value2811)))
+
+(_Aviation-Unit2871 has
+;  (instance-of (Aviation-Unit Battalion))
+  (instance-of (Aviation-Battalion))  ; jihie
+  (called ("1ST AVN"))
+  (remaining-strength ((a Remaining-Strength-Value with
+                           (value ((:pair 1 NIL))))))
+  (allegiance (_Allegiance-Value2814))
+  (troop-strength (_Troop-Strength-Value2813)))
+
+(_Mechanized-Infantry-Unit2872 has
+;  (instance-of (Mechanized-Infantry-Unit Battalion))
+  (instance-of (Mechanized-Infantry-Battalion)) ; jihie
+  (called ("3-4"))
+  (remaining-strength ((a Remaining-Strength-Value with
+                           (value ((:pair 1 NIL))))))
+  (allegiance (_Allegiance-Value2816))
+  (troop-strength (_Troop-Strength-Value2815)))
+
+(_Mechanized-Infantry-Unit2873 has
+;  (instance-of (Mechanized-Infantry-Unit Battalion))
+  (instance-of (Mechanized-Infantry-Battalion)) ; jihie
+  (called ("2-4"))
+  (allegiance (_Allegiance-Value2818))
+  (remaining-strength ((a Remaining-Strength-Value with
+                           (value ((:pair 1 NIL))))))
+  (troop-strength (_Troop-Strength-Value2817)))
+
+(_Mechanized-Infantry-Unit2874 has
+;  (instance-of (Mechanized-Infantry-Unit Battalion))
+  (instance-of (Mechanized-Infantry-Battalion)) ; jihie
+  (called ("1-4"))
+  (remaining-strength ((a Remaining-Strength-Value with
+                           (value ((:pair 1 NIL))))))
+  (allegiance (_Allegiance-Value2820))
+  (troop-strength (_Troop-Strength-Value2819)))
+
+(_Destroy-Unit2875 has
+  (instance-of (Destroy-Unit))
+  (agent (_Armor-Unit2861))
+  (object (_Armor-Unit2879)))
+
+(_Goal2876 has (instance-of (Goal)) (enables (_Destroy-Unit2875)))
+
+(_Destroy-Unit2877 has
+  (instance-of (Destroy-Unit))
+  (agent (_Armor-Unit2861))
+  (object (_Armor-Unit2879)))
+
+(_Goal2878 has (instance-of (Goal)) (enables (_Destroy-Unit2877)))
+
+(_Armor-Unit2879 has
+;  (instance-of (Armor-Unit Brigade))
+  (instance-of (Armored-Brigade)) ; jihie
+  (called ("3"))
+  (remaining-strength ((a Remaining-Strength-Value with
+                           (value ((:pair 1 NIL))))))
+  (allegiance (_Allegiance-Value2822))
+  (troop-strength (_Troop-Strength-Value2821)))
+
+(_Armor-Unit2880 has
+;  (instance-of (Armor-Unit Brigade))
+  (instance-of (Armored-Brigade)) ; jihie
+  (called ("2"))
+  (remaining-strength ((a Remaining-Strength-Value with
+                           (value ((:pair 1 NIL))))))
+  (allegiance (_Allegiance-Value2824))
+  (troop-strength (_Troop-Strength-Value2823)))
+
+(_Armor-Unit2881 has
+;  (instance-of (Armor-Unit Brigade))
+  (instance-of (Armored-Brigade)) ; jihie
+  (called ("4"))
+  (allegiance (_Allegiance-Value2826))
+  (remaining-strength ((a Remaining-Strength-Value with
+                           (value ((:pair 1 NIL))))))
+  (troop-strength (_Troop-Strength-Value2825)))
+
+(_Destroy-Unit2882 has
+  (instance-of (Destroy-Unit))
+  (agent (_Armor-Unit2862))
+  (object (_Artillery-Unit2884)))
+
+(_Goal2883 has (instance-of (Goal)) (enables (_Destroy-Unit2882)))
+
+(_Artillery-Unit2884 has
+;  (instance-of (Artillery-Unit Regiment))
+  (instance-of (Artillery-Regiment)) ; jihie
+  (called ("29 FA"))
+  (allegiance (_Allegiance-Value2828))
+  (remaining-strength ((a Remaining-Strength-Value with
+                           (value ((:pair 1 NIL))))))
+  (troop-strength (_Troop-Strength-Value2827)))
+
+(_Bridge2885 has (instance-of (Bridge)))
+
+(_Move-Military-Unit2886 has
+  (instance-of (Move-Military-Unit))
+  (agent (_Mechanized-Infantry-Unit2860))
+  (destination (_Spatial-Entity2908)))
+
+(_Goal2887 has (instance-of (Goal)) (enables (_Move-Military-Unit2886)))
+
+(_Move-Military-Unit2888 has
+  (instance-of (Move-Military-Unit))
+  (agent (_Armor-Unit2862))
+  (destination (_Spatial-Entity2908)))
+
+(_Goal2889 has (instance-of (Goal)) (enables (_Move-Military-Unit2888)))
+
+(_Move-Military-Unit2890 has
+  (instance-of (Move-Military-Unit))
+  (agent (_Military-Unit2924))
+  (destination (_Spatial-Entity2908)))
+
+(_Goal2891 has (instance-of (Goal)) (enables (_Move-Military-Unit2890)))
+
+(_Seize2892 has
+  (instance-of (Seize))
+  (agent (_Armor-Unit2861))
+  (object (_Spatial-Entity2908)))
+
+(_Goal2893 has (instance-of (Goal)) (enables (_Seize2892)))
+
+(_Seize2894 has
+  (instance-of (Seize))
+  (agent (_Armor-Unit2863))
+  (object (_Spatial-Entity2908)))
+
+(_Goal2895 has (instance-of (Goal)) (enables (_Seize2894)))
+
+(_Seize2896 has
+  (instance-of (Seize))
+  (agent (_Military-Unit2924))
+  (object (_Spatial-Entity2908)))
+
+(_Goal2897 has (instance-of (Goal)) (enables (_Seize2896)))
+
+(_Seize2898 has
+  (instance-of (Seize))
+  (agent (_Military-Unit2924))
+  (object (_Spatial-Entity2908)))
+
+(_Goal2899 has (instance-of (Goal)) (enables (_Seize2898)))
+
+(_Move-Military-Unit2900 has
+  (instance-of (Move-Military-Unit))
+  (agent (_Armor-Unit2863))
+  (destination (_Spatial-Entity2908)))
+
+(_Goal2901 has (instance-of (Goal)) (enables (_Move-Military-Unit2900)))
+
+(_Move-Military-Unit2902 has
+  (instance-of (Move-Military-Unit))
+  (agent (_Armor-Unit2861))
+  (destination (_Spatial-Entity2908)))
+
+(_Goal2903 has (instance-of (Goal)) (enables (_Move-Military-Unit2902)))
+
+(_Spatial-Entity2904 has (instance-of (Spatial-Entity)))
+
+(_Spatial-Entity2905 has (instance-of (Spatial-Entity)))
+
+(_Spatial-Entity2906 has
+  (instance-of (Spatial-Entity))
+  (called ("AXIS STRIKE"))
+  (allegiance (_Allegiance-Value2829))
+  (agent (_Aviation-Unit2871)))
+
+(_Spatial-Entity2907 has
+  (instance-of (Spatial-Entity))
+  (called ("AXIS GREEN"))
+  (allegiance (_Allegiance-Value2830))
+  (agent (_Armor-Unit2863)))
+
+(_Spatial-Entity2908 has (instance-of (Spatial-Entity))
+ (called ("Objective JAYHAWK")))
+
+(_Spatial-Entity2909 has
+  (instance-of (Spatial-Entity))
+  (called ("PL SMASH"))
+  (allegiance (_Allegiance-Value2831)))
+
+(_Spatial-Entity2910 has
+  (instance-of (Spatial-Entity Reserve-Task))
+  (called ("AXIS WHITE"))
+  (allegiance (_Allegiance-Value2832))
+  (agent (_Mechanized-Infantry-Unit2860)))
+
+(_Spatial-Entity2911 has
+  (instance-of (Spatial-Entity))
+  (called ("AXIS BLUE"))
+  (allegiance (_Allegiance-Value2833))
+  (agent (_Armor-Unit2862)))
+
+(_City2912 has (instance-of (City)) (called ("Topeka")))
+
+(_Spatial-Entity2913 has (instance-of (Spatial-Entity)))
+
+(_Spatial-Entity2914 has (instance-of (Spatial-Entity)))
+
+(_Spatial-Entity2915 has (instance-of (Spatial-Entity)))
+
+(_Spatial-Entity2916 has (instance-of (Spatial-Entity)))
+
+(_Spatial-Entity2917 has (instance-of (Spatial-Entity)))
+
+(_Spatial-Entity2918 has (instance-of (Spatial-Entity)))
+
+(_Spatial-Entity2919 has (instance-of (Spatial-Entity)))
+
+(_Spatial-Entity2920 has (instance-of (Spatial-Entity)))
+
+(_River2921 has (instance-of (River)))
+
+(_Lake2922 has (instance-of (Lake)))
+
+(_Military-Task2923 has (instance-of (Military-Task)))
+
+(_Military-Unit2924 has (instance-of (Military-Unit))
+ (allegiance (_Allegiance-Value2834)))
+
+(_Seize2925 has
+  (instance-of (Seize))
+  (agent (_Military-Unit2924))
+  (object (_Spatial-Entity2908)))
+
+(_Military-Task2926 has (instance-of (Military-Task)))
+
+(_Military-Unit2927 has (instance-of (Military-Unit)))
+
+(_Military-Unit2928 has (instance-of (Military-Unit)))
+
+(_Military-Task2929 has (instance-of (Military-Task))
+ (agent (_Military-Unit2927)))
+
+(_Military-Task2930 has (instance-of (Military-Task))
+ (agent (_Military-Unit2928)))
+
+(_Move-Military-Unit2kanal1 has ;; jihie
+  (instance-of (Move-Military-Unit))
+  (object (_Armor-Unit2862))
+  (path (_Spatial-Entity2911)) ;; AXIS BLUE
+  (next-event (_Supporting-Attack-Task2937))
+  (destination (_Spatial-Entity2908)))
+
+(_Supporting-Attack-Task2931 has
+  (instance-of (Supporting-Attack-Task Destroy-Unit))
+  (duration (_Duration-Value2845))
+  (object (_Artillery-Unit2884))
+  (agent (_Armor-Unit2862))
+  (location (_Spatial-Entity2911)))
+
+(_Move-Military-Unit2kanal2 has ;; jihie
+  (instance-of (Move-Military-Unit))
+  (object (_Armor-Unit2861 _Armor-Unit2863))
+  (path (_Spatial-Entity2907)) ;; AXIS GREEN
+  (next-event (_Main-Attack-Task2932 _Main-Attack-Task2934))
+  (destination (_Spatial-Entity2908)))
+
+(_Main-Attack-Task2932 has
+  (instance-of (Main-Attack-Task Spatial-Entity Seize))
+  (duration (_Duration-Value2842))
+  (objective (_Goal2897))
+  (agent (_Armor-Unit2861))
+  (object (_Mechanized-Infantry-Unit2860)))
+
+(_Reserve-Task2933 has
+  (instance-of (Reserve-Task Attack))
+  (duration (_Duration-Value2843))
+  (object (_Armor-Unit2879 _Armor-Unit2880))
+  (objective (_Goal2876))
+  (agent (_Aviation-Unit2870)))
+
+(_Main-Attack-Task2934 has
+  (instance-of (Main-Attack-Task Spatial-Entity Seize))
+  (duration (_Duration-Value2839))
+  (objective (_Goal2899))
+  (object (_Armor-Unit2880 _Armor-Unit2881))
+  (agent (_Armor-Unit2863)))
+
+(_Fire-Support-Task2935 has
+  (instance-of (Fire-Support-Task Attack-by-Fire))
+  (duration (_Duration-Value2837))
+  (object (_Armor-Unit2879 _Armor-Unit2880))
+  (objective (_Goal2878))
+  (agent (_Aviation-Unit2871)))
+
+(_Reserve-Task2936 has
+  (instance-of (Reserve-Task Destroy-Unit))
+  (duration (_Duration-Value2847))
+  (object (_Mechanized-Infantry-Unit2873))
+  (agent (_Mechanized-Infantry-Unit2860))
+  (location (_Spatial-Entity2910))
+  (next-event (_Supporting-Attack-Task2931 _Main-Attack-Task2932
+               _Reserve-Task2933 _Main-Attack-Task2934)))
+
+(_Supporting-Attack-Task2937 has
+  (instance-of (Supporting-Attack-Task Attack))
+  (duration (_Duration-Value2844))
+  (objective (_Goal2889))
+  (object (_Mechanized-Infantry-Unit2872))
+  (agent (_Armor-Unit2862))
+  (next-event (_Supporting-Attack-Task2931 _Main-Attack-Task2932
+               _Reserve-Task2933 _Main-Attack-Task2934)))
+
+(_Move-Military-Unit2kanal3 has ;; jihie
+  (instance-of (Move-Military-Unit))
+  (object (_Armored-Cavalry-Unit2869))
+  (path (_Spatial-Entity2911)) ;; AXIS BLUE
+  (next-event (_Main-Attack-Task2938))
+  (destination (_Spatial-Entity2908)))
+
+(_Main-Attack-Task2938 has
+  (instance-of (Main-Attack-Task Destroy-Unit))
+  (duration (_Duration-Value2840))
+  (objective (_Goal2901 _Goal2903))
+  (object (_Mechanized-Infantry-Unit2874))
+  (location (_Mechanized-Infantry-Unit2874))
+  (agent (_Armored-Cavalry-Unit2869))
+  (next-event (_Supporting-Attack-Task2931 _Main-Attack-Task2932
+               _Reserve-Task2933 _Main-Attack-Task2934)))
+
+(_Fire-Support-Task2939 has
+  (instance-of (Fire-Support-Task Follow-and-Support Spatial-Entity))
+  (duration (_Duration-Value2846))
+  (objective (_Goal2891))
+  (agent (_Artillery-Unit2866))
+  (object (_Artillery-Unit2864)))
+
+(_Reserve-Task2940 has
+  (instance-of (Reserve-Task))
+  (duration (_Duration-Value2836))
+  (objective (_Goal2857 _Goal2859))
+  (agent (_Mechanized-Infantry-Unit2860))
+  (next-event (_Reserve-Task2936 _Supporting-Attack-Task2937
+               _Main-Attack-Task2938)))
+
+(_Fire-Support-Task2941 has
+  (instance-of (Fire-Support-Task Follow-and-Support Spatial-Entity))
+  (duration (_Duration-Value2841))
+  (objective (_Goal2883))
+  (agent (_Artillery-Unit2867)))
+
+(_Fire-Support-Task2942 has
+  (instance-of (Fire-Support-Task Follow-and-Support Spatial-Entity))
+  (duration (_Duration-Value2848))
+  (objective (_Goal2893))
+  (agent (_Artillery-Unit2865)))
+
+(_Fire-Support-Task2943 has
+  (instance-of (Fire-Support-Task Follow-and-Support Spatial-Entity))
+  (duration (_Duration-Value2835))
+  (objective (_Goal2887))
+  (agent (_Artillery-Unit2868)))
+
+(_Fire-Support-Task2944 has
+  (instance-of (Fire-Support-Task Follow-and-Support Spatial-Entity))
+  (duration (_Duration-Value2838))
+  (objective (_Goal2895))
+  (agent (_Artillery-Unit2864)))
+
+(_Goal2945 has (instance-of (Goal)) (enables (_Seize2925)))
+
+(_Property-Node2946 has (instance-of (Property-Node)))
+
+(_Property-Node2947 has (instance-of (Property-Node)))
+
+(_Property-Node2948 has (instance-of (Property-Node)))
+
+(_Property-Node2949 has (instance-of (Property-Node)))
+
+(_Property-Node2950 has (instance-of (Property-Node)))
+
+(_Property-Node2951 has (instance-of (Property-Node)))
+
+(_Property-Node2952 has (instance-of (Property-Node)))
+
+(_Property-Node2953 has (instance-of (Property-Node)))
+
+(_Property-Node2954 has (instance-of (Property-Node)))
+
+(_Property-Node2955 has (instance-of (Property-Node)))
+
+(_Property-Node2956 has (instance-of (Property-Node)))
+
+(_Property-Node2957 has (instance-of (Property-Node)))
+
+(_Property-Node2958 has (instance-of (Property-Node)))
+
+(_Property-Node2959 has (instance-of (Property-Node)))
+
+(_Property-Node2960 has (instance-of (Property-Node)))
+
+(_Property-Node2961 has (instance-of (Property-Node)))
+
+(_Property-Node2962 has (instance-of (Property-Node)))
+
+(_Property-Node2963 has (instance-of (Property-Node)))
+
+(_Property-Node2964 has (instance-of (Property-Node)))
+
+(_Property-Node2965 has (instance-of (Property-Node)))
+
+(_Property-Node2966 has (instance-of (Property-Node)))
+
+(_Property-Node2967 has (instance-of (Property-Node)))
+
+(_Property-Node2968 has (instance-of (Property-Node)))
+
+(_Property-Node2969 has (instance-of (Property-Node)))
+
+(_Property-Node2970 has (instance-of (Property-Node)))
+
+(_Property-Node2971 has (instance-of (Property-Node)))
+
+(_Property-Node2972 has (instance-of (Property-Node)))
+
+(_Property-Node2973 has (instance-of (Property-Node)))
+
+(_Property-Node2974 has (instance-of (Property-Node)))
+
+(_Property-Node2975 has (instance-of (Property-Node)))
+
+(_Property-Node2976 has (instance-of (Property-Node)))
+
+(_Property-Node2977 has (instance-of (Property-Node)))
+
+(_Property-Node2978 has (instance-of (Property-Node)))
+
+(_Property-Node2979 has (instance-of (Property-Node)))
+
+(_Property-Node2980 has (instance-of (Property-Node)))
+
+(_Property-Node2981 has (instance-of (Property-Node)))
+
+(_Property-Node2982 has (instance-of (Property-Node)))
+
+(_Property-Node2983 has (instance-of (Property-Node)))
+
+(_Property-Node2984 has (instance-of (Property-Node)))
+
+(_Property-Node2985 has (instance-of (Property-Node)))
+
+(_Property-Node2986 has (instance-of (Property-Node)))
+
+(_Property-Node2987 has (instance-of (Property-Node)))
+
+(_Property-Node2988 has (instance-of (Property-Node)))
+
+(_Property-Node2989 has (instance-of (Property-Node)))
+
+(_Property-Node2990 has (instance-of (Property-Node)))
+
+(_Property-Node2991 has (instance-of (Property-Node)))
+
+(_Property-Node2992 has (instance-of (Property-Node)))
+
+(_Property-Node2993 has (instance-of (Property-Node)))
+
+(_Property-Node2994 has (instance-of (Property-Node)))
+
+(_Property-Node2995 has (instance-of (Property-Node)))
+
+(_Property-Node2996 has (instance-of (Property-Node)))
+
+(_Property-Node2997 has (instance-of (Property-Node)))
+
+(_Property-Node2998 has (instance-of (Property-Node)))
+
+(_Property-Node2999 has (instance-of (Property-Node)))
+
+(_Property-Node3000 has (instance-of (Property-Node)))
+
+(_Property-Node3001 has (instance-of (Property-Node)))
+
+(_Property-Node3002 has (instance-of (Property-Node)))
+
+(_Property-Node3003 has (instance-of (Property-Node)))
+
+(_Group-Node3004 has (instance-of (Group-Node)))
+
+(_Group-Node3006 has (instance-of (Group-Node)))
+
+(_Group-Node3008 has (instance-of (Group-Node)))
+
+(_Group-Node3010 has (instance-of (Group-Node)))
+
+(enable-classification)
+
+(explanation
+ (:triple _Troop-Strength-Value2791 value
+  (:pair *regular-strength Mechanized-Infantry-Unit))
+ (((@ SME entered))))
+
+(explanation (:triple _Allegiance-Value2792 value *Blue) (((@ SME entered))))
+
+(explanation
+ (:triple _Troop-Strength-Value2793 value
+  (:pair *regular-strength Armor-Unit))
+ (((@ SME entered))))
+
+(explanation (:triple _Allegiance-Value2794 value *Blue) (((@ SME entered))))
+
+(explanation
+ (:triple _Troop-Strength-Value2795 value
+  (:pair *regular-strength Armor-Unit))
+ (((@ SME entered))))
+
+(explanation (:triple _Allegiance-Value2796 value *Blue) (((@ SME entered))))
+
+(explanation
+ (:triple _Troop-Strength-Value2797 value
+  (:pair *regular-strength Armor-Unit))
+ (((@ SME entered))))
+
+(explanation (:triple _Allegiance-Value2798 value *Blue) (((@ SME entered))))
+
+(explanation
+ (:triple _Troop-Strength-Value2799 value
+  (:pair *regular-strength Artillery-Unit))
+ (((@ SME entered))))
+
+(explanation (:triple _Allegiance-Value2800 value *Blue) (((@ SME entered))))
+
+(explanation
+ (:triple _Troop-Strength-Value2801 value
+  (:pair *regular-strength Artillery-Unit))
+ (((@ SME entered))))
+
+(explanation (:triple _Allegiance-Value2802 value *Blue) (((@ SME entered))))
+
+(explanation
+ (:triple _Troop-Strength-Value2803 value
+  (:pair *regular-strength Artillery-Unit))
+ (((@ SME entered))))
+
+(explanation (:triple _Allegiance-Value2804 value *Blue) (((@ SME entered))))
+
+(explanation
+ (:triple _Troop-Strength-Value2805 value
+  (:pair *regular-strength Artillery-Unit))
+ (((@ SME entered))))
+
+(explanation (:triple _Allegiance-Value2806 value *Blue) (((@ SME entered))))
+
+(explanation
+ (:triple _Troop-Strength-Value2807 value
+  (:pair *regular-strength Artillery-Unit))
+ (((@ SME entered))))
+
+(explanation (:triple _Allegiance-Value2808 value *Blue) (((@ SME entered))))
+
+(explanation
+ (:triple _Troop-Strength-Value2809 value
+  (:pair *regular-strength Armored-Cavalry-Unit))
+ (((@ SME entered))))
+
+(explanation (:triple _Allegiance-Value2810 value *Blue) (((@ SME entered))))
+
+(explanation
+ (:triple _Troop-Strength-Value2811 value
+  (:pair *regular-strength Aviation-Unit))
+ (((@ SME entered))))
+
+(explanation (:triple _Allegiance-Value2812 value *Blue) (((@ SME entered))))
+
+(explanation
+ (:triple _Troop-Strength-Value2813 value
+  (:pair *regular-strength Aviation-Unit))
+ (((@ SME entered))))
+
+(explanation (:triple _Allegiance-Value2814 value *Blue) (((@ SME entered))))
+
+(explanation
+ (:triple _Troop-Strength-Value2815 value
+  (:pair *regular-strength Mechanized-Infantry-Unit))
+ (((@ SME entered))))
+
+(explanation (:triple _Allegiance-Value2816 value *Red) (((@ SME entered))))
+
+(explanation
+ (:triple _Troop-Strength-Value2817 value
+  (:pair *regular-strength Mechanized-Infantry-Unit))
+ (((@ SME entered))))
+
+(explanation (:triple _Allegiance-Value2818 value *Red) (((@ SME entered))))
+
+(explanation
+ (:triple _Troop-Strength-Value2819 value
+  (:pair *regular-strength Mechanized-Infantry-Unit))
+ (((@ SME entered))))
+
+(explanation (:triple _Allegiance-Value2820 value *Red) (((@ SME entered))))
+
+(explanation
+ (:triple _Troop-Strength-Value2821 value
+  (:pair *regular-strength Armor-Unit))
+ (((@ SME entered))))
+
+(explanation (:triple _Allegiance-Value2822 value *Red) (((@ SME entered))))
+
+(explanation
+ (:triple _Troop-Strength-Value2823 value
+  (:pair *regular-strength Armor-Unit))
+ (((@ SME entered))))
+
+(explanation (:triple _Allegiance-Value2824 value *Red) (((@ SME entered))))
+
+(explanation
+ (:triple _Troop-Strength-Value2825 value
+  (:pair *regular-strength Armor-Unit))
+ (((@ SME entered))))
+
+(explanation (:triple _Allegiance-Value2826 value *Red) (((@ SME entered))))
+
+(explanation
+ (:triple _Troop-Strength-Value2827 value
+  (:pair *regular-strength Artillery-Unit))
+ (((@ SME entered))))
+
+(explanation (:triple _Allegiance-Value2828 value *Red) (((@ SME entered))))
+
+(explanation (:triple _Allegiance-Value2829 value *Blue) (((@ SME entered))))
+
+(explanation (:triple _Allegiance-Value2830 value *Blue) (((@ SME entered))))
+
+(explanation (:triple _Allegiance-Value2831 value *Blue) (((@ SME entered))))
+
+(explanation (:triple _Allegiance-Value2832 value *Blue) (((@ SME entered))))
+
+(explanation (:triple _Allegiance-Value2833 value *Blue) (((@ SME entered))))
+
+(explanation (:triple _Allegiance-Value2834 value *Blue) (((@ SME entered))))
+
+(explanation (:triple _Duration-Value2839 value (:pair 2.0d0 *hour))
+ (((@ SME entered))))
+
+(explanation (:triple _Duration-Value2840 value (:pair 0.5d0 *hour))
+ (((@ SME entered))))
+
+(explanation (:triple _Duration-Value2842 value (:pair 1.0d0 *hour))
+ (((@ SME entered))))
+
+(explanation (:triple _Duration-Value2843 value (:pair 2.0d0 *hour))
+ (((@ SME entered))))
+
+(explanation (:triple _Duration-Value2844 value (:pair 0.5d0 *hour))
+ (((@ SME entered))))
+
+(explanation (:triple _Duration-Value2845 value (:pair 2.0d0 *hour))
+ (((@ SME entered))))
+
+(explanation (:triple _Duration-Value2847 value (:pair 0.5d0 *hour))
+ (((@ SME entered))))
+
+(explanation (:triple _Duration-Value2837 value (:pair 2.5d0 *hour))
+ (((@ SME entered))))
+
+(explanation (:triple _Duration-Value2846 value (:pair 6.0d0 *hour))
+ (((@ SME entered))))
+
+(explanation (:triple _Duration-Value2836 value (:pair 1.0d0 *hour))
+ (((@ SME entered))))
+
+(explanation (:triple _Duration-Value2841 value (:pair 6.0d0 *hour))
+ (((@ SME entered))))
+
+(explanation (:triple _Duration-Value2848 value (:pair 6.0d0 *hour))
+ (((@ SME entered))))
+
+(explanation (:triple _Duration-Value2835 value (:pair 6.0d0 *hour))
+ (((@ SME entered))))
+
+(explanation (:triple _Reinforce2856 object _Armor-Unit2861)
+ (((@ SME entered))))
+
+(explanation (:triple _Reinforce2856 agent _Military-Unit2924)
+ (((@ SME entered))))
+
+(explanation (:triple _Goal2857 enables _Reinforce2856) (((@ SME entered))))
+
+(explanation (:triple _Reinforce2858 object _Armor-Unit2863)
+ (((@ SME entered))))
+
+(explanation (:triple _Reinforce2858 agent _Military-Unit2924)
+ (((@ SME entered))))
+
+(explanation (:triple _Goal2859 enables _Reinforce2858) (((@ SME entered))))
+
+(explanation
+ (:triple _Mechanized-Infantry-Unit2860 troop-strength
+  _Troop-Strength-Value2791)
+ (((@ SME entered))))
+
+(explanation
+ (:triple _Mechanized-Infantry-Unit2860 allegiance _Allegiance-Value2792)
+ (((@ SME entered))))
+
+(explanation
+ (:triple _Armor-Unit2861 troop-strength _Troop-Strength-Value2793)
+ (((@ SME entered))))
+
+(explanation (:triple _Armor-Unit2861 allegiance _Allegiance-Value2794)
+ (((@ SME entered))))
+
+(explanation
+ (:triple _Armor-Unit2862 troop-strength _Troop-Strength-Value2795)
+ (((@ SME entered))))
+
+(explanation (:triple _Armor-Unit2862 allegiance _Allegiance-Value2796)
+ (((@ SME entered))))
+
+(explanation
+ (:triple _Armor-Unit2863 troop-strength _Troop-Strength-Value2797)
+ (((@ SME entered))))
+
+(explanation (:triple _Armor-Unit2863 allegiance _Allegiance-Value2798)
+ (((@ SME entered))))
+
+(explanation
+ (:triple _Artillery-Unit2865 troop-strength _Troop-Strength-Value2801)
+ (((@ SME entered))))
+
+(explanation (:triple _Artillery-Unit2865 allegiance _Allegiance-Value2802)
+ (((@ SME entered))))
+
+(explanation
+ (:triple _Artillery-Unit2866 troop-strength _Troop-Strength-Value2803)
+ (((@ SME entered))))
+
+(explanation (:triple _Artillery-Unit2866 allegiance _Allegiance-Value2804)
+ (((@ SME entered))))
+
+(explanation
+ (:triple _Artillery-Unit2867 troop-strength _Troop-Strength-Value2805)
+ (((@ SME entered))))
+
+(explanation (:triple _Artillery-Unit2867 allegiance _Allegiance-Value2806)
+ (((@ SME entered))))
+
+(explanation
+ (:triple _Artillery-Unit2868 troop-strength _Troop-Strength-Value2807)
+ (((@ SME entered))))
+
+(explanation (:triple _Artillery-Unit2868 allegiance _Allegiance-Value2808)
+ (((@ SME entered))))
+
+(explanation
+ (:triple _Armored-Cavalry-Unit2869 troop-strength _Troop-Strength-Value2809)
+ (((@ SME entered))))
+
+(explanation
+ (:triple _Armored-Cavalry-Unit2869 allegiance _Allegiance-Value2810)
+ (((@ SME entered))))
+
+(explanation
+ (:triple _Aviation-Unit2870 troop-strength _Troop-Strength-Value2811)
+ (((@ SME entered))))
+
+(explanation (:triple _Aviation-Unit2870 allegiance _Allegiance-Value2812)
+ (((@ SME entered))))
+
+(explanation
+ (:triple _Aviation-Unit2871 troop-strength _Troop-Strength-Value2813)
+ (((@ SME entered))))
+
+(explanation (:triple _Aviation-Unit2871 allegiance _Allegiance-Value2814)
+ (((@ SME entered))))
+
+(explanation
+ (:triple _Mechanized-Infantry-Unit2872 troop-strength
+  _Troop-Strength-Value2815)
+ (((@ SME entered))))
+
+(explanation
+ (:triple _Mechanized-Infantry-Unit2872 allegiance _Allegiance-Value2816)
+ (((@ SME entered))))
+
+(explanation
+ (:triple _Mechanized-Infantry-Unit2873 troop-strength
+  _Troop-Strength-Value2817)
+ (((@ SME entered))))
+
+(explanation
+ (:triple _Mechanized-Infantry-Unit2873 allegiance _Allegiance-Value2818)
+ (((@ SME entered))))
+
+(explanation
+ (:triple _Mechanized-Infantry-Unit2874 troop-strength
+  _Troop-Strength-Value2819)
+ (((@ SME entered))))
+
+(explanation
+ (:triple _Mechanized-Infantry-Unit2874 allegiance _Allegiance-Value2820)
+ (((@ SME entered))))
+
+(explanation (:triple _Destroy-Unit2875 object _Armor-Unit2879)
+ (((@ SME entered))))
+
+(explanation (:triple _Destroy-Unit2875 agent _Armor-Unit2861)
+ (((@ SME entered))))
+
+(explanation (:triple _Goal2876 enables _Destroy-Unit2875) (((@ SME entered))))
+
+(explanation (:triple _Destroy-Unit2877 object _Armor-Unit2879)
+ (((@ SME entered))))
+
+(explanation (:triple _Destroy-Unit2877 agent _Armor-Unit2861)
+ (((@ SME entered))))
+
+(explanation (:triple _Goal2878 enables _Destroy-Unit2877) (((@ SME entered))))
+
+(explanation
+ (:triple _Armor-Unit2879 troop-strength _Troop-Strength-Value2821)
+ (((@ SME entered))))
+
+(explanation (:triple _Armor-Unit2879 allegiance _Allegiance-Value2822)
+ (((@ SME entered))))
+
+(explanation
+ (:triple _Armor-Unit2880 troop-strength _Troop-Strength-Value2823)
+ (((@ SME entered))))
+
+(explanation (:triple _Armor-Unit2880 allegiance _Allegiance-Value2824)
+ (((@ SME entered))))
+
+(explanation
+ (:triple _Armor-Unit2881 troop-strength _Troop-Strength-Value2825)
+ (((@ SME entered))))
+
+(explanation (:triple _Armor-Unit2881 allegiance _Allegiance-Value2826)
+ (((@ SME entered))))
+
+(explanation (:triple _Destroy-Unit2882 object _Artillery-Unit2884)
+ (((@ SME entered))))
+
+(explanation (:triple _Destroy-Unit2882 agent _Armor-Unit2862)
+ (((@ SME entered))))
+
+(explanation (:triple _Goal2883 enables _Destroy-Unit2882) (((@ SME entered))))
+
+(explanation
+ (:triple _Artillery-Unit2884 troop-strength _Troop-Strength-Value2827)
+ (((@ SME entered))))
+
+(explanation (:triple _Artillery-Unit2884 allegiance _Allegiance-Value2828)
+ (((@ SME entered))))
+
+(explanation (:triple _Move-Military-Unit2886 destination _Spatial-Entity2908)
+ (((@ SME entered))))
+
+(explanation (:triple _Move-Military-Unit2886 agent _Mechanized-Infantry-Unit2860)
+ (((@ SME entered))))
+
+(explanation (:triple _Goal2887 enables _Move-Military-Unit2886) (((@ SME entered))))
+
+(explanation (:triple _Move-Military-Unit2888 destination _Spatial-Entity2908)
+ (((@ SME entered))))
+
+(explanation (:triple _Move-Military-Unit2888 agent _Armor-Unit2862) (((@ SME entered))))
+
+(explanation (:triple _Goal2889 enables _Move-Military-Unit2888) (((@ SME entered))))
+
+(explanation (:triple _Move-Military-Unit2890 destination _Spatial-Entity2908)
+ (((@ SME entered))))
+
+(explanation (:triple _Move-Military-Unit2890 agent _Military-Unit2924) (((@ SME entered))))
+
+(explanation (:triple _Goal2891 enables _Move-Military-Unit2890) (((@ SME entered))))
+
+(explanation (:triple _Seize2892 object _Spatial-Entity2908)
+ (((@ SME entered))))
+
+(explanation (:triple _Seize2892 agent _Armor-Unit2861) (((@ SME entered))))
+
+(explanation (:triple _Goal2893 enables _Seize2892) (((@ SME entered))))
+
+(explanation (:triple _Seize2894 object _Spatial-Entity2908)
+ (((@ SME entered))))
+
+(explanation (:triple _Seize2894 agent _Armor-Unit2863) (((@ SME entered))))
+
+(explanation (:triple _Seize2896 object _Spatial-Entity2908)
+ (((@ SME entered))))
+
+(explanation (:triple _Seize2896 agent _Military-Unit2924) (((@ SME entered))))
+
+(explanation (:triple _Goal2897 enables _Seize2896) (((@ SME entered))))
+
+(explanation (:triple _Seize2898 object _Spatial-Entity2908)
+ (((@ SME entered))))
+
+(explanation (:triple _Seize2898 agent _Military-Unit2924) (((@ SME entered))))
+
+(explanation (:triple _Goal2899 enables _Seize2898) (((@ SME entered))))
+
+(explanation (:triple _Move-Military-Unit2900 destination _Spatial-Entity2908)
+ (((@ SME entered))))
+
+(explanation (:triple _Move-Military-Unit2900 agent _Armor-Unit2863) (((@ SME entered))))
+
+(explanation (:triple _Goal2901 enables _Move-Military-Unit2900) (((@ SME entered))))
+
+(explanation (:triple _Move-Military-Unit2902 destination _Spatial-Entity2908)
+ (((@ SME entered))))
+
+(explanation (:triple _Move-Military-Unit2902 agent _Armor-Unit2861) (((@ SME entered))))
+
+(explanation (:triple _Goal2903 enables _Move-Military-Unit2902) (((@ SME entered))))
+
+(explanation (:triple _Spatial-Entity2906 agent _Aviation-Unit2871)
+ (((@ SME entered))))
+
+(explanation (:triple _Spatial-Entity2906 allegiance _Allegiance-Value2829)
+ (((@ SME entered))))
+
+(explanation (:triple _Spatial-Entity2907 agent _Armor-Unit2863)
+ (((@ SME entered))))
+
+(explanation (:triple _Spatial-Entity2907 allegiance _Allegiance-Value2830)
+ (((@ SME entered))))
+
+(explanation (:triple _Spatial-Entity2909 allegiance _Allegiance-Value2831)
+ (((@ SME entered))))
+
+(explanation (:triple _Spatial-Entity2910 agent _Mechanized-Infantry-Unit2860)
+ (((@ SME entered))))
+
+(explanation (:triple _Spatial-Entity2910 allegiance _Allegiance-Value2832)
+ (((@ SME entered))))
+
+(explanation (:triple _Spatial-Entity2911 agent _Armor-Unit2862)
+ (((@ SME entered))))
+
+(explanation (:triple _Spatial-Entity2911 allegiance _Allegiance-Value2833)
+ (((@ SME entered))))
+
+(explanation (:triple _Military-Unit2924 allegiance _Allegiance-Value2834)
+ (((@ SME entered))))
+
+(explanation (:triple _Seize2925 object _Spatial-Entity2908)
+ (((@ SME entered))))
+
+(explanation (:triple _Seize2925 agent _Military-Unit2924) (((@ SME entered))))
+
+(explanation (:triple _Goal2945 enables _Seize2925) (((@ SME entered))))
+
+(explanation (:triple _Military-Task2929 agent _Military-Unit2927)
+ (((@ SME entered))))
+
+(explanation (:triple _Military-Task2930 agent _Military-Unit2928)
+ (((@ SME entered))))
+
+(explanation
+ (:triple _Supporting-Attack-Task2931 location _Spatial-Entity2911)
+ (((@ SME entered))))
+
+(explanation (:triple _Supporting-Attack-Task2931 agent _Armor-Unit2862)
+ (((@ SME entered))))
+
+(explanation (:triple _Supporting-Attack-Task2931 object _Artillery-Unit2884)
+ (((@ SME entered))))
+
+(explanation
+ (:triple _Supporting-Attack-Task2931 duration _Duration-Value2845)
+ (((@ SME entered))))
+
+(explanation
+ (:triple _Main-Attack-Task2932 object _Mechanized-Infantry-Unit2860)
+ (((@ SME entered))))
+
+(explanation (:triple _Main-Attack-Task2932 agent _Armor-Unit2861)
+ (((@ SME entered))))
+
+(explanation (:triple _Main-Attack-Task2932 objective _Goal2897)
+ (((@ SME entered))))
+
+(explanation (:triple _Main-Attack-Task2932 duration _Duration-Value2842)
+ (((@ SME entered))))
+
+(explanation (:triple _Reserve-Task2933 agent _Aviation-Unit2870)
+ (((@ SME entered))))
+
+(explanation (:triple _Reserve-Task2933 objective _Goal2876)
+ (((@ SME entered))))
+
+(explanation (:triple _Reserve-Task2933 object _Armor-Unit2879)
+ (((@ SME entered))))
+
+(explanation (:triple _Reserve-Task2933 object _Armor-Unit2880)
+ (((@ SME entered))))
+
+(explanation (:triple _Reserve-Task2933 duration _Duration-Value2843)
+ (((@ SME entered))))
+
+(explanation (:triple _Main-Attack-Task2934 agent _Armor-Unit2863)
+ (((@ SME entered))))
+
+(explanation (:triple _Main-Attack-Task2934 object _Armor-Unit2880)
+ (((@ SME entered))))
+
+(explanation (:triple _Main-Attack-Task2934 object _Armor-Unit2881)
+ (((@ SME entered))))
+
+(explanation (:triple _Main-Attack-Task2934 objective _Goal2899)
+ (((@ SME entered))))
+
+(explanation (:triple _Main-Attack-Task2934 duration _Duration-Value2839)
+ (((@ SME entered))))
+
+(explanation (:triple _Fire-Support-Task2935 agent _Aviation-Unit2871)
+ (((@ SME entered))))
+
+(explanation (:triple _Fire-Support-Task2935 objective _Goal2878)
+ (((@ SME entered))))
+
+(explanation (:triple _Fire-Support-Task2935 object _Armor-Unit2879)
+ (((@ SME entered))))
+
+(explanation (:triple _Fire-Support-Task2935 object _Armor-Unit2880)
+ (((@ SME entered))))
+
+(explanation (:triple _Fire-Support-Task2935 duration _Duration-Value2837)
+ (((@ SME entered))))
+
+(explanation
+ (:triple _Reserve-Task2936 next-event _Supporting-Attack-Task2931)
+ (((@ SME entered))))
+
+(explanation (:triple _Reserve-Task2936 next-event _Main-Attack-Task2932)
+ (((@ SME entered))))
+
+(explanation (:triple _Reserve-Task2936 next-event _Reserve-Task2933)
+ (((@ SME entered))))
+
+(explanation (:triple _Reserve-Task2936 next-event _Main-Attack-Task2934)
+ (((@ SME entered))))
+
+(explanation (:triple _Reserve-Task2936 location _Spatial-Entity2910)
+ (((@ SME entered))))
+
+(explanation (:triple _Reserve-Task2936 agent _Mechanized-Infantry-Unit2860)
+ (((@ SME entered))))
+
+(explanation (:triple _Reserve-Task2936 object _Mechanized-Infantry-Unit2873)
+ (((@ SME entered))))
+
+(explanation (:triple _Reserve-Task2936 duration _Duration-Value2847)
+ (((@ SME entered))))
+
+(explanation
+ (:triple _Supporting-Attack-Task2937 next-event _Supporting-Attack-Task2931)
+ (((@ SME entered))))
+
+(explanation
+ (:triple _Supporting-Attack-Task2937 next-event _Main-Attack-Task2932)
+ (((@ SME entered))))
+
+(explanation
+ (:triple _Supporting-Attack-Task2937 next-event _Reserve-Task2933)
+ (((@ SME entered))))
+
+(explanation
+ (:triple _Supporting-Attack-Task2937 next-event _Main-Attack-Task2934)
+ (((@ SME entered))))
+
+(explanation (:triple _Supporting-Attack-Task2937 agent _Armor-Unit2862)
+ (((@ SME entered))))
+
+(explanation
+ (:triple _Supporting-Attack-Task2937 object _Mechanized-Infantry-Unit2872)
+ (((@ SME entered))))
+
+(explanation (:triple _Supporting-Attack-Task2937 objective _Goal2889)
+ (((@ SME entered))))
+
+(explanation
+ (:triple _Supporting-Attack-Task2937 duration _Duration-Value2844)
+ (((@ SME entered))))
+
+(explanation
+ (:triple _Main-Attack-Task2938 next-event _Supporting-Attack-Task2931)
+ (((@ SME entered))))
+
+(explanation (:triple _Main-Attack-Task2938 next-event _Main-Attack-Task2932)
+ (((@ SME entered))))
+
+(explanation (:triple _Main-Attack-Task2938 next-event _Reserve-Task2933)
+ (((@ SME entered))))
+
+(explanation (:triple _Main-Attack-Task2938 next-event _Main-Attack-Task2934)
+ (((@ SME entered))))
+
+(explanation (:triple _Main-Attack-Task2938 agent _Armored-Cavalry-Unit2869)
+ (((@ SME entered))))
+
+(explanation
+ (:triple _Main-Attack-Task2938 location _Mechanized-Infantry-Unit2874)
+ (((@ SME entered))))
+
+(explanation
+ (:triple _Main-Attack-Task2938 object _Mechanized-Infantry-Unit2874)
+ (((@ SME entered))))
+
+(explanation (:triple _Main-Attack-Task2938 objective _Goal2901)
+ (((@ SME entered))))
+
+(explanation (:triple _Main-Attack-Task2938 objective _Goal2903)
+ (((@ SME entered))))
+
+(explanation (:triple _Main-Attack-Task2938 duration _Duration-Value2840)
+ (((@ SME entered))))
+
+(explanation (:triple _Fire-Support-Task2939 object _Artillery-Unit2864)
+ (((@ SME entered))))
+
+(explanation (:triple _Fire-Support-Task2939 agent _Artillery-Unit2866)
+ (((@ SME entered))))
+
+(explanation (:triple _Fire-Support-Task2939 objective _Goal2891)
+ (((@ SME entered))))
+
+(explanation (:triple _Fire-Support-Task2939 duration _Duration-Value2846)
+ (((@ SME entered))))
+
+(explanation (:triple _Reserve-Task2940 next-event _Reserve-Task2936)
+ (((@ SME entered))))
+
+(explanation
+ (:triple _Reserve-Task2940 next-event _Supporting-Attack-Task2937)
+ (((@ SME entered))))
+
+(explanation (:triple _Reserve-Task2940 next-event _Main-Attack-Task2938)
+ (((@ SME entered))))
+
+(explanation (:triple _Reserve-Task2940 agent _Mechanized-Infantry-Unit2860)
+ (((@ SME entered))))
+
+(explanation (:triple _Reserve-Task2940 objective _Goal2857)
+ (((@ SME entered))))
+
+(explanation (:triple _Reserve-Task2940 objective _Goal2859)
+ (((@ SME entered))))
+
+(explanation (:triple _Reserve-Task2940 duration _Duration-Value2836)
+ (((@ SME entered))))
+
+(explanation (:triple _Fire-Support-Task2941 agent _Artillery-Unit2867)
+ (((@ SME entered))))
+
+(explanation (:triple _Fire-Support-Task2941 objective _Goal2883)
+ (((@ SME entered))))
+
+(explanation (:triple _Fire-Support-Task2941 duration _Duration-Value2841)
+ (((@ SME entered))))
+
+(explanation (:triple _Fire-Support-Task2942 agent _Artillery-Unit2865)
+ (((@ SME entered))))
+
+(explanation (:triple _Fire-Support-Task2942 objective _Goal2893)
+ (((@ SME entered))))
+
+(explanation (:triple _Fire-Support-Task2942 duration _Duration-Value2848)
+ (((@ SME entered))))
+
+(explanation (:triple _Fire-Support-Task2943 agent _Artillery-Unit2868)
+ (((@ SME entered))))
+
+(explanation (:triple _Fire-Support-Task2943 objective _Goal2887)
+ (((@ SME entered))))
+
+(explanation (:triple _Fire-Support-Task2943 duration _Duration-Value2835)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Spatial-Entity2849)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Spatial-Entity2850)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Spatial-Entity2851)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Spatial-Entity2852)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Spatial-Entity2853)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Spatial-Entity2854)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Spatial-Entity2855)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Reinforce2856)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Goal2857) (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Reinforce2858)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Goal2859) (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Mechanized-Infantry-Unit2860)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Armor-Unit2861)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Armor-Unit2862)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Armor-Unit2863)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Artillery-Unit2864)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Artillery-Unit2865)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Artillery-Unit2866)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Artillery-Unit2867)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Artillery-Unit2868)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Armored-Cavalry-Unit2869)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Aviation-Unit2870)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Aviation-Unit2871)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Mechanized-Infantry-Unit2872)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Mechanized-Infantry-Unit2873)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Mechanized-Infantry-Unit2874)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Destroy-Unit2875)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Goal2876) (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Destroy-Unit2877)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Goal2878) (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Armor-Unit2879)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Armor-Unit2880)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Armor-Unit2881)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Destroy-Unit2882)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Goal2883) (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Artillery-Unit2884)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Bridge2885)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Move-Military-Unit2886) (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Goal2887) (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Move-Military-Unit2888) (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Goal2889) (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Move-Military-Unit2890) (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Goal2891) (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Seize2892)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Goal2893) (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Seize2894)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Goal2895) (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Seize2896)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Goal2897) (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Seize2898)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Goal2899) (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Move-Military-Unit2900) (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Goal2901) (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Move-Military-Unit2902) (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Goal2903) (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Spatial-Entity2904)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Spatial-Entity2905)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Spatial-Entity2906)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Spatial-Entity2907)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Spatial-Entity2908)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Spatial-Entity2909)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Spatial-Entity2910)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Spatial-Entity2911)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _City2912) (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Spatial-Entity2913)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Spatial-Entity2914)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Spatial-Entity2915)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Spatial-Entity2916)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Spatial-Entity2917)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Spatial-Entity2918)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Spatial-Entity2919)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Spatial-Entity2920)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _River2921)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Lake2922) (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Military-Task2923)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Military-Unit2924)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Seize2925)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Goal2945) (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Military-Task2926)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Fire-Support-Task2943)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Reserve-Task2940)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Fire-Support-Task2935)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Fire-Support-Task2944)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Main-Attack-Task2934)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Main-Attack-Task2938)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Fire-Support-Task2941)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Main-Attack-Task2932)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Reserve-Task2933)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Supporting-Attack-Task2937)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Supporting-Attack-Task2931)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Fire-Support-Task2939)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Reserve-Task2936)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Fire-Support-Task2942)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Military-Unit2927)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Military-Unit2928)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Military-Task2929)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Military-Task2930)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 participants _Jayhawk2790)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 first-subevent _Fire-Support-Task2935)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 first-subevent _Fire-Support-Task2939)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 first-subevent _Reserve-Task2940)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 first-subevent _Fire-Support-Task2941)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 first-subevent _Fire-Support-Task2942)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 first-subevent _Fire-Support-Task2943)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 first-subevent _Fire-Support-Task2944)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 subevent _Supporting-Attack-Task2931)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 subevent _Main-Attack-Task2932)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 subevent _Reserve-Task2933)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 subevent _Main-Attack-Task2934)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 subevent _Fire-Support-Task2935)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 subevent _Reserve-Task2936)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 subevent _Supporting-Attack-Task2937)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 subevent _Main-Attack-Task2938)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 subevent _Fire-Support-Task2939)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 subevent _Reserve-Task2940)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 subevent _Fire-Support-Task2941)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 subevent _Fire-Support-Task2942)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 subevent _Fire-Support-Task2943)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 subevent _Fire-Support-Task2944)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 objective _Goal2945) (((@ SME entered))))
+
+(explanation
+ (:triple _Artillery-Unit2864 troop-strength _Troop-Strength-Value2799)
+ (((@ SME entered))))
+
+(explanation (:triple _Artillery-Unit2864 allegiance _Allegiance-Value2800)
+ (((@ SME entered))))
+
+(explanation (:triple _Goal2895 enables _Seize2894) (((@ SME entered))))
+
+(explanation (:triple _Fire-Support-Task2944 agent _Artillery-Unit2864)
+ (((@ SME entered))))
+
+(explanation (:triple _Fire-Support-Task2944 objective _Goal2895)
+ (((@ SME entered))))
+
+(explanation (:triple _Fire-Support-Task2944 duration _Duration-Value2838)
+ (((@ SME entered))))
+
+(explanation (:triple _Duration-Value2838 value (:pair 6.0d0 *hour))
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 big-nodes _Property-Node2946)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 big-nodes _Property-Node2947)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 big-nodes _Property-Node2948)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 big-nodes _Property-Node2949)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 big-nodes _Property-Node2950)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 big-nodes _Property-Node2951)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 big-nodes _Property-Node2952)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 big-nodes _Property-Node2953)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 big-nodes _Property-Node2954)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 big-nodes _Property-Node2955)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 big-nodes _Property-Node2956)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 big-nodes _Property-Node2957)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 big-nodes _Property-Node2958)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 big-nodes _Property-Node2959)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 big-nodes _Property-Node2960)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 big-nodes _Property-Node2961)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 big-nodes _Property-Node2962)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 big-nodes _Property-Node2963)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 big-nodes _Property-Node2964)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 big-nodes _Property-Node2965)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 big-nodes _Property-Node2966)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 big-nodes _Property-Node2967)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 big-nodes _Property-Node2968)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 big-nodes _Property-Node2969)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 big-nodes _Property-Node2970)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 big-nodes _Property-Node2971)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 big-nodes _Property-Node2972)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 big-nodes _Property-Node2973)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 big-nodes _Property-Node2974)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 big-nodes _Property-Node2975)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 big-nodes _Property-Node2976)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 big-nodes _Property-Node2977)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 big-nodes _Property-Node2978)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 big-nodes _Property-Node2979)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 big-nodes _Property-Node2980)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 big-nodes _Property-Node2981)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 big-nodes _Property-Node2982)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 big-nodes _Property-Node2983)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 big-nodes _Property-Node2984)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 big-nodes _Property-Node2985)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 big-nodes _Property-Node2986)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 big-nodes _Property-Node2987)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 big-nodes _Property-Node2988)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 big-nodes _Property-Node2989)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 big-nodes _Property-Node2990)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 big-nodes _Property-Node2991)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 big-nodes _Property-Node2992)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 big-nodes _Property-Node2993)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 big-nodes _Property-Node2994)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 big-nodes _Property-Node2995)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 big-nodes _Property-Node2996)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 big-nodes _Property-Node2997)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 big-nodes _Property-Node2998)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 big-nodes _Property-Node2999)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 big-nodes _Property-Node3000)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 big-nodes _Property-Node3001)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 big-nodes _Property-Node3002)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 big-nodes _Property-Node3003)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 big-nodes _Group-Node3004)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 big-nodes _Group-Node3005)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 big-nodes _Group-Node3006)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 big-nodes _Group-Node3007)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 big-nodes _Group-Node3008)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 big-nodes _Group-Node3009)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 big-nodes _Group-Node3010)
+ (((@ SME entered))))
+
+(explanation (:triple _Jayhawk2790 big-nodes _Group-Node3011)
+ (((@ SME entered))))
+
+#|
+;;; jihie
+
+;; Move -> Move-Military-Unit
+
+;; Aviation-Unit Battalion -> Aviation-Battalion
+
+;; (instance-of (Fire-Support-Task Attack))
+;;   ->  (instance-of (Fire-Support-Task Attack-by-Fire))
+   Attack is not in the CP spec, and we don't know required-force-ratio,
+   attrition-rate etc.
+|#

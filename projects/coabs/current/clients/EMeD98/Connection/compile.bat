@@ -1,0 +1,1 @@
+javac -classpath C:\bcbl-exp\client-source;C:\bcbl-exp\client\sax.jar;C:\bcbl-exp\client\saxon.zip;C:\bcbl-exp\client\swingall.jar;C:\bcbl-exp\client\xml4j.jar;C:\lang\jdk1.1.8\lib\classes.zip ExpectServer.java

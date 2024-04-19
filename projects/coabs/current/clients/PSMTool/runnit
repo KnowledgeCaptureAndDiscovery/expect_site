@@ -1,0 +1,22 @@
+#!/bin/sh
+#
+# @(#)runnit	1.4 97/10/14
+
+SDKHOME=/nfs/etg/apps/java/jdk1.2.2
+XML=/nfs/v2/expect/current/clients/XML
+
+SCLASSPATH=../expect.jar:../XML/xml4j.jar:../XML/xerces.jar:../XML/saxon
+
+PORT=$1
+
+echo "Port is $PORT"
+if (test $CLASS="") ; then CLASS="PSMTool" ; fi
+
+CMD="${SDKHOME}/bin/java -classpath ${SCLASSPATH} PSMTool $PORT"
+
+#CMD="/nfs/etg/apps/java/jdk1.2.2/bin/java -classpath ${SCLASSPATH} PSMTool"
+
+
+echo ${CMD}
+${CMD}
+

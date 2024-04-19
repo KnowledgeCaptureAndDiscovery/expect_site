@@ -1,0 +1,368 @@
+<html>
+<head>
+<script>
+var limit="0:30"
+if (document.images){
+  var parselimit=limit.split(":");
+  parselimit=parselimit[0]*60+parselimit[1]*1;
+  }
+function resubmit(val) {
+    var myform = eval("document.form"+val);
+    myform.submit();
+}
+function beginrefresh(){
+  if (!document.images)
+      return;
+   if (parselimit==1)
+      window.location.reload();
+   else {
+      parselimit-=1;
+      curmin=Math.floor(parselimit/60);
+      cursec=parselimit%60;
+      if (curmin!=0)
+         curtime=curmin+" minutes and "+cursec+" seconds left until page refresh!";
+      else
+         curtime=cursec+" seconds left until page refresh!";
+      window.status=curtime
+      setTimeout("beginrefresh()",1000)
+   }
+ }
+window.onload=beginrefresh;
+</script>
+</head>
+<table>
+<tr><td colspan=2>----Sat Apr 20 09:07:59 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>American Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>2436</td></tr>
+<tr><td><b>on date</b></td><td>4/20/2002</td></tr>
+<tr><td><b>from airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>philpot@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2><b>American Airlines flight 2436</b></td></tr>
+<tr><td colspan=2>Dear philpot_at_isi_edu,<br/><br/>Your American Airlines flight 2436 is still scheduled to depart LAX on-time at 11:16 AM Gate 48A and is scheduled to arrive DFW at 4:21 PM Gate .<br/><br/>   -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1019318879)'></td></tr>
+</table><br>
+<form name='form1019318879' action="/cgi-bin/portal/agent-req.pl" target="_blank" method="post">
+<input type='hidden' name='val0' value='American Airlines'>
+<input type='hidden' name='val1' value='2436'>
+<input type='hidden' name='val2' value='4/20/2002'>
+<input type='hidden' name='val3' value='LAX'>
+<input type='hidden' name='val4' value='philpot@isi.edu'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='philpot@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Tue Apr  9 10:44:06 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>American Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>2838</td></tr>
+<tr><td><b>on date</b></td><td>5/5/2002</td></tr>
+<tr><td><b>from airport</b></td><td>CLT</td></tr>
+<tr><td><b>for user id</b></td><td>philpot@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;ack&gt;OK&lt;/ack&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1018374246)'></td></tr>
+</table><br>
+<form name='form1018374246' action="/cgi-bin/portal/agent-req.pl" target="_blank" method="post">
+<input type='hidden' name='val0' value='American Airlines'>
+<input type='hidden' name='val1' value='2838'>
+<input type='hidden' name='val2' value='5/5/2002'>
+<input type='hidden' name='val3' value='CLT'>
+<input type='hidden' name='val4' value='philpot@isi.edu'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='philpot@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Tue Apr  9 10:43:48 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>American Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>2436</td></tr>
+<tr><td><b>on date</b></td><td>4/20/2002</td></tr>
+<tr><td><b>from airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>philpot@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;ack&gt;OK&lt;/ack&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1018374228)'></td></tr>
+</table><br>
+<form name='form1018374228' action="/cgi-bin/portal/agent-req.pl" target="_blank" method="post">
+<input type='hidden' name='val0' value='American Airlines'>
+<input type='hidden' name='val1' value='2436'>
+<input type='hidden' name='val2' value='4/20/2002'>
+<input type='hidden' name='val3' value='LAX'>
+<input type='hidden' name='val4' value='philpot@isi.edu'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='philpot@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Mon Apr  8 16:40:58 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>American Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>2436</td></tr>
+<tr><td><b>on date</b></td><td>4/20/2002</td></tr>
+<tr><td><b>from airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>philpot@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;ack&gt;OK&lt;/ack&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1018309258)'></td></tr>
+</table><br>
+<form name='form1018309258' action="/cgi-bin/portal/agent-req.pl" target="_blank" method="post">
+<input type='hidden' name='val0' value='American Airlines'>
+<input type='hidden' name='val1' value='2436'>
+<input type='hidden' name='val2' value='4/20/2002'>
+<input type='hidden' name='val3' value='LAX'>
+<input type='hidden' name='val4' value='philpot@isi.edu'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='philpot@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Mon Apr  8 16:37:39 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>American Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>2838</td></tr>
+<tr><td><b>on date</b></td><td>5/5/2002</td></tr>
+<tr><td><b>from airport</b></td><td>CLT</td></tr>
+<tr><td><b>for user id</b></td><td>philpot@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;ack&gt;OK&lt;/ack&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1018309059)'></td></tr>
+</table><br>
+<form name='form1018309059' action="/cgi-bin/portal/agent-req.pl" target="_blank" method="post">
+<input type='hidden' name='val0' value='American Airlines'>
+<input type='hidden' name='val1' value='2838'>
+<input type='hidden' name='val2' value='5/5/2002'>
+<input type='hidden' name='val3' value='CLT'>
+<input type='hidden' name='val4' value='philpot@isi.edu'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='philpot@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Mon Apr  8 16:37:33 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>American Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>1732</td></tr>
+<tr><td><b>on date</b></td><td>4/19/2002</td></tr>
+<tr><td><b>from airport</b></td><td>DFW</td></tr>
+<tr><td><b>for user id</b></td><td>philpot@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;ack&gt;OK&lt;/ack&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1018309053)'></td></tr>
+</table><br>
+<form name='form1018309053' action="/cgi-bin/portal/agent-req.pl" target="_blank" method="post">
+<input type='hidden' name='val0' value='American Airlines'>
+<input type='hidden' name='val1' value='1732'>
+<input type='hidden' name='val2' value='4/19/2002'>
+<input type='hidden' name='val3' value='DFW'>
+<input type='hidden' name='val4' value='philpot@isi.edu'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='philpot@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Mon Apr  8 16:37:26 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>American Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>2446</td></tr>
+<tr><td><b>on date</b></td><td>4/19/2002</td></tr>
+<tr><td><b>from airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>philpot@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;ack&gt;OK&lt;/ack&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1018309046)'></td></tr>
+</table><br>
+<form name='form1018309046' action="/cgi-bin/portal/agent-req.pl" target="_blank" method="post">
+<input type='hidden' name='val0' value='American Airlines'>
+<input type='hidden' name='val1' value='2446'>
+<input type='hidden' name='val2' value='4/19/2002'>
+<input type='hidden' name='val3' value='LAX'>
+<input type='hidden' name='val4' value='philpot@isi.edu'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='philpot@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Mon Apr  8 16:37:07 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>American Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>2721</td></tr>
+<tr><td><b>on date</b></td><td>5/5/2002</td></tr>
+<tr><td><b>from airport</b></td><td>STL</td></tr>
+<tr><td><b>for user id</b></td><td>philpot@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;ack&gt;OK&lt;/ack&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1018309027)'></td></tr>
+</table><br>
+<form name='form1018309027' action="/cgi-bin/portal/agent-req.pl" target="_blank" method="post">
+<input type='hidden' name='val0' value='American Airlines'>
+<input type='hidden' name='val1' value='2721'>
+<input type='hidden' name='val2' value='5/5/2002'>
+<input type='hidden' name='val3' value='STL'>
+<input type='hidden' name='val4' value='philpot@isi.edu'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='philpot@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Mon Apr  8 16:36:35 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>American Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>3037</td></tr>
+<tr><td><b>on date</b></td><td>5/5/2002</td></tr>
+<tr><td><b>from airport</b></td><td>STL</td></tr>
+<tr><td><b>for user id</b></td><td>philpot@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;ack&gt;OK&lt;/ack&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1018308995)'></td></tr>
+</table><br>
+<form name='form1018308995' action="/cgi-bin/portal/agent-req.pl" target="_blank" method="post">
+<input type='hidden' name='val0' value='American Airlines'>
+<input type='hidden' name='val1' value='3037'>
+<input type='hidden' name='val2' value='5/5/2002'>
+<input type='hidden' name='val3' value='STL'>
+<input type='hidden' name='val4' value='philpot@isi.edu'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='philpot@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Mon Apr  8 16:36:15 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>US Airways</td></tr>
+<tr><td><b>of flight number</b></td><td>1196</td></tr>
+<tr><td><b>on date</b></td><td>4/20/2002</td></tr>
+<tr><td><b>from airport</b></td><td>STL</td></tr>
+<tr><td><b>for user id</b></td><td>philpot@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;ack&gt;OK&lt;/ack&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1018308975)'></td></tr>
+</table><br>
+<form name='form1018308975' action="/cgi-bin/portal/agent-req.pl" target="_blank" method="post">
+<input type='hidden' name='val0' value='US Airways'>
+<input type='hidden' name='val1' value='1196'>
+<input type='hidden' name='val2' value='4/20/2002'>
+<input type='hidden' name='val3' value='STL'>
+<input type='hidden' name='val4' value='philpot@isi.edu'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='philpot@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Mon Apr  8 16:36:09 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>US Airways</td></tr>
+<tr><td><b>of flight number</b></td><td>1205</td></tr>
+<tr><td><b>on date</b></td><td>5/5/2002</td></tr>
+<tr><td><b>from airport</b></td><td>CLT</td></tr>
+<tr><td><b>for user id</b></td><td>philpot@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;ack&gt;OK&lt;/ack&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1018308969)'></td></tr>
+</table><br>
+<form name='form1018308969' action="/cgi-bin/portal/agent-req.pl" target="_blank" method="post">
+<input type='hidden' name='val0' value='US Airways'>
+<input type='hidden' name='val1' value='1205'>
+<input type='hidden' name='val2' value='5/5/2002'>
+<input type='hidden' name='val3' value='CLT'>
+<input type='hidden' name='val4' value='philpot@isi.edu'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='philpot@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Mon Apr  8 16:35:57 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>American Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>2954</td></tr>
+<tr><td><b>on date</b></td><td>4/20/2002</td></tr>
+<tr><td><b>from airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>philpot@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;ack&gt;OK&lt;/ack&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1018308957)'></td></tr>
+</table><br>
+<form name='form1018308957' action="/cgi-bin/portal/agent-req.pl" target="_blank" method="post">
+<input type='hidden' name='val0' value='American Airlines'>
+<input type='hidden' name='val1' value='2954'>
+<input type='hidden' name='val2' value='4/20/2002'>
+<input type='hidden' name='val3' value='LAX'>
+<input type='hidden' name='val4' value='philpot@isi.edu'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='philpot@isi.edu'>
+</form>
+
+</html>

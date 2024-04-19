@@ -1,0 +1,72 @@
+<html>
+<head>
+<script>
+var limit="0:30"
+if (document.images){
+  var parselimit=limit.split(":");
+  parselimit=parselimit[0]*60+parselimit[1]*1;
+  }
+function resubmit(val) {
+    var myform = eval("document.form"+val);
+    myform.submit();
+}
+function beginrefresh(){
+  if (!document.images)
+      return;
+   if (parselimit==1)
+      window.location.reload();
+   else {
+      parselimit-=1;
+      curmin=Math.floor(parselimit/60);
+      cursec=parselimit%60;
+      if (curmin!=0)
+         curtime=curmin+" minutes and "+cursec+" seconds left until page refresh!";
+      else
+         curtime=cursec+" seconds left until page refresh!";
+      window.status=curtime
+      setTimeout("beginrefresh()",1000)
+   }
+ }
+window.onload=beginrefresh;
+</script>
+</head>
+<table>
+<tr><td colspan=2>----Sun Jul 28 02:29:07 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>of outbound flight number</b></td><td>039</td></tr>
+<tr><td><b>on outbound departure date</b></td><td>7/27/2002</td></tr>
+<tr><td><b>at outbound departure time (e.g. 12:30pm no space please)</b></td><td>12:55pm</td></tr>
+<tr><td><b>from outbound departure airport</b></td><td>IAD</td></tr>
+<tr><td><b>to outbound arrival airport</b></td><td>LAX</td></tr>
+<tr><td><b>of return flight number</b></td><td>924</td></tr>
+<tr><td><b>on return departure date</b></td><td>8/3/2002</td></tr>
+<tr><td><b>at return departure time</b></td><td>12:20pm</td></tr>
+<tr><td><b>from return departure airport</b></td><td>LAX</td></tr>
+<tr><td><b>to return arrival airport</b></td><td>IAD</td></tr>
+<tr><td><b>for user id</b></td><td>akruse@snap.org</td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;error&gt;&lt;type&gt;Date passed&lt;/type&gt;&lt;attr&gt;date&lt;/attr&gt;&lt;/error&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1027848547)'></td></tr>
+</table><br>
+<form name='form1027848547' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='039'>
+<input type='hidden' name='val2' value='7/27/2002'>
+<input type='hidden' name='val3' value='12:55pm'>
+<input type='hidden' name='val4' value='IAD'>
+<input type='hidden' name='val5' value='LAX'>
+<input type='hidden' name='val6' value='924'>
+<input type='hidden' name='val7' value='8/3/2002'>
+<input type='hidden' name='val8' value='12:20pm'>
+<input type='hidden' name='val9' value='LAX'>
+<input type='hidden' name='val10' value='IAD'>
+<input type='hidden' name='val11' value='akruse@snap.org'>
+<input type='hidden' name='agent' value='flight-schedule'>
+<input type='hidden' name='email' value='akruse@snap.org'>
+</form>
+
+<p>
+</html>

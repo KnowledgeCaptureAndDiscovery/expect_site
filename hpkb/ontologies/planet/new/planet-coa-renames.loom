@@ -1,0 +1,78 @@
+;;; ============================================================
+;;; the portion of the COA specialization of
+;;; PLANET that can be viewed as simple specializations of the
+;;; concepts in PLANET, relabelling the concepts and not providing
+;;; additional info.
+ 
+
+(defconcept COA-problem-context
+  :is-primitive (:and planning-problem-context
+                      (:the scenario COA-scenario)
+		      (:all possible-COA-problem COA-problem)
+	              )
+  :annotations ((documentation "A problem context captures the input
+ information in which any alternative plans or COAs are considered.
+ In the COA domain, this is given as a 'scenario' that contains selected
+ products of mission analysis.")))
+
+(defrelation possible-COA-problem 
+  :range COA-problem
+  :annotations ((documentation "Links an object (such as the COA-problem-context) to a
+COA-problem."))
+  )
+
+(defconcept COA-problem
+  :is-primitive Planning-problem
+  :annotations ((documentation "The scenario given in the problem
+context is then broken down into what every item means in terms of
+planning.  For example, the mission statement contains the top level
+goal and the top level task to be done.  Other items in the scenario,
+such as assets available, turn into assertions to be made as part of the
+initial state.")))
+
+#|
+(defrelation accomplish 
+    :domain COA-task
+    :range purpose)
+|#
+
+(defconcept COA-task :is-primitive
+	    (:and plan-task
+		(:the structured-statement structured-task-statement)
+		(:the human-readable-description-of 
+		  human-readable-task-description)
+		(:at-least 0 accomplishes) ;;; purpose may not be specified
+		;; (:the accomplishes purpose COA-task)
+		))
+
+(defconcept purpose
+  :is-primitive (:and goal-specification
+                      (:the structured-statement structured-purpose-statement)
+                      (:the human-readable-description-of 
+			human-readable-task-description))
+  :annotations ((documentation "Purposes are a kind of goal.  Sometimes they
+ seem to be state-based and other times they seem to be objective-based.
+ The ontology does not commit purpose to being either, i.e., it defines purpose
+ to be in their parent class 'goal-specification'.")))
+
+(defconcept COA :is-primitive
+  (:and Plan
+        (:all task-of COA-task)
+        (:the Close Close-COA)
+        (:the Reserve Reserve-COA)
+        (:the Security Security-COA)
+        (:the Deep Deep-COA)
+        (:the Rear Rear-COA)
+        (:the Fires Fires-COA)
+        (:the Obstacles Obstacles-COA))
+  :annotations ((documentation "COAs are plans.  A COA has many tasks,
+and the tasks are grouped into six conceptually related subplans (close,
+reserve, security, deep, rear, fires, and obstacles.")))
+
+#|
+(defrelation before :is-primitive
+  (:and ordering-commitment temporal-commitment)
+  :annotations ((documentation ""))	; is this Allen's "meets" ?
+  )
+|#
+

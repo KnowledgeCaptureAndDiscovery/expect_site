@@ -1,0 +1,205 @@
+
+
+ ===============================================
+ start test-knowledge 
+"2001/6/25  17:31:39"
+
+(VIC-loop has 
+  (superclasses (Action))
+  (instances (_VIC-loop2437
+              _VIC-loop2573
+              _VIC-loop3013
+              _VIC-loop3048
+              _VIC-loop3680
+              _VIC-loop3715
+              _VIC-loop3742
+              _VIC-loop3769
+              _VIC-loop3796
+              _VIC-loop3823
+              _VIC-loop3850
+              _VIC-loop3877
+              _VIC-loop3904
+              _VIC-loop3931)))
+
+(every VIC-loop has 
+  (agent ((a Virus)))
+  (object ((a Cell)))
+  (first-subevent (((the Attach subevent of Self) called "AdhereToCell")))
+  (subevent ((a Attach called "AdhereToCell" with (object ((the Virus agent of Self))) (base ((the Cell object of Self))) (next-event (((the Penetrate subevent of Self) called "PenetrateCell"))))
+             (a Penetrate called "PenetrateCell" with (agent ((the Virus agent of Self))) (object ((the Plasma-Membrane has-part of (the Cell object of Self)))) (next-event (((the Release subevent of Self) called "Uncoat"))))
+             (a Release called "Uncoat" with (object ((the Viral-Nucleic-Acid has-part of (the Virus agent of Self)))) (base ((the Protein-Coat has-part of (the Virus agent of Self)))) (next-event (((the Move subevent of Self) called "MoveIntoCytoplasm") ((the Penetrate subevent of Self) called "PenetrateCell"))))
+             (a Move called "MoveIntoCytoplasm" with (object ((the Viral-Nucleic-Acid has-part of (the Virus agent of Self)))) (destination ((the Cytoplasm has-part of (the Cell object of Self))))))))
+
+
+
+ ===============================================
+ Start testing user::|VIC-loop| with 
+   user::|_VIC-loop4555| in user::|_Situation4554|
+
+
+  -----------------------------------------------------------
+  step: user::|_Attach4558|
+  -----------------------------------------------------------
+   preconditions:((:|triple| user::|_Virus4556| user::|object-of|
+                   (user::|mustnt-be-a| user::|Be-Touching| user::|with|
+                    (user::|object|
+                     ((user::|the| user::|base| user::|of|
+                       user::|_Attach4558|)))))
+                  (:|triple| user::|_Cell4557| user::|object-of|
+                   (user::|mustnt-be-a| user::|Be-Touching| user::|with|
+                    (user::|object|
+                     ((user::|the| user::|object| user::|of|
+                       user::|_Attach4558|)))))) 
+
+   succeeded preconditions:((:|triple| user::|_Cell4557| user::|object-of|
+                             (user::|mustnt-be-a| user::|Be-Touching|
+                              user::|with|
+                              (user::|object|
+                               ((user::|the| user::|object| user::|of|
+                                 user::|_Attach4558|)))))
+                            (:|triple| user::|_Virus4556| user::|object-of|
+                             (user::|mustnt-be-a| user::|Be-Touching|
+                              user::|with|
+                              (user::|object|
+                               ((user::|the| user::|base| user::|of|
+                                 user::|_Attach4558|)))))) 
+
+ ... EXECUTE _attach4558 in _situation4554...
+      deleting nil
+      adding ((:|triple| user::|_Be-Attached-To4573| user::|object|
+               user::|_Virus4556|)
+              (:|triple| user::|_Be-Attached-To4573| user::|object|
+               user::|_Cell4557|)
+              (:|triple| user::|_Cell4557| user::|abuts| user::|_Virus4556|)
+              (:|triple| user::|_Virus4556| user::|abuts| user::|_Cell4557|)) becoming _situation4574
+
+ loop found to user::|_Breach4565|
+
+cannot progress
+   [steps (_breach4565) were undoable this iteration...]
+
+
+  ************************************************
+          Summary of Paths Simulated
+  ************************************************
+
+  These are the simulated paths: 
+     (user::|_Attach4558|)
+
+ (user::|_Traverse4567| user::|_Breach4565| user::|_Move4564|
+  user::|_Release4563| user::|_Penetrate4559|) 
+ were not reached in this path
+
+
+
+  ************************************************
+                check expected effects
+  ************************************************
+    we check each simulated path
+
+
+  ------------------------------------------------
+    The overall effects for path
+        (user::|_Attach4558|)
+  ------------------------------------------------
+   added:   
+             (:|triple| user::|_Be-Attached-To4573| user::|object|
+              user::|_Virus4556|)
+             (:|triple| user::|_Be-Attached-To4573| user::|object|
+              user::|_Cell4557|)
+             (:|triple| user::|_Cell4557| user::|abuts| user::|_Virus4556|)
+             (:|triple| user::|_Virus4556| user::|abuts| user::|_Cell4557|)
+
+   deleted: 
+
+  .............................................
+ The expected effects for vic-loop is not specified yet!
+
+
+  ************************************************
+          Summary of Loops Found
+  ************************************************
+   (user::|Breach| user::|Traverse| user::|Penetrate| user::|Release|
+    user::|Breach|)
+
+ Test Output 
+(((source . user::|_Attach4558|) (success . t) (level . :error)
+  (type . :precondition)
+  (constraint
+   (:|triple| user::|_Cell4557| user::|object-of|
+    (user::|mustnt-be-a| user::|Be-Touching| user::|with|
+     (user::|object|
+      ((user::|the| user::|object| user::|of| user::|_Attach4558|)))))
+   (:|triple| user::|_Virus4556| user::|object-of|
+    (user::|mustnt-be-a| user::|Be-Touching| user::|with|
+     (user::|object|
+      ((user::|the| user::|base| user::|of| user::|_Attach4558|))))))
+  (id . |error-item-229|))
+ ((source . user::|_Attach4558|) (success . t) (level . :warning)
+  (type . :no-effect)
+  (constraint
+   ((:|triple| user::|_Be-Attached-To4573| user::|object| user::|_Virus4556|)
+    (:|triple| user::|_Be-Attached-To4573| user::|object| user::|_Cell4557|)
+    (:|triple| user::|_Cell4557| user::|abuts| user::|_Virus4556|)
+    (:|triple| user::|_Virus4556| user::|abuts| user::|_Cell4557|))
+   nil)
+  (id . |error-item-230|))
+ ((source . user::|VIC-loop|) (success . t) (level . :warning) (type . :loop)
+  (constraint
+   (user::|_Breach4565| user::|_Traverse4567| user::|_Penetrate4559|
+    user::|_Release4563| user::|_Breach4565|))
+  (id . |error-item-231|))
+ ((source user::|_Breach4565|) (success) (level . :error)
+  (type . :undoable-event) (constraint) (id . |error-item-232|))
+ ((source user::|_Attach4558|) (success) (level . :warning)
+  (type . :unreached-events)
+  (constraint user::|_Traverse4567| user::|_Breach4565| user::|_Move4564|
+   user::|_Release4563| user::|_Penetrate4559|)
+  (id . |error-item-234|))
+ ((source . user::|VIC-loop|) (content (user::|_Attach4558|))
+  (type . :simulated-paths) (id . |info-item-233|)))
+====================================
+ Error Items and Their Fixes
+====================================
+
+((source user::|_Breach4565|) (success) (level . :error)
+ (type . :undoable-event) (constraint) (id . |error-item-232|)) 
+
+
+ --------------------
+ "2001/6/25  17:31:41" -- Getting fixes for |error-item-232|
+
+ FIX ITEMS 
+(((type . :change-or-add-link-between-steps)
+  (fix change-or-add-link-between-steps-for-undoable-event
+   (user::|_Breach4565|))))
+==> fixes (((type . :change-or-add-link-between-steps)
+            (fix change-or-add-link-between-steps-for-undoable-event
+             (user::|_Breach4565|)))) 
+
+((source user::|_Attach4558|) (success) (level . :warning)
+ (type . :unreached-events)
+ (constraint user::|_Traverse4567| user::|_Breach4565| user::|_Move4564|
+  user::|_Release4563| user::|_Penetrate4559|)
+ (id . |error-item-234|)) 
+
+
+ --------------------
+ "2001/6/25  17:31:41" -- Getting fixes for |error-item-234|
+
+ FIX ITEMS 
+(((type . :change-or-add-link-between-steps)
+  (fix change-or-add-link-between-steps-for-unreached-events
+   (user::|_Traverse4567| user::|_Breach4565| user::|_Move4564|
+    user::|_Release4563| user::|_Penetrate4559|))))
+==> fixes (((type . :change-or-add-link-between-steps)
+            (fix change-or-add-link-between-steps-for-unreached-events
+             (user::|_Traverse4567| user::|_Breach4565| user::|_Move4564|
+              user::|_Release4563| user::|_Penetrate4559|)))) 
+
+
+======================
+ Info Items
+======================
+(((source . user::|VIC-loop|) (content (user::|_Attach4558|))
+  (type . :simulated-paths) (id . |info-item-233|))) 

@@ -1,0 +1,815 @@
+
+\documentclass{llncs}
+%In order to omit page numbers and running heads
+%please use the following line instead of the first command line:
+%\documentclass{llncs}.
+%Furthermore change the line \pagestyle{headings} to
+%\pagestyle{empty}.
+
+%\usepackage{makeidx}  % allows for indexgeneration
+
+\input{psfig.sty}
+
+\begin{document}
+
+%\pagestyle{headings}
+%In order to omit page numbers and running heads
+%please change this line to
+\pagestyle{empty}
+%and change the first command line too, see above.
+
+\mainmatter
+
+\title{Deriving Acquisition Principles\\ from Tutoring Principles
+}
+
+\titlerunning{Lecture Notes in Computer Science}
+
+\author{Jihie Kim \and Yolanda Gil
+}
+
+\authorrunning{Jihie Kim and Yolanda Gil}
+
+\institute{Information Sciences Institute,
+University of Southern California\\
+4676 Admiralty Way,
+Marina del Rey, CA 90292, U.S.A. \\
+\email{\{jihie, gil\}@isi.edu}\\
+}
+
+
+\maketitle
+
+\begin{abstract}
+This paper describes our analysis of the literature on tutorial dialogues and
+presents a compilation of useful principles that students and teachers
+typically follow
+in making tutoring interactions successful.  The compilation is done in the
+context of making use of those principles in building knowledge acquisition
+interfaces since acquisition interfaces can be seen as students acquiring
+knowledge from the user.  We plan to use these ideas in our future work to
+develop more proactive and effective acquisition interfaces.
+
+\end{abstract}
+
+
+\section{Introduction}
+
+Transferring knowledge from humans to computers has proven to be an extremely
+challenging task.  Over the last two decades, an array of approaches to
+interactive knowledge acquisition have been proposed.  Some tools accept rules
+and check them against other existing rules \cite{Davis79,seek2}.  Some tools
+acquire knowledge suitable for specific tasks and problem solving strategies
+\cite{MarcusM89}.  Other tools focus on detecting errors in the knowledge
+specified by the user \cite{GilM96,KimG99,chimaera00}.  Some systems use a
+variety of elicitation techniques to acquire descriptive knowledge
+\cite{GainesS93,cmaps1} often in semi-formal forms.  There are some isolated
+reports of users with no formal background in computer science that are now
+able to use acquisition tools to build sizeable knowledge bases
+\cite{KimG00,EriksEA95,Clark01}.
+However, the majority of the burden of the acquisition task still remains with
+the user.  Users have to decide what, how, and when to teach the system.  
+Current acquisition tools do not take the kind of
+initiative and collaborative attitude that one would expect of a good student,
+mostly reacting to the user's actions instead of being proactive learners.
+
+We set off to investigate how the dynamics of tutor-student interactions could
+be used to make acquisition tools better students to further support users in
+their role of tutors of computers.    Given the success in deploying
+educational systems in schools and their reported effectiveness in raising
+student grades \cite{Koedinger97}, we expected the tutoring
+literature to have useful principles that we could exploit.  Another
+strength of tutoring work is that it is typically motivated by extensive
+analysis of human tutorial dialogues \cite{Fox93}, which the knowledge
+acquisition literature lacks.
+
+This paper describes our analysis of the literature on tutorial dialogues and
+presents a compilation of useful principles that students and teachers follow
+in making tutoring interactions successful and that could be useful in the
+context of interactive acquisition tools.  We plan to use these ideas in our
+future work to develop more proactive acquisition interfaces.  
+
+The paper begins with a discussion of the similarities and differences between
+instructional systems (educational software and human tutoring) and
+interactive acquisition tools.  We then present fourteen learning principles
+that we believe can be immediately incorporated into our current tools.
+Finally, we describe how acquisition interfaces can interact with users using
+these principles.
+
+\section{Tutorial Dialogues in Instructional Systems and in 
+Interactive Knowledge Acquisition}
+
+In instructional systems (both educational software and intelligent tutoring
+systems), the tutor's role is to help the user (student) achieve some degree
+of proficiency in a certain topic (the lesson).  In interactive acquisition
+interfaces, these roles are reversed.  Acquisition tools can be seen
+as students learning new knowledge from the user (teacher) and they should be
+able to use some of the strategies that good learners pursue during a tutoring
+dialogue.  Ideally, it should also be able to supplement the user's skills as
+a teacher by helping the user pursue effective tutoring techniques.  This
+would help the user teach the material better and faster to the system, as
+well as delegate some of the tutor functions over to the system.
+
+In essence, we are trying to investigate what it takes to create a good
+student, while most ITS work has focused on creating good teachers.  We
+believe that the work in educational systems and acquisition systems share a
+lot of issues and they may be able to contribute to each other in many ways.
+In fact there has been work that bridges these two communities.  For example,
+there have been recent interests in acquiring knowledge for intelligent
+tutoring systems \cite{Murray99}.  We think that technology built by the
+knowledge acquisition community will be useful for building tools to help
+users develop the knowledge and models used in ITS.
+
+There are some issues that interactive acquisition interfaces will not face.
+Human students in need of tutoring often have a lack of motivation that the
+instructional system has to address \cite{Lepper93}.  Instructional systems
+need to use special tactics to promote deep learning, such as giving
+incremental hints instead of showing the student the correct answers.
+Finally, our student will not be subject to the cognitive limitations of a
+typical human student, and can exploit memory and computational skills that
+would be exceptional (if not infrequent) for human students.
+
+
+\section{Principles in Teaching and Learning}
+
+We have been investigating various tutoring principles\footnote{In the
+tutoring literature these are often referred to as tutoring strategies.
+We prefer to refer to them as tutoring principles, since we found that they
+can be implemented as goals, strategies, or plans during the dialogue, or
+simply be taken into account in the design of the interaction.}  used
+by human tutors and educational software \cite{Forbus01,Wenger87,Fox93}.
+Although human tutors provide more flexible support, the tutoring principles
+supported by educational software are often inspired by human tutors
+\cite{Merrill92} and we derive learning principles from both.
+Table~\ref{summary} shows a summary of the principles that we found useful.
+The rest of this section describes these principles and discusses how they
+could be adopted in acquisition systems.  More details on how current
+acquisition techniques are related to these principles are described in
+~\cite{gil-kim-cogsci02}.
+
+Instructional systems contain other components such as student
+models and domain models, but here we are focusing on tutoring principles and
+leave user modeling as future work.  
+
+\begin{table}
+\begin{center}
+\vspace*{-0.7em}
+\begin{scriptsize}
+
+\begin{tabular}{|l||l |l |} \hline
+Teaching/Learning principle & Tutoring literature \\
+
+\hline \hline
+Introduce lesson topics and goals & Atlas-Andes, Meno-Tutor, Human tutorial
+dialog \\
+ & human learning \\
+\hline
+Use topics of the lesson as a guide & BE\&E, UMFE   \\
+\hline 
+Subsumption to existing cognitive structure & human learning, WHY, Atlas-Andes \\
+\hline
+	
+Immediate feedback & SOPHIE, Auto-Tutor, LISP tutor  \\
+ &  Human tutorial dialog, human learning  \\
+\hline
+
+Generate educated guesses & Human tutorial dialog, QUADRATIC, PACT \\
+\hline 
+Keep on track & GUIDON, SCHOLAR, TRAIN-Tutor \\
+\hline 
+
+Indicate lack of understanding & Human tutorial dialog, WHY  \\
+\hline
+Detect and fix ``buggy'' knowledge & SCHOLAR, Meno-Tutor, WHY, Buggy, CIRCSIM \\
+ & human learning\\
+\hline
+
+
+Learn deep models & PACT, Atlas-Andes  \\
+\hline
+Learn domain language & Atlas-Andes, Meno-Tutor  \\
+\hline
+
+Keep track of correct answers & Atlas-Andes  \\
+\hline
+Prioritize learning tasks & WHY \\
+\hline
+
+Limit the nesting of the lesson to a handful & Atlas  \\
+\hline
+
+Summarize what was learned & EXCHECK, TRAIN-Tutor, Meno-Tutor  \\
+\hline
+Assess learned knowledge & WEST, Human tutorial dialog \\
+\hline
+
+\end{tabular}
+\end{scriptsize}
+\caption{Some Tutoring and Learning Principles}
+\label{summary}
+\end{center}
+\setlength{\baselineskip}{1.0em}
+\vspace*{-0.7em}
+\begin{footnotesize} 
+References:
+Atlas \cite{VanLehn00}, Atlas-Andes\cite{Rose01}, 
+BE\&E \cite{Core00}, Buggy \cite{buggy78}, 
+CIRCSIM-tutor \cite{circsim},
+EXCHECK \cite{McDonald81},
+GUIDON \cite{Clancey87}, 
+Human tutorial dialog \cite{Fox93}, 
+human learning \cite{Merrill92,Gentner01,Kulik88,Ausubel68,Collins82,Festinger57}, 
+LISP Tutor \cite{Anderson89}, Meno-Tutor \cite{woolf84}, 
+PACT \cite{Aleven00}, QUADRATIC \cite{quadratic},
+SCHOLAR \cite{Carbonell70}, SOPHIE \cite{Brown82}, TRAIN-Tutor \cite{WoolfA00}, 
+UMFE \cite{Sleeman84},
+WEST \cite{Burton79}, WHY \cite{why77}.
+\setlength{\baselineskip}{1.5em}
+\end{footnotesize}
+\end{table}
+\vspace*{-1.0em}
+\begin{itemize}
+\item {\bf Introduce lesson topics and goals}
+
+In the beginning of the lesson, tutors often outline the topics to be learned
+during the session and try to assess the student's prior knowledge on
+these topics.  For example, the advance organizer approach \cite{Ausubel68}
+lets the student see the big picture of what is to be learned and provides
+what the tutor's argument will be in order to bridge the gap between what the
+student may already know and what the student should learn.  In educational
+systems, such as Meno-Tutor \cite{woolf84}, as the tutor introduces general
+topics it asks exploratory questions in order to assess the student's prior
+knowledge.  In fact, there are similar findings in teacher-student dialogs.
+Teachers often let students express how good or bad they are at given
+topic \cite{Fox93}.
+
+\vspace*{0.5em}
+Adopting the above tutoring principle, acquisition tools should start their
+dialogue by asking for the topic of the current lesson and establish assumed
+prior knowledge.  
+The topic of the lesson could be given as a set of terms to be defined, or a
+set of test problems that the system should be able to solve at the end of the
+lesson.
+Once the user specifies the topic, the system may assist the user
+to assess the current knowledge base in terms of the topic and bring up
+possibly relevant background knowledge. Missing prior knowledge can prompt a
+sub-dialogue for a background lesson.
+
+\vspace*{0.5em}
+\item {\bf Use topics of the lesson as a guide}
+
+In planning tutorial dialogues, instructional systems check what is being
+learned against the topics of the lesson \cite{Core00} and try to avoid
+unfocused dialogue and digressions.  In the process of learning, the
+terms brought up during the lesson are connected to the concepts learned
+\cite{Sleeman84}.
+
+\vspace*{0.5em}
+As in instructional systems, acquisition tools can use the topics of the
+lesson in checking how much progress the user made in
+building the knowledge base and in relating the terms introduced in the
+session to those topics.
+
+\vspace*{0.5em}
+\item {\bf Subsumption to existing cognitive structure}
+
+The subsumption theory by Ausubel \cite{Ausubel68} emphasizes that learning
+new material involves relating it to relevant ideas in the existing cognitive
+structure.  The integration of new material with previous information can be
+done by analogies, generalizations and checking consistency.  Through analogy,
+novel situations and problems can be understood in terms of familiar ones
+\cite{Gentner01}.  Effective human tutors ask for similarities and differences
+for similar cases \cite{Collins82}.  In educational systems such as
+Atlas-Andes \cite{Rose01}, the system points out differences between similar
+objects (e.g., speed vs. velocity) in terms of what they are and how they are
+calculated.  Human tutors help students generalize when there are several
+similar cases \cite{Collins82}. For example, they suggest or point out
+the need to formulate a rule for similar cases by asking how the values of certain
+factors are related to the values of the dependent variables.  Educational
+systems, such as Atlas \cite{VanLehn00}, encourage students to abstract plans
+from the details to see the basic approach behind problem solving.
+Finally, cognitive dissonance theory \cite{Festinger57} points out that people
+tend to seek consistency among their cognitions (i.e., beliefs,
+opinions). When there is an inconsistency (dissonance), something must change
+to eliminate the dissonance.
+
+\vspace*{0.5em}
+Acquisition systems should follow this principle and assist users to: 1)
+learn new concepts from analogous concepts that already exist, 2) generalize
+definitions if similar things exist (and there could be plausible
+generalizations), and 3) make all new definitions consistent with existing
+knowledge.
+
+\vspace*{0.5em}
+\item {\bf Immediate feedback}
+
+Many educational systems provide immediate feedback on the quality of
+student's responses \cite{Brown82,Anderson89}. The studies of feedback in a
+variety of instructional context find that immediate feedback is much more
+effective than feedback received after a delay \cite{Kulik88}.  Similarly, in
+the tutorial dialog study by Fox \cite{Fox93}, tutors show immediate
+recognition of every step the student makes and their silence tends to presage
+the student's confusion.  It is reported that in providing feedback, human
+tutors are more flexible than educational software, using high bandwidth
+communication to guide the students \cite{Merrill92}.
+
+\vspace*{0.5em}
+Based on this principle, we can make acquisition tools more actively
+involved in providing and obtaining feedback.  For example, in addition to
+reporting how newly entered knowledge was understood and what errors were
+found, tools can ask for feedback on how results or answers being generated
+match the user's expectation.
+
+\vspace*{0.5em}
+\item {\bf Generate educated guesses} 
+
+Some educational systems invite guesses on questions 
+either in the process of letting the student discover the answers
+\cite{quadratic} or in the process of assessing the student's
+knowledge\cite{Aleven00}.  
+Likewise, in the studies of human tutoring, student often display their
+understanding by finishing the tutor's utterance and the tutor finds out what
+students understood by inviting their guesses (utterance completion
+strategy) \cite{Fox93}.  
+
+\vspace*{0.5em}
+We can extend the existing capabilities of acquisition tools to provide
+educated guesses on how to fix problems based on their context.  For example
+if there are salient features such as an action that can fix two errors at the
+same time, maybe it should be suggested as a most promising next step.  If the
+guesses were wrong, it may be an indication of further missing knowledge and
+the system can show its surprise to the user and ask for further help.
+
+\vspace*{0.5em}
+\item {\bf Keep on track}
+
+If the student gives an incorrect answer, the tutor must immediately get the
+student back on track \cite{Carbonell70}.  Some systems also detect change of
+directions \cite{WoolfA00} or check if the questions are irrelevant to the
+case at hand \cite{Clancey87}.
+
+\vspace*{0.5em}
+Novice users of interactive acquisition interfaces often have difficulty in
+understanding if they are on the right track and if they are making progress
+\cite{KimG00}.  We believe that acquisition interfaces should keep track of
+information regarding the progress made throughout the session and the tasks
+that remain to be addressed in the dialogue.
+
+
+\vspace*{0.5em}
+\item {\bf Indicate lack of understanding}  
+\label{indicate-lack-of-understanding}
+
+Studies in human tutoring show cases where students themselves indicate lack
+of understanding of introduced terms \cite{Fox93}, but tutors also point out
+the specific aspects that need to be understood by the
+student.\cite{Collins82}.
+
+\vspace*{0.5em}
+Some acquisition tools indicate to the user what is missing in the knowledge
+base \cite{KimG00} and users 
+often use it to decide what to do next. 
+Diagnosis questions should be useful to detect misunderstandings and missing
+knowledge. 
+
+ 
+\vspace*{0.5em}
+\item {\bf Detect and fix ``buggy'' knowledge}
+
+Many educational systems have a tutoring goal of diagnosing the student's
+"bugs" \cite{woolf84,why77,buggy78} and question answering is often used in
+checking student's knowledge.  However, simply telling that an error has
+occurred is much less useful than reminding the student of the current goal or
+pointing out a feature of the error \cite{McKendree90}.  If there are
+insufficient or unnecessary factors in a student's answers, experienced tutors
+pick counter examples to highlight the problem \cite{Collins82}. In the
+process of checking, when the tutor does not understand the answer, sometimes
+the student is asked to rephrase the answer \cite{Carbonell70}.
+
+%In the studies of tutorial dialogs, when the student's understanding does not
+%match the tutor's understanding, either the student corrects himself/herself,
+%the student invites corrections, or the tutor initiates corrections.
+%This display and repairing of their understanding continue until the student
+%gets stuck.
+
+\vspace*{0.5em}
+Most acquisition systems have a way of detecting errors and gaps in the
+knowledge base.  However, as in the case of educational systems, instead of
+simply telling the errors found it is more useful to show the explanation of
+how and where the errors were found.
+
+
+\vspace*{0.5em}
+\item {\bf Learn deep models}
+
+The tutor and the student should focus on deep conceptual models and
+explanations rather than superficial ones \cite{VanLehn00}.  Students should
+not only be expected to give the right answer but to do so for the right
+reasons.  For example, when the student's answer is right, educational systems
+ask how the correct answer is generated \cite{Aleven00,VanLehn00}.  In some
+cases, to be able to ensure that the student understood the explanation
+educational systems use a set of check questions \cite{Rose01}.  Studies of
+human tutoring show that students themselves occasionally try to check the
+reasoning behind the answers provided \cite{Fox93}.
+
+\vspace*{0.5em}
+Current acquisition tools do not have a good basis to
+evaluate or pursue depth in their knowledge base, though this is a long
+recognized shortcoming.  One thing acquisition tools can do is to provide a
+way of enforcing users to check how the answers were generated and see if
+the system provides the right answer for the right reasons.
+
+\vspace*{0.5em}
+\item {\bf Learn domain language}
+
+Another interesting aspect of a lesson is learning to describe the new
+knowledge in terms that are appropriate in the domain at hand.  Educators want
+to ensure that the students learn to talk science as a part of understanding
+of the science \cite{VanLehn00}.  Teaching is more difficult when the
+student organizes and talks about knowledge in a different way than the tutor
+does \cite{woolf84}.
+
+\vspace*{0.5em}
+Acquiring domain language has not been a focus of knowledge base development
+in general.  If an acquisition tool has a notion of checking the terms the
+users bring up in the process of entering knowledge, they can be highlighted
+to draw the user's attention.
+ 
+\vspace*{0.5em}
+\item {\bf Keep track of correct answers}
+
+Instructional systems keep track of the questions that the student is able to
+answer correctly as well as those answered incorrectly, which drives further
+interactions with the student.  Some systems try more specific or simpler
+version of questions to keep better track of progress. \cite{Rose01}.
+
+\vspace*{0.5em}
+Some acquisition tools keep track of whether some set of test cases 
+are answered correctly.  However, they can be more actively used in guiding
+the acquisition dialog in terms of helping the user understand the current
+status of the knowledge base.  For example, the acquisition tool can volunteer
+its own assessment of the kinds of questions that can be answered.
+
+\vspace*{0.5em}
+\item {\bf Prioritize learning tasks}
+
+To handle multiple tasks and sub-tasks to be done, educational
+systems use priority rules. For example, systems can focus on errors before
+omissions and shorter fixes before longer fixes, prior steps before later
+steps, etc \cite{Collins82}.
+
+
+\vspace*{0.5em}
+Similarly, some acquisition systems use a priority scheme to organize errors
+based on their type and the amount of help the system can provide.
+
+\vspace*{0.5em}
+\item {\bf Limit the nesting of the lesson}
+
+It appears that it is useful to limit the nesting of lessons to a handful
+\cite{VanLehn00}, which seems it would help our acquisition tools keep track
+of what is going on as much as it helps a human student.
+
+\vspace*{0.5em}
+\item {\bf Summarize back to teacher what was learned}
+
+Many educational systems summarize the highlights at the end of the lesson
+\cite{woolf84,McDonald81}. For example, EXCHECK prints out review of the proof
+for the student to give a clear picture of what has been done
+\cite{McDonald81}.  In some systems, when the tutor has given several hints, a
+summary may be given to ensure that the student has correct information just
+in case the student gave right answer by following hints without understanding
+the procedures \cite{WoolfA00}.
+
+\vspace*{0.5em}
+Acquisition tools do not actively provide a summary unless the user
+explicitly queries the knowledge base.  Providing a summary of what has been
+learned in terms of the purpose of the lesson will be very useful for the
+user.
+
+\vspace*{0.5em}
+\item {\bf Assess learned knowledge}
+
+In their dialogs with human tutors, students often indicate how well they
+understand the topic as well as what has been learned \cite{Fox93}.
+Also some educational systems have a way of isolating the weaknesses in the
+student's knowledge and propose further lessons on those areas \cite{Burton79}.
+
+\vspace*{0.5em}
+Only some acquisition tools perform this kind of assessment.  We
+believe that volunteering the assessment of how well the system understands
+certain topics will be very useful for the users.
+
+
+\end{itemize}
+
+\section{Using Principles in Knowledge Acquisition}
+
+Based on our observations of teaching and learning principles described in the
+previous section, we are developing a system called SLICK\footnote{Skills for
+Learning to Interactively Capture Knowledge}.  The principles are
+used to steer the dialog with the user, and result in a more
+goal-oriented behavior that makes the system a more proactive learner.
+
+We have designed SLICK as a front-end dialogue tool that can be layered over
+the functionality of existing acquisition interfaces.  We are exploring the
+use of SLICK with SHAKEN \cite{Clark01}, a tool that allows end users to
+specify process models in terms of their substeps and the objects involved,
+uses graphical input, and allows users to test the process model by asking
+questions and running a simulation.  We are also using SLICK as a front-end
+dialogue tool for EXPECT \cite{expect01}, a tool that allows users to specify
+problem solving in terms of methods and submethods, uses a structured editor
+for input, and allows users to pose both parameterized and instantiated
+problems for testing.  In each case, the general learning principles described
+in this paper are operationalized by taking into account the features of the
+specific acquisition interface, in terms of the kinds of target knowledge they
+capture, the input modality offered to the user, and the testing and error
+checking strategies used.  For example, the topic of the lesson in SHAKEN is a
+top-level process description and a set of objects that are involved in that
+process, while in EXPECT the topic of the lesson is given by a set of
+top-level problem solving goals.  SLICK analyzes whether new terms introduced
+by the user relate to the topic of the lesson, checking this in SHAKEN by
+querying their appearance in the current expanded process description details
+and in EXPECT by checking their use in problem solving trees.  We are also
+investigating how to include in SLICK useful dialogue management and user
+interaction techniques, as well as self-awareness capabilities that would
+enable it to assess the system's competence and confidence on the lesson
+topics as the dialogue with the user progresses.
+
+
+\section{Conclusion and Future Work}
+
+We have presented an analysis of instructional systems in terms of tutoring
+and learning principles and described how they could be useful in the context
+of interactive acquisition tools.  We believe that they will play a central
+role in making acquisition tools proactive learners.  We have started to
+incorporate these principles in our work and we are planning to perform user
+studies to collect feedback on the effectiveness of this addition.
+
+\section*{Acknowledgments}
+
+This research was funded by the DARPA Rapid Knowledge Formation (RKF) program
+with award number N66001-00-C-8018.  We would like to thank Ken Forbus, Lewis
+Johnson, Jeff Rickel, Paul Rosenbloom, David Traum, and Jim Blythe on their
+insightful comments on earlier drafts.
+
+
+\begin{thebibliography}{}
+\vspace*{-1.0em}
+\bibitem{Aleven00}
+Aleven, V. \& Koedinger, K. (2000).
+\newblock The need for tutorial dialog to support self-explanation.
+\newblock In {\em Proceedings of the AAAI Fall Symposium on Building Dialogue
+  Systems for Tutorial Applications}.
+
+\bibitem{Anderson89}
+Anderson, J.~R., Conrad, F.~G., \& Corbett, A.~T. (1989).
+\newblock Skill acquisition and the lisp tutor.
+\newblock {\em Cognitive Science}, 13:467--506.
+
+\bibitem{Ausubel68}
+Ausubel, D. (1968).
+\newblock {\em Educational psychology: A cognitive approach}.
+\newblock New York, Holt, Rinehart and Winston.
+
+\bibitem{expect01}
+Blythe, J.; Kim, J.; Ramachandran, S.; and Gil, Y. (2001).
+\newblock An integrated environment for knowledge acquisition.
+\newblock In {\em Proceedings of the IUI-2001}.
+
+\bibitem{Brown82}
+Brown, J.~S., Burton, R., \& de~Kleer, J. (1982).
+\newblock Pedagogical natural language and knowledge engineering techniques in
+  SOPHIE I, II, III.
+\newblock In Derek, S. \& Brown, J.~S., {\rm (Eds.)}, {\em Intelligent Tutoring
+  Systems}. New York, Academic Press.
+
+\bibitem{buggy78}
+Brown, J.~S. \& Burton, R.~R. (1978).
+\newblock Diagnostic models for procedural bugs in basic mathematical skills.
+\newblock {\em Cognitive Science}, 2:155--191.
+
+\bibitem{Burton79}
+Burton, R. \& Brown, J. (1979).
+\newblock An investigation of computer coaching for informal learning
+  activities.
+\newblock {\em International Journal of Man-Machine Studies}, 11:5--24.
+
+\bibitem{Carbonell70}
+Carbonell, J.~R. (1970).
+\newblock {AI in CAI}: An artificial intelligence approach to computer-assisted
+  instruction.
+\newblock {\em IEEE Transactions on Man-Machine Systems}, 11(4):190--202.
+
+\bibitem{Clancey87}
+Clancey, W., {\rm (Ed.)} (1987).
+\newblock {\em Knowledge-Based Tutoring:{The GUIDON Program}}.
+\newblock MIT press.
+
+\bibitem{Clark01}
+Clark, P., Thompson, J., Barker, K., Porter, B., Chaudhri, V., Rodriguez,
+  A., Thomere, J., Mishra, S., Gil, Y., Hayes, P., \& Reichherzer, T. (2001).
+\newblock Knowledge entry as the graphical assembly of components.
+\newblock In {\em Proceedings of K-CAP-2001}.
+
+\bibitem{Collins82}
+Collins, A. \& Stevens, A.~L. (1982).
+\newblock Goals and strategies of inquiry teachers.
+\newblock {\em Advances in Instructional Psychology}, 2:65--119.
+
+\bibitem{Core00}
+Core, M.~G., Moore, J.~D., \& Zinn, C. (2000).
+\newblock Supporting constructive learning with a feedback planner.
+\newblock In {\em Proceedings of the AAAI Fall Symposium on Building Dialogue
+  Systems for Tutorial Applications}.
+
+\bibitem{Davis79}
+Davis, R. (1979).
+\newblock Interactive transfer of expertise: Acquisition of new inference
+  rules.
+\newblock {\em Artificial Intelligence}, 12:121--157.
+
+\bibitem{EriksEA95}
+Eriksson, H., Shahar, Y., Tu, S.~W., Puerta, A.~R., \& Musen, M. (1995).
+\newblock Task modeling with reusable problem-solving methods.
+\newblock {\em Artificial Intelligence}, 79:293--326.
+
+\bibitem{Festinger57}
+Festinger, L. (1957).
+\newblock {\em A Theory of Cognitive Dissonance}.
+\newblock Stanford University Press.
+
+\bibitem{Forbus01}
+Forbus, K. \& Feltovich, P., {\rm (Eds.)} (2001).
+\newblock {\em Smart Machines in Education}.
+\newblock AAAI press.
+
+\bibitem{Fox93}
+Fox, B. (1993).
+\newblock {\em The Human Tutorial Dialog Project}.
+\newblock Lawrence Erlbaum.
+
+\bibitem{GainesS93}
+Gaines, B.~R. \& Shaw, M. (1993).
+\newblock Knowledge acquisition tools based on personal construct psychology.
+\newblock {\em The Knowledge Engineering Review}, 8(1):49--85.
+
+\bibitem{Gentner01}
+Gentner, D., Holyoak, K.~J., \& Kokinov, B.~N., {\rm (Eds.)} (2001).
+\newblock {\em The analogical mind: Perspectives from cognitive science.}
+\newblock MIT press.
+
+\bibitem{gil-kim-cogsci02}
+Gil, Y. \& Kim, J. (2002).
+\newblock Interactive knowledge acquisition tools: A tutoring perspective.
+\newblock http://www.isi.edu/expect/papers/Interactive-KA-Tools-gil-kim-02.pdf
+(internal project report).
+
+\bibitem{GilM96}
+Gil, Y. \& Melz, E. (1996).
+\newblock Explicit representations of problem-solving strategies to support
+  knowledge acquisition.
+\newblock In {\em Proceedings of the Thirteenth National Conference on
+  Artificial Intelligence}.
+
+\bibitem{seek2}
+Ginsberg, A., Weiss, S., \& Politakis, P. (1985).
+\newblock SEEK2: A generalized approach to automatic knowledge base refinement.
+\newblock In {\em Proceedings of IJCAI-85}.
+
+\bibitem{KimG99}
+Kim, J. \& Gil, Y. (1999).
+\newblock Deriving expectations to guide knowledge base creation.
+\newblock In {\em Proceedings of the Sixteenth National Conference on
+  Artificial Intelligence}, pp. 235--241.
+
+\bibitem{KimG00}
+Kim, J. \& Gil, Y. (2000).
+\newblock Acquiring problem-solving knowledge from end users: Putting
+  interdependency models to the test.
+\newblock In {\em Proceedings of the Seventeenth National Conference on
+  Artificial Intelligence}.
+
+\bibitem{KimG02}
+Kim, J. \& Gil, Y. (2002).
+\newblock Proactive learning for interactive knowledge capture.
+\newblock http://www.isi.edu/expect/papers/KA-Dialog-Kim-Gil-02.pdf
+(internal project report).
+
+\bibitem{Koedinger97}
+Koedinger, K., Anderson, J., Hadley, W., \& Mark, M. (1997).
+\newblock Intelligent tutoring goes to school in the big city.
+\newblock {\em International Journal of Artificial Intelligence in Education},
+  8:30--43.
+
+\bibitem{Kulik88}
+Kulik, J. \& Kulik, C. (1988).
+\newblock Timing of feedback and verbal learning.
+\newblock {\em Review of Educational Research}, 58:79--97.
+
+\bibitem{Lepper93}
+Lepper, M., Woolverton, M., Mumme, D., \& Gurtner, J. (1993).
+\newblock Motivational techniques of expert human tutors: Lesson for the design
+  of computer-based tutors.
+\newblock In Lajoie, S. \& Derry, S., {\rm (Eds.)}, {\em Computers as Cognitive
+  Tools}, pp. 75--105. Hillsdale.
+
+\bibitem{MarcusM89}
+Marcus, S. \& McDermott, J. (1989).
+\newblock {SALT: A} knowledge acquisition language for propose-and-revise
+  systems.
+\newblock {\em Artificial Intelligence}, 39(1):1--37.
+
+\bibitem{McDonald81}
+McDonald, J. (1981).
+\newblock The EXCHECK CAI system.
+\newblock In Suppes, P., {\rm (Ed.)}, {\em University-level Computer-assisted
+  Instruction at Stanford: 1968-1980}. Stanford.
+
+\bibitem{chimaera00}
+McGuinness, D.~L., Fikes, R., Rice, J., \& Wilde, S. (2000).
+\newblock An environment for merging and testing large ontologies.
+\newblock In {\em Proceedings of KR-2000}.
+
+\bibitem{McKendree90}
+McKendree, J. (1990).
+\newblock Effective feedback content for tutoring complex skills.
+\newblock {\em Human Computer Interactions}, 5:381--413.
+
+\bibitem{Merrill92}
+Merrill, D.~C., Reiser, B.~J., Ranney, M., \& Trafton, J.~G. (1992).
+\newblock Effective tutoring techniques: A comparison of human tutors and
+  intelligent tutoring systems.
+\newblock {\em The Journal of the Learning Sciences}, 2:277--305.
+
+\bibitem{Murray99}
+Murray, T. (1999).
+\newblock Authoring intelligent tutoring systems: {A}n analysis of the state of
+  the art.
+\newblock {\em International Journal of Artificial Intelligence in Education},
+  10:98--129.
+
+\bibitem{cmaps1}
+Novak, J., {\rm (Ed.)} (1998).
+\newblock {\em Learning, Creating, and Using Knowledge: {C}oncept {M}aps as
+  Facilitative Tools in Schools and Corporations}.
+\newblock Lawrence Erlbaum.
+
+\bibitem{quadratic}
+O'Shea, T. (1979).
+\newblock A self-improving {Q}uadratic tutor.
+\newblock {\em International Journal of Man-Machine Studies}, 11:97--124.
+
+\bibitem{Rose01}
+Rose, C.~P., Jordan, P., Ringenberg, M., Siler, S., VanLehn, K., \&
+  Weinstein, A. (2001).
+\newblock Interactive conceptual tutoring in {A}tlas-{A}ndes.
+\newblock In {\em Proceedings of AI in Education}.
+
+\bibitem{Sleeman84}
+Sleeman, D.~H. (1984).
+\newblock Inferring student models for intelligent computer-aided instruction.
+\newblock In Michalski, R.~S., Carbonell, J.~G., \& Mitchell, T.~M., {\rm
+  (Eds.)}, {\em Machine Learning: An Artificial Intelligence Approach}, pp.
+  483--510. Springer.
+
+\bibitem{why77}
+Stevens, A. \& Collins, A. (1977).
+\newblock The goal structure of a {S}ocratic tutor.
+\newblock In {\em Proceedings of the National ACM Conference}.
+
+\bibitem{VanLehn00}
+VanLehn, K., Freedman, R., Pamela, J., Murray, C., Osan, R., Ringenberg,
+  M., Rose, C., Schulze, K., Shelby, R., Treacy, D., Weinstein, A., \&
+  Wintersgill, M. (2000).
+\newblock Fading and deepening: The next steps for {A}ndes and other
+  model-tracing tutors.
+\newblock In {\em Proceedings of ITS-2000}.
+
+\bibitem{Wenger87}
+Wenger, E., {\rm (Ed.)} (1987).
+\newblock {\em Artificial Intelligence and Tutoring Systems}.
+\newblock Morgan Kaufmann.
+
+\bibitem{WoolfA00}
+Woolf, B. \& Allen, J. (2000).
+\newblock Spoken language tutorial dialogue.
+\newblock In {\em Proceedings of the AAAI Fall Symposium on Building Dialogue
+  Systems for Tutorial Applications}.
+
+\bibitem{woolf84}
+Woolf, B.~P. \& McDonald, D.~D. (1984).
+\newblock Building a computer tutor: Design issues.
+\newblock {\em IEEE Computer}, 17(9):61--73.
+
+\bibitem{circsim}
+Zhou, Y., Freedman, R., Michael, M. G.~J., Rovick, A., \& Evens, M.
+  (1999).
+\newblock What should the tutor do when the student cannot answer a question?
+\newblock In {\em Proceedings of FLAIRS-99}.
+
+\end{thebibliography}
+
+
+
+\end{document}

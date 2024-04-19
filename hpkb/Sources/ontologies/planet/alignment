@@ -1,0 +1,227 @@
+PLANET's alignment with the IKB
+
+Jim Blythe, ISI, 
+Cleo Condoravdi, Teknowledge and
+Ben Rode, Cycorp
+
+This document summarizes the current alignment of ISI's PLANET ontology
+with Cyc and the IKB. The process is still ongoing and some decisions
+have been left until later, but we view this as a useful roadmap. We
+have identified some of the entities in PLANET with existing entities in
+the IKB, and added entities to Cyc that correspond to many of the
+others. Some of these were straightforward to model in Cyc while others
+presented technical challenges whose solutions we describe below. There
+remain some entities that are not yet mapped in Cyc, either because the
+exact way they should be modelled still needs to be ironed out or
+because, in the IKB, they may have a better fit in a different
+ontology. Still, we hope to have a preliminary Cyc version of the
+ontology in the next couple of weeks. We expect this to be useful for a
+number of groups doing critiques of plans, since it complements the
+currently posted ontologies.
+
+Before going into the details of the alignment strategy we describe
+three interesting features of the current scheme. First, several
+entities that are modelled as concepts in Loom are more naturally
+represented using microtheories in Cyc. Although this may make the
+surface representation look different, it captures the same information
+in each system in the most natural way, and automatic mappings are
+possible between the two representations without loss of
+information. Second, when entities in PLANET were added to Cyc the name
+was often changed in order to conform with Cyc's naming conventions.
+For example, PLANET's "problem-refinement" is called
+"planSelectionRefinement".  Third, sometimes entities that appear to
+need to be directly aligned because they are denoted with similar
+symbols turn out to be very different in nature.  A lot of careful
+analysis was done in this alignment in order to address this.  An
+example of this is the relation "before".  In PLANET there is a relation
+type that allows temporal relations between tasks to be expressed as
+commitments, for example that taskA should finish before taskB in some
+plan. Cyc already had temporal relations such as "before", but they
+refer to an actual occurrence of plan actions and do not have the
+(deontic) aspect of intention that PLANET is trying to capture.  A good
+solution for Cyc is to provide a predicate that takes such a relation,
+eg taskA finishes before taskB and expresses the deontic version. This
+is the route we are taking.
+
+Now on to the details.
+
+
+First, these are the one-to-one mappings and subclasses that will be
+made to existing Cyc concepts or relations. Where the concept is
+equivalent it has been marked with "(equiv)", otherwise the PLANET
+entity will be marked as a sub-entity of the Cyc one.
+
+PLANET Loom concept or relation    Cyc class or relation
+
+ plan                                 Plan (equiv)
+
+ plan-task                            PurposefulAction
+  These subconcepts will also be mapped by extension:
+  primitive-plan-task, plan-step
+ 
+ goal-specification                   Goal (equiv)
+ (was state-based-goal-spec, but Cleo pointed out that although #$Goal
+  is explicitly state-based, we can use propositions to capture
+  objective-based-goal-specifications. This will be done in the Cyc
+  version of PLANET.)
+  These subconcepts will also be mapped by extension:
+  state-based-goal-spec, objective-based-goal-spec
+
+ sub-task (relation)                  subEvents
+ There are more detailed relations in Cyc that may be more appropriate,
+ but they are not as yet released in the IKB. Ben will look into getting
+ more of these released, and then we will probably align sub-task to a
+ more specific relation.
+
+ preconditions                        preconditionFor-PropSit
+
+
+ plan-task-template                   scriptType
+
+
+Discussion on aligning the other entities in PLANET is still ongoing,
+but we expect that for many of them, new entities will be added to the
+Cyc version of this ontology that will allow the same information to be
+represented. We are working to make sure that the translation between
+the two versions of the ontology can be automated. Below are some of the
+issues that we have discussed to this point and have some agreement on.
+
+ temporal-restriction (relation):
+This cannot be modelled as a ComplexTemporalRelation because
+subrelations of this do not have deontic force, but a new predicate will
+be added to Cyc to express the deontic equivalent of any
+ComplexTemporalRelation appearing in its scope. For instance, to express
+that task A should start after the end of task B, the predicate would
+make use of the ComplexTemporalRelation StartsAfterEndingOf to say
+something like (plan-requires StartsAfterEndingOf taskA taskB) (this is
+not the actual predicate name, which Ben will choose.)  This will avoid
+the problem of re-defining all the existing temporal predicates in
+deontic form. The distinction in PLANET between constraints (imposed by
+forces external to the planner, such as the commander) and commitments
+(made during the planning process to specify a plan) will probably be
+capture by the kind of microtheory in which the assertions are made.
+
+
+planning-problem-context and planning-problem:
+
+Some of the concepts used in PLANET to organise planning problems and
+groups of plans will be modelled in Cyc as microtheories. Thus where in
+Loom a planning-problem-context may have a number of planning-problems
+defined from it, each with a number of plans, each in turn with
+refinement plans, Cyc will have a hierarchy of microtheories to capture
+the same structure. We don't foresee any problem making an automatic
+translation between the Loom and Cyc versions. This approach will be
+used to model the PLANET concepts planning-problem,
+planning-problem-context and plan. Some of the relations between these
+concepts may be modelled as relations between microtheories, including
+problem-refinement and refinement-plan.  Others, such as sub-plan, may
+be captured in a different way. The relation possible-task will be
+modelled indirectly as an assertion about taskTypes made in a
+planning-problem-context microtheory, and the relation initial-state
+will probably be replaced implicitly by assertions about the domain in
+the appropriate microtheory.
+
+  PLANET (Loom)                     PLANET (Cyc)
+
+planning-problem                   planSelectionContext
+planning-problem-context           planSelectionBackgroundContext
+problem-refinement                 planSelectionRefinement
+
+
+
+The following relations, which capture the process of making and
+examining choices, will be added to Cyc:
+candidate
+feasible-candidate
+unfeasible-candidate
+
+and also the following:
+untried-candidate 
+selected-candidate
+rejected-candidate
+
+
+capability: this relation on a task-template will be modelled in Cyc,
+but the name will probably need to be changed in the Cyc version.
+
+Action consequences and effects: Cleo and Ben are working on a richer
+representation for the effects of actions, which will probably be
+aligned with the following relations in PLANET: effects, primary-effects
+and accomplishes (named "intentInPlan" in the Cyc version).
+
+The following relations group together a set of assertions about the
+plan and its components that are either made externally (constraints) or
+internally (commitments). These will be modelled in Cyc, although some
+of the restrictions themselves will be implicitly made in
+microtheories. Note that the exact form of the equivalent entities
+depends on choices made for some of the higher-level entities.
+
+Planet (Loom)                       Planet (Cyc)
+
+ plan-restrictions                  planContextRestrictionPredicate
+ constraints                        planContextConstraintPredicate
+ commitments                        planContextCommitmentPredicate
+ plan-commitments                   commitmentOfPlan
+ plan-constraints                   
+ task-of                            eventOfPlan
+ task-commitments                   commitmentOfPlanAction
+ task-constraints
+ ordering-restriction               orderingRestrictionInPlanContext
+ ordering-commitment
+ ordering-constraint
+
+The following concepts and relations do not describe resources in
+detail, but capture the way the planning ontology should link to an
+ontology of resources. At ISI, we use the resource ontology that is part
+of the plan critiquing problem-solving method, while at Cyc there is
+still some work to be done on a taxonomy of resources. In any event,
+these entities or analogous ones will be modelled in Cyc (although
+relations will probably be used rather than the concepts in Loom):
+
+ resource-requirement
+ required-resource
+ resource
+ planning-resource                   
+
+
+The remaining entities complete the PLANET ontology. The matter of
+whether to add corresponding entities in Cyc can be decided as we
+progress.
+
+Loom name                            Cyc name
+
+
+ problem-goal                        planSelectionGoal
+ plan-goal                           purposeOfPlan
+ intermediate-goal 
+
+ precondition-expression will be modelled as a CycFormula
+
+ plan-task-description
+ primitive-plan-task-description
+
+ planning-level-specifier
+ planning-level
+
+ human-readable-description
+ human-readable-task-description
+ human-readable-description-of
+
+ human-readable-goal-specification-description
+ human-readable-goal-description
+
+ evaluation-structure
+ evaluation
+ comparison-structure
+ comparison
+
+
+Finally, as a result of our discussions some changes will be made to
+PLANET. The concepts feasible-plan, rejected-plan etc that were
+subconcepts of plan will disappear, to be replaced by subrelations of
+the candidate relations feasible-candidate, rejected-candidate etc.
+
+Some concept similar to justified-plan will be added that captures the
+idea of a plan satisfying a maximal subset of the given constraints, in
+the event that relaxations are made when the full set of given
+constraints is not satisfiable.

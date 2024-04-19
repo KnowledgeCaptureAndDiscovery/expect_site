@@ -1,0 +1,129 @@
+<HTML>
+<HEAD>
+    <TITLE>EXPECT Data Types</TITLE>
+</HEAD>
+<BODY>
+
+<H3 ALIGN=LEFT><FONT SIZE=+2>New Notation for EXPECT Data Types
+(EDTs)</FONT></H3>
+
+<P><B> Basic EDTs </B> 
+
+
+<P ALIGN=CENTER><TABLE WIDTH="450" HEIGHT="297" BORDER="1" CELLSPACING=
+"2" CELLPADDING="2">
+<TR>
+<TD WIDTH="50%" HEIGHT="22">&nbsp;<b>Current notation</b></TD>
+<TD WIDTH="50%">&nbsp;<b>New notation</b></TD></TR>
+<TR>
+<TD HEIGHT="23">&nbsp;(INST LA) = LA</TD>
+<TD>&nbsp;(the-instance LA) = LA</TD></TR>
+<TR>
+<TD HEIGHT="23">&nbsp;(DESC allied-airport) = allied-airport</TD>
+<TD>&nbsp;(the-concept allied-airport)</TD></TR>
+<TR>
+<TD HEIGHT="23">&nbsp;(spec-of factorial)</TD>
+<TD>&nbsp;(subtype-of factorial)</TD></TR>
+<TR>
+<TD HEIGHT="23">&nbsp;(inst-of location)</TD>
+<TD>&nbsp;location</TD></TR>
+<TR>
+<TD HEIGHT="49">&nbsp;(24 32 5)</TD>
+<TD>&nbsp;(the-set 24 32 5)<BR>
+= (the-set (the-instance 24)...)<BR>
+= (the-set 32 24 5)</TD></TR>
+<TR>
+<TD HEIGHT="23">&nbsp;</TD>
+<TD>&nbsp;(the-list 24 32 5)</TD></TR>
+<TR>
+<TD HEIGHT="23">&nbsp;(or 2 3 4)</TD>
+<TD>&nbsp;(one-of 2 3 4)</TD></TR>
+<TR>
+<TD HEIGHT="23">&nbsp;(set-of (inst-of number))</TD>
+<TD>&nbsp;(set-of number)</TD></TR>
+<TR>
+<TD HEIGHT="23">&nbsp;</TD>
+<TD>&nbsp;(list-of number)</TD></TR>
+<TR>
+<TD HEIGHT="23">(set-of (spec-of constraint))</TD>
+<TD>&nbsp;(set-of (subtype-of constraint))</TD></TR>
+<TR>
+<TD HEIGHT="23">&nbsp;</TD>
+<TD>&nbsp;(list-of (subtype-of constraint))</TD></TR>
+</TABLE>
+</P>
+
+
+<P><B> New EDTs to denote null items</B> (syntax TBD)
+
+<P ALIGN=CENTER><TABLE WIDTH="450" HEIGHT="200" BORDER="1" CELLSPACING=
+"2" CELLPADDING="2">
+<TR>
+<TD WIDTH="50%" HEIGHT="22">&nbsp;<b>Current notation</b></TD>
+<TD WIDTH="50%">&nbsp;<b>New notation</b></TD></TR>
+<TR>
+<TD HEIGHT="23">&nbsp; NIL meaning no instance of seaport</TD>
+<TD>&nbsp;(NO seaport)</TD></TR>
+<TR>
+<TD HEIGHT="23">&nbsp; NIL meaning no subtype of discrete-resource</TD>
+<TD>&nbsp;(NO (subtype-of discrete-resource))</TD></TR>
+<TR>
+<TD HEIGHT="23">&nbsp; NIL meaning empty set of instances of seaport</TD>
+<TD>&nbsp;(EMPTY (set-of (seaport)))</TD></TR>
+<TR>
+<TD HEIGHT="23">&nbsp; NIL meaning empty set of subtypes of resource</TD>
+<TD>&nbsp;(EMPTY (set-of (subtype-of (resource)))</TD></TR>
+</TABLE>
+</P>
+
+<P><B> New EDT to denote error</B>
+
+<P ALIGN=CENTER><TABLE WIDTH="450" HEIGHT="70" BORDER="1" CELLSPACING=
+"2" CELLPADDING="2">
+<TR>
+<TD WIDTH="50%" HEIGHT="22">&nbsp;<b>Current notation</b></TD>
+<TD WIDTH="50%">&nbsp;<b>New notation</b></TD></TR>
+<TR>
+<TD HEIGHT="23">&nbsp; NIL meaning result from error in KB</TD>
+<TD>&nbsp;UNKNOWN</TD></TR>
+</TABLE>
+</P>
+
+<P><B> New EDTs to denote relations</B> (syntax TBD)
+
+<P ALIGN=CENTER><TABLE WIDTH="450" HEIGHT="150" BORDER="1" CELLSPACING=
+"2" CELLPADDING="2">
+<TR>
+<TD WIDTH="50%" HEIGHT="22">&nbsp;<b>Current notation</b></TD>
+<TD WIDTH="50%">&nbsp;<b>New notation</b></TD></TR>
+<TR>
+<TD HEIGHT="23">&nbsp; </TD>
+<TD>&nbsp;(the-relation seaports)</TD></TR>
+<TR>
+<TD HEIGHT="23">&nbsp; </TD>
+<TD>&nbsp;(subtype-of ports)</TD></TR>
+<TR>
+<TD HEIGHT="23">&nbsp; </TD>
+<TD>&nbsp;(set-of (subtype-of ports))</TD></TR>
+<TR>
+<TD HEIGHT="23">&nbsp; </TD>
+<TD>&nbsp;(list-of (subtype-of ports))</TD></TR>
+</TABLE>
+</P>
+
+<P><B> New EDTs to denote methods</B> (syntax TBD)
+
+<P ALIGN=CENTER><TABLE WIDTH="450" HEIGHT="70" BORDER="1" CELLSPACING=
+"2" CELLPADDING="2">
+<TR>
+<TD WIDTH="50%" HEIGHT="22">&nbsp;<b>Current notation</b></TD>
+<TD WIDTH="50%">&nbsp;<b>New notation</b></TD></TR>
+<TR>
+<TD HEIGHT="23">&nbsp; </TD>
+<TD>&nbsp;(the-method MC)</TD></TR>
+</TABLE>
+</P>
+
+</BODY>
+</HTML>
+

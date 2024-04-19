@@ -1,0 +1,97 @@
+<HTML>
+<HEAD>
+  <TITLE>
+  The dialog-manager Project at ISI
+  </TITLE>
+<STYLE TYPE="text/css">
+  BODY { background-color: white }
+  TD { background-color: #CCCCCC }
+  TD.b { background-color: white }
+
+</STYLE>
+</HEAD>
+<BODY style="FONT-FAMILY: Verdana; FONT-SIZE: 10pt" text='black'>
+<TABLE border='0' cellspacing='1' cellpadding='5' bgcolor='black'>
+<TR>
+  <TD class='top' align='center'><A href='http://www.isi.edu/expect'>
+   <IMG border='1' SRC='../expect.jpg'></A></TD>
+  <TD class='top' width='100%' align='center'><A href='./'>
+   <IMG border='1' SRC='logo.jpg'></A>&nbsp;<A HREF="http://www.isi.edu"><IMG border='1' SRC="../isi.gif"></A><BR>
+<B>Dialogue Management for Knowledge Acquisition</B>
+ </TD>
+</TR>
+<TR>
+  <TD valign='top' align='right'>
+  <P><A HREF='./'><B>Main</B></A>
+  <P><A HREF='description.html'><B>Description</B></A>
+  <P><A HREF='demo.html'><B>Demo</B></A>
+  <P><A HREF='people.html'><B>People</B></A>
+  <P><A HREF='publications.html'><B>Publications</B></A>
+  <P><A HREF='research.html'><B>Research</B></A>
+  <P><A HREF='funding.html'><B>Funding</B></A>
+  <P><A HREF='links.html'><B>Links</B></A>
+  <P><A HREF='status.html'><B>Status</B></A>
+  </TD>
+  <TD class='b' valign='top'>
+<H2>Description</H2>
+<P>    	   	 
+
+
+<p />
+We are developing a dialogue manager that uses KA plans to keep 
+track of the user's actions and can make suggestions for how to 
+proceed.  The dialogue manager would support: 1) generation, to 
+suggest to the user what to do next based on the library of KA plans, 
+2) recognition, to track what the user is doing in terms of the KA 
+plans.  The dialogue state would be shown to the user as a "status" 
+window, where the user could see the currently active KA plans as a 
+list of bullets and sub-bullets, each bullet would be checked if 
+completed and collapsed when all its sub-bullets are completed.  The 
+user could choose to toggle between a "suggest" mode (generation) and 
+a "comment" mode (recognition).  We could also keep a history of the 
+user's sessions, and be more forceful to impose the "suggest" mode to 
+new users or when a more experience user tries a new 
+feature/capability of the system.
+
+<p />
+A new capability that we'd like to support with this work is 
+meta-level interaction with the user.  By allowing users to 
+manipulate/edit the status window, they could indicate whether a 
+certain task is completed (e.g., I'm done adding sub-steps).
+
+<p />
+To develop the library of KA plans we would draw ideas from 
+Intelligent Tutoring Systems, in effect trying to make SHAKEN a 
+smarter student.  An initial (old) outline is posted at 
+ <a href="http://www.isi.edu/~gil/rkf/ITS.ppt">
+http://www.isi.edu/~gil/rkf/ITS.ppt</a>.  For example, ITS often start by 
+showing the student the purpose of a lesson, partly to give the 
+student a roadmap but also to detect any gaps in the student's prior 
+knowledge assumed by the lesson.  There are many other interesting 
+points about controlling nested subdialogues, teaching strategies, 
+providing immediate feedback, etc.
+
+<p />
+An intriguing possibility is to use this as a way to 
+determine/compare the quality of human tutors by looking at how and 
+how much they complete the KA plans (how organized their lessons are, 
+how thorough with details), and eventually to train human tutors 
+through practicing with the system.
+
+<p />
+We have done some previous work in this area on KA Scripts and 
+PSMTool, several papers are available at 
+<a href="http://www.isi.edu/expect/link/papers-ka.html">
+http://www.isi.edu/expect/link/papers-ka.html</a>.
+<p />
+
+More details are available at 
+<a href="http://www.isi.edu/expect/projects/rkf/dialog-manager.html">
+http://www.isi.edu/expect/projects/rkf/dialog-manager.html</a>.
+<p />
+    
+</TD>
+</TR>
+</TABLE>
+</BODY>
+</HTML>

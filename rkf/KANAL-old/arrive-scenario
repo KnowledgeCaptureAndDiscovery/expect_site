@@ -1,0 +1,323 @@
+;; *************************************************
+;; 1. add a precondition with a slot (is-possible)
+;; *************************************************
+
+(global-situation)
+
+(is-possible has
+	(instance-of (Slot))
+	(domain (Change))
+	(range (Boolean))
+	(cardinality (N-to-1))
+	(fluent-status (*Fluent))
+	(situation-specific (t))
+)
+
+;; in case of TakeIn (such as Endocytosis), the virus should be near the cell
+;; in case of other Move, the patient's location should be the same as the
+;; source
+
+(every Change has 
+       (is-possible (((not (Self isa Move)) or 
+		      ((Self isa TakeIn) and
+          	       ((the location of (the patient of Self))= (the near of
+			(the agent of Self)))) or
+                      ((not (Self isa TakeIn)) and 
+                       ((the source of Self) /= NIL) and
+          	       ((the source of Self) = (the location of (the patient of Self))))))))
+#|
+(every Change has 
+	(is-possible (t))) ;; default
+
+(every Move has 
+	(is-possible 
+		((((the source of Self) /= NIL) and
+          	  ((the source of Self) = (the location of (the patient of Self)))))))
+(every TakeIn has
+	(is-possible 
+		(((the location of (the patient of Self))= 
+		 (the near of (the agent of Self))))))
+|#
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; additional slots for 'near' ;;;;;;
+
+(near has
+	(instance-of (Slot))
+	(domain (TangibleThing))
+	(range (TangibleThing))
+	(inverse (near-of))
+	(cardinality (N-to-1)))
+
+(near-of has
+	(instance-of (Slot))
+	(domain (TangibleThing))
+	(range (TangibleThing)))
+
+;; *************************************************
+;; 2. define Arrive
+;; *************************************************
+
+(Arrive has 
+	(superclasses (Change)))
+
+(every Arrive has
+       (agent ((a TangibleThing)))
+       (source (( a Space)))
+;       (source ((the location of ((Self agent)))))
+;	(destination ((a Space)))
+       	(destination ((a TangibleThing)))
+        (affect ((a Affect with
+		   (affectedThing ((Self agent)))
+		   (affectedSlot (location))
+		   (expectedValue ((the near of (the destination of Self)))))))
+)
+;; *************************************************
+;; 3. define new situation
+;; *************************************************
+
+    (*new-start-situation has
+	(instance-of (Situation)))
+
+(in-situation *new-start-situation)
+
+    (a VirusInvadesCell with
+  	 (agent (*virus))
+	 (patient (*cell)))
+    
+    (*virus has 
+	(contains ((the Dna parts of Self)))
+        (location (*somewhere)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Q: computing value of is-possible slot:
+;;     the location of the virus has to be defined in global situation?
+;;    message: (Don't re-evaluate inherited rules ((not (_Endocytosis11 isa TakeIn)) or
+;;                                       ((the location of (the patient of _Endocytosis11)) =
+;;                                        (the near of (the agent of _Endocytosis11)))) for _Endocytosis11 in this situation,
+;;                as I don't know if this is the situation where this event will occur!)
+
+;; *************************************************
+;; 3. run simulation
+;; *************************************************
+;; in simulation, the system checks the preconditions
+
+[*new-start-situation] KM> (forall (the actions of (thelast VirusInvadesCell))
+              where (the is-possible of It) (do-and-next It))
+ 0: (do-action |_Fuse163| :change-to-next-situation t)
+ 0: returned |_Situation166|
+ 0: (do-action |_Degrade164| :change-to-next-situation t)
+ 0: returned |_Situation170|
+ 0: (do-action |_Release162| :change-to-next-situation t)
+ 0: returned |_Situation172|
+ 0: (do-action |_Deliver156| :change-to-next-situation t)
+ 0: returned |_Situation173|
+ 0: (do-action |_VirusInvadesCell149| :change-to-next-situation t)
+ 0: returned |_Situation174|
+(_Situation166 _Situation170 _Situation172 _Situation173 _Situation174)
+(1671 inferences and 33281 kb-accesses in 6.4 sec [260 lips, 5183 kaps])
+
+;; what is the location now?
+[_Situation174] KM> (the location of (the Virus))
+(*somewhere)  ;; Virus didn't reach the cell !!!
+
+;; what are not possible actions?
+;(forall (the actions of (thelast VirusInvadesCell)) 
+;	where ((the is-possible of It) = NIL) It)
+
+;; find all the expected-effect where the result is not equal to the expected value
+[_Situation174] (forall (the expected-effect of (thelast VirusInvadesCell))
+ where ((the checkedValue of It) /= (the expectedValue of It))
+ (the affectedSlot of It))
+(location)
+
+;; find all the subclasses of Change which can affect the unachieved slot
+[_Situation174] (forall (the subclasses of Change)
+(forall2 (the expected-effect of (thelast VirusInvadesCell))
+ where (((the checkedValue of It2) /= (the expectedValue of It2)) and
+((the affectedSlot of (the affect of (a It))) = (the affectedSlot of It2)))
+(:seq It (the subclasses of It))))
+
+((:seq Arrive) (:seq Move Convey Exit Enter PassThroughSeparator))
+
+;; *************************************************
+;; 4. NewVirusInvadesCell includes Arrive
+;; *************************************************
+(global-situation)
+
+(NewVirusInvadesCell has (superclasses (Invade)))
+
+(every NewVirusInvadesCell has 
+       (agent ((a Virus)))
+       (patient ((a Cell)))
+
+;       (firstevent ((the Enter subevents of (Self))))
+       (subevents 
+	((a Enter with 
+	    (self-contained (t))
+	    (patient ((Self agent)))
+	    (beneficiary ((Self patient)))
+	    (firstevent ((the Penetrate subevents of 
+			      (the Enter subevents of Self))))
+	    (prereq ((a Penetrate with 
+			(self-contained (t))
+			(agent ((Self agent)))
+			(patient (Self agent))
+			(firstevent ((the Endocytosis byMeansOf of 
+					  (the Penetrate prereq of (the Enter subevents of Self)))))
+			(byMeansOf ((a Endocytosis with 
+				       (agent ((Self patient)))
+				       (patient ((Self agent)))
+				       (source ((a Space with (location-of ((Self agent)))))))))
+			(nextevent ((the Deliver enables of (the Enter subevents of Self)))))))
+	    (enables
+	     ((a Deliver with   ; Deliver = Convey + Release
+		 (agent ((Self agent)))     ; coerced to be a Container
+		 (patient ((the Dna contains of (Self agent))))
+		 (destination ((the inside of ((the Cytoplasm contains of 
+						    (Self patient))))))
+		 (subevents 
+		  ((a Convey with 
+		      (patient ((Self agent)))
+		      (firstevent ((the Fuse byMeansOf of 
+					(the Convey subevents of 
+					     (the Deliver subevents of 
+						  (the Enter subevents 
+						       of Self))))))
+;		      (source ((a Space with (location-of ((Self agent))))))
+		      (source ((the destination of 
+				    (the Endocytosis byMeansOf of 
+					 (the Penetrate prereq of 
+					      (the Enter subevents of Self))))))
+		      (destination ((the destination of 
+					 (the Deliver subevents of 
+					      (the Enter subevents of Self))
+					 )))
+		      (byMeansOf 
+		       ((a Fuse with 
+			   (agent ((oneof (the Lysosome contains of 
+					       (the Cytoplasm contains of 
+						    (Self patient))) 
+					  where (t))))
+			   (patient ((the Vesicle creates of 
+					  (the Endocytosis byMeansOf
+					       of (the Penetrate 
+						       prereq of
+						       (the Enter subevents of Self)))))))))
+		      (nextevent ((the Release subevents of 
+				       (the Deliver subevents of 
+					    (the Enter subevents of Self)))
+				  )))
+		   (a Release with   
+#| 
+                      note: the agent of the Release is
+                            set by the Deliver component, to be *virus
+|#
+; incompleteness in KM! (patient ((the Dna contains of (Self agent))))
+			(patient ((the Dna parts of (Self agent))))
+		      (destination ((a Space with (location-of ((the CytoplasmFluid contains of
+					 (the Cytoplasm contains of 
+					      (Self patient))))))))
+		      (firstevent ((the Degrade subevents of 
+					(the Release subevents of 
+					     (the Deliver subevents of 
+						  (the Enter subevents 
+						       of Self))))))
+		      (subevents 
+		       ((a Degrade with 
+			   (agent ((Self patient)))
+			   (patient ((the ProteinCoat 
+					  parts of (Self agent))))
+			   (nextevent ((the Exit subevents of 
+					    (the Release subevents of
+						 (the Deliver subevents of
+						      (the Enter subevents
+							   of Self))))))
+			   (instrument 
+			    ((the Acid contains of 
+				  (the Lysosome agent of 
+				       (the Fuse byMeansOf of 
+					    (the Convey subevents of
+						 (the Deliver
+						      subevents of
+						      (the Enter 
+							   subevents 
+							   of Self)))))))))
+			(a Exit with	
+; incompleteness in KM!    (patient ((the Dna contains of (Self agent))))
+			   (patient ((the Dna parts of (Self agent))))
+			   (destination ((a Space with (location-of ((the CytoplasmFluid contains of
+					      (the Cytoplasm contains of 
+						   (Self patient)))))))))
+		   ))))))))))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;; User adds Arrive as the first subevent 
+(every NewVirusInvadesCell has
+     (firstevent ((the Arrive subevents of (Self))))
+     (subevents 
+      ((a Arrive with (agent ((Self agent)))  
+	              (patient ((Self agent)))
+		      (source ((the location of ((Self agent)))))
+		     ;(destination ((the near of ((Self patient))))) ;; near cell
+		      (destination ((Self patient))) ;; near cell
+		      (is-possible (t))
+		      (nextevent ((the Enter subevents of (Self)))))))
+     (expected-effect ((a Affect with
+        (affectedThing ((Self agent)))
+        (affectedSlot (location)) 
+        (checkedValue ((the location of ((Self agent)))))	
+        (expectedValue ((the inside of (the contains of ((Self patient)))))))))
+)
+
+;; *************************************************
+;; 5. define new start-situation & simulate again
+;; *************************************************
+(*new-new-start-situation has
+	(instance-of (Situation)))
+(in-situation *new-new-start-situation)
+
+(a NewVirusInvadesCell with
+  	 (agent (*virus))
+	 (patient (*cell)))
+
+[*new-start-situation] KM> (forall (the actions of (thelast NewVirusInvadesCell))
+              where (the is-possible of It) (do-and-next It))
+ 0: (do-action |_Arrive192| :change-to-next-situation t)
+ 0: returned |_Situation211|
+ 0: (do-action |_Endocytosis203| :change-to-next-situation t)
+ 0: returned |_Situation216|
+ 0: (do-action |_Fuse206| :change-to-next-situation t)
+ 0: returned |_Situation243|
+ 0: (do-action |_Convey204| :change-to-next-situation t)
+ 0: returned |_Situation246|
+ 0: (do-action |_Degrade207| :change-to-next-situation t)
+ 0: returned |_Situation250|
+ 0: (do-action |_Release205| :change-to-next-situation t)
+ 0: returned |_Situation252|
+ 0: (do-action |_Deliver199| :change-to-next-situation t)
+ 0: returned |_Situation253|
+ 0: (do-action |_NewVirusInvadesCell190| :change-to-next-situation t)
+ 0: returned |_Situation254|
+(_Situation211 _Situation216 _Situation243 _Situation246 _Situation250
+ _Situation252 _Situation253 _Situation254)
+
+;; where is virus?
+[_Situation254] KM> (the location of (the Virus))
+
+;;; what sub-action of NewVirusInvadesCell caused location change?
+KM> (forall (the affect of 
+			 (the actions of (thelast NewVirusInvadesCell))) where (t)
+ (forall2 (the expected-effect of (thelast NewVirusInvadesCell))
+ where (((the checkedValue of It2) = (the expectedValue of It2)) and
+        ((the affectedSlot of It) = (the affectedSlot of It2)) and 
+((the affectedThing of It) = (the affectedThing of It2)))
+(the affect-of of It)))
+
+(_Arrive192 _Endocytosis203 _Convey204)
+
+;;*******************************************************
+;; Questions:
+;;  about slot 'fluent-status' (*Fluent,...);?
+;;  about slot 'situation-specific'
+
+

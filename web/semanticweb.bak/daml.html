@@ -1,0 +1,246 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.76 [en] (Windows NT 5.0; U) [Netscape]">
+   <meta name="Author" content="Jihie Kim">
+   <title>DAML</title>
+</head>
+<body text="#E5E5E5" bgcolor="#FFFFFF" link="#0000EE" vlink="#551A8B" alink="#FF0000">
+
+<pre><span style="background-color: #ffffcc"><font color="#000000">&lt;?</span><b>xml version=</b>'1.0'<b> encoding=</b>'ISO-8859-1'<span style="background-color: #ffffcc">?></span>
+
+
+<a NAME="entities"></a><span style="background-color: #ffffcc">&lt;!</span><span style="background-color: #ffffcc">-- Entity declarations (shortcuts) --</span><span style="background-color: #ffffcc">></span>
+&lt;!<b>DOCTYPE</b> rdf:RDF [
+&nbsp;&nbsp;&nbsp; &lt;!<b>ENTITY</b> rdf 'http://www.w3.org/1999/02/22-rdf-syntax-ns#'>
+&nbsp;&nbsp;&nbsp; &lt;!<b>ENTITY</b> rdfs 'http://www.w3.org/TR/WD-rdf-schema#'>
+&nbsp;&nbsp;&nbsp; &lt;!<b>ENTITY</b> xsd 'http://www.w3.org/2001/XMLSchema#'>
+&nbsp;&nbsp;&nbsp; &lt;!<b>ENTITY</b> daml 'http://www.daml.org/2001/03/daml+oil#'>
+]>
+
+
+<a NAME="namespace"></a><span style="background-color: #ffffcc">&lt;!</span><span style="background-color: #ffffcc">-- Setting up DAML Namespaces --</span><span style="background-color: #ffffcc">></span>
+&lt;rdf:RDF&nbsp;
+&nbsp;&nbsp;&nbsp; xmlns:rdf="&amp;rdf;"
+&nbsp;&nbsp;&nbsp; xmlns:rdfs="&amp;rdfs;"
+&nbsp;&nbsp;&nbsp; xmlns:daml="&amp;daml;"
+&nbsp;&nbsp;&nbsp; xmlns:xsd="&amp;xsd;">
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="background-color: #ffffcc">&lt;!</span><span style="background-color: #ffffcc">-- Information about the Ontology being created --</span><span style="background-color: #ffffcc">></span>
+&nbsp;&nbsp;&nbsp; &lt;daml:Ontology rdf:about="">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;daml:versionInfo>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $Id: daml+oil-ex.daml,v 1.4 2001/01/11 20:33:52 mdean Exp $
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/daml:versionInfo>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;rdfs:comment>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; An ontology created by OntoEdit
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/rdfs:comment></font></pre>
+
+<pre>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a NAME="import"></a><span style="background-color: #ffffcc"><font color="#000000">&lt;!</span><span style="background-color: #ffffcc">-- Importing an ontology --</span><span style="background-color: #ffffcc">></span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;daml:imports rdf:resource="http://www.daml.org/2000/12/daml+oil"/>
+&nbsp;&nbsp;&nbsp; &lt;/daml:Ontology>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<a NAME="class"></a><span style="background-color: #ffffcc">&lt;!</span><span style="background-color: #ffffcc">-- DAML uses rdf Classes --</span><span style="background-color: #ffffcc">></span>
+&nbsp;&nbsp;&nbsp; &lt;rdfs:Class rdf:ID="Staff">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a NAME="localrange"></a>&nbsp;<span style="background-color: #ffffcc">&lt;!</span><span style="background-color: #ffffcc">-- Example of local range statements through a restriction on 'toClass' --</span><span style="background-color: #ffffcc">></span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;rdfs:subClassOf></font></pre>
+
+<pre>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a NAME="mincard"></a><span style="background-color: #ffffcc"><font color="#000000">&lt;!</span><span style="background-color: #ffffcc">-- Minimum 1 Email required (minCardinality) --</span><span style="background-color: #ffffcc">></span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;daml:Restriction daml:minCardinalityQ="1">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a NAME="xsd"></a>&lt;daml:onProperty rdf:resource="#EMail"/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;daml:toClass rdf:resource="&amp;xsd;String"/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/daml:Restriction>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/rdfs:subClassOf>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a NAME="restriction"></a><span style="background-color: #ffffcc">&lt;!</span><span style="background-color: #ffffcc">-- Restricting the cardinality of the property (locally) --</span><span style="background-color: #ffffcc">></span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;rdfs:subClassOf>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a NAME="cardinality"></a>&lt;daml:Restriction daml:cardinality="1">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;daml:onProperty rdf:resource="#FName"/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/daml:Restriction>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/rdfs:subClassOf>
+&nbsp;&nbsp;&nbsp; &lt;/rdfs:Class>
+&nbsp;&nbsp;&nbsp;&nbsp;
+
+&nbsp;&nbsp;&nbsp; &lt;rdfs:Class rdf:ID="Admin">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="background-color: #ffffcc">&lt;!</span><span style="background-color: #ffffcc">-- using RDFSchema subClassOf --</span><span style="background-color: #ffffcc">></span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;rdfs:subClassOf rdf:resource="#Staff"/>
+&nbsp;&nbsp;&nbsp; &lt;/rdfs:Class>
+
+
+&nbsp;&nbsp;&nbsp; &lt;rdfs:Class rdf:ID="Coordinator">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;rdfs:subClassOf rdf:resource="#Admin"/>
+&nbsp;&nbsp;&nbsp; &lt;/rdfs:Class>
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &lt;rdfs:Class rdf:ID="ProjAssistant">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;rdfs:subClassOf rdf:resource="#Admin"/>
+&nbsp;&nbsp;&nbsp; &lt;/rdfs:Class>
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &lt;rdfs:Class rdf:ID="Researcher">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;rdfs:subClassOf rdf:resource="#Staff"/>
+&nbsp;&nbsp;&nbsp; &lt;/rdfs:Class>
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &lt;rdfs:Class rdf:ID="GRA">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;rdfs:subClassOf rdf:resource="#Researcher"/></font></pre>
+
+<pre><font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;rdfs:subClassOf></font></pre>
+
+<pre>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a NAME="maxcard"></a><span style="background-color: #ffffcc"><font color="#000000">&lt;!</span><span style="background-color: #ffffcc">-- Maximum of 5 papers (just for example) --</span><span style="background-color: #ffffcc">></span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;daml:Restriction daml:maxCardinality="5">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;daml:onProperty rdf:resource="#Paper"/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/daml:Restriction></font></pre>
+
+<pre><font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/rdfs:subClassOf>
+&nbsp;&nbsp;&nbsp; &lt;/rdfs:Class>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &lt;rdfs:Class rdf:ID="ProjLeader">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;rdfs:subClassOf rdf:resource="#ISIResearchStaff"/>
+&nbsp;&nbsp;&nbsp; &lt;/rdfs:Class>
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &lt;rdfs:Class rdf:ID="SRSci">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;rdfs:subClassOf rdf:resource="#ISIResearchStaff"/>
+&nbsp;&nbsp;&nbsp; &lt;/rdfs:Class>
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &lt;rdfs:Class rdf:ID="Intern">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;rdfs:subClassOf rdf:resource="#Researcher"/>
+&nbsp;&nbsp;&nbsp; &lt;/rdfs:Class>
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;<a NAME="DatatypeProperty"></a>&nbsp;<span style="background-color: #ffffcc">&lt;!</span><span style="background-color: #ffffcc">-- Datatype Properties (relating an object to a primitive datatype) --</span><span style="background-color: #ffffcc">></span>
+&nbsp;&nbsp;&nbsp; &lt;daml:DatatypeProperty rdf:ID="StartDate">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;rdfs:domain rdf:resource="#Intern" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a NAME="globalrange"></a><span style="background-color: #ffffcc">&lt;!</span><span style="background-color: #ffffcc">-- global restriction on the range of a property--</span><span style="background-color: #ffffcc">></font></span></pre>
+
+<pre><font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;rdfs:range rdf:resource="&amp;xsd;date"/>
+&nbsp;&nbsp;&nbsp; &lt;/daml:DatatypeProperty></font></pre>
+
+<pre><font color="#000000">&nbsp;&nbsp;&nbsp; &lt;daml:DatatypeProperty rdf:ID="EndDate">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;rdfs:domain rdf:resource="#Intern" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a NAME="globalrange"></a><span style="background-color: #ffffcc">&lt;!</span><span style="background-color: #ffffcc">-- global restriction on the range of a property--</span><span style="background-color: #ffffcc">></font></span></pre>
+
+<pre><font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;rdfs:range rdf:resource="&amp;xsd;date"/>
+&nbsp;&nbsp;&nbsp; &lt;/daml:DatatypeProperty>
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &lt;daml:DatatypeProperty rdf:ID="FName"/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a NAME="globalcardinality"></a><span style="background-color: #ffffcc">&lt;!</span><span style="background-color: #ffffcc">-- global restriction on cardinality (only 1 - UniqueProperty) --</span><span style="background-color: #ffffcc">></span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;rdf:type rdf:resource="http://www.daml.org/2001/03/daml+oil#UniqueProperty"/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;rdfs:domain rdf:resource="#Staff" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;rdfs:range rdf:resource="&amp;rdfs;Literal"/>
+&nbsp;&nbsp;&nbsp; &lt;/daml:DatatypeProperty>
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &lt;daml:DatatypeProperty rdf:ID="NumProjPrincipal">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a NAME="globaldomain"></a><span style="background-color: #ffffcc">&lt;!</span><span style="background-color: #ffffcc">-- global restriction on the domain of a property--</span><span style="background-color: #ffffcc">></font></span></pre>
+
+<pre><font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;rdfs:domain rdf:resource="#ISIResearchStaff" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;rdfs:range rdf:resource="&amp;xsd;nonNegativeInteger"/>
+&nbsp;&nbsp;&nbsp; &lt;/daml:DatatypeProperty>
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &lt;daml:DatatypeProperty rdf:ID="OfficeNo"/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;rdfs:domain rdf:resource="#Staff" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;rdfs:range rdf:resource="&amp;xsd;nonNegativeInteger"/>
+&nbsp;&nbsp;&nbsp; &lt;/daml:DatatypeProperty>
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &lt;daml:DatatypeProperty rdf:ID="MiddleInitial">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;rdfs:comment xml:lang="en">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Middle Initial
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/rdfs:comment>
+&nbsp;&nbsp;&nbsp; &lt;/daml:DatatypProperty>
+
+&nbsp;&nbsp;&nbsp; &lt;daml:DatatypeProperty rdf:ID="Major"/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;rdfs:domain rdf:resource="#GRA" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;rdfs:range rdf:resource="&amp;rdfs;Literal"/>
+&nbsp;&nbsp;&nbsp; &lt;/daml:DatatypeProperty>
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<a NAME="ObjectProperty"></a><span style="background-color: #ffffcc">&lt;!</span><span style="background-color: #ffffcc">-- Object Property (relating one object to another object) --</span><span style="background-color: #ffffcc">></span>
+&nbsp;&nbsp;&nbsp; &lt;rdf:ObjectProperty rdf:ID="Project"/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;rdfs:domain rdf:resource="#Staff" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;rdfs:range rdf:resource="#Project"/>
+&nbsp;&nbsp;&nbsp; &lt;/daml:DatatypeProperty>
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &lt;daml:DatatypeProperty rdf:ID="Group"/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;rdfs:domain rdf:resource="#Staff" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;rdfs:range rdf:resource="&amp;rdfs;Literal"/>
+&nbsp;&nbsp;&nbsp; &lt;/daml:DatatypeProperty>
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &lt;daml:DatatypeProperty rdf:ID="College"/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;rdfs:domain rdf:resource="#Intern" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;rdfs:range rdf:resource="&amp;rdfs;Literal"/>
+&nbsp;&nbsp;&nbsp; &lt;/daml:DatatypeProperty>
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &lt;daml:DatatypeProperty rdf:ID="DegreeObjective"/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;rdfs:domain rdf:resource="#GRA" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;rdfs:range rdf:resource="&amp;rdfs;Literal"/>
+&nbsp;&nbsp;&nbsp; &lt;/daml:DatatypeProperty>
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &lt;daml:DatatypeProperty rdf:ID="EMail"/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;rdfs:domain rdf:resource="#Staff" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;rdfs:range rdf:resource="&amp;rdfs;Literal"/>
+&nbsp;&nbsp;&nbsp; &lt;/daml:DatatypeProperty>
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &lt;daml:DatatypeProperty rdf:ID="LName"/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;rdfs:domain rdf:resource="#Staff" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;rdfs:range rdf:resource="&amp;rdfs;Literal"/>
+&nbsp;&nbsp;&nbsp; &lt;/daml:DatatypeProperty>
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &lt;daml:DatatypeProperty rdf:ID="AdminGroup"/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;rdfs:domain rdf:resource="#Admin" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;rdfs:range rdf:resource="&amp;rdfs;Literal"/>
+&nbsp;&nbsp;&nbsp; &lt;/daml:DatatypeProperty>
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &lt;daml:DatatypeProperty rdf:ID="TelNo"/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;rdfs:domain rdf:resource="#Staff" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;rdfs:range rdf:resource="&amp;rdfs;Literal"/>
+&nbsp;&nbsp;&nbsp; &lt;/daml:DatatypeProperty>
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &lt;daml:DatatypeProperty rdf:ID="HomePage"/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;rdfs:domain rdf:resource="#Staff" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;rdfs:range rdf:resource="&amp;xsd;anyURI"/>
+&nbsp;&nbsp;&nbsp; &lt;/daml:DatatypeProperty>
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &lt;daml:DatatypeProperty rdf:ID="Paper"/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;rdfs:domain rdf:resource="#Researcher" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;rdfs:range rdf:resource="&amp;rdfs;Literal"/>
+&nbsp;&nbsp;&nbsp; &lt;/daml:DatatypeProperty>
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &lt;rdfs:Class rdf:ID="Project" /></font></pre>
+
+<pre>&nbsp;<span style="background-color: #ffffcc"><font color="#000000">&lt;!</span><span style="background-color: #ffffcc">-- Some example classes (not linked with the Staff ontology) --</span><span style="background-color: #ffffcc">></font></span></pre>
+
+<pre><font color="#000000">&nbsp;&nbsp; &lt;daml:Class rdf:ID="Car">
+&nbsp;&nbsp;&nbsp;<a NAME="negation"></a>&nbsp;&nbsp; &lt;rdfs:comment>no car is a person&lt;/rdfs:comment>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;rdfs:subClassOf>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;daml:Class></font></pre>
+
+<pre>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="background-color: #ffffcc"><font color="#000000">&lt;!</span><span style="background-color: #ffffcc">-- Negation using complementOf --</span><span style="background-color: #ffffcc">></span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;daml:complementOf rdf:resource="#Person"/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/daml:Class>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/rdfs:subClassOf></font></pre>
+
+<pre><font color="#000000">&nbsp; &lt;/daml:Class></font></pre>
+
+<pre>&nbsp;<a NAME="transitive"></a><span style="background-color: #ffffcc"><font color="#000000">&lt;!</span><span style="background-color: #ffffcc">-- An example of a transitive property--</span><span style="background-color: #ffffcc">></font></span></pre>
+
+<pre>&nbsp; <font color="#000000">&lt;daml:TransitiveProperty rdf:ID="hasAncestor">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;rdfs:label>hasAncestor&lt;/rdfs:label>
+&nbsp; &lt;/daml:TransitiveProperty></font></pre>
+
+<pre><a NAME="union"></a><span style="background-color: #ffffcc"><font color="#000000">&lt;!</span><span style="background-color: #ffffcc">-- An example of a union (here a disjointUnion)--</span><span style="background-color: #ffffcc">></span>
+&nbsp; &lt;daml:Class rdf:about="#Personnel">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;daml:disjointUnionOf rdf:parseType="daml:collection">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;daml:Class rdf:about="#Admin"/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;daml:Class rdf:about="#Researcher"/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/daml:disjointUnionOf>
+&nbsp; &lt;/daml:Class>
+
+
+&nbsp;&nbsp;<a NAME="sameClassAs"></a>&lt;daml:Class rdf:ID="HumanBeing">
+&nbsp;&nbsp;&nbsp; &lt;daml:sameClassAs rdf:resource="#Person"/>
+&nbsp; &lt;/daml:Class></font>
+
+</pre>
+
+<pre>&nbsp;&nbsp;&nbsp;
+<font color="#000000">&lt;/rdf:RDF></font></pre>
+
+</body>
+</html>

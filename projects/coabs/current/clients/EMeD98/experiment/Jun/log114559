@@ -1,0 +1,69 @@
+select: add new button
+   at Fri May 28 11:46:16 PDT 1999
+
+check: Method Capability Hierarchy
+   at Fri May 28 11:46:24 PDT 1999
+
+select: modify button
+   at Fri May 28 11:48:45 PDT 1999
+
+ done editing:((name estimate-time-to-tank-plow-minefield)
+ (capability (estimate
+                (obj (?t is (spec-of time)))
+                (for (?s is (inst-of tank-plow-minefield)))
+                ))
+ (result-type (inst-of number))
+ (method (multiply
+            (obj (find
+                    (obj (spec-of length))
+                    (of ( minefield-of ?s))
+                    ))
+              (by 25/3)
+              ))
+)
+   at Fri May 28 11:48:49 PDT 1999
+
+modified method:((name estimate-time-to-tank-plow-minefield)
+ (capability (estimate
+                (obj (?t is (spec-of time)))
+                (for (?s is (inst-of tank-plow-minefield)))
+                ))
+ (result-type (inst-of number))
+ (method (multiply
+            (obj (find
+                    (obj (spec-of length))
+                    (of ( minefield-of ?s))
+                    ))
+              (by 25/3)
+              ))
+)
+   at Fri May 28 11:48:49 PDT 1999
+
+check: All Agenda
+   at Fri May 28 11:48:49 PDT 1999
+
+check: Method Sub-Method Relation
+   at Fri May 28 11:48:49 PDT 1999
+
+check: Method Capability Hierarchy
+   at Fri May 28 11:48:55 PDT 1999
+
+select: delete button
+   at Fri May 28 11:49:31 PDT 1999
+
+deleted method:((name estimate-time-to-tank-plow-minefield)
+ (capability (estimate
+                (obj (?t is (spec-of time)))
+                (for (?s is (inst-of tank-plow-minefield)))
+                ))
+ (result-type (inst-of number))
+ (method (multiply
+            (obj (find
+                    (obj (spec-of length))
+                    (of ( minefield-of ?s))
+                    ))
+              (by 25/3)
+              ))
+)
+   at Fri May 28 11:49:31 PDT 1999
+

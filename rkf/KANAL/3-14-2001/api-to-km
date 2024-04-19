@@ -1,0 +1,254 @@
+;;; ======================================================================
+;;;		API to KM
+;;; ======================================================================
+
+;; km calls from KANAL go through these two functions
+(defun km-k (arg)
+  (km arg :fail-mode #$'fail))
+
+(defun km-unique-k (arg)
+  (km-unique arg :fail-mode #$'fail))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; concepts/roles/instances
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defun create-instance (concept &optional (situation nil))
+  (if situation
+      (km-unique-k `(#$in-situation ,situation (#$a ,concept)))
+    (km-unique-k `(#$a ,concept))))
+
+(defun get-role-values (instance role)
+  (km-k `(#$the ,role #$of ,instance)))
+
+(defun assert-role-value (instance role val)
+  (km-k `(,instance #$has (,role (,val)))))
+
+;; to prevent unification
+(defun assert-another-role-value (instance role val)
+  (km-k `(,instance #$also-has (,role (,val)))))
+
+(defun get-concepts-from-instance (instance)
+  (km-k `(#$the #$instance-of #$of ,instance)))
+
+(defun get-concept-from-instance (instance)
+  (km-unique-k `(#$the #$instance-of #$of ,instance)))
+
+(defun get-subconcepts (concept)
+  (km-k `(#$the #$subclasses #$of ,concept))
+  )
+
+(defun get-concept-name (step)
+  (get-concept-from-instance step))
+
+(defun get-all-subconcepts (concepts)
+  (km-k `(#$the #$all-subclasses #$of ,concepts)))
+
+(defun get-inverse (role)
+  (km-k `(#$the #$inverse #$of ,role)))
+
+(defun create-a-thing ()
+  (create-instance '#$Thing))
+
+(defun get-role-description (obj role)
+  (or (caar (inherited-rule-sets obj role))
+      (caar (own-rule-sets obj role)))
+  )
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; to handle situation
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defun goto (situation)
+  (km-k `(#$in-situation ,situation)))
+
+(defun goto-global-situation ()
+  (global-situation)) 
+
+(defun create-situation ()
+  (create-instance '#$Situation))
+
+(defun current-situation ()
+  (km-unique-k '#$(curr-situation)))
+
+(defun previous-situation (situation)
+  (km-k `(#$the #$prev-situation #$of ,situation)))
+
+(defun get-after-situation (event)
+  (km-k `(#$the #$after-situation #$of ,event)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;  expressions
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defun equal-objects (obj1 obj2)
+  (km-k `(,obj1 #$= ,obj2)))
+
+(defun test-expr (expr &optional (situation nil))  ;; test a triple
+  (if situation 
+      (km-k `(#$in-situation ,situation (#$is-true ,expr)))
+    (km-k `(#$is-true ,expr))))
+
+(defun evaluate-expr (expr)
+  (km-k `(,expr)))
+
+(defun has-value (result)
+  (km-k `(#$has-value , result)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; preconditions & effects
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defun get-preconditions (event)
+  (remove-duplicates (km-k `(#$the #$pcs-list #$of ,event)) :test #'equal)
+  )
+
+(defun get-the-add-list (action-instance)
+  (get-role-values action-instance '#$add-list))
+
+(defun get-the-del-list (action-instance)
+  (get-role-values action-instance '#$del-list))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; km dependent
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defun get-primary-roles (action)  
+  ;; needed for building action table
+  (km-k `(#$the #$primary-slot #$of ,action)))
+
+(defun get-all-actions ()
+  (km-k `#$(the all-subclasses of Action)))
+
+
+(defun get-concept-action ()
+  (km-k `#$(Action))  )
+
+(defun check-object (obj)
+  (km-k `(#$showme ,obj))) 
+
+(defun find-symbol-in-kb (symbol-name)
+  ;(find-symbol symbol-name (find-package *km-package*))
+  (find-symbol symbol-name (find-package :user)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; to handle triples 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defun get-object (triple)
+  (second triple))
+
+(defun get-role (triple)
+  (third triple))
+
+(defun get-val (triple)
+  (fourth triple))
+
+(defun get-triple-values (triples)
+  (mapcar #'(lambda (triple) 
+	      (list (first triple)
+		    (km-unique-k (get-object triple))
+		    (km-unique-k (get-role triple))
+		    (km-unique-k (get-val triple))))
+	  triples))
+
+(defun triple-consistent-with-kb (triple &optional (situation nil))
+  (let ((obj (get-object triple))
+	(role (get-role triple))
+	(val (get-val triple)))
+    (if situation 
+      (km-k `(#$in-situation ,situation ((#$the ,role #$of ,obj) #$&? ,val)))
+    (km-k `((#$the ,role #$of ,obj) #$&? ,val)))
+    ))
+
+(defun assert-triple (triple &optional (situation nil))
+  (let ((obj (get-object triple))
+	(role (get-role triple))
+	(val (get-val triple)))
+    (if situation 
+      (km-k `(#$in-situation ,situation ((#$the ,role #$of ,obj) #$& ,val)))
+    (km-k `((#$the ,role #$of ,obj) #$& ,val)))
+    ))
+
+(defun make-sentence-for-triple (triple)
+  (let ((obj (get-object triple))
+	(role (get-role triple))
+	(val (get-val triple)))
+    (make-sentence `((#$the ,role #$of ,obj)  is ,val))
+    ))
+
+;;; ======================================================================
+;;;		API to event structure
+;;;
+;;;  these functions are used in running simulations
+;;; ======================================================================
+
+(defun get-parent-events (event)
+  ;(get-role-values-with-checking "parent-events" event nil)
+  (get-role-values-with-checking "subevent-of" event nil)
+  )
+
+(defun get-next-events (event)
+  (get-role-values-with-checking "next-events" event nil))
+
+(defun get-prev-events (event)
+  (get-role-values-with-checking "prev-events" event nil))
+
+(defun get-subevents (event)
+  ;(get-role-values-with-checking "subevents" event nil)
+  (get-role-values-with-checking "subevent" event nil)
+  ) 
+
+(defun get-first-subevents (event)
+  (get-role-values-with-checking "first-subevents" event nil))
+
+(defun get-disjunctive-next-events (event)
+  (get-role-values-with-checking "disjunctive-next-events" event nil))
+
+(defun get-primitive-events (event)
+  (get-role-values-with-checking "primitive-actions" event nil))
+
+(defun get-all-subevents (event)
+  (get-role-values-with-checking "all-subevents" event nil))
+
+
+(defun execute-step (event)
+  (km-k `(#$do-and-next ,event)))
+
+
+;;; temporary 
+
+(defun get-subevent-order (event)
+  (get-role-values-with-checking "subevent-order" event nil))
+
+;;; ======================================================================
+;;;   THESE FUNCTIONS ARE TEMPORARILY USED TO SUPPORT 'subevent-order'
+;;;
+;;;		Add ordering info  (1/2001)
+;;;    
+;;;  in Jan demo, we used subevent-order role which is different from 
+;;;   from what we had for virus invasion
+;;;  this function generate appropriate ordering from subevent-order
+;;; ======================================================================
+
+(defun get-subevents-in-order (event-instance subevents)
+  (let ((order (get-subevent-order event-instance)))
+    (if order
+	order
+      subevents ;; if the ordering is not specified,
+                ;; use the ordering in the subevents list
+      )))
+
+
+(defun add-ordering-info (event-instance)
+  (let ((subevents (get-subevents event-instance)))
+   (when (not (null subevents))
+    (let* ((subevents-in-order (get-subevents-in-order event-instance subevents))
+	   (first-subevent (first subevents-in-order))
+	   (last-subevent (car (last subevents-in-order))))
+      (mapcar #'add-ordering-info subevents-in-order)
+      (km-k `(,event-instance #$also-has (#$first-subevents (,first-subevent))))
+      (dotimes (count (- (length subevents-in-order) 1))
+	(let ((event (nth count subevents-in-order))
+	      (next-event (nth (+ count 1) subevents-in-order)))
+	  (km-k `(,event #$also-has (#$next-events (,next-event)))) 
+	  )) 
+      )
+    )
+  ))

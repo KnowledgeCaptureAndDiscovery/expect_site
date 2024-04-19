@@ -1,0 +1,172 @@
+<HTML>
+<HEAD>
+   <TITLE>EXPECT introduction</TITLE>
+
+  <SCRIPT language="javascript">
+
+  about_on = new Image();
+  about_on.src = "./exp-about.gif";
+
+  research_on = new Image();
+  research_on.src = "./exp-research.gif"; 
+
+  projectmemb_on = new Image();
+  projectmemb_on.src = "./exp-pr-members.gif";
+
+  publications_on = new Image();
+  publications_on.src = "./exp-publ.gif";
+
+  movie_on = new Image();
+  movie_on.src = "./exp-mov.gif"; 
+
+  projects_on = new Image();
+  projects_on.src = "./exp-projects.gif"; 
+ 
+ 
+   
+function swampImages(imagename, cimage)
+  {
+      imgsrc = './' + cimage;
+      document[imagename].src = imgsrc;
+  } 
+  </SCRIPT>
+ 
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+
+<TABLE  align=center WIDTH=730 border=0>
+<TR><TD colspan=3>
+
+<P ALIGN=CENTER>
+
+<A HREF="../"
+onmouseover="swampImages('About','exp-about.gif'); return true"
+onmouseout="swampImages('About','exp-about-bl.gif');return true" 
+onclick="return false"><IMG
+SRC="exp-about-bl.gif" BORDER=0 NAME="About"></A>
+
+<A HREF="./research.html"
+onmouseover="swampImages('Research','exp-research.gif'); return true"
+onmouseout="swampImages('Research','exp-research-bl.gif');return
+true"><IMG SRC="exp-research-bl.gif" BORDER=0 NAME="Research"></A>
+
+<A HREF="./projects.html"
+onmouseover="swampImages('Projects','exp-projects.gif'); return true"
+onmouseout="swampImages('Projects','exp-projects-bl.gif');return
+true"><IMG SRC="./exp-projects-bl.gif" BORDER=0 NAME="Projects"></A>
+
+
+<A HREF="./pr-members.html"
+onmouseover="swampImages('Members','exp-pr-members.gif'); return true"
+onmouseout="swampImages('Members','exp-pr-members-bl.gif');return true"><IMG
+SRC="exp-pr-members-bl.gif" BORDER=0 NAME="Members"></A>
+
+<A HREF="./publications.html"
+onmouseover="swampImages('Publ','exp-publ.gif'); return true"
+onmouseout="swampImages('Publ','exo-publ-bl.gif');return true"><IMG
+SRC="exo-publ-bl.gif" BORDER=0 NAME="Publ"></A>
+
+<A HREF="./demo.html"
+onmouseover="swampImages('Demo','exp-mov.gif'); return true"
+onmouseout="swampImages('Demo','exp-mov-bl.gif');return true"><IMG
+SRC="exp-mov-bl.gif" BORDER=0 NAME="Demo"></A></P>
+</TD></TR>
+
+<TR><TD WIDTH=100></TD>
+
+<TD WIDTH=550>
+
+<BR><BR>
+
+<P ALIGN=CENTER><B><FONT FACE="Times" SIZE=5>EXPECT in a Nutshell</B></FONT></P>
+
+<P>EXPECT is an environment for developing knowledge-based systems that includes knowledge acquisition (KA) tools to extend and modify knowledge bases.  Successful knowledge acquisition tools use a role-limiting approach where they help users provide the domain-dependent knowledge needed for a given kind of problem.  Several such tools have been built to support KA for a specific problem-solving strategy: SALT for propose-and-revise [Marcus & McDermott 89], MOLE for cover-and-differentiate [Eshelman 1998], PROTEGE for skeletal plan refinement [Musen 1989], etc.  Although having a role-limiting strategy provides very strong guidance for knowledge acquisition, these tools lack the flexibility that knowledge-based system construction needs [Musen 1992] because the problem-solving method is hard-coded and cannot be changed with the tool. </P>
+
+<P>In contrast, EXPECT represents explicitly both factual knowledge and problem-solving knowledge and its knowledge acquisition tools can reason about each piece of knowledge and analyze its interactions with others in the context of problem solving.  EXPECT is tightly integrated with Loom, a state-of-the-art knowledge representation system based on description logic.</P>
+
+<P>EXPECT generates automatically an <I>Interdependency Model</I> (IM) that
+captures the relationships between different pieces of knowledge in a
+knowledge base.  EXPECT's KA tool uses this IM to determine
+what KA tasks the user needs to complete.  A basic type of
+interdependency occurs between ontologies and problem-solving
+knowledge, i.e., how the ontologies are used during problem solving
+and what problem-solving knowledge is required given the ontological
+knowledge about the domain. In effect, this basic IM determines which
+aspects of a very large background ontology are relevant to the
+problem at hand. For example, the class <FONT
+FACE="Courier" SIZE=4>city</FONT> may have attributes such as latitude, longitude, airports, seaports, mayor, subway-system, restaurant, etc.  In a transportation application, when the user wants to add a city to the knowledge base, the IM would determine that only airport and seaport information is required and would not ask a user to specify any of the other attributes (such as the restaurants or the name of the mayor). </P>
+
+<P>EXPECT's ontologies and factual knowledge includes concepts,
+instances, and the relations among them.  Problem-solving knowledge is
+represented in a procedural-style language that is tightly integrated
+with the Loom representations.  Subgoals that arise during problem
+solving are solved by methods.  Each method description specifies: 1)
+its <I>capability</I> in terms of the kinds of goals that the method
+can achieve, 2) the type of <I>result</I> that the method returns, and 3) the method <I>body</I> that contains the procedure that must be followed in order to achieve the method's goal.  A method body can contain nested expressions, including subgoal expressions that need to be resolved by other methods; control expressions such as conditional statements and some forms of iteration; and relational expressions to retrieve the fillers of a relation over a concept. </P>
+
+<P>EXPECT's representation of problem-solving method capabilities and goals is tightly coupled with the domain ontologies in the knowledge base, can express task-related parameters explicitly, and is based on case grammars.  This representation allows EXPECT to reason about goals and capabilities through subsumption and reformulation.</P>
+
+<P>EXPECT's predecessor was the Explainable Expert Systems architecture [Swartout et al 1991], which exploited similar representations in order to generate adequate explanations of a knowledge base system's behavior in natural language.</P>
+
+<P>In summary, EXPECT exploits explicit representations of knowledge
+to derive interdependency models that are useful to guide users in
+knowledge acquisition. </P>
+
+<P>We have shown that this approach is more flexible than existing approaches by illustrating how EXPECT can acquire the same kinds of information as a well-known KA tool, and can support the acquisition of additional kinds of knowledge.   EXPECT is unique in that it is able to guide the user to acquire and modify problem-solving knowledge, while other KA tools do not support these kinds of modifications.</P>
+
+<PWe have used EXPECT to develop several applications in knowledge-rich planning domains, including air campaign planning, workarounds for target damage, transportation planning, and course of action analysis. </P>
+
+<P>Current research within the EXPECT project includes knowledge acquisition, knowledge modelling, problem solving and reasoning, ontologies and problem solving method repositories, and multi-agent coordination and communication. </P>
+
+<BLOCKQUOTE>
+<P>"Knowledge Refinement in a Reflective Architecture".  Y. Gil.  Proceedings
+of AAAI-94. (<A HREF="./papers/gil-aaai94.pdf">PDF file</A>)</P>
+
+<P>"Towards Method-Independent Knowledge Acquisition".  Y. Gil and C. Paris.
+<I>Knowledge Acquisition</I> 6(2), 1994. (<A HREF="./papers/gil-paris-kaj94.pdf">PDF file</A>) </P>
+
+<P>"EXPECT: Explicit Representation for Flexible Acquisition".  W. Swartout
+and Y. Gil.  Proceedings of 1995 Knowledge Acquisition Workshop. 
+(<A HREF="./papers/swartout-gil-kaw95.pdf">PDF file</A>)</P>
+
+<P>"Explicit Representations of Problem-Solving Strategies to Support
+Knowledge Acquisition".  
+Y. Gil and E. Melz.  Proceedings of AAAI-96.
+(<A HREF="./papers/gil-melz-aaai96.pdf">PDF file </A>) </P>
+
+<P>"Representing Capabilities of Problem-Solving Methods." W. Swartout,
+Y. Gil, and A. Valente.  
+Proceedings of 1999 IJCAI Workshop on Ontologies and Problem-Solving Methods. 
+(<a href="http://www.isi.edu/expect/papers/swartout-ijcai99.pdf">PDF
+file </a>)</P>
+
+<P>Deriving Expectations to Guide Knowledge Base Creation".  J. Kim and
+Y. Gil.    Proceedings of AAAI-99. (<A
+HREF="http://www.isi.edu/expect/papers/kim-gil-aaai99.pdf">PDF file</A>)</P>
+</BLOCKQUOTE>
+
+<P><B>Back to <A HREF="./research.html">EXPECT Research</A></B></P>.
+
+<HR SIZE=2>
+
+<P ALIGN=CENTER><FONT FACE=ARIAL SIZE=-1>About EXPECT |
+<A HREF="./research.html">Research</A> |
+ <A HREF="projects.html">Projects</A> | 
+ <A
+HREF="./pr-members.html">Project Members</A> | <A
+HREF="./publications.html">Publications</A> | <A
+HREF="./demo.html">Movie</A> | <BR>
+| <A HREF="http://www.isi.edu/divisions/div3">Intelligent Systems
+Division</A> | <A HREF="http://www.isi.edu">Information Sciences
+Institute</A> | <A HREF="http://www.usc.edu">USC</A> |</P>
+</TD>
+
+<TD WIDTH=100></TD>
+
+</TR>
+
+</TABLE>
+</BODY>
+</HTML>
+
+

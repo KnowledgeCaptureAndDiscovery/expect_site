@@ -1,0 +1,242 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="Microsoft Word 97/98">
+<TITLE>&lt;HTML&gt;</TITLE>
+<META NAME="Template" CONTENT="Macintosh HD:Microsoft Office 98:Office:HTML:View HTML Source">
+</HEAD>
+<BODY>
+
+<FONT FACE="Courier New" SIZE=2><P>&lt;HTML&gt;</P>
+<P>&lt;HEAD&gt;</P>
+<P>&lt;META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1"&gt;</P>
+<P>&lt;META NAME="Generator" CONTENT="Microsoft Word 97/98"&gt;</P>
+<P>&lt;TITLE&gt;&amp;#61623; New EXPECT interface&lt;/TITLE&gt;</P>
+<P>&lt;/HEAD&gt;</P>
+<P>&lt;BODY LINK="#0000ff" VLINK="#800080"&gt;</P>
+
+<P>&lt;FONT FACE="Times"&gt;&lt;P ALIGN="JUSTIFY"&gt;&lt;/P&gt;</P>
+<P>&lt;/FONT&gt;&lt;B&gt;&lt;FONT FACE="Times" SIZE=6&gt;&lt;P ALIGN="CENTER"&gt;The EXPECT Project at ISI:&lt;/P&gt;</P>
+<P>&lt;P ALIGN="CENTER"&gt;Current Research Areas&lt;/P&gt;</P>
+<P>&lt;/B&gt;&lt;/FONT&gt;&lt;FONT FACE="Times"&gt;&lt;P ALIGN="JUSTIFY"&gt;&lt;/P&gt;</P>
+<P>&lt;/FONT&gt;&lt;FONT FACE="Times" SIZE=4&gt;&lt;P ALIGN="CENTER"&gt;Yolanda Gil, Bill Swartout,&lt;/P&gt;</P>
+<P>&lt;P ALIGN="CENTER"&gt;Jim Blythe, Jihie Kim, Surya Ramachandran,&lt;/P&gt;</P>
+<P>&lt;P ALIGN="CENTER"&gt;Andre Valente, Marcelo Tallis&lt;/P&gt;</P>
+<P>&lt;/FONT&gt;&lt;FONT FACE="Times"&gt;&lt;P ALIGN="CENTER"&gt;&lt;/P&gt;</P>
+<P>&lt;P ALIGN="CENTER"&gt;USC/Information Sciences Institute&lt;/P&gt;</P>
+<P>&lt;P ALIGN="CENTER"&gt;4676 Admiralty Way&lt;/P&gt;</P>
+<P>&lt;P ALIGN="CENTER"&gt;Marina del Rey, CA 90292&lt;/P&gt;</P>
+<P>&lt;P ALIGN="CENTER"&gt;(310) 822-1511&lt;/P&gt;</P>
+<P>&lt;P ALIGN="CENTER"&gt;&lt;/P&gt;</P>
+<P>&lt;P ALIGN="CENTER"&gt;&lt;/FONT&gt;&lt;A HREF="mailto:Expect@isi.edu"&gt;&lt;FONT FACE="Times"&gt;expect@isi.edu&lt;/FONT&gt;&lt;/A&gt;&lt;/P&gt;</P>
+<P>&lt;FONT FACE="Times"&gt;&lt;P ALIGN="CENTER"&gt;www.isi.edu/expect/&lt;/P&gt;</P>
+<P>&lt;P ALIGN="JUSTIFY"&gt;&lt;/P&gt;</P>
+<P>&lt;P&gt;EXPECT is an environment for developing knowledge-based systems that includes knowledge acquisition (KA) tools to extend and modify knowledge bases.  Current research topics include knowledge acquisition, knowledge modelling, problem solving and reasoning, ontologies and problem solving method repositories, and multi-agent coordination and communication.  &lt;/P&gt;</P>
+
+<P>&lt;P&gt;We have used EXPECT to develop several applications in knowledge-rich planning domains, including air campaign planning, workarounds for target damage, transportation planning, and course of action analysis.  &lt;/P&gt;</P>
+
+<P>&lt;P&gt;The EXPECT project is funded under the DARPA/Rome Laboratory Planning Initiative (ARPI), DARPA's High Performance Knowledge Bases program (HPKB), DARPA&amp;#146;s Control of Agent-Based Systems program (CoABS), and DARPA's JFACC program.&lt;/P&gt;</P>
+
+<P>&lt;/FONT&gt;&lt;B&gt;&lt;FONT FACE="Times" SIZE=5&gt;&lt;P&gt;1. EXPECT in a Nutshell&lt;/P&gt;</P>
+<P>&lt;/B&gt;&lt;/FONT&gt;&lt;FONT FACE="Times"&gt;</P>
+<P>&lt;P&gt;EXPECT is an environment for developing knowledge-based systems that includes knowledge acquisition (KA) tools to extend and modify knowledge bases.  Successful knowledge acquisition tools use a role-limiting approach where they help users provide the domain-dependent knowledge needed for a given kind of problem.  Several such tools have been built to support KA for a specific problem-solving strategy: SALT for propose-and-revise [Marcus &amp;amp; McDermott 89], MOLE for cover-and-differentiate [Eshelman 1998], PROTEGE for skeletal plan refinement [Musen 1989], etc.  Although having a role-limiting strategy provides very strong guidance for knowledge acquisition, these tools lack the flexibility that knowledge-based system construction needs [Musen 1992] because the problem-solving method is hard-coded and cannot be changed with the tool.  &lt;/P&gt;</P>
+
+<P>&lt;P&gt;In contrast, EXPECT represents explicitly both factual knowledge and problem-solving knowledge and its knowledge acquisition tools can reason about each piece of knowledge and analyze its interactions with others in the context of problem solving.  EXPECT is tightly integrated with Loom, a state-of-the-art knowledge representation system based on description logic.  &lt;/P&gt;</P>
+
+<P>&lt;P&gt;EXPECT generates automatically an &lt;I&gt;Interdependency Model&lt;/I&gt; (IM) that captures the relationships between different pieces of knowledge in a knowledge base.  EXPECT&amp;#146;s KA tool uses this IM to determine what KA tasks the user needs to complete.  A basic type of interdependency occurs between ontologies and problem-solving knowledge, i.e., how the ontologies are used during problem solving and what problem-solving knowledge is required given the ontological knowledge about the domain. In effect, this basic IM determines which aspects of a very large background ontology are relevant to the problem at hand. For example, the class&lt;B&gt; &lt;/B&gt;&lt;/FONT&gt;&lt;FONT FACE="Courier"&gt;city&lt;/FONT&gt;&lt;FONT FACE="Times"&gt; may have attributes such as latitude, longitude, airports, seaports, mayor, subway-system, restaurant, etc.  In a transportation application, when the user wants to add a city to the knowledge base, the IM would determine that only airport and seaport information is required and would not ask a user to specify any of the other attributes (such as the restaurants or the name of the mayor).  &lt;/P&gt;</P>
+
+<P>&lt;P&gt;EXPECT&amp;#146;s ontologies and factual knowledge includes concepts, instances, and the relations among them.  Problem-solving knowledge is represented in a procedural-style language that is tightly integrated with the Loom representations.  Subgoals that arise during problem solving are solved by methods.  Each method description specifies: 1) its &lt;I&gt;capability&lt;/I&gt; in terms of the kinds of goals that the method can achieve, 2) the type of &lt;I&gt;result&lt;/I&gt; that the method returns, and 3) the method &lt;I&gt;body&lt;/I&gt; that contains the procedure that must be followed in order to achieve the method's goal.  A method body can contain nested expressions, including subgoal expressions that need to be resolved by other methods; control expressions such as conditional statements and some forms of iteration; and relational expressions to retrieve the fillers of a relation over a concept.  &lt;/P&gt;</P>
+
+<P>&lt;P&gt;EXPECT&amp;#146;s representation of problem-solving method capabilities and goals is tightly coupled with the domain ontologies in the knowledge base, can express task-related parameters explicitly, and is based on case grammars.  This representation allows EXPECT to reason about goals and capabilities through subsumption and reformulation. &lt;/P&gt;</P>
+
+<P>&lt;P&gt;EXPECT&amp;#146;s predecessor was the Explainable Expert Systems architecture [Swartout et al 1991], which exploited similar representations in order to generate adequate explanations of a knowledge base system&amp;#146;s behavior in natural language.&lt;/P&gt;</P>
+
+<P>&lt;P&gt;In summary, EXPECT exploits explicit representations of knowledge to derive interdependency models that are useful to guide users in knowledge acquisition.  &lt;/P&gt;</P>
+<P>&lt;P&gt;We have shown that this approach is more flexible than existing approaches by illustrating how EXPECT can acquire the same kinds of information as a well-known KA tool, and can support the acquisition of additional kinds of knowledge.   EXPECT is unique in that it is able to guide the user to acquire and modify problem-solving knowledge, while other KA tools do not support these kinds of modifications.&lt;/P&gt;</P>
+
+<P>&lt;P&gt;We have used EXPECT to develop several applications in knowledge-rich planning domains, including air campaign planning, workarounds for target damage, transportation planning, and course of action analysis.  &lt;/P&gt;</P>
+
+<P>&lt;P&gt;Current research within the EXPECT project includes knowledge acquisition, knowledge modelling, problem solving and reasoning, ontologies and problem solving method repositories, and multi-agent coordination and communication.  &lt;/P&gt;</P>
+<P>&lt;DIR&gt;</P>
+<P>&lt;DIR&gt;</P>
+
+<P>&lt;P&gt; &amp;quot;Knowledge Refinement in a Reflective Architecture&amp;quot;.  Y. Gil.  Proceedings of AAAI-94.&lt;/P&gt;</P>
+
+<P>&lt;P&gt;&amp;quot;Towards Method-Independent Knowledge Acquisition&amp;quot;.  Y. Gil and C. Paris.  Knowledge Acquisition 6(2), 1994.&lt;/P&gt;</P>
+
+<P>&lt;P&gt;&amp;quot;EXPECT: Explicit Representation for Flexible Acquisition&amp;quot;.  W. Swartout and Y. Gil.  Proceedings of 1995 Knowledge Acquisition Workshop.&lt;/P&gt;</P>
+
+<P>&lt;P&gt;&amp;quot;Explicit Representations of Problem-Solving Strategies to Support Knowledge Acquisition&amp;quot;.  Y. Gil and E. Melz.  Proceedings of AAAI-96.&lt;/P&gt;</P>
+
+<P>&lt;P&gt;&amp;quot;Representing Capabilities of Problem-Solving Methods&amp;quot; W. Swartout, Y. Gil, and A. Valente.  Proceedings of 1999 IJCAI Workshop on Ontologies and Problem-Solving Methods.  &lt;/P&gt;</P>
+
+<P>&lt;P ALIGN="JUSTIFY"&gt; &amp;quot;Deriving Expectations to Guide Knowledge Base Creation&amp;quot;.  J. Kim and Y. Gil.    Proceedings of AAAI-99.  &lt;/P&gt;</P>
+<P>&lt;/DIR&gt;</P>
+<P>&lt;/DIR&gt;</P>
+
+<P>&lt;/FONT&gt;&lt;B&gt;&lt;FONT FACE="Times" SIZE=5&gt;&lt;P&gt;2. Research in Knowledge Acquisition &lt;/P&gt;</P>
+<P>&lt;/B&gt;&lt;/FONT&gt;&lt;FONT FACE="Times"&gt;&lt;P ALIGN="JUSTIFY"&gt;&lt;/P&gt;</P>
+<P>&lt;P ALIGN="JUSTIFY"&gt;We are working on several areas to enhance and extend EXPECT&amp;#146;s current knowledge acquisition capabilities.&lt;/P&gt;</P>
+<P>&lt;/FONT&gt;&lt;B&gt;&lt;I&gt;&lt;FONT FACE="Helvetica"&gt;&lt;P&gt;2.1  Exploting Interdependecy Models&lt;/P&gt;</P>
+<P>&lt;/B&gt;&lt;/I&gt;&lt;/FONT&gt;&lt;FONT FACE="Times"&gt;&lt;P ALIGN="JUSTIFY"&gt;EXPECT analyzes the interdependencies among individual pieces of knowledge and generates an Interdependency Model (IM).  This model determines what additional knowledge needs to be acquired and thus what are the remaining KA tasks that the user must do.  The baseline EXPECT system uses an agenda mechanism as a useful way to guide users during KA.  The agenda shows the user what KA tasks remain to be done based on the IM and on different types of errors in the KB that EXPECT detects automatically, and guides the user to resolve them with the KA tools. &lt;/P&gt;</P>
+<P>&lt;P ALIGN="JUSTIFY"&gt;&lt;/P&gt;&lt;DIR&gt;</P>
+<P>&lt;DIR&gt;</P>
+
+<P>&lt;P&gt;&amp;quot;Knowledge Refinement in a Reflective Architecture&amp;quot;.  Y. Gil.  Proceedings of AAAI-94.&lt;/P&gt;</P>
+<P>&lt;P ALIGN="JUSTIFY"&gt;&lt;/P&gt;</P>
+<P>&lt;P ALIGN="JUSTIFY"&gt;&amp;quot;Deriving Expectations to Guide Knowledge Base Creation&amp;quot;.  J. Kim and Y. Gil.  Proceedings of AAAI-99.  &lt;/P&gt;</P>
+<P>&lt;P ALIGN="JUSTIFY"&gt;&amp;nbsp;&lt;/P&gt;&lt;/DIR&gt;</P>
+<P>&lt;/DIR&gt;</P>
+
+<P>&lt;/FONT&gt;&lt;B&gt;&lt;I&gt;&lt;FONT FACE="Helvetica"&gt;&lt;P&gt;2.2  Script-Based KA  &lt;/P&gt;</P>
+<P>&lt;/B&gt;&lt;/I&gt;&lt;/FONT&gt;&lt;FONT FACE="Times"&gt;&lt;P ALIGN="JUSTIFY"&gt;We are developing a new approach to KA based on the use of KA Scripts that capture typical knowledge base modification sequences.  Our tool uses these KA scripts  to help users make changes to a knowledge base.  We have a principled set of dimensions to organize and populate our library of KA Scripts.  Several evaluations have been performed with this tool.&lt;/P&gt;</P>
+<P>&lt;P ALIGN="JUSTIFY"&gt;&lt;/P&gt;&lt;DIR&gt;</P>
+<P>&lt;DIR&gt;</P>
+
+<P>&lt;P&gt; &amp;quot;A Scripts-Based Approach to Knowledge Acquisition&amp;quot;.  Y. Gil and M. Tallis.  Proceedings of AAAI-97.&lt;/P&gt;</P>
+
+<P>&lt;P&gt;&amp;quot;Designing Scripts to Guide Users in Modifying Knowledge-Based Systems&amp;quot;.  M. Tallis and Y. Gil.  Proceedings of AAAI-99.&lt;/P&gt;</P>
+
+<P>&lt;P&gt;&amp;quot;A Script-Based Approach to Modifying Knowledge-Based Systems&amp;quot;.  M. Tallis. PhD Thesis.  Department of Computer Science, University of Southern California.  May 1999. &lt;/P&gt;</P>
+<P>&lt;P ALIGN="JUSTIFY"&gt;&amp;nbsp;&lt;/P&gt;&lt;/DIR&gt;</P>
+<P>&lt;/DIR&gt;</P>
+
+<P>&lt;/FONT&gt;&lt;B&gt;&lt;I&gt;&lt;FONT FACE="Helvetica"&gt;&lt;P&gt;2.3  English-based Knowledge Acquisition&lt;/P&gt;</P>
+<P>&lt;/B&gt;&lt;/I&gt;&lt;/FONT&gt;&lt;FONT FACE="Times"&gt;&lt;P ALIGN="JUSTIFY"&gt;&amp;nbsp;&lt;/P&gt;</P>
+<P>&lt;P ALIGN="JUSTIFY"&gt;We are interested in developing tools that enable users to specify new knowledge in natural language, so that they are more accessible to end users.  We have developed an interface that allows users to modify methods by manipulating their paraphrase in English.  It allows the user to select a portion of the paraphrase that corresponds to a valid expression and picking from a menu of suggestions for other expressions that can be used to replace it.  Generating sensible suggestions is one of the challenging aspects of this work. &lt;/P&gt;</P>
+<P>&lt;/FONT&gt;&lt;B&gt;&lt;I&gt;&lt;FONT FACE="Helvetica"&gt;&lt;P&gt;2.4  Support in creating new KBs &lt;/P&gt;</P>
+<P>&lt;/B&gt;&lt;/I&gt;&lt;/FONT&gt;&lt;FONT FACE="Times"&gt;&lt;P ALIGN="JUSTIFY"&gt;There is not much knowledge at the beginning to form expectations for KA, but a KA tool can create more expectations as the user enters knowledge.  This tool tries to help a user create a KB without errors before the problem solver is run.  The tool builds expectations based on the representation language (includes a method editor with adaptive forms), based on surface interdependencies (as opposed to the deeper interdependencies detected by the problem solver), and based on a restricted language for users to specify KA constraints and tasks.  Preliminary evaluations with users show a 30% improvement in terms of the time to complete a KB modification.&lt;/P&gt;</P>
+<P>&lt;P ALIGN="JUSTIFY"&gt;&lt;/P&gt;&lt;DIR&gt;</P>
+<P>&lt;DIR&gt;</P>
+
+<P>&lt;P ALIGN="JUSTIFY"&gt;&amp;quot;Deriving Expectations to Guide Knowledge Base Creation&amp;quot;.  J. Kim and Y. Gil.  Proceedings of AAAI-99.  &lt;/P&gt;&lt;/DIR&gt;</P>
+<P>&lt;/DIR&gt;</P>
+
+<P>&lt;/FONT&gt;&lt;B&gt;&lt;I&gt;&lt;FONT FACE="Helvetica"&gt;&lt;P&gt;2.5  Experimental Methodology for Evaluating KA Tools&lt;/P&gt;</P>
+<P>&lt;/B&gt;&lt;/I&gt;&lt;/FONT&gt;&lt;FONT FACE="Times"&gt;&lt;P&gt;We are performing pioneering work in knowledge acquisition concerning the evaluation of KA tools and approaches. EXPECT&amp;#146;s KA tools are already instrumented to collect several kinds of information during a KA session, including times when users execute KA modifications, what kind of modification is done, what pending KA tasks remain according to EXPECT&amp;#146;s analysis of the knowledge base, what new knowledge was added and what and how existing knowledge was changed, etc.  &lt;/P&gt;</P>
+<P>&lt;DIR&gt;</P>
+<P>&lt;DIR&gt;</P>
+
+<P>&lt;P&gt;&amp;quot;A Scripts-Based Approach to Knowledge Acquisition&amp;quot;.  Y. Gil and M. Tallis.  Proceedings of AAAI-97.&lt;/P&gt;</P>
+
+<P>&lt;P&gt;&amp;quot;Designing Scripts to Guide Users in Modifying Knowledge-Based Systems&amp;quot;.  M. Tallis and Y. Gil.  Proceedings of AAAI-99.&lt;/P&gt;</P>
+
+<P>&lt;P ALIGN="JUSTIFY"&gt; &amp;quot;Deriving Expectations to Guide Knowledge Base Creation&amp;quot;.  J. Kim and Y. Gil.    Proceedings of AAAI-99.  &lt;/P&gt;</P>
+<P>&lt;P ALIGN="JUSTIFY"&gt;&lt;/P&gt;&lt;/DIR&gt;</P>
+<P>&lt;/DIR&gt;</P>
+
+<P>&lt;/FONT&gt;&lt;B&gt;&lt;FONT FACE="Times" SIZE=5&gt;&lt;P&gt;3.  Research in Developing and Reusing Ontologies and Problem Solving Method Repositories&lt;/P&gt;</P>
+<P>&lt;/B&gt;&lt;/FONT&gt;&lt;FONT FACE="Times"&gt;</P>
+<P>&lt;P&gt;We are interested in new approaches to knowledge based system development that exploit knowledge repositories in order to develop new knowledge bases more quickly.  &lt;/P&gt;</P>
+<P>&lt;/FONT&gt;&lt;B&gt;&lt;I&gt;&lt;FONT FACE="Helvetica"&gt;&lt;P&gt;3.1  Problem Solving Method Repositories&lt;/P&gt;</P>
+<P>&lt;/B&gt;&lt;/I&gt;&lt;/FONT&gt;&lt;FONT FACE="Times"&gt;&lt;P&gt;&amp;nbsp;&lt;/P&gt;</P>
+<P>&lt;P&gt;We are developing problem-solving methods for a variety of tasks, including plan evaluation and critiquing, configuration design, and plan generation.  The problem-solving knowledge in these methods is represented explicitly, and can be changed and extended using EXPECT&amp;#146;s knowledge acquisition tools.  The methods are coupled with ontologies that define the problem solving terms used in the method.  We are using these methods to develop new applications with EXPECT.  &lt;/P&gt;</P>
+<P>&lt;DIR&gt;</P>
+<P>&lt;DIR&gt;</P>
+
+<P>&lt;P&gt;&amp;quot;Representing Capabilities of Problem-Solving Methods&amp;quot; W. Swartout, Y. Gil, and A. Valente.  Proceedings of 1999 IJCAI Workshop on Ontologies and Problem-Solving Methods.  &lt;/P&gt;</P>
+
+<P>&lt;P&gt;&amp;quot;Explicit Representations of Problem-Solving Strategies to Support Knowledge Acquisition&amp;quot;.  Y. Gil and E. Melz.  Proceedings of AAAI-96.&lt;/P&gt;</P>
+
+<P>&lt;P&gt;&amp;quot;Developing plan evaluation and critiquing tools based on reuse and capture of general principles&amp;quot;.  J. Blythe and Y. Gil. Available from http://www.isi.edu/~blythe/evaluation-psm/&lt;/P&gt;</P>
+
+<P>&lt;P&gt;&amp;quot;Using Description Logics to Match Goals&amp;quot;.  Y. Gil and P. Gonzalez.  Proceedings of the 1996 Workshop on Description Logics.&lt;/P&gt;</P>
+<P>&lt;P&gt;&amp;nbsp;&lt;/P&gt;&lt;/DIR&gt;</P>
+<P>&lt;/DIR&gt;</P>
+
+<P>&lt;/FONT&gt;&lt;B&gt;&lt;I&gt;&lt;FONT FACE="Helvetica"&gt;&lt;P&gt;3.2  Ontologies&lt;/P&gt;</P>
+<P>&lt;/B&gt;&lt;/I&gt;&lt;/FONT&gt;&lt;FONT FACE="Times"&gt;&lt;P&gt;&amp;nbsp;&lt;/P&gt;</P>
+<P>&lt;P&gt;We are developing ontologies that range from domain-independent core theories to domain-specific ontologies.  Unlike other researchers that emphasize the use of ontologies to capture knowledge, our interest is to exploit ontologies for knowledge reuse, integration, and knowledge modelling.  &lt;/P&gt;</P>
+<P>&lt;DIR&gt;</P>
+<P>&lt;DIR&gt;</P>
+
+<P>&lt;P&gt;&amp;quot;PLANET: A shareable and reusable ontology for representing plans&amp;quot;.  Y. Gil and J. Blythe.  Available from &lt;/FONT&gt;&lt;A HREF="http://www.isi.edu/~blythe/planet/"&gt;&lt;FONT FACE="Times"&gt;http://www.isi.edu/~blythe/planet/&lt;/FONT&gt;&lt;/A&gt;&lt;/P&gt;</P>
+<P>&lt;FONT FACE="Times"&gt;</P>
+<P>&lt;P&gt;&amp;quot;Building and (Re)Using an Ontology of Air Campaign Planning&amp;quot;. A. Valente, T. Russ, R. MacGregor, and W. Swartout.  IEEE Intelligent Systems 14(1), 1999.&lt;/P&gt;</P>
+<P>&lt;/DIR&gt;</P>
+<P>&lt;/DIR&gt;</P>
+
+<P>&lt;/FONT&gt;&lt;B&gt;&lt;FONT FACE="Times" SIZE=5&gt;&lt;P&gt;4.  Research in Planning&lt;/P&gt;</P>
+<P>&lt;/B&gt;&lt;/FONT&gt;&lt;FONT FACE="Times"&gt;</P>
+<P>&lt;P&gt;A main focus of the knowledge bases that we have built with EXPECT are planning tools, in particular tools for evaluating and critiquing plans.  The application domains include: air campaign planning, transportation planning, enemy workarounds to damaged targets, and course of action critiquing.  &lt;/P&gt;</P>
+<P>&lt;/FONT&gt;&lt;B&gt;&lt;I&gt;&lt;FONT FACE="Helvetica"&gt;&lt;P&gt;4.1 Plan Evaluation and Critiquing&lt;/P&gt;</P>
+<P>&lt;/B&gt;&lt;/I&gt;&lt;/FONT&gt;&lt;FONT FACE="Times"&gt;&lt;P&gt;We are developing a general-purpose reusable Problem Solving Method (PSM) for plan evaluation and critiquing that includes both ontologies and problem-solving knowledge.   This PSM can be seen as a middle-level theory about plan evaluation.  A user can build plan evaluation and critiquing tools by adapting this PSM to new domains using EXPECT's knowledge acquisition capabilities.  These methods capture knowledge about desirable constraints in the structure of plans and about how to evaluate the use of different types of resources.  The methods are structured so that the user does not have to be aware of the details of how the evaluation system works.  EXPECT identifies the domain-specific knowledge that is needed to create a plan evaluation system for a new domain, and guides the user to provide it. &lt;/P&gt;</P>
+<P>&lt;DIR&gt;</P>
+<P>&lt;DIR&gt;</P>
+
+<P>&lt;P&gt;&amp;quot;Developing plan evaluation and critiquing tools based on reuse and capture of general principles&amp;quot;.  J. Blythe and Y. Gil. Available from http://www.isi.edu/~blythe/evaluation-psm/&lt;/P&gt;&lt;/DIR&gt;</P>
+<P>&lt;/DIR&gt;</P>
+
+<P>&lt;/FONT&gt;&lt;B&gt;&lt;I&gt;&lt;FONT FACE="Helvetica"&gt;&lt;P&gt;4.2  Knowledge-Rich Environments for Planning and Problem Solving&lt;/P&gt;</P>
+<P>&lt;/B&gt;&lt;/I&gt;&lt;/FONT&gt;&lt;FONT FACE="Times"&gt;&lt;P&gt;We are investigating how ontologies as well as explicit representations of problem-solving knowledge enable intelligent systems to operate in environments with large amounts of knowledge.  We are developing expressive languages to represent problem-solving goals and objectives, both domain independent and domain specific.  We are also investigating how to use and reuse of large ontologies in problem-solving contexts.  &lt;/P&gt;</P>
+<P>&lt;DIR&gt;</P>
+<P>&lt;DIR&gt;</P>
+
+<P>&lt;P&gt;&amp;quot;EXPECT: Explicit Representation for Flexible Acquisition&amp;quot;.  W. Swartout and Y. Gil.  Proceedings of 1995 Knowledge Acquisition Workshop.&lt;/P&gt;</P>
+
+<P>&lt;P&gt;&amp;quot;Using Description Logics to Match Goals&amp;quot;.  Y. Gil and P. Gonzalez.  Proceedings of the 1996 Workshop on Description Logics.&lt;/P&gt;</P>
+
+<P>&lt;P&gt;&amp;quot;Building and (Re)Using an Ontology of Air Campaign Planning&amp;quot;. A. Valente, T. Russ, R. MacGregor, and W. Swartout.  IEEE Intelligent Systems 14(1), 1999.&lt;/P&gt;</P>
+
+<P>&lt;P&gt;&amp;quot;Representing Capabilities of Problem-Solving Methods&amp;quot; W. Swartout, Y. Gil, and A. Valente.  Proceedings of 1999 IJCAI Workshop on Ontologies and Problem-Solving Methods.  &lt;/P&gt;</P>
+
+<P>&lt;P&gt;&amp;quot;A Representation and Library for Objectives in Air Campaign Plans&amp;quot;.  A. Valente, W. Swartout, and Y. Gil.  Available from &lt;/FONT&gt;&lt;A HREF="http://www.isi.edu/expect/inspect.html"&gt;&lt;FONT FACE="Times"&gt;http://www.isi.edu/expect/inspect.html&lt;/FONT&gt;&lt;/A&gt;&lt;FONT FACE="Times"&gt;.&lt;/P&gt;</P>
+<P>&lt;P&gt;&amp;nbsp;&lt;/P&gt;&lt;/DIR&gt;</P>
+<P>&lt;/DIR&gt;</P>
+
+<P>&lt;/FONT&gt;&lt;B&gt;&lt;I&gt;&lt;FONT FACE="Helvetica"&gt;&lt;P&gt;4.3  Plan Representation&lt;/P&gt;</P>
+<P>&lt;/B&gt;&lt;/I&gt;&lt;/FONT&gt;&lt;FONT FACE="Times"&gt;&lt;P&gt;&amp;nbsp;&lt;/P&gt;</P>
+<P>&lt;P&gt;PLANET is a reusable ontology for representing plans that is designed to accomodate a diverse range of real-world plans, both manually and automatically created. We have drawn from our past experience in designing, developing and integrating planning tools, and expect planet to ease these tasks in the future in three ways. First, we have already found it useful for knowledge modelling. By providing a structure that formalizes useful distinctions for reasoning about states and actions, a knowledge engineer can find the semantics of informal expressions of plans (e.g., textual or domain-specific) through designing mappings to the ontology. Second, a plan ontology can be a central vehicle for knowledge reuse across planning applications. Planet contains general, domain-independent definitions that are common and useful across planning domains. Third, PLANET should facilitate integration of planning tools through knowledge sharing.&lt;/P&gt;</P>
+
+<P>&lt;P&gt;A related effort is CommonP, a language to represent plans that supports the needs of a plan evaluation tool, a plan editor, a generative planner, and a scheduler. &lt;/P&gt;</P>
+<P>&lt;DIR&gt;</P>
+<P>&lt;DIR&gt;</P>
+
+<P>&lt;P&gt;&amp;quot;PLANET: A shareable and reusable ontology for representing plans&amp;quot;.  Y. Gil and J. Blythe.  Available from &lt;/FONT&gt;&lt;A HREF="http://www.isi.edu/~blythe/planet/"&gt;&lt;FONT FACE="Times"&gt;http://www.isi.edu/~blythe/planet/&lt;/FONT&gt;&lt;/A&gt;&lt;/P&gt;</P>
+<P>&lt;FONT FACE="Times"&gt;</P>
+<P>&lt;P&gt;&amp;quot;CommonP: A Language to Represent Air Campaign Plans&amp;quot;.  Y. Gil, R. MacGregor, K. Myers, S. Smith, W. Swartout.  Internal project report.&lt;/P&gt;</P>
+<P>&lt;P&gt;&amp;nbsp;&lt;/P&gt;&lt;/DIR&gt;</P>
+<P>&lt;/DIR&gt;</P>
+
+<P>&lt;/FONT&gt;&lt;B&gt;&lt;I&gt;&lt;FONT FACE="Helvetica"&gt;&lt;P&gt;4.4  Air Campaign Planning &lt;/P&gt;</P>
+<P>&lt;/B&gt;&lt;/I&gt;&lt;/FONT&gt;&lt;FONT FACE="Times"&gt;&lt;P&gt;We have developed a tool that evaluates and critiques air campaign plans called INSPECT.  It takes an air campaign plan that has been manually developed and looks for possible problems that a user may have overlooked, such as inconsistencies or unrealistic use of resources.  We extended INSPECT to support cross-functional planning by catching problems due to the interdependencies between operational, logistics, and ISR objectives.  An important part of the work on INSPECT was the development of structured representations (or grammars) for air campaign plans.  INSPECT was an integral part of two important demonstrations: ARPI's Fourth Integrated Feasibility Demonstration (IFD-4) in June 1996 and the Jumpstart Demonstration of the DARPA JFACC program in January 1997.  It is also integrated with the ARPI TIE 97-1 Multi-Agent Planning, Simulation, and Visualization Experiment. INSPECT was also demonstrated at the recent EFX-98 Air Force exercise.&lt;/P&gt;</P>
+<P>&lt;DIR&gt;</P>
+<P>&lt;DIR&gt;</P>
+
+<P>&lt;P&gt;&amp;quot;INSPECT: an Intelligent System for Air Campaign Plan Evaluation based on EXPECT&amp;quot;. A. Valente, Y. Gil, and W. Swartout.  Available from http://www.isi.edu/expect/inspect.html.&lt;/P&gt;</P>
+
+<P>&lt;P&gt;&amp;quot;Building and (Re)Using an Ontology of Air Campaign Planning&amp;quot;. A. Valente, T. Russ, R. MacGregor, and W. Swartout.  IEEE Intelligent Systems 14(1), 1999.&lt;/P&gt;</P>
+
+<P>&lt;P&gt;&amp;quot;A Representation and Library for Objectives in Air Campaign Plans&amp;quot;.  A. Valente, W. Swartout, and Y. Gil.  Available from &lt;/FONT&gt;&lt;A HREF="http://www.isi.edu/expect/inspect.html"&gt;&lt;FONT FACE="Times"&gt;http://www.isi.edu/expect/inspect.html&lt;/FONT&gt;&lt;/A&gt;&lt;FONT FACE="Times"&gt;.&lt;/P&gt;</P>
+<P>&lt;/DIR&gt;</P>
+<P>&lt;/DIR&gt;</P>
+
+<P>&lt;/FONT&gt;&lt;B&gt;&lt;FONT FACE="Times" SIZE=5&gt;&lt;P&gt;5.  Research in Multi-Agent Communication and Coordination&lt;/P&gt;</P>
+<P>&lt;/B&gt;&lt;/FONT&gt;&lt;FONT FACE="Times"&gt;</P>
+<P>&lt;P&gt;The main goal of our work in this area is to investigate how ontologies help in agent coordination and communication.  In the EXPECT framework, agents can be viewed as entities with some problem-solving capability that need to be brought together in order to solve more complex problems.  This work is joint with ISI&amp;#146;s Loom/Powerloom project.  &lt;/P&gt;</P>
+<P>&lt;/FONT&gt;&lt;B&gt;&lt;I&gt;&lt;FONT FACE="Helvetica"&gt;&lt;P&gt;5.1  Finding Agents &lt;/P&gt;</P>
+<P>&lt;/B&gt;&lt;/I&gt;&lt;/FONT&gt;&lt;FONT FACE="Times"&gt;&lt;P&gt;&amp;nbsp;&lt;/P&gt;</P>
+<P>&lt;P&gt;This work addresses the issue of how to match requests and agent capabilities through ontologies. The hypothesis is that a broad and shallow ontology (such as the HPKB upper ontology or SENSUS) is sufficient for locating agents.  This work builds on EXPECT&amp;#146;s matcher to find capabilities of problem-solving methods that match a given problem-solving goal.  &lt;/P&gt;</P>
+<P>&lt;DIR&gt;</P>
+<P>&lt;DIR&gt;</P>
+
+<P>&lt;P&gt;&amp;quot;Phosphorus: A Knowledge and Experience-based Agent Capabilities Matcher&amp;quot;. Y. Gil and R. MacGregor.  Available from &lt;/FONT&gt;&lt;A HREF="http://www.isi.edu/expect/projects/agents/phosphorus.html"&gt;&lt;FONT FACE="Times"&gt;http://www.isi.edu/expect/projects/agents/phosphorus.html&lt;/FONT&gt;&lt;/A&gt;&lt;FONT FACE="Times"&gt;.&lt;/P&gt;</P>
+
+<P>&lt;P&gt;&amp;quot;Using Description Logics to Match Goals&amp;quot;.  Y. Gil and P. Gonzalez.  Proceedings of the 1996 Workshop on Description Logics.&lt;/P&gt;</P>
+<P>&lt;P&gt;&amp;nbsp;&lt;/P&gt;&lt;/DIR&gt;</P>
+<P>&lt;/DIR&gt;</P>
+
+<P>&lt;/FONT&gt;&lt;B&gt;&lt;I&gt;&lt;FONT FACE="Helvetica"&gt;&lt;P&gt;5.2  Ontology-Based Agent Communication&lt;/P&gt;</P>
+<P>&lt;/B&gt;&lt;/I&gt;&lt;/FONT&gt;&lt;FONT FACE="Times"&gt;&lt;P&gt;&amp;nbsp;&lt;/P&gt;</P>
+<P>&lt;P&gt; Once you have found agents with the right capability (for example through Phosporus), then they need to use richer ontologies for communicating with each other. For this work, we will be using ontologies and tools that we are developing under the HPKB program.  These include the PLANET ontology for representing plans, and the Ontomorph ontology mapping toolkit.  &lt;/P&gt;</P>
+<P>&lt;DIR&gt;</P>
+<P>&lt;DIR&gt;</P>
+
+<P>&lt;P&gt;&amp;quot;Ontology-based Agent Communication with Rosetta&amp;quot;.  J. Blythe, Y. Gil, R. MacGregor, and B. Swartout.  Available from &lt;/FONT&gt;&lt;A HREF="http://www.isi.edu/expect/projects/agents/rosetta.html"&gt;&lt;FONT FACE="Times"&gt;http://www.isi.edu/expect/projects/agents/rosetta.html&lt;/FONT&gt;&lt;/A&gt;&lt;FONT FACE="Times"&gt;.&lt;/P&gt;</P>
+
+<P>&lt;P&gt;&amp;quot;PLANET: A shareable and reusable ontology for representing plans&amp;quot;.  Y. Gil and J. Blythe.  Available from &lt;/FONT&gt;&lt;A HREF="http://www.isi.edu/~blythe/planet/"&gt;&lt;FONT FACE="Times"&gt;http://www.isi.edu/~blythe/planet/&lt;/FONT&gt;&lt;/A&gt;&lt;/P&gt;</P>
+<P>&lt;FONT FACE="Times"&gt;&lt;/DIR&gt;</P>
+<P>&lt;/DIR&gt;</P>
+<P>&lt;/FONT&gt;&lt;/BODY&gt;</P>
+<P>&lt;/HTML&gt;</P></FONT></BODY>
+</HTML>

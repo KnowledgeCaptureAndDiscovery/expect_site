@@ -1,0 +1,29 @@
+<H2>Description</H2>
+<P>    	   	 
+<B>PHOSPHORUS</B> is a knowledge-based matcher that accepts a user's
+description of a needed service as input and responds with a ranked list of
+agents that have the capability to provide that service. The Phosphorus matcher
+is both knowledge based and experience based. It accesses a base of ontological
+knowledge to assist the process of performing structural matches between pairs
+of requested and advertised capabilities, and it takes a knowledge-based
+approach to guide a post-match decision process that determines how retrieved
+capabilities can be selected, reformulated, and/or combined to best satisfy a
+user request. We assume that exact matches will be relatively rare; our
+matcher exploits domain ontologies to allow loose-coupling between agent
+capabilities and user requests, finding agents that have more specific
+capabilities than what was requested, or agents that can provide a related
+service when no exact matches are found. Loose coupling is enabled by
+using EXPECT's goal and capability language to describe agent capabilities and
+requests are then be matched through subsumption, goal reformulation,
+and partial match. The matcher is also experienced-based, using learning
+techniques to improve the utility of its matches over time.
+<P><B>PHOSPHORUS</B>
+is able to abstract the results of its learning, storing its experience in the
+form of axioms in a knowledge base that summarize its knowledge of matching
+requests with agents within a particular domain. Phosphorus can be used
+standalone or be used as a service within existing agent integration
+architectures. 
+
+
+
+

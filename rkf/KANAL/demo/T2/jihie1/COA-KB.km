@@ -1,0 +1,656 @@
+
+
+;
+
+(Fire-Support has (superclasses (Attack-By-Fire)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; additions for military tasks
+;;;  - preconditions
+;;   - effects
+
+
+(Domain-Concept has (superclasses (Thing)))
+(Military-Task has (superclasses (Action Domain-Concept)))
+(every Military-Task has
+ (type-of-operation ((a Operation-Type)))
+ (agent-attrition-rate ((a Number)))
+ (object-attrition-rate ((a Number)))
+; (agent ((must-be-a Military-Unit)))  
+; (object ((must-be-a Military-Unit))) 
+ (del-list ((forall (the agent of Self)
+              (:set
+                 (:triple It remaining-strength
+			     (the remaining-strength of It) )))
+	    (forall (the object of Self)
+              (:set
+                 (:triple It remaining-strength
+			     (the remaining-strength of It) )))))
+ (add-list ((forall (the object of Self)
+              (:set 
+                 (:triple It remaining-strength 
+			    ((the object-attrition-rate of Self)
+                             * (the remaining-strength of It) ))))
+	    (forall (the agent of Self)
+              (:set 
+                 (:triple It remaining-strength 
+			    ((the agent-attrition-rate of Self)
+                             * (the remaining-strength of It) ))))))
+ 			
+)
+(Engagement-Military-Task has (superclasses (Military-Task)))
+(Non-Engagement-Military-Task has (superclasses (Military-Task)))
+(every Engagement-Military-Task has
+ (required-force-ratio ((a Number)))
+ (available-force-ratio
+   (((the sum of (the bag of 
+			(the relative-combat-power of (the agent of Self))) )
+    /
+    (the sum of (the bag of 
+			(the relative-combat-power of (the object of Self)))))))
+ (soft-pcs-list     ;((forall (the agent of Self)
+                 ;(forall2 (the object of Self)
+                 ;(:triple It location (the is-at of (the location of It2)))))
+		((if ((the required-force-ratio of Self) /= 0) then
+                 (:triple
+                 (the available-force-ratio of Self) 
+                 >=
+		 (the required-force-ratio of Self)))))			
+)
+(COA has (superclasses (Domain-Concept)))
+(Military-Equipment has (superclasses (Domain-Concept)))
+(Military-Unit has (superclasses (Domain-Concept)))
+(every Military-Unit has 
+ (remaining-strength ((a Number)))
+ (default-combat-power ((a Number)))
+ (equipment ((a Military-Equipment)))
+ (relative-combat-power (((the remaining-strength of Self) *
+                          (the default-combat-power of Self))))
+)
+
+
+
+
+(Tank-Unit has (superclasses (Military-Unit)))
+(Tank-Brigade has (superclasses (Brigade Tank-Unit)))
+;(Tank-Brigade has (superclasses (Brigade)))
+(Aviation-Battalion has (superclasses (Battalion)))
+(Artillery-Battery has (superclasses (Battery)))
+(Artillery-Regiment has (superclasses (Regiment)))
+(Cavalry-Squadron has (superclasses (Squadron)))
+
+(Tank has (superclasses (Military-Equipment)))
+(*T64 has (instance-of (Tank)))
+(*M1A2Abrams has (instance-of (Tank)))
+(*MLRS has (instance-of (Military-Equipment)))
+(*M60A3 has (instance-of (Tank)))
+
+
+(relative-combat-power has
+   (instance-of   	(Property))
+   (domain        	(Entity))
+   (range         	(Number))
+   (inverse 	  	(relative-combat-power-of))
+   (fluent-status      	(*Inertial-Fluent))
+   (situation-specific 	(t))
+   (cardinality        	(N-to-1)))
+
+(default-combat-power has
+   (instance-of   	(Property))
+   (domain        	(Entity))
+   (range         	(Number))
+   (inverse 	  	(default-combat-power-of))
+   (fluent-status      	(*Inertial-Fluent))
+   (situation-specific 	(t))
+   (cardinality        	(N-to-1)))
+
+(remaining-strength has
+   (instance-of   	(Property))
+   (domain        	(Entity))
+   (range         	(Number))
+   (inverse 	  	(remaining-strength-of))
+   (fluent-status      	(*Inertial-Fluent))
+   (situation-specific 	(t))
+   (cardinality        	(N-to-1)))
+
+(object-attrition-rate has
+   (instance-of   	(Property))
+   (domain        	(Action))
+   (range         	(Number))
+   (fluent-status      	(*Inertial-Fluent))
+   (situation-specific 	(t))
+   (cardinality        	(N-to-1)))
+
+(agent-attrition-rate has
+   (instance-of   	(Property))
+   (domain        	(Action))
+   (range         	(Number))
+   (fluent-status      	(*Inertial-Fluent))
+   (situation-specific 	(t))
+   (cardinality        	(N-to-1)))
+
+(required-force-ratio has
+   (instance-of           (Relation))
+   (domain                (Engagement-Military-Task))
+   (range                 (Number))
+   (inverse               (required-force-ratio-of))
+   (fluent-status         (*Inertial-Fluent))
+;   (situation-specific    (t))
+   (cardinality           (N-to-1)))
+
+(available-force-ratio has
+   (instance-of           (Relation))
+   (domain                (Engagement-Military-Task))
+   (range                 (Number))
+   (inverse               (available-force-ratio-of))
+   (fluent-status         (*Inertial-Fluent))
+   (situation-specific    (t))
+   (cardinality           (N-to-1)))
+
+;; the main equipment
+(equipment has
+   (instance-of           (Relation))
+   (domain                (Military-Unit))
+   (range                 (Military-Equipment))
+   (fluent-status         (*Inertial-Fluent))
+   (cardinality           (N-to-1)))
+
+(followed-object has
+   (instance-of           (Relation))
+   (domain                (Military-Task))
+   (range                 (Military-Unit))
+   (fluent-status         (*Inertial-Fluent))
+   (cardinality           (N-to-N)))
+;; =====================================================================
+;; required force ratios and attrition rates (temporary values for test)
+;;
+(Attack-To-Destroy has (superclasses (Engagement-Military-Task)))
+(every Attack-To-Destroy has
+  (agent ((a Military-Unit)))
+       (required-force-ratio (3))
+       (object-attrition-rate (0.7))
+       (agent-attrition-rate (0.9))
+	)
+(Attack-To-Destroy-Hasty-Defense has (superclasses (Engagement-Military-Task)))
+(every Attack-To-Destroy-Hasty-Defense has
+  (agent ((a Military-Unit)))
+       (required-force-ratio (2.5))
+       (object-attrition-rate (0.6))
+       (agent-attrition-rate (0.9))
+	)
+(Attack-To-Fix has (superclasses (Engagement-Military-Task)))
+(every Attack-To-Fix has
+  (agent ((a Military-Unit)))
+       (required-force-ratio (1))
+       (agent-attrition-rate (0.8))
+       (object-attrition-rate (0.8))
+	)
+(Follow-Military-Task has (superclasses (Non-Engagement-Military-Task))  )
+(every Follow-Military-Task has
+        (agent-attrition-rate (0.99))
+	)
+ ;; follow the same path as the one followed
+;(every Follow-Military-Task has 
+;	(pcs-list ((forall (the Move-Military-Task object-of of
+;                           (the object-followed of Self))
+;		    (if (not (It isa Follow-Military-Task))
+;		    then
+;                    (:triple Self path (the path of It)))))))
+
+
+
+(Move-Military-Task has (superclasses (Non-Engagement-Military-Task Move)))
+(every Move-Military-Task has
+        (object-attrition-rate (0.99))
+	)
+
+;; ====================================================================
+;; default combat power values (temporary values for test)
+;;
+;; It should be computed based on the given equipment and the echelon
+;; (and some other factors).
+;; Currently, it is simply based on the main equipment and echelon
+;; (unit compositions are ignored and it is assumed that
+;; there is only one main equipment the value relies on)
+
+(Brigade has (superclasses (Military-Unit)))
+
+(every Brigade has
+  (default-combat-power (
+	(if ((the equipment of Self) = *MLRS) then 1.5  ;; with respect to M2 battalion
+         else (if ((the equipment of Self) = *M1A2Abrams) then 1.21
+         else (if ((the equipment of Self) = *M60A3) then 0.89
+         else (if ((the equipment of Self) = *T64) then 0.5 
+         else 0 )))))) 
+)
+
+(Regiment has (superclasses (Military-Unit)))
+
+(every Regiment has
+  (default-combat-power (
+	(if ((the equipment of Self) = *Howitzer122) 0.65 ;; with respect to M2 battalion
+         else 0)))
+) 
+
+
+(Battalion has (superclasses (Military-Unit)))
+
+(every Battalion has
+  (default-combat-power (
+      (if ((the equipment of Self) = *AH64) then 2.81
+         else (if ((the equipment of Self) = *MLRS) then 1.5 
+         else (if ((the equipment of Self) = *M1A2Abrams) then 1.21
+         else (if ((the equipment of Self) = *M60A3) then 0.89
+	   else (if ((the equipment of Self) = *T64) then 0.5  
+         else 0 )))))))
+)
+
+(Squadron has (superclasses (Military-Unit)))
+
+(every Squadron has
+  (default-combat-power (
+	(if ((the equipment of Self) = *MLRS) then 1.5  ;; with respect to M2 battalion
+         else (if ((the equipment of Self) = *M1A2Abrams) then 1.21
+         else (if ((the equipment of Self) = *M60A3) then 0.89
+         else (if ((the equipment of Self) = *T64) then 0.5 
+         else 0))))))
+) 
+
+
+(Battery has (superclasses (Military-Unit)))
+
+(every Battery has
+  (default-combat-power (
+	(if ((the equipment of Self) = *MLRS) then 1.5  ;; with respect to M2 battalion
+         else (if ((the equipment of Self) = *M1A2Abrams) then 1.21
+         else (if ((the equipment of Self) = *Howitzer155) then 1.02
+         else (if ((the equipment of Self) = *M60A3) then 0.89
+         else (if ((the equipment of Self) = *T64) then 0.5 
+         else 0)))))))
+)
+
+
+;;;; ADDED BY GOLDEE
+
+(Mechanized-Infantry-Brigade has (superclasses (Mechanized-Infantry-Unit Brigade)))
+
+(every Mechanized-Infantry-Brigade has
+  (default-combat-power (
+	(if ((the text-phrase of (the allegiance of Self)) = *Blue) then 4.18  ;; with respect to M2 battalion
+         else (if ((the text-phrase of (the allegiance of Self)) = *Red) then 2.31
+         else 0))
+      )
+  )
+)
+
+(Armored-Brigade has (superclasses (Armor-Unit Brigade)))
+
+(every Armored-Brigade has
+  (default-combat-power (
+	(if ((the text-phrase of (the allegiance of Self)) = *Blue) then 4.34  ;; with respect to M2 battalion
+         else (if ((the text-phrase of (the allegiance of Self)) = *Red) then 2.06
+         else 0))
+      )
+  )
+)
+
+(Artillery-Brigade has  (superclasses (Artillery-Unit Brigade)))
+
+(every Artillery-Brigade has
+  (default-combat-power (
+	(if ((the text-phrase of (the allegiance of Self)) = *Red) then 3.16  ;; with respect to M2 battalion
+         else 0)
+      )
+  )
+)
+
+(Armored-Division has (superclasses (Armor-Unit Division)))
+
+(every Armored-Division has
+  (default-combat-power (
+	(if ((the text-phrase of (the allegiance of Self)) = *Blue) then 13.14  ;; with respect to M2 battalion
+         else (if ((the text-phrase of (the allegiance of Self)) = *Red) then 11.9
+         else 0))
+      )
+  )
+)
+
+(Mechanized-Infantry-Division has (superclasses (Mechanized-Infantry-Unit Division)))
+
+(every Mechanized-Infantry-Division has
+  (default-combat-power (
+	(if ((the text-phrase of (the allegiance of Self)) = *Blue) then 18.7  ;; with respect to M2 battalion
+         else 0)
+      )
+  )
+)
+
+(Armored-Battalion has (superclasses (Armor-Unit Battalion)))
+(every Armored-Battalion has
+  (default-combat-power (
+	(if ((the equipment of Self) = *M1A1) then 1.16  ;; with respect to M2 battalion
+         else 0)))
+) 
+
+(Mechanized-Infantry-Battalion has (superclasses (Mechanized-Infantry-Unit Battalion)))
+(every Mechanized-Infantry-Battalion has
+  (default-combat-power (
+	(if ((the equipment of Self) = *M2BFV) then 1  ;; with respect to M2 battalion
+         else (if ((the equipment of Self) = *BMP2) then 0.58 
+         else (if ((the equipment of Self) = *M2BTR60) then 0.41
+         else 0)))))
+)
+
+;; aviation-attack-battalion
+(Aviation-Battalion has (superclasses (Aviation-Unit Battalion)))
+(every Aviation-Battalion has
+  (default-combat-power (
+	(if ((the equipment of Self) = *AH1J) then 2.05  ;; with respect to M2 battalion
+         else 0)))
+)
+
+;; squadron
+(Armored-Cavalry-Squad has (superclasses (Armored-Cavalry-Unit Squad)))
+(every Armored-Cavalry-Squad has
+  (default-combat-power (
+	(if ((the equipment of Self) = *M1) then 1.07  ;; with respect to M2 battalion
+         else (if ((the equipment of Self) = *M3CFV) then 1 
+         else 0))))
+)
+
+;; for general support and direct support
+(Artillery-Battalion has (superclasses (Artillery-Unit Battalion)))
+(every Artillery-Battalion has
+  (default-combat-power (
+	(if ((the equipment of Self) = *ATCM) then 1.5  ;; with respect to M2 battalion
+         else (if ((the equipment of Self) = *MRLS) then 1.5
+         else (if ((the equipment of Self) = *Howitzer155) then 1.02
+         else (if ((the equipment of Self) = *Howitzer152) then 0.79 
+         else (if ((the equipment of Self) = *Howitzer122) then 0.65
+         else 0)))))))
+)
+
+;;;ADDED BY	GOLDEE
+
+(MainTask has
+   (superclasses (Military-Task))
+   )
+
+(ReserveTask has
+   (superclasses (Military-Task))
+   )
+;added by amit
+(every ReserveTask has
+        (agent-attrition-rate (0.9))
+)
+
+(SupportingTask has
+   (superclasses (Military-Task))
+   )
+;added by amit
+(every SupportingTask has
+        (agent-attrition-rate (0.9))
+)
+
+(SupportingFireTask has
+   (superclasses (Engagement-Military-Task))
+   )
+;added by amit
+(every SupportingFireTask has
+        (agent-attrition-rate (0.9))
+)
+
+(Attack-By-Fire has  (superclasses (Engagement-Military-Task)))
+(every Attack-By-Fire has
+    (agent ((a Military-Unit)))
+	(required-force-ratio (1))
+	(agent-attrition-rate (0.9))
+	(object-attrition-rate (0.7))
+)
+
+(Advance has (superclasses (Non-Engagement-Military-Task)))
+(every Advance has
+	(required-force-ratio (1))
+	(object-attrition-rate (0.9))
+)
+
+(Annihilate-Unit has (superclasses (Engagement-Military-Task)))
+(every Annihilate-Unit has
+    (agent ((a Military-Unit)))
+	(required-force-ratio (3))
+        (agent-attrition-rate (0.9))
+	(object-attrition-rate (0.8))
+)
+
+(Attack has (superclasses (Engagement-Military-Task)))
+(every Attack has
+    (agent ((a Military-Unit)))
+	(required-force-ratio (3))
+        (agent-attrition-rate (0.9))
+	(object-attrition-rate (0.8))
+)
+
+;; base
+(Block-Avenue-of-Approach has (superclasses (Engagement-Military-Task Block)))
+(every Block-Avenue-of-Approach has
+    (agent ((a Military-Unit)))
+        (agent-attrition-rate (0.9))
+	(required-force-ratio (0.33))
+	(object-attrition-rate (0.8))
+)
+
+;; base
+(Bypass has (superclasses (Engagement-Military-Task Locomotion)))
+(every Bypass has
+    (agent ((a Military-Unit)))
+        (agent-attrition-rate (0.9))
+	(required-force-ratio (1))
+	(object-attrition-rate (0.8))
+)
+
+;; base
+(Canalize has (superclasses (Engagement-Military-Task Confine)))
+(every Canalize has
+    (agent ((a Military-Unit)))
+        (agent-attrition-rate (0.9))
+	(required-force-ratio (0.33))
+	(object-attrition-rate (0.8))
+)
+
+;; base
+(Clear has (superclasses (Engagement-Military-Task Move)))
+(every Clear has
+    (agent ((a Military-Unit)))
+        (agent-attrition-rate (0.9))
+	(required-force-ratio (1))
+	(object-attrition-rate (0.8))
+)
+
+(Contain has (superclasses (Engagement-Military-Task Confine)))
+(every Contain has
+    (agent ((a Military-Unit)))
+        (agent-attrition-rate (0.9))
+	(required-force-ratio (0.33))
+	(object-attrition-rate (0.8))
+)
+
+;; path
+(Cross has (superclasses (Engagement-Military-Task Locomotion)))
+(every Cross has
+    (agent ((a Military-Unit)))
+        (agent-attrition-rate (0.9))
+	(required-force-ratio (1))
+)
+
+(Defeat-Unit has (superclasses (Engagement-Military-Task)))
+(every Defeat-Unit has
+    (agent ((a Military-Unit)))
+        (agent-attrition-rate (0.9))
+	(required-force-ratio (3))
+	(object-attrition-rate (0.8))
+)
+
+(Delay has (superclasses (Military-Task)))
+(every Delay has
+    (agent ((a Military-Unit)))
+        (agent-attrition-rate (0.9))
+	(required-force-ratio (0.17))
+	(object-attrition-rate (0.8))
+)
+
+(Destroy-Unit has (superclasses (Engagement-Military-Task)))
+(every Destroy-Unit has
+    (agent ((a Military-Unit)))
+	(required-force-ratio (3))
+        (agent-attrition-rate (0.9))
+	(object-attrition-rate (0.8))
+)
+
+;; inhibits
+(Disrupt has (superclasses (Engagement-Military-Task)))
+(every Disrupt has
+    (agent ((a Military-Unit)))
+	(required-force-ratio (1))
+        (agent-attrition-rate (0.9))
+	(object-attrition-rate (0.8))
+)
+
+;; base
+(Fix has (superclasses (Military-Task)))
+(every Fix has
+    (agent ((a Military-Unit)))
+	(required-force-ratio (1))
+        (agent-attrition-rate (0.9))
+	(object-attrition-rate (0.8))
+)
+
+;; base, path
+(Follow-and-Assume has (superclasses (Military-Task Follow)))
+(every Follow-and-Assume has
+    (agent ((a Military-Unit)))
+	(required-force-ratio (1))
+        (agent-attrition-rate (0.9))
+)
+
+;; supports, base , path
+(Follow-and-Support has (superclasses (Military-Task Follow)))
+(every Follow-and-Support has
+    (agent ((a Military-Unit)))
+	(required-force-ratio (1))
+        (agent-attrition-rate (0.9))
+)
+
+(Give-Early-Warning has (superclasses (Military-Task)))
+(every Give-Early-Warning has
+    (agent ((a Military-Unit)))
+        (agent-attrition-rate (0.9))
+	(required-force-ratio (1))
+	(object-attrition-rate (0.8))
+)
+
+(Guard has (superclasses (Engagement-Military-Task)))
+(every Guard has
+    (agent ((a Military-Unit)))
+        (agent-attrition-rate (0.9))
+	(required-force-ratio (1))
+	(object-attrition-rate (0.8))
+)
+
+(Interdict has (superclasses (Engagement-Military-Task)))
+(every Interdict has
+    (agent ((a Military-Unit)))
+        (agent-attrition-rate (0.9))
+	(required-force-ratio (1))
+	(object-attrition-rate (0.8))
+)
+
+(Neutralize-Unit has (superclasses (Engagement-Military-Task)))
+(every Neutralize-Unit has
+    (agent ((a Military-Unit)))
+        (agent-attrition-rate (0.9))
+	(required-force-ratio (3))
+	(object-attrition-rate (0.8))
+)
+
+;; path
+(Occupy has (superclasses (Military-Task Locomotion)))
+(every Occupy has
+    (agent ((a Military-Unit)))
+        (agent-attrition-rate (0.9))
+	(required-force-ratio (2))
+	(object-attrition-rate (0.8))
+)
+
+;; site
+(Penetrate-Defenses has (superclasses (Engagement-Military-Task Penetrate)))
+(every Penetrate-Defenses has
+    (agent ((a Military-Unit)))
+        (agent-attrition-rate (0.9))
+	(required-force-ratio (2))
+	(object-attrition-rate (0.8))
+)
+
+(Reconstitute-Unit has (superclasses (Military-Task)))
+(every Reconstitute-Unit has
+    (agent ((a Military-Unit)))
+        (agent-attrition-rate (0.9))
+	(required-force-ratio (1))
+	(object-attrition-rate (0.8))
+)
+
+(Reinforce has (superclasses (Military-Task)))
+(every Reinforce has
+    (agent ((a Military-Unit)))
+        (agent-attrition-rate (0.9))
+	(required-force-ratio (1))
+	(object-attrition-rate (0.8))
+)
+
+(Retain has (superclasses (Engagement-Military-Task)))
+(every Retain has
+    (agent ((a Military-Unit)))
+        (agent-attrition-rate (0.9))
+	(required-force-ratio (1))
+	(object-attrition-rate (0.8))
+)
+
+(Screen has (superclasses (Engagement-Military-Task)))
+(every Screen has
+    (agent ((a Military-Unit)))
+        (agent-attrition-rate (0.9))
+	(required-force-ratio (1))
+	(object-attrition-rate (0.8))
+)
+
+(Secure has (superclasses (Engagement-Military-Task)))
+(every Secure has
+    (agent ((a Military-Unit)))
+        (agent-attrition-rate (0.9))
+	(required-force-ratio (1))
+	(object-attrition-rate (0.8))
+)
+
+(Seize has (superclasses (Engagement-Military-Task)))
+(every Seize has
+    (agent ((a Military-Unit)))
+        (agent-attrition-rate (0.9))
+	(required-force-ratio (3))
+	(object-attrition-rate (0.8))
+)
+
+(Support-by-Fire has (superclasses (Engagement-Military-Task)))
+(every Support-by-Fire has
+    (agent ((a Military-Unit)))
+        (agent-attrition-rate (0.9))
+	(required-force-ratio (1))
+	(object-attrition-rate (0.8))
+)
+
+(Suppress has (superclasses (Engagement-Military-Task)))
+(every Suppress has
+    (agent ((a Military-Unit)))
+        (agent-attrition-rate (0.9))
+	(required-force-ratio (2))
+	(object-attrition-rate (0.8))
+)
+

@@ -1,0 +1,494 @@
+<HTML><HEAD><TITLE>SAXON API User's Guide</TITLE></HEAD>
+<BODY>
+<H1>SAXON API User's Guide</H1>
+
+<HR>
+<TABLE><TR><TD WIDTH=200></TD><TD><B>Contents</B></TD></TR>
+<TR><TD></TD><TD VALIGN=TOP>
+<A HREF=#Scope>Scope and Purpose</A><BR>
+<A HREF=#Structure>Structure</A><BR>
+<A HREF=#Distributor>The Distributor</A><BR>
+<A HREF=#Renderer>The Renderer</A><BR>
+<A HREF=#ElementHandler>Writing an Element Handler</A><BR>
+<A HREF=#ElementInfo>The ElementInfo Object</A><BR>
+<A HREF=#DOM>Using SAXON with the Document Object Model</A><BR>
+<A HREF=#XRenderer>The XRenderer Interface</A><BR>
+</TD></TR></TABLE><HR>
+
+<A NAME=Scope><H2>What is SAXON?</H2></A>
+The SAXON package is a Java interface for processing XML documents.<P>
+
+
+
+It offers an alternative to both the raw SAX interface
+(see <A HREF="http://www.microstar.com/xml/sax">www.microstar.com/xml/sax</A>)
+and the full Document Object Model as defined by <A HREF="http://www.w3.org/dom">
+W3C</A>.<P>
+
+Like SAX, SAXON is an event-driven interface in which user-written code is
+called when particular constructs are encountered in the source XML document.
+If you are familiar with SAX, the main differences in SAXON are:<P>
+<UL><LI>You can provide a separate handler for each element type, making
+your application more modular
+<LI>SAXON supplies context information to your application, so you
+can find out, for example, the parent element of the one you are
+currently processing
+<LI>SAXON provides facilities for organizing the output of your application,
+allowing you to associate different output streams (Java Writers) with
+individual element instances or types.
+<LI>SAXON provides a number of standard element handlers that you
+can use to perform common rendition tasks. A SAXON application to produce HTML output
+will often be much simpler than an equivalent XSL script, and SAXON
+imposes fewer constraints.
+<LI>SAXON allows you to register your preferred SAX-compliant XML parser;
+you do not need to hard-code the name of the parser into your application
+or supply it each time on the command line.
+<LI>SAXON extends the SAX InputSource class allowing you to specify a
+file name as the source of input. 
+</UL>
+
+An alternative way to process XML documents is to allow the XML parser to
+create a tree structure - the Document Object Model or DOM - in memory, and 
+then to navigate around this structure within your application. This is more
+flexible than SAX, because processing does not need to be strictly serial, but
+it can be difficult to write maintainable code to this interface. SAXON allows
+you to process the DOM, or any part of it, in the same way as you process a raw
+XML document, using exactly the same element handlers. This allows you to
+easily adapt an existing application to take advantage of the DOM if required,
+without a rewrite.<P>
+
+<A NAME="Structure"><H2>Structure</H2></A>
+
+SAXON is constructed as two distinct layers. You can use layer 1 on its own, which
+provides the basic services, or you can use it in conjunction with layer 2, which provides
+more specialised services.<P>
+
+Layer 1, the <B>Distributor</B>, is responsible for registering and invoking
+appropriate element handlers for each element type, and for providing the
+element handler with contextual information about each element. It also
+allows a Writer object to be registered for particular element types, so that
+the input document can be split hierarchically. by channelling different parts
+to different output destinations. This is useful both for splitting an input XML document into multiple XML
+documents, and for creating HTML fragments that can be reassembled in a different
+order for display<P>
+
+Layer 2, the <B>Renderer</B>, provides a number of element handlers that
+can be used to transform the XML information into a suitable output stream
+(typically but not necessarily XML or HTML).<P>  
+
+
+<A NAME=Distributor><H2>The Distributor</H2></A>
+
+The core of SAXON is a program called the <A HREF="com.icl.saxon.Distributor.html">
+<B>Distributor</B></A>. The reason for the name
+is that it distributes events among a number of registered element handlers.
+ (Another reason is that there already
+seemed to be plenty of things around called "driver", "parser", "manager", 
+"processor", or "handler", and I needed a new name).<P>
+
+You can write an application either by sub-classing Distributor or by 
+instantiating it and invoking its services directly.<P>
+
+Running the Distributor is a several-stage process:<P>
+
+<OL>
+<LI>Instantiate it:<P> 
+<CODE><I>Distributor d = new Distributor()</I></CODE><P>
+The following steps can be done either from your calling program, or from
+a constructor or initialisation method that you define within a subclass.<P>
+
+<LI>Select the <B>Writers</B> for individual element types in your XML
+document. A Writer is typically used for a major hierarchic subdivision of your XML document;
+if you define the Writer for one element type, then all the elements subordinate
+to it will use the same Writer, unless you define otherwise. The appropriate
+Writer is used whenever your element handler uses the write() method to produce
+output. You can achieve maximum flexibility by using a StringWriter.<P>
+
+Note that the Writer is associated with element types, not instances: if you call:<P>
+
+<CODE><I>d.setWriter("SCENE", sceneWriter);</I></CODE><P>
+
+then all SCENE elements and their subordinate elements will be output using
+the same sceneWriter object. An alternative, more flexible approach is to
+define a separate writer for each element instance: you can do this by calling
+<I>ElementInfo.setWriter()</I> from the <I>startElement()</I> method in
+your element handler.<P>
+
+If the element type does not identify the context uniquely, you can qualify
+it with the parent element type. For example:<P>
+
+<CODE>
+<I>d.setWriter("ACT/TITLE", actWriter);</I><P></CODE>
+
+This sets the context for the TITLE element whenever
+it occurs immediately within an ACT element. (This PARENT/CHILD syntax
+is used consistently throughout the SAXON API).<P>
+
+<LI>Select the element handlers to be used for individual elements
+of your XML document. See the following section for how to write an 
+element handler.<P>
+
+<CODE>
+<I>d.setHandler( "SCENE", new SCENEHandler() );</I><BR>
+<I>d.setHandler( "ACT/TITLE", new ACTTITLEHandler() );</I><P>
+</CODE>
+
+Again you can use the PARENT/CHILD syntax.<P>
+
+ You can define several
+handlers for the same element type: they are invoked "outwards-in". That is,
+the first handler registered is called before the second in the case of
+the startGroup(), startElement(), characters(), and ignorable() interfaces;
+the first handler is called after the second in the case of endElement() and
+endGroup(). Note however that if there there is a handler for ACT/TITLE and
+another for TITLE, the handler for TITLE will never be called to process a
+TITLE that appears immediately within an ACT.<P>
+
+If you supply no element handler for a particular element type, the Distributor uses a null
+handler that does nothing (but it still processes its children).<P>
+
+<LI>Run the Distributor, supplying an input XML file.<P>
+<CODE><I>d.run(new ExtendedInputSource(new File(filename)))</I></CODE><P>
+The parameter to run() is an InputSource, as defined in the SAX
+interface. Because using a file as input is common, SAXON provides 
+for convenience the class ExtendedInputSource which allows a File
+to be supplied as the input source.<P>
+
+</OL><P>
+
+<A NAME=Renderer><H2>The Renderer</H2></A>
+
+The SAXON <A HREF="com.icl.saxon.Renderer.html">Renderer</A> class
+ specialises the Distributor for applications that
+involve transformation of an XML input document into (typically) XML
+or HTML output documents.<P>
+
+The main purpose of Renderer is to provide a number of standard element
+handlers, and a simple way of invoking them using simple parameters.
+ The relevant interfaces are:<P>
+
+    <TABLE><TR><TD VALIGN=TOP>
+    <A HREF="com.icl.saxon.Renderer.html#setItemRendition">setItemRendition</A></TD><TD>
+    This invokes the standard element handler <A HREF="com.icl.saxon.ItemRenderer.html">
+    ItemRenderer</A> which outputs the character content
+    of the element, preceded and followed by user-supplied strings. These strings
+    can also include parameterised insertion points to insert the values of
+    attributes.</TD></TR>
+    <TR><TD VALIGN=TOP>
+    <A HREF="com.icl.saxon.Renderer.html#setGroupRendition">setGroupRendition</A></TD><TD>
+    This invokes the standard element handler <A HREF="com.icl.saxon.GroupRenderer.html">
+    GroupRenderer</A> which processes a group of one or
+    more consecutive elements of the same type. It outputs the character content
+    of the elements unchanged, and also outputs user-specified strings before
+    the first element of the group, between consecutive elements of the group,
+    and after the last element of the group.
+    </TD></TR>
+    <TR><TD VALIGN=TOP>
+    <A HREF="com.icl.saxon.Renderer.html#setNumbering">setNumbering</TD><TD>
+    This invokes the standard element handler <A HREF="com.icl.saxon.NumberHandler.html">
+    NumberHandler</A> which generates consecutive numbers for elements
+    subordinate to a given hierarchic level. The numbers are generated as pseudo-attributes
+    which can be accessed and output in the same way as any other attribute of an element.
+    </TD></TR>
+    <TR><TD VALIGN=TOP>
+    <A HREF="com.icl.saxon.Renderer.html#setSorter">setSorter</TD><TD>
+    This invokes the standard element handler <A HREF="com.icl.saxon.ElementSorter.html">
+    ElementSorter</A> which allows a group of consecutive elements of the same type
+    to be sorted on the value of any attribute, or on the content, or on a calculated
+    attribute (which might, for example, be the value of a nested child element).
+    </TD></TR></TABLE>Of course you can also supply your own element handlers,
+     as with the Distributor.<P>
+
+
+The Renderer also provides a number of useful rendition services, for example the ability to
+"escape" character data by replacing special characters such as &lt; with their
+XML/HTML expansions such as &amp;lt;.<P>
+
+Unlike the Distributor, the default element handler used by the Renderer
+is <A HREF="com.icl.saxon.ElementCopier.html">ElementCopier</A>. This
+element handler copies the XML input to the appropriate output writer.<P>
+
+
+<A NAME=ElementHandler><H2>Writing an Element Handler</H2></A>
+
+User-written element-handlers should be written to implement the
+interface <A HREF="com.icl.saxon.ElementHandler.html">
+ElementHandler</A>. Optionally, you can define them as subclasses of the
+system-supplied class <A HREF="com.icl.saxon.ElementHandlerBase.html">
+ElementHandlerBase</A>, an element handler that does nothing. Or you
+ can define them as subclasses of the
+system-supplied class <A HREF="com.icl.saxon.ElementCopier.html">
+ElementCopier</A>, an element handler that copies the element (tags,
+attributes, and immediate character content - but not of course child
+elements) to the appropriate output writer.<P>
+
+If you write your element handler by subclassing one of these
+supplied element handlers, then you only need to provide those
+methods that perform a different action from the default.<P>
+
+Normally you will write one element handler for each type of element,
+but it is quite possible to use the same handler for several
+different elements. You can also write completely general-purpose
+handlers: the system-supplied NumberHandler which performs automatic
+section numbering is an example.<P>
+
+You provide one method for each event associated with the selected
+element type. The events available are:<P>
+
+<TABLE>
+<TR><TD VALIGN=TOP WIDTH=150>
+<A HREF="com.icl.saxon.ElementHandler.html#beforeGroup">beforeGroup()</A></TD>
+<TD>This is called immediately before a group
+of one or more elements of the same type appearing in sequence. To
+put it another way, it is called before every element that is not
+preceded by another of the same type. This event can be very useful
+when generating table structures for output. (Note, unlike the similar
+construct in XSL, this event occurs even for a "group" of one element,
+and it does not inhibit the startElement() event).</TD></TR>
+
+<TR><TD VALIGN=TOP>
+<A HREF="com.icl.saxon.ElementHandler.html#startElement">startElement()</A>
+</TD><TD>This is called when the start of the element
+is encountered. The ElementInfo object passed gives you information about
+the element and it attributes. It also gives you access to the Context object
+appropriate to your context in the XML source.
+You can store information in the ElementInfo object
+if you wish, using one of two techniques:
+
+    <UL>
+    <LI>The setExtendedAttribute() interface allows you to store a keyword=value
+    pair as if it were an attribute encountered in the XML source. You can set the
+    attribute either on the current element, or on another element such as the parent
+    element. This technique is useful
+    if you want to supply a default value that was omitted in the source; but the
+    mechanism is completely general, and you can invent new attributes and even new
+    element types if you wish. 
+    <LI>The setUserData() interface allows you to store an arbitrary object in the
+    ElementInfo object. This is useful if you are building up an object model from
+    the XML document, and you want to link XML elements to objects in your model.
+    It also allows you to perform simple functions such as counting the length of
+    character data encountered within an element.
+    </UL>
+</TD></TR>
+
+<TR><TD VALIGN=TOP>
+<A HREF="com.icl.saxon.ElementHandler.html#characters">characters()</A>
+</TD><TD>This is called when character data is
+encountered within the context of this element type. You have access 
+to the same ElementInfo structure as is used for the start and end of the element.</TD></TR>
+
+<TR><TD VALIGN=TOP>
+<A HREF="com.icl.saxon.ElementHandler.html#ignorable">ignorable()</A>
+</TD><TD>This is called when "ignorable white space" is
+encountered within the context of this element type. </TD></TR>
+
+<TR><TD VALIGN=TOP>
+<A HREF="com.icl.saxon.ElementHandler.html#endElement">endElement()</A>
+</TD><TD>This is called when the end of the element is
+encountered. You have access to the same ElementInfo structure as was used for the start
+of the corresponding element.</TD></TR>
+
+<TR><TD VALIGN=TOP>
+<A HREF="com.icl.saxon.ElementHandler.html#afterGroup">afterGroup()</A>
+</TD><TD>This is called at the end of a sequence of one or
+more elements of the same type. More strictly, it is called when the group
+is known to have ended: that is, before processing the first element at the
+same level of a different type, or the end tag of the parent element. For
+example, the event occurs for element P at the point marked * in the following
+sequences:<BR>
+<PRE>
+    &lt;P&gt;&lt;/P&gt;(text)&lt;P&gt;&lt;/P&gt;(text)*&lt;Q&gt;&lt;/Q&gt;
+    &lt;K&gt;&lt;P&gt;&lt;/P&gt;(text)&lt;P&gt;&lt;/P&gt;(text)*&lt;/K&gt;
+</PRE>
+
+</TD></TR></TABLE>
+
+
+<A NAME=ElementInfo><H2>The ElementInfo Object</H2></A>
+
+The ElementInfo object represents an element of the XML document (that is,
+a structure with a start and end tag)<P>
+
+The main purpose of the ElementInfo object is to provide element handlers
+with information about the context in which they are called. The methods
+available include:<P>
+
+<TABLE><TR>
+<TD VALIGN=TOP WIDTH=150>
+<A HREF="com.icl.saxon.ElementInfo.html#getTag">getTag()</A></TD>
+<TD>get the tag of the element, as a String</TD></TR>
+
+
+
+<TR><TD VALIGN=TOP>
+<A HREF="com.icl.saxon.ElementInfo.html#getAttributeList">getAttributeList()</A></TD>
+<TD>get the values of all the attributes of this element, 
+as a SAX AttributeList object. </TD></TR>
+
+<TR><TD VALIGN=TOP>
+<A HREF="com.icl.saxon.ElementInfo.html#getAttribute">getAttribute()</A></TD>
+<TD>get the value of a specified attribute, as a String. </TD></TR>
+
+<TR><TD VALIGN=TOP>
+<A HREF="com.icl.saxon.ElementInfo.html#getExtendedAttribute">getExtendedAttribute()</A></TD>
+<TD>get the value of a specified attribute, as a String. This can
+retrieve either an attribute on the current element, or the most-recently
+encountered attribute on a different element: use the syntax
+"element-name/attribute-name". This might be an attribute actually present
+in the source document, or an attribute created dynamically using the
+setExtendedAttribute() interface.</TD></TR>
+
+<TR><TD VALIGN=TOP>
+<A HREF="com.icl.saxon.ElementInfo.html#getParent">getParent()</A></TD>
+<TD>get the ElementInfo of the parent element. Note that if you frequently
+need to take different action depending on the parent element type,
+it may be better to provide separate handlers for the element depending
+on the context it appears in.</TD></TR>
+
+<TR><TD VALIGN=TOP>
+<A HREF="com.icl.saxon.ElementInfo.html#getAncestor">getAncestor()</A></TD>
+<TD>get the nearest ancestor with a specified tag. This is often useful
+for locating the root element.</TD></TR>
+
+<TR><TD VALIGN=TOP>
+<A HREF="com.icl.saxon.ElementInfo.html#getPreviousSibling">getPreviousSibling()</A></TD>
+<TD>get the ElementInfo for the previous element at the same
+level. (Note that you can navigate to your ancestors or to your older siblings, or to
+the older siblings of your ancestors. You cannot look forwards in the document, or
+navigate to your children, or to the children of any element that has already ended.
+ If you need to do this, use the DOM.)</TD></TR>
+
+<TR><TD VALIGN=TOP>
+<A HREF="com.icl.saxon.ElementInfo.html#setuserData">setUserData()</A>,<BR>
+<A HREF="com.icl.saxon.ElementInfo.html#getUserData">getUserData()</A></TD>
+<TD>These methods allow you to save information
+in your startElement() handler which will be available later in other handlers such
+as endElement(), and also when processing character data or child elements occurring
+within this element</TD></TR>
+
+<TR><TD VALIGN=TOP>
+<A HREF="com.icl.saxon.ElementInfo.html#isFirstOfType">isFirstOfType()</A></TD>
+<TD>True if the element is the first of a group of one or
+more consecutive elements of the same type at the same level. Since 
+a single element counts as a group, this returns false only if the element
+is immediately preceded by another element of the same type at the same level.</TD></TR>
+
+<TR><TD VALIGN=TOP>
+<A HREF="com.icl.saxon.ElementInfo.html#isFirstChild">isFirstChild()</A></TD>
+<TD>True if the element is the first child element of its parent</TD></TR>
+
+<TR><TD VALIGN=TOP>
+<A HREF="com.icl.saxon.ElementInfo.html#hasParent">hasParent()</TD>
+<TD>True if the parent element has the tag specified as a parameter. This is a
+convenience method, the same effect can be achieved using 
+getParent().getTag().equals(tag)</TD></TR>
+
+<TR><TD VALIGN=TOP>
+<A HREF="com.icl.saxon.ElementInfo.html#setExtendedAttribute">
+setExtendedAttribute()</A></TD>
+<TD>As an alternative to setUserData(), this allows you to save
+information associated with the element for later use. The information can be retrieved
+later using getExtendedAttribute() exactly as if it were present in the original XML source. The
+special attribute named "#" is set in this way if you invoke the NumberHandler on the
+element; the "#" attribute contains the generated section number.</TD></TR>
+
+<TR><TD VALIGN=TOP>
+<A HREF="com.icl.saxon.ElementInfo.html#getHandler">
+getHandler()</A></TD>
+<TD>This returns the handler for the element in question. This is useful
+because you can navigate from the current element to other elements such as
+an ancestor; calling getHandler() on the ElementInfo for the Ancestor
+element can give access to methods associated with that element type, 
+for example a method that understands the attributes on that element.
+(Remember that your element handler can provide methods additional to
+those defined in the ElementHandler interface.)</TD></TR>
+
+<TR><TD VALIGN=TOP>
+<A HREF="com.icl.saxon.ElementInfo.html#getElementInDOM">
+getElementInDOM()</A></TD>
+<TD>This method can only be used if you have chosen to build the
+Document Object Model (DOM) by calling 
+<A HREF="com.icl.saxon.Distributor.html#setOption">setOption()</A> to set the
+BUILD_DOM option. If you did this, getElementInDOM() will return the
+Element object for the current element, as defined in the DOM specification.
+You can use this in any way permitted by the DOM, for example you can
+add additional child elements to this element.</TD></TR>
+
+</TABLE>
+
+<A NAME="DOM"><H2>Using SAXON with the Document Object Model</H2></A>
+
+If the BUILD_DOM option to Distributor is set to true (using the 
+<A HREF="com.icl.saxon.Distributor.html#setOption">setOption()</A> interface)
+then SAXON will operate in two passes. The first pass will
+build the Document Object Model in memory, and the second pass will
+perform a depth-first traversal of the DOM tree structure, calling
+SAXON element handlers as it does so.<P>
+
+Using this option is slower, but it gives the application added flexibility.
+For example: <UL>
+
+<LI>After processing the entire tree once, you can process individual nodes
+of the tree again, perhaps with different element handlers. 
+
+<LI>The ElementInfo structure passed to element handlers includes a pointer
+to the relevant node of the DOM tree. You can use this to perform navigation
+that would not be possible using SAXON alone, for example finding an element
+by the value of its attributes. Having done this, you can create a new instance
+of Distributor and use it to process another branch of the DOM tree.
+
+<LI>You can modify the DOM tree and then use SAXON to navigate the modified DOM.
+There is also a function to save the current state of the DOM tree as an
+XML document: this is implemented simply by doing a complete walk of the
+tree with the standard SAXON ElementCopier as the element handler.
+
+</UL>
+[A word of warning: this aspect of SAXON is relatively new and untested.]<P>
+
+To build the DOM, SAXON uses the FREE-DOM package (available from www.docuverse.com )
+SAXON includes a driver, DOMDriver, which behaves as a SAX-compliant parser but
+builds the FREE-DOM tree and uses this, rather than the raw XML document, as
+its input.<P>
+
+<A NAME="XRenderer"><H2>The XRenderer Interface</H2></A>
+
+The class <A HREF="com.icl.saxon.XRenderer.html">XRenderer</A> is designed to
+provide a simple interface to SAXON's capabilities for use from ActiveX
+environments such as Active Server Pages. This is achieved by registering
+XRenderer as an ActiveX object using Microsoft's javareg tool. To make
+XRenderer easy to use from such environments, all its methods take simple 
+character strings and integers (and not objects) as parameters.<P>
+
+XRenderer provides the following interfaces:<P>
+<TABLE><TR><TD VALIGN=TOP WIDTH=150>
+<A HREF="com.icl.saxon.XRenderer.html#selectBucket">selectBucket()</A>
+</TD><TD>Set output bucket for an element
+</TD></TR><TR><TD VALIGN=TOP>
+<A HREF="com.icl.saxon.XRenderer.html#setItemRendition">setItemRendition()</A>
+</TD><TD>Define a prefix and suffix to be used for displaying an element
+</TD></TR><TR><TD VALIGN=TOP>
+<A HREF="com.icl.saxon.XRenderer.html#setGroupRendition">setGroupRendition()</A>
+</TD><TD>Define strings to be displayed before, after, and between the elements
+in a group of consecutive elements of the same type
+</TD></TR><TR><TD VALIGN=TOP>
+<A HREF="com.icl.saxon.XRenderer.html#setNumbering">setNumbering()</A>
+</TD><TD>Establish automatic section numbering for an element
+</TD></TR><TR><TD VALIGN=TOP>
+<A HREF="com.icl.saxon.XRenderer.html#setInputFile">setInputFile()</A>
+</TD><TD>Process an XML input file
+</TD></TR><TR><TD VALIGN=TOP>
+<A HREF="com.icl.saxon.XRenderer.html#getErrorText">getErrorText()</A>
+</TD><TD>After processing, get error text.
+</TD></TR><TR><TD VALIGN=TOP>
+<A HREF="com.icl.saxon.XRenderer.html#readBucket">readBucket()</A>
+</TD><TD>After processing, read the contents of an output bucket
+</TD></TR><TR><TD VALIGN=TOP>
+</TABLE>
+
+<HR><CENTER><I>Michael H. Kay<BR>15 June 1998</I></CENTER>
+
+</BODY>
+</HTML>
+
+
+

@@ -1,0 +1,99 @@
+
+#|
+;;; INFORMAL SKETCH OF THIS PROTOTYPE:
+
+Fire-SCUD
+  destination(o): Target and Tangible-Entity
+  origin(o): Tangible-Entity
+  recipient(o): Target and Tangible-Entity
+  donor(o): Tangible-Entity
+  subevent(i): Relinquish
+                 next-event(i): Move...
+                 donor(o): Tangible-Entity
+                 object(o): SCUD...
+                 agent(o): Tangible-Entity
+               Move
+                 next-event(i): Deliver...
+                 destination(o): Target and Tangible-Entity
+                 origin(o): Tangible-Entity
+                 object(o): SCUD...
+               Deliver
+                 recipient(o): Target and Tangible-Entity
+                 donor(o): Tangible-Entity
+                 object(o): SCUD...
+  first-subevent(i): Relinquish
+                       next-event(i): Move...
+                       donor(o): Tangible-Entity
+                       object(o): SCUD...
+                       agent(o): Tangible-Entity
+  object(o): SCUD
+               location(o): Place
+  agent(o): Tangible-Entity
+
+|#
+
+;;; KM REPRESENTATION OF THIS PROTOTYPE
+
+(Fire-SCUD has (superclasses (Fire)))
+
+(Fire-SCUD now-has (prototypes (_Fire-SCUD1231)))
+
+(_Fire-SCUD1231 has
+  (prototype-of (Fire-SCUD))
+  (prototype-scope (Fire-SCUD))
+  (prototype-participants (_Fire-SCUD1231 _Target1232 _Move1233
+                           _Deliver1234 _Relinquish1235 _Projectile1236
+                           _Tangible-Entity1237 _Place1238)))
+
+(_Fire-SCUD1231 has
+  (instance-of (Fire-SCUD))
+  (agent (_Tangible-Entity1237))
+  (object (_Projectile1236))
+  (first-subevent (_Relinquish1235))
+  (subevent (_Relinquish1235 _Move1233 _Deliver1234))
+  (donor (_Tangible-Entity1237))
+  (recipient (_Target1232))
+  (origin (_Tangible-Entity1237))
+  (destination (_Target1232))
+  (new-objects (_Projectile1236 _Target1232)))
+
+(_Target1232 has (instance-of (Target Tangible-Entity)))
+
+(_Move1233 has
+  (instance-of (Move))
+  (object (_Projectile1236))
+  (origin (_Tangible-Entity1237))
+  (destination (_Target1232))
+  (next-event (_Deliver1234)))
+
+(_Deliver1234 has
+  (instance-of (Deliver))
+  (object (_Projectile1236))
+  (donor (_Tangible-Entity1237))
+  (recipient (_Target1232)))
+
+(_Relinquish1235 has
+  (instance-of (Relinquish))
+  (agent (_Tangible-Entity1237))
+  (object (_Projectile1236))
+  (donor (_Tangible-Entity1237))
+  (next-event (_Move1233)))
+
+(_Projectile1236 has (instance-of (SCUD)) (location (_Place1238)))
+
+(_Tangible-Entity1237 has (instance-of (Tangible-Entity)))
+
+(_Place1238 has (instance-of (Place)))
+
+(explanation (:triple _Target1232 instance-of Target)
+ (((@ SME entered))
+  (every Fire-SCUD has
+   (destination
+    ((a Target with (instance-of ((a Target) Tangible-Entity))))))))
+
+
+#|
+;;; TRADITIONAL FORMAT FOR SME'S LAST ACTIONS WOULD HAVE LOOKED:
+
+
+|#

@@ -1,0 +1,362 @@
+head	1.3;
+access;
+symbols;
+locks
+	blythe:1.3; strict;
+comment	@# @;
+
+
+1.3
+date	99.03.31.03.14.06;	author blythe;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	98.04.02.07.55.12;	author hans;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	98.03.31.07.48.35;	author hans;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.3
+log
+@Added pointers to the year 2 ontologies.
+@
+text
+@<HTML>
+<HEAD> 
+<TITLE>HPKB Battlespace Ontologies</TITLE>
+<!-- Version: $Id: ontologies.html,v 1.2 1998/04/02 07:55:12 hans Exp hans $ -->
+</HEAD>
+<BODY background="http://www.isi.edu/isd/LOOM/hierarchy-background.gif">
+
+<H1> HPKB Battlespace Ontologies </H1>
+
+<UL>
+  <LI><A HREF="#on-line"> Ontologies Browsable On-Line </A>
+  <LI><A HREF="#okbc"> Ontologies Accessible Via OKBC </A>
+  <LI><A HREF="#sources"> Ontology Sources </A>
+  <LI><A HREF="#tools"> Tools </A>
+</UL>
+
+<H2>Year 2 Ontologies</H2>
+
+<P>
+These ontologies have been developed or are under development at ISI
+for the HPKB year 2 battlespace problem. 
+</P>
+
+<H3> PLANET</H3>
+
+This is an ontology for plans, available in 
+<A HREF="sources/ontologies/planet/planet.loom"> Loom </A>
+and <A HREF="sources/ontologies/planet/planet.ke"> Cyc </A>
+format, with KIF to follow. The Cyc version was developed in 
+collaboration with Cycorp and Teknowledge:
+<A HREF="sources/ontologies/planet/alignment">here is a document</A>
+explaining the alignment process. At the moment, the Loom version
+is the more complete.
+<A HREF="http://www.isi.edu/~blythe/planet">Here</A> is a page
+describing the ontology, with a pointer to a more detailed project
+report.
+
+<H3> Critiquer output ontology</H3>
+
+This ontology of critiques, evaluations and estimates is for 
+use to couch the output of the separate critiquers to the integration
+module. 
+<A HREF="sources/ontologies/output/evaluations.loom">Here</A>
+it is as a loom document.
+<A HREF="http://www.isi.edu/~blythe/evaluation-ontology">Here</A>
+is a page describing the ontology.
+
+
+<H3>Other ontologies coming to this page soon</H3>
+<LU>
+<LI> Resource ontology
+<LI> Ontology of constraints on plans, for evaluating COAs.
+</UL>
+
+<H2><A NAME="on-line"> Ontologies Browsable On-Line </A></H2>
+The ontologies below can be browsed on-line via the <A
+HREF="http://www.isi.edu/isd/ontosaurus.html"> Ontosaurus </A>
+browser.  Since some of the ontologies contain content that was
+derived from copyrighted material, browser access is password
+protected.  Please use the same username and password you used
+to access this page (since Ontosaurus runs on a separate server,
+you will have to enter them again).  If you have any problems
+accessing these ontologies, please send mail to
+<A HREF=mailto:hans@@isi.edu>hans@@isi.edu</A>.
+
+<p>
+To browse an ontology, select one of the links below and supply the
+necessary username and password.  Once the initial Ontosaurus browser
+window has come up, select the appropriate ontology/theory from the <strong>
+Theory </strong> menu in the navigation pane.  By default, the merged
+<code> BATTLE-SPACE </code> ontology is selected from which you can
+see everything defined in the upper, middle, and lower levels.
+However, if, for example, you are only interested in vehicles, you can
+select the <code> LAND-VEHICLES </code> theory to not see other irrelevant
+information.
+
+<p>
+To find a particular concept or relation, type its
+name (or part of it) in the input box and then click on the <strong>
+Find </strong> button, for example, type <code> M113 </code> to find
+information about M113s.  If relevant information
+could be found, it will be displayed with mouse-sensitive links which
+you can click on to start browsing.  Alternatively, you can select a
+particular ontology/theory and then click the <strong>Show</strong> button
+which will display the top-level concepts in this theory and various
+related information which you can use to start browsing.
+
+<UL>
+  <LI> <A HREF="http://sevak.isi.edu:8500/loom/shuttle.html">
+       Merged Battle Space Ontology </A> (theory name <code>
+       BATTLE-SPACE </code>).  This ontology consists of the following
+       components (currently, all links below lead to the same browser
+       entry point):
+       <UL>
+         <LI> <A HREF="http://sevak.isi.edu:8500/loom/shuttle.html">
+              CYC/Sensus Upper Level </A> (theory name <code>
+              CYC-SENSUS-UPPER </code>)
+         <LI> <A HREF="http://sevak.isi.edu:8500/loom/shuttle.html">
+              CYC Vehicle Middle Level </A> (theory name <code>
+              CYC-VEHICLES </code>)
+         <LI> <A HREF="http://sevak.isi.edu:8500/loom/shuttle.html">
+              Land Vehicles </A> (theory name <code> LAND-VEHICLES </code>)
+         <LI> <A HREF="http://sevak.isi.edu:8500/loom/shuttle.html">
+              Geographical Features for Workarounds </A> (theory name
+              <code> FEATURES </code>)
+         <LI> <A HREF="http://sevak.isi.edu:8500/loom/shuttle.html">
+              Engineering Equipment </A> (theory name <code>
+              ENGINEERING-EQUIPMENT </code>)
+       </UL>
+</UL>
+
+
+<H2><A NAME="okbc"> Ontologies Accessible Via OKBC </A></H2>
+
+We have an OKBC server running from which you can access the latest
+version of the <A HREF="http://sevak.isi.edu:8500/loom/shuttle.html">
+Merged Battle Space Ontology </A>.  To connect to the server use the
+address <code> sevak.isi.edu </code> and choose a port between
+<code>8995</code> and <code>9005</code>.  Since the server
+implementation of the standard OKBC release does not support
+multi-threading, each client has to connect at a different port.
+Therefore, if you connect but do not get any response after some time,
+please try a different port in the above range to see whether that
+fixes the problem.  Please make sure to always close connections with
+<code>okbc:close-connection</code> so that the port gets freed up for
+somebody else to use.  This scheme is somewhat fragile, so, if you
+have any problems connecting or any other questions regarding the OKBC
+server, please send mail to <A
+HREF=mailto:hans@@isi.edu>hans@@isi.edu</A>.
+
+<p>
+Before you start connecting, you should probably <A HREF="#on-line">
+browse </A> the ontology via Ontosaurus to find out about names of
+concepts and slots/relations.  For simplicity, the ontology available
+via our OKBC server does not have explicitly represented units, thus,
+if, for example, you see a speed listed in Ontosaurus as 48km/h, you will get
+the bare 48 back when you retrieve the particular slot value via OKBC
+(see example).  The unit used for a particular slot/relation can be
+retrieved via the <code> output-unit </code> relation (see example).
+
+<p>
+Below is a simple example dialog between a Lisp-based OKBC client and
+our OKBC server.  User input at the <code>USER(n):</code> prompt is
+shown in <strong>bold</strong> face.
+
+<p>
+<blockquote>
+<pre>
+;; You have to define the following two packages to be able to properly
+;; qualify frame names.  All frame name symbols in the battle space
+;; ontlogy have to be explicitly qualified with 'BS', for example, to
+;; refer to the class 'M60' you have to use 'BS::M60':
+<strong>USER(1): (defpackage "LOOM")</strong>
+#&lt;The LOOM package&gt;
+<strong>USER(2): (defpackage "BATTLE-SPACE" (:nicknames "BS"))</strong>
+#&lt;The BATTLE-SPACE package&gt;
+<strong>USER(3): (setq netcon
+           (okbc:establish-connection
+            'ok-back::simple-network-connection
+            :initargs '(:host "sevak.isi.edu" :port 9003)))</strong>
+
+;;; Persistent Network OKBC connection established.
+#&lt;OK-BACK:SIMPLE-NETWORK-CONNECTION @@ #x256fdaa&gt;
+<strong>USER(5): (setq bskb (okbc:find-kb 'BS::BATTLE-SPACE :connection netcon))</strong>
+#&lt;OK-BACK::LOOM-KB-NETWORK-KB
+  BATTLE-SPACE on stream #&lt;BIDIRECTIONAL-TERMINAL-STREAM
+                           to [sevak.isi.edu/9003] fd 9&gt;:NIL
+  @@ #x2587162&gt;
+<strong>USER(6): (okbc:get-slot-value 'BS::M60 'BS::MAX-SPEED-ON-ROAD :kb bskb  :slot-type :template)</strong>
+48
+T
+<strong>USER(7): (okbc:get-slot-value 'BS::M60 'BS::MAX-STEP :kb bskb :slot-type :template)</strong>
+0.91
+T
+<strong>USER(8): (okbc:get-slot-value 'BS::MAX-SPEED-ON-ROAD 'BS::OUTPUT-UNIT :kb bskb :slot-type :own)</strong>
+"km/h"
+T
+<strong>USER(9): (okbc:get-slot-value 'BS::MAX-STEP 'BS::OUTPUT-UNIT :kb bskb :slot-type :own)</strong>
+"m"
+T
+<strong>USER(10): (okbc:get-class-superclasses 'BS::M60 :kb bskb)</strong>
+(#&lt;OK-BACK:FRAME-HANDLE 415894776:2 @@ #x259c37a&gt;
+ #&lt;OK-BACK:FRAME-HANDLE 415894776:3 @@ #x259c472&gt;
+ #&lt;OK-BACK:FRAME-HANDLE 415894776:4 @@ #x259c56a&gt; ...)
+T
+;; Please be sure to close the connection at the end, so the port gets freed
+;; up for somebody else to use:
+<strong>USER(11): (okbc:close-connection netcon)</strong>
+
+;;; Closed simple-network-connection #&lt;OK-BACK:SIMPLE-NETWORK-CONNECTION @@ #x256fdaa&gt;
+NIL
+<strong>USER(12): </strong>
+</pre>
+</blockquote>
+
+<H2><A NAME="sources"> Ontology Sources </A></H2>
+The directory below contains ontologies in Loom source format.  To
+load them you will need Loom 3.1 or later.
+
+<ul>
+  <li> <a href="http://sevak.isi.edu:8466/LOOM/HPKB-Protected/sources/ontologies/loom/">
+       Browse Source Directory </a>
+</ul>
+
+<H2><A NAME="tools"> Tools </A></H2>
+
+<ul>
+  <li> <a href="http://sevak.isi.edu:8466/LOOM/HPKB-Protected/sources/tools/nwu-kqml-acl4.3-unix.tar.gz">
+       NWU KQML interface adapted for Allegro CL 4.3 under Unix (Solaris 2.5)
+       </a>
+  <li> <a href="http://sevak.isi.edu:8466/LOOM/HPKB-Protected/sources/tools/">
+       Browse Tools Directory </a>
+</ul>
+
+
+<HR SIZE=2>
+<A HREF="http://www.isi.edu">
+   <IMG SRC="http://www.isi.edu/isd/LOOM/new-isi-logo.gif"
+        ALT="Information Sciences Institute"
+        WIDTH=183 HEIGHT=96 BORDER=NO></A>
+<A HREF="http://www.isi.edu/isd/ai-at-isi.html">
+   <IMG SRC="http://www.isi.edu/isd/LOOM/new-isd-logo.gif"
+        ALT="ISI Intelligent Systems Division"
+        WIDTH=209 HEIGHT=95 BORDER=NO></A>
+<br>
+<i><small>Last modified:
+<!-- hhmts start -->
+Last modified: Tue Mar 30 19:13:38 PST 1999
+<!-- hhmts end --> </small></i>
+
+</BODY>
+</HTML>
+@
+
+
+1.2
+log
+@Updated Ontosaurus instructions.
+Added OKBC instructions.
+@
+text
+@d2 1
+a2 1
+<HEAD>
+d4 1
+a4 1
+<!-- Version: $Id: ontologies.html,v 1.1 1998/03/31 07:48:35 hans Exp hans $ -->
+d14 1
+d17 38
+d60 4
+a63 3
+protected.  The necessary username and password has been distributed
+on the appropriate HPKB mailing lists.  If you did not receive this
+information but need to access these ontologies, please send mail to
+d157 1
+a157 1
+<strong>USER(3) (setq netcon
+d160 1
+a160 1
+            :initargs '(:host "sevak.isi.edu" :port 9003))):</strong>
+d169 1
+a169 1
+<strong>USER(6): (okbc:get-slot-value 'BS::M60 'BS::MAX-SPEED-ON-ROAD :kb bskb)</strong>
+d172 1
+a172 1
+<strong>USER(7): (okbc:get-slot-value 'BS::M60 'BS::MAX-STEP :kb bskb)</strong>
+d175 1
+a175 1
+<strong>USER(8): (okbc:get-slot-value 'BS::MAX-SPEED-ON-ROAD 'BS::OUTPUT-UNIT :kb bskb)</strong>
+d178 1
+a178 1
+<strong>USER(9): (okbc:get-slot-value 'BS::MAX-STEP 'BS::OUTPUT-UNIT :kb bskb)</strong>
+d205 1
+d207 9
+d228 1
+a228 1
+Apr  1, 1998
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d4 1
+a4 1
+<!-- Version: $Id: index.html,v 1.5 1997/12/12 20:32:58 hans Exp $ -->
+d10 7
+a16 1
+<H2> Ontologies Browsable On-Line </H2>
+d29 10
+a38 4
+window has come up, select the appropriate theory from the <strong>
+Theory </strong> menu in the navigation pane, for example, select the
+<code> LAND-VEHICLES </code> theory (currently, this selection has to
+be done by hand).  To find a particular concept or relation, type its
+d41 1
+a41 2
+information about M113s (note, for this to work you must have selected
+the <code> LAND-VEHICLES </code> theory).  If relevant information
+d43 4
+a46 1
+you can click on to start browsing.
+d49 21
+a69 13
+  <LI> <A HREF="http://voodoo.isi.edu:8500/loom/shuttle.html">
+       CYC/Sensus Upper Level </A> (select theory <code>
+       CYC-SENSUS-UPPER </code>)
+  <LI> <A HREF="http://voodoo.isi.edu:8500/loom/shuttle.html">
+       CYC Vehicle Middle Level </A> (select theory <code>
+       CYC-VEHICLES </code>)
+  <LI> <A HREF="http://voodoo.isi.edu:8500/loom/shuttle.html">
+       Land Vehicles </A> (select theory <code> LAND-VEHICLES </code>)
+  <LI> <A HREF="http://voodoo.isi.edu:8500/loom/shuttle.html">
+       Geographical Features </A> (select theory <code> FEATURES </code>)
+  <LI> <A HREF="http://voodoo.isi.edu:8500/loom/shuttle.html">
+       Engineering Equipment </A> (select theory <code>
+       ENGINEERING-EQUIPMENT </code>)
+a71 1
+<H2> Ontology Sources </H2>
+d73 93
+a165 2
+<H2> Ontologies Accessible Via OKBC </H2>
+       
+d178 1
+a178 1
+Mar 30, 1998
+@

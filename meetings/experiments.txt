@@ -1,0 +1,165 @@
+         KA Experiments and Lessons Learned
+
+	 Marcelo Tallis and Jihie Kim
+		   3/3/99
+
+
+Experimental setup
+------------------
+
+- Each subject was given two tasks, one with tool and the other 
+   without tool (EXPECT only)
+- Before the experiment, each subject was given a tutorial of the
+   tools with simpler scenarios. 
+- The tools were used in different orders to reduce the
+   influences from familiarity with tools or fatigue. 
+- Recorded total time, agenda, ps-tree, executed-commands, start/end
+   commands in UI, executed features in EMeD, executed KA Scripts in
+   ETM. We asked subjects to think aloud and took note of the actions
+   performed by the subjects.
+
+Subject Activities during a KA session
+--------------------------------------
+- understanding the given KA task
+- deciding how to proceed with the KA task (i.e., what to do next)
+- browsing KB to understand it
+- browsing KB to find something
+- editing (to create or to modify) a KB element
+- checking that a modification had the expected effects in the KB
+- looking around for possible errors
+      - browsing KB to check that it looks/behaves as expected (i.e.,
+verification)
+      - running problems (i.e., validation)
+      - browsing through a problem solving trace to check that it is ok
+- understanding & deciding how to fix an error
+- recovering from an error by undoing previous steps (to delete or to
+restore a KB element)
+- "putting 2 & 2 together" (i.e., stepping back & thinking about what is
+going on in the system)
+
+- using tool
+  - deciding which features in the tool to use
+     (multiple features can support similar functions)
+  - performing actions using selected features (edit/debug/browse..)
+  - understanding what the tool is showing/suggesting
+ 
+
+Noise in the results
+--------------------
+
+- Differences in typing speed and mastering of EMACS
+
+- Errors made by users unrelated to our claims 
+  - Syntax errors
+  - modeling errors
+  - misunderstanding of domain
+  - misunderstanding of KA task
+
+- Differences in understanding of domain and task. 
+  example. Most of the subjects had problems understanding 
+      the task requiring FILTER stmt (in an ETM experiment)
+
+- Differences in help given to users
+
+- Differences in strategies (changes sequences)
+  - Changed LOOM vs. change methods
+  - modified methods vs. created new ones
+  - top-down vs. bottom-up
+  - made one general method vs. made several specific methods
+
+- Differences in the uses of tool
+  - Differences in understanding the tool (forget to use features in
+    EMeD)
+ 
+- Differences in subjects characteristics (e.g., cautious, critics)
+  - examine and explore tools during experiment
+
+- Differences of work done by initial change (discounted from total)
+   (in ETM experiment)
+
+
+Difficulties in fine grained analysis of results
+------------------------------------------------
+
+- Discriminate time for different activities in editing 
+  example:
+  - time per atomic changes in EMACS
+  - time for thinking from time for executing (EMACS is open even when 
+    the user is not editing)
+
+- Correlate numbers of different commands executed 
+  because of
+  - difference in granularity of commands
+    (example. one EDIT command = many atomic changes) 
+  - extra commands executed to fix errors
+
+
+How I messed up an experiment 
+---------------------------------------------------------------
+<mistakes in initial design: EMeD cases>
+
+- Compared Expect Clim interface vs EMeD interface
+  --> Separated EMeD features from EMeD interface to let the user 
+      have same environment except for the features
+
+- Different uses of EMACS and X tools
+  --> Restricted the use of EMACS 
+
+- Too easy KA tasks
+  (Trivial tasks cannot exploit different features in the tool)
+  --> Presented more realistic KA tasks with different variety of
+      KA activities involved. 
+
+<counterproductive enhancements: ETM cases>
+
+- Complicating KA task created problems with editor and
+  more syntax errors
+
+- Removing methods added to simplify task created syntax errors,
+  problems with editor, and misuse of EXPECT constructs.
+
+- Increasing freedom in initial change created differences in
+  users strategies (i.e., sequences of changes) that invalidated
+  comparisons.
+
+DOs and DON'Ts (lessons learned)
+--------------------------------
+- do not use Emacs (syntax errors, emacs skills, cannot discriminate
+  times) --> build/use a controllable editor
+
+- isolate as much as possible what you want to show. 
+  example:
+  - good to separate time before first change (e.g. understanding)
+    than time following-up change
+
+- minimize variables unrelated to your claims
+  example:  why provide more than one way of performing a change?
+
+- minimize chances of errors and problems unrelated to your claims.
+   (fine instrumentation help to identify time for unrelated problems,
+   however might not be feasible to discount this time from yhe total)
+
+- It is impossible to avoid helping subjects, however, the kind and
+  the form of the help should be normed.
+
+- do careful design to avoid comparing apples and oranges (e.g.,
+  differences in initial change or in strategies)
+
+- do rigorous experimental design for statistical analysis
+
+
+DON'T KNOW HOW TO
+-----------------
+
+- control differences in understanding domain and tasks
+
+- deal with differences in strategies. Too much hint might
+  oversimplify the task for subjects
+
+- do other appropriate measures other than time
+
+- exclude differences in subjects styles
+
+
+
+

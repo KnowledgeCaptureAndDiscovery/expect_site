@@ -1,0 +1,229 @@
+Agenda:
+ In the method to compute the combat power of a military unit with respect to a military task, ?T is not used
+   at Fri Sep 17 11:42:37 PDT 1999
+
+create method for goal from undefined capabilities
+   at Fri Sep 17 11:42:47 PDT 1999
+
+undefined goal:
+(check (obj (spec-of force-ratio)) (of (inst-of military-task)) (in (inst-of coa)))  
+Expected Result:(inst-of yes-no)  
+Callers:(check-force-ratio-for-main-task)  
+Capability:(capability (check (obj (?v727 is (spec-of force-ratio))) (of (?v728 is (inst-of military-task))) (in (?v729 is (inst-of coa)))))  
+   at Fri Sep 17 11:42:47 PDT 1999
+
+select Button:expect-expression:EXPRESSION
+ TO become:((name _method705  )
+(capability    ( check   ( obj   ( ?v727 is   ( spec-of force-ratio ) ) )
+         ( of   ( ?v728 is   ( inst-of military-task ) ) )
+         ( in   ( ?v729 is   ( inst-of coa ) ) ) )
+)
+(result-type  (inst-of yes-no)  )
+(method  SUB-GOAL 
+)
+)
+   at Fri Sep 17 11:43:12 PDT 1999
+
+select Button:expect-goal-form:SUB-GOAL
+ TO become:((name _method705  )
+(capability    ( check   ( obj   ( ?v727 is   ( spec-of force-ratio ) ) )
+         ( of   ( ?v728 is   ( inst-of military-task ) ) )
+         ( in   ( ?v729 is   ( inst-of coa ) ) ) )
+)
+(result-type  (inst-of yes-no)  )
+(method    ( is-less-or-equal   ( obj EXPRESSION )   ( than EXPRESSION ) ) 
+)
+)
+   at Fri Sep 17 11:43:37 PDT 1999
+
+select Button:expect-expression:EXPRESSION
+ TO become:((name _method705  )
+(capability    ( check   ( obj   ( ?v727 is   ( spec-of force-ratio ) ) )
+         ( of   ( ?v728 is   ( inst-of military-task ) ) )
+         ( in   ( ?v729 is   ( inst-of coa ) ) ) )
+)
+(result-type  (inst-of yes-no)  )
+(method    ( is-less-or-equal   ( obj SUB-GOAL )   ( than EXPRESSION ) ) 
+)
+)
+   at Fri Sep 17 11:43:46 PDT 1999
+
+select Button:expect-goal-form:SUB-GOAL
+ TO become:((name _method705  )
+(capability    ( check   ( obj   ( ?v727 is   ( spec-of force-ratio ) ) )
+         ( of   ( ?v728 is   ( inst-of military-task ) ) )
+         ( in   ( ?v729 is   ( inst-of coa ) ) ) )
+)
+(result-type  (inst-of yes-no)  )
+(method    ( is-less-or-equal   ( obj   ( estimate   ( obj
+                           ( spec-of required-force-ratio ) )
+                     ( for EXPRESSION ) ) )
+         ( than EXPRESSION ) ) 
+)
+)
+   at Fri Sep 17 11:43:56 PDT 1999
+
+select Button:expect-expression:EXPRESSION
+ TO become:((name _method705  )
+(capability    ( check   ( obj   ( ?v727 is   ( spec-of force-ratio ) ) )
+         ( of   ( ?v728 is   ( inst-of military-task ) ) )
+         ( in   ( ?v729 is   ( inst-of coa ) ) ) )
+)
+(result-type  (inst-of yes-no)  )
+(method    ( is-less-or-equal   ( obj   ( estimate   ( obj
+                           ( spec-of required-force-ratio ) )
+                     ( for VARIABLE ) ) )
+         ( than EXPRESSION ) ) 
+)
+)
+   at Fri Sep 17 11:44:03 PDT 1999
+
+select Button:expect-variable-name:VARIABLE
+ TO become:((name _method705  )
+(capability    ( check   ( obj   ( ?v727 is   ( spec-of force-ratio ) ) )
+         ( of   ( ?v728 is   ( inst-of military-task ) ) )
+         ( in   ( ?v729 is   ( inst-of coa ) ) ) )
+)
+(result-type  (inst-of yes-no)  )
+(method    ( is-less-or-equal   ( obj   ( estimate   ( obj
+                           ( spec-of required-force-ratio ) )
+                     ( for ?v728 ) ) )
+         ( than EXPRESSION ) ) 
+)
+)
+   at Fri Sep 17 11:44:06 PDT 1999
+
+select Button:expect-expression:EXPRESSION
+ TO become:((name _method705  )
+(capability    ( check   ( obj   ( ?v727 is   ( spec-of force-ratio ) ) )
+         ( of   ( ?v728 is   ( inst-of military-task ) ) )
+         ( in   ( ?v729 is   ( inst-of coa ) ) ) )
+)
+(result-type  (inst-of yes-no)  )
+(method    ( is-less-or-equal   ( obj   ( estimate   ( obj
+                           ( spec-of required-force-ratio ) )
+                     ( for ?v728 ) ) )
+         ( than SUB-GOAL ) ) 
+)
+)
+   at Fri Sep 17 11:44:13 PDT 1999
+
+select Button:expect-goal-form:SUB-GOAL
+ TO become:((name _method705  )
+(capability    ( check   ( obj   ( ?v727 is   ( spec-of force-ratio ) ) )
+         ( of   ( ?v728 is   ( inst-of military-task ) ) )
+         ( in   ( ?v729 is   ( inst-of coa ) ) ) )
+)
+(result-type  (inst-of yes-no)  )
+(method    ( is-less-or-equal   ( obj   ( estimate   ( obj
+                           ( spec-of required-force-ratio ) )
+                     ( for ?v728 ) ) )
+         ( than   ( estimate   ( obj
+                           ( spec-of available-force-ratio ) )
+                     ( for EXPRESSION ) ) ) ) 
+)
+)
+   at Fri Sep 17 11:44:20 PDT 1999
+
+select Button:expect-expression:EXPRESSION
+ TO become:((name _method705  )
+(capability    ( check   ( obj   ( ?v727 is   ( spec-of force-ratio ) ) )
+         ( of   ( ?v728 is   ( inst-of military-task ) ) )
+         ( in   ( ?v729 is   ( inst-of coa ) ) ) )
+)
+(result-type  (inst-of yes-no)  )
+(method    ( is-less-or-equal   ( obj   ( estimate   ( obj
+                           ( spec-of required-force-ratio ) )
+                     ( for ?v728 ) ) )
+         ( than   ( estimate   ( obj
+                           ( spec-of available-force-ratio ) )
+                     ( for VARIABLE ) ) ) ) 
+)
+)
+   at Fri Sep 17 11:44:27 PDT 1999
+
+select Button:expect-variable-name:VARIABLE
+ TO become:((name _method705  )
+(capability    ( check   ( obj   ( ?v727 is   ( spec-of force-ratio ) ) )
+         ( of   ( ?v728 is   ( inst-of military-task ) ) )
+         ( in   ( ?v729 is   ( inst-of coa ) ) ) )
+)
+(result-type  (inst-of yes-no)  )
+(method    ( is-less-or-equal   ( obj   ( estimate   ( obj
+                           ( spec-of required-force-ratio ) )
+                     ( for ?v728 ) ) )
+         ( than   ( estimate   ( obj
+                           ( spec-of available-force-ratio ) )
+                     ( for ?v728 ) ) ) ) 
+)
+)
+   at Fri Sep 17 11:44:30 PDT 1999
+
+ From sketch:To do what(Capability):
+Do(Method Body):
+
+The result will be(Result Type):
+   at Fri Sep 17 11:44:35 PDT 1999
+
+ done editing:((name _method705  )
+(capability    ( check   ( obj   ( ?v727 is   ( spec-of force-ratio ) ) )
+         ( of   ( ?v728 is   ( inst-of military-task ) ) )
+         ( in   ( ?v729 is   ( inst-of coa ) ) ) )
+)
+(result-type  (inst-of yes-no)  )
+(method    ( is-less-or-equal   ( obj   ( estimate   ( obj
+                           ( spec-of required-force-ratio ) )
+                     ( for ?v728 ) ) )
+         ( than   ( estimate   ( obj
+                           ( spec-of available-force-ratio ) )
+                     ( for ?v728 ) ) ) ) 
+)
+)
+   at Fri Sep 17 11:44:35 PDT 1999
+
+added New method:((name _method705)
+ (capability (check
+                (obj (?v727 is (spec-of force-ratio)))
+                (of (?v728 is (inst-of military-task)))
+                (in (?v729 is (inst-of coa)))
+                ))
+ (result-type (inst-of yes-no))
+ (method (is-less-or-equal
+            (obj (estimate
+                    (obj (spec-of required-force-ratio))
+                    (for ?v728)
+                    ))
+             (than (estimate
+                      (obj (spec-of available-force-ratio))
+                      (for ?v728)
+                      ))
+               ))
+)
+   at Fri Sep 17 11:44:38 PDT 1999
+
+check tab:-1
+   at Fri Sep 17 11:44:38 PDT 1999
+
+check tab:0
+   at Fri Sep 17 11:44:38 PDT 1999
+
+Agenda:
+ Expression ((DIVIDE (OBJ (COMPUTE (OBJ (SPEC-OF COMBAT-POWER)) (OF (UNIT-ASSIGNED DESTROY3)) (WITH-RESPECT-TO DESTROY3))) (BY (COMPUTE (OBJ (SPEC-OF COMBAT-POWER)) (OF (UNIT-ACTED-ON DESTROY3)) (WITH-RESPECT-TO DESTROY3)))) (1.5692309 0.82926834 4.615385 2.4390244)) has invalid result
+ Expression ((IS-LESS-OR-EQUAL (OBJ (ESTIMATE (OBJ (SPEC-OF REQUIRED-FORCE-RATIO)) (FOR DESTROY3))) (THAN (ESTIMATE (OBJ (SPEC-OF AVAILABLE-FORCE-RATIO)) (FOR DESTROY3)))) (YES YES YES YES)) has invalid result
+ Expression ((CHECK (OBJ (SPEC-OF FORCE-RATIO)) (OF (MAIN-TASK-OF (CLOSE-STATEMENT-OF BLUEBRIGADECOA4-2-1))) (IN BLUEBRIGADECOA4-2-1)) (YES YES YES YES)) has invalid result
+ Expression ((DIVIDE (OBJ (COMPUTE (OBJ (SPEC-OF COMBAT-POWER)) (OF (UNIT-ASSIGNED (INST-OF MILITARY-TASK))) (WITH-RESPECT-TO (INST-OF MILITARY-TASK)))) (BY (COMPUTE (OBJ (SPEC-OF COMBAT-POWER)) (OF (UNIT-ACTED-ON (INST-OF MILITARY-TASK))) (WITH-RESPECT-TO (INST-OF MILITARY-TASK))))) (SET-OF (INST-OF NUMBER))) has invalid result
+ Expression ((IS-LESS-OR-EQUAL (OBJ (ESTIMATE (OBJ (SPEC-OF REQUIRED-FORCE-RATIO)) (FOR (INST-OF MILITARY-TASK)))) (THAN (ESTIMATE (OBJ (SPEC-OF AVAILABLE-FORCE-RATIO)) (FOR (INST-OF MILITARY-TASK))))) (SET-OF (INST-OF YES-NO))) has invalid result
+ Expression ((CHECK (OBJ (SPEC-OF FORCE-RATIO)) (OF (MAIN-TASK-OF (CLOSE-STATEMENT-OF (INST-OF COA)))) (IN (INST-OF COA))) (SET-OF (INST-OF YES-NO))) has invalid result
+ In the method to check the force ratio of a military task in a coa, ?V729 is not used
+ In the method to compute the combat power of a military unit with respect to a military task, ?T is not used
+   at Fri Sep 17 11:44:45 PDT 1999
+
+7check: Method Sub-Method Relation
+   at Fri Sep 17 11:44:50 PDT 1999
+
+2check: All Agenda
+   at Fri Sep 17 11:44:53 PDT 1999
+
+check tab:8
+   at Fri Sep 17 11:47:33 PDT 1999
+

@@ -1,0 +1,3088 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;;; Military Units  - ontology for COA's
+
+
+
+;;constant declaration
+
+
+
+Default Mt : BaseKB .
+
+
+
+constant: subOrgs-Command .
+
+constant: subOrgs-Direct .
+
+constant: subOrgs-Permanent. 
+
+constant: subOrgs-OnlyDuringOperation.
+
+constant: subOrgs-Temporary .
+
+
+
+Default Mt : MilitaryForceStructureMt .
+
+
+
+constant:  allAssignedMilitaryOrg .
+
+constant:  allAttachedMilitaryOrg .
+
+constant: allOperationalControlMilitaryOrg.
+
+
+
+constant: ConventionalWeaponsUnit-MilitarySpecialty .
+
+constant: WeaponsUnit-MilitarySpecialty .
+
+constant: MaterialSupportUnit-MilitarySpecialty .
+
+constant: MortarUnit-MilitarySpecialty.
+
+constant: ArtilleryUnit-MilitarySpecialty .
+
+constant: FieldArtilleryUnit-MilitarySpecialty.
+
+constant: HeavyMortarUnit-MilitarySpecialty.
+
+
+
+
+
+
+
+Default Mt : BaseKB .
+
+
+
+constant: sovereignAllegianceOfOrg.
+
+constant: ModernMilitaryUnit-Deployable.
+
+constant:  assignedMilitaryOrg.
+
+constant: attachedMilitaryOrg .
+
+constant: operationalControlMilitaryOrg.
+
+
+
+Default Mt : MilitaryForceStructureMt .
+
+
+
+constant : MilitaryUnitSpecialtyType.
+
+constant :  echelonOfUnit .
+
+constant :  MilitaryEchelon.
+
+constant: Division-UnitDesignation .
+
+constant: Battalion-UnitDesignation.
+
+constant: Regiment-UnitDesignation.
+
+constant: TaskForce-UnitDesignation.
+
+constant: Squadron-UnitDesignation.
+
+constant: Company-UnitDesignation.
+
+constant: Platoon-UnitDesignation.
+
+constant: Corps-UnitDesignation.
+
+constant: ArtilleryUnit-MilitarySpecialty.
+
+constant: ArmoredUnit-MilitarySpecialty.
+
+constant: MechanizedUnit-MilitarySpecialty.
+
+constant: CavalryUnit-MilitarySpecialty.
+
+constant: InfantryUnit-MilitarySpecialty.
+
+constant: AerialSupportUnit-MilitarySpecialty.
+
+constant: EngineeringUnit-MilitarySpecialty.
+
+constant: HeadquartersUnit-MilitarySpecialty.
+
+constant: HeavyMortarUnit-MilitarySpecialty.
+
+constant: MaterialSupportUnit-MilitarySpecialty.
+
+constant: MedicalSupportUnit-MilitarySpecialty.
+
+constant: ReconnaissanceUnit-MilitarySpecialty.
+
+constant: OffensiveOperationsUnit-MilitarySpecialty .
+
+
+
+;;add
+
+
+
+in Mt : BaseKB .
+
+F : (genlMt MilitaryForceStructureMt  OrganizationMt) .
+
+
+
+in Mt : Base KB .
+
+F : (genlMt BattlespaceMilitaryMt ModernMilitaryTacticsMt) .
+
+
+
+constant: ModernMilitaryUnit-Deployable.
+
+in Mt : BaseKB .
+
+isa: ExistingObjectType ConventionalClassificationType.
+
+genls: ModernMilitaryOrganization.
+
+
+
+;;--------------------------------------------------------------------------
+
+;; Subordination and control relations 
+
+
+
+constant: subOrgs-Command.
+
+in Mt : BaseKB .
+
+isa : TransitiveBinaryPredicate  .
+
+genlPreds : subOrganizations .
+
+arg1Isa : Organization .
+
+arg2Isa : Organization .
+
+comment : "(subOrgs-Command SUPERUNIT SUBUNIT) means that SUBUNIT is formally
+
+subject to command and direction by SUPERUNIT. In the military services this
+
+means that SUBUNIT is assigned, or has at least been 'attached', to SUPERUNIT
+
+in such a way that at least one of the controllingSuborganizations of
+
+SUPERUNIT, or its commanding officer, are authorized to issue orders to
+
+SUBUNIT. SUBUNIT need not be an immediate subordinate of SUPERUNIT, -- it
+
+could also be several steps down in the chain of command. Even if SUBUNIT is
+
+not getting any financial or logistic support from SUPERUNIT, it is still in a
+
+subOrgs-Command relation if it is ordinarily supposed to obey the directives
+
+of SUPERUNIT." .
+
+
+
+
+
+constant: subOrgs-Direct .
+
+in Mt : BaseKB .
+
+isa : BinaryPredicate IKBConstant .
+
+genlPreds : subOrganizations .
+
+arg1Isa : Organization .
+
+arg2Isa : Organization .
+
+comment : "This predicate is a specialization of subOrganizations
+
+          that requires a 'direct suborganizational relationship' with
+
+          no intervening organizations between the two related
+
+          organizations. It is like subOrganizations except that it is
+
+          intransitive. Thus, (subOrgs-Direct SUPER SUB) means that SUB
+
+          is 'immediately below' SUPER in the organizational hierarchy
+
+          in question; no other organization is both below SUPER and
+
+          above SUB." .
+
+F : (not 
+
+       (isa subOrgs-Direct TransitiveBinaryPredicate)).
+
+
+
+constant:  subOrgs-Permanent. 
+
+in Mt : BaseKB .
+
+isa : BinaryPredicate .
+
+genlPreds : subOrganizations .
+
+arg1Isa : Organization .
+
+arg2Isa : Organization .
+
+comment : "(subOrgs-Permanent SUPER SUB) means that SUB is an
+
+          organization subordinate to SUPER in an organizational
+
+          hierarchy, that this relation has obtained for some time, and
+
+          that it is likely to obtain for the foreseeable future. For
+
+          example, the US Air Force is a subOrgs-Permanent of the
+
+          United States Armed Forces." .
+
+
+
+
+
+constant: subOrgs-Temporary .
+
+in  Mt : BaseKB .
+
+isa : BinaryPredicate .
+
+negationInverse : subOrgs-Temporary .
+
+arg1Isa : Organization .
+
+arg2Isa : Organization .
+
+comment : "(subOrgs-Temporary SUPER SUB) means that SUB is a
+
+          subordinate organization to SUPER in an organizational
+
+          hierarchy only for the time being, and the relationship is
+
+          supposed to end prior to the dissolution of either
+
+          organization. This relation could be established in the course
+
+          of a particular major undertaking, enterprise or campaign, but
+
+          it is not likely to persist beyond the end of it. For example,
+
+          in the military a particular battalion might be attached to a
+
+          particular brigade to provide logistical support during a
+
+          military campaign: this relationship would be a
+
+          subOrgs-Temporary relation if it is expected to end in the
+
+          reasonably near future or at the end of the campaign. (See also
+
+          subOrgs-Permanent and #$subOrgs-DuringOperation.)" .
+
+
+
+
+
+constant:  allAssignedMilitaryOrg .
+
+in Mt : MilitaryForceStructureMt .
+
+isa : TransitiveBinaryPredicate IKBConstant .
+
+genlPreds : subOrgs-Command subOrgs-Financial
+
+        subOrgs-Permanent .
+
+genlPreds : subOrgs-AdministrativeServiceSupport subOrgs-MaterialSupport .
+
+arg1Isa : Organization .
+
+arg2Isa : Organization .
+
+comment : "(allAssignedMilitaryOrg SUPER SUB) means that SUB is a
+
+          permanently assigned (immediate or more remote)
+
+          sub-organization of SUPER assignedMilitaryOrg. SUPER directly
+
+          or indirectly commands SUB, supports it logistically, and
+
+          with services, and either provides the money for SUB's budget
+
+          or accounts for SUB within SUPER's own budget. There is
+
+          financial support, service support, material support, and
+
+          command subordination permanent (that is, the relationship
+
+          has obtained historically and will continue to be hold for
+
+          the foreseeable future). Saying (allAssignedMilitaryOrg
+
+          DVN-101 BAT-103) really means that the commander of DVN-101
+
+          can give operational orders to BAT-103, and that the
+
+          headquarters of DVN-101 is responsible for coordinating
+
+          logistic and admin support to BAT-103. Every military unit
+
+          lower than division level is assigned to some unit. See also
+
+          allAttachedMilitaryOrg and allOperationalControlMilitaryOrg
+
+          for contrast." .
+
+
+
+constant:  allAttachedMilitaryOrg .
+
+in Mt : MilitaryForceStructureMt .
+
+isa : TransitiveBinaryPredicate IKBConstant .
+
+genlPreds : subOrgs-MaterialSupport .
+
+arg1Isa : Organization .
+
+arg2Isa : Organization .
+
+comment :  "(allAttachedMilitaryOrg SUPER SUB) means that the
+
+          organization SUB has been temporarily 'attached', directly or
+
+          through intermediate levels, to the organization SUPER, which
+
+          has temporary command of SUB and provides most logistic and
+
+          facilities support needed by SUB. SUPER does not necessarily
+
+          pay for SUB out of out of SUPER's own regular budget support
+
+          of SUB may come from SUB's original (assigned) organization
+
+          rather than from SUPER. The relationship is considered
+
+          temporary (even if long-term), possibly established for a
+
+          major undertaking or campaign, or for a fixed period of time
+
+          of months or years. Every military unit is attached to some
+
+          organization same organization to which it is assigned,
+
+          unless overridden. The allAttachedMilitaryOrg predicate
+
+          entails logistical support and command with any number of
+
+          intervening units of organization between SUPER and SUB. See
+
+          attachedMilitaryOrg for the non-transitive version. See also
+
+          allAssignedMilitaryOrg and allOperationalControlMilitaryOrg
+
+          for contrast." .
+
+
+
+
+
+constant: sovereignAllegianceOfOrg.
+
+in Mt : BaseKB .
+
+isa : IKBConstant BinaryPredicate IrreflexiveBinaryPredicate  .
+
+genlPreds : affiliatedWith .
+
+arg1Isa : ModernMilitaryOrganization .
+
+arg2Isa : Agent .
+
+comment : "(sovereignAllegianceOfUnit MIL-UNIT COUNTRY) means
+
+          that the military unit MIL-UNIT owes allegiance to COUNTRY.
+
+          This predicate relates a military organization to whatever sovereign
+
+          agency that ultimately responsible for its creation. The agency is
+
+          usually an instance of IndependentCountry. For example, the 101st
+
+          Airborne Division has as its sovereignAllegianceOfUnit the
+
+          UnitedStatesOfAmerica. However, the first argument need not be
+
+          an instance of IndependentCountry: military and paramilitary
+
+          forces can be organized by corporations (e.g., the
+
+          Freeport-MacMoRan security force in Indonesia) or even by
+
+          individuals (e.g., the Duvaliers' Tonton Macoutes).
+
+          sovereignAllegianceOfUnit is also a different concept from
+
+          'assignment' and/or 'attachment' in a command-and-control
+
+          structure. An American battalion might be placed under temporary
+
+          UN command in an international action. However, the
+
+          sovereignAllegianceOfUnit would remain the
+
+          UnitedStatesOfAmerica." .
+
+
+
+
+
+constant:  assignedMilitaryOrg.
+
+in Mt : BaseKB .
+
+isa: IKBConstant BinaryPredicate .
+
+genlPreds: subOrgs-Financial subOrgs-Command subOrgs-Direct
+
+           subOrgs-Permanent allAssignedMilitaryOrg .
+
+arg1Isa: Organization .
+
+arg2Isa: Organization .
+
+
+
+comment: "(assignedMilitaryOrg SUPER SUB) means that the organization SUB is a
+
+          permanently assigned immediate sub-organization of SUPER; SUPER
+
+          commands SUB, supports it logistically if need be, and provides the
+
+          money for SUB's budget. This predicate corresponds to the concept of
+
+          permanent 'assignment' in a military command structure, as in
+
+          Peterson and Andersen (1997). This relationship entails financial,
+
+          logistical, and command subordination; it is ordinarily a direct
+
+          command relationship without intervening levels -- it is not
+
+          transitive --and it is considered to be permanent (that is, a
+
+          relationship has obtained historically and will continue to be hold
+
+          for the foreseeable future).  Most departments, subdivisions,
+
+          branches, etc. of organizations are assignedMilitaryOrg. See also
+
+          attachedMilitaryOrg and operationalControlMilitaryOrg." .
+
+
+
+in Mt : MilitaryForceStructureMt .
+
+F : (genlPreds  assignedMilitaryOrg allAssignedMilitaryOrg) .
+
+
+
+
+
+constant: attachedMilitaryOrg .
+
+in Mt : BaseKB .
+
+isa:  IKBConstant BinaryPredicate .
+
+genlPreds: subOrgs-Command subOrgs-Direct subOrgs-Temporary .
+
+arg1Isa : Organization .
+
+arg2Isa : Organization .
+
+comment : "(attachedMilitaryOrg SUPER SUB) means that the organization
+
+          SUB has been 'attached' directly to the organization SUPER, so that
+
+          SUPER has temporary command of SUB and provides most of the
+
+          logistical and support needed by SUB. SUPER does not necessarily
+
+          pay for SUB out of out of SUPER's regular budget: basic financial
+
+          and/or administrative support of SUB may come from SUB's
+
+          original organization rather than from SUPER. This predicate
+
+          corresponds to the concept of temporary 'attachment'. The
+
+          relationship is temporary, possibly established for a major
+
+          undertaking or campaign, or for a fixed period of time of months or
+
+          years. Generally, attachedMilitaryOrg entails direct logistical
+
+          support and command with no intervening units of organization
+
+          between SUPER and SUB. See also assignedMilitaryOrg and
+
+          operationalControlMilitaryOrg.".
+
+constant: attachedMilitaryOrg .
+
+in Mt : MilitaryForceStructureMt .
+
+genlPreds : allAttachedMilitaryOrg .
+
+
+
+
+
+constant: subOrgs-OnlyDuringOperation .
+
+in Mt : BaseKB .
+
+isa : BinaryPredicate  .
+
+genlPreds : subOrganizations .
+
+arg1Isa :  Organization .
+
+arg2Isa : Organization .
+
+comment : "(subOrgs-OnlyDuringOperation SUPER SUB) means that SUB is
+
+          an organization subordinate to the organization SUPER for a
+
+          very short term -- during a particular task, trial or battle,
+
+          for example, or in a specific field operation. This kind of
+
+          relationship is often established between units in the course
+
+          of military field operations. This relationship is deemed
+
+          very temporary, more so than for subOrgs-Temporary. (See also
+
+          subOrgs-Permanent.)" .
+
+
+
+
+
+constant: allOperationalControlMilitaryOrg.
+
+in Mt : MilitaryForceStructureMt .
+
+isa : TransitiveBinaryPredicate IKBConstant .
+
+genlPreds : subOrgs-Command .
+
+arg1Isa : Organization .
+
+arg2Isa : Organization .
+
+comment : "(allOperationalControlMilitaryOrg SUPER SUB) means that
+
+          the organization SUPER has been given direct or indirect
+
+          operational control (at least temporary command) of the
+
+          organization SUB for at least the duration of some operation.
+
+          This predicate corresponds to the concept known in military
+
+          parlance as the 'OPCON' relation. It is a transitive
+
+          subordination-relation with any number of intermediate levels
+
+          of command between SUPER and SUB version see
+
+          operationalControlMilitaryOrg. If SUB is not permanently
+
+          assigned or temporarily attached to SUPER, then the
+
+          operational control (OPCON) relation lasts only for the
+
+          extent of the operation in question (it is even more
+
+          temporary than attachedMilitaryOrg). Usually SUPER will not
+
+          be responsible for any logistical or service support of SUB,
+
+          nor for paying SUB's operating expenses out of SUPER's
+
+          regular budget. See also allAssignedMilitaryOrg and
+
+          allAttachedMilitaryOrg for contrast." .
+
+
+
+
+
+constant: operationalControlMilitaryOrg.
+
+in Mt : BaseKB .
+
+isa: IKBConstant BinaryPredicate .
+
+genlPreds : subOrgs-Command subOrgs-Direct
+
+            subOrgs-OnlyDuringOperation  .
+
+arg1Isa : Organization .
+
+arg2Isa : Organization .
+
+comment : "(#$operationalControlMilitaryOrg SUPER SUB) means that the
+
+          organization SUPER has been given operational control (very
+
+          temporary command) of the organization SUB for the duration of
+
+          some operation. This predicate corresponds to the concept known
+
+          in military parlance as the 'OPCON' relation. It is a 'direct'
+
+          subordination-relation (with no intermediate levels of command
+
+          between SUPER and SUB), entailing command of SUB by SUPER,
+
+          and lasting, usually, only for the extent of the operation in 
+
+          question (it is even more temporary than subOrgs-Temporary). Often
+
+          SUPER will not be responsible for logistical support of SUB, nor for
+
+          paying SUB's expenses out of SUPER's regular budget. See also
+
+          #$assignedMilitaryOrg and #$attachedMilitaryOrg.".
+
+constant: operationalControlMilitaryOrg.
+
+in Mt : MilitaryForceStructureMt .
+
+genlPreds : allOperationalControlMilitaryOrg .
+
+
+
+constant: controllingSuborganizations.
+
+in Mt: BaseKB.
+
+isa: IKBConstant CotemporalObjectsSlot BinaryPredicate.
+
+genlPreds : subOrgs-Direct positiveVestedInterest .
+
+genlInverse : controls .
+
+negationInverse : controllingSuborganizations .
+
+arg1Isa : Organization  .
+
+arg2Isa : Organization  .
+
+arg2Format : SetTheFormat .
+
+comment : "(#$controllingSuborganizations ORG SUBORG)
+
+          means that SUBORG is a #$subOrganizations of ORG
+
+          which has controlling power over ORG. For
+
+          example, (#$controllingSuborganizations
+
+          #$RomanCatholicChurch #$HolySee). This is not a
+
+          #$FunctionalPredicate since an organization may
+
+          have a hierarch of controlling suborganizations,
+
+          e.g. a #$CommunistParty may have a CentralCommittee as a
+
+          #$controllingSuborganizations, and both the
+
+          central committee and the party may have a
+
+          Politboro as a #$controllingSuborganizations.
+
+          Other examples would be a corporate
+
+          #$BoardOfDirectors or the cabinet in a
+
+          #$ParliamentaryGovernment.".
+
+
+
+F : (not 
+
+       (isa controllingSuborganizations TransitiveBinaryPredicate)).
+
+
+
+constant: headQuartersOfUnit.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: BinaryPredicate IKBConstant.
+
+genlPreds: controllingSuborganizations.
+
+arg1Isa: ModernMilitaryUnit-Deployable.
+
+arg2Isa: ModernMilitaryUnit-Deployable.
+
+ 
+
+ 
+
+constant: CommandPost.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ExistingObjectType IKBConstant.
+
+genls: ConstructionArtifact.
+
+ 
+
+constant: mainCPOfUnit.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: BinaryPredicate IKBConstant.
+
+arg1Isa: CommandPost.
+
+arg2Isa: ModernMilitaryUnit-Deployable.
+
+ 
+
+constant: tacticalCPOfUnit.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: BinaryPredicate IKBConstant.
+
+arg1Isa: CommandPost.
+
+arg2Isa: ModernMilitaryUnit-Deployable.
+
+ 
+
+constant: rearCPOfUnit.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: BinaryPredicate IKBConstant.
+
+arg1Isa: CommandPost.
+
+arg2Isa: ModernMilitaryUnit-Deployable.
+
+ 
+
+
+
+;;-----------------------------------------------------------------------------
+
+;; Task Force Organization
+
+
+
+constant: UnitOrganizationalAttribute.
+
+in Mt: MilitaryForceStructureMt.
+
+isa: UnorderedAttributeType IKBConstant.
+
+genls: AttributeValue.
+
+comment: "A collection of attributes characterizing the organizational
+
+structures of instances of #$ModernMilitaryOrganization.".
+
+
+
+constant: TaskForce-Military.
+
+in Mt: MilitaryForceStructureMt.
+
+isa: UnitOrganizationalAttribute IKBConstant.
+
+comment: "Task organized units containing a mix of unit types that are
+
+headquartered by a battalion or brigade level headquarters (communication Rob
+
+Rasch).".
+
+
+
+constant: Team-Military.
+
+in Mt: MilitaryForceStructureMt.
+
+isa : UnitOrganizationalAttribute IKBConstant.
+
+comment: "Task organized units containing a mix of unit types that are
+
+headquartered by a company (communication Rob Rasch).".
+
+
+
+constant: JointTaskForce-Military.
+
+in Mt: MilitaryForceStructureMt.
+
+isa: UnitOrganizationalAttribute IKBConstant.
+
+comment: "Task organized units containing a mix of unit types that are
+
+headquartered by a division (communication Rob Rasch).".
+
+
+
+;;---------------------------------------------------------------------------
+
+;; Troop strength
+
+
+
+constant: TroopStrengthAttribute.
+
+in Mt: MilitaryForceStructureMt.
+
+isa: LinearOrderAttributeType IKBConstant.
+
+genls: AttributeValue.  
+
+comment: "A collection of attributes used to indicate the complement and
+
+strength of military units.  Examples include #$ReinforcedStatus and
+
+#$ReducedStatus.".
+
+ 
+
+constant: troopStrengthOfUnit.
+
+in Mt: MilitaryForceStructureMt.
+
+isa: BinaryPredicate IKBConstant.
+
+arg1Isa: ModernMilitaryUnit-Deployable.
+
+arg2Isa: TroopStrengthAttribute.
+
+comment: "(#$troopStrengthOfUnit UNIT STRENGTHATT) means that the
+
+#$ModernMilitaryUnit-Deployable UNIT has the troop strength status
+
+STRENGTHATT.".
+
+ 
+
+constant: ReinforcedStatus.
+
+in Mt: MilitaryForceStructureMt.
+
+isa: TroopStrengthAttribute IKBConstant.
+
+ 
+
+constant: ReducedStatus.
+
+in Mt: MilitaryForceStructureMt.
+
+isa: TroopStrengthAttribute IKBConstant.
+
+ 
+
+;; --------------------------------------------------------------------------
+
+;; Military Echelons
+
+
+
+constant :  echelonOfUnit .
+
+in Mt : MilitaryForceStructureMt .
+
+isa : BinaryPredicate FunctionalSlot IKBConstant .
+
+genlPreds : hasAttributes .
+
+arg1Isa : ModernMilitaryOrganization .
+
+arg2Isa : MilitaryEchelon .
+
+comment : "(echelonOfUnit UNIT ECHELON) means that the military unit
+
+          UNIT has the official echelon (unit ranking) ECHELON in the
+
+          armed service of which it is a part. An individual military unit can
+
+          have only one echelon See also the collection MilitaryEchelon." .
+
+
+
+constant :  MilitaryEchelon.
+
+in Mt : MilitaryForceStructureMt .
+
+isa : AttributeType ConventionalClassificationType .
+
+genls : AttributeValue ScalarInterval.
+
+comment : "An AttributeType consisting of the collection of all echelon
+
+          values of military units of all countries and branches of
+
+          service (like US Army echelons). See the predicate echelonOfUnit.".
+
+
+
+constant : Region-UnitDesignation.
+
+in Mt : MilitaryForceStructureMt.
+
+isa : IKBConstant MilitaryEchelon .
+
+comment : "The attribute of being an army region.  In the
+
+          USA, a military unit with the status of Region-UnitDesignation is
+
+          composed of several units with the status of
+
+          ArmyGroup-UnitDesignation. Note that this is rarely used but is
+
+          refered to in standard army symbology" .
+
+F : (sourceOfTerm-PIT Region-UnitDesignation FM101-5-1WebPage).
+
+;; author : NatashaNoy
+
+;; author : AdamPease
+
+
+
+constant : ArmyGroup-UnitDesignation.
+
+in Mt : MilitaryForceStructureMt.
+
+isa : IKBConstant MilitaryEchelon .
+
+comment : "The attribute of being an army group. (This does not refer to 'the Army'
+
+          meaning the whole > Army-BranchOfService.)  In the
+
+          USA, a military unit with the status of ArmyGroup-UnitDesignation is
+
+          composed of several units with the status of
+
+          Army-UnitDesignation.  Note that this designation is rarely used but
+
+          refered to in standard army symbology" .
+
+F : (followingValueOnScale ArmyGroup-UnitDesignation Region-UnitDesignation MilitaryEchelon).
+
+F : (sourceOfTerm-PIT ArmyGroup-UnitDesignation FM101-5-1WebPage).
+
+;; synonym : "Front"
+
+;; author : NatashaNoy
+
+;; author : AdamPease
+
+
+
+constant : Army-UnitDesignation.
+
+in Mt : MilitaryForceStructureMt.
+
+isa : IKBConstant MilitaryEchelon .
+
+comment : "The attribute of being an army, in the sense of a deployable
+
+          field unit called an 'Army'. (This does not refer to 'the Army'
+
+          meaning the whole > Army-BranchOfService.) This is the
+
+          attribute of a maximal echelon unit in the military command
+
+          structure of the UnitedStatesArmy, as 'the 6th Army'. In the
+
+          USA, a military unit with the status of Army-UnitDesignation is
+
+          typically composed of three or more units with the status of
+
+          Corps-UnitDesignation." .
+
+F : (followingValueOnScale Army-UnitDesignation ArmyGroup-UnitDesignation MilitaryEchelon).
+
+;; F : (sourceOfTerm-PIT Army-UnitDesignation AndersenAndPetersen).
+
+F : (sourceOfTerm-PIT Army-UnitDesignation FM101-5-1WebPage).
+
+
+
+constant: Corps-UnitDesignation.
+
+in Mt : MilitaryForceStructureMt .
+
+isa: IKBConstant MilitaryEchelon.
+
+comment : "The attribute of being a military corps within a military echelon
+
+          structure. In the USA, a military unit with the status of
+
+          Army-UnitDesignation is typically composed of three or more
+
+          units with the status of Corps-UnitDesignation, and a unit with the
+
+          status of Corps-UnitDesignation is typically composed of three or
+
+          more units with the status of Division-UnitDesignation." .
+
+F : (followingValueOnScale Corps-UnitDesignation Army-UnitDesignation MilitaryEchelon).
+
+;; F : (sourceOfTerm-PIT Corps-UnitDesignation AndersenAndPetersen).
+
+F : (sourceOfTerm-PIT Corps-UnitDesignation FM101-5-1WebPage).
+
+
+
+constant: Division-UnitDesignation .
+
+in Mt : MilitaryForceStructureMt .
+
+isa: IKBConstant MilitaryEchelon . 
+
+comment : "The attribute of being a military division within a military
+
+          echelon structure. In the USA, a military unit with the status of
+
+          Corps-UnitDesignation is typically composed of three or more
+
+          units with the status of Division-UnitDesignation, and a unit with
+
+          the status of Division-UnitDesignation is typically composed of
+
+          nine or more units with the status of Battalion-UnitDesignation.
+
+          See also Brigade-UnitDesignation and
+
+          Regiment-UnitDesignation.".
+
+F : (followingValueOnScale Division-UnitDesignation Corps-UnitDesignation MilitaryEchelon).
+
+;; F : (sourceOfTerm-PIT Division-UnitDesignation AndersenAndPetersen).
+
+F : (sourceOfTerm-PIT Division-UnitDesignation FM101-5-1WebPage).
+
+
+
+constant: Brigade-UnitDesignation.
+
+in Mt : MilitaryForceStructureMt.
+
+isa : IKBConstant MilitaryEchelon .
+
+comment : "Special-purpose subunits of military divisions are called
+
+          `brigades' and have Brigade-UnitDesignation. They are
+
+          somewhat similar to units with Regiment-UnitDesignation. A
+
+          brigade typically consists of two to five battalions, often
+
+          organized to fulfill a specific objective, and is commanded by a
+
+          brigadier general. See also Regiment-UnitDesignation and
+
+          Battalion-UnitDesignation." .
+
+F : (followingValueOnScale Brigade-UnitDesignation Division-UnitDesignation MilitaryEchelon).
+
+;; F : (sourceOfTerm-PIT Brigade-UnitDesignation AndersenAndPetersen).
+
+F : (sourceOfTerm-PIT Brigade-UnitDesignation FM101-5-1WebPage).
+
+
+
+constant: Regiment-UnitDesignation.
+
+in Mt : MilitaryForceStructureMt .
+
+isa: IKBConstant MilitaryEchelon.
+
+comment : "Military units that are special-purpose subunits of units with
+
+          Division-UnitDesignation are called 'regiments'.
+
+          Regiment-UnitDesignation represents this particular
+
+          echelon-level. A regiment typically consists of two to five
+
+          battalions, often organized to accomplish a specific kind of
+
+          objective. See also Brigade-UnitDesignation." .
+
+F : (followingValueOnScale Regiment-UnitDesignation Brigade-UnitDesignation MilitaryEchelon).
+
+;; F : (sourceOfTerm-PIT Regiment-UnitDesignation AndersenAndPetersen).
+
+F : (sourceOfTerm-PIT Regiment-UnitDesignation FM101-5-1WebPage).
+
+;; synonym : "Group"
+
+
+
+constant: Battalion-UnitDesignation.
+
+in Mt : MilitaryForceStructureMt .
+
+isa: IKBConstant MilitaryEchelon.
+
+comment : "The attribute of being a military battalion within a military
+
+          echelon structure. In the USA, a military unit with the status of
+
+          Division-UnitDesignation is typically composed of nine or more
+
+          units with the status of Battalion-UnitDesignation, and a unit with
+
+          the status of Battalion-UnitDesignation is typically composed of
+
+          three or more units with the status of Company-UnitDesignation." .
+
+F : (followingValueOnScale Battalion-UnitDesignation Regiment-UnitDesignation MilitaryEchelon).
+
+;; F : (sourceOfTerm-PIT Battalion-UnitDesignation AndersenAndPetersen).
+
+F : (sourceOfTerm-PIT Battalion-UnitDesignation FM101-5-1WebPage).
+
+;; synonym : "Squadron"
+
+
+
+constant: Company-UnitDesignation.
+
+in Mt : MilitaryForceStructureMt .
+
+isa: IKBConstant MilitaryEchelon.
+
+comment : "The attribute of being a military company within a military
+
+          echelon structure. In the USA, a military unit with the status of
+
+          Battalion-UnitDesignation is typically composed of three or more
+
+          units with the status of Company-UnitDesignation, and a unit with
+
+          the status of Company-UnitDesignation is typically composed of
+
+          two or more units with the status of Platoon-UnitDesignation. In
+
+          the US armed forces structure, units with the designation of
+
+          Company-UnitDesignation are also the smallest units to have their
+
+          own administrative staffs." .
+
+F : (followingValueOnScale Company-UnitDesignation Battalion-UnitDesignation MilitaryEchelon).
+
+;; F : (sourceOfTerm-PIT Company-UnitDesignation AndersenAndPetersen).
+
+F : (sourceOfTerm-PIT Company-UnitDesignation FM101-5-1WebPage).
+
+;; synonym : "Battery" "Troop"
+
+
+
+constant: Platoon-UnitDesignation.
+
+in Mt : MilitaryForceStructureMt .
+
+isa: IKBConstant MilitaryEchelon.
+
+comment:  "The attribute of being a military platoon within a military
+
+          echelon structure. In the USA, a military unit with the status of
+
+          Company-UnitDesignation is typically composed of two or more
+
+          units with the status of Platoon-UnitDesignation, and a unit with
+
+          the status of Platoon-UnitDesignation is typically composed of two
+
+          or more units with the status of Squad-UnitDesignation." .
+
+F : (followingValueOnScale Platoon-UnitDesignation Company-UnitDesignation MilitaryEchelon).
+
+;; F : (sourceOfTerm-PIT Platoon-UnitDesignation AndersenAndPetersen).
+
+F : (sourceOfTerm-PIT Platoon-UnitDesignation FM101-5-1WebPage).
+
+;; synonym : "Detachment"
+
+
+
+constant: Section-UnitDesignation .
+
+in Mt : MilitaryForceStructureMt.
+
+isa : IKBConstant MilitaryEchelon.
+
+comment : "The attribute of being a military section within a military echelon
+
+          structure. In the USA, a military unit with the status of
+
+          Section-UnitDesignation is composed of
+
+          units with the status of Squad-UnitDesignation. The American Heritage 
+
+          Dictionary, New College Edition, 1976 lists a Section as an army 
+
+          tactical unit smaller than platoon and larger than a squad. This designation is
+
+          part of standard army symbology but somewhat rarely used." .
+
+F : (followingValueOnScale Section-UnitDesignation Platoon-UnitDesignation MilitaryEchelon).
+
+F : (sourceOfTerm-PIT Section-UnitDesignation FM101-5-1WebPage).
+
+F : (sourceOfTerm-PIT Section-UnitDesignation AmericanHeritageDictionary1976).
+
+;; author : NatashaNoy
+
+;; author : AdamPease
+
+
+
+constant: Squad-UnitDesignation .
+
+in Mt : MilitaryForceStructureMt.
+
+isa : IKBConstant MilitaryEchelon.
+
+comment : "The attribute of being a military squad within a military echelon
+
+          structure. In the USA, a military unit with the status of
+
+          Platoon-UnitDesignation is typically composed of two or more
+
+          units with the status of Squad-UnitDesignation. A squad is the
+
+          minimal unit within the armed forces of the United States." .
+
+F : (followingValueOnScale Squad-UnitDesignation Section-UnitDesignation MilitaryEchelon).
+
+;; F : (sourceOfTerm-PIT Squad-UnitDesignation AndersenAndPetersen).
+
+F : (sourceOfTerm-PIT Squad-UnitDesignation FM101-5-1WebPage).
+
+
+
+constant: Team-UnitDesignation .
+
+in Mt : MilitaryForceStructureMt.
+
+isa : IKBConstant MilitaryEchelon.
+
+comment : "The attribute of being a military team within a military echelon
+
+          structure. In the USA, a military unit with the status of
+
+          Team-UnitDesignation is typically composed 
+
+          units with the status of Installation-UnitDesignation. A Team is 
+
+          a subdivision of a squad, consisting of 2-4 soldiers
+
+          and led by a sergeant or corporal (specialist). Note that
+
+          this designation is part of standard army symbology but is rarely used." .
+
+F : (followingValueOnScale  Team-UnitDesignation Squad-UnitDesignation MilitaryEchelon).
+
+F : (sourceOfTerm-PIT Team-UnitDesignation FM101-5-1WebPage).
+
+;; synonym : "Crew"
+
+;; author : NatashaNoy
+
+;; author : AdamPease
+
+
+
+constant: Installation-UnitDesignation .
+
+in Mt : MilitaryForceStructureMt.
+
+isa : IKBConstant MilitaryEchelon.
+
+comment : "The attribute of being a military team within a military echelon
+
+          structure.  This is the minimal unit designation of Army symbology. Note that
+
+          this designation is part of standard army symbology but is rarely used." .
+
+F : (followingValueOnScale  Installation-UnitDesignation Team-UnitDesignation MilitaryEchelon).
+
+F : (sourceOfTerm-PIT Installation-UnitDesignation FM101-5-1WebPage).
+
+;; author : AdamPease
+
+
+
+constant: TaskForce-UnitDesignation.
+
+in Mt : MilitaryForceStructureMt .
+
+isa: IKBConstant MilitaryEchelon.
+
+
+
+;;-------------------------------------------
+
+;; Ammunition status - added in this version
+
+;;
+
+
+
+constant : AmmunitionStatus.
+
+in Mt: MilitaryForceStructureMt.
+
+isa : LinearOrderAttributeType PrimitiveAttributeType .
+
+genls : ScalarInterval.
+
+comment : "Qualitative assessment of amount of ammunition a unit has:
+
+                green-> amber->red->black".
+
+;; author : NatashaNoy .
+
+
+
+;; Note: this can probably be linked with #$possesses on the 
+
+;; Cyc'c end of things if necessary. 
+
+;; Although, the ScalarInterval treatment is probably enough for now
+
+
+
+constant : ammunitionStatusOfUnit .
+
+in Mt: MilitaryForceStructureMt.
+
+isa: BinaryPredicate FunctionalSlot.
+
+genlPreds : hasAttributes .
+
+arg1Isa : ModernMilitaryUnit-Deployable .
+
+arg2Isa : AmmunitionStatus .
+
+comment :"(ammunitionStatusOfUnit UNIT AMMUNITIONSTATUS) means that unit
+
+has the corresponding percentage of its ammunition intact".
+
+;; author : NatashaNoy .
+
+
+
+constant : AmmunitionStatus-Green.
+
+in Mt: MilitaryForceStructureMt.
+
+isa : AmmunitionStatus.
+
+comment : "Unit has more than 80% of its ammunition".
+
+;; author : NatashaNoy .
+
+F:
+
+(genlAttributes (VeryHighAmountFn AmunitionStatus) AmmunitionStatus-Green).
+
+F:
+
+(genlAttributes (HighAmountFn AmunitionStatus) AmmunitionStatus-Green).
+
+
+
+constant : AmmunitionStatus-Amber.
+
+in Mt: MilitaryForceStructureMt.
+
+isa : AmmunitionStatus.
+
+comment : "Unit has more than 60% of its ammunition, but less than 80%".
+
+;; author : NatashaNoy .
+
+F:
+
+(genlAttributes (MediumAmountFn AmunitionStatus) AmmunitionStatus-Amber).
+
+F:
+
+(followingValueOnScale AmmunitionStatus-Amber AmmunitionStatus-Green AmmunitionStatus) .
+
+
+
+constant : AmmunitionStatus-Red.
+
+in Mt: MilitaryForceStructureMt.
+
+isa : AmmunitionStatus.
+
+comment : "Unit has more than 40% of its ammunition, but less than 60%".
+
+;; author : NatashaNoy .
+
+F:
+
+(genlAttributes (LowAmountFn AmunitionStatus) AmmunitionStatus-Red).
+
+F:
+
+(followingValueOnScale AmmunitionStatus-Red AmmunitionStatus-Amber AmmunitionStatus) .
+
+
+
+constant : AmmunitionStatus-Black.
+
+in Mt: MilitaryForceStructureMt.
+
+isa : AmmunitionStatus.
+
+comment : "Unit less than 40% of ammunition".
+
+;; author : NatashaNoy .
+
+F:
+
+(genlAttributes (VeryLowAmountFn AmunitionStatus) AmmunitionStatus-Black).
+
+F:
+
+(genlAttributes (NoAmountFn AmunitionStatus) AmmunitionStatus-Black).
+
+F:
+
+(followingValueOnScale AmmunitionStatus-Black AmmunitionStatus-Red AmmunitionStatus) .
+
+
+
+;;--------------------------------------------------------------------------
+
+;; Note: did not include Natasha's positionOfUnit since it is covered by 
+
+;; #$objectFoundInLocation or #$spatiallyIntersects
+
+;;
+
+;; Note: did not include Natasha's #$unitEquippedWith since it is covered by 
+
+;; #$armamentOfUnit, #$typicalArmamentOfUnit and #$typicalArmamentOfUnitType
+
+
+
+;; -------------------------------------------------------------------------
+
+;; Military Specialties
+
+
+
+constant : MilitaryUnitSpecialtyType.
+
+in Mt : MilitaryForceStructureMt .
+
+isa : Collection IKBConstant .
+
+genls : ExistingObjectType .
+
+comment : "MilitaryUnitSpecialtyType is a collection of collections. Its
+
+          instances are subsets of ModernMilitaryOrganization grouped by
+
+          military specialization. Much of this work is based on Peterson and
+
+          Andersen (1997)." .
+
+
+
+constant : CombatArmsUnit-MilitarySpecialty .
+
+in Mt : MilitaryForceStructureMt.
+
+isa : MilitaryUnitSpecialtyType .
+
+genls : ModernMilitaryUnit-Deployable .
+
+comment : " A collection of units that engage in direct combat with opposing forces.
+
+Also referred to as 'Ground Maneuver units' (which could be defined
+
+as a synonym) ".
+
+;; author : NatashaNoy
+
+
+
+constant : CombatSupportUnit-MilitarySpecialty .
+
+in Mt : MilitaryForceStructureMt.
+
+isa : MilitaryUnitSpecialtyType .
+
+genls : ModernMilitaryUnit-Deployable .
+
+comment : " A collection of units that support combat arms units by enhancing, enabling or improving their capabilities ".
+
+;; author : NatashaNoy
+
+
+
+constant : CombatServiceSupportUnit-MilitarySpecialty .
+
+in Mt : MilitaryForceStructureMt.
+
+isa : MilitaryUnitSpecialtyType .
+
+genls : ModernMilitaryUnit-Deployable .
+
+comment : " Supporting units such as medical, transport, supply, etc.
+
+                Synonym: LogisticsUnit-MilitarySpecialty ".
+
+;; author : NatashaNoy
+
+
+
+constant: WeaponsUnit-MilitarySpecialty .
+
+in Mt : MilitaryForceStructureMt.
+
+isa : MilitaryUnitSpecialtyType .
+
+genls : CombatSupportUnit-MilitarySpecialty .
+
+comment : "The collection of all military units trained, equipped,
+
+          and organized for the handling of a particular kind of
+
+          weapons system." .
+
+
+
+constant: ConventionalWeaponsUnit-MilitarySpecialty .
+
+in Mt : MilitaryForceStructureMt.
+
+isa: MilitaryUnitSpecialtyType .
+
+genls : WeaponsUnit-MilitarySpecialty .
+
+comment : "The collection of all military unit trained, organized and
+
+          equipped for the handling, deployment, employment, or
+
+          containment of some kind of conventionional weapons system.
+
+          'Conventional' in this context refers to weapons relying upon
+
+          conventional explosives for motive force and/or destructive
+
+          potential.".
+
+
+
+constant: ConventionalWeaponsUnit-MilitarySpecialty .
+
+in Mt : MilitaryForceStructureMt.
+
+isa: MilitaryUnitSpecialtyType .
+
+genls : WeaponsUnit-MilitarySpecialty .
+
+comment : "The collection of all military unit trained, organized and
+
+          equipped for the handling, deployment, employment, or
+
+          containment of some kind of conventionional weapons system.
+
+          'Conventional' in this context refers to weapons relying upon
+
+          conventional explosives for motive force and/or destructive
+
+          potential.".
+
+
+
+constant: ArtilleryUnit-MilitarySpecialty.
+
+in Mt : MilitaryForceStructureMt.
+
+isa: MilitaryUnitSpecialtyType.
+
+genls: ConventionalWeaponsUnit-MilitarySpecialty .
+
+comment: "The collection of all military units trained in handling certain
+
+         classes of projectile weapon." .
+
+
+
+constant: ArmoredUnit-MilitarySpecialty.
+
+in Mt : MilitaryForceStructureMt.
+
+isa: MilitaryUnitSpecialtyType.
+
+genls : CombatArmsUnit-MilitarySpecialty.
+
+comment: "The collection of all military units that employ motorized
+
+          vehicles engineered to resist penetration by explosives and
+
+          projectile weapons. In modern armed forces, it usually entails the
+
+          presence of tanks and heavy artillery.
+
+
+
+          In mounted warfare, the tank is the primary offensive weapon. Its firepower,
+
+          protection from enemy fire, and speed create the shock effect necessary to
+
+          disrupt or defeat the enemy. Tanks can destroy enemy armored vehicles,
+
+          infantry units, and antitank guided missile units. Tanks can break through
+
+          suppressed defenses, exploit the success of an attack by striking deep into the
+
+          enemy's rear areas, and pursue defeated enemy " .
+
+F : (sourceOfTerm-PIT InfantryUnit-MilitarySpecialty (PageFn 22 (ChapterFn 2 FM101-5Mt))).
+
+
+
+constant: MechanizedUnit-MilitarySpecialty.
+
+in Mt : MilitaryForceStructureMt.
+
+isa: MilitaryUnitSpecialtyType.
+
+genls: CombatArmsUnit-MilitarySpecialty .
+
+comment: "The collection of all military units typically employing vehicles
+
+          that run on motorized tracks or treads may be partial or it may be
+
+          complete. Such units are usually partially equipped for the
+
+          maintainance of such vehicles." .
+
+
+
+constant: CavalryUnit-MilitarySpecialty.
+
+in Mt : MilitaryForceStructureMt.
+
+isa: MilitaryUnitSpecialtyType.
+
+genls: CombatArmsUnit-MilitarySpecialty .
+
+comment : "The collection of all military units that are capable of covering
+
+          large distances in a wide variety of terrains, and to quickly engage
+
+          and disengage with the enemy, often in advance of the main force.
+
+          Historically and etymologically, 'cavalry' implies mounted units
+
+          however, in modern times the term has come to refer almost
+
+          exclusively to certain kinds of motorized armored unit.
+
+
+
+         The basic missions of cavalry units are reconnaissance, security, and economy
+
+         of force. The ability of cavalry units to find the enemy, to develop the situation,
+
+         and to provide the commander with reaction time and security also make
+
+         them ideal for operating in an economy-of-force role. Cavalry forces
+
+         can delay an attacking enemy as well as assist in a withdrawal. Air cavalry units
+
+         perform the same missions of reconnaissance and security as ground
+
+         cavalry and are organic to all cavalry units. Because of their greater mobility,
+
+         air cavalry troops can reconnoiter and maintain surveillance over a much larger
+
+         area in a shorter period of time than ground troops. During security
+
+         operations, the air cavalry reconnoiters, screens forward and to the flanks of
+
+         ground forces, and acts as a rapid reaction force.".
+
+F : (sourceOfTerm-PIT InfantryUnit-MilitarySpecialty (PageFn 23 (ChapterFn 2 FM101-5Mt))).
+
+
+
+constant: ArmoredCavalryUnit-MilitarySpecialty.
+
+in Mt : MilitaryForceStructureMt.
+
+isa: MilitaryUnitSpecialtyType.
+
+genls: CavalryUnit-MilitarySpecialty ArmoredUnit-MilitarySpecialty
+
+comment : "The collection of all military units that are capable of covering
+
+          large distances in a wide variety of terrains, and to quickly engage
+
+          and disengage with the enemy, often in advance of the main force.
+
+          Historically and etymologically, 'cavalry' implies mounted units
+
+          however, in modern times the term has come to refer almost
+
+          exclusively to certain kinds of motorized armored unit.".
+
+;; author : NatashaNoy
+
+
+
+constant: InfantryUnit-MilitarySpecialty.
+
+in Mt : MilitaryForceStructureMt.
+
+isa: MilitaryUnitSpecialtyType.
+
+genls: CombatArmsUnit-MilitarySpecialty.
+
+comment : "The five types of infantry forces are light, airborne, air assault, ranger,
+
+      and mechanized. Each has its own special skills and specific
+
+      organizational design, but all share the common mission to close with and
+
+      destroy the enemy. Airborne and air assault forces are most readily
+
+      distinguished by their means of entry into battle. Rangers serve both as a
+
+      type of infantry and as SOF. Regardless of their mode of
+
+      conveyance--by aircraft, by armored vehicle, by truck, or by foot-- they all
+
+      serve as a key element of combat power in close combat. ".  
+
+F : (sourceOfTerm-PIT InfantryUnit-MilitarySpecialty (PageFn 22 (ChapterFn 2 FM101-5Mt)).
+
+;; author : BillJarrold
+
+;; author : AdamPease
+
+
+
+constant: MechanizedInfantryUnit-MilitarySpecialty.
+
+in Mt : MilitaryForceStructureMt.
+
+isa: MilitaryUnitSpecialtyType.
+
+genls: MechanizedUnit-MilitarySpecialty InfantryUnit-MilitarySpecialty.
+
+comment : "Mechanized infantry has the same mobility as armor
+
+          forces, but less firepower and protection. Armor and mechanized
+
+          infantry train and fight as a team to defeat enemy armored forces. When
+
+          equipped with infantry fighting vehicles, the mechanized infantry can accompany
+
+          tanks in mounted assault, although commanders must be careful in
+
+          determining if, when, and where infantrymen must dis-mount to
+
+          accomplish their mission. In the attack, mechanized infantrymen can act as fixing
+
+          forces. In the defense, they act as pivot points for maneuvering tank-heavy
+
+          forces. Mechanized infantry forces seek to integrate fast, protected mobility;
+
+          lethal, vehicle-mounted, fire-support systems; and dismounted infantry skills
+
+          into an effective fighting system that enhances the striking power of armor
+
+          forces. Synonym: MotorizedRifleUnit-MilitarySpacialty (for enemy forces)".
+
+F : (sourceOfTerm-PIT MechanizedInfantryUnit-MilitarySpecialty (PageFn 23 (ChapterFn 2 FM101-5Mt))).
+
+
+
+constant: FootInfantryUnit-MilitarySpecialty.
+
+in Mt : MilitaryForceStructureMt.
+
+isa: MilitaryUnitSpecialtyType.
+
+genls: InfantryUnit-MilitarySpecialty.
+
+;; author : NatashaNoy
+
+
+
+constant: LightInfantryUnit-MilitarySpecialty.
+
+in Mt : MilitaryForceStructureMt.
+
+isa: MilitaryUnitSpecialtyType.
+
+genls: InfantryUnit-MilitarySpecialty.
+
+comment : "Light infantry units can operate effectively in most terrain
+
+      and weather. They may be the dominant arm in fast-breaking
+
+      operations because of their rapid strategic deployability. In such cases,
+
+      they can wrest the initiative early, seize and hold ground, and mass fires
+
+      to stop the enemy in restrictive terrain. They are particularly effective
+
+      in urban terrain. They can infiltrate and move rapidly to the enemy rear.
+
+      Their tactical mobility is enhanced through the use of helicopter support
+
+      and tactical airlift.
+
+
+
+      Light infantry units are capable of rapid deployment due to their austere
+
+      but lethal design. They may operate throughout the battlefield and can be
+
+      rapidly augmented for almost any task or situation. Light infantry units
+
+      are especially useful for operations in difficult terrain and urbanized areas.
+
+      They operate primarily at night or during periods of limited visibility in
+
+      close or restrictive terrain. Light infantry units achieve decisive results
+
+      through the employment of organic and supporting forces and weapons
+
+      systems. ".
+
+F : (sourceOfTerm-PIT LightInfantryUnit-MilitarySpecialty (PageFn 22 (ChapterFn 2 FM101-5Mt))).
+
+;; author : NatashaNoy
+
+;; author : AdamPease
+
+
+
+constant: ArmoredInfantryUnit-MilitarySpecialty.
+
+in Mt : MilitaryForceStructureMt.
+
+isa: MilitaryUnitSpecialtyType.
+
+genls: InfantryUnit-MilitarySpecialty ArmoredUnit-MilitarySpecialty.
+
+
+
+constant: AerialSupportUnit-MilitarySpecialty.
+
+in Mt : MilitaryForceStructureMt.
+
+isa: MilitaryUnitSpecialtyType.
+
+genls: CombatSupportUnit-MilitarySpecialty .
+
+
+
+constant: MaterialSupportUnit-MilitarySpecialty .
+
+in Mt : MilitaryForceStructureMt.
+
+isa : MilitaryUnitSpecialtyType .
+
+genls : CombatServiceSupportUnit-MilitarySpecialty .
+
+comment : "The collection of all military units specialized for
+
+          providing material support to other military units." .
+
+
+
+constant: EngineeringUnit-MilitarySpecialty.
+
+in Mt : MilitaryForceStructureMt.
+
+isa: MilitaryUnitSpecialtyType.
+
+genls: MaterialSupportUnit-MilitarySpecialty.
+
+comment: "The collection of all military units specialized to provide
+
+         engineering support to other military units. Engineers
+
+   execute mobility, countermobility, and survivability missions in the
+
+   forward combat zone and provide sustainment engineering for support forces. 
+
+   Topographic engineers provide terrain analysis and map products.
+
+
+
+   In offensive operations, engineers normally concentrate their efforts in
+
+   supporting maneuver by breaching and crossing obstacles, assisting in the
+
+   assault of fortified positions, and emplacing obstacles to protect the
+
+   flanks of friendly attacking forces. In the defense, engineers reinforce the
+
+   terrain to anchor the defense in critical areas, to maximize the effects of
+
+   defenders' fires, to provide maximum protection to friendly fighting positions,
+
+   and to facilitate the movement of counterattack forces. In all types of
+
+   operations, engineers advise the maneuver commander on the
+
+   effective use of terrain; construct, improve, and maintain routes, bridges,
+
+   airfields, and other facilities; and reorganize to fight as infantry when
+
+   required." .
+
+
+
+constant : CombatEngineeringUnit-MilitarySpecialty.
+
+in Mt : MilitaryForceStructureMt.
+
+isa: MilitaryUnitSpecialtyType.
+
+genls: CombatSupportUnit-MilitarySpecialty .
+
+
+
+constant: HeadquartersUnit-MilitarySpecialty.
+
+in Mt : MilitaryForceStructureMt.
+
+isa: MilitaryUnitSpecialtyType.
+
+genls: ModernMilitaryUnit-Deployable.
+
+comment: "The collection of all military units with a specialization having to
+
+         do with the operation of a headquarters.".
+
+
+
+constant: ArtilleryUnit-MilitarySpecialty .
+
+in Mt : MilitaryForceStructureMt.
+
+isa: MilitaryUnitSpecialtyType.
+
+genls : ConventionalWeaponsUnit-MilitarySpecialty .
+
+comment : "The collection of all military units trained in handling
+
+          certain classes of projectile weapon." .
+
+
+
+constant: FieldArtilleryUnit-MilitarySpecialty.
+
+in Mt : MilitaryForceStructureMt.
+
+isa: MilitaryUnitSpecialtyType.
+
+genls : ArtilleryUnit-MilitarySpecialty .
+
+comment : "The collection of all military units trained and equipped
+
+          for handling heavy guns used for indirect fire against
+
+          land-based targets.
+
+
+
+          A principal means of fire support in fire and maneuver is the field
+
+          artillery. It not only provides fires with cannon, rocket, and missile
+
+          systems but also integrates all means of fire support available to the
+
+          commander. Field artillery can neutralize, suppress, or destroy
+
+          enemy direct fire forces, attack enemy artillery and mortars, and
+
+          deliver scatterable mines to isolate and interdict enemy forces or
+
+          protect friendly operations. Field artillery units contribute to attacking
+
+          the enemy throughout the depth of his formations and suppress enemy
+
+          air defense systems to facilitate ground and air operations. As
+
+          mobile as the maneuver force it supports, field artillery provides
+
+          continuous fires in support of the commanders' schemes of maneuver" .
+
+F : (sourceOfTerm-PIT MechanizedInfantryUnit-MilitarySpecialty (PageFn 23 (ChapterFn 2 FM101-5Mt))).
+
+
+
+Constant: SelfPropelledFieldArtilleryUnit-MilitarySpecialty
+
+in Mt : MilitaryForceStructureMt
+
+isa : IKBConstant MilitaryUnitSpecialtyType 
+
+genls : FieldArtilleryUnit-MilitarySpecialty 
+
+comment : "The collection of all military units trained and equipped for
+
+          handling motorized artillery pieces. Note that 'self-propelled'
+
+          refers to the artillery piece itself, not to the projectile fired." 
+
+
+
+Collection : TractoredFieldArtilleryUnit-MilitarySpecialty
+
+in Mt : MilitaryForceStructureMt
+
+isa : IKBConstant MilitaryUnitSpecialtyType 
+
+genls : FieldArtilleryUnit-MilitarySpecialty 
+
+comment :  "The collection of all military units trained and equipped for
+
+          handling artillery pieces that must be towed into position by other
+
+          equipment." 
+
+
+
+constant: MortarUnit-MilitarySpecialty.
+
+in Mt : MilitaryForceStructureMt.
+
+isa: MilitaryUnitSpecialtyType.
+
+genls : FieldArtilleryUnit-MilitarySpecialty .
+
+comment : "The collection of all military units trained and equipped
+
+          for handling mortar weapons." .
+
+
+
+
+
+
+
+constant: HeavyMortarUnit-MilitarySpecialty.
+
+in Mt : MilitaryForceStructureMt.
+
+isa: MilitaryUnitSpecialtyType.
+
+genls: MortarUnit-MilitarySpecialty.
+
+comment : "The collection of all military units trained and equipped for
+
+          handling heavy mortar weapons." .
+
+ 
+
+
+
+
+
+constant: MedicalSupportUnit-MilitarySpecialty. 
+
+in Mt : MilitaryForceStructureMt.
+
+isa: MilitaryUnitSpecialtyType.
+
+genls: CombatServiceSupportUnit-MilitarySpecialty.
+
+comment : "The collection of all military units whose mission profile is
+
+          centered on providing some kind of medical support. 
+
+          This attribute covers both units that are deployed to provide
+
+          medical service in the field, like MASH units, and units which
+
+          provide service at a fixed location in non-combat conditions, like
+
+          clinics. To specify the former, use also the attribute
+
+          FieldServicesUnit-MilitarySpecialty or assert that the unit is a
+
+          ModernMilitaryUnit-Deployable." .
+
+
+
+constant: ReconnaissanceUnit-MilitarySpecialty.
+
+in Mt : MilitaryForceStructureMt.
+
+isa: MilitaryUnitSpecialtyType.
+
+genls: CombatArmsUnit-MilitarySpecialty.
+
+comment: "The collection of all military units. A reconnaissance unit is a
+
+         task-dedicated unit whose purpose is to survey territory in order to
+
+         gain information." .
+
+
+
+
+
+constant : AttackAviationUnit-MilitarySpecialty.
+
+in Mt : MilitaryForceStructureMt.
+
+isa: MilitaryUnitSpecialtyType.
+
+genls: CombatArmsUnit-MilitarySpecialty .
+
+;; author : NatashaNoy
+
+
+
+constant : AssaultHelicopterUnit-MilitarySpecialty.
+
+in Mt : MilitaryForceStructureMt.
+
+isa : MilitaryUnitSpecialtyType .
+
+genls : AttackAviationUnit-MilitarySpecialty.
+
+;; author : NatashaNoy
+
+
+
+constant : AttackHelicopterUnit-MilitarySpecialty.
+
+in Mt : MilitaryForceStructureMt.
+
+isa : MilitaryUnitSpecialtyType .
+
+genls : AttackAviationUnit-MilitarySpecialty.
+
+;; author : NatashaNoy
+
+
+
+constant: OffensiveOperationsUnit-MilitarySpecialty .
+
+in Mt : MilitaryForceStructureMt .
+
+isa : MilitaryUnitSpecialtyType .
+
+genls : ModernMilitaryUnit-Deployable .
+
+comment : "The collection of all military units that deal with any
+
+          dimension of offensive operations." .
+
+cyclistNotes : "This collection was created primarily in order to
+
+               gather a number of associated military unit attributes
+
+               together under the same heading and support generalized
+
+               inferencing about them. For a given military unit, a
+
+               more specific specialization will ordinarily be
+
+               asserted." .
+
+
+
+constant: BradleyFightingVehicle.
+
+in Mt: ModernMilitaryVehiclesMt.
+
+isa: ExistingObjectType IKBConstant.
+
+genls: ArmoredPersonnelCarrier.
+
+comment: "Specialized type of #$ArmoredPersonnelCarrier used regularly
+
+by the modern US Army.".
+
+;; author CleoCondoravdi
+
+ 
+
+;;add
+
+constant: MotorizedUnit-MilitarySpecialty.
+
+in Mt : MilitaryForceStructureMt.
+
+isa : IKBConstant MilitaryUnitSpecialtyType IKBConstant.
+
+genls : ModernMilitaryUnit-Deployable  .
+
+comment : "The collection of all military units. A
+
+          'motorized' unit employs motorized vehicles for
+
+          transport and/or combat." .
+
+;; author CleoCondoravdi
+
+
+
+constant: BFVUnit-MilitarySpecialty.
+
+in Mt: BattlespaceMilitaryMt.
+
+isa: ExistingObjectType IKBConstant.
+
+genls: MotorizedUnit-MilitarySpecialty.
+
+comment: "Specialization of motorized units with mission profiles
+
+dedicated to the deployment and use of BradleyFightingVehicles.".
+
+;; author CleoCondoravdi
+
+ 
+
+constant: HelicopterUnit-MilitarySpecialty.
+
+in Mt: MilitaryForceStructureMt.
+
+isa: ExistingObjectType IKBConstant.
+
+genls: AerialSupportUnit-MilitarySpecialty.
+
+comment: "Specialization of units that deploy by means of helicopters.".
+
+;; author CleoCondoravdi
+
+ 
+
+constant: LightHelicopterUnit-MilitarySpecialty.
+
+in Mt: MilitaryForceStructureMt.
+
+isa: ExistingObjectType IKBConstant.
+
+genls: HelicopterUnit-MilitarySpecialty.
+
+;comment: "".
+
+;; author CleoCondoravdi
+
+
+
+constant: MediumHelicopterUnit-MilitarySpecialty.
+
+in Mt: MilitaryForceStructureMt.
+
+isa: ExistingObjectType IKBConstant.
+
+genls: HelicopterUnit-MilitarySpecialty.
+
+;; author CleoCondoravdi
+
+ 
+
+constant: HeavyHelicopterUnit-MilitarySpecialty.
+
+in Mt: MilitaryForceStructureMt.
+
+isa: ExistingObjectType IKBConstant.
+
+genls: HelicopterUnit-MilitarySpecialty.
+
+;; author CleoCondoravdi
+
+ 
+
+constant: CombatUnit-MilitarySpecialty.
+
+in Mt: MilitaryForceStructureMt.
+
+isa: ExistingObjectType IKBConstant.
+
+genls: ModernMilitaryUnit-Deployable.
+
+;; author CleoCondoravdi
+
+ 
+
+constant: DismountedUnit-MilitarySpecialty.
+
+in Mt: MilitaryForceStructureMt.
+
+isa: ExistingObjectType IKBConstant.
+
+genls: ModernMilitaryUnit-Deployable.
+
+;; author CleoCondoravdi
+
+ 
+
+constant: MobileUnit-MilitarySpecialty.
+
+in Mt: MilitaryForceStructureMt.
+
+isa: ExistingObjectType IKBConstant.
+
+genls: ModernMilitaryUnit-Deployable.
+
+;; author CleoCondoravdi
+
+ 
+
+;;ebh, 3/19/99 - NEW CONSTANTS:
+
+
+
+;AirDefenseArtilleryUnit-MilitarySpecialty
+
+;MechanizedAntiArmorUnit-MilitarySpecialty
+
+;IFVMechanizedUnit-MilitarySpecialty
+
+;IFVAntiArmorUnit-MilitarySpecialty
+
+;DismountedAntiArmorUnit-MilitarySpecialty
+
+;MechanizedAntiArmorUnit-MilitarySpecialty
+
+;AviationReconUnit-MilitarySpecialty
+
+;LightAttackHelicopterUnit-MilitarySpecialty
+
+;HeavyAttackHelicopterUnit-MilitarySpecialty
+
+;MediumAttackHelicopterUnit-MilitarySpecialty
+
+;LightLiftHelicopterUnit-MilitarySpecialty
+
+;MediumLiftHelicopterUnit-MilitarySpecialty
+
+;HeavyLiftHelicopterUnit-MilitarySpecialty
+
+;DismountedCombatEngineeringUnit-MilitarySpecialty
+
+;MechanizedCombatEngineeringUnit-MilitarySpecialty
+
+;AirAssaultEngineeringUnit-MilitarySpecialty
+
+;AirborneEngineeringUnit-MilitarySpecialty
+
+;LightEngineeringUnit-MilitarySpecialty
+
+;MechanizedEngineeringUnit-MilitarySpecialty
+
+;LightInfantryUnit-MilitarySpecialty
+
+;LightInfantryMortarUnit-MilitarySpecialty
+
+;MechanizedInfantryMortarUnit-MilitarySpecialty
+
+;AirAssaultInfantryUnit-MilitarySpecialty
+
+;AirborneInfantryUnit-MilitarySpecialty
+
+;AmphibiousInfantryUnit-MilitarySpecialty
+
+;AirborneReconnaissanceUnit-MilitarySpecialty
+
+;LightCavalryReconnaissanceUnit-MilitarySpecialty
+
+;IFVArmoredCavalryUnit-MilitarySpecialty
+
+;IFVArmoredReconnaissanceUnit-MilitarySpecialty
+
+
+
+;;ALSO ADDED:
+
+
+
+f:
+
+(genls ArmoredCavalryUnit-MilitarySpecialty MechanizedUnit-MilitarySpecialty).
+
+
+
+in Mt: ModernMilitaryForceStructureMt.
+
+f:
+
+(genls HelicopterUnit-MilitarySpecialty AviationUnit-MilitarySpecialty).
+
+f:
+
+(genls LightHelicopterUnit-MilitarySpecialty AviationUnit-MilitarySpecialty).
+
+f:
+
+(genls MediumHelicopterUnit-MilitarySpecialty AviationUnit-MilitarySpecialty).
+
+f:
+
+(genls HeavyHelicopterUnit-MilitarySpecialty AviationUnit-MilitarySpecialty).
+
+
+
+In Mt: ModernMilitaryTacticsMt.
+
+f:
+
+(standardVehicleOfUnitType MechanizedUnit-MilitarySpecialty TrackedVehicle).
+
+
+
+In Mt: ModernMilitaryTacticsMt.
+
+f:
+
+(standardEquipmentOfUnitType FieldArtilleryUnit-MilitarySpecialty FieldArtillery).
+
+
+
+f:
+
+(standardEquipmentOfUnitType TractoredFieldArtilleryUnit-MilitarySpecialty Artillery-Towed).
+
+
+
+f:
+
+(standardEquipmentOfUnitType SelfPropelledFieldArtilleryUnit-MilitarySpecialty Artillery-SelfPropelled).
+
+
+
+In Mt: ModernMilitaryTacticsMt.
+
+f:
+
+(standardEquipmentOfUnitType MortarUnit-MilitarySpecialty Mortar).
+
+
+
+
+
+constant: AirDefenseArtilleryUnit-MilitarySpecialty.
+
+in Mt: MilitaryForceStructureMt.
+
+isa: IKBConstant MilitaryUnitSpecialtyType.
+
+genls: AirDefenseUnit-MilitarySpecialty ArtilleryUnit-MilitarySpecialty.
+
+
+
+comment: "The collection of ground-based military units that are
+
+trained in handling certain classes of projectile weapons and are
+
+dedicated to protecting airspace regions.".
+
+
+
+constant: MechanizedAntiArmorUnit-MilitarySpecialty.
+
+in Mt: MilitaryForceStructureMt.
+
+isa: IKBConstant MilitaryUnitSpecialtyType.
+
+genls: AntiArmorUnit-MilitarySpecialty MechanizedUnit-MilitarySpecialty.
+
+
+
+comment: "The collection of military units trained and equipped to
+
+fight armored vehicles and typically employing motorized track
+
+vehicles.".
+
+
+
+constant: IFVMechanizedUnit-MilitarySpecialty.
+
+in Mt: MilitaryForceStructureMt.
+
+isa: IKBConstant MilitaryUnitSpecialtyType.
+
+genls: MechanizedUnit-MilitarySpecialty.
+
+
+
+comment: "The collection of military units that employ Infantry
+
+Fighting Vehicles. (See M2InfantryFightingVehicle.)".
+
+
+
+In Mt: ModernMilitaryTacticsMt.
+
+f:
+
+(standardVehicleOfUnitType IFVMechanizedUnit-MilitarySpecialty M2InfantryFightingVehicle).
+
+
+
+
+
+constant: IFVAntiArmorUnit-MilitarySpecialty.
+
+in Mt: MilitaryForceStructureMt.
+
+isa: IKBConstant MilitaryUnitSpecialtyType.
+
+genls: MechanizedAntiArmorUnit-MilitarySpecialty.
+
+
+
+comment: "The collection of military units trained and equipped to
+
+fight armored vehicles and typically employing Infantry Fighting
+
+Vehilces. (See #$M2InfantryFightingVehicle.)".
+
+
+
+constant: DismountedAntiArmorUnit-MilitarySpecialty.
+
+in Mt: MilitaryForceStructureMt.
+
+isa: IKBConstant MilitaryUnitSpecialtyType.
+
+genls: AntiArmorUnit-MilitarySpecialty DismountedUnit-MilitarySpecialty.
+
+
+
+comment: "The collection of military units trained and equipped to
+
+fight armored vehicles while on foot.".
+
+
+
+;*Note - I don't exactly know what a dismounted unit is. The
+
+;collection, #$DismountedUnit-MilitarySpecialty doesn't have a comment
+
+;on it, so I made the above comment up.
+
+
+
+constant: AviationReconUnit-MilitarySpecialty.
+
+in Mt: MilitaryForceStructureMt.
+
+isa: IKBConstant MilitaryUnitSpecialtyType.
+
+genls: AviationUnit-MilitarySpecialty ReconnaissanceUnit-MilitarySpecialty.
+
+
+
+comment: "The collection of instances of ModernMilityUnit-Deployable
+
+that rely on the use of helicopters for reconnaissance operations to
+
+which they are dedicated.".
+
+
+
+constant: LightAttackHelicopterUnit-MilitarySpecialty.
+
+in Mt: MilitaryForceStructureMt.
+
+isa: IKBConstant MilitaryUnitSpecialtyType.
+
+genls: LightHelicopterUnit-MilitarySpecialty.
+
+
+
+;standardVehicleOfUnitType: AttackHelicopter.
+
+
+
+constant: MediumAttackHelicopterUnit-MilitarySpecialty.
+
+in Mt: MilitaryForceStructureMt.
+
+isa: IKBConstant MilitaryUnitSpecialtyType.
+
+genls: MediumHelicopterUnit-MilitarySpecialty.
+
+
+
+comment: "The collection of moderately armed military units that rely
+
+on the use of attack helicopters for closing with and engaging the
+
+enemy.".
+
+
+
+comment: "The collection of lightly armed military units that rely on
+
+the use of attack helicopters for closing with and engaging the
+
+enemy.".
+
+
+
+constant: HeavyAttackHelicopterUnit-MilitarySpecialty.
+
+in Mt: MilitaryForceStructureMt.
+
+isa: IKBConstant MilitaryUnitSpecialtyType.
+
+genls: HeavyHelicopterUnit-MilitarySpecialty.
+
+;standardVehicleOfUnitType: AttackHelicopter.
+
+
+
+comment: "The collection of heavily armed military units that rely on
+
+the use of attack helicopters for closing with and engaging the
+
+enemy.".
+
+
+
+constant: LightLiftHelicopterUnit-MilitarySpecialty.
+
+in Mt: MilitaryForceStructureMt.
+
+isa: IKBConstant MilitaryUnitSpecialtyType.
+
+genls: LightHelicopterUnit-MilitarySpecialty.
+
+
+
+comment: "The collection of lightly armed military units that are
+
+responsible for airlifting troops to the combat areas.".
+
+
+
+constant: MediumLiftHelicopterUnit-MilitarySpecialty.
+
+in Mt: MilitaryForceStructureMt.
+
+isa: IKBConstant MilitaryUnitSpecialtyType.
+
+genls: MediumHelicopterUnit-MilitarySpecialty.
+
+
+
+comment: "The collection of moderately armed military units that are
+
+responsible for airlifting troops to the combat areas.".
+
+
+
+constant: HeavyLiftHelicopterUnit-MilitarySpecialty.
+
+in Mt: MilitaryForceStructureMt.
+
+isa: IKBConstant MilitaryUnitSpecialtyType.
+
+genls: HeavyHelicopterUnit-MilitarySpecialty.
+
+
+
+comment: "The collection of heavily armed military units that are
+
+responsible for airlifting troops to the combat areas.".
+
+
+
+constant: DismountedCombatEngineeringUnit-MilitarySpecialty.
+
+in Mt: MilitaryForceStructureMt.
+
+isa: IKBConstant MilitaryUnitSpecialtyType.
+
+genls: DismountedUnit-MilitarySpecialty CombatUnit-MilitarySpecialty EngineeringUnit-MilitarySpecialty.
+
+
+
+comment: "The collection of dismounted military units that are
+
+equipped for both combat operations and engineering operations.".
+
+
+
+constant: MechanizedCombatEngineeringUnit-MilitarySpecialty.
+
+in Mt: MilitaryForceStructureMt.
+
+isa: IKBConstant MilitaryUnitSpecialtyType.
+
+genls: MechanizedUnit-MilitarySpecialty EngineeringUnit-MilitarySpecialty CombatUnit-MilitarySpecialty.
+
+
+
+comment: "The collection of military combat units typically employing
+
+motorized tracked vehicles.".
+
+
+
+constant: AirAssaultEngineeringUnit-MilitarySpecialty.
+
+in Mt: MilitaryForceStructureMt.
+
+isa: IKBConstant MilitaryUnitSpecialtyType.
+
+genls: AirAssaultUnit-MilitarySpecialty EngineeringUnit-MilitarySpecialty.
+
+
+
+comment: "The collection of offensive military units that are inserted
+
+into combat (usually by helicopter) from the air and are also equipped
+
+to provide engineering support.".
+
+
+
+constant: AirborneEngineeringUnit-MilitarySpecialty.
+
+in Mt: MilitaryForceStructureMt.
+
+isa: IKBConstant MilitaryUnitSpecialtyType.
+
+genls: AirborneUnit-MilitarySpecialty EngineeringUnit-MilitarySpecialty.
+
+
+
+comment: "The collection of military engineering units that are
+
+deployed by parachute drop.".
+
+
+
+constant: Parachute.
+
+isa: IKBConstant ProductType ExistingObjectType.
+
+genls: AirTransportationDevice.
+
+
+
+comment: "The collection of parachutes. I.e., those large, roundish
+
+sheets of fabric which are attached by cords to a harness worn on the
+
+back by persons jumping from airplanes or helicopters. Parachutes can
+
+also be used for transporting inanimate objects from the air to the
+
+ground.".
+
+
+
+In Mt: ModernMilitaryTacticsMt.
+
+f:
+
+(implies
+
+ (and
+
+  (isa ?UNIT AirborneUnit-MilitarySpecialty)
+
+  (complementOfMilitaryUnit ?UNIT ?N)
+
+  (isa ?EVENT Deploying-Military)
+
+  (performedBy ?EVENT ?UNIT))
+
+ (preconditionFor-PropSit 
+
+  (thereExistAtLeast ?N ?PARACHUTE 
+
+		     (and (equipmentOfUnit ?UNIT ?PARACHUTE)
+
+			  (isa ?PARACHUTE Parachute))) ?EVENT)).
+
+
+
+constant: LightEngineeringUnit-MilitarySpecialty.
+
+in Mt: MilitaryForceStructureMt.
+
+isa: IKBConstant MilitaryUnitSpecialtyType.
+
+genls: EngineeringUnit-MilitarySpecialty.
+
+
+
+comment: "The collection of lightly armed instances of
+
+#$EngineeringUnit-MilitarySpecialty.".
+
+
+
+constant: MechanizedEngineeringUnit-MilitarySpecialty.
+
+in Mt: MilitaryForceStructureMt.
+
+isa: IKBConstant MilitaryUnitSpecialtyType.
+
+genls: EngineeringUnit-MilitarySpecialty MechanizedUnit-MilitarySpecialty.
+
+
+
+comment: "The collection of instances of
+
+#$EngineeringUnit-MilitarySpecialty typically employing
+
+motorized tracked vehicles.".
+
+
+
+constant: LightInfantryUnit-MilitarySpecialty.
+
+in Mt: MilitaryForceStructureMt.
+
+isa: IKBConstant MilitaryUnitSpecialtyType.
+
+genls: InfantryUnit-MilitarySpecialty.
+
+
+
+comment: "The collection of lightly armed infantry units.".
+
+
+
+constant: LightInfantryMortarUnit-MilitarySpecialty.
+
+in Mt: MilitaryForceStructureMt.
+
+isa: IKBConstant MilitaryUnitSpecialtyType.
+
+genls: LightInfantryUnit-MilitarySpecialty MortarUnit-MilitarySpecialty. 
+
+
+
+comment: "The collection of lightly armed infantry units employing
+
+mortar-type weapons. (See #$Mortar.).".
+
+
+
+constant: MechanizedInfantryMortarUnit-MilitarySpecialty.
+
+in Mt: MilitaryForceStructureMt.
+
+isa: IKBConstant MilitaryUnitSpecialtyType.
+
+genls: MechanizedInfantryUnit-MilitarySpecialty.
+
+
+
+comment: "The collection infantry units employing motorized tracked
+
+vehicles and mortar-type weapons.".
+
+
+
+constant: AirAssaultInfantryUnit-MilitarySpecialty.
+
+in Mt: MilitaryForceStructureMt.
+
+isa: IKBConstant MilitaryUnitSpecialtyType.
+
+genls: AirAssaultUnit-MilitarySpecialty InfantryUnit-MilitarySpecialty.
+
+
+
+comment: "The collection of offensive infantry units that are inserted
+
+into combat by air vehicles - usually helicopters - without
+
+parachute drop.".
+
+
+
+constant: AirborneInfantryUnit-MilitarySpecialty.
+
+in Mt: MilitaryForceStructureMt.
+
+isa: IKBConstant MilitaryUnitSpecialtyType.
+
+genls: AirborneUnit-MilitarySpecialty InfantryUnit-MilitarySpecialty.
+
+
+
+comment: "The collection of infantry units that are deployed by
+
+parachute drop.".
+
+
+
+constant: AmphibiousInfantryUnit-MilitarySpecialty.
+
+in Mt: MilitaryForceStructureMt.
+
+isa: IKBConstant MilitaryUnitSpecialtyType.
+
+genls: AmphibiousUnit-MilitarySpecialty InfantryUnit-MilitarySpecialty.
+
+
+
+comment: "The collection of infantry units that are trained and
+
+equipped to move to their places of deployment by water vehicles.".
+
+
+
+In Mt: ModernMilitaryTacticsMt.
+
+f:
+
+(standardEquipmentOfUnitType AmphibiousUnit-MilitarySpecialty AmphibiousVehicle).
+
+
+
+constant: IFVMechanizedInfantryUnit-MilitarySpecialty.
+
+in Mt: MilitaryForceStructureMt.
+
+isa: IKBConstant MilitaryUnitSpecialtyType.
+
+genls: MechanizedInfantryUnit-MilitarySpecialty IFVMechanizedUnit-MilitarySpecialty.
+
+
+
+comment: "The collection of infantry units employing Infantry Fighting
+
+Vehicles. (See M2InfantryFightingVehicle.)".
+
+
+
+constant: AirborneReconnaissanceUnit-MilitarySpecialty.
+
+in Mt: MilitaryForceStructureMt.
+
+isa: IKBConstant MilitaryUnitSpecialtyType.
+
+genls: AirborneUnit-MilitarySpecialty ReconnaissanceUnit-MilitarySpecialty.
+
+
+
+comment: "The collection of military reconnaissance units that are
+
+deployed by parachute drop.".
+
+
+
+constant: LightCavalryReconnaissanceUnit-MilitarySpecialty.
+
+in Mt: MilitaryForceStructureMt.
+
+isa: IKBConstant MilitaryUnitSpecialtyType.
+
+genls: CavalryUnit-MilitarySpecialty ReconnaissanceUnit-MilitarySpecialty.
+
+
+
+comment: "The collection of lightly armed cavalry units dedicated to
+
+reconnaissance operations.".
+
+
+
+f:
+
+(genls ArmoredCavalryUnit-MilitarySpecialty MechanizedUnit-MilitarySpecialty).
+
+
+
+constant: IFVArmoredCavalryUnit-MilitarySpecialty.
+
+in Mt: MilitaryForceStructureMt.
+
+isa: IKBConstant MilitaryUnitSpecialtyType.
+
+genls: ArmoredCavalryUnit-MilitarySpecialty IFVMechanizedUnit-MilitarySpecialty.
+
+
+
+comment: "The collection of cavalry units equipped with Infantry
+
+Fighting Vehicles.".
+
+
+
+constant: IFVArmoredReconnaissanceUnit-MilitarySpecialty.
+
+in Mt: MilitaryForceStructureMt.
+
+isa: IKBConstant MilitaryUnitSpecialtyType.
+
+genls: IFVMechanizedUnit-MilitarySpecialty ReconnaissanceUnit-MilitarySpecialty ArmoredUnit-MilitarySpecialty.
+
+
+
+comment: "The collection of armored reconnaissance units typically
+
+employing Infantry Fighting Vehicles.".
+
+
+
+
+
+
+
+
+

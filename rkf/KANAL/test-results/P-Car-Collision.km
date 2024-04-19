@@ -1,0 +1,67 @@
+;; 
+;; (Car has (superclasses (Inanimate-Object)))
+;;
+
+(P-Car-Collision has (superclasses (Scenario)))
+                          
+(every P-Car-Collision has 
+  (some-associated-move-to3 ((a Move-To)))
+  (some-associated-move-to4 ((a Move-To)))
+  (some-associated-make-contact2 ((a Make-Contact)))
+  (some-associated-car3 ((a Car)))
+  (some-associated-car4 ((a Car)))
+  (some-associated-spatial-entity2 ((a Spatial-Entity)))
+
+  (first-subevent 
+     (( ((the some-associated-move-to4 of Self)) 
+	&& 
+	((a Move-To) (the some-associated-move-to3 of Self)) 
+	&& 
+	((a Move-To with 
+	    (next-event ((the some-associated-make-contact2 of Self)))) 
+	 (a Move-To)) 
+	&& 
+	((a Move-To) 
+	 (a Move-To with 
+	    (next-event ((the next-event of (the first of 
+			      (the first-subevent of Self))))))))))
+                            
+  (subevent 
+     (( ((the first of (the first-subevent of Self))) 
+	&& 
+	((a Move-To) (the second of (the first-subevent of Self))) 
+	&& 
+	((a Move-To) (a Move-To) (the next-event of (the first of (the subevent of Self)))) 
+	&& 
+	((a Move-To with 
+	    (destination ((the some-associated-spatial-entity2 of Self)))) 
+	 (a Move-To) 
+	 (a Make-Contact)) 
+	&& 
+	((a Move-To) 
+	 (a Move-To with 
+	    (destination ((the destination of (the first of (the subevent of Self)))))) 
+	 (a Make-Contact)) 
+	&& 
+	((a Move-To with 
+	    (object ((the some-associated-car4 of Self)))) 
+	 (a Move-To) 
+	 (a Make-Contact)) 
+	&& 
+	((a Move-To) 
+	 (a Move-To with 
+	    (object ((the some-associated-car3 of Self)))) 
+	 (a Make-Contact)) 
+	&& 
+	((a Move-To) 
+	 (a Move-To) 
+	 (a Make-Contact with 
+	    (base ((the object of (the first of (the subevent of Self))))))) 
+	&& 
+	((a Move-To) 
+	 (a Move-To) 
+	 (a Make-Contact with 
+	    (object ((the object of (the second of (the subevent of Self))))))))))
+                            
+  (base   ((the object of (the first of (the subevent of Self)))))
+  (object ((the object of (the second of (the subevent of Self))))))

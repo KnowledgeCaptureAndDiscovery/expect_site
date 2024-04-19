@@ -1,0 +1,809 @@
+Agenda:
+   at Tue Jun 26 14:18:55 PDT 2001
+
+select: show in English button
+   at Tue Jun 26 14:46:48 PDT 2001
+
+shown in English:COMPUTE-REQUIRED-FORCE-RATIO
+   at Tue Jun 26 14:46:49 PDT 2001
+
+select: show error button
+   at Tue Jun 26 14:47:30 PDT 2001
+
+checked error:((name compute-required-force-ratio)
+ (capability (estimate
+                (obj (?f is (spec-of required-force-ratio)))
+                (for (?s is (inst-of military-task)))
+                ))
+ (result-type (inst-of number))
+ (method  ( if (is-it-a
+            (obj ( operation-of ?s))
+            (of (spec-of military-offensive-operation))
+            ) 
+         then 3 
+         else 1/3))
+)
+MESSAGES
+   at Tue Jun 26 14:47:30 PDT 2001
+
+select: creat label button
+   at Tue Jun 26 14:49:05 PDT 2001
+
+created label:coa
+   at Tue Jun 26 14:49:40 PDT 2001
+
+select: cut button
+   at Tue Jun 26 14:49:55 PDT 2001
+
+cut to move method:((name find-combat-power-of-unit-wrt-m2-bn)
+ (primitivep t)
+ (capability (find
+                (obj (?o is (spec-of combat-power)))
+                (of (?ech is (inst-of echelon)))
+                (with (?eq is (inst-of military-equipment)))
+                (with-respect-to (?m2 is (spec-of m2-battalion)))
+                ))
+ (result-type (inst-of number))
+ (method (lookup-combat-power-table-wrt-m2-bn ?ech ?eq))
+)
+MESSAGES
+   at Tue Jun 26 14:49:56 PDT 2001
+
+select: embrace into button
+   at Tue Jun 26 14:49:59 PDT 2001
+
+select: cut button
+   at Tue Jun 26 14:50:44 PDT 2001
+
+cut to move method:((name find-combat-power-of-unit-wrt-m2-bn)
+ (primitivep t)
+ (capability (find
+                (obj (?o is (spec-of combat-power)))
+                (of (?ech is (inst-of echelon)))
+                (with (?eq is (inst-of military-equipment)))
+                (with-respect-to (?m2 is (spec-of m2-battalion)))
+                ))
+ (result-type (inst-of number))
+ (method (lookup-combat-power-table-wrt-m2-bn ?ech ?eq))
+)
+MESSAGES
+   at Tue Jun 26 14:50:44 PDT 2001
+
+select: paste button
+   at Tue Jun 26 14:50:47 PDT 2001
+
+select: cut button
+   at Tue Jun 26 14:52:21 PDT 2001
+
+cut to move method:coa
+   at Tue Jun 26 14:52:21 PDT 2001
+
+select: modify button
+   at Tue Jun 26 14:52:33 PDT 2001
+
+select Button:1/3:1/3
+ TO become:((name COMPUTE-REQUIRED-FORCE-RATIO)
+(capability    ( estimate   ( obj   ( ?f is   ( spec-of required-force-ratio ) ) )
+         ( for   ( ?s is   ( inst-of military-task ) ) ) )
+)
+(result-type    ( inst-of number ))
+(method    ( if   ( is-it-a   ( obj   ( operation-of ?s ) )
+               ( of   ( spec-of military-offensive-operation ) ) ) then 3 else any )
+)
+)
+   at Tue Jun 26 14:53:13 PDT 2001
+
+ From sketch:(Capability): This method can be used to estimate the required force ratio for a military task.
+(Body)To do that, if is it a the operation of of the military task of the military offensive operation, then take 3, else take 1/3.
+
+   at Tue Jun 26 14:53:16 PDT 2001
+
+ done editing:((name COMPUTE-REQUIRED-FORCE-RATIO)
+(capability    ( estimate   ( obj   ( ?f is   ( spec-of required-force-ratio ) ) )
+         ( for   ( ?s is   ( inst-of military-task ) ) ) )
+)
+(result-type    ( inst-of number ))
+(method    ( if   ( is-it-a   ( obj   ( operation-of ?s ) )
+               ( of   ( spec-of military-offensive-operation ) ) ) then 3 else any )
+)
+)
+   at Tue Jun 26 14:53:16 PDT 2001
+
+modified method:((name compute-required-force-ratio)
+ (capability (estimate
+                (obj (?f is (spec-of required-force-ratio)))
+                (for (?s is (inst-of military-task)))
+                ))
+ (result-type (inst-of number))
+ nil)
+   at Tue Jun 26 14:53:17 PDT 2001
+
+check tab:-1
+   at Tue Jun 26 14:53:17 PDT 2001
+
+check tab:0
+   at Tue Jun 26 14:53:17 PDT 2001
+
+Agenda:
+ Error: In the method to COMPUTE-REQUIRED-FORCE-RATIO, I cannot understand ANY
+   at Tue Jun 26 14:53:18 PDT 2001
+
+7check: Method Sub-Method Relation
+   at Tue Jun 26 14:53:21 PDT 2001
+
+select: modify button
+   at Tue Jun 26 14:54:40 PDT 2001
+
+select Button:any:any
+ TO become:((name COMPUTE-REQUIRED-FORCE-RATIO)
+(capability    ( estimate   ( obj   ( ?f is   ( spec-of required-force-ratio ) ) )
+         ( for   ( ?s is   ( inst-of military-task ) ) ) )
+)
+(result-type    ( inst-of number ))
+(method    ( if   ( is-it-a   ( obj   ( operation-of ?s ) )
+               ( of   ( spec-of military-offensive-operation ) ) ) then 3 else 1/3 )
+)
+)
+   at Tue Jun 26 14:55:57 PDT 2001
+
+ From sketch:(Capability): This method can be used to estimate the required force ratio for a military task.
+(Body)To do that, if is it a the operation of of the military task of the military offensive operation, then take 3, else take Any.
+
+   at Tue Jun 26 14:55:59 PDT 2001
+
+ done editing:((name COMPUTE-REQUIRED-FORCE-RATIO)
+(capability    ( estimate   ( obj   ( ?f is   ( spec-of required-force-ratio ) ) )
+         ( for   ( ?s is   ( inst-of military-task ) ) ) )
+)
+(result-type    ( inst-of number ))
+(method    ( if   ( is-it-a   ( obj   ( operation-of ?s ) )
+               ( of   ( spec-of military-offensive-operation ) ) ) then 3 else 1/3 )
+)
+)
+   at Tue Jun 26 14:55:59 PDT 2001
+
+modified method:((name compute-required-force-ratio)
+ (capability (estimate
+                (obj (?f is (spec-of required-force-ratio)))
+                (for (?s is (inst-of military-task)))
+                ))
+ (result-type (inst-of number))
+ (method  ( if (is-it-a
+            (obj ( operation-of ?s))
+            (of (spec-of military-offensive-operation))
+            ) 
+         then 3 
+         else 1/3))
+)
+   at Tue Jun 26 14:56:00 PDT 2001
+
+check tab:-1
+   at Tue Jun 26 14:56:00 PDT 2001
+
+check tab:0
+   at Tue Jun 26 14:56:00 PDT 2001
+
+Agenda:
+   at Tue Jun 26 14:56:01 PDT 2001
+
+7check: Method Sub-Method Relation
+   at Tue Jun 26 14:56:04 PDT 2001
+
+check tab:8
+   at Tue Jun 26 14:57:40 PDT 2001
+
+7check: Method Sub-Method Relation
+   at Tue Jun 26 15:02:20 PDT 2001
+
+check tab:8
+   at Tue Jun 26 15:02:26 PDT 2001
+
+7check: Method Sub-Method Relation
+   at Tue Jun 26 15:02:39 PDT 2001
+
+check tab:8
+   at Tue Jun 26 15:02:40 PDT 2001
+
+7check: Method Sub-Method Relation
+   at Tue Jun 26 15:02:56 PDT 2001
+
+check tab:8
+   at Tue Jun 26 15:03:01 PDT 2001
+
+5check: Undefined Capabilities
+   at Tue Jun 26 15:03:11 PDT 2001
+
+check tab:0
+   at Tue Jun 26 15:04:48 PDT 2001
+
+5check: Undefined Capabilities
+   at Tue Jun 26 15:05:12 PDT 2001
+
+2check: All Agenda
+   at Tue Jun 26 15:05:29 PDT 2001
+
+3check: Describe PS Tree
+   at Tue Jun 26 15:06:05 PDT 2001
+
+4check: Search Methods
+   at Tue Jun 26 15:06:13 PDT 2001
+
+ select: get ps tree success
+   at Tue Jun 26 15:06:45 PDT 2001
+
+ [ps-en1] > (CHECK (OBJ (SPEC-OF FEASIBILITY)) (OF (INST-OF MILITARY-TASK)))
+[ps-en1] < NIL
+
+   at Tue Jun 26 15:06:46 PDT 2001
+
+ select: get ps tree goals
+   at Tue Jun 26 15:06:49 PDT 2001
+
+ X[ps-an2: METHOD] > (CHECK (OBJ (SPEC-OF FEASIBILITY)) (OF (INST-OF MILITARY-TASK)))
+   X[ps-an4: METHOD] > (CHECK (OBJ (SPEC-OF FORCE-RATIO)) (OF (INST-OF MILITARY-TASK)))
+    [ps-an4: METHOD]   *** NO METHOD FOUND ***
+
+   at Tue Jun 26 15:06:49 PDT 2001
+
+1check: Evaluation Result
+   at Tue Jun 26 15:07:40 PDT 2001
+
+7check: Method Sub-Method Relation
+   at Tue Jun 26 15:10:32 PDT 2001
+
+create method for goal from undefined capabilities
+   at Tue Jun 26 15:10:49 PDT 2001
+
+undefined goal:
+(check (obj (spec-of force-ratio)) (of (inst-of military-task)))  
+Expected Result:(inst-of yes-no)  
+Callers:(check-feasibility-for-military-task)  
+Capability:(capability (check (obj (?v39 is (spec-of force-ratio))) (of (?v40 is (inst-of military-task)))))  
+   at Tue Jun 26 15:10:49 PDT 2001
+
+select Button:expect-expression:EXPRESSION
+ TO become:((name _method0  )
+(capability    ( check   ( obj   ( ?v39 is   ( spec-of force-ratio ) ) )
+         ( of   ( ?v40 is   ( inst-of military-task ) ) ) )
+)
+(result-type  (inst-of yes-no)  )
+(method  SUB-GOAL 
+)
+)
+   at Tue Jun 26 15:11:50 PDT 2001
+
+select Button:expect-goal-form:SUB-GOAL
+ TO become:((name _method0  )
+(capability    ( check   ( obj   ( ?v39 is   ( spec-of force-ratio ) ) )
+         ( of   ( ?v40 is   ( inst-of military-task ) ) ) )
+)
+(result-type  (inst-of yes-no)  )
+(method    ( is-less-or-equal   ( obj (INST-OF NUMBER) )   ( than (INST-OF NUMBER) ) ) 
+)
+)
+   at Tue Jun 26 15:11:58 PDT 2001
+
+5check: Undefined Capabilities
+   at Tue Jun 26 15:12:09 PDT 2001
+
+select Button:expect-expression:(INST-OF NUMBER)
+ TO become:((name _method0  )
+(capability    ( check   ( obj   ( ?v39 is   ( spec-of force-ratio ) ) )
+         ( of   ( ?v40 is   ( inst-of military-task ) ) ) )
+)
+(result-type  (inst-of yes-no)  )
+(method    ( is-less-or-equal   ( obj   ( estimate   ( obj
+                           ( spec-of required-force-ratio ) )
+                     ( for (inst-of military-task) ) ) )
+         ( than (INST-OF NUMBER) ) ) 
+)
+)
+   at Tue Jun 26 15:12:28 PDT 2001
+
+select Button:expect-expression:(inst-of military-task)
+ TO become:((name _method0  )
+(capability    ( check   ( obj   ( ?v39 is   ( spec-of force-ratio ) ) )
+         ( of   ( ?v40 is   ( inst-of military-task ) ) ) )
+)
+(result-type  (inst-of yes-no)  )
+(method    ( is-less-or-equal   ( obj   ( estimate   ( obj
+                           ( spec-of required-force-ratio ) )
+                     ( for VARIABLE ) ) )
+         ( than (INST-OF NUMBER) ) ) 
+)
+)
+   at Tue Jun 26 15:12:50 PDT 2001
+
+select Button:expect-variable-name:VARIABLE
+ TO become:((name _method0  )
+(capability    ( check   ( obj   ( ?v39 is   ( spec-of force-ratio ) ) )
+         ( of   ( ?v40 is   ( inst-of military-task ) ) ) )
+)
+(result-type  (inst-of yes-no)  )
+(method    ( is-less-or-equal   ( obj   ( estimate   ( obj
+                           ( spec-of required-force-ratio ) )
+                     ( for ?v40 ) ) )
+         ( than (INST-OF NUMBER) ) ) 
+)
+)
+   at Tue Jun 26 15:12:59 PDT 2001
+
+select Button:expect-expression:(INST-OF NUMBER)
+ TO become:((name _method0  )
+(capability    ( check   ( obj   ( ?v39 is   ( spec-of force-ratio ) ) )
+         ( of   ( ?v40 is   ( inst-of military-task ) ) ) )
+)
+(result-type  (inst-of yes-no)  )
+(method    ( is-less-or-equal   ( obj   ( estimate   ( obj
+                           ( spec-of required-force-ratio ) )
+                     ( for ?v40 ) ) )
+         ( than   ( estimate   ( obj
+                           ( spec-of required-force-ratio ) )
+                     ( for ?v40 ) ) ) ) 
+)
+)
+   at Tue Jun 26 15:14:17 PDT 2001
+
+select Button:required-force-ratio:required-force-ratio
+ TO become:((name _method0  )
+(capability    ( check   ( obj   ( ?v39 is   ( spec-of force-ratio ) ) )
+         ( of   ( ?v40 is   ( inst-of military-task ) ) ) )
+)
+(result-type  (inst-of yes-no)  )
+(method    ( is-less-or-equal   ( obj   ( estimate   ( obj
+                           ( spec-of required-force-ratio ) )
+                     ( for ?v40 ) ) )
+         ( than   ( estimate   ( obj
+                           ( spec-of available-force-ratio ) )
+                     ( for ?v40 ) ) ) ) 
+)
+)
+   at Tue Jun 26 15:14:59 PDT 2001
+
+ From sketch:To do what(Capability): check the force ratio of the military task
+Do(Method Body):
+
+The result will be(Result Type):(inst-of yes-no)  
+   at Tue Jun 26 15:15:12 PDT 2001
+
+ done editing:((name _method0  )
+(capability    ( check   ( obj   ( ?v39 is   ( spec-of force-ratio ) ) )
+         ( of   ( ?v40 is   ( inst-of military-task ) ) ) )
+)
+(result-type  (inst-of yes-no)  )
+(method    ( is-less-or-equal   ( obj   ( estimate   ( obj
+                           ( spec-of required-force-ratio ) )
+                     ( for ?v40 ) ) )
+         ( than   ( estimate   ( obj
+                           ( spec-of available-force-ratio ) )
+                     ( for ?v40 ) ) ) ) 
+)
+)
+   at Tue Jun 26 15:15:12 PDT 2001
+
+added New method:((name _method0)
+ (capability (check
+                (obj (?v39 is (spec-of force-ratio)))
+                (of (?v40 is (inst-of military-task)))
+                ))
+ (result-type (inst-of yes-no))
+ (method  (is-less-or-equal
+            (obj (estimate
+                    (obj (spec-of required-force-ratio))
+                    (for ?v40)
+                    ))
+             (than (estimate
+                      (obj (spec-of available-force-ratio))
+                      (for ?v40)
+                      ))
+               ))
+)
+   at Tue Jun 26 15:15:13 PDT 2001
+
+check tab:-1
+   at Tue Jun 26 15:15:13 PDT 2001
+
+check tab:0
+   at Tue Jun 26 15:15:13 PDT 2001
+
+Agenda:
+   at Tue Jun 26 15:15:15 PDT 2001
+
+7check: Method Sub-Method Relation
+   at Tue Jun 26 15:15:17 PDT 2001
+
+check tab:8
+   at Tue Jun 26 15:15:26 PDT 2001
+
+7check: Method Sub-Method Relation
+   at Tue Jun 26 15:15:57 PDT 2001
+
+create method for goal from undefined capabilities
+   at Tue Jun 26 15:16:09 PDT 2001
+
+undefined goal:
+(estimate (obj (spec-of available-force-ratio)) (for (inst-of military-task)))  
+Expected Result:(inst-of number)  
+Callers:(_method0)  
+Capability:(capability (estimate (obj (?v51 is (spec-of available-force-ratio))) (for (?v52 is (inst-of military-task)))))  
+   at Tue Jun 26 15:16:09 PDT 2001
+
+5check: Undefined Capabilities
+   at Tue Jun 26 15:16:35 PDT 2001
+
+select Button:expect-expression:EXPRESSION
+ TO become:((name _method41  )
+(capability    ( estimate   ( obj   ( ?v51 is   ( spec-of available-force-ratio ) ) )
+         ( for   ( ?v52 is   ( inst-of military-task ) ) ) )
+)
+(result-type  (inst-of number)  )
+(method    ( divide   ( obj (inst-of number) )   ( by (inst-of number) ) ) 
+)
+)
+   at Tue Jun 26 15:17:01 PDT 2001
+
+select Button:expect-expression:(inst-of number)
+ TO become:((name _method41  )
+(capability    ( estimate   ( obj   ( ?v51 is   ( spec-of available-force-ratio ) ) )
+         ( for   ( ?v52 is   ( inst-of military-task ) ) ) )
+)
+(result-type  (inst-of number)  )
+(method    ( divide   ( obj SUB-GOAL )   ( by (inst-of number) ) ) 
+)
+)
+   at Tue Jun 26 15:17:19 PDT 2001
+
+select Button:expect-goal-form:SUB-GOAL
+ TO become:((name _method41  )
+(capability    ( estimate   ( obj   ( ?v51 is   ( spec-of available-force-ratio ) ) )
+         ( for   ( ?v52 is   ( inst-of military-task ) ) ) )
+)
+(result-type  (inst-of number)  )
+(method    ( divide   ( obj   ( compute   ( obj
+                           ( spec-of combat-power ) )
+                     ( of (SET-OF (INST-OF MILITARY-UNIT)) ) ) )
+         ( by (inst-of number) ) ) 
+)
+)
+   at Tue Jun 26 15:17:52 PDT 2001
+
+select Button:expect-expression:(SET-OF (INST-OF MILITARY-UNIT))
+ TO become:((name _method41  )
+(capability    ( estimate   ( obj   ( ?v51 is   ( spec-of available-force-ratio ) ) )
+         ( for   ( ?v52 is   ( inst-of military-task ) ) ) )
+)
+(result-type  (inst-of number)  )
+(method    ( divide   ( obj   ( compute   ( obj
+                           ( spec-of combat-power ) )
+                     ( of THE SOMETHING OF A CLASS ) ) )
+         ( by (inst-of number) ) ) 
+)
+)
+   at Tue Jun 26 15:18:33 PDT 2001
+
+select Button:expect-relation-form:THE SOMETHING OF A CLASS
+ TO become:((name _method41  )
+(capability    ( estimate   ( obj   ( ?v51 is   ( spec-of available-force-ratio ) ) )
+         ( for   ( ?v52 is   ( inst-of military-task ) ) ) )
+)
+(result-type  (inst-of number)  )
+(method    ( divide   ( obj   ( compute   ( obj
+                           ( spec-of combat-power ) )
+                     ( of
+                           ( RELATION EXPRESSION ) ) ) )
+         ( by (inst-of number) ) ) 
+)
+)
+   at Tue Jun 26 15:18:44 PDT 2001
+
+select Button:expect-relation-name:RELATION
+ TO become:((name _method41  )
+(capability    ( estimate   ( obj   ( ?v51 is   ( spec-of available-force-ratio ) ) )
+         ( for   ( ?v52 is   ( inst-of military-task ) ) ) )
+)
+(result-type  (inst-of number)  )
+(method    ( divide   ( obj   ( compute   ( obj
+                           ( spec-of combat-power ) )
+                     ( of
+                           ( unit-assigned EXPRESSION ) ) ) )
+         ( by (inst-of number) ) ) 
+)
+)
+   at Tue Jun 26 15:18:57 PDT 2001
+
+select Button:expect-expression:EXPRESSION
+ TO become:((name _method41  )
+(capability    ( estimate   ( obj   ( ?v51 is   ( spec-of available-force-ratio ) ) )
+         ( for   ( ?v52 is   ( inst-of military-task ) ) ) )
+)
+(result-type  (inst-of number)  )
+(method    ( divide   ( obj   ( compute   ( obj
+                           ( spec-of combat-power ) )
+                     ( of
+                           ( unit-assigned VARIABLE ) ) ) )
+         ( by (inst-of number) ) ) 
+)
+)
+   at Tue Jun 26 15:19:05 PDT 2001
+
+select Button:expect-variable-name:VARIABLE
+ TO become:((name _method41  )
+(capability    ( estimate   ( obj   ( ?v51 is   ( spec-of available-force-ratio ) ) )
+         ( for   ( ?v52 is   ( inst-of military-task ) ) ) )
+)
+(result-type  (inst-of number)  )
+(method    ( divide   ( obj   ( compute   ( obj
+                           ( spec-of combat-power ) )
+                     ( of
+                           ( unit-assigned ?v52 ) ) ) )
+         ( by (inst-of number) ) ) 
+)
+)
+   at Tue Jun 26 15:19:12 PDT 2001
+
+select Button:expect-expression:(inst-of number)
+ TO become:((name _method41  )
+(capability    ( estimate   ( obj   ( ?v51 is   ( spec-of available-force-ratio ) ) )
+         ( for   ( ?v52 is   ( inst-of military-task ) ) ) )
+)
+(result-type  (inst-of number)  )
+(method    ( divide   ( obj   ( compute   ( obj
+                           ( spec-of combat-power ) )
+                     ( of
+                           ( unit-assigned ?v52 ) ) ) )
+         ( by   ( compute   ( obj
+                           ( spec-of combat-power ) )
+                     ( of
+                           ( unit-assigned ?v52 ) ) ) ) ) 
+)
+)
+   at Tue Jun 26 15:19:35 PDT 2001
+
+select Button:unit-assigned:unit-assigned
+ TO become:((name _method41  )
+(capability    ( estimate   ( obj   ( ?v51 is   ( spec-of available-force-ratio ) ) )
+         ( for   ( ?v52 is   ( inst-of military-task ) ) ) )
+)
+(result-type  (inst-of number)  )
+(method    ( divide   ( obj   ( compute   ( obj
+                           ( spec-of combat-power ) )
+                     ( of
+                           ( unit-assigned ?v52 ) ) ) )
+         ( by   ( compute   ( obj
+                           ( spec-of combat-power ) )
+                     ( of
+                           ( unit-acted-on ?v52 ) ) ) ) ) 
+)
+)
+   at Tue Jun 26 15:19:55 PDT 2001
+
+ From sketch:To do what(Capability): estimate the available force ratio for the military task
+Do(Method Body):
+
+The result will be(Result Type):(inst-of number)  
+   at Tue Jun 26 15:20:00 PDT 2001
+
+ done editing:((name _method41  )
+(capability    ( estimate   ( obj   ( ?v51 is   ( spec-of available-force-ratio ) ) )
+         ( for   ( ?v52 is   ( inst-of military-task ) ) ) )
+)
+(result-type  (inst-of number)  )
+(method    ( divide   ( obj   ( compute   ( obj
+                           ( spec-of combat-power ) )
+                     ( of
+                           ( unit-assigned ?v52 ) ) ) )
+         ( by   ( compute   ( obj
+                           ( spec-of combat-power ) )
+                     ( of
+                           ( unit-acted-on ?v52 ) ) ) ) ) 
+)
+)
+   at Tue Jun 26 15:20:00 PDT 2001
+
+added New method:((name _method41)
+ (capability (estimate
+                (obj (?v51 is (spec-of available-force-ratio)))
+                (for (?v52 is (inst-of military-task)))
+                ))
+ (result-type (inst-of number))
+ (method  (divide
+            (obj (compute
+                    (obj (spec-of combat-power))
+                    (of ( unit-assigned ?v52))
+                    ))
+              (by (compute
+                     (obj (spec-of combat-power))
+                     (of ( unit-acted-on ?v52))
+                     ))
+               ))
+)
+   at Tue Jun 26 15:20:03 PDT 2001
+
+check tab:-1
+   at Tue Jun 26 15:20:03 PDT 2001
+
+check tab:0
+   at Tue Jun 26 15:20:03 PDT 2001
+
+Agenda:
+   at Tue Jun 26 15:20:07 PDT 2001
+
+7check: Method Sub-Method Relation
+   at Tue Jun 26 15:20:10 PDT 2001
+
+check tab:8
+   at Tue Jun 26 15:20:15 PDT 2001
+
+2check: All Agenda
+   at Tue Jun 26 15:20:54 PDT 2001
+
+4check: Search Methods
+   at Tue Jun 26 15:20:57 PDT 2001
+
+ select: get ps tree success
+   at Tue Jun 26 15:21:25 PDT 2001
+
+ [ps-en1] > (CHECK (OBJ (SPEC-OF FEASIBILITY)) (OF (INST-OF MILITARY-TASK)))
+[ps-en1] < (INST-OF YES-NO)
+   -[ps-an2: METHOD] > (CHECK (OBJ (SPEC-OF FEASIBILITY)) (OF (INST-OF MILITARY-TASK)))
+    [ps-an2: METHOD] < (INST-OF YES-NO)
+    [ps-en3] > (CHECK (OBJ (SPEC-OF FORCE-RATIO)) (OF (INST-OF MILITARY-TASK)))
+    [ps-en3] < (INST-OF YES-NO)
+     -[ps-an4: METHOD] > (CHECK (OBJ (SPEC-OF FORCE-RATIO)) (OF (INST-OF MILITARY-TASK)))
+      [ps-an4: METHOD] < (INST-OF YES-NO)
+      [ps-en5] > (IS-LESS-OR-EQUAL (OBJ (ESTIMATE (OBJ (SPEC-OF REQUIRED-FORCE-RATIO)) (FOR (INST-OF MILITARY-TASK)))) (THAN (ESTIMATE (OBJ (SPEC-OF AVAILABLE-FORCE-RATIO)) (FOR (INST-OF MILITARY-TASK)))))
+      [ps-en5]   (IS-LESS-OR-EQUAL (OBJ (INST-OF NUMBER)) (THAN (INST-OF NUMBER)))
+      [ps-en5] < (INST-OF YES-NO)
+       [ps-en6] > (ESTIMATE (OBJ (SPEC-OF REQUIRED-FORCE-RATIO)) (FOR (INST-OF MILITARY-TASK)))
+       [ps-en6] < (INST-OF NUMBER)
+        -[ps-an8: METHOD] > (ESTIMATE (OBJ (SPEC-OF REQUIRED-FORCE-RATIO)) (FOR (INST-OF MILITARY-TASK)))
+         [ps-an8: METHOD] < (INST-OF NUMBER)
+         [ps-en9] > (IF (IS-IT-A (OBJ (OPERATION-OF (INST-OF MILITARY-TASK))) (OF (SPEC-OF MILITARY-OFFENSIVE-OPERATION))) THEN 3 ELSE 1/3)
+         [ps-en9]   (IF (INST-OF YES-NO) THEN 3 ELSE 1/3)
+         [ps-en9] < (INST-OF NUMBER)
+          [ps-en10] > (IS-IT-A (OBJ (OPERATION-OF (INST-OF MILITARY-TASK))) (OF (SPEC-OF MILITARY-OFFENSIVE-OPERATION)))
+          [ps-en10]   (IS-IT-A (OBJ (INST-OF MILITARY-OPERATION)) (OF (SPEC-OF MILITARY-OFFENSIVE-OPERATION)))
+          [ps-en10] < (INST-OF YES-NO)
+           [ps-en11] > (OPERATION-OF (INST-OF MILITARY-TASK))
+           [ps-en11] < (INST-OF MILITARY-OPERATION)
+            -[ps-an12: RETRIEVE-R] > (OPERATION-OF (INST-OF MILITARY-TASK))
+             [ps-an12: RETRIEVE-R] < (INST-OF MILITARY-OPERATION)
+           -[ps-an13: METHOD] > (IS-IT-A (OBJ (INST-OF MILITARY-OPERATION)) (OF (SPEC-OF MILITARY-OFFENSIVE-OPERATION)))
+            [ps-an13: METHOD] < (INST-OF YES-NO)
+       [ps-en7] > (ESTIMATE (OBJ (SPEC-OF AVAILABLE-FORCE-RATIO)) (FOR (INST-OF MILITARY-TASK)))
+       [ps-en7] < (INST-OF NUMBER)
+        -[ps-an14: METHOD] > (ESTIMATE (OBJ (SPEC-OF AVAILABLE-FORCE-RATIO)) (FOR (INST-OF MILITARY-TASK)))
+         [ps-an14: METHOD] < (INST-OF NUMBER)
+         [ps-en15] > (DIVIDE (OBJ (COMPUTE (OBJ (SPEC-OF COMBAT-POWER)) (OF (UNIT-ASSIGNED (INST-OF MILITARY-TASK))))) (BY (COMPUTE (OBJ (SPEC-OF COMBAT-POWER)) (OF (UNIT-ACTED-ON (INST-OF MILITARY-TASK))))))
+         [ps-en15]   (DIVIDE (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+         [ps-en15] < (INST-OF NUMBER)
+          [ps-en16] > (COMPUTE (OBJ (SPEC-OF COMBAT-POWER)) (OF (UNIT-ASSIGNED (INST-OF MILITARY-TASK))))
+          [ps-en16]   (COMPUTE (OBJ (SPEC-OF COMBAT-POWER)) (OF (SET-OF (INST-OF MILITARY-UNIT))))
+          [ps-en16] < (INST-OF NUMBER)
+           [ps-en18] > (UNIT-ASSIGNED (INST-OF MILITARY-TASK))
+           [ps-en18] < (SET-OF (INST-OF MILITARY-UNIT))
+            -[ps-an19: RETRIEVE-R] > (UNIT-ASSIGNED (INST-OF MILITARY-TASK))
+             [ps-an19: RETRIEVE-R] < (SET-OF (INST-OF MILITARY-UNIT))
+           -[ps-an20: METHOD] > (COMPUTE (OBJ (SPEC-OF COMBAT-POWER)) (OF (SET-OF (INST-OF MILITARY-UNIT))))
+            [ps-an20: METHOD] < (INST-OF NUMBER)
+            [ps-en21] > (ADD (OBJ (ESTIMATE (OBJ (SPEC-OF COMBAT-POWER)) (OF (SET-OF (INST-OF MILITARY-UNIT))))))
+            [ps-en21]   (ADD (OBJ (SET-OF (INST-OF NUMBER))))
+            [ps-en21] < (INST-OF NUMBER)
+             [ps-en22] > (ESTIMATE (OBJ (SPEC-OF COMBAT-POWER)) (OF (SET-OF (INST-OF MILITARY-UNIT))))
+             [ps-en22] < (SET-OF (INST-OF NUMBER))
+              -[ps-an24: SET] > (ESTIMATE (OBJ (SPEC-OF COMBAT-POWER)) (OF (SET-OF (INST-OF MILITARY-UNIT))))
+               [ps-an24: SET]   (APPEND (INST-OF NUMBER))
+               [ps-an24: SET] < (SET-OF (INST-OF NUMBER))
+               [ps-en25] > (ESTIMATE (OBJ (SPEC-OF COMBAT-POWER)) (OF (INST-OF MILITARY-UNIT)))
+               [ps-en25] < (INST-OF NUMBER)
+                -[ps-an26: METHOD] > (ESTIMATE (OBJ (SPEC-OF COMBAT-POWER)) (OF (INST-OF MILITARY-UNIT)))
+                 [ps-an26: METHOD] < (INST-OF NUMBER)
+                 [ps-en27] > (FIND (OBJ (SPEC-OF COMBAT-POWER)) (OF (ECHELON-OF (INST-OF MILITARY-UNIT))) (WITH (MAIN-EQUIPMENT-OF (INST-OF MILITARY-UNIT))) (WITH-RESPECT-TO (SPEC-OF M2-BATTALION)))
+                 [ps-en27]   (FIND (OBJ (SPEC-OF COMBAT-POWER)) (OF (INST-OF ECHELON)) (WITH (INST-OF MILITARY-EQUIPMENT)) (WITH-RESPECT-TO (SPEC-OF M2-BATTALION)))
+                 [ps-en27] < (INST-OF NUMBER)
+                  [ps-en28] > (ECHELON-OF (INST-OF MILITARY-UNIT))
+                  [ps-en28] < (INST-OF ECHELON)
+                   -[ps-an30: RETRIEVE-R] > (ECHELON-OF (INST-OF MILITARY-UNIT))
+                    [ps-an30: RETRIEVE-R] < (INST-OF ECHELON)
+                  [ps-en29] > (MAIN-EQUIPMENT-OF (INST-OF MILITARY-UNIT))
+                  [ps-en29] < (INST-OF MILITARY-EQUIPMENT)
+                   -[ps-an31: RETRIEVE-R] > (MAIN-EQUIPMENT-OF (INST-OF MILITARY-UNIT))
+                    [ps-an31: RETRIEVE-R] < (INST-OF MILITARY-EQUIPMENT)
+                  -[ps-an32: METHOD] > (FIND (OBJ (SPEC-OF COMBAT-POWER)) (OF (INST-OF ECHELON)) (WITH (INST-OF MILITARY-EQUIPMENT)) (WITH-RESPECT-TO (SPEC-OF M2-BATTALION)))
+                   [ps-an32: METHOD] < (INST-OF NUMBER)
+             -[ps-an33: METHOD] > (ADD (OBJ (SET-OF (INST-OF NUMBER))))
+              [ps-an33: METHOD] < (INST-OF NUMBER)
+          [ps-en17] > (COMPUTE (OBJ (SPEC-OF COMBAT-POWER)) (OF (UNIT-ACTED-ON (INST-OF MILITARY-TASK))))
+          [ps-en17]   (COMPUTE (OBJ (SPEC-OF COMBAT-POWER)) (OF (SET-OF (INST-OF MILITARY-UNIT))))
+          [ps-en17] < (INST-OF NUMBER)
+           [ps-en34] > (UNIT-ACTED-ON (INST-OF MILITARY-TASK))
+           [ps-en34] < (SET-OF (INST-OF MILITARY-UNIT))
+            -[ps-an35: RETRIEVE-R] > (UNIT-ACTED-ON (INST-OF MILITARY-TASK))
+             [ps-an35: RETRIEVE-R] < (SET-OF (INST-OF MILITARY-UNIT))
+           -[ps-an20: METHOD] > (COMPUTE (OBJ (SPEC-OF COMBAT-POWER)) (OF (SET-OF (INST-OF MILITARY-UNIT))))
+            [ps-an20: METHOD] < (INST-OF NUMBER)
+            [ps-en21] > (ADD (OBJ (ESTIMATE (OBJ (SPEC-OF COMBAT-POWER)) (OF (SET-OF (INST-OF MILITARY-UNIT))))))
+            [ps-en21]   (ADD (OBJ (SET-OF (INST-OF NUMBER))))
+            [ps-en21] < (INST-OF NUMBER)
+             [ps-en22] > (ESTIMATE (OBJ (SPEC-OF COMBAT-POWER)) (OF (SET-OF (INST-OF MILITARY-UNIT))))
+             [ps-en22] < (SET-OF (INST-OF NUMBER))
+              -[ps-an24: SET] > (ESTIMATE (OBJ (SPEC-OF COMBAT-POWER)) (OF (SET-OF (INST-OF MILITARY-UNIT))))
+               [ps-an24: SET]   (APPEND (INST-OF NUMBER))
+               [ps-an24: SET] < (SET-OF (INST-OF NUMBER))
+               [ps-en25] > (ESTIMATE (OBJ (SPEC-OF COMBAT-POWER)) (OF (INST-OF MILITARY-UNIT)))
+               [ps-en25] < (INST-OF NUMBER)
+                -[ps-an26: METHOD] > (ESTIMATE (OBJ (SPEC-OF COMBAT-POWER)) (OF (INST-OF MILITARY-UNIT)))
+                 [ps-an26: METHOD] < (INST-OF NUMBER)
+                 [ps-en27] > (FIND (OBJ (SPEC-OF COMBAT-POWER)) (OF (ECHELON-OF (INST-OF MILITARY-UNIT))) (WITH (MAIN-EQUIPMENT-OF (INST-OF MILITARY-UNIT))) (WITH-RESPECT-TO (SPEC-OF M2-BATTALION)))
+                 [ps-en27]   (FIND (OBJ (SPEC-OF COMBAT-POWER)) (OF (INST-OF ECHELON)) (WITH (INST-OF MILITARY-EQUIPMENT)) (WITH-RESPECT-TO (SPEC-OF M2-BATTALION)))
+                 [ps-en27] < (INST-OF NUMBER)
+                  [ps-en28] > (ECHELON-OF (INST-OF MILITARY-UNIT))
+                  [ps-en28] < (INST-OF ECHELON)
+                   -[ps-an30: RETRIEVE-R] > (ECHELON-OF (INST-OF MILITARY-UNIT))
+                    [ps-an30: RETRIEVE-R] < (INST-OF ECHELON)
+                  [ps-en29] > (MAIN-EQUIPMENT-OF (INST-OF MILITARY-UNIT))
+                  [ps-en29] < (INST-OF MILITARY-EQUIPMENT)
+                   -[ps-an31: RETRIEVE-R] > (MAIN-EQUIPMENT-OF (INST-OF MILITARY-UNIT))
+                    [ps-an31: RETRIEVE-R] < (INST-OF MILITARY-EQUIPMENT)
+                  -[ps-an32: METHOD] > (FIND (OBJ (SPEC-OF COMBAT-POWER)) (OF (INST-OF ECHELON)) (WITH (INST-OF MILITARY-EQUIPMENT)) (WITH-RESPECT-TO (SPEC-OF M2-BATTALION)))
+                   [ps-an32: METHOD] < (INST-OF NUMBER)
+             -[ps-an33: METHOD] > (ADD (OBJ (SET-OF (INST-OF NUMBER))))
+              [ps-an33: METHOD] < (INST-OF NUMBER)
+          -[ps-an36: METHOD] > (DIVIDE (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+           [ps-an36: METHOD] < (INST-OF NUMBER)
+       -[ps-an37: METHOD] > (IS-LESS-OR-EQUAL (OBJ (INST-OF NUMBER)) (THAN (INST-OF NUMBER)))
+        [ps-an37: METHOD] < (INST-OF YES-NO)
+
+   at Tue Jun 26 15:21:26 PDT 2001
+
+ select: get ps tree goals
+   at Tue Jun 26 15:21:35 PDT 2001
+
+ -[ps-an2: METHOD] > (CHECK (OBJ (SPEC-OF FEASIBILITY)) (OF (INST-OF MILITARY-TASK)))
+   -[ps-an4: METHOD] > (CHECK (OBJ (SPEC-OF FORCE-RATIO)) (OF (INST-OF MILITARY-TASK)))
+    -[ps-an8: METHOD] > (ESTIMATE (OBJ (SPEC-OF REQUIRED-FORCE-RATIO)) (FOR (INST-OF MILITARY-TASK)))
+     -[ps-an13: METHOD] > (IS-IT-A (OBJ (INST-OF MILITARY-OPERATION)) (OF (SPEC-OF MILITARY-OFFENSIVE-OPERATION)))
+    -[ps-an14: METHOD] > (ESTIMATE (OBJ (SPEC-OF AVAILABLE-FORCE-RATIO)) (FOR (INST-OF MILITARY-TASK)))
+     -[ps-an20: METHOD] > (COMPUTE (OBJ (SPEC-OF COMBAT-POWER)) (OF (SET-OF (INST-OF MILITARY-UNIT))))
+      -[ps-an24: SET] > (ESTIMATE (OBJ (SPEC-OF COMBAT-POWER)) (OF (SET-OF (INST-OF MILITARY-UNIT))))
+       -[ps-an26: METHOD] > (ESTIMATE (OBJ (SPEC-OF COMBAT-POWER)) (OF (INST-OF MILITARY-UNIT)))
+        -[ps-an32: METHOD] > (FIND (OBJ (SPEC-OF COMBAT-POWER)) (OF (INST-OF ECHELON)) (WITH (INST-OF MILITARY-EQUIPMENT)) (WITH-RESPECT-TO (SPEC-OF M2-BATTALION)))
+      X[ps-an23: METHOD] > (ESTIMATE (OBJ (SPEC-OF COMBAT-POWER)) (OF (SET-OF (INST-OF MILITARY-UNIT))))
+       [ps-an23: METHOD]   *** NO METHOD FOUND ***
+      -[ps-an33: METHOD] > (ADD (OBJ (SET-OF (INST-OF NUMBER))))
+     -[ps-an20: METHOD] > (COMPUTE (OBJ (SPEC-OF COMBAT-POWER)) (OF (SET-OF (INST-OF MILITARY-UNIT))))
+      -[ps-an24: SET] > (ESTIMATE (OBJ (SPEC-OF COMBAT-POWER)) (OF (SET-OF (INST-OF MILITARY-UNIT))))
+       -[ps-an26: METHOD] > (ESTIMATE (OBJ (SPEC-OF COMBAT-POWER)) (OF (INST-OF MILITARY-UNIT)))
+        -[ps-an32: METHOD] > (FIND (OBJ (SPEC-OF COMBAT-POWER)) (OF (INST-OF ECHELON)) (WITH (INST-OF MILITARY-EQUIPMENT)) (WITH-RESPECT-TO (SPEC-OF M2-BATTALION)))
+      X[ps-an23: METHOD] > (ESTIMATE (OBJ (SPEC-OF COMBAT-POWER)) (OF (SET-OF (INST-OF MILITARY-UNIT))))
+       [ps-an23: METHOD]   *** NO METHOD FOUND ***
+      -[ps-an33: METHOD] > (ADD (OBJ (SET-OF (INST-OF NUMBER))))
+     -[ps-an36: METHOD] > (DIVIDE (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+    -[ps-an37: METHOD] > (IS-LESS-OR-EQUAL (OBJ (INST-OF NUMBER)) (THAN (INST-OF NUMBER)))
+
+   at Tue Jun 26 15:21:35 PDT 2001
+
+ select: get ps tree :very detail
+   at Tue Jun 26 15:21:40 PDT 2001
+
+3check: Describe PS Tree
+   at Tue Jun 26 15:21:53 PDT 2001
+
+4check: Search Methods
+   at Tue Jun 26 15:22:12 PDT 2001
+
+check tab:8
+   at Tue Jun 26 15:23:19 PDT 2001
+
+4check: Search Methods
+   at Tue Jun 26 15:23:22 PDT 2001
+
+3check: Describe PS Tree
+   at Tue Jun 26 15:24:05 PDT 2001
+
+check tab:8
+   at Tue Jun 26 15:24:40 PDT 2001
+
+3check: Describe PS Tree
+   at Tue Jun 26 15:25:17 PDT 2001
+

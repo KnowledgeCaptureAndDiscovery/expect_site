@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:as97="http://www.isi.edu/expect/scec/as97" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://www.isi.edu/expect/scec/as97" schemaLocation="as97.xsd"/>
+	<xs:element name="ground_motion_param" type="as97:gmp"/>
+	<xs:element name="earthquake_magnitude" type="as97:magnitude"/>
+	<xs:element name="distance_to_rupture" type="as97:distance"/>
+	<xs:element name="type_of_site" type="as97:sitetype"/>
+	<xs:element name="type_of_fault" type="as97:faulttype"/>
+	<xs:element name="uncertainties" type="as97:uncertainties"/>
+	<xs:element name="as97_message">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ground_motion_param"/>
+				<xs:element ref="earthquake_magnitude"/>
+				<xs:element ref="distance_to_rupture"/>
+				<xs:element ref="type_of_fault"/>
+				<xs:element ref="type_of_site"/>
+				<xs:element ref="uncertainties"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

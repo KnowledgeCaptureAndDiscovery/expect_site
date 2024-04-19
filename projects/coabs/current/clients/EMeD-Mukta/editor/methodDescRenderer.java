@@ -1,0 +1,108 @@
+// 
+// Jihie Kim, 1999
+// 
+
+package editor;
+
+import java.io.*;
+import java.util.*;
+import java.awt.Color;
+import com.icl.saxon.*;
+import org.xml.sax.SAXException;
+import org.xml.sax.AttributeList;
+import org.xml.sax.InputSource;
+import Tree.renderer;
+
+public class methodDescRenderer extends renderer {
+  String xmlDesc="";
+  Vector capButtons = null;
+  Vector bodyButtons = null;
+  Vector resultButtons = null;
+  Vector nameButtons = null;
+  public methodDescRenderer () {
+    this ("");
+  }
+
+  public methodDescRenderer (String desc) {
+    xmlDesc = desc;
+    //System.out.println(desc);
+    
+
+    setHandler("capability", new capabilityHandler());
+    setHandler("body", new bodyHandler());
+    setHandler("result", new resultHandler());
+    setHandler("name", new nameHandler());
+    setHandler("item", new itemHandler());
+
+    runFromNamedParser(new InputSource(new StringReader(xmlDesc)), 
+		   "com.ibm.xml.parser.SAXDriver");
+  
+  }
+  public Vector getCapButtons() {
+    return capButtons;
+  }
+  public Vector getBodyButtons() {
+    return bodyButtons;
+  }
+  public Vector getResultButtons() {
+    return resultButtons;
+  }
+
+  private class capabilityHandler extends ElementHandlerBase {
+    public void startElement (ElementInfo e) throws SAXException  {
+      capButtons = new Vector();
+      e.setUserData (capButtons);
+      
+    }
+  }
+  private class bodyHandler extends ElementHandlerBase {
+    public void startElement (ElementInfo e) throws SAXException  {
+      bodyButtons = new Vector();
+      e.setUserData (bodyButtons);
+      
+    }
+  }
+  private class resultHandler extends ElementHandlerBase {
+    public void startElement (ElementInfo e) throws SAXException  {
+      resultButtons = new Vector();
+      e.setUserData (resultButtons);
+      
+    }
+  }
+  private class nameHandler extends ElementHandlerBase {
+    public void startElement (ElementInfo e) throws SAXException  {
+      nameButtons = new Vector();
+      e.setUserData (nameButtons);
+      
+    }
+  }
+
+  /* If the code starts with expect- or the description is blank,
+     use the description, otherwise use the code for display */
+  private class itemHandler extends ElementHandlerBase {
+    public void startElement (ElementInfo e) throws SAXException  {
+      Vector cButtons;
+      eButton bt;
+      ElementInfo parentElement = e.getParent();
+      cButtons = (Vector) parentElement.getUserData();
+      String code = e.getAttribute("code");
+      String desc = e.getAttribute("desc");
+
+      if (code.equals("paren"))
+        bt = new eButton (desc,true,e.getAttribute("idx"));
+      else if (desc.equals(" ") && (!code.equals("obj"))) // blank element
+        bt = new eButton(desc,e.getAttribute("idx"));
+      else if (code.equals("nil"))
+        bt = new eButton(desc,e.getAttribute("idx"));
+      else if (code.equals("expect-expression"))
+        bt = new eButton(desc,e.getAttribute("idx"));
+      else 
+        bt = new eButton(code,e.getAttribute("idx"));
+      //System.out.println("code:"+code+":");
+      //System.out.println("desc:"+desc+":");
+      bt.setName(code);
+      cButtons.addElement(bt);
+    }
+  }
+
+}

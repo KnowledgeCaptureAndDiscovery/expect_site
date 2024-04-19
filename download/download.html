@@ -1,0 +1,120 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type"
+content="text/html; charset=iso-8859-1">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<title>Download,</title>
+</head>
+
+<body bgcolor="#FFFFFF">
+
+<h2>Download, Install and Setup directions for the EXPECT system.</h2>
+
+<hr>
+
+<h3>System Requirements:</h3>
+
+<dl>
+    <dd>Unix X environment (any window manager)</dd>
+    <dd>Allegro Common Lisp with CLIM (tested on ACL 4.3 and CLIM
+        2.0)</dd>
+    <dd>LOOM (version 3.0)</dd>
+</dl>
+
+<h3>Download :</h3>
+
+<dl>
+    <dd>Loom can be got from its official homepage <a
+        href="http://www.isi.edu/isd/LOOM/LOOM-HOME.html">here</a></dd>
+    <dd>Expect system can be obtained from <a href="http://www.isi.edu/expect/download/expect.zip">here</a></dd>
+    <dd>A brief tutorial can be found <a href="http://www.isi.edu/expect/download/expect-tutorial.zip">here</a>
+      and the manual <a href="http://www.isi.edu/expect/download/manual.zip">here</a>.</dd>
+</dl>
+
+<h3>Installation :</h3>
+
+<dl>
+    <dd>a) Download and install LOOM3.0 according to the
+        instructions that are found on the LOOM homepage.</dd>
+    <dd>&nbsp;</dd>
+    <dd>b) After downloading EXPECT.tgz extract it to the
+        location that you want to run it from</dd>
+    <dd>note that it will create a top-level directory structure
+        called expect.</dd>
+    <dd>&nbsp;</dd>
+    <dd>c) The Directory structure that can be expected to be
+        seen under EXPECT is as follows:</dd>
+    <dd>drwxrwxrwx BIN &lt;-- Main directory for the compiled
+        files<br>
+        -rwxrwxrwx compile.lisp &lt;-- file for compiling EXPECT<br>
+        -rwxrwxrwx defsys.lisp &lt;-- load file list (see
+        defsystem.text)<br>
+        -rwxrwxrwx defsystem.lisp<br>
+        -rwxrwxrwx defsystem.text<br>
+        drwxrwxrwx documentation &lt;-- limited EXPECT
+        documentation<br>
+        drwxrwxrwx domains &lt;- Some practice domains for EXPECT<br>
+        drwxrwxrwx grator<br>
+        drwxrwxrwx ka<br>
+        drwxrwxrwx kas<br>
+        -rwxrwxrwx load-path-redefs.lisp<br>
+        -rwxrwxrwx load.lisp &lt;-- file to load EXPECT<br>
+        drwxrwxrwx matcher &lt;- EXPECT matcher files<br>
+        -rwxrwxrwx pathnames.lisp<br>
+        drwxrwxrwx ps &lt;-- EXPECT problem solving files<br>
+        drwxrwxrwx shared &lt;-- EXPECT shared utilities and
+        functions<br>
+        drwxrwxrwx tests &lt;-- Test cases for the EXPECT system<br>
+        drwxrwxrwx ui &lt;-- All UI files for the EXPECT system</dd>
+</dl>
+
+<h3>Setup and running the EXPECT system :</h3>
+
+<dl>
+    <dd>a) The LOOM architecture can be loaded directly from the
+        lisp files but this will degrade system performance
+        greatly. It is <strong>strongly</strong> recommended to
+        compile LOOM first. To do this, after loading your
+        version of acl with CLIM, load the compile-loom.lisp file.</dd>
+    <dd>&nbsp;</dd>
+    <dd>b) The EXPECT architecture can be loaded directly from
+        the lisp files but this will degrade system performance
+        greatly. It is strongly recommended to compile EXPECT
+        first. To do this, after loading acl, CLIM and LOOM, load
+        the compile.lisp file.</dd>
+    <dd>&nbsp;</dd>
+    <dd>c) If needed the EXPECT image may be saved at this time
+        for an easy load for the next time by (dumplisp :name
+        &lt;filename&gt; :standalone t) or the equivalent in your
+        version of ACL.</dd>
+    <dd>&nbsp;</dd>
+    <dd>d) The EXPECT UI can be started from the Lisp prompt by
+        forse switching to the expect package</dd>
+    <dd>USER&gt; :pa expect </dd>
+    <dd>and then typing EXPECT&gt;(e)</dd>
+</dl>
+
+<h3>Practice Domains for EXPECT:</h3>
+
+<dl>
+    <dt>These currently include :</dt>
+    <dd>a) The factorial domain (calculate the factorial of a
+        number)</dd>
+    <dd>b) The Propose and revise algorithm</dd>
+    <dd>c) The Uhaul configuration domain (based on the propose-and-revise
+        algorithm)</dd>
+    <dd>d) The transportation domain (for the calculation of time
+        required to transport)</dd>
+    <dt>In addition to these, more complex domains such as COA
+        Critiquing, INSPECT, etc. will be available on request.</dt>
+</dl>
+
+<p>&nbsp;</p>
+
+<hr>
+
+<p>Please address all question, comments, bugs and info to <a
+href="mailto:surya@isi.edu">Surya Ramachandran</a></p>
+</body>
+</html>

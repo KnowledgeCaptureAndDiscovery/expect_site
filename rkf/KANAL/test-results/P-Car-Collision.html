@@ -1,0 +1,346 @@
+<html><title>Knowledge analysis</title><body bgcolor="#ffffff"><h1>Test Knowledge</h1><hr><ul><br>
+<font color="green">SHAKEN simulates your process model and checks several things:<p>
+<li>Check what happens before and after each step (the conditions and effects
+of each step) by running a simulation
+<br>e.g.: before executing Attach, check if virus is located near the cell
+<br>   after Breach the plasma membrane of the cell is broken
+<li>Check that all the overall <b>expected effects</b> (specified by you) are obtained
+<br>e.g.: after virus-invade-cell, viral-nucleic-acid is located in the
+cytoplasm
+<li>Check correctness of <b>assumptions</b> (especially initial conditions)
+<br>e.g., no location was specified for the virus, I'll assume it is next to the
+cell
+<li>Check combinations of substeps (execution paths) that are possible
+<li>Check steps that are never reached during simulation
+<li>Check how each step enables other steps to take place
+<li>Check if there are loops
+
+<hr>
+
+For each of these checks, SHAKEN will report
+<li>checks and assumptions that seemed ok
+<li>errors,i.e., serious problems that you should fix.</font>
+ <font color="red"> Errors are shown in<b>Red</b></font><font color="green">.
+<li>warnings/notes, i., e., things it wants you to take a look at so you decide
+for yourself whether there is a problem or not). </font><font color="orange">Warnings and notes are
+shown in <b>Orange</b></font><font color="green">.
+<p>
+For each error or warning, you can ask SHAKEN to show you a list of
+suggestions for how to fix them.  You can pick one of these suggested fixes,
+or you can decide to fix the problem in a different way.  SHAKEN will take
+you to the knowledge editor window in either case.</font><hr>
+<h1>Knowledge Analysis for p-car-collision</h1>
+<p>Analysis performed at 2001/6/25  18:16:30</p><hr><ul>
+<br><br><li><strong>Step: _move-to2233</strong><br><br><font color="blue"><b>Checking Preconditions:</b></font>
+<pre>(:|triple| user::|_Car2241| user::|object-of|
+      (user::|mustnt-be-a| user::|Be-Restrained|))
+(:|triple| user::|_Tangible-Entity2250| user::|object-of|
+ (user::|mustnt-be-a| user::|Be-Restrained|))
+</pre>
+<font color="blue">Succeeded preconditions:</font>
+<pre>(:|triple| user::|_Tangible-Entity2250| user::|object-of|
+      (user::|mustnt-be-a| user::|Be-Restrained|))
+(:|triple| user::|_Car2241| user::|object-of|
+ (user::|mustnt-be-a| user::|Be-Restrained|))
+</pre> 
+
+<br> EXECUTE _move-to2233 in _situation2231
+<br><br><font color="blue"><b>Checking Effects:</b></font><br>
+
+<br>      <font color="blue">deleting</font>
+<pre>(:|triple| user::|_Car2241| user::|location| nil)
+(:|triple| user::|_Tangible-Entity2250| user::|location| user::|_Place2261|)
+</pre>
+<br>      <font color="blue">adding</font>
+<pre>(:|triple| user::|_Car2241| user::|is-near| nil)
+(:|triple| user::|_Car2241| user::|abuts| nil)
+(:|triple| user::|_Car2241| user::|is-above| nil)
+(:|triple| user::|_Car2241| user::|is-below| nil)
+(:|triple| user::|_Car2241| user::|is-along| nil)
+(:|triple| user::|_Car2241| user::|is-at| nil)
+(:|triple| user::|_Car2241| user::|is-at-of| nil)
+(:|triple| user::|_Car2241| user::|is-beside| nil)
+(:|triple| user::|_Car2241| user::|is-between| nil)
+(:|triple| user::|_Car2241| user::|is-behind| nil)
+(:|triple| user::|_Car2241| user::|is-in-front-of| nil)
+(:|triple| user::|_Car2241| user::|is-inside| nil)
+(:|triple| user::|_Car2241| user::|encloses| nil)
+(:|triple| user::|_Car2241| user::|is-on| nil)
+(:|triple| user::|_Car2241| user::|has-on-it| nil)
+(:|triple| user::|_Car2241| user::|is-opposite| nil)
+(:|triple| user::|_Car2241| user::|is-outside| nil)
+(:|triple| user::|_Car2241| user::|does-not-enclose| nil)
+(:|triple| user::|_Car2241| user::|is-over| nil)
+(:|triple| user::|_Car2241| user::|is-under| nil)
+(:|triple| user::|_Car2241| user::|location| nil)
+(:|triple| user::|_Tangible-Entity2250| user::|is-near| nil)
+(:|triple| user::|_Tangible-Entity2250| user::|abuts| nil)
+(:|triple| user::|_Tangible-Entity2250| user::|is-above| nil)
+(:|triple| user::|_Tangible-Entity2250| user::|is-below| nil)
+(:|triple| user::|_Tangible-Entity2250| user::|is-along| nil)
+(:|triple| user::|_Tangible-Entity2250| user::|is-at| nil)
+(:|triple| user::|_Tangible-Entity2250| user::|is-at-of| nil)
+(:|triple| user::|_Tangible-Entity2250| user::|is-beside| nil)
+(:|triple| user::|_Tangible-Entity2250| user::|is-between| nil)
+(:|triple| user::|_Tangible-Entity2250| user::|is-behind| nil)
+(:|triple| user::|_Tangible-Entity2250| user::|is-in-front-of| nil)
+(:|triple| user::|_Tangible-Entity2250| user::|is-inside| nil)
+(:|triple| user::|_Tangible-Entity2250| user::|encloses| nil)
+(:|triple| user::|_Tangible-Entity2250| user::|is-on| nil)
+(:|triple| user::|_Tangible-Entity2250| user::|has-on-it| nil)
+(:|triple| user::|_Tangible-Entity2250| user::|is-opposite| nil)
+(:|triple| user::|_Tangible-Entity2250| user::|is-outside| nil)
+(:|triple| user::|_Tangible-Entity2250| user::|does-not-enclose| nil)
+(:|triple| user::|_Tangible-Entity2250| user::|is-over| nil)
+(:|triple| user::|_Tangible-Entity2250| user::|is-under| nil)
+(:|triple| user::|_Tangible-Entity2250| user::|location| nil)
+</pre>
+<br>      canceling effects: adding (:|triple| user::|_Car2241|
+                                     user::|location| nil) 
+         which has been deleted by earlier (or current) action user::|_Move-To2233|</li>
+<br><br><li><strong>Step: _move-to2234</strong><br><br><font color="blue"><b>Checking Preconditions:</b></font>
+<pre>(:|triple| user::|_Car2245| user::|object-of|
+      (user::|mustnt-be-a| user::|Be-Restrained|))
+(:|triple| user::|_Tangible-Entity2254| user::|object-of|
+ (user::|mustnt-be-a| user::|Be-Restrained|))
+</pre>
+<font color="blue">Succeeded preconditions:</font>
+<pre>(:|triple| user::|_Tangible-Entity2254| user::|object-of|
+      (user::|mustnt-be-a| user::|Be-Restrained|))
+(:|triple| user::|_Car2245| user::|object-of|
+ (user::|mustnt-be-a| user::|Be-Restrained|))
+</pre> 
+
+<br> EXECUTE _move-to2234 in _situation2262
+<br><br><font color="blue"><b>Checking Effects:</b></font><br>
+
+<br>      <font color="blue">deleting</font>
+<pre>(:|triple| user::|_Car2245| user::|location| nil)
+(:|triple| user::|_Tangible-Entity2254| user::|location| user::|_Place2299|)
+</pre>
+<br>      <font color="blue">adding</font>
+<pre>(:|triple| user::|_Car2245| user::|is-near| nil)
+(:|triple| user::|_Car2245| user::|abuts| nil)
+(:|triple| user::|_Car2245| user::|is-above| nil)
+(:|triple| user::|_Car2245| user::|is-below| nil)
+(:|triple| user::|_Car2245| user::|is-along| nil)
+(:|triple| user::|_Car2245| user::|is-at| nil)
+(:|triple| user::|_Car2245| user::|is-at-of| nil)
+(:|triple| user::|_Car2245| user::|is-beside| nil)
+(:|triple| user::|_Car2245| user::|is-between| nil)
+(:|triple| user::|_Car2245| user::|is-behind| nil)
+(:|triple| user::|_Car2245| user::|is-in-front-of| nil)
+(:|triple| user::|_Car2245| user::|is-inside| nil)
+(:|triple| user::|_Car2245| user::|encloses| nil)
+(:|triple| user::|_Car2245| user::|is-on| nil)
+(:|triple| user::|_Car2245| user::|has-on-it| nil)
+(:|triple| user::|_Car2245| user::|is-opposite| nil)
+(:|triple| user::|_Car2245| user::|is-outside| nil)
+(:|triple| user::|_Car2245| user::|does-not-enclose| nil)
+(:|triple| user::|_Car2245| user::|is-over| nil)
+(:|triple| user::|_Car2245| user::|is-under| nil)
+(:|triple| user::|_Car2245| user::|location| nil)
+(:|triple| user::|_Tangible-Entity2254| user::|is-near| nil)
+(:|triple| user::|_Tangible-Entity2254| user::|abuts| nil)
+(:|triple| user::|_Tangible-Entity2254| user::|is-above| nil)
+(:|triple| user::|_Tangible-Entity2254| user::|is-below| nil)
+(:|triple| user::|_Tangible-Entity2254| user::|is-along| nil)
+(:|triple| user::|_Tangible-Entity2254| user::|is-at| nil)
+(:|triple| user::|_Tangible-Entity2254| user::|is-at-of| nil)
+(:|triple| user::|_Tangible-Entity2254| user::|is-beside| nil)
+(:|triple| user::|_Tangible-Entity2254| user::|is-between| nil)
+(:|triple| user::|_Tangible-Entity2254| user::|is-behind| nil)
+(:|triple| user::|_Tangible-Entity2254| user::|is-in-front-of| nil)
+(:|triple| user::|_Tangible-Entity2254| user::|is-inside| nil)
+(:|triple| user::|_Tangible-Entity2254| user::|encloses| nil)
+(:|triple| user::|_Tangible-Entity2254| user::|is-on| nil)
+(:|triple| user::|_Tangible-Entity2254| user::|has-on-it| nil)
+(:|triple| user::|_Tangible-Entity2254| user::|is-opposite| nil)
+(:|triple| user::|_Tangible-Entity2254| user::|is-outside| nil)
+(:|triple| user::|_Tangible-Entity2254| user::|does-not-enclose| nil)
+(:|triple| user::|_Tangible-Entity2254| user::|is-over| nil)
+(:|triple| user::|_Tangible-Entity2254| user::|is-under| nil)
+(:|triple| user::|_Tangible-Entity2254| user::|location| nil)
+</pre>
+<br>      canceling effects: adding (:|triple| user::|_Car2245|
+                                     user::|location| nil) 
+         which has been deleted by earlier (or current) action user::|_Move-To2234|</li>
+<br><br><li><strong>Step: _make-contact2237</strong><br><br><font color="blue"><b>Checking Preconditions:</b></font>
+<pre>(:|triple| user::|_Car2245| user::|object-of|
+      (user::|mustnt-be-a| user::|Be-Touching| user::|with|
+       (user::|object|
+        ((user::|the| user::|base| user::|of| user::|_Make-Contact2237|)))))
+(:|triple| user::|_Car2241| user::|object-of|
+ (user::|mustnt-be-a| user::|Be-Touching| user::|with|
+  (user::|object|
+   ((user::|the| user::|object| user::|of| user::|_Make-Contact2237|)))))
+</pre>
+<font color="blue">Succeeded preconditions:</font>
+<pre>(:|triple| user::|_Car2241| user::|object-of|
+      (user::|mustnt-be-a| user::|Be-Touching| user::|with|
+       (user::|object|
+        ((user::|the| user::|object| user::|of| user::|_Make-Contact2237|)))))
+(:|triple| user::|_Car2245| user::|object-of|
+ (user::|mustnt-be-a| user::|Be-Touching| user::|with|
+  (user::|object|
+   ((user::|the| user::|base| user::|of| user::|_Make-Contact2237|)))))
+</pre> 
+
+<br> EXECUTE _make-contact2237 in _situation2301
+<br><br><font color="blue"><b>Checking Effects:</b></font><br>
+
+<br>      <font color="blue">deleting</font>
+.. nothing to delete
+<br>      <font color="blue">adding</font>
+<pre>(:|triple| user::|_Be-Touching2308| user::|object| user::|_Car2245|)
+(:|triple| user::|_Be-Touching2308| user::|object| user::|_Car2241|)
+(:|triple| user::|_Car2241| user::|abuts| user::|_Car2245|)
+(:|triple| user::|_Car2245| user::|abuts| user::|_Car2241|)
+</pre></li>
+
+</ul>
+<hr><h2>Summary of alternative paths simulated</h2>
+<ul>
+<li>(user::|_Move-To2233| user::|_Move-To2234| user::|_Make-Contact2237|)
+</li>
+</ul>
+<hr><h2>Check expected effects</h2>
+<p>We check each simulated path</p>
+<ul>
+
+<li><p>The overall effects for path (user::|_Move-To2233| user::|_Move-To2234|
+                                     user::|_Make-Contact2237|)</p>
+<ul><li>Added: <br>
+(:|triple| user::|_Car2241| user::|is-near| nil)<br>
+(:|triple| user::|_Car2241| user::|abuts| nil)<br>
+(:|triple| user::|_Car2241| user::|is-above| nil)<br>
+(:|triple| user::|_Car2241| user::|is-below| nil)<br>
+(:|triple| user::|_Car2241| user::|is-along| nil)<br>
+(:|triple| user::|_Car2241| user::|is-at| nil)<br>
+(:|triple| user::|_Car2241| user::|is-at-of| nil)<br>
+(:|triple| user::|_Car2241| user::|is-beside| nil)<br>
+(:|triple| user::|_Car2241| user::|is-between| nil)<br>
+(:|triple| user::|_Car2241| user::|is-behind| nil)<br>
+(:|triple| user::|_Car2241| user::|is-in-front-of| nil)<br>
+(:|triple| user::|_Car2241| user::|is-inside| nil)<br>
+(:|triple| user::|_Car2241| user::|encloses| nil)<br>
+(:|triple| user::|_Car2241| user::|is-on| nil)<br>
+(:|triple| user::|_Car2241| user::|has-on-it| nil)<br>
+(:|triple| user::|_Car2241| user::|is-opposite| nil)<br>
+(:|triple| user::|_Car2241| user::|is-outside| nil)<br>
+(:|triple| user::|_Car2241| user::|does-not-enclose| nil)<br>
+(:|triple| user::|_Car2241| user::|is-over| nil)<br>
+(:|triple| user::|_Car2241| user::|is-under| nil)<br>
+(:|triple| user::|_Tangible-Entity2250| user::|is-near| nil)<br>
+(:|triple| user::|_Tangible-Entity2250| user::|abuts| nil)<br>
+(:|triple| user::|_Tangible-Entity2250| user::|is-above| nil)<br>
+(:|triple| user::|_Tangible-Entity2250| user::|is-below| nil)<br>
+(:|triple| user::|_Tangible-Entity2250| user::|is-along| nil)<br>
+(:|triple| user::|_Tangible-Entity2250| user::|is-at| nil)<br>
+(:|triple| user::|_Tangible-Entity2250| user::|is-at-of| nil)<br>
+(:|triple| user::|_Tangible-Entity2250| user::|is-beside| nil)<br>
+(:|triple| user::|_Tangible-Entity2250| user::|is-between| nil)<br>
+(:|triple| user::|_Tangible-Entity2250| user::|is-behind| nil)<br>
+(:|triple| user::|_Tangible-Entity2250| user::|is-in-front-of| nil)<br>
+(:|triple| user::|_Tangible-Entity2250| user::|is-inside| nil)<br>
+(:|triple| user::|_Tangible-Entity2250| user::|encloses| nil)<br>
+(:|triple| user::|_Tangible-Entity2250| user::|is-on| nil)<br>
+(:|triple| user::|_Tangible-Entity2250| user::|has-on-it| nil)<br>
+(:|triple| user::|_Tangible-Entity2250| user::|is-opposite| nil)<br>
+(:|triple| user::|_Tangible-Entity2250| user::|is-outside| nil)<br>
+(:|triple| user::|_Tangible-Entity2250| user::|does-not-enclose| nil)<br>
+(:|triple| user::|_Tangible-Entity2250| user::|is-over| nil)<br>
+(:|triple| user::|_Tangible-Entity2250| user::|is-under| nil)<br>
+(:|triple| user::|_Tangible-Entity2250| user::|location| nil)<br>
+(:|triple| user::|_Car2245| user::|is-near| nil)<br>
+(:|triple| user::|_Car2245| user::|abuts| nil)<br>
+(:|triple| user::|_Car2245| user::|is-above| nil)<br>
+(:|triple| user::|_Car2245| user::|is-below| nil)<br>
+(:|triple| user::|_Car2245| user::|is-along| nil)<br>
+(:|triple| user::|_Car2245| user::|is-at| nil)<br>
+(:|triple| user::|_Car2245| user::|is-at-of| nil)<br>
+(:|triple| user::|_Car2245| user::|is-beside| nil)<br>
+(:|triple| user::|_Car2245| user::|is-between| nil)<br>
+(:|triple| user::|_Car2245| user::|is-behind| nil)<br>
+(:|triple| user::|_Car2245| user::|is-in-front-of| nil)<br>
+(:|triple| user::|_Car2245| user::|is-inside| nil)<br>
+(:|triple| user::|_Car2245| user::|encloses| nil)<br>
+(:|triple| user::|_Car2245| user::|is-on| nil)<br>
+(:|triple| user::|_Car2245| user::|has-on-it| nil)<br>
+(:|triple| user::|_Car2245| user::|is-opposite| nil)<br>
+(:|triple| user::|_Car2245| user::|is-outside| nil)<br>
+(:|triple| user::|_Car2245| user::|does-not-enclose| nil)<br>
+(:|triple| user::|_Car2245| user::|is-over| nil)<br>
+(:|triple| user::|_Car2245| user::|is-under| nil)<br>
+(:|triple| user::|_Tangible-Entity2254| user::|is-near| nil)<br>
+(:|triple| user::|_Tangible-Entity2254| user::|abuts| nil)<br>
+(:|triple| user::|_Tangible-Entity2254| user::|is-above| nil)<br>
+(:|triple| user::|_Tangible-Entity2254| user::|is-below| nil)<br>
+(:|triple| user::|_Tangible-Entity2254| user::|is-along| nil)<br>
+(:|triple| user::|_Tangible-Entity2254| user::|is-at| nil)<br>
+(:|triple| user::|_Tangible-Entity2254| user::|is-at-of| nil)<br>
+(:|triple| user::|_Tangible-Entity2254| user::|is-beside| nil)<br>
+(:|triple| user::|_Tangible-Entity2254| user::|is-between| nil)<br>
+(:|triple| user::|_Tangible-Entity2254| user::|is-behind| nil)<br>
+(:|triple| user::|_Tangible-Entity2254| user::|is-in-front-of| nil)<br>
+(:|triple| user::|_Tangible-Entity2254| user::|is-inside| nil)<br>
+(:|triple| user::|_Tangible-Entity2254| user::|encloses| nil)<br>
+(:|triple| user::|_Tangible-Entity2254| user::|is-on| nil)<br>
+(:|triple| user::|_Tangible-Entity2254| user::|has-on-it| nil)<br>
+(:|triple| user::|_Tangible-Entity2254| user::|is-opposite| nil)<br>
+(:|triple| user::|_Tangible-Entity2254| user::|is-outside| nil)<br>
+(:|triple| user::|_Tangible-Entity2254| user::|does-not-enclose| nil)<br>
+(:|triple| user::|_Tangible-Entity2254| user::|is-over| nil)<br>
+(:|triple| user::|_Tangible-Entity2254| user::|is-under| nil)<br>
+(:|triple| user::|_Tangible-Entity2254| user::|location| nil)<br>
+(:|triple| user::|_Be-Touching2308| user::|object| user::|_Car2245|)<br>
+(:|triple| user::|_Be-Touching2308| user::|object| user::|_Car2241|)<br>
+(:|triple| user::|_Car2241| user::|abuts| user::|_Car2245|)<br>
+(:|triple| user::|_Car2245| user::|abuts| user::|_Car2241|)<br>
+</li>
+<li>Deleted: <br>
+(:|triple| user::|_Tangible-Entity2250| user::|location|
+ user::|_Place2261|)<br>
+(:|triple| user::|_Tangible-Entity2254| user::|location|
+ user::|_Place2299|)<br>
+</li></ul>
+<p>No expected effects for p-car-collision are specified yet.</p>
+
+</li>
+
+</ul>
+<hr><h2>Summary of Loops Found</h2><br>  <font color="blue">No loop found!</font>
+<hr><h2>Error items and their fixes</h2>
+<ul>
+
+<br><br><li>NOTE: These seemed to be unnecessary ordering given the definitions currently I have about the steps<br> ((user::|_Move-To2233|
+                                                                                                                       before
+                                                                                                                       user::|_Make-Contact2237|)
+                                                                                                                      (user::|_Move-To2234|
+                                                                                                                       before
+                                                                                                                       user::|_Make-Contact2237|)) <br> <br>Fix details: <ul><li>((type
+                                                                                                                                                                                   . :delete-or-modify-link)
+                                                                                                                                                                                  (fix
+                                                                                                                                                                                   delete-or-modify
+                                                                                                                                                                                   ordering
+                                                                                                                                                                                   constraints
+                                                                                                                                                                                   in
+                                                                                                                                                                                   ((user::|_Move-To2233|
+                                                                                                                                                                                     before
+                                                                                                                                                                                     user::|_Make-Contact2237|)
+                                                                                                                                                                                    (user::|_Move-To2234|
+                                                                                                                                                                                     before
+                                                                                                                                                                                     user::|_Make-Contact2237|))))</li>
+</ul>
+
+</ul>
+<h2>Info items</h2>
+<ul><br><li>((source . user::|P-Car-Collision|)
+             (content
+              (user::|_Move-To2233| user::|_Move-To2234|
+               user::|_Make-Contact2237|))
+             (type . :simulated-paths) (id . |info-item-87|))</li>
+
+</ul>
+
+</body></html>

@@ -1,0 +1,109 @@
+<!--- This is HTML created by conceptRenderer. --->
+<HTML>
+<BODY bgcolor="#00bbbb" text="#000000">
+<TITLE>CONCEPT: MILITARY-BRIDGE</TITLE>
+ <H4>CONCEPT <A HREF = "MILITARY-BRIDGE.concept">MILITARY-BRIDGE</A> </H4><br>
+<H5>Definition: </H5>
+<P>
+<pre>(defconcept <A HREF ="MILITARY-BRIDGE.concept">MILITARY-BRIDGE</A> 
+    :is-primitive (:and <A HREF ="ENGINEERING-EQUIPMENT.concept">ENGINEERING-EQUIPMENT</A>  <A HREF ="BRIDGE.concept">BRIDGE</A> )
+    :annotations ((     <A HREF ="DOCUMENTATION.relation">DOCUMENTATION</A> "the class of fixed-span and floating bridges 
+used by the military"))
+    :roles (( <A HREF ="EMPLACEMENT-TIME.relation">EMPLACEMENT-TIME</A> :type
+                        <A HREF ="TIME-QUANTITY.concept">TIME-QUANTITY</A> )
+            (num-bays :type
+                      <A HREF ="INTEGER.concept">INTEGER</A> )
+            (max-length :type
+                        <A HREF ="DISTANCE-QUANTITY.concept">DISTANCE-QUANTITY</A> )
+            (max-forward-slope :type
+                        <A HREF ="QUANTITY.concept">QUANTITY</A> )))
+
+</P></pre>
+<H5>Subconcepts: </H5>
+<pre>
+     <li>  <A HREF ="M4T6-FIXED-BRIDGE.concept">M4T6-FIXED-BRIDGE</A> 
+     <li>  <A HREF ="FLOATING-BRIDGE.concept">FLOATING-BRIDGE</A> 
+     <li>  <A HREF ="BAILEY-BRIDGE.concept">BAILEY-BRIDGE</A> 
+     <li>  <A HREF ="MGB.concept">MGB</A> 
+     <li>  <A HREF ="AVLB.concept">AVLB</A> 
+</pre> <BR>
+<H5>Superconcepts: </H5><br>
+<pre>
+     <li>  <A HREF ="BRIDGE.concept">BRIDGE</A> 
+     <li>  <A HREF ="ENGINEERING-EQUIPMENT.concept">ENGINEERING-EQUIPMENT</A> 
+</pre><BR>
+<H5>Siblings: </H5><br>
+Siblings with the common parent: <A HREF="ENGINEERING-EQUIPMENT.concept">ENGINEERING-EQUIPMENT</A> <pre>
+     <li>  <A HREF ="AMMUNITION.concept">AMMUNITION</A> 
+     <li>  <A HREF ="DEMINING-EQUIPMENT.concept">DEMINING-EQUIPMENT</A> 
+     <li>  <A HREF ="MILITARY-CRANE.concept">MILITARY-CRANE</A> 
+     <li>  <A HREF ="MILITARY-DOZER.concept">MILITARY-DOZER</A> 
+     <li>  <A HREF ="MINE-PLOW.concept">MINE-PLOW</A> 
+     <li>  <A HREF ="TANK-BLADE.concept">TANK-BLADE</A> </pre><br>
+<p><H5>Roles: </H5>
+<pre>
+     <li>  <A HREF ="CROSS-SECTION.relation">CROSS-SECTION</A> 
+     -- 
+     <A HREF ="GEOGRAPHICAL-GAP.concept">GEOGRAPHICAL-GAP</A> </Type>
+
+     <li>  <A HREF ="DAMAGED-GAP-WIDTH.relation">DAMAGED-GAP-WIDTH</A> 
+     -- 
+     <A HREF ="DISTANCE-QUANTITY.concept">DISTANCE-QUANTITY</A> </Type>
+
+     <li>  <A HREF ="EMPLACEMENT-TIME.relation">EMPLACEMENT-TIME</A> 
+     -- 
+     <A HREF ="NUMBER.concept">NUMBER</A> </Type>
+
+     <li>  <A HREF ="FAR-APPROACH.relation">FAR-APPROACH</A> 
+     -- 
+     <A HREF ="GEOGRAPHICAL-APPROACH.concept">GEOGRAPHICAL-APPROACH</A> </Type>
+
+     <li>  <A HREF ="MAX-FORWARD-SLOPE.relation">MAX-FORWARD-SLOPE</A> 
+     -- 
+     <A HREF ="QUANTITY.concept">QUANTITY</A> </Type>
+
+     <li>  <A HREF ="MAX-LENGTH.relation">MAX-LENGTH</A> 
+     -- 
+     <A HREF ="DISTANCE-QUANTITY.concept">DISTANCE-QUANTITY</A> </Type>
+
+     <li>  <A HREF ="MAX-SLOPE.relation">MAX-SLOPE</A> 
+     -- 
+     <A HREF ="QUANTITY.concept">QUANTITY</A> </Type>
+
+     <li>  <A HREF ="MAX-TRAFFIC-CLASS.relation">MAX-TRAFFIC-CLASS</A> 
+     -- 
+     <A HREF ="INTEGER.concept">INTEGER</A> </Type>
+
+     <li>  <A HREF ="NEAR-APPROACH.relation">NEAR-APPROACH</A> 
+     -- 
+     <A HREF ="GEOGRAPHICAL-APPROACH.concept">GEOGRAPHICAL-APPROACH</A> </Type>
+
+     <li>  <A HREF ="NUM-BAYS.relation">NUM-BAYS</A> 
+     -- 
+     <A HREF ="INTEGER.concept">INTEGER</A> </Type>
+
+     <li>  <A HREF ="OBJECT-FOUND-IN-LOCATION.relation">OBJECT-FOUND-IN-LOCATION</A> 
+     -- 
+     <A HREF ="LOCATION.concept">LOCATION</A> </Type>
+
+     <li>  <A HREF ="SOIL-OF.relation">SOIL-OF</A> 
+     -- 
+     <A HREF ="SOIL-TYPE.concept">SOIL-TYPE</A> </Type>
+
+     <li>  <A HREF ="VEGETATION-OF.relation">VEGETATION-OF</A> 
+     -- 
+     <A HREF ="VEGETATION-TYPE.concept">VEGETATION-TYPE</A> </Type>
+</pre>
+<H5>Number of Instances: </H5> 2 (0 direct, 2inferred)<BR>
+<p>Direct Instances:
+<BR>
+
+<p>Inferred Instances:
+<pre>
+     <li>  <A HREF ="AVLB1.instance">AVLB1</A> 
+
+     <li>  <A HREF ="MGB1.instance">MGB1</A> 
+</pre><BR>
+</BODY>
+</HTML>
+<!--- End of HTML. --->

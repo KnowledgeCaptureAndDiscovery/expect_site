@@ -1,0 +1,212 @@
+
+
+constant: VehicularTrafficMt.
+
+in Mt: BaseKB.
+
+isa: IKBConstant GeneralMicrotheory.
+
+genlMt: HumanActivitiesMt.
+
+comment: "This Cyc microtheory contains information about various
+
+categories and classes of vehicles, about the types of load they
+
+typically transport, and about the kinds of terrain and pathway that
+
+typically accomodate them.".
+
+F:
+
+(genlMt ModernMilitaryVehiclesMt VehicularTrafficMt).
+
+
+
+constant: shortestRouteByRoadsBetween.
+
+in Mt: VehicularTrafficMt.
+
+isa: TernaryPredicate IKBConstant.
+
+genlPreds: pathConnects.
+
+arg1Isa: PathForWheeledVehicles Path-Simple.
+
+arg2Isa: SpatialThing-Localized.
+
+arg3Isa: SpatialThing-Localized.
+
+comment: "A predicate mapped in from the NWU Trafficability and
+
+Terrain Engine. (#$shortestRouteByRoadsBetween PATH LOC1 LOC2) means
+
+that PATH is the shortest path for wheeled vehicles connecting LOC1
+
+and LOC2, in the sense that there does not exist any other path for
+
+wheeled vehicles connecting LOC1 and LOC2 whose length is the same
+
+length as PATH or shorter.".
+
+F:
+
+(implies
+
+  (and
+
+    (completeExtentKnown pathConnects)
+
+    (isa ?LOC1 SpatialThing-Localized)
+
+    (isa ?LOC2 SpatialThing-Localized)
+
+    (nthSmallestElement ?SHORTPATH 1
+
+                      (TheSetOf ?PATH (pathConnects ?PATH ?LOC1 ?LOC2))
+
+                      (FunctionToArg 2 lengthOfObject)))
+
+  (shortestRouteByRoadsBetween ?SHORTPATH ?LOC1 ?LOC2)).
+
+
+
+
+
+constant: fastestRouteForVehicleType.
+
+in Mt: VehicularTrafficMt.
+
+isa: QuaternaryPredicate IKBConstant.
+
+arg1Isa: PathForWheeledVehicles Path-Simple.
+
+arg2Isa: ExistingObjectType.
+
+arg2Genl: LandTransportationDevice.
+
+arg3Isa: SpatialThing-Localized.
+
+arg4Isa: SpatialThing-Localized.
+
+comment: "A Predicate mapped in from the NWU Trafficability and
+
+Terrain Engine.  (#$fastestRouteForVehicleType PATH VEHICLETYPE LOC1
+
+LOC2) means that of the paths available, taking PATH will oridinarily
+
+be the fastest route for getting a vehicle of type VEHICLETYPE from
+
+LOC1 to LOC2.".
+
+
+
+F:
+
+(implies
+
+  (fastestRouteForVehicleType ?PATH ?VTYPE ?LOC1 ?LOC2)
+
+  (pathConnects ?PATH ?LOC1 ?LOC2)).
+
+
+
+
+
+constant: expectedTimeToTraverse.
+
+in Mt: VehicularTrafficMt.
+
+isa: IKBConstant TernaryPredicate.
+
+arg1Isa: ExistingObjectType.
+
+arg1Genl: LandTransportationDevice.
+
+arg2Isa: Path-Customary.
+
+arg3Isa: Time-Quantity.
+
+comment: "(#$expectedTimeToTraverse VEHICLETYPE PATH DURATION) means
+
+that it is anticipated that instances of VEHICLETYPE will take
+
+DURATION to completely traverse PATH in the context in which this
+
+assertion is made.".
+
+
+
+constant: speedInMoveTypeOnTerrain.
+
+in Mt: VehicularTrafficMt.
+
+isa: IKBConstant QuaternaryPredicate.
+
+arg1Isa: ExistingObjectType.
+
+arg1Genl: LandTransportationDevice.
+
+arg2Isa: SituationType.
+
+arg2Genl: Movement-TranslationEvent.
+
+arg3Isa: TemporalStuffType.
+
+arg3Genl: EcologicalRegion.
+
+arg4Isa: Speed.
+
+comment: "(#$speedInMoveTypeOnTerrain VEHICLETYPE MOVETYPE TERRAINTYPE
+
+SPEED) means that the typical speed of vehicles of type VEHICLETYPE
+
+when they are playing the role of #$primaryObjectMoving in translation
+
+events of MOVETYPE on TERRAINTYPE is SPEED.".
+
+
+
+constant: vehicleLinearSpeedOnTerrain.
+
+in Mt: VehicularTrafficMt.
+
+isa: IKBConstant TernaryPredicate.
+
+arg1Isa: ExistingObjectType.
+
+arg1Genl: LandTransportationDevice.
+
+arg2Isa: TemporalStuffType.
+
+arg2Genl: EcologicalRegion.
+
+arg3Isa: Speed.
+
+comment: "(#$vehicleLinearSpeedOnTerrain VEHICLETYPE REGIONTYPE
+
+SPEED) means that the typical speed of an instance of vehicletype
+
+driving in a straight line course across an instance of REGIONTYPE is SPEED.".
+
+F:
+
+(implies
+
+  (and
+
+    (isa ?PATH Path-Customary)
+
+    (isa ?PATH ?REGIONTYPE)
+
+    (genls ?REGIONTYPE EcologicalRegion)
+
+    (lengthOfObject ?PATH ?DISTANCE)
+
+    (vehicleLinearSpeedOnTerrain ?VEHICLETYPE ?REGIONTYPE ?SPEED)
+
+    (evaluate ?TIME (QuotientFn ?DISTANCE ?SPEED)))
+
+  (expectedTimeToTraverse ?VEHICLETYPE ?PATH ?TIME)).
+
+
+

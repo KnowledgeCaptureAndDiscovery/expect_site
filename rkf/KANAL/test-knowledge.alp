@@ -1,0 +1,886 @@
+<HTML>
+<!--
+******************************************************************************
+     
+				     RKF   
+
+   Unpublished-rights reserved under the copyright laws of the United States.
+    
+   This data and information is proprietary to, and a valuable trade
+   secret of, SRI International.  It is given in confidence by SRI
+   International. Its use, duplication, or disclosure is subject to the
+   restrictions set forth in the License Agreement under which it has
+   been distributed.
+
+******************************************************************************     
+
+                     Unpublished Copyright (c) 1999-2000
+		             Andres C. Rodriguez
+			      SRI International
+
+==============================================================================
+				MODIFICATIONS
+==============================================================================
+File Name: test-knowledge.alp
+09/26  Initial version - ACR
+____________________________________ 2000 ____________________________________
+==============================================================================
+-->
+
+  <HEAD>
+    <TITLE>Test Knowledge</TITLE>
+    <LINK REL="stylesheet" HREF="/css/stylesheet.css" TYPE="text/css" TITLE="style">
+    <SCRIPT TYPE="text/javascript" SRC="/javascript/lib/tooltip.js"></SCRIPT>
+    <script language="JavaScript1.2">
+    <!--
+    function showConceptMenu()
+    {
+      return false;
+    }
+    //-->
+    </script>
+    <DIV ID="tooltip" STYLE="position:absolute; visibility:hide; z-index:1;"></DIV>
+	 <STYLE>
+	 .bluebutton {font-family:Verdana;font-size:xx-small;font-weight:bold;color:white;background:#6699cc}
+	 </STYLE>
+  </HEAD>
+
+  <BODY BGCOLOR="WHITE" TEXT="BLACK" LINK="BLUE" VLINK="RED">
+  <% (alist-bind-values 
+      (sessionid errorid concept type reason logflag instance) ALIST 
+      (if logflag 
+	  (with-open-file (kanal::*kanal-log-stream* (format nil "~a~a/~a" (translate-logical-pathname "rkf:users;logs;") sessionid (kanal::get-log-file-name)) :direction :output
+			   :if-does-not-exist :create :if-exists :append) 
+	    (kanal::kanal-format nil "~%+++++++++++++++++++++++++++++++++~% user note on error: (session-id:~a) (concept:~a) (type:~a)~% ~a ~% REASON:~a~%+++++++++++++++++++++++++++++++++~%~%" sessionid concept type errorid reason)%><b>Do Not Close This Window !</b><%)
+	(alist-bind-values 
+	 (sessionid action message step concept baseConcept errors log-file html-file
+		    errorid rest explanation dictionary fixes constraint type error) 
+	 ALIST 
+	 %>
+    <FORM NAME="form" ACTION="test-knowledge.html" METHOD="POST">
+    <INPUT TYPE="HIDDEN" NAME="sessionid" VALUE="<%= sessionid %>">
+    <INPUT TYPE="HIDDEN" NAME="action" VALUE="<%= action %>"> 
+    <INPUT TYPE="HIDDEN" NAME="step" VALUE="<%= step %>">
+    <INPUT TYPE="HIDDEN" NAME="instance" VALUE="<%= instance %>">
+    <% (when (not (empty-p concept)) %>
+	     <INPUT TYPE="HIDDEN" NAME="concept" VALUE="<%= concept %>">
+	     <% ) %>
+    <% (when errorid %>
+	     <INPUT TYPE="HIDDEN" NAME="errorid" VALUE="<%= errorid %>">
+	     <% ) %>
+    <% (when baseConcept %>
+	     <INPUT TYPE="HIDDEN" NAME="baseConcept" VALUE="<%= baseConcept %>">
+	     <% ) %>
+
+    <SCRIPT>
+    function BrowseOpen(concept) {
+    address = "/concept.html?sessionid=<%= sessionid %>&action=show&mode=cmap&concept=" + escape( concept ) ;
+    features  = "resizable,scrollbars,alwaysRaised,width=650,height=650" ;
+    window.open(address,"_blank",features) ;
+    }
+    </SCRIPT>
+
+    <!-- HEADER ______________________________________________________________ -->
+      
+    <P CLASS="title">Test Knowledge</P>
+    <HR NOSHADE>
+    <!-- <p> Id: <%= errorid %> Step: <%= step %> </p> -->
+      
+
+    <!-- TOOLBAR _____________________________________________________________ -->
+      
+    <% (alp::include-with-args "secondary-toolbar-inc.alp") %>
+
+
+    <!-- MESSAGE _____________________________________________________________ -->
+
+    <% (alp::include-with-args "message-inc.alp" message) %>
+
+
+    <!-- TOP LEVEL (STEP 1: OPEN) ____________________________________________ -->
+
+
+
+    <% (when (equal step "1") 
+	 %>
+
+    <!-- RECENT CONCEPTS _____________________________________________________ -->
+
+    <% (when (empty-p concept) 
+	 %>
+
+	       <SCRIPT>
+	       function Continue ( concept ) {
+	       document.form.concept.value = concept;
+	       document.form.action.value = 'open'; 
+	       document.form.submit();
+	       }
+	       if (ReferenceFunction == null) { var ReferenceFunction = Continue ; }
+	       </SCRIPT>
+	       <% (alp::include-with-args "recent-concepts-inc.alp" sessionid "ReferenceFunction") %>
+	       <% )
+    %>
+
+	 <P>
+	 <% (cond ((not (empty-p concept))
+		   %>
+		   <SPAN CLASS="suplabel"> Testing process: <% (alp::include "link-inc.alp" OUTPUT-STREAM ALIST concept) %></SPAN><% )
+		  (t
+		   %>
+		   <SPAN CLASS="suplabel">Specify the process you want to test:<BR></SPAN>
+		   <SPAN CLASS="textfield"><INPUT TYPE="TEXT" NAME="concept" VALUE="<% (when concept %><%= concept %><% ) %>" SIZE="40" MAXLENGTH="240"></SPAN>
+		   <INPUT TYPE="BUTTON" VALUE=" Browse " onClick="OpenBrowse( document.form.concept.value);">
+
+      <HR NOSHADE>
+	<P CLASS="tip">1. If you know the process you want to test, you can simply type it in the empty box, and click continue.</p>	
+        <P CLASS="tip">2. To view the existing concepts in the system, you may click on browse button. Clicking on the browse button will take you to a  search facility where you can look for existing concepts.</P>
+	<P CLASS="tip">3. Concept names are case-sensitive.</P>
+      
+
+	       
+		   <SCRIPT>
+		   function OpenBrowse( seed ) {
+		   address = "/browse.html?sessionid=<%= sessionid %>&action=open&recipient=concept&root=Event&search-text="+seed ;
+		   features  = "resizable,scrollbars,alwaysRaised,width=800,height=700" ;
+		   window.open(address,"_blank",features) ;
+		   }
+		   </SCRIPT> <% ))
+	 %>
+	 </P>
+
+	 <HR NOSHADE>
+
+
+    <!-- HELP SECTION ____________________________________________________ -->
+
+    <% (when (not (empty-p concept)) %>
+	     <P CLASS="tip">You can tell SHAKEN what you expect to be the case after the overall process happens 
+	     (expected effects)</P>
+    <UL CLASS="tip">
+      <LI>e.g.: plasma membrane is broken</LI>
+      <LI>e.g.: viral nucleic acid is inside the cell</LI>
+    </UL>
+    <P CLASS="tip">
+      SHAKEN will check that these things are true at the end of the simulation.
+      If SHAKEN reports that they are not, that is a sign that your process model
+      is not defined as you expected and you need to go back and correct it.
+    </P>
+    <HR NOSHADE="NOSHADE"/>
+    <% ) %>
+
+	   
+    <!-- EXPECTED EFFECTS ________________________________________________ -->
+
+	 <% (when (not (empty-p concept))
+	      (let ((num 0)
+		    (expected-effects (rkf::get-expected-effects concept)))
+		%><%
+		(cond (expected-effects
+		       %> <P Class="sublabel">
+		       The expected effects for <%= (rkf::frame2english concept) %> are </P>
+		       <% (dolist (effect expected-effects)
+			   %><P Class="normal">
+			   <INPUT TYPE=CHECKBOX NAME="VAL" VALUE=<%= num %> >
+			   <%= (rkf::get-constraint-sentence effect :path nil :mode :should) %> </P><% 
+			    (incf num))
+		       %>
+		       <% )
+		      (t 
+		       %> <P Class="normal">There are no user-defined effects specified by you </P><%
+		       )
+		      %>
+                 
+
+                 <% )
+		%>
+      
+		<P Class="normal">
+		If you want to specify a new one, click 
+		<A HREF="expected-effect.html?sessionid=<%= sessionid %>&action=select&step=2&recipient=expected&concept=<%= concept %>&instance=<%= instance %>">
+		here</A></P>
+	      
+		<P Class="normal">Otherwise press 'Continue' to start testing</P>
+	      
+		<% (when (> num 0)
+		     %>
+		     <P Class="normal">
+		     <SCRIPT>
+		     function RemoveEffects ()
+		     {
+		       document.form.action.value = 'open' ;
+		       document.form.submit() ;
+		     }
+		     </SCRIPT>
+		     Click <A HREF="javascript:void RemoveEffects ();">here</A>
+		     to remove checked expected effects.</P><% )
+		%>
+		<HR NOSHADE>
+		<% ))
+	 %>
+	 <% ) %>
+
+    <!-- CONTINUES ___________________________________________________________ -->
+
+    <% 
+    (when (or (and (not (empty-p concept)) (equal step "1"))(equal step "2")) %>
+	  <INPUT TYPE="BUTTON" VALUE=" Go Back " onClick="javascript:void history.back();">
+	  <% )
+    
+    (when (and (not (empty-p concept)) (equal step "1"))
+      %><INPUT TYPE="BUTTON" VALUE=" Continue " onClick="document.form.action.value = 'test-concept'; document.form.submit();">
+      <% ) 
+    (when (and (empty-p concept) (equal step "1")) %>
+	  <INPUT TYPE="BUTTON" VALUE=" Continue " onClick="document.form.action.value = 'open'; document.form.submit();">
+	  <% ) %>
+    <%
+    (when (equal step "1") %>
+	  <HR NOSHADE>
+	  <% )
+    %>
+    
+    <!-- HELP SECTION ____________________________________________________ -->
+
+    <% (when (equal step "2") %>
+
+    <INPUT TYPE="BUTTON" VALUE=" See Full Description " onClick="window.open('/logs/<%= sessionid %>/<%= html-file %>.html');">
+    <HR NOSHADE>
+    <P CLASS="tip">SHAKEN simulates your process model and checks several things:</P>
+    <UL CLASS="tip">
+      <LI>
+	Check what happens before and after each step (the conditions and effects of
+	each step) by running a simulation (e.g.: before executing Attach, check if
+	virus is located near the cell. After Breach the plasma membrane of the cell is broken)
+      </LI>
+      <LI>
+	Check that all the overall expected effects (specified by you) are obtained
+	(e.g. after virus-invade-cell, viral-nucleic-acid is located in the cytoplasm)
+      </LI>
+      <LI>
+	Check assumptions used in checking conditions
+	(e.g. no location was specified for the virus, I’ll assume it is next to the cell)
+      </LI>
+      <LI>Check combinations of substeps (execution paths) that are possible </LI>
+      <LI>Check steps that are never reached during simulation</LI>
+      <LI>Check how each step enables other steps to take place</LI>
+      <LI>Check if there are loops</LI>
+    </UL>
+    
+    <P CLASS="tip">
+      For each of these checks, SHAKEN will report:
+    </P>
+    <UL CLASS="tip">
+      <LI>checks and assumptions that seemed ok</LI>
+      <LI>
+	errors, i.e., serious problems that you should fix.<BR />
+	<SPAN CLASS="error"><b>Errors are shown in Red.</b></SPAN>
+      </LI>
+      <LI>
+	warnings/notes, i.e., things it wants you to take a look at so you decide
+	for yourself whether there is a problem or not.<BR />
+	<SPAN CLASS="warning"><FONT COLOR="BROWN"><b>Warnings and notes are shown in Brown.</b></FONT></SPAN>
+      </LI>
+    </UL>
+
+    <P CLASS="tip">
+      For each error or warning, you can ask SHAKEN to show you a list of suggestions
+      for how to fix them.  You can pick one of these suggested fixes, or you can
+      decide to fix the problem in a different way.  SHAKEN will take you to the
+      knowledge editor window in either case.  
+    </P>
+
+     <INPUT TYPE="BUTTON" VALUE="See documentation for further details" onClick="window.open ('http://www.isi.edu/expect/projects/rkf/KANAL/KANAL-documentation-7-18-00.htm' , '_blank' );">
+
+    <HR NOSHADE="NOSHADE"/>
+    <% ) %>
+
+	   
+    <!-- TOP LEVEL (STEP 2: ANALYZE) _________________________________________ -->
+
+    <% (when (equal step "2") %>
+	     <P CLASS="subtitle">Knowledge Analysis for: 
+	     <% (alp::include "link-inc.alp" OUTPUT-STREAM ALIST concept) %>
+	     </P>
+	     <SCRIPT>
+	     function OpenFixes (errorid) {
+	     address = "test-knowledge.html?sessionid=<%= sessionid %>&concept=<%= concept %>&action=propose-fixes&errorid=" + errorid
+	     features  = "resizable,scrollbars,alwaysRaised,width=800,height=500" ;
+	     window.open(address,"_blank",features) ;
+	     }
+
+		  function StoreError (errorid,flag) {
+				var sessionid = "<%= sessionid %>";
+				var concept = "<%= concept %>";
+				var reason = "";
+
+				document.toLog.concept.value = concept;
+				document.toLog.errorid.value = errorid;
+				document.toLog.sessionid.value = sessionid;
+
+				if(flag==1) {
+					 reason = prompt("What is the Reason of disagreement ?","");
+					 document.toLog.type.value = "disagree";
+					 document.toLog.reason.value = reason;
+				} else if(flag==2) {
+					 document.toLog.type.value = "ignore";
+					 document.toLog.reason.value = "";
+				}
+				else {
+					 document.toLog.type.value = "agree";
+					 document.toLog.reason.value = "";
+		      }
+				var logwin = window.open("","logwin","width=1,height=1,resizable=no,scrollbars=no");
+				document.toLog.submit();
+		  }
+
+	     </SCRIPT>
+
+	     <!-- Dictionary: <%= dictionary %> -->
+	     <% (let ((process-steps (rkf::extract-simulated-path errors))
+		      (rkf::*definer* "the "))
+		  %><UL><%
+		  (when process-steps %>
+			<LI><B>Summary of alternative paths simulated</B><BR> &nbsp &nbsp&nbsp
+			<FONT FACE="courier">
+			<%= (rkf::frame2english (car process-steps)) %>
+			<% (loop for process-step in (cdr process-steps) do 
+				 (progn %>
+					-&gt  
+					<%= (rkf::frame2english process-step) %> 
+					<% )) 
+			%>
+			</FONT>
+			<HR NOSHADE>
+			<% )
+		  %>
+		  <% (loop for process-step in (append (rkf::extract-simulated-path errors)
+						       (cdr (util::alist-value (car (rkf::extract-unreached-events errors))
+									       'kanal::source))) do
+			   (progn
+			     (let ((serious-errors (rkf::extract-errors errors process-step))
+				   (warnings (rkf::extract-warnings errors process-step)))
+			       (when (or serious-errors warnings) %>
+				     <LI><B>Step: <%= (rkf::frame2english process-step) %></B> <BR>
+				     <TABLE BORDER="0" CELLSPACING="2" CELLPADDING="0">
+				     <% 
+				     (loop for error in serious-errors do 
+					   (progn %>
+						  <% (alist-bind-values 
+						      (type id constraint content level source success) error %>
+						      <TR VALIGN="TOP">
+						   
+						      <TD ALIGN="RIGHT"> <P CLASS="sublabel"> <%= (rkf::get-error-type-sentence type) %> </P>
+						      </TD>
+						      <TD> <FONT COLOR="<%= (if success "BLACK" "RED") %>">
+						      <% (when (consp constraint)
+							   %><OL><%
+							   (dolist (ctr constraint)
+							     (let ((sentence1 (rkf::get-constraint-sentence ctr :path t :context process-step))
+								   (sentence2 (rkf::get-constraint-sentence ctr :path nil :context process-step)))%>	
+								   <LI>
+								   <% (unless (string-equal sentence1 sentence2) %><%= sentence1 %>.<BR> &nbsp &nbsp &nbsp <% ) %>
+								   <%= sentence2 %>.
+								   </LI><% )) 
+							   %></OL><%)
+						      %>	
+						      <% (when (consp constraint)
+							   %>-&gt   The <%= (format () "~R ~A~P"
+										    (length constraint)
+										    (case type (:expected-effect "expected effect")
+											  (t "condition"))
+										    (length constraint)) %>
+							   <%= (if success "succeeded" "failed") %> <BR><%)
+						      %>							 
+						      <% (when (not success) 
+								    (when (kanal::failed-condition-checks-necessity id)
+									 %> (This condition checks if the step is unnecessary : its effect is
+									     already true) <%)
+							   %>
+								<br>&nbsp;&nbsp;&nbsp;<input type=button class=bluebutton value="Agree" onclick=StoreError('<%= (symbol-name id) %>',0)>
+								<font color='black'>[You Agree with this Error]<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>
+							   Click 
+							   <A HREF="javascript:void OpenFixes ( '<%= (symbol-name id) %>')" >here</A>
+							   to find help for fixing this error. 
+								<br><br>&nbsp;&nbsp;&nbsp;<input type=button class=bluebutton value="Disagree" onclick=StoreError('<%= (symbol-name id) %>',1)>
+								<font color=black> [You Disagree with this Error]</font><br><br></tr>
+							   <% ) %>
+								</FONT></TD>
+						      </TR>
+						      <% ) %>
+						  <% )) %>
+				     <% (loop for warning in warnings do 
+					      (alist-bind-values 
+					       (success type) warning 
+						      
+  					       (when (not success)%>
+
+						      <TR VALIGN="TOP">
+						   
+						      <TD ALIGN="RIGHT"> <P CLASS="sublabel"> <%= (rkf::get-error-type-sentence type) %> </P>
+						      </TD>
+
+
+
+						     <TR VALIGN="TOP">
+						     <TH ALIGN="RIGHT">Note:</TH> <TD><FONT COLOR="BROWN"><%= (rkf::get-warning-sentence warning) %>
+						     <% (let ((args (remove nil (rkf::get-warning-arguments warning))))
+							  (when args
+							    %> <UL> <%
+							    (alp::include "bullet-inc.alp" OUTPUT-STREAM ALIST args)
+							    %> </UL> <% ))
+						     %>
+						     </FONT>
+						     <% (cond ((equal type :inexplicit-precondition)%>
+								<br>&nbsp;&nbsp;&nbsp;<input type=button class=bluebutton value="Ignore" onclick=StoreError('<%= (symbol-name (util::alist-value warning 'kanal::id)) %>',2)>
+								[You think it is ok to assume these conditions are true]<br><br>&nbsp;&nbsp;&nbsp;
+									 If this is in fact false, click <%)
+							       (t %>
+								    <br>&nbsp;&nbsp;&nbsp;
+									 <input type=button class=bluebutton value="Agree" 
+									 onclick=StoreError('<%= (symbol-name (util::alist-value warning 'kanal::id)) %>',0)>
+									 [You Agree with this Note]<br>
+								    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Click 
+									 <% ))
+						     %>
+						     <A HREF="javascript:void OpenFixes ( '<%= (symbol-name (util::alist-value warning 'kanal::id)) %>')">here</A>
+						     for suggestions.
+								<br><br>&nbsp;&nbsp;&nbsp;<input type=button class=bluebutton value="Disagree" onclick=StoreError('<%= (symbol-name (util::alist-value warning 'kanal::id)) %>',1)> [You Disagree with this Note]<br><br>
+						     
+						     </TD>
+						     </TR>
+		 				     <% ))) %>
+
+				     <% (loop for warning in warnings do 
+					      (alist-bind-values 
+					       (success type) warning 
+  					       (when success%>
+						      <TR VALIGN="TOP">
+						   
+						      <TD ALIGN="RIGHT"> <P CLASS="sublabel"> <%= (rkf::get-error-type-sentence type) %> </P>
+						      </TD>
+						      
+						    
+						    <TD>  <FONT COLOR="BLACK"> 
+						     <% (let* ((args (rkf::get-warning-arguments warning :mode :is))
+							       (add-list (first args))
+							       (del-list (second args))) %>
+							       <BR>
+							       
+							       <% (when del-list %>
+									The following becomes false:
+									<OL>
+									<% (dolist (del del-list) %>
+									    <LI>
+									    <%= del %>
+									    </LI>
+									    <% )
+									%></OL><% )
+							       %>
+							       <% (when add-list %>
+									The following becomes true:
+									<OL>
+									<% (dolist (add add-list) %>
+									    <LI>
+									    <%= add %>
+									    </LI>
+									    <% )
+									%></OL><% )
+							       %>
+
+							       <% (when (and (null del-list) (null add-list) (not success)) %>
+
+									<TH ALIGN="RIGHT">Note:</TH> <TD><FONT COLOR="BROWN"><%= (rkf::get-warning-sentence warning) %>
+								    &nbsp;&nbsp;&nbsp; <input type=button class=bluebutton value="Agree" 
+									 onclick=StoreError('<%= (symbol-name (util::alist-value warning 'kanal::id)) %>',0)>
+									 [You Agree with this Note]<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									Click
+									<A HREF="javascript:void OpenFixes ( '<%= (symbol-name (util::alist-value warning 'kanal::id)) %>')">here</A>
+									for suggestions.
+
+								   <br><br>&nbsp;&nbsp;&nbsp;<input type=button class=bluebutton value="Disagree" 
+									onclick=StoreError('<%= (symbol-name (util::alist-value warning 'kanal::id)) %>',1)>
+									 [You Disagree with this Note]<br><br>
+
+									<%)
+							       %>
+							       <% )
+						     %>
+
+
+
+
+						<% ))) %>
+
+
+
+							</FONT>
+ 						   </TD>
+						</TR>
+
+				     </TABLE>
+								 
+				     </LI>
+
+				     <% ))))
+		  %>
+		  </UL>
+		  <% 
+	   
+	   
+	   
+		  (let* ((concept (intern concept :user))
+			 (serious-errors (append (rkf::extract-errors errors concept)
+						 (rkf::extract-errors errors nil)))
+			 (warnings (rkf::extract-warnings errors concept))
+			 (unnecessary-links (rkf::extract-unnecessary-links errors))
+			 (missing-ordering-constraint (rkf::extract-missing-ordering-constraint errors))
+			 (ordering-errors (rkf::extract-ordering-errors errors))
+			 (missing-first-subevent (rkf::extract-missing-first-subevent errors)))
+		    (when (or serious-errors warnings unnecessary-links missing-ordering-constraint missing-first-subevent) %>
+			  <HR NOSHADE>
+			  <% 
+			  (loop for error in serious-errors do 
+				(progn %>
+				       <% (alist-bind-values 
+					   (type id constraint content level source success) error %>
+			  <TABLE BORDER="0" CELLSPACING="2" CELLPADDING="0">
+				 <TR VALIGN="TOP">
+					   <TD ALIGN="RIGHT"> <P CLASS="label"> <%= (rkf::get-error-type-sentence type) %> </P>					   </TD>
+					   <TD> <FONT COLOR="<%= (if success "BLACK" "RED") %>">
+					   <% (when (consp constraint)
+						%><OL><%
+						(dolist (ctr constraint)
+						  (let ((sentence1 (rkf::get-constraint-sentence ctr :path t ))
+							(sentence2 (rkf::get-constraint-sentence ctr :path nil)))%>	
+						      
+							<LI>
+							<% (unless (string-equal sentence1 sentence2) %><%= sentence1 %>.<BR> <% ) %>
+							<%= sentence2 %>.
+							</LI>
+							<% )) 
+						%></OL><% )
+					   %>							  
+					   <% (when (consp constraint)
+						%>-&gt  The <%= (format () "~R ~A~P"
+									     (length constraint)
+									     (case type (:expected-effect "expected effect")
+										   (t "condition"))
+									     (length constraint)) %>
+					   <%= (if success "succeeded" "failed") %> <BR><% )
+					   %>		
+					   <% (when (not success)
+								    (when (kanal::failed-condition-checks-necessity id)
+									 %> (This condition checks if the step is unnecessary : its effect is
+									     already true) <%)
+									 %>
+								    &nbsp;&nbsp;&nbsp; <input type=button class=bluebutton value="Agree" 
+									 onclick=StoreError('<%= (symbol-name id) %>',0)>
+									 <font color=black>[You Agree with this Error]<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>
+						    Click
+						    <A HREF="javascript:void OpenFixes ( '<%= (symbol-name id) %>')">here</A>
+						    to find help for fixing this error.
+								   <br><br>&nbsp;&nbsp;&nbsp;<input type=button class=bluebutton value="Disagree" 
+									onclick=StoreError('<%= (symbol-name id) %>',1)>
+									<font color=black> [You Disagree with this Error]</font><br></tr>
+						    <% ) %></FONT></TD>
+					   </TR> 
+			                             </TABLE>
+						<HR NOSHADE>
+
+					   <% ) %>
+
+				       <% )) %>
+
+
+			  <% (loop for warning in warnings do 
+				   (progn %>
+					  <TR VALIGN="TOP">
+					  <TH ALIGN="RIGHT">Note: </TH> <TD><FONT COLOR="BROWN"><%= (rkf::get-warning-sentence warning) %> </FONT></BR>
+								    &nbsp;&nbsp;&nbsp; <input type=button class=bluebutton value="Agree" 
+									 onclick=StoreError('<%= (symbol-name (util::alist-value warning 'kanal::id)) %>',0)>
+									 [You Agree with this Note]<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					  Click  
+					  <A HREF="javascript:void OpenFixes ( '<%= (symbol-name (util::alist-value warning 'kanal::id)) %>')">here</A>
+					  for suggestions. 
+								   <br><br>&nbsp;&nbsp;&nbsp;<input type=button class=bluebutton value="Disagree" 
+									onclick=StoreError('<%= (symbol-name (util::alist-value warning 'kanal::id)) %>',1)>
+									 [You Disagree with this Note]<br><br></td>
+						     
+					  </TR>
+					  <% )) 
+			  %>
+			   <% (loop for warning in (append missing-ordering-constraint ordering-errors)
+				 do 
+				   (alist-bind-values 
+				    (type id level) warning  
+				    %>
+				    <TABLE BORDER="0" CELLSPACING="2" CELLPADDING="0">
+				    <TR VALIGN="TOP">
+				    
+				    <TD ALIGN="RIGHT"> <P CLASS="sublabel"> <%= (rkf::get-error-type-sentence type) %> </P>
+				    </TD>
+				    
+				    
+					     <TR VALIGN="TOP">
+					     <TH ALIGN="RIGHT">
+					     <% (case level (:error %> Error: <% ) (t %> Note: <% )) %>
+					     </TH> <TD>
+					     <FONT COLOR=<%= (case level (:error "RED") (t "BROWN")) %> >
+					     <%= (rkf::get-warning-sentence warning) %></FONT>      
+				    <% (let ((args (remove nil (rkf::get-warning-arguments warning)))) %>
+					    <%     (when args  %>
+							 <OL>
+							 <% (dolist (arg args) %>
+							     <LI>
+							     <%= arg %>
+							     </LI>
+							     <% ) %>
+							 </OL>
+							 <%	) %>
+							 <%) %>
+				    </FONT></BR>
+								    &nbsp;&nbsp;&nbsp; <input type=button class=bluebutton value="Agree" 
+									 onclick=StoreError('<%= (symbol-name (util::alist-value warning 'kanal::id)) %>',0)>
+									 [You Agree with this Note]<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				    Click
+				    <A HREF="javascript:void OpenFixes ( '<%= (symbol-name (util::alist-value warning 'kanal::id)) %>')">here</A>
+				    for suggestions.
+									<% (when (equal type :unnecessary-link) %>
+
+								   <br><br>&nbsp;&nbsp;&nbsp;<input type=button class=bluebutton value="Ignore" 
+									onclick=StoreError('<%= (symbol-name (util::alist-value warning 'kanal::id)) %>',2)>
+									 [You agree, but there is no need to fix it]
+									 <% ) %>
+
+								   <br><br>&nbsp;&nbsp;&nbsp;<input type=button class=bluebutton value="Disagree" 
+									onclick=StoreError('<%= (symbol-name (util::alist-value warning 'kanal::id)) %>',1)>
+									 [You Disagree with this Note]<br><br></td>
+				    </TR>
+				    </TABLE>
+				    <% ))
+			  %>
+
+								 
+
+			  <% ))
+	   
+	   
+	   
+		  %>
+	   
+		  <HR NOSHADE>
+		  <P CLASS="label"> Other results from the analysis: </P>
+		  <DL>
+		  <% (let ((unreached-events (rkf::extract-unreached-events errors)))
+		       (loop for error in unreached-events do
+			     %>
+			     <LI><%= (rkf::get-warning-sentence error)  %>
+			     <UL>
+			     <% (loop for process-step in (util::alist-value error 'kanal::constraint) do
+				      (progn %><li> <%= (rkf::pretty-class process-step) %></li>
+					     <% )) %>
+			     </UL>
+			     </LI>
+		      
+			     <% ))
+		  %>
+						   
+		  <% (let ((causals (rkf::extract-causal-links errors)))
+		       (when causals %>
+			     <LI>Causal relationships between the steps:<BR> 
+			     <% (loop for error in causals do
+				      (progn %>
+					     <%= (rkf::get-causal-sentence error) %>
+					     <% )) %>
+			     </LI>
+			     <% ))
+		  %>
+						   
+		  
+        <% (let ((loops (rkf::extract-loops errors)))
+             (when loops %>
+           <LI><% (loop for loop in loops do
+             (progn %>
+            <%= (rkf::get-loop-sentence loop) %>
+				<% (when (not (util::alist-value loop 'kanal::success)) %>
+                <UL>
+                <% (loop for process-step in (car (util::alist-value loop
+'kanal::constraint)) do
+                   (progn %><li> <%= (rkf::frame2english process-step) %></li>
+                <% )) %>
+                </UL>
+				 <br>&nbsp;&nbsp;&nbsp; <input type=button class=bluebutton value="Agree" 
+				 onclick=StoreError('<%= (symbol-name (util::alist-value loop 'kanal::id)) %>',0)>
+				 [You would like to Remove this loop]<br><br>
+				 &nbsp;&nbsp;&nbsp; <input type=button class=bluebutton value="Ignore" 
+				 onclick=StoreError('<%= (symbol-name (util::alist-value loop 'kanal::id)) %>',2)>
+				 [You agree but there is no need to fix it]<br><br>
+				 &nbsp;&nbsp;&nbsp; <input type=button class=bluebutton value="Disagree" 
+				 onclick=StoreError('<%= (symbol-name (util::alist-value loop 'kanal::id)) %>',1)>
+				 [You Disagree with this Note]<br><br> <%
+				 ))) %>
+            </LI><% ))
+        %>
+		  </UL>
+		  <% ) %>
+			       
+	     <HR NOSHADE>
+	     <% )  %>
+
+    <!-- TOP LEVEL (STEP 3: FIXES) _________________________________________ -->
+
+    <% (when (equal step "3")
+	 ;;;We don't print the paths
+	 (let ((rkf::*path* nil))
+	 %>
+	 <P CLASS="subtitle">Fixes for <% 
+	 (when (not (empty-p concept)) %>
+	       <% (alp::include "link-inc.alp" OUTPUT-STREAM ALIST concept) %><% ) %></P>
+	
+		  <P CLASS="label">
+		  <%= (rkf::get-error-type-sentence type) %>:
+		  </P>
+		  <P><%= (rkf::get-warning-sentence error) %></P>
+		  <P>
+		  <% (let ((args (remove nil (rkf::get-warning-arguments error)))) %>
+			  <%     (when args  %>
+				       <UL>
+				       <% (dolist (arg args) %>
+					   <LI>
+					   <%= arg %>.
+					   </LI>
+					   <% ) %>
+				       </UL>
+				       <%	) %>
+				       <%)
+		  
+		  %>
+		  </P>
+
+	 <%  (cond (fixes 
+		    %>
+		    <P CLASS="subtitle">Suggestions:</P>
+		    <P><TABLE>
+		    <TR><TD COLSPAN=2 CLASS="label">There are several things that one can do in order to fix this kind of 
+		    problem, such as:</TD</TR>
+		    <% (loop for fixnum from 0 to (1- (length fixes))
+			   do (let ((fix (nth fixnum fixes)))
+				(when (equal (util::alist-value fix 'kanal::type) :general)
+				  (let* ((rkf::*definer* "the ")
+					 (fix-sentence (rkf::display-fix concept fix)))
+				    (typecase fix-sentence
+				      (string %>
+					      <TR VALIGN="TOP">
+					      <TD>
+					      <INPUT TYPE="BUTTON" VALUE="Apply Fix" 
+					      onClick="javascript:void OpenEnterKnowledge(document.form.concept.value, <%= fixnum %> );">
+					      &nbsp
+					      </TD>
+					      <TD>
+					      <%= (rkf::string-first-cap fix-sentence) %>
+					      </TD>
+					      </TR>
+					      <% )
+				      (cons 
+				       %><TR VALIGN="TOP">
+				       <TD>
+				       <INPUT TYPE="BUTTON" VALUE="Apply Fix" onClick="javascript:void OpenEnterKnowledge(document.form.concept.value, <%= fixnum %> );">
+				       </TD>
+				       <TD>
+				       <%= (car fix-sentence) %><DL>
+				       <DD><DL> 
+				       <% (dolist (item (cdr fix-sentence))
+					   %> <DT><%= (car item) %>:</DT>
+					   <DD><%= (cdr item) %><% )
+				       %></DL></DD></DL>
+				       </TD>
+				       </TR><% ))))))
+		    %>
+		    <TR></TR>
+		    <% (let ((done nil))
+			 (loop for fixnum from 0 to (1- (length fixes))
+			     do (let ((fix (nth fixnum fixes)))
+				  (unless (equal (util::alist-value fix 'kanal::type) :general)
+				    (let* ((rkf::*definer* "the ")
+					   (fix-sentence (rkf::display-fix concept fix)))
+				      (unless done
+					%>
+					<TR><TD COLSPAN=2 CLASS="label">These are more specific suggestions:</TD</TR>
+					<% 
+					(setq done t)) ;so that the title is printed once and only once
+				      (typecase fix-sentence
+					(string %>
+						<TR VALIGN="TOP">
+						<TD>
+						<INPUT TYPE="BUTTON" VALUE="Apply Fix" onClick="javascript:void OpenEnterKnowledge(document.form.concept.value, <%= fixnum %> );">
+						&nbsp
+						</TD>
+						<TD>
+						<%= (rkf::string-first-cap fix-sentence) %>
+						</TD>
+						</TR>
+						<% )
+					(cons 
+					 %><TR VALIGN="TOP">
+					 <TD>
+					 <INPUT TYPE="BUTTON" VALUE="Apply Fix" onClick="javascript:void OpenEnterKnowledge(document.form.concept.value, <%= fixnum %> );">
+					 </TD>
+					 <TD>
+					 <%= (car fix-sentence) %><DL>
+					 <DD><DL> 
+					 <% (dolist (item (cdr fix-sentence))
+					     %> <DT><%= (car item) %>:</DT>
+					     <DD><%= (cdr item) %><% )
+					 %></DL></DD></DL>
+					 </TD>
+					 </TR><% )))))))
+		    %>
+		    <TR VALIGN="TOP">
+		    </tr>
+		    <TR VALIGN="TOP">
+		    <TD>
+		    <INPUT TYPE="BUTTON" VALUE="None of the above" onClick="javascript:void OpenEnterKnowledge(document.form.concept.value, -1 );">
+		    </TD>
+		    <TD>None of the fixes above seem appropriate in this case. 
+		    The knowledge will be modified in a different way than what is suggested above.
+		    </TD></TR>
+		    </TABLE></P>
+		    <% )
+		   (t 
+		    %><P class="normal">
+		    I can't find any specific fixes to suggest. But you should try to go back and change the process model.
+		    </P><% )
+		   %> <% )
+	 %>
+	 <SCRIPT>
+	 function OpenEnterKnowledge(concept, fixnum) {
+	 address = "/im?current=kanal-enter-knowledge-springboard&sessionid=<%= sessionid %>&class=" + escape(concept);
+	 features  = "resizable,scrollbars,alwaysRaised,width=800,height=600" ;
+	 window.open(address,"_blank",features) ;
+	 }
+
+	 </SCRIPT>
+	 <HR NOSHADE>
+
+	 <% )) %>
+
+    <!-- COPYRIGHT ___________________________________________________________ -->
+
+    <% (alp::include-with-args "copyright-inc.alp") %>
+
+
+    <!-- EXTRA COMMENTS ______________________________________________________ -->
+      
+    </FORM>
+    <% ))) %>
+	 <FORM name="toLog" ACTION="test-knowledge.html" METHOD="POST" TARGET="logwin">
+	 <input type=hidden name="sessionid">
+	 <input type=hidden name="errorid">
+	 <input type=hidden name="concept">
+	 <input type=hidden name="type">
+	 <input type=hidden name="reason">
+	 <input type=hidden name="action" value="open">
+	 <input type=hidden name="logflag" value="yes">
+	 </FORM>
+  </BODY>
+</HTML>
+

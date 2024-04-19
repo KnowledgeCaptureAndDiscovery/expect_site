@@ -1,0 +1,368 @@
+<html><title>Knowledge analysis</title><body bgcolor="#ffffff"><h1>Test Knowledge</h1><hr><ul><br>
+<font color="green">SHAKEN simulates your process model and checks several things:<p>
+<li>Check what happens before and after each step (the conditions and effects
+of each step) by running a simulation
+<br>e.g.: before executing Attach, check if virus is located near the cell
+<br>   after Breach the plasma membrane of the cell is broken
+<li>Check that all the overall <b>expected effects</b> (specified by you) are obtained
+<br>e.g.: after virus-invade-cell, viral-nucleic-acid is located in the
+cytoplasm
+<li>Check correctness of <b>assumptions</b> (especially initial conditions)
+<br>e.g., no location was specified for the virus, I'll assume it is next to the
+cell
+<li>Check combinations of substeps (execution paths) that are possible
+<li>Check steps that are never reached during simulation
+<li>Check how each step enables other steps to take place
+<li>Check if there are loops
+
+<hr>
+
+For each of these checks, SHAKEN will report
+<li>checks and assumptions that seemed ok
+<li>errors,i.e., serious problems that you should fix.</font>
+ <font color="red"> Errors are shown in<b>Red</b></font><font color="green">.
+<li>warnings/notes, i., e., things it wants you to take a look at so you decide
+for yourself whether there is a problem or not). </font><font color="orange">Warnings and notes are
+shown in <b>Orange</b></font><font color="green">.
+<p>
+For each error or warning, you can ask SHAKEN to show you a list of
+suggestions for how to fix them.  You can pick one of these suggested fixes,
+or you can decide to fix the problem in a different way.  SHAKEN will take
+you to the knowledge editor window in either case.</font><hr>
+<h1>Knowledge Analysis for virus-invades-cell</h1>
+<p>Analysis performed at 2001/6/25  18:16:55</p><hr><ul>
+<br><br><li><strong>Step: _attach2637</strong><br><br><font color="blue"><b>Checking Preconditions:</b></font>
+<pre>(:|triple| user::|_Virus2635| user::|object-of|
+      (user::|mustnt-be-a| user::|Be-Touching| user::|with|
+       (user::|object|
+        ((user::|the| user::|base| user::|of| user::|_Attach2637|)))))
+(:|triple| user::|_Cell2636| user::|object-of|
+ (user::|mustnt-be-a| user::|Be-Touching| user::|with|
+  (user::|object|
+   ((user::|the| user::|object| user::|of| user::|_Attach2637|)))))
+</pre>
+<font color="blue">Succeeded preconditions:</font>
+<pre>(:|triple| user::|_Cell2636| user::|object-of|
+      (user::|mustnt-be-a| user::|Be-Touching| user::|with|
+       (user::|object|
+        ((user::|the| user::|object| user::|of| user::|_Attach2637|)))))
+(:|triple| user::|_Virus2635| user::|object-of|
+ (user::|mustnt-be-a| user::|Be-Touching| user::|with|
+  (user::|object|
+   ((user::|the| user::|base| user::|of| user::|_Attach2637|)))))
+</pre> 
+
+<br> EXECUTE _attach2637 in _situation2633
+<br><br><font color="blue"><b>Checking Effects:</b></font><br>
+
+<br>      <font color="blue">deleting</font>
+.. nothing to delete
+<br>      <font color="blue">adding</font>
+<pre>(:|triple| user::|_Be-Attached-To2652| user::|object| user::|_Virus2635|)
+(:|triple| user::|_Be-Attached-To2652| user::|object| user::|_Cell2636|)
+(:|triple| user::|_Cell2636| user::|abuts| user::|_Virus2635|)
+(:|triple| user::|_Virus2635| user::|abuts| user::|_Cell2636|)
+</pre></li>
+<br><br><li><strong>Step: _breach2644</strong><br><br><font color="blue"><b>Checking Preconditions:</b></font>
+ .. there are no preconditions<br>
+
+<br> EXECUTE _breach2644 in _situation2653
+<br><br><font color="blue"><b>Checking Effects:</b></font><br>
+
+<br>      <font color="blue">deleting</font>
+.. nothing to delete
+<br>      <font color="blue">adding</font>
+<pre>(:|triple| user::|_Portal2649| user::|is-region-of|
+      user::|_Plasma-Membrane2639|)
+(:|triple| user::|_Be-Broken2660| user::|object| user::|_Plasma-Membrane2639|)
+</pre></li>
+<br><br><li><strong>Step: _traverse2646</strong><br><br><font color="blue"><b>Checking Preconditions:</b></font>
+<pre>(:|triple| user::|_Virus2635| user::|object-of|
+      (user::|mustnt-be-a| user::|Be-Restrained|))
+(:|triple| user::|_Portal2649| user::|object-of|
+ (user::|mustnt-be-a| user::|Be-Blocked|))
+</pre>
+<font color="blue">Succeeded preconditions:</font>
+<pre>(:|triple| user::|_Portal2649| user::|object-of|
+      (user::|mustnt-be-a| user::|Be-Blocked|))
+(:|triple| user::|_Virus2635| user::|object-of|
+ (user::|mustnt-be-a| user::|Be-Restrained|))
+</pre> 
+
+<br> EXECUTE _traverse2646 in _situation2662
+<br><br><font color="blue"><b>Checking Effects:</b></font><br>
+
+<br>      <font color="blue">deleting</font>
+<pre>(:|triple| user::|_Virus2635| user::|location| user::|_Place2664|)
+(:|triple| user::|_Virus2635| user::|abuts| user::|_Cell2636|)
+</pre>
+<br>      <font color="blue">adding</font>
+.. nothing to add
+<br>      canceling effects: deleting (:|triple|
+                                       user::|_Virus2635|
+                                       user::|abuts|
+                                       user::|_Cell2636|) 
+         which has been added by earlier (or current) action user::|_Attach2637|
+<br>      canceling effects: deleting (:|triple|
+                                       user::|_Virus2635|
+                                       user::|abuts|
+                                       user::|_Cell2636|) 
+         which has been added by earlier (or current) action user::|_Attach2637|</li>
+<br><br><li><strong>Step: _penetrate2638</strong><br><br><font color="blue"><b>Checking Preconditions:</b></font>
+ .. there are no preconditions<br>
+
+<br> EXECUTE _penetrate2638 in _situation2667
+<br><br><font color="blue"><b>Checking Effects:</b></font><br>
+
+<br>      <font color="blue">deleting</font>
+.. nothing to delete
+<br>      <font color="blue">adding</font>
+.. nothing to add</li>
+<br><br><li><strong>Step: _release2642</strong><br><br><font color="blue"><b>Checking Preconditions:</b></font>
+<pre>(:|triple| user::|_Viral-Nucleic-Acid2687| user::|object-of|
+      (user::|a| user::|Be-Confined| user::|with|
+       (user::|base|
+        ((user::|the| user::|base| user::|of| user::|_Release2642|)))))
+</pre>
+<font color="#ff9933">WARNING: <br>(:|triple| user::|_Viral-Nucleic-Acid2687|
+                                    user::|object-of|
+                                    (user::|a| user::|Be-Confined|
+                                     user::|with|
+                                     (user::|base|
+                                      ((user::|the|
+                                        user::|base|
+                                        user::|of|
+                                        user::|_Release2642|)))))<br>"The object-of of the viral-nucleic-acid is a be-confined with base the base of the release."<br>is not explicitly true, but consistent with the KB
+<br>    so we will assume it is true and continue<br></font>
+
+<br> EXECUTE _release2642 in _situation2679
+<br><br><font color="blue"><b>Checking Effects:</b></font><br>
+
+<br>      <font color="blue">deleting</font>
+<pre>(:|triple| user::|_Be-Confined2692| user::|object|
+      user::|_Viral-Nucleic-Acid2687|)
+(:|triple| user::|_Be-Confined2692| user::|base| user::|_Protein-Coat2686|)
+</pre>
+<br>      <font color="blue">adding</font>
+.. nothing to add</li>
+<br><br><li><strong>Step: _move2643</strong><br><br><font color="blue"><b>Checking Preconditions:</b></font>
+<pre>(:|triple| user::|_Viral-Nucleic-Acid2687| user::|object-of|
+      (user::|mustnt-be-a| user::|Be-Restrained|))
+</pre>
+<font color="blue">Succeeded preconditions:</font>
+<pre>(:|triple| user::|_Viral-Nucleic-Acid2687| user::|object-of|
+      (user::|mustnt-be-a| user::|Be-Restrained|))
+</pre> 
+
+<br> EXECUTE _move2643 in _situation2697
+<br><br><font color="blue"><b>Checking Effects:</b></font><br>
+
+<br>      <font color="blue">deleting</font>
+<pre>(:|triple| user::|_Viral-Nucleic-Acid2687| user::|location|
+      user::|_Place2704|)
+(:|triple| user::|_Viral-Nucleic-Acid2687| user::|is-inside|
+ user::|_Protein-Coat2686|)
+</pre>
+<br>      <font color="blue">adding</font>
+<pre>(:|triple| user::|_Viral-Nucleic-Acid2687| user::|is-near| nil)
+(:|triple| user::|_Viral-Nucleic-Acid2687| user::|abuts| nil)
+(:|triple| user::|_Viral-Nucleic-Acid2687| user::|is-above| nil)
+(:|triple| user::|_Viral-Nucleic-Acid2687| user::|is-below| nil)
+(:|triple| user::|_Viral-Nucleic-Acid2687| user::|is-along| nil)
+(:|triple| user::|_Viral-Nucleic-Acid2687| user::|is-at| nil)
+(:|triple| user::|_Viral-Nucleic-Acid2687| user::|is-at-of| nil)
+(:|triple| user::|_Viral-Nucleic-Acid2687| user::|is-beside| nil)
+(:|triple| user::|_Viral-Nucleic-Acid2687| user::|is-between| nil)
+(:|triple| user::|_Viral-Nucleic-Acid2687| user::|is-behind| nil)
+(:|triple| user::|_Viral-Nucleic-Acid2687| user::|is-in-front-of| nil)
+(:|triple| user::|_Viral-Nucleic-Acid2687| user::|is-inside|
+ user::|_Plasma-Membrane2639|)
+(:|triple| user::|_Viral-Nucleic-Acid2687| user::|encloses| nil)
+(:|triple| user::|_Viral-Nucleic-Acid2687| user::|is-on| nil)
+(:|triple| user::|_Viral-Nucleic-Acid2687| user::|has-on-it| nil)
+(:|triple| user::|_Viral-Nucleic-Acid2687| user::|is-opposite| nil)
+(:|triple| user::|_Viral-Nucleic-Acid2687| user::|is-outside| nil)
+(:|triple| user::|_Viral-Nucleic-Acid2687| user::|does-not-enclose| nil)
+(:|triple| user::|_Viral-Nucleic-Acid2687| user::|is-over| nil)
+(:|triple| user::|_Viral-Nucleic-Acid2687| user::|is-under| nil)
+(:|triple| user::|_Viral-Nucleic-Acid2687| user::|location| user::|_Place2710|)
+</pre></li>
+
+</ul>
+<hr><h2>Summary of alternative paths simulated</h2>
+<ul>
+<li>(user::|_Attach2637| user::|_Breach2644| user::|_Traverse2646|
+     user::|_Penetrate2638| user::|_Release2642| user::|_Move2643|)
+</li>
+</ul>
+<hr><h2>Check expected effects</h2>
+<p>We check each simulated path</p>
+<ul>
+
+<li><p>The overall effects for path (user::|_Attach2637| user::|_Breach2644|
+                                     user::|_Traverse2646|
+                                     user::|_Penetrate2638|
+                                     user::|_Release2642|
+                                     user::|_Move2643|)</p>
+<ul><li>Added: <br>
+(:|triple| user::|_Be-Attached-To2652| user::|object| user::|_Virus2635|)<br>
+(:|triple| user::|_Be-Attached-To2652| user::|object| user::|_Cell2636|)<br>
+(:|triple| user::|_Portal2649| user::|is-region-of|
+ user::|_Plasma-Membrane2639|)<br>
+(:|triple| user::|_Be-Broken2660| user::|object|
+ user::|_Plasma-Membrane2639|)<br>
+(:|triple| user::|_Viral-Nucleic-Acid2687| user::|is-near| nil)<br>
+(:|triple| user::|_Viral-Nucleic-Acid2687| user::|abuts| nil)<br>
+(:|triple| user::|_Viral-Nucleic-Acid2687| user::|is-above| nil)<br>
+(:|triple| user::|_Viral-Nucleic-Acid2687| user::|is-below| nil)<br>
+(:|triple| user::|_Viral-Nucleic-Acid2687| user::|is-along| nil)<br>
+(:|triple| user::|_Viral-Nucleic-Acid2687| user::|is-at| nil)<br>
+(:|triple| user::|_Viral-Nucleic-Acid2687| user::|is-at-of| nil)<br>
+(:|triple| user::|_Viral-Nucleic-Acid2687| user::|is-beside| nil)<br>
+(:|triple| user::|_Viral-Nucleic-Acid2687| user::|is-between| nil)<br>
+(:|triple| user::|_Viral-Nucleic-Acid2687| user::|is-behind| nil)<br>
+(:|triple| user::|_Viral-Nucleic-Acid2687| user::|is-in-front-of| nil)<br>
+(:|triple| user::|_Viral-Nucleic-Acid2687| user::|is-inside|
+ user::|_Plasma-Membrane2639|)<br>
+(:|triple| user::|_Viral-Nucleic-Acid2687| user::|encloses| nil)<br>
+(:|triple| user::|_Viral-Nucleic-Acid2687| user::|is-on| nil)<br>
+(:|triple| user::|_Viral-Nucleic-Acid2687| user::|has-on-it| nil)<br>
+(:|triple| user::|_Viral-Nucleic-Acid2687| user::|is-opposite| nil)<br>
+(:|triple| user::|_Viral-Nucleic-Acid2687| user::|is-outside| nil)<br>
+(:|triple| user::|_Viral-Nucleic-Acid2687| user::|does-not-enclose| nil)<br>
+(:|triple| user::|_Viral-Nucleic-Acid2687| user::|is-over| nil)<br>
+(:|triple| user::|_Viral-Nucleic-Acid2687| user::|is-under| nil)<br>
+(:|triple| user::|_Viral-Nucleic-Acid2687| user::|location|
+ user::|_Place2710|)<br>
+</li>
+<li>Deleted: <br>
+(:|triple| user::|_Virus2635| user::|location| user::|_Place2664|)<br>
+(:|triple| user::|_Be-Confined2692| user::|object|
+ user::|_Viral-Nucleic-Acid2687|)<br>
+(:|triple| user::|_Be-Confined2692| user::|base| user::|_Protein-Coat2686|)<br>
+(:|triple| user::|_Viral-Nucleic-Acid2687| user::|location|
+ user::|_Place2704|)<br>
+(:|triple| user::|_Viral-Nucleic-Acid2687| user::|is-inside|
+ user::|_Protein-Coat2686|)<br>
+</li></ul>
+<br>These are expected effects of a user::|Virus-Invades-Cell|
+<br>  (We assume that the user entered these using the Dialog Window)<br>
+<br>(:|triple|
+     (user::|the| user::|Viral-Nucleic-Acid| user::|has-part| user::|of|
+      (user::|the| user::|Virus| user::|agent| user::|of|
+       (user::|thelast| user::|Virus-Invades-Cell|)))
+     user::|location|
+     (user::|the| user::|location| user::|of|
+      (user::|the| user::|Cytoplasm| user::|has-part| user::|of|
+       (user::|the| user::|Cell| user::|object| user::|of|
+        (user::|thelast| user::|Virus-Invades-Cell|)))))
+<br>      -> the effect is achieved!
+
+<br> <font color="blue">ALL THE EXPECTED EFFECTS ARE ACHIEVED.</font>
+
+</li>
+
+</ul>
+<hr><h2>Summary of Loops Found</h2><br>  <font color="blue">No loop found!</font>
+<hr><h2>Error items and their fixes</h2>
+<ul>
+
+<br><br><li>NOTE: For step user::|_Release2642| the following were not known to be either true or false, but we assume it is true:<br> (:|triple|
+                                                                                                                                        user::|_Viral-Nucleic-Acid2687|
+                                                                                                                                        user::|object-of|
+                                                                                                                                        (user::|a|
+                                                                                                                                         user::|Be-Confined|
+                                                                                                                                         user::|with|
+                                                                                                                                         (user::|base|
+                                                                                                                                          ((user::|the|
+                                                                                                                                            user::|base|
+                                                                                                                                            user::|of|
+                                                                                                                                            user::|_Release2642|)))))<br> <font color="blue">proposed fix</font> : add a user::|Block| step with "the be-blocked" as (user::|a|
+                                                                                                                                                                                                                                                                      user::|Be-Confined|
+                                                                                                                                                                                                                                                                      user::|with|
+                                                                                                                                                                                                                                                                      (user::|base|
+                                                                                                                                                                                                                                                                       ((user::|the|
+                                                                                                                                                                                                                                                                         user::|base|
+                                                                                                                                                                                                                                                                         user::|of|
+                                                                                                                                                                                                                                                                         user::|_Release2642|)))) before step user::|_Release2642| to change user::|object-of| of user::|_Viral-Nucleic-Acid2687|
+<br> <font color="blue">proposed fix</font> : add a user::|Shut-Out| step with "the be-shut-out" as (user::|a|
+                                                                                                     user::|Be-Confined|
+                                                                                                     user::|with|
+                                                                                                     (user::|base|
+                                                                                                      ((user::|the|
+                                                                                                        user::|base|
+                                                                                                        user::|of|
+                                                                                                        user::|_Release2642|)))) before step user::|_Release2642| to change user::|object-of| of user::|_Viral-Nucleic-Acid2687|
+
+<br>
+<br><font color="blue">proposed fix:</font> delete or modify user::|_Release2642|
+<br>Fix details: <ul><li>((type . :add-step-before-step)
+                          (fix add user::|Block| {with "the be-blocked" as
+                           (user::|a| user::|Be-Confined| user::|with|
+                            (user::|base|
+                             ((user::|the| user::|base| user::|of|
+                               user::|_Release2642|))))
+                           } before user::|_Release2642| to-make
+                           user::|object-of| of
+                           user::|_Viral-Nucleic-Acid2687| become
+                           (user::|a| user::|Be-Confined| user::|with|
+                            (user::|base|
+                             ((user::|the| user::|base| user::|of|
+                               user::|_Release2642|))))))</li>
+<li>((type . :add-step-before-step)
+     (fix add user::|Shut-Out| {with "the be-shut-out" as
+      (user::|a| user::|Be-Confined| user::|with|
+       (user::|base|
+        ((user::|the| user::|base| user::|of| user::|_Release2642|))))
+      } before user::|_Release2642| to-make user::|object-of| of
+      user::|_Viral-Nucleic-Acid2687| become
+      (user::|a| user::|Be-Confined| user::|with|
+       (user::|base|
+        ((user::|the| user::|base| user::|of| user::|_Release2642|))))))</li>
+<li>((type . :delete-or-modify-step)
+     (fix delete-or-modify user::|_Release2642|))</li>
+</ul>
+
+<br><br><li>NOTE: These seemed to be unnecessary ordering given the definitions currently I have about the steps<br> ((user::|_Attach2637|
+                                                                                                                       before
+                                                                                                                       user::|_Penetrate2638|)
+                                                                                                                      (user::|_Breach2644|
+                                                                                                                       before
+                                                                                                                       user::|_Traverse2646|)
+                                                                                                                      (user::|_Penetrate2638|
+                                                                                                                       before
+                                                                                                                       user::|_Release2642|)
+                                                                                                                      (user::|_Release2642|
+                                                                                                                       before
+                                                                                                                       user::|_Move2643|)) <br> <br>Fix details: <ul><li>((type
+                                                                                                                                                                           . :delete-or-modify-link)
+                                                                                                                                                                          (fix
+                                                                                                                                                                           delete-or-modify
+                                                                                                                                                                           ordering
+                                                                                                                                                                           constraints
+                                                                                                                                                                           in
+                                                                                                                                                                           ((user::|_Attach2637|
+                                                                                                                                                                             before
+                                                                                                                                                                             user::|_Penetrate2638|)
+                                                                                                                                                                            (user::|_Breach2644|
+                                                                                                                                                                             before
+                                                                                                                                                                             user::|_Traverse2646|)
+                                                                                                                                                                            (user::|_Penetrate2638|
+                                                                                                                                                                             before
+                                                                                                                                                                             user::|_Release2642|)
+                                                                                                                                                                            (user::|_Release2642|
+                                                                                                                                                                             before
+                                                                                                                                                                             user::|_Move2643|))))</li>
+</ul>
+
+</ul>
+<h2>Info items</h2>
+<ul><br><li>((source . user::|Virus-Invades-Cell|)
+             (content
+              (user::|_Attach2637| user::|_Breach2644| user::|_Traverse2646|
+               user::|_Penetrate2638| user::|_Release2642| user::|_Move2643|))
+             (type . :simulated-paths) (id . |info-item-110|))</li>
+
+</ul>
+
+</body></html>

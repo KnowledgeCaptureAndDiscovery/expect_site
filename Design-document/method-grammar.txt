@@ -1,0 +1,72 @@
+#| ******************************************************************* 
+
+	**********************
+        *                    *
+	*   EXPECT GRAMMAR   *
+	*                    *
+	**********************
+
+
+--------------------------------------------------
+
+method-goal :- var-goal-form
+
+var-goal-form :- (GOAL-NAME var-goal-argument*)
+
+var-goal-argument :- (PARAMETER-NAME   method-goal-argument)
+
+method-goal-argument :- (VARIABLE-NAME IS complex-data) |
+                        (VARIABLE-NAME IS data) |
+                        (INST INSTANCE-NAME) |
+                        (DESC CONCEPT-NAME)
+          
+
+complex-data :- (SET-OF (SPEC-OF  CONCEPT-NAME)) |
+                (SPEC-OF  CONCEPT-NAME) | 
+                (SET-OF (INST-OF  CONCEPT-NAME)) | 
+                (INST-OF  CONCEPT-NAME) |
+                (data*)
+
+--------------------------------------------------
+
+method-result :- complex-data
+
+--------------------------------------------------
+
+method-body :- block-expression | () | (SOME-LISP-CODE)
+
+block-expression :- expression  | (expression*) 
+
+expression :- form | complex-data | data 
+
+form :- logic-form |
+        special-form |
+        relation-form |
+        goal-form
+
+logic-form :- (logic-operator expression*) 
+
+logic-operator :- AND | OR | NOT
+
+special-form :- if-form | filter-form | append-form | when-form | union-form
+
+if-form :- (IF expression THEN block-expression ELSE block-expression)
+
+when-form :- (WHEN expression block-expression)
+
+filter-form :- (FILTER (OBJ expression) (WITH expression))
+
+append-form :- (APPEND-ELTS block-expression) | (APPEND block-expression)
+
+union-form :- (UNION block-expression)
+
+relation-form :- (RELATION-NAME expression)
+
+goal-form :- (GOAL-NAME goal-parameter*)
+
+goal-parameter :- (PARAMETER-NAME expression)
+
+
+data :- VARIABLE-NAME | INSTANCE-NAME | CONCEPT-NAME
+
+******************************************************************* |#

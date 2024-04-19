@@ -1,0 +1,199 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<BODY BGCOLOR="FFFFFF">
+<TITLE>3 A Representation for Measures of Effect in Air Campaign Plans</TITLE>
+<META NAME="description" CONTENT="3 A Representation for Measures of Effect in Air Campaign Plans">
+<META NAME="keywords" CONTENT="measures-of-merit">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="measures-of-merit.css">
+</HEAD>
+<BODY LANG="EN">
+ <H1><A NAME="SECTION00030000000000000000">3 A Representation for Measures of Effect in Air Campaign Plans</A></H1>
+<P>
+<A NAME="repr">&#160;</A>
+<P>
+In this section, we present the proposed representation for measures
+of effect. First, we distinguish some types of MOEs, and then we
+present a grammar for their representation in Backus-Naur Form (BNF).
+<P>
+<H2><A NAME="SECTION00031000000000000000">3.1 Basic Elements</A></H2>
+<P>
+In the specification of a measure of effect, two basic elements can be
+distinguished: a <EM>measurable element</EM> and its <EM>
+  quantification</EM>:<A NAME="tex2html2" HREF="footnode.html#37"><IMG  ALIGN=BOTTOM ALT="gif" SRC="http://www.isi.edu/~valente/images/icons/foot_motif.gif"></A>
+<P>
+<UL><LI> The <EM>measurable element</EM> can be anything that can be
+  measured in the domain, ranging from some of the enemy's
+  capabilities to the occurrence of some actions. We have found the
+  following types of measurable elements in the set of examples we
+  examined:
+  <UL><LI> A <EM>capability</EM>, for example ``ability for troop movement
+    on primary LOCs'' or ``petroleum production capability''.<LI> An <EM>object</EM> or type of object or system, for example ``NCA
+    Communications links'' or ``WMD Facilities''.<LI> An <EM>event</EM>, for instance, ``Libyan aircraft deliver
+    weapons against allied forces'' or ``loss of allied shipping to
+    Libyan surface or sub-surface vessels''.<LI> An <EM>aspect</EM> of some objects/systems/area in the domain,
+    for example, ``Mediterranean free for commercial shipping'' or
+    ``communication effectiveness''..
+  </UL>
+<P>
+  The interesting aspect of the measurable elements is (as the name
+  indicates) that they should be measurable. This produces the
+  interesting effect that the actions that are used as measurable
+  elements must be countable, and in fact used as events.
+<P>
+  It happens frequently that the measurable element is forgotten,
+  generating MOEs like ``Degrade by 50%''. In these cases, the idea is
+  that the measurable element is implicit in the objective. For
+  example, for an objective like ``Disrupt petroleum production
+  capability'', what this MOE means is ``Degrade petroleum production
+  capability by 50%''. In the new representation, this reference
+  cannot be left implicit. However, an editor for MOEs can offer the
+  same object used in the objective as the element to be measured in
+  the MOE, thereby facilitating edition.<LI> The <EM>quantification</EM> is expressed as either a countable
+  value (usually a number) or a change (reduction or increase, usually
+  in percentage) in the value from a reference value (usually the
+  value at the beginning of the conflict). Examples of quantification
+  are: ``Degrade by 50%'' and ``Reduce to 20% of pre-conflict
+  levels''.
+<P>
+</UL><H2><A NAME="SECTION00032000000000000000">3.2 BNF Specification of the Grammar</A></H2>
+<P>
+<A NAME="bnf">&#160;</A>
+<P>
+The specification in this section is made only for the main type of
+MOEs defined above; the ``force'' examples are to be dealt with
+later.
+<P>
+Figure&nbsp;<A HREF="node3.html#figbnf">1</A> shows a specification of the representation as a
+grammar in BNF (Backus-Naur Form).  Terms in all capitals are reserved
+terms (keywords).  Lowercase terms are non-terminal. Terms with first
+letter in capitals represent names or strings, that is, they are
+currently ``free text'' fields.<A NAME="tex2html5" HREF="footnode.html#51"><IMG  ALIGN=BOTTOM ALT="gif" SRC="http://www.isi.edu/~valente/images/icons/foot_motif.gif"></A>
+Options are indicated as <I>A | B</I>, meaning either <I>A</I> or <I>
+  B</I> (but not both). Parentheses specify scope.  Elements within
+brackets are optional. <I>A+</I> indicates one or more occurrences of
+<I>A</I>, <I>A*</I> indicates zero or more occurrences of <I>A</I>.
+<P>
+<P><A NAME="61">&#160;</A><A NAME="figbnf">&#160;</A> <IMG WIDTH=615 HEIGHT=721 ALIGN=BOTTOM ALT="figure59" SRC="img1.gif"  > <BR>
+<STRONG>Figure 1:</STRONG> BNF grammar of the proposed representation for measures of merit.<BR>
+<P>
+<P>
+In order to help the visualization and understanding of this grammar
+(and considering that not everybody is well-acquainted with a BNF
+form), Figure&nbsp;<A HREF="node3.html#figmoegrammar">2</A> shows the main elements of the
+structured representation of measures of effect as a part-of
+decomposition.
+<P>
+<P><A NAME="67">&#160;</A><A NAME="figmoegrammar">&#160;</A> <IMG WIDTH=740 HEIGHT=318 ALIGN=BOTTOM ALT="figure65" SRC="img2.gif"  > <BR>
+<STRONG>Figure 2:</STRONG> Main structure of the proposed representation for
+    measures of effect. Arrows indicate types of fillers for one
+    element of the grammar.<BR>
+<P><H2><A NAME="SECTION00033000000000000000">3.3 Examples</A></H2>
+<P>
+The following are examples of how some measures of effect can be
+represented in the proposed grammar. Some of them are paraphrased from
+the set of examples. The measurable element and the quantification are
+separated for clarity.
+<P>
+<TT>
+<PRE><TT> 
+Loss of Allied Aircraft to Libyan surface or air forces        		 Zero (none)
+<P>
+Libyan aircraft deliver weapons against allied forces          		 Zero (none)
+<P>
+Loss of Allied Shipping to Libyan Surface Vessels              		 Zero (none)
+<P>
+NCA Communications links by                                    		 Degrade by 50%
+<P>
+Transmission capability                                        		 Degrade by 70%
+<P>
+Loss of Life to Enemy TBM, Air attack, or Sea Attack           		 Zero (none)
+<P>
+Transmissions to military leaders                              		 Degrade by 70%
+<P>
+Communication effectiveness                                    		 Reduced by 50%
+<P>
+WMD Facilities and/or Storage                                  		 Reduced by 70%
+<P>
+Delivery Systems                                               		 Reduced by 65%
+<P>
+Production                                                     		 Reduced to 20% of pre-conflict levels
+<P>
+Ability for troop movement on primary LOCs                     		 Reduced by 35%
+<P>
+Troop Strength                                                 		 Reduced by 20%
+<P>
+Loss of Campaign picture due to Enemy SOF activity             		 Zero (none)
+<P>
+Information transfer capability                                		 Reduced by 60%
+<P>
+Decision process of leadership                                 		 Delay by 24 hours
+<P>
+Losses of friendly air forces to SAMS/AAA/Aircraft over the battlespace 		 Zero (none)
+<P>
+Losses of friendly air forces to SAMS/AAA/Aircraft over the Enemy 		 Zero (none)
+<P>
+Losses of High Value Airborne Assets                           		 Zero (none)
+<P>
+Engagement of Allied forces by enemy naval vessels             		 Zero (none)
+<P>
+Reduction of Friendly shipping due to Enemy naval vessels      		 Zero (none)
+<P>
+Losses of Allied aircraft to pre positioned SAMS/AAA           		 Zero (none)
+<P>
+Comm effectiveness                                             		 Reduced by 75%
+<P>
+Transmissions to military leaders                              		 Degrade by 70%
+<P>
+Loss of life to Enemy TBM                                      		 Zero (none)
+<P>
+TBM capability                                                 		 Reduced by 50%
+<P>
+Loss of life from Air Attack                                   		 Zero (none)
+<P>
+Enemy Air Capability                                           		 Reduced by 70%
+<P>
+Loss of life from Sea Attack                                   		 Zero (none)
+<P>
+Loss of Shipping Assets to Enemy attack                        		 Zero (none)
+<P>
+Comm effectiveness                                             		 Reduced by 75%
+<P>
+Transmissions to military leaders                              		 Degrade by 70%
+<P>
+WMD facilities and/or storage                                  		 Reduced by 70%
+<P>
+Delivery systems                                               		 Reduced by 65%
+<P>
+Ability for troop movement on primary LOCs                     		 Limited by 35%
+<P>
+Troop strength                                                 		 Reduced by 50%
+<P>
+Production in Western sector                                   		 Reduced to 20% of pre-conflict levels
+<P>
+Distribution of petroleum in western sector                    		 Reduced by 80%
+<P>
+Distribution of petroleum in eastern sector                    		 Reduced by 70%
+<P>
+Loss of Campaign due to Enemy SOF activity                     		 Zero (none)
+<P>
+Information transfer capability                                		 Reduced by 60%
+<P>
+Decision process of leadership                                 		 Delay by 24 hours
+<P>
+Attrition of friendly forces in contact                        		 Reduced by 70%
+<P>
+</TT></PRE>
+<P>
+</TT>
+<P>
+<BR> <HR>
+<P><ADDRESS>
+<I>Andre Valente <BR>
+Fri Nov 22 19:21:57 PST 1996</I>
+</ADDRESS>
+</BODY>
+</HTML>

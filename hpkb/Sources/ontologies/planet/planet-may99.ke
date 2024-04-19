@@ -1,0 +1,1994 @@
+constant: PLANETAlignmentMt.
+in Mt: BaseKB.
+isa: Microtheory IndexedInfoSource IKBConstant.
+comment: "PLANET is a scheme for plan representation and reasoning
+developed at ISI.".
+
+;The above is a bookkeeping device which will enable us to keep track
+;in Cyc of what Cyc concepts map to what PLANET concepts, via
+;'synonymousExternalConcept'.  In a few cases in the present file we
+;are going to be pushing the envelope on what is covered by synonymity
+;(e.g., cases where concepts map to predicates).  Kathy Burns can help
+;us determine what to do in cases where flexibility is needed.
+
+
+constant: PlanningMicrotheory.
+in Mt: BaseKB.
+isa: MicrotheoryType IKBConstant.
+genls: Microtheory
+comment: "A collection of microtheories whose instances implement
+various forms of planning context.  Important specializations are
+#$PlanBackgroundContext, #$PlanSelectionContext, and #$Plan.".
+
+
+constant: PlanBackgroundContext.
+in Mt: BaseKB.
+isa: MicrotheoryType IKBConstant.
+genls: PlanningMicrotheory.
+comment: "Instances are contexts used for reasoning about #$Plans.
+More specifically, #$PlanBackgroundContexts are used to store
+high-level information about resources, constraints, commitments,
+initial state and purpose that are applicable to a certain class or
+type of #$Plan, such as military COAs (see
+#$COASpecificationMicrotheory).  All #$Plans of the class in question
+will be established as specializations of the appropriate
+#$PlanBackgroundContext, so that they inherit these assumptions.".
+F:
+(isa BattlespaceMilitaryMt PlanBackgroundContext).
+in Mt: PLANETAlignmentMt.
+F:
+(synonymousExternalConcept 
+    PlanBackgroundContext PLANETAlignmentMt "planning-context").
+
+
+constant: PlanSelectionContext.
+in Mt: BaseKB.
+isa: MicrotheoryType IKBConstant.
+genls: PlanningMicrotheory.
+comment: "Instances are microtheories containing information pertinent
+to evaluating a set of competing plans and selecting one that is
+optimal with respect to some set of predetermined criteria represented
+in the context.".
+cyclistNotes: "In addition to the usual resources, constraints,
+initial state data and so forth, it is anticipated that
+#$PlanSelectionContexts will contain testing criteria specific to
+determining which candidate plans (see
+#$candidatePlanOfSelectionContext) are achievable or 'complete' in the
+context.  See also #$completeInSelectionContext.".
+
+F:
+(interArgIsa1-2 genlMt PlanSelectionContext PlanBackgroundContext). 
+
+in Mt: PLANETAlignmentMt.
+F:
+(synonymousExternalConcept 
+   PlanSelectionContext PLANETAlignmentMt "planning-problem").
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;It is not yet certain whether or not we are going to need this.
+
+;*
+constant: PlanSelectionBackgroundContext.
+in Mt: BaseKB.
+isa: MicrotheoryType IKBConstant.
+genls: PlanSelectionContext.
+comment: "A special class of #$PlanSelectionContext.  Each instance is
+a #$Microtheory containing a set of initial assumptions pertinent to
+evaluating a set of competing plans and selecting one that is
+'optimal' with respect to evaluation criteria stored in the context.
+It is possible that in certain circumstances involving reasoning with
+plans, we will want to refine such assumption sets: such refinements
+will be more specific #$PlanSelectionContexts, linked to the original
+#$PlanSelectionBackgroundContext by #$planSelectionRefinement.".
+
+in Mt: PLANETAlignmentMt.
+F:
+(synonymousExternalConcept
+  PlanSelectionBackgroundContext PLANETAlignmentMt "planning-problem-context").
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+constant: planSelectionRefinement.
+in Mt: BaseKB.
+isa: RuleMacroPredicate TransitiveBinaryPredicate
+ReflexiveBinaryPredicate IKBConstant MicrotheoryPredicate
+DefaultMonotonicPredicate.
+genlPreds: genlMt.
+arg1Isa: PlanSelectionContext.
+arg2Isa: PlanSelectionContext.
+comment: "(#$planSelectionRefinement PSC_SPEC PSC_GEN) means that
+the #$PlanSelectionContext PSC_SPEC is a more specific
+#$PlanSelectionContext than PSC_GEN: that is, it inherits the
+assumptions of PSC_GEN and includes additional assumptions. Since this
+predicate is a specialization of #$genlMt, it insures inheritance of
+the more general #$PlanSelectionContext by the more specific
+#$PlanSelectionContext.".
+cyclistNotes: "It would of course be possible to simply use #$genlMt.
+However, a suspicion exists that the 'refining' assumptions are of a
+particular kind, which as of 2/25/99 remains to be elucidated.  If
+this is the case, there is a prima facia justification for using a
+specialization of genlMt even though this insures total inheritance
+across the access link at this time.".
+in Mt: PLANETAlignmentMt.
+F:
+(synonymousExternalConcept planSelectionRefinement PLANETAlignmentMt
+"problem-refinement").
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+F:
+(relationAllExists
+  planSelectionRefinement PlanSelectionContext PlanSelectionBackgroundContext). 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+constant: refinesPlan.
+in Mt: BaseKB.
+isa: RuleMacroPredicate TransitiveBinaryPredicate
+ReflexiveBinaryPredicate PublicConstant MicrotheoryPredicate
+DefaultMonotonicPredicate BinaryPredicate.
+genlPreds: genlMt.
+arg1Isa: Plan.
+arg2Isa: Plan.
+comment: "(#$refinesPlan PLANSPEC PLANGEN) means that the assumptive
+constraints, commitments, resources, and goals of represented in
+PLANSPEC constitute a superset of those represented in PLANGEN.
+Accordingly, the predicate has been made a specialization of genlMt to
+insure access".
+
+;Right now, the genlMt link in Cyc is totally unselective: (genlMt MT1
+;MT2) means that MT1 inherits all the information that MT2 contains or
+;inherits.  Admittedly, PLANET, when it talks about a 'consistent
+;superset of commitments' probably means that to apply *only* to
+;commitments and not to other assumptions which may or may not be
+;inherited.  However, there are plans in the works that will enable us
+;to limit the scope of inheritance through genlMt links, and at the
+;time that functionality comes on line, we will see if the scope of
+;refinesPlan can be stopped down accordingly.
+
+;*
+constant: candidatePlanningContext.
+in Mt: BaseKB.
+isa: RuleMacroPredicate.
+ReflexiveBinaryPredicate PublicConstant MicrotheoryPredicate.
+genlInverse: genlMt.
+arg1Isa: PlanningMicrotheory.
+arg2Isa: PlanningMicrotheory.
+comment: "(#$candidatePlanningContext GEN_CONTEXT CONTEXT) means that
+CONTEXT is a candidate planning context being tested for suitability
+according to testing criteria established in GEN_CONTEXT.  CONTEXT may
+be a #$Plan, a #$PlanSelectionContext, or a #$PlanBackgroundContext,
+and likewise for GEN_CONTEXT; however if GEN_CONTEXT is a
+#$PlanBackgroundContext, CONTEXT must be a #$PlanSelectionContext, and
+if GEN_CONTEXT is a #$PlanSelectionContext, then CONTEXT must be a
+#$Plan.  We don't rule out the case where GEN_CONTEXT is a #$Plan, but
+we would not ordinarily expect to find such a case.  Since this
+predicate is a #$genlInverse of #$genlMt, it insures that CONTEXT has
+mt-access to GEN_CONTEXT.".
+F: 
+(interArgIsa1-2 candidatePlanningContext PlanBackgroundContext
+PlanSelectionContext).
+F:
+(interArgIsa1-2 candidatePlanningContext PlanSelectionContext Plan).
+
+in Mt: PLANETAlignmentMt.
+F:
+(synonymousExternalConcept candidatePlanningContext PLANETAlignmentMt "candidate").
+
+;*
+constant: candidatePlanInSelectionContext.
+in Mt: BaseKB.
+isa: RuleMacroPredicate.
+ReflexiveBinaryPredicate PublicConstant MicrotheoryPredicate
+DefaultMonotonicPredicate BinaryPredicate.
+genlInverse: genlMt.
+genlPreds: candidatePlanningContext.
+arg1Isa: PlanSelectionContext.
+arg2Isa: Plan.
+comment: "(#$candidatePlanInSelectionContext PSC PLAN) means that PLAN
+is a candidate #$Plan being tested for suitability according to the
+testing criteria asserted in PSC.  Note that since this predicate is a
+#$genlInverse of #$genlMt, asserting it of PLAN and PSC insures that
+PLAN has access to all of the assumptions PSC has access to.  Some
+important specializations include #$consistentInSelectionContext,
+#$completeInSelectionContext, #$infeasibleInSelectionContext, etc.
+All such predicates thus insure access on the part of the #$Plan to
+the assumptions in the #$PlanSelectionContext.".
+in Mt: PLANETAlignmentMt.
+F:
+(synonymousExternalConcept candidatePlanInSelectionContext PLANETAlignmentMt
+"candidate-plan").
+
+;*
+constant: consistentPlanInSelectionContext.
+in Mt: BaseKB.
+isa: RuleMacroPredicate TransitiveBinaryPredicate
+ReflexiveBinaryPredicate PublicConstant MicrotheoryPredicate
+DefaultMonotonicPredicate BinaryPredicate.
+genlPreds: candidatePlanInSelectionContext.
+arg1Isa: PlanSelectionContext.
+arg2Isa: Plan.
+comment: "(#$consistentPlanInSelectionContext PSC PLAN) means that the
+assumptive commitments of PLAN are consistent with one another, with
+the assumptions of the #$PlanSelectionContext PSC, and with the
+assumptions of the larger #$PlanBackgroundContext to which PSC has
+access.".
+in Mt: PLANETAlignmentMt.
+F:
+(synonymousExternalConcept consistentPlanInSelectionContext PLANETAlignmentMt
+"Consistent-plan")
+
+in Mt: BaseKB:
+F:
+(implies
+  (and
+    (candidatePlanInSelectionContext ?PSC ?PLAN)     
+    (implies
+      (ist ?PLAN ?PROP)
+      (ist ?PSC (consistent ?PROP))))
+  (consistentPlanInSelectionContext ?PSC ?PLAN)).
+;Support for the above rule is currently very limited, although our
+;new recursive ask capability may not put a weak form of consistency
+;checking outside our reach.  However, in the grander scheme of
+;things, it's important to realize that support *can* only remain
+;imperfect, or first-order predicate calculus would not be
+;semi-decideable.  Basically we want to say that if
+;(candidatePlanInSelectionContext PSC PLAN) and everything that is
+;derivable in PLAN is provably consistent with PSC, then
+;(consistentPlanInSelectionContext ?PSC ?PLAN).  But 'provably consistent'
+;can only ever mean 'unable to prove inconsistent' for an inference
+;engine, and so the limiting factor will always be the performance of
+;the Cyc inferrer and its HL modules.
+
+;*
+constant: feasiblePlanInSelectionContext.
+in Mt: BaseKB.
+isa: RuleMacroPredicate TransitiveBinaryPredicate
+ReflexiveBinaryPredicate PublicConstant MicrotheoryPredicate
+DefaultMonotonicPredicate BinaryPredicate.
+genlPreds: consistentPlanInSelectionContext.
+arg1Isa: PlanSelectionContext.
+arg2Isa: Plan.
+comment: "(#$feasiblePlanInSelectionContext PSC PLAN) means that there
+exists a COMPPLAN such that (#$refinesPlan COMPPLAN PLAN) and
+(#$completePlanInSelectionContext PSC COMPPLAN).  Thus, there exists a
+plan whose assumptions constitute a superset of the assumptions of
+PLAN that contains the necessary commitments to achieve its
+goals. Also, if there is any plan in the PSC such that
+(#$completePlanInSelectionContext PSC PLAN), any plan of which PLAN is a
+refinement is said to be #$feasiblePlanInSelectionContext with respect to
+PSC. Ordinarily #$feasiblePlanInSelectionContext entails
+#$consistentPlanInSelectionContext, hence the #$genlPreds relation.".
+in Mt: PLANETAlignmentMt.
+F:
+(synonymousExternalConcept feasiblePlanInSelectionContext PLANETAlignmentMt
+"feasible-candidate-plan").
+
+;*
+constant: completePlanInSelectionContext.
+in Mt: BaseKB.
+isa: RuleMacroPredicate TransitiveBinaryPredicate
+ReflexiveBinaryPredicate PublicConstant MicrotheoryPredicate
+DefaultMonotonicPredicate BinaryPredicate.
+genlPreds: feasiblePlanInSelectionContext.
+arg1Isa: PlanSelectionContext.
+arg2Isa: Plan.
+comment: "(#$completePlanInSelectionContext PSC PLAN) means that PLAN
+includes the tasks necessary to achieve its goals according to a
+testing criterion specified in PSC .  Moreover, if
+(#$completePlanInSelectionContext PSC PLAN), then any plan FEASPLAN
+such that (#$refinesPlan PLAN FEASPLAN) is
+#$feasiblePlanInSelectionContext with respect to PSC.  Note that if a
+plan is #$completePlanInSelectionContext, it is itself
+#$feasiblePlanInSelectionContext, hence the genlPreds relation.".
+cyclistNotes: "What relationship #$completePlanInSelectionContext and
+#$consistentPlanInSelectionContext bear to the formal concepts of
+'consistency' and 'completeness' has yet to be fully elucidated.".
+
+;see also comment on rule for consistentPlanInSelectionContext.
+in Mt: PLANETAlignmentMt.
+F:
+(synonymousExternalConcept completePlanInSelectionContext PLANETAlignmentMt
+"Complete-plan").
+in Mt: BaseKB.
+F:
+(implies
+   (and
+     (completePlanInSelectionContext ?PSC ?PLANCOMPLETE)
+     (refinesPlan ?PLANCOMPLETE ?PLANFEASIBLE))
+   (feasiblePlanInSelectionContext ?PSC ?PLAN)).
+
+F:
+(implies
+  (feasiblePlanInSelectionContext ?PSC ?PLAN)
+  (thereExists ?REFINEMENT
+    (and
+      (refinesPlan ?REFINEMENT ?PLAN)
+      (completePlanInSelectionContext ?PSC ?REFINEMENT)))).
+
+
+;*
+constant: inFeasiblePlanInSelectionContext.
+in Mt: BaseKB.
+isa: RuleMacroPredicate TransitiveBinaryPredicate
+ReflexiveBinaryPredicate PublicConstant MicrotheoryPredicate
+DefaultMonotonicPredicate BinaryPredicate.
+genlPreds: candidatePlanInSelectionContext.
+negationPreds: feasiblePlanInSelectionContext.
+arg1Isa: PlanSelectionContext.
+arg2Isa: Plan.
+comment: "(#$inFeasiblePlanInSelectionContext PSC PLAN) means that there
+does not exist a REFINEMENT such that (refinesPlan REFINEMENT PLAN)
+and such that REFINEMENT can achieve its goals according to the
+criteria established in PSC.  Note that
+(#$infeasiblePlanInSelectionContext PSC PLAN) does not imply
+(#$rejectedPlanInSelectionContext PSC PLAN) (although the converse is
+true) because some relaxation of the PSC constraints on PLAN may be
+applied.".
+in Mt: PLANETAlignmentMt.
+F:
+(synonymousExternalConcept inFeasiblePlanInSelectionContext PLANETAlignmentMt 
+"unfeasible-candidate-plan").
+
+F:
+  (not
+    (and
+      (inFeasiblePlanInSelectionContext ?PSC ?PLAN)
+      (refinesPlan ?REFINEMENT ?PLAN)
+      (completePlanInSelectionContext ?PSC ?REFINEMENT))).
+
+
+;*
+constant: justifiedPlanInSelectionContext.
+in Mt: BaseKB.
+isa: RuleMacroPredicate TransitiveBinaryPredicate
+ReflexiveBinaryPredicate PublicConstant MicrotheoryPredicate
+DefaultMonotonicPredicate BinaryPredicate.
+genlPreds: completePlanInSelectionContext.
+arg1Isa: PlanSelectionContext.
+arg2Isa: Plan.
+comment: "(#$justifiedPlanInSelectionContext PSC PLAN) means that PLAN can
+accomplish its goals using some minimal set of commitments as
+specified in the PSC.  #$justifiedPlanInSelectionContext entails
+#$completePlanInSelectionContext, hence the #$genlPreds relation.".
+in Mt: PLANETAlignmentMt.
+F:
+(synonymousExternalConcept justifiedPlanInSelectionContext PLANETAlignmentMt 
+"Justified-plan").
+
+
+;All of the foregoing seem to be well-founded Cyc predicates insofar
+;as there would be no concern about writing rules in a PSC, say that
+;concluded to GAFs involving them.  As regards the predicates in the
+;following ;;;; block, however, there is some question as to how they
+;would function internal to CycL.  This concern, incidentally, is very
+;similar to the point Cleo has already made concerning the
+;'evaluation' vocabulary.  All are, in effect, descriptors for some
+;internal or external inference process envisaged as currently going
+;on.
+
+;Note that the extensions of all three predicates would change over
+;the course of the run time of any plan evaluation, refinement, and/or
+;generation scheme.  This does not preclude their usefulness, I hasten
+;to add: however, certainly untriedPlanInSelectionContext, and possibly
+;rejectPlanInSelectionContext and selectPlanInSelectionContext, seem to imply
+;a situation where assertions would be continuously asserted and
+;unasserted in Cyc over the course of the performance of some
+;critiquing engine with which the Cyc system was interacting.
+
+;I have changed the names of selectPlanInSelectionContext and
+;rejectPlanInSelectionContext from 'participle' to 'imperative' because of
+;the prospect they seem to afford of actually writing instructions for
+;various critiquing engines in CycL, e.g.--
+
+;F:
+;(implies
+;  (justifiedPlanInSelectionContext ?PSC ?PLAN)
+;  (selectPlanInSelectionContext ?PSC ?PLAN)).
+
+
+;If this is deemed desireable, we may want to add a third arg to these
+;to specify the critiquing engine for whom the instruction is being
+;written.  All of this, I hardly need add, is highly speculative.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;*
+constant: untriedPlanInSelectionContext.
+in Mt: BaseKB.
+isa: RuleMacroPredicate TransitiveBinaryPredicate
+ReflexiveBinaryPredicate PublicConstant MicrotheoryPredicate
+DefaultMonotonicPredicate BinaryPredicate.
+genlPreds: candidatePlanInSelectionContext.
+arg1Isa: PlanSelectionContext.
+arg2Isa: Plan.
+comment: "(#$untriedPlanInSelectionContext PSC PLAN) means that in the
+context of the assertion, PLAN has not been evaluated according to the
+testing criteria specified in PSC.".
+in Mt: PLANETAlignmentMt.
+F:
+(synonymousExternalConcept untriedPlanInSelectionContext PLANETAlignmentMt
+"untried-candidate-plan")
+
+;*
+constant: selectPlanInSelectionContext.
+in Mt: BaseKB.
+isa: RuleMacroPredicate TransitiveBinaryPredicate
+ReflexiveBinaryPredicate PublicConstant MicrotheoryPredicate
+DefaultMonotonicPredicate BinaryPredicate.
+genlPreds: candidatePlanInSelectionContext.
+arg1Isa: PlanSelectionContext.
+arg2Isa: Plan.
+comment: "(#$selectedPlanInSelectionContext PSC PLAN) means that in the
+context of the assertion, PLAN should be selected according
+to the testing criteria stored in the #$PlanSelectionContext
+PSC. Usually, but not always, this will result from a plan's being
+concluded to be #$justifiedInPlanSelectionContext, or more weakly,
+#$completePlanInSelectionContext.".
+in Mt: PLANETAlignmentMt.
+F:
+(synonymousExternalConcept selectPlanInSelectionContext PLANETAlignmentMt
+"selected-candidate-plan").
+
+;*
+constant: rejectPlanInSelectionContext.
+in Mt: BaseKB.
+isa: RuleMacroPredicate TransitiveBinaryPredicate
+ReflexiveBinaryPredicate PublicConstant MicrotheoryPredicate
+DefaultMonotonicPredicate BinaryPredicate.
+genlPreds: infeasiblePlanInSelectionContext.
+arg1Isa: PlanSelectionContext.
+arg2Isa: Plan.
+comment: "(#$rejectPlanInSelectionContext PSC PLAN) means that in the context of the assertion, PLAN should be rejected according
+to the testing criteria stored in the #$PlanSelectionContext PSC. "
+in Mt: PLANETAlignmentMt.
+F:
+(synonymousExternalConcept rejectPlanInSelectionContext PLANETAlignmentMt
+"rejected-candidate-plan")
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+F:
+(genls Plan PlanningMicrotheory).
+
+in Mt: PLANETAlignmentMt.
+F:
+(synonymousExternalConcept Plan PLANETAlignmentMt "plan").
+F:
+(synonymousExternalConcept PurposefulAction PLANETAlignmentMt "plan-task").
+F:
+(synonymousExternalConcept Goal PLANETAlignmentMt "goal-specification").
+F:
+(synonymousExternalConcept subEvents PLANETAlignmentMt "sub-task").
+F:
+(synonymousExternalConcept preconditionFor-PropSit PLANETAlignmentMt "preconditions").
+F:
+(synonymousExternalConcept ScriptType PLANETAlignmentMt "plan-task-template")
+
+;!   
+constant: planningAgent.
+in Mt: BaseKB.
+isa: BinaryPredicate IKBConstant.
+arg1Isa: PlanningMicrotheory.
+arg2Isa: Agent. 
+comment: "(#$planningAgent PLAN AGENT) means that AGENT
+is directly responsible for devising and using the planning
+context PLAN, and that AGENT has a direct stake and interest in a
+successful execution of PLAN.".
+
+;commanderForCOA, g2ForCOA, and g3ForCOA may be critical for
+;addressing 'command intent' critiquing questions.  See also
+;intentOfCommanderInCOA, intentOfG2InCOA, and intentOfG3InCOA.
+
+;!
+constant: commanderForCOA.
+in Mt: ModernMilitaryTacticsMt.
+isa: BinaryPredicate IKBConstant.
+genlPreds: planningAgent.
+arg1Isa: COASpecificationMicrotheory.
+arg2Isa: Agent.
+comment: "During COA development, the officer acting as commander has
+overall responsibility for communicating the mission to his staff and
+for shaping the plan as he sees fit.  He has final command authority
+to decide which Blue COA to adopt and what it should contain.  He also
+has specific responsibilities during mission analysis, which are of
+course reflected in the mission analysis products he provides.".
+cyclistNotes: "For most of the COA critiquing work, we will reify a
+commander.".
+sourceOfTerm-PIT: COACPSpecV1_1Mt.
+sourceOfTerm-Person: EricJones.
+
+
+;!
+constant: g2ForCOA.
+in Mt: ModernMilitaryTacticsMt.
+isa: BinaryPredicate IKBConstant.
+genlPreds: planningAgent.
+arg1Isa: COASpecificationMicrotheory.
+arg2Isa: Agent.
+comment: "The G2 or S2 (intelligence officer) produces the IPB
+(intelligence preparation of the battlefield) products that are vital
+to Course of Action development, including potential Courses of Action
+for the #$Red-Side. Without these, the G3/S3 and the rest of the staff
+cannot proceed with course of action development. Sometimes this means
+that the IPB products are initial estimates only, and will be refined
+as the estimate process continues. Nonetheless, all of these products
+are necessary for producing or understanding courses of action. In
+wargaming, the G3 directs the blue fight and the G2 conducts the red
+fight.".
+sourceOfTerm-PIT: COACPSpecV1_1Mt.
+sourceOfTerm-Person: EricJones
+
+;!
+constant: g3ForCOA.
+in Mt: ModernMilitaryTacticsMt.
+isa: BinaryPredicate IKBConstant.
+genlPreds: planningAgent.
+arg1Isa: COASpecificationMicrotheory.
+arg2Isa: Agent.
+comment: "The G3 (S3 for smaller units) is the 'operations
+officer'--the person who is in charge of developing and refining Blue
+COAs.  His responsibilities during mission analysis include estimating
+current combat power for the blue units involved, and specifying the
+task organization, the mission and intent up to two levels, the
+missions of adjacent units, the relevant constraints for the various
+tasks involved, and the refinements of purpose entailed.  In
+wargaming, the G3 leads the blue fight and the G2 leads the red
+fight.".
+sourceOfTerm-PIT: COACPSpecV1_1Mt.
+sourceOfTerm-Person: EricJones
+
+
+;!
+constant: executionOfPlan.
+in Mt: BaseKB. 
+isa: BinaryPredicate PublicConstant.
+arg1Isa: Plan.
+arg2Isa: PurposefulAction.
+comment: "(executionOfPlan PLAN EVENT) means that EVENT is a complex
+#$Event, generally an instance of an instance of #$ScriptType, that
+figures as an execution of the #$Plan represented by PLAN.  EVENT may
+be reified within the #$Microtheory PLAN itself, or it may be in a
+higher-order mt to which PLAN has access.".
+cyclistNotes: "This predicate is used for linking instances of #$Plan
+with complex temporal objects about which temporal assertions can be
+made.  This enables us to state the temporal presuppositions of
+predicates that reference plans in their argument structures.".
+
+F:
+(genlPreds operationOfCOA executionOfPlan).
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;planning context restrictions
+
+;!
+constant: PlanContextRestrictionPredicate.
+in Mt: BaseKB.
+isa: IKBConstant PredicateCategory.
+genls: Predicate.
+comment: "A #$PlanContextRestrictionPredicate can be any relation
+on a plan, planning problem, context or task that constrains the forms
+of refinements of instantiations possible.".
+in Mt: PLANETAlignmentMt.
+F:
+(synonymousExternalConcept 
+    PlanContextRestrictionPredicate PLANETAlignmentMt "plan-restriction").
+
+;!
+constant: PlanContextConstraintPredicate.
+in Mt: BaseKB.
+isa: IKBConstant PredicateCategory.
+genls: PlanContextRestrictionPredicate.
+disjointWith: PlanContextCommitmentPredicate.
+comment: "Plan constraints are 'external' restrictions that are part
+of the problem definition of a planning context.  As such they are
+usually expressed in 'higher level' instances of
+#$PlanBackgroundContext and #$PlanSelectionContext.  Instances of
+#$PlanContextConstraintPredicate help in expressing such constraints.  They are
+generally 'type level' and apply to more than one plan.".
+in Mt: PLANETAlignmentMt.
+F:
+(synonymousExternalConcept PlanContextConstraintPredicate PLANETAlignmentMt "constraints").
+
+
+constant: PlanContextCommitmentPredicate.
+in Mt: BaseKB.
+genls: PlanContextRestrictionPredicate.
+in Mt: PLANETAlignmentMt.
+comment: "Plan commitments are restrictions added by the planning
+agent to denote choices made during search.  They are more 'low level'
+than plan constraints, and are generally represented directly within
+the context of the #$Plan itself.  Instances of
+#$PlanContextCommitmentPredicate are used for keeping track of the commitments
+within a #$Plan, and also for writing rules that apply to such commitments.".
+F:
+(synonymousExternalConcept PlanContextCommitmentPredicate PLANETAlignmentMt "commitments").
+
+constant: orderingRestrictionInPlanContext.
+in Mt: BaseKB.
+isa: IKBConstant QuaternaryPredicate PlanContextConstraintPredicate.
+arg1Isa: PlanningMicrotheory.
+arg2Isa: ScriptType.
+arg2Genl: PurposefulAction.
+arg3Isa: ScriptType.
+arg3Genl: PurposefulAction.
+arg4Isa: ComplexTemporalRelation.
+comment: "(orderingRestrictionInPlanContext CONTEXT EVENT_TYPE1 EVENT_TYPE2
+TEMPPRED)means that one of the assumptive constraints of the
+#$PlanningContext CONTEXT is that, in any plan inheriting the
+assumptions of CONTEXT, there must be an event of type EVENT_TYPE1
+bearing the #$ComplexTemporalRelation TEMPPRED to some event of
+EVENT_TYPE2.".
+in Mt: PLANETAlignmentMt.
+F:
+(overlappingExternalConcept 
+  orderingRestrictionInPlanContext PLANETAlignmentMt "ordering-restriction").
+in Mt: BaseKB.
+F:
+(implies 
+  (and
+   (isa ?PC PlanningMicrotheory)
+   (isa ?PLAN Plan)
+   (executionOfPlan ?PLAN ?EXEC)
+   (genlMt ?PLAN ?PC)
+   (orderingRestrictionInPlanContext ?PC ?EVENT_TYPE1 ?EVENT_TYPE2 ?TEMPPRED))
+  (preconditionFor-PropSit
+    (thereExists ?EVENT_1
+      (thereExists ?EVENT_2
+        (and
+          (subEvents ?EXEC ?EVENT_1)
+          (subEvents ?EXEC ?EVENT_2)
+          (isa ?EVENT_1 ?EVENT_TYPE1)
+          (isa ?EVENT_2 ?EVENT_TYPE2)
+          (?TEMPRED ?EVENT_TYPE1 ?EVENT_TYPE2))))
+    ?EXEC)).
+;I am beginning to think that we need a successfulForAgents variant for Plans.
+
+constant: orderingRestrictionInPlanContext-Inst.
+in Mt: BaseKB.
+isa: IKBConstant QuaternaryPredicate PlanContextConstraintPredicate.
+arg1Isa: PlanningMicrotheory.
+arg2Isa: PurposefulAction.
+arg3Isa: PurposefulAction.
+arg4Isa: ComplexTemporalRelation.
+comment: "(orderingRestrictionInPlanContext-Inst CONTEXT EVENT1 EVENT2
+TEMPPRED)means that one of the assumptive constraints of the
+#$PlanningContext CONTEXT is that, in any plan inheriting the
+assumptions of CONTEXT, EVENT1 must bear the #$ComplexTemporalRelation TEMPPRED to EVENT2.".
+F:
+(implies
+ (and
+   (isa ?PC PlanningMicrotheory)
+   (isa ?PLAN Plan)
+   (executionOfPlan ?PLAN ?EXEC)
+   (genlMt ?PLAN ?PC)
+   (orderingRestrictionInPlanContext ?PC ?EVENT1 ?EVENT2 ?TEMPPRED))
+ (preconditionFor-PropSit
+   (?TEMPPRED ?EVENT1 ?EVENT2) ?EXEC)).
+
+in Mt: PLANETAlignmentMt.
+F:
+(synonymousExternalConcept 
+  orderingRestrictionInPlanContext PLANETAlignmentMt "ordering-restriction").
+
+constant: commitmentOfPlan.
+in Mt: BaseKB.
+isa: BinaryPredicate IKBConstant PlanContextCommitmentPredicate.
+arg1Isa: PlanningMicrotheory.
+arg2Isa: Situation.
+comment: "(#$commitmentOfPlan PLAN SITUATION) means that the reified
+#$Situation SITUATION in the context of PLAN counts as a 'commitment'
+made by the #$planningAgent to figure as a definite step in the
+#$executionOfPlan.  See #$planningAgent, #$executionOfPlan, and
+#$PlanContextCommitmentPredicate.".
+in Mt: PLANETAlignmentMt.
+(synonymousExternalConcept commitmentOfPlan PLANETAlignmentMt "plan-commitment")
+
+;!
+constant: eventOfPlan.
+in Mt: BaseKB.
+isa: BinaryPredicate IKBConstant PlanContextCommitmentPredicate.
+genlPreds: commitmentOfPlan.
+arg1Isa: PlanningMicrotheory.
+arg2Isa: PurposefulAction.
+comment: "(eventOfPlan PLANMT EVENT) means that EVENT is a
+hypothetical Event referenced in the description of a plan that is
+represented in the Plan microtheory PLANMT. Ordinarily, such an
+assertion will be made within PLANMT itself, and every event in the
+plan that figures as a 'planned' event will have such an assertion
+made of it.".
+in Mt: PLANETAlignmentMt.
+(synonymousExternalConcept eventOfPlan PLANETAlignmentMt "task-of")
+
+;!
+constant: intentInPlan.
+in Mt: BaseKB.
+isa: TernaryPredicate IKBConstant PlanContextConstraintPredicate.
+arg1Isa: Agent.
+arg2Isa: PlanningMicrotheory.
+arg3Isa: Goal.
+comment: "(#$intentInPlan AGENT PLAN GOAL) means that one of the
+purposes which AGENT intends for the #$PlanningMicrtotheory PLAN to
+accomplish is GOAL.  This predicate is the plan-analog of
+#$purposeInEvent.".
+cyclistNotes: "The constraint on the second argument is
+#$PlanningMicrotheory, so this predicate can be used to specify the
+purpose of the #$planningAgent for planning contexts that are broader
+than mere #$Plans: i.e., #$PlanBackGroundContexts and
+#$PlanSelectionContexts.".
+
+in Mt: PLANETAlignmentMt.
+(synonymousExternalConcept intentInPlan PLANETAlignmentMt "accomplishes")
+;This is a little different from the ISI 'accomplishes' and we may
+;want to discuss this.  In Cyc, I think we'd like simply to map from
+;the #$planningAgent and the plan to the #$Goal.  It's very much
+;analogous to the extant Cyc predicate #$purposeInEvent.
+ 
+in Mt: BaseKB.
+F:
+(requiredArg2Pred Plan intentInPlan). 
+>F:
+(implies
+  (intentInPlan ?AGENT ?PLAN ?GOAL)
+  (planningAgent ?PLAN ?AGENT)).
+
+;!
+constant: purposeOfPlan.
+in Mt: BaseKB.
+isa: BinaryPredicate IKBConstant PlanContextConstraintPredicate.
+arg1Isa: Plan.
+arg2Isa: Goal.
+comment: "(#$purposeOfPlan PLAN GOAL) means that in a higher-level
+instance of #$PlanBackgroundContext or #$PlanSelectionContext, the
+purpose of the #$Plan PLAN is GOAL. What this implies will vary from
+context to context: however there will often be the entailment that
+#$Agents in the context who are tasked with carrying out PLAN will
+themselves have GOAL as a #$goals. For the present, we remain agnostic
+as to how a #$Plan may inherit a 'purpose', apart from stipulating
+that (#$intentInPlan AGENT PLAN GOAL) implies (#$purposeOfPlan PLAN
+GOAL). However, it seems fairly certain that (#$purposeOfPlan PLAN
+GOAL) implies that there is an #$Agent either developing or executing
+PLAN who has GOAL as a purpose.".
+
+F:
+(implies
+  (and
+    (isa ?PLAN Plan)
+    (intentInPlan ?AGENT ?PLAN ?GOAL))
+  (purposeOfPlan ?PLAN ?GOAL)).
+
+in Mt: PLANETAlignmentMt.
+F:
+(synonymousExternalConcept purposeOfPlan PLANETAlignmentMt "plan-goal").
+
+;Note--any and all propositional purposeSpecificationPreds for plans
+;should have purposeOfPlan as the genlPreds.  propositional
+;purposeSpecificationPreds for events should have purposeOfEvent as
+;the genlPreds.  propositional successCriteria preds for plans should
+;have constraintOfPlan as the genlPreds; propositional success
+;criteria preds for events should have constraintOfEvent as the
+;genlPreds.
+
+constant: intentOfCommanderInCOA.
+in Mt: ModernMilitaryTacticsMt.
+isa: TernaryPredicated IKBConstant.
+genlPreds: intentInPlan.
+arg1Isa: HumanAgent.
+arg2Isa: COASpecificationMicrotheory.
+arg3Isa: Goal.
+interArgReln1-2: commanderInCOA.
+interArgReln1-3: purposeOfPlan. 
+comment: "(#$intentOfCommanderInCOA COMMANDER COAMT PROP) means that
+the proposition PROP is part of the intent of the individual serving
+as the #$commanderOfCOA in the COA development context inclusive of
+the #$COASpecifcationMicrotheory COAMT.  What is cited as the
+#$intentOfCommanderInCOA also figures as part of the COA's
+#$purposeOfPlan. In the COA development process, part of the role of
+the commander is tothe commander has overall responsibility for
+communicating the mission to his staff and for shaping the plan as he
+sees fit.  He has also has final command authority to decide which
+Blue COA to adopt and what it should contain.".
+sourceOfTerm-Person: EricJones.
+sourceOfTerm-PIT: COACPSpecV1_1Mt.
+
+constant: intentOfG2InCOA.
+in Mt: ModernMilitaryTacticsMt.
+isa: TernaryPredicated IKBConstant.
+genlPreds: intentInPlan.
+arg1Isa: HumanAgent.
+arg2Isa: COASpecificationMicrotheory.
+arg3Isa: Goal.
+interArgReln1-2: g2InCOA. 
+comment: "(#$intentOfG2InCOA G2 COAMT PROP) means that the proposition
+PROP is part of the intent of the G2 officer in the COA development
+context inclusive of the #$COASpecificationMicrotheory COAMT.  
+In the COA development context the G2 directs the intelligence
+peparation of the battlefield, which may include developing Course of
+Action scenarios for the red units.  Such scenarios all fall within
+the purview of the G2's intent.".
+cyclistNotes: "We may want to be careful about having this predicate
+generalize to #$intentInPlan, since the G2 is for all intents and
+purposes the devil's advocate in the COA development process,
+attempting to project a realistic course of action for the threat
+force.".
+
+
+constant: intentOfG3InCOA.
+in Mt: ModernMilitaryTacticsMt.
+isa: TernaryPredicated IKBConstant.
+genlPreds: intentInPlan.
+arg1Isa: HumanAgent.
+arg2Isa: COASpecificationMicrotheory.
+arg3Isa: Goal.
+interArgReln1-2: g3InCOA.
+interArgReln1-3: purposeOfPlan. 
+comment: "(#$intentOfG3InCOA G3 COAMT PROP) means that PROP is part of
+the intent of the individual serving as the G3 officer in planning
+context in which the plan represented by the
+#$COASpecificationMicrotheory COAMT is being developed.  The G3's
+responsibilities include providing mission analysis products relating
+to task organization and specification of purpose: thus nearly
+everything in the #$COASpecificationMicrotheory that is not specified
+as the #$intentOfCommanderInCOA or the #$intentOfG2InCOA; however, in
+practice what is explicitly identified as the #$intentOfG3InCOA will
+probably be much less extensive than this.  Use of this predicate does
+entail that what is cited as the #$intentOfG3InCOA is also
+#$purposeOfPlan for the relevant COA.".
+
+
+constant: planSelectionGoal.
+in Mt: BaseKB.
+isa: BinaryPredicate IKBConstant PlanContextConstraintPredicate.
+arg1Isa: PlanSelectionContext.
+arg2Isa: Goal.
+comment: "(#$planSelectionGoal SELECTION_CONTEXT GOAL) means that GOAL
+is one of the goals of the #$PlanSelectionContext SELECTION_CONTEXT.
+In most cases, this will mean that GOAL states some species of
+criterion according to which a particular instance of #$Plan is
+selected in the context.".
+
+F:
+(implies
+    (and
+      (isa ?PLAN PlanSelectionContext)
+      (intentOfPlan ?AGENT ?PLAN ?GOAL))
+    (planSelectionGoal ?PLAN ?GOAL)).
+
+in Mt: PLANETAlignmentMt.
+F:
+(synonymousExternalConcept planSelectionGoal PLANETAlignmentMt "problem-goal"). 
+   
+constant: timeConstraintOfPlan.
+in Mt: BaseKB.
+isa: PlanContextConstraintPredicate IKBConstant BinaryPredicate.
+arg1Isa: Plan.
+arg2Isa: Time-Quantity.  
+comment: "(#$timeConstraintOfPlan PLAN DURATION) means that under
+normal conditions an #$executionOfPlan of PLAN must be completed
+within the measure of #$Duration in order for it to count as
+#$successfulForAgents for the performer.".
+F:
+(implies
+ (and
+   (timeConstraintOfPlan ?PLAN ?DUR)
+   (executionOfPlan ?PLAN ?EXEC)
+   (performedBy ?EXEC ?AGENT))
+ (precondtionFor-Props
+    (measure ?EXEC ?DUR) (successfulForAgents ?EXEC ?AGENT))).
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;Restrictions on Tasks
+
+;!
+;Added to KB 4/26/99
+constant: PlanActionRestrictionPredicate.
+in Mt: BaseKB.
+isa: PredicateCategory PublicConstant.
+genls: Predicate.
+comment: "A collection of predicates.  Instances are used to express
+durationalconstraints, constraints relating to temporal ordering, and
+subeventual commitments relating to reified #$PurposefulActions in
+#$Plans.".
+
+;!
+;Added to KB 4/26/99
+constant: timeConstraintOfAction.
+in Mt: BaseKB.
+isa: BinaryPredicate PlanActionRestrictionPredicate PublicConstant.
+arg1Isa: PurposefulAction.
+arg2Isa: TimeQuantity.
+comment: "(#$timeConstraintOfAction ACT DUR) means that in the
+planning context of the assertion, ACT should take no longer than the
+#$Time-Quantity DUR.".
+in Mt: PLANETAlignmentMt.
+F:
+(synonymousExternalConcept
+   timeConstraintOfAction PLANETAlignmentMt "temporal-constraints")
+F:
+(implies
+  (and
+   (timeConstraintOfAction ?ACT ?SUPPOSEDDUR)
+   (measure ?ACT ?REALDUR))
+  (preconditionFor-PropSit
+     (greaterThanOrEqualTo ?SUPPOSEDDUR ?REALDUR) ?ACT)).
+
+
+
+constant: commitmentOfPlanAction.
+in Mt: BaseKB.
+isa: BinaryPredicate PlanActionRestrictionPredicate PublicConstant.
+genlPreds: temporallySubsumes.
+arg1Isa: PurposefulAction.
+arg2Isa: Situation-Temporal.
+comment: "(#$commitmentOfPlanAction ACT SIT) means that the
+#$planningAgent who is committing to ACT is also committing to the
+#$Situation-Temporal SIT, which ACT temporally subsumes.".
+F:
+(implies
+  (and
+    (commitmentOfPlanAction ?ACT ?SIT)
+    (commitmentOfPlan ?PLAN ?ACT))
+  (commitmentOfPlan ?PLAN ?SIT)).
+
+
+in Mt: PLANETAlignmentMt.
+F:
+(synonymousExternalConcept commitmentOfPlanAction PLANETAlignmentMt "task-commitments").
+
+constant: subEventsOfPlanAction.
+in Mt: BaseKB.
+isa: BinaryPredicate PlanActionRestrictionPredicate PublicConstant.
+genlPreds: subEvents commitmentOfPlanAction.
+arg1Isa: PurposefulAction.
+arg2Isa: Event.
+in Mt: PLANETAlignmentMt.
+comment: "(#$subEventsOfPlanAction ACT EVENT) means that the
+#$planningAgent for whom ACT is a commitment also has ACT's
+#$subEvents EVENT as a commitment.".
+cyclistNotes: "This predicate is a specialization of #$subEvents.  It
+should be used to indicate that a particular refied subevent of a
+reified action-commitment in a #$Plan is not only a subevents, but
+also a commitment of the #$planningAgent developing the #$Plan.".
+
+F:
+(implies
+  (and
+    (subEventsOfPlanAction ?ACT ?EVENT)
+    (eventOfPlan ?PLAN ?ACT))
+  (eventOfPlan ?PLAN ?EVENT)).
+
+
+;-------------------------------------------------------------------------
+;The Parallels So Far--
+
+;      EVENTS                                          PLANS
+
+;PlanActionRestrictionPredicate            PlanContextRestrictionPredicate  
+;-                                         PlanContextCommitmentPredicate       -                                         PlanContextConstraintPredicate      
+
+;If we go with the 'high-level'/'low-level' distinction between
+;'constraint' and 'commitment', there is no corresponding distinction
+;between commitment and constraint for actions as there is for planning
+;contexts.  This is because reified actions in #$Plans already have the
+;status of 'commitments': thus, subEvents that are restrictions will
+;have the status of 'commitments', too.  Ordering restrictions can
+;either be expressed as constraints in a higher level planning context,
+;using orderingRestrictionInPlanContext, or by using
+;ComplexTemporalRelations to order events in Plans themselves.
+;Durational constraints, using the predicate timeConstraintOfAction,
+;can be expressed either using rules in higher level planning contexts,
+;or GAFs in Plans.
+
+
+;commitmentOfPlanAction                    commitmentOfPlan
+;subEventsOfPlanAction                     eventOfPlan
+;purposeInEvent                            intentInPlan
+;purposeOfEvent                            purposeOfPlan
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;RESOURCES
+
+;! ;;ADDED TO KB 4/2/99
+constant: resourceInEvent.
+in Mt: HumanActivieitesMt.
+isa: ActorSlot IKBConstant.
+conceptuallyRelated: resourceInPlan.
+arg1Isa: PurposefulAction.
+arg2Isa: SomethingExisting.
+comment: "(#$resourceInEvent EVENT RESOURCE) means that, in any #$Plan
+in which the assertion holds, if AGENT is to be the performedBy in
+EVENT (i.e., if (performedBy EVENT AGENT) is asserted in PLAN), then
+it is a precondition for EVENT being #$successfulForAgents that AGENT #$controls RESOURCE. The
+precise meaning of #$controls will vary depending upon the thing
+playing the role of 'resource' in the context.".
+cyclistNotes: "There is a weaker sense in which a #$SomethingExisting
+can play the role of 'resource' in an action or a plan: namely, the
+situation can be such that if the agent who is executing the plan or
+the action controls the resource, the plan or action can be executed
+more efficiently than it could be otherwise, with efficiency being
+cashed out in terms of some weaker success criterion.".
+
+F:
+(implies
+  (and 
+    (resourceInEvent ?EVENT ?RESOURCE)
+    (performedBy ?EVENT ?AGENT))
+  (preconditionFor-Props 
+      (controls ?AGENT ?RESOURCE) (successfulForAgents ?EVENT ?AGENT))).
+
+in Mt: PLANETAlignmentMt.
+F:
+(synonymousExternalConcept resourceInEvent PLANETAlignmentMt "resource").
+
+
+;For critiquing purposes, using the salient rule would probably entail
+;making unitAssignedToTask a spec-pred of performedBy, a step I have
+;been a little reluctant to take, albeit it is the natural
+;interpretation given the 'deontic' character of the planning context:
+;'to be performedBy'==>'performedBy' in a SupposedToBeMicrotheory.
+;However, it isn't clear we actually need to bank on such a rule for
+;critiquing purposes.
+
+;!
+constant: resourceInPlan.
+in Mt: BaseKB.
+isa: Role IKBConstant BinaryPredicate.
+conceptuallyRelated: resourceInEvent.
+arg1Isa: PlanningMicrotheory.
+arg2Isa: SomethingExisting.
+comment: "(#$resourceInPlan PLAN RESOURCE) means that if EXEC is an
+execution of PLAN performedBy AGENT, then (#$controls AGENT RESOURCE)
+is a precondition for EXEC being #$successfulForAgents.  Exactly what
+#$controls will entail will vary from context to context."
+cyclistNotes: "There is a weaker sense in which a #$SomethingExisting
+can play the role of 'resource' in an action or a plan: namely, the
+situation can be such that if the agent who is executing the plan or
+the action controls the resource, the plan or action can be executed
+more efficiently than it could be otherwise, with efficiency being
+cashed out in terms of some weaker success criterion.".
+
+
+F:
+(implies
+  (and 
+    (isa ?PLAN Plan)
+    (executionOfPlan ?PLAN ?EXEC)
+    (performedBy ?EXEC ?AGENT)
+    (resourceInPlan ?PLAN ?RESOURCE))
+  (preconditionFor-Props
+     (controls ?AGENT ?RESOURCE)
+     (successfulForAgents ?EXEC ?AGENT))).
+
+in Mt: PLANETAlignmentMt.
+F:
+(synonymousExternalConcept resourceInPlan PLANETAlignmentMt "planning-resource")
+
+;! ;;ADDED TO KB 4/2/99
+constant: actionResourceQuantForTime.
+in Mt: BaseKB.
+isa: QuaternaryPredicate Role IKBConstant.
+arg1Isa: PurposefulAction.
+arg2Isa: SpatialThing-Localized.
+arg3Isa: Volume.
+arg4Isa: TemporalThing.
+comment: "(#$actionResourceQuantForTime ACT THING QUANT TEMP) means
+that in ACT, a quantity QUANT of THING is a required resource for the
+duration of TEMP, in the sense that the agent performing ACT must have
+'access' to a QUANT amount of THING for TEMP in order for ACT to be
+#$successfulForAgents.".
+F:
+(interArgReln1-4 actionResourceQuantForTime temporalBoundsContain).
+
+F:
+(implies
+  (and
+    (actionResourceQuantForTime ?ACT ?THING ?QUANT ?TEMP)
+    (volumeOfObject ?THING ?VOL))
+  (preconditionFor-PropSit
+    (greaterThanOrEqualTo ?VOL ?QUANT) ?ACT)).
+ 
+F:
+(implies
+  (and
+    (actionResourceQuantForTime ?ACT ?THING ?QUANT ?TEMP)
+    (performedBy ?ACT ?AGENT))
+  (preconditionFor-Props
+    (thereExists ?PART
+      (and
+        (physicalDecompositions ?THING ?PART)
+        (volumeOfObject ?PART ?QUANT)
+        (holdsIn ?TEMP (controls ?AGENT ?PART))))
+    (successfulForAgents ?ACT ?AGENT))).
+
+in Mt: PLANETAlignmentMt.
+F:
+(synonymousExternalConcept
+   actionResourceQuantForTime PLANETAlignmentMt "resource-requirement").
+
+;!
+constant: planResourceQuantForTime.
+in Mt: BaseKB.
+isa: QuaternaryPredicate PublicConstant.
+arg1Isa: PlanningMicrotheory.
+arg2Isa: ExistingStuffType.
+arg2Genl: SpatialThing-Localized.
+arg3Isa: Volume.
+arg4Isa: TemporalObjectType.
+arg4Genl: Event.
+constant: "(#$planResourceQuantForTime PLAN STUFFTYPE QUANT TEMPTYPE)
+means that in an execution of PLAN the executing agent needs to have
+control of quantity QUANT of some stuff ot type STUFFTYPE for the
+duration of an event of type TEMPTYPE in the plan exectution, in order for
+the execution to be #$successfulForAgents.".
+cyclistNotes
+
+F:
+(implies
+  (and
+    (planResourceQuantForTime ?PLAN ?THINGTYPE ?QUANT ?TEMPTYPE)
+    (executionOfPlan ?PLAN ?EXEC)
+    (performedBy ?EXEC ?AGENT))
+  (preconditionFor-Props
+     (thereExists ?TEMP
+       (thereExists ?THING
+        (thereExists ?PART
+          (and
+            (isa ?THING ?THINGTYPE)
+            (isa ?TEMP ?TEMPTYPE)
+            (subEvents ?EXEC ?TEMP)
+            (greaterThanOrEqualTo
+               (FunctionValueFn (FunctionToArg 2 volumeOfObject) ?THING)
+               ?QUANT)
+            (physicalDecompositions ?THING ?PART)
+            (volumeOfObject ?PART ?QUANT)
+            (holdsIn ?TEMP (controls ?AGENT ?PART)))))))).
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; for our purposes we probably want to separate out cases where agents
+; are regarded as 'resources' in some planning event, since this seems
+; substantially different from cases where we deal with 'inanimate' resources.
+
+;! ;;ADDED TO KB 4/2/99
+constant: agentResourceInEvent.
+in Mt: HumanActivitiesMt.
+isa: ActorSlot IKBConstant.
+arg1Isa: PurposefulAction.
+arg2Isa: Agent.
+conceptuallyRelated: resourceInEvent.
+comment: "(#$agentResourceInEvent ACT AGENT) means that for ACT to be
+#$successfulForAgents for any performing agent, it must be the case
+that AGENT is #$behaviorCapable of playing the role of
+#$assistingAgent in any specialization of #$Event of whish ACT is an
+instance.".
+
+F:
+(implies
+  (and
+    (agentResourceInEvent ?EVENT ?AGENT)
+    (performedBy ?EVENT ?PERFORMER)
+    (nearestIsa ?EVENT Event))
+  (preconditionFor-Props
+     (behaviorCapable ?AGENT ?EVENTTYPE assistingAgent) 
+     (successfulForAgents ?EVENT ?PERFORMER))).
+
+;Again, it isn't altogether clear that we need this rule for purposes
+;of critique: e.g., we may simply want to ask whether the identified
+;agentResourceInEvent is behaviorCapable of being assistingAgent in
+;the salient event-type, although how we pick out saliency becomes an
+;interesting question.
+
+;! 
+constant: agentResourceInPlan.
+in Mt: BaseKB.
+isa: ActorSlot IKBConstant.
+arg1Isa: PlanningMicrotheory.
+arg2Isa: Agent.
+conceptuallyRelated: resourceInPlan.
+comment: "(#$agentResourceInPlan PLAN AGENT) means that if EXEC is an
+execution of PLAN, and is #$performedBy PERFORMER, then AGENT's being
+#$behaviorCapable of being the #$assistingAgent in any specialization
+of #$Event of which EXEC isan instance is a precondition for EXEC
+being #$successfulForAgents.".
+
+F:
+(implies
+ (and
+  (agentResourceInPlan ?PLAN ?AGENT)
+  (executionOfPlan ?PLAN ?EXEC)
+  (nearestIsa ?EXEC Event)
+  (performedBy ?EXEC ?PERFORMER))
+ (preconditionFor-Props 
+   (behaviorCapable ?AGENT ?EVENTTYPE assistingAgent)
+   (successfulForAgents ?EVENT ?PERFORMER))).
+  
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;Military Task-Specific Constraints
+;!
+;added to KB 4/26/99
+constant: depthConstraintOfTask.
+in Mt: ModernMilitaryTacticsMt.
+isa: PlanActionRestrictionPredicate BinaryConstant IKBConstant.
+arg1Isa: MilitaryTask.
+arg2Isa: Distance.
+comment: "".
+
+F:
+(implies
+  (and
+   (depthConstraintOfTask ?TASK ?DEPTH)
+   (unitAssignedToTask ?UNIT ?TASK)
+   (objectActedOn ?TASK ?OPPUNIT)
+   (isa ?OPPUNIT ModernMilitaryUnit-Deployable)
+   (hasAttributes ?OPPUNIT HostileUnit))
+  (preconditionFor-PropSit
+    (distanceBetween ?UNIT ?OPPUNIT ?DEPTH) ?TASK)).
+
+;!
+;added to KB: 4/26/99
+constant: traversalConstraintOfTask.
+in Mt: ModernMilitaryTacticsMt.
+isa: PlanActionRestrictionPredicate.
+arg1Isa: MilitaryTask.
+arg2Isa: Distance.
+comment: "(#$traversalConstraintOfTask TASK DISTANCE) means that any
+unit assigned to TASK will be required to traverse a distance of at
+least DISTANCE along the #$AxisOfAdvance, in executing TASK.".
+
+F:
+(implies
+  (and
+   (traversalConstraintOfTask ?TASK ?DISTANCE)
+   (axisOfAdvanceForTask ?TASK ?AXIS)
+   (lengthOfObject ?AXIS ?LENGTH))
+  (preconditionFor-PropSit
+    (greaterThanOrEqualTo ?DISTANCE ?LENGTH) ?TASK)).
+
+
+;!
+;added to KB: 4/26/99
+constant: specialtyConstraintOfTask.
+in Mt: ModernMilitaryTacticsMt.
+isa: PlanActionRestrictionPredicate.
+arg1Isa: MilitaryTask.
+arg2Isa: MilitaryUnitSpecialtyType.
+comment: "(#$specialtyConstraintOfTask TASK SPECIALTY) means that if
+UNIT is the #$unitAssignedToTask for TASK, then it is a precondition
+for TASK being #$successfulForAgents for UNIT that UNIT be an instance
+of the #$ModernMilitaryUnitSpecialtyType SPECIALTY.".
+
+F:
+(implies
+  (and
+    (specialtyConstraintOfTask ?TASK ?SPECIALTY)
+    (unitAssignedToTask ?TASK ?UNIT))
+  (preconditionFor-Props 
+     (isa ?UNIT ?SPECIALTY)
+     (successfulForAgents ?TASK ?UNIT))).
+
+
+;!
+;added to KB 4/26/99
+constant: expectedAttritionForAction.
+in Mt: ModernMilitaryTacticsMt.
+isa: BinaryPredicate IKBConstant PlanActionRestrictionPredicate.
+arg1Isa: MilitaryEvent PurposefulAction.
+arg2Isa: Rate.
+
+
+
+constant: constraintForTaskType.
+isa: BinaryPredicate IKBConstant.
+arg1Isa: PlanActionRestrictionPredicate TernaryPredicate.
+arg2Isa: ScriptType.
+arg2Genl: MilitaryTask.
+arg3Isa: Thing.
+
+
+
+F:
+(implies
+  (constraintForTaskType ?PRED ?TASK_TYPE ?CONSTRAINT)
+  (trueRule
+    (PredicateRuleTemplateFn constraintForTaskType)
+    (implies
+       (isa ?TASK ?TASKTYPE)
+       (?PRED ?TASK ?CONSTRAINT)))).
+F:
+(ruleTemplateDirection
+  (PredicateRuleTemplateFn constraintForTaskType)
+  Forward-AssertionDirection).
+
+;;; The next part of the file contains planet "core" concepts from Ben.
+
+;;;Content-Type: TEXT/PLAIN; charset=US-ASCII; name="PLANET-CORE.lisp"
+;;;Content-ID: <Pine.LNX.3.96.990525221506.15458l@santa-rita>
+;;;Content-Description: PLANET constants added
+
+ 
+constant: PlanContextRestrictionPredicate.
+in Mt: BaseKB.
+isa: IKBConstant PredicateCategory.
+genls: Predicate.
+comment: "A #$PlanContextRestrictionPredicate can be any relation
+on a plan, planning problem, context or task that constrains the forms
+of refinements of instantiations possible.".
+in Mt: PLANETAlignmentMt.
+F:
+(synonymousExternalConcept 
+    PlanContextRestrictionPredicate PLANETAlignmentMt "plan-restriction").
+
+constant: executionOfPlan.
+in Mt: BaseKB. 
+isa: BinaryPredicate PublicConstant.
+arg1Isa: Plan. 
+arg2Isa: PurposefulAction.
+comment: "(executionOfPlan PLAN EVENT) means that EVENT is a complex
+#$Event, generally an instance of an instance of #$ScriptType, that
+figures as an execution of the #$Plan represented by PLAN.  EVENT may
+be reified within the #$Microtheory PLAN itself, or it may be in a
+higher-order mt to which PLAN has access, or in an instance of
+#$PlanExecutionRecordMt.".
+cyclistNotes: "This predicate is used for linking instances of #$Plan
+with complex temporal objects about which temporal assertions can be
+made.  This enables us to state the temporal presuppositions of
+predicates that reference plans in their argument structures.".
+
+in Mt: ModernMilitaryTacticsMt.
+F:
+(genlPreds operationOfCOA executionOfPlan).
+
+
+constant: PlanBackgroundContext.
+in Mt: BaseKB.
+isa: MicrotheoryType IKBConstant.
+genls: PlanningMicrotheory.
+comment: "Instances are contexts used for reasoning about #$Plans.
+More specifically, #$PlanBackgroundContexts are used to store
+high-level information about resources, constraints, commitments,
+initial state and purpose that are applicable to a certain class or
+type of #$Plan, such as military COAs (see
+#$COASpecificationMicrotheory).  All #$Plans of the class in question
+will be established as specializations of the appropriate
+#$PlanBackgroundContext, so that they inherit these assumptions.".
+F:
+(isa BattlespaceMilitaryMt PlanBackgroundContext).
+
+in Mt: PLANETAlignmentMt.
+F:
+(synonymousExternalConcept 
+    PlanBackgroundContext PLANETAlignmentMt "planning-context").
+
+
+constant: planningAgent.
+in Mt: BaseKB.
+isa: BinaryPredicate IKBConstant.
+arg1Isa: PlanningMicrotheory.
+arg2Isa: Agent. 
+comment: "(#$planningAgent PLAN AGENT) means that AGENT
+is directly responsible for devising and using the planning
+context PLAN, and that AGENT has a direct stake and interest in a
+successful execution of PLAN.".
+
+constant: commanderForCOA.
+in Mt: ModernMilitaryTacticsMt.
+isa: BinaryPredicate IKBConstant.
+genlPreds: planningAgent.
+arg1Isa: COASpecificationMicrotheory.
+arg2Isa: Agent.
+comment: "During COA development, the officer acting as commander has
+overall responsibility for communicating the mission to his staff and
+for shaping the plan as he sees fit.  He has final command authority
+to decide which Blue COA to adopt and what it should contain.  He also
+has specific responsibilities during mission analysis, which are of
+course reflected in the mission analysis products he provides.".
+cyclistNotes: "For most of the COA critiquing work, we will reify a
+commander.".
+sourceOfTerm-PIT: BatSpaceCPSpecV1-1Mt.
+sourceOfTerm-Person: EricJones.
+
+constant: g2ForCOA.
+in Mt: ModernMilitaryTacticsMt.
+isa: BinaryPredicate IKBConstant.
+genlPreds: planningAgent.
+arg1Isa: COASpecificationMicrotheory.
+arg2Isa: Agent.
+comment: "The G2 or S2 (intelligence officer) produces the IPB
+(intelligence preparation of the battlefield) products that are vital
+to Course of Action development, including potential Courses of Action
+for the #$Red-Side. Without these, the G3/S3 and the rest of the staff
+cannot proceed with course of action development. Sometimes this means
+that the IPB products are initial estimates only, and will be refined
+as the estimate process continues. Nonetheless, all of these products
+are necessary for producing or understanding courses of action. In
+wargaming, the G3 directs the blue fight and the G2 conducts the red
+fight.".
+sourceOfTerm-PIT: BatSpaceCPSpecV1-1Mt.
+sourceOfTerm-Person: EricJones.
+
+constant: g3ForCOA.
+in Mt: ModernMilitaryTacticsMt.
+isa: BinaryPredicate IKBConstant.
+genlPreds: planningAgent.
+arg1Isa: COASpecificationMicrotheory.
+arg2Isa: Agent.
+comment: "The G3 (S3 for smaller units) is the 'operations
+officer'--the person who is in charge of developing and refining Blue
+COAs.  His responsibilities during mission analysis include estimating
+current combat power for the blue units involved, and specifying the
+task organization, the mission and intent up to two levels, the
+missions of adjacent units, the relevant constraints for the various
+tasks involved, and the refinements of purpose entailed.  In
+wargaming, the G3 leads the blue fight and the G2 leads the red
+fight.".
+sourceOfTerm-PIT: BatSpaceCPSpecV1-1Mt.
+sourceOfTerm-Person: EricJones.
+
+constant: intentInPlan.
+in Mt: BaseKB.
+isa: TernaryPredicate IKBConstant PlanContextRestrictionPredicate.
+arg1Isa: Agent.
+arg2Isa: PlanningMicrotheory. 
+arg3Isa: Goal.
+comment: "(#$intentInPlan AGENT PLAN GOAL) means that one of the
+purposes which AGENT intends for the #$PlanningMicrtotheory PLAN to
+accomplish is GOAL.  This predicate is the plan-analog of
+#$purposeInEvent.".
+cyclistNotes: "The constraint on the second argument is
+#$PlanningMicrotheory, so this predicate can be used to specify the
+purpose of the #$planningAgent for planning contexts that are broader
+than mere #$Plans: i.e., #$PlanBackGroundContexts and
+#$PlanSelectionContexts.".
+
+F:
+(requiredArg2Pred Plan intentInPlan). 
+
+F:
+(implies
+  (intentInPlan ?AGENT ?PLAN ?GOAL)
+  (planningAgent ?PLAN ?AGENT)).
+
+in Mt: PLANETAlignmentMt.
+F:
+(overlappingExternalConcept intentInPlan PLANETAlignmentMt "accomplishes").
+
+
+constant: purposeOfPlan.
+in Mt: BaseKB.
+isa: BinaryPredicate IKBConstant PlanContextRestrictionPredicate.
+arg1Isa: Plan.
+arg2Isa: Goal.
+comment: "(#$purposeOfPlan PLAN GOAL) means that in a higher-level
+instance of #$PlanBackgroundContext or #$PlanSelectionContext, the
+purpose of the #$Plan PLAN is GOAL. What this implies will vary from
+context to context: however there will often be the entailment that
+#$Agents in the context who are tasked with carrying out PLAN will
+themselves have GOAL as a #$goals. For the present, we remain agnostic
+as to how a #$Plan may inherit a 'purpose', apart from stipulating
+that (#$intentInPlan AGENT PLAN GOAL) implies (#$purposeOfPlan PLAN
+GOAL). However, it seems fairly certain that (#$purposeOfPlan PLAN
+GOAL) implies that there is an #$Agent either developing or executing
+PLAN who has GOAL as a purpose.".
+
+F:
+(implies
+  (and
+    (isa ?PLAN Plan)
+    (intentInPlan ?AGENT ?PLAN ?GOAL))
+  (purposeOfPlan ?PLAN ?GOAL)).
+
+in Mt: PLANETAlignmentMt.
+F:
+(overlappingExternalConcept purposeOfPlan PLANETAlignmentMt "plan-goal").
+
+
+constant: intentOfCommanderInCOA.
+in Mt: ModernMilitaryTacticsMt.
+isa: TernaryPredicate IKBConstant.
+genlPreds: intentInPlan.
+arg1Isa: IntelligentAgent.
+arg2Isa: COASpecificationMicrotheory.
+arg3Isa: Goal.
+interArgReln1-2: commanderForCOA.
+interArgReln1-3: purposeOfPlan. 
+comment: "(#$intentOfCommanderInCOA COMMANDER COAMT PROP) means that
+the proposition PROP is part of the intent of the individual serving
+as the #$commanderOfCOA in the COA development context inclusive of
+the #$COASpecifcationMicrotheory COAMT.  What is cited as the
+#$intentOfCommanderInCOA also figures as part of the COA's
+#$purposeOfPlan. In the COA development process, the commander has
+overall responsibility for communicating the mission to his staff and
+for shaping the plan as he sees fit.  He has also has final command
+authority to decide which Blue COA to adopt and what it should
+contain.".
+sourceOfTerm-Person: EricJones.
+sourceOfTerm-PIT: BatSpaceCPSpecV1-1Mt.
+
+direction: forward.
+F:
+(implies
+  (and
+    (intentOfCommanderInCOA ?COMMANDER ?COAMT ?PROP)
+    (isa ?COMMANDINTENTMT COACommandIntentMicrotheory)
+    (genlMt ?COAMT ?COMMANDINTENTMT))
+  (ist ?COMMANDINTENTMT ?PROP)).
+
+
+constant: intentOfCommanderForAction.
+in Mt: ModernMilitaryTacticsMt.
+isa: TernaryPredicate IKBConstant.
+genlPreds: purposeInEvent.
+arg1Isa: IntelligentAgent.
+arg2Isa: MilitaryEvent.
+arg3Isa: Goal.
+comment: "(#$intentOfCommanderForAction COMMANDER ACTION PROP) means
+that the proposition PROP is part of the intent of the individual
+serving as the #$commanderOfCOA in the COA development context for the
+#$MilitaryEvent ACTION. In the associated
+#$COACommandIntentMicrotheory, ACTION will have PROP as its
+#$taskHasPurpose in the relevant #$COACommandIntentMicrotheory".
+sourceOfTerm-Person: EricJones.
+sourceOfTerm-PIT: BatSpaceCPSpecV1-1Mt.
+
+F:
+(implies 
+  (and
+    (intentOfCommanderForAction ?COMMANDER ?ACT ?PROP)
+    (isa ?COMINTENTMT COACommandIntentMicrotheory)
+    (isa ?COAMT COASpecificationMicrotheory)
+    (genlMt ?COMINTENTMT ?COAMT))
+  (ist ?COMINTENTMT (taskHasPurpose ?ACT ?PROP))).
+
+
+
+constant: intentOfG2InCOA.
+in Mt: ModernMilitaryTacticsMt.
+isa: TernaryPredicate IKBConstant.
+genlPreds: intentInPlan.
+arg1Isa: IntelligentAgent.
+arg2Isa: COASpecificationMicrotheory.
+arg3Isa: Goal.
+interArgReln1-2: g2ForCOA. 
+comment: "(#$intentOfG2InCOA G2 COAMT PROP) means that the proposition
+PROP is part of the intent of the G2 officer in the COA development
+context inclusive of the #$COASpecificationMicrotheory COAMT.  
+In the COA development context the G2 directs the intelligence
+peparation of the battlefield, which may include developing Course of
+Action scenarios for the red units.  Such scenarios all fall within
+the purview of the G2's intent.".
+cyclistNotes: "We may want to be careful about having this predicate
+generalize to #$intentInPlan, since the G2 is for all intents and
+purposes the devil's advocate in the COA development process,
+attempting to project a realistic course of action for the threat
+force.".
+
+direction: forward.
+F:
+(implies
+  (and
+    (intentOfG2InCOA ?G2 ?COAMT ?PROP)
+    (isa ?PMAG2MT COAMissionAnalysisProdsG2Microtheory)
+    (genlMt ?COAMT ?PMAG2MT))
+  (ist ?PMAG2MT ?PROP)).
+
+constant: intentOfG3InCOA.
+in Mt: ModernMilitaryTacticsMt.
+isa: TernaryPredicate IKBConstant.
+genlPreds: intentInPlan.
+arg1Isa: IntelligentAgent.
+arg2Isa: COASpecificationMicrotheory.
+arg3Isa: Goal.
+interArgReln1-2: g3ForCOA.
+interArgReln1-3: purposeOfPlan. 
+comment: "(#$intentOfG3InCOA G3 COAMT PROP) means that PROP is part of
+the intent of the individual serving as the G3 officer in planning
+context in which the plan represented by the
+#$COASpecificationMicrotheory COAMT is being developed.  The G3's
+responsibilities include providing mission analysis products relating
+to task organization and specification of purpose: thus nearly
+everything in the #$COASpecificationMicrotheory that is not specified
+as the #$intentOfCommanderInCOA or the #$intentOfG2InCOA; however, in
+practice what is explicitly identified as the #$intentOfG3InCOA will
+probably be much less extensive than this.  Use of this predicate does
+entail that what is cited as the #$intentOfG3InCOA is also
+#$purposeOfPlan for the relevant COA.".
+
+direction: forward.
+F:
+(implies
+  (and
+    (intentOfG3InCOA ?G3 ?COAMT ?PROP)
+    (isa ?PMAG3MT COAMissionAnalysisProdsG3Microtheory)
+    (genlMt ?COAMT ?PMAG3MT))
+  (ist ?PMAG3MT ?PROP)).
+
+
+constant: timeConstraintOfPlan.
+in Mt: BaseKB.
+isa: PlanContextRestrictionPredicate IKBConstant BinaryPredicate.
+arg1Isa: Plan.
+arg2Isa: Time-Quantity.  
+comment: "(#$timeConstraintOfPlan PLAN DURATION) means that under
+normal conditions an #$executionOfPlan of PLAN must be completed
+within the measure of #$Duration in order for it to count as
+#$successfulForAgents for the performer.".
+F:
+(implies
+ (and
+   (timeConstraintOfPlan ?PLAN ?DUR)
+   (executionOfPlan ?PLAN ?EXEC)
+   (performedBy ?EXEC ?AGENT))
+ (preconditionFor-Props
+    (measure ?EXEC ?DUR) (successfulForAgents ?EXEC ?AGENT))).
+
+constant: resourceInPlan.
+in Mt: BaseKB.
+isa: Role IKBConstant BinaryPredicate.
+conceptuallyRelated: resourceInEvent.
+arg1Isa: PlanningMicrotheory.
+arg2Isa: SomethingExisting.
+comment: "(#$resourceInPlan PLAN RESOURCE) means that if EXEC is an
+execution of PLAN performedBy AGENT, then (#$controls AGENT RESOURCE)
+is a precondition for EXEC being #$successfulForAgents.  Exactly what
+#$controls will entail will vary from context to context.".
+cyclistNotes: "There is a weaker sense in which a #$SomethingExisting
+can play the role of 'resource' in an action or a plan: namely, the
+situation can be such that if the agent who is executing the plan or
+the action controls the resource, the plan or action can be executed
+more efficiently than it could be otherwise, with efficiency being
+cashed out in terms of some weaker success criterion.".
+
+
+F:
+(implies
+  (and 
+    (isa ?PLAN Plan)
+    (executionOfPlan ?PLAN ?EXEC)
+    (performedBy ?EXEC ?AGENT)
+    (resourceInPlan ?PLAN ?RESOURCE))
+  (preconditionFor-Props
+     (controls ?AGENT ?RESOURCE)
+     (successfulForAgents ?EXEC ?AGENT))).
+
+in Mt: PLANETAlignmentMt.
+F:
+(synonymousExternalConcept resourceInPlan PLANETAlignmentMt "planning-resource").
+in Mt: CPRAlignmentMt.
+F:
+(overlappingExternalConcept resourceInPlan CPRAlignmentMt "Resource").
+
+
+constant: specialtyConstraintOfTask.
+in Mt: ModernMilitaryTacticsMt.
+isa: PlanActionRestrictionPredicate.
+arg1Isa: MilitaryTask.
+arg2Isa: MilitaryUnitSpecialtyType.
+comment: "(#$specialtyConstraintOfTask TASK SPECIALTY) means that if
+UNIT is the #$unitAssignedToTask for TASK, then it is a precondition
+for TASK being #$successfulForAgents for UNIT that UNIT be an instance
+of the #$ModernMilitaryUnitSpecialtyType SPECIALTY.".
+
+F:
+(implies
+  (and
+    (specialtyConstraintOfTask ?TASK ?SPECIALTY)
+    (unitAssignedToTask ?TASK ?UNIT))
+  (preconditionFor-Props 
+     (isa ?UNIT ?SPECIALTY)
+     (successfulForAgents ?TASK ?UNIT))).
+
+constant: traversalConstraintOfTask.
+in Mt: ModernMilitaryTacticsMt.
+isa: PlanActionRestrictionPredicate.
+arg1Isa: MilitaryTask.
+arg2Isa: Distance.
+comment: "(#$traversalConstraintOfTask TASK DISTANCE) means that any
+unit assigned to TASK will be required to traverse a distance of at
+least DISTANCE along the #$AxisOfAdvance, in executing TASK.".
+
+F:
+(implies
+  (and
+   (traversalConstraintOfTask ?TASK ?DISTANCE)
+   (axisOfAdvanceForTask ?TASK ?AXIS)
+   (lengthOfObject ?AXIS ?LENGTH))
+  (preconditionFor-PropSit
+    (greaterThanOrEqualTo ?DISTANCE ?LENGTH) ?TASK)).
+
+constant: expectedAttritionForAction.
+in Mt: ModernMilitaryTacticsMt.
+isa: BinaryPredicate IKBConstant.
+arg1Isa: MilitaryEvent PurposefulAction.
+arg2Isa: PositiveNumber.
+comment: "(#$expectedAttritionForAction ACTION QUANT) means that
+expected losses of personnel in ACTION will be approximately QUANT.
+Besidest encompassing personnel being killed or seriously wounded as
+the result of enemy action, 'losses' in this context also may refer to
+combat-ineffectiveness resulting from fatigue and other factors.  In
+general, expected attrition is given as a percentage or decimal
+fraction of the whole.".  
+cyclistNotes: "For the present we are glossing the issue of
+intentionality.  We may want to modify the salient CycL definition of
+this constant to conclude to a statement about the beliefs of the
+planning agent.".
+
+F:
+(implies
+  (and
+    (expectedAttritionForAction ?ACTION ?QUANT)
+    (isa ?UNIT ModernMilitaryUnit-Deployable)
+    (performedBy ?ACTION ?UNIT))
+  (holdsIn (STIF ?ACTION)
+    (thereExistAtLeast ?QUANT ?PERSONNEL
+       (and
+         (groupMembers ?UNIT ?PERSONNEL)
+         (not
+           (behaviorCapable ?PERSONNEL MilitaryEvent performedBy)))))).
+
+
+constant: expectedAttritionForActionType.
+in Mt: ModernMilitaryTacticsMt.
+isa: BinaryPredicate IKBConstant.
+arg1Isa: ScriptType.
+arg1Genl: MilitaryEvent.
+arg2Isa: PositiveNumber.
+comment: "(#$expectedAttritionForActionType ACT_TYPE QUANT) means that
+in the context, the expected attrition-level of a military action ACT
+that is of ACT_TYPE is QUANT. See also #$expectedAttritionForAction.".
+
+direction: forward.
+F:
+(implies
+ (and
+  (expectedAttritionForActionType ?ACT_TYPE ?QUANT)
+  (isa ?ACT ?ACT_TYPE))
+ (expectedAttritionForAction ?ACT ?QUANT)).
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+constant: resourceInEvent.
+in Mt: HumanActivieitesMt.
+isa: ActorSlot IKBConstant.
+conceptuallyRelated: resourceInPlan.
+arg1Isa: PurposefulAction.
+arg2Isa: SomethingExisting.
+comment: "(#$resourceInEvent EVENT RESOURCE) means that, in any #$Plan
+in which the assertion holds, if AGENT is to be the performedBy in
+EVENT (i.e., if (performedBy EVENT AGENT) is asserted in PLAN), then
+it is a precondition for EVENT being #$successfulForAgents that AGENT #$controls RESOURCE. The
+precise meaning of #$controls will vary depending upon the thing
+playing the role of 'resource' in the context.".
+cyclistNotes: "There is a weaker sense in which a #$SomethingExisting
+can play the role of 'resource' in an action or a plan: namely, the
+situation can be such that if the agent who is executing the plan or
+the action controls the resource, the plan or action can be executed
+more efficiently than it could be otherwise, with efficiency being
+cashed out in terms of some weaker success criterion.".
+
+F:
+(implies
+  (and 
+    (resourceInEvent ?EVENT ?RESOURCE)
+    (performedBy ?EVENT ?AGENT))
+  (preconditionFor-Props 
+      (controls ?AGENT ?RESOURCE) (successfulForAgents ?EVENT ?AGENT))).
+
+in Mt: PLANETAlignmentMt.
+F:
+(synonymousExternalConcept resourceInEvent PLANETAlignmentMt "resource").
+
+
+
+constant: agentResourceInEvent.
+in Mt: HumanActivitiesMt.
+isa: ActorSlot IKBConstant.
+arg1Isa: PurposefulAction.
+arg2Isa: Agent.
+conceptuallyRelated: resourceInEvent.
+comment: "(#$agentResourceInEvent ACT AGENT) means that for ACT to be
+#$successfulForAgents for any performing agent, it must be the case
+that AGENT is #$behaviorCapable of playing the role of
+#$assistingAgent in any specialization of #$Event of whish ACT is an
+instance.".
+
+F:
+(implies
+  (and
+    (agentResourceInEvent ?EVENT ?AGENT)
+    (performedBy ?EVENT ?PERFORMER)
+    (nearestIsa ?EVENT Event))
+  (preconditionFor-Props
+     (behaviorCapable ?AGENT ?EVENTTYPE assistingAgent) 
+     (successfulForAgents ?EVENT ?PERFORMER))).
+
+constant: agentResourceInPlan.
+in Mt: BaseKB.
+isa: ActorSlot IKBConstant.
+arg1Isa: PlanningMicrotheory.
+arg2Isa: Agent.
+conceptuallyRelated: resourceInPlan.
+comment: "(#$agentResourceInPlan PLAN AGENT) means that if EXEC is an
+execution of PLAN, and is #$performedBy PERFORMER, then AGENT's being
+#$behaviorCapable of being the #$assistingAgent in any specialization
+of #$Event of which EXEC isan instance is a precondition for EXEC
+being #$successfulForAgents.".
+
+F:
+(implies
+ (and
+  (agentResourceInPlan ?PLAN ?AGENT)
+  (executionOfPlan ?PLAN ?EXEC)
+  (nearestIsa ?EXEC Event)
+  (performedBy ?EXEC ?PERFORMER))
+ (preconditionFor-Props 
+   (behaviorCapable ?AGENT ?EVENTTYPE assistingAgent)
+   (successfulForAgents ?EVENT ?PERFORMER))).
+  
+constant: actionResourceQuantForTime.
+in Mt: BaseKB.
+isa: QuaternaryPredicate Role IKBConstant.
+arg1Isa: PurposefulAction.
+arg2Isa: SpatialThing-Localized.
+arg3Isa: Volume.
+arg4Isa: TemporalThing.
+comment: "(#$actionResourceQuantForTime ACT THING QUANT TEMP) means
+that in ACT, a quantity QUANT of THING is a required resource for the
+duration of TEMP, in the sense that the agent performing ACT must have
+'access' to a QUANT amount of THING for TEMP in order for ACT to be
+#$successfulForAgents.".
+F:
+(interArgReln1-4 actionResourceQuantForTime temporalBoundsContain).
+
+F:
+(implies
+  (and
+    (actionResourceQuantForTime ?ACT ?THING ?QUANT ?TEMP)
+    (volumeOfObject ?THING ?VOL))
+  (preconditionFor-PropSit
+    (greaterThanOrEqualTo ?VOL ?QUANT) ?ACT)).
+ 
+F:
+(implies
+  (and
+    (actionResourceQuantForTime ?ACT ?THING ?QUANT ?TEMP)
+    (performedBy ?ACT ?AGENT))
+  (preconditionFor-Props
+    (thereExists ?PART
+      (and
+        (physicalDecompositions ?THING ?PART)
+        (volumeOfObject ?PART ?QUANT)
+        (holdsIn ?TEMP (controls ?AGENT ?PART))))
+    (successfulForAgents ?ACT ?AGENT))).
+
+in Mt: PLANETAlignmentMt.
+F:
+(synonymousExternalConcept
+   actionResourceQuantForTime PLANETAlignmentMt "resource-requirement").
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+constant: PlanActionRestrictionPredicate.
+in Mt: ModernMilitaryTacticsMt.
+isa: PredicateCategory PublicConstant.
+genls: Predicate.
+comment: "A collection of predicates.  Instances are used to express
+durationalconstraints, constraints relating to temporal ordering, and
+subeventual commitments relating to reified #$PurposefulActions that
+are represented in the deontic contexts of #$Plans.".
+cyclistNotes: "Planning contexts are ordinarily considered to be
+'deontic', in the sense that they are descriptions of idealized
+event-sequences that are supposed to occur. Thus, one way of
+representing temporo-spatial constraints in plans is to simply assert
+as a matter of 'fact' *that* a particular event has such-and-such
+spatiotemporal characteristics.  However, this is not always
+sufficient, especially in cases where the plan itself is being
+critiqued against a set of background constraints. It is primarily
+such background constraints that the instances of this collection are
+supposed to be used to represent.".
+cyclistNotes: "Instances of this collection are mostly 'instance
+level' predicates because it will frequently be the case that they are
+used to enunciate background constraints to the effect that 'there
+should exist such-and-such an event with this constraint on it'.  In
+cases where the constraint is posed at the level of types, it is of
+course possible to employ relation-typing preds like
+#$relationAllExists, &c.".
+
+
+constant: timeConstraintOfAction.
+in Mt: ModernMilitaryTacticsMt.
+isa: BinaryPredicate PlanActionRestrictionPredicate PublicConstant.
+arg1Isa: PurposefulAction.
+arg2Isa: Time-Quantity.
+comment: "(#$timeConstraintOfAction ACT DUR) means that in the
+planning context of the assertion, ACT should take no longer than the
+#$Time-Quantity DUR.".
+
+F:
+(genlPreds timeConstraintOfTask timeConstraintOfAction).
+
+F:
+(implies
+  (and
+   (timeConstraintOfAction ?ACT ?SUPPOSEDDUR)
+   (measure ?ACT ?REALDUR))
+  (preconditionFor-PropSit
+     (greaterThanOrEqualTo ?SUPPOSEDDUR ?REALDUR) ?ACT)).
+
+
+constant: depthConstraintOfTask.
+in Mt: ModernMilitaryTacticsMt.
+isa: PlanActionRestrictionPredicate BinaryPredicate IKBConstant.
+arg1Isa: MilitaryTask.
+arg2Isa: Distance.
+comment: "(#$depthConstraintOfTask TASK DIST) means that the distance between the #$unitAssignedToTask of TASK and any opposing unit which is the target of TASK should be less than DIST.".
+
+F:
+(implies
+  (and
+   (depthConstraintOfTask ?TASK ?DEPTH)
+   (unitAssignedToTask ?TASK ?UNIT)
+   (objectActedOn ?TASK ?OPPUNIT)
+   (isa ?OPPUNIT ModernMilitaryUnit-Deployable)
+   (hasAttributes ?OPPUNIT HostileUnit)
+   (distanceBetween ?UNIT ?OPPUNIT ?DIST))
+  (preconditionFor-PropSit
+    (greaterThanOrEqualTo ?DEPTH ?DIST) ?TASK)).
+  
+;!
+constant: traversalConstraintOfTask.
+in Mt: ModernMilitaryTacticsMt.
+isa: PlanActionRestrictionPredicate BinaryPredicate IKBConstant.
+arg1Isa: MilitaryTask.
+arg2Isa: Distance.
+comment: "(#$traversalConstraintOfTask TASK DISTANCE) means that any
+unit assigned to TASK will be required to traverse a distance of at
+least DISTANCE along the #$AxisOfAdvance, in executing TASK.".
+
+F:
+(implies
+  (and
+   (traversalConstraintOfTask ?TASK ?DISTANCE)
+   (axisOfAdvanceForTask ?TASK ?AXIS)
+   (lengthOfObject ?AXIS ?LENGTH))
+  (preconditionFor-PropSit
+    (greaterThanOrEqualTo ?DISTANCE ?LENGTH) ?TASK)).
+
+
+constant: specialtyConstraintOfTask.
+in Mt: ModernMilitaryTacticsMt.
+isa: PlanActionRestrictionPredicate BinaryPredicate IKBConstant.
+arg1Isa: MilitaryTask.
+arg2Isa: MilitaryUnitSpecialtyType.
+comment: "(#$specialtyConstraintOfTask TASK SPECIALTY) means that if
+UNIT is the #$unitAssignedToTask for TASK, then it is a precondition
+for TASK being #$successfulForAgents for UNIT that UNIT be an instance
+of the #$ModernMilitaryUnitSpecialtyType SPECIALTY.".
+
+F:
+(implies
+  (and
+    (specialtyConstraintOfTask ?TASK ?SPECIALTY)
+    (unitAssignedToTask ?TASK ?UNIT))
+  (preconditionFor-Props 
+     (isa ?UNIT ?SPECIALTY)
+     (successfulForAgents ?TASK ?UNIT))).
+  
+
+constant: attritionConstraintOfAction.
+in Mt: ModernMilitaryTacticsMt.
+isa: PlanActionRestrictionPredicate BinaryPredicate IKBConstant.
+arg1Isa: MilitaryEvent PurposefulAction.
+arg2Isa: PositiveNumber.
+comment: "(#$attritionConstraintOfAction ACT QUANT) means that an
+expected attrition level in excess of QUANT is not considered acceptable for
+the military action ACT>.  The attrition constraint is generally given as a percentage or decimal fraction of the whole.".
+
+F:
+(implies
+  (and
+    (attritionConstraintOfAction ?ACT ?QUANT)
+    (expectedAttritionForAction ?ACT ?ATTRIT))
+  (preconditionFor-PropSit
+    (greaterThanOrEqualTo ?QUANT ?ATTRIT) ?ACT)).
+

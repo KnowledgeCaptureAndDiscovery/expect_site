@@ -1,0 +1,88 @@
+<html>
+<head>
+<script>
+var limit="0:30"
+if (document.images){
+  var parselimit=limit.split(":");
+  parselimit=parselimit[0]*60+parselimit[1]*1;
+  }
+function resubmit(val) {
+    var myform = eval("document.form"+val);
+    myform.submit();
+}
+function beginrefresh(){
+  if (!document.images)
+      return;
+   if (parselimit==1)
+      window.location.reload();
+   else {
+      parselimit-=1;
+      curmin=Math.floor(parselimit/60);
+      cursec=parselimit%60;
+      if (curmin!=0)
+         curtime=curmin+" minutes and "+cursec+" seconds left until page refresh!";
+      else
+         curtime=cursec+" seconds left until page refresh!";
+      window.status=curtime
+      setTimeout("beginrefresh()",1000)
+   }
+ }
+window.onload=beginrefresh;
+</script>
+</head>
+<table>
+<tr><td colspan=2>----Thu Jun 13 15:01:43 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>than flight number</b></td><td>6108</td></tr>
+<tr><td><b>connecting-to flight number2</b></td><td></td></tr>
+<tr><td><b>on date</b></td><td>6/13/2002</td></tr>
+<tr><td><b>from airport</b></td><td>mry</td></tr>
+<tr><td><b>to airport</b></td><td>lax</td></tr>
+<tr><td><b>for user id</b></td><td>knight@isi.edu</td></tr>
+
+<tr><td colspan=2><b>Earlier Flights</b></td></tr>
+<tr><td colspan=2>Dear knight_at_isi_edu,<br/>The status of your currently scheduled flight(s) are:<br/># 6108 MRY (7:50 PM) - LAX (9:13 PM) On Time<br/><br/>If you would like to return earlier, the following United Airlines flights will arrive earlier than your scheduled flights:<br/><br/># 6106 MRY (5:35 PM) - LAX (6:58 PM) On Time<br/>------<br/># 5419 MRY (4:40 PM) - SFO (5:14 PM) On Time<br/># 168 OAK (7:36 PM) - LAX (8:57 PM) On Time<br/>------<br/># 5419 MRY (4:40 PM) - SFO (5:14 PM) On Time<br/># 901 SFO (6:00 PM) - LAX (7:22 PM) On Time<br/>------<br/># 5419 MRY (4:40 PM) - SFO (5:14 PM) On Time<br/># 841 SFO (6:45 PM) - LAX (8:07 PM) On Time<br/>------<br/># 5419 MRY (4:40 PM) - SFO (5:14 PM) On Time<br/># 889 SFO (7:45 PM) - LAX (9:07 PM) On Time<br/>------<br/># 5406 MRY (6:00 PM) - SFO (6:34 PM) On Time<br/># 889 SFO (7:45 PM) - LAX (9:07 PM) On Time<br/>------<br/><br/> Thank you, <br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1024005703)'></td></tr>
+</table><br>
+<form name='form1024005703' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='6108'>
+<input type='hidden' name='val2' value=''>
+<input type='hidden' name='val3' value='6/13/2002'>
+<input type='hidden' name='val4' value='mry'>
+<input type='hidden' name='val5' value='lax'>
+<input type='hidden' name='val6' value='knight@isi.edu'>
+<input type='hidden' name='agent' value='earlier-flight'>
+<input type='hidden' name='email' value='knight@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Mon Jun 10 13:11:39 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>than flight number</b></td><td>6107</td></tr>
+<tr><td><b>connecting-to flight number2</b></td><td></td></tr>
+<tr><td><b>on date</b></td><td>6/10/2002</td></tr>
+<tr><td><b>from airport</b></td><td>lax</td></tr>
+<tr><td><b>to airport</b></td><td>mry</td></tr>
+<tr><td><b>for user id</b></td><td>knight@isi.edu</td></tr>
+
+<tr><td colspan=2><b>Earlier Flights</b></td></tr>
+<tr><td colspan=2>Dear knight_at_isi_edu,<br/>The status of your currently scheduled flight(s) are:<br/># 6107 LAX (6:05 PM) - MRY (7:22 PM) On Time<br/><br/>If you would like to return earlier, the following United Airlines flights will arrive earlier than your scheduled flights:<br/><br/># 6105 LAX (3:56 PM) - MRY (5:11 PM) On Time<br/>------<br/># 842 LAX (1:30 PM) - SFO (2:37 PM) On Time<br/># 5418 SFO (4:20 PM) - MRY (5:00 PM) On Time<br/>------<br/># 842 LAX (1:30 PM) - SFO (2:37 PM) On Time<br/># 5420 SFO (6:35 PM) - MRY (7:15 PM) On Time<br/>------<br/># 864 LAX (2:00 PM) - SFO (3:07 PM) On Time<br/># 5418 SFO (4:20 PM) - MRY (5:00 PM) On Time<br/>------<br/># 864 LAX (2:00 PM) - SFO (3:07 PM) On Time<br/># 5420 SFO (6:35 PM) - MRY (7:15 PM) On Time<br/>------<br/># 1822 LAX (2:30 PM) - SFO (3:36 PM) On Time<br/># 5420 SFO (6:35 PM) - MRY (7:15 PM) On Time<br/>------<br/># 960 LAX (3:30 PM) - SFO (4:36 PM) On Time<br/># 5420 SFO (6:35 PM) - MRY (7:15 PM) On Time<br/>------<br/># 1824 LAX (4:15 PM) - SFO (5:31 PM) On Time<br/># 5420 SFO (6:35 PM) - MRY (7:15 PM) On Time<br/>------<br/><br/> Thank you, <br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1023739899)'></td></tr>
+</table><br>
+<form name='form1023739899' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='6107'>
+<input type='hidden' name='val2' value=''>
+<input type='hidden' name='val3' value='6/10/2002'>
+<input type='hidden' name='val4' value='lax'>
+<input type='hidden' name='val5' value='mry'>
+<input type='hidden' name='val6' value='knight@isi.edu'>
+<input type='hidden' name='agent' value='earlier-flight'>
+<input type='hidden' name='email' value='knight@isi.edu'>
+</form>
+
+<p>
+</html>

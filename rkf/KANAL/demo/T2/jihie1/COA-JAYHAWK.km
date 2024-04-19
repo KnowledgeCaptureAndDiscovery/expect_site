@@ -1,0 +1,192 @@
+;; note
+;; JAYHAWK COA with
+;; cavarly for the fix
+;; and  move for 2nd brigade
+(Fire-Support has (superclasses (Attack-By-Fire)))
+
+(COA-JAYHAWK has (superclasses (COA-for-Attack)))
+(every COA-JAYHAWK has
+   (agent ((a Army-Division called "23rd" with
+	      (element ((a Tank-Brigade called "1st" with 
+				(remaining-strength (0.8)) ;; initial strength
+				(equipment (*M1A2Abrams)))
+			(a Tank-Brigade called "2nd" with 
+				(remaining-strength (0.95))
+				(equipment (*M1A2Abrams)))
+			(a Tank-Brigade called "3rd" with 
+				(remaining-strength (0.97))
+				(equipment (*M1A2Abrams)))
+			(a Tank-Brigade called "4th" with 
+				(remaining-strength (0.99))
+				(equipment (*M1A2Abrams)))
+			(a Cavalry-Squadron called "cavalry" with 
+				(remaining-strength (0.95))
+				(equipment (*M1A2Abrams)))
+			(a Aviation-Battalion called "1st-air" with 
+				(remaining-strength (0.95))
+				(equipment (*AH64)))
+			(a Aviation-Battalion called "2nd-air" with 
+				(remaining-strength (0.93))
+				(equipment (*AH64)))
+			(a Artillery-Battery called "artillery" with 
+				(remaining-strength (0.95))
+				(equipment (*Howitzer155m))))))))
+   (object ((a Army-Division called "29th" with 
+               (element ((a Tank-Brigade called "R1st" with 
+				(remaining-strength (0.72))
+				(equipment (*T64))
+			        (location ((a Place with
+					  (is-at (((the object of Self) called "Jayhawk")))))))
+			(a Tank-Brigade called "R2nd" with 
+				(remaining-strength (0.76))
+				(equipment (*T64))
+				(location ((a Place with
+					  (is-at (((the object of Self) called "Jayhawk")))))))
+			(a Tank-Brigade called "R3rd" with 
+				(remaining-strength (0.74))
+				(equipment (*T64))
+				(location ((a Place with
+					  (is-at (((the object of Self) called "Jayhawk")))))))
+			(a Artillery-Regiment called "Red-artillery" with 
+				(remaining-strength (0.70))
+				(equipment (*Howitzer122m))
+				(location ((a Place with
+					    (is-behind (((the object of Self) 
+						called "Jayhawk")))))))))
+				)
+	    (a Place called "Jayhawk")))
+
+   ;; The Main, Supporting, Fire-Support, and Reserve events of 
+   ;; the COA.
+
+   (first-subevent (
+	((the subevent of Self) called "Movement-of-Main-Attack")
+	((the subevent of Self) called "Movement-of-Suporting-Attack")
+	((the subevent of Self) called "Move-Reserve")
+	((the subevent of Self) called "FS-Main-Attack")
+	((the subevent of Self) called "FS-Air-Attack")))
+
+   ;; The Events of the COA.
+   (subevent (
+	      ;; Events in the Main Attack Phase.
+	      (a Move-Military-Task called "Movement-of-Main-Attack" with
+		 (destination 	(((the object of Self) called "Jayhawk")))
+		 (path 		((a Place called "Axis-Blue")))
+;		 (agent		(((the element of (the agent of Self)) 
+;				  called "3rd")
+;				 ((the element of (the agent of Self)) 
+;				  called "4th")))
+		 (object	(((the element of (the agent of Self)) 
+				  called "3rd")
+				 ((the element of (the agent of Self)) 
+				  called "4th")))
+		 (next-event    (((the subevent of Self) called "Main-Attack1")))
+		 (duration      ((a Duration-Value with (value ((:pair 7 *hour))))))
+		 (time		((a Time-Interval with
+				    (before ((the time of 
+						  ((the subevent of Self) 
+						   called "Main-Attack1")))
+					    )))))
+
+	      (a Attack-To-Destroy-Hasty-Defense called "Main-Attack1" with	
+		 (agent 	(((the element of (the agent of Self)) called "3rd")
+                                 ((the element of (the agent of Self)) called "4th")))
+		 (object	(((allof (the element of ((the object of Self) called "29th")) where ((the
+is-at of (the location of It))  = ((the object of Self) called "Jayhawk"))))))
+		 (duration      ((a Duration-Value with (value ((:pair 4 *hour))))))
+		 (objective 	((a Destroy with
+				    (object (((the object of Self) called "29th")))
+				    (agent  ((the agent of
+                                                  ((the subevent of Self)
+				called "Main-Attack1")))))))
+
+		 )
+
+	      
+             (a Move-Military-Task called "Movement-of-Suporting-Attack" with
+		 (destination 	(((the object of Self) called "Jayhawk")))
+		 (path 		((a Place called "Axis-Green")))
+;		 (agent		(((the element of (the agent of Self)) 
+;				  called "1st")
+;				 ((the element of (the agent of Self)) 
+;				  called "cavalry")))
+		 (object	(((the element of (the agent of Self)) 
+				  called "1st")
+				 ((the element of (the agent of Self)) 
+				  called "cavalry")))
+		 (next-event    (((the subevent of Self) called "Holding-Attack")))
+		 (duration      ((a Duration-Value with (value ((:pair 6 *hour))))))
+		 (time		((a Time-Interval with
+				    (before ((the time of 
+						  ((the subevent of Self) 
+						   called "Attack-To-Fix")))
+					    )))))
+
+	       ;; Event in the Supporting Attack Phase.
+	       (a Attack-To-Fix called "Holding-Attack" with	
+		  (agent 	(((the element of (the agent of Self)) called "1st")
+                                 ((the element of (the agent of Self)) called "cavalry")))
+		  (object	(((allof (the element of ((the object of Self) called "29th")) where 
+			           ((the is-at of (the location of It))  = ((the object of Self) called "Jayhawk"))))))
+		  (prevents 	((a Move called "Assist-Flank" with
+				    (object 	 ((the object of 
+						       ((the subevent of Self) called "Holding-Attack"))))
+				    (destination ((the location of (the object of (the objective of
+						       (the prevents of 
+							    ((the subevent of Self) called "Holding-Attack")))))))
+				    (objective   ((a Assist with 
+						     (object ((a Military-Unit with
+								 (location ((a Place with
+									       (east-of (((the object of Self)
+											  called "Jayhawk")))))))))
+						     (agent  ((the object of 
+								(the prevents of
+								   ((the subevent of Self) 
+								    called "Holding-Attack")))))))))))
+		  (duration      ((a Duration-Value with (value ((:pair 4 *hour))))))
+		  (time		((a Time-Interval with
+                                    (temporally-overlaps 
+                                      ((the time of 
+					    ((the subevent of Self) called "Movement-of-Main-Attack"))
+				       (the time of	
+					    ((the subevent of Self) called "Main-Attack1"))))
+				    ))))
+               
+
+	       ;; The Reserve Actions.
+	       (a Move-Military-Task called "Move-Reserve" with
+		  (agent  	(((the element of (the agent of Self)) called "2nd")))
+		  (object  	(((the element of (the agent of Self)) called "2nd")))
+;		  (followed-object 	(((the element of (the agent of Self)) called "3rd")))
+		  (path 	((a Place called "Axis-Blue")))
+                  (destination  (((the destination of ((the subevent of Self) called "Movement-of-Main-Attack")))))
+		  (duration      ((a Duration-Value with (value ((:pair 3 *hour))))))
+		  (time	  	((a Time-Interval with
+			      	    (during ((the time of 
+					       ((the subevent of Self) called "Movement-of-Main-Attack"))))))))
+
+	       
+
+	       ;; Fire Support
+	       (a Fire-Support called "FS-Main-Attack"	with
+		  (agent   	(((the element of (the agent of Self)) called "artillery")))
+		  (supports	(((the subevent of Self) called "Main-Attack1")))
+		  (duration      ((a Duration-Value with (value ((:pair 2 *hour))))))
+		  (time    	((a Time-Interval with
+			       	    (during ((the time of 
+					       ((the subevent of Self) called "Main-Attack1"))))))))
+
+	       (a Attack-By-Fire called "FS-Air-Attack" with
+		  (agent   ((the Aviation-Battalion element of (the agent of Self))))
+		  (object  ((the Artillery-Regiment element of 
+					(the object of Self))))
+		  (duration      ((a Duration-Value with (value ((:pair 1 *hour))))))
+		  (time    ((a Time-Interval with
+			       (before ((the time of 
+					     ((the subevent of Self) called "Main-Attack1")))))))
+		  (causes  ((a Neutralize with
+			       (object ((the object of 
+					     ((the subevent of Self) called "FS-Air-Attack"))))))))
+
+
+)))

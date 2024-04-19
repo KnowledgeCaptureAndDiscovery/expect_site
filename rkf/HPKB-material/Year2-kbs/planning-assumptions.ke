@@ -1,0 +1,23 @@
+;05/05/99 new vocabulary necessary to express planning assumptions
+
+constant : criticalEventInCoa .
+in Mt: ModernMilitaryTacticsMt.
+isa:  BinaryPredicate IKBConstant.
+arg1Isa: COASpecificationMicrotheory.
+arg2Isa: MilitaryEvent .
+comment: "(#$criticalEventInCoa COA-MT EVENT) means that EVENT is a critical
+event in the context of a particular course of action as specified in COA-MT
+EVENT. Critical events and their temporal ordering are required information
+for calculating the #$forceRatioOfUnits of opposing units as the course of
+action unfolds." .
+
+constant : sustainsAttritionDuringEvent .
+in Mt: ModernMilitaryTacticsMt.
+isa: TernaryPredicate IKBConstant.
+arg1Isa: MilitaryEvent .
+arg2Isa: ModernMilitaryUnit-Deployable .
+arg3Isa: ScalarInterval .
+comment: "(#$sustainsAttritionDuringEvent EVENT UNIT N-PERCENT) means that
+during EVENT UNIT is attrited to N-PERCENT of its original combat force
+value.".
+ 

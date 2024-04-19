@@ -1,0 +1,146 @@
+Agenda:
+   at Wed Oct 06 15:37:35 PDT 1999
+
+select: copy and create button
+   at Wed Oct 06 15:37:50 PDT 1999
+
+select Button:appropriate-unit:appropriate-unit
+ TO become:((name _method33750)
+(capability    ( check   ( obj   ( ?a is   ( spec-of force-ratio ) ) )
+         ( of   ( ?t is   ( inst-of military-task ) ) ) )
+)
+(result-type    ( inst-of yes-no ))
+(method    ( set-member   ( obj ?t )   ( of
+               ( unit-can-perform   ( unit-assigned ?t ) ) ) )
+)
+)
+   at Wed Oct 06 15:38:02 PDT 1999
+
+6check: Method Capability Hierarchy
+   at Wed Oct 06 15:38:09 PDT 1999
+
+select Button:expect-expression: 
+ TO become:((name _method33750)
+(capability    ( check   ( obj   ( ?a is   ( spec-of force-ratio ) ) )
+         ( of   ( ?t is   ( inst-of military-task ) ) ) )
+)
+(result-type    ( inst-of yes-no ))
+(method    ( is-less-or-equal   ( obj (inst-of number) )   ( than (inst-of number) ) )
+)
+)
+   at Wed Oct 06 15:38:22 PDT 1999
+
+5check: Undefined Capabilities
+   at Wed Oct 06 15:38:35 PDT 1999
+
+select Button:expect-expression:(inst-of number)
+ TO become:((name _method33750)
+(capability    ( check   ( obj   ( ?a is   ( spec-of force-ratio ) ) )
+         ( of   ( ?t is   ( inst-of military-task ) ) ) )
+)
+(result-type    ( inst-of yes-no ))
+(method    ( is-less-or-equal   ( obj   ( estimate   ( obj
+                           ( spec-of required-force-ratio ) )
+                     ( for (inst-of military-task) ) ) )
+         ( than (inst-of number) ) )
+)
+)
+   at Wed Oct 06 15:38:58 PDT 1999
+
+select Button:expect-expression:(inst-of military-task)
+ TO become:((name _method33750)
+(capability    ( check   ( obj   ( ?a is   ( spec-of force-ratio ) ) )
+         ( of   ( ?t is   ( inst-of military-task ) ) ) )
+)
+(result-type    ( inst-of yes-no ))
+(method    ( is-less-or-equal   ( obj   ( estimate   ( obj
+                           ( spec-of required-force-ratio ) )
+                     ( for ?t ) ) )
+         ( than (inst-of number) ) )
+)
+)
+   at Wed Oct 06 15:39:05 PDT 1999
+
+select Button:expect-expression:(inst-of number)
+ TO become:((name _method33750)
+(capability    ( check   ( obj   ( ?a is   ( spec-of force-ratio ) ) )
+         ( of   ( ?t is   ( inst-of military-task ) ) ) )
+)
+(result-type    ( inst-of yes-no ))
+(method    ( is-less-or-equal   ( obj   ( estimate   ( obj
+                           ( spec-of required-force-ratio ) )
+                     ( for ?t ) ) )
+         ( than   ( estimate   ( obj
+                           ( spec-of required-force-ratio ) )
+                     ( for ?t ) ) ) )
+)
+)
+   at Wed Oct 06 15:39:18 PDT 1999
+
+select Button:required-force-ratio:required-force-ratio
+ TO become:((name _method33750)
+(capability    ( check   ( obj   ( ?a is   ( spec-of force-ratio ) ) )
+         ( of   ( ?t is   ( inst-of military-task ) ) ) )
+)
+(result-type    ( inst-of yes-no ))
+(method    ( is-less-or-equal   ( obj   ( estimate   ( obj
+                           ( spec-of required-force-ratio ) )
+                     ( for ?t ) ) )
+         ( than   ( estimate   ( obj
+                           ( spec-of available-force-ratio ) )
+                     ( for ?t ) ) ) )
+)
+)
+   at Wed Oct 06 15:39:28 PDT 1999
+
+ From sketch:(Capability): This method can be used to check the appropriate unit of a military task.
+(Body)To do that, set member the military task of the unit can perform of the unit assigned of the military task.
+
+   at Wed Oct 06 15:39:30 PDT 1999
+
+ done editing:((name _method33750)
+(capability    ( check   ( obj   ( ?a is   ( spec-of force-ratio ) ) )
+         ( of   ( ?t is   ( inst-of military-task ) ) ) )
+)
+(result-type    ( inst-of yes-no ))
+(method    ( is-less-or-equal   ( obj   ( estimate   ( obj
+                           ( spec-of required-force-ratio ) )
+                     ( for ?t ) ) )
+         ( than   ( estimate   ( obj
+                           ( spec-of available-force-ratio ) )
+                     ( for ?t ) ) ) )
+)
+)
+   at Wed Oct 06 15:39:30 PDT 1999
+
+built new method:((name _method33750)
+ (capability (check
+                (obj (?a is (spec-of force-ratio)))
+                (of (?t is (inst-of military-task)))
+                ))
+ (result-type (inst-of yes-no))
+ (method  (is-less-or-equal
+            (obj (estimate
+                    (obj (spec-of required-force-ratio))
+                    (for ?t)
+                    ))
+             (than (estimate
+                      (obj (spec-of available-force-ratio))
+                      (for ?t)
+                      ))
+               ))
+)
+   at Wed Oct 06 15:39:31 PDT 1999
+
+check tab:-1
+   at Wed Oct 06 15:39:31 PDT 1999
+
+check tab:0
+   at Wed Oct 06 15:39:31 PDT 1999
+
+Agenda:
+   at Wed Oct 06 15:39:32 PDT 1999
+
+7check: Method Sub-Method Relation
+   at Wed Oct 06 15:39:36 PDT 1999
+

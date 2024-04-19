@@ -1,0 +1,513 @@
+<!-- <?xml version='1.0'?> -->
+
+<!--
+
+IF YOU CAN READ THIS, YOUR BROWSER DOESN'T SUPPORT XML.
+
+PLEASE UPDATE YOUR BROWSER, OR VIEW THE HTML VERSION OF THIS PAGE.
+
+-->
+<!--
+When the schema works, reference it like this; change the project tag below to this
+<project xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation = "isd-personnel.xsd">
+-->
+<project>
+  <name>Trellis</name>
+  <title>Capturing and Exploiting Semantic Relationships for Information and Knowledge Management</title>
+
+  <status>
+  <short>
+  <n /> short status
+  </short>
+  <long>
+<b><n /></b> provides an interactive environment that allows users to add their observations, opinions, and conclusions as they analyze information by making semantic annotations to documents and other on-line resources. Our work to date has concentrated on three major areas: 1) designing a vocabulary to annotate information analysis, 2) creating semantic markup representations for this vocabulary and annotating analysis products, and 3) developing an initial prototype of the <n /> interface and tools.
+<p />
+We have released in August 2001 our first version of <n />.  <n /> includes a vocabulary for semantic annotations of decisions and tradeoffs.  The initial version of this vocabulary is now available as a schema/ontology in XMLS, RDFS, and DAML+OIL. <n /> allows users to extend this vocabulary and its corresponding schemas.  For each analysis performed by a user with <n />, the system generates annotations in XML, RDF, and DAML+OIL according to the schemas and ontologies for the <n /> annotation vocabulary.  Users can extend the vocabulary using the <n /> interface, adding perhaps domain specific terms or constructs that are useful to their particular task.
+<p />
+We have exercised <n /> to date with a variety of scenarios to annotate tradeoffs and decisions (e.g., travel), organizing materials (e.g., search results), analyzing disagreements and controversies on a topic (e.g., political debates), and handling incomplete information (e.g., genealogy research).
+<br />
+  </long>
+  </status>
+
+  <description>
+    <short>
+<n/> is an interactive environment that allows users to add their observations, viewpoints, and conclusions as they  analyze information by making semantic annotations to documents and other on-line resources. We view this as a knowledge acquisition problem, where users are adding new knowledge to the system based on their expertise as they analyze information.
+    </short>
+
+    <long>
+<n/> is an interactive environment that allows users to add their observations, viewpoints, and conclusions as they  analyze information by making semantic annotations to documents and other on-line resources. We view this as a knowledge acquisition problem, where users are adding new knowledge to the system based on their expertise as they analyze information.
+     <p>The key innovative ideas behind our approach are:</p>
+     <ul>
+     <li>
+     Supporting users to create knowledge fragments from the original sources
+     as well as from other fragments. The key is to capture how a developer
+     progressively generates new knowledge that results in added value to the
+     original raw information sources. Our goal is to support users to
+     highlight key salient information from large reports and documents, to
+     add new knowledge fragments based on their analysis and integration of
+     existing information, and to finally create semi-formal fragments.</li>
+     </ul>
+
+     <ul>
+     <li>
+     Capturing and exploiting semantic interrelationships among information
+     items. <n/> will 1) facilitate semantic markup of relationships
+     between different pieces of knowledge, 2) exploit semantic markups
+     in given problem solving contexts, and 3) suggest additional relationships
+     based on those already specified by the user. Users will be encouraged
+     and rewarded to add valuable annotations over raw information sources,
+     since the more annotations they add the more help the system can provide
+     in their work. When the user chooses to do little or no annotation,
+     the system will provide weaker support (based on default heuristics and
+     strategies) and will still help the user as much as possible.</li>
+     </ul>
+
+     <ul>
+     <li>
+     Extensible semantic markup of information items and their relationships.
+     Users will be able to draw from a core semantic markup language that will
+     contain a basic domain-independent vocabulary to formulate annotations.
+     They will also be able to extend this core language with additional terminology
+     useful in their particular domain. Using this language, users will
+     be able to annotate not only the information items themselves, but they
+     will also be able to annotate the relationships among them, which will
+     enable them to qualify and describe interdependencies between different
+     information sources and how they relate to a new conclusion or assessment
+     added by the developer. In essence, links between the information
+     items will be first class citizens in the knowledge base.</li>
+     </ul>
+
+     <p>Below is a diagram of the current <n/> architecture. A
+     User typically starts searching the Web for a certain document, or indicating
+     a pointer to a specific Web resource that contains useful information.
+     Each is considered an information item. Information items may include
+     raw information sources (an image, a text document, a video, etc.) as well
+     as products of previous analysis (by the user or by other users.)
+     All the information items are in some sense the knowledge base that <n/>
+     operates on, and we refer to it as the Semantically Marked Information
+     Base, or SMIB. We refer to an information item as an EI2 (Extended
+     Information Items).</p>
+
+     <center>
+	  <img src="arch.jpg"/>
+	  </center>
+
+     <p>Users extend the SMIB using two tools: the Annotation Tool and the Creation
+     Tool. They can use the EI2 Annotation Tool to add semantic annotations
+     to an EI2 to describe its contents and to relate them to other EI2.
+     For example, an EI2 may be annotated as containing a map, or an interesting
+     event. The Annotation tool can also be used to relate EI2.
+     The tool will provide an editor with a set of connectors. An example
+     is a connector to denote that two EI2s are contradictory. This way,
+     the user may link an EI2 that contains a description of a product as having
+     a tag price of $20 to another EI2 that has the same product with
+     a price of $25.</p>
+     <p>The Annotation tool draws on a library of semantic annotations and connectors
+     that will be based on a core domain-independent language defined by the
+     Semantic Annotation Vocabulary. An Interdependency Schema defines
+     a vocabulary for connectors based on a variety of dimensions: pertinence,
+     reliability, credibility, structural (x is example of y, x is part of y,
+     x describes y, etc.) causality (x1 x2...xn contribute to y, x1 x2...xn
+     indicate y, etc.) temporal ordering (x before y, x after y, x simultaneous
+     with y, etc.), argumentation (x may be reason for y, x supports y, etc.).
+     The Domain Schema contains a core vocabulary to annotate the content of
+     documents that extends the Interdependency Schema with domain terms.
+     Our plan is that <n/> will provide a core vocabulary, and users will
+     be able to extend it with additional terms.</p>
+     <p>The Creation Tool enables users to create new EI2. For example,
+     a user may create an EI2 as an assessment that he or she formulates based
+     on existing EI2. If a combination of some subparts of EI2 lets a
+     user conclude or decide on some definition, then the subparts can be captured
+     into a new Information Item, that drops all other irrelevant parts of the
+     original EI2. A new EI2 can be added by extracting or summarizing
+     some of the previous results.</p>
+     <p>Below is a snapshot of the current user interface of <n/>.
+     In this case, a user is using <n/> to decide whether a mission to take
+     Navy SEALs to Athens is feasible. Given the Web sources consulted
+     and the indicated capabilities of the SEAL team (shown on the left), the
+     user has entered the rationale for deciding that the operation is not feasible.</p>
+
+     <center>
+	  <img src="snapshot.jpg"/>
+	  </center>
+
+     <p/><p>We plan to extend <n/> with learning and adaptive techniques
+     in order to offer to the user improved and extended capabilities over time.
+     As users annotate more EI2 and create new EI2 that capture their analysis,
+     <n/> will be able to exploit this information and become increasingly
+     more proactive. We also plan to add a Query Facility that will allow
+     users to search the SMIB based on the semantic annotations of the EI2.
+     It will include a structured editor to guide users to formulate queries
+     using the semantic annotation vocabulary defined in the schemas.</p>
+     <p>In summary, <n/> provides users with tools that enable them to specify
+     information in increasingly more structured form, and to specify semantic
+     annotations that can be exploited for processing and integration of separate
+     information items.</p><br/>
+    </long>
+  </description>
+
+  <research>
+    <short>
+    Semantic Markup, Rationale Capture, Knowledge Aquisition.
+    </short>
+    <long>
+	 <p />
+	 <ul>
+<li>Developing a vocabulary to support semantic annotations for information interdependencies to capture the rationale for decisions as well as traces to the original information sources used. Our initial version of this language draws from research in various areas, including argumentation and discourse relations, logic deduction, process and plan representations, and event understanding.<br /></li> 
+
+<li>Developing semantic annotations of decisions and tradeoffs through the use of markup languages.  The initial version of this vocabulary is now available as a schema/ontology in <a href="http://www.w3.org/XML/Schema">XMLS</a>, <a href="http://www.w3.org/TR/rdf-schema/">RDFS</a>, and <a href="http://www.daml.org">DAML+OIL</a>. TRELLIS allows users to extend this vocabulary and its corresponding schemas.
+A nice result of this work is a <a href="http://trellis.semanticweb.org/comparison.html">comparison table</a> of semantic markup languages that helped us the features and tradeoffs of existing markup languages.  This table compares the features of XML Schema, RDF Schema, and DAML+OIL and is linked to examples of use of each feature. We also have tutorial <a href="http://trellis.semanticweb.org">slides</a> on semantic markup languages that highlight their features.<br /></li>
+
+<li>Developing an <a href="http://excalibur.isi.edu:8888/trellis_web/">interface</a> that helps users annotate information analysis and decision rationale.  The first version of this interface was released in August 2000 and includes a creation tool, an annotation tool, and search and collaborative capabilities.  We have used it to developed several scenarios that demonstrate generality of the approach, including intelligence analysis, genealogy research, and travel planning.<br /></li>
+
+<li>Annotating the design rationale of knowledge bases, to create a new generation of "Resilient Hyper Knowledge Bases" (RHKBs) that contain pointers to the original sources of knowledge as well as the analysis and decisions of the knowledge engineers that built it.<br /></li>
+    </ul>
+    </long>
+  </research>
+
+  <mainlink><a href="http://www.w3c.org/">World Wide Web consortium</a></mainlink>
+  <link>
+  <b>The Semantic Web</b>
+  <ul>
+  <li><a href="http://www.w3c.org/">World Wide Web consortium</a></li>
+  <li><a href="http://www.w3c.org/DesignIssues/Semantic.html">Tim Berners-Lee's vision of the Sematic Web</a></li>
+  <li><a href="http://www.w3c.org/DesignIssues/Semantic.html">The Semantic Web</a> and its
+    <a href="http://www.semanticweb.org/">Organization</a></li>
+  </ul>
+  </link>
+
+  <link>
+  <b>Markup Languages &amp; Tools</b>
+  <ul>
+  <li><a href="http://www.w3.org/RDF/">RDF</a></li>
+  <li><a href="http://www.w3.org/XML/">XML</a></li>
+  <li><a href="http://www.daml.org/">DAML</a></li>
+  <li><a href="http://dtsn.darpa.mil/iso/programtemp.asp?mode=347">The DARPA Agent Markup Language (DAML) program</a>
+    and its <a href="http://www.daml.org/">extended community</a>.</li>
+  </ul>
+  </link>
+
+  <link>
+  <b>Related Projects</b>
+  <ul>
+  <li><a href="http://www.cs.umd.edu/projects/plus/SHOE/">SHOE</a></li>
+  <li><a href="http://ontobroker.aifb.uni-karlsruhe.de/">OntoBroker</a></li>
+  <li><a href="http://www.dublincore.org/">The Dublic Core Metadata Initiative</a></li>
+  <li><a href="http://www.w3.org/Metadata/Activity.html">W3C Metadata working group</a></li>
+  </ul>
+  </link>
+
+<!-- Demo -->
+<demo>
+<center>
+<b><font face="Arial,Helvetica" size="+1">A Screen Walkthrough
+Demonstration of <n /></font></b>
+<p /><b><font face="Arial,Helvetica">Version 1.0, August 2001</font></b></center>
+
+<p /><b><i><font face="Arial,Helvetica">Brief Overview</font></i></b>
+<p /><n /> is an interactive environment that will allow users to add their
+observations, viewpoints, and conclusions as they analyze information by
+making semantic annotations to documents and other on-line resources. We
+view this as a knowledge acquisition problem, where users are adding new
+knowledge to the system based on their expertise as they analyze information.
+<p /><n /> can be accessed from the main project page at <a href="http://trellis.semanticweb.org">http://trellis.semanticweb.org</a>,
+or from <a href="http://www.isi.edu/expect/projects/trellis">http://www.isi.edu/expect/projects/trellis</a>.
+<p />Each analysis that the user performs has a purpose that is used to describe
+the issue analyzed. <n /> asks the user to specify a purpose, which
+is a short sentence that summarizes the issue or hypothesis in question.
+<p />Each piece of information or data that is used in the analysis is called
+a statement. A statement can be linked to a Web resource, it could
+be a manual or authoritative source. <n /> allows the user to access
+a Web search engine and use the results of the search to create new statements.
+Users can also enter statements that are not Web pages but instead have
+text such as an email message, or a note about a conversation, or any other
+text. The user can specify a URL but it is not necessary. In
+addition to input information and data, the user can add statements that
+indicate intermediate conclusions or hypothesis. Statements can also
+be used to indicate the sources of some information. Sources can
+be qualified according to the user's view on their reliability and credibility.
+The user can define new statements or modify existing ones at any time.
+<p />The overall analysis is composed of units, which are composed in turn
+of sub-units. Each unit relates individual statements using a construct
+from the <n /> vocabulary. All the statements within a unit are linked
+to some Web source or user-provided text. Users can provide reasons
+("because") or not, depending on the amount of detail that they wish to
+capture in each part of the analysis. Only some portions of a given
+unit are part of the <n /> language. The rest of the components
+of the unit (i.e., the statements) are treated as strings and <n /> will
+not process them further.
+At any time, users can compose their analysis from the statements that
+they have selected and created. The analysis of a purpose is made
+of units, which may have sub-units in turn. Users can collapse or
+expand any portions of the analysis and manipulate units and sub-units
+to refine their interdependencies. Users can also rearrange the units in
+the analysis by dragging and dropping them in the analysis window.
+This is useful in cases where the analysis is done bottom-up and the users
+wants to relate units that were created previously separately.
+<p />Sometimes a user does not know yet how to use a statement in an analysis
+but would like to have that statement included in the analysis frame.
+Users can select statements and include them in the analysis under a 'Notes
+and other information' category. This facility is also useful to
+drag and drop statements into the analysis.
+<p />Users can also import statements and units from other users if they
+are relevant to your purpose. The user can do keyword search in either
+purpose names or statement titles entered by other users.
+<p /><n /> can be used offline if you cache Web pages before disconnecting
+from the network. Statements can be selected and a cached copy of their
+corresponding Web pages is created and used until otherwise indicated.
+<p />Users can view the results of their analysis annotated in several markup
+languages: XML, RDF, and DAML, corresponding to the Schemas and ontologies
+that define the <n /> vocabulary.
+<br />
+<br />
+<p /><b><i><font face="Arial,Helvetica">Screen Walkthrough of an Example</font></i></b>
+<br />
+<p /><b><font face="Arial,Helvetica" size="-1">Start with the Login Screen.</font></b>
+<p /><img src="demoimages/imageRD5.JPG" />
+<br />
+<br />
+<br />
+<p /><b><font face="Arial,Helvetica" size="-1">Each analysis that the
+user performs has a "purpose" that is used to describe the issue analyzed.<br />
+After logging in, you are presented with the purposes which you have (or
+a person with your login ID has) made so far. By default, there are 3 purposes
+which are added for each new user.</font></b>
+<p /><img src="demoimages/imageRP6.JPG" />
+<br />
+<br />
+<br />
+<p /><b><font face="Arial,Helvetica" size="-1">You can make a new purpose
+by the "New Purpose" button, which prompts for the name of the new purpose</font></b>
+<p /><img src="demoimages/imageQJJ.JPG" />
+<br />
+<br />
+<br />
+<p /><b><font face="Arial,Helvetica" size="-1">After creating a new purpose
+OR when editing an existing purpose, you end up with the <i><u>purpose
+editor window </u></i>as shown below. The left side of the screen is used
+to find, select, and edit the statements used in analyzing the purpose.<br />
+The right side of the screen is used to construct and view the details
+of the analysis.</font></b><b><font face="Arial,Helvetica" size="-1"></font></b>
+<p /><b><font face="Arial,Helvetica" size="-1">A <i><u>query frame</u></i>
+is in the top left hand side, in which you can fire off queries to a search
+engine (in this version of <n /> the search engine is Google), and get
+the results in the <i><u>results frame</u></i> below.</font></b>
+<br /><b><font face="Arial,Helvetica" size="-1">There is nothing in the
+current selections here, since this is a new purpose. Nor is there anything
+in the <i><u>statements frame</u></i>, which is the frame shown in the
+lower left of the screen</font></b>
+<p /><img src="demoimages/image7GI.JPG" />
+<br />
+<br />
+<p /><b><font face="Arial,Helvetica" size="-1">The results from the search
+engine that you find relevant can be selected by clicking their icon and
+clicking on 'Add Selections'.<br /> The Web pages selected are added to
+the statements frame at the bottom left.</font></b>
+<br /><b><font face="Arial,Helvetica" size="-1"></font></b><br />
+<p /><img src="demoimages/imageCPO.JPG" />
+<br />
+<br />
+<br />
+<p /><b><font face="Arial,Helvetica" size="-1">The selected pages can
+be renamed to reflect the salient fact that they contain that needs to
+be brought up in the analysis of the overall purpose.<br /> You can rename
+something by selecting it and pressing Ren (one of the buttons for editing
+of current selections).<br /> A selected page can also be deleted (selecting
+it and then clicking on the Delete button).<br /> Anything in the statements
+frame can also be moved to the analysis frame on the right hand side to
+start building the analysis (by selecting it and clicking the "Move ->"
+button).</font></b>
+<p /><img src="demoimages/imageGEQ.JPG" />
+<br />
+<br />
+<br />
+<br />
+<p /><b><font face="Arial,Helvetica" size="-1">Not all statements come
+from Web pages.<br /> You can also add new statements manually, for example
+an email message, or a note about a conversation, or any other text.<br />
+This is done by clicking on "Add user data".<br /> You can specify a URL
+if you wish, but it is not necessary.</font></b><b><font face="Arial,Helvetica" size="-1"></font></b>
+<p /><b><font face="Arial,Helvetica" size="-1">Any new statements entered
+manually also have to be selected in order to be added to the statements
+frame and ultimately to the analysis.</font></b>
+<br /><b><font face="Arial,Helvetica" size="-1"></font></b><br />
+<p /><img src="demoimages/imageTGQ.JPG" />
+<br />
+<br />
+<br />
+<p /><b><font face="Arial,Helvetica" size="-1">Some statements denote
+a source (e.g., CNN) that you want to cite in your analysis.<br /> You
+can describe a source in detail using the 'Desc' button as shown. This
+description will be shown whenever you click on this source statement.</font></b>
+<p /><img src="demoimages/imageF1O.JPG" />
+<br />
+<br />
+<br />
+<p /><b><font face="Arial,Helvetica" size="-1">You can also view user-entered
+statements by clicking on them.</font></b>
+<p /><img src="demoimages/image3MG.JPG" />
+<br />
+<br />
+<br />
+<p /><b><font face="Arial,Helvetica" size="-1">To modify a user-entered
+statement, select it and click on the Edit button, then enter the new information.</font></b>
+<p /><img src="demoimages/imageFTV.JPG" />
+<br />
+<br />
+<br />
+<br />
+<p /><b><font face="Arial,Helvetica" size="-1">At any time, you can compose
+your analysis from the statements that you have selected and created.<br />
+The analysis of a purpose is made of units, which may have sub-units in
+turn.<br /> Click the "Add Unit" button, where you can select statements
+and constructs from the <n /> language in order to create an expression.<br />
+You can also annotate the source of the analysis and qualify the source
+for its reliability and credibility.</font></b><b><font face="Arial,Helvetica" size="-1"></font></b>
+<p /><b><font face="Arial,Helvetica" size="-1">You can build a unit using
+the default <n /> constructs, but you can also define your own by selecting
+"New".</font></b>
+<br /><b><font face="Arial,Helvetica" size="-1"></font></b><br />
+<p /><img src="demoimages/imageQLE.JPG" />
+<br />
+<br />
+<br />
+<br />
+<p /><b><font face="Arial,Helvetica" size="-1">Units are normally shown
+as a collapsible list that the user can select and expand. If any sub-units
+are added after selecting a statement, they will be added under this statement
+in the collapsible tree.</font></b>
+<p /><img src="demoimages/imageOEU.JPG" />
+<br />
+<br />
+<br />
+<p /><b><font face="Arial,Helvetica" size="-1">You can also use statements
+and units from other users if they are relevant to your purpose.<br />
+To do this, click on the "Import" button and you will be prompted for a
+keyword to search (here 'Iraq') in either Purpose names or Statement titles
+entered by other users.</font></b>
+<p /><img src="demoimages/imageKD4.JPG" />
+<br />
+<br />
+<br />
+<br />
+<p /><b><font face="Arial,Helvetica" size="-1">From the results obtained,
+you can select a purpose.<br /> The system will show an uneditable version
+of the analysis frame. You can select any unit and import it.<br /> Notice
+that if you select the top unit the entire analysis is imported.</font></b>
+<p /><img src="demoimages/imageVV3.JPG" />
+<br />
+<br />
+<br />
+<br />
+<p /><b><font face="Arial,Helvetica" size="-1">After importing, the selected
+units and sub-units (along with the statements used in them) as well as
+the sources are added to your own set.</font></b>
+<p /><img src="demoimages/image270.JPG" />
+<br />
+<br />
+<br />
+<br />
+<p /><b><font face="Arial,Helvetica" size="-1">You can also rearrange
+the units in the analysis by dragging and dropping them in the analysis
+frame.<br /> This is useful if you do your analysis bottom-up and want
+to relate units that you created previously separately.</font></b><b><font face="Arial,Helvetica" size="-1"></font></b>
+<p /><b><font face="Arial,Helvetica" size="-1">To move a unit, select
+it first by moving the mouse to the left side of the triangle widget and
+clicking on it.<br /> Hold down the mouse and move it to the place
+where you want the unit to be.<br /> A black line shows the position where
+the unit would be dropped.<br /> A transparent box shows its future parent
+unit. (So you can either drag to, or into).</font></b><b><font face="Arial,Helvetica" size="-1"></font></b>
+<p /><b><font face="Arial,Helvetica" size="-1">There are 2 modes of dragging
+: Left-click and drag drags the whole tree (as shown), and right click
+and drag just drags the particular unit.</font></b>
+<br /><b><font face="Arial,Helvetica" size="-1"></font></b><br />
+<p /><img src="demoimages/imageCE4.JPG" />
+<br />
+<br />
+<br />
+<br />
+<p /><b><font face="Arial,Helvetica" size="-1">After the unit has been
+moved:</font></b>
+<p /><img src="demoimages/imageF1H.JPG" />
+<br />
+<br />
+<br />
+<br />
+<p /><b><font face="Arial,Helvetica" size="-1"><n /> can be used offline
+if you cache Web pages before disconnecting from the network. Select a
+statement and click 'Toggle'. This link now points to a cached copy. A
+link pointing to a cached copy is highlighted in a darker green color.</font></b>
+<p /><img src="demoimages/imageTQT.JPG" />
+<br />
+<br />
+<br />
+<br />
+<p /><b><font face="Arial,Helvetica" size="-1">Sometimes you do not know
+yet how you want to use a statement in an analysis but you want to include
+it in the analysis frame. You can select statements and move them to the
+analysis frame with the 'Move->' button. These selections go under a 'Notes
+and other information' category.</font></b><b><font face="Arial,Helvetica" size="-1"></font></b>
+<p /><b><font face="Arial,Helvetica" size="-1">This facility is useful
+to drag and drop statements into the analysis.</font></b>
+<br /><b><font face="Arial,Helvetica" size="-1"></font></b><br />
+<p /><img src="demoimages/imageTLJ.JPG" />
+<br />
+<br />
+<p /><b><font face="Arial,Helvetica" size="-1">You can modify units in
+the analysis frame by clicking on the "Edit" button.</font></b>
+<br /><b><font face="Arial,Helvetica" size="-1"></font></b><br /><b><font face="Arial,Helvetica" size="-1"></font></b>
+<p /><b><font face="Arial,Helvetica" size="-1">The "Remove" button deletes
+the selected unit and all of its sub-units.</font></b>
+<br /><b><font face="Arial,Helvetica" size="-1"></font></b><br /><b><font face="Arial,Helvetica" size="-1"></font></b>
+<p /><b><font face="Arial,Helvetica" size="-1">The "Restore" button is
+used as a single-step undo.</font></b>
+<br /><b><font face="Arial,Helvetica" size="-1"></font></b><br /><b><font face="Arial,Helvetica" size="-1"></font></b>
+<p /><b><font face="Arial,Helvetica" size="-1">The "Extract" button is
+used after selecting a statement. Then all the sources that it finds inside
+the statement are added to the current selections.</font></b>
+<br /><b><font face="Arial,Helvetica" size="-1"></font></b><br />
+<br />
+<br />
+<br />
+<br />
+<p /><b><font face="Arial,Helvetica" size="-1">You can also view the
+results of your analysis annotated in several markup languages. To view
+this, go back to the Main Screen where you can see the marked up versions
+of the purposes that were just edited, by clicking on the 'XML' button
+for the XML markup, 'RDF' button for RDF markup and 'DAML' button for the
+DAML version.</font></b>
+<br /><b><font face="Arial,Helvetica" size="-1"></font></b><br /><b><font face="Arial,Helvetica" size="-1"></font></b>
+<p /><b><font face="Arial,Helvetica" size="-1">In this example, the XML
+version of the 'Use of chemical weapons by Iraq' purpose is shown:</font></b>
+<br /><b><font face="Arial,Helvetica" size="-1"></font></b><br />
+<p /><img src="demoimages/imageLS3.JPG" />
+<br />
+<br />
+<br />
+<br />
+<br />
+<p /><b><font face="Arial,Helvetica" size="-1">You can also see the Schemas
+(DTD, XML Schema) for the XML data, the RDF Schema for the RDF data, and
+the DAML ontology by clicking the respective buttons on top of the screen.</font></b>
+<p /><img src="demoimages/imageRP7.JPG" />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<p /><b><font face="Arial,Helvetica" size="-1">The 'Save' Button is used
+to take a single backup of all your purposes. If at a later time, the 'Restore'
+button is clicked, all the purposes from the time that 'Save' was clicked
+are restored.</font></b>
+<br /><b><font face="Arial,Helvetica" size="-1"></font></b><br /><b><font face="Arial,Helvetica" size="-1"></font></b>
+<p /><b><font face="Arial,Helvetica" size="-1">The 'Help' Button brings
+up a User Guide.</font></b>
+<br /><b><font face="Arial,Helvetica" size="-1"></font></b><br /><b><font face="Arial,Helvetica" size="-1"></font></b>
+<p /><b><font face="Arial,Helvetica" size="-1">The 'Logout' Button brings
+you back to the Login page.</font></b>
+<br /><b><font face="Arial,Helvetica" size="-1"></font></b><br /><b><font face="Arial,Helvetica" size="-1"></font></b>
+<p /><img src="demoimages/imageRP6.JPG" />
+</demo>
+</project>

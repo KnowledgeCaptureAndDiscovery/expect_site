@@ -1,0 +1,115 @@
+<HTML>
+<HEAD>
+   <TITLE>EXPECT introduction</TITLE>
+
+  <SCRIPT language="javascript">
+ 
+  about_on = new Image();
+  about_on.src = "./exp-about.gif";
+
+  research_on = new Image();
+  research_on.src = "./exp-research.gif"; 
+
+  projectmemb_on = new Image();
+  projectmemb_on.src = "./exp-pr-members.gif";
+
+  publications_on = new Image();
+  publications_on.src = "./exp-publ.gif";
+
+  movie_on = new Image();
+  movie_on.src = "./exp-mov.gif";  
+   
+function swampImages(imagename, cimage)
+  {
+      imgsrc = './' + cimage;
+      document[imagename].src = imgsrc;
+  } 
+  </SCRIPT>
+ 
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+
+<TABLE  align=center WIDTH=730 border=0>
+<TR><TD colspan=3>
+
+<P ALIGN=CENTER>
+<IMG
+SRC="expect.jpg"><IMG
+SRC="expect-1.jpg"><BR>
+
+<A HREF="./"
+onmouseover="swampImages('About','exp-about.gif'); return true"
+onmouseout="swampImages('About','exp-about-bl.gif');return true" 
+onclick="return false"><IMG
+SRC="exp-about-bl.gif" BORDER=0 NAME="About"></A>
+
+<A HREF="./research.html"
+onmouseover="swampImages('Research','exp-research.gif'); return true"
+onmouseout="swampImages('Research','exp-research-bl.gif');return
+true"><IMG SRC="exp-research-bl.gif" BORDER=0 NAME="Research"></A>
+
+<A HREF="./pr-members.html"
+onmouseover="swampImages('Members','exp-pr-members.gif'); return true"
+onmouseout="swampImages('Members','exp-pr-members-bl.gif');return true"><IMG
+SRC="exp-pr-members-bl.gif" BORDER=0 NAME="Members"></A>
+
+<A HREF="./publications.html"
+onmouseover="swampImages('Publ','exp-publ.gif'); return true"
+onmouseout="swampImages('Publ','exo-publ-bl.gif');return true"><IMG
+SRC="exo-publ-bl.gif" BORDER=0 NAME="Publ"></A>
+
+<A HREF="./demo.html"
+onmouseover="swampImages('Demo','exp-mov.gif'); return true"
+onmouseout="swampImages('Demo','exp-mov-bl.gif');return true"><IMG
+SRC="exp-mov-bl.gif" BORDER=0 NAME="Demo"></A></P>
+</TD></TR>
+
+
+
+<TR><TD WIDTH=100></TD>
+
+<TD WIDTH=550>
+
+<BR><BR>
+
+<P align=center><B><FONT FACE=ARIAL COLOR=blue SIZE=+1>Welcome to the EXPECT Project!</FONT></B></P>
+
+
+
+<P>EXPECT is an environment for developing knowledge-based systems
+that includes knowledge acquisition tools to extend  and modify
+knowledge bases.</P>
+
+<P align=center><IMG SRC="./diagram-small.jpg"></P>
+
+<HR>
+
+<p><B>See a Quicktime <A
+HREF="http://www.isi.edu/expect/expect-movie.m4v"><blink>movie</blink></A> about
+the EXPECT project.</B></P>
+
+<HR> 
+
+
+<p>For more information about EXPECT, send mail to <A
+HREF=mailto:expect@isi.edu>expect@isi.edu</A>.</P>
+
+<HR SIZE=2>
+
+<P ALIGN=CENTER><FONT FACE=ARIAL SIZE=-1>About EXPECT |
+<A HREF="./research.html">Research</A> | <A
+HREF="./pr-members.html">Project Members</A> | <A
+HREF="./publications.html">Publications</A> | <A
+HREF="./demo.html">Movie</A> | <BR>
+| <A HREF="http://www.isi.edu/divisions/div3">Intelligent Systems
+Division</A> | <A HREF="http://www.isi.edu">Information Sciences
+Institute</A> | <A HREF="http://www.usc.edu">USC</A> |</P>
+</TD>
+
+<TD WIDTH=100></TD>
+
+</TR>
+
+</TABLE>
+</BODY>
+</HTML>

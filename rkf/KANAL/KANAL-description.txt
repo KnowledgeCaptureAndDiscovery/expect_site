@@ -1,0 +1,449 @@
+                         KANAL:
+      KNOWLEDGE ANALYSIS USING INTERDEPENDENCY MODELS
+
+
+               Jihie Kim and Yolanda Gil
+          USC / Information Sciences Institute
+
+                    August 23, 2000
+
+                    Internal Report
+
+
+This document describes ISI's plans for developing a Knowledge
+Analysis module for the SRI team within the Rapid Knowledge
+Formation (RKF) program.
+
+The role of Knowledge Analysis within the architecture of the
+RKF SRI team is to guard the Knowledge Server (KS) against possibly
+invalid statements entered by the user and to point out to the
+Interaction Manager (IM) what additional knowledge needs to be acquired.
+Its main functions are:
+
+- relating different knowledge inputs among themselves and to the existing KB
+- detecting inconsistencies and knowledge gaps
+
+Our approach is inspired on previous work on EXPECT using 
+Interdependency Models
+[Kim and Gil AAAI-2000, Kim and Gil IUI-2000, Kim and Gil AAAI-99,
+Swartout and Gil KAW-95, Gil and Melz AAAI-96].  EXPECT derives models
+of the interdependencies between different pieces of knowledge by
+analyzing how knowledge is used during problem solving.  By analyzing these
+interdependencies, EXPECT's knowledge acquisition tool is able to detect
+inconsistencies and missing knowledge and alert the user of potential
+problems in the knowledge base.  Finally, based on the context provided
+by the Interdependency Models it can guide the user in fixing these problems
+by correcting inconsistencies and by adding further knowledge.
+
+There are many different kinds of interdependencies.  Our past work on
+EXPECT analyzed problem solving interdependencies, which model how
+different pieces of problem solving (procedural) knowledge relate to
+each other and to the class definitions in domain ontologies.
+In our new work, we will exploit other kinds of interdependencies
+that will take advantage of the reasoners provided within the
+architecture of the RKF SRI team.
+
+Our initial work will concentrate on analysis of process knowledge,
+i.e., knowledge describing activities and subprocesses as well as their
+relationships.  Entering process knowledge is a central activity in both CPs,
+Process knowledge is a distictive and ubiquitous kind of knowledge
+in many practical domains.  Since process models will be expressed as
+composed concepts in KM, the approach proposed would be applicable
+to other kinds of knowledge specified by composition.
+
+The overall system is designed with two assumptions:
+
+- there are no errors in the models retrieved from the component library
+- the user interface will not allow users to define inconsistent mappings
+during composition.
+
+Thus, the Knowledge Analysis module will not be designed to detect or
+correct those kinds of errors.
+
+Our implementation of the Knowledge Analysis module will be called KANAL
+The name is inspired on 'canal' which means channel, conduit, and passage
+and captures the notion that this module connects the interface and
+the Knowledge Server.
+
+
+
+I. Describing process models
+
+A process model is composed of a number of (sub)steps.  We describe here the
+assumptions that we make on how process models will be represented.
+
+Each individual step can have preconditions and effects, where
+the preconditions specify the conditions needed to be satisfied to activate
+the step and the effects describe KB changes that result from the execution
+of the step.  For example, an Enter step has a condition that that the
+objects to enter should be near the entrance and its effect will include
+a location change from outside of a space to inside of the space.
+
+In KM, they are represented as preconditions and add/delete lists in STRIPS
+operators.
+
+The steps within a process model are connected to other steps through
+different kinds of links that include:
+
+   o decomposition links between steps and their substeps
+   o temporal links
+   o disjunctive alternatives
+   o causal links
+
+KM includes a simulator that can execute a sequence of steps.
+
+
+II. Interdependecy Models
+
+We will perform two kinds of checks on the process models.
+Static checks will be performed by posing questions about various
+features of the process model.  Dynamic checks will be performed
+by simulating the execution of the process model.
+
+In order to perform static checks, we will maintain a list of sample
+KB query templates, such as retrieving the values of a certain kind
+of role, part-of relations, and type definitions.  The analyzer
+will generate a list of instantiated queries from a model,
+ordering them based on heuristics.  User can select key queries from
+this list and also specify the answers expected from the queries.
+An explanation or trace of the answer to a query will be considered
+as a model of the interdependencies in that it reflects how different
+pieces of knowledge are put together to generate the answer.
+
+Dynamic checks will be done on the simulated execution of the process model.
+Symbolic execution is an established software evaluation technique where
+program execution is simulated using symbols rather than actual values for
+input data, and program output is expressed as logical or mathematical
+expressions involving theses symbols [Wallace et al 96; Dillon 90;
+Douglas and Kemmerer 94].  EXPECT's problem solver used this technique,
+by generating problem solving trees of variabilized (symbolic) goals.
+KM's simulation of process models can be seen as a symbolic execution
+of a linearization of the process model using Skolem instances.
+We adopt this technique for checking process models, using the simulation
+as a tool to generate Interdependency Models.
+
+KANAL's implementation will build on KM's simulator and invoke it
+to generate alternative simulations of a process model as follows.
+
+KM can simulate a linear sequence of steps.  A process model
+may contain many alternative disjunctive branches within the model,
+there will be many possible linearizations.  KANAL will include a
+capability to analyze the disjunctive branches within a process model,
+and generate a subset of the possible linearizations that will be
+simulated (the subset will be chosen using heuristic principles
+that will be described later).
+
+KM's simulator uses Skolem instances of the objects used in the steps.
+KANAL will create an instance of a given model and use the simulator to test the
+model. 
+
+SIMULATE(model)
+1) create an instance of the composed concept 
+2) create a new situation
+3) iterate these two substeps
+    3-1) get the next event (in the beginning, this will be the first event)
+    3-2) simulate the step
+
+Note: this needs to be extended to support disjuctive and conjuctive sequences
+as described below.
+
+Later on, we will investigate the following extensions:
+
+* History and evolution of Interdependency Models:
+KANAL will maintain a history of tests (both simulations and queries) that
+will include the answers and results that were specified by the user as
+being correct.  As the user continues to edit and extend the model,
+KANAL can check if any of the tests that were correctly answered before
+are no longer correctly answered and if so fix the problem.
+
+* Checking intermediate results:
+When no answer or an invalid response is obtained, KANAL will use a
+divide-and-conquer strategy to determine which parts of the solution cannot
+be obtained.  For example, if the simulator does not produce some expected
+result, some parts of the overall process can be simulated and checked
+for errors.
+
+* Testing different initial states and different arguments:
+Although the simulation of a process could be run without errors,
+there might be cases where the expected effects cannot be achieved
+depending on how the initial state is setup.  By using different
+initial states which can represent alternative situations we may
+be able to find gaps/errors in the process models.
+
+
+
+
+III. Validation and Verification of Process Models using Interdependencies
+
+Model validation consists of checks on the knowledge already entered in
+the system.  Another important issue is model verification, where a tool
+should help the user check that the knowledge entered does in fact model
+things as they had in mind (or to comply with some spec).
+
+KANAL will exploit several techniques for process model validation and
+verification as we describe here.
+
+
+III-1. Checking unachieved preconditions
+
+A precondition is not achieved either because there is no previous 
+step with that
+effect or some steps (in another conjunct or in its own sub-sequence) undo the
+precondition.  For example, a Fermenting-Bacteria step may undo a
+precondition (cleaned Test Area) of a Transfer-Animals-to-Test-Site step when
+the test area is near and the waste from the fermentation process is still
+around.
+
+The general algorithm to check preconditions is as follows:
+
+CHECK UNACHIEVED PRECONDITIONS
+   1.  Notice problem
+        1.1.  SIMULATE
+        1.2.  Collect failed step (or steps)
+        1.3.  Collect unachieved precondition (or preconditions) of step
+                    by tracing KM's "is-possible" slot
+        1.4. Show them to user
+   2.  Help user fix problem
+        2.1  Suggest that there are missing steps in the process model
+                2.1.1  Find components in the library that have the effect (or
+			effects) needed by the failed action.
+                2.1.2  Suggest to the user to insert one of these
+			components somewhere within the current process model
+			before the failed step.
+        2.2  Suggest that there are missing ordering constraints in the
+	    process model
+               2.2.1  Find an action (or actions) that was executed
+			before the failed step that may have an effect
+			(or effects) that undid the unachieved precondition
+			(or preconditions).
+                      Find an action (or actions) that follows the
+			failed step and have an effect (or effects) that
+			asserts the unachieved precondition.
+               2.2.2  Suggest to the user to insert an ordering constraint
+			between that action and the failed step.
+        2.3. Suggest to delete the step whose preconditions were not achieved
+             when the step is not needed
+        (2.4. Suggest to modify the preconditions when they are not needed)
+
+
+III-2 Checking expected/unexpected effects
+
+The expected effects are the effects the user indicates that should
+result from the simulation and/or the postconditions of the composed concept.
+For example, the user may expect that after a VirusInvadesCell the virus
+should be located inside the cell.  After the simulation, KANAL can check
+if the expected effects are in fact achieved.  Also, there may be
+additional results of the simulation that are not expected effects,
+and KANAL will highlight them for the user to check that they should
+in fact occur.
+
+The algorithm is as follows:
+
+CHECK EFFECTS
+   1. Compute expected effects
+       collect expected effects as specified by the user
+   2. Notice problem
+       2.1. SIMULATE
+       2.2. Collect unachieved effects
+       2.3. Collect effects which are not expected
+               and record the actions that created the unexpected effects
+       2.4. Show them to user
+   3. Help user fix problem
+       3.1. Help user fix unachieved effects
+            3.1.1. Suggest that there are missing steps in the process model
+                   2.1.1  Find components in the library that have the 
+effect (or
+			effects) needed by the failed action.
+                   2.1.2  Suggest to the user to insert one of these
+			components somewhere within the current process model
+            3.1.2. Suggest that there are missing ordering constraints in the
+		  process model
+		  2.2.1  Find an action (or actions) that may have an effect
+			(or effects) that undid the expected effect
+                          Find an action (or actions) that asserts the expected
+			effect
+                   2.2.2  Suggest to the user to insert an ordering constraint
+                         in order to maintain the expected effect where needed
+       3.2. Help user fix unexpected effects
+            3.2.1. Suggest to delete the actions that created the effects
+            3.2.2. Suggest to add an action (or actions) that can undo 
+the effects
+                   3.2.2.1. Find components that can delete the effects
+                   3.2.2.2. Suggest to the user to insert the
+                            components somewhere after the actions that
+                            have the unexpected effects
+            3.2.3. Suggest that there are missing ordering constraints
+                   3.2.3.1. Find an action (or actions) that was executed before
+                            the effect-created action that can undo the effect
+                   3.2.3.2. Suggest to the user to insert an ordering
+                            between that action (or actions) and the
+			               action that has the unexpected effects
+
+
+III-3. Checking unordered steps
+
+Users may either forget to specify some of the links, or add incorrect links.
+We found two such errors in MacMahon's BW production model, even though it
+can be considered a relatively small and simple model and many people have
+looked at it (one error is that the two substeps of Complete-Agent-Plan
+are both numbered as 2; the other error is that the ordering between the
+two substeps of Obtain-Agent is missing.)  Although these may be simple
+errors, in more complex models users may generate more serious problems
+and have difficulty noticing and fixing them.
+
+These problems may be detected when the steps are mapped to components in
+the library that have certain ordering constraints already specified, or by
+simulating the steps and doing the checks described in III-1 and III-2.
+However, in some cases these errors will be detected by user verification
+of the model, since the system will not have enough knowledge to detect them.
+In order to make the unconstrained ordering more apparent to the user,
+one technique is to show the user different orderings of the steps by
+drawing the steps in different layouts.  They will be able to check if
+the lack of ordering constraints is in fact right.  We will support such
+a way of viewing the models.
+
+CHECK ORDERING CONSTRAINTS
+   1. Notice Problem
+      1.1. Find unordered substeps in the model
+      1.2. Display them in different layouts and let the user mark
+           incorrect sequences or subsequences
+   2. Help user fix problem for each unusual sequence
+      2.1. Find the first action in the unusual subsequence
+      2.1. Suggest addition of ordering constraints
+
+
+III-4. Checking disjunctive branches in models
+
+When there are disjunctive branches in a model, the user may not
+notice that some of the combinations of alternatives should in fact
+not be possible.  KANAL will walk the user through different branches
+in the models by showing them different alternative combinations of
+substeps.
+
+CHECK DISJUNCTIVE SEQUENCES
+   1. Notice Problem
+      1.1. Compute all the disjuctive paths in the model
+      1.2. Generate an example for each path
+           NOTE: this needs an extension to the SIMULATE
+      1.3. Show them to user and let user mark ununsual sequences
+	  in the paths
+   2. Help user fix problem for each unusual sequence
+      2.1. Find the first action in the unusual subsequence
+      2.1. Suggest link changes or modifications of the actions
+
+
+III-5. Finding redundancies
+
+If there are redundant sub-sequences or redundant steps in the model,
+KANAL can propose to merge them for efficiency.  For example, the initial
+substeps of Acquire-Equipment may be the same as some substeps of
+Acquire-Production-Materials, and they can be shared.
+
+CHECK REDUNDANT SEQUENCES
+   1. Notice Problem
+      1.1. find conjunctions of sequences that have the same initial sequences 
+   2. Help user fix problem
+      2.1. highlight the same sub-sequences and ask if user wants to merge them
+
+III-8. Checking loops
+
+Loops are not necessarily a problem in process models.  For example,
+a test-and-clean operation for biological weapon production
+can be repeated multiple times.  However, they can be a problem in
+some cases especially when there is a loop across many steps.
+The analyzer will provide a warning for such cases.
+
+CHECK LOOPS
+   1. Notice Problem
+      1.1. Find loops in the model
+      1.2. Highlight them with warning
+   2. Help user fix problem
+      2.1. Ask the user to indicate the step that needs to preceed the others
+      2.1. Suggest link changes or additions to make that step preceed 
+the others
+
+III-9.  Checking objects
+
+The objects that play a role in a substep, such as the equipment used for a
+process, are resources that the step may produce, consume, or use.
+We will perform checks on the use of resources (incorrectly sharing the same
+non-shareable resource) based on a theory of resources that we have developed
+that extends CMU's OZONE resource scheduling ontology.
+
+III-10.  Other checks
+
+KANAL will perform additional checks by exploiting the reasoners available
+in the KS, background theories available in the KB, and features of the
+user interfaces.  For example, in order to check temporal constraints
+between the steps KANAL may invoke a temporal reasoner to detect
+problematic temporal constraints but will need the combined functionality
+of the simulation and the temporal reasoner to check the temporal constraints
+more thoroughly.
+
+
+V. Principles for guiding Knowledge Analysis
+
+As the user enters more complex knowledge and the knowledge
+bases grow larger, the algorithms and techniques outlined above
+will have steps that would generate many possibilites.  The user
+will not be able to handle a system that makes him or her confirm
+or check thoroughly every single possible flaw in the model.
+We will use heuristics to guide the interaction so that it explores
+the most salient errors and problem areas in the model.
+
+We will use several principles that will guide the Knowledge
+Analyzer, and will be implemented as heuristics in the
+algorithms described above.
+
+
+V-1. Principle of practical validation (PPV)
+
+PPV:  Invalid/incomplete statements are more likely to appear in
+knowledge fragements that have not been exercised by using them
+to solve problems or answer questions.
+
+
+V-2. Principle of experiential context (PEC)
+
+PEC: Invalid/incomplete statements are more likely to appear in
+knowledge fragments where limited prior knowledge (theories, components,
+models, etc) can be or has been brought to bear.
+
+
+V-3. Principle of local consistency (PLOC)
+
+PLOC: Inconsistencies are more likely appear in knowledge fragments
+that have not been defined and/or cannot be viewed in proximity
+(spatial, temporal, representational, or inferential) by the user
+
+
+
+VI. Evaluation
+
+To evaluate the Knowledge Analysis module we will perform a tool ablation
+experiment.  We will create an ablated version of the RKF SRI system that will
+not contain KANAL.  Subjects will be asked to create process models with the
+whole system and with the ablated version.  We will use a range of process
+models, including relatively simple ones (5-10 steps) and more complex ones
+(several dozens of steps).  The simpler models will probably be taken from
+the TKCP, for example of the size of the VirusInvadesCell model.  The more
+complex models can be from the EKCP, where for example BW production models
+may consist of up to 200 steps.
+
+Our gold standard will be process models created by experts that are checked
+for errors manually and thoroughly by other experts and by knowledge engineers.
+We will assess KANAL's competence by comparing the quality of the resulting
+process models by measuring the number of errors that the models contain in
+both conditions.   We will also assess KANAL's proactive help to the user
+in fixing problems by measuring the average time to fix errors.  In the
+ablated condition, we will add a second session in the experiment where
+the subjects will be told by the experimenters about the errors in their
+models and will be asked to fix the errors using the ablated version of
+the tool.  The time to fix these errors will be compared with the time
+to fix similar kinds of errors in the non-ablated condition where
+subjects are using KANAL and following its suggestions.
+
+We will also analyze KANAL's coverage in terms of what errors were not
+detected, and will direct our future efforts to extend KANAL to address those
+errors.
+

@@ -1,0 +1,644 @@
+;;(in-package "EVALUATION")
+;;(use-package '("EXPECT" "PLANET"))
+;;(loom::use-loom "EVALUATION" :dont-create-context-p t)
+(in-package "EVALUATION")
+
+
+(defconcept hpkb-plan
+  :is-primitive (and COA
+		 ;; This allows us to inherit aspects and stuff.
+		 ;; It should not override the definition of COA 
+		 ;; in the ontology..
+		 (:some evaluation-aspect feasibility-evaluation-structure)
+		 ;; these are commented out while I get the merge with the
+		 ;; critiquing ontology working.
+		 ;;(:filled-by evaluation-aspect correctness)
+		 ;;(:filled-by evaluation-aspect completeness)
+		 ;;(:filled-by evaluation-aspect strength-weakness)
+		 ;; There are other aspects, but I haven't any methods for them yet.
+		 ))
+
+
+;;; The thing used in a force ratio
+
+(defconcept combat-power
+  :is-primitive resource)
+
+;;; Military units
+(defconcept unit :is military-unit)
+
+
+;;; These concepts and relations are in the upper ontology, but I don't 
+;;; have a translation yet.
+
+(defrelation unit-assigned-to-task  :is-primitive who)
+  
+;;;(defrelation objectActedOn :is-primitive action-obj)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; these need to be changed
+;;; for completeness
+
+(defrelation main-effort-of-operation 
+    :domain coa
+    :range unit)
+
+(defconcept purpose
+    :is-primitive top-domain-concept)
+
+(defrelation task-has-purpose
+    :domain |MilitaryEvent|
+    :range purpose
+    :annotations ((documentation "This is a copy of the relation
+from the high-level task ontology until we can load that KB properly")))
+
+;; reserves
+(defrelation reserve-unit-in-mission
+    :domain coa
+    :range unit)
+
+;; Security
+(defrelation security-unit-in-mission
+    :domain coa
+    :range unit)
+
+;; Deep Operations
+(defconcept deep-operation-task
+    :is-primitive |MilitaryEvent|)
+
+;; Fires
+(defrelation division-fires
+    :domain coa
+    :range unit)
+
+;; Threat ?
+(defconcept military-threat
+    :is-primitive top-domain-concept)
+
+;; Rear ?
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; for strength and weakness 
+
+
+;;; This doesn't really have an analog in reality..
+
+(defconcept complex-military-task
+    :is-primitive |MilitaryEvent|)
+
+;;;******************************************
+;;; added by jihie
+;;; 
+
+(defconcept combat-power-value
+    :is-primitive number)
+
+(defrelation combat-power-value-of
+    :domain unit
+    :range number
+    :characteristics :single-valued)
+
+;;;;;;;;;;;;;;;;;;;;;;;
+;;;; for modification
+
+(defconcept remnants
+    :is-primitive number)
+
+(defconcept remaining-strength
+  :is-primitive number)
+
+;;; These conglomerate concepts should really be replaced with more
+;;; expressive method capabilities, but this will improve explanation in
+;;; the short term.
+
+(defconcept number-of-companies-in-a-battalion
+  :is-primitive number)
+
+(defconcept number-of-batteries-in-a-battalion
+  :is-primitive number)
+
+(defconcept number-of-platoons-in-a-company
+  :is-primitive number)
+
+(defconcept active-units
+  :is-primitive |ModernMilitaryUnit-Deployable|)
+
+#|
+Now defined in planning-assumptions.loom
+(defrelation |sustainsAttritionDuringEvent|
+    :arity 3 
+    :domains (|MilitaryEvent| unit)
+    :characteristics :single-valued
+    :range number)
+|#
+
+
+
+(defconcept armored-unit :is-primitive thing)
+(defconcept mechanized-unit :is-primitive thing)
+
+;; to be deleted (jihie)
+(defconcept resource :is-primitive thing)
+(tellm (resource force-ratio)
+       (thing amount))
+
+;;;;;;; to be modified/aligned (surya)
+(defconcept Defendfrompreparedposition-MilitaryOperation
+   :is-primitive thing)
+
+(defconcept Defendfromhastyposition-MilitaryOperation
+  :is-primitive thing)
+#|(defconcept MilitaryDefensiveOperation
+  :is-primitive thing)|#
+(defconcept Attackhastydefence-MilitaryOperation
+  :is-primitive thing)
+(defconcept Attackprepareddefence-MilitaryOperation
+  :is-primitive thing)
+
+;;;;; lifting 
+
+(defrelation unit-acted-on
+  :domain |MilitaryEvent|
+  :range |ModernMilitaryUnit-Deployable|
+  :is (:satisfies (?e ?u) 
+		  (:and 
+		   (|objectActedOn| ?e ?u)
+		   (|ModernMilitaryUnit-Deployable| ?u))))
+
+(defrelation coa-operation
+    :domain COA
+    :range |MilitaryOperation|
+    :is (:satisfies (?c ?o)
+		    (:and 
+		     (|operationOfCOA| ?c ?o)
+		     (|COA| ?c))))
+
+(defrelation the-coa-operation
+    :domain COA
+    :range |MilitaryOperation|    
+    :characteristics :single-valued
+    :is (:satisfies (?c ?o)
+		    (coa-operation ?c ?o)))
+
+(defrelation critical-event-or-coa-task
+  :domain COA
+  :range |MilitaryEvent|
+  :is (:satisfies (?c ?e)
+	        (or (critical-event-of ?c ?e)
+		  (for-some (?o)
+			  (and (coa-operation ?c ?o)
+			       (|taskOfOperation| ?o ?e)))))
+  )
+
+(defrelation assigned-action
+    :domain military-unit
+    :range task-action
+    :is (:satisfies (?u ?a)
+		(|WHO| ?a ?u)))
+
+
+(defrelation assigned-operation
+    :domain military-unit
+    :range |MilitaryOperation|
+    :is (:satisfies (?u ?o)
+		    (|unitAssignedToOperation| ?o ?u)))
+
+(defrelation operation-of-task
+    :domain |MilitaryEvent|
+    :range |MilitaryOperation|
+    :characteristics :single-valued
+    :is (:satisfies (?t ?o)
+		    (|taskOfOperation| ?o ?t)))
+
+(defrelation super-task 
+  :domain |MilitaryEvent|
+  :range |MilitaryEvent|
+  :characteristics :single-valued
+  :is (:satisfies (?sub ?super)
+	        (|subTasks-Military| ?super ?sub)))
+
+(defrelation allegiance-of
+    :domain |ModernMilitaryOrganization|
+    :range |Agent|
+    :characteristics :single-valued
+    :is (:satisfies (?u ?a)
+		    (|sovereignAllegianceOfOrg| ?u ?a)))
+
+;;;;; IKB changes
+(defrelation |echelonOfUnit|
+  :is-primitive |hasAttributes|
+  :domain |ModernMilitaryOrganization|
+  :range |MilitaryEchelon|
+  :characteristics :single-valued)
+
+(defrelation task-forces-in-coa
+  :domain coa
+  :range |ModernMilitaryUnit-Deployable|
+  :is (:satisfies (?c ?u)
+	        (or (for-some (?ce)
+			  (and (critical-event-of ?c ?ce)
+			       (who ?ce ?u)))
+		  (for-some (?mo)
+			  (and (the-coa-operation ?c ?mo)
+			       (for-some (?task)
+				       (and (|taskOfOperation| ?mo ?task)
+					  (who ?task ?u)))))))
+  )
+
+(defrelation object-forces-in-coa
+  :domain coa
+  :range |ModernMilitaryUnit-Deployable|
+  :is (:satisfies (?c ?u)
+	        (or (for-some (?ce)
+			  (and (critical-event-of ?c ?ce)
+			       (|objectActedOn| ?ce ?u)))
+		  (for-some (?mo)
+			  (and (the-coa-operation ?c ?mo)
+			       (for-some (?task)
+				       (and (|taskOfOperation| ?mo ?task)
+					  (|objectActedOn| ?task ?u)))))))
+  )
+(defrelation controlling-org
+    :domain unit
+    :range unit
+    :is (:satisfies (?u ?a)
+		    (|operationalControlMilitaryOrg| ?a ?u)))
+
+(defrelation all-controlling-org
+  :domain unit
+  :range unit
+  :is (:satisfies (?u ?a)
+	        (or (|operationalControlMilitaryOrg| ?a ?u)
+		  (for-some (?i)
+			  (and (|operationalControlMilitaryOrg| ?i ?u)
+			       (all-controlling-org ?i ?a))))))
+
+(defrelation top-controlling-org
+  :domain unit
+  :range unit
+  :is (:satisfies (?u ?t)
+	        (and (all-controlling-org ?u ?t)
+		   (for-all (?o1)
+			  (implies (all-controlling-org ?u ?o1)
+				 (or (all-controlling-org ?o1 ?t)
+				     (same-as ?o1 ?t))))))
+  )
+
+;;; This is needed now that attrition can be shown directly on sub-units
+(defrelation betweenInOperationalControl
+  :arity 3
+  :domains (|ModernMilitaryUnit-Deployable| |ModernMilitaryUnit-Deployable|)
+  :range |ModernMilitaryUnit-Deployable|
+  :is (:satisfies (?lower ?upper ?mid)
+	        (:and (all-controlling-org ?lower ?mid)
+		    (all-controlling-org ?lower ?upper)
+		    (all-controlling-org ?mid ?upper))))
+
+;;; Same for sub-units
+
+(defrelation all-super-unit
+  :domain unit
+  :range unit
+  :is (:satisfies (?u ?s)
+	        (or (sub-unit ?s ?u)
+		  (for-some (?i)
+			  (and (sub-unit ?i ?u)
+			       (all-super-unit ?i ?s)))))
+  )
+
+
+(defrelation top-super-unit
+  :domain unit
+  :range unit
+  :is (:satisfies (?u ?t)
+	        (and (all-super-unit ?u ?t)
+		   (for-all (?o1)
+			  (implies (all-super-unit ?u ?o1)
+				 (or (all-super-unit ?o1 ?t)
+				     (same-as ?o1 ?t))))))
+  )
+
+
+
+
+;;; Inverse of WHO restricted to critical events
+(defrelation events-undertaken
+  :domain |ModernMilitaryUnit-Deployable|
+  :range |MilitaryEvent|
+  :is (satisfies (?u ?ce) 
+	       (or (and (for-some (?coa)
+			      (critical-event-of ?coa ?ce))
+		      ;; This is a hack because I don't want to evaluate
+		      ;; these tasks.
+		      (who ?ce ?u))
+		 (and (for-some (?coa)
+			      (for-some (?op)
+				      (and (the-coa-operation ?coa ?op)
+					 (|taskOfOperation| ?op ?ce))))
+		      ;; This is a hack because I don't want to evaluate
+		      ;; these tasks.
+		      (who ?ce ?u)))))
+
+
+;;; Two new relations for critiques in this domain are the PQ and Spec
+;;; numbers, two alternative systems for numbering questions that are
+;;; used in SAIC's output tool.
+
+(defrelation analysis-pq
+  :domain analysis
+  :range number)
+
+(defrelation analysis-spec
+  :domain analysis
+  :range string)
+
+;;; The priorities in the critiques below come from Jim Donlon's summary
+;;; of Jan 4 99.
+
+(defconcept inadequate-forces-critique
+  :is (:and
+       feasibility-critique
+       global-constraint
+       resource-check
+       (:filled-by checked-resource force-ratio)
+       (:filled-by description
+	         ("The task force ~S ~:[has~;does not have~] adequate resources to accomplish its mission."
+		(get-name (get-value ?self 'analysis-object))
+		(eq (get-value ?self 'violated)
+		    (fi true))
+		))
+       (:filled-by analysis-question
+	         ("Does the task force ~S have sufficient resources to accomplish its mission?" 
+		(get-name (get-value ?self 'analysis-object))))
+       (:filled-by analysis-pq 4)
+       (:filled-by analysis-spec "5.1.2")
+       (:filled-by priority 4)
+       )
+  :in-partition $active-analysis-partition$
+  :annotations ((documentation "A critique on the adequacy of the forces
+assigned in a COA. This is a feasibility critique, explained in terms of
+the task-by-task version 'inadequate-forces-for-task-critique', which is
+a helper question."))
+  )
+
+
+(defconcept inadequate-forces-for-task-critique
+  :is (:and 
+       feasibility-critique
+       ;; These concepts are defined in resource-and-constraints
+       local-constraint
+       resource-check
+       ;;(:filled-by critiquing-facet inadequate-forces)
+       ;;(:filled-by item-type inadequate-forces-critique-type)
+       ;; checked-resource is a subrelation of analysis-property.
+       (:filled-by checked-resource force-ratio)
+       (:filled-by description
+	         ("The task ~S ~:[has~;does not have~] adequate resources to be accomplished."
+		(get-name (get-value ?self 'analysis-object))
+		(eq (get-value ?self 'violated)
+		    (fi true))
+		))
+       (:filled-by analysis-question
+	         ("Does the task ~S have sufficient resources to be accomplished?" 
+		(get-name (get-value ?self 'analysis-object))))
+       (:filled-by priority 4)
+       (:filled-by analysis-pq 27)
+       (:filled-by analysis-spec "5.5.4")
+       )
+  :in-partition $active-analysis-partition$
+  ;; :defaults (:filled-by critiquing-facet inadequate-forces)
+  :annotations ((documentation "A critique on the adequacy of the
+forces assigned to a task in a COA. This is a feasibility critique."))
+  )
+
+(defrelation coa-inadequate-forces-for-task-critique
+  :domain coa
+  :range inadequate-forces-for-task-critique
+  :characteristics (:single-valued)
+  :is (satisfies (?c ?crit)
+	       (and (inadequate-forces-for-task-critique ?crit)
+		  (for-some (?struc)
+			  (and (evaluation-aspect ?c ?struc)
+			       (factor ?struc ?crit))))))
+
+(defconcept all-arrayed-forces-owned-critique
+  :is-primitive (:and
+	       correctness-critique
+	       global-constraint
+	       ;;(:filled-by checked-constraint not-all-forces-arrayed)
+	       (:filled-by priority 2)
+	       (:filled-by description
+		         ("The COA ~:[owns~;does not own~] all the forces arrayed in the mission.~:[~;~%    ~S are not owned.~]"
+			(eq (get-value ?self 'violated)
+			    (fi true))
+			(eq (get-value ?self 'violated)
+			    (fi true))
+			(first (get-values ?self 'analysis-estimate))))
+	       (:filled-by analysis-question
+		         ("Does the COA own all the forces that are arrayed?")
+		         )
+	       (:filled-by analysis-pq 11)
+	       (:filled-by analysis-spec "5.1.4.1")
+	       )
+  :in-partition $active-analysis-partition$)
+
+(defconcept all-forces-arrayed-critique
+  :is-primitive (:and
+	       correctness-critique
+	       global-constraint
+	       ;;(:filled-by checked-constraint not-all-forces-arrayed)
+	       (:filled-by priority 2)
+	       (:filled-by description
+		         ("The COA ~:[arrays~;does not array~] all the forces available in the mission.~:[~;~%    ~S are not arrayed.~]"
+			(eq (get-value ?self 'violated)
+			    (fi true))
+			(eq (get-value ?self 'violated)
+			    (fi true))
+			(get-value ?self 'analysis-estimate)))
+	       (:filled-by analysis-question
+		         ("Does the COA array all the forces available?")
+		         )
+	       (:filled-by analysis-pq 11)
+	       (:filled-by analysis-spec "5.1.4.1")
+	       )
+  :in-partition $active-analysis-partition$
+  )
+
+(defconcept reserve-identified-critique
+  :is-primitive (:and
+	       completeness-critique
+	       global-constraint
+	       ;;(:filled-by checked-constraint no-reserve-unit-identified)
+	       (:filled-by priority 2)
+	       (:filled-by analysis-question
+		         ("Does the COA include a statement of reserve forces?"))
+	       (:filled-by description
+		         ("The COA does ~:[~;not ~] include a statement of reserve forces.~:[~%    ~S is assigned to the reserve.~;~]"
+			(eq (get-value ?self 'violated)
+			    (fi true))
+			(eq (get-value ?self 'violated)
+			    (fi true))
+			(get-value ?self 'analysis-estimate)))
+	       (:filled-by analysis-pq 8)
+	       (:filled-by analysis-spec "5.1.4.1")
+	       )
+  :in-partition $active-analysis-partition$
+  )
+
+(defconcept security-identified-critique
+  :is-primitive (:and
+	       completeness-critique
+	       global-constraint
+	       ;;(:filled-by checked-constraint no-security-unit-identified)
+	       (:filled-by priority 5)
+	       (:filled-by analysis-question
+		         ("Does the COA include a statement of security forces?"))
+	       (:filled-by description
+		         ("The COA does ~:[~;not ~] include a statement of security forces.~:[~%    ~S is assigned to the security mission.~;~]"
+			(eq (get-value ?self 'violated)
+			    (fi true))
+			(eq (get-value ?self 'violated)
+			    (fi true))
+			(get-value ?self 'analysis-estimate)))
+	       (:filled-by analysis-pq 8)
+	       (:filled-by analysis-spec "5.1.4.1")
+	       )
+  :in-partition $active-analysis-partition$
+  )
+
+(defconcept rear-identified-critique
+  :is-primitive (:and
+	       completeness-critique
+	       global-constraint
+	       ;;(:filled-by checked-constraint no-rear-unit-identified)
+	       (:filled-by priority 5)
+	       (:filled-by analysis-question
+		         ("Does the COA include a statement of rear forces?"))
+	       (:filled-by description
+		         ("The COA does ~:[~;not ~] include a statement of rear forces.~:[~%    ~S is assigned to the rear mission.~;~]"
+			(eq (get-value ?self 'violated)
+			    (fi true))
+			(eq (get-value ?self 'violated)
+			    (fi true))
+			(get-value ?self 'analysis-estimate)))
+	       (:filled-by analysis-pq 8)
+	       (:filled-by analysis-spec "5.1.4.1")
+	       )
+  :in-partition $active-analysis-partition$
+  )
+
+(defconcept main-effort-identified-critique
+  :is-primitive (:and
+	       completeness-critique
+	       global-constraint
+	       ;;(:filled-by checked-constraint no-rear-unit-identified)
+	       (:filled-by priority 5)
+	       (:filled-by analysis-question
+		         ("Does the COA include a statement of the main effort?"))
+	       (:filled-by description
+		         ("The COA does ~:[~;not ~] include a statement of the main effort.~:[~%    ~S is assigned to the main effort.~;~]"
+			(eq (get-value ?self 'violated)
+			    (fi true))
+			(eq (get-value ?self 'violated)
+			    (fi true))
+			(get-value ?self 'analysis-estimate)))
+	       (:filled-by analysis-pq 8)
+	       (:filled-by analysis-spec "5.1.4.1")
+	       )
+  :in-partition $active-analysis-partition$
+  )
+
+(defconcept fire-task-identified-critique
+  :is-primitive (:and
+	       completeness-critique
+	       global-constraint
+	       ;;(:filled-by checked-constraint no-rear-unit-identified)
+	       (:filled-by priority 5)
+	       (:filled-by analysis-question
+		         ("Does the COA include a statement of fire tasks?"))
+	       (:filled-by description
+		         ("The COA does ~:[~;not ~] include a statement of deep fires.~:[~%    ~S is assigned as fire tasks.~;~]"
+			(eq (get-value ?self 'violated)
+			    (fi true))
+			(eq (get-value ?self 'violated)
+			    (fi true))
+			(get-value ?self 'analysis-estimate)))
+	       (:filled-by analysis-pq 8)
+	       (:filled-by analysis-spec "5.1.4.1")
+	       )
+  :in-partition $active-analysis-partition$
+  )
+
+;; from missing-definitions.loom
+(defconcept PROTOTYPE)
+(defrelation PROTOTYPICAL-INSTANCE :domain Concept)
+(defrelation UNIT-ASSIGNED-TO-COA)
+(defconcept  |HumanRegionalBorder|)
+(defrelation |alignmentOfCOA|)
+
+;; check equipment.loom
+(defconcept |BattleTank-T6| :is-primitive |Artifact|)
+
+(defconcept defensive-task 
+  :is (:or |Block-MilitaryTask| 
+	  |CounterattackByFire|
+	  |Retain-MilitaryTask|
+	  |Delay-MilitaryTask|
+	  |Canalize-MilitaryTask|
+	  |Occupy-MilitaryTask|
+	  |Security-MilitaryOperation|
+	  |Disengage-MilitaryTask|
+	  |Exfiltrate-MilitaryTask|
+	  |Retirement-MilitaryOperation|
+	  ))
+
+;;; Recognising some of the forms the fusion output can throw up.
+(defconcept |T-62| :is |BattleTank-T62|)
+(defconcept |2S3-152| :is |Howitzer-152mmSelfPropelled|)
+(defconcept |2S1-122| :is |Howitzer-122mmSelfPropelled|)
+
+(DEFCONCEPT |BMP-2|
+  :IS-PRIMITIVE |ArmoredPersonnelCarrier|)
+
+
+;;; undefined concepts
+
+(defrelation |terrainRestrictionForUnitEchelon| :arity 4)
+(defrelation |candidateEngagementAreaOfCOA|)
+(defrelation |candidateBattlePositionForUnitType| :arity 3)
+(defconcept |MassCombatPower|)
+(defconcept |SurprisingOpponent|)
+
+(defrelation |unitOperatingInRear|
+    :domain PLANET::|MilitaryOperation|
+    :range PLANET::|ModernMilitaryUnit-Deployable|)
+
+(defconcept |Neutralize-MilitaryTask|
+    :is-primitive |MilitaryTask|)
+
+(defrelation |fireOperationTask|
+    :domain |MilitaryOperation|
+    :range |MilitaryTask|)
+
+(tellm 
+ (thing not-all-forces-arrayed)
+ (thing no-reserve-unit-identified)
+ (thing no-main-effort-identified)
+ (thing no-security-unit-identified)
+ (thing no-rear-unit-identified)
+ (thing no-fire-task-identified)
+ )
+
+;;; Added concept definitions for Close Battle Statement SR.
+
+(defconcept |mainTask|
+    :is-primitive |MilitaryEvent|)
+
+(defconcept |supportingTask|
+    :is-primitive |MilitaryEvent|)
+
+(defconcept closed-battle-statement
+    :is-primitive top-domain-concept)
+
+
+

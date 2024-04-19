@@ -1,0 +1,42 @@
+
+import java.awt.*;
+import java.awt.event.*;
+class New extends Frame {
+    New() {
+        super("New MouseEvent example");
+        setSize(100, 50);
+        this.addMouseListener(new MouseEventHandler());
+        show();
+
+    addWindowListener(new WindowAdapter(){    //I added this(mc)
+      public void windowClosing(WindowEvent e){
+        System.exit(0);
+       }
+     });
+
+    }
+    class MouseEventHandler implements MouseListener {
+        public void mouseEntered(MouseEvent evt) {
+            System.out.println("Mouse Enter(" + evt.getX() + "," + evt.getY() + ")");
+        }
+        public void mouseExited(MouseEvent evt) {
+            System.out.println("Mouse Exit(" + evt.getX() + "," + evt.getY() + ")");
+        }
+        public void mousePressed(MouseEvent evt) {
+            System.out.println("Mouse Down(" + evt.getX() + "," + evt.getY() + ")");
+        }
+        public void mouseReleased(MouseEvent evt) {
+            System.out.println("Mouse Up(" + evt.getX() + "," + evt.getY() + ")");
+        }
+        public void mouseClicked(MouseEvent evt) {
+            System.out.println("Mouse Clicked(" + evt.getX() + "," + evt.getY() + ")");
+        }
+    }
+    public static void main(String[] args) {
+        new New();
+    }
+}
+
+java.awt.event.ComponentEvent
+getComponent()
+paramString()

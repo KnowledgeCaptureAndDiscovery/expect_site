@@ -1,0 +1,113 @@
+<TITLE>INSPECT</TITLE>
+
+<CENTER>
+<H1>                 INSPECT: </H1>
+<H1>An Intelligent Tool to Evaluate Air Campaign Plans</H1>
+</CENTER>
+
+
+<H2>General Background</H2>
+
+
+<A HREF="http://www.isi.edu">
+ISI</A>
+'s
+<A HREF="http://www.isi.edu/expect/expect-homepage.html">
+EXPECT </A>
+project was part of the Fourth Integrated Feasibility Demonstration
+(IFD-4) of the DARPA/Rome Laboratory Planning Initiative (ARPI).  The event took
+place on June 12 at the US Air Force Air Combat Command in Hampton, Virginia. 
+The goal was to demonstrate how research in planning and scheduling from ARPI can
+improve the current process of Air Campaign Planning in the Air Force.  Our
+experts from the CHECKMATE cell at the Pentagon built the Air Campaign Planning
+Tool (ACPT) as a structured editor to build their plans.  For IFD-4, we extended
+ACPT with tools that detect errors and flaws in the plans. The EXPECT team from
+ISI contributed a plan evaluation tool that we call INSPECT, and collaborated
+with ISX to provide a formal language and an editor for specifying goals in this
+domain.  SRI and GE built a feasibility analysis tool based on the TACHYON
+temporal reasoner and the SIPE planner.
+<P>
+
+INSPECT is a knowledge-based system that we developed using the EXPECT framework.
+The knowledge base captures criteria that experienced planners from CHECKMATE
+use to build good plans.  INSPECT uses these criteria to detect plan
+incompleteness, problems with plan structure, and lack of resources.  INSPECT
+produces an agenda of all these kinds of problems found with the plan, and shows
+it to the user together with detailed explanations of the reasons for each
+problem and suggestions for how the user can fix each problem.
+<P>
+
+Without a tool like INSPECT, ACPT users can create plans that may be inconsistent
+or have low quality. Another benefit of using INSPECT is to help users plan
+effectively in crisis situations, when the time pressures make it very hard to
+manually check the consistency of all the alternative plans that are considered
+for a given crisis, each one changing as the crisis evolves.  Ultimately, INSPECT
+could also be used as a training tool for planners, by pointing out possible
+faults in the plans they create.
+<P>
+
+Although not demonstrated in IFD-4, an important benefit of building a tool like
+INSPECT with the EXPECT framework is to support users in knowledge acquisition
+and maintenance.  Because each campaign is different, the knowledge base of any
+planning tool must be updated to include all the particulars of the scenario:
+forces and resources available, specific rules of engagement, etc.  As part of
+our research, we continue to develop interactive knowledge acquisition tools that
+allow end-users to maintain and update knowledge-based systems.
+<P>
+
+The first IFD was DART, a system developed to schedule the transportation of all
+U.S. personnel and materials such as vehicles, food, and ammunition from Europe
+to Saudi Arabia during the operations Desert Shield and Desert Storm.  It
+prompted the now famous quote that DART alone "reportedly more than offset all
+the money the Advanced Research Projects Agency had funneled into AI research in
+the last 30 years" (Critical Technology Assesment of the US Artificial
+Intelligence Sector, US Department of Commerce, August 1994.)
+<P>
+
+Although ACPT is a relatively new system, it was used by CHECKMATE to help NATO
+commanders select targets in Bosnia.  Efforts are under way to transform the
+IFD-4 demonstration software into a usable tool for CHECKMATE and ultimately for
+the numbered air forces throughout the world.
+<P>
+
+<H2> Ongoing Work on INSPECT</H2>
+
+INSPECT is being extended in several important dimensions under the 
+<A HREF="http://yorktown.dc.isx.com/iso/planning/jfacc.html">
+DARPA JFACC program</A>.  
+Some of these extensions require basic R&D work on 
+the EXPECT framework on
+generating explanations and justifications for INSPECT's recommendations,
+and on Web-based tools to support domain experts to change 
+INSPECT's knowledge base.
+Other extensions will widen the scope of INSPECT's evaluations to include 
+additional types of objectives (such as LOG and ISR) and to evaluate
+the plan from a more global perspective that would include information about 
+strategy and plan rationale.
+
+
+<H2> References </H2>
+
+Valente, A., Gil, Y. and Swartout, W. R. 
+<A HREF="http://www.isi.edu/~valente/inspect/inspect.html">
+INSPECT: an Intelligent System for Air Campaign Plan Evaluation based on EXPECT
+</A>.
+<P>
+
+Valente, A., Swartout, W. R. and Gil, Y.
+<A HREF="http://www.isi.edu/~valente/grammar/grammar.html">
+A Representation and Library for Objectives in Air Campaign Plans
+</A>.
+<P>
+
+<P><HR>
+
+
+For more information about INSPECT, send mail to 
+<A HREF=mailto:expect@isi.edu>expect@isi.edu</A>.
+
+<P><HR>
+
+<i>Last updated: June, 1997.</i>
+
+

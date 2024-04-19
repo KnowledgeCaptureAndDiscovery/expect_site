@@ -1,0 +1,242 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.76 [en] (Windows NT 5.0; U) [Netscape]">
+   <title>RDF Schema</title>
+</head>
+<body text="#E5E5E5" bgcolor="#FFFFFF" link="#0000EE" vlink="#551A8B" alink="#FF0000">
+
+<pre><span style="background-color: #ffffcc"><font color="#000000">&lt;?</span><b>xml version=</b>'1.0'<b> encoding=</b>'ISO-8859-1'<span style="background-color: #ffffcc">?></span>
+
+<span style="background-color: #ffffcc">&lt;!</span><span style="background-color: #ffffcc">--&nbsp;</span>
+<span style="background-color: #ffffcc">&nbsp;&nbsp; Declaring some entities to be used later</span>
+<span style="background-color: #ffffcc">--</span><span style="background-color: #ffffcc">></span>
+<a NAME="entities"></a>&lt;!<b>DOCTYPE</b> rdf:RDF [
+&nbsp;&nbsp;&nbsp; &lt;!<b>ENTITY</b> rdf 'http://www.w3.org/1999/02/22-rdf-syntax-ns#'>
+&nbsp;&nbsp;&nbsp; &lt;!<b>ENTITY</b> rdfs 'http://www.w3.org/TR/WD-rdf-schema#'>
+]>
+
+
+<a NAME="namespace"></a><span style="background-color: #ffffcc">&lt;!</span><span style="background-color: #ffffcc">--</span>
+<span style="background-color: #ffffcc">&nbsp;&nbsp; Declaring the Namespaces</span>
+<span style="background-color: #ffffcc">--</span><span style="background-color: #ffffcc">></span>
+&lt;rdf:RDF&nbsp;
+&nbsp;&nbsp;&nbsp; xmlns="http://lancelot.isi.edu/staff.rdfs#"
+&nbsp;&nbsp;&nbsp; xmlns:rdf="&amp;rdf;"
+&nbsp;&nbsp;&nbsp; xmlns:rdfs="&amp;rdfs;">
+
+
+<a NAME="Class"></a><span style="background-color: #ffffcc">&lt;!</span><span style="background-color: #ffffcc">--</span>
+<span style="background-color: #ffffcc">&nbsp;&nbsp; Top level class 'Staff'</span>
+<span style="background-color: #ffffcc">--</span><span style="background-color: #ffffcc">></span>
+&lt;rdfs:Class rdf:ID="Staff" rdfs:comment="A Staff member at ISI">
+&nbsp;&nbsp; &lt;rdfs:subClassOf rdf:resource="&amp;rdfs;Resource"/>
+&lt;/rdfs:Class>
+
+
+<a NAME="subClass"></a><span style="background-color: #ffffcc">&lt;!</span><span style="background-color: #ffffcc">--&nbsp;</span>
+<span style="background-color: #ffffcc">&nbsp;&nbsp; Subclasses of Staff</span>
+<span style="background-color: #ffffcc">--</span><span style="background-color: #ffffcc">></span>
+&lt;rdfs:Class rdf:ID="Researcher" rdfs:comment="A Researcher at ISI">
+&nbsp;&nbsp; &lt;rdfs:subClassOf rdf:resource="#Staff"/>
+&lt;/rdfs:Class>
+
+&lt;rdfs:Class rdf:ID="Admin" rdfs:comment="Administrative Staff">
+&nbsp;&nbsp; &lt;rdfs:subClassOf rdf:resource="#Staff"/>
+&lt;/rdfs:Class></font></pre>
+
+<pre><font color="#000000"></font></pre>
+
+<pre><font color="#000000">&lt;rdfs:Class rdf:ID="Paper" rdfs:comment="A Published paper">
+&lt;/rdfs:Class></font></pre>
+
+<pre><font color="#000000"></font></pre>
+
+<pre><font color="#000000">&lt;rdf:Property rdf:ID="Author" rdfs:comment="Authors of the paper" rdfs:domain="#Paper" /></font></pre>
+
+<pre></pre>
+
+<pre><a NAME="seq"></a><span style="background-color: #ffffcc"><font color="#000000">&lt;!</span><span style="background-color: #ffffcc">--&nbsp;</span>
+<span style="background-color: #ffffcc">&nbsp;&nbsp; Declaring an RDF Instance having an ordered set of properties</span>
+<span style="background-color: #ffffcc">--</span><span style="background-color: #ffffcc">></span>
+&lt;Paper ID="gil2001a"></font></pre>
+
+<pre><font color="#000000">&nbsp;&nbsp;&nbsp; &lt;rdf:Seq></font></pre>
+
+<pre><font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;rdf:li> &lt;Author> Yolanda Gil &lt;/Author>&lt;/rdf:li></font></pre>
+
+<pre><font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;rdf:li> &lt;Author> Foo Bar &lt;/Author>&lt;/rdf:li></font></pre>
+
+<pre><font color="#000000">&nbsp;&nbsp;&nbsp; &lt;/rdf:Seq></font></pre>
+
+<pre><font color="#000000">&lt;/Paper></font></pre>
+
+<pre>
+
+<span style="background-color: #ffffcc"><font color="#000000">&lt;!</span><span style="background-color: #ffffcc">--&nbsp;</span>
+<span style="background-color: #ffffcc">&nbsp;&nbsp; Subclasses of Researcher</span>
+<span style="background-color: #ffffcc">--</span><span style="background-color: #ffffcc">></span>
+&lt;rdfs:Class rdf:ID="ISIResearchStaff">
+&nbsp;&nbsp; &lt;rdfs:subClassOf rdf:resource="#Researcher"/>
+&lt;/rdfs:Class>
+
+&lt;rdfs:Class rdf:ID="GRA">
+&nbsp;&nbsp; &lt;rdfs:subClassOf rdf:resource="#Researcher"/>
+&lt;/rdfs:Class>
+
+&lt;rdfs:Class rdf:ID="Intern">
+&nbsp;&nbsp; &lt;rdfs:subClassOf rdf:resource="#Researcher"/>
+&lt;/rdfs:Class>
+
+
+<span style="background-color: #ffffcc">&lt;!</span><span style="background-color: #ffffcc">--&nbsp;</span>
+<span style="background-color: #ffffcc">&nbsp;&nbsp; Subclasses of ISI Staff</span>
+<span style="background-color: #ffffcc">--</span><span style="background-color: #ffffcc">></span>
+&lt;rdfs:Class rdf:ID="ProjLeader">
+&nbsp;&nbsp; &lt;rdfs:subClassOf rdf:resource="#ISIResearchStaff"/>
+&lt;/rdfs:Class>
+
+&lt;rdfs:Class rdf:ID="SRSci">
+&nbsp;&nbsp; &lt;rdfs:subClassOf rdf:resource="#ISIResearchStaff"/>
+&lt;/rdfs:Class>
+
+
+
+<span style="background-color: #ffffcc">&lt;!</span><span style="background-color: #ffffcc">--&nbsp;</span>
+<span style="background-color: #ffffcc">&nbsp;&nbsp; Subclasses of Admin</span>
+<span style="background-color: #ffffcc">--</span><span style="background-color: #ffffcc">></span>
+&lt;rdfs:Class rdf:ID="ProjAssistant">
+&nbsp;&nbsp; &lt;rdfs:subClassOf rdf:resource="#Admin"/>
+&lt;/rdfs:Class>
+
+&lt;rdfs:Class rdf:ID="Coordinator">
+&nbsp;&nbsp; &lt;rdfs:subClassOf rdf:resource="#Admin"/>
+&lt;/rdfs:Class>
+
+
+<span style="background-color: #ffffcc">&lt;!</span><span style="background-color: #ffffcc">--&nbsp;</span>
+<span style="background-color: #ffffcc">&nbsp;&nbsp; Defining Properties</span>
+<span style="background-color: #ffffcc">&nbsp;&nbsp; (Common to all)</span>
+<span style="background-color: #ffffcc">--</span><span style="background-color: #ffffcc">></span>
+<a NAME="Property"></a>&lt;rdf:Property rdf:ID="LName" rdfs:comment="Last Name of the Person">
+&nbsp;&nbsp; &lt;rdfs:domain rdf:resource="#Staff"/>
+&nbsp;&nbsp; &lt;rdfs:range rdf:resource="&amp;rdfs;Literal"/>
+&lt;/rdf:Property>
+
+&lt;rdf:Property rdf:ID="FName"
+&nbsp;&nbsp;&nbsp; rdfs:comment="First Name of the Person">
+&nbsp;&nbsp; &lt;rdfs:domain rdf:resource="#Staff"/></font></pre>
+
+<pre><a NAME="range"></a><span style="background-color: #ffffcc"><font color="#000000">&lt;!-- Here the &amp;rdfs; refers to the &lt;!DOCTYPE... entities declared <a href="#entities">on top --></span>
+</a>&nbsp;&nbsp; &lt;rdfs:range rdf:resource="&amp;rdfs;Literal"/></font></pre>
+
+<pre><font color="#000000">&lt;/rdf:Property>
+
+&lt;rdf:Property rdf:ID="MI" rdfs:comment="Middle Initial of the Person">
+&nbsp;&nbsp; &lt;rdfs:domain rdf:resource="#Staff"/>
+&nbsp;&nbsp; &lt;rdfs:range rdf:resource="&amp;rdfs;Literal"/>
+&lt;/rdf:Property>
+
+&lt;rdf:Property rdf:ID="EMail" rdfs:comment="e-mail id of the person">
+&nbsp;&nbsp; &lt;rdfs:domain rdf:resource="#Staff"/>
+&nbsp;&nbsp; &lt;rdfs:range rdf:resource="&amp;rdfs;Literal"/>
+&lt;/rdf:Property>
+
+&lt;rdf:Property rdf:ID="HomePage">
+&nbsp;&nbsp; &lt;rdfs:domain rdf:resource="#Staff"/>
+&nbsp;&nbsp; &lt;rdfs:range rdf:resource="&amp;rdfs;Literal"/>
+&lt;/rdf:Property>
+
+&lt;rdf:Property rdf:ID="Group">
+&nbsp;&nbsp; &lt;rdfs:domain rdf:resource="#Staff"/>
+&nbsp;&nbsp; &lt;rdfs:range rdf:resource="&amp;rdfs;Literal"/>
+&lt;/rdf:Property>
+
+&lt;rdf:Property rdf:ID="OfficeNo" rdfs:comment="Office Number">
+&nbsp;&nbsp; &lt;rdfs:domain rdf:resource="#Staff"/>
+&nbsp;&nbsp; &lt;rdfs:range rdf:resource="&amp;rdfs;Literal"/>
+&lt;/rdf:Property>
+
+&lt;rdf:Property rdf:about="TelNo" rdfs:comment="Telephone Number">
+&nbsp;&nbsp; &lt;rdfs:domain rdf:resource="#Staff"/>
+&nbsp;&nbsp; &lt;rdfs:range rdf:resource="&amp;rdfs;Literal"/>
+&lt;/rdf:Property>
+
+
+<span style="background-color: #ffffcc">&lt;!</span><span style="background-color: #ffffcc">--&nbsp;</span>
+<span style="background-color: #ffffcc">&nbsp;&nbsp;&nbsp; Properties specific to Researchers</span>
+<span style="background-color: #ffffcc">--</span><span style="background-color: #ffffcc">></span>
+&lt;rdf:Property rdf:ID="Papers">
+&nbsp;&nbsp; &lt;rdfs:domain rdf:resource="#Researcher"/>
+&nbsp;&nbsp; &lt;rdfs:range rdf:resource="&amp;rdfs;Literal"/>
+&lt;/rdf:Property>
+
+
+<span style="background-color: #ffffcc">&lt;!</span><span style="background-color: #ffffcc">--&nbsp;</span>
+<span style="background-color: #ffffcc">&nbsp;&nbsp;&nbsp; Properties specific to Researchers</span>
+<span style="background-color: #ffffcc">&nbsp;&nbsp;&nbsp; and Project Assistants</span>
+<span style="background-color: #ffffcc">--</span><span style="background-color: #ffffcc">></span>
+&lt;rdf:Property rdf:ID="Project">
+&nbsp;&nbsp; &lt;rdfs:domain rdf:resource="#Researcher"/>
+&nbsp;&nbsp; &lt;rdfs:domain rdf:resource="#ProjAssistant"/>
+&nbsp;&nbsp; &lt;rdfs:range rdf:resource="&amp;rdfs;Literal"/>
+&lt;/rdf:Property>
+
+
+<span style="background-color: #ffffcc">&lt;!</span><span style="background-color: #ffffcc">--&nbsp;</span>
+<span style="background-color: #ffffcc">&nbsp;&nbsp;&nbsp; Properties specific to ISIResearchStaff</span>
+<span style="background-color: #ffffcc">--</span><span style="background-color: #ffffcc">></span>
+&lt;rdf:Property rdf:ID="NumProjPrincipal"&nbsp;
+&nbsp;&nbsp; rdfs:comment="Number of Projects done as the Principal in the Project">
+&nbsp;&nbsp; &lt;rdfs:domain rdf:resource="#ISIResearchStaff"/>
+&nbsp;&nbsp; &lt;rdfs:range rdf:resource="&amp;rdfs;Literal"/>
+&lt;/rdf:Property>
+
+
+<span style="background-color: #ffffcc">&lt;!</span><span style="background-color: #ffffcc">--&nbsp;</span>
+<span style="background-color: #ffffcc">&nbsp;&nbsp;&nbsp; Properties specific to GRA's</span>
+<span style="background-color: #ffffcc">--</span><span style="background-color: #ffffcc">></span>
+&lt;rdf:Property rdf:ID="Major">
+&nbsp;&nbsp;<a NAME="domain"></a><span style="background-color: #ffffcc">&lt;!-- 'Major' is only a property of a GRA --></font></span></pre>
+
+<pre><font color="#000000">&nbsp;&nbsp; &lt;rdfs:domain rdf:resource="#GRA"/>
+&nbsp;&nbsp; &lt;rdfs:range rdf:resource="&amp;rdfs;Literal"/>
+&lt;/rdf:Property>
+
+&lt;rdf:Property rdf:ID="DegreeObjective">
+&nbsp;&nbsp; &lt;rdfs:domain rdf:resource="#GRA"/>
+&nbsp;&nbsp; &lt;rdfs:range rdf:resource="&amp;rdfs;Literal"/>
+&lt;/rdf:Property>
+
+
+<span style="background-color: #ffffcc">&lt;!</span><span style="background-color: #ffffcc">--&nbsp;</span>
+<span style="background-color: #ffffcc">&nbsp;&nbsp;&nbsp; Properties specific to Interns</span>
+<span style="background-color: #ffffcc">--</span><span style="background-color: #ffffcc">></span>
+&lt;rdf:Property rdf:ID="College">
+&nbsp;&nbsp; &lt;rdfs:domain rdf:resource="#Intern"/>
+&nbsp;&nbsp; &lt;rdfs:range rdf:resource="&amp;rdfs;Literal"/>
+&lt;/rdf:Property>
+
+&lt;rdf:Property rdf:ID="StartDate">
+&nbsp;&nbsp; &lt;rdfs:domain rdf:resource="#Intern"/>
+&nbsp;&nbsp; &lt;rdfs:range rdf:resource="&amp;rdfs;Literal"/>
+&lt;/rdf:Property>
+
+&lt;rdf:Property rdf:ID="EndDate">
+&nbsp;&nbsp; &lt;rdfs:domain rdf:resource="#Intern"/>
+&nbsp;&nbsp; &lt;rdfs:range rdf:resource="&amp;rdfs;Literal"/>
+&lt;/rdf:Property>
+
+<span style="background-color: #ffffcc">&lt;!</span><span style="background-color: #ffffcc">--&nbsp;</span>
+<span style="background-color: #ffffcc">&nbsp;&nbsp;&nbsp; Properties specific to Administrators</span>
+<span style="background-color: #ffffcc">--</span><span style="background-color: #ffffcc">></span>
+&lt;rdf:Property rdf:ID="AdminGroup">
+&nbsp;&nbsp; &lt;rdfs:domain rdf:resource="#Admin"/>
+&nbsp;&nbsp; &lt;rdfs:range rdf:resource="&amp;rdfs;Literal"/>
+&lt;/rdf:Property>
+
+&lt;/rdf:RDF></font></pre>
+
+</body>
+</html>

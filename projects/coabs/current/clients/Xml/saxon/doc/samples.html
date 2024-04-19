@@ -1,0 +1,130 @@
+<HTML><HEAD><TITLE>Sample SAXON Applications</TITLE></HEAD>
+<BODY>
+<H1>Sample SAXON Applications</H1>
+
+Three sample applications are included in the SAXON distribution.<P>
+
+<H2>DTDGenerator</H2>
+
+This is a utility which, given an XML document as input, produces 
+a document type definition (DTD) as output.<P>
+
+See <A HREF="dtdgen.html">here</A> for details.<P>
+
+<H2>Book list</H2>
+
+This is a very simple demonstration to illustrate sorting. It uses
+the XML file books.xml (derived from a file issued with Microsoft's
+MSXML distribution) and the program ShowBooks which can be run
+directly from the command line. It produces on the standard output
+an HTML page showing the book list in sorted order.<P>
+
+<H2>Shakespeare</H2>
+
+This is a set of related programs. The first splits a large XML
+document into several smaller linked XML documents; the others
+are concerned with displaying the smaller documents at a web
+browser.<P>
+
+LoadPlay is a free-standing Java application which you can run
+from the command line. It takes as input a full Shakespeare play
+(for example <B>othello.xml</B> which is included in the distribution)
+and splits it into a number of separate XML files, one for the
+"front material" of the play, and one for each scene in the play.<P>
+
+To run the program:<UL>
+<LI>Ensure it is on your CLASSPATH
+<LI>Ensure you have registered a SAX parser using 
+<A HREF="com.icl.saxon.ParserManager.html">ParserManager</A>
+<LI>Change directory to the directory containing the file <B>othello.xml</B>
+<LI>Enter the command line:<BR>
+<CODE>java LoadPlay othello</CODE>
+</UL>
+A directory called "othello" is created and the play and scene files
+are generated within it.<P>
+
+The program will also work with any of the Shakespeare plays included
+in Jon Bosak's distribution 
+<A HREF="http://sunsite.unc.edu/pub/sun-info/xml/eg/shakespeare.1.10.xml.zip">here</A><P>
+
+There are two pairs of programs for displaying the generated plays and scenes
+at a web browser. Both expand
+the play and scene files into HTML on the server, which is then delivered
+to the browser in the normal way. One pair are written as Microsoft
+ASP pages for use with Microsoft IIS. The other pair are written as Java Servlets
+which are supported by a number of different web servers.<P>
+
+<H3>The ASP programs</H3>
+
+There are two .ASP programs supplied, play.asp and scene.asp<P>
+
+Both are written in VBScript, and invoke SAXON via the XRenderer
+interface. To use them:
+
+<UL>
+<LI>Set up a Microsoft IIS server
+
+<LI>Install Microsoft's Java development environment
+
+<LI>Register the Java class com.icl.saxon.XRenderer as an ActiveX
+class using the command:<BR>
+<CODE>javareg /register /class:com.icl.saxon.XRenderer /progid:XRenderer.java
+</CODE>
+
+<LI>Register a SAX parser using <A HREF="com.icl.saxon.ParserManager.html">ParserManager</A>.
+Note that this registers the parser in a file called saxon.ini in the "user.home"
+directory, which will be different for different Java VMs. So you need
+to register the parser using the Microsoft Java VM.
+
+<LI>Copy the play.asp and scene.asp files into the directory structure
+accessible via the web server.
+
+<LI>Set up an HTML page with a link to the play.asp page. It should
+be something like:<BR>
+<CODE>
+&lt;A HREF="play.asp?play=othello&dir=c:\saxon\samples\data"&gt;Othello&lt;/A&gt;
+<BR></CODE>
+
+<LI>Follow the link!
+</UL>
+
+It should also be possible in principle to use Sun's JAVA VM and their
+ActiveX Bridge technology, but last time I tried I couldn't get this to work.<P>
+
+<H3>The Java Servlets</H3>
+
+The play and scene files can also be viewed using the Java servlets ShowPlay.java
+and ShowScene.java. These should work with any web server that supports the
+Servlet interface, though I have only tested them with <I>JRUN version 2.0
+for ISAPI</I> from <A HREF="http://www.livesoftware.com/products/jrun">Live
+Software</A>. This is an add-on product to Microsoft IIS.<P>
+
+With JRUN, the two servlets need to be installed in the <b>servlets</b>
+directory, which on my server is:<BR><CODE>
+c:\Program Files\Live Software\JRunISAPI\servlets</CODE></BR>
+JRUN comes with its own Java Run-Time environment, so the <b>user.home</b>
+directory in which the SAX parser is registered will be different
+again: on my system the <b>saxon.ini</b> file needs to be in<BR><CODE>
+c:\Program Files\Live Software\JRunISAPI\jre\1.1</CODE><P>
+
+As with the ASP pages, you will need to set up a link to the
+ShowPage servlet with appropriate parameters. For example:
+<BR>
+<CODE>
+&lt;A HREF="/servlet/ShowPlay?play=othello&dir=c:\saxon\samples\data"&gt;Othello&lt;/A&gt;
+<BR></CODE>
+
+If you have problems getting this to work, and there seem to be
+no useful diagnostics visible at the web browser, check in JRUN's
+logs directory. Also, try getting the simple Hello World servlet
+supplied with JRUN to work first: this will ensure that the
+environment is configured correctly.<P>
+
+<HR><CENTER><A HREF="mailto:M.H.Kay@eng.icl.co.uk">Michael H. Kay</A>
+<BR>12 May 1998</I></CENTER>
+
+</BODY>
+</HTML>
+
+
+

@@ -1,0 +1,235 @@
+Agenda:
+ In the method to compute the combat power of a military unit with respect to a military task, ?T is not used
+ In the method to estimate the required force ratio of a military defensive operation for a military task, ?O is not used
+ In the method to estimate the required force ratio of a military defensive operation for a military task, ?CE is not used
+ In the method to estimate the required force ratio of a military offensive operation for a military task, ?O is not used
+ In the method to estimate the required force ratio of a military offensive operation for a military task, ?CE is not used
+   at Thu Sep 09 15:35:14 PDT 1999
+
+6check: Method Capability Hierarchy
+   at Thu Sep 09 15:35:23 PDT 1999
+
+create method for goal from undefined capabilities
+   at Thu Sep 09 15:35:25 PDT 1999
+
+undefined goal:
+(check (obj (spec-of force-ratio)) (of (inst-of military-task)) (in (inst-of coa)))  
+Expected Result:(inst-of yes-no)  
+Callers:(check-force-ratio-for-main-task)  
+Capability:(capability (check (obj (?v377 is (spec-of force-ratio))) (of (?v378 is (inst-of military-task))) (in (?v379 is (inst-of coa)))))  
+   at Thu Sep 09 15:35:25 PDT 1999
+
+select Button:expect-expression:EXPRESSION
+ TO become:((name _method339  )
+(capability    ( check   ( obj   ( ?v377 is   ( spec-of force-ratio ) ) )
+         ( of   ( ?v378 is   ( inst-of military-task ) ) )
+         ( in   ( ?v379 is   ( inst-of coa ) ) ) )
+)
+(result-type  (inst-of yes-no)  )
+(method  SUB-GOAL 
+)
+)
+   at Thu Sep 09 15:35:47 PDT 1999
+
+select Button:expect-goal-form:SUB-GOAL
+ TO become:((name _method339  )
+(capability    ( check   ( obj   ( ?v377 is   ( spec-of force-ratio ) ) )
+         ( of   ( ?v378 is   ( inst-of military-task ) ) )
+         ( in   ( ?v379 is   ( inst-of coa ) ) ) )
+)
+(result-type  (inst-of yes-no)  )
+(method    ( is-less-or-equal   ( obj EXPRESSION )   ( than EXPRESSION ) ) 
+)
+)
+   at Thu Sep 09 15:35:54 PDT 1999
+
+select Button:expect-expression:EXPRESSION
+ TO become:((name _method339  )
+(capability    ( check   ( obj   ( ?v377 is   ( spec-of force-ratio ) ) )
+         ( of   ( ?v378 is   ( inst-of military-task ) ) )
+         ( in   ( ?v379 is   ( inst-of coa ) ) ) )
+)
+(result-type  (inst-of yes-no)  )
+(method    ( is-less-or-equal   ( obj SUB-GOAL )   ( than EXPRESSION ) ) 
+)
+)
+   at Thu Sep 09 15:36:00 PDT 1999
+
+select Button:expect-goal-form:SUB-GOAL
+ TO become:((name _method339  )
+(capability    ( check   ( obj   ( ?v377 is   ( spec-of force-ratio ) ) )
+         ( of   ( ?v378 is   ( inst-of military-task ) ) )
+         ( in   ( ?v379 is   ( inst-of coa ) ) ) )
+)
+(result-type  (inst-of yes-no)  )
+(method    ( is-less-or-equal   ( obj   ( estimate   ( obj
+                           ( spec-of required-force-ratio ) )
+                     ( for EXPRESSION ) ) )
+         ( than EXPRESSION ) ) 
+)
+)
+   at Thu Sep 09 15:36:07 PDT 1999
+
+select Button:expect-expression:EXPRESSION
+ TO become:((name _method339  )
+(capability    ( check   ( obj   ( ?v377 is   ( spec-of force-ratio ) ) )
+         ( of   ( ?v378 is   ( inst-of military-task ) ) )
+         ( in   ( ?v379 is   ( inst-of coa ) ) ) )
+)
+(result-type  (inst-of yes-no)  )
+(method    ( is-less-or-equal   ( obj   ( estimate   ( obj
+                           ( spec-of required-force-ratio ) )
+                     ( for VARIABLE ) ) )
+         ( than EXPRESSION ) ) 
+)
+)
+   at Thu Sep 09 15:36:15 PDT 1999
+
+select Button:expect-variable-name:VARIABLE
+ TO become:((name _method339  )
+(capability    ( check   ( obj   ( ?v377 is   ( spec-of force-ratio ) ) )
+         ( of   ( ?v378 is   ( inst-of military-task ) ) )
+         ( in   ( ?v379 is   ( inst-of coa ) ) ) )
+)
+(result-type  (inst-of yes-no)  )
+(method    ( is-less-or-equal   ( obj   ( estimate   ( obj
+                           ( spec-of required-force-ratio ) )
+                     ( for ?v378 ) ) )
+         ( than EXPRESSION ) ) 
+)
+)
+   at Thu Sep 09 15:36:20 PDT 1999
+
+select Button:(estimate (obj (?f is (spec-of required-force-ratio))) (for (?s is (inst-of military-task)))): 
+ TO become:((name _method339  )
+(capability    ( check   ( obj   ( ?v377 is   ( spec-of force-ratio ) ) )
+         ( of   ( ?v378 is   ( inst-of military-task ) ) )
+         ( in   ( ?v379 is   ( inst-of coa ) ) ) )
+)
+(result-type  (inst-of yes-no)  )
+(method    ( is-less-or-equal   ( obj EXPRESSION )   ( than EXPRESSION ) ) 
+)
+)
+   at Thu Sep 09 15:36:31 PDT 1999
+
+select Button:expect-expression:EXPRESSION
+ TO become:((name _method339  )
+(capability    ( check   ( obj   ( ?v377 is   ( spec-of force-ratio ) ) )
+         ( of   ( ?v378 is   ( inst-of military-task ) ) )
+         ( in   ( ?v379 is   ( inst-of coa ) ) ) )
+)
+(result-type  (inst-of yes-no)  )
+(method    ( is-less-or-equal   ( obj   ( estimate   ( obj
+                           ( spec-of required-force-ratio ) )
+                     ( for ?v378 ) ) )
+         ( than EXPRESSION ) ) 
+)
+)
+   at Thu Sep 09 15:36:35 PDT 1999
+
+select Button:expect-expression:EXPRESSION
+ TO become:((name _method339  )
+(capability    ( check   ( obj   ( ?v377 is   ( spec-of force-ratio ) ) )
+         ( of   ( ?v378 is   ( inst-of military-task ) ) )
+         ( in   ( ?v379 is   ( inst-of coa ) ) ) )
+)
+(result-type  (inst-of yes-no)  )
+(method    ( is-less-or-equal   ( obj   ( estimate   ( obj
+                           ( spec-of required-force-ratio ) )
+                     ( for ?v378 ) ) )
+         ( than   ( estimate   ( obj
+                           ( spec-of required-force-ratio ) )
+                     ( for ?v378 ) ) ) ) 
+)
+)
+   at Thu Sep 09 15:36:41 PDT 1999
+
+select Button:required-force-ratio:required-force-ratio
+ TO become:((name _method339  )
+(capability    ( check   ( obj   ( ?v377 is   ( spec-of force-ratio ) ) )
+         ( of   ( ?v378 is   ( inst-of military-task ) ) )
+         ( in   ( ?v379 is   ( inst-of coa ) ) ) )
+)
+(result-type  (inst-of yes-no)  )
+(method    ( is-less-or-equal   ( obj   ( estimate   ( obj
+                           ( spec-of required-force-ratio ) )
+                     ( for ?v378 ) ) )
+         ( than   ( estimate   ( obj
+                           ( spec-of available-force-ratio ) )
+                     ( for ?v378 ) ) ) ) 
+)
+)
+   at Thu Sep 09 15:36:50 PDT 1999
+
+ From sketch:To do what(Capability):
+Do(Method Body):
+
+The result will be(Result Type):
+   at Thu Sep 09 15:37:03 PDT 1999
+
+ done editing:((name _method339  )
+(capability    ( check   ( obj   ( ?v377 is   ( spec-of force-ratio ) ) )
+         ( of   ( ?v378 is   ( inst-of military-task ) ) )
+         ( in   ( ?v379 is   ( inst-of coa ) ) ) )
+)
+(result-type  (inst-of yes-no)  )
+(method    ( is-less-or-equal   ( obj   ( estimate   ( obj
+                           ( spec-of required-force-ratio ) )
+                     ( for ?v378 ) ) )
+         ( than   ( estimate   ( obj
+                           ( spec-of available-force-ratio ) )
+                     ( for ?v378 ) ) ) ) 
+)
+)
+   at Thu Sep 09 15:37:03 PDT 1999
+
+added New method:((name _method339)
+ (capability (check
+                (obj (?v377 is (spec-of force-ratio)))
+                (of (?v378 is (inst-of military-task)))
+                (in (?v379 is (inst-of coa)))
+                ))
+ (result-type (inst-of yes-no))
+ (method (is-less-or-equal
+            (obj (estimate
+                    (obj (spec-of required-force-ratio))
+                    (for ?v378)
+                    ))
+             (than (estimate
+                      (obj (spec-of available-force-ratio))
+                      (for ?v378)
+                      ))
+               ))
+)
+   at Thu Sep 09 15:37:06 PDT 1999
+
+check tab:-1
+   at Thu Sep 09 15:37:06 PDT 1999
+
+check tab:0
+   at Thu Sep 09 15:37:06 PDT 1999
+
+Agenda:
+ In the method to check the force ratio of a military task in a coa, ?V379 is not used
+ In the method to compute the combat power of a military unit with respect to a military task, ?T is not used
+ In the method to estimate the required force ratio of a military defensive operation for a military task, ?O is not used
+ In the method to estimate the required force ratio of a military defensive operation for a military task, ?CE is not used
+ In the method to estimate the required force ratio of a military offensive operation for a military task, ?O is not used
+ In the method to estimate the required force ratio of a military offensive operation for a military task, ?CE is not used
+   at Thu Sep 09 15:37:10 PDT 1999
+
+7check: Method Sub-Method Relation
+   at Thu Sep 09 15:37:13 PDT 1999
+
+2check: All Agenda
+   at Thu Sep 09 15:37:17 PDT 1999
+
+6check: Method Capability Hierarchy
+   at Thu Sep 09 15:38:24 PDT 1999
+
+7check: Method Sub-Method Relation
+   at Thu Sep 09 15:38:25 PDT 1999
+
+3check: Describe PS Tree
+   at Thu Sep 09 15:38:32 PDT 1999
+

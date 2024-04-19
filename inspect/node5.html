@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<BODY BGCOLOR="FFFFFF">
+<TITLE>5 Types of Problems Detected by INSPECT</TITLE>
+<META NAME="description" CONTENT="5 Types of Problems Detected by INSPECT">
+<META NAME="keywords" CONTENT="inspect">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="inspect.css">
+</HEAD>
+<BODY LANG="EN">
+ <H1><A NAME="SECTION00050000000000000000">5 Types of Problems Detected by INSPECT</A></H1>
+<P>
+As explained above, INSPECT embeds a library of problems in air
+campaign plans. These problems (sometimes referred to as <EM>
+  inconsistencies</EM>) can be classified in two ways. The first
+distinguishes categories of problems by their significance or
+seriousness. The second distinguishes categories of problems by areas
+or aspects of the plan they are related.
+<P>
+<H4><A NAME="SECTION00050010000000000000">Categories of problems distinguished by seriousness</A></H4>
+<P>
+In order to indicate the significance or seriousness of the
+problems found by INSPECT, we define three types of
+problems corresponding to the usage of the terms in Air Force
+manuals:
+<P>
+<UL><LI> <EM>Warning</EM> -- this is a serious problem, that requires
+  urgent attention.<LI> <EM>Caution</EM> -- this is a reasonably serious problem, that
+  requires some attention but not immediately.<LI> <EM>Note</EM> -- this is a less serious problem, that does not
+  require immediate attention.
+</UL>
+<P>
+Each type of problem checked by INSPECT belongs to one of these
+categories. They are displayed in the INSPECT agenda ordered from the
+most serious to the less serious, i.e., first warnings, then cautions,
+then notes.
+<P>
+<H4><A NAME="SECTION00050020000000000000">Categories of problems distinguished by aspects of the plan</A></H4>
+<P>
+The problems in INSPECT's library can be divided into four main types,
+distinguished based on major aspects of the plan:<A NAME="tex2html4" HREF="footnode.html#153"><IMG  ALIGN=BOTTOM ALT="gif" SRC="http://www.isi.edu/~valente/images/icons/foot_motif.gif"></A>
+<P>
+<DL ><DT><STRONG>Completeness</STRONG>
+<DD> These are problems that relate to the completeness
+  of the plan, i.e., whether some element or connection between
+  elements is missing. In this group there are currently five
+  problems:
+<P>
+  <UL><LI> <EM>Objective with no child</EM> (Caution). According to the
+    strategy-to-task approach to air campaign planning, all objectives
+    must be subordinated to higher objectives (their ``parents'') and
+    decomposed into lower objectives (their ``children''). This
+    problem occurs when there is an objective that was not
+    decomposed into objectives of a lower level.<LI> <EM>Objective with no parent</EM> (Warning). This problem occurs
+    when there is an objective that is not serving any higher level
+    objective.<LI> <EM>Objective with no MOM (measure of merit)</EM> (Note).
+    According to the strategy-to-task approach to air campaign
+    planning, all objectives must contain a measure of merit (MOM)
+    that defines in measurable terms when the objective has been
+    achieved. This problem occurs when there is an objective for
+    which no measure of merit was defined.<LI> <EM>Objective with no structured specification</EM> (Note). In
+    order to maintain consistency in the way objectives are written,
+    it is preferable that they are specified also in the structured
+    language defined for this IFD-4, and implemented in a special ACPT
+    editor. Further, this structured specification enables systems
+    like INSPECT to interpret and better understand the semantics of
+    the objectives, therefore enabling automation of several tasks
+    relative to air campaign plans. This problem occurs when there is
+    an objective for which no structured specification was provided.<LI> <EM>No objective fulfilling one of the basic tenants of air
+      power</EM> (Caution). Air Force doctrine suggest that an air
+    campaign plan must contain objectives of certain types, related to
+    the so-called ``basic tenants of air power''. These tenants are:
+    force deployment, force protection, air superiority, force
+    application, conflict termination, and force redeployment. This
+    problem occurs when one of the basic tenants of air power is not
+    fulfilled by any objective in the entire plan.
+    </UL>
+<P>
+  <DT><STRONG>Reasonable structure</STRONG>
+<DD> This type of problem relates to
+    the fact that the structure of the plan must obey certain
+    standards. Specifically, two types of problems are
+    currently checked:
+<P>
+  <UL><LI> <EM>Objective with too many parents</EM> (Note). An objective
+    with too many parents is an indication that the parent objective
+    is either too general (and should thus be divided) or the
+    connections are somewhat artificial.<A NAME="tex2html5" HREF="footnode.html#58"><IMG  ALIGN=BOTTOM ALT="gif" SRC="http://www.isi.edu/~valente/images/icons/foot_motif.gif"></A> This problem
+    occurs when there is an objective with more than three parents.<LI> <EM>Incompatible sequence restrictions</EM> (Warning). Sequence
+    restrictions specify when a given objective should (or must) be
+    accomplished before or after other objectives. This problem
+    occurs when one sequence restriction specifies that an objective
+    should or must be accomplished before another, and another
+    sequence restriction specifies the opposite.
+  </UL>
+<P>
+<DT><STRONG>Feasibility</STRONG>
+<DD> This type of problem examines some broad
+  aspects of the feasibility of the plan (more detailed aspects are
+  verified by e.g. SIPE in IFD-4).
+<P>
+  <UL><LI> <EM>No primary aircraft currently available for an Objective</EM>
+    (Note). For each type of aircraft, there is a limited number of
+    types of missions it is suited to execute, and a few types it was
+    primarily designed to execute. This problem occurs when an
+    objective requires a type of mission that is not the primary
+    mission type of any of the aircraft available in the Friendly
+    Order of Battle.<LI> <EM>No adequate aircraft currently available for an
+      Objective</EM> (Caution). This problem occurs when an
+    objective requires a type of mission for which none of the
+    aircraft currently available in the Friendly Order of Battle is
+    adequate.
+  </UL>
+<P>
+<DT><STRONG>Plan contents</STRONG>
+<DD> This type of problem analyzes the semantics
+  of the plan contents (e.g. the definition of the objectives).
+<P>
+  <UL><LI> <EM>Incoherent decomposition</EM> (Warning). In principle, an
+    objective must be decomposed into objectives which are more
+    specific or more detailed than their parent. This problem occurs
+    when a parent objective is more specific than one of its child
+    objectives.<A NAME="tex2html6" HREF="footnode.html#67"><IMG  ALIGN=BOTTOM ALT="gif" SRC="http://www.isi.edu/~valente/images/icons/foot_motif.gif"></A>
+  </UL> 
+ </DL>
+<P>
+Appendix A provides examples of agenda items, fixes and explanations
+for each of the types of problems discussed above.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+<I>Andre Valente <BR>
+Fri Sep 13 19:10:15 PDT 1996</I>
+</ADDRESS>
+</BODY>
+</HTML>

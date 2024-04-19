@@ -1,0 +1,233 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<BODY BGCOLOR="FFFFFF">
+<TITLE>3 BNF Specification of the Grammar</TITLE>
+<META NAME="description" CONTENT="3 BNF Specification of the Grammar">
+<META NAME="keywords" CONTENT="grammar">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="grammar.css">
+</HEAD>
+<BODY LANG="EN">
+ <H1><A NAME="SECTION00030000000000000000">3 BNF Specification of the Grammar</A></H1>
+<P>
+This section contains a specification of the grammar in BNF
+(Backus-Naur Form).  Terms in all capitals are reserved terms
+(keywords).  Lowercase terms are non-terminal. Terms with first letter
+in capitals represent names or strings, that is, they are currently
+``free text'' fields.<A NAME="tex2html4" HREF="footnode.html#85"><IMG  ALIGN=BOTTOM ALT="gif" SRC="http://www.isi.edu/~valente/images/icons/foot_motif.gif"></A> Options are
+indicated as <I>A | B</I>, meaning either <I>A</I> or <I>B</I> (but not
+both). Parentheses specify scope.  Elements within brackets are
+optional. <I>A+</I> indicates one or more occurrences of <I>A</I>, <I>
+  A*</I> indicates zero or more occurrences of <I>A</I>.
+<P>
+In order to help the visualization and understanding of this grammar
+(and considering that not everybody is well-acquainted with a BNF
+form), Figure&nbsp;<A HREF="node3.html#figstrucgrammar">1</A> shows the main elements of the
+grammar as a part-of decomposition. Some elements are ommited or
+simplified for clarity.
+<P>
+<P><A NAME="97">&#160;</A><A NAME="figstrucgrammar">&#160;</A><A NAME="tex2htmlfigure95" HREF="img1.gif">[IMAGE ]</A><BR>
+<STRONG>Figure 1:</STRONG> Main structure of the proposed
+      grammar for objectives. Arrows indicate types of fillers for one
+      element of the grammar.<BR>
+<P>
+<P>
+Below is the BNF specification:
+<P>
+<PRE>acp-objective           ::= objective-type
+                            Objective-name
+                            action-specification
+                            MEASURES OF MERIT measures-of-merit
+                            PARENTS (Objective-name)+
+                            [SEQUENCE RESTRICTIONS sequence-restrictions]
+                            [COGS (COG-name)+]
+                            [%COMPLETE Percentage]
+                            [REVIEW STATUS review-status]
+
+objective-type          ::= CINC OBJECTIVE |
+                            AIR OBJECTIVE |
+                            AIR TASK |
+                            AIR ACTIVITY |
+                            AIR-MISSION
+
+action-specification    ::= text-action-spec |
+                            structured-action-spec |
+                            text-action-spec structured-action-spec
+
+text-action-spec        ::= TITLE Text-description
+
+structured-action-spec  ::= action-type
+                            action-role+
+                            [area-restriction]
+                            [time-restriction]
+
+action-type             ::= Action-name
+
+action-role             ::= role-name role-object
+
+role-name               ::= Role | DOB
+
+role-object             ::= aspect |
+                            object |
+                            action |
+                            action-capability |
+                            area 
+
+aspect                  ::= (Object-qualification |
+                             State)
+                            [OF Owner/controller]
+
+object                  ::= object-description
+
+object-description      ::= Object-type
+                            [OF Owner/controller]
+
+action                  ::= Action
+                            [OF Owner/controller]
+
+action-capability       ::= Action-capability
+                            [OF Owner/controller]
+
+area-restriction        ::= area-modifier area 
+
+area-modifier           ::= OVER | IN | AT 
+
+area                    ::= Country |
+                            Geographic-region |
+                            conflict-side |
+                            DESIRED CHOKEPOINTS AND RESTRICTED LOCS |
+                            area AND area
+
+conflict-side           ::= GRAY | BLUE | RED
+
+time-restriction        ::= WITHIN time-period |
+                            BEFORE time |
+                            AFTER time |
+                            BETWEEN time AND time
+
+time                    ::= time-period | date
+
+time-period             ::= TIME-PERIOD Begin-time End-time
+
+date                    ::= Date
+
+measures-of-merit       ::= Measure-of-merit [AND measures-of-merit]
+
+sequence-restrictions   ::= strength-modifier time-relation Objective-name+
+                            [AND sequence-restrictions]
+
+strength-modifier       ::= MUST |
+                            SHOULD |
+                            SHOULD NOT |
+                            MUST NOT
+
+
+time-relation           ::= BEFORE |
+                            AFTER |
+                            SIMULTANEOUS WITH
+
+review-status           ::= DEFAULT | REVIEWED | CHANGED</PRE>
+<P>
+<H2><A NAME="SECTION00031000000000000000">3.1 Some Comments</A></H2>
+<P>
+<OL><LI> <I>Air Activities</I>, one level below <I>Air Tasks</I>, are
+  presently not incorporated into ACPT, and its introduction in the
+  grammar is due to CHECKMATE's suggestion. The idea is to
+  distinguish an objective that involves a target from the target
+  itself, thus allowing e.g. the representation of support missions.
+  <I>Air Missions</I> were tentatively included at SRI's request,
+  representing a special type of <I>Air Activity</I> that is generally
+  fulfilled by a group of homogenous aircraft. Further interaction
+  with CHECKMATE will verify if this additional level is necessary
+  and if it requires special representation.<LI> DOB indicates the direct object. In practice, an interface that
+  produces a human readable version of an objective migt prefer to
+  ommit this token, which is necessary only for machine parsing
+  purposes.<LI> Objectives are defined in such a way that the user can specify
+  the action of the objective with a a structured definition (via the
+  <TT>structured-action-spec</TT>), with a free text definition (via the
+  <TT>text-action-spec</TT>) or both. This is intentional, as a way to
+  preserve the ability of the users to define objectives beyond the
+  limits of the defined grammar. It also preserves some level of
+  compatibility with the present definition of objectives in ACPT
+  (this is also the reason why the <TT>text-action-spec</TT> uses a
+  keyword <TT>TITLE</TT>).<LI> There are certain terminals in the grammar that refer to
+typologies of elements in the Air Campaign domain. These are:
+  <UL><LI> Aspect<LI> State<LI> Geographic-region<LI> Object-type<LI> Action<LI> Action-capability<LI> Time-period
+  </UL>
+<P>
+  The typologies for these elements must be defined in detail within
+  an ARPI-wide effort towards a shared ontology. When such typologies
+  are defined, it will be possible to define a set of fillers (or a
+  more specific grammar) for these items.
+<P>
+  Independently of these efforts, a more specific grammar will be
+  developed shortly for the elements: <TT>Aspect</TT>, <TT>State</TT> and
+  <TT>Time-period</TT>, because in the development process these seem to
+  require further structuring.<LI> Some terminals presently defined as text must be defined (at
+  least in part) campaign- or theater-wise. These are: <TT>Country</TT>
+  and <TT>Geographic-region</TT>.<LI> There is currently no structured definition for measures of
+  merit. This is one of the priorities for extending this grammar
+  later.
+<P>
+</OL><H2><A NAME="SECTION00032000000000000000">3.2 Examples</A></H2>
+<P>
+The following are examples of how some objectives can be represented
+in the proposed grammar. They are adapted (substituting country names)
+from actual objectives used in IFD-4. The quotes in some elements are
+not necessary, and are used for clarity, to emphasize groups of words
+that are playing the same grammatical role. Primitive terms of the
+grammar are indicated by capital letters. The DOB token is ommitted
+for clarity. Some COGs and sequence restrictions were added for
+illustration purposes.
+<P>
+<PRE>AIR OBJECTIVE O1
+   Maintain &quot;air superiority&quot; OF BLUE OVER &quot;Friendly forces&quot;
+   MEASURES OF MERIT
+      &quot;No loss of Allied Aircraft to enemy surface or air forces&quot;
+      AND
+      &quot;No enemy aircraft deliver weapons against allied forces&quot;
+   PARENTS C1
+   SEQUENCE-RESTRICTIONS SHOULD BEFORE O2 O3
+   COGS COG1 COG2
+   
+    
+AIR-OBJECTIVE O2
+   Disrupt &quot;military control&quot; OF &quot;population&quot; OF &quot;Enemy&quot; 
+   MEASURES-OF-MERIT
+      &quot;Reduce communication effectiveness by 50%&quot;
+      AND
+      &quot;Force use of More vulnerable Transmission Systems&quot;
+   PARENTS C2 C4
+   SEQUENCE-RESTRICTIONS SHOULD BEFORE O3
+   COGS COG2
+   
+   
+AIR-TASK T1
+   Maintain &quot;Air Supremacy&quot; OVER &quot;battlefield and engaged waters&quot;
+   MEASURES-OF-MERIT
+      &quot;Freedom of air movement over the battlespace&quot;
+      AND
+      &quot;No losses of friendly air forces to SAMS/AAA/Aircraft over the battlespace&quot;
+   PARENTS O1
+   SEQUENCE-RESTRICTIONS MUST BEFORE T2
+   COGS COG2
+ 
+AIR-TASK T2
+   Destroy &quot;Naval activity&quot; of &quot;Red&quot; IN &quot;Eastern Sea&quot;
+   MEASURES-OF-MERIT
+      &quot;No engagement of Allied forces by enemy naval vessels&quot;
+      AND
+      &quot;No reduction of Friendly shipping due to Enemy naval vessels''
+   PARENTS O1 O5
+   COGS COG2</PRE>
+<P>
+<BR> <HR>
+<P><ADDRESS>
+<I>Andre Valente <BR>
+Fri Sep 13 20:17:45 PDT 1996</I>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,30 @@
+
+#|
+;;; INFORMAL SKETCH OF THIS PROTOTYPE:
+
+SCUD
+  location(o): Place
+
+|#
+
+;;; KM REPRESENTATION OF THIS PROTOTYPE
+
+(SCUD has (superclasses (Projectile)))
+
+(SCUD now-has (prototypes (_Projectile1166)))
+
+(_Projectile1166 has
+  (prototype-of (SCUD))
+  (prototype-scope (SCUD))
+  (prototype-participants (_Projectile1166 _Place1167)))
+
+(_Projectile1166 has (instance-of (SCUD)) (location (_Place1167)))
+
+(_Place1167 has (instance-of (Place)))
+
+
+#|
+;;; TRADITIONAL FORMAT FOR SME'S LAST ACTIONS WOULD HAVE LOOKED:
+
+
+|#

@@ -1,0 +1,235 @@
+<TITLE>Papers on Machine Learning</TITLE>
+
+<H1> Papers on Machine Learning </H1>
+
+
+<P><HR>
+
+Jaime Carbonell, 
+Oren Etzioni, 
+Yolanda Gil,
+Robert Joseph,
+Craig Knoblock,
+Steven Minton, 
+and Manuela Veloso.
+"Planning and Learning in PRODIGY: Overview of an Integrated Architecture".
+In <i>Goal-Driven Learning</i>, Aswin Ram and David Leake (Eds.),
+MIT Press 1995.
+<P>
+
+<P><HR>
+
+
+Yolanda Gil.
+"Learning by Experimentation: 
+Incremental Refinement of Incomplete Planning Domains".
+<i>Proceedings of the Eleventh International
+Conference on Machine Learning</i>July 10-13, 1994, Rutgers, NJ.
+(<A HREF="http://www.isi.edu/~gil/papers/gil-mlc94.ps">Postscript file </A>) 
+<P>
+
+<B> Abstract: </B> 
+Building a knowledge base requires iterative refinement to 
+correct imperfections that keep lurking after each new version of the system.
+This paper concentrates on the automatic refinement of 
+incomplete domain models for planning systems,
+presenting both a methodology for addressing the problem
+and empirical results.
+Planning knowledge may be refined automatically 
+through direct interaction with the environment.
+Missing conditions cause unreliable predictions of action outcomes.
+Missing effects cause unreliable predictions of facts about the state.
+We present a practical approach based on
+continuous and selective interaction with the 
+environment that pinpoints the type of
+fault in the domain knowledge that causes 
+any unexpected 
+behavior of the environment, 
+and resorts to experimentation 
+when additional information is needed to correct the fault.
+Our approach has been implemented in EXPO, a system that uses PRODIGY
+as a baseline planner and improves its domain knowledge in several domains
+when initial domain knowledge is up to
+50% incomplete.
+The empirical results presented show that EXPO 
+dramatically improves its 
+prediction accuracy and reduces the amount of unreliable action outcomes.
+<P>
+
+<P><HR>
+
+
+Yolanda Gil.
+"Efficient Domain-Independent Experimentation".
+<i>Proceedings of the Tenth International
+Conference on Machine Learning</i>,
+Amherst, MA, June 1993.
+(<A HREF="http://www.isi.edu/~gil/papers/gil-mlc93.ps">Postscript file </A>) 
+<P>
+
+<B> Abstract: </B> 
+Planning systems often make the assumption that omniscient 
+world knowledge is available.
+Our approach makes the more realistic assumption that the 
+initial knowledge about the actions 
+is incomplete,
+and uses experimentation as a learning mechanism when
+the missing knowledge causes an execution failure.
+Previous work on learning by experimentation
+has not addressed the issue of how to choose good experiments,
+and much research on learning from failure 
+has relied on background knowledge to build 
+explanations that pinpoint directly the causes of failures.
+We want to investigate the potential
+of a system 
+for efficient learning by experimentation without such background knowledge.
+This paper describes domain-independent heuristics 
+that compare possible hypotheses and choose the ones most likely to 
+cause the failure.
+These heuristics extract information solely from
+the domain operators 
+initially available for planning
+(incapable of producing such explanations)
+and the planner's experiences in interacting with the environment.
+Our approach has been implemented in EXPO, a system that uses PRODIGY
+as a baseline planner and improves its domain knowledge in several
+domains.
+The empirical results presented show that EXPO's heuristics 
+dramatically reduce the number of experiments needed to 
+refine incomplete operators.
+<P>
+
+<P><HR>
+
+
+Yolanda Gil.
+"Learning New Planning Operators by Exploration and Experimentation".
+<i>Proceedings of the AAAI Workshop on Learning Action
+  Models</i>, Washington, DC, July 1993.
+(<A HREF="http://www.isi.edu/~gil/papers/gil-aaaiwks93.ps">Postscript file </A>) 
+<P>
+
+<B> Abstract: </B> 
+This paper addresses a computational approach to the automated
+acquisition of domain knowledge for planning systems via 
+experimentation with the environment.  Our previous work has shown 
+how existing incomplete operators can be refined by adding missing 
+preconditions and effects.   Here we develop additional methods to 
+acquire new operators such as direct analogy with existing operators,
+decomposition of monolithic operators into meaningful sub-operators, 
+and experimentation with partially-specified operators.
+<P>
+
+<P><HR>
+
+
+
+Yolanda Gil.
+"Acquiring Domain Knowledge for Planning by Experimentation".
+<i>Ph.D. Thesis</i>, School of Computer Science, Carnegie Mellon
+University, Pittsburgh PA 15213.  August 1992.  
+Available as CMU Technical Report CMU-CS-92-175.
+<P>
+
+<B> Abstract: </B> 
+In order for autonomous systems to interact with their environment in an
+intelligent way, they must be given the ability to adapt and learn
+incrementally and deliberately. It is virtually impossible to devise 
+and hand code all potentially relevant domain knowledge for complex 
+dynamic tasks. This thesis describes a framework to acquire domain
+knowledge for planning by failure-driven experimentation with the 
+environment.  The initial domain knowledge in the system is an 
+approximate model for planning in the environment, defining the
+system's expectations.  The framework exploits the characteristics 
+of planning domains in order to search the space of plausible 
+hypotheses without the need for additional background knowledge to
+build causal explanations for expectation failures.   Plans are 
+executed while the external environment is monitored, and 
+differences between the internal state and external observations 
+are detected by various methods each correlated with a typical 
+cause for the expectation failure.  The methods also construct a 
+set of concrete hypotheses to repair the knowledge deficit.
+After being heuristically filtered, each hypothesis is tested in turn
+with an experiment.  After the experiment is designed,
+a plan is constructed to achieve the situation required to 
+carry out the experiment.  The experiment plan must meet 
+constraints such as minimizing plan length and negative 
+interference with the main goals.  The thesis describes a set of 
+domain-independent constraints for experiments and their 
+incorporation in the planning search space.  After the execution
+of the plan and the experiment, observations are collected to conclude if
+the experiment was successful or not.  Upon success, the hypothesis is
+confirmed and  the domain knowledge is adjusted.  Upon failure, the
+experimentation process is iterated on the remaining hypotheses 
+until success or until no more hypotheses are left to be considered.  
+This framework has shown to be an effective way to address incomplete 
+planning knowledge and is demonstrated in a system called EXPO, 
+implemented on the PRODIGY planning architecture.
+The effectiveness and efficiency of EXPO's methods is 
+empirically demonstrated in several domains, including a large-scale
+process planning task, where the planner can recover from situations 
+missing up to 50% of domain knowledge through repeated experimentation.
+<P>
+
+<P><HR>
+
+
+
+Jaime Carbonell and Yolanda Gil.
+"Learning by Experimentation:
+The Operator Refinement Method".
+<i>Machine Learning: An Artificial Intelligence
+Approach, Volume III</i>,  Michalski, R. S. and Kodratoff, Y. (Eds.),
+Morgan Kaufmann, 1990.
+(<A HREF="http://www.isi.edu/~gil/papers/gil-mlbook3.ps">Postscript file </A>) 
+<P>
+
+<B> Abstract: </B> 
+Autonomous systems require the ability to plan effective courses of action
+under potentially uncertain or unpredictable contingencies. 
+Planning requires knowledge of the environment that is accurate enough to
+allow reasoning about actions.
+If the environment
+is too complex or very dynamic, goal-driven learning with
+reactive feedback becomes a necessity.  This chapter addresses the issue of
+learning by experimentation as an integral component of PRODIGY.
+PRODIGY is a flexible planning system that 
+encodes its domain knowledge as declarative operators, and applies
+the operator refinement method to acquire additional preconditions
+or postconditions when observed consequences
+diverge from internal expectations.  When multiple explanations for
+the observed divergence are consistent with the existing domain knowledge, 
+experiments to discriminate among these explanations are generated.
+The experimentation process isolates the deficient operator and inserts the
+discriminant condition or unforeseen side-effect to
+avoid similar impasses in future planning. 
+Thus, experimentation is demand-driven and exploits both the internal state
+of the planner and any external feedback received.  A detailed example of
+integrated experiment formulation in presented as the basis for a
+systematic approach to extending an incomplete domain theory or correcting
+a potentially inaccurate 
+one.
+<P>
+
+<P><HR>
+
+Steve Minton, Jaime G. Carbonell, Craig A. Knoblock,
+Daniel R. Kuokka, Oren Etzioni, and Yolanda Gil.
+"Explanation-Based Learning: A Problem-Solving Perspective".
+<i>Artificial Intelligence</i>,  40(1-3):63-118,
+September 1989.
+<P>
+
+<P><HR>
+
+
+
+<A HREF="http://www.isi.edu/~gil/yg-homepage.html">
+<i>Yolanda Gil</i></A> 
+<A HREF=mailto:gil@isi.edu>gil@isi.edu</A>
+
+
+
+
+
+

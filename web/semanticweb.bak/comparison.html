@@ -1,0 +1,355 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="Author" content="Jihie Kim">
+   <meta name="GENERATOR" content="Mozilla/4.76 [en] (Windows NT 5.0; U) [Netscape]">
+   <title>XML Schema, RDF Schema &amp; DAML Comparison</title>
+</head>
+<body>
+
+<center><u><font face="Arial,Helvetica"><font size=+1>Markup Languages:
+Comparison and Examples</font></font></u>
+<p><a href="http://www.isi.edu/~gil/">Yolanda Gil</a> and <a href="mailto:varunr@isi.edu">Varun
+Ratnakar</a>
+<br><a href="http://www.usc.edu/">USC</a>/<a href="http://www.isi.edu/">Information
+Sciences Institute</a>
+<br><a href="http://trellis.semanticweb.org">TRELLIS</a> project</center>
+
+<p>Below is a comparison table that we created to understand the tradeoffs
+and differences among markup languages.&nbsp; It compares <a href="http://www.w3c.org/XML/">XML</a>
+(eXtensible Markup Language), <a href="http://www.w3c.org/RDF/">RDF</a>
+(Resource Description Framework), and <a href="http://www.daml.org/">DAML</a>
+(DARPA Agent Markup Language) by showing a description and examples of
+how each language addresses common knowledge representation requirements.
+<p>We are preparing an article describing this comparison in detail.&nbsp;
+If you have any comments or suggestions, please <a href="#Authors">email</a>
+them to us !
+<p>Our interest in markup languages stems from :
+<br>-&nbsp; Research on <a href="http://www.isi.edu/expect/web/trellis/">TRELLIS</a>,
+a framework to help users create semantically annotated traces and rationale
+for their decisions.
+<br>&nbsp;&nbsp; A prototype of <a href="http://www.isi.edu/expect/web/trellis/">TRELLIS</a>
+has just been released and you can try it <a href="http://excalibur.isi.edu:8888/trellis_web/">here</a>.
+<br>- Our research on <a href="http://www.isi.edu/expect/web/phosphorus/">PHOSPHORUS</a>,
+an ontology-based agent matchmaker that the ISI <a href="http://www.isi.edu/agents-united/">Electric
+Elves</a> framework uses to support human organizations.
+<br>&nbsp;
+<br>&nbsp;
+<center><table BORDER CELLSPACING=0 >
+<tr ALIGN=CENTER>
+<td BGCOLOR="#FFFFCC">&nbsp;</td>
+
+<td BGCOLOR="#FFFFCC"><b><font color="#000099">XML (Schema)</font></b></td>
+
+<td BGCOLOR="#FFFFCC"><b><font color="#000099">RDF (Schema)</font></b></td>
+
+<td BGCOLOR="#FFFFCC"><b><font color="#000099">DAML</font></b></td>
+
+<td BGCOLOR="#FFFFCC"><b><font color="#000099">Notes&nbsp;</font></b></td>
+</tr>
+
+<tr>
+<td BGCOLOR="#FFFFCC"><b><font color="#000099">Contexts</font></b></td>
+
+<td>Default Namespace : xmlns
+<br>Declaring others : xmlns:&lt;label>
+<p><i>XMLSchema Namespace (typically labelled xsd)</i>
+<br>xmlns:xsd="<a href="http://www.w3.org/2001/XMLSchema">www.w3.org/2001/XMLSchema</a>"
+<br>[Final W3C Recommendation]
+<p><i>targetNamespace</i> refers to the namespace defined by the current
+file.
+<p><a href="xsd.html#namespace">Example Namespace Declarations</a>
+<p><b>Note:</b> Namespaces need not point to anything in the XML Namespaces
+specification.
+<br>&lt;xsi:schemaLocation..> provides the location of the schema.
+<br>&nbsp;</td>
+
+<td>RDF uses XML Namespaces.
+<p><i>RDF Syntax Namespace</i>
+<br>xmlns:rdf="<a href="http://www.w3.org/1999/02/22-rdf-syntax-ns#">http://www.w3.org/1999/02/22-rdf-syntax-ns#</a>"
+<p><i>RDF Schema Namespace</i>
+<br>xmlns:rdfs = "<a href="http://www.w3.org/2000/01/rdf-schema#">http://www.w3.org/2000/01/rdf-schema#</a>"
+<p>Example <a href="rdfs.html#namespace">Namespace Declarations</a> in
+RDF
+<p><b>Note</b>: In RDF, the namespace URI reference also identifies the
+location of the RDF schema
+<br>&nbsp;
+<p>&nbsp;</td>
+
+<td>DAML also uses XML Namespaces.
+<p>It uses RDF &amp; RDF Schema elements by referring to&nbsp;
+<br>their respective Namespaces.
+<p>The latest <i>DAML Namespace</i>
+<br>xmlns:daml="http://www.daml.org/2001/03/daml+oil#"
+<p>Example <a href="daml.html#namespace">Namespace Declarations</a> in
+DAML
+<p>In DAML, we have to <a href="daml.html#import">Import</a> ontologies
+to be able to use the classes defined in the ontology.</td>
+
+<td>&nbsp;</td>
+</tr>
+
+<tr>
+<td BGCOLOR="#FFFFCC"><b><font color="#000099">Object Classes &amp; Properties</font></b></td>
+
+<td>No concept of classes and properties,
+<br>only Elements of certain Types.
+<br>The Type can be <i><a href="xsd.html#simpleType">simpleType</a></i>
+or a <i><a href="xsd.html#complexType">complexType</a></i>.</td>
+
+<td>Resource is the top level class.
+<br>(http://www.w3.org/2001/01/rdf-schema#Resource)
+<p>Example of <a href="rdfs.html#Class">Classes</a>, &amp; <a href="rdfs.html#Property">Properties</a></td>
+
+<td>DAML also has <a href="daml.html#class">Classes</a> &amp; Properties.
+<br>Classes can also be a subClassOf an anonymous class created due to
+a '<i><a href="daml.html#localrange">Restriction</a></i>' on the set of
+all 'Things'.
+<p>Two kinds of Properties are defined:
+<br><i><a href="daml.html#ObjectProperty">ObjectProperties</a></i> (Relate
+an object to another object - the value of the property is also an object)
+<br>&amp;
+<br><i><a href="daml.html#DatatypeProperty">DatatypeProperties</a></i>
+(Relate an object to a primitive data type - the value of the property
+is a primitive data type)
+<p>&nbsp;</td>
+
+<td>&nbsp;</td>
+</tr>
+
+<tr>
+<td BGCOLOR="#FFFFCC"><b><font color="#000099">Inheritance</font></b></td>
+
+<td>Since there aren't any Classes, there is no concept of inheritance.
+<p>However, Types can be <i><a href="xsd.html#extension">extended</a></i>
+or <i><a href="xsd.html#restriction">restricted</a> , </i>thus defining
+subTypes.
+<br>&nbsp;</td>
+
+<td>A class can be a <i><a href="rdfs.html#subClass">subClassOf</a> </i>other
+classes (multiple inheritance is allowed)
+<p>Properties can also be <i>subPropertyOf</i> other properties.
+<br>&nbsp;</td>
+
+<td>Same as in RDF.</td>
+
+<td>&nbsp;</td>
+</tr>
+
+<tr>
+<td BGCOLOR="#FFFFCC"><b><font color="#000099">Property Range</font></b></td>
+
+<td>Can be specified globally.
+<br>For a locally specificied (element specific) range, the element has
+to be declared locally.
+<p>Example of a <a href="xsd.html#global">global element</a>.
+<br>The global element can be referred to like <a href="xsd.html#globalref">this</a>.
+<p>Example of <a href="xsd.html#local">local element</a></td>
+
+<td>Can only be specified globally
+<br>&lt;rdfs:range....>
+<p>Multiple range statements are not allowed. However the same effect can
+be had by having a class as the range of a property, then all it's sub-classes
+will be allowed as values of the Property.
+<p><a href="rdfs.html#range">Example</a> of a range specification
+<br>&nbsp;</td>
+
+<td>Can be specified <a href="daml.html#globalrange">globally</a> (&lt;rdfs:range...>)&nbsp;
+<br>as well as <a href="daml.html#localrange">locally</a>
+<br>&nbsp;&lt;daml:Restriction>
+<br>&nbsp;&nbsp; &lt;daml:onProperty...>&lt;daml:toClass....>
+<br>&nbsp;&lt;/daml:Restriction>
+<p>Multiple range statements imply <u>conjunction</u> (i.e. all of them
+should be satisfied)
+<br>&nbsp;</td>
+
+<td>Range specifies the kinds of values (elements / classes / datatypes)
+the property can have.</td>
+</tr>
+
+<tr>
+<td BGCOLOR="#FFFFCC"><b><font color="#000099">Property Domain</font></b></td>
+
+<td>No explicit declaration of the domain of the element. The domain is
+implicitly the element in which the definition appears.</td>
+
+<td>Can only be specified globally
+<br>&lt;rdfs:domain....>
+<p>Multiple domain statements imply <u>disjunction</u> (i.e. any of them
+could be satisfied)
+<p>Example of a domain spec in RDF <a href="rdfs.html#domain">here</a>.
+<br>&nbsp;</td>
+
+<td>Can be specified globally (&lt;rdfs:domain...>).
+<p>Multiple domain statements imply <u>conjuction</u> (i.e. all of them
+should be satisfied)
+<p><a href="daml.html#globaldomain">Example</a> of a domain in DAML</td>
+
+<td>Domain specifies which elements / classes can have the particular property</td>
+</tr>
+
+<tr>
+<td BGCOLOR="#FFFFCC"><b><font color="#000099">Property Cardinality</font></b>
+<br><b><font color="#000099">[1 to many relations]</font></b></td>
+
+<td>Can be specified using
+<br><i>minOccurs,</i> <i>maxOccurs</i>
+<p><a href="xsd.html#minmax">Example</a></td>
+
+<td>Not defined in the core RDF Schema. By default there are no cardinality
+restrictions on properties.
+<p>However, new constraints like these can be specified by making them
+a <i>subClassOf</i> the '<i>ConstraintProperty</i>' Class.
+<br>Look at how cardinality is defined in&nbsp; <a href="http://www.ontoknowledge.org/oil/rdf-schema/2000/11/10-oil-standard" target="_blank">OIL-Ontology</a>
+<br>&nbsp;</td>
+
+<td>Can be specified locally
+<br><i><a href="daml.html#mincard">minCardinality</a>, <a href="daml.html#maxcard">maxCardinality</a>,
+<a href="daml.html#cardinality">cardinality</a></i>
+<p>Can also be specified <a href="daml.html#globalcardinality">globally</a>
+although only as a UniqueProperty (single valued i.e. having cardinality
+of 1).
+<br>&nbsp;</td>
+
+<td>The cardinality of a property specifies the number of occurences of
+the property/element for a certain class/element.</td>
+</tr>
+
+<tr>
+<td BGCOLOR="#FFFFCC"><b><font color="#000099">Basic Datatypes</font></b></td>
+
+<td>Datatypes supported by XMLSchema are mainly variations of numerical,
+temporal and string datatypes.
+<p>For a hierarchy of all built-in datatypes visit
+<br><a href="http://www.w3.org/TR/xmlschema-2/#built-in-datatypes" target="_blank">this
+link</a>.
+<br>&nbsp;</td>
+
+<td>The core RDF Schema only includes 'Literals' which is the set of all
+strings.
+<p>Example of the use of <a href="rdfs.html#range">Literals</a>.</td>
+
+<td>Allows the use of XMLSchema Datatypes by just referring to the XMLSchema
+URI.
+<br><a href="daml.html#xsd">Example</a>
+<br>More information can be found <a href="http://www.daml.org/2001/03/reference.html#Object" target="_blank">here</a>.</td>
+
+<td>&nbsp;</td>
+</tr>
+
+<tr>
+<td BGCOLOR="#FFFFCC"><b><font color="#000099">Enumeration of Property
+Values</font></b></td>
+
+<td>Possible with the &lt;<i>enumeration</i>> tag.
+<p>See an example <a href="xsd.html#enumeration">here</a>.</td>
+
+<td>Not possible.</td>
+
+<td>Enumeration of property types is possible with the &lt;<i>oneOf rdf:ParseType="daml:collection"...</i>>
+tag
+<br>See an example <a href="http://www.daml.org/2001/03/reference.html#Enumerated" target="_blank">here</a>.
+<p>It is also possible to simply point to an enumerated data type declared
+using XMLSchema.
+<br>&nbsp;</td>
+
+<td>An Enumeration restricts the value space of a property to a certain
+set of values.</td>
+</tr>
+
+<tr>
+<td BGCOLOR="#FFFFCC"><b><font color="#000099">Ordered Data Set</font></b></td>
+
+<td>Data Sets maintain order by default
+<p><b>Note: </b>Type declarations having the &lt;<i>sequence</i>> tag,
+just mean that data should appear in the order specified
+<br><a href="xsd.html#sequence">Example</a>
+<br>&nbsp;</td>
+
+<td>Data Set ordered with the &lt;<i>rdf:Seq...</i>> tag
+<p>Example can be found <a href="rdfs.html#seq">here</a>.</td>
+
+<td>Can use the <i>&lt;rdf:Seq..></i> tag</td>
+
+<td>&nbsp;</td>
+</tr>
+
+<tr>
+<td BGCOLOR="#FFFFCC"><b><font color="#000099">Transitive Properties</font></b></td>
+
+<td>Not possible to specify.</td>
+
+<td>Cannot be stated.</td>
+
+<td>Possible with the &lt;<i>daml:TransitiveProperty</i>> tag
+<p>See an <a href="daml.html#transitive">example</a>.
+<br>&nbsp;</td>
+
+<td>&nbsp;</td>
+</tr>
+
+<tr>
+<td BGCOLOR="#FFFFCC"><b><font color="#000099">Negation</font></b></td>
+
+<td>Not possible.</td>
+
+<td>Not&nbsp; present.</td>
+
+<td>Possible with the <i>&lt;daml:complementOf..></i> tag
+<p><a href="daml.html#negation">Example</a>
+<br>&nbsp;</td>
+
+<td>Negation implies the absence of some element (ex. no Car is a person)</td>
+</tr>
+
+<tr>
+<td BGCOLOR="#FFFFCC"><b><font color="#000099">Disjunctive / Disjoint Classes</font></b></td>
+
+<td>A union of possible types for an element is possible with the <i>&lt;union></i>
+tag
+<p><a href="xsd.html#union">Example</a></td>
+
+<td>Can use a Bag to Indicate unordered collections (or unions of properties).
+<p>However, we cannot have a class as a union of 2 classes.
+<br>&nbsp;</td>
+
+<td>A Class can be a union of 2 other Classes. Possible with the &lt;<i>unionOf...></i>
+tag.
+<br>We can represent disjoint unions with the <i>&lt;disjointUnionOf...></i>
+tag.
+<p><a href="daml.html#union">Example</a>
+<br>&nbsp;</td>
+
+<td>&nbsp;</td>
+</tr>
+
+<tr>
+<td BGCOLOR="#FFFFCC"><b><font color="#000099">Necessary &amp; Sufficient
+conditions for Class Membership</font></b></td>
+
+<td>No</td>
+
+<td>No</td>
+
+<td>Yes
+<p><i><a href="daml.html#sameClassAs">sameClassAs</a>, equivalent, </i>using
+boolean combinations of Class Expressions.
+<p><i>UnambigousProperty</i> specifies a property which identifies the
+resource (like a primary key).
+<p>&nbsp;</td>
+
+<td>Necessary and Sufficient conditions for Class Membership specify a
+class definition that can be used:
+<br>1) to determine (or recognize) whether an instance belongs to that
+class
+<br>2) to determine (or classify) wheteher the class is a subclass of another
+class.</td>
+</tr>
+</table></center>
+
+<p><a NAME="Authors"></a>If there are any comments or suggestions, you
+can mail either <a href="mailto:gil@isi.edu">Yolanda Gil</a>, or <a href="mailto:varunr@isi.edu">Varun
+Ratnakar</a>.
+</body>
+</html>

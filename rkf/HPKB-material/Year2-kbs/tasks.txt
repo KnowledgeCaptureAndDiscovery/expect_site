@@ -1,0 +1,830 @@
+
+
+;HIGH LEVEL TACTICAL TASK REPRESENTATION
+
+
+
+;===========================================================================
+
+;A WORD CONCERNING TASK ASSIGNATION IN COURSES OF ACTION
+
+  
+
+;From direct communication by J. Donlon:
+
+
+
+; "- In a COA (and other military planning products) each is indeed assigned
+
+;  to a specific unit.  It should never be the case that a task is stated in
+
+;  the statement or symbolized on the sketch and not assigned to a unit in
+
+;  that plan.  (As in, if anyone gets around to it, feel free to destroy this
+
+;  thing over here...)  :-)  
+
+
+
+;  - Forces carrying out one of these tasks should be controlled by a single
+
+;  headquarters -- resulting in one unit to a tactical task at any given time.
+
+;  (This is the principle of "unity of command").
+
+
+
+;  - It is permissible for one unit to assume the task previously conducted
+
+;  by another unit.  This might be planned for in a course of action.  For
+
+;  example, if an attacking unit is likely to reach a culminating point before
+
+;  completion of a task, another unit may be following behind, with the intent
+
+;  of continuing the attack to complete that task.  (Conveying this
+
+;  relationship is the primary purpose of the follow and assume graphic and
+
+;  task).
+
+
+
+;  - If a task is to be conducted as part of the COA's mission that is too
+
+;  much for any single subordinate unit to accomplish alone, then the task can
+
+;  be decomposed to allow multiple units to accomplish the unit's overall
+
+;  task.  For example, suppose a division is tasked to seize OBJ FORD, and
+
+;  this is too big for any brigade to do alone.  The OBJ can be broken into
+
+;  smaller objectives and assigned to units accordingly (SE1 attacks to seize
+
+;  OBJ FORD1..., SE2 attacks to seize OBJ FORD2...).   Or if a division's
+
+;  mission involves destroying enemy forces in zone, the COA might decompose
+
+;  that task by dividing the division zone into brigade zones and assigning
+
+;  each the task to destroy enemy forces in (its own) zone.
+
+
+
+;  - Tasks seem to be expressed wrt one of: terrain, friendly forces, or
+
+;  enemy forces.  See the grammar and KF 52.1 on this.
+
+
+
+;  - In the CP document we describe tasks as resource commitments.  4.3.1
+
+
+
+;  - The Army uses three basic ways to express when a task will be done.  In
+
+;  its basic form, the task will be done (and a timeSpec may be used to
+
+;  specify when).  The two variants are "on order" tasks" (it will be done,
+
+;  but not until directed) and "be prepared" tasks (it may or may not be
+
+;  directed).  More on this in 4.3.1 in the CP doc.
+
+
+
+;  - In course of action planning, some tasks are planned to be conducted
+
+;  conditionally.  Also in 4.3.1
+
+
+
+;  - In the context of mission analysis (an input for our purposes), tasks
+
+;  given in a mission are categorized as "specified" or "implied".  A subset
+
+;  of these are identified as "essential tasks" -- tasks that must be executed
+
+;  to accomplish the mission.  See FM 101-5, p. 5-6.  (BTW, don't be confused
+
+;  by the definition of essential task in FM 101-5-1.  The term defined there
+
+;  really is a different use of the term altogether, from a training
+
+;  management context)."
+
+
+
+;>From direct communication by Eric Jones:
+
+
+
+; "The MDMP is a "fractal"-like, recursive process.  First a large unit (e.g.
+
+; a Corps) is handed a mission and goes through the MDMP to (e.g.  a Corps) is
+
+; handed a mission and goes through the MDMP to create COAs and operations
+
+; orders.  These orders specify sub-missions for the immediate subordinate
+
+; units (e.g. divisions), each of which then repeats the MDMP to plan for its
+
+; sub-mission.  The MDMP one echelon down is very similar to the MDMP at the
+
+; higher echelon, except that the scale (planning/execution time, space, unit
+
+; size) is smaller (e.g. in theory, the amount of time available for planning
+
+; one echelon down is 2/3rds that available to the immediately higher
+
+; echelon).
+
+
+
+; Note that a COA for a unit at a given echelon specifies exactly the right
+
+; amount of information needed to support recursive decomposition to the next
+
+; echelon down: in particular, the COA for the most part assigns HQs, tasks,
+
+; and purposes to maneuver units one echelon down.  A COA doesn't concern
+
+; itself with details of tasks two echelons down (or more) except in a few
+
+; special cases like the reserve, where the smaller unit's purpose directly
+
+; impacts the sucess of the larger unit's mission.  Providing for only this
+
+; level of detail both manages complexity of a unit's planning task and
+
+; provides subordinate commanders maximum flexibility and room to exercise
+
+; initiative."
+
+
+
+;-------------------------------------------------------------
+
+;I have attempted to keep the following ontologization in consonance
+
+;with the preceding comments.  For further discussion of some of the
+
+;relevant issues, see A CONCLUDING WORD ABOUT MILITARY OPERATIONS AND
+
+;TASKS below.
+
+
+
+
+
+constant: ModernMilitaryTacticsMt.
+
+in Mt: BaseKB.
+
+isa: ApplicationContext IKBConstant.
+
+genlMt: ModernMilitaryWeaponsMt MilitaryForceStructureMt
+
+ModernMilitaryVehiclesMt.
+
+comment: "This instance of #$Microtheory is intended to contain
+
+doctrinal rules and definitions pertaining to military tactics.  Since
+
+much of the information contained here references data about military
+
+force structure, vehicles, and weapons, this microtheory has access to
+
+the #$ModernMilitaryWeaponsMt #$MilitaryForceStructureMt and the
+
+#$ModernMilitaryVehiclesMt.  A number of more specialized tactical
+
+microtheories in turn have access to it: each of these contains
+
+information derived from a specific source.  Each of the
+
+source-specific microtheories is in turn accessed by the
+
+#$ModernMilitaryMt which is intended to have access to all aspects of
+
+modern military operations.  Plan representation microtheories that
+
+specify military COAs (courses of action) will also have access to
+
+it." .
+
+
+
+constant: SpecializedTacticsSourceMt.
+
+in Mt: BaseKB.
+
+isa: ApplicationContext IKBConstant.
+
+genlMt: ModernMilitaryTacticsMt.
+
+comment: "This instance of #$Microtheory and its siblings are intended
+
+to contain source-specific information concerning military tactics
+
+acquired by the knowledge acquisition tools of the Battlespace
+
+COA-critiquing project.  Since this information will probably be
+
+encoded in terms of constants defined in the
+
+#$ModernMilitaryTacticsMt, this microtheory has been given access to
+
+that context.  The #$ModernMilitaryMt in turn has access to this
+
+microtheory and all others like it.".
+
+
+
+F:
+
+(genlMt ModernMilitaryMt SpecializedTacticsSourceMt).
+
+
+
+
+
+constant: MilitaryTask.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: TemporalObjectType ScriptType IKBConstant.
+
+genls: MilitaryEvent SingleDoerAction.
+
+comment: "The collection of all military Tasks such as might be
+
+assigned to deployable, modern military units.  A particular task is
+
+performed by one and only one unit, although other units may function
+
+in a support capacity, and subunits of the performing unit may be
+
+assigned tasks that figure as subtasks of the performing unit's
+
+assigned task.  In this case the tasks of the subordinate units should
+
+be related to the overarching task of the superior unit by the
+
+#$subTasks-Military relation.  A single unit may be assigned more than
+
+one task.  Notice that this collection is a specialization of
+
+#$MilitaryEvent, not #$MilitaryOperation -- instances of the latter are
+
+complex events take account of both primary tasks and their subtasks
+
+and also distinct support tasks.  Instances of #$MilitaryTask may
+
+properly figure as #$subEvents in an instance of
+
+#$MilitaryOperation.".
+
+
+
+F:
+
+(interArgIsa1-2 performedBy MilitaryTask ModernMilitaryUnit-Deployable).
+
+F:
+
+(relationAllExistsMany subEvents MilitaryOperation MilitaryTask).
+
+
+
+
+
+constant : MilitaryInterferenceAction .
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: TemporalObjectType IKBConstant .
+
+genls: MilitaryEvent .
+
+comment : "Any type of action that a military force undertakes to interfere
+
+with operations of an enemy military force." . 
+
+F: (interArgIsa1-2 performedBy MilitaryInterferenceAction
+
+        ModernMilitaryUnit-Deployable). 
+
+F: (interArgIsa1-2 objectActedOn  MilitaryInterferenceAction
+
+        ModernMilitaryUnit-Deployable). 
+
+
+
+
+
+constant : MilitaryOffensiveTask .
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: TemporalObjectType IKBConstant .
+
+genls : MilitaryTask .
+
+;;genls: AttackOnTangible MilitaryTask Movement-TranslationEvent.
+
+comment : "The collection comprised of the closed class of offensive
+
+forms of MilitaryTask. The collection is not a specialization
+
+of MilitaryAttack or AttackOnTangible, since not all forms of
+
+MilitaryOffensiveTask constitute outright attacks. Some
+
+instances may be attacks, however." .
+
+
+
+constant : MilitaryOffensiveOperation .
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa : IKBConstant TemporalObjectType .
+
+genls : MilitaryAttack MilitaryOperation .
+
+comment : "The collection of all instances of
+
+          MilitaryOperation where the primary purpose or goal
+
+          is offensive in nature. This collection is inclusive
+
+          of concerted operations carried out by multiple
+
+          units. For individual MilitaryTasks carried out by
+
+          particular units, see MilitaryOffensiveTask.
+
+          MilitaryOffensiveOperation is the 'defensive' analog
+
+          of MilitaryDefensiveOperation." .
+
+
+
+
+
+constant : MilitaryDefensiveOperation.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: TemporalObjectType ScriptType IKBConstant.
+
+genls: MilitaryOperation ProtectingSomething.
+
+comment : "The collection of all instances of #$MilitaryOperation where
+
+          the primary purpose or goal is defensive in nature. This
+
+          collection is inclusive of concerted operations carried out by
+
+          multiple units. For individual MilitaryTasks carried out by
+
+          particular units, see #$MilitaryDefensiveTask.
+
+          #$MilitaryDefensiveOperation is the 'defensive' analog of
+
+          #$MilitaryOffensiveOperation." .
+
+
+
+
+
+
+
+constant: MilitaryDefensiveTask.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: TemporalObjectType ScriptType IKBConstant.
+
+genls: MilitaryTask  ProtectingSomething.
+
+comment: "The collection comprised of all defensive forms of Task.
+
+This collection is *not* a specialization of
+
+#$MilitaryDefensiveOperation since #$MilitaryDefensiveOperation is a
+
+specialization of #$MilitaryOperation: instances are carried out by
+
+several units acting in concert to implement primary and support
+
+tasks.  An instance of #$MilitaryDefensiveOperation will be comprised
+
+of one or more instances of #$MilitaryDefensiveTask figuring as
+
+#$subEvents.".
+
+
+
+F:
+
+(relationAllExists objectTakenCareOf MilitaryDefensiveTask PartiallyTangible).
+
+F:
+
+(interArgIsa1-2 objectTakenCareOf MilitaryDefensiveTask PartiallyTangible).
+
+
+
+
+
+constant: unitAssignedToTask.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ActorSlot IKBConstant.
+
+arg1Isa: MilitaryTask.
+
+arg2Isa: ModernMilitaryUnit-Deployable.
+
+comment: "(unitAssignedToTask TASK UNIT) means that UNIT is the
+
+instance of #$ModernMilitaryUnit-Deployable that is charged with
+
+primary responsibility for implementing TASK in accordance with a
+
+course of action (COA).".
+
+
+
+
+
+
+
+constant: timeConstraintOfTask.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: BinaryPredicate IKBConstant.
+
+arg1Isa: MilitaryTask.
+
+arg2Isa: TemporalThing.
+
+comment: "(timeConstraintOfTask TASK TIMESPEC) means that within a
+
+particular plan specification or course of action context, TASK is to
+
+be completed within the time extent of the #$TemporalThing TIMESPEC." .
+
+
+
+F:
+
+(implies
+
+  (and
+
+    (unitAssignedToTask ?TASK ?UNIT)
+
+    (timeConstraintOfTask ?TASK ?TIMESPEC)
+
+    (successfulForAgents ?TASK ?UNIT))
+
+  (temporallySubsumes ?TIMESPEC ?TASK)).
+
+
+
+F:
+
+(implies
+
+  (and
+
+    (unitAssignedToTask ?TASK ?UNIT)
+
+    (timeConstraintOfTask ?TASK ?TIMESPEC))
+
+  (preconditionFor-PropSit
+
+    (temporallySubsumes ?TIMESPEC ?TASK) ?TASK)).
+
+
+
+
+
+
+
+
+
+constant: subTasks-Military.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: NonPhysicalPartPredicate ReflexiveBinaryPredicate
+
+AntiSymmetricBinaryPredicate TransitiveBinaryPredicate SubProcessSlot
+
+ComplexTemporalRelation Role IKBConstant.
+
+genlPreds: subEvents.
+
+arg1Isa: MilitaryTask.
+
+arg2Isa: MilitaryTask.
+
+comment: "(subTasks-Military TASK SUBTASK) means that SUBTASK is
+
+considered a proper #$subEvents of TASK and presupposes that any unit
+
+assigned to perform SUBTASK is a #$subOrganizations of the unit
+
+assigned to perform TASK.  This relation is used to express the
+
+relationship between a task assigned to a particular military unit at
+
+one level of planning in the MDMPand the task assigned to a subunit of
+
+that unit at a lower level of planning.".
+
+cyclistNotes: "Do not confuse this relationship with the
+
+#$supportingTask relation.  The latter holds between the main task of
+
+an operation and a supporting task at the same level of planning.".
+
+
+
+
+
+
+
+;;genlPreds relies on preds in task interaction file
+
+
+
+constant: supportingTask.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: IrreflexiveBinaryPredicate AsymmetricBinaryPredicate
+
+TransitiveBinaryPredicate.
+
+;;genlPreds: taskAssists taskComplements taskPositiveSynergyWith.
+
+arg1Isa: MilitaryTask.
+
+arg2Isa: MilitaryTask.
+
+comment: "(#$supportingTask SUPPORTING SUPPORTED) means that SUPPORTING
+
+satisfies one or more of the preconditions for SUPPORTED, lowers the
+
+cost associated with performing SUPPORTED, and increases the utility
+
+of the consequences of SUPPORTED for the unit tasked with performing
+
+it.  It is, in consequence, a specialization of #$taskAssists,
+
+#$taskComplements, and #$taskPositiveSynergyWith.  In general, this
+
+will often be the relation that is asserted to hold between the #$mainTask
+
+of an instance of #$MilitaryOperation and any task that is carried out
+
+by friendly forces in the course of the operation that is not a
+
+#$subTasks-Military of the #$mainTask." .
+
+cyclistNotes: "Do not confuse this relation with #$subTasks-Military.
+
+The latter properly holds between the task assigned to a unit at one
+
+level of planning in the MDMP process and the task assigned a subunit
+
+of that unit at a lower level of planning.  #$supportingTask holds
+
+between tasks assigned to different units at the same planning
+
+level.".
+
+
+
+
+
+constant: mainTaskOfOperation .
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa :  AntiSymmetricBinaryPredicate
+
+        AsymmetricBinaryPredicate IrreflexiveBinaryPredicate .
+
+genlPreds : subEvents  .
+
+arg1Isa : MilitaryOperation .
+
+arg2Isa : MilitaryTask .
+
+comment : "This predicate relates an instance of
+
+          MilitaryOperation to an instance of MilitaryTask.
+
+          (mainTaskOfOperation OP TASK) means that TASK is
+
+          considered to be the principle task and raison d'etre
+
+          of the MilitaryOperation OP within the plan
+
+          specification context in which the assertion is made.
+
+          This entails (subEvents OP TASK)." .
+
+
+
+
+
+
+
+constant: supportingTaskOfOperation.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: IrreflexiveBinaryPredicate AsymmetricBinaryPredicate.
+
+genlPreds: subEvents .
+
+arg1Isa: MilitaryOperation .
+
+arg2Isa: MilitaryTask.
+
+comment: "(#$supportingTaskOfOperation OP SUPTASK) means that
+
+(#$subEvents OP SUPTASK) and, if (#$mainTaskOfOperation OP MAINTASK),
+
+then (#$supportingTask MAINTASK SUPTASK).".
+
+
+
+F:
+
+(implies
+
+  (and
+
+    (supportingTaskOfOperation ?OP ?SUPTASK)
+
+    (mainTaskOfOperation ?OP ?MAINTASK))
+
+  (supportingTask ?MAINTASK ?SUPTASK)).
+
+
+
+
+
+;A CONCLUDING WORD ABOUT MILITARY OPERATIONS AND TASKS.  
+
+;When dealing with any collection of actions in Cyc, and particularly
+
+;with instances of #$ScriptType, it is vital to distinguish between
+
+;cases where one collection of actions really is a specialization of
+
+;another and cases where it is really the case that every instance of
+
+;one collection is a subEvents of every instance of the other.  For
+
+;instance, consider the script types CallingSomeoneOnTheTelephone and
+
+;DialingATelephoneNumber.  The connection here is not genls; rather it
+
+;is probably the case that (relationAllExists subEvents
+
+;CallingSomeoneOnTheTelephone DialingATelephoneNumber).
+
+
+
+;The name and the documentary definition of MilitaryOperation both
+
+;tend to suggest to me that in fact every instance of
+
+;MilitaryOperation is a grade above a MilitaryTask--i.e., every
+
+;instance is undertaken by more than one unit, acting in concert, and
+
+;is *not* what Jim Donlon characterizes as a military task, assigned
+
+;to one unit at a particular level of planning.  A potential confusion
+
+;arises here with respect to #$MilitaryOperation-Joint, but I would
+
+;say that the definition on *this* constant makes it clear that
+
+;instances are *huge* military operation undertaken by multiple
+
+;branches of service; possibly from different countries.
+
+
+
+;Therefore, we're adopting the convention that instances of
+
+;MilitaryTask properly figure as subEvents in instances of
+
+;MilitaryOperation: both collections are specs of MilitaryEvent and
+
+;there should be no direct genls link between them.  For the same
+
+;reason, MilitaryOffensiveTask should not be a spec of MilitaryAttack, and
+
+;MilitaryDefensiveTask should not be a spec of
+
+;MilitarDefensiveOperation, and so on.
+
+
+
+;I submit that the implementation of a Course of Action should be
+
+;thought of as a particular kind of #$MilitaryOperation, with one
+
+;#$mainTaskOfOperation plus numerous support tasks that have the
+
+;relation #$supportingTask to the main task and the relation
+
+;#$supportingTaskOfOperation to the whole operation.  Conversely, if
+
+;we are talking about the relation between the task assigned to a unit
+
+;at one level of planning and the task assigned to one of the unit's
+
+;subordinate units at a lower level of planning, we should use the
+
+;relation #$subTasks-Military.
+
+
+
+;The documentary definition of #$MilitaryOperation will be changed to
+
+;bring it into line with this analysis.
+
+
+
+;SOME ADDITIONAL MILITARY EVENTS
+
+;=================================================================
+
+
+
+constant : MilitaryContainment.
+
+in Mt: ModernMilitaryTacticsMt. 
+
+isa: TemporalObjectType ScriptType IKBConstant.
+
+genls: MilitaryEvent.
+
+
+
+ 
+
+Constant : MovementAgainstResistance-Military.
+
+in Mt: ModernMilitaryTacticsMt. 
+
+isa: TemporalObjectType ScriptType IKBConstant.
+
+genls: MilitaryEvent Movement-TranslationEvent.
+
+ 
+
+
+
+Constant : ImpedingMovement .
+
+in Mt: ModernMilitaryTacticsMt. 
+
+isa: TemporalObjectType ScriptType IKBConstant.
+
+genls: MilitaryEvent ConstrainingEvent .
+
+
+
+
+
+constant: WithdrawalFromCombat.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: TemporalObjectType ScriptType IKBConstant.
+
+genls: MilitaryEvent LeavingAPlace.
+
+
+
+
+
+
+

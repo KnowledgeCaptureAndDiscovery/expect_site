@@ -1,0 +1,196 @@
+;;; -*- Mode: Lisp; Package: BATTLE-SPACE; Syntax: COMMON-LISP; Base: 10 -*-
+
+;;; HPKB Engineering Equipment Ontology
+
+
+(in-package "BATTLE-SPACE")
+
+
+
+;;; ******************** CONCEPTS ********************
+
+(defconcept engineering-equipment
+  :is-primitive tool) ;; There has to be a better place to link this
+
+(defconcept military-bridge
+  :is-primitive (:and engineering-equipment bridge)
+  :annotations ((documentation "The class of fixed-span and floating bridges 
+used by the military"))
+  :roles ((emplacement-time :type loom::time-quantity)
+          (num-bays :type integer)
+          (max-length :type loom::distance-quantity)
+          (max-forward-slope :type loom::quantity)))
+
+(defconcept avlb
+  :is-primitive (:and (:filled-by emplacement-time 0.08h)
+                      (:filled-by max-traffic-class 70)
+                      (:filled-by length-of-object 17.0m)
+                      (:filled-by max-length 17.0m)
+                      military-bridge
+                      tracked-vehicle)
+  :annotations ((documentation "An armoured vehicle launched bridge")))
+
+(defset possible-mgb-size :is (:one-of 'single 'double) :annotations
+ ((documentation "MGB's may be single or double story")))
+
+(defconcept mgb
+  :is-primitive military-bridge
+  :annotations ((documentation "The Medium Girder Bridge"))
+  :roles ((num-stories :type possible-mgb-size)))
+
+(defconcept mgb-ss
+  :is-primitive (:and (:filled-by max-length 22.0m) mgb)
+  :annotations ((documentation "Single story MGB")))
+
+(defconcept mgb-ds
+  :is-primitive (:and (:filled-by max-length 47.4m) mgb)
+  :annotations ((documentation "Double story MGB")))
+
+(defconcept bailey-bridge
+  :is-primitive (:and (:filled-by max-length 51.8m) military-bridge)
+  :annotations ((documentation "The Bailey Military Bridge")))
+
+(defconcept floating-bridge
+  :is-primitive military-bridge
+  :annotations ((documentation "The class of military bridges that float on the water 
+rather than spanning over it."))
+  :roles ((max-current :type loom::speed-quantity)
+          (max-bank-height :type loom::distance-quantity)
+          (min-water-depth :type loom::distance-quantity)))
+
+(defconcept ribbon-bridge
+  :is-primitive (:and (:filled-by emplacement-time 0.5h)
+                      (:filled-by max-length 215m)
+                      (:filled-by max-forward-slope 20%)
+                      (:filled-by max-current 3.05m/s)
+                      (:filled-by max-bank-height 1.0m)
+                      (:filled-by min-water-depth 0.6m)
+                      floating-bridge)
+  :annotations ((documentation "The ribbon bridge is the standard floating bridge used by the Army.")))
+
+(defconcept m4t6
+  :is-primitive floating-bridge
+  :annotations ((documentation "Another type of floating bridge.  With the advent of the ribbon bridge in 1972, the M4T6 floating bridges has become somewhat 
+obsolete.  However, if ribbon equipment is not available, they may be a 
+useful alternative."))
+  ; :roles ((reinforced :type boolean))
+)
+
+(defproperty reinforced) ;; Optionally add domain.
+
+(defconcept m4t6-fixed-bridge
+  :is-primitive (:and (:filled-by max-length 13.7m) military-bridge)
+  :annotations ((documentation "The M4T6 floating bridging equipment can be used to 
+  span gaps, however there is a significant limitation on length-of-object and 
+  traffic class.")))
+
+(defconcept military-crane
+  :is-primitive engineering-equipment
+  :annotations ((documentation "A general crane used by the military")))
+
+(defconcept mine-plow
+  :is-primitive engineering-equipment
+  :annotations ((documentation "A mine plow is a plow that is attached to a tank.  It 
+is designed to plow through a minefield, usually setting them off.")))
+
+(defconcept tank-blade
+  :is-primitive engineering-equipment
+  :annotations ((documentation "A tank blade is an attachment to a tank that allows it to 
+do simple bulldozing activities.")))
+
+(defconcept military-dozer
+  :is-primitive (:and engineering-equipment military-vehicle))
+
+(defconcept light-dozer
+  :is-primitive military-dozer)
+
+(defconcept medium-dozer
+  :is-primitive military-dozer)
+
+(defconcept heavy-dozer
+  :is-primitive military-dozer)
+
+(defconcept deuce
+  :is-primitive light-dozer
+  :annotations ((documentation "The DEUCE bulldozer")))
+
+(defconcept d7
+  :is-primitive medium-dozer
+  :annotations ((documentation "The D7 bulldozer")))
+
+(defconcept d8
+  :is-primitive heavy-dozer
+  :annotations ((documentation "The D8 bulldozer")))
+
+(defconcept ammunition
+  :is-primitive engineering-equipment
+  :annotations ((documentation "The military doesn't really classify Ammunition
+as Engineering Equipment, but it fits better here in our model.")))
+
+(defconcept explosives
+  :is-primitive ammunition
+  :annotations ((documentation "An explosive is a particular type of ammunition.  It is 
+designed to blow things up.  Example subclasses would be dynamite or c4.")))
+
+(defconcept c4
+  :is-primitive explosives
+  :annotations ((documentation "The c4 class of explosives")))
+
+(defconcept demining-equipment
+  :is-primitive engineering-equipment)
+
+(defconcept miclic
+  :is-primitive (:and demining-equipment ammunition)
+  :annotations ((documentation "The MICLIC is used to clear minefields.")))
+
+(defconcept bangalor
+  :is-primitive (:and demining-equipment ammunition)
+  :annotations ((documentation "The Bangalor-Torpedo is used to clear minefields")))
+
+
+
+;;; ******************** RELATIONS ********************
+
+;;; ******************** AXIOMS ********************
+
+(implies (:and MGB-SS (>= length-of-object 0.0m) (< length-of-object 9.0m))
+	 (:filled-by max-traffic-class 70))
+(implies (:and MGB-SS (>= length-of-object 9.0m) (< length-of-object 10.8m))
+	 (:filled-by max-traffic-class 40))
+(implies (:and MGB-SS (>= length-of-object 10.8m) (< length-of-object 14.4m))
+	 (:filled-by max-traffic-class 30))
+(implies (:and MGB-SS (>= length-of-object 14.4m) (< length-of-object 16.2m))
+	 (:filled-by max-traffic-class 24))
+(implies (:and MGB-SS (>= length-of-object 16.2m) (< length-of-object 18.1m))
+	 (:filled-by max-traffic-class 24))
+(implies (:and MGB-SS (>= length-of-object 18.1m) (< length-of-object 22.0m))
+	 (:filled-by max-traffic-class 16))
+
+(implies (:and MGB-DS (>= length-of-object 0.0m) (< length-of-object 29.1m))
+	 (:filled-by max-traffic-class 70))
+(implies (:and MGB-DS (>= length-of-object 29.1m) (< length-of-object 32.8m))
+	 (:filled-by max-traffic-class 50))
+(implies (:and MGB-DS (>= length-of-object 32.8m) (< length-of-object 36.4m))
+	 (:filled-by max-traffic-class 40))
+(implies (:and MGB-DS (>= length-of-object 36.4m) (< length-of-object 40.1m))
+	 (:filled-by max-traffic-class 30))
+(implies (:and MGB-DS (>= length-of-object 40.1m) (< length-of-object 43.7m))
+	 (:filled-by max-traffic-class 24))
+(implies (:and MGB-DS (>= length-of-object 43.7m) (< length-of-object 47.4m))
+	 (:filled-by max-traffic-class 16))
+
+(implies (:and M4T6-FIXED-BRIDGE 
+	       (>= length-of-object 0.0m) 
+	       (< length-of-object 7.3m))
+	 (:filled-by max-traffic-class 100))
+
+(implies (:and M4T6-FIXED-BRIDGE 
+	       (>= length-of-object 7.3m) 
+	       (< length-of-object 11.6m))
+	 (:filled-by max-traffic-class 90))
+
+(implies (:and M4T6-FIXED-BRIDGE 
+	       (>= length-of-object 11.6m) 
+	       (< length-of-object 13.7m))
+	 (:filled-by max-traffic-class 65))
+

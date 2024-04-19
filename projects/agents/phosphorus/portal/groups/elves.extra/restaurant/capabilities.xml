@@ -1,0 +1,63 @@
+<advertisement>
+<agent-id>restaurant</agent-id>
+
+<capability>
+<MethodGoal>
+<VarGoalForm>
+<GoalName>Find</GoalName>
+<ManyVarGoalArgument>
+<VarGoalArgument>
+   <ParameterName>obj</ParameterName>
+   <MethodGoalArgument>
+      <VariableName>?o</VariableName><is>IS</is>
+      <ComplexData>
+         <edt-type>SPEC-OF</edt-type>
+         <ConceptName>restaurants</ConceptName>
+      </ComplexData>
+   </MethodGoalArgument>
+</VarGoalArgument>
+
+<VarGoalArgument>
+   <ParameterName>WITH</ParameterName>
+   <MethodGoalArgument>
+      <VariableName>?v0</VariableName><is>IS</is>
+      <ComplexData>
+         <edt-type>INST-OF</edt-type>
+         <ConceptName>latitude</ConceptName>
+      </ComplexData>
+   </MethodGoalArgument>
+</VarGoalArgument>
+
+<VarGoalArgument>
+   <ParameterName>WITH2</ParameterName>
+   <MethodGoalArgument>
+      <VariableName>?v1</VariableName><is>IS</is>
+      <ComplexData>
+         <edt-type>INST-OF</edt-type>
+         <ConceptName>longitude</ConceptName>
+      </ComplexData>
+   </MethodGoalArgument>
+</VarGoalArgument>
+
+<VarGoalArgument>
+   <ParameterName>FOR</ParameterName>
+   <MethodGoalArgument>
+      <VariableName>?v2</VariableName><is>IS</is>
+      <ComplexData>
+         <edt-type>INST-OF</edt-type>
+         <ConceptName>user-id</ConceptName>
+      </ComplexData>
+   </MethodGoalArgument>
+</VarGoalArgument>
+
+</ManyVarGoalArgument>
+</VarGoalForm>
+</MethodGoal>
+</capability>
+<result>
+<ComplexData>
+   <edt>INST-OF</edt>
+   <ConceptName>message</ConceptName>
+</ComplexData>
+</result>
+</advertisement>

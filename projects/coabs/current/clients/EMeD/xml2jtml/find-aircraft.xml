@@ -1,0 +1,11 @@
+ <?xml version="1.0"?>
+<!DOCTYPE methodDescription SYSTEM "method.dtd">
+
+<methodDescription primitivep="F" name="FIND-AVAILABLE-AIRCRAFT-THAT-PRIMARILY-COVER-A-MISSION-TYPE"> 
+<nlDescription> find the available aircraft that primarily cover a mission type </nlDescription>
+<MethodGoal><VarGoalForm><GoalName>FIND</GoalName><ManyVarGoalArgument><VarGoalArgument><ParameterName>OBJ</ParameterName><MethodGoalArgument><VariableName>?A</VariableName><t name="IS"></t><ComplexData><t name="SPEC-OF"></t><ConceptName>AVAILABLE-AIRCRAFT</ConceptName></ComplexData></MethodGoalArgument></VarGoalArgument><VarGoalArgument><ParameterName>THAT-PRIMARILY-COVER</ParameterName><MethodGoalArgument><VariableName>?M</VariableName><t name="IS"></t><ComplexData><t name="INST-OF"></t><ConceptName>MISSION-TYPE</ConceptName></ComplexData></MethodGoalArgument></VarGoalArgument></ManyVarGoalArgument></VarGoalForm></MethodGoal>
+
+<MethodResult><ComplexData><t name="SET-OF"></t><t name="INST-OF"></t><ConceptName>AVAILABLE-AIRCRAFT</ConceptName></ComplexData></MethodResult>
+
+<MethodBody><BlockExpression><Expression><Form><SpecialForm><FilterForm><t name="FILTER"></t><ParameterName>OBJ</ParameterName><Expression><Form><RelationForm><RelationName>R-AIRCRAFT-PERFORMS-PRIMARILY-MISSION-TYPE</RelationName><Expression><Data><VariableName>?M</VariableName></Data></Expression></RelationForm></Form></Expression><ParameterName>WITH</ParameterName><Expression><Form><GoalForm><GoalName>IS-IT-A</GoalName><ManyGoalParameters><GoalParameter><ParameterName>OBJ</ParameterName><Expression><Form><RelationForm><RelationName>R-AIRCRAFT-PERFORMS-PRIMARILY-MISSION-TYPE</RelationName><Expression><Data><VariableName>?M</VariableName></Data></Expression></RelationForm></Form></Expression></GoalParameter><GoalParameter><ParameterName>OF</ParameterName><Expression><ComplexData><t name="SPEC-OF"></t><ConceptName>AVAILABLE-AIRCRAFT</ConceptName></ComplexData></Expression></GoalParameter></ManyGoalParameters></GoalForm></Form></Expression></FilterForm></SpecialForm></Form></Expression></BlockExpression></MethodBody>
+<resultRefiner></resultRefiner><StorageInfo></StorageInfo><PostProcessing></PostProcessing> </methodDescription>

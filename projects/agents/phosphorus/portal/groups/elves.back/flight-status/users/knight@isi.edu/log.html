@@ -1,0 +1,88 @@
+<html>
+<head>
+<script>
+var limit="0:30"
+if (document.images){
+  var parselimit=limit.split(":");
+  parselimit=parselimit[0]*60+parselimit[1]*1;
+  }
+function resubmit(val) {
+    var myform = eval("document.form"+val);
+    myform.submit();
+}
+function beginrefresh(){
+  if (!document.images)
+      return;
+   if (parselimit==1)
+      window.location.reload();
+   else {
+      parselimit-=1;
+      curmin=Math.floor(parselimit/60);
+      cursec=parselimit%60;
+      if (curmin!=0)
+         curtime=curmin+" minutes and "+cursec+" seconds left until page refresh!";
+      else
+         curtime=cursec+" seconds left until page refresh!";
+      window.status=curtime
+      setTimeout("beginrefresh()",1000)
+   }
+ }
+window.onload=beginrefresh;
+</script>
+</head>
+<table>
+<tr><td colspan=2>----Thu Jun 13 18:00:24 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>6108</td></tr>
+<tr><td><b>on date</b></td><td>6/13/2002</td></tr>
+<tr><td><b>from airport</b></td><td>mry</td></tr>
+<tr><td><b>for user id</b></td><td>knight@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2><b>United Airlines flight 6108</b></td></tr>
+<tr><td colspan=2>Dear knight_at_isi_edu,<br/><br/>Your United Airlines flight 6108 is still scheduled to depart MRY on-time at 7:50 PM Gate and is scheduled to arrive LAX at 9:13 PM Gate .<br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1024016424)'></td></tr>
+</table><br>
+<form name='form1024016424' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='6108'>
+<input type='hidden' name='val2' value='6/13/2002'>
+<input type='hidden' name='val3' value='mry'>
+<input type='hidden' name='val4' value='knight@isi.edu'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='knight@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Mon Jun 10 16:10:08 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>6107</td></tr>
+<tr><td><b>on date</b></td><td>6/10/2002</td></tr>
+<tr><td><b>from airport</b></td><td>lax</td></tr>
+<tr><td><b>for user id</b></td><td>knight@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2><b>United Airlines flight 6107</b></td></tr>
+<tr><td colspan=2>Dear knight_at_isi_edu,<br/><br/>Your United Airlines flight 6107 is still scheduled to depart LAX on-time at 6:05 PM Gate and is scheduled to arrive MRY at 7:22 PM Gate .<br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1023750608)'></td></tr>
+</table><br>
+<form name='form1023750608' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='6107'>
+<input type='hidden' name='val2' value='6/10/2002'>
+<input type='hidden' name='val3' value='lax'>
+<input type='hidden' name='val4' value='knight@isi.edu'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='knight@isi.edu'>
+</form>
+
+<p>
+</html>

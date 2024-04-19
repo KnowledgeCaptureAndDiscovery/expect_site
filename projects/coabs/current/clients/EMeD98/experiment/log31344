@@ -1,0 +1,77 @@
+Agenda:
+   at Tue Oct 05 15:14:05 PDT 1999
+
+5check: Undefined Capabilities
+   at Tue Oct 05 15:14:15 PDT 1999
+
+6check: Method Capability Hierarchy
+   at Tue Oct 05 15:15:15 PDT 1999
+
+5check: Undefined Capabilities
+   at Tue Oct 05 15:15:34 PDT 1999
+
+select: modify button
+   at Tue Oct 05 15:16:28 PDT 1999
+
+1check: Evaluation Result
+   at Tue Oct 05 15:17:07 PDT 1999
+
+select Button:unit-assigned:unit-assigned
+ TO become:((name CHECK-UNIT-FOR-MILITARY-TASK)
+(capability    ( check   ( obj   ( ?a is   ( spec-of appropriate-unit ) ) )
+         ( of   ( ?t is   ( inst-of military-task ) ) ) )
+)
+(result-type    ( inst-of yes-no ))
+(method    ( set-member   ( obj ?t )   ( of
+               ( unit-can-perform   ( echelon-of ?t ) ) ) )
+)
+)
+   at Tue Oct 05 15:18:08 PDT 1999
+
+ From sketch:(Capability): This method can be used to check the appropriate unit of a military task.
+(Body)To do that, set member the military task of the unit can perform of the unit assigned of the military task.
+
+   at Tue Oct 05 15:18:12 PDT 1999
+
+ done editing:((name CHECK-UNIT-FOR-MILITARY-TASK)
+(capability    ( check   ( obj   ( ?a is   ( spec-of appropriate-unit ) ) )
+         ( of   ( ?t is   ( inst-of military-task ) ) ) )
+)
+(result-type    ( inst-of yes-no ))
+(method    ( set-member   ( obj ?t )   ( of
+               ( unit-can-perform   ( echelon-of ?t ) ) ) )
+)
+)
+   at Tue Oct 05 15:18:12 PDT 1999
+
+modified method:((name check-unit-for-military-task)
+ (capability (check
+                (obj (?a is (spec-of appropriate-unit)))
+                (of (?t is (inst-of military-task)))
+                ))
+ (result-type (inst-of yes-no))
+ (method  (set-member
+            (obj ?t)
+            (of ( unit-can-perform ( echelon-of ?t)))
+            ))
+)
+   at Tue Oct 05 15:18:13 PDT 1999
+
+check tab:-1
+   at Tue Oct 05 15:18:13 PDT 1999
+
+check tab:0
+   at Tue Oct 05 15:18:13 PDT 1999
+
+Agenda:
+   at Tue Oct 05 15:18:14 PDT 1999
+
+7check: Method Sub-Method Relation
+   at Tue Oct 05 15:18:16 PDT 1999
+
+3check: Describe PS Tree
+   at Tue Oct 05 15:18:19 PDT 1999
+
+select: modify button
+   at Tue Oct 05 15:18:38 PDT 1999
+

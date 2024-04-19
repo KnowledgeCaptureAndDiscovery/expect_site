@@ -1,0 +1,121 @@
+;;; -*- Mode: Lisp; Package: BATTLE-SPACE; Syntax: COMMON-LISP; Base: 10 -*-
+
+(in-package "BATTLE-SPACE")
+
+
+;; Derived from `Device--Single-User':
+(defconcept Device--User-Controlled
+  :is-primitive (:and Physical-Device Partially-Tangible)
+  :annotations (Existing-Object-Type
+                (documentation "A collection of user-controlled devices.")))
+
+;; Derived from `Kinetic-Energy-Powered-Device':
+(defconcept Fuel-Powered-Device
+  :is-primitive Powered-Device
+  :annotations (Existing-Object-Type
+                (documentation "A collection of fuel-powered devices")))
+
+(defconcept Indirect-Fire-Weapon
+  :is-primitive Weapon
+  :annotations (Existing-Object-Type
+                (documentation "A collection of weapons designed to fire
+indirectly at their targets.  E.g., mortars, ballistic missiles, etc.")))
+
+
+;; Relations:
+
+(defrelation max-number-of-passengers
+  "(max-number-of-passengers ?VEHICLE ?NR) states that the number of
+#$passengers (not #$crewMembers) is ?NR. In a military context this is often
+referred to as 'infantry dismounts' or 'cavalry scouts' depending what type
+of vehicle we are considering."
+  :arity 2
+  :domain Transportation-Device--Vehicle
+  :range Integer
+  :characteristics :single-valued
+  :annotations
+  (Functional-Predicate
+   Binary-Predicate))
+
+(defrelation max-range-on-road
+  "(max-range-on-road ?VEH ?DIST) means that ?DIST is the maximum distance
+that can be traveled without intermediate refueling on a 'normal' paved road
+at normal cruising speed when traveling in forward direction on normal flat
+terrain and in calm weather.  Note, that the optimal speed for achieving
+maximal fuel economy and distance with a vehicle might be very different from
+its normal cruising speed, since factors such as wind resistance, engine fuel
+economy, etc. are all speed dependent."
+  :arity 2
+  :domain Land-Transportation-Device
+  :range loom::Distance-Quantity
+  :characteristics :single-valued
+  :annotations
+  (Binary-Predicate
+   (output-unit "km")))
+
+(defrelation max-speed-on-road
+  "(max-speed-on-road ?VEH ?SPEED) states that ?VEH can go at the maximum
+speed ?SPEED when traveling in forward direction along a 'normal' paved
+road on normal flat terrain and in calm weather."
+  :arity 2
+  :domain Land-Transportation-Device
+  :range loom::Speed-Quantity
+  :characteristics :single-valued
+  :annotations
+  (Functional-Predicate
+   Binary-Predicate
+   (output-unit "km/h")))
+
+(defrelation max-step
+  "(max-step ?VEHICLE ?HEIGHT) states that the highest vertical climb
+that ?VEHICLE can make is ?HEIGHT."
+  :arity 2
+  :domain Land-Transportation-Device
+  :range loom::Distance-Quantity
+  :characteristics :single-valued
+  :annotations
+  (Binary-Predicate
+   Functional-Predicate
+   (output-unit "m")))
+
+(delete-concept 'max-fording-depth :type :relation)
+
+(defrelation min-turning-radius
+  "(min-turning-radius ?VEHICLE ?RADIUS) is the minimum achievable radius of
+the circle that is partially traversed when ?VEHICLE is #$Turning. For
+#$AirTransportationDevices this is for turns in a horizontal plane; a vertical
+turn (as in a looping) is not expressed as a predicate."
+  :arity 2
+  :domain Transportation-Device
+  :range loom::Distance-Quantity
+  :characteristics :single-valued
+  :annotations
+  (Binary-Predicate
+   Functional-Predicate
+   (output-unit "m")))
+
+(defrelation vehicle-cargo-capacity--mass
+  "(vehicle-cargo-capacity--mass ?VEHICLE ?MASS) means that ?MASS is the
+mass of material that can safely be transported in the cargo-carrying
+region of ?VEHICLE."
+  :arity 2
+  :domain Transportation-Device
+  :range loom::Mass-Quantity
+  :characteristics :single-valued
+  :annotations
+  (Binary-Predicate
+   Functional-Predicate
+   (output-unit "kg")))
+
+(defrelation vehicle-cargo-capacity--volume
+  "(vehicle-cargo-capacity--volume ?VEHICLE ?VOLUME) means that ?VOLUME is the
+volume of material that can be transported in the cargo-carrying region of
+?VEHICLE."
+  :arity 2
+  :is-primitive volume-contained
+  :domain Transportation-Device
+  :range loom::Volume-Quantity
+  :characteristics :single-valued
+  :annotations
+  (Interval-Based-Quantity-Slot
+   (output-unit "l")))

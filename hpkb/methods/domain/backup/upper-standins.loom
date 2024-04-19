@@ -1,0 +1,24 @@
+(in-package "EVALUATION")
+;;(in-package "EVALUATION")
+;;(use-package '("EXPECT" "PLANET"))
+;;(loom::use-loom "EVALUATION" :dont-create-context-p t)
+
+
+;;; This file contains definitions that will be provided in the upper
+;;; HPKB ontology when it's ready to be loaded into Loom.
+
+;;; Military tasks (from task ontology and specific task ontology)
+
+(defconcept military-offensive-task
+  :is-primitive military-task)
+
+(defconcept military-defensive-task
+  :is-primitive military-task)
+
+(defconcept delay-military-task
+  :is-primitive military-task)
+
+(defconcept counterattack-military-task
+  :is-primitive military-attack)
+
+

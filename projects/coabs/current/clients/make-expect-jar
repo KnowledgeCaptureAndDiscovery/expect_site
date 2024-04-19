@@ -1,0 +1,16 @@
+#!/bin/csh
+
+#cp -r EMeD/classes all-classes
+echo PSMTool
+cp PSMTool/classes/*.class all-classes
+echo RKF
+cp RKF/classes/*.class all-classes
+echo Temple
+cp Temple/classes/*.class all-classes
+echo Connection
+cp Connection/*.class all-classes/Connection
+echo Making jar file
+cd all-classes
+jar cvf ../expect.jar *.class */*.class
+
+

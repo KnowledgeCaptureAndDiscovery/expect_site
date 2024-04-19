@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<!--
+
+If you can read this, your browser doesn't support xml.
+please update your browser, or view the html version of the projects
+from http://www.isi.edu/expect/web.
+
+
+-->
+<!DOCTYPE stylesheet [
+ <!ENTITY proj SYSTEM "content.xml">
+ <!ENTITY personnel SYSTEM "../isd-personnel.xml">
+ <!ENTITY pubs SYSTEM "../isd-publications.xml">
+   ]>
+  
+<?xml-stylesheet type="text/xsl" href="../project-publications-view.xsl"?>
+
+<outer>
+   &personnel;
+   &pubs;
+   &proj;
+</outer>

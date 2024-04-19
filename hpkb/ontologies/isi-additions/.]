@@ -1,0 +1,388 @@
+;;;
+;;; Some concepts and relations in support of generic plan evaluation.
+;;;
+;;; The ontology of constraints and resources here is based on
+;;; "An ontology for constructing scheduling systems", Smith and Becker 97
+;;; http://www.cs.cmu.edu/afs/cs/project/ozone/www/AAAI_Symp_On_Ontol_97/abstract.html
+;;;
+(in-package "EVALUATION")
+(use-package '("EXPECT" "PLANET"))
+(loom::use-loom "EVALUATION" :dont-create-context-p t)
+
+;;; This ontology now requires the PLANET and PLANET-COA ontologies.
+;;; History:
+;;; 3/23/99 Jim: removed COA-specific references from this file
+;;;              (either moved to domain.loom or superseded by planet-COA)
+
+;;; Constraints
+
+(tellm (about constraint-critiques aspect)) ; not used in HPKB
+
+(defconcept constraint
+  "A constraint is a kind of critique. Right now all critiques
+turn out to be constraints."
+  :is-primitive critique
+  :partition $constraint-type$)
+
+(defrelation active-constraint
+  "This relation tells which constraints need to be checked for a COA.
+It is not used for HPKB where specific aspects and their factors are declared."
+  :domain plan
+  :range constraint)
+
+(defrelation violated-constraint
+  "Links either a plan or task to a constraint if it is violated by that
+plan or task.  The value is typically set by the critiquing methods."
+  :domain (:or plan military-task)
+  :range constraint)
+
+;;; If a (local) constraint is violated for some task in a plan, then it
+;;; is violated on the whole plan. I need an implies statement to express that.
+
+
+;;; Class of constraints that are to be evaluated per military-task
+(defconcept local-constraint
+  "A local constraint is one which should be evaluated on a per task basis"
+  :is-primitive constraint
+  :in-partition $constraint-type$)
+
+;;; These are standard default local constraints, which may or may not
+;;; be active in any particular domain.
+(tellm (about have-children local-constraint)
+       (about have-parents local-constraint))
+	   
+(defconcept global-constraint
+  "Class of constraints that are to be evaluated on the whole plan,
+as opposed to per task."
+  :is-primitive constraint
+  :in-partition $constraint-type$)
+
+(defconcept directly-predictable-constraint
+  "Constraints that are instances of directly-predictable-constraint
+have all the relevant information defined with the slot accesses
+(constraint-violated military-task constraint). In other words this
+relation is a hack which tells the critiquer to rely on KB-defined
+rules rather than its own methods"
+  :is-primitive constraint)
+
+;;; This should be binary (and is not needed if the output ontology is used).
+(defrelation constraint-violated
+  :arity 3
+  :domains (military-task directly-predictable-constraint)
+  :range boolean)
+
+(defconcept bounds-check
+  "A bounds check is a kind of constraint that involves inequality checks. There may be an upper bound and/or a lower bound"
+  :is-primitive (:and constraint
+		  (:the upper-bound upper-bound-value)
+		  (:the lower-bound lower-bound-value)))
+
+(defconcept upper-bound-check
+  "A bounds check that has an upper bound. The relation upper-bound might
+not be filled, however, because it might be computed by a method."
+  :is-primitive bounds-check)
+
+(defconcept lower-bound-check
+  "A bounds check that has an upper bound. The relation upper-bound might
+not be filled, however, because it might be computed by a method."
+  :is-primitive bounds-check)
+
+(defconcept bound-value
+  "The threshold value for some bound check"
+  :is-primitive number)
+
+(defconcept upper-bound-value
+  :is-primitive bound-value)
+
+(defconcept lower-bound-value
+  :is-primitive bound-value)
+
+(defrelation checked-feature
+  "The feature being checked in a bounds check. The checked-resource relation
+is a specialisation of this. This relation might not be filled if the feature
+is not explicit (for example, number of parents"
+  :is-primitive analysis-property
+  :domain constraint)
+
+(defrelation upper-bound
+  "These are default relations used to compute the upper and lower bounds for 
+checks on some computed value. Expect methods are provided which will attempt
+to access these relations unless a more specific method is provided."
+  :domain bounds-check
+  :range number)
+
+(defrelation lower-bound
+  :domain bounds-check 
+  :range number)
+
+;;; A default bounds check. Oops, it's not a resource because the number
+;;; is an upper bound. It's made "directly predictable" because the
+;;; threshold is given by a loom relation. The number of parents is
+;;; computed by a method, which simply overrides the method that would
+;;; look for a loom relation because it is more specific.
+(tellm (about too-many-parents upper-bound-check local-constraint
+	    (upper-bound 3)		; default value
+	    ))
+       
+;;; The one partition given is the cross product of the two orthogonal
+;;; partitions, consumable versus reusable and capacitated versus
+;;; discrete.
+(defconcept resource-check
+  "A resource check is a kind of constraint based on the amount
+available of some specified resource. It may be either required by the
+whole plan globally or by subparts of it, and some quantity and/or
+specific state of the resource may be required. This is indicated in the
+subconcepts of resource-check. A resource-check should a specialisation
+of lower-bound-check, but that isn't done yet."
+  :is-primitive (:and constraint
+		  (:the checked-resource planning-resource))
+  :partition $consumption-amount$)
+
+(defrelation checked-resource
+  "Links a resource-check constraint to the resource being checked."
+  :is-primitive checked-feature
+  :domain resource-check
+  :range planning-resource)
+
+#|
+This is replaced by planning-resource from the planet ontology.
+(defconcept resource
+  "An entity that is required for a plan to work. The way in which
+the resource is needed is specified in the resource-check instance
+associated with the resource for the plan, since the entity may
+exist separately from the plan."
+  :is-primitive domain-concept)
+|#
+
+(defconcept global-resource
+  :is (:and resource-check global-constraint)
+  :annotations ((documentation "A resource check that is evaluated
+globally on the whole plan, eg fuel used by the whole plan.")))
+
+(defconcept local-resource
+  :is (:and resource-check local-constraint)
+  :annotations ((documentation "A resource check that is evaluated
+locally on each task in the plan, eg fuel used by each task.")))
+
+
+(defconcept capacitated-resource
+  "a capacitated resource check is one that is requires some quantity,
+like fuel or aircraft storage. The relation \"amount-needed\" specifies 
+how much capacity is available at some location for a resource."
+  :is-primitive resource-check)
+
+#|
+superseded by resource-available
+(defrelation amount-available
+  :arity 3
+  :domains ((or plan military-task) capacitated-resource)
+  :range number
+  :characteristics :single-valued)
+|#
+
+(defrelation amount-needed
+  :arity 3
+  :domains ((or plan military-task) capacitated-resource)
+  :range number
+  :characteristics :single-valued)
+
+(defconcept discrete-resource 
+  "A discrete resource can be in one of a set of states, some subset of which
+corresponds to being available. For example an aircraft needs to be
+ready to use, which requires a ground crew inspection"
+  :is-primitive resource-check)
+
+;;; These two should also be computed from any amount-needed or supply,
+;;; respectively.
+
+(defrelation resource-needed
+  :domain (:or plan military-task)
+  :range resource-check)
+
+(defrelation resource-available
+  :domain (:or plan military-task)
+  :range resource-check)
+
+(defconcept consumable-resource 
+  "After a consumable resource is consumed by an activity it is gone
+forever - eg fuel."
+  :is-primitive resource-check)
+
+(defconcept consumable-capacitated-resource
+  "A consumable, capacitated resource is common, and since I use the
+type in Expect methods I figure it has to have an atomic name."
+  :is (and consumable-resource capacitated-resource)
+  :in-partition $consumption-amount$)
+
+(defconcept linear-consumable-resource
+  "A linear resource is one whose quantity is summable. Eg the fuel
+used by a set of tasks is the sum of the fuel used by each task"
+  :is-primitive consumable-capacitated-resource)
+
+(defconcept reusable-resource 
+  "After this resource is released by an activity it is available
+again, eg an aircraft."
+  :is-primitive resource-check)
+
+(defconcept reusable-discrete-resource
+  :is (and reusable-resource discrete-resource)
+  :in-partition $consumption-amount$)
+
+(defconcept reusable-capacitated-resource
+  :is (and reusable-resource capacitated-resource)
+  :in-partition $consumption-amount$)
+
+;;; Can be overwritten in a particular domain with the appropriate
+;;; concept (eg "base" in air campaign planning).
+(defconcept physical-location
+  "Needs to be aligned with HPKB"
+  :is-primitive top-domain-concept)
+
+;;; Some military-tasks have a "base of operation" where their resources are
+;;; mostly to be found. The military-tasks that share Temporal-spatial
+;;; resources have the same locus, and being located at this position is
+;;; a necessary precondition to using such resources.
+(defrelation resource-found-at
+  "Needs to be aligned with HPKB"
+  :domain military-task
+  :range physical-location
+  :characteristics :single-valued)
+
+;;; Reusable resources can have different models of which military-tasks
+;;; "share" resources - ie their useage patterns are summed rather than
+;;; maxed. ts-resource is short for "temporal-spatial-resource" -
+;;; military-tasks share this kind of resource iff they have the same time
+;;; and place. (both time and place may then play a part in determining
+;;; how much of the resource is available as well). I probably want to
+;;; separate this concept from reusable-capacitated-resource since for
+;;; discrete resources it could be used to tell you about the state it
+;;; needs to be in.
+(defconcept ts-resource
+  :is-primitive reusable-capacitated-resource)
+
+;;; Resources that are instances of directly-predictable-resource have all
+;;; information necessary computed by standard slot accesses:
+;;; (amount-needed military-task resource) (amount-available military-task resource)
+;;; (resource-needed military-task) and (resource-available military-task).
+;;; This used to be the default method for all resources, but by making
+;;; it a different class, the KA system requires a method to be built
+;;; for any new resource defined, which looks better in demos.
+(defconcept directly-predictable-resource
+  :is (:and resource-check directly-predictable-constraint))
+
+;;; A globally allocated resource is one which has some amount allocated
+;;; to the plan, and then that amount is available to any military-task.
+(defconcept globally-allocated-resource
+  :is-primitive resource-check)
+
+;;; A linear resource is one whose amount used on a set of military-tasks
+;;; can always be found by summing the amount used by each military-task
+;;; (this implies it is completely consumable!)
+(defconcept linear-resource
+  :is-primitive resource-check)
+
+;;; Different ways to check a resource - this complements the
+;;; partitioning of resources as capacitated/discrete etc, allowing a
+;;; critiquer to sometimes treat a capacitated resource as discrete, if
+;;; information about amounts is not yet available. An alternative
+;;; strategy would be to have a number of different resource-checks that
+;;; work on the same resource, and allow the critiquer to choose a
+;;; subset of them at run time.
+(defconcept resource-mode
+  :is-primitive domain-concept)
+
+(defconcept amount-used
+  :is-primitive resource-mode)
+
+;;; If these two are made subconcepts of amount-used, we get a goal
+;;; loop!
+(defconcept amount-used-by-whole-plan
+  :is-primitive resource-mode)
+
+(defconcept amount-used-by-each-task
+  :is-primitive resource-mode)
+
+(defconcept existence
+  :is-primitive resource-mode)
+
+#|
+Changed from being a 
+(tellm (about existence resource-mode)
+       (about amount-used-by-whole-plan resource-mode)
+       (about amount-used-by-each-task resource-mode)
+       (about amount resource-mode))
+|#
+
+;;; As well as amount-used we reason about amount-available. It's a
+;;; concept rather than an instance because it makes sense to think
+;;; about more specific goals, eg estimate amount-available by Thursday.
+(defconcept amount-available
+  :is-primitive domain-concept)
+
+(defrelation supply
+  :arity 3
+  :domains (directly-predictable-resource plan)
+  :range number)
+
+
+;;; Support stuff
+
+(defconcept set-member :is-primitive top-domain-concept)
+
+;;; Example subset of critiques for HPKB year 2:
+
+#|
+(defconcept hpkb-plan
+  :is (and plan ; This allows us to inherit aspects and stuff.
+                            ; It should not override the definition of COA 
+                            ; in the ontology..
+	 (:filled-by evaluation-aspect feasibility)
+	 (:filled-by evaluation-aspect correctness)
+	 (:filled-by evaluation-aspect completeness)
+	 (:filled-by evaluation-aspect strength-weakness)
+	 ;; There are other aspects, but I haven't any methods for them yet.
+	 ))
+
+
+;; 'factor' should be 'facet-factor' in the current scheme.
+(tellm (about feasibility aspect
+	    (factor force-ratio-check))
+       (about correctness aspect
+	    (factor all-forces-arrayed)
+	    (factor appropriate-task-for-unit)
+	    (factor main-effort-identified)
+	    (factor too-many-parents)	; this is for a test
+	    )
+       (about completeness aspect
+	    (factor every-task-has-purpose)
+	    (factor reserve-unit-identified)
+	    (factor security-unit-identified)
+	    (factor division-fires-identified)
+	    )
+       (about strength-weakness aspect
+	    (factor task-simplicity))
+       
+       ;; in the current scheme, a resource is checked locally on each
+       ;; objective.
+       (about force-ratio-check resource-check local-constraint
+	    (checked-resource force-ratio))
+
+       (about force-ratio resource)
+
+       ;; this should be checked on the whole plan.
+       (about all-forces-arrayed global-constraint)
+
+       ;; this should be checked on each objective
+       (about appropriate-task-for-unit local-constraint)
+       
+       (about main-effort-identified global-constraint)
+       
+       (about every-task-has-purpose local-constraint)
+       (about reserve-unit-identified global-constraint)
+       (about security-unit-identified global-constraint)
+       (about division-fires-identified global-constraint)
+       
+       (about task-simplicity global-constraint)
+       
+       )
+|#

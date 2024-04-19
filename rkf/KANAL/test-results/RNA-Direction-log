@@ -1,0 +1,112 @@
+
+
+ ===============================================
+ start test-knowledge 
+"2001/7/10  11:6:44"
+
+(RNA-Direction has 
+  (superclasses (Event))
+  (instances (_RNA-Direction8984
+              _RNA-Direction9050
+              _RNA-Direction9116
+              _RNA-Direction9182
+              _RNA-Direction9248
+              _RNA-Direction9314)))
+
+(every RNA-Direction has 
+  (some-associated-attach3 ((a Attach)))
+  (some-associated-be-attached-to3 ((a Be-Attached-To)))
+  (some-associated-ribonucleotide3 ((a Ribonucleotide)))
+  (some-associated-ribonucleotide4 ((a Ribonucleotide)))
+  (subevent ((((the some-associated-attach3 of Self)) && ((a Attach with (base ((the some-associated-ribonucleotide3 of Self))))) && ((a Attach with (object ((the some-associated-ribonucleotide4 of Self))))) && ((a Attach with (causes ((the some-associated-be-attached-to3 of Self))))) && ((a Attach with (base ((a Ribonucleotide with (has-region ((the some-associated-5-prime-end of Self)))))))) && ((a Attach with (object ((a Ribonucleotide with (has-region ((the some-associated-3-prime-end of Self)))))))) && ((a Attach with (origin ((the has-region of (the base of (the subevent of Self))))))) && ((a Attach with (destination ((the has-region of (the object of (the subevent of Self))))))) && ((a Attach with (destination ((the first of (the has-region of (the some-associated-rna-molecule5 of Self))))))) && ((a Attach with (origin ((the second of (the has-region of (the second of (the is-region-of of (the destination of (the subevent of Self)))))))))) && ((a Attach with (object ((the first of (the has-basic-structural-unit of (the second of (the is-region-of of (the origin of (the subevent of Self)))))))))) && ((a Attach with (object ((a Ribonucleotide with (is-part-of ((a RNA-Molecule with (has-basic-structural-unit ((a Ribonucleotide) (a Ribonucleoside-Monophosphate) (the base of (the subevent of Self)))))))))))))))
+  (some-associated-3-prime-end ((a 3-Prime-End)))
+  (some-associated-5-prime-end ((a 5-Prime-End)))
+  (some-associated-rna-molecule5 ((a RNA-Molecule))))
+
+
+
+ ===============================================
+ Start testing user::|RNA-Direction| with 
+   user::|_RNA-Direction9380| in user::|_Situation9379|
+
+ WARNING (missing first subevent)
+  the first event of user::|_RNA-Direction9380| isn't defined
+  the system cannot execute these subevents: (user::|_Attach9381|)
+
+cannot progress
+   [steps (_rna-direction9380) were undoable this iteration...]
+
+ There was no simulation path
+
+
+
+  ************************************************
+                check expected effects
+  ************************************************
+    we check each simulated path
+
+
+ Test Output 
+(((source user::|_RNA-Direction9380| (user::|_Attach9381|)) (success)
+  (level . :error) (type . :missing-first-subevent) (constraint . ordering)
+  (id . |error-item-69|))
+ ((source user::|_RNA-Direction9380|) (success) (level . :error)
+  (type . :undoable-event) (constraint) (id . |error-item-70|))
+ ((source . no-simulation-path-exist) (success) (level . :warning)
+  (type . :unreached-events) (constraint user::|_Attach9381|)
+  (id . |error-item-71|)))
+====================================
+ Error Items and Their Fixes
+====================================
+
+((source user::|_RNA-Direction9380| (user::|_Attach9381|)) (success)
+ (level . :error) (type . :missing-first-subevent) (constraint . ordering)
+ (id . |error-item-69|)) 
+
+
+ --------------------
+ "2001/7/10  11:6:47" -- Getting fixes for |error-item-69|
+
+ FIX ITEMS 
+(((type . :add-first-event)
+  (fix add first-subevent constraint for user::|_RNA-Direction9380|)))
+==> fixes (((type . :add-first-event)
+            (fix add first-subevent constraint for
+             user::|_RNA-Direction9380|))) 
+
+((source user::|_RNA-Direction9380|) (success) (level . :error)
+ (type . :undoable-event) (constraint) (id . |error-item-70|)) 
+
+
+ --------------------
+ "2001/7/10  11:6:47" -- Getting fixes for |error-item-70|
+
+ FIX ITEMS 
+(((type . :change-or-add-link-between-steps)
+  (fix change-or-add-link-between-steps-for-undoable-event
+   (user::|_RNA-Direction9380|))))
+==> fixes (((type . :change-or-add-link-between-steps)
+            (fix change-or-add-link-between-steps-for-undoable-event
+             (user::|_RNA-Direction9380|)))) 
+
+((source . no-simulation-path-exist) (success) (level . :warning)
+ (type . :unreached-events) (constraint user::|_Attach9381|)
+ (id . |error-item-71|)) 
+
+
+ --------------------
+ "2001/7/10  11:6:47" -- Getting fixes for |error-item-71|
+
+ FIX ITEMS 
+(((type . :change-or-add-link-between-steps)
+  (fix change-or-add-link-between-steps-for-unreached-events
+   (user::|_Attach9381|))))
+==> fixes (((type . :change-or-add-link-between-steps)
+            (fix change-or-add-link-between-steps-for-unreached-events
+             (user::|_Attach9381|)))) 
+
+
+======================
+ Info Items
+======================
+nil 

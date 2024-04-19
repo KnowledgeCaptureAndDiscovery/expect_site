@@ -1,0 +1,81 @@
+<HTML>
+<HEAD>
+   <TITLE>Papers on Knowledge Acquisition</TITLE>
+
+  <SCRIPT language="javascript">
+
+  about_on = new Image();
+  about_on.src = "./exp-about.gif";
+
+  research_on = new Image();
+  research_on.src = "./exp-research.gif"; 
+
+  projectmemb_on = new Image();
+  projectmemb_on.src = "./exp-pr-members.gif";
+
+  publications_on = new Image();
+  publications_on.src = "./exp-publ.gif";
+
+  movie_on = new Image();
+  movie_on.src = "./exp-mov.gif";  
+   
+function swampImages(imagename, cimage)
+  {
+      imgsrc = './' + cimage;
+      document[imagename].src = imgsrc;
+  } 
+  </SCRIPT>
+ 
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+
+<TABLE  WIDTH=730>
+<TR><TD colspan=3>
+
+<IMG
+SRC="expect.jpg">
+<A HREF="./EXPECT.html"
+onmouseover="swampImages('About','exp-about.gif'); return true"
+onmouseout="swampImages('About','exp-about-bl.gif');return true"><IMG
+SRC="exp-about-bl.gif" BORDER=0 NAME="About"></A>
+
+<A HREF="./research.html"
+onmouseover="swampImages('Research','exp-research.gif'); return true"
+onmouseout="swampImages('Research','exp-research-bl.gif');return
+true"><IMG SRC="exp-research-bl.gif" BORDER=0 NAME="Research"></A>
+
+<A HREF="./pr-members.html"
+onmouseover="swampImages('Members','exp-pr-members.gif'); return true"
+onmouseout="swampImages('Members','exp-pr-members-bl.gif');return true"><IMG
+SRC="exp-pr-members-bl.gif" BORDER=0 NAME="Members"></A>
+
+<A HREF="./"
+onmouseover="swampImages('Publ','exp-publ.gif'); return true"
+onmouseout="swampImages('Publ','exo-publ-bl.gif');return true"
+onclick="return false"><IMG
+SRC="exo-publ-bl.gif" BORDER=0 NAME="Publ"></A>
+
+<A HREF="./demo.html"
+onmouseover="swampImages('Demo','exp-mov.gif'); return true"
+onmouseout="swampImages('Demo','exp-mov-bl.gif');return true"><IMG
+SRC="exp-mov-bl.gif" BORDER=0 NAME="Demo"></A>
+</TD></TR>
+
+<TR><TD width=50></TD>
+
+
+
+<TD WIDTH=550>
+<BR>
+<P ALIGN=CENTER><B><FONT SIZE=+2 FACE=ARIAL>Research Areas</B></FONT><BR>
+
+
+<HR>
+
+<P><FONT FACE=ARIAL><B>Papers on <A HREF="./publications.html#EXPECT">EXPECT</A></P>
+<P>Papers on <A HREF="./papers-planning.html">Planning</A></P>
+<P>Papers on <A HREF="./papers-ka.html">Knowledge Acquisition</A></P>
+<P>Papers on <A HREF="./papers-ontos.html">Ontologies and
+Problem-Solving Methods</A></P>
+<P>Papers on <A HREF="./papers-ml.html">Machine Learning</A></P></FONT></B>
+

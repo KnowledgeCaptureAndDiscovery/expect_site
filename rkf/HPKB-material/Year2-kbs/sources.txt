@@ -1,0 +1,1466 @@
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;The Scheme Behind This File This file assumes that battlespace source
+
+
+
+;will be represented as instances of #$PropositionalInformationThing
+
+;(PITs).  PITs are a specialized form of microtheory, and the working
+
+;assumption is that propositions deriving from the source will
+
+;henceforth be asserted in the PIT-Mt of the source itself, as reified
+
+;in Cyc, with the genlMt access links being established accordingly via
+
+;forward-firing rules.
+
+
+
+;It was always planned that specialized battlespace source mts would be
+
+;specializations of the ModernMilitaryTacticsMt: this is really the
+
+;only available option since having the access links the other way
+
+;round involves an untenable explosion of genlMt links to the
+
+;ModernMilitaryVehiclesMt, the MilitaryForceStructureMt, and the like.
+
+;As it stands, the implied microtheory structure is this with access running
+
+;bottom-to-top:
+
+
+
+
+
+;  ModMilWeaponsMt  MilitaryForceStructureMt ModMilVehiclesMt
+
+;       \                     |                 /
+
+;        \                    |                /
+
+;         \                   |               /
+
+;          \                  |              /
+
+;           ---------ModernMilitarTacticsMt--
+
+;                        /     |     \
+
+;                       /      |      \
+
+;                 PITMt1   PITMt2      PITMt3
+
+;                    \        |          /
+
+;                     \       |         /
+
+;                     BattlespaceMilitaryMt
+
+;                         |
+
+;                         |
+
+;                   COASpecMts &c.
+
+
+
+;If closer cooperation between Battlespace and CM work is desired, the
+
+;ModernMilitaryMt can be replaced with the BattlespaceMilitaryMt:
+
+;however, there are certain assumptions about MilitaryOperations and
+
+;MilitaryTasks that the CM community does not wish to inherit at this
+
+;time.
+
+
+
+;In certain cases, we will want data from a particular source to be
+
+;asserted in the higher-level ModernMilitaryTacticsMt: source alone is
+
+;not definitional of generality.  In these cases, use of the predicate
+
+;#$sourceOfTerm-PIT can be used to project a duplicate of the assertion
+
+;downward into the appropriate source mt for bookkeeping purposes, due
+
+;to a forward-firing rule attaching to this predicate.
+
+
+
+
+
+constant: BattlespaceMilitaryMt.
+
+in Mt: BaseKB.
+
+isa: GeneralMicrotheory.
+
+comment: "This Microtheory inherits information from all instances of
+
+#$PhaseIIBattlespaceSource-PITType, which in turn inherit from the
+
+#$ModernMilitaryTacticsMt. It is used to collect information from the
+
+various battlespace source Mts, in much the same manner as the
+
+#$ModernMilitaryMt is used for the CM reasoning work.".
+
+Direction: forward.
+
+F:
+
+(implies
+
+    (isa ?COAMT COASpecificationMicrotheory)
+
+    (genlMt ?COAMT BattlespaceMilitaryMt)).
+
+;This rule insures that all COASpecificationMicrotheory instances have
+
+;access to the BattlespaceMilitaryMt.
+
+
+
+
+
+constant: PhaseIIBattlespaceSource-PITType.
+
+in Mt: BaseKB.
+
+isa: MicrotheoryType ObjectType IKBConstant.
+
+genls: PropositionalInformationThing.
+
+comment: "Each instance is a source for the phase II battlespace work
+
+being done at Cyc (winter, 1998), partially represented as a chunk of
+
+abstract propositional information in the form of a PIT (a
+
+#$PropositionalInformationThing).".
+
+Direction: forward.
+
+F:
+
+(implies
+
+    (isa ?PITMT PhaseIIBattlespaceSource-PITType)
+
+    (genlMt ?PITMT ModernMilitaryTacticsMt)).
+
+Direction: forward.
+
+F:
+
+(implies
+
+   (isa ?PITMT PhaseIIBattlespaceSource-PITType)
+
+   (genlMt BattlespaceMilitaryMt ?PITMT)).
+
+;These two rules insure that every instance of
+
+;PhaseIIBattlespaceSource-PITType has access to the
+
+;ModernMilitaryTacticsMt and that the BattlespaceMilitaryMt has access
+
+;to every PhaseIIBattlespaceSource that is created.  They will result
+
+;in the creation of redundant genlMt links for source mts that have
+
+;'Page' and 'Chapter' mts NATified on-the-fly via PageFn and
+
+;ChapterFn, but this is not viewed as a serious problem.
+
+
+
+constant: PublishedEdition-PITType.
+
+in Mt: BaseKB.
+
+isa: MicrotheoryType ObjectType IKBConstant.
+
+genls: PropositionalInformationThing.
+
+comment: "Each instance is a partial representation of the
+
+propositional content of a particular edition of a public work.
+
+Different editions should be reified as separate PITs.  Every instance
+
+should have a specified #$dateOfPublication.".
+
+
+
+constant: MilitaryFieldManual-PITType.
+
+in Mt: BaseKB.
+
+isa: MicrotheoryType ObjectType IKBConstant.
+
+genls: PublishedEdition-PITType.  
+
+comment: "Each instance is a partial representation of the
+
+propositional content of a particular edition of a military field
+
+manual.".
+
+
+
+constant: dateOfPublication-PIT.
+
+in Mt: HumanActivitiesMt.
+
+isa: IKBConstant FunctionalSlot.
+
+arg1Isa: PropositionalInformationThing.
+
+arg2Isa: Date.
+
+functionalInTheNthArg: 2.
+
+comment: "(#$dateOfPublication PITMT DATE) means that the work
+
+represented in PITMT was published on DATE.  PITMT is a
+
+#$PropositionalInformationThing, i.e., a #$Microtheory that functions
+
+as a partial representation of the propositional content of the work
+
+in question.".
+
+
+
+constant: authorOfPublication-PIT.
+
+in Mt: HumanActivitiesMt.
+
+isa: IKBConstant BinaryPredicate.
+
+arg1Isa: PublishedEdition-PITType.
+
+arg2Isa: Person.
+
+comment: "(#$authorOfPublication-PIT PITMT PERSON) means that PERSON
+
+is the author of the work whose propositional content is partially
+
+represented in PITMT.".
+
+cyclistNotes: "This predicate links an author directly with an
+
+'abstract' informational content.  For linking an author with a 'work'
+
+represented as a collection of physical objects, use
+
+#$authorOfPublication.  KE is currently being developed to
+
+definitionally link #$authorOfPublication and
+
+#$authorOfPublication-PIT.".
+
+
+
+constant: Chapter-PIT.
+
+in Mt: HumanActivitiesMt.
+
+isa: MicrotheoryType ObjectType.
+
+genls: PropositionalInformationThing.
+
+comment: "Instances are instances of #$PropositionalInformationThing
+
+which represent the propositional contents of 'chapters' in larger,
+
+subdivided works.  An example would be the propositional information
+
+content of Chapter 4 of *HuckleberryFinn.".
+
+cyclistNotes: "The conception differs from both the idea of a
+
+'chapter' as a group of character strings (see #$Chapter), and also
+
+from the idea of a 'chapter' as a
+
+#$SpecifiedInformationBearingThingType.  KE work is being planned for
+
+definitionally linking these conceptions.".
+
+
+
+constant: PageInAPublishedEdition-PIT.
+
+in Mt: HumanActivitiesMt.
+
+isa: MicrotheoryType ObjectType.
+
+genls: PropositionalInformationThing.
+
+comment: "Each instance of this collection is the propositional
+
+informational content of some 'page' in an instance of
+
+#$PublishedEdition-PITType.  This concept of 'page' differs from the idea
+
+of a 'page' as a group of character strings and also from the idea of
+
+a collection of physical pages in the physical instances of a
+
+particular edition, i.e., the idea of a 'page' as a
+
+#$SpecifiedInformationBearingThingType.".
+
+cyclistNotes: "This conception really does refer to a page in a
+
+particular edition of a published text, conceived as a PIT.  Often we
+
+want to reference pages by their page numbers: however, if we are not
+
+restricting our consideration to a single edition of a published text,
+
+the same page number will not always indicate the same information
+
+content.  For referring to a page in an unpublished text, a different
+
+constant will be needed.".
+
+
+
+constant: PageNumberingSchema.
+
+in Mt: HumanActivitiesMt.
+
+isa: UnorderedAttributeType IKBConstant.
+
+genls: AttributeValue.
+
+comment: "A collection of page numbering attributes; that is,
+
+attributes describing the way the pages of texts are numbered.  Two of
+
+the most notable instances are #$SimpleSequentialSchema,
+
+#$RepetionBySubsectionSchema, and the
+
+#$SequentialWithPriviledgedSubsectionsSchema.".
+
+
+
+constant: SimpleSequentialSchema.
+
+in Mt: HumanActivitiesMt.
+
+isa: PageNumberingSchema IKBConstant.
+
+comment: "A page numbering schema for instances of
+
+#$SpecifiedInformationBearingThingType that are specializations of
+
+#$TextualMaterial.  A text that has the #$SimpleSequentialSchema
+
+numbers the first page 1 and continues with page numbering increasing
+
+by increments of 1 through to the last page.".
+
+
+
+constant: RepetitionBySubsectionSchema.
+
+in Mt: HumanActivitiesMt.
+
+isa: PageNumberingSchema IKBConstant.
+
+comment: "A page numbering schema for instances of
+
+#$SpecifiedInformationBearingThingType that are specifications of
+
+#$TextualMaterial.  A text that has the #$RepetitionBySubsectionSchema
+
+is divided into several formally delineated subsections, such as
+
+chapters or subsections, with each subsection exhibiting its own
+
+internal sequential numbering scheme.".
+
+cyclistNotes: "A text with numbering scheme
+
+#$RepetitionBySubsectionSchema cannot be given as an argument to
+
+#$PageFn, since it will not have a unique instance of page N.  For
+
+such sections the function is undefined.  One of its subsections can
+
+be given as an argument, however.".
+
+
+
+constant: SequentialWithPriviledgedSubsectionsSchema.
+
+in Mt: HumanActivitiesMt.
+
+isa: PageNumberingSchema IKBConstant.
+
+comment: "A page numbering schema for instances of
+
+#$SpecifiedInformationBearingThingType that are specifications of
+
+#$TextualMaterial.  A text that has the
+
+#$SequentialWithPriviledgeSubsectionSchema exhibits sequential
+
+numbering by increments of one throughout most of its main body:
+
+however, there are one or more 'priviledged' subsections exhibiting
+
+separate and internal sequential numbering schemas.  This arrangement
+
+is often to be observed in texts with introductions and appendices,
+
+which exhibit their own internal numbering separate from the rest of
+
+the text.".
+
+
+
+constant: hasNumberingSchema.
+
+in Mt: HumanActivitiesMt.
+
+isa: FunctionalSlot IKBConstant.
+
+genlPreds: hasAttributes.
+
+arg1Isa: PublishedEdition-PITType.
+
+arg2Isa: PageNumberingSchema.
+
+functionalInTheNthArg: 2.
+
+comment: "(#$hasNumberingSchema TEXT SCHEMA) means that physical
+
+instances embodying the informational content of the
+
+#$PublishedEdition-PITType TEXT ordinarily exhibit the page numbering
+
+schema SCHEMA.".
+
+
+
+constant: ChapterFn.
+
+in Mt: HumanActivitiesMt.
+
+isa: BinaryFunction ReifiableFunction IKBConstant.
+
+arg1Isa: PublishedEdition-PITType.
+
+arg2Isa: PositiveInteger.
+
+resultIsa: Chapter-PIT.
+
+comment: "(#$ChapterFn TEXT N) returns the Nth chapter of TEXT, where
+
+both TEXT and chapter are conceived of as being
+
+#$PropositionalInformationThings (PITs).Use of the function
+
+presupposes that the TEXT given as its first argument is subdivided
+
+into chapters: otherwise the function is undefined.".
+
+cyclistNotes: "Note that the function returns an instance of
+
+#$Chapter-PIT and not #$Chapter.".
+
+Direction: forward.
+
+F:
+
+(implies
+
+  (termOfUnit ?CHAPTER (ChapterFn ?EDITION ?N))
+
+  (genlMt ?EDITION ?CHAPTER)).
+
+;This forward rule insures that every published edition PIT is a
+
+;spec-Mt of each of its chapters.
+
+
+
+Direction: forward.
+
+F:
+
+(implies
+
+  (and
+
+    (termOfUnit ?CHAPTER (ChapterFn ?TEXT ?N))
+
+    (isa ?TEXT PhaseIIBattlespaceSource-PITType))
+
+  (isa ?CHAPTER PhaseIIBattlespaceSource-PITType)).
+
+;This rule insures that Chapters of phase II battlespace sources are
+
+;themselves phase II battlespace sources.  The forward rules attaching
+
+;to PhaseIIBattlespaceSource-PITType will in sure that each reified
+
+;Chapter gets a genlMt link to the ModernMilitaryTacticsMt
+
+;and receives one from the BattlespaceMilitaryMt.
+
+
+
+constant: PageFn.
+
+in Mt: HumanActivitiesMt.
+
+isa: BinaryFunction ReifiableFunction IKBConstant.
+
+arg1Isa: PublishedEdition-PITType.
+
+arg2Isa: PositiveInteger.
+
+resultIsa: PageInAPublishedEdition-PIT.
+
+comment: "If TEXT is a text with numbered pages and the
+
+#$PageNumberingSchema #$SimpleSequentialSchema and is not divided into
+
+subsections and is not itself a subsection of some larger text,
+
+(PageFn TEXT N) returns page number N of TEXT.  If TEXT is divided
+
+into subsections and has as its #$PageNumberingSchema the
+
+#$SimpleSequentialSchema, then (#$PageFn TEXT N) also returns page
+
+number N of TEXT.  If TEXT is divided into subsections and has as its
+
+#$PageNumberingSchema the #$SequentialWithPriviledgedSubsectionSchema,
+
+then (#$PageFn TEXT N) returns page with number N, in the 'main body'
+
+of the text, disregarding the priviledged subsection or subsections.
+
+If TEXT is itself a subsection of a larger autonomous text SUPERTEXT
+
+with the #$PageNumberingSchema of #$SimpleSequentialSchema then
+
+(#$PageFn TEXT N) returns (#$PageFn SUPERTEXT N).  If TEXT is itself a
+
+subsection of a larger autonomous text SUPERTEXT with the
+
+#$PageNumberingSchema of #$RepetitionBySubsectionSchema then (#$PageFn
+
+TEXT N) returns the page with number N in TEXT's own internal
+
+numbering schema.  And if TEXT is itself a subsection of a larger
+
+autonomous text SUPERTEXT with the #$PageNumberingSchema of
+
+#$SequentialWithPriviledgedSubsectionsSchema, then (#$PageFn TEXT N)
+
+returns (#$PageFn SUPERTEXT N) unless TEXT is one of the 'priviledged'
+
+subsections, in which case (#$PageFn TEXT N) returns the page with
+
+number N in TEXT's own internal numbering schema.  Otherwise the
+
+function is undefined.  In any case the function returns an instance
+
+of #$PropositionalInformationThing, which means there will always be
+
+an genlMt access link between a given TEXT and (#$PageFn TEXT N) where
+
+the function is defined.".
+
+cyclistNotes: "In the #$comment, 'subsections' refers to formally
+
+delineated subsections like chapters and appendices, not to arbitrary
+
+chunks of text.".
+
+
+
+Direction: forward.
+
+F:
+
+(implies
+
+  (termOfUnit ?PAGE (PageFn ?EDITION ?N))
+
+  (genlMt ?EDITION ?PAGE)).
+
+;This forward rule insures that every published edition PIT is a
+
+;spec-Mt of each of its pages.
+
+
+
+Direction: forward.
+
+F:
+
+(implies
+
+  (and
+
+    (termOfUnit ?PAGE (PageFn ?TEXT ?N))
+
+    (isa ?TEXT PhaseIIBattlespaceSource-PITType))
+
+  (isa ?PAGE PhaseIIBattlespaceSource-PITType)).
+
+;This rule insures that pages of phase II battlespace sources are
+
+;themselves phase II battlespace sources.  The forward rules attaching
+
+;to PhaseIIBattlespaceSource-PITType will in sure that each reified
+
+;page gets a genlMt link to the ModernMilitaryTacticsMt
+
+;and receives one from the BattlespaceMilitaryMt.
+
+
+
+
+
+constant: PageRangeFn.
+
+in Mt: HumanActivitiesMt.
+
+isa: TernaryFunction ReifiableFunction IKBConstant.
+
+arg1Isa: PublishedEdition-PITType.
+
+arg2Isa: PositiveInteger.
+
+arg3Isa: PositiveInteger.
+
+resultIsa: PropositionalInformationThing.
+
+comment: "IfIf TEXT is a text with numbered pages that is not divided
+
+into subsections and is not itself a subsection of some larger text,
+
+(PageRangeFn TEXT N M) returns the informational contents of pages
+
+numbered N through M of TEXT.  If TEXT is divided into subsections and
+
+has as its #$PageNumberingSchema the #$SimpleSequentialSchema, then
+
+(#$PageRangeFn TEXT N M) also returns the informational contents of
+
+pages N through M of TEXT.  If TEXT is divided into subsections and
+
+has as its #$PageNumberingSchema the
+
+#$SequentialWithPriviledgedSubsectionSchema, then (#$PageRangeFn TEXT
+
+N M) returns the informational content of pages with numbers N through
+
+M in the main body of the text, disregarding the priviledged
+
+subsection or subsections. If TEXT is itself a subsection of a larger
+
+autonomous text SUPERTEXT with the #$PageNumberingSchema of
+
+#$SimpleSequentialSchema then (#$PageRangeFn TEXT N M) returns
+
+(#$PageRangeFn SUPERTEXT N M). If TEXT is itself a subsection of a
+
+larger autonomous text SUPERTEXT with the #$PageNumberingSchema of
+
+#$RepetitionBySubsectionSchema then (#$PageRangeFn TEXT N M) returns
+
+the informational contents of pages number N through M in TEXT's own
+
+internal numbering schema. And if TEXT is itself a subsection of a
+
+larger autonomous text SUPERTEXT with the #$PageNumberingSchema of
+
+#$SequentialWithPriviledgedSubsectionsSchema, then (#$PageRangeFn TEXT
+
+N M) returns (#$PageRangeFn SUPERTEXT N M) unless TEXT is one of the
+
+'priviledged' subsections, in which case (#$PageRangeFn TEXT N M)
+
+returns the informatational contents of pages with numbers N through M
+
+in TEXT's own internal numbering schema.  In any case the function
+
+returns an instance of #$PropositionalInformationThing, which means
+
+there will always be a #$genlMt access link between a given
+
+(#$PageRangeFn TEXT N M) and (#$PageRange TEXT K) where the function
+
+is defined and where N<K<M, and also a #$genlMt access link between a
+
+given TEXT and (#$PageRangeFn TEXT N M) where the function is
+
+defined.".
+
+Direction: forward.
+
+F:
+
+(implies
+
+  (termOfUnit ?PAGERANGEMT (PageRangeFn ?TEXTMT ?N ?M))
+
+  (genlMt ?TEXTMT ?PAGERANGEMT)).
+
+;This forward rule insures that every published edition PIT is a
+
+;spec-Mt of each of its NATified page ranges.
+
+
+
+Direction: forward.
+
+F:
+
+(implies
+
+  (and
+
+    (termOfUnit ?PAGERANGE (PageRangeFn ?TEXT ?N ?M))
+
+    (isa ?TEXT PhaseIIBattlespaceSource-PITType))
+
+  (isa ?PAGERANGE PhaseIIBattlespaceSource-PITType)).
+
+;This rule insures that NATified page ranges of phase II battlespace
+
+;sources are themselves phase II battlespace sources.  The forward
+
+;rules attaching to PhaseIIBattlespaceSource-PITType will in sure that
+
+;each reified page range gets a genlMt link to the
+
+;ModernMilitaryTacticsMt and receives one from the
+
+;BattlespaceMilitaryMt.
+
+ 
+
+Direction: forward.
+
+F:
+
+(implies
+
+  (and
+
+    (termOfUnit ?PAGEMT (PageFn ?TEXT ?K))
+
+    (termOfUnit ?PAGERANGEMT (PageRangeFn ?TEXT ?N ?M))
+
+    (greaterThanOrEqualTo ?K ?N)
+
+    (greaterThanOrEqualTo ?M ?K))
+
+  (genlMt ?PAGERANGEMT ?PAGEMT)).
+
+;This rule insures that there will always be a #$genlMt access link
+
+;between a given (#$PageRangeFn TEXT N M) and (#$PageRange TEXT K)
+
+;where the function where N<K<M.
+
+
+
+constant: SourceCitationSlot.
+
+in Mt: BaseKB.
+
+isa: PredicateCategory DocumentationConstant IKBConstant.
+
+genls: BinaryPredicate MetaKnowledgePredicate.
+
+comment: "Instances are instances of #$BinaryPredicate used for citing
+
+sources of various kinds for various Cyc terms.".
+
+F:
+
+(isa myCreator SourceCitationSlot).
+
+F:
+
+(isa mtSource SourceCitationSlot).
+
+
+
+constant: sourceOfTerm-PIT.
+
+in Mt: HumanActivitiesMt.
+
+isa: SourceCitationSlot IKBConstant.
+
+arg1Isa: CycIndexedTerm.
+
+arg2Isa: PropositionalInformationThing.
+
+comment: "(#$sourceOfTerm-PIT TERM SOURCEPIT) means that the #$CycIndexedTerm
+
+TERM has its origin in abstract information content of the source whose propositional content is partially represented in SOURCEPIT. If TERM is a constant, it
+
+models some important concept to be found in SOURCEPIT: if it is an
+
+assertion, then that assertion most likely models a knowledge fragment
+
+that #$ist in SOURCEPIT.".
+
+Direction: forward.
+
+F:
+
+(implies
+
+  (and
+
+    (sourceOfTerm-PIT ?FORMULA ?SOURCEMT)
+
+    (isa ?FORMULA CycFormula))
+
+  (ist ?SOURCEMT ?FORMULA)).
+
+;This rule is supposed to project the first argument of a
+
+;sourceOfTerm-PIT assertion into the source PIT itself for bookkeeping
+
+;purposes.
+
+
+
+
+
+constant: sourceOfTerm-Person.
+
+in Mt: HumanActivitiesMt.
+
+isa: SourceCitationSlot IKBConstant.
+
+arg1Isa: CycIndexedTerm.
+
+arg2Isa: Person.
+
+comment: "This predicate is used when the author of a particular Cyc
+
+constant or assertion wishes to cite an individual other than himself
+
+or herself as the source from which the information originally derived.".
+
+
+
+constant: WebPage. 
+
+in Mt: HumanActivitiesMt.
+
+isa: ExistingObjectType Intangible IKBConstant.
+
+genls: InformationBearingThing.
+
+comment: "Instances are pages on the World Wide Web, referenced in
+
+most cases by URLs.".
+
+cyclistNotes: "This is a collection of individuals: web pages
+
+conceived of as abstract information contents.  An instance of
+
+#$WebPage may conceivably be an instance of an instance of
+
+#$SpecifiedInformationBearingThingType.  For example, if a particular
+
+edition of 'Huckleberry Finn' were posted as a web page, the page
+
+would be an instance of the SIBTType reified to represent that
+
+edition.  If there is a #$PropositionalInformationThing PIT in Cyc
+
+whose contents correspond to the contents of a #$WebPage WP that is
+
+also reified in Cyc, (#$containsInformation WP PIT) should always be
+
+asserted.)".
+
+
+
+
+
+constant: webPageURL.
+
+in Mt: HumanActivitiesMt.
+
+isa: CotemporalObjectsSlot IKBConstant.
+
+arg1Isa: WebPage.
+
+arg2Isa: CharacterString.
+
+comment: "(#$webPageURL WP PATH) means that PATH is the URL for the
+
+instance of #$WebPage WP that is represented as a Cyc constant.".
+
+cyclistNotes: "This is a #$CotemporalObjectsSlot.  URLs may change over
+
+the course of a web page's lifetime, so the assertion should always
+
+receive appropriate temporal qualification.  It is hoped that in the
+
+future, when assertions involving #$webPageURL are made in contexts
+
+whose #$assertionTimeOfMicrotheory is #$Now, changes in the URL may be
+
+automatically updated via a functionality akin to what is involved in
+
+'Rename'. ".
+
+ 
+
+constant: sourceOfTerm-WebPage.
+
+in Mt: HumanActivitiesMt.
+
+isa: SourceCitationSlot IKBConstant.
+
+arg1Isa: CycIndexedTerm.
+
+arg2Isa: WebPage.
+
+comment: "(#$sourceOfTerm-WebPage TERM WP) means that the instance of
+
+#$WebPage WP, represented as a constant in Cyc, is a source which is
+
+directly or indirectly responsible for the creation of the
+
+#$CycIndexedTerm TERM.  The URL of WP may be given through
+
+#$webPageURL.  If it is the case that (#$sourceOfTerm-WebPage TERM WP)
+
+and WP is an instance of a collection TEXT which is a specialization
+
+of #$TextualMaterial and an instance
+
+#$SpecifiedInformationBearingThingType, thenit is the case that
+
+(#$sourceOfTerm-Text TERM TEXT)".
+
+
+
+Direction: Forward.
+
+F:
+
+(implies
+
+  (and
+
+    (sourceOfTerm-WebPage ?TERM ?WP)
+
+    (isa ?TEXTMT PropositionalInformationThing)
+
+    (containsInformation ?WP ?TEXTMT))
+
+  (sourceOfTerm-PIT ?TERM ?TEXTMT)).
+
+;This forward rule insures that if the source of a Cyc term is a
+
+;particular web page that contains the propositional information in a
+
+;NATified PIT, the sourceOfTerm-Text for that information will be that
+
+;PIT.  By extension, this insures that the if the term is a
+
+;proposition, it will be projected into the PIT in question.
+
+
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+
+constant: AmericanHeritageDictionary1976.
+
+in Mt: BaseKB.
+
+isa:  PhaseIIBattlespaceSource-PITType IKBConstant.
+
+comment: "A modern American dictionary published in 1976.".
+
+
+
+constant: FM101-5-1Mt.
+
+in Mt: BaseKB.
+
+isa: MilitaryFieldManual-PITType PhaseIIBattlespaceSource-PITType IKBConstant.
+
+comment: "A partial representation of the propositional information
+
+contained in Military Field Manual 101-5-1/MCRP 5-2A, 'Operational
+
+Terms and Graphics'.".
+
+
+
+constant: FM101-5-1WebPage.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: WebPage.
+
+containsInformation: FM101-5-1Mt.
+
+webPageURL: "http://www-cgsc.army.mil/cdd/F545/f545con.htm".
+
+comment: "The web page for FM101-5-1.".
+
+
+
+constant: FM101-5Mt.
+
+in Mt: BaseKB.
+
+isa: MilitaryFieldManual-PITType PhaseIIBattlespaceSource-PITType IKBConstant.
+
+comment: "A partial representation of the propositional content of FM
+
+101-5, 'Staff Organization and Operations' (May, 1997).".
+
+;F:
+
+;(genlMt FM101-5Mt ModernMilitaryTacticsMt).
+
+
+
+constant: FM100-5Mt.
+
+in Mt: BaseKB.
+
+isa: MilitaryFieldManual-PITType PhaseIIBattlespaceSource-PITType IKBConstant.
+
+comment: "A partial representation of the propositional content of FM
+
+100-5, 'Operations' (June, 1993).".
+
+
+
+constant: FM100-40AppendixAMt.
+
+in Mt: BaseKB.
+
+isa: PhaseIIBattlespaceSource-PITType IKBConstant.
+
+comment: "A partial representation of the propositional content of
+
+Appendix AFM 100-40 'Military Tasks'.".
+
+;F:
+
+;(genlMt FM101-40AppendixAMt ModernMilitaryTacticsMt).
+
+
+
+in Mt: ModernMilitaryTacticsMt.
+
+F:
+
+(sourceOfTerm-PIT Ambush-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT AreaSecurity-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT AttackByDirectFire-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT AttackByFire-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT AttackByIndirectFire-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT Attrit-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT Block-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT Breach-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT Bypass-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT BypassNoCombatJoined FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT BypassWithFixByFire FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT Canalize-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT Clear-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT ComplexMilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT Contain-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT Control-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT Counterreconnaissance-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT Cover-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT Deceive-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT Deception-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT DeepOperationTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT Defeat-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT DefensiveEconomyOfForceTask-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT Delay-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT Demonstration-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT DenyInformation-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT DenyPhysicalAccess-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT Destroy-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT Detect-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT Disengage-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT Disrupt-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT EmplaceObstacle-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT Encircle-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT Envelope-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT Exfiltrate-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT Exploit-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT Feint-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT Fix-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT FixByFire-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT FollowAndAssume-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT FollowAndSupport-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT ForwardPassageOfLines-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT Guard-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT Identify-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT Infiltrate-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT IntelligenceCollection-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT Interdict-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT Isolate-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT Linkup-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT Locate-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT MilitaryCSSTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT MilitaryDecoyTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT MilitaryDefensiveTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT MilitaryEnablingTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT MilitaryOffensiveTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT MobileDefenseFix-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT MobileDefenseStrike-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT MovementToContact-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT Neutralize-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT Obscure-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT Occupy-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT OffensiveEconomyOfForceTask-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT PassageOfLines-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT Patrol-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT Penetrate-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT Pursue-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT Raid-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT ReConstitute-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT RearwardPassageOfLines-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT ReconnaissanceInForce-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT Relieve-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT RelieveInPlace-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT Retain-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT Retire-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT RiverCrossing-Deliberate FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT RiverCrossing-Hasty FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT RiverCrossing-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT RiverCrossing-Retrograde FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT Rupture-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT Screen-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT SearchAndAttack-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT Secure-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT Seize-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT SpoilingAttack-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT SupportByFire-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT Suppress-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT Surprise-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT TroopMovement FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT TurningMovement-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT WithdrawFromCombat-MilitaryTask FM100-40AppendixAMt).
+
+F:
+
+(sourceOfTerm-PIT WithdrawUnderPressure-MilitaryTask FM100-40AppendixAMt).
+
+
+
+
+
+
+
+
+
+
+

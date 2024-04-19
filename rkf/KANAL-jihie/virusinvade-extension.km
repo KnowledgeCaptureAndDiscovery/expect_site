@@ -1,0 +1,214 @@
+;; *************************************************
+;; 1. use is-possible slot for preconditions
+;; *************************************************
+
+(global-situation)
+
+(is-possible has
+	(instance-of (Slot))
+	(domain (Change))
+	(range (Boolean))
+	(cardinality (N-to-1))
+	(fluent-status (*Fluent))
+	(situation-specific (t))
+)
+
+;; in case of TakeIn (such as Endocytosis), the virus should be near the cell
+;; in case of other Move, the patient's location should be the same as the
+;; source
+;; Bruce comment: we should specify preconditions for each action
+
+
+(every Endocytosis has
+	(is-possible 
+		((((the patient of Self) /= (the agent of Self)) and
+		  ((the location of (the patient of Self))= 
+			(the space-near of (the agent of Self)))))))
+
+(every Fuse has 
+	(is-possible (t))) ;; default
+(every Degrade has 
+	(is-possible (t))) ;; default
+(every Convey has 
+	(is-possible (t))) ;; default
+(every Exit has 
+	(is-possible (t)))
+
+(every Release has 
+	(is-possible (t))) ;; default
+
+(every Deliver has 
+	(is-possible (t))) ;; default
+(every Invade has 
+	(is-possible (t))) ;; default
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(every TangibleThing has (location ((a Space))))
+(every TangibleThing has (space-near ((a Space))))
+
+(location has 
+	(situation-specific (t)))
+(space-near has 
+	(situation-specific (t)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; additional slots for 'near' ;;;;;;
+
+(space-near has
+	(instance-of (Slot))
+	(domain (TangibleThing))
+	(range (Space))
+	(inverse (space-near-of))
+	(cardinality (N-to-1)))
+
+(space-near-of has
+	(instance-of (Slot))
+	(domain (TangibleThing))
+	(range (TangibleThing)))
+
+;; *************************************************
+;; 2. define Arrive
+;; *************************************************
+
+(Arrive has 
+	(superclasses (Change)))
+
+(every Arrive has
+	(agent ((a TangibleThing)))
+	(source (( a Space)))
+ 	(destination ((a TangibleThing)))
+        (affect ((a Affect with
+		   (affectedThing ((Self agent)))
+		   (affectedSlot (location))
+                   (oldValue ((the source of Self)))
+		   (newValue ((the space-near of (the destination of Self)))))))
+)
+;; *************************************************
+;; 3. define NewVirusInvadesCell
+;; *************************************************
+
+(NewVirusInvadesCell has (superclasses (Invade)))
+
+(every NewVirusInvadesCell has 
+       (agent ((a Virus)))
+       (patient ((a Cell)))
+
+;       (firstevent ((the Enter subevents of (Self))))
+       (subevents 
+	((a Enter with 
+	    (self-contained (t))
+	    (patient ((Self agent)))
+	    (beneficiary ((Self patient)))
+	    (firstevent ((the Penetrate subevents of 
+			      (the Enter subevents of Self))))
+	    (prereq ((a Penetrate with 
+			(self-contained (t))
+			(agent ((Self agent)))
+			(patient (Self agent))
+			(firstevent ((the Endocytosis byMeansOf of 
+					  (the Penetrate prereq of (the Enter subevents of Self)))))
+			(byMeansOf ((a Endocytosis with 
+				       (agent ((Self patient)))
+				       (patient ((Self agent)))
+				       (source ((a Space with (location-of ((Self agent)))))))))
+			(nextevent ((the Deliver enables of (the Enter subevents of Self)))))))
+	    (enables
+	     ((a Deliver with   ; Deliver = Convey + Release
+		 (agent ((Self agent)))     ; coerced to be a Container
+		 (patient ((the Dna contains of (Self agent))))
+		 (destination ((the inside of ((the Cytoplasm contains of 
+						    (Self patient))))))
+		 (subevents 
+		  ((a Convey with 
+		      (patient ((Self agent)))
+		      (firstevent ((the Fuse byMeansOf of 
+					(the Convey subevents of 
+					     (the Deliver subevents of 
+						  (the Enter subevents 
+						       of Self))))))
+;		      (source ((a Space with (location-of ((Self agent))))))
+		      (source ((the destination of 
+				    (the Endocytosis byMeansOf of 
+					 (the Penetrate prereq of 
+					      (the Enter subevents of Self))))))
+		      (destination ((the destination of 
+					 (the Deliver subevents of 
+					      (the Enter subevents of Self))
+					 )))
+		      (byMeansOf 
+		       ((a Fuse with 
+			   (agent ((oneof (the Lysosome contains of 
+					       (the Cytoplasm contains of 
+						    (Self patient))) 
+					  where (t))))
+			   (patient ((the Vesicle creates of 
+					  (the Endocytosis byMeansOf
+					       of (the Penetrate 
+						       prereq of
+						       (the Enter subevents of Self)))))))))
+		      (nextevent ((the Release subevents of 
+				       (the Deliver subevents of 
+					    (the Enter subevents of Self)))
+				  )))
+		   (a Release with   
+#| 
+                      note: the agent of the Release is
+                            set by the Deliver component, to be *virus
+|#
+; incompleteness in KM! (patient ((the Dna contains of (Self agent))))
+			(patient ((the Dna parts of (Self agent))))
+		      (destination ((a Space with (location-of ((the CytoplasmFluid contains of
+					 (the Cytoplasm contains of 
+					      (Self patient))))))))
+		      (firstevent ((the Degrade subevents of 
+					(the Release subevents of 
+					     (the Deliver subevents of 
+						  (the Enter subevents 
+						       of Self))))))
+		      (subevents 
+		       ((a Degrade with 
+			   (agent ((Self patient)))
+			   (patient ((the ProteinCoat 
+					  parts of (Self agent))))
+			   (nextevent ((the Exit subevents of 
+					    (the Release subevents of
+						 (the Deliver subevents of
+						      (the Enter subevents
+							   of Self))))))
+			   (instrument 
+			    ((the Acid contains of 
+				  (the Lysosome agent of 
+				       (the Fuse byMeansOf of 
+					    (the Convey subevents of
+						 (the Deliver
+						      subevents of
+						      (the Enter 
+							   subevents 
+							   of Self)))))))))
+			(a Exit with	
+; incompleteness in KM!    (patient ((the Dna contains of (Self agent))))
+			   (patient ((the Dna parts of (Self agent))))
+			   (destination ((a Space with (location-of ((the CytoplasmFluid contains of
+					      (the Cytoplasm contains of 
+						   (Self patient)))))))))
+		   ))))))))))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;; User adds Arrive as the first subevent 
+(every NewVirusInvadesCell has
+     (firstevent ((the Arrive subevents of (Self))))
+     (subevents 
+      ((a Arrive with (agent ((Self agent)))  
+	              (patient ((Self agent)))
+		      (source ((the location of ((Self agent)))))
+		     ; (destination ((the space-near of ((Self patient))))) ;; near cell
+		      (destination ((Self patient))) ;; near cell
+		      (is-possible (t))
+		      (nextevent ((the Enter subevents of (Self)))))))
+     (expected-effect ((a Affect with
+        (affectedThing ((Self agent)))
+        (affectedSlot (location)) 
+        (checkedValue ((the location of ((Self agent)))))	
+        (expectedValue ((the inside of (the contains of ((Self patient)))))))))
+)

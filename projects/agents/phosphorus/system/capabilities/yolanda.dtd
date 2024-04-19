@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XML Spy v3.0.7 NT (http://www.xmlspy.com) by pablo yanez (isi usc) -->
+<!ELEMENT person (Name, UserId, Photo?, projects*, systems*, topics*, position, group?, capabilities)>
+<!ELEMENT Name (#PCDATA)>
+<!ELEMENT UserId (#PCDATA)>
+<!ELEMENT Photo (#PCDATA)>
+<!ELEMENT projects (#PCDATA)>
+<!ELEMENT systems (#PCDATA)>
+<!ELEMENT topics (#PCDATA)>
+<!ELEMENT position (#PCDATA)>
+<!ELEMENT group (#PCDATA)>
+<!ELEMENT capabilities (capability+)>
+<!ELEMENT capability (NlDescription, MethodGoal+)>
+<!ELEMENT NlDescription (#PCDATA)>
+<!ELEMENT MethodGoal (VarGoalForm+)>
+<!ELEMENT VarGoalForm (GoalName, ManyVarGoalArgument)>
+<!ELEMENT GoalName (#PCDATA)>
+<!ELEMENT ManyVarGoalArgument (VarGoalArgument+)>
+<!ELEMENT VarGoalArgument (ParameterName, MethodGoalArgument)>
+<!ELEMENT ParameterName (#PCDATA)>
+<!ELEMENT MethodGoalArgument (VariableName?, t, ComplexData?)>
+<!ELEMENT VariableName (#PCDATA)>
+<!ELEMENT t (#PCDATA)>
+<!ATTLIST t
+	name CDATA #REQUIRED
+>
+<!ELEMENT ComplexData (t, (ConceptName | InstanceName | ComplexData?))>
+<!ELEMENT ConceptName (#PCDATA)>
+<!ELEMENT InstanceName (#PCDATA)>

@@ -1,0 +1,1419 @@
+;;; -*- Mode: Lisp; Package: CYC; Syntax: COMMON-LISP; Base: 10 -*-
+
+(CL:IN-PACKAGE "CYC")
+
+(TELL)
+(TELL (|COA| |BlueBrigadeCOA4-2-1Mt|))
+(TELL (|genlMt| |BlueBrigadeCOA4-2-1Mt| |ModernMilitaryTacticsMt|))
+(TELL)
+(TELL (|COA| |BlueBrigadeCOA4-2-1Mt-PlanningMt|))
+(TELL (|genlMt| |BlueBrigadeCOA4-2-1Mt-PlanningMt| |BlueBrigadeCOA4-2-1Mt|))
+(TELL)
+(TELL (|COA| |BlueBrigadeCOA4-2-1Mt-RedCOAMt|))
+(TELL (|genlMt| |BlueBrigadeCOA4-2-1Mt-RedCOAMt| |BlueBrigadeCOA4-2-1Mt|))
+(TELL (|PhaseLineBoundedArea| |BrigadeAO|))
+(TELL (|GeographicalRegion| |OBJ_Coors|))
+(TELL (|City| |Central_City|))
+(TELL (|GeographicalRegion| |Loc1|))
+(TELL (|GeographicalRegion| |COO1|))
+(TELL (|GeographicalRegion| |COO2|))
+(TELL (|GeographicalRegion| |COO3|))
+(TELL (|GeographicalRegion| |COO4|))
+(TELL (|GeographicalRegion| |COO5|))
+(TELL (|GeographicalRegion| |COO6|))
+(TELL (|GeographicalRegion| |COO7|))
+(TELL (|GeographicalRegion| |COO8|))
+(TELL (|GeographicalRegion| |Loc2|))
+(TELL (|GeographicalRegion| |Loc3|))
+(TELL (|GeographicalRegion| |Loc4|))
+(TELL (|GeographicalRegion| |Loc5|))
+(TELL (|GeographicalRegion| |Loc6|))
+(TELL (|GeographicalRegion| |Loc7|))
+(TELL (|GeographicalRegion| |Loc8|))
+(TELL (|GeographicalRegion| |Loc9|))
+(TELL (|GeographicalRegion| |Loc10|))
+(TELL (|GeographicalRegion| |Loc11|))
+(TELL (|GeographicalRegion| |Loc12|))
+(TELL (|GeographicalRegion| |Loc13|))
+(TELL (|GeographicalRegion| |Loc14|))
+(TELL (|GeographicalRegion| |Loc15|))
+(TELL (|GeographicalRegion| |Loc16|))
+(TELL (|GeographicalRegion| |OBJ_Bud|))
+(TELL (|GeographicalRegion| |Loc17|))
+(TELL (|GeographicalRegion| |Loc18|))
+(TELL (|GeographicalRegion| |Loc19|))
+(TELL (|GeographicalRegion| |Loc20|))
+(TELL (|HumanRegionalBorder| |PL_Green|))
+(TELL (|PhaseLine| |PL_Green|))
+(TELL (|PhaseLine| |PL_Amber_LD_LC|))
+(TELL (|LineOfDeparture| |PL_Amber_LD_LC|))
+(TELL (|LineOfContact| |PL_Amber_LD_LC|))
+(TELL (|HumanRegionalBorder| |BrigadeBorderN|))
+(TELL (|PhaseLineBoundedArea| |Loc21|))
+(TELL (|PhaseLineBoundedArea| |Loc22|))
+(TELL (|HumanRegionalBorder| |PL_Orange|))
+(TELL (|PhaseLine| |PL_Orange|))
+(TELL (|HumanRegionalBorder| |BrigadeBorderS|))
+(TELL (|PhaseLineBoundedArea| |Loc23|))
+(TELL (|PathForWheeledVehicles| |Road_1|))
+(TELL (|Path-Spatial| |Road_1|))
+(TELL (|PathForWheeledVehicles| |Road_3|))
+(TELL (|Path-Spatial| |Road_3|))
+(TELL (|PathForWheeledVehicles| |Road_2|))
+(TELL (|Path-Spatial| |Road_2|))
+(TELL (|HumanRegionalBorder| |PL_Brown|))
+(TELL (|PhaseLine| |PL_Brown|))
+(TELL (|PhaseLineBoundedArea| |Loc24|))
+(TELL (|PhaseLine| |PL_Yellow_LOA|))
+(TELL (|LimitOfAdvance| |PL_Yellow_LOA|))
+(TELL (|HumanRegionalBorder| |BattalionBorder|))
+(TELL (|PhaseLineBoundedArea| |Loc25|))
+(TELL (|Path-Spatial| |Path1|))
+(TELL (|AvenueOfApproach-Ground| |AA1|))
+(TELL (|MobilityCorridor| |MC1|))
+(TELL (|MobilityCorridor| |MC2|))
+(TELL (|MobilityCorridor| |MC3|))
+(TELL (|MobilityCorridor| |MC4|))
+(TELL (|MobilityCorridor| |MC5|))
+(TELL (|MobilityCorridor| |MC6|))
+(TELL (|MobilityCorridor| |MC7|))
+(TELL (|GeographicalRegion| |EA1|))
+(TELL (|GeographicalRegion| |BP1|))
+(TELL (|GeographicalRegion| |BP2|))
+(TELL (|GeographicalRegion| |BP3|))
+(TELL (|GeographicalRegion| |BP4|))
+(TELL (|GeographicalRegion| |BP5|))
+(TELL (|GeographicalRegion| |BP6|))
+(TELL (|GeographicalRegion| |BP7|))
+(TELL (|ArmoredUnit-MilitarySpecialty| |RedMechRegiment2|))
+(TELL (|MechanizedInfantryUnit-MilitarySpecialty| |RedMechRegiment2|))
+(TELL (|ModernMilitaryUnit-Deployable| |RedMechBattalion1|))
+(TELL (|MechanizedInfantryUnit-MilitarySpecialty| |RedMechBattalion1|))
+(TELL (|ModernMilitaryUnit-Deployable| |RedMechBattalion2|))
+(TELL (|MechanizedInfantryUnit-MilitarySpecialty| |RedMechBattalion2|))
+(TELL (|ModernMilitaryUnit-Deployable| |RedTankBattalion1|))
+(TELL (|ArmoredUnit-MilitarySpecialty| |RedTankBattalion1|))
+(TELL (|ModernMilitaryUnit-Deployable| |RedArtilleryBattalion1|))
+(TELL
+ (|SelfPropelledFieldArtilleryUnit-MilitarySpecialty| |RedArtilleryBattalion1|))
+(TELL (|MechanizedInfantryUnit-MilitarySpecialty| |RedMechCompany1|))
+(TELL (|MechanizedInfantryUnit-MilitarySpecialty| |RedMechCompany2|))
+(TELL (|MechanizedInfantryUnit-MilitarySpecialty| |RedMechCompany3|))
+(TELL (|MechanizedInfantryUnit-MilitarySpecialty| |RedCSOP1|))
+(TELL (|MechanizedInfantryUnit-MilitarySpecialty| |RedMechCompany4|))
+(TELL (|MechanizedInfantryUnit-MilitarySpecialty| |RedMechCompany5|))
+(TELL (|MechanizedInfantryUnit-MilitarySpecialty| |RedMechCompany6|))
+(TELL (|MechanizedInfantryUnit-MilitarySpecialty| |RedCSOP2|))
+(TELL (|ArmoredUnit-MilitarySpecialty| |RedTankCompany1|))
+(TELL (|ArmoredUnit-MilitarySpecialty| |RedTankCompany2|))
+(TELL (|ArmoredUnit-MilitarySpecialty| |RedTankCompany3|))
+(TELL (|ModernMilitaryUnit-Deployable| |RedArtillerybattery1|))
+(TELL
+ (|SelfPropelledFieldArtilleryUnit-MilitarySpecialty| |RedArtillerybattery1|))
+(TELL (|ModernMilitaryUnit-Deployable| |RedArtillerybattery2|))
+(TELL
+ (|SelfPropelledFieldArtilleryUnit-MilitarySpecialty| |RedArtillerybattery2|))
+(TELL (|ModernMilitaryUnit-Deployable| |RedArtillerybattery3|))
+(TELL
+ (|SelfPropelledFieldArtilleryUnit-MilitarySpecialty| |RedArtillerybattery3|))
+(TELL (|ModernMilitaryUnit-Deployable| |RedMechDivision1|))
+(TELL (|MechanizedInfantryUnit-MilitarySpecialty| |RedMechDivision1|))
+(TELL (|ModernMilitaryUnit-Deployable| |RedTankRegiment2|))
+(TELL (|ArmoredUnit-MilitarySpecialty| |RedTankRegiment2|))
+(TELL (|ModernMilitaryUnit-Deployable| |RedMechRegiment1|))
+(TELL (|MechanizedInfantryUnit-MilitarySpecialty| |RedMechRegiment1|))
+(TELL (|ModernMilitaryUnit-Deployable| |Redcorps|))
+(TELL (|MechanizedInfantryUnit-MilitarySpecialty| |Redcorps|))
+(TELL (|ModernMilitaryUnit-Deployable| |RedDivision2|))
+(TELL (|ArmoredUnit-MilitarySpecialty| |RedDivision2|))
+(TELL (|MechanizedInfantryUnit-MilitarySpecialty| |BlueBrigade2|))
+(TELL (|ModernMilitaryUnit-Deployable| |BlueBattalion1|))
+(TELL (|MechanizedInfantryUnit-MilitarySpecialty| |BlueBattalion1|))
+(TELL (|ModernMilitaryUnit-Deployable| |BlueBattalion2|))
+(TELL (|MechanizedInfantryUnit-MilitarySpecialty| |BlueBattalion2|))
+(TELL (|ModernMilitaryUnit-Deployable| |BlueBattalion3|))
+(TELL (|ArmoredUnit-MilitarySpecialty| |BlueBattalion3|))
+(TELL (|IFVMechanizedInfantryUnit-MilitarySpecialty| |BlueMechPlt1|))
+(TELL (|MechanizedInfantryUnit-MilitarySpecialty| |BlueMechPlt1|))
+(TELL (|ModernMilitaryUnit-Deployable| |BlueArtilleryBattalion1|))
+(TELL
+ (|SelfPropelledFieldArtilleryUnit-MilitarySpecialty|
+  |BlueArtilleryBattalion1|))
+(TELL (|ModernMilitaryUnit-Deployable| |BlueMechCompany1|))
+(TELL (|MechanizedInfantryUnit-MilitarySpecialty| |BlueMechCompany1|))
+(TELL (|ModernMilitaryUnit-Deployable| |BlueMechCompany2|))
+(TELL (|MechanizedInfantryUnit-MilitarySpecialty| |BlueMechCompany2|))
+(TELL (|ModernMilitaryUnit-Deployable| |BlueMechCompany3|))
+(TELL (|MechanizedInfantryUnit-MilitarySpecialty| |BlueMechCompany3|))
+(TELL (|ModernMilitaryUnit-Deployable| |BlueMechCompany4|))
+(TELL (|MechanizedInfantryUnit-MilitarySpecialty| |BlueMechCompany4|))
+(TELL (|ModernMilitaryUnit-Deployable| |BlueMechCompany5|))
+(TELL (|MechanizedInfantryUnit-MilitarySpecialty| |BlueMechCompany5|))
+(TELL (|ModernMilitaryUnit-Deployable| |BlueMechCompany6|))
+(TELL (|MechanizedInfantryUnit-MilitarySpecialty| |BlueMechCompany6|))
+(TELL (|ModernMilitaryUnit-Deployable| |BlueMechCompany7|))
+(TELL (|MechanizedInfantryUnit-MilitarySpecialty| |BlueMechCompany7|))
+(TELL (|ModernMilitaryUnit-Deployable| |BlueMechCompany8|))
+(TELL (|MechanizedInfantryUnit-MilitarySpecialty| |BlueMechCompany8|))
+(TELL (|ModernMilitaryUnit-Deployable| |BlueArmorCompany1|))
+(TELL (|ArmoredUnit-MilitarySpecialty| |BlueArmorCompany1|))
+(TELL (|ModernMilitaryUnit-Deployable| |BlueArmorCompany2|))
+(TELL (|ArmoredUnit-MilitarySpecialty| |BlueArmorCompany2|))
+(TELL (|ModernMilitaryUnit-Deployable| |BlueArmorCompany3|))
+(TELL (|ArmoredUnit-MilitarySpecialty| |BlueArmorCompany3|))
+(TELL (|ModernMilitaryUnit-Deployable| |BlueArmorCompany4|))
+(TELL (|ArmoredUnit-MilitarySpecialty| |BlueArmorCompany4|))
+(TELL (|ModernMilitaryUnit-Deployable| |BlueArtillerybattery1|))
+(TELL
+ (|SelfPropelledFieldArtilleryUnit-MilitarySpecialty| |BlueArtillerybattery1|))
+(TELL (|ModernMilitaryUnit-Deployable| |BlueArtillerybattery2|))
+(TELL
+ (|SelfPropelledFieldArtilleryUnit-MilitarySpecialty| |BlueArtillerybattery2|))
+(TELL (|ModernMilitaryUnit-Deployable| |BlueArtillerybattery3|))
+(TELL
+ (|SelfPropelledFieldArtilleryUnit-MilitarySpecialty| |BlueArtillerybattery3|))
+(TELL (|ModernMilitaryUnit-Deployable| |BlueDivision1|))
+(TELL (|MechanizedInfantryUnit-MilitarySpecialty| |BlueDivision1|))
+(TELL (|ModernMilitaryUnit-Deployable| |BlueMechBrigade1|))
+(TELL (|MechanizedInfantryUnit-MilitarySpecialty| |BlueMechBrigade1|))
+(TELL (|ModernMilitaryUnit-Deployable| |BlueArmorBrigade1|))
+(TELL (|ArmoredUnit-MilitarySpecialty| |BlueArmorBrigade1|))
+(TELL (|ModernMilitaryUnit-Deployable| |Xcorps|))
+(TELL (|MechanizedInfantryUnit-MilitarySpecialty| |Xcorps|))
+(TELL (|ModernMilitaryUnit-Deployable| |BlueDivision2|))
+(TELL (|MechanizedInfantryUnit-MilitarySpecialty| |BlueDivision2|))
+(TELL (|MechanizedInfantryUnit-MilitarySpecialty| |BlueTaskForce1|))
+(TELL (|ArmoredUnit-MilitarySpecialty| |BlueTaskForce1|))
+(TELL (|ArmoredUnit-MilitarySpecialty| |BlueTaskForce2|))
+(TELL (|MechanizedInfantryUnit-MilitarySpecialty| |BlueTaskForce2|))
+(TELL (|ArmoredUnit-MilitarySpecialty| |BlueTaskForce3|))
+(TELL (|MechanizedInfantryUnit-MilitarySpecialty| |BlueTaskForce3|))
+(TELL (|MechanizedInfantryUnit-MilitarySpecialty| |BlueMechBattalion1|))
+(TELL (|ModernMilitaryUnit-Deployable| |BlueMechCompany9|))
+(TELL (|MechanizedInfantryUnit-MilitarySpecialty| |BlueMechCompany9|))
+(TELL (|ModernMilitaryUnit-Deployable| |BlueMechCompany10|))
+(TELL (|MechanizedInfantryUnit-MilitarySpecialty| |BlueMechCompany10|))
+(TELL (|MilitaryTask| |BlueBrigadeTask|))
+(TELL (|PENETRATE| |BlueBrigadeTask|))
+(TELL (|MilitaryOperation| |BlueBrigadeOp|))
+(TELL (|MilitaryOffensiveOperation| |BlueBrigadeOp|))
+(TELL (|SEIZE| |Seize1|))
+(TELL (|MilitaryOffensiveOperation| |Attack2|))
+(TELL (|Destroy-MilitaryTask| |Destroy1|))
+(TELL (|Clear-MilitaryTask| |Clear-MilitaryTask-task1|))
+(TELL (|MilitaryOffensiveOperation| |Attack3|))
+(TELL (|AttackByFire-MilitaryTask| |AttackByFire1|))
+(TELL (|Clear-MilitaryTask| |Clear-MilitaryTask-task2|))
+(TELL (|MilitaryOffensiveTask| |FollowAndSupport1|))
+(TELL (|MOVE| |FollowAndSupport1|))
+(TELL (|Translation-SingleTrajectory| |FollowAndSupport1|))
+(TELL (|FOLLOW| |FollowAndSupport1|))
+(TELL (|Destroy-MilitaryTask| |Destroy2|))
+(TELL (|Secure-MilitaryTask| |Secure-MilitaryTask-task1|))
+(TELL (|Neutralize-MilitaryTask| |Neutralize-MilitaryTask-task1|))
+(TELL (|SEIZE| |Seize2|))
+(TELL (|GeographicalRegion| |OBJ_Pass|))
+(TELL (|GeographicalRegion| |BSA|))
+(TELL (|GeographicalRegion| |Objslam|))
+(TELL (|SEIZE| |Seize3|))
+(TELL (|Border| |Border1|))
+(TELL (|operationOfCOA| |BlueBrigadeCOA4-2-1Mt| |BlueBrigadeOp|))
+(TELL (|troopStrengthOfUnit| |BlueBrigade2| |RegularStatus|))
+(TELL (|nameString| |BlueBrigade2| "BLUEBRIGADE2"))
+(TELL (|sectorOfResponsibility| |BlueBrigade2| |BrigadeAO|))
+(TELL (|nameString| |RedMechRegiment2| "REDMECHREGIMENT2"))
+(TELL (|nameString| |OBJ_Coors| "OBJ COORS"))
+(TELL (|shape| |OBJ_Coors| |(AbstractFn Polygon)|))
+(TELL (|nameString| |Central_City| "CENTRAL CITY"))
+(TELL (WHERE |Central_City| |Loc1|))
+(TELL (|shape| |Loc1| |(AbstractFn Square)|))
+(TELL (|degreeOfTrafficability| |COO1| |TerrainRestricted|))
+(TELL (|nameString| |COO1| "COO1"))
+(TELL (|shape| |COO1| |(AbstractFn Polygon)|))
+(TELL (|degreeOfTrafficability| |COO2| |TerrainRestricted|))
+(TELL (|nameString| |COO2| "COO2"))
+(TELL (|shape| |COO2| |(AbstractFn Polygon)|))
+(TELL (|degreeOfTrafficability| |COO3| |TerrainRestricted|))
+(TELL (|nameString| |COO3| "COO3"))
+(TELL (|shape| |COO3| |(AbstractFn Polygon)|))
+(TELL (|degreeOfTrafficability| |COO4| |TerrainRestricted|))
+(TELL (|nameString| |COO4| "COO4"))
+(TELL (|shape| |COO4| |(AbstractFn Polygon)|))
+(TELL (|degreeOfTrafficability| |COO5| |TerrainSeverelyRestricted|))
+(TELL (|nameString| |COO5| "COO5"))
+(TELL (|shape| |COO5| |(AbstractFn Polygon)|))
+(TELL (|degreeOfTrafficability| |COO6| |TerrainRestricted|))
+(TELL (|nameString| |COO6| "COO6"))
+(TELL (|shape| |COO6| |(AbstractFn Polygon)|))
+(TELL (|degreeOfTrafficability| |COO7| |TerrainRestricted|))
+(TELL (|nameString| |COO7| "COO7"))
+(TELL (|shape| |COO7| |(AbstractFn Polygon)|))
+(TELL (|degreeOfTrafficability| |COO8| |TerrainRestricted|))
+(TELL (|nameString| |COO8| "COO8"))
+(TELL (|shape| |COO8| |(AbstractFn Polygon)|))
+(TELL (|nameString| |MC6| "MC6"))
+(TELL (|trafficableForUnitSize-Max| |MC6| |Battalion-UnitDesignation|))
+(TELL (|nameString| |MC7| "MC7"))
+(TELL (|trafficableForUnitSize-Max| |MC7| |Battalion-UnitDesignation|))
+(TELL (|nameString| |MC1| "MC1"))
+(TELL (|trafficableForUnitSize-Max| |MC1| |Battalion-UnitDesignation|))
+(TELL (|nameString| |MC2| "MC2"))
+(TELL (|trafficableForUnitSize-Max| |MC2| |Battalion-UnitDesignation|))
+(TELL (|nameString| |MC3| "MC3"))
+(TELL (|trafficableForUnitSize-Max| |MC3| |Battalion-UnitDesignation|))
+(TELL (|nameString| |MC4| "MC4"))
+(TELL (|trafficableForUnitSize-Max| |MC4| |Battalion-UnitDesignation|))
+(TELL (|nameString| |MC5| "MC5"))
+(TELL (|trafficableForUnitSize-Max| |MC5| |Battalion-UnitDesignation|))
+(TELL (|positionStatusOfArea| |Loc2| |KeyFeatureMark|))
+(TELL (|shape| |Loc2| |(AbstractFn Square)|))
+(TELL (|positionStatusOfArea| |Loc3| |KeyFeatureMark|))
+(TELL (|shape| |Loc3| |(AbstractFn Square)|))
+(TELL (|positionStatusOfArea| |Loc4| |KeyFeatureMark|))
+(TELL (|shape| |Loc4| |(AbstractFn Square)|))
+(TELL (|nameString| |EA1| "EA1"))
+(TELL (|shape| |EA1| |(AbstractFn Polygon)|))
+(TELL (|candidateBattlePositionOfCOA| |BlueBrigadeCOA4-2-1Mt| |BP1|))
+(TELL (|nameString| |BP1| "BP1"))
+(TELL (|shape| |BP1| |(AbstractFn Polygon)|))
+(TELL (|candidateBattlePositionOfCOA| |BlueBrigadeCOA4-2-1Mt| |BP2|))
+(TELL (|nameString| |BP2| "BP2"))
+(TELL (|shape| |BP2| |(AbstractFn Polygon)|))
+(TELL (|candidateBattlePositionOfCOA| |BlueBrigadeCOA4-2-1Mt| |BP3|))
+(TELL (|nameString| |BP3| "BP3"))
+(TELL (|shape| |BP3| |(AbstractFn Polygon)|))
+(TELL (|candidateBattlePositionOfCOA| |BlueBrigadeCOA4-2-1Mt| |BP4|))
+(TELL (|nameString| |BP4| "BP4"))
+(TELL (|shape| |BP4| |(AbstractFn Polygon)|))
+(TELL (|candidateBattlePositionOfCOA| |BlueBrigadeCOA4-2-1Mt| |BP5|))
+(TELL (|nameString| |BP5| "BP5"))
+(TELL (|shape| |BP5| |(AbstractFn Polygon)|))
+(TELL (|candidateBattlePositionOfCOA| |BlueBrigadeCOA4-2-1Mt| |BP6|))
+(TELL (|nameString| |BP6| "BP6"))
+(TELL (|shape| |BP6| |(AbstractFn Polygon)|))
+(TELL (|candidateBattlePositionOfCOA| |BlueBrigadeCOA4-2-1Mt| |BP7|))
+(TELL (|nameString| |BP7| "BP7"))
+(TELL (|shape| |BP7| |(AbstractFn Polygon)|))
+(TELL (|troopStrengthOfUnit| |RedCSOP1| |RegularStatus|))
+(TELL (|structureOfUnitUnspecified| |RedCSOP1|))
+(TELL (|nameString| |RedCSOP1| "REDCSOP1"))
+(TELL (WHERE |RedCSOP1| |Loc5|))
+(TELL (|shape| |Loc5| |(AbstractFn Square)|))
+(TELL (|troopStrengthOfUnit| |RedCSOP2| |RegularStatus|))
+(TELL (|structureOfUnitUnspecified| |RedCSOP2|))
+(TELL (|nameString| |RedCSOP2| "REDCSOP2"))
+(TELL (WHERE |RedCSOP2| |Loc6|))
+(TELL (|shape| |Loc6| |(AbstractFn Square)|))
+(TELL (|troopStrengthOfUnit| |RedMechCompany1| |RegularStatus|))
+(TELL (|structureOfUnitUnspecified| |RedMechCompany1|))
+(TELL (|nameString| |RedMechCompany1| "REDMECHCOMPANY1"))
+(TELL (WHERE |RedMechCompany1| |Loc7|))
+(TELL (|shape| |Loc7| |(AbstractFn Square)|))
+(TELL (|troopStrengthOfUnit| |RedMechCompany2| |RegularStatus|))
+(TELL (|structureOfUnitUnspecified| |RedMechCompany2|))
+(TELL (|nameString| |RedMechCompany2| "REDMECHCOMPANY2"))
+(TELL (WHERE |RedMechCompany2| |Loc8|))
+(TELL (|shape| |Loc8| |(AbstractFn Square)|))
+(TELL (|troopStrengthOfUnit| |RedMechCompany3| |RegularStatus|))
+(TELL (|structureOfUnitUnspecified| |RedMechCompany3|))
+(TELL (|nameString| |RedMechCompany3| "REDMECHCOMPANY3"))
+(TELL (WHERE |RedMechCompany3| |Loc9|))
+(TELL (|shape| |Loc9| |(AbstractFn Square)|))
+(TELL (|troopStrengthOfUnit| |RedMechCompany4| |RegularStatus|))
+(TELL (|structureOfUnitUnspecified| |RedMechCompany4|))
+(TELL (|nameString| |RedMechCompany4| "REDMECHCOMPANY4"))
+(TELL (WHERE |RedMechCompany4| |Loc10|))
+(TELL (|shape| |Loc10| |(AbstractFn Square)|))
+(TELL (|troopStrengthOfUnit| |RedMechCompany5| |RegularStatus|))
+(TELL (|structureOfUnitUnspecified| |RedMechCompany5|))
+(TELL (|nameString| |RedMechCompany5| "REDMECHCOMPANY5"))
+(TELL (WHERE |RedMechCompany5| |Loc11|))
+(TELL (|shape| |Loc11| |(AbstractFn Square)|))
+(TELL (|troopStrengthOfUnit| |RedMechCompany6| |RegularStatus|))
+(TELL (|structureOfUnitUnspecified| |RedMechCompany6|))
+(TELL (|nameString| |RedMechCompany6| "REDMECHCOMPANY6"))
+(TELL (WHERE |RedMechCompany6| |Loc12|))
+(TELL (|shape| |Loc12| |(AbstractFn Square)|))
+(TELL (|troopStrengthOfUnit| |RedTankCompany1| |RegularStatus|))
+(TELL (|structureOfUnitUnspecified| |RedTankCompany1|))
+(TELL (|nameString| |RedTankCompany1| "REDTANKCOMPANY1"))
+(TELL (WHERE |RedTankCompany1| |Loc13|))
+(TELL (|shape| |Loc13| |(AbstractFn Square)|))
+(TELL (|troopStrengthOfUnit| |RedTankCompany2| |RegularStatus|))
+(TELL (|structureOfUnitUnspecified| |RedTankCompany2|))
+(TELL (|nameString| |RedTankCompany2| "REDTANKCOMPANY2"))
+(TELL (WHERE |RedTankCompany2| |Loc14|))
+(TELL (|shape| |Loc14| |(AbstractFn Square)|))
+(TELL (|troopStrengthOfUnit| |RedTankCompany3| |RegularStatus|))
+(TELL (|structureOfUnitUnspecified| |RedTankCompany3|))
+(TELL (|nameString| |RedTankCompany3| "REDTANKCOMPANY3"))
+(TELL (WHERE |RedTankCompany3| |Loc15|))
+(TELL (|shape| |Loc15| |(AbstractFn Square)|))
+(TELL (|nameString| |BSA| "BSA"))
+(TELL (|shape| |BSA| |(AbstractFn Polygon)|))
+(TELL (|troopStrengthOfUnit| |BlueMechPlt1| |RegularStatus|))
+(TELL (|structureOfUnitUnspecified| |BlueMechPlt1|))
+(TELL (|nameString| |BlueMechPlt1| "BLUEMECHPLT1"))
+(TELL (WHERE |BlueMechPlt1| |Loc16|))
+(TELL (|shape| |Loc16| |(AbstractFn Square)|))
+(TELL (|nameString| |OBJ_Bud| "OBJ BUD"))
+(TELL (|shape| |OBJ_Bud| |(AbstractFn Polygon)|))
+(TELL (|nameString| |OBJ_Pass| "OBJ PASS"))
+(TELL (|shape| |OBJ_Pass| |(AbstractFn Polygon)|))
+(TELL (|troopStrengthOfUnit| |BlueMechBattalion1| |RegularStatus|))
+(TELL
+ (:ABOUT
+  |BlueMechBattalion1|
+  (:EXACTLY 0 |subOrgs-Direct| |ArmoredUnit-MilitarySpecialty|)))
+(TELL
+ (:ABOUT
+  |BlueMechBattalion1|
+  (:EXACTLY 2 |subOrgs-Direct| |MechanizedUnit-MilitarySpecialty|)))
+(TELL (|nameString| |BlueMechBattalion1| "BLUEMECHBATTALION1"))
+(TELL (WHERE |BlueMechBattalion1| |Loc17|))
+(TELL (|shape| |Loc17| |(AbstractFn Square)|))
+(TELL (|troopStrengthOfUnit| |BlueTaskForce1| |RegularStatus|))
+(TELL
+ (:ABOUT
+  |BlueTaskForce1|
+  (:EXACTLY 2 |subOrgs-Direct| |ArmoredUnit-MilitarySpecialty|)))
+(TELL
+ (:ABOUT
+  |BlueTaskForce1|
+  (:EXACTLY 2 |subOrgs-Direct| |MechanizedUnit-MilitarySpecialty|)))
+(TELL (|nameString| |BlueTaskForce1| "BLUETASKFORCE1"))
+(TELL (WHERE |BlueTaskForce1| |Loc18|))
+(TELL (|shape| |Loc18| |(AbstractFn Square)|))
+(TELL (|troopStrengthOfUnit| |BlueTaskForce3| |RegularStatus|))
+(TELL
+ (:ABOUT
+  |BlueTaskForce3|
+  (:EXACTLY 1 |subOrgs-Direct| |ArmoredUnit-MilitarySpecialty|)))
+(TELL
+ (:ABOUT
+  |BlueTaskForce3|
+  (:EXACTLY 3 |subOrgs-Direct| |MechanizedUnit-MilitarySpecialty|)))
+(TELL (|nameString| |BlueTaskForce3| "BLUETASKFORCE3"))
+(TELL (WHERE |BlueTaskForce3| |Loc19|))
+(TELL (|shape| |Loc19| |(AbstractFn Square)|))
+(TELL (|troopStrengthOfUnit| |BlueTaskForce2| |RegularStatus|))
+(TELL
+ (:ABOUT
+  |BlueTaskForce2|
+  (:EXACTLY 1 |subOrgs-Direct| |ArmoredUnit-MilitarySpecialty|)))
+(TELL
+ (:ABOUT
+  |BlueTaskForce2|
+  (:EXACTLY 3 |subOrgs-Direct| |MechanizedUnit-MilitarySpecialty|)))
+(TELL (|nameString| |BlueTaskForce2| "BLUETASKFORCE2"))
+(TELL (WHERE |BlueTaskForce2| |Loc20|))
+(TELL (|shape| |Loc20| |(AbstractFn Square)|))
+(TELL (|hasPartAsBorder| |BrigadeAO| |PL_Green|))
+(TELL (|nameString| |PL_Green| "PL GREEN"))
+(TELL (|nameString| |PL_Amber_LD_LC| "PL AMBER (LD/LC)"))
+(TELL (|sectorOfResponsibility| |BlueMechPlt1| |Loc21|))
+(TELL (|hasPartAsBorder| |Loc21| |BrigadeBorderN|))
+(TELL (|sectorOfResponsibility| |BlueTaskForce2| |Loc22|))
+(TELL (|hasPartAsBorder| |Loc22| |BrigadeBorderN|))
+(TELL (|hasPartAsBorder| |BrigadeAO| |BrigadeBorderN|))
+(TELL (|nameString| |BrigadeBorderN| "BRIGADEBORDERN"))
+(TELL (|hasPartAsBorder| |BrigadeAO| |PL_Orange|))
+(TELL (|hasPartAsBorder| |Loc21| |PL_Orange|))
+(TELL (|nameString| |PL_Orange| "PL ORANGE"))
+(TELL (|sectorOfResponsibility| |BlueMechBattalion1| |Loc23|))
+(TELL (|hasPartAsBorder| |Loc23| |BrigadeBorderS|))
+(TELL (|hasPartAsBorder| |BrigadeAO| |BrigadeBorderS|))
+(TELL (|nameString| |BrigadeBorderS| "BRIGADEBORDERS"))
+(TELL (|nameString| |Road_1| "ROAD 1"))
+(TELL (|nameString| |Road_3| "ROAD 3"))
+(TELL (|nameString| |Road_2| "ROAD 2"))
+(TELL (|widthOfObject| |AA1| 7.5))
+(TELL (|nameString| |AA1| "AA1"))
+(TELL (|hasPartAsBorder| |Loc21| |PL_Brown|))
+(TELL (|hasPartAsBorder| |Loc22| |PL_Brown|))
+(TELL (|sectorOfResponsibility| |BlueTaskForce1| |Loc24|))
+(TELL (|hasPartAsBorder| |Loc24| |PL_Brown|))
+(TELL (|hasPartAsBorder| |Loc23| |PL_Brown|))
+(TELL (|nameString| |PL_Brown| "PL BROWN"))
+(TELL (|nameString| |PL_Yellow_LOA| "PL YELLOW (LOA)"))
+(TELL (|hasPartAsBorder| |Loc23| |BattalionBorder|))
+(TELL (|hasPartAsBorder| |Loc24| |BattalionBorder|))
+(TELL (|sectorOfResponsibility| |BlueTaskForce3| |Loc25|))
+(TELL (|hasPartAsBorder| |Loc25| |BattalionBorder|))
+(TELL (|nameString| |BattalionBorder| "BATTALIONBORDER"))
+(TELL (|objectActedOn| |AttackByFire1| |OBJ_Bud|))
+(TELL (|WHO| |FollowAndSupport1| |BlueMechBattalion1|))
+(TELL (|objectFollowedInMovement| |FollowAndSupport1| |BlueTaskForce1|))
+(TELL (|pathway-Complete| |FollowAndSupport1| |Path1|))
+(TELL (|nameString| |Objslam| "OBJ SLAM"))
+(TELL
+ (|terrainRestrictionForUnitEchelon|
+  |AA1|
+  |Brigade-UnitDesignation|
+  |MilitaryOffensiveOperation|
+  |TerrainUnrestricted|))
+(TELL
+ (|terrainRestrictionForUnitEchelon|
+  |MC1|
+  |Battalion-UnitDesignation|
+  |MilitaryOffensiveOperation|
+  |TerrainUnrestricted|))
+(TELL
+ (|terrainRestrictionForUnitEchelon|
+  |MC2|
+  |Battalion-UnitDesignation|
+  |MilitaryOffensiveOperation|
+  |TerrainUnrestricted|))
+(TELL
+ (|terrainRestrictionForUnitEchelon|
+  |MC3|
+  |Battalion-UnitDesignation|
+  |MilitaryOffensiveOperation|
+  |TerrainUnrestricted|))
+(TELL
+ (|terrainRestrictionForUnitEchelon|
+  |MC4|
+  |Battalion-UnitDesignation|
+  |MilitaryOffensiveOperation|
+  |TerrainUnrestricted|))
+(TELL
+ (|terrainRestrictionForUnitEchelon|
+  |MC5|
+  |Battalion-UnitDesignation|
+  |MilitaryOffensiveOperation|
+  |TerrainUnrestricted|))
+(TELL
+ (|terrainRestrictionForUnitEchelon|
+  |MC6|
+  |Battalion-UnitDesignation|
+  |MilitaryOffensiveOperation|
+  |TerrainUnrestricted|))
+(TELL
+ (|terrainRestrictionForUnitEchelon|
+  |MC7|
+  |Brigade-UnitDesignation|
+  |MilitaryOffensiveOperation|
+  |TerrainUnrestricted|))
+(TELL (|keyTerrainOfCOA| |BlueBrigadeCOA4-2-1Mt| |Central_City|))
+(TELL (|controlPermitsControl| |Central_City| |Road_1|))
+(TELL (|controlPermitsControl| |Central_City| |Road_2|))
+(TELL (|keyTerrainOfCOA| |BlueBrigadeCOA4-2-1Mt| |BP3|))
+(TELL (|controlPermitsControl| |BP3| |MC4|))
+(TELL (|keyTerrainOfCOA| |BlueBrigadeCOA4-2-1Mt| |BP4|))
+(TELL (|controlPermitsControl| |BP4| |MC6|))
+(TELL (|candidateEngagementAreaOfCOA| |BlueBrigadeCOA4-2-1Mt| |EA1|))
+(TELL
+ (|candidateBattlePositionForUnitType|
+  |BP1|
+  |ModernMilitaryUnit-Deployable|
+  |Company-UnitDesignation|))
+(TELL
+ (|candidateBattlePositionForUnitType|
+  |BP2|
+  |ModernMilitaryUnit-Deployable|
+  |Company-UnitDesignation|))
+(TELL
+ (|candidateBattlePositionForUnitType|
+  |BP3|
+  |ModernMilitaryUnit-Deployable|
+  |Battalion-UnitDesignation|))
+(TELL
+ (|candidateBattlePositionForUnitType|
+  |BP4|
+  |ModernMilitaryUnit-Deployable|
+  |Battalion-UnitDesignation|))
+(TELL
+ (|candidateBattlePositionForUnitType|
+  |BP5|
+  |ModernMilitaryUnit-Deployable|
+  |Battalion-UnitDesignation|))
+(TELL
+ (|candidateBattlePositionForUnitType|
+  |BP6|
+  |ModernMilitaryUnit-Deployable|
+  |Battalion-UnitDesignation|))
+(TELL
+ (|candidateBattlePositionForUnitType|
+  |BP7|
+  |ModernMilitaryUnit-Deployable|
+  |Battalion-UnitDesignation|))
+(TELL (|sovereignAllegianceOfOrg| |RedMechRegiment2| |Red-Side|))
+(TELL (|echelonOfUnit| |RedMechRegiment2| |Regiment-UnitDesignation|))
+(TELL (|nameString| |RedMechBattalion1| "REDMECHBATTALION1"))
+(TELL (|echelonOfUnit| |RedMechBattalion1| |Battalion-UnitDesignation|))
+(TELL (|SUB-UNIT| |RedMechRegiment2| |RedMechBattalion1|))
+(TELL (|sovereignAllegianceOfOrg| |RedMechBattalion1| |Red-Side|))
+(TELL (|nameString| |RedMechBattalion2| "REDMECHBATTALION2"))
+(TELL (|echelonOfUnit| |RedMechBattalion2| |Battalion-UnitDesignation|))
+(TELL (|SUB-UNIT| |RedMechRegiment2| |RedMechBattalion2|))
+(TELL (|sovereignAllegianceOfOrg| |RedMechBattalion2| |Red-Side|))
+(TELL (|nameString| |RedTankBattalion1| "REDTANKBATTALION1"))
+(TELL (|echelonOfUnit| |RedTankBattalion1| |Battalion-UnitDesignation|))
+(TELL (|SUB-UNIT| |RedMechRegiment2| |RedTankBattalion1|))
+(TELL (|sovereignAllegianceOfOrg| |RedTankBattalion1| |Red-Side|))
+(TELL (|nameString| |RedArtilleryBattalion1| "REDARTILLERYBATTALION1"))
+(TELL (|echelonOfUnit| |RedArtilleryBattalion1| |Battalion-UnitDesignation|))
+(TELL (|SUB-UNIT| |RedMechRegiment2| |RedArtilleryBattalion1|))
+(TELL (|sovereignAllegianceOfOrg| |RedArtilleryBattalion1| |Red-Side|))
+(TELL (|sovereignAllegianceOfOrg| |RedMechCompany1| |Red-Side|))
+(TELL (|echelonOfUnit| |RedMechCompany1| |Company-UnitDesignation|))
+(TELL (|SUB-UNIT| |RedMechBattalion1| |RedMechCompany1|))
+(TELL (|sovereignAllegianceOfOrg| |RedMechCompany2| |Red-Side|))
+(TELL (|echelonOfUnit| |RedMechCompany2| |Company-UnitDesignation|))
+(TELL (|SUB-UNIT| |RedMechBattalion1| |RedMechCompany2|))
+(TELL (|sovereignAllegianceOfOrg| |RedMechCompany3| |Red-Side|))
+(TELL (|echelonOfUnit| |RedMechCompany3| |Company-UnitDesignation|))
+(TELL (|SUB-UNIT| |RedMechBattalion1| |RedMechCompany3|))
+(TELL (|sovereignAllegianceOfOrg| |RedCSOP1| |Red-Side|))
+(TELL (|echelonOfUnit| |RedCSOP1| |Platoon-UnitDesignation|))
+(TELL (|SUB-UNIT| |RedMechBattalion1| |RedCSOP1|))
+(TELL (|sovereignAllegianceOfOrg| |RedMechCompany4| |Red-Side|))
+(TELL (|echelonOfUnit| |RedMechCompany4| |Company-UnitDesignation|))
+(TELL (|SUB-UNIT| |RedMechBattalion2| |RedMechCompany4|))
+(TELL (|sovereignAllegianceOfOrg| |RedMechCompany5| |Red-Side|))
+(TELL (|echelonOfUnit| |RedMechCompany5| |Company-UnitDesignation|))
+(TELL (|SUB-UNIT| |RedMechBattalion2| |RedMechCompany5|))
+(TELL (|sovereignAllegianceOfOrg| |RedMechCompany6| |Red-Side|))
+(TELL (|echelonOfUnit| |RedMechCompany6| |Company-UnitDesignation|))
+(TELL (|SUB-UNIT| |RedMechBattalion2| |RedMechCompany6|))
+(TELL (|sovereignAllegianceOfOrg| |RedCSOP2| |Red-Side|))
+(TELL (|echelonOfUnit| |RedCSOP2| |Platoon-UnitDesignation|))
+(TELL (|SUB-UNIT| |RedMechBattalion2| |RedCSOP2|))
+(TELL (|sovereignAllegianceOfOrg| |RedTankCompany1| |Red-Side|))
+(TELL (|echelonOfUnit| |RedTankCompany1| |Company-UnitDesignation|))
+(TELL (|SUB-UNIT| |RedTankBattalion1| |RedTankCompany1|))
+(TELL (|sovereignAllegianceOfOrg| |RedTankCompany2| |Red-Side|))
+(TELL (|echelonOfUnit| |RedTankCompany2| |Company-UnitDesignation|))
+(TELL (|SUB-UNIT| |RedTankBattalion1| |RedTankCompany2|))
+(TELL (|sovereignAllegianceOfOrg| |RedTankCompany3| |Red-Side|))
+(TELL (|echelonOfUnit| |RedTankCompany3| |Company-UnitDesignation|))
+(TELL (|SUB-UNIT| |RedTankBattalion1| |RedTankCompany3|))
+(TELL (|nameString| |RedArtillerybattery1| "REDARTILLERYBATTERY1"))
+(TELL (|echelonOfUnit| |RedArtillerybattery1| |Battery-UnitDesignation|))
+(TELL (|SUB-UNIT| |RedArtilleryBattalion1| |RedArtillerybattery1|))
+(TELL (|sovereignAllegianceOfOrg| |RedArtillerybattery1| |Red-Side|))
+(TELL (|nameString| |RedArtillerybattery2| "REDARTILLERYBATTERY2"))
+(TELL (|echelonOfUnit| |RedArtillerybattery2| |Battery-UnitDesignation|))
+(TELL (|SUB-UNIT| |RedArtilleryBattalion1| |RedArtillerybattery2|))
+(TELL (|sovereignAllegianceOfOrg| |RedArtillerybattery2| |Red-Side|))
+(TELL (|nameString| |RedArtillerybattery3| "REDARTILLERYBATTERY3"))
+(TELL (|echelonOfUnit| |RedArtillerybattery3| |Battery-UnitDesignation|))
+(TELL (|SUB-UNIT| |RedArtilleryBattalion1| |RedArtillerybattery3|))
+(TELL (|sovereignAllegianceOfOrg| |RedArtillerybattery3| |Red-Side|))
+(TELL (|nameString| |RedMechDivision1| "REDMECHDIVISION1"))
+(TELL (|sovereignAllegianceOfOrg| |RedMechDivision1| |Red-Side|))
+(TELL (|echelonOfUnit| |RedMechDivision1| |Division-UnitDesignation|))
+(TELL (|SUB-UNIT| |RedMechDivision1| |RedMechRegiment2|))
+(TELL (|nameString| |RedTankRegiment2| "REDTANKREGIMENT2"))
+(TELL (|echelonOfUnit| |RedTankRegiment2| |Regiment-UnitDesignation|))
+(TELL (|SUB-UNIT| |RedMechDivision1| |RedTankRegiment2|))
+(TELL (|sovereignAllegianceOfOrg| |RedTankRegiment2| |Red-Side|))
+(TELL (|nameString| |RedMechRegiment1| "REDMECHREGIMENT1"))
+(TELL (|echelonOfUnit| |RedMechRegiment1| |Regiment-UnitDesignation|))
+(TELL (|SUB-UNIT| |RedMechDivision1| |RedMechRegiment1|))
+(TELL (|sovereignAllegianceOfOrg| |RedMechRegiment1| |Red-Side|))
+(TELL (|nameString| |Redcorps| "REDCORPS"))
+(TELL (|sovereignAllegianceOfOrg| |Redcorps| |Red-Side|))
+(TELL (|echelonOfUnit| |Redcorps| |Corps-UnitDesignation|))
+(TELL (|SUB-UNIT| |Redcorps| |RedMechDivision1|))
+(TELL (|nameString| |RedDivision2| "REDDIVISION2"))
+(TELL (|echelonOfUnit| |RedDivision2| |Division-UnitDesignation|))
+(TELL (|SUB-UNIT| |Redcorps| |RedDivision2|))
+(TELL (|sovereignAllegianceOfOrg| |RedDivision2| |Red-Side|))
+(TELL (|operationalControlMilitaryOrg| |RedMechRegiment2| |RedMechBattalion1|))
+(TELL (|operationalControlMilitaryOrg| |RedMechRegiment2| |RedMechBattalion2|))
+(TELL (|operationalControlMilitaryOrg| |RedMechRegiment2| |RedTankBattalion1|))
+(TELL
+ (|operationalControlMilitaryOrg| |RedMechRegiment2| |RedArtilleryBattalion1|))
+(TELL (|operationalControlMilitaryOrg| |RedMechBattalion1| |RedMechCompany1|))
+(TELL
+ (AND
+  (|ArmoredPersonnelCarrier-BTR60| |ArmoredPersonnelCarrier-BTR60-prototype|)
+  (|PROTOTYPE| |ArmoredPersonnelCarrier-BTR60-prototype|)
+  (|PROTOTYPICAL-INSTANCE|
+   |ArmoredPersonnelCarrier-BTR60|
+   |ArmoredPersonnelCarrier-BTR60-prototype|)
+  (|equipmentOfUnit|
+   |RedMechCompany1|
+   |ArmoredPersonnelCarrier-BTR60-prototype|)))
+(TELL (|operationalControlMilitaryOrg| |RedMechBattalion1| |RedMechCompany2|))
+(TELL
+ (AND
+  (|ArmoredPersonnelCarrier-BTR60| |ArmoredPersonnelCarrier-BTR60-prototype|)
+  (|PROTOTYPE| |ArmoredPersonnelCarrier-BTR60-prototype|)
+  (|PROTOTYPICAL-INSTANCE|
+   |ArmoredPersonnelCarrier-BTR60|
+   |ArmoredPersonnelCarrier-BTR60-prototype|)
+  (|equipmentOfUnit|
+   |RedMechCompany2|
+   |ArmoredPersonnelCarrier-BTR60-prototype|)))
+(TELL (|operationalControlMilitaryOrg| |RedMechBattalion1| |RedMechCompany3|))
+(TELL
+ (AND
+  (|ArmoredPersonnelCarrier-BTR60| |ArmoredPersonnelCarrier-BTR60-prototype|)
+  (|PROTOTYPE| |ArmoredPersonnelCarrier-BTR60-prototype|)
+  (|PROTOTYPICAL-INSTANCE|
+   |ArmoredPersonnelCarrier-BTR60|
+   |ArmoredPersonnelCarrier-BTR60-prototype|)
+  (|equipmentOfUnit|
+   |RedMechCompany3|
+   |ArmoredPersonnelCarrier-BTR60-prototype|)))
+(TELL (|operationalControlMilitaryOrg| |RedMechBattalion1| |RedCSOP1|))
+(TELL
+ (AND
+  (|ArmoredPersonnelCarrier-BTR60| |ArmoredPersonnelCarrier-BTR60-prototype|)
+  (|PROTOTYPE| |ArmoredPersonnelCarrier-BTR60-prototype|)
+  (|PROTOTYPICAL-INSTANCE|
+   |ArmoredPersonnelCarrier-BTR60|
+   |ArmoredPersonnelCarrier-BTR60-prototype|)
+  (|equipmentOfUnit| |RedCSOP1| |ArmoredPersonnelCarrier-BTR60-prototype|)))
+(TELL (|operationalControlMilitaryOrg| |RedMechBattalion2| |RedMechCompany4|))
+(TELL
+ (AND
+  (|ArmoredPersonnelCarrier-BTR60| |ArmoredPersonnelCarrier-BTR60-prototype|)
+  (|PROTOTYPE| |ArmoredPersonnelCarrier-BTR60-prototype|)
+  (|PROTOTYPICAL-INSTANCE|
+   |ArmoredPersonnelCarrier-BTR60|
+   |ArmoredPersonnelCarrier-BTR60-prototype|)
+  (|equipmentOfUnit|
+   |RedMechCompany4|
+   |ArmoredPersonnelCarrier-BTR60-prototype|)))
+(TELL (|operationalControlMilitaryOrg| |RedMechBattalion2| |RedMechCompany5|))
+(TELL
+ (AND
+  (|ArmoredPersonnelCarrier-BTR60| |ArmoredPersonnelCarrier-BTR60-prototype|)
+  (|PROTOTYPE| |ArmoredPersonnelCarrier-BTR60-prototype|)
+  (|PROTOTYPICAL-INSTANCE|
+   |ArmoredPersonnelCarrier-BTR60|
+   |ArmoredPersonnelCarrier-BTR60-prototype|)
+  (|equipmentOfUnit|
+   |RedMechCompany5|
+   |ArmoredPersonnelCarrier-BTR60-prototype|)))
+(TELL (|operationalControlMilitaryOrg| |RedMechBattalion2| |RedMechCompany6|))
+(TELL
+ (AND
+  (|ArmoredPersonnelCarrier-BTR60| |ArmoredPersonnelCarrier-BTR60-prototype|)
+  (|PROTOTYPE| |ArmoredPersonnelCarrier-BTR60-prototype|)
+  (|PROTOTYPICAL-INSTANCE|
+   |ArmoredPersonnelCarrier-BTR60|
+   |ArmoredPersonnelCarrier-BTR60-prototype|)
+  (|equipmentOfUnit|
+   |RedMechCompany6|
+   |ArmoredPersonnelCarrier-BTR60-prototype|)))
+(TELL (|operationalControlMilitaryOrg| |RedMechBattalion2| |RedCSOP2|))
+(TELL
+ (AND
+  (|ArmoredPersonnelCarrier-BTR60| |ArmoredPersonnelCarrier-BTR60-prototype|)
+  (|PROTOTYPE| |ArmoredPersonnelCarrier-BTR60-prototype|)
+  (|PROTOTYPICAL-INSTANCE|
+   |ArmoredPersonnelCarrier-BTR60|
+   |ArmoredPersonnelCarrier-BTR60-prototype|)
+  (|equipmentOfUnit| |RedCSOP2| |ArmoredPersonnelCarrier-BTR60-prototype|)))
+(TELL (|operationalControlMilitaryOrg| |RedTankBattalion1| |RedTankCompany1|))
+(TELL
+ (AND
+  (|BattleTank-T64| |BattleTank-T64-prototype|)
+  (|PROTOTYPE| |BattleTank-T64-prototype|)
+  (|PROTOTYPICAL-INSTANCE| |BattleTank-T64| |BattleTank-T64-prototype|)
+  (|equipmentOfUnit| |RedTankCompany1| |BattleTank-T64-prototype|)))
+(TELL (|operationalControlMilitaryOrg| |RedTankBattalion1| |RedTankCompany2|))
+(TELL
+ (AND
+  (|BattleTank-T64| |BattleTank-T64-prototype|)
+  (|PROTOTYPE| |BattleTank-T64-prototype|)
+  (|PROTOTYPICAL-INSTANCE| |BattleTank-T64| |BattleTank-T64-prototype|)
+  (|equipmentOfUnit| |RedTankCompany2| |BattleTank-T64-prototype|)))
+(TELL (|operationalControlMilitaryOrg| |RedTankBattalion1| |RedTankCompany3|))
+(TELL
+ (AND
+  (|BattleTank-T64| |BattleTank-T64-prototype|)
+  (|PROTOTYPE| |BattleTank-T64-prototype|)
+  (|PROTOTYPICAL-INSTANCE| |BattleTank-T64| |BattleTank-T64-prototype|)
+  (|equipmentOfUnit| |RedTankCompany3| |BattleTank-T64-prototype|)))
+(TELL
+ (|operationalControlMilitaryOrg|
+  |RedArtilleryBattalion1|
+  |RedArtillerybattery1|))
+(TELL
+ (AND
+  (|Howitzer-122mmSelfPropelled| |Howitzer-122mmSelfPropelled-prototype|)
+  (|PROTOTYPE| |Howitzer-122mmSelfPropelled-prototype|)
+  (|PROTOTYPICAL-INSTANCE|
+   |Howitzer-122mmSelfPropelled|
+   |Howitzer-122mmSelfPropelled-prototype|)
+  (|equipmentOfUnit|
+   |RedArtillerybattery1|
+   |Howitzer-122mmSelfPropelled-prototype|)))
+(TELL
+ (|operationalControlMilitaryOrg|
+  |RedArtilleryBattalion1|
+  |RedArtillerybattery2|))
+(TELL
+ (AND
+  (|Howitzer-122mmSelfPropelled| |Howitzer-122mmSelfPropelled-prototype|)
+  (|PROTOTYPE| |Howitzer-122mmSelfPropelled-prototype|)
+  (|PROTOTYPICAL-INSTANCE|
+   |Howitzer-122mmSelfPropelled|
+   |Howitzer-122mmSelfPropelled-prototype|)
+  (|equipmentOfUnit|
+   |RedArtillerybattery2|
+   |Howitzer-122mmSelfPropelled-prototype|)))
+(TELL
+ (|operationalControlMilitaryOrg|
+  |RedArtilleryBattalion1|
+  |RedArtillerybattery3|))
+(TELL
+ (AND
+  (|Howitzer-122mmSelfPropelled| |Howitzer-122mmSelfPropelled-prototype|)
+  (|PROTOTYPE| |Howitzer-122mmSelfPropelled-prototype|)
+  (|PROTOTYPICAL-INSTANCE|
+   |Howitzer-122mmSelfPropelled|
+   |Howitzer-122mmSelfPropelled-prototype|)
+  (|equipmentOfUnit|
+   |RedArtillerybattery3|
+   |Howitzer-122mmSelfPropelled-prototype|)))
+(TELL (|sovereignAllegianceOfOrg| |BlueBrigade2| |Blue-Side|))
+(TELL (|echelonOfUnit| |BlueBrigade2| |Brigade-UnitDesignation|))
+(TELL (|nameString| |BlueBattalion1| "BLUEBATTALION1"))
+(TELL (|echelonOfUnit| |BlueBattalion1| |Battalion-UnitDesignation|))
+(TELL (|SUB-UNIT| |BlueBrigade2| |BlueBattalion1|))
+(TELL (|sovereignAllegianceOfOrg| |BlueBattalion1| |Blue-Side|))
+(TELL (|nameString| |BlueBattalion2| "BLUEBATTALION2"))
+(TELL (|echelonOfUnit| |BlueBattalion2| |Battalion-UnitDesignation|))
+(TELL (|SUB-UNIT| |BlueBrigade2| |BlueBattalion2|))
+(TELL (|sovereignAllegianceOfOrg| |BlueBattalion2| |Blue-Side|))
+(TELL (|nameString| |BlueBattalion3| "BLUEBATTALION3"))
+(TELL (|echelonOfUnit| |BlueBattalion3| |Battalion-UnitDesignation|))
+(TELL (|SUB-UNIT| |BlueBrigade2| |BlueBattalion3|))
+(TELL (|sovereignAllegianceOfOrg| |BlueBattalion3| |Blue-Side|))
+(TELL (|sovereignAllegianceOfOrg| |BlueMechPlt1| |Blue-Side|))
+(TELL (|echelonOfUnit| |BlueMechPlt1| |Platoon-UnitDesignation|))
+(TELL (|SUB-UNIT| |BlueBrigade2| |BlueMechPlt1|))
+(TELL (|nameString| |BlueArtilleryBattalion1| "BLUEARTILLERYBATTALION1"))
+(TELL (|echelonOfUnit| |BlueArtilleryBattalion1| |Battalion-UnitDesignation|))
+(TELL (|SUB-UNIT| |BlueBrigade2| |BlueArtilleryBattalion1|))
+(TELL (|sovereignAllegianceOfOrg| |BlueArtilleryBattalion1| |Blue-Side|))
+(TELL (|nameString| |BlueMechCompany1| "BLUEMECHCOMPANY1"))
+(TELL (|echelonOfUnit| |BlueMechCompany1| |Company-UnitDesignation|))
+(TELL (|SUB-UNIT| |BlueBattalion1| |BlueMechCompany1|))
+(TELL (|sovereignAllegianceOfOrg| |BlueMechCompany1| |Blue-Side|))
+(TELL (|nameString| |BlueMechCompany2| "BLUEMECHCOMPANY2"))
+(TELL (|echelonOfUnit| |BlueMechCompany2| |Company-UnitDesignation|))
+(TELL (|SUB-UNIT| |BlueBattalion1| |BlueMechCompany2|))
+(TELL (|sovereignAllegianceOfOrg| |BlueMechCompany2| |Blue-Side|))
+(TELL (|nameString| |BlueMechCompany3| "BLUEMECHCOMPANY3"))
+(TELL (|echelonOfUnit| |BlueMechCompany3| |Company-UnitDesignation|))
+(TELL (|SUB-UNIT| |BlueBattalion1| |BlueMechCompany3|))
+(TELL (|sovereignAllegianceOfOrg| |BlueMechCompany3| |Blue-Side|))
+(TELL (|nameString| |BlueMechCompany4| "BLUEMECHCOMPANY4"))
+(TELL (|echelonOfUnit| |BlueMechCompany4| |Company-UnitDesignation|))
+(TELL (|SUB-UNIT| |BlueBattalion1| |BlueMechCompany4|))
+(TELL (|sovereignAllegianceOfOrg| |BlueMechCompany4| |Blue-Side|))
+(TELL (|nameString| |BlueMechCompany5| "BLUEMECHCOMPANY5"))
+(TELL (|echelonOfUnit| |BlueMechCompany5| |Company-UnitDesignation|))
+(TELL (|SUB-UNIT| |BlueBattalion2| |BlueMechCompany5|))
+(TELL (|sovereignAllegianceOfOrg| |BlueMechCompany5| |Blue-Side|))
+(TELL (|nameString| |BlueMechCompany6| "BLUEMECHCOMPANY6"))
+(TELL (|echelonOfUnit| |BlueMechCompany6| |Company-UnitDesignation|))
+(TELL (|SUB-UNIT| |BlueBattalion2| |BlueMechCompany6|))
+(TELL (|sovereignAllegianceOfOrg| |BlueMechCompany6| |Blue-Side|))
+(TELL (|nameString| |BlueMechCompany7| "BLUEMECHCOMPANY7"))
+(TELL (|echelonOfUnit| |BlueMechCompany7| |Company-UnitDesignation|))
+(TELL (|SUB-UNIT| |BlueBattalion2| |BlueMechCompany7|))
+(TELL (|sovereignAllegianceOfOrg| |BlueMechCompany7| |Blue-Side|))
+(TELL (|nameString| |BlueMechCompany8| "BLUEMECHCOMPANY8"))
+(TELL (|echelonOfUnit| |BlueMechCompany8| |Company-UnitDesignation|))
+(TELL (|SUB-UNIT| |BlueBattalion2| |BlueMechCompany8|))
+(TELL (|sovereignAllegianceOfOrg| |BlueMechCompany8| |Blue-Side|))
+(TELL (|nameString| |BlueArmorCompany1| "BLUEARMORCOMPANY1"))
+(TELL (|echelonOfUnit| |BlueArmorCompany1| |Company-UnitDesignation|))
+(TELL (|SUB-UNIT| |BlueBattalion3| |BlueArmorCompany1|))
+(TELL (|sovereignAllegianceOfOrg| |BlueArmorCompany1| |Blue-Side|))
+(TELL (|nameString| |BlueArmorCompany2| "BLUEARMORCOMPANY2"))
+(TELL (|echelonOfUnit| |BlueArmorCompany2| |Company-UnitDesignation|))
+(TELL (|SUB-UNIT| |BlueBattalion3| |BlueArmorCompany2|))
+(TELL (|sovereignAllegianceOfOrg| |BlueArmorCompany2| |Blue-Side|))
+(TELL (|nameString| |BlueArmorCompany3| "BLUEARMORCOMPANY3"))
+(TELL (|echelonOfUnit| |BlueArmorCompany3| |Company-UnitDesignation|))
+(TELL (|SUB-UNIT| |BlueBattalion3| |BlueArmorCompany3|))
+(TELL (|sovereignAllegianceOfOrg| |BlueArmorCompany3| |Blue-Side|))
+(TELL (|nameString| |BlueArmorCompany4| "BLUEARMORCOMPANY4"))
+(TELL (|echelonOfUnit| |BlueArmorCompany4| |Company-UnitDesignation|))
+(TELL (|SUB-UNIT| |BlueBattalion3| |BlueArmorCompany4|))
+(TELL (|sovereignAllegianceOfOrg| |BlueArmorCompany4| |Blue-Side|))
+(TELL (|nameString| |BlueArtillerybattery1| "BLUEARTILLERYBATTERY1"))
+(TELL (|echelonOfUnit| |BlueArtillerybattery1| |Battery-UnitDesignation|))
+(TELL (|SUB-UNIT| |BlueArtilleryBattalion1| |BlueArtillerybattery1|))
+(TELL (|sovereignAllegianceOfOrg| |BlueArtillerybattery1| |Blue-Side|))
+(TELL (|nameString| |BlueArtillerybattery2| "BLUEARTILLERYBATTERY2"))
+(TELL (|echelonOfUnit| |BlueArtillerybattery2| |Battery-UnitDesignation|))
+(TELL (|SUB-UNIT| |BlueArtilleryBattalion1| |BlueArtillerybattery2|))
+(TELL (|sovereignAllegianceOfOrg| |BlueArtillerybattery2| |Blue-Side|))
+(TELL (|nameString| |BlueArtillerybattery3| "BLUEARTILLERYBATTERY3"))
+(TELL (|echelonOfUnit| |BlueArtillerybattery3| |Battery-UnitDesignation|))
+(TELL (|SUB-UNIT| |BlueArtilleryBattalion1| |BlueArtillerybattery3|))
+(TELL (|sovereignAllegianceOfOrg| |BlueArtillerybattery3| |Blue-Side|))
+(TELL (|nameString| |BlueDivision1| "BLUEDIVISION1"))
+(TELL (|sovereignAllegianceOfOrg| |BlueDivision1| |Blue-Side|))
+(TELL (|echelonOfUnit| |BlueDivision1| |Division-UnitDesignation|))
+(TELL (|SUB-UNIT| |BlueDivision1| |BlueBrigade2|))
+(TELL (|nameString| |BlueMechBrigade1| "BLUEMECHBRIGADE1"))
+(TELL (|echelonOfUnit| |BlueMechBrigade1| |Brigade-UnitDesignation|))
+(TELL (|SUB-UNIT| |BlueDivision1| |BlueMechBrigade1|))
+(TELL (|sovereignAllegianceOfOrg| |BlueMechBrigade1| |Blue-Side|))
+(TELL (|nameString| |BlueArmorBrigade1| "BLUEARMORBRIGADE1"))
+(TELL (|echelonOfUnit| |BlueArmorBrigade1| |Brigade-UnitDesignation|))
+(TELL (|SUB-UNIT| |BlueDivision1| |BlueArmorBrigade1|))
+(TELL (|sovereignAllegianceOfOrg| |BlueArmorBrigade1| |Blue-Side|))
+(TELL (|nameString| |Xcorps| "XCorps"))
+(TELL (|sovereignAllegianceOfOrg| |Xcorps| |Blue-Side|))
+(TELL (|echelonOfUnit| |Xcorps| |Corps-UnitDesignation|))
+(TELL (|SUB-UNIT| |Xcorps| |BlueDivision1|))
+(TELL (|nameString| |BlueDivision2| "BLUEDIVISION2"))
+(TELL (|echelonOfUnit| |BlueDivision2| |Division-UnitDesignation|))
+(TELL (|SUB-UNIT| |Xcorps| |BlueDivision2|))
+(TELL (|sovereignAllegianceOfOrg| |BlueDivision2| |Blue-Side|))
+(TELL (|sovereignAllegianceOfOrg| |BlueTaskForce1| |Blue-Side|))
+(TELL (|operationalControlMilitaryOrg| |BlueBrigade2| |BlueTaskForce1|))
+(TELL (|sovereignAllegianceOfOrg| |BlueTaskForce2| |Blue-Side|))
+(TELL (|operationalControlMilitaryOrg| |BlueBrigade2| |BlueTaskForce2|))
+(TELL (|sovereignAllegianceOfOrg| |BlueTaskForce3| |Blue-Side|))
+(TELL (|operationalControlMilitaryOrg| |BlueBrigade2| |BlueTaskForce3|))
+(TELL (|sovereignAllegianceOfOrg| |BlueMechBattalion1| |Blue-Side|))
+(TELL (|echelonOfUnit| |BlueMechBattalion1| |Battalion-UnitDesignation|))
+(TELL (|operationalControlMilitaryOrg| |BlueBrigade2| |BlueMechBattalion1|))
+(TELL (|operationalControlMilitaryOrg| |BlueBrigade2| |BlueMechPlt1|))
+(TELL
+ (AND
+  (|BradleyFightingVehicle-M2| |BradleyFightingVehicle-M2-prototype|)
+  (|PROTOTYPE| |BradleyFightingVehicle-M2-prototype|)
+  (|PROTOTYPICAL-INSTANCE|
+   |BradleyFightingVehicle-M2|
+   |BradleyFightingVehicle-M2-prototype|)
+  (|equipmentOfUnit| |BlueMechPlt1| |BradleyFightingVehicle-M2-prototype|)))
+(TELL
+ (|operationalControlMilitaryOrg| |BlueBrigade2| |BlueArtilleryBattalion1|))
+(TELL (|operationalControlMilitaryOrg| |BlueTaskForce1| |BlueMechCompany1|))
+(TELL
+ (AND
+  (|BradleyFightingVehicle-M2| |BradleyFightingVehicle-M2-prototype|)
+  (|PROTOTYPE| |BradleyFightingVehicle-M2-prototype|)
+  (|PROTOTYPICAL-INSTANCE|
+   |BradleyFightingVehicle-M2|
+   |BradleyFightingVehicle-M2-prototype|)
+  (|equipmentOfUnit| |BlueMechCompany1| |BradleyFightingVehicle-M2-prototype|)))
+(TELL (|operationalControlMilitaryOrg| |BlueTaskForce1| |BlueMechCompany2|))
+(TELL
+ (AND
+  (|BradleyFightingVehicle-M2| |BradleyFightingVehicle-M2-prototype|)
+  (|PROTOTYPE| |BradleyFightingVehicle-M2-prototype|)
+  (|PROTOTYPICAL-INSTANCE|
+   |BradleyFightingVehicle-M2|
+   |BradleyFightingVehicle-M2-prototype|)
+  (|equipmentOfUnit| |BlueMechCompany2| |BradleyFightingVehicle-M2-prototype|)))
+(TELL (|operationalControlMilitaryOrg| |BlueTaskForce1| |BlueArmorCompany1|))
+(TELL
+ (AND
+  (|M1A2AbramsTank| |M1A2AbramsTank-prototype|)
+  (|PROTOTYPE| |M1A2AbramsTank-prototype|)
+  (|PROTOTYPICAL-INSTANCE| |M1A2AbramsTank| |M1A2AbramsTank-prototype|)
+  (|equipmentOfUnit| |BlueArmorCompany1| |M1A2AbramsTank-prototype|)))
+(TELL (|operationalControlMilitaryOrg| |BlueTaskForce1| |BlueArmorCompany2|))
+(TELL
+ (AND
+  (|M1A2AbramsTank| |M1A2AbramsTank-prototype|)
+  (|PROTOTYPE| |M1A2AbramsTank-prototype|)
+  (|PROTOTYPICAL-INSTANCE| |M1A2AbramsTank| |M1A2AbramsTank-prototype|)
+  (|equipmentOfUnit| |BlueArmorCompany2| |M1A2AbramsTank-prototype|)))
+(TELL (|operationalControlMilitaryOrg| |BlueTaskForce2| |BlueMechCompany3|))
+(TELL
+ (AND
+  (|BradleyFightingVehicle-M2| |BradleyFightingVehicle-M2-prototype|)
+  (|PROTOTYPE| |BradleyFightingVehicle-M2-prototype|)
+  (|PROTOTYPICAL-INSTANCE|
+   |BradleyFightingVehicle-M2|
+   |BradleyFightingVehicle-M2-prototype|)
+  (|equipmentOfUnit| |BlueMechCompany3| |BradleyFightingVehicle-M2-prototype|)))
+(TELL (|operationalControlMilitaryOrg| |BlueTaskForce2| |BlueMechCompany4|))
+(TELL
+ (AND
+  (|BradleyFightingVehicle-M2| |BradleyFightingVehicle-M2-prototype|)
+  (|PROTOTYPE| |BradleyFightingVehicle-M2-prototype|)
+  (|PROTOTYPICAL-INSTANCE|
+   |BradleyFightingVehicle-M2|
+   |BradleyFightingVehicle-M2-prototype|)
+  (|equipmentOfUnit| |BlueMechCompany4| |BradleyFightingVehicle-M2-prototype|)))
+(TELL (|operationalControlMilitaryOrg| |BlueTaskForce2| |BlueMechCompany5|))
+(TELL
+ (AND
+  (|BradleyFightingVehicle-M2| |BradleyFightingVehicle-M2-prototype|)
+  (|PROTOTYPE| |BradleyFightingVehicle-M2-prototype|)
+  (|PROTOTYPICAL-INSTANCE|
+   |BradleyFightingVehicle-M2|
+   |BradleyFightingVehicle-M2-prototype|)
+  (|equipmentOfUnit| |BlueMechCompany5| |BradleyFightingVehicle-M2-prototype|)))
+(TELL (|operationalControlMilitaryOrg| |BlueTaskForce2| |BlueArmorCompany3|))
+(TELL
+ (AND
+  (|M1A2AbramsTank| |M1A2AbramsTank-prototype|)
+  (|PROTOTYPE| |M1A2AbramsTank-prototype|)
+  (|PROTOTYPICAL-INSTANCE| |M1A2AbramsTank| |M1A2AbramsTank-prototype|)
+  (|equipmentOfUnit| |BlueArmorCompany3| |M1A2AbramsTank-prototype|)))
+(TELL (|operationalControlMilitaryOrg| |BlueTaskForce3| |BlueMechCompany6|))
+(TELL
+ (AND
+  (|BradleyFightingVehicle-M2| |BradleyFightingVehicle-M2-prototype|)
+  (|PROTOTYPE| |BradleyFightingVehicle-M2-prototype|)
+  (|PROTOTYPICAL-INSTANCE|
+   |BradleyFightingVehicle-M2|
+   |BradleyFightingVehicle-M2-prototype|)
+  (|equipmentOfUnit| |BlueMechCompany6| |BradleyFightingVehicle-M2-prototype|)))
+(TELL (|operationalControlMilitaryOrg| |BlueTaskForce3| |BlueMechCompany7|))
+(TELL
+ (AND
+  (|BradleyFightingVehicle-M2| |BradleyFightingVehicle-M2-prototype|)
+  (|PROTOTYPE| |BradleyFightingVehicle-M2-prototype|)
+  (|PROTOTYPICAL-INSTANCE|
+   |BradleyFightingVehicle-M2|
+   |BradleyFightingVehicle-M2-prototype|)
+  (|equipmentOfUnit| |BlueMechCompany7| |BradleyFightingVehicle-M2-prototype|)))
+(TELL (|operationalControlMilitaryOrg| |BlueTaskForce3| |BlueMechCompany8|))
+(TELL
+ (AND
+  (|BradleyFightingVehicle-M2| |BradleyFightingVehicle-M2-prototype|)
+  (|PROTOTYPE| |BradleyFightingVehicle-M2-prototype|)
+  (|PROTOTYPICAL-INSTANCE|
+   |BradleyFightingVehicle-M2|
+   |BradleyFightingVehicle-M2-prototype|)
+  (|equipmentOfUnit| |BlueMechCompany8| |BradleyFightingVehicle-M2-prototype|)))
+(TELL (|operationalControlMilitaryOrg| |BlueTaskForce3| |BlueArmorCompany4|))
+(TELL
+ (AND
+  (|M1A2AbramsTank| |M1A2AbramsTank-prototype|)
+  (|PROTOTYPE| |M1A2AbramsTank-prototype|)
+  (|PROTOTYPICAL-INSTANCE| |M1A2AbramsTank| |M1A2AbramsTank-prototype|)
+  (|equipmentOfUnit| |BlueArmorCompany4| |M1A2AbramsTank-prototype|)))
+(TELL (|nameString| |BlueMechCompany9| "BLUEMECHCOMPANY9"))
+(TELL (|echelonOfUnit| |BlueMechCompany9| |Company-UnitDesignation|))
+(TELL (|operationalControlMilitaryOrg| |BlueMechBattalion1| |BlueMechCompany9|))
+(TELL (|sovereignAllegianceOfOrg| |BlueMechCompany9| |Blue-Side|))
+(TELL
+ (AND
+  (|BradleyFightingVehicle-M2| |BradleyFightingVehicle-M2-prototype|)
+  (|PROTOTYPE| |BradleyFightingVehicle-M2-prototype|)
+  (|PROTOTYPICAL-INSTANCE|
+   |BradleyFightingVehicle-M2|
+   |BradleyFightingVehicle-M2-prototype|)
+  (|equipmentOfUnit| |BlueMechCompany9| |BradleyFightingVehicle-M2-prototype|)))
+(TELL (|nameString| |BlueMechCompany10| "BLUEMECHCOMPANY10"))
+(TELL (|echelonOfUnit| |BlueMechCompany10| |Company-UnitDesignation|))
+(TELL
+ (|operationalControlMilitaryOrg| |BlueMechBattalion1| |BlueMechCompany10|))
+(TELL (|sovereignAllegianceOfOrg| |BlueMechCompany10| |Blue-Side|))
+(TELL
+ (AND
+  (|BradleyFightingVehicle-M2| |BradleyFightingVehicle-M2-prototype|)
+  (|PROTOTYPE| |BradleyFightingVehicle-M2-prototype|)
+  (|PROTOTYPICAL-INSTANCE|
+   |BradleyFightingVehicle-M2|
+   |BradleyFightingVehicle-M2-prototype|)
+  (|equipmentOfUnit|
+   |BlueMechCompany10|
+   |BradleyFightingVehicle-M2-prototype|)))
+(TELL
+ (|operationalControlMilitaryOrg|
+  |BlueArtilleryBattalion1|
+  |BlueArtillerybattery1|))
+(TELL
+ (AND
+  (|Howitzer-155mmSelfPropelled| |Howitzer-155mmSelfPropelled-prototype|)
+  (|PROTOTYPE| |Howitzer-155mmSelfPropelled-prototype|)
+  (|PROTOTYPICAL-INSTANCE|
+   |Howitzer-155mmSelfPropelled|
+   |Howitzer-155mmSelfPropelled-prototype|)
+  (|equipmentOfUnit|
+   |BlueArtillerybattery1|
+   |Howitzer-155mmSelfPropelled-prototype|)))
+(TELL
+ (|operationalControlMilitaryOrg|
+  |BlueArtilleryBattalion1|
+  |BlueArtillerybattery2|))
+(TELL
+ (AND
+  (|Howitzer-155mmSelfPropelled| |Howitzer-155mmSelfPropelled-prototype|)
+  (|PROTOTYPE| |Howitzer-155mmSelfPropelled-prototype|)
+  (|PROTOTYPICAL-INSTANCE|
+   |Howitzer-155mmSelfPropelled|
+   |Howitzer-155mmSelfPropelled-prototype|)
+  (|equipmentOfUnit|
+   |BlueArtillerybattery2|
+   |Howitzer-155mmSelfPropelled-prototype|)))
+(TELL
+ (|operationalControlMilitaryOrg|
+  |BlueArtilleryBattalion1|
+  |BlueArtillerybattery3|))
+(TELL
+ (AND
+  (|Howitzer-155mmSelfPropelled| |Howitzer-155mmSelfPropelled-prototype|)
+  (|PROTOTYPE| |Howitzer-155mmSelfPropelled-prototype|)
+  (|PROTOTYPICAL-INSTANCE|
+   |Howitzer-155mmSelfPropelled|
+   |Howitzer-155mmSelfPropelled-prototype|)
+  (|equipmentOfUnit|
+   |BlueArtillerybattery3|
+   |Howitzer-155mmSelfPropelled-prototype|)))
+(TELL (DOCUMENTATION |BlueBrigadeOp| "generic"))
+(TELL (|WHO| |BlueBrigadeTask| |BlueBrigade2|))
+(TELL (|unitAssignedToOperation| |BlueBrigadeOp| |BlueBrigade2|))
+(TELL
+ (AND
+  (|taskOfOperation| |BlueBrigadeOp| |BlueBrigadeTask|)
+  (|TASK-OF| |BlueBrigadeTask| |BlueBrigadeCOA4-2-1Mt-RedCOAMt|)))
+(TELL
+ (AND
+  (|CLOSE-COA| |BlueBrigadeCOA4-2-1Mt-RedCOAMt-close|)
+  (|CLOSE|
+   |BlueBrigadeCOA4-2-1Mt-RedCOAMt|
+   |BlueBrigadeCOA4-2-1Mt-RedCOAMt-close|)))
+(TELL (|echelonOfUnit| |BlueTaskForce1| |Battalion-UnitDesignation|))
+(TELL (|WHO| |Seize1| |BlueTaskForce1|))
+(TELL (|unitAssignedToOperation| |Attack2| |BlueTaskForce1|))
+(TELL
+ (AND
+  (|taskOfOperation| |Attack2| |Seize1|)
+  (|TASK-OF| |Seize1| |BlueBrigadeCOA4-2-1Mt-RedCOAMt-close|)))
+(TELL
+ (AND
+  (|mainTaskOfOperation| |BlueBrigadeOp| |Seize1|)
+  (|TASK-OF| |Seize1| |BlueBrigadeCOA4-2-1Mt-RedCOAMt-close|)))
+(TELL (|unitAssignedMainOpEffort| |BlueBrigadeOp| |BlueTaskForce1|))
+(TELL (|echelonOfUnit| |BlueTaskForce2| |Battalion-UnitDesignation|))
+(TELL (|WHO| |Destroy1| |BlueTaskForce2|))
+(TELL (|WHO| |Clear-MilitaryTask-task1| |BlueTaskForce2|))
+(TELL (|contiguousAfter| |Clear-MilitaryTask-task1| |Destroy1|))
+(TELL (|unitAssignedToOperation| |Attack3| |BlueTaskForce2|))
+(TELL
+ (AND
+  (|taskOfOperation| |Attack3| |Destroy1|)
+  (|TASK-OF| |Destroy1| |BlueBrigadeCOA4-2-1Mt-RedCOAMt-close|)))
+(TELL
+ (AND
+  (|supportingTaskOfOperation| |BlueBrigadeOp| |Destroy1|)
+  (|TASK-OF| |Destroy1| |BlueBrigadeCOA4-2-1Mt-RedCOAMt-close|)))
+(TELL (|unitAssignedSuppOpEffort| |BlueBrigadeOp| |BlueTaskForce2|))
+(TELL (|unitAssignedNthSuppEffort| |BlueBrigadeOp| |BlueTaskForce2| 1))
+(TELL
+ (AND
+  (|supportingTaskOfOperation| |BlueBrigadeOp| |Clear-MilitaryTask-task1|)
+  (|TASK-OF|
+   |Clear-MilitaryTask-task1|
+   |BlueBrigadeCOA4-2-1Mt-RedCOAMt-close|)))
+(TELL (|echelonOfUnit| |BlueTaskForce3| |Battalion-UnitDesignation|))
+(TELL (|WHO| |AttackByFire1| |BlueTaskForce3|))
+(TELL (|WHO| |Clear-MilitaryTask-task2| |BlueTaskForce3|))
+(TELL (|contiguousAfter| |Clear-MilitaryTask-task2| |AttackByFire1|))
+(TELL
+ (AND
+  (|supportingTaskOfOperation| |BlueBrigadeOp| |AttackByFire1|)
+  (|TASK-OF| |AttackByFire1| |BlueBrigadeCOA4-2-1Mt-RedCOAMt-close|)))
+(TELL (|unitAssignedSuppOpEffort| |BlueBrigadeOp| |BlueTaskForce3|))
+(TELL (|unitAssignedNthSuppEffort| |BlueBrigadeOp| |BlueTaskForce3| 2))
+(TELL
+ (AND
+  (|supportingTaskOfOperation| |BlueBrigadeOp| |Clear-MilitaryTask-task2|)
+  (|TASK-OF|
+   |Clear-MilitaryTask-task2|
+   |BlueBrigadeCOA4-2-1Mt-RedCOAMt-close|)))
+(TELL
+ (AND
+  (|RESERVE-COA| |BlueBrigadeCOA4-2-1Mt-RedCOAMt-reserve|)
+  (|RESERVE|
+   |BlueBrigadeCOA4-2-1Mt-RedCOAMt|
+   |BlueBrigadeCOA4-2-1Mt-RedCOAMt-reserve|)))
+(TELL (|WHO| |FollowAndSupport1| |BlueMechBattalion1|))
+(TELL
+ (AND
+  (|reserveUnitInMission| |BlueBrigadeOp| |BlueMechBattalion1|)
+  (|UNIT-ASSIGNED-TO-COA|
+   |BlueMechBattalion1|
+   |BlueBrigadeCOA4-2-1Mt-RedCOAMt-reserve|)
+  (|TASK-OF| |FollowAndSupport1| |BlueBrigadeCOA4-2-1Mt-RedCOAMt-reserve|)))
+(TELL
+ (AND
+  (|DEEP-COA| |BlueBrigadeCOA4-2-1Mt-RedCOAMt-deep|)
+  (|DEEP|
+   |BlueBrigadeCOA4-2-1Mt-RedCOAMt|
+   |BlueBrigadeCOA4-2-1Mt-RedCOAMt-deep|)))
+(TELL (|deepOperationTask| |BlueBrigadeOp| |Destroy2|))
+(TELL
+ (AND
+  (|REAR-COA| |BlueBrigadeCOA4-2-1Mt-RedCOAMt-rear|)
+  (|REAR|
+   |BlueBrigadeCOA4-2-1Mt-RedCOAMt|
+   |BlueBrigadeCOA4-2-1Mt-RedCOAMt-rear|)))
+(TELL (|WHO| |Secure-MilitaryTask-task1| |BlueMechPlt1|))
+(TELL
+ (AND
+  (|unitOperatingInRear| |BlueBrigadeOp| |BlueMechPlt1|)
+  (|UNIT-ASSIGNED-TO-COA|
+   |BlueMechPlt1|
+   |BlueBrigadeCOA4-2-1Mt-RedCOAMt-rear|)
+  (|TASK-OF|
+   |Secure-MilitaryTask-task1|
+   |BlueBrigadeCOA4-2-1Mt-RedCOAMt-rear|)))
+(TELL
+ (AND
+  (|FIRES-COA| |BlueBrigadeCOA4-2-1Mt-RedCOAMt-fires|)
+  (|FIRES|
+   |BlueBrigadeCOA4-2-1Mt-RedCOAMt|
+   |BlueBrigadeCOA4-2-1Mt-RedCOAMt-fires|)))
+(TELL
+ (AND
+  (|fireOperationTask| |BlueBrigadeOp| |Neutralize-MilitaryTask-task1|)
+  (|TASK-OF|
+   |Neutralize-MilitaryTask-task1|
+   |BlueBrigadeCOA4-2-1Mt-RedCOAMt-fires|)))
+(TELL (DOCUMENTATION |BlueBrigadeOp| "missionOneUp"))
+(TELL (|WHO| |Seize2| |BlueDivision1|))
+(TELL (|missionLevelTaskOfCOA| |BlueBrigadeCOA4-2-1Mt| |BlueBrigadeTask|))
+(TELL (|missionLevelTaskSquaredOfCOA| |BlueBrigadeCOA4-2-1Mt| |Seize2|))
+(TELL (|objectActedOn| |Seize1| |OBJ_Pass|))
+(TELL (|objectActedOn| |Secure-MilitaryTask-task1| |BSA|))
+(TELL (|supportRegionForUnit| |BSA| |BlueBrigade2|))
+(TELL (|objectActedOn| |Seize2| |Objslam|))
+(TELL (|objectActedOn| |BlueBrigadeTask| |RedMechRegiment2|))
+(TELL (|objectActedOn| |Destroy1| |RedMechCompany1|))
+(TELL (|objectActedOn| |Destroy1| |RedMechCompany2|))
+(TELL (|objectActedOn| |Destroy1| |RedMechCompany3|))
+(TELL (|objectActedOn| |Clear-MilitaryTask-task1| |RedMechCompany1|))
+(TELL (|objectActedOn| |Clear-MilitaryTask-task1| |RedMechCompany2|))
+(TELL (|objectActedOn| |Clear-MilitaryTask-task1| |RedMechCompany3|))
+(TELL (|objectActedOn| |Clear-MilitaryTask-task2| |RedMechCompany4|))
+(TELL (|objectActedOn| |Clear-MilitaryTask-task2| |RedMechCompany5|))
+(TELL (|assistingAgent| |FollowAndSupport1| |BlueTaskForce1|))
+(TELL (|objectActedOn| |Destroy2| |RedMechRegiment2|))
+(TELL (|objectActedOn| |Neutralize-MilitaryTask-task1| |RedMechCompany4|))
+(TELL (|objectActedOn| |Neutralize-MilitaryTask-task1| |RedMechCompany5|))
+(TELL (|WHO| |Seize3| |BlueArmorBrigade1|))
+(TELL (|objectActedOn| |Seize3| |Objslam|))
+(TELL
+ (AND
+  (|ENABLE-ACTION| ENABLE-ACTION-000)
+  (|PURPOSE-ACTION| ENABLE-ACTION-000)
+  (|PURPOSE-OF| |BlueBrigadeTask| ENABLE-ACTION-000)
+  (|ACTION-OBJ| ENABLE-ACTION-000 |Seize3|)))
+(TELL
+ (DOCUMENTATION
+  |BlueBrigadeCOA4-2-1Mt|
+  " (taskHasPurpose BlueBrigadeTask (enables-EventEvent BlueBrigadeTask Seize3)) "))
+(TELL
+ (AND
+  (|ENABLE-ACTION| ENABLE-ACTION-001)
+  (|PURPOSE-ACTION| ENABLE-ACTION-001)
+  (|PURPOSE-OF| |Seize1| ENABLE-ACTION-001)
+  (|ACTION-OBJ| ENABLE-ACTION-001 |Seize3|)))
+(TELL (|supportingTask| |Seize1| |Seize3|))
+(TELL
+ (DOCUMENTATION
+  |BlueBrigadeCOA4-2-1Mt|
+  " (taskHasPurpose Seize1 (enables-EventEvent Seize1 Seize3)) "))
+(TELL
+ (AND
+  (|PROTECT| PROTECT-000)
+  (|PURPOSE-ACTION| PROTECT-000)
+  (|PURPOSE-OF| |Destroy1| PROTECT-000)
+  (AND
+   (|ACTION-OBJ| PROTECT-000 |BlueArmorBrigade1|)
+   (|WHO| PROTECT-000 |BlueTaskForce2|))))
+(TELL
+ (DOCUMENTATION
+  |BlueBrigadeCOA4-2-1Mt|
+  " (taskHasPurpose Destroy1 (ProtectingSomething (objectTakenCareOf BlueArmorBrigade1) (performedBy BlueTaskForce2))) "))
+(TELL
+ (AND
+  (|PROTECT| PROTECT-001)
+  (|PURPOSE-ACTION| PROTECT-001)
+  (|PURPOSE-OF| |Seize2| PROTECT-001)
+  (AND
+   (|ACTION-OBJ| PROTECT-001 |Border1|)
+   (|WHO| PROTECT-001 |BlueDivision1|))))
+(TELL (|northOf| |Border1| |BlueDivision2|))
+(TELL
+ (DOCUMENTATION
+  |BlueBrigadeCOA4-2-1Mt|
+  " (taskHasPurpose Seize2 (ProtectingSomething (objectTakenCareOf Border1) (performedBy BlueDivision1))) "))
+(TELL (|subTasks-Military| |BlueBrigadeTask| |Seize1|))
+(TELL (|subTasks-Military| |BlueBrigadeTask| |Destroy1|))
+(TELL (|subTasks-Military| |BlueBrigadeTask| |Clear-MilitaryTask-task1|))
+(TELL (|subTasks-Military| |BlueBrigadeTask| |AttackByFire1|))
+(TELL (|subTasks-Military| |BlueBrigadeTask| |Clear-MilitaryTask-task2|))
+(TELL (|subTasks-Military| |BlueBrigadeTask| |FollowAndSupport1|))
+(TELL (|subTasks-Military| |BlueBrigadeTask| |Destroy2|))
+(TELL (|subTasks-Military| |BlueBrigadeTask| |Secure-MilitaryTask-task1|))
+(TELL (|subTasks-Military| |BlueBrigadeTask| |Neutralize-MilitaryTask-task1|))
+(TELL (|alignmentOfCOA| |BlueBrigadeCOA4-2-1Mt| |COAForFriendlyForce|))
+(TELL (|Destroy-MilitaryTask| |Destroy3|))
+(TELL (|WHO| |Destroy3| |BlueTaskForce2|))
+(TELL (|WHO| |Destroy3| |BlueArtillerybattery2|))
+(TELL (|CRITICAL-EVENT-OF| |BlueBrigadeCOA4-2-1Mt| |Destroy3|))
+(TELL (|objectActedOn| |Destroy3| |RedMechCompany1|))
+(TELL (|objectActedOn| |Destroy3| |RedMechCompany2|))
+(TELL (|objectActedOn| |Destroy3| |RedMechCompany3|))
+(TELL (|objectActedOn| |Destroy3| |RedArtillerybattery2|))
+(TELL (|Destroy-MilitaryTask| |Destroy4|))
+(TELL (|MilitaryDefensiveOperation| |Defend1|))
+(TELL (|Destroy-MilitaryTask| |Destroy5|))
+(TELL (|MilitaryDefensiveOperation| |Defend2|))
+(TELL (|Destroy-MilitaryTask| |Destroy6|))
+(TELL (|MilitaryDefensiveOperation| |Defend3|))
+(TELL (|SCREEN| |Screen-MilitaryTask-task1|))
+(TELL (|SCREEN| |Screen-MilitaryTask-task2|))
+(TELL (|Suppress-MilitaryTask| |Suppress-MilitaryTask-task1|))
+(TELL (|GeographicalRegion| |Location1|))
+(TELL (|AttackByFire-MilitaryTask| |AttackByFire2|))
+(TELL (|WHO| |Destroy4| |RedMechRegiment2|))
+(TELL (|unitAssignedToOperation| |Defend1| |RedMechRegiment2|))
+(TELL
+ (AND
+  (|taskOfOperation| |Defend1| |Destroy4|)
+  (|TASK-OF| |Destroy4| |BlueBrigadeCOA4-2-1Mt-RedCOAMt-fires|)))
+(TELL (|WHO| |Destroy5| |RedMechBattalion1|))
+(TELL (|unitAssignedToOperation| |Defend2| |RedMechBattalion1|))
+(TELL
+ (AND
+  (|taskOfOperation| |Defend2| |Destroy5|)
+  (|TASK-OF| |Destroy5| |BlueBrigadeCOA4-2-1Mt-RedCOAMt-fires|)))
+(TELL (|WHO| |Destroy6| |RedMechBattalion2|))
+(TELL (|unitAssignedToOperation| |Defend3| |RedMechBattalion2|))
+(TELL
+ (AND
+  (|taskOfOperation| |Defend3| |Destroy6|)
+  (|TASK-OF| |Destroy6| |BlueBrigadeCOA4-2-1Mt-RedCOAMt-fires|)))
+(TELL)
+(TELL
+ (DOCUMENTATION
+  |BlueBrigadeCOA4-2-1Mt-RedCOAMt|
+  " (potentialDutyOfAgent RedTankBattalion1 (TheSetOf (and (isa ReinforcingAMilitaryForce) (or (beneficiary RedMechBattalion1) (beneficiary RedMechBattalion2)))) performedBy) "))
+(TELL
+ (AND
+  (|reserveUnitInMission| |Defend1| |RedTankBattalion1|)
+  (|UNIT-ASSIGNED-TO-COA|
+   |RedTankBattalion1|
+   |BlueBrigadeCOA4-2-1Mt-RedCOAMt-fires|)))
+(TELL
+ (AND
+  (|SECURITY-COA| |BlueBrigadeCOA4-2-1Mt-RedCOAMt-security|)
+  (|SECURITY|
+   |BlueBrigadeCOA4-2-1Mt-RedCOAMt|
+   |BlueBrigadeCOA4-2-1Mt-RedCOAMt-security|)))
+(TELL (|WHO| |Screen-MilitaryTask-task1| |RedCSOP1|))
+(TELL
+ (AND
+  (|securityUnitInMission| |Defend1| |RedCSOP1|)
+  (|UNIT-ASSIGNED-TO-COA|
+   |RedCSOP1|
+   |BlueBrigadeCOA4-2-1Mt-RedCOAMt-security|)
+  (|TASK-OF|
+   |Screen-MilitaryTask-task1|
+   |BlueBrigadeCOA4-2-1Mt-RedCOAMt-security|)))
+(TELL (|WHO| |Screen-MilitaryTask-task2| |RedCSOP2|))
+(TELL
+ (AND
+  (|securityUnitInMission| |Defend1| |RedCSOP2|)
+  (|UNIT-ASSIGNED-TO-COA|
+   |RedCSOP2|
+   |BlueBrigadeCOA4-2-1Mt-RedCOAMt-security|)
+  (|TASK-OF|
+   |Screen-MilitaryTask-task2|
+   |BlueBrigadeCOA4-2-1Mt-RedCOAMt-security|)))
+(TELL
+ (AND
+  (|fireOperationTask| |Defend1| |Suppress-MilitaryTask-task1|)
+  (|TASK-OF|
+   |Suppress-MilitaryTask-task1|
+   |BlueBrigadeCOA4-2-1Mt-RedCOAMt-security|)))
+(TELL (|objectActedOn| |Destroy4| |BlueBrigade2|))
+(TELL (|objectActedOn| |Destroy5| |BlueBrigade2|))
+(TELL (|objectActedOn| |Destroy6| |BlueBrigade2|))
+(TELL (|objectActedOn| |Screen-MilitaryTask-task1| |RedMechBattalion1|))
+(TELL (|objectActedOn| |Screen-MilitaryTask-task2| |RedMechBattalion2|))
+(TELL (|objectActedOn| |Suppress-MilitaryTask-task1| |BlueBrigade2|))
+(TELL
+ (AND
+  (|PREVENT-ACTION| PREVENT-ACTION-000)
+  (|PURPOSE-ACTION| PREVENT-ACTION-000)
+  (|PURPOSE-OF| |Destroy4| PREVENT-ACTION-000)
+  (|ACTION-OBJ| PREVENT-ACTION-000 MilitaryOffensiveOperation-000)
+  (|MilitaryOffensiveOperation| MilitaryOffensiveOperation-000)
+  (AND (|WHO| MilitaryOffensiveOperation-000 |BlueDivision1|) (|and|))))
+(TELL
+ (DOCUMENTATION
+  |BlueBrigadeCOA4-2-1Mt-RedCOAMt|
+  " (taskHasPurpose Destroy4 (prevents-SitSitType Destroy4 (MilitaryOffensiveOperation (performedBy BlueDivision1)))) "))
+(TELL
+ (AND
+  (|PREVENT-ACTION| PREVENT-ACTION-001)
+  (|PURPOSE-ACTION| PREVENT-ACTION-001)
+  (|PURPOSE-OF| |Destroy5| PREVENT-ACTION-001)
+  (|ACTION-OBJ| PREVENT-ACTION-001 MilitaryOffensiveOperation-001)
+  (|MilitaryOffensiveOperation| MilitaryOffensiveOperation-001)
+  (AND (|WHO| MilitaryOffensiveOperation-001 |BlueDivision1|) (|and|))))
+(TELL
+ (DOCUMENTATION
+  |BlueBrigadeCOA4-2-1Mt-RedCOAMt|
+  " (taskHasPurpose Destroy5 (prevents-SitSitType Destroy5 (MilitaryOffensiveOperation (performedBy BlueDivision1)))) "))
+(TELL
+ (AND
+  (|PREVENT-ACTION| PREVENT-ACTION-002)
+  (|PURPOSE-ACTION| PREVENT-ACTION-002)
+  (|PURPOSE-OF| |Destroy6| PREVENT-ACTION-002)
+  (|ACTION-OBJ| PREVENT-ACTION-002 MilitaryOffensiveOperation-002)
+  (|MilitaryOffensiveOperation| MilitaryOffensiveOperation-002)
+  (AND (|WHO| MilitaryOffensiveOperation-002 |BlueDivision1|) (|and|))))
+(TELL
+ (DOCUMENTATION
+  |BlueBrigadeCOA4-2-1Mt-RedCOAMt|
+  " (taskHasPurpose Destroy6 (prevents-SitSitType Destroy6 (MilitaryOffensiveOperation (performedBy BlueDivision1)))) "))
+(TELL
+ (AND
+  (|PREVENT-ACTION| PREVENT-ACTION-003)
+  (|PURPOSE-ACTION| PREVENT-ACTION-003)
+  (|PURPOSE-OF| |Screen-MilitaryTask-task1| PREVENT-ACTION-003)
+  (|ACTION-OBJ| PREVENT-ACTION-003 WatchingSomething-000)
+  (|WatchingSomething| WatchingSomething-000)
+  (AND
+   (|WHO| WatchingSomething-000 |BlueBrigade2|)
+   (|objectActedOn| WatchingSomething-000 |RedMechBattalion1|))))
+(TELL
+ (DOCUMENTATION
+  |BlueBrigadeCOA4-2-1Mt-RedCOAMt|
+  " (taskHasPurpose Screen-MilitaryTask-task1 (prevents-SitSitType Screen-MilitaryTask-task1 (WatchingSomething (performedBy BlueBrigade2) (objectActedOn RedMechBattalion1)))) "))
+(TELL
+ (AND
+  (|PREVENT-ACTION| PREVENT-ACTION-004)
+  (|PURPOSE-ACTION| PREVENT-ACTION-004)
+  (|PURPOSE-OF| |Screen-MilitaryTask-task2| PREVENT-ACTION-004)
+  (|ACTION-OBJ| PREVENT-ACTION-004 WatchingSomething-001)
+  (|WatchingSomething| WatchingSomething-001)
+  (AND
+   (|WHO| WatchingSomething-001 |BlueBrigade2|)
+   (|objectActedOn| WatchingSomething-001 |RedMechBattalion2|))))
+(TELL
+ (DOCUMENTATION
+  |BlueBrigadeCOA4-2-1Mt-RedCOAMt|
+  " (taskHasPurpose Screen-MilitaryTask-task2 (prevents-SitSitType Screen-MilitaryTask-task2 (WatchingSomething (performedBy BlueBrigade2) (objectActedOn RedMechBattalion2)))) "))
+(TELL (|sectorOfResponsibility| |RedMechRegiment2| |Location1|))
+(TELL
+ (AND
+  (|fireOperationTask| |Defend1| |AttackByFire2|)
+  (|TASK-OF| |AttackByFire2| |BlueBrigadeCOA4-2-1Mt-RedCOAMt-security|)))
+(TELL
+ (|eventToPrevent-SitType|
+  |AttackByFire2|
+  |(CollectionSubsetFn Breach-MilitaryTask (TheSetOf ?OBJ (and (performedBy ?OBJ BlueBrigade2) (eventOccursAt ?OBJ Location1))))|))
+(TELL (|subTasks-Military| |Destroy4| |AttackByFire2|))
+(TELL
+ (DOCUMENTATION
+  |BlueBrigadeCOA4-2-1Mt-RedCOAMt|
+  " (eventToPrevent-SitType AttackByFire2 (Breach-MilitaryTask (and (performedBy BlueBrigade2) (eventOccursAt Location1)))) "))
+(TELL (|alignmentOfCOA| |BlueBrigadeCOA4-2-1Mt-RedCOAMt| |COAForHostileForce|))

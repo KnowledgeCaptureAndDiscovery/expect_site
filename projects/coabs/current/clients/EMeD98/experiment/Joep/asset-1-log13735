@@ -1,0 +1,312 @@
+check: Undefined Capabilities
+   at Fri Jun 04 13:38:14 PDT 1999
+
+create method for goal from undefined capabilities
+   at Fri Jun 04 13:38:27 PDT 1999
+
+undefined goal:
+Reformulated Goal:
+(estimate (obj (spec-of time)) (for (inst-of move-asset)))  
+Expected Result:UNDEFINED
+Capability:(capability (estimate (obj (?v3172 is (spec-of time))) (for (?v3173 is (inst-of move-asset)))))  
+   at Fri Jun 04 13:38:27 PDT 1999
+
+check: Method Capability Hierarchy
+   at Fri Jun 04 13:42:02 PDT 1999
+
+ done editing:((name estimate-move-asset-to-place  )
+(capability (estimate (obj (?time is (spec-of time))) (for (?move-asset is (inst-of move-asset)))))  
+(result-type (inst-of number))
+(method (add (obj (estimate (obj (opcon-time))
+			    (of (asset-of ?move-asset)))
+	     (to (estimate (obj (moving-time))
+			   (of (asset-of ?move-asset))))))))
+   at Fri Jun 04 13:48:51 PDT 1999
+
+select: add new button
+   at Fri Jun 04 13:49:14 PDT 1999
+
+ done editing:((name estimate-move-asset-to-place  )
+(capability (estimate (obj (?time is (spec-of time))) (for (?move-asset is (inst-of move-asset)))))  
+(result-type (inst-of number))
+(method (add (obj (estimate (obj (opcon-time))
+			    (of (asset-of ?move-asset)))
+	     (to (estimate (obj (moving-time))
+			   (of (asset-of ?move-asset))))))))
+   at Fri Jun 04 13:49:40 PDT 1999
+
+added New method:((name estimate-move-asset-to-place  )
+(capability (estimate (obj (?time is (spec-of time))) (for (?move-asset is (inst-of move-asset)))))  
+(result-type (inst-of number))
+(method (add (obj (estimate (obj (opcon-time))
+			    (of (asset-of ?move-asset)))
+	     (to (estimate (obj (moving-time))
+			   (of (asset-of ?move-asset))))))))
+   at Fri Jun 04 13:49:40 PDT 1999
+
+check: All Agenda
+   at Fri Jun 04 13:49:40 PDT 1999
+
+check: Method Sub-Method Relation
+   at Fri Jun 04 13:49:41 PDT 1999
+
+check: Undefined Capabilities
+   at Fri Jun 04 13:50:02 PDT 1999
+
+check: Method Capability Hierarchy
+   at Fri Jun 04 13:50:27 PDT 1999
+
+check: Undefined Capabilities
+   at Fri Jun 04 13:50:44 PDT 1999
+
+create method for goal from undefined capabilities
+   at Fri Jun 04 13:50:52 PDT 1999
+
+undefined goal:
+Reformulated Goal:
+(estimate (obj opcon-time) (of (set-of (inst-of asset))))  
+Expected Result:UNDEFINED
+Capability:(capability (estimate (obj (?v3181 is opcon-time)) (of (?v3182 is (set-of (inst-of asset))))))  
+   at Fri Jun 04 13:50:52 PDT 1999
+
+check: Method Capability Hierarchy
+   at Fri Jun 04 13:51:54 PDT 1999
+
+ done editing:((name estimate-opcon-set  )
+(capability (estimate (obj (?time is (spec-of time)) (of (?asset is (set-of (inst-of asset)))))) ) 
+(result-type (inst-of number))
+(method (find
+                (obj (spec-of maximum))
+                (of (estimate (obj (apec-of opcon-time))
+			      for ?asset))
+                ))  )
+   at Fri Jun 04 13:57:11 PDT 1999
+
+added New method:((name estimate-opcon-set  )
+(capability (estimate (obj (?time is (spec-of time)) (of (?asset is (set-of (inst-of asset)))))) ) 
+(result-type (inst-of number))
+(method (find
+                (obj (spec-of maximum))
+                (of (estimate (obj (apec-of opcon-time))
+			      for ?asset))
+                ))  )
+   at Fri Jun 04 13:57:11 PDT 1999
+
+check: All Agenda
+   at Fri Jun 04 13:57:11 PDT 1999
+
+check: Method Sub-Method Relation
+   at Fri Jun 04 13:57:11 PDT 1999
+
+select: modify button
+   at Fri Jun 04 13:58:06 PDT 1999
+
+ done editing:((name estimate-opcon-set  )
+(capability (estimate (obj (?time is (spec-of time))) (of (?asset is (set-of (inst-of asset))))))  
+(result-type (inst-of number))
+(method (find
+                (obj (spec-of maximum))
+                (of (estimate (obj (apec-of opcon-time))
+			      for ?asset))
+                ))  )
+   at Fri Jun 04 13:58:22 PDT 1999
+
+select: modify button
+   at Fri Jun 04 13:59:00 PDT 1999
+
+ done editing:((name estimate-opcon-set  )
+(capability (estimate (obj (?time is (spec-of time))) (of (?asset is (set-of (inst-of asset))))))  
+(result-type (inst-of number))
+(method (find
+                (obj (spec-of maximum))
+                (of (estimate (obj (apec-of opcon-time))
+			      for ?asset))
+                ))  )
+   at Fri Jun 04 13:59:22 PDT 1999
+
+check: All Agenda
+   at Fri Jun 04 13:59:23 PDT 1999
+
+check: Method Sub-Method Relation
+   at Fri Jun 04 13:59:24 PDT 1999
+
+select: modify button
+   at Fri Jun 04 13:59:42 PDT 1999
+
+select: copy and create button
+   at Fri Jun 04 13:59:56 PDT 1999
+
+select: add new button
+   at Fri Jun 04 14:00:01 PDT 1999
+
+select: modify button
+   at Fri Jun 04 14:00:14 PDT 1999
+
+ done editing:((name estimate-opcon-set  )
+(capability (estimate (obj (?time is (spec-of time)) )(of (?asset is (set-of (inst-of asset)))))) 
+(result-type (inst-of number))
+(method (find
+                (obj (spec-of maximum))
+                (of (estimate (obj (apec-of opcon-time))
+			      for ?asset))
+                ))  )
+   at Fri Jun 04 14:00:26 PDT 1999
+
+check: All Agenda
+   at Fri Jun 04 14:00:26 PDT 1999
+
+check: Method Sub-Method Relation
+   at Fri Jun 04 14:00:27 PDT 1999
+
+select: modify button
+   at Fri Jun 04 14:00:40 PDT 1999
+
+ done editing:((name estimate-opcon-set 1 )
+(capability (estimate (obj (?time is (spec-of time))) (of (?asset is (set-of (inst-of asset)))))) 
+(result-type (inst-of number))
+(method (find
+                (obj (spec-of maximum))
+                (of (estimate (obj (apec-of opcon-time))
+			      for ?asset))
+                ))  )
+   at Fri Jun 04 14:00:54 PDT 1999
+
+check: All Agenda
+   at Fri Jun 04 14:00:55 PDT 1999
+
+check: Method Sub-Method Relation
+   at Fri Jun 04 14:00:56 PDT 1999
+
+select: add new button
+   at Fri Jun 04 14:01:13 PDT 1999
+
+ done editing:((name estimate-opcon-set2 )
+(capability (estimate (obj (?time is (spec-of time))) (of (?asset is (set-of (inst-of asset))))))  
+(result-type (inst-of number))
+(method (find
+                (obj (spec-of maximum))
+                (of (estimate (obj (apec-of opcon-time))
+			      for ?asset))
+                ))  )
+
+   at Fri Jun 04 14:01:28 PDT 1999
+
+select: copy and create button
+   at Fri Jun 04 14:01:51 PDT 1999
+
+ done editing:((name estimate-opcon-set2 )
+(capability (estimate (obj (?time is (spec-of time))) (of (?asset is (set-of (inst-of asset))))))  
+(result-type (inst-of number))
+(method (find
+                (obj (spec-of maximum))
+                (of (estimate (obj (apec-of opcon-time))
+			      for ?asset))
+                ))  )
+
+   at Fri Jun 04 14:02:03 PDT 1999
+
+built new method:((name estimate-opcon-set2 )
+(capability (estimate (obj (?time is (spec-of time))) (of (?asset is (set-of (inst-of asset))))))  
+(result-type (inst-of number))
+(method (find
+                (obj (spec-of maximum))
+                (of (estimate (obj (apec-of opcon-time))
+			      for ?asset))
+                ))  )
+
+   at Fri Jun 04 14:02:04 PDT 1999
+
+check: All Agenda
+   at Fri Jun 04 14:02:04 PDT 1999
+
+check: Method Sub-Method Relation
+   at Fri Jun 04 14:02:04 PDT 1999
+
+select: delete button
+   at Fri Jun 04 14:02:15 PDT 1999
+
+select: show error button
+   at Fri Jun 04 14:02:20 PDT 1999
+
+checked error:((name estimate-opcon-set2 )
+(capability (estimate (obj (?time is (spec-of time))) (of (?asset is (set-of (inst-of asset))))))  
+(result-type (inst-of number))
+(method (find
+                (obj (spec-of maximum))
+                (of (estimate (obj (apec-of opcon-time))
+			      for ?asset))
+                ))  )
+
+   at Fri Jun 04 14:02:20 PDT 1999
+
+select: show error button
+   at Fri Jun 04 14:02:22 PDT 1999
+
+checked error:((name estimate-move-asset-to-place  )
+(capability (estimate (obj (?time is (spec-of time))) (for (?move-asset is (inst-of move-asset)))))  
+(result-type (inst-of number))
+(method (add (obj (estimate (obj (opcon-time))
+			    (of (asset-of ?move-asset)))
+	     (to (estimate (obj (moving-time))
+			   (of (asset-of ?move-asset))))))))
+   at Fri Jun 04 14:02:22 PDT 1999
+
+check: Undefined Capabilities
+   at Fri Jun 04 14:02:32 PDT 1999
+
+select: modify button
+   at Fri Jun 04 14:03:40 PDT 1999
+
+ done editing:((name estimate-opcon-set  )
+(capability (estimate (obj (?time is (spec-of time))) (of (?asset is (set-of (inst-of asset))))))  
+(result-type (inst-of number))
+(method (find
+                (obj (spec-of maximum))
+                (of (estimate (obj (spec-of opcon-time))
+			     ( for ?asset))))))
+   at Fri Jun 04 14:06:28 PDT 1999
+
+check: All Agenda
+   at Fri Jun 04 14:06:29 PDT 1999
+
+check: Method Sub-Method Relation
+   at Fri Jun 04 14:06:29 PDT 1999
+
+select: modify button
+   at Fri Jun 04 14:06:47 PDT 1999
+
+ done editing:((name estimate-opcon-set2  )
+(capability (estimate (obj (?time is (spec-of time))) (of (?asset is (set-of (inst-of asset))))))  
+(result-type (inst-of number))
+(method (find
+                (obj (spec-of maximum))
+                (of (estimate (obj (spec-of opcon-time))
+			     ( for ?asset))))))
+   at Fri Jun 04 14:06:57 PDT 1999
+
+check: All Agenda
+   at Fri Jun 04 14:06:57 PDT 1999
+
+check: Method Sub-Method Relation
+   at Fri Jun 04 14:06:58 PDT 1999
+
+select: modify button
+   at Fri Jun 04 14:08:14 PDT 1999
+
+ done editing:((name estimate-opcon-set2 )
+(capability (estimate (obj (?time is (spec-of time))) (of (?asset is (set-of (inst-of asset))))))  
+(result-type (inst-of number))
+(method (find
+                (obj (spec-of maximum))
+                (of (estimate (obj (spec-of opcon-time))
+			      for ?asset))
+                ))  )
+
+   at Fri Jun 04 14:08:20 PDT 1999
+
+check: All Agenda
+   at Fri Jun 04 14:08:20 PDT 1999
+
+check: Method Sub-Method Relation
+   at Fri Jun 04 14:08:20 PDT 1999
+

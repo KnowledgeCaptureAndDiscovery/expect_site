@@ -1,0 +1,256 @@
+
+java Start -grammar method.igr
+===================
+
+
+setenv MMAF_HOME /nfs/u14/frank/java/AdaptiveForms
+setenv SWING_HOME /nfs/v2/jihie/java/JFC/10
+java AdaptiveForms.Examples.SimpleIntegrated
+  (Literal "(")
+  (NonTerminal "nlDescription"
+    (Epsilon)
+  )
+  (NonTerminal "methodNameDesc"
+    (Literal "(name")
+    (NonTerminal "methodName"
+      (NonTerminal "userInput"
+        (RegularExpression "factorial-n" "userInput")
+      )
+    )
+    (Literal ")")
+  )
+  (NonTerminal "capability"
+    (Literal "(capability (")
+    (NonTerminal "goalName"
+      (Literal "compute")
+    )
+    (NonTerminal "varGoalArgument1"
+      (NonTerminal "varGoalArgument"
+        (Literal "( ")
+        (NonTerminal "parameterName"
+          (Literal "obj")
+        )
+        (Literal "(")
+        (NonTerminal "varDesc"
+          (NonTerminal "variableName"
+            (Literal "?")
+            (NonTerminal "userInput"
+              (RegularExpression "f" "userInput")
+            )
+          )
+          (Literal "is")
+          (NonTerminal "data"
+            (NonTerminal "complexData"
+              (Literal "(spec-of")
+              (NonTerminal "conceptName"
+                (Literal "factorial")
+              )
+              (Literal ")")
+            )
+          )
+        )
+        (Literal ")")
+        (Literal ")")
+      )
+    )
+    )
+    (NonTerminal "varGoalArgument2"
+      (NonTerminal "varGoalArgument"
+        (Literal "( ")
+        (NonTerminal "parameterName"
+          (Literal "of")
+        )
+        (Literal "(")
+        (NonTerminal "varDesc"
+          (NonTerminal "variableName"
+            (Literal "?")
+            (NonTerminal "userInput"
+              (RegularExpression "n" "userInput")
+            )
+          )
+          (Literal "is")
+          (NonTerminal "data"
+            (NonTerminal "complexData"
+              (Literal "(inst-of")
+              (NonTerminal "conceptName"
+                (Literal "number")
+              )
+              (Literal ")")
+            )
+          )
+        )
+        (Literal ")")
+        (Literal ")")
+      )
+    )
+    (NonTerminal "varGoalArgument3"
+      (Epsilon)
+    )
+    (Literal "))")
+  )
+  (NonTerminal "methodResult"
+    (Literal "(result-type")
+    (NonTerminal "complexData"
+      (Literal "(inst-of")
+
+      (NonTerminal "conceptName"
+        (Literal "number")
+      )
+      (Literal ")")
+    )
+    (Literal ")")
+  )
+  (NonTerminal "methodBody"
+    (Literal "(method")
+    (NonTerminal "content"
+      (NonTerminal "blockExpression"
+        (NonTerminal "userInput"
+          (RegularExpression "1" "userInput")
+        )
+      )
+    )
+    (Literal ")")
+  )
+  (Literal ")")
+)
+ 
+==================
+
+
+
+            )
+            (NonTerminal "goalParameter2"
+              (NonTerminal "goalParameter"
+                (Literal "(    ")
+                (NonTerminal "parameterName"
+                  (Literal "by")
+                )
+                (NonTerminal "expression"
+                  (NonTerminal "goalForm"
+                    (NonTerminal "goalNamePfx"
+                      (Literal "(compute")
+                    )
+                    (NonTerminal "goalParameter1"
+                      (NonTerminal "goalParameter"
+                        (Literal "(    ")
+                        (NonTerminal "parameterName"
+                          (Literal "obj")
+                        )
+                        (NonTerminal "expression"
+                          (NonTerminal "variableName"
+                            (Literal "?")
+                            (NonTerminal "userInput"
+                              (RegularExpression "f" "userInput")
+                            )
+                          )
+                        )
+                        (Literal ")")
+                      )
+                    )
+                    (NonTerminal "goalParameter2"
+                      (NonTerminal "goalParameter"
+                        (Literal "(    ")
+                        (NonTerminal "parameterName"
+                          (Literal "of")
+                        )
+                        (NonTerminal "expression"
+                          (NonTerminal "goalForm"
+                            (NonTerminal "goalNamePfx"
+                              (Literal "(subtract")
+                            )
+                            (NonTerminal "goalParameter1"
+                              (NonTerminal "goalParameter"
+                                (Literal "(    ")
+                                (NonTerminal "parameterName"
+                                  (Literal "obj")
+                                   (NonTerminal "expression"
+                                  (NonTerminal "userInput"
+                                    (RegularExpression "1serInput")
+                                  )
+                                )
+                                (Literal ")")
+                              )
+                            )
+                            (NonTerminal "goalParameter2"
+                              (NonTerminal "goalParameter"
+                                (Literal "(    ")
+                                (NonTerminal "parameterName"
+                                  (Literal "from")
+                                )
+                                (NonTerminal "expression"
+                                  (NonTerminal "variableName"
+                                    (Literal "?")
+                                    (NonTerminal "userInput"
+                                      (RegularExpression "n" "userInput")
+                                    )
+                                  )
+                                )
+                                (Literal ")")
+                              )
+                            )
+                            (NonTerminal "goalParameter3"
+                              (Epsilon)
+                            )
+                            (Literal ")")
+                          )
+                        )
+                        (Literal ")")
+                      )
+                    )
+                    (NonTerminal "goalParameter3"
+                      (Epsilon)
+                    )
+                    (Literal ")")
+                  )
+                )
+                (Literal ")")
+              )
+            )
+            (NonTerminal "goalParameter3"
+              (Epsilon)
+            )
+            (Literal ")")
+          )
+        )
+      )
+    )
+    (Literal ")")
+  )
+  (Literal ")")
+)
+ 
+( (name factorial-n ) (capability ( compute (  obj ( ? f is (spec-of factorial ) ) ) (  of ( ? n is (inst-of number ) ) ) )) (result-type (inst-of number ) ) (method ;GOAL FORM; (multiply (     obj ? n ) (     by (compute (     obj ? f ) (     of (subtract (     obj 1rom ? n ) ) ) ) ) ) ) )
+ 
+ 
+===============
+z
+"methodNameDesc"
+methodResult
+methodBody
+
+complexData 
+
+"capability"
+"varGoalArg"
+"goalForm"
+filterForm
+relationForm
+conditionForm
+logicForm
+
+
+=====
+WITH PAREN
+ (name factorial ) (capability ( compute (  obj ( ? f is (spec-of factorial ) ) ) (  of ( ? n is (inst-of number ) ) ) )) (result-type (inst-of number ) ) (method ;GOAL FORM; (multiply (     obj ? n ) (     by (compute (     obj ? f ) (     of (subtract (     obj 1 ) (     from ? n ) ) ) ) ) ) )
+ 
+(  (name factorial  )  (capability ( compute  (  obj  ( ? f   is (spec-of factorial  )    ) )   (  of  ( ? n   is (inst-of number  )    ) )    ))  (result-type (inst-of number  )  )  (method  (multiply  (     obj  ? n    )   (     by  (compute  (     obj  ? f    )   (     of  (subtract  (     obj  1   )   (     from  ? n    )    )   )    )   )    )     )  )
+
+
+WITHOUT PAREN
+ factorial-n compute obj ;VAR NAME(?var); ?f is  spec-of factorial of ;VAR NAME(?var); ?n is  set-of (inst-of number ) inst-of number ;GOAL FORM; (compute, find,..) multiply obj ;VAR NAME(?var); ?n by compute obj ;VAR NAME(?var); ?f by subtract obj 1 from ;VAR NAME(?var); ?n
+ 
+( 
+(name  factorial-n  )
+(capability ( compute ( obj (  ?f   is ( spec-of factorial  )  ) ) ( of (  ?n   is ( set-of (inst-of number  ) )  ) )   ) )
+(result-type ( inst-of number  ) )
+(method  ( multiply ( obj   ?n    ) ( by ( compute ( obj   ?f    ) ( by ( subtract ( obj ( 1      )  ) ( from   ?n    )   )  )   )  )   )   ) )

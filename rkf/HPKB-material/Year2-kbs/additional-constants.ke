@@ -1,0 +1,458 @@
+constant: choiceOfManeuverInAction.
+in Mt: ModernMilitaryTacticsMt.
+isa: BinaryPredicate IKBConstant.
+arg1Isa: MilitaryEvent.
+arg2Isa: TemporalObjectType.
+arg2Genl: MilitaryManeuver.
+comment: "(#$choiceOfManeuverInAction ACT MANEUVERTYPE) means that in
+the plannning context there exists a requirement such that the
+#$MilitaryEvent ACT incorporate a #$MilitaryManeuver of type
+MANEUVERTYPE.".
+
+F:
+(implies
+ (and
+  (choiceOfManeuverInAction ?ACTION ?MANEUVER_TYPE)
+  (genls ?MANEUVER_TYPE ?MANEUVER_SUPERTYPE)
+  (genls ?MANEUVER_SUPERTYPE MilitaryManeuver))
+ (choiceOfManeuverInAction ?ACTION ?MANEUVER_SUPERTYPE)).
+F:
+(implies
+  (choiceOfManeuverInAction ?ACTION ?MANEUVER_TYPE)
+  (relationInstanceExists subEvents ?ACTION ?MANEUVER_TYPE)).
+
+constant: forceRatioRequForActionType.
+in Mt: ModernMilitaryTacticsMt.
+isa: BinaryPredicate IKBConstant.
+arg1Isa: ScriptType.
+arg1Genl: MilitaryEvent.
+arg2Isa: RealNumber.
+comment: "(#$forceRatioRequForActionType ACT_TYPE RATIO) means that in
+a military action of type ACT_TYPE the force ratio of units should be
+at least RATIO in order to keep the operation within the limits of
+acceptable risk.  Ordinarily, having the ratio at or above this level
+may be considered a precondition for the action's success.".
+
+in Mt: ForceRatioPrerequisitesMt.
+F:
+(implies
+  (and
+    (forceRatioRequForActionType ?ACT_TYPE ?N)
+    (isa ?ACT ?ACTTYPE)
+    (unitAssignedToOperation ?ACT ?UNIT)
+    (objectActedOn ?ACT ?OPPUNIT)
+    (opponentsInConflict ?UNIT ?OPPUNIT ?ACT)
+    (forceRatioOfUnits ?UNIT ?OPPUNIT ?M))
+  (preconditionFor-Props 
+     (greaterThanOrEqualTo ?M ?N)
+     (successfulForAgents ?ACT ?UNIT))).
+F:
+(implies
+  (and
+    (forceRatioRequForActionType ?ACT_TYPE ?N)
+    (isa ?ACT ?ACTTYPE)
+    (unitAssignedToTask ?ACT ?UNIT)
+    (objectActedOn ?ACT ?OPPUNIT)
+    (opponentsInConflict ?UNIT ?OPPUNIT ?ACT)
+    (forceRatioOfUnits ?UNIT ?OPPUNIT ?M))
+  (preconditionFor-Props 
+     (greaterThanOrEqualTo ?M ?N)
+     (successfulForAgents ?ACT ?UNIT))).
+
+in Mt: ForceRatioPrerequisitesMt.
+
+F:
+(forceRatioRequForActionType Attack-MilitaryOperation 3.0).
+F:
+(forceRatioRequForActionType MilitaryDefensiveOperation 0.4).
+F:
+(forceRatioRequForActionType Counterattack-MilitaryOperation 1.0).
+F:
+(forceRatioRequForActionType Delay-MilitaryTask 0.16666667).
+F:
+(forceRatioRequForActionType Fix-MilitaryTask 2.0).
+F:
+(forceRatioRequForActionType Pursuit-MilitaryOperation 1.0).
+F:
+(forceRatioRequForActionType Exploitation-MilitaryOperation 1.0).
+F:
+(forceRatioRequForActionType MovementToContact-MilitaryOperation 1.0).
+
+
+
+constant: istIncreasesSlotValue.
+in Mt: BaseKB.
+isa: SlotTrendPredicate TernaryPredicate PublicConstant.
+arg1Isa: CycFormula.
+arg2Isa: CycFormula.
+arg3Isa: IntervalBasedQuantitySlot FunctionalSlot.
+comment: "(#$istIncreasesSlotValue INDPROP DEPPROP SLOT) means that
+the value that SLOT takes in the arg2 position for DEPPROP will be
+greater if INDPROP is provable than it will be if INDPROP is not provable.".
+
+constant: istDecreasesSlotValue.
+in Mt: BaseKB.
+isa: SlotTrendPredicate TernaryPredicate PublicConstant.
+arg1Isa: CycFormula.
+arg2Isa: CycFormula.
+arg3Isa: IntervalBasedQuantitySlot FunctionalSlot.
+comment: "(#$istDecreasesSlotValue INDPROP DEPPROP SLOT) means that
+the value that SLOT takes in the arg2 position for DEPPROP will be
+less if INDPROP is provable than it will be if INDPROP is not provable.".
+
+constant: FunctionValueForCondFn.
+in Mt: BaseKB.
+isa: ReifiableFunction TernaryFunction PublicConstant.
+arg1Isa: CycFormula.
+arg2Isa: UnaryFunction.
+arg3Isa: Thing.
+comment: "(#$FunctionValueForCondFn COND FUNCTION ARG) is a term for
+denoting whatever results from applying FUNCTION TO ARG, given that COND is
+true.  Since this is a #$Reifiable
+function, one can use it to refer to and talk about the result of
+applying a function to an argument, given a certain condition, even if
+one does not know (or does not care) what the actual resulting value
+is, or whether the condition is provable. See also #$FunctionValueFn.".
+
+F:
+(implies
+  (istIncreasesSlotValue ?IND_PROP ?DEP_PROP ?SLOT)
+  (followingValue
+     (FunctionValueForCondFn (not ?IND_PROP)
+        (FunctionToArg 2 ?SLOT) ?DEP_PROP)
+     (FunctionValueForCondFn ?IND_PROP
+        (FunctionToArg 2 ?SLOT) ?DEP_PROP))).
+F:
+(implies
+  (istDecreasesSlotValue ?IND_PROP ?DEP_PROP ?SLOT)
+  (followingValue
+     (FunctionValueForCondFn ?IND_PROP
+       (FunctionToArg 2 ?SLOT) ?DEP_PROP)
+     (FunctionValueForCondFn (not ?IND_PROP)
+       (FunctionToArg 2 ?SLOT) ?DEP_PROP))).
+
+constant: temporalStage.
+in Mt: ModernMilitaryTacticsMt.  
+isa: TernaryPredicate FunctionalPredicate IKBConstant.
+arg1Isa: SomethingExisting.
+arg2Isa: Microtheory.
+arg3Isa: SomethingExisting.
+interArgReln1-2: subAbstrac.
+functionalInTheNthArg: 2.
+comment: "(#$temporalStage WHOLE MT SUB) means that SUB is the
+temporal subastraction of WHOLE that is picked out by the #$mtTime of
+the #$Microtheory, MT.  This presupposes that WHOLE
+#$temporallySubsumes the specified #$mtTime of MT.  In general,
+assertions of the form (#$temporalStage WHOLE MT SUB) will be made
+in contexts to which MT itself has access.".
+cyclistNotes: "This predicate will be renamed after the current round
+of COA work is finished, i.e., after July 16, 1999.  The name has
+already been referenced in the Edinburgh fusion output and priorities
+and time constraints are such that the output cannot be readjusted.  The suggested rename is subAbstracPerMt.".
+
+F:
+(implies
+  (and
+   (temporalStage ?WHOLE ?MT ?SUB)
+   (mtTime ?MT ?TEMP))
+  (cotemporal ?SUB ?TEMP)).
+F:
+(implies
+  (and
+   (temporalStage ?WHOLE ?MT ?SUB)
+   (mtTime ?MT ?TEMP))
+  (subAbsDuring ?WHOLE ?SUB ?TEMP)).
+F:
+(implies
+  (and
+   (temporalStage ?WHOLE ?MT1 ?SUB1)
+   (temporalStage ?WHOLE ?MT2 ?SUB2)
+   (mtTime ?MT1 ?TEMP1)
+   (mtTime ?MT2 ?TEMP2)
+   (cotemporal ?TEMP1 ?TEMP2))
+  (equals ?SUB1 ?SUB2)).
+
+in Mt: COAContributorsMt.
+F:
+(battlespaceKRContributor temporalStage Rode).
+
+constant: SubAbsFn.
+in Mt: ModernMilitaryTacticsMt.
+isa: BinaryFunction.
+arg1Isa: SomethingExisting.
+arg2Isa: TemporalThing.
+interArgReln1-2: temporalBoundsContain.
+resultIsa: SomethingExisting.
+comment: "(#$SubAbsFn THING TEMP) denotes the subabstraction of THING
+picked out by the #$TemporalThing TEMP.  Use presupposes that
+(#$temporalBoundsContain THING TEMP).".
+
+
+F:
+(implies
+  (termOfUnit ?SUB (SubAbsFn ?THING ?TEMP))
+  (subAbsDuring ?THING ?SUB ?TEMP)).   
+
+;F:
+;(implies
+; (and
+;  (isa ?COL TemporalStuffType)
+;  (isa ?THING ?COL)
+;  (termOfUnit ?SUB (SubAbsFn ?THING ?TEMP)))
+; (isa ?SUB ?COL)). 
+
+F:
+(implies
+ (and
+  (differentSymbols ?SUB1 ?SUB2)
+  (termOfUnit ?SUB1 (SubAbsFn ?THING ?TEMP1))
+  (termOfUnit ?SUB2 (SubAbsFn ?THING ?TEMP2))
+  (cotemporal ?TEMP1 ?TEMP2))
+ (equals ?SUB1 ?SUB2)).
+
+
+;direction: Forward.
+;F:
+;(implies
+;  (termOfUnit ?SUB (SubAbsFn ?THING ?TEMP))
+;  (subAbstrac ?THING ?SUB)).
+
+direction: Forward.
+F:
+(implies
+  (termOfUnit ?SUB (SubAbsFn ?THING ?TEMP))
+  (cotemporal ?SUB ?TEMP)).
+
+direction: Forward.
+F:
+(implies
+  (and
+    (termOfUnit ?SUB (SubAbsFn ?THING ?TEMP))
+    (mtTime ?MT ?TEMP))
+  (temporalStage ?THING ?MT ?SUB)).
+
+in Mt: COAContributorsMt.
+F:
+(battlespaceKRContributor SubAbsFn Rode).
+
+
+constant: initialRedPosMt.
+in Mt: ModernMilitaryTacticsMt.
+isa: BinaryPredicate IKBConstant.
+arg1Isa: COASpecificationMicrotheory.
+arg2Isa: COASpecificationMicrotheory.
+comment: "(#$initialRedPosMt FRIENDMT ENEMYMT) means that ENEMYMT
+represents the initial position of a threat force with respect to the
+position of a friendly force detailed in FRIENDMT.".
+cyclistNotes: "This predicate presupposes that the #$alignmentOfCOA
+for the first argument is #$COAForFriendlyForce and that the
+#$alignmentOfCOA for the second argument is #$COAForHostileForce.  At
+this time(6/15/99) we do not enforce this requirement with
+constraining assertions.".
+cyclistNotes: "This predicate will be renamed after the current round
+of COA work is finished, i.e., after July 16, 1999.  The name has
+already been referenced in the Edinburgh fusion output and priorities
+and time constraints are such that the output cannot be readjusted.".
+
+in Mt: COAContributorsMt.
+F:
+(battlespaceKRContributor initialRedPosMt Rode).
+
+constant: finalRedPosDesiredByBlueMt.
+in Mt: ModernMilitaryTacticsMt.
+isa: BinaryPredicate IKBConstant.
+arg1Isa: COASpecificationMicrotheory.
+arg2Isa: COASpecificationMicrotheory.
+comment: "(#$finalRedPosDesiredByBlueMt FRIENDMT ENEMYMT) means
+that ENEMYMT represents the final position that the friendly force
+whose position is detailed in FRIENDMT desires its opponent force to
+be in at the end of the COA represented in FRIENDMT.".
+cyclistNotes: "This predicate presupposes that the #$alignmentOfCOA
+for the first argument is #$COAForFriendlyForce and that the
+#$alignmentOfCOA for the second argument is #$COAForHostileForce.  At
+this time(6/15/99) we do not enforce this requirement with
+constraining assertions.".
+cyclistNotes: "This predicate will be renamed after the current round
+of COA work is finished, i.e., after July 16, 1999.  The name has
+already been referenced in the Edinburgh fusion output and priorities
+and time constraints are such that the output cannot be readjusted.".
+
+
+in Mt: COAContributorsMt.
+F:
+(battlespaceKRContributor finalRedPosDesiredByBlueMt Rode).
+
+constant: finalRedPosDesiredByRedMt.
+in Mt: ModernMilitaryTacticsMt.
+isa: BinaryPredicate IKBConstant.
+arg1Isa: COASpecificationMicrotheory.
+arg2Isa: COASpecificationMicrotheory.
+comment: "(#$finalRedPosDesiredByRedMt FRIENDMT ENEMYMT) means
+that ENEMYMT represents the final position that it is anticipated the
+threat force desires to attain, relative to the friendly force
+position detailed in FRIENDMT.".
+cyclistNotes: "This predicate presupposes that the #$alignmentOfCOA
+for the first argument is #$COAForFriendlyForce and that the
+#$alignmentOfCOA for the second argument is #$COAForHostileForce.  At
+this time(6/15/99) we do not enforce this requirement with
+constraining assertions.".
+cyclistNotes: "This predicate will be renamed after the current round
+of COA work is finished, i.e., after July 16, 1999.  The name has
+already been referenced in the Edinburgh fusion output and priorities
+and time constraints are such that the output cannot be readjusted.".
+
+in Mt: COAContributorsMt.
+F:
+(battlespaceKRContributor finalRedPosDesiredByRedMt Rode).
+
+constant: Troop-UnitDesignation.
+in Mt: MilitaryForceStructureMt.
+isa: MilitaryEchelon IKBConstant.
+comment: "The cavalry equivalent of a #$Company-UnitDesignation.
+U.S. cavalry troops usually consist of three to five cavalry
+platoons.".
+
+in Mt: ModernMilitaryTacticsMt.
+F:
+(subEchelonsInOrg Troop-UnitDesignation Platoon-UnitDesignation USArmyEchelon).
+F:
+(subEchelonsInOrg Battalion-UnitDesignation Troop-UnitDesignation USArmyEchelon).
+F:
+(commandRankOfEchelon Troop-UnitDesignation Captain-Rank).
+
+
+direction: Forward.
+F:
+(implies
+  (and
+    (echelonOfUnit ?UNIT Company-UnitDesignation)
+    (isa ?UNIT CavalryUnit-MilitarySpecialty))
+  (echelonOfUnit ?UNIT Troop-UnitDesignation)).
+
+constant: NorthEasternRegionFn.
+in Mt: GeographyMt.
+isa: ReifiableFunction GeographicDirectionFunction IKBConstant.
+comment: "A unary function that returns the `northeastern region' of
+          an instance of #$GeographicalRegion. What counts as the
+          `northeastern region' is contextually determined. Some of the
+          factors influencing the determination may be local
+          geography, cultural identity, and political considerations.".
+cyclistNotes: "In some contexts, but not in all,
+(#$NorthEasternRegionFn REG), (#$NorthernRegionFn (#$EasternRegionFn
+REG)), and (#$EasternRegionFn (#$NorthernRegionFn REG)) will be
+identical.".
+
+direction: Forward.
+F:
+(implies
+  (termOfUnit ?NEREG (NorthEasternRegionFn ?REG))
+  (geographicalSubRegions ?REG ?NEREG)).
+
+in Mt: COAContributorsMt.
+battlespaceKRContributor: Rode.
+
+
+
+constant: NorthWesternRegionFn.
+in Mt: GeographyMt.
+isa: ReifiableFunction GeographicDirectionFunction IKBConstant.
+comment: "A unary function that returns the `northwestern region' of
+          an instance of #$GeographicalRegion. What counts as the
+          `northwestern region' is contextually determined. Some of the
+          factors influencing the determination may be local
+          geography, cultural identity, and political considerations.".
+cyclistNotes: "In some contexts, but not in all,
+(#$NorthWesternRegionFn REG), (#$NorthernRegionFn (#$WesternRegionFn
+REG)), and (#$WesternRegionFn (#$NorthernRegionFn REG)) will be
+identical.".
+
+direction: Forward.
+F:
+(implies
+  (termOfUnit ?NWREG (NorthWesternRegionFn ?REG))
+  (geographicalSubRegions ?REG ?NWREG)).
+
+in Mt: COAContributorsMt.
+battlespaceKRContributor: Rode.
+
+
+constant: SouthEasternRegionFn.
+in Mt: GeographyMt.
+isa: ReifiableFunction GeographicDirectionFunction IKBConstant.
+comment: "A unary function that returns the `southeastern region' of
+          an instance of #$GeographicalRegion. What counts as the
+          `southeastern region' is contextually determined. Some of the
+          factors influencing the determination may be local
+          geography, cultural identity, and political considerations.".
+cyclistNotes: "In some contexts, but not in all,
+(#$SouthEasternRegionFn REG), (#$SouthernRegionFn (#$EasternRegionFn
+REG)), and (#$EasternRegionFn (#$SouthernRegionFn REG)) will be
+identical.".
+
+direction: Forward.
+F:
+(implies
+  (termOfUnit ?SEREG (SouthEasternRegionFn ?REG))
+  (geographicalSubRegions ?REG ?SEREG)).
+
+in Mt: COAContributorsMt.
+battlespaceKRContributor: Rode.
+
+
+
+constant: SouthWesternRegionFn.
+in Mt: GeographyMt.
+isa: ReifiableFunction GeographicDirectionFunction IKBConstant.
+comment: "A unary function that returns the `southwestern region' of
+          an instance of #$GeographicalRegion. What counts as the
+          `southwestern region' is contextually determined. Some of the
+          factors influencing the determination may be local
+          geography, cultural identity, and political considerations.".
+cyclistNotes: "In some contexts, but not in all,
+(#$SouthWesternRegionFn REG), (#$SouthernRegionFn (#$WesternRegionFn
+REG)), and (#$WesternRegionFn (#$SouthernRegionFn REG)) will be
+identical.".
+
+direction: Forward.
+F:
+(implies
+  (termOfUnit ?SWREG (SouthWesternRegionFn ?REG))
+  (geographicalSubRegions ?REG ?SWREG)).
+
+in Mt: COAContributorsMt.
+battlespaceKRContributor: Rode.
+
+
+
+constant: FlanksOfUnitFn.
+in Mt: ModernMilitaryTacticsMt.
+isa:  ReifiableFunction IndividualDenotingFunction
+      IKBConstant UnaryFunction.
+resultIsa: GeographicalThing-Intangible-MovableLocation. 
+arg1Isa:  ModernMilitaryUnit-Deployable.
+comment: "FlanksOfUnitFn is a function which applied to UNIT,
+          an instance of ModernMilitaryUnit-Deployable, yields the
+          GeographicalThing-Intangible-MovableLocation that
+          constitutes the 'flanks' of UNIT.".
+in Mt: COAContributorsMt.
+battlespaceKRContributor: Cleo.
+
+constant: orgAssignedToAction.
+Mt: ModernMilitaryTacticsMt.
+isa: ActorSlot IKBConstant.
+arg1Isa: MilitaryEvent. 
+arg2Isa: ModernMilitaryOrganization.
+comment: "(orgAssignedToAction EVENT ORG) means that
+          ORG is the instance of ModernMilitaryOrganization
+          charged with the responsibility of implementing EVENT."
+F:
+(genlPreds unitAssignedToOperation orgAssignedToAction).
+F:
+(genlPreds unitAssignedToTask orgAssignedToAction).
+
+in Mt: COAContributorsMt.
+battlespaceKRContributor: Huffer. 
+
+
+
+

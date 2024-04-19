@@ -1,0 +1,149 @@
+<html>
+<head>
+<script>
+var limit="0:30"
+if (document.images){
+  var parselimit=limit.split(":");
+  parselimit=parselimit[0]*60+parselimit[1]*1;
+  }
+function resubmit(val) {
+    var myform = eval("document.form"+val);
+    myform.submit();
+}
+function beginrefresh(){
+  if (!document.images)
+      return;
+   if (parselimit==1)
+      window.location.reload();
+   else {
+      parselimit-=1;
+      curmin=Math.floor(parselimit/60);
+      cursec=parselimit%60;
+      if (curmin!=0)
+         curtime=curmin+" minutes and "+cursec+" seconds left until page refresh!";
+      else
+         curtime=cursec+" seconds left until page refresh!";
+      window.status=curtime
+      setTimeout("beginrefresh()",1000)
+   }
+ }
+window.onload=beginrefresh;
+</script>
+</head>
+<table>
+<tr><td colspan=2>----Fri Nov 15 00:26:40 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>than flight number</b></td><td>1410</td></tr>
+<tr><td><b>connecting-to flight number2</b></td><td>0962</td></tr>
+<tr><td><b>on date</b></td><td>11/14/2002</td></tr>
+<tr><td><b>from airport</b></td><td>PDX</td></tr>
+<tr><td><b>to airport</b></td><td>IAD</td></tr>
+<tr><td><b>for user id</b></td><td>dschmorrow@darpa.mil</td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;error&gt;&lt;type&gt;Date passed&lt;/type&gt;&lt;attr&gt;date&lt;/attr&gt;&lt;/error&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1037348800)'></td></tr>
+</table><br>
+<form name='form1037348800' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='1410'>
+<input type='hidden' name='val2' value='0962'>
+<input type='hidden' name='val3' value='11/14/2002'>
+<input type='hidden' name='val4' value='PDX'>
+<input type='hidden' name='val5' value='IAD'>
+<input type='hidden' name='val6' value='dschmorrow@darpa.mil'>
+<input type='hidden' name='agent' value='earlier-flight'>
+<input type='hidden' name='email' value='dschmorrow@darpa.mil'>
+</form>
+
+<table>
+<tr><td colspan=2>----Fri Aug  2 11:19:28 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>than flight number</b></td><td>200</td></tr>
+<tr><td><b>connecting-to flight number2</b></td><td></td></tr>
+<tr><td><b>on date</b></td><td>8/2/2002</td></tr>
+<tr><td><b>from airport</b></td><td>LAX</td></tr>
+<tr><td><b>to airport</b></td><td>IAD</td></tr>
+<tr><td><b>for user id</b></td><td>dschmorrow@darpa.mil</td></tr>
+
+<tr><td colspan=2><b>Earlier Flights</b></td></tr>
+<tr><td colspan=2>Dear dschmorrow_at_darpa_mil,<br/>The status of your currently scheduled flight(s) are:<br/># 200 LAX (3:50 PM) - IAD (11:41 PM) On Time<br/><br/>If you would like to return earlier, the following United Airlines flights will arrive earlier than your scheduled flights:<br/><br/># 186 LAX (1:35 PM) - IAD (9:22 PM) On Time<br/>------<br/># 104 LAX (2:00 PM) - ORD (7:55 PM) On Time<br/># 1244 ORD (8:45 PM) - IAD (11:30 PM) On Time<br/>------<br/><br/> Thank you, <br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1028312368)'></td></tr>
+</table><br>
+<form name='form1028312368' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='200'>
+<input type='hidden' name='val2' value=''>
+<input type='hidden' name='val3' value='8/2/2002'>
+<input type='hidden' name='val4' value='LAX'>
+<input type='hidden' name='val5' value='IAD'>
+<input type='hidden' name='val6' value='dschmorrow@darpa.mil'>
+<input type='hidden' name='agent' value='earlier-flight'>
+<input type='hidden' name='email' value='dschmorrow@darpa.mil'>
+</form>
+
+<table>
+<tr><td colspan=2>----Fri Aug  2 11:02:28 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>than flight number</b></td><td>200</td></tr>
+<tr><td><b>connecting-to flight number2</b></td><td></td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>on date</b></td><td>8/2/2002</td></tr>
+<tr><td><b>from airport</b></td><td>LAX</td></tr>
+<tr><td><b>to airport</b></td><td>IAD</td></tr>
+<tr><td><b>for user id</b></td><td>dschmorrow@darpa.mil</td></tr>
+<tr><td><b>at leaves</b></td><td>3 pm</td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;ack&gt;OK&lt;/ack&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1028311348)'></td></tr>
+</table><br>
+<form name='form1028311348' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='200'>
+<input type='hidden' name='val1' value=''>
+<input type='hidden' name='val2' value='United Airlines'>
+<input type='hidden' name='val3' value='8/2/2002'>
+<input type='hidden' name='val4' value='LAX'>
+<input type='hidden' name='val5' value='IAD'>
+<input type='hidden' name='val6' value='dschmorrow@darpa.mil'>
+<input type='hidden' name='val7' value='3 pm'>
+<input type='hidden' name='agent' value='earlier-flight'>
+<input type='hidden' name='email' value='dschmorrow@darpa.mil'>
+</form>
+
+<table>
+<tr><td colspan=2>----Sun Jul 28 16:08:09 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>than flight number</b></td><td>200</td></tr>
+<tr><td><b>connecting-to flight number2</b></td><td></td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>on date</b></td><td>8/2/2002</td></tr>
+<tr><td><b>from airport</b></td><td>LAX</td></tr>
+<tr><td><b>to airport</b></td><td>IAD</td></tr>
+<tr><td><b>for user id</b></td><td>dschmorrow@darpa.mil</td></tr>
+<tr><td><b> </b></td><td>3 pm</td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;ack&gt;OK&lt;/ack&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1027897689)'></td></tr>
+</table><br>
+<form name='form1027897689' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='200'>
+<input type='hidden' name='val1' value=''>
+<input type='hidden' name='val2' value='United Airlines'>
+<input type='hidden' name='val3' value='8/2/2002'>
+<input type='hidden' name='val4' value='LAX'>
+<input type='hidden' name='val5' value='IAD'>
+<input type='hidden' name='val6' value='dschmorrow@darpa.mil'>
+<input type='hidden' name='val7' value='3 pm'>
+<input type='hidden' name='agent' value='earlier-flight'>
+<input type='hidden' name='email' value='dschmorrow@darpa.mil'>
+</form>
+
+<p>
+</html>

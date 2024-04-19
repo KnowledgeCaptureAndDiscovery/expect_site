@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<BODY BGCOLOR="FFFFFF">
+<TITLE>7 IDL Specification of the MOE Grammar</TITLE>
+<META NAME="description" CONTENT="7 IDL Specification of the MOE Grammar">
+<META NAME="keywords" CONTENT="measures-of-merit">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="measures-of-merit.css">
+</HEAD>
+<BODY LANG="EN">
+ <H1><A NAME="SECTION00070000000000000000">7 IDL Specification of the MOE Grammar</A></H1>
+<P>
+<A NAME="idlspec">&#160;</A>
+<P>
+The following is a specification of a set of classes in IDL (CORBA's
+Interface Definition Language) that is (roughly) equivalent to the
+representation described above. A slightly restricted modified version
+of this specification was adopted in the database schema of the JFACC
+Jumpstart program. Note that <I>date</I> is unspecified; we assume that
+most IDL schemas will have date specification classes that we can
+reuse.
+<P>
+<PRE>// forward declarations
+
+interface PlanEntity;
+interface MeasureOfEffect;
+interface Quantification;
+interface PercentageChange;
+interface TimeChange;
+interface ChangeFromPreConflictLevels;
+interface ChangeFromInitialValue;
+interface ValueRestriction;
+interface TimeValue;
+
+// enumerations
+
+enum ChangeVerb {
+                    ChangeVerb_Degraded,
+                    ChangeVerb_Reduced,
+                    };
+
+enum TimeChangeVerb {
+                    TimeChangeVerb_Delayed
+                    };
+
+enum Restriction {
+                    Restriction_AtMost,
+                    Restriction_AtLeast
+                    };
+
+// class definitions
+
+interface PlanEntity {};
+
+interface MeasureOfEffect : PlanEntity {
+    attribute MeasurableElement measurableElement;
+    attribute Quantification quantification;
+    attribute string textSpecification;
+};
+
+interface Quantification : PlanEntity {
+};
+
+interface PercentageChange : quantification {
+    attribute ChangeVerb changeVerb;
+    attribute float percentage;
+};
+
+interface TimeChange : quantification {
+    attribute TimeChangeVerb changeVerb;
+    attribute float percentage;
+};
+
+interface ChangeFromReferenceValue : PlanEntity {
+    attribute ChangeVerb changeVerb;
+    attribute float changePercentage;
+    attribute ReferenceValue referenceValue;
+};
+
+interface ChangeFromInitialValue : PlanEntity {
+    attribute ChangeVerb changeVerb;
+    attribute float changePercentage;
+    attribute float initialValue;
+};
+
+interface ValueRestriction : PlanEntity {
+    attribute Restriction restriction;
+    attribute short value;
+};
+
+interface ReferenceValue : PlanEntity {
+};
+
+interface PreConflictLevels : ReferenceValue {
+};
+
+interface KnownAtDate : PlanEntity {
+    attribute date knownAt;
+};
+
+interface TimeValue : PlanEntity {
+    attribute TimeUnits unit;
+    attribute short value;
+};
+
+interface MeasurableElement : PlanEntity {
+    attribute string text-specification;
+};
+
+interface Event : MeasurableElement {
+};
+
+interface Object : MeasurableElement {
+};
+
+interface Aspect : MeasurableElement {
+};
+
+interface Capability : MeasurableElement {
+};</PRE>
+<P>
+<BR> <HR>
+<P><ADDRESS>
+<I>Andre Valente <BR>
+Fri Nov 22 19:21:57 PST 1996</I>
+</ADDRESS>
+</BODY>
+</HTML>

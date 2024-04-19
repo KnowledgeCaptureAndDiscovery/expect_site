@@ -1,0 +1,37 @@
+
+#|
+;;; INFORMAL SKETCH OF THIS PROTOTYPE:
+
+Reload
+  resulting-state(o): Be-Activated
+  object(o): Weapon and Entity
+
+|#
+
+;;; KM REPRESENTATION OF THIS PROTOTYPE
+
+(Reload has (superclasses (Activate)))
+
+(Reload now-has (prototypes (_Activate1396)))
+
+(_Activate1396 has
+  (prototype-of (Reload))
+  (prototype-scope (Reload))
+  (prototype-participants (_Activate1396 _Be-Activated1397 _Weapon1398)))
+
+(_Activate1396 has
+  (instance-of (Reload))
+  (object (_Weapon1398))
+  (resulting-state (_Be-Activated1397))
+  (new-objects (_Weapon1398)))
+
+(_Be-Activated1397 has (instance-of (Be-Activated)))
+
+(_Weapon1398 has (instance-of (Weapon Entity)))
+
+
+#|
+;;; TRADITIONAL FORMAT FOR SME'S LAST ACTIONS WOULD HAVE LOOKED:
+
+
+|#

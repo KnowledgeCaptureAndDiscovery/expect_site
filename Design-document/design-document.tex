@@ -1,0 +1,132 @@
+\documentclass[11pt]{article}
+
+\usepackage{local-isi,html,graphicx}
+
+\graphicspath{{figs/}}
+
+\title{Design of the EXPECT Graphical User Interface}
+
+\author{Andre Valente \\
+  University of Southern California\\
+  Information Sciences Institute\\
+  4676 Admiralty Way, Marina del Rey, CA 90292\\
+  e-mail: valente@isi.edu}
+
+\begin{document}
+
+\maketitle
+
+
+\section{Basic Design Requirements}
+
+\begin{itemize}
+\item 
+\end{itemize}
+
+\section{Architecture}
+
+The architecture of the EXPECT interface is shown in
+Figure~\ref{interface-arch}. The interface works as a client in a
+basic client-server architecture where the server is a program running
+EXPECT. The server is currently implemented in CommonLisp.
+
+\postscript{15cm}{interface-arch}{The architecture of the EXPECT
+  graphical user interface.} 
+
+\subsection{Hardware and Software Decisions}
+
+The
+
+
+\section{Basic GUI Design}
+
+\subsection{Contents of the windows}
+
+\subsubsection{Windows on the Method Knowledge Browser/Editor}
+
+\paragraph{Method display window}
+\begin{itemize}
+\item Method name
+\item Capability
+\item Result type
+\item Method Body
+\item Methods that subsume the method
+\item Methods subsumed by the method
+\item PS nodes that refer to the method
+\item EXE nodes that refer to the method
+\item Groups the method belongs to
+\item Macrocomponents the method belongs to
+\item Agenda items that refer to the method/goal
+\end{itemize}
+
+\subsubsection{Windows on the Domain Knowledge Browser/Editor}
+
+\paragraph{Concept display window}
+\begin{itemize}
+\item Concept name
+\item Concept definition
+\item Superconcepts of the concept
+\item Subconcepts of the concept
+\item Relations/roles involving the concept
+\item Instances of the concept
+\item Groups the concept belongs to
+\item Macrocomponents the concept belongs to
+\item Agenda items that refer to the concept
+\end{itemize}
+
+\paragraph{Relation display window}
+\begin{itemize}
+\item Relation name
+\item Relation definition
+\item Superrelations of the relation
+\item Subrelations of the relation
+\item Concept-instance pairs of the relation
+\item Groups the relation belongs to
+\item Macrocomponents the relation belongs to
+\item Agenda items that refer to the relation
+\end{itemize}
+
+\paragraph{Instance display window}
+\begin{itemize}
+\item Instance name
+\item Instance assertions
+\item Groups the instance belongs to
+\item Macrocomponents the instance belongs to
+\item Agenda items that refer to the instance
+\end{itemize}
+
+
+
+\subsubsection{Windows on the PS Knowledge Browser/Editor}
+
+\paragraph{PS node display window}
+\begin{itemize}
+\item PS node name
+\item PS node contents
+\item Agenda items that refer to the instance
+\end{itemize}
+
+\paragraph{EXE node display window}
+
+
+
+\subsubsection{Windows on the Agenda Editor}
+
+\paragraph{Agenda item display window}
+
+\paragraph{Agenda list display window}
+
+
+
+\small
+\bibliographystyle{name}
+\bibliography{valente}
+
+\end{document}
+
+
+
+
+
+
+

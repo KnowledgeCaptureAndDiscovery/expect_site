@@ -1,0 +1,112 @@
+
+<A HREF = "distance-quantity"> distance-quantity</a>)<br>
+
+<H5> Inferred Instances:</H5><br>
+
+
+DukeDollars Question
+               Newsgroup: swing
+               Submitter: guybob
+               Question: Adding tag to HTMLEditor
+               Date:  Tue Jan 19 05:13:36 PST 1999
+
+               Question number: 1261
+
+               ** This question is still open **
+               JDC-notify: true
+
+               Hello,
+               I'm looking for some source examples of adding tag to the HTMLEditor. I've red that it should be possible
+               to do this.
+               But with some examples it is more easier to understand it !
+
+               Any idea ?
+
+               Thanks a lot for your help.
+
+               Answers
+               =======
+
+               ** From: wiseb:
+
+               Replied: Wed Jan 20 07:48:56 PST 1999
+
+               The built-in HTML classes that come with Swing (JDK1.2) are 
+               based on version 3.2 of the HTML specifications.  If you wish
+               to support other kinds of tags, then you can subclass
+               HTMLTag.Tag called HTML.UnknownTag.
+
+               Sorry I don't have an example, if you do this then
+               the parser object can still parse your modified HTML....
+
+
+               ** From: guybob:
+
+               Replied: Thu Jan 21 00:50:48 PST 1999
+
+               What I've understand on this topic, is this :
+               -> we can have the HTMLDocument including non html tags by using the setPreservesUnknownTag(true)
+               -> the unknown tag would then stored undir the UnknownTag class.
+
+               But i didn't see anything about rendering the UnknownTag ... in fact what is done is only hidding or
+               displaying it  when the file containing them is opened in the JEditorPane.
+
+               It seems to be possible to do many things by subclassing this classes ... but I don't want to do that ! 
+
+               I'm only looking for a way to add non html tags and then handling them.
+
+               Any more ideas ?
+
+
+
+               ** From: 0351:
+
+               Replied: Fri Feb 19 13:35:04 PST 1999
+
+               I don't know what you are trying to do, but style sheets allow you to define the look of tags.
+               Here is an example: of CSS Syntax: 
+               <HEAD>
+               <STYLE TYPE="text/css">
+                   H1 {color: blue; text-transform: uppercase;}
+                   BLOCKQUOTE {color: red; font-style: italic;}
+               </STYLE>
+               </HEAD>
+               <BODY> 
+               Added to the start of your html page, this will change the appearance of your document. 
+               You could redefine an existing tag or create a new "class" of tag, just using this type of 
+               style declaration. A good source for more info is:
+                http://developer.netscape.com/docs/manuals/communicator/dynhtml/index.htm 
+
+               I have used this approach in the JEditorPane successfully.
+
+
+
+
+
+
+How to Display Text from a URL
+
+         Although JEditorPane is intended to be subclassed and extended, it has one useful
+         plug-and-play feature: displaying text from a URL. The URL can contain plain, HTML, or
+         RTF text. Here's the code from EeyoreQuotes that does this: 
+
+              //create html area
+              JEditorPane quotePane = null;
+              JScrollPane scrollPane = null;
+              try {
+                  URL url = new URL("http://javaweb/~mem/tutorial/ui/swing/" +
+                                    "example-swing/EeyoreQuote.html");
+                  quotePane = new JEditorPane(url);
+                  quotePane.setEditable(false);
+                  scrollPane = new JScrollPane(quotePane);
+                  scrollPane.setPreferredSize(new Dimension(300, 175));
+                  if (DEBUG)
+                      System.out.println(quotePane.getText());
+
+              } catch (java.io.IOException e) {
+                  scrollPane = new JScrollPane(new JTextArea("Can't find HTML file."));
+                  scrollPane.setFont(demoFont);
+              }
+
+   Alternatively, you can use the setPage(String) or setPage(URL)
+methods to set the URL from which to load text. 

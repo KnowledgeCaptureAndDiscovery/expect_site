@@ -1,0 +1,220 @@
+;;; -*- Mode: Lisp; Package: CYC; Syntax: COMMON-LISP; Base: 10 -*-
+
+(in-package "CYC")
+
+
+;;; ******************** CONCEPTS ********************
+
+(DEFCONCEPT |ArmoredPersonnelCarrier-BTR60|
+  :IS-PRIMITIVE |ArmoredPersonnelCarrier|
+  :ANNOTATIONS (|IKBConstant|
+                |ExistingObjectType|
+                (DOCUMENTATION "A type of armored personnel carrier
+which Iran is      known to possess.")))
+
+(DEFCONCEPT |BattleTank-T54|
+  :IS-PRIMITIVE |Tank-Vehicle|
+  :ANNOTATIONS (|IKBConstant|
+                |ExistingObjectType|
+                (DOCUMENTATION "Class of battle tank currently (1998) used by Iran.")))
+
+(DEFCONCEPT |BattleTank-T55|
+  :IS-PRIMITIVE |Tank-Vehicle|
+  :ANNOTATIONS (|IKBConstant|
+                |ExistingObjectType|
+                (DOCUMENTATION "Class of battle tank currently (1998) used by Iran.")))
+
+(DEFCONCEPT |BattleTank-T62|
+  :IS-PRIMITIVE |Tank-Vehicle|
+  :ANNOTATIONS (|IKBConstant|
+                |ExistingObjectType|
+                (DOCUMENTATION "Class of battle tank currently (1998) used by Iran.")))
+
+(DEFCONCEPT |BattleTank-T64|
+  :IS-PRIMITIVE |Tank-Vehicle|
+  :ANNOTATIONS (|ExistingObjectType| (DOCUMENTATION "A type of battle tank.")))
+
+(DEFCONCEPT |BattleTank-T72|
+  :IS-PRIMITIVE |Tank-Vehicle|
+  :ANNOTATIONS (|IKBConstant|
+                |ExistingObjectType|
+                (DOCUMENTATION "Class of battle tank currently (1998) used by Iran.")))
+
+(DEFCONCEPT |BradleyFightingVehicle|
+  :IS-PRIMITIVE |ArmoredPersonnelCarrier|
+  :ANNOTATIONS (|IKBConstant|
+                |ExistingObjectType|
+                (DOCUMENTATION "Specialized type of #$ArmoredPersonnelCarrier used regularly by the modern US Army.")))
+
+(DEFCONCEPT |BradleyFightingVehicle-M2|
+  :IS-PRIMITIVE |BradleyFightingVehicle|
+  :ANNOTATIONS (|ExistingObjectType|
+                |IKBConstant|
+                (DOCUMENTATION "A model of #$BradleyFightingVehicle.")))
+
+(DEFCONCEPT |BradleyFightingVehicle-M3|
+  :IS-PRIMITIVE |BradleyFightingVehicle|
+  :ANNOTATIONS (|ExistingObjectType|
+                |IKBConstant|
+                (DOCUMENTATION "A model of #$BradleyFightingVehicle
+used by scouts and designed to carry more TOW missiles than the model
+#$BradleyFightingVehicle-M2.")))
+
+(DEFCONCEPT |Howitzer|
+  :IS-PRIMITIVE |Cannon|
+  :ANNOTATIONS (|IKBConstant|
+                |ExistingObjectType|
+                (DOCUMENTATION "A collection. Each instance is a large Weapon too
+large for one person to carry and used for indirect      shooting. A
+Howitzer has a caliber larger than 15mm and      fires projectiles at
+medium muzzle speed with a      trajectory over 45 degrees.")))
+
+(DEFCONCEPT |Howitzer-122mmSelfPropelled|
+  :IS-PRIMITIVE (:and |Artillery-SelfPropelled| |Howitzer|)
+  :ANNOTATIONS (|IKBConstant|
+                |ExistingObjectType|
+                (DOCUMENTATION "The collection of self-propelled
+122mm #$Howitzers.")))
+
+(DEFCONCEPT |Howitzer-152mmSelfPropelled|
+  :IS-PRIMITIVE (:and |Artillery-SelfPropelled| |Howitzer|)
+  :ANNOTATIONS (|ExistingObjectType|
+                (DOCUMENTATION "The collection of self-propelled
+152mm #$Howitzers.")))
+
+(DEFCONCEPT |Howitzer-155mmSelfPropelled|
+  :IS-PRIMITIVE (:and |Artillery-SelfPropelled| |Howitzer|)
+  :ANNOTATIONS (|IKBConstant|
+                |ExistingObjectType|
+                (DOCUMENTATION "The collection of self-propelled
+155mm #$Howitzers.")))
+
+(DEFCONCEPT |M1A1AbramsTank|
+  :IS-PRIMITIVE |Tank-Vehicle|
+  :ANNOTATIONS (|IKBConstant|
+                |ExistingObjectType|
+                (DOCUMENTATION "A type of tank. Since its deployment in 1983, the
+M1A1Abrams has been the principal tank used by the United      States Army
+and Marine Corps.")))
+
+(DEFCONCEPT |M1A2AbramsTank|
+  :IS-PRIMITIVE |Tank-Vehicle|
+  :ANNOTATIONS (|IKBConstant|
+                |ExistingObjectType|
+                (DOCUMENTATION "A newer version of #$M1A1AbramsTank.")))
+
+(DEFCONCEPT |MultipleRocketLauncher-122mmMRL|
+  :IS-PRIMITIVE |MultipleRocketLauncher|
+  :ANNOTATIONS (|ExistingObjectType|
+                |IKBConstant|
+                (DOCUMENTATION "The collection of 122mm multiple
+rocket launchers. The MRL is a Soviet-made, truck mounted rocket launcher,
+similar to the American Multiple Launch Rocket system (MLRS), but much
+older.")))
+
+(DEFCONCEPT |MultipleRocketLauncherSystem-MLRS|
+  :IS-PRIMITIVE |MultipleRocketLauncher|
+  :ANNOTATIONS (|ExistingObjectType|
+                |IKBConstant|
+                (DOCUMENTATION "The collection of American-made
+multiple rocket launchers, similar to the Soviet
+#$MultipleRocketLauncher-122mmMRL, but much newer.")))
+
+(DEFCONCEPT |SupportHelicopter-OH58DKW|
+  :IS-PRIMITIVE |SupportHelicopter|
+  :ANNOTATIONS (|IKBConstant|
+                |ExistingObjectType|
+                (DOCUMENTATION "The collection of helicopters used to
+provide reconnaissance and close air support duties. The OH58DKW is
+generally equipped with anti-tank missiles and rockets, thermal imaging
+equipment for providing target information to other air and ground-based
+units.")))
+
+
+
+;;; ******************** FUNCTIONS AND RELATIONS ********************
+
+(DEFRELATION |equipmentOfUnit|
+  :ARITY 2
+  :IS-PRIMITIVE |possesses|
+  :DOMAIN |ModernMilitaryUnit-Deployable|
+  :RANGE |Artifact|
+  :ANNOTATIONS (|IKBConstant|
+                |BinaryPredicate|
+                (DOCUMENTATION "(#$equipmentOfUnit ?UNIT ?DEVICE) means that
+?DEVICE is part of the equipment possessed by unit. This is an
+instance-level predicate, relating a particular unit to a particular piece
+of equipment.")))
+
+(DEFRELATION |standardEquipmentOfUnitType|
+  :ARITY 2
+  :DOMAIN (:and |ExistingObjectType|
+                (:FILLED-BY SUPERRELATIONS |ModernMilitaryUnit-Deployable|))
+  :RANGE (:and |ExistingObjectType| (:FILLED-BY SUPERRELATIONS |Artifact|))
+  :ANNOTATIONS (|IKBConstant|
+                |BinaryPredicate|
+                (DOCUMENTATION "(#$standardEquipmentOfUnitType
+?UNITTYPE ?THINGTYPE) means that under 'ordinary' or 'normal' circumstances
+we should expect to find any instances of?UNITTYPE equipped with one or
+more instances of ?THINGTYPE.")))
+
+(DEFRELATION |standardEquipmentOfUnitTypeCount|
+  :ARITY 2
+  :DOMAIN (:and |ExistingObjectType|
+                (:FILLED-BY SUPERRELATIONS |Artifact|
+                 |ModernMilitaryUnit-Deployable|))
+  :RANGE (:and |ExistingObjectType|
+               (:FILLED-BY SUPERRELATIONS |ModernMilitaryUnit-Deployable|
+                |Artifact|))
+  :ANNOTATIONS (|IKBConstant|
+                |BinaryPredicate|
+                |TernaryPredicate|
+                (DOCUMENTATION "(#$standardEquipmentOfUnitTypeCount ?UNITTYPE ?EQUIPMENTTYPE ?NUMBER)
+means that under 'ordinary' or 'normal' circumstances we would expect to
+find an instance of ?UNITTYPE equipped with exactly ?NUMBER #$Artifacts of
+type ?EQUIPMENTTYPE.")))
+
+(DEFRELATION |standardVehicleOfUnitType|
+  :ARITY 2
+  :IS-PRIMITIVE |standardEquipmentOfUnitType|
+  :DOMAIN (:and |ExistingObjectType|
+                (:FILLED-BY SUPERRELATIONS |ModernMilitaryUnit-Deployable|))
+  :RANGE (:and |ExistingObjectType|
+               (:FILLED-BY SUPERRELATIONS |TransportationDevice|))
+  :ANNOTATIONS (|IKBConstant|
+                |BinaryPredicate|
+                (DOCUMENTATION "(#$standardVehicleOfUnitType ?UNITTYPE
+?VEHICLETYPE) means that under 'ordinary' or 'normal' conditions, we should
+expect to find any instances of ?UNITTYPE equipped with one or more
+instances of ?VEHICLETYPE.")))
+
+(DEFRELATION |standardVehicleOfUnitTypeCount|
+  :ARITY 3
+  :DOMAINS ((:AND |ExistingObjectType|
+             (:FILLED-BY SUPERRELATIONS |ModernMilitaryUnit-Deployable|))
+            (:AND |ExistingObjectType|
+             (:FILLED-BY SUPERRELATIONS |TransportationDevice|)))
+  :RANGE |PositiveInteger|
+  :ANNOTATIONS (|IKBConstant|
+                |TernaryPredicate|
+                (DOCUMENTATION "(#$standardVehicleOfUnitTypeCount
+?UNITTYPE ?VEHICLETYPE ?NUMBER) means that under 'ordinary' or 'normal'
+circumstances we would expect to find an instance of ?UNITTYPE equipped
+with exactly ?NUMBER #$TransportationDevices of type ?VEHICLETYPE.")))
+
+(DEFRELATION |vehicleOfUnit|
+  :ARITY 2
+  :IS-PRIMITIVE (:and |equipmentOfUnit| |possesses|)
+  :DOMAIN |ModernMilitaryUnit-Deployable|
+  :RANGE (:and |ModernMilitaryUnit-Deployable| |TransportationDevice|)
+  :ANNOTATIONS (|IKBConstant|
+                |BinaryPredicate|
+                (DOCUMENTATION "(#$vehicleOfUnit ?UNIT ?VEHICLE) means that
+?VEHICLE is a #$TransportationDevice that is possessed and used by ?UNIT.
+This is an instance-level predicate, relating a particular unit to a
+particular vehicle.")))
+
+
+
+;;; ******************** GENERAL ASSERTIONS ********************
+

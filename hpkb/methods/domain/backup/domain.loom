@@ -1,0 +1,140 @@
+;;(in-package "EVALUATION")
+;;(use-package '("EXPECT" "PLANET"))
+;;(loom::use-loom "EVALUATION" :dont-create-context-p t)
+(in-package "EVALUATION")
+
+
+(defconcept hpkb-plan
+  :is-primitive (and plan
+		 ;; This allows us to inherit aspects and stuff.
+		 ;; It should not override the definition of COA 
+		 ;; in the ontology..
+		 (:some evaluation-aspect feasibility-evaluation-structure)
+		 ;; these are commented out while I get the merge with the
+		 ;; critiquing ontology working.
+		 ;;(:filled-by evaluation-aspect correctness)
+		 ;;(:filled-by evaluation-aspect completeness)
+		 ;;(:filled-by evaluation-aspect strength-weakness)
+		 ;; There are other aspects, but I haven't any methods for them yet.
+		 ))
+
+
+;;; The thing used in a force ratio
+
+(defconcept combat-power
+  :is-primitive resource)
+
+;;; Military units
+(defconcept unit :is military-unit)
+
+
+;;; These concepts and relations are in the upper ontology, but I don't 
+;;; have a translation yet.
+
+(defrelation unit-assigned-to-task  :is-primitive who)
+  
+(defrelation objectActedOn :is-primitive action-obj)
+
+;; to be changed
+(defrelation coa-unit
+    :domain coa
+    :range unit)
+  
+;; need to be checked
+(defrelation coa-task
+  :domain coa
+  :range military-task)
+
+;;; This relation links units to objectives that it is natural for them
+;;; to perform.
+(defrelation unit-can-perform
+  :domain unit
+  :range military-task)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; these need to be changed
+;;; for completeness
+
+(defrelation main-effort-of-operation 
+    :domain coa
+    :range unit)
+
+(defconcept purpose
+    :is-primitive top-domain-concept)
+
+(defrelation task-has-purpose
+    :domain military-task
+    :range purpose
+    :annotations ((documentation "This is a copy of the relation
+from the high-level task ontology until we can load that KB properly")))
+
+;; reserves
+(defrelation reserve-unit-in-mission
+    :domain coa
+    :range unit)
+
+;; Security
+(defrelation security-unit-in-mission
+    :domain coa
+    :range unit)
+
+;; Deep Operations
+(defconcept deep-operation-task
+    :is-primitive military-task)
+
+;; Fires
+(defrelation division-fires
+    :domain coa
+    :range unit)
+
+;; Threat ?
+(defconcept military-threat
+    :is-primitive top-domain-concept)
+
+;; Rear ?
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; for strength and weakness 
+
+
+;;; This doesn't really have an analog in reality..
+
+(defconcept complex-military-task
+    :is-primitive military-task)
+
+;;;******************************************
+;;; added by jihie
+;;; 
+
+(defconcept combat-power-value
+    :is-primitive number)
+
+(defrelation combat-power-value-of
+    :domain unit
+    :range number
+    :characteristics :single-valued)
+
+;;;;;;;;;;;;;;;;;;;;;;;
+;;;; for modification
+
+(defconcept attrition-rate 
+    :is-primitive number)
+
+(defrelation attrition-rate-of 
+    :arity 3 
+    :domains (unit military-task)
+    :range number)
+
+(defrelation all-tasks-before 
+    :domain military-task
+    :range military-task)
+
+
+(defconcept armored-unit :is-primitive thing)
+(defconcept mechanized-unit :is-primitive thing)
+
+;; to be deleted (jihie)
+(defconcept resource :is-primitive thing)
+(tellm (resource force-ratio)
+       (thing amount))

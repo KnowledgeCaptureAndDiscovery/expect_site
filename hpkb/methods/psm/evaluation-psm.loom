@@ -1,0 +1,18 @@
+(in-package "EVALUATION")
+(use-package '("EXPECT" "PLANET"))
+(loom::use-loom "EVALUATION" :dont-create-context-p t)
+
+;;; basically, a primitive task
+(defconcept plan-task-at-the-lowest-level
+  :is-primitive plan-task)
+
+(defconcept plan-task-at-the-highest-level
+  :is-primitive plan-task)
+
+;;; Should be defined as (:inverse task-of) - I'll try that approach
+;;; when I have the main part working.
+(defrelation in-plan
+  "Since I use an object for the plan here, I need a way to link a given
+task to the plan it belongs to."
+  :is (:inverse task-of))
+

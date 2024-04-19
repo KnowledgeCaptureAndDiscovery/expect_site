@@ -1,0 +1,31 @@
+
+#|
+;;; INFORMAL SKETCH OF THIS PROTOTYPE:
+
+SCUD-unit
+  has-part(i): Living-Entity
+
+|#
+
+;;; KM REPRESENTATION OF THIS PROTOTYPE
+
+(SCUD-unit has (superclasses (Military-unit)))
+
+(SCUD-unit now-has (prototypes (_Military-unit1665)))
+
+(_Military-unit1665 has
+  (prototype-of (SCUD-unit))
+  (prototype-scope (SCUD-unit))
+  (prototype-participants (_Military-unit1665 _Living-Entity1666)))
+
+(_Military-unit1665 has (instance-of (SCUD-unit))
+ (has-part (_Living-Entity1666)))
+
+(_Living-Entity1666 has (instance-of (Living-Entity)))
+
+
+#|
+;;; TRADITIONAL FORMAT FOR SME'S LAST ACTIONS WOULD HAVE LOOKED:
+
+
+|#

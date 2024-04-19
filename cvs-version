@@ -1,0 +1,111 @@
+
+     NEW VERSION OF EXPECT, AND VERSION CONTROL.
+     ===========================================
+     (March 24 99)
+
+
+We want to begin maintaining Expect and related sources under version
+control, and have begun maintaining a new version of Expect to use as
+the base version. It's not ready yet, but when it is We hope that you
+will use this version and use the version control program (CVS) to
+incorporate your specific changes to this version. Here are preliminay
+details on how to do that and what to expect from the new version.
+
+We cover:
+1. Where to find the preliminary new version of Expect
+2. How is it different from the current/ version and how will that
+   affect you?
+3. How to use CVS to make changes in the new version
+4. Plans for this version
+
+
+1. Where to find the preliminary new version of Expect
+
+For now it's in /nfs/isd/blythe/release/expect. We will try to get
+a new volume on nitro for it.
+
+2. How is it different?
+
+It has a preliminary version of the new result-types for nodes, that
+allow us to record error information and empty sets without using NIL
+for either. Some examples are on the next sheet.
+
+
+2b. How will that affect you?
+
+If you need to update an old domain to the new version, be aware of
+these changes:
+
+Every node that used to have an EDT in its result slot now has an
+eresult structure. You can access the value with
+(get-eresult-edt (get-node-result <node>)).
+
+Your primitive functions may have to deal with empty sets in a different
+way. For example, "primitive-add-numbers" must now give the result 0
+on the input "(no (set-of (inst-of number)))" (meaning the empty set of
+numbers).
+
+Files with more details on the structures and edts involved:
+ps/results.lisp
+shared/edts.lisp
+
+
+3. How to use CVS:
+
+CVS has many options and commands. Here are four simple commands you can 
+use to check out a copy of expect, edit it, check that you have no
+conflicts with someone else's edits and then add your changes to the
+main version. For more info see the man pages, or the texinfo files
+at /local/info/*.
+
+
+The current repository is at /nfs/isd/blythe/cvsroot (again, we'll
+change this to a new volume).
+
+So you need to set the environment variable CVSROOT:
+
+% setenv CVSROOT /nfs/isd/blythe/cvsroot
+
+Then you can check out expect in some directory with
+
+% cvs checkout expect
+ (makes a copy in your directory, currently about 5 megabytes)
+
+Edit the files as usual.
+
+You can see differences between your version and the repository with
+
+% cvs diff
+
+You can make "updates" if someone has changed the repository since you
+edited with
+
+% cvs update
+
+When there are no such changes, or you have updated, you can commit your 
+changes back to the main version with
+
+% cvs commit
+
+- It will open an editor for your short comments on the version change,
+or you can specify these in a string with the -m option.
+
+
+
+For more details, including branches, rollbacks and symbolic tags, 
+see the man pages and the texinfo files.
+
+
+4. Plans for this version:
+
+We hope to incorporate changes people have made to expect using the
+version control, for instance:
+- fixes from HPKB year 1
+- additions to the compiler
+- natural language "editor"
+- changes for the KA system
+
+We also want to put the other parts of the Expect system under 
+the same version control:
+- the java ui client and server
+- cl-http

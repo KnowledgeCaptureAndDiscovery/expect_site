@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE agitemDescription SYSTEM "agitem.dtd">
+
+<agitemDescription name="agenda-item-25"> 
+<ExpectErrorType> ERROR 
+</ExpectErrorType>
+<ItemReferencingElement> <Method> CHECK-IF-PLAN-HAS-NEEDED-PRIMARY-AIRCRAFT-NOT-AVAILABLE </Method> 
+</ItemReferencingElement>
+<TextDescription> Expression ((DETERMINE-WHETHER-THERE-ARE-NO (OBJ (FIND (OBJ (SPEC-OF AVAILABLE-AIRCRAFT)) 
+           (THAT-PRIMARILY-COVER (INST-OF MISSION-TYPE))))) (INST-OF BOOLEAN)) has invalid result 
+</TextDescription><Source> PS-TREE </Source>
+<ProblemNode> <psnode> ps-an79 </psnode> 
+</ProblemNode>
+<ErrorCauses> (INVALID-RESULT METHOD-BODY VERIFY-IF-MISSION-TYPE-IS-COVERED-WITH-PRIMARY-AIRCRAFT) 
+</ErrorCauses> 
+</agitemDescription>

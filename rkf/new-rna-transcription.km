@@ -1,0 +1,392 @@
+
+; Bacterial RNA transcription scenario from Alberts 7.1.4
+; Dec 18, 2000
+;  modified Feb 14, 2001
+
+; disclaimer: due to non-KM stuff, this scenario has not been tested/debugged
+
+; ########## DNA ##########
+
+; There is a representation of DNA in the component library that's still
+; being worked out. This is not it. This version of DNA has just what's 
+; needed for the RNA transcription scenario.
+
+; Changes to conform to the new ADL (Jim):
+; subevent-order has been removed
+; subevent -> sub-steps
+; each sub-step has an event-to-do and a next-step.
+
+(DNA has
+     (superclasses (Nucleic-Acid))
+     (required-slot ())
+     (primary-slot ())
+     (secondary-slot ())
+     (cmap-correspondance ()))
+
+(every DNA has
+  (shape (*helix))
+
+  (has-part 
+    ((a DNA-Strand called "S1" with
+       (region 
+         ((a DNA-5-End with
+            (is-at 
+              ((the DNA-3-End region of 
+                 ((the has-part of Self) called "S2")))))
+          (a DNA-3-End with
+            (is-at 
+              ((the DNA-5-End region of 
+                 ((the has-part of Self) called "S2"))))))))
+     (a DNA-Strand called "S2" with
+       (region 
+         ((a DNA-5-End with
+            (is-at 
+              ((the DNA-3-End region of 
+                 ((the has-part of Self) called "S1")))))
+          (a DNA-3-End with
+            (is-at 
+              ((the DNA-5-End region of 
+                 ((the has-part of Self) called "S1")))))))))))
+
+
+; ########## DNA-Strand ##########
+
+(DNA-Strand has
+         (superclasses (Nucleic-Acid))
+         (required-slot ())
+         (primary-slot ())
+         (secondary-slot ())
+         (cmap-correspondence ())
+         (test-case ()))
+
+(every DNA-Strand has
+       (views ((a View with
+                     (as ((a Sequence with
+                             (basic-unit (Deoxyribonucleotide))))))))
+
+       (has-part ((at-least 1 Gene-Coding-Region)))
+
+       (region ((a DNA-5-End with
+                   (is-opposite ((the DNA-3-End region of Self))))
+                (a DNA-3-End with
+                   (is-opposite ((the DNA-5-End region of Self)))))))
+
+
+; ########## Sequence ##########
+
+(Sequence has
+         (superclasses (Entity))
+         (required-slot (basic-unit))
+         (primary-slot ())
+         (secondary-slot ())
+         (cmap-correspondence ())
+         (test-case ()))
+
+(every Sequence has
+       (basic-unit (Entity))
+       (the-seq ((:seq (an instance of (Self basic-unit)) 
+                       (an instance of (Self basic-unit))))))
+
+; A sequence has at least two elements (instances of whatever the basic-unit
+; class is). More elements can be added to the chain by appending
+
+
+; ########## Append ##########
+
+(Append has
+        (superclasses (Create))
+        (required-slot (object destination result))
+        (primary-slot ())
+        (secondary-slot ())
+        (cmap-correspondence ())
+        (test-case ()))
+
+(every Append has
+       (object ((an instance of (the basic-unit of (the destination of Self)))))
+       (destination ((a Sequence)))
+       (result ((a Sequence with
+                   (the-seq (((the the-seq of (the destination of Self)))
+                               append
+                              (:seq (the object of Self))))))))
+
+
+; ########## Gene-Coding-Regin ##########
+
+(Gene-Coding-Region has
+         (superclasses (Nucleic-Acid))
+         (required-slot ())
+         (primary-slot ())
+         (secondary-slot ())
+         (cmap-correspondence ())
+         (test-case ()))
+
+(every Gene-Coding-Region has
+       (has-part ((a Promoter)
+                  (a Terminator))))
+
+
+; ########## Operon ##########
+
+(Operon has
+         (superclasses (Gene-Coding-Region))
+         (required-slot ())
+         (primary-slot ())
+         (secondary-slot ())
+         (cmap-correspondence ())
+         (test-case ()))
+
+(every Operon has
+   (has-part 
+      ((a Operon-Coding-Region with
+         (location 
+            ((a Place with
+                (is-between ((:args (the Promoter has-part of Self)
+                                    (the Terminator has-part of Self)))))))))))
+
+
+; ########## Promoter ##########
+
+(Promoter has
+         (superclasses (Regulatory-Region))
+         (required-slot ())
+         (primary-slot ())
+         (secondary-slot ())
+         (cmap-correspondence ())
+         (test-case ()))
+
+(every Promoter has
+       (views ((a View with
+                     (as ((a Sequence with
+                             (basic-unit (Deoxyribonucleotide)))))))))
+
+
+; ########## Terminator ##########
+
+(Terminator has
+         (superclasses (Regulatory-Region))
+         (required-slot ())
+         (primary-slot ())
+         (secondary-slot ())
+         (cmap-correspondence ())
+         (test-case ()))
+
+(every Terminator has
+       (views ((a View with
+                     (as ((a Sequence with
+                             (basic-unit (Deoxyribonucleotide)))))))))
+
+
+; ########## Operon-Coding-Region ##########
+
+(Operon-Coding-Region has
+         (superclasses (Gene-Coding-Region))
+         (required-slot ())
+         (primary-slot ())
+         (secondary-slot ())
+         (cmap-correspondence ())
+         (test-case ()))
+
+(every Operon-Coding-Region has
+       (views ((a View with
+                     (as ((a Sequence with
+                             (basic-unit (Deoxyribonucleotide))))))))
+       (has-part ((at-least 2 Gene))))
+
+
+; ########## Bacterial-RNA-Transcription ##########
+
+; Here is the transcription scenario itself. There are some not-KM
+; elements in here. Also, slots that begin with "the-" are merely
+; shorthand used locally. For example, by using a slot "the-DNA"
+; whose value is "((the DNA is-part-of* of (the object of Self)))"
+; I can refer to the DNA as simply "(the the-DNA of Self)".
+
+; This encoding of the scenario simplifies the transcription by
+; assuming that the polymerase unbonds one pair of deoxyribonuc's,
+; then transcribes one of them, then bonds them again, instead of
+; unzipping some distance downstream.
+
+(Bacterial-RNA-Transcription has
+        (superclasses    (RNA-Transcription))
+        (required-slot   (object result source destination instrument))
+        (primary-slot    ())
+        (cmap-correspondence ()))
+
+(every Bacterial-RNA-Transcription has
+       (object ((a Operon-Coding-Region)))
+       (the-DNA ((the DNA is-part-of* of (the object of Self))))
+       (result ((a RNA-Transcript)))
+       (source ((the Promoter has-part of (the object of Self))))
+       (destination ((the Terminator has-part of (the object of Self))))
+       (instrument ((a RNA-Polymerase)))
+
+       (pcs-list ((:triple (the RNA-Polymerase instrument of Self)
+                           agent-of
+                           (a Find-Promoter with 
+                              (object ((the source of Self)))))
+                  (:triple (the RNA-Polymerase instrument of Self)
+                           object-of
+                           (a Be-Attached-To with
+                              (destination (the the-DNA of Self))
+                              (intensity (*strong))))))
+
+
+				; The expression (theN N of ...) refers to the Nth element in the 
+				; sequence (= Nth iteration of the loop) that the Operon-Coding-Region 
+				; inherits as a has-part by being modeled as a Sequence (with a View).
+
+       (the-Next-S1-Deoxyribonucleotide ( ; <===
+				 (theN N of ; <===
+				       (the the-seq of ; <===
+					  (the Operon-Coding-Region has-part* of ; <===
+					       (the DNA-Strand called "S1" has-part of ; <===
+						  the the-DNA of Self)))))) ; <===
+       (the-Next-S2-Deoxyribonucleotide ( ; <===
+				 (theN N of ; <===
+				       (the the-seq of ; <===
+					  (the Operon-Coding-Region has-part* of ; <===
+					       (the DNA-Strand called "S2" has-part of ; <===
+						  the the-DNA of Self)))))) ; <===
+
+       (sub-steps
+
+        ;; loop until the location of the RNA-Polymerase instrument is
+        ;; the location of the Terminator
+
+        ((a step called "Unzip-DNA" with
+	  (event-to-do ((the-class Unbond with
+			       (object ((the the-Next-S1-Deoxyribonucleotide of Self)
+				      (the the-Next-S2-Deoxyribonucleotide of Self)))
+			       (agent ((the RNA-Polymerase instrument of Self))))))
+	  (next-step (((the sub-steps of Self) called "Move-to-DNA"))))
+
+         (a step called "Move-To-DNA" with
+	  (event-to-do ((the-class Move with
+			       (object ((a Ribonucleotide)))
+			       (destination ((the the-Next-S1-Deoxyribonucleotide of Self))))))
+	  (next-step (((the sub-steps of Self) called "Ribonucleotide-Bond"))))
+         
+         (a step called "Ribonucleotide-Bond" with
+	  (event-to-do ((the-class Hydrogen-Bond with
+			       (object ((the Ribonucleotide object of
+					 ((the Move subevent of Self) called "Move-To-DNA"))
+				      (the the-Next-S1-Deoxyribonucleotide of Self))))))
+	  (next-step (((the Append sub-steps of Self)))))
+         
+         (a step with
+	  (event-to-do ((the-class Append with
+			       (object (
+				      (the Ribonucleotide object of
+					 ((the Move subevent of Self) called "Move-To-DNA"))))
+			       (destination ((the RNA-Transcript result of Self))) ; <===
+			       (result ((the RNA-Transcript result of Self)))))) ; <===
+	  (next-steps (((the sub-steps of Self) called "Release-Ribonucleotide"))))
+
+         (a step called "Release-Ribonucleotide" with
+	  (event-to-do ((the-class Unbond with
+			       (object (
+				      (the Ribonucleotide object of
+					 ((the Move subevent of Self) called "Move-To-DNA"))
+				      (the the-Next-S1-Deoxyribonucleotide of Self))))))
+	  (next-step (((the sub-steps of Self) called "Move-Downstream"))))
+
+         (a step called "Move-Downstream" with
+	  (event-to-do ((the-class Move with
+			       (object ((the RNA-Polymerase instrument of Self)))
+			       (direction (*downstream))
+			       (away-from ((the source of Self)))
+			       (toward ((the destination of Self))))))
+	  (next-step (((the sub-steps of Self) called "Zip-DNA"))))
+
+         (a step called "Zip-DNA" with
+	  (event-to-do ((the-class Hydrogen-Bond with
+			       (object ((the the-Next-S1-Deoxyribonucleotide of Self)
+				      (the the-Next-S2-Deoxyribonucleotide of Self)))
+			       (agent ((the RNA-Polymerase instrument of Self))))))
+	  (test ('((the N of Self) = 10)))
+            (next-step ((:args t ((the sub-steps of Self) called "Release-Sigma-Factor"))
+                        (:args NIL ((the sub-steps of Self) called "Unzip-DNA")))))
+
+		       ; if N = 10 do this Detach (it's only done once)
+
+        (a step called "Release-Sigma-Factor" with
+	 (event-to-do ((the-class Detach with
+			      (object ((a Sigma-Factor)))	; there should be only one
+			      (source ((the RNA-Polymerase instrument of Self))))))
+	 (next-step (((the sub-steps of Self) called "Release-RNA-Polymerase"))))
+
+        (a step called "Release-RNA-Polymerase" with
+	 (event-to-do ((the-class Detach with
+			      (object ((the RNA-Polymerase instrument of Self)))
+			      (source ((the the-DNA of Self))))))
+	 (next-step (((the sub-steps of Self) called "Release-RNA-Transcript"))))
+
+        (a step called "Release-RNA-Transcript" with
+	 (event-to-do ((the-class Detach with
+			      (object ((the RNA-Transcript result of Self)))
+			      (source ((the RNA-Polymerase instrument of Self))))))))))
+
+
+; ########## Find-Promoter ##########
+
+(Find-Promoter has
+        (required-slot   (agent object))
+        (primary-slot    ())
+        (cmap-correspondence ()))
+
+
+(every Find-Promoter has
+       (agent ((a RNA-Polymerase)))
+       (object ((a Promoter)))
+       (the-DNA ((the DNA is-part-of* of (the Promoter object of Self))))
+
+       (sub-steps ((a step called "Move-To-DNA" with
+		  (event-to-do ((the-class Move with
+				       (object ((the RNA-Polymerase agent of Self)))
+				       (destination ((the the-DNA of Self))))))
+		  (next-step ((the Make-Contact sub-steps of self))))
+                  (a step with
+		 (event-to-do ((the-class Make-Contact with
+				      (object ((the RNA-Polymerase agent of Self)
+					     (the the-DNA of Self))))))
+		 (next-step ((the Attach sub-steps of Self))))
+                  (a step with
+		 (event-to-do ((the-class Attach with
+				      (object ((the RNA-Polymerase agent of Self)))
+				      (destination ((the the-DNA of Self)))
+				      (intensity (*weak)))))
+		 (next-step ((the Move sub-steps of Self
+			        called "Move-Along-DNA"))))
+                  (a step called "Move-Along-DNA" with
+		 (event-to-do ((the-class Move with
+				      (object ((the RNA-Polymerase agent of Self)))
+				      (path ((the the-DNA of Self)))
+				      (destination ((the Promoter object of Self)))
+				      (rate (*quickly)))))
+		 (next-step ((the Recognize sub-steps of Self))))
+                  (a step with
+		 (event-to-do ((the-class Recognize with
+				      (pcs-list
+				       ((:triple 
+				         (the agent of (the Recognize subevent of Self))
+				         object-of
+				         (a Be-Attached-To to with
+					  (destination 
+					   ((the RNA-Polymerase agent of Self)))))))
+				      (object ((the Promoter object of Self)))
+				      (agent ((a Sigma-Factor)))
+				      (del-list
+				       ((:triple 
+				         (the Be-Attached-To object-of of
+					    (the RNA-Polymerase agent of Self))
+				         intensity
+				         (*weak))))
+				      (add-list
+				       ((:triple 
+				         (the Be-Attached-To object-of of
+					    (the RNA-Polymerase agent of Self))
+				         intensity
+				         (*strong)))))))))))
+
+
+

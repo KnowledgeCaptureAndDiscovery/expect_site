@@ -1,0 +1,17 @@
+The cycles listed here need to be fixed before the cyc-ikb can be
+loaded.
+
+Also the order of the defproperty calls may need to be swapped,
+depending on whether Loom has been updated to handle that.
+
+
+(find-tbox-cycles)
+((|C||Missile| |C||CruiseMissile| |C||Missile|)
+ (|R||father| |R||biologicalFather| |R||father|)
+ (|R||mother| |R||biologicalMother| |R||mother|))
+
+
+;;; Less important:
+(list-undefined-concepts)
+(|C||Cannon| |C||MilitaryEnablingTask| |C||Counterattack-MilitaryTask|
+ |C||Surprise-MilitaryTask| |C|LOOM::META |C|LOOM::QUANTITY)

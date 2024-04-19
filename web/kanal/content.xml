@@ -1,0 +1,186 @@
+<!-- <?xml version='1.0'?> -->
+
+<!--
+
+IF YOU CAN READ THIS, YOUR BROWSER DOESN'T SUPPORT XML.
+
+PLEASE UPDATE YOUR BROWSER, OR VIEW THE HTML VERSION OF THIS PAGE.
+
+-->
+<!--
+When the schema works, reference it like this; change the project tag below to this
+<project xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation = "isd-personnel.xsd">
+-->
+<project>
+  <name>KANAL</name>
+  <title>Knowledge Analysis on Process Models"</title>
+
+  <status>
+    <short>
+  Our initial evaluation of <n /> as a stand-alone system shows its usefulness
+in finding errors and suggesting fixes.  It also has been
+successfully integrated within an end-to-end system that support users
+entering domain knowledge as a part of DARPA Rapid Knowledge Formation (RKF)
+program. 
+  </short>
+  <long>
+<b><n /></b> is a tool for building and checking process models.  By
+relating different pieces of information in process models among themselves
+and to the existing KB, it performs a variety of verification and validation
+checks and propose useful fixes.
+  <p />
+
+We performed an initial evaluation in December 2000, which has been reported in
+<a 
+href="http://www.isi.edu/expect/projects/rkf/KANAL/kanal-ijcai01.pdf">Kim and
+Gil, IJCAI-01</a>.  The results show that <n /> can find most of the errors in
+the process models and suggest useful fixes including the fixes that directly
+point to the sources of the errors.
+<p />
+
+<n /> has been successfully integrated within an end-to-end system (called
+SHAKEN) that supports subject matter experts entering domain knowledge as part
+of the DARPA <a href="http://reliant.teknowledge.com/RKF/">Rapid Knowledge
+Formation (RKF)</a> program.  During summer 2001, the SHAKEN system has been
+evaluated by lightly trained biologists where they author biology textbook
+knowledge using the system.  The resulting knowledge bases 
+answer questions that a student might be asked based on the
+chapter's contents.
+</long>
+ 
+  </status>
+
+  <description>
+    <short>
+     <n/> is a tool for building and checking process models.  By
+relating different pieces of information in process models among themselves
+and to the existing KB, it performs a variety of verification and validation
+checks and propose useful fixes.
+    </short>
+
+    <long>
+<p />
+Helping end users build and check process models is a challenge for many
+science and engineering fields.  Many AI researchers have investigated useful
+ways of verifying and validating knowledge bases for ontologies and rules, but
+it is not easy to directly apply them to checking process models.  Other
+techniques developed for checking and refining planning knowledge tend to
+focus on automated plan generation rather than helping users author process
+information.  In this paper, we propose a complementary approach which helps
+users author and check process models.  Our system, called <a
+href="KANAL-description.txt"><n /></a>(Knowledge 
+ANALysis), relates pieces of information in process models among themselves
+and to the existing KB, analyzing how different pieces of input are put
+together to achieve some effect.  It builds interdependency models from this
+analysis and uses them to find errors and propose fixes.  
+(<a
+href="http://www.isi.edu/expect/projects/rkf/KANAL/kanal-ijcai01.pdf">Kim and Gil, IJCAI-01</a>)
+
+<p />
+<n /> builds upon previous work on <a
+href="http://www.isi.edu/expect/">EXPECT</a> using Interdependency Models (<a
+href="http://www.isi.edu/expect/link/publications.html#Kim-Gil-AAAI-99">Kim and Gil
+AAAI-99</a>, <a
+href="http://www.isi.edu/expect/link/publications.html#Kim-Gil-AAAI-2000">Kim and Gil
+AAAI-2000</a>).  The work on EXPECT analyzed problem-solving interdependencies,
+which model how different pieces of problem solving (procedural) knowledge
+relate to each other and to the class definitions in domain ontologies.  Our
+initial work concentrates on <i>process models</i>, i.e., knowledge
+describing activities and subprocesses as well as their relationships.
+
+<p />
+Currently, <n />'s checks are done on the simulated execution of the process
+model.  Using skolem instances, we can check general scenarios of the
+animation of a process. The result of each animation are used as a model of
+interdependencies among the sub-steps of the process model.  <n /> performs a
+variety of verification checks to process models, including <i>unachieved
+conditions of steps</i> in a process model, <i>expected and unexpected
+effects, potential loops</i>, and <i>disjunctive model branches</i>.  <n />
+will also help users with validation checks of <i> redundancies</i>, and
+<i>resource use</i> within a process model.
+
+
+    </long>
+  </description>
+
+  <research>
+    <short>
+     Process Models, Verification and Validation, Knowledge Acquisition
+    </short>
+    <long>
+<n /> checks process models specified by a user reports possible errors in
+the models, and generates specific suggestions to the user about how to fix
+those errors.  Our approach is inspired on previous work on <a
+href="http://www.isi.edu/expect/">EXPECT</a> using Interdependency Models (<a
+href="http://www.isi.edu/expect/link/publications.html#Kim-Gil-AAAI-99">Kim and Gil
+AAAI-99</a>, <a
+href="http://www.isi.edu/expect/link/publications.html#Kim-Gil-AAAI-2000">Kim and Gil
+AAAI-2000</a>).  KANAL analyzes the interdependencies among the individual
+steps of a process model.  For example, a simulation of the execution of the
+steps allows KANAL to anlayze interdependencies between the conditions and
+effects of different steps, such as that the required conditions for each step
+are met when the step is supposed to take place, and that the expected effects
+of the overall process are in fact obtained.
+
+<p /> The kinds of checks performed and the kinds of fixes proposed by <n /> include
+
+<ul>
+<li> Unachieved Preconditions
+</li>
+<li> Unachieved Expected Effects
+</li>
+<li> Unordered Steps
+</li>
+<li> Inappropriate Execution of Steps
+</li>
+<li> Inappropriate Loops
+</li>
+<li> Inappropriate Disjunctive Branches
+</li>
+<li> Inappropriate Branches
+</li>
+
+</ul>
+
+    </long>
+  </research>
+
+  <link>
+   <a href="http://www.isi.edu/expect/projects/KANAL/api.txt">KANAL API</a>
+  </link>
+  <link>
+   <a href="http://www.isi.edu/expect/projects/KANAL/releases.html">KANAL Implementation on KM</a>
+  </link>
+
+  <link>
+  KANAL slides in various meetings 
+  <ul>
+  <li><a href="http://www.isi.edu/expect/projects/KANAL/slides/KANAL-SRI-meeting-10-00.ppt">SRI RKF meeting (10/11/00)</a></li>
+  <li><a href="http://www.isi.edu/expect/projects/KANAL/slides/KANAL-jan-01-rkf.ppt">RKF PI meeting (Jan/01)</a></li>
+  <li><a href="http://www.isi.edu/expect/projects/KANAL/slides/test-k-intro-in-training.ppt">Test Knowledge (intro)
+(April)</a></li>
+  <li><a href="http://www.isi.edu/expect/projects/KANAL/slides/Virus-Invades-Cell-trial-in-shaken.ppt"> design of the KANAL
+interface (a) (Mar/01)</a></li> 
+  <li><a href="http://www.isi.edu/expect/projects/KANAL/slides/Virus-Invades-Cell-in-shaken.ppt"> design of the KANAL
+interface (b) (Mar/01)</a></li>
+  </ul>
+  </link>
+
+
+
+<!-- Demo -->
+<demo>
+<P>
+
+</P>
+
+
+
+     <center>
+	  <img src="../tn_comingsoon.jpg"/>
+	  </center>
+
+
+</demo>
+</project>

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XML Spy v3.0.7 NT (http://www.xmlspy.com) by pablo yanez (isi usc) -->
+<?xml-stylesheet type="text/xsl" href="lizh.xsl"?>
+<!DOCTYPE person SYSTEM "yolanda.dtd">
+<person>
+	<Name>Liz Hall</Name>
+	<UserId>lizh</UserId>
+	<Photo>photo/lizh</Photo>
+	<projects/>
+	<systems/>
+	<topics/>
+	<position>Project Assistant</position>
+	<group>Expect, NL, Ariadne</group>
+	<capabilities>
+		<capability>
+			<NlDescription>Arrange travel for researcher to meeting</NlDescription>
+			<MethodGoal>
+				<VarGoalForm>
+					<GoalName>plan</GoalName>
+					<ManyVarGoalArgument>
+						<VarGoalArgument>
+							<ParameterName>OBJ</ParameterName>
+							<MethodGoalArgument>
+								<VariableName>?v</VariableName>
+								<t name="IS"/>
+								<ComplexData>
+									<t name="SPEC-OF"/>
+									<ConceptName>travel</ConceptName>
+								</ComplexData>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+						<VarGoalArgument>
+							<ParameterName>FOR</ParameterName>
+							<MethodGoalArgument>
+								<VariableName>?l</VariableName>
+								<t name="IS"/>
+								<ComplexData>
+									<t name="INST-OF"/>
+									<ConceptName>researcher</ConceptName>
+								</ComplexData>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+						<VarGoalArgument>
+							<ParameterName>TO</ParameterName>
+							<MethodGoalArgument>
+								<VariableName>?M</VariableName>
+								<t name="IS"/>
+								<ComplexData>
+									<t name="INST-OF"/>
+									<ConceptName>meeting</ConceptName>
+								</ComplexData>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+					</ManyVarGoalArgument>
+				</VarGoalForm>
+			</MethodGoal>
+		</capability>
+		<capability>
+			<NlDescription>Submit reimbursement for traveler</NlDescription>
+			<MethodGoal>
+				<VarGoalForm>
+					<GoalName>submit</GoalName>
+					<ManyVarGoalArgument>
+						<VarGoalArgument>
+							<ParameterName>OBJ</ParameterName>
+							<MethodGoalArgument>
+								<VariableName>?v</VariableName>
+								<t name="IS"/>
+								<ComplexData>
+									<t name="INST-OF"/>
+									<ConceptName>reimbursement</ConceptName>
+								</ComplexData>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+						<VarGoalArgument>
+							<ParameterName>FOR</ParameterName>
+							<MethodGoalArgument>
+								<VariableName>?t</VariableName>
+								<t name="IS"/>
+								<ComplexData>
+									<t name="INST-OF"/>
+									<ConceptName>travelers</ConceptName>
+								</ComplexData>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+					</ManyVarGoalArgument>
+				</VarGoalForm>
+			</MethodGoal>
+		</capability>
+		<capability>
+			<NlDescription>Assist researcher</NlDescription>
+			<MethodGoal>
+				<VarGoalForm>
+					<GoalName>assist</GoalName>
+					<ManyVarGoalArgument>
+						<VarGoalArgument>
+							<ParameterName>OBJ</ParameterName>
+							<MethodGoalArgument>
+								<VariableName>?v</VariableName>
+								<t name="IS"/>
+								<ComplexData>
+									<t name="INST-OF"/>
+									<ConceptName>researcher</ConceptName>
+								</ComplexData>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+					</ManyVarGoalArgument>
+				</VarGoalForm>
+			</MethodGoal>
+		</capability>
+		<capability>
+			<NlDescription>Type documents</NlDescription>
+			<MethodGoal>
+				<VarGoalForm>
+					<GoalName>type</GoalName>
+					<ManyVarGoalArgument>
+						<VarGoalArgument>
+							<ParameterName>OBJ</ParameterName>
+							<MethodGoalArgument>
+								<VariableName>?m</VariableName>
+								<t name="IS"/>
+								<ComplexData>
+									<t name="INST-OF"/>
+									<ConceptName>document</ConceptName>
+								</ComplexData>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+					</ManyVarGoalArgument>
+				</VarGoalForm>
+			</MethodGoal>
+		</capability>
+		<capability>
+			<NlDescription>Edit the InSiDer
+</NlDescription>
+			<MethodGoal>
+				<VarGoalForm>
+					<GoalName>write</GoalName>
+					<ManyVarGoalArgument>
+						<VarGoalArgument>
+							<ParameterName>obj</ParameterName>
+							<MethodGoalArgument>
+								<VariableName>?m</VariableName>
+								<t name="IS"/>
+								<ComplexData>
+									<t name="INST"/>
+									<InstanceName>InSiDer</InstanceName>
+								</ComplexData>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+					</ManyVarGoalArgument>
+				</VarGoalForm>
+			</MethodGoal>
+		</capability>
+	</capabilities>
+</person>

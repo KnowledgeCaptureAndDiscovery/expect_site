@@ -1,0 +1,119 @@
+<!--- This is HTML created by conceptRenderer. --->
+<HTML>
+<BODY bgcolor="#00bbbb" text="#000000">
+<TITLE>CONCEPT: SEAPORT</TITLE>
+ <H4>CONCEPT <A HREF = "SEAPORT.concept">SEAPORT</A> </H4><br>
+
+<H5>Definition: </H5>
+<P>
+<pre>(defconcept <A HREF ="SEAPORT.concept">SEAPORT</A> 
+    :is-primitive <A HREF ="GENERAL-PORT.concept">GENERAL-PORT</A> 
+    :constraints (:and (:at-least 0 <A HREF ="R-SHIPS.relation">R-SHIPS</A> )
+                 (:at-least 0 <A HREF ="R-BERTHS.relation">R-BERTHS</A> )
+                 (:at-least 0 <A HREF ="R-COVERED-STORAGE-AREA.relation">R-COVERED-STORAGE-AREA</A> )
+                 (:at-least 0 <A HREF ="R-PIERS.relation">R-PIERS</A> )
+                 (:at-least 0 <A HREF ="R-POLS.relation">R-POLS</A> ))
+    :in-partition $air-or-sea-port$
+    :partition $inland-or-maritime-port$)
+</P></pre>
+
+<H5>Subconcepts: </H5>
+<pre>
+
+     <li>  <A HREF ="MARITIME-SEAPORT.concept">MARITIME-SEAPORT</A> 
+
+     <li>  <A HREF ="INLAND-WATERWAY-SEAPORT.concept">INLAND-WATERWAY-SEAPORT</A> 
+</pre> <BR>
+
+<H5>Superconcepts: </H5><br>
+<pre>
+
+     <li>  <A HREF ="GENERAL-PORT.concept">GENERAL-PORT</A> 
+</pre><BR>
+
+<H5>Siblings: </H5><br>
+
+Siblings with the common parent: <A HREF="GENERAL-PORT.concept">GENERAL-PORT</A> <pre>
+
+     <li>  <A HREF ="AIRPORT.concept">AIRPORT</A> 
+</pre><br>
+
+<p><H5>Roles: </H5>
+<pre>
+
+     <li>  <A HREF ="CRANES.relation">CRANES</A> 
+     -- 
+
+     <A HREF ="NUMBER.concept">NUMBER</A> 
+</Type>
+
+
+     <li>  <A HREF ="R-BERTHS.relation">R-BERTHS</A> 
+     -- 
+
+     <A HREF ="[BERTH-UNIT]-VALUE.concept">[BERTH-UNIT]-VALUE</A> 
+</Type>
+
+
+     <li>  <A HREF ="R-COVERED-STORAGE-AREA.relation">R-COVERED-STORAGE-AREA</A> 
+     -- 
+
+     <A HREF ="SURFACE-VALUE.concept">SURFACE-VALUE</A> 
+</Type>
+
+
+     <li>  <A HREF ="R-GEOLOC-CODE.relation">R-GEOLOC-CODE</A> 
+     -- 
+
+     <A HREF ="GEO-LOCATION-CODE.concept">GEO-LOCATION-CODE</A> 
+</Type>
+
+
+     <li>  <A HREF ="R-LOCATION.relation">R-LOCATION</A> 
+     -- 
+
+     <A HREF ="LOCATION.concept">LOCATION</A> 
+</Type>
+
+
+     <li>  <A HREF ="R-PIERS.relation">R-PIERS</A> 
+     -- 
+
+     <A HREF ="[PIER-UNIT]-VALUE.concept">[PIER-UNIT]-VALUE</A> 
+</Type>
+
+
+     <li>  <A HREF ="R-POLS.relation">R-POLS</A> 
+     -- 
+
+     <A HREF ="[POL-UNIT]-VALUE.concept">[POL-UNIT]-VALUE</A> 
+</Type>
+
+
+     <li>  <A HREF ="R-SHIPS.relation">R-SHIPS</A> 
+     -- 
+
+     <A HREF ="SHIP.concept">SHIP</A> 
+</Type>
+</pre>
+
+<H5>Number of Instances: </H5> 3 (3 direct, 0 inferred)<BR>
+
+<p>Direct Instances:
+
+
+     <li>  <A HREF ="LONG-BEACH.instance">LONG-BEACH</A> 
+
+
+     <li>  <A HREF ="LA-JOLLA.instance">LA-JOLLA</A> 
+
+
+     <li>  <A HREF ="TIJUANA.instance">TIJUANA</A> 
+<BR>
+
+
+<p>Inferred Instances:
+<pre></pre><BR>
+</BODY>
+</HTML>
+<!--- End of HTML. --->

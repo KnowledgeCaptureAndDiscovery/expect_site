@@ -1,0 +1,293 @@
+;;; -*- Mode: Lisp; Package: BATTLE-SPACE; Syntax: COMMON-LISP; Base: 10 -*-
+
+;;; HPKB Geographical Features Ontology
+
+;;; This ontology provides the basic vocabulary and hierarchy for the
+;;; geographic features that will be specified in year 1 for the
+;;; Workaround problems.  These features were decided at the February
+;;; SME meeting.
+
+(in-package "BATTLE-SPACE")
+
+
+
+;;; ******************** CONCEPTS ********************
+
+(defconcept geographical-point
+  :is-primitive topographical-feature)
+
+(defconcept vegetation-type :is-primitive (:one-of none desert-scrub cultivated))
+
+(defconcept soil-type :is-primitive (:one-of sand gravel loam clay rock))
+
+(defconcept geographical-bank
+  :is-primitive topographical-feature
+  :roles ((water-of :type body-of-water) (gap-of :type geographical-gap)))
+
+(defconcept geographical-approach
+  :is-primitive (:and (:filled-by length-of-object 200.0m)
+                      topographical-feature)
+  :roles ((feature-of :type geographical-region)))
+
+(defconcept geographical-gap
+  :is-primitive topographical-feature
+  :roles ((bridge-of :type bridge) (river-of :type body-of-water)))
+
+(defconcept wetness-type :is-primitive (:one-of dry wet intermittent))
+
+(defconcept ford-site
+  :is-primitive geographical-gap)
+
+(defconcept minefield
+  :is-primitive topographical-feature
+  :roles ((mine-density :type number)))
+
+(defconcept bridge
+  :is-primitive (:and fixed-structure outdoor-location)
+  :roles ((cross-section :type geographical-gap)
+          (missing-span-length :type loom::distance-quantity)
+          (max-traffic-class :type integer)))
+
+(defconcept tunnel
+  :is-primitive (:and fixed-structure outdoor-location))
+
+(defconcept tunnel-opening
+  :is-primitive (:and topographical-feature portal))
+
+(defconcept rubble
+  :is-primitive earth-stuff)
+
+
+
+;;; ******************** RELATIONS ********************
+
+
+;;; ******************** RELATIONS ********************
+
+(defrelation part-of
+  :arity 2
+  :domain thing
+  :range thing
+  :annotations ((documentation "The part-of relationship specifies that ?y has some 
+sort of part relation ship to ?x.  ?y is a part of ?x")))
+
+(defproperty stable :domain partially-tangible)
+
+(defproperty mined :domain geographical-region)
+
+(defrelation water-depth
+  :arity 2
+  :domain geographical-region
+  :range loom::distance-quantity
+  :characteristics :single-valued)
+
+(defrelation wetness
+  :arity 2
+  :domain body-of-water
+  :range wetness-type)
+
+(defrelation right-river-bank
+  :arity 2
+  :domain body-of-water
+  :range geographical-bank
+  :characteristics :single-valued)
+
+(defrelation left-river-bank
+  :arity 2
+  :domain body-of-water
+  :range geographical-bank
+  :characteristics :single-valued)
+
+(defrelation river-flows-trough-gap
+  :arity 2
+  :domain body-of-water
+  :range geographical-gap)
+
+(defrelation river-current
+  :arity 2
+  :domain body-of-water
+  :range loom::speed-quantity
+  :characteristics :single-valued)
+
+(defrelation far-approach
+  :arity 3
+  :domains (geographical-region partially-tangible)
+  :range geographical-approach
+  :characteristics :single-valued)
+
+(defrelation near-approach
+  :arity 3
+  :domains (geographical-region partially-tangible)
+  :range geographical-approach
+  :characteristics :single-valued)
+
+(defrelation approach-of
+  :arity 2
+  :domain geographical-region
+  :range geographical-approach)
+
+(defrelation bank-of
+  :arity 2
+  :domain geographical-gap
+  :range geographical-bank)
+
+(defrelation right-approach
+  :arity 2
+  :domain geographical-region
+  :range geographical-approach
+  :characteristics :single-valued)
+
+(defrelation left-approach
+  :arity 2
+  :domain geographical-region
+  :range geographical-approach
+  :characteristics :single-valued)
+
+(defrelation right-bank
+  :arity 2
+  :domain geographical-gap
+  :range geographical-bank
+  :characteristics :single-valued)
+
+(defrelation left-bank
+  :arity 2
+  :domain geographical-gap
+  :range geographical-bank
+  :characteristics :single-valued)
+
+(defrelation near-bank
+  :arity 3
+  :domains (geographical-gap partially-tangible)
+  :range geographical-bank
+  :characteristics :single-valued)
+
+(defrelation far-bank
+  :arity 3
+  :domains (geographical-gap partially-tangible)
+  :range geographical-bank
+  :characteristics :single-valued)
+
+(defrelation soil-of
+  :arity 2
+  :domain geographical-region
+  :range soil-type)
+
+(defrelation vegetation-of
+  :arity 2
+  :domain geographical-region
+  :range vegetation-type)
+
+(defrelation length-under-water
+  :arity 2
+  :domain geographical-region
+  :range loom::distance-quantity
+  :characteristics :single-valued
+  :annotations ((documentation "This is the portion of a regions' length that is under 
+water.  For example, a river bank may be 8 meters long with 3 meters under 
+water and 5 meters above water.")))
+
+(defrelation max-slope
+  :arity 2
+  :domain geographical-region
+  :range number
+  :characteristics :single-valued)
+
+(defproperty damaged :domain partially-tangible)
+
+(defrelation trafficable
+  :arity 2
+  :domain surface--physical
+  :range spatial-thing)
+
+(defrelation latitude
+  :arity 2
+  :domain place
+  :range number
+  :inheritance-link geographically-near
+  :inheritance-method :nearest-neighbor
+  :characteristics :single-valued)
+
+(defrelation longitude
+  :arity 2
+  :domain place
+  :range number
+  :inheritance-link geographically-near
+  :inheritance-method :nearest-neighbor
+  :characteristics :single-valued)
+
+(defrelation cross-section
+  :arity 2
+  :domain bridge
+  :range geographical-gap
+  :characteristics :single-valued)
+
+(defrelation missing-span-length
+  :arity 2
+  :domain bridge
+  :range loom::distance-quantity
+  :characteristics :single-valued)
+
+(defrelation max-traffic-class
+  :arity 2
+  :domain bridge
+  :range number
+  :characteristics :single-valued)
+
+(defrelation mine-density
+  :arity 2
+  :domain minefield
+  :range number
+  :characteristics :single-valued)
+
+(defrelation bridge-of
+  :arity 2
+  :domain (:or action geographical-gap)
+  :range bridge
+  :characteristics :single-valued)
+
+(defrelation river-of
+  :arity 2
+  :domain geographical-gap
+  :range body-of-water
+  :characteristics :single-valued)
+
+(defrelation feature-of
+  :arity 2
+  :domain geographical-approach
+  :range geographical-region
+  :characteristics :single-valued)
+
+(defrelation water-of
+  :arity 2
+  :domain geographical-bank
+  :range body-of-water
+  :characteristics :single-valued)
+
+(defrelation gap-of
+  :arity 2
+  :domain (:or action geographical-bank)
+  :range geographical-gap
+  :characteristics :single-valued)
+
+(defproperty marked)
+
+(defrelation geographically-near
+    :is (:and near (:domain geographical-region))
+    :arity 2
+    :range geographical-region
+    :characteristics :SYMMETRIC)
+
+(defrelation in-geographical-region
+    :is (:and in-region (:domain geographical-region))
+    :arity 2
+    :range geographical-region)
+
+(defrelation geographical-region-contains 
+    :is (:Inverse in-geographical-region))
+
+;;; ******************** ASSERTIONS ********************
+
+
+
+;;; ******************** AXIOMS ********************
+

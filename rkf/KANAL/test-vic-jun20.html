@@ -1,0 +1,386 @@
+<html><title>Knowledge analysis</title><body bgcolor="#ffffff"><h1>Knowledge Analysis for virus-invades-cell</h1><hr><ul>
+<br><li><strong>Step: _attach8861</strong><br><br><font color="blue">Preconditions:</font>
+<pre>(:|triple| |_Virus8859| |object-of|
+      (|mustnt-be-a| |Be-Touching| |with|
+       (|object| ((|the| |base| |of| |_Attach8861|)))))
+(:|triple| |_Cell8860| |object-of|
+ (|mustnt-be-a| |Be-Touching| |with|
+  (|object| ((|the| |object| |of| |_Attach8861|)))))
+</pre>
+<font color="blue">Succeeded preconditions:</font>
+<pre>(:|triple| |_Virus8859| |object-of|
+      (|mustnt-be-a| |Be-Touching| |with|
+       (|object| ((|the| |base| |of| |_Attach8861|)))))
+(:|triple| |_Cell8860| |object-of|
+ (|mustnt-be-a| |Be-Touching| |with|
+  (|object| ((|the| |object| |of| |_Attach8861|)))))
+</pre> 
+
+<br> EXECUTE _attach8861 in _situation8857
+
+<br>      <font color="blue">deleting</font>
+.. nothing to delete
+<br>      <font color="blue">adding</font>
+<pre>(:|triple| |_Be-Attached-To8870| |object| |_Virus8859|)
+(:|triple| |_Be-Attached-To8870| |object| |_Cell8860|)
+(:|triple| |_Cell8860| |abuts| |_Virus8859|)
+(:|triple| |_Virus8859| |abuts| |_Cell8860|)
+</pre></li>
+<br><li><strong>Step: _breach8872</strong><br><br><font color="blue">Preconditions:</font>
+<pre></pre>
+
+<br> EXECUTE _breach8872 in _situation8871
+
+<br>      <font color="blue">deleting</font>
+.. nothing to delete
+<br>      <font color="blue">adding</font>
+<pre>(:|triple| |_Portal8877| |is-region-of| |_Plasma-Membrane8863|)
+(:|triple| |_Be-Broken8888| |object| |_Plasma-Membrane8863|)
+</pre></li>
+<br><li><strong>Step: _traverse8874</strong><br><br><font color="blue">Preconditions:</font>
+<pre>(:|triple| |_Virus8859| |object-of|
+      (|mustnt-be-a| |Be-Restrained|))
+(:|triple| |_Portal8877| |object-of| (|mustnt-be-a| |Be-Blocked|))
+</pre>
+<font color="blue">Succeeded preconditions:</font>
+<pre>(:|triple| |_Virus8859| |object-of|
+      (|mustnt-be-a| |Be-Restrained|))
+(:|triple| |_Portal8877| |object-of| (|mustnt-be-a| |Be-Blocked|))
+</pre> 
+
+<br> EXECUTE _traverse8874 in _situation8890
+
+<br>      <font color="blue">deleting</font>
+<pre>(:|triple| |_Virus8859| |location| |_Place8894|)
+(:|triple| |_Virus8859| |abuts| |_Cell8860|)
+</pre>
+<br>      <font color="blue">adding</font>
+.. nothing to add
+<br>      canceling effects: deleting (:|triple|
+                                       |_Virus8859|
+                                       |abuts|
+                                       |_Cell8860|) 
+         which has been added by earlier action |_Attach8861|
+<br>      canceling effects: deleting (:|triple|
+                                       |_Virus8859|
+                                       |abuts|
+                                       |_Cell8860|) 
+         which has been added by earlier action |_Attach8861|</li>
+<br><li><strong>Step: _penetrate8862</strong><br><br><font color="blue">Preconditions:</font>
+<pre></pre>
+
+<br> EXECUTE _penetrate8862 in _situation8897
+
+<br>      <font color="blue">deleting</font>
+.. nothing to delete
+<br>      <font color="blue">adding</font>
+.. nothing to add</li>
+<br><li><strong>Step: _release8866</strong><br><br><font color="blue">Preconditions:</font>
+<pre>(:|triple| |_Viral-Nucleic-Acid8945| |object-of|
+      (|a| |Be-Confined| |with|
+       (|base| ((|the| |base| |of| |_Release8866|)))))
+</pre>
+<font color="#ff9933">WARNING: <br>(:|triple|
+                                    |_Viral-Nucleic-Acid8945|
+                                    |object-of|
+                                    (|a|
+                                     |Be-Confined|
+                                     |with|
+                                     (|base|
+                                      ((|the|
+                                        |base|
+                                        |of|
+                                        |_Release8866|)))))<br>"The object-of of the viral-nucleic-acid is a be-confined with base the base of the release."<br>is not explicitly true, but consistent with the KB
+<br>    so we will assume it is true and continue<br></font>
+
+<br> EXECUTE _release8866 in _situation8898
+
+<br>      <font color="blue">deleting</font>
+<pre>(:|triple| |_Be-Confined8950| |object| |_Viral-Nucleic-Acid8945|)
+(:|triple| |_Be-Confined8950| |base| |_Protein-Coat8944|)
+</pre>
+<br>      <font color="blue">adding</font>
+.. nothing to add</li>
+<br><li><strong>Step: _move8867</strong><br><br><font color="blue">Preconditions:</font>
+<pre>(:|triple| |_Viral-Nucleic-Acid8945| |object-of|
+      (|mustnt-be-a| |Be-Restrained|))
+</pre>
+<font color="blue">Succeeded preconditions:</font>
+<pre>(:|triple| |_Viral-Nucleic-Acid8945| |object-of|
+      (|mustnt-be-a| |Be-Restrained|))
+</pre> 
+
+<br> EXECUTE _move8867 in _situation8955
+
+<br>      <font color="blue">deleting</font>
+<pre>(:|triple| |_Viral-Nucleic-Acid8945| |location| |_Place8962|)
+(:|triple| |_Viral-Nucleic-Acid8945| |is-inside| |_Protein-Coat8944|)
+</pre>
+<br>      <font color="blue">adding</font>
+<pre>(:|triple| |_Viral-Nucleic-Acid8945| |is-near| nil)
+(:|triple| |_Viral-Nucleic-Acid8945| |abuts| nil)
+(:|triple| |_Viral-Nucleic-Acid8945| |is-above| nil)
+(:|triple| |_Viral-Nucleic-Acid8945| |is-below| nil)
+(:|triple| |_Viral-Nucleic-Acid8945| |is-along| nil)
+(:|triple| |_Viral-Nucleic-Acid8945| |is-at| nil)
+(:|triple| |_Viral-Nucleic-Acid8945| |is-at-of| nil)
+(:|triple| |_Viral-Nucleic-Acid8945| |is-beside| nil)
+(:|triple| |_Viral-Nucleic-Acid8945| |is-between| nil)
+(:|triple| |_Viral-Nucleic-Acid8945| |is-behind| nil)
+(:|triple| |_Viral-Nucleic-Acid8945| |is-in-front-of| nil)
+(:|triple| |_Viral-Nucleic-Acid8945| |is-inside| |_Plasma-Membrane8863|)
+(:|triple| |_Viral-Nucleic-Acid8945| |encloses| nil)
+(:|triple| |_Viral-Nucleic-Acid8945| |is-on| nil)
+(:|triple| |_Viral-Nucleic-Acid8945| |has-on-it| nil)
+(:|triple| |_Viral-Nucleic-Acid8945| |is-opposite| nil)
+(:|triple| |_Viral-Nucleic-Acid8945| |is-outside| nil)
+(:|triple| |_Viral-Nucleic-Acid8945| |does-not-enclose| nil)
+(:|triple| |_Viral-Nucleic-Acid8945| |is-over| nil)
+(:|triple| |_Viral-Nucleic-Acid8945| |is-under| nil)
+(:|triple| |_Viral-Nucleic-Acid8945| |location| |_Place8968|)
+</pre></li>
+
+</ul>
+<h2>Summary of alternative paths simulated</h2>
+<ul>
+<li>(|_Attach8861| |_Breach8872| |_Traverse8874| |_Penetrate8862|
+     |_Release8866| |_Move8867|)
+</li>
+</ul>
+<hr><h2>Check expected effects</h2>
+<p>We check each simulated path</p>
+<ul>
+
+<li><p>The overall effects for path (|_Attach8861|
+                                     |_Breach8872|
+                                     |_Traverse8874|
+                                     |_Penetrate8862|
+                                     |_Release8866|
+                                     |_Move8867|)</p>
+<ul><li>Added: <br>
+(:|triple| |_Be-Attached-To8870| |object| |_Virus8859|)<br>
+(:|triple| |_Be-Attached-To8870| |object| |_Cell8860|)<br>
+(:|triple| |_Portal8877| |is-region-of| |_Plasma-Membrane8863|)<br>
+(:|triple| |_Be-Broken8888| |object| |_Plasma-Membrane8863|)<br>
+(:|triple| |_Viral-Nucleic-Acid8945| |is-near| nil)<br>
+(:|triple| |_Viral-Nucleic-Acid8945| |abuts| nil)<br>
+(:|triple| |_Viral-Nucleic-Acid8945| |is-above| nil)<br>
+(:|triple| |_Viral-Nucleic-Acid8945| |is-below| nil)<br>
+(:|triple| |_Viral-Nucleic-Acid8945| |is-along| nil)<br>
+(:|triple| |_Viral-Nucleic-Acid8945| |is-at| nil)<br>
+(:|triple| |_Viral-Nucleic-Acid8945| |is-at-of| nil)<br>
+(:|triple| |_Viral-Nucleic-Acid8945| |is-beside| nil)<br>
+(:|triple| |_Viral-Nucleic-Acid8945| |is-between| nil)<br>
+(:|triple| |_Viral-Nucleic-Acid8945| |is-behind| nil)<br>
+(:|triple| |_Viral-Nucleic-Acid8945| |is-in-front-of| nil)<br>
+(:|triple| |_Viral-Nucleic-Acid8945| |is-inside|
+ |_Plasma-Membrane8863|)<br>
+(:|triple| |_Viral-Nucleic-Acid8945| |encloses| nil)<br>
+(:|triple| |_Viral-Nucleic-Acid8945| |is-on| nil)<br>
+(:|triple| |_Viral-Nucleic-Acid8945| |has-on-it| nil)<br>
+(:|triple| |_Viral-Nucleic-Acid8945| |is-opposite| nil)<br>
+(:|triple| |_Viral-Nucleic-Acid8945| |is-outside| nil)<br>
+(:|triple| |_Viral-Nucleic-Acid8945| |does-not-enclose| nil)<br>
+(:|triple| |_Viral-Nucleic-Acid8945| |is-over| nil)<br>
+(:|triple| |_Viral-Nucleic-Acid8945| |is-under| nil)<br>
+(:|triple| |_Viral-Nucleic-Acid8945| |location| |_Place8968|)<br>
+</li>
+<li>Deleted: <br>
+(:|triple| |_Virus8859| |location| |_Place8894|)<br>
+(:|triple| |_Be-Confined8950| |object| |_Viral-Nucleic-Acid8945|)<br>
+(:|triple| |_Be-Confined8950| |base| |_Protein-Coat8944|)<br>
+(:|triple| |_Viral-Nucleic-Acid8945| |location| |_Place8962|)<br>
+(:|triple| |_Viral-Nucleic-Acid8945| |is-inside|
+ |_Protein-Coat8944|)<br>
+</li></ul>
+<br>These are expected effects of a |Virus-Invades-Cell|
+<br>  (We assume that the user entered these using the Dialog Window)<br>
+<br>(:|triple|
+     (|the| |Viral-Nucleic-Acid| |has-part| |of|
+      (|the| |Virus| |agent| |of| (|thelast| |Virus-Invades-Cell|)))
+     |location|
+     (|the| |location| |of|
+      (|the| |Cytoplasm| |has-part| |of|
+       (|the| |Cell| |object| |of| (|thelast| |Virus-Invades-Cell|)))))
+<br>      -> the effect is achieved!
+
+<br> <font color="blue">ALL THE EXPECTED EFFECTS ARE ACHIEVED.</font>
+
+</li>
+
+</ul>
+<h2>Summary of Loops Found</h2><br>  <font color="blue">No loop found!</font>
+<h2>Error items and their fixes</h2>
+<ul>
+<br> "2001/6/20  9:45:3" -- Getting fixes for |error-item-255|
+
+<h3>checking how to change |object-of| value of |_Viral-Nucleic-Acid8945|</h3>
+<br> ..checking if there are missing steps .. 
+<br> <font color="blue">proposed fix</font> : add a |Shut-Out| step with "the be-shut-out" as (|a|
+                                                                                               |Be-Confined|
+                                                                                               |with|
+                                                                                               (|base|
+                                                                                                ((|the|
+                                                                                                  |base|
+                                                                                                  |of|
+                                                                                                  |_Release8866|)))) before step |_Release8866| to change |object-of| of |_Viral-Nucleic-Acid8945|
+<br> <font color="blue">proposed fix</font> : add a |Block| step with "the be-blocked" as (|a|
+                                                                                           |Be-Confined|
+                                                                                           |with|
+                                                                                           (|base|
+                                                                                            ((|the|
+                                                                                              |base|
+                                                                                              |of|
+                                                                                              |_Release8866|)))) before step |_Release8866| to change |object-of| of |_Viral-Nucleic-Acid8945|
+
+<br>     .. checking if steps can be modified .. 
+       -> no step modification applicable
+
+<br>     .. checking if ordering changes may fix the problem .. 
+<br>       -> no ordering change applicable
+
+<br>
+
+<h3>checking  if there are unnecessary steps </h3> 
+<br><font color="blue">Proposed fix:</font> delete or modify |_Release8866|
+<br>Fix items: ((type . :add-step-before-step)
+                (kanal::fix kanal::add |Shut-Out| kanal::{with
+                 "the be-shut-out" kanal::as
+                 (|a| |Be-Confined| |with|
+                  (|base| ((|the| |base| |of| |_Release8866|))))
+                 kanal::} kanal::before |_Release8866| kanal::to-make
+                 |object-of| kanal::of |_Viral-Nucleic-Acid8945|
+                 kanal::become
+                 (|a| |Be-Confined| |with|
+                  (|base| ((|the| |base| |of| |_Release8866|))))))<br>
+((type . :add-step-before-step)
+ (kanal::fix kanal::add |Block| kanal::{with "the be-blocked" kanal::as
+  (|a| |Be-Confined| |with|
+   (|base| ((|the| |base| |of| |_Release8866|))))
+  kanal::} kanal::before |_Release8866| kanal::to-make |object-of|
+  kanal::of |_Viral-Nucleic-Acid8945| kanal::become
+  (|a| |Be-Confined| |with|
+   (|base| ((|the| |base| |of| |_Release8866|))))))<br>
+((type . :delete-or-modify-step)
+ (kanal::fix kanal::delete-or-modify |_Release8866|))<br>
+
+<li>((kanal::source . |_Release8866|) (kanal::success)
+     (kanal::level . :warning) (type . :inexplicit-precondition)
+     (kanal::constraint
+      (:|triple| |_Viral-Nucleic-Acid8945| |object-of|
+       (|a| |Be-Confined| |with|
+        (|base| ((|the| |base| |of| |_Release8866|))))))
+     (kanal::id . |error-item-255|))
+<br> "2001/6/20  9:45:9" -- Getting fixes for |error-item-255|
+
+<h3>checking how to change |object-of| value of |_Viral-Nucleic-Acid8945|</h3>
+<br> ..checking if there are missing steps .. 
+<br> <font color="blue">proposed fix</font> : add a |Shut-Out| step with "the be-shut-out" as (|a|
+                                                                                               |Be-Confined|
+                                                                                               |with|
+                                                                                               (|base|
+                                                                                                ((|the|
+                                                                                                  |base|
+                                                                                                  |of|
+                                                                                                  |_Release8866|)))) before step |_Release8866| to change |object-of| of |_Viral-Nucleic-Acid8945|
+<br> <font color="blue">proposed fix</font> : add a |Block| step with "the be-blocked" as (|a|
+                                                                                           |Be-Confined|
+                                                                                           |with|
+                                                                                           (|base|
+                                                                                            ((|the|
+                                                                                              |base|
+                                                                                              |of|
+                                                                                              |_Release8866|)))) before step |_Release8866| to change |object-of| of |_Viral-Nucleic-Acid8945|
+
+<br>     .. checking if steps can be modified .. 
+       -> no step modification applicable
+
+<br>     .. checking if ordering changes may fix the problem .. 
+<br>       -> no ordering change applicable
+
+<br>
+
+<h3>checking  if there are unnecessary steps </h3> 
+<br><font color="blue">Proposed fix:</font> delete or modify |_Release8866|
+<br>Fix items: ((type . :add-step-before-step)
+                (kanal::fix kanal::add |Shut-Out| kanal::{with
+                 "the be-shut-out" kanal::as
+                 (|a| |Be-Confined| |with|
+                  (|base| ((|the| |base| |of| |_Release8866|))))
+                 kanal::} kanal::before |_Release8866| kanal::to-make
+                 |object-of| kanal::of |_Viral-Nucleic-Acid8945|
+                 kanal::become
+                 (|a| |Be-Confined| |with|
+                  (|base| ((|the| |base| |of| |_Release8866|))))))<br>
+((type . :add-step-before-step)
+ (kanal::fix kanal::add |Block| kanal::{with "the be-blocked" kanal::as
+  (|a| |Be-Confined| |with|
+   (|base| ((|the| |base| |of| |_Release8866|))))
+  kanal::} kanal::before |_Release8866| kanal::to-make |object-of|
+  kanal::of |_Viral-Nucleic-Acid8945| kanal::become
+  (|a| |Be-Confined| |with|
+   (|base| ((|the| |base| |of| |_Release8866|))))))<br>
+((type . :delete-or-modify-step)
+ (kanal::fix kanal::delete-or-modify |_Release8866|))<br>
+
+==> fixes ((type . :add-step-before-step)
+           (kanal::fix kanal::add |Shut-Out| kanal::{with
+            "the be-shut-out" kanal::as
+            (|a| |Be-Confined| |with|
+             (|base| ((|the| |base| |of| |_Release8866|))))
+            kanal::} kanal::before |_Release8866| kanal::to-make
+            |object-of| kanal::of |_Viral-Nucleic-Acid8945|
+            kanal::become
+            (|a| |Be-Confined| |with|
+             (|base| ((|the| |base| |of| |_Release8866|))))))<br>
+((type . :add-step-before-step)
+ (kanal::fix kanal::add |Block| kanal::{with "the be-blocked" kanal::as
+  (|a| |Be-Confined| |with|
+   (|base| ((|the| |base| |of| |_Release8866|))))
+  kanal::} kanal::before |_Release8866| kanal::to-make |object-of|
+  kanal::of |_Viral-Nucleic-Acid8945| kanal::become
+  (|a| |Be-Confined| |with|
+   (|base| ((|the| |base| |of| |_Release8866|))))))<br>
+((type . :delete-or-modify-step)
+ (kanal::fix kanal::delete-or-modify |_Release8866|))<br>
+</li>
+<br> "2001/6/20  9:45:10" -- Getting fixes for |error-item-259|
+<br>Fix items: ((type . :delete-or-modify-link)
+                (kanal::fix kanal::delete-or-modify kanal::ordering
+                 kanal::constraints kanal::in
+                 ((|_Attach8861| kanal::before |_Penetrate8862|)
+                  (|_Breach8872| kanal::before |_Traverse8874|)
+                  (|_Penetrate8862| kanal::before |_Release8866|)
+                  (|_Release8866| kanal::before |_Move8867|))))<br>
+
+<li>((kanal::source (|_Attach8861| kanal::before |_Penetrate8862|)
+      (|_Breach8872| kanal::before |_Traverse8874|)
+      (|_Penetrate8862| kanal::before |_Release8866|)
+      (|_Release8866| kanal::before |_Move8867|))
+     (kanal::success) (kanal::level . :warning)
+     (type . :unnecessary-link) (kanal::constraint . kanal::ordering)
+     (kanal::id . |error-item-259|))
+<br> "2001/6/20  9:45:10" -- Getting fixes for |error-item-259|
+<br>Fix items: ((type . :delete-or-modify-link)
+                (kanal::fix kanal::delete-or-modify kanal::ordering
+                 kanal::constraints kanal::in
+                 ((|_Attach8861| kanal::before |_Penetrate8862|)
+                  (|_Breach8872| kanal::before |_Traverse8874|)
+                  (|_Penetrate8862| kanal::before |_Release8866|)
+                  (|_Release8866| kanal::before |_Move8867|))))<br>
+
+==> fixes ((type . :delete-or-modify-link)
+           (kanal::fix kanal::delete-or-modify kanal::ordering
+            kanal::constraints kanal::in
+            ((|_Attach8861| kanal::before |_Penetrate8862|)
+             (|_Breach8872| kanal::before |_Traverse8874|)
+             (|_Penetrate8862| kanal::before |_Release8866|)
+             (|_Release8866| kanal::before |_Move8867|))))<br>
+</li>
+<h2>Info items</h2>
+<br>((kanal::source . |Virus-Invades-Cell|)
+     (kanal::content
+      (|_Attach8861| |_Breach8872| |_Traverse8874| |_Penetrate8862|
+       |_Release8866| |_Move8867|))
+     (type . :simulated-paths) (kanal::id . |info-item-260|))
+

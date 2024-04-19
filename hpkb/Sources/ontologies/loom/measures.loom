@@ -1,0 +1,111 @@
+;;; -*- Mode: Lisp; Package: LOOM; Syntax: COMMON-LISP; Base: 10 -*-
+
+(in-package "LOOM")
+
+
+(defvar *ignore-units-p* nil
+  "If T dimensioned numbers such as 0.18km will parse into plain numbers,
+e.g., 0.18, and the corresponding quantity concept, e.g., `Distance-Quantity'
+will become a synonym for `Number'.")
+
+;; The `-Quantity' concepts below mirror the corresponding `-Measure'
+;;    concepts.  Since the vehicle ontology uses only `-Quantity' concepts,
+;;    we can ignore unit information by simply setting `*ignore-units-p*'.
+
+(defpackage "LOOM"
+  (:export #:Distance-Quantity
+           #:Mass-Quantity
+           #:Power-Quantity
+           #:Speed-Quantity
+           #:Volume-Quantity
+           #:Time-Quantity
+           #:Area-Quantity
+           #:Flow-Quantity
+           #:Area-Rate-Quantity))
+
+(cond
+ ((not *ignore-units-p*)
+  (defconcept Distance-Quantity :is Distance-Measure)
+  (defconcept Mass-Quantity :is Mass-Measure)
+  (defconcept Power-Quantity :is Power-Measure)
+  (defconcept Speed-Quantity :is Speed-Measure)
+  (defconcept Volume-Quantity :is Volume-Measure)
+  (defconcept Time-Quantity :is Time-Measure)
+  (defconcept Area-Quantity :is Area-Measure)
+  (defconcept Flow-Quantity :is Measure)
+  (defconcept Area-Rate-Quantity :is Measure)
+
+  ;; Define this new "area" measure so it won't be reduced to m2:
+  (ms:define-unit "l/km")
+  ;; Define flow unit:
+  (ms:defmeasure flow "m3/s"
+    :units ("l/s" "l/h" "m3/h")
+    :format (:unit "l/h"))
+  (ms:defmeasure area-rate "m2/s"
+    :units ("m2/h")
+    :format (:unit "m2/h"))
+  )
+ (t
+  (defconcept Distance-Quantity :is Number)
+  (defconcept Mass-Quantity :is Number)
+  (defconcept Power-Quantity :is Number)
+  (defconcept Speed-Quantity :is Number)
+  (defconcept Volume-Quantity :is Number)
+  (defconcept Time-Quantity :is Number)
+  (defconcept Area-Quantity :is Number)
+  (defconcept Flow-Quantity :is Number)
+  (defconcept Area-Rate-Quantity :is Number)
+  ))
+
+(tellm)
+
+
+;; Reactivate the measures readtable in case we are using a dumped image:
+
+(defun reactivate-measures-readtable ()
+  (when (symbolp (read-from-string "42m"))
+    (let ((standard-readtable ms::*standard-readtable*))
+      (ms:install-dim-number-reader :permanent t)
+      (when standard-readtable
+        ;; Important: Make sure `ms::*standard-readtable*' stays clean even if
+        ;;    the current readtable already had dim-number readers installed:
+        (setq ms::*standard-readtable* standard-readtable)))))
+
+(reactivate-measures-readtable)
+
+
+;; Hacking the measures package to ignore units if desired:
+
+(defvar *orig-make-dim-number* #'ms:make-dim-number)
+
+(defun ms:make-dim-number (&rest args &key (value 1) unit pid)
+  ;; Advised version that throws away unit information and returns
+  ;;    the plain `value' in case `*ignore-units-p*' is T.
+  (declare (ignore unit pid))
+  (let ((result
+         ;; This always needs to get called, since for things like
+         ;;    `18Wheel-Truck' it is expected to signal an error (we
+         ;;    have to use `apply' to properly set supplied-p vars):
+         (apply *orig-make-dim-number* args)))
+    (if *ignore-units-p*
+        value
+      result)))
+(compile 'ms:make-dim-number)
+
+
+;;; TEMPORARY PATCH UNTIL MEASURES PACKAGE IS FIXED:
+
+(in-package "MEASURES")
+
+(defvar *token-buffer*
+    (make-array '(1024) :element-type 'character
+                :fill-pointer 0 :adjustable t))
+
+(defun read-token-preserving-case (stream char) 
+  (setf (fill-pointer *token-buffer*) 0)
+  (do ((c char (read-char stream nil nil)))
+      ((or (null c) (terminating-char-p c))
+       (if c (unread-char c stream))
+       (coerce *token-buffer* 'simple-string))
+    (vector-push-extend c *token-buffer*)))
+(compile 'read-token-preserving-case)

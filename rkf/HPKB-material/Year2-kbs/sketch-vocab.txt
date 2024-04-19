@@ -1,0 +1,1840 @@
+
+
+
+
+
+
+
+
+;STANDARD EQUIPMENT AND TROOP STRENGTH
+
+
+
+constant: equipmentOfUnit.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: BinaryPredicate IKBConstant.
+
+arg1Isa: ModernMilitaryUnit-Deployable
+
+arg2Isa: Artifact.
+
+genlPreds: possesses.
+
+comment: "(#$equipmentOfUnit ?UNIT ?DEVICE) means that ?DEVICE is part
+
+of the equipment possessed by unit.  This is an instance-level
+
+predicate, relating a particular unit to a particular piece of
+
+equipment.".
+
+cyclistNotes: "Type-level analogs may be created using typing preds
+
+such as #$relationAllExists.  However, see also
+
+#$standardEquipmentOfUnitType.".
+
+
+
+constant: vehicleOfUnit.
+
+in Mt: ModernMilitaryVehiclesMt.
+
+isa: BinaryPredicate IKBConstant.
+
+genlPreds: possesses.
+
+arg1Isa: ModernMilitaryUnit-Deployable.
+
+arg2Isa: ModernMilitaryUnit-Deployabl.
+
+comment: "(#$vehicleOfUnit ?UNIT ?VEHICLE) means that ?VEHICLE is a
+
+#$TransportationDevice that is possessed and used by ?UNIT.  This is
+
+an instance-level predicate, relating a particular unit to a
+
+particular vehicle.".
+
+In Mt: ModernMilitaryTacticsMt.
+
+(F: (genlPreds vehicleOfUnit equipmentOfUnit)).
+
+
+
+constant: standardVehicleOfUnitType.
+
+in Mt: ModernMilitaryVehiclesMt.
+
+isa: BinaryPredicate IKBConstant.
+
+arg1Isa: ExistingObjectType.
+
+arg1Genl: ModernMilitaryUnit-Deployable.
+
+arg2Isa: ExistingObjectType.
+
+arg2Genl: TransportationDevice.
+
+comment: "(#$standardVehicleOfUnitType ?UNITTYPE ?VEHICLETYPE) means
+
+that under 'ordinary' or 'normal' conditions, we should expect to find
+
+any instances of ?UNITTYPE equipped with one or more instances of
+
+?VEHICLETYPE.".
+
+cyclistNotes: "While (#$standardVehicleOfUnitType ?UNITTYPE
+
+?VEHICLETYPE) entails (#$relationAllExists #$vehicleOfUnit ?UNITTYPE
+
+?VEHICLETYPE) in 'normal' reasoning contexts, it entails more than this:
+
+the use of the predicate carries the imputation that the equipping is
+
+'standard' and that we would expect it, other things being equal.
+
+This is not something we would capture simply by use of
+
+#$relationAllExists in conjunction with #$vehicleOfUnit.".
+
+
+
+constant: standardEquipmentOfUnitType.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: BinaryPredicate IKBConstant.
+
+arg1Isa: ExistingObjectType.
+
+arg1Genl: ModernMilitaryUnit-Deployable.
+
+arg2Isa: ExistingObjectType.
+
+arg2Genl: Artifact.
+
+comment: "(#$standardEquipmentOfUnitType ?UNITTYPE ?THINGTYPE) means
+
+that under 'ordinary' or 'normal' circumstances we should expect to
+
+find any instances of?UNITTYPE equipped with one or more instances of
+
+?THINGTYPE.".
+
+cyclistNotes: "While (#$standardEquipmentOfUnitType ?UNITTYPE
+
+?THINGTYPE) entails (#$relationAllExists #$equipmentOfUnit ?UNITTYPE
+
+?THINGTYPE) in 'normal' reasoning contexts, it entails more than this:
+
+the use of the predicate carries the imputation that the equipping is
+
+'standard' and that we would expect it, other things being equal.
+
+This is not something we would capture simply by use of
+
+#$relationAllExists in conjunction with #$equipmentOfUnit.".
+
+in Mt: ModernMilitaryTacticsMt.
+
+F: (genlPreds standardVehicleOfUnitType standardEquipmentOfUnitType).
+
+
+
+constant: standardVehicleOfUnitTypeCount.
+
+in Mt: ModernMilitaryVehiclesMt.
+
+isa: TernaryPredicate IKBConstant.
+
+arg1Isa: ExistingObjectType.
+
+arg1Genl: ModernMilitaryUnit-Deployable.
+
+arg2Isa: ExistingObjectType.
+
+arg2Genl: TransportationDevice.
+
+arg3Isa: PositiveInteger.
+
+comment: "(#$standardVehicleOfUnitTypeCount ?UNITTYPE ?VEHICLETYPE
+
+?NUMBER) means that under 'ordinary' or 'normal' circumstances we
+
+would expect to find an instance of ?UNITTYPE equipped with exactly
+
+?NUMBER #$TransportationDevices of type ?VEHICLETYPE.".
+
+F:
+
+(implies
+
+  (standardVehicleOfUnitTypeCount ?UNITTYPE ?TRANSTYPE ?COUNT)
+
+  (standardVehicleOfUnitType ?UNITTYPE ?TRANSTYPE)).
+
+
+
+constant: standardEquipmentOfUnitTypeCount.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: BinaryPredicate IKBConstant.
+
+arg1Isa: ExistingObjectType.
+
+arg1Genl: Artifact.
+
+arg2Isa: ExistingObjectType.
+
+arg2Genl: ModernMilitaryUnit-Deployable.
+
+arg3Isa: PositiveInteger.
+
+comment: "(#$standardEquipmentOfUnitTypeCount ?UNITTYPE ?EQUIPMENTTYPE
+
+?NUMBER) means that under 'ordinary' or 'normal' circumstances we
+
+would expect to find an instance of ?UNITTYPE equipped with exactly
+
+?NUMBER #$Artifacts of type ?EQUIPMENTTYPE.".
+
+F:
+
+(implies
+
+  (standardEquipmentOfUnitTypeCount ?UNITTYPE ?THINGTYPE ?COUNT)
+
+  (standardEquipmentOfUnitType ?UNITTYPE ?THINGTYPE)).
+
+
+
+in Mt: ModernMilitaryTacticsMt.
+
+F:
+
+(implies
+
+  (standardEquipmentOfUnitType ?UNITTYPE ?THINGTYPE)
+
+  (relationAllExists equipmentOfUnit ?UNITTYPE ?THINGTYPE)).
+
+
+
+in Mt: ModernMilitaryVehiclesMt.
+
+F:
+
+(implies
+
+  (standardVehicleOfUnitType ?UNITTYPE ?VEHICLETYPE)
+
+  (relationAllExists equipmentOfUnit ?UNITTYPE ?VEHICLETYPE)).
+
+
+
+
+
+in Mt: ModernMilitaryTacticsMt.
+
+F:
+
+(implies
+
+  (standardEquipmentOfUnitType ?UNITTYPE ?THINGTYPE)
+
+  (relationAllExistsMany equipmentOfUnit ?UNITTYPE ?THINGTYPE)).
+
+F:
+
+(exceptWhen 
+
+  (standardEquipmentOfUnitTypeCount ?UNITTYPE ?THINGTYPE 1)
+
+(implies
+
+  (standardEquipmentOfUnitType ?UNITTYPE ?THINGTYPE)
+
+  (relationAllExistsMany equipmentOfUnit ?UNITTYPE ?THINGTYPE))).
+
+F:
+
+(exceptWhen 
+
+  (standardEquipmentOfUnitTypeCount ?UNITTYPE ?THINGTYPE 2)
+
+(implies
+
+  (standardEquipmentOfUnitType ?UNITTYPE ?THINGTYPE)
+
+  (relationAllExistsMany equipmentOfUnit ?UNITTYPE ?THINGTYPE))).
+
+F:
+
+(exceptWhen 
+
+  (standardEquipmentOfUnitTypeCount ?UNITTYPE ?THINGTYPE 3)
+
+(implies
+
+  (standardEquipmentOfUnitType ?UNITTYPE ?THINGTYPE)
+
+  (relationAllExistsMany equipmentOfUnit ?UNITTYPE ?THINGTYPE))).
+
+
+
+
+
+in Mt: ModernMilitaryVehiclesMt.
+
+F:
+
+(implies
+
+  (standardVehicleOfUnitType ?UNITTYPE ?TRANSTYPE)
+
+  (relationAllExistsMany vehicleOfUnit ?UNTITYPE ?TRANSTYPE)).
+
+F:
+
+(exceptWhen
+
+  (standardVehicleOfUnitTypeCount ?UNITTYPE ?TRANSTYPE 1)
+
+(implies
+
+  (standardVehicleOfUnitType ?UNITTYPE ?TRANSTYPE)
+
+  (relationAllExistsMany vehicleOfUnit ?UNTITYPE ?TRANSTYPE))).
+
+F:
+
+(exceptWhen
+
+  (standardVehicleOfUnitTypeCount ?UNITTYPE ?TRANSTYPE 2)
+
+(implies
+
+  (standardVehicleOfUnitType ?UNITTYPE ?TRANSTYPE)
+
+  (relationAllExistsMany vehicleOfUnit ?UNTITYPE ?TRANSTYPE))).
+
+F:
+
+(exceptWhen
+
+  (standardVehicleOfUnitTypeCount ?UNITTYPE ?TRANSTYPE 3)
+
+(implies
+
+  (standardVehicleOfUnitType ?UNITTYPE ?TRANSTYPE)
+
+  (relationAllExistsMany vehicleOfUnit ?UNTITYPE ?TRANSTYPE))).
+
+
+
+
+
+in Mt: ModernMilitaryTacticsMt.
+
+F:
+
+(implies
+
+   (standardEquipmentOfUnitTypeCount ?UNITTYPE ?THINGTYPE ?COUNT)
+
+   (relationAllExistsCount equipmentOfUnit ?UNITTYPE ?THINGTYPE ?COUNT)).
+
+
+
+
+
+in Mt: ModernMilitaryVehiclesMt.
+
+F:
+
+(implies
+
+  (standardVehicleOfUnitTypeCount ?UNITTYPE ?VEHICLETYPE ?COUNT)
+
+  (relationAllExistsCount vehicleOfUnit ?UNITTYPE ?VEHICLETYPE ?COUNT)). 
+
+
+
+
+
+;Troop strength
+
+
+
+constant: complementOfMilitaryUnit.
+
+in Mt: MilitaryForceStructureMt.
+
+isa: IKBConstant BinaryPredicate.
+
+arg1Isa: ModernMilitaryOrganization. 
+
+arg2Isa: PositiveInteger.
+
+comment : "(#$complementOfMilitaryUnit UNIT INT) means that the number
+
+          of persons assigned to the particular military organization UNIT is
+
+          INT." 
+
+
+
+constant: standardComplementOfUnitType.
+
+in Mt: MilitaryForceStructureMt.
+
+isa: IKBConstant quaternaryPredicate.
+
+arg1Isa: MilitaryUnitSpecialtyType.
+
+arg2Isa: Agent.
+
+arg3Isa: MilitaryEchelon.
+
+arg4Isa: PositiveInteger.
+
+comment: "(#$standardComplementOfUnitType SPECIALIZATION ALLEGIANCE
+
+ECHELON INT) means that under 'normal' or 'ordinary' circumstances we
+
+would expect a military unit of specialization SPECIALIZATION with
+
+allegiance ALLEGIANCE at ECHELON level to have a troop complement of
+
+INT.".
+
+
+
+
+
+
+
+;SPECIALIZATIONS
+
+
+
+constant: BradleyFightingVehicle.
+
+in Mt: ModernMilitaryVehiclesMt.
+
+isa: ExistingObjectType IKBConstant.
+
+genls: ArmoredPersonnelCarrier.
+
+comment: "Specialized type of #$ArmoredPersonnelCarrier used regularly
+
+by the modern US Army.".
+
+
+
+constant: BFVUnit-MilitarySpecialty.
+
+in Mt: BattlespaceMilitaryMt.
+
+isa: ExistingObjectType IKBConstant.
+
+genls: MotorizedUnit-MilitarySpecialty.
+
+comment: "Specialization of motorized units with mission profiles
+
+dedicated to the deployment and use of BradleyFightingVehicles.".
+
+
+
+constant: HelicopterUnit-MilitarySpecialty.
+
+in Mt: MilitaryForceStructureMt.
+
+isa: ExistingObjectType IKBConstant.
+
+genls: AerialSupportUnit-MilitarySpecialty.
+
+
+
+constant: LightHelicopterUnit-MilitarySpecialty.
+
+in Mt: MilitaryForceStructureMt.
+
+isa: ExistingObjectType IKBConstant.
+
+genls: HelicopterUnit-MilitarySpecialty.
+
+
+
+constant: MediumHelicopterUnit-MilitarySpecialty.
+
+in Mt: MilitaryForceStructureMt.
+
+isa: ExistingObjectType IKBConstant.
+
+genls: HelicopterUnit-MilitarySpecialty.
+
+
+
+constant: HeavyHelicopterUnit-MilitarySpecialty.
+
+in Mt: MilitaryForceStructureMt.
+
+isa: ExistingObjectType IKBConstant.
+
+genls: HelicopterUnit-MilitarySpecialty.
+
+
+
+constant: CombatUnit-MilitarySpecialty.
+
+in Mt: MilitaryForceStructureMt.
+
+isa: ExistingObjectType IKBConstant.
+
+genls: ModernMilitaryUnit-Deployable.
+
+
+
+constant: DismountedUnit-MilitarySpecialty.
+
+in Mt: MilitaryForceStructureMt.
+
+isa: ExistingObjectType IKBConstant.
+
+genls: ModernMilitaryUnit-Deployable.
+
+
+
+constant: MobileUnit-MilitarySpecialty.
+
+in Mt: MilitaryForceStructureMt.
+
+isa: ExistingObjectType IKBConstant.
+
+genls: ModernMilitaryUnit-Deployable.
+
+
+
+
+
+
+
+
+
+
+
+;HEADQUARTERS
+
+
+
+constant: headQuartersOfUnit.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: BinaryPredicate IKBConstant.
+
+genlPreds: controllingSubOrganizations.
+
+arg1Isa: ModernMilitaryUnit-Deployable.
+
+arg2Isa: ModernMilitaryUnit-Deployable.
+
+
+
+
+
+constant: CommandPost.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ExistingObjectType IKBConstant.
+
+genls: ConstructionArtifact.
+
+
+
+constant: mainCPOfUnit.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: BinaryPredicate IKBConstant.
+
+arg1Isa: CommandPost.
+
+arg2Isa: ModernMilitaryUnit-Deployable.
+
+
+
+constant: tacticalCPOfUnit.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: BinaryPredicate IKBConstant
+
+arg1Isa: CommandPost.
+
+arg2Isa: ModernMilitaryUnit-Deployable.
+
+
+
+constant: rearCPOfUnit.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: BinaryPredicate IKBConstant
+
+arg1Isa: CommandPost.
+
+arg2Isa: ModernMilitaryUnit-Deployable.
+
+
+
+
+
+;Probably not needed/helpful
+
+
+
+;constant: mainHQOfTask.
+
+;in Mt: ModernMilitaryTacticsMt.
+
+;isa: ActorSlot IKBConstant.
+
+;genlPreds: headQuartersOfTask.
+
+;arg1Isa: MilitaryTask.
+
+;arg2Isa: ModernMilitaryUnit-Deployable.
+
+
+
+;constant: rearHQOfTask.
+
+;in Mt: ModernMilitaryTacticsMt.
+
+;isa: ActorSlot IKBConstant.
+
+;genlPreds: headQuartersOfTask.
+
+;arg1Isa: MilitaryTask.
+
+;arg2Isa: ModernMilitaryUnit-Deployable.
+
+
+
+;constant: forwardHQOfTask.
+
+;in Mt: ModernMilitaryTacticsMt.
+
+;isa: ActorSlot IKBConstant.
+
+;genlPreds: headQuartersOfTask.
+
+;arg1Isa: MilitaryTask.
+
+;arg2Isa: ModernMilitaryUnit-Deployable.
+
+
+
+;constant: tacticalHQOfTask.
+
+;in Mt: ModernMilitaryTacticsMt.
+
+;isa: ActorSlot IKBConstant.
+
+;genlPreds: headQuartersOfTask.
+
+;arg1Isa: MilitaryTask.
+
+;arg2Isa: ModernMilitaryUnit-Deployable.
+
+
+
+
+
+;CONTROL MEASURES
+
+
+
+;More Combat Theater Site Attributes
+
+
+
+;For all of these, one overall question is whether they are
+
+;task-specific.  If they are, it would be preferable to represent them
+
+;with predicates linking a region to a task.
+
+
+
+constant: ContactPoint.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: CombatTheaterSiteAttribute IKBConstant. 
+
+
+
+constant: CheckPoint.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: CombatTheaterSiteAttribute IKBConstant.
+
+
+
+constant: CoordinatingPoint.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: CombatTheaterSiteAttribute IKBConstant.
+
+
+
+constant: GeneralPoint.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: CombatTheaterSiteAttribute IKBConstant.
+
+
+
+constant: TargetReferencePoint.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: CombatTheaterSiteAttribute IKBConstant.
+
+
+
+constant: KeyFeatureMark.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: CombatTheaterSiteAttribute IKBConstant.
+
+
+
+constant: TargetedForMining.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: CombatTheaterSiteAttribute IKBConstant.
+
+;This one is doing duty for 'planned' minefields
+
+
+
+constant: EngagementArea.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: CombatTheaterSiteAttribute.
+
+
+
+constant: DropZone.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: CombatTheaterSiteAttribute.
+
+
+
+constant: FortifiedArea.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: CombatTheaterSiteAttribute.
+
+
+
+constant: LandingZone.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: CombatTheaterSiteAttribute.
+
+
+
+constant: PickupZone.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: CombatTheaterSiteAttribute.
+
+
+
+constant: StrongPoint.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: CombatTheaterSiteAttribute.
+
+
+
+constant: Airhead.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: CombatTheaterSiteAttribute.
+
+
+
+constant: ForwardArmingAndRefuelingPoint.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: CombatTheaterSiteAttribute.
+
+
+
+;Lines
+
+ 
+
+constant: ForwardEdgeOfBattleArea.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ExistingObjectType IKBConstant.
+
+genls: LineOfMilitaryForces.
+
+
+
+constant: LineOfDeparture.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ExistingObjectType IKBConstant.
+
+genls: LineOfMilitaryForces.
+
+
+
+constant: LineOfContact.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ExistingObjectType IKBConstant.
+
+genls: LineOfMilitaryForces.
+
+
+
+constant: FireSupportCoordinationLine.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ExistingObjectType IKBConstant.
+
+genls: LineOfMilitaryForces.
+
+
+
+constant: AirheadLine.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ExistingObjectType IKBConstant.
+
+genls: LineOfMilitaryForces.
+
+
+
+
+
+;MINEFIELDS
+
+
+
+constant: Minefield-AntiPersonnel.
+
+in Mt: ModernMilitaryWeaponsMt.
+
+isa: ExistingStuffType IKBConstant.
+
+genls: Minefield.
+
+
+
+constant: Minefield-AntiTank.
+
+in Mt: ModernMilitaryWeaponsMt.
+
+isa: ExistingStuffType IKBConstant.
+
+genls: Minefield.
+
+
+
+constant: Minefield-AntiTankWithGap.
+
+in Mt: ModernMilitaryWeaponsMt.
+
+isa: ExistingStuffType IKBConstant.
+
+genls: Minefield-AntiTank.
+
+
+
+;?
+
+;constant: Minefield-AntiTankWithLineMarker.
+
+;in Mt: ModernMilitaryWeaponsMt.
+
+;isa: ExistingStuffType IKBConstant.
+
+;genls: Minefield-AntiTank.
+
+
+
+constant: Minefield-Scatterable
+
+in Mt: ModernMilitaryWeaponsMt.
+
+isa: ExistingStuffType IKBConstant.
+
+genls: Minefield.
+
+
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+
+;AvenuesOfApproach, &c.
+
+
+
+constant: centerLineOfAOA.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: BinaryPredicate IKBConstant.
+
+genlPreds: inRegion.
+
+arg1Isa: Traversal SpatialThing.
+
+arg2Isa: AvenueOfApproach.
+
+comment: "(#$centerLineOfAOA LINE AOA) means that LINE is the
+
+centerline of the #$AvenueOfApproach AOA, represented as a spatial
+
+traversal.".
+
+;See if you guys consider #$Traversal the appropriate arg1Isa.  I'm assuming we'll reify centerlines as individuals, e.g.--
+
+
+
+;constant: CenterLineOfAOA101.
+
+;isa: Traversal SpatialThing-Localized.
+
+
+
+
+
+constant: widthOfAOA-Average.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: BinaryPredicate IKBConstant.
+
+arg1Isa: AvenueOfApproach.
+
+arg2Isa: ScalarInterval.
+
+comment: "(#$widthOfAOA-Average AOA WIDTH) means that WIDTH is the
+
+average width of the #$AvenueOfApproach AOA.".
+
+
+
+
+
+
+
+;CenterLine Point List
+
+
+
+;For this I really need to know what the 'points' proposed are and how
+
+;they are being represented.  I am using CycSystemList for the arg2:
+
+;if you are thinking of listing pairs of numbers representing point
+
+;coordinates, see Keith for details.
+
+
+
+constant: pointsOfCenterLineTraversal.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: BinaryPredicate IKBConstant.
+
+arg1Isa: Traversal SpatialThing.
+
+arg2Isa: CycSystemList.
+
+
+
+constant: pointsOfBorder.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: BinaryPredicate IKBConstant.
+
+arg1Isa: Border.
+
+arg2Isa: CycSystemList.
+
+
+
+
+
+;"AxisOfAdvance"
+
+constant: AxisOfAdvance.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ExistingObjectType IKBConstant.
+
+genls: LineOfMilitaryForces.
+
+sourceOfTerm-PIT: FM101-5-1Mt.
+
+sourceOfTerm-WebPage: FM101-5-1WebPage.
+
+comment: "A line of advance assigned for purposes of control; often a
+
+road or a group of roads, or a designated series of locations,
+
+extending in the direction of the enemy. (Army) - A general route of
+
+advance, assigned for purposes of control, which extends toward the
+
+enemy. An axis of advance symbol graphically portrays a commander's
+
+intention, such as avoidance of built-up areas or envelopment of an
+
+enemy force. It follows terrain suitable for the size of the force
+
+assigned the axis and is often a road, a group of roads, or a
+
+designated series of locations. A commander may maneuver his forces
+
+and supporting fires to either side of an axis of advance provided the
+
+unit remain oriented on the axis and the objective. Deviations from an
+
+assigned axis of advance must not interfere with the maneuver of
+
+adjacent units without prior approval of the higher commander. Enemy
+
+forces that do not threaten security or jeopardize mission
+
+accomplishment may be bypassed. An axis of advance is not used to
+
+direct the control of terrain or the clearance of enemy forces from
+
+specific locations. Intermediate objectives normally are assigned for
+
+these purposes.".
+
+F:
+
+(relationAllInstance hasAttributes AxisOfAdvance ControlMeasure)>
+
+
+
+constant: ApproachCorridorAttribute.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: UnorderedAttributeType IKBConstant.
+
+genls: CombatTheaterSiteAttribute.
+
+comment: "A collection of #$CombatTheaterSiteAttributes properly
+
+applicable to approach corridors such as instances of
+
+#$AvenueOfApproach, instances of #$MobilityCorridor, and so on.".
+
+F:
+
+(interArgIsa2-1 hasAttributes ApproachCorridorAttribute AvenueOfApproach). 
+
+
+
+constant: ControlMeasureAttribute.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: UnorderedAttributeType IKBConstant.
+
+genls: CombatTheaterSiteAttribute.
+
+comment: "Collection of #$CombatTheaterSiteAttributes properly
+
+applicable to various individuals being used as #$ControlMeasures in a
+
+COA representation.".
+
+F:
+
+(implies
+
+  (and
+
+    (isa ?CMA ControlMeasureAttribute)
+
+    (hasAttributes ?THING ?CMA))
+
+  (hasAttributes ?THING ControlMeasure)).
+
+
+
+constant: AirApproach.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ApproachCorridorAttribute.
+
+comment: "Characteristic attribute of an approach corridor employed by
+
+air traffic.".
+
+F:
+
+(relationAllInstance hasAttributes AvenueOfApproach-Air AirApproach).
+
+
+
+constant: GroundApproach.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ApproachCorridorAttribute.
+
+comment: "Characteristic attribute of an approach corridor employed by
+
+ground forces.".
+
+F:
+
+(relationAllInstance hasAttributes AvenueOfApproach-Ground GroundApproach).
+
+
+
+;"Area, Friendly"
+
+constant: FriendlyRegion.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: CombatTheaterSiteAttribute.
+
+comment: "Distinguishing attribute of regions that are considered
+
+'friendly' in a COA planning context.". 
+
+
+
+;"Area, Hostile"
+
+constant: HostileRegion.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: CombatTheaterSiteAttribute.
+
+comment: "Distinguishing attribute of regions that are considered
+
+'hostile' in a COA planning context.".
+
+
+
+;"Area, Enemy Suspected"
+
+constant: SuspectedHostileActivity.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: CombatTheaterSiteAttribute.
+
+comment: "A region with this attribute in a military planning context
+
+is a region where the enemy is suspected but not known to be active.".
+
+
+
+constant: KnownHostileActivity.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: CombatTheaterSiteAttribute.
+
+comment: "A region with this attribute in a military planning context
+
+is a region where the enemy is known to be active.".
+
+
+
+constant: COAUnitOrientationAttribute.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: UnorderedAttributeType IKBConstant.
+
+genls: AttributeValue.
+
+comment: "Collection of military unit attributes pertaining to unit
+
+orientation within a planning context.".
+
+
+
+constant: FriendlyUnit.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: COAUnitOrientationAttribute.
+
+comment: "Distinguishing attribute of 'friendly' units within a COA
+
+planning context.".
+
+
+
+constant: HostileUnit.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: COAUnitOrientationAttribute.
+
+comment: "Distinguishing attribute of 'hostile' units within a COA
+
+planning context.".
+
+F:
+
+(implies
+
+  (and
+
+    (hasAttributes ?UNIT1 FriendlyUnit)
+
+    (hasAttributes ?UNIT2 HostileUnit))
+
+  (opponents ?UNIT1 ?UNIT2)).
+
+F:
+
+(implies
+
+  (and
+
+    (hasAttributes ?REGION FriendlyRegion)
+
+    (zoneControlled ?UNIT ?REGION)
+
+    (isa ?UNIT ModernMilitaryUnit-Deployable))
+
+  (hasAttributes ?UNIT FriendlyUnit)).
+
+F:
+
+(implies
+
+  (and
+
+    (hasAttributes ?REGION HostileRegion)
+
+    (zoneControlled ?UNIT ?REGION)
+
+    (isa ?UNIT ModernMilitaryUnit-Deployable))
+
+  (hasAttributes ?UNIT HostileUnit)).
+
+;For the present, we assume that the unit in control of a
+
+;HostileRegion is hostile and the unit in control of a FriendlyRegion
+
+;is friendly.  We do not assume that because a friendly unit controls
+
+;it, a region is friendly or that because a hostile unit controls it a
+
+;region is hostile.  In other words, the controlling unit is not the
+
+;only thing we look at in determining whether a region is hostile or
+
+;friendly.  This seemed the safer course.
+
+
+
+constant: avenueOfApproachForTroopType.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: TernaryPredicate IKBConstant.
+
+arg1Isa: AvenueOfApproach.
+
+arg2Isa: COAUnitOrientationAttribute.
+
+arg3Isa: MilitaryUnitSpecialtyType.
+
+comment: "(#$avenueOfApproachForTroopType AVENUE ORIENTATION
+
+SPECIALTY) means that within the COA representation context the
+
+#$AvenueOfApproach AVENUE is considered a viable avenue of approach
+
+for forces with the #$MilitarySpecialtyType SPECIALTY and the
+
+#$COAUnitOrientationAttribute ATTRIBUTE.".
+
+
+
+constant: axisOfAdvanceForTask.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: BinaryPredicate IKBConstant.
+
+arg1Isa: MilitaryTask.
+
+arg2Isa: AxisOfAdvance.
+
+comment: "(#$axisOfAdvanceForTask TASK AXIS) means that AXIS is the
+
+designated #$AxisOfAdvance for the #$MilitaryTask TASK in the COA
+
+planning context.".
+
+
+
+;For all of the categories listed under the 'Axis of Advance' heading, I would suggest hanging them off of MilitaryTasks as in the following example:
+
+
+
+;"Axis Of Advance, Friendly Airborne"
+
+;(and
+
+; (axisOfAdvanceInTask TASK AXIS)
+
+; (unitAssignedToTask TASK UNIT)
+
+; (isa UNIT AirborneUnit-MilitarySpecialization)
+
+; (hasAttributes UNIT FriendlyUnit))
+
+
+
+constant: directionOfAttack.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: BinaryPredicate IKBConstant.
+
+arg1Isa: MilitaryAttack.
+
+arg2Isa: UnitVectorInterval.
+
+comment: "(#$directionOfAttack ATTACK VECTOR) means that VECTOR is the
+
+direction in which the main force of the #$MilitaryAttack ATTACK is
+
+directed.".
+
+F:
+
+(implies
+
+  (and
+
+    (isa ?ATTACK Movement-TranslationEvent)
+
+    (directionOfAttack ?ATTACK ?VECTOR))
+
+  (directionOfTranslation-Avg ?ATTACK ?VECTOR)).
+
+
+
+
+
+;Similarly, for the various 'categories' of 'Direction of Attack', I would recommend having the pointers be conjunctions built up around military tasks, e.g.
+
+
+
+;"Direction of Attack, Enemy Aviation"
+
+
+
+;(and
+
+;  (directionOfAttack ATTACK VECTOR)
+
+;  (unitAssignedToTask ATTACK UNIT)
+
+;  (isa UNIT AviationUnit-MilitarySpecialization)
+
+;  (hasAttributes UNIT HostileUnit))
+
+
+
+;replace unitAssignedToTask with unitAssignedToOperation if appropriate.
+
+
+
+; "direction of attack for feint"
+
+;(and
+
+;  (directionOfAttack ATTACK VECTOR)
+
+;  (isa ATTACK Feint-MilitaryTask))
+
+
+
+;One issue that remains to be resolved is whether UnitVectorInterval is
+
+;the best CycL choice for representing direction, although I would
+
+;argue strongly that it is.  Instances include GeographicalDirections
+
+;like 'NorthEast-Directly' and also the intrinsic directionalities of
+
+;certain kinds of objects, like 'Leftward-Directly'.  I imagine that it
+
+;would not be hard to link the GeographicalDirection up with the
+
+;coordinate representation John, Rob, and Ken are using.
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+
+;Unit Positions.
+
+
+
+;I am a little nervous about adding 'planned' to this list, as in 'assemblyPositionPlanned'.  For one thing, I'm not sure what the 'proposed-ordered-planned' distinction actually is; also, it seems 'planned' really entails expansion in terms of unit or maybe task-purpose.  Still, if it has to be created it can be done on the model of the others.
+
+
+
+;Also, do we really need the 'proposed' category?  It seems to me
+
+;every position designated as such in a COA sketch is in some sense a
+
+;'proposed' position.  
+
+
+
+;I haven't created a predicate for 'actual' positions.  I think we should assume a position is actual unless otherwise designated (e.g, via 'proposed').  I don't think we get much mileage out of an 'actual'/'virtual' distinction here.
+
+
+
+;If 'friendly' and 'hostile' come into it, as in "Attack Position,
+
+;Friendly, Occupied", it would probably be best to use the
+
+;COAUnitOrientationAttributes in describing the situation, thus:
+
+
+
+;(and
+
+;   (attackPositionOccupied REGION UNIT)
+
+;   (hasAttributes UNIT FriendlyUnit)).
+
+
+
+;We could also use FriendlyRegion and HostileRegion, e.g.--
+
+
+
+;(and
+
+;   (attackPositionOccupied REGION UNIT)
+
+;   (hasAttributes REGION FriendlyRegion)).
+
+
+
+;albeit this does not mean quite the same thing.
+
+  
+
+
+
+constant: attackPositionOccupied.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: BinaryPredicate IKBConstant.
+
+arg1Isa: GeographicalRegion.
+
+arg2Isa: ModernMilitaryUnit-Deployable.
+
+
+
+constant: attackPositionProposed.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: BinaryPredicate IKBConstant.
+
+arg1Isa: GeographicalRegion.
+
+arg2Isa: ModernMilitaryUnit-Deployable.
+
+
+
+constant: attackPositionOrdered.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: BinaryPredicate IKBConstant.
+
+arg1Isa: GeographicalRegion.
+
+arg2Isa: ModernMilitaryUnit-Deployable.
+
+
+
+
+
+
+
+constant: battlePositionOccupied.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: BinaryPredicate IKBConstant.
+
+arg1Isa: GeographicalRegion.
+
+arg2Isa: ModernMilitaryUnit-Deployable.
+
+
+
+constant: battlePositionProposed.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: BinaryPredicate IKBConstant.
+
+arg1Isa: GeographicalRegion.
+
+arg2Isa: ModernMilitaryUnit-Deployable.
+
+
+
+constant: battlePositionOrdered.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: BinaryPredicate IKBConstant.
+
+arg1Isa: GeographicalRegion.
+
+arg2Isa: ModernMilitaryUnit-Deployable.
+
+
+
+
+
+constant: assemblyAreaOccupied.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: BinaryPredicate IKBConstant.
+
+arg1Isa: GeographicalRegion.
+
+arg2Isa: ModernMilitaryUnit-Deployable.
+
+
+
+constant: assemblyAreaProposed.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: BinaryPredicate IKBConstant.
+
+arg1Isa: GeographicalRegion.
+
+arg2Isa: ModernMilitaryUnit-Deployable.
+
+
+
+constant: assemblyAreaOrdered.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: BinaryPredicate IKBConstant.
+
+arg1Isa: GeographicalRegion.
+
+arg2Isa: ModernMilitaryUnit-Deployable.
+
+
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+
+;TASK FORCES AND TEAMS
+
+
+
+constant: UnitOrganizationalAttribute.
+
+in Mt: MilitaryForceStructureMt.
+
+isa: UnorderedAttributeType IKBConstant.
+
+genls: AttributeValue.
+
+comment: "A collection of attributes characterizing the organizational
+
+structures of instances of #$ModernMilitaryOrganization.".
+
+
+
+constant: TaskForce-Military.
+
+in Mt: MilitaryForceStructureMt.
+
+isa: UnitOrganizationalAttribute.
+
+comment: "Distinguishing characteristic of a brigade- or
+
+division-level unit that has been specially constituted to carry out a
+
+particular instance of #$MilitaryTask, with constituent subunits
+
+being chosen on the basis of specialization.".
+
+
+
+;maybe?  Though there are a couple of concerns.
+
+;in Mt: ModernMilitaryTacticsMt.
+
+;F:
+
+;(implies
+
+;   (and
+
+;     (isa ?TASK MilitaryTask)
+
+;     (unitAssignedToTask ?TASK ?UNIT)
+
+;     (echelonOfUnit ?UNIT Brigade-UnitDesignation))
+
+;   (hasAttributes ?UNIT TaskForce-Military)).
+
+
+
+;henceforth we should use this in lieu of the echelon
+
+;TaskForce-UnitDesignation.
+
+
+
+
+
+constant: Team-Military.
+
+in Mt: MilitaryForceStructureMt.
+
+isa: UnitOrganizationalAttribute.
+
+comment: "Distinguishing characteristic of a unit of battalion level
+
+or lower that has been specially constituted to carry out a particular
+
+instance of #$MilitaryTask, with constituent subunits being chosen
+
+on the basis of specialization.".
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+
+;OBSTACLE EFFECTS
+
+
+
+;here again more information would be useful.  A lot of these effects
+
+;seem to have the same names as already reified tasks, which gives me
+
+;an idea:
+
+
+
+constant: obstacleSystemSupportsTaskType.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: BinaryPredicate IKBConstant.
+
+arg1Isa: ObstacleSystem-Military.
+
+arg2Isa: ScriptType.
+
+arg2Genls: MilitaryTask.
+
+comment: "(#$obstacleSystemSupportsTaskType OBSYS TASKTYPE) means that
+
+the #$ObstacleSystem-Military OBSYS is structured with the design and
+
+intent of supporting a task of type TASKTYPE.".
+
+
+
+;Thus, for obstacle 'effect' fix--
+
+
+
+;(obstacleSystemSupportsTaskType OBSYS Fix-MilitaryTask).
+
+
+
+;Where a *type* of obstacle system is being defined, it would be
+
+;appropriate to use a relation typing predicate, e.g.--
+
+
+
+;constant: FixingObstacleSystem.
+
+;in Mt: ModernMilitaryTacticsMt.
+
+;isa: ExistingObjectType IKBConstant.
+
+;genls: ObstacleSystem-Military.
+
+
+
+;F:
+
+;(relationAllInstance 
+
+;  obstacleSystemSupportsTaskType FixingObstacleSystem Fix-MilitaryTask).
+
+
+
+;See also #$ObstacleSystem-Military, #$MilitaryTaskObstacleFn, and
+
+;#$MilitarySpecialtyObstacleFn.
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+
+;Representing the level of difficulty of a Bypass-MilitaryTask (or any
+
+;other task)
+
+
+
+constant: difficultyOfTask.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: TernaryPredicate IKBConstant.
+
+arg1Isa: ExistingObjectType.
+
+arg1Genl: ModernMilitaryUnit-Deployable.
+
+arg2Isa: MilitaryTask.
+
+arg3Isa: GenericAttribute.
+
+comment: "(#$difficultyOfTask UNITTYPE TASK LEVEL) means that for a
+
+unit of type UNITTYPE, TASK has the level or degree of difficulty
+
+LEVEL.".
+
+cyclistNotes: "The arg1 constraints for this predicate have been set
+
+up to be inclusive of, but broader than MilitaryUnitSpecialtyType.  If
+
+it is desired to identify the general level of difficulty of a task
+
+while being agnostic about the military specialization involved, use
+
+#$ModernMilitaryUnit-Deployable as the first argument.".
+
+
+
+;This predicate should be extremely useful for expressing certain rules, e.g.,
+
+
+
+;(implies
+
+;  (isa ?TASK Canalize-MilitaryTask)
+
+;  (difficultyOfTask AviationUnit-MilitarySpecialty ?TASK VeryHigh)).
+
+
+
+
+
+;see also #$skillRequired.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

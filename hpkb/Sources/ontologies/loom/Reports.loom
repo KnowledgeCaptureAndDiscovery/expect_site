@@ -1,0 +1,396 @@
+;;; -*- Mode: Lisp; Package: BATTLE-SPACE; Syntax: COMMON-LISP; Base: 10 -*-
+
+;;; HPKB Movement Analysis Ontology
+(in-package "BATTLE-SPACE")
+
+(defconcept Float :is Floating-Point-Number) ;; no `Float' in Loom
+
+(defset Source :is (:one-of 'HUMINT 'SIGINT 'IRINT 'ILINT 'IMINT 'MIT 'SMI 'SAIC))
+(defset Radar-Types :is (:one-of 'Radar 'EndTrayRadar 'ADARadar 'CounterArtillery/MortarRadar 'FlapWheelRadar))
+(defset Signal-Types :is (:one-of 'GENERIC))
+(defset Site-Duration :is (:one-of 'PERMANENT 'SEMI-PERMANENT 'TRANSIENT))
+(defset Road-Usage-Property :is (:one-of 'VOLUME 'SPEED))
+(defset Traffic-Direction :is (:one-of 'OVERALL 'POSITIVE 'NEGATIVE))
+(defset Trend-Direction :is (:one-of 'INCREASING 'DECREASING))
+(defset Boolean :is (:one-of 'TRUE 'FALSE))
+
+;;; Definitions for Report
+(defrelation Report-Source
+    :arity 2
+    :domain Report
+    :range Source)
+
+(defconcept Report
+	:is-primitive Intangible-Existing-Thing
+	:roles ((time-of-occurrence :type Time-Interval
+	            :facets ((documentation "The truth of a proposition over a time interval.")))
+	        (report-time :type Time-Interval
+	            :facets ((documentation "The time at which a notification is generated.")))
+	        (report-id :type Integer
+	            :facets ((documentation "The report id number.")))))
+
+(defconcept Humint-Report
+    :is-primitive Report
+    :roles ((path :type Movement-Path)
+            (vehicle-group :type Vehicle-Group)))
+
+;;; Events
+(defconcept Intelligence-Event
+	:is-primitive Report
+	:roles ((location :type Spot))
+    :annotations ((documentation "Used to chronicle things of the form \"a thing happened at a time and a location.\"\r\n\r\nCurrently, the \"things\" that happen are pretty undefined :-)")))
+
+(defconcept COMINT-Event
+	:is-primitive Intelligence-Event)
+
+(defconcept ELINT-Event
+	:is-primitive Intelligence-Event
+	:roles ((radar-type :type Radar-Types)))
+
+(defconcept SIGINT-Event
+	:is-primitive Intelligence-Event
+	:roles ((signal-type :type Signal-Types)))
+
+;;;define concepts for Movement
+(defconcept Movement
+    :is-primitive Intangible-Existing-Thing
+    :roles ((unit-of-movement :type Military-Unit)
+            (path-of-movement :type movement-path)))
+
+;;; definitions for Abstract GIS
+(defconcept Flot
+    :is-primitive (:and two-dimensional-shape geographical-region))
+
+; hc: already defined:
+;(defconcept Geographical-Point
+;    :is-primitive geographical-region)
+
+
+(defconcept Rectangle-Size
+	:is-primitive Physical-Attribute
+	:roles ((center-to-top :type Float)
+	        (center-to-side :type Float)))
+
+(defconcept Rectangular-Region
+	:is-primitive Geographical-Region
+	:roles ((center :type Geographical-Point)
+            (size :type Rectangle-Size)))
+
+(defconcept Spot
+	:is-primitive Geographical-Region
+	:roles ((bounding-box :type Rectangular-Region)
+	        (best-guess :type Geographical-Point))
+    :annotations ((documentation "A spot is a point with some uncertainty. Basically, there is a \"point\" in Platonic Space and the spot is an approximation to it. We give both our best guess and an absolute container (the \"real point\" must lie somewhere in the \"bounding box\").\r\n\r\nNote that there is some confusion here because Spots do not have a well defined arithmetical theory. That is, we can average points and take the distance between them. We cannot do so in a canoncial way for Spots. And while we can intersect RectangularRegions and extend them to include points etcetera, the same operations are confusing for Spots.\r\n\r\nThe basic problem is that best_guess is defined by non geometric properties. And hence, we don't know how to modify it under geometric operations. \r\n")))
+
+;comment of bounding-box "The real point must lie within this region."
+;comment of best-guess "What we perceive the point to be."
+
+(defrelation point-on-path
+            :domain Movement-Path
+            :range Annotated-Point)
+
+(defrelation time-of-convoy-point
+    :domain Convoy-Point
+    :range Time-Interval)
+
+(defconcept Convoy-Point
+    :is-primitive Geographical-Point)
+
+(defrelation unit-name-of-path
+    :domain Movement-Path
+    :range Military-Unit)
+
+; hc: was missing:
+(defrelation unit-site-of-path
+    :domain Movement-Path
+    :range Site)
+
+(defconcept Movement-Path
+    :is-primitive PATH--SIMPLE)
+
+;;;==================================================================
+(defconcept MIT-Report
+    :is-primitive Report
+    :roles ((modifies-id :type Integer)))
+
+(defconcept MIT-Military-Vehicle-Report
+    :is-primitive MIT-Report
+    :roles ((vehicle-id :type Integer
+	            :facets ((documentation "The vehicle ID number, as is in the input data."))))
+    :annotations ((documentation "This report is issued when there is a reason to believe that vehicle is a military vehicle and not a civilian vehicle.")))
+
+(defrelation vehicle-id-numbers
+    :domain MIT-Convoy-Report
+    :range Integer)
+
+(defconcept MIT-Convoy-Report
+    :is-primitive MIT-Report
+    :roles ((convoy-id :type Integer)
+            (average-latitude :type Float)
+            (average-longitude :type Float)
+            (first-vehicle-latitude :type Float)
+            (first-vehicle-longitude :type Float)
+            (last-vehicle-latitude :type Float)
+            (last-vehicle-longitude :type Float)
+            (average-speed :type Integer
+                :facets ((documentation "In kilometers per hour.")))
+            (average-distance :type Integer
+                :facets ((documentation "Average distance \(separation\)
+                between successive vehicles in the convoy as of the
+                reporting time")))
+            (vehicle-count :type Integer))
+    :annotations ((documentation "This report is issued when a set of vehicles are identified as a convoy.  This report is of indefinite length, as its last elements give the ID numbers of each vehicle in the convoy.")))
+
+(defconcept MIT-Convoy-Start-Report
+    :is-primitive MIT-Report
+    :roles ((convoy-id :type Integer)
+            (convoy-started-time :type Integer
+                :facets ((documentation "Time at which the convoy started moving, measured by the starting time of the first vehicle to begin moving.  This will be different time than the report time, but usually only a few minutes later.  The times at which the first and last vehicles started moving are recorded in the slot \"time-of-occurrence\".")))
+            (average-latitude :type Float)
+            (average-longitude :type Float)
+            (first-vehicle-latitude :type Float)
+            (first-vehicle-longitude :type Float)
+            (last-vehicle-latitude :type Float)
+            (last-vehicle-longitude :type Float))
+    :annotations ((documentation "This report is issued to indicate an estimate of the place at which a convoy started moving.  The report applies only to an interval of unbroken motion.  If a convoy halts and then continues on, separate reports of this form would be issued for each interval of motion.  The time at which the convoy started moving, measured by the starting time of the first vehicle to begin moving, is stored in a slot of its parent convept called \"time-of-occurrence\".")))
+
+(defconcept MIT-Convoy-Stop-Report
+    :is-primitive MIT-Report
+    :roles ((convoy-id :type Integer)
+            (convoy-stopped-time :type Integer
+                :facets ((documentation "Time at which the convoy stopped moving, measured by the starting time of the first vehicle to stop moving.  This will be different time than the report time, but usually only a few minutes later.  The times at which the first and last vehicles stopped moving are recorded in the slot \"time-of-occurrence\".")))
+            (average-latitude :type Float)
+            (average-longitude :type Float)
+            (first-vehicle-latitude :type Float)
+            (first-vehicle-longitude :type Float)
+            (last-vehicle-latitude :type Float)
+            (last-vehicle-longitude :type Float))
+    :annotations ((documentation "This report is issued to indicate an estimate of the place at which a convoy stopped moving.  The report applies only to an interval of unbroken motion.  If a convoy halts and then continues on, separate reports of this form would be issued for each interval of motion.  The time at which the convoy stopped moving, measured by the stopping time of the first vehicle to begin moving, is stored in a slot of its parent convept called \"time-of-occurrence\".")))
+
+(defconcept MIT-Displacement-Convoy-Report
+    :is-primitive MIT-Report
+    :roles ((convoy-id :type Integer)
+            (average-latitude :type Float)
+            (average-longitude :type Float)
+            (unit-function :type Military-Unit))
+    :annotations ((documentation "This report is issued to indicate that a convoy has been identified as performing a displacement.  At present, MIT only expects to report displacements of units subsequent to use of radars of firing of missles.")))
+
+(defconcept MIT-Off-Road-Site-Report
+    :is-primitive MIT-Report
+    :roles ((site-id :type Integer)
+            (average-latitude :type Float
+                :facets ((documentation "Average latitude of the vehicles at the site as of the reporting time.  Locations of vehicles are estimated from the speed and direction of travel at the last observation prior to stopping.")))
+            (average-longitude :type Float
+                :facets ((documentation "Average longitude of the vehicles at the site as of the reporting time.  Locations of vehicles are estimated from the speed and direction of travel at the last observation prior to stopping.")))
+            (radius :type Integer
+                :facets ((documentation "Radius of the site, relative to the average latitide and longitude.  This is half the maximum distance between vehicles at the site as of the reporting time.")))
+            (vehicle-count :type Integer))
+    :annotations ((documentation "This report is issued when a site off the defined roads at which military vehicles or convoys have stopped is identified.  MIT is not yet providing an analysis of most site types, and so a preliminary report of this form would have to be considerec a disjuction of battle position, command post, support area, artillery site, SSM site, LBCM site, AD site, or assembly or staging area.  The starting and ending times of the interval during which the site was occupied are stored in a slot of its parent concept called \"time-of-occurrence\".")))
+
+(defconcept MIT-Radar-Site-Report
+    :is-primitive MIT-Report
+    :roles ((site-id :type Integer)
+            (latitude :type Float
+                :facets ((documentation "The latitude of the radar site.")))
+            (longitude :type Float
+                :facets ((documentation "The longitude of the radar site.")))
+            (radar-type :type Radar-Types
+                :facets ((documentation "The type of radar used at the site during the specified interval."))))
+    :annotations ((documentation "This report is issued to indicate the location of a radar site existing during some past or present temporal interval.  The starting and ending times of the interval during which the site was occupird bya radar unit are stored are stored in a slot of its parent concept called \"time-of-occurrence\".")))
+
+(defconcept MIT-Road-Usage-Report
+    :is-primitive MIT-Report
+    :roles ((property-being-compared :type Road-Usage-Property)
+            (traffic-direction :type Traffic-Direction)
+            (trend-direction :type Trend-Direction)
+            (starting-node-id :type Integer
+                :facets ((documentation "ID of the starting node of the road span.  Positive traffic direction means travelling on the span in the direction from this node to the ending node.")))
+            (ending-node-id :type Integer
+                :facets ((documentation "ID of the ending node of the road span.  Positive traffic direction means travelling on the span in the direction from this node to the ending node.")))
+            (starting-time :type Integer
+                :facets ((documentation "The starting time of the hour being considered \(in seconds\).")))
+            (number-of-days :type Integer
+                :facets ((documentation "The number of days over which the trand has been observed, including the day including the hour indicated in the "starting-time" slot."))))
+    :annotations ((documentation "This report is issued to indicate the location of a radar site existing during some past or present temporal interval.  The starting and ending times of the interval during which the site was occupird bya radar unit are stored are stored in a slot of its parent concept called \"time-of-occurrence\".")))
+
+(defconcept SMI-Convoy-Report
+	:is-primitive Report
+	:roles ((convoy :type Convoy)))
+
+(defconcept Site-Report
+	:is-primitive Report
+	:roles ((site :type Site)))
+
+(defconcept SMI-Site-Report
+	:is-primitive Site-Report)
+
+(defrelation unit-of-occupied-site
+    :domain SMI-Occupied-Site-Report
+    :range Military-Unit)
+
+(defconcept SMI-Occupied-Site-Report
+	:is-primitive SMI-Site-Report)
+
+(defrelation unit-of-unit-report
+    :domain Unit-Report
+    :range Military-Unit)
+
+(defconcept Unit-Report
+	:is-primitive Report)
+
+(defconcept UnitAt-Report
+	:is-primitive Unit-Report)
+
+(defconcept SMI-Unit-Report
+	:is-primitive Unit-Report)
+
+(defconcept SMI-Unit-Deployed-Report
+	:is-primitive SMI-Unit-Report
+	:roles ((by-convoy :type Convoy)
+	        (to-location :type Spot)))
+
+(defconcept SMI-Unit-Relocate-Report
+	:is-primitive SMI-Unit-Deployed-Report
+	:roles ((from-location :type Spot)))
+
+(defconcept SMI-Vehicle-Identification-Report
+    :is-primitive Report
+    :roles ((vehicle-type :type Vehicle-MA)))
+
+(defconcept SMI-Humint-Report
+    :is-primitive Report
+    :roles ((vehicle-group :type Vehicle-Group)
+            (path :type Convoy-Path)))
+
+(defrelation task
+    :domain Convoy
+    :range Task)
+
+(defconcept Convoy
+	:is-primitive Partially-Tangible
+	:roles ((movement-time :type Time-Interval)
+        	(path :type Convoy-Path)
+	        (start-location :type Spot)
+        	(stop-location :type Spot)
+        	(vehicle-group :type Vehicle-Group)
+        	(originating-site :type Site)
+        	(destination-site :type Site)
+        	(number-of-rest-stops :type Integer)
+        	(unit-involved :type Military-Unit)
+        	(day :type Integer)))
+
+(defrelation Vehicle-Type-Collection
+    :domain Vehicle-Group
+    :range Equipment-Collection)
+
+(defrelation Vehicle-Collection
+    :domain Vehicle-Group
+    :range Vehicle-MA)
+
+(defconcept Vehicle-Group
+    :is-primitive Partially-Tangible
+	:roles ((number-of-vehicles :type Integer)
+	        (number-of-small-wheeled-vehicles :type Integer)
+	        (number-of-big-wheeled-vehicles :type Integer)
+        	(number-of-small-tracked-vehicles :type Integer)
+        	(number-of-big-tracked-vehicles :type Integer))
+    :annotations ((documentation "Use Vehicle-Type-Collection relation to set the vehicle types and cardinarities. Use Vehicles-Collection to set the collection of vehicles.")))
+
+(defrelation Vehicle-Type
+    :domain Vehicle-MA
+    :range Physical-Device)
+
+(defconcept Vehicle-MA
+	:is-primitive Partially-Tangible
+	:roles ((id-number :type Integer)
+	        (has-been-deployed :type Boolean))
+    :annotations ((documentation "Vehicle-MA is named to distinguish from Cyc predicate Vehicle.  It is created specifically for HPKB MA CP.  The class uses relation Vehicle-Type to set its type and has an unique ID that is gotten from the simulated track data.")))
+
+(defconcept Convoy-Path
+	:is-primitive Movement-Path
+    :annotations ((documentation "The implicit axioms are for typing. Namely-- segments are all ConvoyPathSegments and vertices are all AnnotatedPoints.")))
+
+(defconcept Annotated-Point
+	:is-primitive Geographical-Point
+	:roles ((distance-from-FLOT :type Float
+	         :facets ((documentation "Records the distance from the FLOT")))))
+
+(defconcept Site
+	:is-primitive Partially-Tangible
+	:roles ((location :type Spot)
+            (unique-identifier :type Integer)
+            (type :type Site-Type-Collection)
+            (duration :type Site-Duration))
+    :annotations ((documentation "A site is something located at a particular place, over a time interval. Moreover, it exists independently of the vehicles which happen to (help) compose it.")))
+
+(defconcept Type
+    :is-primitive intangible)
+
+(defconcept Task
+	:is-primitive Intangible-Existing-Thing)
+
+(defconcept Task-Type
+    :is-primitive Type)
+
+(defconcept Site-Type
+    :is-primitive Type)
+
+(defconcept Site-Type-Collection
+    :is-primitive (:and Site-Type Collection))
+
+(defconcept Air-Defense-Site
+	:is-primitive Site-Type)
+
+(defconcept SAM-Site
+	:is-primitive Air-Defense-Site)
+
+(defconcept AAA-Site
+	:is-primitive Air-Defense-Site)
+
+(defconcept Artillery-Site
+	:is-primitive Site-Type)
+
+(defconcept Combat-Troop-Deployment-Site
+	:is-primitive Site-Type
+    :annotations ((documentation "Should this be here ? The basic notion is that this site is nothing special (just a place that forward deployed companies or platoons hang out at)")))
+
+(defconcept Rest-Area
+	:is-primitive Site-Type)
+
+(defconcept Staging-Area
+	:is-primitive Site-Type)
+
+(defconcept Supply-Site
+	:is-primitive Site-Type)
+
+(defconcept Division-Support-Area
+	:is-primitive Supply-Site)
+
+(defconcept ATP
+	:is-primitive Supply-Site)
+
+(defconcept FSB
+	:is-primitive Supply-Site)
+
+(defconcept MSB
+	:is-primitive Supply-Site)
+
+(defconcept Infantry-FSB
+	:is-primitive Supply-Site
+    :annotations ((documentation "Distinguished from an ordinary MSB because the traffic load is much smaller")))
+
+(defconcept Infantry-MSB
+	:is-primitive Supply-Site
+    :annotations ((documentation "Distinguished from an ordinary MSB because the traffic load is much smaller")))
+
+(defconcept Big-Blip-Tracked-Vehicle
+	:is-primitive Military-Vehicle)
+
+(defconcept Big-Blip-Wheeled-Vehicle
+	:is-primitive Military-Vehicle)
+
+(defconcept Small-Blip-Tracked-Vehicle
+	:is-primitive Military-Vehicle)
+
+(defconcept Small-Blip-Wheeled-Vehicle
+	:is-primitive Military-Vehicle)

@@ -1,0 +1,169 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=Content-Type content="text/html; charset=windows-1252">
+</HEAD>
+
+<BODY bgColor=white>
+<SCRIPT>
+
+function y2k(number) { return (number < 1000) ? number + 1900 : number; }
+
+var reason = '';
+
+function isValidDate (myDate,sep) {
+// checks if date passed is in valid dd/mm/yyyy format
+
+    if (myDate.length == 10) {
+        if (myDate.substring(2,3) == sep && myDate.substring(5,6) == sep) {
+            var month  = myDate.substring(0,2);
+            var date = myDate.substring(3,5);
+            var year  = myDate.substring(6,10);
+
+            var test = new Date(year,month-1,date);
+
+            if (year == y2k(test.getYear()) && (month-1 == test.getMonth()) && (date == test.getDate())) {
+                reason = '';
+                return true;
+            }
+            else {
+                reason = 'valid format but an invalid date';
+                return false;
+            }
+        }
+        else {
+            reason = 'invalid spearators';
+            return false;
+        }
+    }
+    else {
+        reason = 'invalid length';
+        return false;
+    }
+}
+
+function checkDate(myDate) {
+    if (isValidDate(myDate,'/'))
+	return 1;    
+    else
+        return 0;
+	
+}
+
+
+
+
+function validate()
+{
+
+var flag = 0
+
+if(!checkDate(document.AgentForm.arg6.value))
+{ 
+	alert(arg6.innerText+" Must be a valid date mm/dd/yyyy");
+	flag = 1
+}
+if(document.AgentForm.arg4.value == "")
+{ 
+	alert(arg4.innerText+" Must be a number");
+	flag = 1
+}
+	
+if(document.AgentForm.arg8.value == "")
+{ 
+	alert(arg8.innerText+" Must be a string");
+	flag = 1
+}
+if(flag == 1)
+ return false
+else
+ {
+	alert("CHECKED");
+	alert(arg10.innerText+"checked"); 
+	return true;
+}	
+
+}
+
+function getUserInfo()
+{
+	alert("hi");
+	
+	
+	
+	return false
+	
+
+}
+var params = new Array(30)
+var concepts = new Array(30)
+
+function getResponse()
+{
+        alert("ok");
+
+	var xmlDoc = new ActiveXObject("Microsoft.XMLDOM")
+	xmlDoc.async="false"
+	xmlDoc.load("groups/elves/flight-status/Flight.xml")
+
+	document.write("The original XML:")
+	document.write("<xmp>"+xmlDoc.xml+"</xmp>")
+
+	var newnode=xmlDoc.createElement("InstanceName")
+        alert("hello")
+        var txt=concepts.item(0).text;
+        alert(txt);
+	var newtext=xmlDoc.createTextNode(txt)
+	newnode.appendChild(newtext)
+	xmlDoc.documentElement.appendChild(newnode)
+	xmlDoc.getElementsByTagName("GoalName").item(0).appendChild(newnode)
+	document.write("After appending the new node:")
+	document.write("<xmp>"+xmlDoc.xml+"</xmp>")
+
+
+
+}
+
+
+
+function getmsg()
+{
+alert("hi")
+}
+var xmlDoc = new ActiveXObject("Microsoft.XMLDOM")
+xmlDoc.async="false"
+xmlDoc.load("Flight.xml")
+
+params = xmlDoc.getElementsByTagName("ParameterName")
+concepts = xmlDoc.getElementsByTagName("ConceptName")
+document.write('<FORM name=AgentForm method="method" action="javascript: getUserInfo();">');
+document.write('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp');
+document.write('<br><br>');
+document.write(xmlDoc.getElementsByTagName("GoalName").item(0).text+xmlDoc.getElementsByTagName("ConceptName").item(0).text);
+document.write('<br><br>');
+for(var i=1;i<params.length;i++)
+{
+
+	document.write(params.item(i).text);
+	var edt = xmlDoc.getElementsByTagName("edt-type");	
+	document.write('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp');
+	document.write(concepts.item(i).text);
+	document.write('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp');
+	document.write('<INPUT type=text name='+concepts.item(i).text+'>');
+	document.write('<br><br>');
+	
+
+
+}
+
+document.write(concepts.item(i).text);
+
+</SCRIPT>
+
+
+
+<BR><BR><BR><INPUT type=SUBMIT value="Send Request"><BR><BR><INPUT type=button value="Show Previous Results" onclick="getmsg()">&nbsp;&nbsp;<BR><INPUT type=button value="Show Response" ONCLICK="getResponse()"><BR><TEXTAREA rows=15 cols=70></TEXTAREA>    
+<HR>
+
+</FORM>
+
+</BODY></HTML>

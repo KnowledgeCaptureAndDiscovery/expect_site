@@ -1,0 +1,220 @@
+<html>
+<head>
+<script>
+var limit="0:30"
+if (document.images){
+  var parselimit=limit.split(":");
+  parselimit=parselimit[0]*60+parselimit[1]*1;
+  }
+function resubmit(val) {
+    var myform = eval("document.form"+val);
+    myform.submit();
+}
+function beginrefresh(){
+  if (!document.images)
+      return;
+   if (parselimit==1)
+      window.location.reload();
+   else {
+      parselimit-=1;
+      curmin=Math.floor(parselimit/60);
+      cursec=parselimit%60;
+      if (curmin!=0)
+         curtime=curmin+" minutes and "+cursec+" seconds left until page refresh!";
+      else
+         curtime=cursec+" seconds left until page refresh!";
+      window.status=curtime
+      setTimeout("beginrefresh()",1000)
+   }
+ }
+window.onload=beginrefresh;
+</script>
+</head>
+<table>
+<tr><td colspan=2>----Tue Nov 19 09:20:24 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>Delta Air Lines</td></tr>
+<tr><td><b>of flight number</b></td><td>2162</td></tr>
+<tr><td><b>of connecting flight number</b></td><td>1111</td></tr>
+<tr><td><b>on date</b></td><td>11/19/2002</td></tr>
+<tr><td><b>from airport</b></td><td>SFO</td></tr>
+<tr><td><b>to airport</b></td><td>LAX</td></tr>
+<tr><td><b>at departs</b></td><td>6 pm</td></tr>
+<tr><td><b> </b></td><td>anytime</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+
+<tr><td colspan=2><b>Connectinh Flights</b></td></tr>
+<tr><td colspan=2>Dear mariam_at_isi_edu,<br/>Your connecting Delta Air Lines flight 1111 will depart at 10:01 AM (1 minute Late) at gate Not Available.<br/><br/>If you would like to leave earlier, the following Delta Air Lines flights will depart earlier than your scheduled flight:<br/><br/>Earlier flights not found<br/> Thank you, <br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1037726424)'></td></tr>
+</table><br>
+<form name='form1037726424' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='Delta Air Lines'>
+<input type='hidden' name='val1' value='2162'>
+<input type='hidden' name='val2' value='1111'>
+<input type='hidden' name='val3' value='11/19/2002'>
+<input type='hidden' name='val4' value='SFO'>
+<input type='hidden' name='val5' value='LAX'>
+<input type='hidden' name='val6' value='6 pm'>
+<input type='hidden' name='val7' value='anytime'>
+<input type='hidden' name='val8' value='mariam@isi.edu'>
+<input type='hidden' name='agent' value='connect-flight'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Mon Nov 18 21:19:18 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>Delta Air Lines</td></tr>
+<tr><td><b>of flight number</b></td><td>324</td></tr>
+<tr><td><b>of connecting flight number</b></td><td>2049</td></tr>
+<tr><td><b>on date</b></td><td>11/18/2002</td></tr>
+<tr><td><b>from airport</b></td><td>LAX</td></tr>
+<tr><td><b>to airport</b></td><td>SFO</td></tr>
+<tr><td><b>at departs</b></td><td>6 pm</td></tr>
+<tr><td><b> </b></td><td>anytime</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+
+<tr><td colspan=2><b>Connectinh Flights</b></td></tr>
+<tr><td colspan=2>Dear mariam_at_isi_edu,<br/>Your connecting Delta Air Lines flight 2049 will depart at 9:58 PM (7 minutes Early) at gate Not Available.<br/><br/>If you would like to leave earlier, the following Delta Air Lines flights will depart earlier than your scheduled flight:<br/><br/>Earlier flights not found<br/> Thank you, <br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1037683158)'></td></tr>
+</table><br>
+<form name='form1037683158' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='Delta Air Lines'>
+<input type='hidden' name='val1' value='324'>
+<input type='hidden' name='val2' value='2049'>
+<input type='hidden' name='val3' value='11/18/2002'>
+<input type='hidden' name='val4' value='LAX'>
+<input type='hidden' name='val5' value='SFO'>
+<input type='hidden' name='val6' value='6 pm'>
+<input type='hidden' name='val7' value='anytime'>
+<input type='hidden' name='val8' value='mariam@isi.edu'>
+<input type='hidden' name='agent' value='connect-flight'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Tue Nov  5 20:45:00 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>America West Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>33</td></tr>
+<tr><td><b>of connecting flight number</b></td><td>813</td></tr>
+<tr><td><b>on date</b></td><td>11/5/2002</td></tr>
+<tr><td><b>from airport</b></td><td>LAX</td></tr>
+<tr><td><b>to airport</b></td><td>SFO</td></tr>
+<tr><td><b>at departs</b></td><td>6 pm</td></tr>
+<tr><td><b> </b></td><td>anytime</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+
+<tr><td colspan=2><b>Connectinh Flights</b></td></tr>
+<tr><td colspan=2>Dear mariam_at_isi_edu,<br/>Your connecting America West Airlines flight 813 will depart at 10:38 PM (287934 hours and 39 minutes Late) at gate A19.<br/><br/>If you would like to leave earlier, the following America West Airlines flights will depart earlier than your scheduled flight:<br/><br/>Earlier flights not found<br/> Thank you, <br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1036557900)'></td></tr>
+</table><br>
+<form name='form1036557900' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='America West Airlines'>
+<input type='hidden' name='val1' value='33'>
+<input type='hidden' name='val2' value='813'>
+<input type='hidden' name='val3' value='11/5/2002'>
+<input type='hidden' name='val4' value='LAX'>
+<input type='hidden' name='val5' value='SFO'>
+<input type='hidden' name='val6' value='6 pm'>
+<input type='hidden' name='val7' value='anytime'>
+<input type='hidden' name='val8' value='mariam@isi.edu'>
+<input type='hidden' name='agent' value='connect-flight'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Tue Nov  5 18:45:11 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>104</td></tr>
+<tr><td><b>of connecting flight number</b></td><td>1244</td></tr>
+<tr><td><b>on date</b></td><td>11/5/2002</td></tr>
+<tr><td><b>from airport</b></td><td>LAX</td></tr>
+<tr><td><b>to airport</b></td><td>IAD</td></tr>
+<tr><td><b>at departs</b></td><td>2 pm</td></tr>
+<tr><td><b> </b></td><td>anytime</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+
+<tr><td colspan=2><b>Connectinh Flights</b></td></tr>
+<tr><td colspan=2>Dear mariam_at_isi_edu,<br/>Your connecting United Airlines flight 1244 will depart at 9:55 PM (287933 hours and 56 minutes Late) at gate B7.<br/><br/>If you would like to leave earlier, the following United Airlines flights will depart earlier than your scheduled flight:<br/><br/>Earlier flights not found<br/> Thank you, <br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1036550711)'></td></tr>
+</table><br>
+<form name='form1036550711' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='104'>
+<input type='hidden' name='val2' value='1244'>
+<input type='hidden' name='val3' value='11/5/2002'>
+<input type='hidden' name='val4' value='LAX'>
+<input type='hidden' name='val5' value='IAD'>
+<input type='hidden' name='val6' value='2 pm'>
+<input type='hidden' name='val7' value='anytime'>
+<input type='hidden' name='val8' value='mariam@isi.edu'>
+<input type='hidden' name='agent' value='connect-flight'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Tue Nov  5 18:44:36 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>104</td></tr>
+<tr><td><b>of connecting flight number</b></td><td>1244</td></tr>
+<tr><td><b>on date</b></td><td>11/5/2002</td></tr>
+<tr><td><b>from airport</b></td><td>LAX</td></tr>
+<tr><td><b>to airport</b></td><td>IAD</td></tr>
+<tr><td><b>at departs</b></td><td>2 pm</td></tr>
+<tr><td><b> </b></td><td>anytime</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+
+<tr><td colspan=2><b>Connectinh Flights</b></td></tr>
+<tr><td colspan=2>Dear mariam_at_isi_edu,<br/>Your connecting United Airlines flight 1244 will depart at 9:55 PM (287933 hours and 56 minutes Late) at gate B7.<br/><br/>If you would like to leave earlier, the following United Airlines flights will depart earlier than your scheduled flight:<br/><br/>Earlier flights not found<br/> Thank you, <br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1036550676)'></td></tr>
+</table><br>
+<form name='form1036550676' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='104'>
+<input type='hidden' name='val2' value='1244'>
+<input type='hidden' name='val3' value='11/5/2002'>
+<input type='hidden' name='val4' value='LAX'>
+<input type='hidden' name='val5' value='IAD'>
+<input type='hidden' name='val6' value='2 pm'>
+<input type='hidden' name='val7' value='anytime'>
+<input type='hidden' name='val8' value='mariam@isi.edu'>
+<input type='hidden' name='agent' value='connect-flight'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Tue Nov  5 18:44:22 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>104</td></tr>
+<tr><td><b>of connecting flight number</b></td><td>1244</td></tr>
+<tr><td><b>on date</b></td><td>11/5/2002</td></tr>
+<tr><td><b>from airport</b></td><td>LAX</td></tr>
+<tr><td><b>to airport</b></td><td>IAD</td></tr>
+<tr><td><b>at departs</b></td><td>2 pm</td></tr>
+<tr><td><b> </b></td><td>anytime</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+
+<tr><td colspan=2><b>Connectinh Flights</b></td></tr>
+<tr><td colspan=2>Dear mariam_at_isi_edu,<br/>Your connecting United Airlines flight 1244 will depart at 9:55 PM (287933 hours and 56 minutes Late) at gate B7.<br/><br/>If you would like to leave earlier, the following United Airlines flights will depart earlier than your scheduled flight:<br/><br/>Earlier flights not found<br/> Thank you, <br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1036550662)'></td></tr>
+</table><br>
+<form name='form1036550662' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='104'>
+<input type='hidden' name='val2' value='1244'>
+<input type='hidden' name='val3' value='11/5/2002'>
+<input type='hidden' name='val4' value='LAX'>
+<input type='hidden' name='val5' value='IAD'>
+<input type='hidden' name='val6' value='2 pm'>
+<input type='hidden' name='val7' value='anytime'>
+<input type='hidden' name='val8' value='mariam@isi.edu'>
+<input type='hidden' name='agent' value='connect-flight'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<p>
+</html>

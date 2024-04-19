@@ -1,0 +1,85 @@
+<HTML>
+<HEAD>
+  <TITLE>
+  The KANAL Project at ISI
+  </TITLE>
+<STYLE TYPE="text/css">
+  BODY { background-color: white }
+  TD { background-color: #CCCCCC }
+  TD.b { background-color: white }
+
+</STYLE>
+</HEAD>
+<BODY style="FONT-FAMILY: Verdana; FONT-SIZE: 10pt" text='black'>
+<TABLE border='0' cellspacing='1' cellpadding='5' bgcolor='black'>
+<TR>
+  <TD class='top' align='center'><A href='http://www.isi.edu/expect'>
+   <IMG border='1' SRC='../expect.jpg'></A></TD>
+  <TD class='top' width='100%' align='center'><A href='./'>
+   <IMG border='1' SRC='logo.jpg'></A>&nbsp;<A HREF="http://www.isi.edu"><IMG border='1' SRC="../isi.gif"></A><BR>
+<B>Knowledge Analysis on Process Models"</B>
+ </TD>
+</TR>
+<TR>
+  <TD valign='top' align='right'>
+  <P><A HREF='./'><B>Main</B></A>
+  <P><A HREF='description.html'><B>Description</B></A>
+  <P><A HREF='demo.html'><B>Demo</B></A>
+  <P><A HREF='people.html'><B>People</B></A>
+  <P><A HREF='publications.html'><B>Publications</B></A>
+  <P><A HREF='research.html'><B>Research</B></A>
+  <P><A HREF='funding.html'><B>Funding</B></A>
+  <P><A HREF='links.html'><B>Links</B></A>
+  <P><A HREF='status.html'><B>Status</B></A>
+  </TD>
+  <TD class='b' valign='top'>
+<H2>Description</H2>
+<P>    	   	 
+
+<p />
+Helping end users build and check process models is a challenge for many
+science and engineering fields.  Many AI researchers have investigated useful
+ways of verifying and validating knowledge bases for ontologies and rules, but
+it is not easy to directly apply them to checking process models.  Other
+techniques developed for checking and refining planning knowledge tend to
+focus on automated plan generation rather than helping users author process
+information.  In this paper, we propose a complementary approach which helps
+users author and check process models.  Our system, called <a
+href="KANAL-description.txt"><b>KANAL</b></a>(Knowledge 
+ANALysis), relates pieces of information in process models among themselves
+and to the existing KB, analyzing how different pieces of input are put
+together to achieve some effect.  It builds interdependency models from this
+analysis and uses them to find errors and propose fixes.  
+(<a
+href="http://www.isi.edu/expect/projects/rkf/KANAL/kanal-ijcai01.pdf">Kim and Gil, IJCAI-01</a>)
+
+<p />
+<b>KANAL</b> builds upon previous work on <a
+href="http://www.isi.edu/expect/">EXPECT</a> using Interdependency Models (<a
+href="http://www.isi.edu/expect/link/publications.html#Kim-Gil-AAAI-99">Kim and Gil
+AAAI-99</a>, <a
+href="http://www.isi.edu/expect/link/publications.html#Kim-Gil-AAAI-2000">Kim and Gil
+AAAI-2000</a>).  The work on EXPECT analyzed problem-solving interdependencies,
+which model how different pieces of problem solving (procedural) knowledge
+relate to each other and to the class definitions in domain ontologies.  Our
+initial work concentrates on <i>process models</i>, i.e., knowledge
+describing activities and subprocesses as well as their relationships.
+
+<p />
+Currently, <b>KANAL</b>'s checks are done on the simulated execution of the process
+model.  Using skolem instances, we can check general scenarios of the
+animation of a process. The result of each animation are used as a model of
+interdependencies among the sub-steps of the process model.  <b>KANAL</b> performs a
+variety of verification checks to process models, including <i>unachieved
+conditions of steps</i> in a process model, <i>expected and unexpected
+effects, potential loops</i>, and <i>disjunctive model branches</i>.  <b>KANAL</b>
+will also help users with validation checks of <i> redundancies</i>, and
+<i>resource use</i> within a process model.
+
+
+    
+</TD>
+</TR>
+</TABLE>
+</BODY>
+</HTML>

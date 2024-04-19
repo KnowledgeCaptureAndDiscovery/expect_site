@@ -1,0 +1,7 @@
+((name check-existence-of-main-task-of-operation)
+ (capability (check-existence (obj (?t is (spec-of |mainTask|)))
+			 (with-respect-to (?s is (inst-of military-unit)))))
+  (result-type (inst-of boolean))
+  (method (if (there-is-not-any (obj (|mainTaskOfOperation| ?k ?s)))
+	    then false
+	    else true)))

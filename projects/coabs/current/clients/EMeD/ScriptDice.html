@@ -1,0 +1,74 @@
+<HTML>
+<HEAD>
+<SCRIPT>
+<!--
+var turn = 1;  // which turn is it?
+var point;      // current point
+var bank=100;  // bucks
+
+function init()
+  {
+  hbank.innerHTML=bank;  // show init bank
+  }
+  
+function go()
+  {
+  title.innerHTML="";  // clear title after first roll
+// first turn: get point, check for 7 or 11 win
+  if (turn==1) {
+    point=document.dice.roll();
+// if you want to see d1 and d2 uncomment
+//    alert(document.dice.d1);
+//    alert(document.dice.d2);
+    if (point==7||point==11) {
+       alert("Winner!");
+       bank+=10;
+       hbank.innerHTML=bank;
+       hpoint.innerHTML="";
+       }
+    else {
+      hpoint.innerHTML="Point is " + point; 
+      turn++;
+      }
+    }
+  else {
+// subsequent roll: check for point, 7/11 loser
+    var d=document.dice.roll();
+    if (d==7||d==11) {
+      alert("Craps!");
+      turn=1;
+      bank-=10;
+      hbank.innerHTML=bank;
+      hpoint.innerHTML="";
+      }
+    if (d==point) {
+      alert("Winner!");
+      bank+=10;
+      hbank.innerHTML=bank;
+      hpoint.innerHTML="";
+      turn=1;
+      }
+    }
+  }
+//-->
+</SCRIPT>
+</HEAD>
+<BODY onLoad='init();'>
+<CENTER>
+<h1 ID=title>Play Craps... a Game of Chance</h1>
+<APPLET NAME=dice code=ScriptDice.class WIDTH=125 HEIGHT=60>
+<PARAM NAME="delay" VALUE=100>
+<PARAM NAME="rolls" VALUE=15>
+</APPLET><BR>
+</CENTER>
+<INPUT TYPE=BUTTON onClick=go() VALUE=Roll>
+<P ID=hpoint>Press Roll to Play!</P>
+<P>Bank = <SPAN ID=hbank></SPAN></P>
+<P><FONT size=1>by Al Williams for Web Techniques Magazine</font></p>
+<NOSCRIPT>
+<P>Warning.... you do not appear to have JavaScript enabled 
+   which is required.</P>
+</NOSCRIPT>
+</BODY>
+</HTML>
+    

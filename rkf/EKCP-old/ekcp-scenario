@@ -1,0 +1,189 @@
+Expert Knowledge Challenge Problem (EKCP) Scenario for the Kickoff Meeting
+		(produced by SRI/ISI, and PSR)
+
+We anticipate our EKCP knowledge base to contain at least three kinds
+of knowledge.
+
+(1) Domain-independent background knowledge
+(2) Domain-specific knowledge entered by our team's SMEs
+(3) Domain-specific knowledge entered by the test taking SMEs
+
+The goal of the EKCP end-to-end  (E2E) system is to enable an analyst
+to create and maintain a generic modeling capability.  This will involve
+extending the  default BW process models that are in the system, and
+specializing them to new situations.  It will also involve creating
+and maintaining problem-solving methods for reasoning with those models.
+
+We first give a description of (3), that is, a sample BW case report
+to be entered into a KB by an SME.  Instead of presenting the full
+case report, we include only snippets from it.  Then we describe (2) -
+the knowledge that we expect to be already present in the system.
+Finally, we consider brief examples of (1), that is, the
+domain-independent knowledge needed for entering (3).
+
+DOMAIN-SPECIFIC KNOWLEDGE TO BE ENTERED BY AN SME
+
+BW CASE DESCRIPTION FOR IRAQ (adapted from IET/PSR's RKF proposal)
+(Adapted from Raymond A.  Zilinska "Iraq's Biological Weapons: The
+Past as Future" JAMA (Vol.  278, No.  5: 6 August 1997), pp.  418-424.)
+
+Iraq's anthrax program began in 1985 at the Muthanna State
+Establishment, but moved to Salman Pak in 1987.  Utilizing samples
+from both the US and France along with local isolates, Iraqi
+scientists produced and animal-tested the virulence of four strains of
+anthrax.  The findings from this research led to mass production of
+anthrax at the Al Hakam Single Cell Protein Production Plant in 1989.
+
+Iraq's current anthrax production capabilities are unknown because the
+government has made an effort to conceal its BW activities.  The United
+Nations Commission (UNSCOM) that carried out inspection activities in Iraq
+has determined that Iraq was capable of maufacturing some dual-use
+equipment that could be used for agent production.  If this includes
+fermenters, for example, then Iraq might have the capability to produce wet
+anthrax.  Also, given the very nature of dual-use equipment, Iraq may not
+have too much difficulty in replacing equipment destroyed or removed during
+the war.  The key ingredient in their BW program - the trained personnel -
+are still largely in place.
+
+Since the Iraqi defeat in the 1991 Persian Gulf War, however, the
+international community has tried to ensure that all vestiges of the
+Iraqi BW program are eliminated. Iraq retained 200 scientists that
+worked within its BW probram and rebuilt some of the research
+facilities bombed during the 1991 Persian Gulf War.
+
+-----End of Case Report----------
+
+SAMPLE QUESTIONS AND ANSWERS BASED ON THE REPORT
+
+Question: If Iraq acquired expertise on dry anthrax production, how
+might this affect a future Iraqi anthrax weaponization program?
+
+Answer: Iraq had the equipment to produce anthrax before 1991.  Since
+dry anthrax is a much more potent weaponization of the agent, it is
+likely that Iraq would try to pursue this route as opposed to the wet
+anthrax weaponization.
+
+-------
+
+DOMAIN-SPECIFIC KNOWLEDGE BUILT BY TEAM'S SMEs prior to evaluation
+
+We expect our team's SMEs to build at least the following
+domain-specific knowledge in the system.
+
+- An ontology of BW related terms representing terms such as:
+transnational actors, produce agent, prepare wet agent etc. A more
+extensive listing of such an ontology is attached in the file
+ekcp-kickoff-supporting-material.
+
+
+- A Model of BW proliferation
+
+Developing a BW agent has the following steps:
+o Acquire Seed stock
+o Acquire production material
+o Establish production facilities
+o Acquire equipment
+o Establish worker safety
+o Produce BW agent
+
+For each activity, the model will specify the necessary materials,
+personnel, resources, etc.  as well as duration, necessary previous
+activities or conditions, etc.  A graphical representation of such a
+model is attached in the file ekcp-kickoff-supporting-material.
+
+Domain-specific knowledge about Anthrax production and delivery
+
+(Note: we could envision a test taker SME entering the knowledge such
+as the one shown here.  For the kickoff meeting, we will assume the
+knowledge about anthrax production is entered by our team's SME.)
+
+Wet anthrax takes the form of a liquid slurry.  Dry anthrax is a
+non-liquid, powder-like substance.  The production methods used to
+develop wet and dry anthrax share some common elements, but differ in
+several key final process steps.  Fermentation is used to grow the
+anthrax spores, regardless of the wet or dry end state.  Following
+fermenation, however, dry agents then go through several process steps
+- including milling and drying (e.g., spray dry, vacuum drum dry, or
+azeotropic distillation) - that the wet agent does not.  Once
+produced, dry agents have far less stringent storage requirements than
+wet agent, which require environmentally-controlled storage.  Also,
+dry agent can be dispensed more easily than wet agent, which requires
+sophisticated aerosol dispersion mechanisms to acheive the most
+effective spore size.
+
+(Note: The knowledge in the previous paragraph is an interesting exercise
+for core theory development. For example, we will need core theory suppport
+to model production, delivery, and liquid/dry/powdered objects.)
+
+Anthrax in dry form, is far more difficult to produce - in terms of
+product stabilization and quality (i.e., spore size), and in terms of
+worker safety.  On the other hand, dry agents are very easy to
+dispense and are hardier in the environment - hence their battlefield
+utility.  Liquid agent dispensers require very precise aerosol
+mechanisms to yield the desired particle size without too much product
+destruction in the process.  The principal tradeoff between production
+difficulty and delivery difficulty is one which occurs with many BW
+agents.  This takes us then to the particular actor involved, and what
+they're expected objective and delivery mode is likely to be.  An
+Iraqi program designed to produce an agent for battlefield employment,
+with the resources of a state actor, is more likely to pursue the dry
+agent form.  A terrorist actor, with more limited resources and
+different employment objectives, might instead pursue the more simple
+production avenue of the liquid agent, even sacrificing dispensing
+efficiency.
+
+(Note: The knowledge in the previous paragraph may be best represented as
+a problem solving method.  Here is an example sketch of a PSM to capture
+this knowledge.
+
+If objective = Maximum Damage
+   Explore X=dry anthrax
+   If dont use dry anthrax
+      Explore X=wet anthrax
+
+If objective = Cause scare
+   Explore X= wet anthrax
+
+
+Explore X
+ Can produce X
+   Can deliver X
+       Use X
+   Cannnot deliver X
+       Dont use X
+ Cannot produce X
+    Dont use X)
+
+
+DOMAIN-INDEPENDENT KNOWLEDGE
+
+An agent can perform a production process if it can meet all the preconditions
+necessary to enable that process.
+
+Distinction between dry and wet objects
+
+Dual-use equipment can be acquired and/or repaired more easily than
+military equipment.
+
+Fermenters are a dual use equipment.
+
+Spores can be grown through a fermentation process.
+
+;;------------------------------------------
+REASONING
+
+objective-of <agent:Iraq> for producing anthrax
+  --> Maximum Damage( battlefield utility)
+  --> then look for something easy to dispense and hardier in the environment
+  --> dry anthrax
+      dry anthrax production needs more expertise
+     (far more difficult to produce - in terms of
+      product stabilization and quality (i.e., spore size), and in terms of
+      worker safety)
+  --> Iraq *might* have the capability to produce wet anthrax.
+        --> Iraq was capable of maufacturing some dual-use
+	equipment that could be used for agent production
+
+objective-of <agent:Iraq> for producing anthrax
+  --> terror with limited resources
+  --> then find simple production --> wet anthrax

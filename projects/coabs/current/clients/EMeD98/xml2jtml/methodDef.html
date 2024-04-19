@@ -1,0 +1,12 @@
+((name inspect-acplan)
+ (capability (inspect
+                (obj (?p is (inst-of acplan)))
+                ))
+ (result-type (set-of (inst-of boolean))
+ (method (evaluate
+            (obj ?p)
+            (wrt (find-the-instances
+                    (of acp-aspect)
+                    ))
+              ))
+)

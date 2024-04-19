@@ -1,0 +1,237 @@
+// This example is from _Java Examples in a Nutshell_. (http://www.oreilly.com)
+// Copyright (c) 1997 by David Flanagan
+// This example is provided WITHOUT ANY WARRANTY either expressed or implied.
+// You may study, use, modify, and distribute it for non-commercial purposes.
+// For any commercial use, see http://www.davidflanagan.com/javaexamples
+
+import com.sun.java.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+/** A simple applet that uses the Java 1.1 event handling model */
+public class MEditor extends JPanel
+                      implements MouseListener,  MouseMotionListener {
+  public static final String HIGHLIGHT = "highlight";
+  public static final String RESET = "reset";
+
+  private int last_x, last_y;
+  private JPanel methodPanel;
+  private JPanel altPanel;
+
+  private JPanel namePanel;
+  private JPanel capPanel;
+  private JPanel resPanel;
+  private JPanel bodyPanel;
+
+  private JLabel nameLabel;
+  private JComponent capButtons[] = new JComponent[50];
+  private JComponent resButtons[] = new JComponent[10];
+  private JComponent bodyButtons[] = new JComponent[100];
+  private int capN = 6;
+  private int resN = 3;
+  private int bodyN = 3;
+
+  //JScrollPane mscrollPane;
+  //JScrollPane ascrollPane;
+
+  private JButton altButtons[] = new JButton[100];
+
+  private JButton getDescButton = new JButton("get method description");
+
+  public MEditor () {
+
+    //setLayout (new GridLayout (0,1));
+    setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
+    altPanel  = new JPanel();
+    methodPanel = new JPanel();
+    methodPanel.setLayout(new BoxLayout(methodPanel, BoxLayout.Y_AXIS));
+    //setAlignmentX(LEFT_ALIGNMENT);
+    //setAlignmentY(TOP_ALIGNMENT);
+
+    namePanel = new JPanel();
+    capPanel = new JPanel();
+    resPanel = new JPanel();
+    bodyPanel = new JPanel();
+
+    nameLabel= new JLabel(" ((name method2001)");
+    namePanel.setLayout(new BoxLayout(namePanel, BoxLayout.X_AXIS));
+    namePanel.setAlignmentX(LEFT_ALIGNMENT);
+    namePanel.add(nameLabel);
+    methodPanel.add (namePanel);
+    
+    capButtons[1] = new exButton("(capability ");
+
+    capButtons[2] = new JButton();
+    capButtons[2].setName("cap 2");
+    capButtons[2].addMouseListener(this);
+
+    capButtons[3] = new exButton("(");
+    capButtons[4] = new JButton("VERB");
+    capButtons[4].setName("cap 4");
+    capButtons[4].addMouseListener(this);
+
+    capButtons[5] = new JButton("PARAMS)");
+    capButtons[5].addMouseListener(this);
+    capButtons[5].setName("cap 5");
+
+    capButtons[6] = new exButton(")");
+    capPanel.setLayout(new BoxLayout(capPanel, BoxLayout.X_AXIS));
+    capPanel.setAlignmentX(LEFT_ALIGNMENT);
+    capPanel.add(capButtons[1]);
+    capPanel.add(capButtons[2]);
+    capPanel.add(capButtons[3]);
+    capPanel.add(capButtons[4]);
+    capPanel.add(capButtons[5]);
+    capPanel.add(capButtons[6]);
+
+    methodPanel.add(capPanel);
+
+    resPanel.setLayout(new BoxLayout(resPanel, BoxLayout.X_AXIS));
+    resPanel.setAlignmentX(LEFT_ALIGNMENT);
+    resButtons[1] = new exButton("(result-type ");
+    resButtons[2] = new JButton(" DATA-TYPE");
+    resButtons[2].addMouseListener(this);
+    resButtons[2].setName("res 2");
+    resButtons[3] = new exButton(")");
+    resPanel.setAlignmentX(LEFT_ALIGNMENT);
+    resPanel.setAlignmentY(TOP_ALIGNMENT);
+    resPanel.add(resButtons[1]);
+    resPanel.add(resButtons[2]);
+    resPanel.add(resButtons[3]);
+
+    methodPanel.add(resPanel);
+
+    bodyPanel.setLayout(new BoxLayout(bodyPanel, BoxLayout.X_AXIS));
+    bodyPanel.setAlignmentX(LEFT_ALIGNMENT);
+    bodyButtons[1] = new exButton("(method ");
+    bodyButtons[2] = new JButton(" EXPR");
+    bodyButtons[2].addMouseListener(this);
+    bodyButtons[2].setName("body 2");
+    bodyButtons[3] = new exButton(")");
+    bodyPanel.add(bodyButtons[1]);
+    bodyPanel.add(bodyButtons[2]);
+    bodyPanel.add(bodyButtons[3]);
+    methodPanel.add(bodyPanel);
+    
+    JScrollPane mscrollpane = new JScrollPane(methodPanel);
+    add(mscrollpane);
+
+
+    JScrollPane ascrollpane = new JScrollPane(altPanel);
+    add (ascrollpane);
+
+    getDescButton.addActionListener(new getDescListener());
+    add(getDescButton);
+  }
+
+  // A method from the MouseListener interface.  Invoked when the
+  // user presses a mouse button.
+  public void mousePressed(MouseEvent e) {
+    last_x = e.getX();
+    last_y = e.getY();
+    System.out.println("Mouse Down(" + e.getX() + "," + e.getY() + ")");
+  }
+
+  // A method from the MouseMotionListener interface.  Invoked when the
+  // user drags the mouse with a button pressed.
+  public void mouseDragged(MouseEvent e) {;  }
+
+  // The other, unused methods of the MouseListener interface.
+  public void mouseReleased(MouseEvent e) {;}
+  public void mouseClicked(MouseEvent e) {         
+    System.out.println("Mouse Clicked(" + e.getX() + "," + e.getY() + ")");
+  }
+  public void mouseEntered(MouseEvent e) {
+    //System.out.println("Mouse Enter(" + e.getX() + "," + e.getY() + ")");
+    Component c = e.getComponent();
+    System.out.println("Selected component: "+c.getName());
+    mapSelections(c.getName(),HIGHLIGHT);
+  }
+  public void mouseExited(MouseEvent e) {
+    mapSelections(e.getComponent().getName(),RESET);
+    
+  }
+
+  // The other method of the MouseMotionListener interface.
+  public void mouseMoved(MouseEvent e) {;}
+  			
+  public void mapSelections (String id, String op) {
+    if (id.equals ("3")) {
+      if (op.equals(HIGHLIGHT)) highlight (4);
+      else resetColor (4);
+      if (op.equals(HIGHLIGHT))	highlight (5);
+      else resetColor(5);
+    }
+    else {
+      int i=0;
+      try {
+	i= Integer.parseInt(id);
+	if (op.equals(HIGHLIGHT))
+	  highlight(i);
+	else resetColor(i);
+      }
+      catch (Exception e) {
+	System.out.println("invalid ID:"+ id);
+      }
+    }
+  }
+
+  public void highlight (int id) {
+    //System.out.println("highlight " + id);
+    //buttons[id].setBackground(Color.red);
+    //buttons[id].repaint();
+
+  }
+
+  public void resetColor (int id) {
+    //buttons[id].setBackground(Color.lightGray);
+    //buttons[id].repaint();
+  }
+
+  class getDescListener implements ActionListener {
+    public void actionPerformed (ActionEvent e) {
+      getDesc();
+    }
+  }
+  public String getDesc () {
+    String res = "";
+    res = res + nameLabel.getText();
+    res = res + "\n";
+    for (int i = 1; i <= capN; i++) {
+      res = res + " "+ ((JButton)capButtons[i]).getText();
+    }
+    res = res + "\n";
+    for (int i = 1; i <= resN; i++) {
+      res = res + " "+ ((JButton)resButtons[i]).getText();
+    }
+    res = res + "\n";
+    for (int i = 1; i <= bodyN; i++) {
+      res = res + " "+((JButton)bodyButtons[i]).getText();
+    }
+    res = res + "\n";
+    System.out.println(res);
+    return res;
+  }
+
+  public boolean needParen (String expr) {
+    return false;
+  }
+
+  public static void main(String[] args) {
+    JFrame frame = new JFrame("Expect Editor");
+ 
+      frame.addWindowListener(new WindowAdapter() {
+        public void windowClosing(WindowEvent e) {
+                  System.exit(0);
+        }
+      });
+      
+      frame.getContentPane().add("Center", new MEditor());
+      frame.setLocation(50,50);
+      frame.setSize(500, 500); // demo mode
+      frame.setVisible(true);
+    }
+ 
+
+}

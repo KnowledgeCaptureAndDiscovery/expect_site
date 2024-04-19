@@ -1,0 +1,31 @@
+
+#|
+;;; INFORMAL SKETCH OF THIS PROTOTYPE:
+
+Military-unit
+  has-part(i): Living-Entity
+
+|#
+
+;;; KM REPRESENTATION OF THIS PROTOTYPE
+
+(Military-unit has (superclasses (Living-Group)))
+
+(Military-unit now-has (prototypes (_Living-Group1656)))
+
+(_Living-Group1656 has
+  (prototype-of (Military-unit))
+  (prototype-scope (Military-unit))
+  (prototype-participants (_Living-Group1656 _Living-Entity1657)))
+
+(_Living-Group1656 has (instance-of (Military-unit))
+ (has-part (_Living-Entity1657)))
+
+(_Living-Entity1657 has (instance-of (Living-Entity)))
+
+
+#|
+;;; TRADITIONAL FORMAT FOR SME'S LAST ACTIONS WOULD HAVE LOOKED:
+
+
+|#

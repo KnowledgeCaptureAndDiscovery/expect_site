@@ -1,0 +1,285 @@
+;; ************************************************************
+
+You need four files to run KANAL
+
+1. KANAL.lisp (http://www.isi.edu/expect/rkf/KANAL.lisp: K analysis functions.
+2. km.lisp (http://www.isi.edu/expect/rkf/km.lisp):
+    an extension of km.lisp based on discussions with Peter Clark
+    the extensions are marked with "KANAL"
+3. virusinvade.km (http://www.isi.edu/expect/rkf/virusinvade.km)  
+4. virusinvade-extension.km : it has
+     definitions for is-possible slot (preconditions)
+     definition of Arrive
+     NewVirusInvadesCell where an Arrive step is added to the original
+     VirusInvadesCell
+
+
+;; ************************************************************
+Allegro CL Professional Edition 5.0 [SPARC] (8/29/98 12:30)
+Copyright (C) 1985-1998, Franz Inc., Berkeley, CA, USA.  All Rights Reserved.
+
+; Loading home .clinit.cl file.
+;; Optimization settings: safety 1, space 1, speed 1, debug 2.
+;; For a complete description of all compiler switches given the current
+;; optimization settings evaluate (EXPLAIN-COMPILER-SETTINGS).
+USER(1): (load "km")
+Resetting KM...
+      ====================================================
+      KM - THE KNOWLEDGE MACHINE - INFERENCE ENGINE v1.4.0 (beta-50)
+      ====================================================
+Copyright (C) 2000 Peter Clark and Bruce Porter. KM comes with ABSOLUTELY
+NO WARRANTY. This is free software, and you are welcome to redistribute it
+under certain conditions. Type (licence) for details.
+
+Documentation at http://www.cs.utexas.edu/users/mfkb/km.html
+Type (km) for the KM interpreter prompt!
+t
+USER(2): (load "KANAL.lisp")
+t
+USER(3): (load-kb "virusinvade.km")
+Reading virusinvade.km...
+Resetting KM...
+(COMMENT: Noting definition for Penetrate...)
+(COMMENT: Noting definition for CauseAction...)
+(COMMENT: Noting definition for Penetrate...)
+(Display of comments is switched off)
+virusinvade.km read!
+T
+(227 inferences and 4747 kb-accesses in 0.6 sec [366 lips, 7656 kaps])
+
+nil
+USER(4): (load-kb "virusinvade-extension.km")
+Reading virusinvade-extension.km...
+virusinvade-extension.km read!
+T
+(58 inferences and 840 kb-accesses in 0.1 sec [483 lips, 7000 kaps])
+
+nil
+USER(5): (do-test)
+
+What do you want to do?
+   1. Test process model
+   2. Quit
+      -> 1
+
+What do you want to test for VirusInvadesCell?
+   1. VirusInvadesCell
+   2. |Endocytosis|
+   3. |Fuse|
+   4. |Convey|
+   5. |Degrade|
+   6. |Exit|
+   7. |Release|
+   8. |Deliver|
+   9. Go back to main menu
+      -> 1
+
+ all sub-steps: (|_Endocytosis33| |_Fuse37| |_Convey34| |_Degrade38| |_Exit39|
+                 |_Release36| |_Deliver27| |_VirusInvadesCell21|)
+
+
+  -----------------------------------------------------------
+  step: |_Endocytosis33|
+  -----------------------------------------------------------
+   precondition:(((|the| |patient| |of| |_Endocytosis33|) /=
+                  (|the| |agent| |of| |_Endocytosis33|))
+                 |and|
+                 ((|the| |location| |of|
+                   (|the| |patient| |of| |_Endocytosis33|))
+                  =
+                  (|the| |space-near| |of|
+                   (|the| |agent| |of| |_Endocytosis33|)))) 
+  --> nil
+
+ the step was not performed because of unachived preconditions
+
+ these are failed descritions:
+
+  ((|the| |location| |of| (|the| |patient| |of| |_Endocytosis33|)) =
+   (|the| |space-near| |of| (|the| |agent| |of| |_Endocytosis33|)))
+
+What do you want to fix?
+   1. ((the location of (the patient of _Endocytosis33)) =
+       (the space-near of (the agent of _Endocytosis33)))
+   2. Go back to main menu
+      -> 1
+
+
+ ***** I would propose following fixes for the failure of 
+      ((|the| |location| |of| (|the| |patient| |of| |_Endocytosis33|)) =
+       (|the| |space-near| |of| (|the| |agent| |of| |_Endocytosis33|))) 
+ 
+ ..............................................................
+   checking how to change |location| value .. 
+ ..............................................................
+
+     .. checking if there are missing steps .. 
+ 1 : add a |Arrive| step before |_Endocytosis33| to change the value of |location|
+ 2 : add a |Move| step before |_Endocytosis33| to change the value of |location|
+
+     .. checking if ordering changes may fix the problem .. 
+       -> no ordering change applicable
+
+
+ ..............................................................
+   checking how to change |space-near| value .. 
+ ..............................................................
+
+     .. checking if there are missing steps .. 
+       -> no step addition applicable
+
+     .. checking if ordering changes may fix the problem .. 
+       -> no ordering change applicable
+
+
+ ..............................................................
+   checking if there are unnecessary steps .. 
+ ..............................................................
+
+ 3  delete |_Endocytosis33|
+
+What do you want to choose?
+   1. (ADD Arrive BEFORE _Endocytosis33)
+   2. (ADD Move BEFORE _Endocytosis33)
+   3. (DELETE _Endocytosis33)
+   4. Go back to main menu
+      -> 1
+
+ ..............................................................
+  the actual fixes are done using Concept Map window
+    and the menues in the Dialog Window...
+ ..............................................................
+
+ assume a |Arrive| step is added properly by the user
+
+What do you want to do?
+   1. Test process model
+   2. Reset to the original model
+   3. Quit
+      -> 1
+
+What do you want to test for NewVirusInvadesCell?
+   1. NewVirusInvadesCell
+   2. |Arrive|
+   3. |Endocytosis|
+   4. |Fuse|
+   5. |Convey|
+   6. |Degrade|
+   7. |Exit|
+   8. |Release|
+   9. |Deliver|
+   10. Go back to main menu
+      -> 1
+
+ all sub-steps: (|_Arrive99| |_Endocytosis109| |_Fuse113| |_Convey110|
+                 |_Degrade114| |_Exit115| |_Release112| |_Deliver104|
+                 |_NewVirusInvadesCell96|)
+
+
+  -----------------------------------------------------------
+  step: |_Arrive99|
+  -----------------------------------------------------------
+   precondition:|t| 
+  --> (|t|)
+
+ ... execute |_Arrive99|...
+      deleted ((:|triple| |_Virus111| |location| |_Space119|))
+      added ((:|triple| |_Virus111| |location| |_Space118|))
+
+  -----------------------------------------------------------
+  step: |_Endocytosis109|
+  -----------------------------------------------------------
+   precondition:(((|the| |patient| |of| |_Endocytosis109|) /=
+                  (|the| |agent| |of| |_Endocytosis109|))
+                 |and|
+                 ((|the| |location| |of|
+                   (|the| |patient| |of| |_Endocytosis109|))
+                  =
+                  (|the| |space-near| |of|
+                   (|the| |agent| |of| |_Endocytosis109|)))) 
+  --> (|t|)
+
+ ... execute |_Endocytosis109|...
+      deleted ((:|triple| |_Vesicle125| |contains| nil)
+               (:|triple| |_Virus111| |location| |_Space142|))
+      added ((:|triple| |_Vesicle125| |contains| |_Virus111|)
+             (:|triple| |_Virus111| |location| |_Space127|))
+
+  -----------------------------------------------------------
+  step: |_Fuse113|
+  -----------------------------------------------------------
+   precondition:|t| 
+  --> (|t|)
+
+ ... execute |_Fuse113|...
+      deleted ((:|triple| |_Virus111| |contains-of| nil))
+      added ((:|triple| |_Virus111| |contains-of| nil))
+
+  -----------------------------------------------------------
+  step: |_Convey110|
+  -----------------------------------------------------------
+   precondition:|t| 
+  --> (|t|)
+
+ ... execute |_Convey110|...
+      deleted ((:|triple| |_Virus111| |location| |_Space127|))
+      added ((:|triple| |_Virus111| |location| |_Space107|))
+
+  -----------------------------------------------------------
+  step: |_Degrade114|
+  -----------------------------------------------------------
+   precondition:|t| 
+  --> (|t|)
+
+ ... execute |_Degrade114|...
+      deleted nil
+      added nil
+
+  -----------------------------------------------------------
+  step: |_Exit115|
+  -----------------------------------------------------------
+   precondition:|t| 
+  --> (|t|)
+
+ ... execute |_Exit115|...
+      deleted ((:|triple| |_Thing163| |contains| |_Dna160|)
+               (:|triple| |_Dna160| |location| |_Space167|))
+      added ((:|triple| |_Thing163| |contains| nil)
+             (:|triple| |_Dna160| |location| |_Space165|))
+
+  -----------------------------------------------------------
+  step: |_Release112|
+  -----------------------------------------------------------
+   precondition:|t| 
+  --> (|t|)
+
+ ... execute |_Release112|...
+      deleted nil
+      added nil
+
+  -----------------------------------------------------------
+  step: |_Deliver104|
+  -----------------------------------------------------------
+   precondition:|t| 
+  --> (|t|)
+
+ ... execute |_Deliver104|...
+      deleted nil
+      added nil
+
+  -----------------------------------------------------------
+  step: |_NewVirusInvadesCell96|
+  -----------------------------------------------------------
+   precondition:|t| 
+  --> (|t|)
+
+ ... execute |_NewVirusInvadesCell96|...
+      deleted nil
+      added nil
+What do you want to do?
+   1. Test process model
+   2. Reset to the original model
+   3. Quit
+      -> 3
+t
+USER(6): 

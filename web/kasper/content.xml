@@ -1,0 +1,235 @@
+
+<!-- <?xml version='1.0'?> -->
+
+<!--
+
+IF YOU CAN READ THIS, YOUR BROWSER DOESN'T SUPPORT XML.
+
+PLEASE UPDATE YOUR BROWSER, OR VIEW THE HTML VERSION OF THIS PAGE.
+
+-->
+<!--
+When the schema works, reference it like this; change the project tag below to this
+<project xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation = "isd-personnel.xsd">
+-->
+<project>
+  <name>Kasper</name>
+  <title>Knowledge Acquisition for Solving Problems</title>
+  <status>
+    <short>
+ <ul>
+ <li> <b>KANAL</b>:  Our initial evaluation shows its
+usefulness in finding errors and suggesting fixes. 
+It has been successfully integrated within an end-to-end system (SHAKEN),
+which has been used by biologists to enter
+textbook knowledge about molecular biology.
+ </li>
+ <li> <b>Dialog Manager</b>: <a
+href="http://www.isi.edu/expect/projects/rkf/dialog-manager.html">initial
+sketch</a> is available. </li>
+ <li> <b>Expression Composer</b>: <a
+href="http://www.isi.edu/expect/projects/rkf/expression-composer.html">initial
+sketch</a> is available. </li>
+ <li><b>SADL</b>: Its <a href="http://www.isi.edu/expect/projects/rkf/action-language.html">initial version</a> was published in Feb 2001. 
+ </li>
+ </ul>
+  </short>
+
+<long>
+
+<ul>
+<li> <b>KANAL</b>: 
+<p />We performed an initial evaluation of <a
+     href="http://www.isi.edu/expect/web/kanal/project-main-view.xml">KANAL (a
+tool for helping users build/check process models)</a> in December 2000, which has been reported in
+<a 
+href="http://www.isi.edu/expect/projects/rkf/KANAL/kanal-ijcai01.pdf">Kim and
+Gil, IJCAI-01</a>.  The results show that KANAL can find most of the errors in
+the process models and suggest useful fixes including the fixes that directly
+point to the sources of the errors.
+
+<p /> KANAL has been successfully integrated within the end-to-end system
+(<a href="http://www.ai.sri.com/~rkf/">SHAKEN</a>) that supports subject
+matter experts entering domain knowledge.  During summer 2001, the SHAKEN system has been evaluated by lightly
+trained biologists where they author biology textbook knowledge using the
+system.  The resulting knowledge bases answer questions that a student might
+be asked based on the chapter's contents.
+</li>
+ <li> <b>Dialog Manager</b>: <a
+href="http://www.isi.edu/expect/projects/rkf/dialog-manager.html">initial
+sketch</a> is now available. </li>
+ <li> <b>Expression Composer</b>: <a
+href="http://www.isi.edu/expect/projects/rkf/expression-composer.html">initial
+sketch</a> is now available. </li>
+ <li><b>SADL</b>: Its <a href="http://www.isi.edu/expect/projects/rkf/action-language.html">design</a> is reported in Feb 2001. Currently, KANAL can
+support most of the functions.
+ </li>
+</ul>
+
+</long>
+  </status>
+
+  <description>
+    <short>
+    We are participating in the DARPA <a
+href="http://reliant.teknowledge.com/RKF/">Rapid Knowledge Formation (RKF)</a>
+program.
+    As a part of the program we are working on several research thrusts
+       (1) <a
+     href="http://www.isi.edu/expect/web/kanal/project-main-view.xml">KANAL: building/checking process models</a> (2) <a
+     href="http://www.isi.edu/expect/web/dialog-manager/project-main-view.xml">Dialog Manager: keeping track of user
+actions and making suggestions</a> (3) <a
+     href="http://www.isi.edu/expect/web/english-editor/project-main-view.xml">Expression Composer: helping users to express their knowledge
+without worrying about underlying representation language</a> (4) <a
+     href="http://www.isi.edu/expect/web/sadl/project-main-view.xml">SADL:
+a language to describe process models</a>.
+
+    </short>
+    <long>
+    We are participating in the DARPA <a
+href="http://reliant.teknowledge.com/RKF/">Rapid Knowledge Formation (RKF)</a>
+program where the goal is to enable distributed teams of subject matter
+    experts (SMEs) to enter and modify knowledge directly and easily, without
+training in knowledge representation, acquisition, or manipulation. 
+
+As a part of the program, we are working on several research thrusts.
+ <ul>
+ <li> <a
+     href="http://www.isi.edu/expect/web/kanal/project-main-view.xml">KANAL (building/checking process models)</a>: We have built a tool for building and checking process models.  By
+relating different pieces of information in process models among themselves
+and to the existing KB, it performs a variety of verification and validation
+checks and propose useful fixes.  Our initial evaluation of KANAL a stand-alone system shows its usefulness
+in finding errors and suggesting fixes.  It also has been
+successfully integrated within an end-to-end system that support users
+entering domain knowledge
+  </li>
+  <li><a
+     href="http://www.isi.edu/expect/web/dialog-manager/project-main-view.xml">Dialog Manager (keeping track of user
+actions and making suggestions)</a>: We are developing a dialogue manager that uses KA plans to keep 
+track of the user's actions and can make suggestions for how to 
+proceed.  The dialogue manager would support: 1) generation, to 
+suggest to the user what to do next based on the library of KA plans, 
+2) recognition, to track what the user is doing in terms of the KA 
+plans.  The dialogue state would be shown to the user as a "status" 
+window, where the user could see the currently active KA plans as a 
+list of bullets and sub-bullets, each bullet would be checked if 
+completed and collapsed when all its sub-bullets are completed. 
+ </li>
+ <li><a
+     href="http://www.isi.edu/expect/web/english-editor/project-main-view.xml">Expression Composer (helping users to express their knowledge
+without worrying about the underlying representation language)</a>: The English editor allows the user to examine and modify
+      problem-solving knowledge through an automatically-generated
+      English paraphrase of that knowledge. When users select parts of
+      the paraphrase to modify, the editor suggests replacements, also
+      paraphrased. The editor can also compose expressions based on
+      search terms from the user.
+ </li>
+ <li> <a
+     href="http://www.isi.edu/expect/web/sadl/project-main-view.xml">SADL
+(a language to describe process models)</a>: We have developed the SHAKEN action language, for representing processes with loops,
+   partially ordered events and conditional and disjunctive events in KM.
+ </li>
+ </ul>
+
+KANAL has been successfully integrated within an end-to-end system (
+<a href="http://www.ai.sri.com/~rkf/">SHAKEN</a>) and other two are being developed as modules within the next version of
+the system.
+
+    </long>
+  </description>
+  <research>
+    <short>
+   Knowledge Acquisition, Evaluating Process Models, Dialog Manager,
+Expression Composer, Action Language
+    </short>
+    <long>
+   We are working on several research thrusts:
+ <ul>
+ <li> <a
+     href="http://www.isi.edu/expect/web/kanal/project-main-view.xml">KANAL (building/checking various process models)</a>: We have built a tool for building and checking process models.  By
+relating different pieces of information in process models among themselves
+and to the existing KB, it performs a variety of verification and validation
+checks and propose useful fixes.  Our initial evaluation of KANAL a stand-alone system shows its usefulness
+in finding errors and suggesting fixes.  It also has been
+successfully integrated within an end-to-end system that support users
+entering domain knowledge
+  </li>
+  <li><a
+     href="http://www.isi.edu/expect/web/dialog-manager/project-main-view.xml">Dialog Manager (keeping track of user
+actions and making suggestions)</a>: We are developing a dialogue manager that uses KA plans to keep 
+track of the user's actions and can make suggestions for how to 
+proceed.  The dialogue manager would support: 1) generation, to 
+suggest to the user what to do next based on the library of KA plans, 
+2) recognition, to track what the user is doing in terms of the KA 
+plans.  The dialogue state would be shown to the user as a "status" 
+window, where the user could see the currently active KA plans as a 
+list of bullets and sub-bullets, each bullet would be checked if 
+completed and collapsed when all its sub-bullets are completed. 
+ </li>
+ <li><a
+     href="http://www.isi.edu/expect/web/english-editor/project-main-view.xml">Expression Composer (helping users to express their knowledge
+without worrying about KR language)</a>: The English editor allows the user to examine and modify
+      problem-solving knowledge through an automatically-generated
+      English paraphrase of that knowledge. When users select parts of
+      the paraphrase to modify, the editor suggests replacements, also
+      paraphrased. The editor can also compose expressions based on
+      search terms from the user.
+ </li>
+ <li> <a
+     href="http://www.isi.edu/expect/web/sadl/project-main-view.xml">Developing
+action language</a>: We have developed the SHAKEN action language, for representing processes with loops,
+   partially ordered events and conditional and disjunctive events in KM.
+ </li>
+ </ul>
+
+    </long>
+  </research>
+  <link>Our <a href="http://www.isi.edu/expect/projects/rkf/y2plan.html">Yr 2 Plan</a></link>
+  <link>DARPA <a href='http://reliant.teknowledge.com/RKF/'>Rapid Knowledge
+Formation (RKF) program</a></link>
+  <link>Other work we have done for RKF
+ <ul>
+ <li><a
+href="http://www.isi.edu/expect/projects/rkf/EKCP-old/EKCP.html">Effort on
+EKCP (Expert Knowledge Challenge Problem)</a>
+ </li> 
+ <li><a href="http://www.isi.edu/expect/projects/rkf/">Training Subject Matter
+Experts</a>
+ </li> 
+<li><a href="http://www.isi.edu/expect/projects/rkf/">Evaluating KA systems</a>
+ </li>
+ <li><a href="http://www.isi.edu/expect/projects/rkf/KANAL-old/KANAL.html"> Earlier work on
+Knowledge Analysis (KANAL) and Theory In Formation (TIF)</a>
+ </li>
+
+ </ul>
+  </link>
+<link><a href='http://www.isi.edu/expect/projects/hpkb/index.html'>Our work in HPKB
+(High-Performance Knowledge Bases) program</a></link>
+  <link> Other links
+ <ul>
+ <li><a href="http://www.ai.sri.com/~rkf/">SRI team webpage</a></li>
+ <li> <a href="http://www.iet.com/Projects/RKF">IET webpage</a></li>
+ 
+ </ul> </link>
+<!-- Demo -->
+<demo>
+
+
+Check out demos of:
+
+<ul>
+<li> 
+  <a href="http://www.isi.edu/expect/web/kanal">KANAL</a>
+</li>
+<li> 
+  <a href="http://www.isi.edu/expect/web/english-editor">Expression Composer</a>
+</li>
+</ul>
+
+ 
+
+
+</demo>
+</project>

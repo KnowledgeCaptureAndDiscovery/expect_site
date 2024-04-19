@@ -1,0 +1,568 @@
+select: copy and create button
+   at Thu Jun 24 14:16:02 PDT 1999
+
+select: copy and create button
+   at Thu Jun 24 14:20:32 PDT 1999
+
+select: copy and create button
+   at Thu Jun 24 14:22:47 PDT 1999
+
+select: copy and create button
+   at Thu Jun 24 14:26:23 PDT 1999
+
+select: copy and create button
+   at Thu Jun 24 14:35:07 PDT 1999
+
+ done editing:((name estimate-time-to-move-asset)
+ (capability (estimate
+                (obj (?t is (spec-of time)))
+                (for (?p is (inst-of move-asset)))
+                ))
+ (result-type (inst-of number))
+ (method (add
+	  (obj (find
+		(obj (spec-of maximum))
+		(of 
+		 (find
+		  (obj (spec-of opcon-time))
+		  (of (asset-of ?p))))))
+	  (to (find
+	       (obj (spec-of maximum))
+	       (of 
+		(find
+		 (obj (spec-of moving-time))
+		 (of (asset-of ?p))))))
+	  )
+ )
+)
+   at Thu Jun 24 14:44:51 PDT 1999
+
+built new method:((name estimate-time-to-move-asset)
+ (capability (estimate
+                (obj (?t is (spec-of time)))
+                (for (?p is (inst-of move-asset)))
+                ))
+ (result-type (inst-of number))
+ (method (add
+	  (obj (find
+		(obj (spec-of maximum))
+		(of 
+		 (find
+		  (obj (spec-of opcon-time))
+		  (of (asset-of ?p))))))
+	  (to (find
+	       (obj (spec-of maximum))
+	       (of 
+		(find
+		 (obj (spec-of moving-time))
+		 (of (asset-of ?p))))))
+	  )
+ )
+)
+   at Thu Jun 24 14:44:51 PDT 1999
+
+check: 
+   at Thu Jun 24 14:44:51 PDT 1999
+
+check: Describe PS Tree
+   at Thu Jun 24 14:44:51 PDT 1999
+
+select: show error button
+   at Thu Jun 24 14:44:54 PDT 1999
+
+checked error:((name max-numbers)
+ (primitivep t)
+ (capability (find
+                (obj (?m is (spec-of maximum)))
+                (of (?ns is (set-of (inst-of number)))
+                ))
+ (result-type (inst-of number))
+ (method (primitive-max-numbers ?ns))
+)
+   at Thu Jun 24 14:44:54 PDT 1999
+
+check: error messages
+   at Thu Jun 24 14:45:01 PDT 1999
+
+select: copy and create button
+   at Thu Jun 24 14:47:49 PDT 1999
+
+select: copy and create button
+   at Thu Jun 24 14:55:57 PDT 1999
+
+select: copy and create button
+   at Thu Jun 24 14:57:36 PDT 1999
+
+select: add new button
+   at Thu Jun 24 15:05:59 PDT 1999
+
+ done editing:((name find-opcon-time-of-asset)
+ (capability (find
+	      (obj (?t is (spec-of opcon-time)))
+	      (of (?a is (inst-of asset)))
+	      ))
+ (result-type (inst-of number))
+ (method (if (is-it-a
+	      (obj ?a)
+	      (of (spec-of corps-level-asset)))
+	     then 4
+	     else 2))
+)
+
+   at Thu Jun 24 15:06:20 PDT 1999
+
+added New method:((name find-opcon-time-of-asset)
+ (capability (find
+	      (obj (?t is (spec-of opcon-time)))
+	      (of (?a is (inst-of asset)))
+	      ))
+ (result-type (inst-of number))
+ (method (if (is-it-a
+	      (obj ?a)
+	      (of (spec-of corps-level-asset)))
+	     then 4
+	     else 2))
+)
+
+   at Thu Jun 24 15:06:20 PDT 1999
+
+check: 
+   at Thu Jun 24 15:06:20 PDT 1999
+
+check: Describe PS Tree
+   at Thu Jun 24 15:06:20 PDT 1999
+
+check: error messages
+   at Thu Jun 24 15:06:34 PDT 1999
+
+select: copy and create button
+   at Thu Jun 24 15:09:52 PDT 1999
+
+select: copy and create button
+   at Thu Jun 24 15:12:14 PDT 1999
+
+select: copy and create button
+   at Thu Jun 24 15:21:11 PDT 1999
+
+ done editing:((name find-moving-time-of-asset)
+ (capability (find
+	      (obj (?t is (spec-of moving-time)))
+	      (of (?a is (inst-of asset)))
+	      (to (?l is (inst-of location))))
+ )
+ (result-type (inst-of number))
+ (method 0)
+)
+
+   at Thu Jun 24 15:21:54 PDT 1999
+
+built new method:((name find-moving-time-of-asset)
+ (capability (find
+	      (obj (?t is (spec-of moving-time)))
+	      (of (?a is (inst-of asset)))
+	      (to (?l is (inst-of location))))
+ )
+ (result-type (inst-of number))
+ (method 0)
+)
+
+   at Thu Jun 24 15:21:54 PDT 1999
+
+check: 
+   at Thu Jun 24 15:21:54 PDT 1999
+
+check: Describe PS Tree
+   at Thu Jun 24 15:21:54 PDT 1999
+
+select: modify button
+   at Thu Jun 24 15:22:15 PDT 1999
+
+ done editing:((name estimate-time-to-move-asset)
+ (capability (estimate
+                (obj (?t is (spec-of time)))
+                (for (?p is (inst-of move-asset)))
+                ))
+ (result-type (inst-of number))
+ (method (add
+	  (obj (find
+		(obj (spec-of maximum))
+		(of 
+		 (find
+		  (obj (spec-of opcon-time))
+		  (of (asset-of ?p))))))
+	  (to (find
+	       (obj (spec-of maximum))
+	       (of 
+		(find
+		 (obj (spec-of moving-time))
+		 (of (asset-of ?p))
+		 (to (destination ?p)))
+	       )
+	      )
+	  )
+	 )
+ )
+)
+   at Thu Jun 24 15:28:12 PDT 1999
+
+modified method:((name estimate-time-to-move-asset)
+ (capability (estimate
+                (obj (?t is (spec-of time)))
+                (for (?p is (inst-of move-asset)))
+                ))
+ (result-type (inst-of number))
+ (method (add
+	  (obj (find
+		(obj (spec-of maximum))
+		(of 
+		 (find
+		  (obj (spec-of opcon-time))
+		  (of (asset-of ?p))))))
+	  (to (find
+	       (obj (spec-of maximum))
+	       (of 
+		(find
+		 (obj (spec-of moving-time))
+		 (of (asset-of ?p))
+		 (to (destination ?p)))
+	       )
+	      )
+	  )
+	 )
+ )
+)
+   at Thu Jun 24 15:28:12 PDT 1999
+
+check: 
+   at Thu Jun 24 15:28:12 PDT 1999
+
+check: Describe PS Tree
+   at Thu Jun 24 15:28:12 PDT 1999
+
+check: error messages
+   at Thu Jun 24 15:28:38 PDT 1999
+
+select: modify button
+   at Thu Jun 24 15:28:59 PDT 1999
+
+select: copy and create button
+   at Thu Jun 24 15:33:59 PDT 1999
+
+ done editing:((name find-moving-time-of-asset)
+ (capability (find
+	      (obj (?t is (spec-of moving-time)))
+	      (of (?a is (inst-of asset)))
+	      (to (?l is (inst-of location))))
+ )
+ (result-type (inst-of number))
+ (method (divide
+	  (obj (find 
+		(obj (spec-of moving-distance))
+		(from object-found-in-location ?a)
+		(to ?l)
+	       )
+	   )
+	 (by 60000)
+	 )
+ )
+)
+   at Thu Jun 24 15:52:56 PDT 1999
+
+built new method:((name find-moving-time-of-asset)
+ (capability (find
+	      (obj (?t is (spec-of moving-time)))
+	      (of (?a is (inst-of asset)))
+	      (to (?l is (inst-of location))))
+ )
+ (result-type (inst-of number))
+ (method (divide
+	  (obj (find 
+		(obj (spec-of moving-distance))
+		(from object-found-in-location ?a)
+		(to ?l)
+	       )
+	   )
+	 (by 60000)
+	 )
+ )
+)
+   at Thu Jun 24 15:52:56 PDT 1999
+
+check: 
+   at Thu Jun 24 15:52:56 PDT 1999
+
+check: Describe PS Tree
+   at Thu Jun 24 15:52:57 PDT 1999
+
+select: modify button
+   at Thu Jun 24 15:53:09 PDT 1999
+
+ done editing:((name find-moving-time-of-asset)
+ (capability (find
+	      (obj (?t is (spec-of moving-time)))
+	      (of (?a is (inst-of asset)))
+	      (to (?l is (inst-of location))))
+ )
+ (result-type (inst-of number))
+ (method (divide
+	  (obj (find 
+		(obj (spec-of moving-distance))
+		(from object-found-in-location ?a)
+		(to ?l)
+	       )
+	   )
+	 (by 60000)
+	 )
+ )
+)
+
+   at Thu Jun 24 15:53:22 PDT 1999
+
+modified method:((name find-moving-time-of-asset)
+ (capability (find
+	      (obj (?t is (spec-of moving-time)))
+	      (of (?a is (inst-of asset)))
+	      (to (?l is (inst-of location))))
+ )
+ (result-type (inst-of number))
+ (method (divide
+	  (obj (find 
+		(obj (spec-of moving-distance))
+		(from object-found-in-location ?a)
+		(to ?l)
+	       )
+	   )
+	 (by 60000)
+	 )
+ )
+)
+
+   at Thu Jun 24 15:53:22 PDT 1999
+
+check: 
+   at Thu Jun 24 15:53:22 PDT 1999
+
+check: Describe PS Tree
+   at Thu Jun 24 15:53:22 PDT 1999
+
+check: error messages
+   at Thu Jun 24 15:53:31 PDT 1999
+
+select: modify button
+   at Thu Jun 24 15:54:00 PDT 1999
+
+ done editing:((name find-moving-time-of-asset)
+ (capability (find
+	      (obj (?t is (spec-of moving-time)))
+	      (of (?a is (inst-of asset)))
+	      (to (?l is (inst-of location))))
+ )
+ (result-type (inst-of number))
+ (method (divide
+	  (obj (find 
+		(obj (spec-of moving-distance))
+		(from (object-found-in-location ?a))
+		(to ?l)
+	       )
+	   )
+	 (by 60000)
+	 )
+ )
+)
+
+   at Thu Jun 24 15:54:20 PDT 1999
+
+modified method:((name find-moving-time-of-asset)
+ (capability (find
+	      (obj (?t is (spec-of moving-time)))
+	      (of (?a is (inst-of asset)))
+	      (to (?l is (inst-of location))))
+ )
+ (result-type (inst-of number))
+ (method (divide
+	  (obj (find 
+		(obj (spec-of moving-distance))
+		(from (object-found-in-location ?a))
+		(to ?l)
+	       )
+	   )
+	 (by 60000)
+	 )
+ )
+)
+
+   at Thu Jun 24 15:54:20 PDT 1999
+
+check: 
+   at Thu Jun 24 15:54:20 PDT 1999
+
+check: Describe PS Tree
+   at Thu Jun 24 15:54:20 PDT 1999
+
+check: error messages
+   at Thu Jun 24 15:54:24 PDT 1999
+
+select: copy and create button
+   at Thu Jun 24 15:55:02 PDT 1999
+
+ done editing:((name find-moving-distance-of-asset)
+ (capability (find 
+	      (obj (?d is (spec-of moving-distance)))
+	      (from (?b is (inst-of location)))
+	      (to (?e is (inst-of location)))
+	     )
+ )
+ (result-type (inst-of number))
+ (method (find-distance ?b ?e))
+ (primitivep t)
+)
+   at Thu Jun 24 16:11:02 PDT 1999
+
+built new method:((name find-moving-distance-of-asset)
+ (capability (find 
+	      (obj (?d is (spec-of moving-distance)))
+	      (from (?b is (inst-of location)))
+	      (to (?e is (inst-of location)))
+	     )
+ )
+ (result-type (inst-of number))
+ (method (find-distance ?b ?e))
+ (primitivep t)
+)
+   at Thu Jun 24 16:11:02 PDT 1999
+
+check: 
+   at Thu Jun 24 16:11:02 PDT 1999
+
+check: Describe PS Tree
+   at Thu Jun 24 16:11:03 PDT 1999
+
+check: error messages
+   at Thu Jun 24 16:11:22 PDT 1999
+
+check: Describe PS Tree
+   at Thu Jun 24 16:11:36 PDT 1999
+
+ select: get ps tree success
+   at Thu Jun 24 16:11:39 PDT 1999
+
+ [ps-en1] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-PLAN)))
+[ps-en1] < (INST-OF NUMBER)
+   -[ps-an2: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-PLAN)))
+    [ps-an2: METHOD] < (INST-OF NUMBER)
+    [ps-en3] > (ADD (OBJ (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (WORKAROUND-OF (INST-OF WORKAROUND-PLAN))))))
+    [ps-en3]   (ADD (OBJ (SET-OF (INST-OF NUMBER))))
+    [ps-en3] < (INST-OF NUMBER)
+     [ps-en4] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (WORKAROUND-OF (INST-OF WORKAROUND-PLAN))))
+     [ps-en4]   (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF WORKAROUND-STEP))))
+     [ps-en4] < (SET-OF (INST-OF NUMBER))
+      [ps-en5] > (WORKAROUND-OF (INST-OF WORKAROUND-PLAN))
+      [ps-en5] < (SET-OF (INST-OF WORKAROUND-STEP))
+       -[ps-an6: RETRIEVE-R] > (WORKAROUND-OF (INST-OF WORKAROUND-PLAN))
+        [ps-an6: RETRIEVE-R] < (SET-OF (INST-OF WORKAROUND-STEP))
+      -[ps-an8: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF WORKAROUND-STEP))))
+       [ps-an8: SET]   (APPEND (SET-OF (INST-OF NUMBER)))
+       [ps-an8: SET] < (SET-OF (INST-OF NUMBER))
+       [ps-en9] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-STEP)))
+       [ps-en9] < (SET-OF (INST-OF NUMBER))
+        -[ps-an12: COVERING] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-STEP)))
+         [ps-an12: COVERING]   (APPEND (INST-OF NUMBER) (INST-OF NUMBER) 1.0 1.5)
+         [ps-an12: COVERING] < (SET-OF (INST-OF NUMBER))
+         [ps-en13] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF MOVE-ASSET)))
+         [ps-en13] < (INST-OF NUMBER)
+          -[ps-an17: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF MOVE-ASSET)))
+           [ps-an17: METHOD] < (INST-OF NUMBER)
+           [ps-en18] > (ADD (OBJ (FIND (OBJ (SPEC-OF MAXIMUM)) (OF (FIND (OBJ (SPEC-OF OPCON-TIME)) (OF (ASSET-OF (INST-OF MOVE-ASSET))))))) (TO (FIND (OBJ (SPEC-OF MAXIMUM)) (OF (FIND (OBJ (SPEC-OF MOVING-TIME)) (OF (ASSET-OF (INST-OF MOVE-ASSET))) (TO (DESTINATION (INST-OF MOVE-ASSET))))))))
+           [ps-en18]   (ADD (OBJ (INST-OF NUMBER)) (TO (INST-OF NUMBER)))
+           [ps-en18] < (INST-OF NUMBER)
+            [ps-en19] > (FIND (OBJ (SPEC-OF MAXIMUM)) (OF (FIND (OBJ (SPEC-OF MOVING-TIME)) (OF (ASSET-OF (INST-OF MOVE-ASSET))) (TO (DESTINATION (INST-OF MOVE-ASSET))))))
+            [ps-en19]   (FIND (OBJ (SPEC-OF MAXIMUM)) (OF (SET-OF (INST-OF NUMBER))))
+            [ps-en19] < (INST-OF NUMBER)
+             [ps-en21] > (FIND (OBJ (SPEC-OF MOVING-TIME)) (OF (ASSET-OF (INST-OF MOVE-ASSET))) (TO (DESTINATION (INST-OF MOVE-ASSET))))
+             [ps-en21]   (FIND (OBJ (SPEC-OF MOVING-TIME)) (OF (SET-OF (INST-OF ASSET))) (TO (INST-OF LOCATION)))
+             [ps-en21] < (SET-OF (INST-OF NUMBER))
+              [ps-en22] > (DESTINATION (INST-OF MOVE-ASSET))
+              [ps-en22] < (INST-OF LOCATION)
+               -[ps-an24: RETRIEVE-R] > (DESTINATION (INST-OF MOVE-ASSET))
+                [ps-an24: RETRIEVE-R] < (INST-OF LOCATION)
+              [ps-en23] > (ASSET-OF (INST-OF MOVE-ASSET))
+              [ps-en23] < (SET-OF (INST-OF ASSET))
+               -[ps-an25: RETRIEVE-R] > (ASSET-OF (INST-OF MOVE-ASSET))
+                [ps-an25: RETRIEVE-R] < (SET-OF (INST-OF ASSET))
+              -[ps-an27: SET] > (FIND (OBJ (SPEC-OF MOVING-TIME)) (OF (SET-OF (INST-OF ASSET))) (TO (INST-OF LOCATION)))
+               [ps-an27: SET]   (APPEND (INST-OF NUMBER))
+               [ps-an27: SET] < (SET-OF (INST-OF NUMBER))
+               [ps-en28] > (FIND (OBJ (SPEC-OF MOVING-TIME)) (OF (INST-OF ASSET)) (TO (INST-OF LOCATION)))
+               [ps-en28] < (INST-OF NUMBER)
+                -[ps-an29: METHOD] > (FIND (OBJ (SPEC-OF MOVING-TIME)) (OF (INST-OF ASSET)) (TO (INST-OF LOCATION)))
+                 [ps-an29: METHOD] < (INST-OF NUMBER)
+                 [ps-en30] > (DIVIDE (OBJ (FIND (OBJ (SPEC-OF MOVING-DISTANCE)) (FROM (OBJECT-FOUND-IN-LOCATION (INST-OF ASSET))) (TO (INST-OF LOCATION)))) (BY 60000))
+                 [ps-en30]   (DIVIDE (OBJ (INST-OF NUMBER)) (BY 60000))
+                 [ps-en30] < (INST-OF NUMBER)
+                  [ps-en31] > (FIND (OBJ (SPEC-OF MOVING-DISTANCE)) (FROM (OBJECT-FOUND-IN-LOCATION (INST-OF ASSET))) (TO (INST-OF LOCATION)))
+                  [ps-en31]   (FIND (OBJ (SPEC-OF MOVING-DISTANCE)) (FROM (INST-OF LOCATION)) (TO (INST-OF LOCATION)))
+                  [ps-en31] < (INST-OF NUMBER)
+                   [ps-en32] > (OBJECT-FOUND-IN-LOCATION (INST-OF ASSET))
+                   [ps-en32] < (INST-OF LOCATION)
+                    -[ps-an33: RETRIEVE-R] > (OBJECT-FOUND-IN-LOCATION (INST-OF ASSET))
+                     [ps-an33: RETRIEVE-R] < (INST-OF LOCATION)
+                   -[ps-an34: METHOD] > (FIND (OBJ (SPEC-OF MOVING-DISTANCE)) (FROM (INST-OF LOCATION)) (TO (INST-OF LOCATION)))
+                    [ps-an34: METHOD] < (INST-OF NUMBER)
+                  -[ps-an35: METHOD] > (DIVIDE (OBJ (INST-OF NUMBER)) (BY 60000))
+                   [ps-an35: METHOD] < (INST-OF NUMBER)
+             -[ps-an36: METHOD] > (FIND (OBJ (SPEC-OF MAXIMUM)) (OF (SET-OF (INST-OF NUMBER))))
+              [ps-an36: METHOD] < (INST-OF NUMBER)
+            [ps-en20] > (FIND (OBJ (SPEC-OF MAXIMUM)) (OF (FIND (OBJ (SPEC-OF OPCON-TIME)) (OF (ASSET-OF (INST-OF MOVE-ASSET))))))
+            [ps-en20]   (FIND (OBJ (SPEC-OF MAXIMUM)) (OF (SET-OF (INST-OF NUMBER))))
+            [ps-en20] < (INST-OF NUMBER)
+             [ps-en37] > (FIND (OBJ (SPEC-OF OPCON-TIME)) (OF (ASSET-OF (INST-OF MOVE-ASSET))))
+             [ps-en37]   (FIND (OBJ (SPEC-OF OPCON-TIME)) (OF (SET-OF (INST-OF ASSET))))
+             [ps-en37] < (SET-OF (INST-OF NUMBER))
+              [ps-en23] > (ASSET-OF (INST-OF MOVE-ASSET))
+              [ps-en23] < (SET-OF (INST-OF ASSET))
+               -[ps-an25: RETRIEVE-R] > (ASSET-OF (INST-OF MOVE-ASSET))
+                [ps-an25: RETRIEVE-R] < (SET-OF (INST-OF ASSET))
+              -[ps-an39: SET] > (FIND (OBJ (SPEC-OF OPCON-TIME)) (OF (SET-OF (INST-OF ASSET))))
+               [ps-an39: SET]   (APPEND (INST-OF NUMBER))
+               [ps-an39: SET] < (SET-OF (INST-OF NUMBER))
+               [ps-en40] > (FIND (OBJ (SPEC-OF OPCON-TIME)) (OF (INST-OF ASSET)))
+               [ps-en40] < (INST-OF NUMBER)
+                -[ps-an41: METHOD] > (FIND (OBJ (SPEC-OF OPCON-TIME)) (OF (INST-OF ASSET)))
+                 [ps-an41: METHOD] < (INST-OF NUMBER)
+                 [ps-en42] > (IF (IS-IT-A (OBJ (INST-OF ASSET)) (OF (SPEC-OF CORPS-LEVEL-ASSET))) THEN 4 ELSE 2)
+                 [ps-en42]   (IF (INST-OF BOOLEAN) THEN 4 ELSE 2)
+                 [ps-en42] < (INST-OF NUMBER)
+                  [ps-en43] > (IS-IT-A (OBJ (INST-OF ASSET)) (OF (SPEC-OF CORPS-LEVEL-ASSET)))
+                  [ps-en43] < (INST-OF BOOLEAN)
+                   -[ps-an44: METHOD] > (IS-IT-A (OBJ (INST-OF ASSET)) (OF (SPEC-OF CORPS-LEVEL-ASSET)))
+                    [ps-an44: METHOD] < (INST-OF BOOLEAN)
+             -[ps-an36: METHOD] > (FIND (OBJ (SPEC-OF MAXIMUM)) (OF (SET-OF (INST-OF NUMBER))))
+              [ps-an36: METHOD] < (INST-OF NUMBER)
+            -[ps-an45: METHOD] > (ADD (OBJ (INST-OF NUMBER)) (TO (INST-OF NUMBER)))
+             [ps-an45: METHOD] < (INST-OF NUMBER)
+         [ps-en14] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF MOVE-ASSET-ACROSS-BRIDGE)))
+         [ps-en14] < (INST-OF NUMBER)
+          -[ps-an46: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF MOVE-ASSET-ACROSS-BRIDGE)))
+           [ps-an46: METHOD] < (INST-OF NUMBER)
+           [ps-en47] > (ESTIMATE (OBJ (SPEC-OF TIME)) (THROUGH (BRIDGE-OF (INST-OF MOVE-ASSET-ACROSS-BRIDGE))))
+           [ps-en47]   (ESTIMATE (OBJ (SPEC-OF TIME)) (THROUGH (INST-OF MILITARY-BRIDGE)))
+           [ps-en47] < (INST-OF NUMBER)
+            [ps-en48] > (BRIDGE-OF (INST-OF MOVE-ASSET-ACROSS-BRIDGE))
+            [ps-en48] < (INST-OF MILITARY-BRIDGE)
+             -[ps-an49: RETRIEVE-R] > (BRIDGE-OF (INST-OF MOVE-ASSET-ACROSS-BRIDGE))
+              [ps-an49: RETRIEVE-R] < (INST-OF MILITARY-BRIDGE)
+            -[ps-an50: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (THROUGH (INST-OF MILITARY-BRIDGE)))
+             [ps-an50: METHOD] < (INST-OF NUMBER)
+         [ps-en15] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF MOVE-ASSET-ACROSS-GAP)))
+         [ps-en15] < 1.0
+          -[ps-an51: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF MOVE-ASSET-ACROSS-GAP)))
+           [ps-an51: METHOD] < 1.0
+         [ps-en16] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF MOVE-ASSET-AROUND-TUNNEL)))
+         [ps-en16] < 1.5
+          -[ps-an52: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF MOVE-ASSET-AROUND-TUNNEL)))
+           [ps-an52: METHOD] < 1.5
+     -[ps-an53: METHOD] > (ADD (OBJ (SET-OF (INST-OF NUMBER))))
+      [ps-an53: METHOD] < (INST-OF NUMBER)
+
+   at Thu Jun 24 16:11:40 PDT 1999
+

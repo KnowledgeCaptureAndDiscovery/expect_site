@@ -1,0 +1,492 @@
+<HTML>
+<HEAD>
+   <TITLE>Papers on Planning</TITLE>
+
+  <SCRIPT language="javascript">
+
+  about_on = new Image();
+  about_on.src = "./exp-about.gif";
+
+  research_on = new Image();
+  research_on.src = "./exp-research.gif"; 
+
+  projectmemb_on = new Image();
+  projectmemb_on.src = "./exp-pr-members.gif";
+
+  publications_on = new Image();
+  publications_on.src = "./exp-publ.gif";
+
+  movie_on = new Image();
+  movie_on.src = "./exp-movie.gif";  
+
+  projects_on = new Image();
+  projects_on.src = "./exp-projects.gif"; 
+    
+function swampImages(imagename, cimage)
+  {
+      imgsrc = './' + cimage;
+      document[imagename].src = imgsrc;
+  } 
+  </SCRIPT>
+ 
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+
+<TABLE align=center WIDTH=730>
+<TR><TD colspan=3>
+
+<P ALIGN=CENTER>
+<A HREF="../"
+onmouseover="swampImages('About','exp-about.gif'); return true"
+onmouseout="swampImages('About','exp-about-bl.gif');return true"><IMG
+SRC="exp-about-bl.gif" BORDER=0 NAME="About"></A>
+
+<A HREF="./research.html"
+onmouseover="swampImages('Research','exp-research.gif'); return true"
+onmouseout="swampImages('Research','exp-research-bl.gif');return
+true"><IMG SRC="exp-research-bl.gif" BORDER=0 NAME="Research"></A>
+
+<A HREF="./projects.html"
+onmouseover="swampImages('Projects','exp-projects.gif'); return true"
+onmouseout="swampImages('Projects','exp-projects-bl.gif');return
+true"><IMG SRC="./exp-projects-bl.gif" BORDER=0 NAME="Projects"></A>
+
+<A HREF="./pr-members.html"
+onmouseover="swampImages('Members','exp-pr-members.gif'); return true"
+onmouseout="swampImages('Members','exp-pr-members-bl.gif');return true"><IMG
+SRC="exp-pr-members-bl.gif" BORDER=0 NAME="Members"></A>
+
+<A HREF="./"
+onmouseover="swampImages('Publ','exp-publ.gif'); return true"
+onmouseout="swampImages('Publ','exo-publ-bl.gif');return true"
+onclick="return false"><IMG
+SRC="exo-publ-bl.gif" BORDER=0 NAME="Publ"></A>
+
+<A HREF="./demo.html"
+onmouseover="swampImages('Demo','exp-mov.gif'); return true"
+onmouseout="swampImages('Demo','exp-mov-bl.gif');return true"><IMG
+SRC="exp-mov-bl.gif" BORDER=0 NAME="Demo"></A>
+</TD></TR>
+
+<TR><TD width=50></TD>
+
+
+
+<TD WIDTH=550>
+<BR>
+<P ALIGN=CENTER><B><FONT SIZE=+2 FACE=ARIAL>Publications</B></FONT><BR>
+
+
+<HR>
+
+<P><FONT FACE=ARIAL><B>Papers on <A HREF="./publications.html#EXPECT">EXPECT</A></P>
+<P>Papers on <A HREF="./papers-planning.html">Planning</A></P>
+<P>Papers on <A HREF="./papers-ka.html">Knowledge Acquisition</A></P>
+<P>Papers on <A HREF="./papers-agents.html">Intelligent Agents</A></P>
+<P>Papers on <A HREF="./papers-ontos.html">Ontologies and
+Problem-Solving Methods</A></P>
+<P>Papers on <A HREF="./papers-dialog.html">Proactive Dialogue</A></P>
+<P>Papers on <A HREF="./papers-ml.html">Machine Learning</A></P></FONT></B>
+
+
+
+<HR>
+
+<P ALIGN=LEFT><B><FONT SIZE=+2 FACE=ARIAL>Papers on Machine Learning</B></FONT><BR>
+
+<P>
+Jihie Kim and Paul Rosenbloom.
+"Bounding the Cost of Learned Rules".
+<i>Artificial Intelligence</i>, Vol. 120, No.1, 2000.
+(<A HREF="../papers/kim-rosenbloom-aij.pdf">PDF file </A>) 
+
+<P>
+<B> Abstract: </B> 
+In this article we approach one key aspect of the utility problem in
+explanation-based learning (EBL) --- the expensive-rule
+problem --- as an avoidable defect in the learning procedure.  In
+particular, we examine the relationship between the cost of solving a
+problem without learning versus the cost of using a learned rule to
+provide the same solution, and refer to a learned rule as 
+expensive if its use is more costly than the original problem
+solving from which it was learned.  The key idea we explore is that
+ expensiveness is inadvertently and unnecessarily introduced into
+learned rules by the learning algorithms themselves.  This becomes a
+particularly powerful idea when combined with an analysis tool which
+identifies these hidden sources of expensiveness, and modifications of
+the learning algorithms which eliminate them.  The result is learning
+algorithms for which the cost of learned rules is bounded by the
+cost of the problem solving that they replace.
+ 
+We investigate this idea through an analysis of EBLsoar, an 
+implementation of explanation-based learning within the Soar 
+architecture.  A transformational analysis is used to identify 
+where EBLsoar inadvertently introduces substantial additional costs 
+in the process of converting a problem solving episode into a learned 
+rule --- excessive costs which all ultimately turn out to stem from 
+losses of information during learning.  Based on these results, a 
+modified EBLsoar algorithm --- Bounded EBLsoar (BEBLsoar) --- is 
+developed from which all sources of expensiveness have been 
+eliminated.  The cost of using a rule learned by BEBLsoar is 
+provably bounded by the cost of the problem solving it replaces.
+
+<p>
+
+<HR>
+<P>
+Jim Blythe and Manuela Veloso.
+"Learning to Improve Uncertainty Handling in a Hybrid Planning System",
+<i>Proceedings of the AAAI Fall Symposium on Learning Complex Behaviors
+in Intelligent Adaptive Systems</i>, 1996
+(<A HREF="http://www.isi.edu/~blythe/papers/postscript/fall96.ps">
+postscript file</A>)</P>
+<P>
+<B>Abstract:</B>
+Weaver is a hybrid planning algorithm that can create plans in domains
+that include uncertainty, modelled either as incomplete knowledge of
+the initial state of the world, of the effects of plan steps or of the
+possible external events. The plans are guaranteed to exceed some
+given threshold probability of success.  Weaver creates a Bayesian
+network representation of a plan to evaluate it, in which links
+corresponding to sequences of events are computed with Markov models.
+As well as the probability of success, evaluation produces a set of
+flaws in the candidate plan, which are used by the planner to improve
+it. We describe a learning method that generates control knowledge
+compiled from this probabilistic evaluation of plans. The output of
+the learner is search control knowledge for the planning domain that
+helps the planner select alternatives that have previously lead to
+plans with high probability of success.  The learned control knowledge
+is incrementally refined by a combined deductive and inductive
+mechanism.
+</P>
+
+
+<P><HR>
+
+<P>
+Jihie Kim and Paul Rosenbloom.
+"Learning efficient rules by maintaining the explanation structure".
+<i>Proceedings of the Thirteenth National Conference on Artificial
+Intelligence,</i> 1996.
+(<A HREF="papers/kim-rosenbloom-aaai96.pdf">PDF file </A>) 
+<P>
+<B> Abstract: </B> Many learning systems suffer from the utility
+problem; that is, that time after learning is greater than time
+before learning.  Discovering how to assure that learned knowledge
+will in fact speed up system performance has been a focus of research
+in explanation-based learning (EBL).  One way to analyze the utility
+problem is by examining the differences between the match process
+(match search) of the learned rule and the problem-solving proce ss
+from which it is learned.  Prior work along these lines examined one
+such difference.  It showed that if the search-control knowledge used
+during problem solving is not maintained in the match process for
+learned rules, then learning can engender a slowdown; but that this
+slowdown could be eliminated if the match is constrained by the
+original search-control knowledge.  This article examines a second
+difference --- when the structure of the problem solving differs from
+the structure of the match process for the learned rules, time after
+learning can be greater than time before learning.  This article also
+shows that this slowdown can be eliminated by making the learning
+mechanism sensitive to the problem-solving structure; i.e., by
+reflecting such structure in the match of the learned rule.
+
+<p>
+<P><HR>
+
+<P>
+Jihie Kim.
+"Bounding the Cost of Learned Rules: A Transformational Approach".
+<i>Ph.D. Thesis</i>, Computer Science Department, School of Engineering, University 
+of Southern California,  1996.  
+Available as ISI Technical Report RR-96-452.
+<p>
+
+<P><HR>
+
+<P>
+Jaime Carbonell, 
+Oren Etzioni, 
+Yolanda Gil,
+Robert Joseph,
+Craig Knoblock,
+Steven Minton, 
+and Manuela Veloso.
+"Planning and Learning in PRODIGY: Overview of an Integrated Architecture".
+In <i>Goal-Driven Learning</i>, Aswin Ram and David Leake (Eds.),
+MIT Press 1995.
+<P>
+
+<P><HR>
+
+<P>
+Jihie Kim and Paul Rosenbloom.  
+<A HREF="./isi95-1.pdf">
+"A transformational analysis of expensive chunks"</A> and 
+<A HREF="./isi95-1.pdf">
+"Mapping explanation-based learning onto Soar: The sequel."</A>
+In Techinical Report: Transformational analyses of learning in Soar. 
+Information Science Institute and Computer Science
+Department, University of Southern California, ISI/RR-95-4221, 1995.  
+<p>
+
+<P><HR>
+
+Yolanda Gil.
+"Learning by Experimentation: 
+Incremental Refinement of Incomplete Planning Domains".
+<i>Proceedings of the Eleventh International
+Conference on Machine Learning</i>July 10-13, 1994, Rutgers, NJ.
+(<A HREF="./gil-mlc94.pdf">PDF file </A>) 
+<P>
+
+<B> Abstract: </B> 
+Building a knowledge base requires iterative refinement to 
+correct imperfections that keep lurking after each new version of the system.
+This paper concentrates on the automatic refinement of 
+incomplete domain models for planning systems,
+presenting both a methodology for addressing the problem
+and empirical results.
+Planning knowledge may be refined automatically 
+through direct interaction with the environment.
+Missing conditions cause unreliable predictions of action outcomes.
+Missing effects cause unreliable predictions of facts about the state.
+We present a practical approach based on
+continuous and selective interaction with the 
+environment that pinpoints the type of
+fault in the domain knowledge that causes 
+any unexpected 
+behavior of the environment, 
+and resorts to experimentation 
+when additional information is needed to correct the fault.
+Our approach has been implemented in EXPO, a system that uses PRODIGY
+as a baseline planner and improves its domain knowledge in several domains
+when initial domain knowledge is up to
+50% incomplete.
+The empirical results presented show that EXPO 
+dramatically improves its 
+prediction accuracy and reduces the amount of unreliable action outcomes.
+<P>
+
+<P><HR>
+
+
+Yolanda Gil.
+"Efficient Domain-Independent Experimentation".
+<i>Proceedings of the Tenth International
+Conference on Machine Learning</i>,
+Amherst, MA, June 1993.
+(<A HREF="http://www.isi.edu/~gil/papers/gil-mlc93.ps">Postscript file </A>) 
+<P>
+
+<B> Abstract: </B> 
+Planning systems often make the assumption that omniscient 
+world knowledge is available.
+Our approach makes the more realistic assumption that the 
+initial knowledge about the actions 
+is incomplete,
+and uses experimentation as a learning mechanism when
+the missing knowledge causes an execution failure.
+Previous work on learning by experimentation
+has not addressed the issue of how to choose good experiments,
+and much research on learning from failure 
+has relied on background knowledge to build 
+explanations that pinpoint directly the causes of failures.
+We want to investigate the potential
+of a system 
+for efficient learning by experimentation without such background knowledge.
+This paper describes domain-independent heuristics 
+that compare possible hypotheses and choose the ones most likely to 
+cause the failure.
+These heuristics extract information solely from
+the domain operators 
+initially available for planning
+(incapable of producing such explanations)
+and the planner's experiences in interacting with the environment.
+Our approach has been implemented in EXPO, a system that uses PRODIGY
+as a baseline planner and improves its domain knowledge in several
+domains.
+The empirical results presented show that EXPO's heuristics 
+dramatically reduce the number of experiments needed to 
+refine incomplete operators.
+<P>
+
+<P><HR>
+
+
+Yolanda Gil.
+"Learning New Planning Operators by Exploration and Experimentation".
+<i>Proceedings of the AAAI Workshop on Learning Action
+  Models</i>, Washington, DC, July 1993.
+(<A HREF="./gil-aaaiwks93.pdf">PDF file </A>) 
+<P>
+
+<B> Abstract: </B> 
+This paper addresses a computational approach to the automated
+acquisition of domain knowledge for planning systems via 
+experimentation with the environment.  Our previous work has shown 
+how existing incomplete operators can be refined by adding missing 
+preconditions and effects.   Here we develop additional methods to 
+acquire new operators such as direct analogy with existing operators,
+decomposition of monolithic operators into meaningful sub-operators, 
+and experimentation with partially-specified operators.
+<P>
+
+<P><HR>
+
+<P>
+Jihie Kim 
+and Paul Rosenbloom.
+"Constraing learning with search control".
+<i>Proceedings of the Tenth International
+Conference on Machine Learning</i> Amherst, MA, June, 1993.
+(<A HREF="papers/kim-rosenbloom-ml93.pdf">PDF file </A>) 
+<P>
+
+<P><HR>
+
+Yolanda Gil.
+"Acquiring Domain Knowledge for Planning by Experimentation".
+<i>Ph.D. Thesis</i>, School of Computer Science, Carnegie Mellon
+University, Pittsburgh PA 15213.  August 1992.  
+Available as CMU Technical Report CMU-CS-92-175.
+<P>
+
+<B> Abstract: </B> 
+In order for autonomous systems to interact with their environment in an
+intelligent way, they must be given the ability to adapt and learn
+incrementally and deliberately. It is virtually impossible to devise 
+and hand code all potentially relevant domain knowledge for complex 
+dynamic tasks. This thesis describes a framework to acquire domain
+knowledge for planning by failure-driven experimentation with the 
+environment.  The initial domain knowledge in the system is an 
+approximate model for planning in the environment, defining the
+system's expectations.  The framework exploits the characteristics 
+of planning domains in order to search the space of plausible 
+hypotheses without the need for additional background knowledge to
+build causal explanations for expectation failures.   Plans are 
+executed while the external environment is monitored, and 
+differences between the internal state and external observations 
+are detected by various methods each correlated with a typical 
+cause for the expectation failure.  The methods also construct a 
+set of concrete hypotheses to repair the knowledge deficit.
+After being heuristically filtered, each hypothesis is tested in turn
+with an experiment.  After the experiment is designed,
+a plan is constructed to achieve the situation required to 
+carry out the experiment.  The experiment plan must meet 
+constraints such as minimizing plan length and negative 
+interference with the main goals.  The thesis describes a set of 
+domain-independent constraints for experiments and their 
+incorporation in the planning search space.  After the execution
+of the plan and the experiment, observations are collected to conclude if
+the experiment was successful or not.  Upon success, the hypothesis is
+confirmed and  the domain knowledge is adjusted.  Upon failure, the
+experimentation process is iterated on the remaining hypotheses 
+until success or until no more hypotheses are left to be considered.  
+This framework has shown to be an effective way to address incomplete 
+planning knowledge and is demonstrated in a system called EXPO, 
+implemented on the PRODIGY planning architecture.
+The effectiveness and efficiency of EXPO's methods is 
+empirically demonstrated in several domains, including a large-scale
+process planning task, where the planner can recover from situations 
+missing up to 50% of domain knowledge through repeated experimentation.
+<P>
+
+<P><HR>
+
+
+
+Jaime Carbonell and Yolanda Gil.
+"Learning by Experimentation:
+The Operator Refinement Method".
+<i>Machine Learning: An Artificial Intelligence
+Approach, Volume III</i>,  Michalski, R. S. and Kodratoff, Y. (Eds.),
+Morgan Kaufmann, 1990.
+(<A HREF="./gil-mlbook3.pdf">PDF file </A>) 
+<P>
+
+<B> Abstract: </B> 
+Autonomous systems require the ability to plan effective courses of action
+under potentially uncertain or unpredictable contingencies. 
+Planning requires knowledge of the environment that is accurate enough to
+allow reasoning about actions.
+If the environment
+is too complex or very dynamic, goal-driven learning with
+reactive feedback becomes a necessity.  This chapter addresses the issue of
+learning by experimentation as an integral component of PRODIGY.
+PRODIGY is a flexible planning system that 
+encodes its domain knowledge as declarative operators, and applies
+the operator refinement method to acquire additional preconditions
+or postconditions when observed consequences
+diverge from internal expectations.  When multiple explanations for
+the observed divergence are consistent with the existing domain knowledge, 
+experiments to discriminate among these explanations are generated.
+The experimentation process isolates the deficient operator and inserts the
+discriminant condition or unforeseen side-effect to
+avoid similar impasses in future planning. 
+Thus, experimentation is demand-driven and exploits both the internal state
+of the planner and any external feedback received.  A detailed example of
+integrated experiment formulation in presented as the basis for a
+systematic approach to extending an incomplete domain theory or correcting
+a potentially inaccurate 
+one.
+<P>
+
+<P><HR>
+
+Steve Minton, Jaime G. Carbonell, Craig A. Knoblock,
+Daniel R. Kuokka, Oren Etzioni, and Yolanda Gil.
+"Explanation-Based Learning: A Problem-Solving Perspective".
+<i>Artificial Intelligence</i>,  40(1-3):63-118,
+September 1989.
+</P>
+
+<P><HR>
+Jim Blythe and Tom Mitchell,
+"On Becoming Reactive",
+<i>Proceedings of the International Conference on Machine Learning</i>, 1989.
+</P>
+
+<P><HR>
+Jim Blythe,
+"Constraining Search in a Hierarchical, Discriminative Learning System",
+<i>Proceedings of the European Conference on Artificial Intelligence</i>, 1988.
+</P>
+
+<P><HR>
+Yves Kodratoff, Michel Manago and Jim Blythe,
+"Generalization and Noise",
+<i>International Journal of Man-Machine Studies</i>, 1987
+</P>
+
+<P><HR>
+Jim Blythe, David Needham and Patrick Corsi
+"An experimental protocol for gathering examples for empirical learning",
+<i>Proceedings of the First European Workshop on Knowledge Acquisition</i>, 
+1987
+</P>
+
+<HR SIZE=2>
+
+<P ALIGN=CENTER><FONT FACE=ARIAL SIZE=-1><A
+HREF="./EXPECT.html">About EXPECT</A> |
+<A HREF="./research.html">Research</A> | <A
+HREF="./pr-members.html">Project Members</A> | Publications | <A
+HREF="./demo.html">Movie</A> | <BR>
+| <A HREF="http://www.isi.edu/divisions/div3">Intelligent Systems
+Division</A> | <A HREF="http://www.isi.edu">Information Sciences
+Institute</A> | <A HREF="http://www.usc.edu">USC</A> |</P>
+</TD>
+
+<TD width=50></TD>
+
+</TR>
+
+</TABLE>
+</BODY>
+</HTML>
+
+
+
+
+
+

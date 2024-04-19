@@ -1,0 +1,377 @@
+<html>
+
+<style type="text/css">
+  body { color: black; background: white; 
+         margin-left: 5%; margin-right: 5%;
+       }
+  strong { font-family: monospace; font-weight: normal;}
+  h1 { margin-left: -5%; }
+  h2,h3 { margin-left: -3%; }
+</style>
+
+<head>
+   <title>The SHAKEN action description language, using the KM
+   Situations mechanism (SADL-S)</title>
+</head>
+
+<body bgcolor="#ffffff">
+
+<h1>The SHAKEN action description language, using KM situations
+ (SADL-S)</h1>
+<p>Jim Blythe, Jan 28th 2002
+<br>
+With contributions from Pete, John, Paul, Gary, Pat, Bruce, Ken,
+Yolanda, Jihie and others.
+</p>
+
+<p>
+The SHAKEN system needs to be able to reason about processes that
+contain loops, conditional steps, partially ordered steps and
+disjunctive steps to meet our goals for year 2. The language described
+here makes minimal necessary extensions to the process description
+language already existing in KM that will allow this.  Because the
+extensions are small, implementing them in each of the components of
+SHAKEN should be straightforward, and further extensions can be made in
+the future as needed. Because a process description will be shared
+between several components, we need a very clear understanding of the
+meaning of each construct in the language and also of how each component
+can use the language.
+</p>
+
+<p>
+This document summarizes the existing language, describes the extensions
+and then shows how they are represented in KM. After this we mention
+some constructs that may be added later, and link to an example based on
+the December model of RNA transcription.
+</p>
+
+<p>
+This version of SADL, called SADL-S, makes use of KM situations, and
+does not require the distinction between events and steps used in the
+original version, which can be found <a
+href="http://www.isi.edu/expect/projects/rkf/sadl/old.html">here</a>
+for comparison. SADL-S requires even less adaptation from the current
+Shaken language, sometimes called SADL-lite, than original SADL. Process
+descriptions that do not require loops or conditional next-events will
+not need to be changed. Simulation code for analysis and
+question-answering could also be left unchanged for those processes, but
+a change will probably be required to simulate processes with loops and
+conditional next-events.
+</p>
+
+<p>
+A short comparison between SADL and the action languages PDDL, DAML+S
+and TAPIR can be found <a href="http://www.isi.edu/expect/projects/rkf/sadl/sadl-mapping.html">here</a>.
+</p>
+
+<h2>Events, sub-events in processes and event occurrences</h2>
+
+<p>
+Feel free to skip this section unless you are interested in how event
+classes, events in processes and event occurrences in process
+simulations are represented and distinguished.
+</p>
+
+<p>
+An <em>event</em> like ``Move'' is represented in KM independently of
+any particular process description. When a process description refers to
+a Move, it creates an instance of the Move event. A process description
+may have several, distinct Move events. Likewise an event in a process
+description is linked to one or more following events with a
+<strong>next-event</strong>, but the event description has no such
+link. Finally when a process is executed, the actual execution of the
+event is represented with respect to a KM situation in which the event
+is executed, using the next-situation slot, which links a situation and
+an event to the next situation. More details on how processes are linked
+to situations during execution are discussed below, and more details
+about situations can be found in the KM situations manual.
+</p>
+
+<p>
+The reason to involve situations in the description of processes is that
+when the processes include loops, we need a way to distinguish between
+the properties of the world each time an event is simulated. Otherwise,
+there would be no way to execute a loop more than once and then follow a
+conditional exit from the loop.  In KM's model, skolem event instances
+for sub-events are created when the parent event is created. Therefore
+the same event instance must stand for each different execution of the
+event during simulation of the process. The solution taken in SADL-S is
+to view the different occurrences as applications of the same event
+instance to different KM situations, recorded with the
+<strong>next-situation</strong> slot. Any conditional tests that
+determine which event to apply, or whether the event is applicable, are
+to be made within this situation.
+</p>
+
+<h2>The existing action language</h2>
+
+<p>
+The current language for describing processes in KM makes use of events
+that can have several sub-events. When an event in a process is to be
+executed, all of its sub-events should be executed. An event in a
+process may also include a <strong>next-event</strong> slot that
+determines the next event to be executed. Here is an example:
+</p>
+
+<pre>
+(every RNA-Transcription-Process has
+   (sub-events
+     (a Collide called "collide" with
+       (next-event (((the sub-events of Self) called "recognize"))))
+     (a Recognize called "recognize" with
+       (next-event (((the sub-events of Self) called "copy"))))
+     (a Copy called "copy" with
+       (next-event (((the sub-events of Self) called "release"))))
+     (a Release called "release")))
+</pre>
+
+<P>
+The meaning of the <strong>sub-events</strong> and
+<strong>next-event</strong> values on this example is that to execute an
+RNA-Transcription-Process, the events called ``collide'', ``recognize'',
+``copy'' and ``release'' are executed in that order.
+</P>
+
+<P>
+No sub-event is explicitly designated the first event in this process.
+Any event that is not the next-event for some other event could
+potentially take place first.
+</P>
+
+<H2>Loops, disjunctive, conditional and partially ordered events</H2>
+
+<P>
+Events in a process are <em>partially ordered</em> if the order in which
+the events take place is incompletely specified. A partial ordering over
+events does not mean that the events can be executed simultaneously, only
+that the full, linear ordering of the events is not specified. For
+instance if two trucks need to go through a narrow tunnel, they cannot
+both go through at the same time although we may not care which goes
+first.
+</P>
+
+<P>
+A process description has a <em>loop</em> if a sequence of events can be
+repeated. For example in the description ``the polymerase moves forward
+<bf>until</bf> the promoter region is reached'', the <em>move</em> event
+is a single-event loop. Loops usually have a termination condition which
+is tested each time the loop is completed.
+</P>
+
+<P>
+A <em>conditional event</em> is one that is executed only if some
+condition is met, for example ``if the gas tank is empty, fill it''. The
+condition is usually tested against the world state immediately before
+choosing to execute the event.
+</P>
+
+<P>
+Two or more events are <em>disjunctive</em> if only one of them will
+take place. For instance: ``to get to the zoo, <em>either</em> take the
+10 freeway <em>or</em> take the 5 freeway''.
+</P>
+
+<P>
+For ease of implementation, this language defines both loops and
+disjunctive events in terms of conditional events, as I describe below.
+</P>
+
+<H2>Extending the existing KM representation</H2>
+
+<H3>Partially ordered events</H3>
+
+<P>
+A concise way to represent partial orders is to allow more than one
+event in the <strong>next-event</strong> field, with the intended
+meaning that each event is executed eventually, but their order is
+undefined. However, events do not take place simultaneously.  If two or
+more events designate the same event <em>e</em> as
+<strong>next-event</strong>, and the designating events have a common
+ancestor, then <em>e</em> is considered a <em>join</em> event, meaning
+that it cannot be executed until all the designating events have been
+executed.
+</P>
+
+<P>
+For example, suppose a process to move two trucks through a gate
+requires first opening the gate, then moving both trucks (in any order),
+then closing the gate. This can be represented as follows:
+
+<PRE>
+(every move-trucks-process has
+  (sub-events
+    (a open-gate with
+      (next-event (((the sub-events of Self) called "move1")
+                  ((the sub-events of Self) called "move2"))))
+    (a move called "move1" with
+      (next-event (((the sub-events of Self) called "close-gate"))))
+    (a move called "move2" with
+      (next-event (((the sub-events of Self) called "close-gate"))))
+    (a close-gate called "close-gate" with)))
+</PRE>
+</P>
+
+<P>
+Since <strong>open-gate</strong> is the only event in the process that
+is not the value of <strong>next-event</strong> for some other event, it
+is the first event to be executed. After <strong>open-gate</strong>,
+both <strong>move1</strong> and <strong>move2</strong> are
+executable. Suppose <strong>move1</strong> is executed. Although the
+<strong>next-event</strong> field is <strong>close-gate</strong>, this
+event cannot be executed because <strong>move2</strong>, which also has
+<strong>close-gate</strong> as its <strong>next-event</strong> field,
+has not yet been executed. So after executing <strong>move1</strong>,
+the order of the remaining events is uniquely determined.
+</P>
+
+<P>
+If there is more than one event in a process that is not designated as
+the <strong>next-event</strong> of some other event, they should be
+interpreted as a set of potential first events that are unordered with
+respect to each other.
+</P>
+
+<h3>Conditional events</h3>
+
+<p>
+The following syntax can be used to represent conditional events:
+</p>
+
+<pre>
+(a move called "move" with
+  (test ('((the location of Self) = (the promotor region...))))
+  (next-event ((:args t   ((the sub-events of Self) called "recognize"))
+              (:args NIL ((the sub-events of Self) called "move")))))
+</pre>
+
+<p>
+Note that the test should be carried out in the KM situation that arises
+from executing the events up to and including the current event. In this
+way different subsequent events can be executed based on the state of
+the simulation. See the manual on the KM Situation Mechanism for
+details.
+</p>
+
+<p>
+Either branch can be empty, indicating that there is no next event in
+that case.
+</p>
+
+<h3>Loops</h3>
+
+<p>
+The above example implements a loop where the <strong>move</strong>
+event is repeated until the test in the <strong>next-event</strong>
+condition is met.  The condition plays the role of the termination
+condition for the loop. A loop involving several events can also be made
+simply by having the <strong>next-event</strong> of an event point to an
+``earlier'' event.
+</P>
+
+<P>
+For example, a simple RNA-Copy process could be defined like this:
+</P>
+
+<pre>
+(every RNA-Copy has
+  (sub-events (
+    (a Create called "create" with
+      (next-event (((the sub-events of Self) called "attach"))))
+    (a Attach called "attach" with
+      (next-event (((the sub-events of Self) called "move"))))
+    (a Move called "move" with
+      (test ('((the location of Self) = (the promotor region...))))
+      (next-event ((:args NIL ((the sub-events of Self) called "create"))))))))
+</pre>
+
+<p>
+This approach to defining loops is flexible since it allows multiple
+entry points and multiple exit points under different
+conditions. However a SME might find it hard to reason about the loop
+because it is represented implicitly. One possibility is for an explicit
+loop construct to be translated into this syntax for ease of
+implementation (an idea that Peter referred to as a ``macro''). For
+example the construct <br>
+ <pre>repeat <em>event1 event2 .. eventn</em> until
+<condition></pre>
+ could be translated into a loop in which <em>eventn</em> has a
+conditional <strong>next-event</strong>.
+</p>
+
+
+<h3>Disjunctive events</h3>
+
+<P>
+Disjunctive events can be represented in terms of a conditional event
+using an explicit non-deterministic test. Again an explicit macro
+construct may help an SME, for example the SME might use the construct
+
+<pre> either <em>take the 10 freeway</em> or <em>take the 5 freeway</em></pre>
+
+which could be translated to
+<pre>
+(a Event with
+  (test ('(equal (toss-a-coin) heads)))
+  (next-event ((:args t   (<EM>take the 10 freeway</EM>))
+	     (:args NIL (<EM>take the 5 freeway</EM>)))))
+</pre> 
+
+Here, <strong>toss-a-coin</strong> is a non-deterministic operation
+that either yields <strong>heads</strong> or <strong>tails</strong>.
+</p>
+
+<h3>Other constructs that may be added later</h3>
+
+There has also been some discussion about other constructs that may be
+needed for May. We intend to include some way to handle "errors" that
+can arise when processes are executed, using a small extension that
+follows the approach already taken by Paul and his group.
+
+There are some other potential extensions that have been discussed, but
+which will probably not be included before the summer unless we see that
+they are definitely needed. These include:
+<ul>
+<li> maintenance conditions (eg if an agent carries an object, then the
+  agent must be holding the object for the entire period of the carry)
+</li>
+<li> Interpreting a richer language for dependencies between events,
+including temporal dependencies (eg, two events must take place
+concurrently, or must start at the same time). Note that we can already
+represent these dependencies, since Allen's interval calculus is
+available in the component library, but the effect that these construct
+have on the simulators is currently undefined. 
+</li>
+<li> loop counters (eg, <em>repeat this event 10 times</em>). We
+currently plan to implement counters through event effects.
+</li>
+<li> an explicit treatment of resources (eg, since the polymerase is a
+  discrete, reusable resource it can only be used by one transcription
+  event at a time, but is available for other transcription events after
+  the current event is finished).
+</li>
+<li>
+An ability for a process to "spawn" others, ie start a subprocess
+without suspending action until the subprocess finishes. Over time an
+unlimited number of subprocesses could be spawned. 
+</li>
+</ul>
+
+<h2>Example: RNA transcription</h2>
+
+<p>
+A version of the December RNA transcription model in KM, following this
+language, can be found
+<a href="http://www.isi.edu/expect/projects/rkf/new-rna-transcription-situation.km">
+here</a>. 
+(As of Feb 14, this example is still under review.)
+</p>
+
+<hr>
+<p>
+Please send comments and suggestions to 
+<a href="mailto:blythe@isi.edu">Jim Blythe</a>.
+</p>
+
+</body>
+</html>
+

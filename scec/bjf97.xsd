@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.isi.edu/expect/scec/bjf97" xmlns:bjf97="http://www.isi.edu/expect/scec/bjf97" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:scec="http://www.isi.edu/expect/scec" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://www.isi.edu/expect/scec" schemaLocation="scec_schema.xsd"/>
+	<xs:simpleType name="gmp">
+		<xs:restriction base="scec:gmp"/>
+	</xs:simpleType>
+	<xs:simpleType name="magnitude">
+		<xs:restriction base="scec:magnitude">
+			<xs:minInclusive value="5.5"/>
+			<xs:maxInclusive value="7.5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="distance">
+		<xs:restriction base="scec:distance">
+			<xs:maxInclusive value="80.0"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="swavevel">
+		<xs:restriction base="scec:swave_vel"/>
+	</xs:simpleType>
+	<xs:simpleType name="bjffault">
+		<xs:restriction base="scec:faulttype">
+			<xs:enumeration value="strike slip"/>
+			<xs:enumeration value="reverse slip"/>
+			<xs:enumeration value="unknown/other"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="uncertainties">
+		<xs:restriction base="scec:uncertainties"/>
+	</xs:simpleType>
+</xs:schema>

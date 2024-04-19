@@ -1,0 +1,915 @@
+;;; -*- Mode: Lisp; Package: CYC; Syntax: COMMON-LISP; Base: 10 -*-
+
+(in-package "CYC")
+
+
+;;; ******************** CONCEPTS ********************
+
+(DEFCONCEPT |AerialSupportUnit-MilitarySpecialty|
+  :IS-PRIMITIVE (:and |CombatSupportUnit-MilitarySpecialty|
+                      |OffensiveOperationsUnit-MilitarySpecialty|)
+  :ANNOTATIONS (|MilitaryUnitSpecialtyType|))
+
+(DEFCONCEPT |AirAssaultEngineeringUnit-MilitarySpecialty|
+  :IS-PRIMITIVE (:and |EngineeringUnit-MilitarySpecialty|
+                      |AirAssaultUnit-MilitarySpecialty|)
+  :ANNOTATIONS (|IKBConstant|
+                |MilitaryUnitSpecialtyType|
+                (DOCUMENTATION "The collection of offensive military units that are inserted into combat (usually by helicopter) from the air and are also equipped to provide engineering support.")))
+
+(DEFCONCEPT |AirAssaultInfantryUnit-MilitarySpecialty|
+  :IS-PRIMITIVE (:and |InfantryUnit-MilitarySpecialty|
+                      |AirAssaultUnit-MilitarySpecialty|)
+  :ANNOTATIONS (|IKBConstant|
+                |MilitaryUnitSpecialtyType|
+                (DOCUMENTATION "The collection of offensive infantry units that are inserted into combat by air vehicles - usually helicopters - without parachute drop.")))
+
+(DEFCONCEPT |AirborneEngineeringUnit-MilitarySpecialty|
+  :IS-PRIMITIVE (:and |EngineeringUnit-MilitarySpecialty|
+                      |AirborneUnit-MilitarySpecialty|)
+  :ANNOTATIONS (|IKBConstant|
+                |MilitaryUnitSpecialtyType|
+                (DOCUMENTATION "The collection of military engineering units that are deployed by parachute drop.")))
+
+(DEFCONCEPT |AirborneInfantryUnit-MilitarySpecialty|
+  :IS-PRIMITIVE (:and |InfantryUnit-MilitarySpecialty|
+                      |AirborneUnit-MilitarySpecialty|)
+  :ANNOTATIONS (|IKBConstant|
+                |MilitaryUnitSpecialtyType|
+                (DOCUMENTATION "The collection of infantry units that are deployed by parachute drop.")))
+
+(DEFCONCEPT |AirborneReconnaissanceUnit-MilitarySpecialty|
+  :IS-PRIMITIVE (:and |ReconnaissanceUnit-MilitarySpecialty|
+                      |AirborneUnit-MilitarySpecialty|)
+  :ANNOTATIONS (|MilitaryUnitSpecialtyType|
+                |IKBConstant|
+                (DOCUMENTATION "The collection of military reconnaissance units that are deployed by parachute drop.")))
+
+(DEFCONCEPT |AirDefenseArtilleryUnit-MilitarySpecialty|
+  :IS-PRIMITIVE (:and |ArtilleryUnit-MilitarySpecialty|
+                      |AirDefenseUnit-MilitarySpecialty|)
+  :ANNOTATIONS (|MilitaryUnitSpecialtyType|
+                |IKBConstant|
+                (DOCUMENTATION "The collection of ground-based military units that are trained in handling certain classes of projectile weapons and are dedicated to protecting airspace regions.")))
+
+(DEFCONCEPT |AmmunitionStatus|
+  :IS-PRIMITIVE |ScalarInterval|
+  :ANNOTATIONS (|PrimitiveAttributeType|
+                |LinearOrderAttributeType|
+                (DOCUMENTATION "Qualitative assessment of amount of ammunition a unit has:         green-> amber->red->black")))
+
+(DEFCONCEPT |AmphibiousInfantryUnit-MilitarySpecialty|
+  :IS-PRIMITIVE (:and |InfantryUnit-MilitarySpecialty|
+                      |AmphibiousUnit-MilitarySpecialty|)
+  :ANNOTATIONS (|IKBConstant|
+                |MilitaryUnitSpecialtyType|
+                (DOCUMENTATION "The collection of infantry units that are trained and equipped to move to their places of deployment by water vehicles.")))
+
+(DEFCONCEPT |ArmoredCavalryUnit-MilitarySpecialty|
+  :IS-PRIMITIVE (:and |MechanizedUnit-MilitarySpecialty|
+                      |CavalryUnit-MilitarySpecialty|
+                      |ArmoredUnit-MilitarySpecialty|)
+  :ANNOTATIONS (|MilitaryUnitSpecialtyType|
+                (DOCUMENTATION "The collection of all military units that are capable of covering      large distances in a wide variety of terrains, and to quickly engage      and disengage with the enemy, often in advance of the main force.      Historically and etymologically, 'cavalry' => mounted units      however, in modern times the term has come to refer almost      exclusively to certain kinds of motorized armored unit.")))
+
+(DEFCONCEPT |ArmoredInfantryUnit-MilitarySpecialty|
+  :IS-PRIMITIVE (:and |ArmoredUnit-MilitarySpecialty|
+                      |InfantryUnit-MilitarySpecialty|)
+  :ANNOTATIONS (|MilitaryUnitSpecialtyType|))
+
+(DEFCONCEPT |ArmoredUnit-MilitarySpecialty|
+  :IS-PRIMITIVE (:and |CombatArmsUnit-MilitarySpecialty|
+                      |ModernMilitaryUnit-Deployable|)
+  :ANNOTATIONS (|MilitaryUnitSpecialtyType|
+                (DOCUMENTATION "The collection of all military units that employ motorized      vehicles engineered to resist penetration by explosives and      projectile weapons. In modern armed forces, it usually entails the      presence of tanks and heavy artillery.      In mounted warfare, the tank is the primary offensive weapon. Its firepower,      protection from enemy fire, and speed create the shock effect necessary to      disrupt or defeat the enemy. Tanks can destroy enemy armored vehicles,      infantry units, and antitank guided missile units. Tanks can break through      suppressed defenses, exploit the success of an attack by striking deep into the      enemy's rear areas, and pursue defeated enemy ")))
+
+(DEFCONCEPT |ArtilleryUnit-MilitarySpecialty|
+  :IS-PRIMITIVE |ConventionalWeaponsUnit-MilitarySpecialty|
+  :ANNOTATIONS (|MilitaryUnitSpecialtyType|
+                (DOCUMENTATION "The collection of all military units trained in handling      certain classes of projectile weapon.")))
+
+(DEFCONCEPT |AssaultHelicopterUnit-MilitarySpecialty|
+  :IS-PRIMITIVE |AttackAviationUnit-MilitarySpecialty|
+  :ANNOTATIONS (|MilitaryUnitSpecialtyType|))
+
+(DEFCONCEPT |AttackAviationUnit-MilitarySpecialty|
+  :IS-PRIMITIVE |CombatArmsUnit-MilitarySpecialty|
+  :ANNOTATIONS (|MilitaryUnitSpecialtyType|))
+
+(DEFCONCEPT |AttackHelicopterUnit-MilitarySpecialty|
+  :IS-PRIMITIVE |AttackAviationUnit-MilitarySpecialty|
+  :ANNOTATIONS (|MilitaryUnitSpecialtyType|))
+
+(DEFCONCEPT |AviationReconUnit-MilitarySpecialty|
+  :IS-PRIMITIVE (:and |ReconnaissanceUnit-MilitarySpecialty|
+                      |AviationUnit-MilitarySpecialty|)
+  :ANNOTATIONS (|IKBConstant|
+                |MilitaryUnitSpecialtyType|
+                (DOCUMENTATION "The collection of instances of ModernMilityUnit-Deployable that rely on the use of helicopters for reconnaissance operations to which they are dedicated.")))
+
+(DEFCONCEPT |BFVUnit-MilitarySpecialty|
+  :IS-PRIMITIVE |MotorizedUnit-MilitarySpecialty|
+  :ANNOTATIONS (|IKBConstant|
+                |ExistingObjectType|
+                (DOCUMENTATION "Specialization of motorized units with mission profiles dedicated to the deployment and use of BradleyFightingVehicles.")))
+
+(DEFCONCEPT |BradleyFightingVehicle|
+  :IS-PRIMITIVE |ArmoredPersonnelCarrier|
+  :ANNOTATIONS (|IKBConstant|
+                |ExistingObjectType|
+                (DOCUMENTATION "Specialized type of #$ArmoredPersonnelCarrier used regularly by the modern US Army.")))
+
+(DEFCONCEPT |CavalryUnit-MilitarySpecialty|
+  :IS-PRIMITIVE (:and |CombatArmsUnit-MilitarySpecialty|
+                      |ModernMilitaryUnit-Deployable|)
+  :ANNOTATIONS (|MilitaryUnitSpecialtyType|
+                (DOCUMENTATION "The collection of all military units that are capable of covering      large distances in a wide variety of terrains, and to quickly engage      and disengage with the enemy, often in advance of the main force.      Historically and etymologically, 'cavalry' => mounted units      however, in modern times the term has come to refer almost      exclusively to certain kinds of motorized armored unit.      The basic missions of cavalry units are reconnaissance, security, and economy     of force. The ability of cavalry units to find the enemy, to develop the situation,     and to provide the commander with reaction time and security also make     them ideal for operating in an economy-of-force role. Cavalry forces     can delay an attacking enemy as well as assist in a withdrawal. Air cavalry units     perform the same missions of reconnaissance and security as ground     cavalry and are organic to all cavalry units. Because of their greater mobility,     air cavalry troops can reconnoiter and maintain surveillance over a much larger     area in a shorter period of time than ground troops. During security     operations, the air cavalry reconnoiters, screens forward and to the flanks of     ground forces, and acts as a rapid reaction force.")))
+
+(DEFCONCEPT |CombatArmsUnit-MilitarySpecialty|
+  :IS-PRIMITIVE |ModernMilitaryUnit-Deployable|
+  :ANNOTATIONS (|MilitaryUnitSpecialtyType|
+                (DOCUMENTATION " A collection of units that engage in direct combat with opposing forces. Also referred to as 'Ground Maneuver units' (which could be defined as a synonym) ")))
+
+(DEFCONCEPT |CombatEngineeringUnit-MilitarySpecialty|
+  :IS-PRIMITIVE |CombatSupportUnit-MilitarySpecialty|
+  :ANNOTATIONS (|MilitaryUnitSpecialtyType|))
+
+(DEFCONCEPT |CombatServiceSupportUnit-MilitarySpecialty|
+  :IS-PRIMITIVE |ModernMilitaryUnit-Deployable|
+  :ANNOTATIONS (|MilitaryUnitSpecialtyType|
+                (DOCUMENTATION " Supporting units such as medical, transport, supply, etc.         Synonym: LogisticsUnit-MilitarySpecialty ")))
+
+(DEFCONCEPT |CombatSupportUnit-MilitarySpecialty|
+  :IS-PRIMITIVE |ModernMilitaryUnit-Deployable|
+  :ANNOTATIONS (|MilitaryUnitSpecialtyType|
+                (DOCUMENTATION " A collection of units that support combat arms units by enhancing, enabling or improving their capabilities ")))
+
+(DEFCONCEPT |CombatUnit-MilitarySpecialty|
+  :IS-PRIMITIVE |ModernMilitaryUnit-Deployable|
+  :ANNOTATIONS (|IKBConstant| |ExistingObjectType|))
+
+(DEFCONCEPT |CommandPost|
+  :IS-PRIMITIVE |ConstructionArtifact|
+  :ANNOTATIONS (|IKBConstant| |ExistingObjectType|))
+
+(DEFCONCEPT |ConventionalWeaponsUnit-MilitarySpecialty|
+  :IS-PRIMITIVE |WeaponsUnit-MilitarySpecialty|
+  :ANNOTATIONS (|MilitaryUnitSpecialtyType|
+                (DOCUMENTATION "The collection of all military unit trained, organized and      equipped for the handling, deployment, employment, or      containment of some kind of conventionional weapons system.      'Conventional' in this context refers to weapons relying upon      conventional explosives for motive force and/or destructive      potential.")))
+
+(DEFCONCEPT |DismountedAntiArmorUnit-MilitarySpecialty|
+  :IS-PRIMITIVE (:and |DismountedUnit-MilitarySpecialty|
+                      |AntiArmorUnit-MilitarySpecialty|)
+  :ANNOTATIONS (|IKBConstant|
+                |MilitaryUnitSpecialtyType|
+                (DOCUMENTATION "The collection of military units trained and equipped to fight armored vehicles while on foot.")))
+
+(DEFCONCEPT |DismountedCombatEngineeringUnit-MilitarySpecialty|
+  :IS-PRIMITIVE (:and |EngineeringUnit-MilitarySpecialty|
+                      |CombatUnit-MilitarySpecialty|
+                      |DismountedUnit-MilitarySpecialty|)
+  :ANNOTATIONS (|IKBConstant|
+                |MilitaryUnitSpecialtyType|
+                (DOCUMENTATION "The collection of dismounted military units that are equipped for both combat operations and engineering operations.")))
+
+(DEFCONCEPT |DismountedUnit-MilitarySpecialty|
+  :IS-PRIMITIVE |ModernMilitaryUnit-Deployable|
+  :ANNOTATIONS (|IKBConstant| |ExistingObjectType|))
+
+(DEFCONCEPT |EngineeringUnit-MilitarySpecialty|
+  :IS-PRIMITIVE |MaterialSupportUnit-MilitarySpecialty|
+  :ANNOTATIONS (|MilitaryUnitSpecialtyType|
+                (DOCUMENTATION "The collection of all military units specialized to provide     engineering support to other military units. Engineers  execute mobility, countermobility, and survivability missions in the  forward combat zone and provide sustainment engineering for support forces.   Topographic engineers provide terrain analysis and map products.   In offensive operations, engineers normally concentrate their efforts in  supporting maneuver by breaching and crossing obstacles, assisting in the  assault of fortified positions, and emplacing obstacles to protect the  flanks of friendly attacking forces. In the defense, engineers reinforce the  terrain to anchor the defense in critical areas, to maximize the effects of  defenders' fires, to provide maximum protection to friendly fighting positions,  and to facilitate the movement of counterattack forces. In all types of  operations, engineers advise the maneuver commander on the  effective use of terrain  airfields, and other facilities  required.")))
+
+(DEFCONCEPT |FieldArtilleryUnit-MilitarySpecialty|
+  :IS-PRIMITIVE |ArtilleryUnit-MilitarySpecialty|
+  :ANNOTATIONS (|MilitaryUnitSpecialtyType|
+                (DOCUMENTATION "The collection of all military units trained and equipped      for handling heavy guns used for indirect fire against      land-based targets.      A principal means of fire support in fire and maneuver is the field      artillery. It not only provides fires with cannon, rocket, and missile      systems but also integrates all means of fire support available to the      commander. Field artillery can neutralize, suppress, or destroy      enemy direct fire forces, attack enemy artillery and mortars, and      deliver scatterable mines to isolate and interdict enemy forces or      protect friendly operations. Field artillery units contribute to attacking      the enemy throughout the depth of his formations and suppress enemy      air defense systems to facilitate ground and air operations. As      mobile as the maneuver force it supports, field artillery provides      continuous fires in support of the commanders' schemes of maneuver")))
+
+(DEFCONCEPT |FootInfantryUnit-MilitarySpecialty|
+  :IS-PRIMITIVE |InfantryUnit-MilitarySpecialty|
+  :ANNOTATIONS (|MilitaryUnitSpecialtyType|))
+
+(DEFCONCEPT |HeadquartersUnit-MilitarySpecialty|
+  :IS-PRIMITIVE (:and |ModernMilitaryUnit-Deployable|
+                      |ModernMilitaryOrganization|)
+  :ANNOTATIONS (|MilitaryUnitSpecialtyType|
+                (DOCUMENTATION "The collection of all military units with a specialization having to     do with the operation of a headquarters.")))
+
+(DEFCONCEPT |HeavyAttackHelicopterUnit-MilitarySpecialty|
+  :IS-PRIMITIVE |HeavyHelicopterUnit-MilitarySpecialty|
+  :ANNOTATIONS (|IKBConstant|
+                |MilitaryUnitSpecialtyType|
+                (DOCUMENTATION "The collection of heavily armed military units that rely on the use of attack helicopters for closing with and engaging the enemy.")))
+
+(DEFCONCEPT |HeavyHelicopterUnit-MilitarySpecialty|
+  :IS-PRIMITIVE (:and |AviationUnit-MilitarySpecialty|
+                      |HelicopterUnit-MilitarySpecialty|)
+  :ANNOTATIONS (|IKBConstant| |ExistingObjectType|))
+
+(DEFCONCEPT |HeavyLiftHelicopterUnit-MilitarySpecialty|
+  :IS-PRIMITIVE |HeavyHelicopterUnit-MilitarySpecialty|
+  :ANNOTATIONS (|IKBConstant|
+                |MilitaryUnitSpecialtyType|
+                (DOCUMENTATION "The collection of heavily armed military units that are responsible for airlifting troops to the combat areas.")))
+
+(DEFCONCEPT |HeavyMortarUnit-MilitarySpecialty|
+  :IS-PRIMITIVE |MortarUnit-MilitarySpecialty|
+  :ANNOTATIONS (|MilitaryUnitSpecialtyType|
+                (DOCUMENTATION "The collection of all military units trained and equipped for      handling heavy mortar weapons.")))
+
+(DEFCONCEPT |HelicopterUnit-MilitarySpecialty|
+  :IS-PRIMITIVE (:and |AviationUnit-MilitarySpecialty|
+                      |AerialSupportUnit-MilitarySpecialty|)
+  :ANNOTATIONS (|IKBConstant|
+                |ExistingObjectType|
+                (DOCUMENTATION "Specialization of units that deploy by means of helicopters.")))
+
+(DEFCONCEPT |IFVAntiArmorUnit-MilitarySpecialty|
+  :IS-PRIMITIVE |MechanizedAntiArmorUnit-MilitarySpecialty|
+  :ANNOTATIONS (|IKBConstant|
+                |MilitaryUnitSpecialtyType|
+                (DOCUMENTATION "The collection of military units trained and equipped to fight armored vehicles and typically employing Infantry Fighting Vehilces. (See #$M2InfantryFightingVehicle.)")))
+
+(DEFCONCEPT |IFVArmoredCavalryUnit-MilitarySpecialty|
+  :IS-PRIMITIVE (:and |IFVMechanizedUnit-MilitarySpecialty|
+                      |ArmoredCavalryUnit-MilitarySpecialty|)
+  :ANNOTATIONS (|MilitaryUnitSpecialtyType|
+                |IKBConstant|
+                (DOCUMENTATION "The collection of cavalry units equipped with Infantry Fighting Vehicles.")))
+
+(DEFCONCEPT |IFVArmoredReconnaissanceUnit-MilitarySpecialty|
+  :IS-PRIMITIVE (:and |ArmoredUnit-MilitarySpecialty|
+                      |ReconnaissanceUnit-MilitarySpecialty|
+                      |IFVMechanizedUnit-MilitarySpecialty|)
+  :ANNOTATIONS (|MilitaryUnitSpecialtyType|
+                |IKBConstant|
+                (DOCUMENTATION "The collection of armored reconnaissance units typically employing Infantry Fighting Vehicles.")))
+
+(DEFCONCEPT |IFVMechanizedInfantryUnit-MilitarySpecialty|
+  :IS-PRIMITIVE (:and |IFVMechanizedUnit-MilitarySpecialty|
+                      |MechanizedInfantryUnit-MilitarySpecialty|)
+  :ANNOTATIONS (|IKBConstant|
+                |MilitaryUnitSpecialtyType|
+                (DOCUMENTATION "The collection of infantry units employing Infantry Fighting Vehicles. (See M2InfantryFightingVehicle.)")))
+
+(DEFCONCEPT |IFVMechanizedUnit-MilitarySpecialty|
+  :IS-PRIMITIVE |MechanizedUnit-MilitarySpecialty|
+  :ANNOTATIONS (|IKBConstant|
+                |MilitaryUnitSpecialtyType|
+                (DOCUMENTATION "The collection of military units that employ Infantry Fighting Vehicles. (See M2InfantryFightingVehicle.)")))
+
+(DEFCONCEPT |InfantryUnit-MilitarySpecialty|
+  :IS-PRIMITIVE (:and |CombatArmsUnit-MilitarySpecialty|
+                      |ModernMilitaryUnit-Deployable|)
+  :ANNOTATIONS (|MilitaryUnitSpecialtyType|
+                (DOCUMENTATION "The five types of infantry forces are light, airborne, air assault, ranger,    and mechanized. Each has its own special skills and specific    organizational design, but all share the common mission to close with and    destroy the enemy. Airborne and air assault forces are most readily    distinguished by their means of entry into battle. Rangers serve both as a    type of infantry and as SOF. Regardless of their mode of    conveyance--by aircraft, by armored vehicle, by truck, or by foot-- they all    serve as a key element of combat power in close combat. ")))
+
+(DEFCONCEPT |LightAttackHelicopterUnit-MilitarySpecialty|
+  :IS-PRIMITIVE |LightHelicopterUnit-MilitarySpecialty|
+  :ANNOTATIONS (|IKBConstant| |MilitaryUnitSpecialtyType|))
+
+(DEFCONCEPT |LightCavalryReconnaissanceUnit-MilitarySpecialty|
+  :IS-PRIMITIVE (:and |ReconnaissanceUnit-MilitarySpecialty|
+                      |CavalryUnit-MilitarySpecialty|)
+  :ANNOTATIONS (|MilitaryUnitSpecialtyType|
+                |IKBConstant|
+                (DOCUMENTATION "The collection of lightly armed cavalry units dedicated to reconnaissance operations.")))
+
+(DEFCONCEPT |LightEngineeringUnit-MilitarySpecialty|
+  :IS-PRIMITIVE |EngineeringUnit-MilitarySpecialty|
+  :ANNOTATIONS (|IKBConstant|
+                |MilitaryUnitSpecialtyType|
+                (DOCUMENTATION "The collection of lightly armed instances of #$EngineeringUnit-MilitarySpecialty.")))
+
+(DEFCONCEPT |LightHelicopterUnit-MilitarySpecialty|
+  :IS-PRIMITIVE (:and |AviationUnit-MilitarySpecialty|
+                      |HelicopterUnit-MilitarySpecialty|)
+  :ANNOTATIONS (|IKBConstant| |ExistingObjectType|))
+
+(DEFCONCEPT |LightInfantryMortarUnit-MilitarySpecialty|
+  :IS-PRIMITIVE (:and |MortarUnit-MilitarySpecialty|
+                      |LightInfantryUnit-MilitarySpecialty|)
+  :ANNOTATIONS (|IKBConstant|
+                |MilitaryUnitSpecialtyType|
+                (DOCUMENTATION "The collection of lightly armed infantry units employing mortar-type weapons. (See #$Mortar.).")))
+
+(DEFCONCEPT |LightInfantryUnit-MilitarySpecialty|
+  :IS-PRIMITIVE |InfantryUnit-MilitarySpecialty|
+  :ANNOTATIONS (|IKBConstant|
+                |MilitaryUnitSpecialtyType|
+                (DOCUMENTATION "The collection of lightly armed infantry units.")))
+
+(DEFCONCEPT |LightLiftHelicopterUnit-MilitarySpecialty|
+  :IS-PRIMITIVE |LightHelicopterUnit-MilitarySpecialty|
+  :ANNOTATIONS (|IKBConstant|
+                |MilitaryUnitSpecialtyType|
+                (DOCUMENTATION "The collection of lightly armed military units that are responsible for airlifting troops to the combat areas.")))
+
+(DEFCONCEPT |MaterialSupportUnit-MilitarySpecialty|
+  :IS-PRIMITIVE (:and |CombatServiceSupportUnit-MilitarySpecialty|
+                      |LogisticsUnit-MilitarySpecialty|)
+  :ANNOTATIONS (|MilitaryUnitSpecialtyType|
+                (DOCUMENTATION "The collection of all military units specialized for      providing material support to other military units.")))
+
+(DEFCONCEPT |MechanizedAntiArmorUnit-MilitarySpecialty|
+  :IS-PRIMITIVE (:and |MechanizedUnit-MilitarySpecialty|
+                      |AntiArmorUnit-MilitarySpecialty|)
+  :ANNOTATIONS (|IKBConstant|
+                |MilitaryUnitSpecialtyType|
+                (DOCUMENTATION "The collection of military units trained and equipped to fight armored vehicles and typically employing motorized track vehicles.")))
+
+(DEFCONCEPT |MechanizedCombatEngineeringUnit-MilitarySpecialty|
+  :IS-PRIMITIVE (:and |CombatUnit-MilitarySpecialty|
+                      |EngineeringUnit-MilitarySpecialty|
+                      |MechanizedUnit-MilitarySpecialty|)
+  :ANNOTATIONS (|IKBConstant|
+                |MilitaryUnitSpecialtyType|
+                (DOCUMENTATION "The collection of military combat units typically employing motorized tracked vehicles.")))
+
+(DEFCONCEPT |MechanizedEngineeringUnit-MilitarySpecialty|
+  :IS-PRIMITIVE (:and |MechanizedUnit-MilitarySpecialty|
+                      |EngineeringUnit-MilitarySpecialty|)
+  :ANNOTATIONS (|IKBConstant|
+                |MilitaryUnitSpecialtyType|
+                (DOCUMENTATION "The collection of instances of #$EngineeringUnit-MilitarySpecialty typically employing motorized tracked vehicles.")))
+
+(DEFCONCEPT |MechanizedInfantryMortarUnit-MilitarySpecialty|
+  :IS-PRIMITIVE |MechanizedInfantryUnit-MilitarySpecialty|
+  :ANNOTATIONS (|IKBConstant|
+                |MilitaryUnitSpecialtyType|
+                (DOCUMENTATION "The collection infantry units employing motorized tracked vehicles and mortar-type weapons.")))
+
+(DEFCONCEPT |MechanizedInfantryUnit-MilitarySpecialty|
+  :IS-PRIMITIVE (:and |InfantryUnit-MilitarySpecialty|
+                      |MechanizedUnit-MilitarySpecialty|)
+  :ANNOTATIONS (|MilitaryUnitSpecialtyType|
+                (DOCUMENTATION "Mechanized infantry has the same mobility as armor      forces, but less firepower and protection. Armor and mechanized      infantry train and fight as a team to defeat enemy armored forces. When      equipped with infantry fighting vehicles, the mechanized infantry can accompany      tanks in mounted assault, although commanders must be careful in      determining if, when, and where infantrymen must dis-mount to      accomplish their mission. In the attack, mechanized infantrymen can act as fixing      forces. In the defense, they act as pivot points for maneuvering tank-heavy      forces. Mechanized infantry forces seek to integrate fast, protected mobility     lethal, vehicle-mounted, fire-support systems     into an effective fighting system that enhances the striking power of armor      forces. Synonym: MotorizedRifleUnit-MilitarySpacialty (for enemy forces)")))
+
+(DEFCONCEPT |MechanizedUnit-MilitarySpecialty|
+  :IS-PRIMITIVE (:and |CombatArmsUnit-MilitarySpecialty|
+                      |ModernMilitaryUnit-Deployable|)
+  :ANNOTATIONS (|MilitaryUnitSpecialtyType|
+                (DOCUMENTATION "The collection of all military units typically employing vehicles      that run on motorized tracks or treads may be partial or it may be      complete. Such units are usually partially equipped for the      maintainance of such vehicles.")))
+
+(DEFCONCEPT |MedicalSupportUnit-MilitarySpecialty|
+  :IS-PRIMITIVE (:and |CombatServiceSupportUnit-MilitarySpecialty|
+                      |LogisticsUnit-MilitarySpecialty|)
+  :ANNOTATIONS (|MilitaryUnitSpecialtyType|
+                (DOCUMENTATION "The collection of all military units whose mission profile is      centered on providing some kind of medical support.      This attribute covers both units that are deployed to provide      medical service in the field, like MASH units, and units which      provide service at a fixed location in non-combat conditions, like      clinics. To specify the former, use also the attribute      FieldServicesUnit-MilitarySpecialty or assert that the unit is a      ModernMilitaryUnit-Deployable.")))
+
+(DEFCONCEPT |MediumAttackHelicopterUnit-MilitarySpecialty|
+  :IS-PRIMITIVE |MediumHelicopterUnit-MilitarySpecialty|
+  :ANNOTATIONS (|MilitaryUnitSpecialtyType|
+                |IKBConstant|
+                (DOCUMENTATION "The collection of lightly armed military units that rely on the use of attack helicopters for closing with and engaging the enemy.")))
+
+(DEFCONCEPT |MediumHelicopterUnit-MilitarySpecialty|
+  :IS-PRIMITIVE (:and |AviationUnit-MilitarySpecialty|
+                      |HelicopterUnit-MilitarySpecialty|)
+  :ANNOTATIONS (|IKBConstant| |ExistingObjectType|))
+
+(DEFCONCEPT |MediumLiftHelicopterUnit-MilitarySpecialty|
+  :IS-PRIMITIVE |MediumHelicopterUnit-MilitarySpecialty|
+  :ANNOTATIONS (|IKBConstant|
+                |MilitaryUnitSpecialtyType|
+                (DOCUMENTATION "The collection of moderately armed military units that are responsible for airlifting troops to the combat areas.")))
+
+(DEFCONCEPT |MilitaryEchelon|
+  :IS-PRIMITIVE (:and |AttributeValue| |ScalarInterval|)
+  :ANNOTATIONS (|AttributeType|
+                |ConventionalClassificationType|
+                (DOCUMENTATION "An AttributeType consisting of the collection of all echelon      values of military units of all countries and branches of      service (like US Army echelons). See the predicate echelonOfUnit.")))
+
+(DEFCONCEPT |MilitaryUnitSpecialtyType|
+  :IS-PRIMITIVE |ExistingObjectType|
+  :ANNOTATIONS (|IKBConstant|
+                |Cyc_Collection|
+                |CollectionType|
+                (DOCUMENTATION "MilitaryUnitSpecialtyType is a collection of collections. Its      instances are subsets of ModernMilitaryOrganization grouped by      military specialization. Much of this work is based on Peterson and      Andersen (1997).")))
+
+(DEFCONCEPT |MobileUnit-MilitarySpecialty|
+  :IS-PRIMITIVE |ModernMilitaryUnit-Deployable|
+  :ANNOTATIONS (|IKBConstant| |ExistingObjectType|))
+
+(DEFCONCEPT |ModernMilitaryUnit-Deployable|
+  :IS-PRIMITIVE |ModernMilitaryOrganization|
+  :ANNOTATIONS (|ConventionalClassificationType|
+                |ExistingObjectType|
+                (DOCUMENTATION "The collection of all military units capable of      being deployed to the field in combat conditions for      purposes of reconnaissance, combat, or combat support.      It also includes any military units that are ordinarily      equipped to be sent to far-away places on short      notice.")))
+
+(DEFCONCEPT |MortarUnit-MilitarySpecialty|
+  :IS-PRIMITIVE |FieldArtilleryUnit-MilitarySpecialty|
+  :ANNOTATIONS (|MilitaryUnitSpecialtyType|
+                (DOCUMENTATION "The collection of all military units trained and equipped      for handling mortar weapons.")))
+
+(DEFCONCEPT |MotorizedUnit-MilitarySpecialty|
+  :IS-PRIMITIVE |ModernMilitaryUnit-Deployable|
+  :ANNOTATIONS (|IKBConstant|
+                |MilitaryUnitSpecialtyType|
+                (DOCUMENTATION "The collection of all military units. A      'motorized' unit employs motorized vehicles for      transport and/or combat.")))
+
+(DEFCONCEPT |OffensiveOperationsUnit-MilitarySpecialty|
+  :IS-PRIMITIVE |ModernMilitaryUnit-Deployable|
+  :ANNOTATIONS (|MilitaryUnitSpecialtyType|
+                (DOCUMENTATION "The collection of all military units that deal with any      dimension of offensive operations.")))
+
+(DEFCONCEPT |Parachute|
+  :IS-PRIMITIVE |AirTransportationDevice|
+  :ANNOTATIONS (|IKBConstant|
+                |ExistingObjectType|
+                |ProductType|
+                (DOCUMENTATION "The collection of parachutes. I.e., those large, roundish sheets of fabric which are attached by cords to a harness worn on the back by persons jumping from airplanes or helicopters. Parachutes can also be used for transporting inanimate objects from the air to the ground.")))
+
+(DEFCONCEPT |ReconnaissanceUnit-MilitarySpecialty|
+  :IS-PRIMITIVE (:and |CombatArmsUnit-MilitarySpecialty|
+                      |ModernMilitaryUnit-Deployable|)
+  :ANNOTATIONS (|MilitaryUnitSpecialtyType|
+                (DOCUMENTATION "The collection of all military units. A reconnaissance unit is a     task-dedicated unit whose purpose is to survey territory in order to     gain information.")))
+
+(DEFCONCEPT |SelfPropelledFieldArtilleryUnit-MilitarySpecialty|
+  :IS-PRIMITIVE |FieldArtilleryUnit-MilitarySpecialty|
+  :ANNOTATIONS (|IKBConstant|
+                |MilitaryUnitSpecialtyType|
+                (DOCUMENTATION "The collection of all military units trained and equipped for      handling artillery pieces that must be towed into position by other      equipment.")))
+
+(DEFCONCEPT |TroopStrengthAttribute|
+  :IS-PRIMITIVE |AttributeValue|
+  :ANNOTATIONS (|IKBConstant|
+                |LinearOrderAttributeType|
+                |PartialOrderAttributeType|
+                (DOCUMENTATION "A collection of attributes used to indicate the complement and strength of military units. Examples include #$ReinforcedStatus and #$ReducedStatus.")))
+
+(DEFCONCEPT |UnitOrganizationalAttribute|
+  :IS-PRIMITIVE |AttributeValue|
+  :ANNOTATIONS (|IKBConstant|
+                |UnorderedAttributeType|
+                (DOCUMENTATION "A collection of attributes characterizing the organizational structures of instances of #$ModernMilitaryOrganization.")))
+
+(DEFCONCEPT |WeaponsUnit-MilitarySpecialty|
+  :IS-PRIMITIVE (:and |CombatSupportUnit-MilitarySpecialty|
+                      |ModernMilitaryUnit-Deployable|)
+  :ANNOTATIONS (|MilitaryUnitSpecialtyType|
+                (DOCUMENTATION "The collection of all military units trained, equipped,      and organized for the handling of a particular kind of      weapons system.")))
+
+
+
+;;; ******************** FUNCTIONS AND RELATIONS ********************
+
+(DEFRELATION |allAssignedMilitaryOrg|
+  :ARITY 2
+  :IS-PRIMITIVE (:and |subOrgs-Command|
+                      |subOrgs-Financial|
+                      |subOrgs-AdministrativeServiceSupport|
+                      |subOrgs-Permanent|
+                      |subOrgs-MaterialSupport|)
+  :DOMAIN |Organization|
+  :RANGE |Organization|
+  :ANNOTATIONS (|IKBConstant|
+                |AntiSymmetricBinaryPredicate|
+                |IrreflexiveBinaryPredicate|
+                |TransitiveBinaryPredicate|
+                |AsymmetricBinaryPredicate|
+                (DOCUMENTATION "(allAssignedMilitaryOrg SUPER SUB) means that SUB is a      permanently assigned (immediate or more remote)      sub-organization of SUPER assignedMilitaryOrg. SUPER directly      or indirectly commands SUB, supports it logistically, and      with services, and either provides the money for SUB's budget      or accounts for SUB within SUPER's own budget. There is      financial support, service support, material support, and      command subordination permanent (that is, the relationship      has obtained historically and will continue to be hold for      the foreseeable future). Saying (allAssignedMilitaryOrg      DVN-101 BAT-103) really means that the commander of DVN-101      can give operational orders to BAT-103, and that the      headquarters of DVN-101 is responsible for coordinating      logistic and admin support to BAT-103. Every military unit      lower than division level is assigned to some unit. See also      allAttachedMilitaryOrg and allOperationalControlMilitaryOrg      for contrast.")))
+
+(DEFRELATION |allAttachedMilitaryOrg|
+  :ARITY 2
+  :IS-PRIMITIVE |subOrgs-MaterialSupport|
+  :DOMAIN |Organization|
+  :RANGE |Organization|
+  :ANNOTATIONS (|IKBConstant|
+                |AntiSymmetricBinaryPredicate|
+                |IrreflexiveBinaryPredicate|
+                |TransitiveBinaryPredicate|
+                |AsymmetricBinaryPredicate|
+                (DOCUMENTATION "(allAttachedMilitaryOrg SUPER SUB) means that the      organization SUB has been temporarily 'attached', directly or      through intermediate levels, to the organization SUPER, which      has temporary command of SUB and provides most logistic and      facilities support needed by SUB. SUPER does not necessarily      pay for SUB out of out of SUPER's own regular budget support      of SUB may come from SUB's original (assigned) organization      rather than from SUPER. The relationship is considered      temporary (even if long-term), possibly established for a      major undertaking or campaign, or for a fixed period of time      of months or years. Every military unit is attached to some      organization same organization to which it is assigned,      unless overridden. The allAttachedMilitaryOrg predicate      entails logistical support and command with any number of      intervening units of organization between SUPER and SUB. See      attachedMilitaryOrg for the non-transitive version. See also      allAssignedMilitaryOrg and allOperationalControlMilitaryOrg      for contrast.")))
+
+(DEFRELATION |allOperationalControlMilitaryOrg|
+  :ARITY 2
+  :IS-PRIMITIVE |subOrgs-Command|
+  :DOMAIN |Organization|
+  :RANGE |Organization|
+  :ANNOTATIONS (|IKBConstant|
+                |AntiSymmetricBinaryPredicate|
+                |IrreflexiveBinaryPredicate|
+                |TransitiveBinaryPredicate|
+                |AsymmetricBinaryPredicate|
+                (DOCUMENTATION "(allOperationalControlMilitaryOrg SUPER SUB) means that      the organization SUPER has been given direct or indirect      operational control (at least temporary command) of the      organization SUB for at least the duration of some operation.      This predicate corresponds to the concept known in military      parlance as the 'OPCON' relation. It is a transitive      subordination-relation with any number of intermediate levels      of command between SUPER and SUB version see      operationalControlMilitaryOrg. If SUB is not permanently      assigned or temporarily attached to SUPER, then the      operational control (OPCON) relation lasts only for the      extent of the operation in question (it is even more      temporary than attachedMilitaryOrg). Usually SUPER will not      be responsible for any logistical or service support of SUB,      nor for paying SUB's operating expenses out of SUPER's      regular budget. See also allAssignedMilitaryOrg and      allAttachedMilitaryOrg for contrast.")))
+
+(DEFRELATION |ammunitionStatusOfUnit|
+  :ARITY 2
+  :IS-PRIMITIVE |hasAttributes|
+  :DOMAIN |ModernMilitaryUnit-Deployable|
+  :RANGE |AmmunitionStatus|
+  :ANNOTATIONS (|FunctionalSlot|
+                |BinaryPredicate|
+                (DOCUMENTATION "(ammunitionStatusOfUnit UNIT AMMUNITIONSTATUS) means that unit has the corresponding percentage of its ammunition intact")))
+
+(DEFRELATION |assignedMilitaryOrg|
+  :ARITY 2
+  :IS-PRIMITIVE (:and |subOrgs-Financial|
+                      |subOrgs-Command|
+                      |subOrgs-Direct|
+                      |subOrgs-Permanent|
+                      |allAssignedMilitaryOrg|)
+  :DOMAIN |Organization|
+  :RANGE |Organization|
+  :ANNOTATIONS (|BinaryPredicate|
+                |IKBConstant|
+                |AntiSymmetricBinaryPredicate|
+                |IrreflexiveBinaryPredicate|
+                |AsymmetricBinaryPredicate|
+                (DOCUMENTATION "(assignedMilitaryOrg SUPER SUB) means that the organization SUB is a      permanently assigned immediate sub-organization of SUPER     commands SUB, supports it logistically if need be, and provides the      money for SUB's budget. This predicate corresponds to the concept of      permanent 'assignment' in a military command structure, as in      Peterson and Andersen (1997). This relationship entails financial,      logistical, and command subordination     command relationship without intervening levels -- it is not      transitive --and it is considered to be permanent (that is, a      relationship has obtained historically and will continue to be hold      for the foreseeable future). Most departments, subdivisions,      branches, etc. of organizations are assignedMilitaryOrg. See also      attachedMilitaryOrg and operationalControlMilitaryOrg.")))
+
+(DEFRELATION |attachedMilitaryOrg|
+  :ARITY 2
+  :IS-PRIMITIVE (:and |allAttachedMilitaryOrg|
+                      |subOrgs-Command|
+                      |subOrgs-Direct|
+                      |subOrgs-Temporary|)
+  :DOMAIN |Organization|
+  :RANGE |Organization|
+  :ANNOTATIONS (|BinaryPredicate|
+                |IKBConstant|
+                |AntiSymmetricBinaryPredicate|
+                |IrreflexiveBinaryPredicate|
+                |AsymmetricBinaryPredicate|
+                (DOCUMENTATION "(attachedMilitaryOrg SUPER SUB) means that the organization      SUB has been 'attached' directly to the organization SUPER, so that      SUPER has temporary command of SUB and provides most of the      logistical and support needed by SUB. SUPER does not necessarily      pay for SUB out of out of SUPER's regular budget: basic financial      and/or administrative support of SUB may come from SUB's      original organization rather than from SUPER. This predicate      corresponds to the concept of temporary 'attachment'. The      relationship is temporary, possibly established for a major      undertaking or campaign, or for a fixed period of time of months or      years. Generally, attachedMilitaryOrg entails direct logistical      support and command with no intervening units of organization      between SUPER and SUB. See also assignedMilitaryOrg and      operationalControlMilitaryOrg.")))
+
+(DEFRELATION |controllingSuborganizations|
+  :ARITY 2
+  :IS-PRIMITIVE (:and |subOrgs-Direct| |positiveVestedInterest|)
+  :DOMAIN |Organization|
+  :RANGE |Organization|
+  :ANNOTATIONS (|BinaryPredicate|
+                |IKBConstant|
+                |IrreflexiveBinaryPredicate|
+                |AntiSymmetricBinaryPredicate|
+                |TransitiveBinaryPredicate|
+                |CotemporalObjectsSlot|
+                |AsymmetricBinaryPredicate|
+                (DOCUMENTATION "(#$controllingSuborganizations ORG SUBORG)      means that SUBORG is a #$subOrganizations of ORG      which has controlling power over ORG. For      example, (#$controllingSuborganizations      #$RomanCatholicChurch #$HolySee). This is not a      #$FunctionalPredicate since an organization may      have a hierarch of controlling suborganizations,      e.g. a #$CommunistParty may have a CentralCommittee as a      #$controllingSuborganizations, and both the      central committee and the party may have a      Politboro as a #$controllingSuborganizations.      Other examples would be a corporate      #$BoardOfDirectors or the cabinet in a      #$ParliamentaryGovernment.")))
+
+(DEFRELATION |echelonOfUnit|
+  :ARITY 2
+  :IS-PRIMITIVE |hasAttributes|
+  :DOMAIN |ModernMilitaryOrganization|
+  :RANGE |MilitaryEchelon|
+  :ANNOTATIONS (|IKBConstant|
+                |BinaryPredicate|
+                |FunctionalSlot|
+                (DOCUMENTATION "(echelonOfUnit UNIT ECHELON) means that the military unit      UNIT has the official echelon (unit ranking) ECHELON in the      armed service of which it is a part. An individual military unit can      have only one echelon See also the collection MilitaryEchelon.")))
+
+(DEFRELATION |headQuartersOfUnit|
+  :ARITY 2
+  :IS-PRIMITIVE |controllingSuborganizations|
+  :DOMAIN |ModernMilitaryUnit-Deployable|
+  :RANGE |ModernMilitaryUnit-Deployable|
+  :ANNOTATIONS (|IKBConstant|
+                |BinaryPredicate|
+                |AntiSymmetricBinaryPredicate|
+                |IrreflexiveBinaryPredicate|
+                |AsymmetricBinaryPredicate|))
+
+(DEFRELATION |mainCPOfUnit|
+  :ARITY 2
+  :DOMAIN |CommandPost|
+  :RANGE |ModernMilitaryUnit-Deployable|
+  :ANNOTATIONS (|IKBConstant| |BinaryPredicate|))
+
+(DEFRELATION |operationalControlMilitaryOrg|
+  :ARITY 2
+  :IS-PRIMITIVE (:and |allOperationalControlMilitaryOrg|
+                      |subOrgs-Command|
+                      |subOrgs-Direct|
+                      |subOrgs-OnlyDuringOperation|)
+  :DOMAIN |Organization|
+  :RANGE |Organization|
+  :ANNOTATIONS (|BinaryPredicate|
+                |IKBConstant|
+                |AntiSymmetricBinaryPredicate|
+                |IrreflexiveBinaryPredicate|
+                |AsymmetricBinaryPredicate|
+                (DOCUMENTATION "(#$operationalControlMilitaryOrg SUPER SUB) means that the      organization SUPER has been given operational control (very      temporary command) of the organization SUB for the duration of      some operation. This predicate corresponds to the concept known      in military parlance as the 'OPCON' relation. It is a 'direct'      subordination-relation (with no intermediate levels of command      between SUPER and SUB), entailing command of SUB by SUPER,      and lasting, usually, only for the extent of the operation in      question (it is even more temporary than subOrgs-Temporary). Often      SUPER will not be responsible for logistical support of SUB, nor for      paying SUB's expenses out of SUPER's regular budget. See also      #$assignedMilitaryOrg and #$attachedMilitaryOrg.")))
+
+(DEFRELATION |rearCPOfUnit|
+  :ARITY 2
+  :DOMAIN |CommandPost|
+  :RANGE |ModernMilitaryUnit-Deployable|
+  :ANNOTATIONS (|IKBConstant| |BinaryPredicate|))
+
+(DEFRELATION |sovereignAllegianceOfOrg|
+  :ARITY 2
+  :IS-PRIMITIVE |affiliatedWith|
+  :DOMAIN |ModernMilitaryOrganization|
+  :RANGE |Agent|
+  :ANNOTATIONS (|BinaryPredicate|
+                |IKBConstant|
+                |IrreflexiveBinaryPredicate|
+                (DOCUMENTATION "(sovereignAllegianceOfUnit MIL-UNIT COUNTRY) means      that the military unit MIL-UNIT owes allegiance to COUNTRY.      This predicate relates a military organization to whatever sovereign      agency that ultimately responsible for its creation. The agency is      usually an instance of IndependentCountry. For example, the 101st      Airborne Division has as its sovereignAllegianceOfUnit the      UnitedStatesOfAmerica. However, the first argument need not be      an instance of IndependentCountry: military and paramilitary      forces can be organized by corporations (e.g., the      Freeport-MacMoRan security force in Indonesia) or even by      individuals (e.g., the Duvaliers' Tonton Macoutes).      sovereignAllegianceOfUnit is also a different concept from      'assignment' and/or 'attachment' in a command-and-control      structure. An American battalion might be placed under temporary      UN command in an international action. However, the      sovereignAllegianceOfUnit would remain the      UnitedStatesOfAmerica.")))
+
+(DEFRELATION |subOrgs-Command|
+  :ARITY 2
+  :IS-PRIMITIVE |subOrganizations|
+  :DOMAIN |Organization|
+  :RANGE |Organization|
+  :ANNOTATIONS (|AntiSymmetricBinaryPredicate|
+                |IrreflexiveBinaryPredicate|
+                |TransitiveBinaryPredicate|
+                |AsymmetricBinaryPredicate|
+                (DOCUMENTATION "(subOrgs-Command SUPERUNIT SUBUNIT) means that SUBUNIT is formally subject to command and direction by SUPERUNIT. In the military services this means that SUBUNIT is assigned, or has at least been 'attached', to SUPERUNIT in such a way that at least one of the controllingSuborganizations of SUPERUNIT, or its commanding officer, are authorized to issue orders to SUBUNIT. SUBUNIT need not be an immediate subordinate of SUPERUNIT, -- it could also be several steps down in the chain of command. Even if SUBUNIT is not getting any financial or logistic support from SUPERUNIT, it is still in a subOrgs-Command relation if it is ordinarily supposed to obey the directives of SUPERUNIT.")))
+
+(DEFRELATION |subOrgs-Direct|
+  :ARITY 2
+  :IS-PRIMITIVE |subOrganizations|
+  :DOMAIN |Organization|
+  :RANGE |Organization|
+  :ANNOTATIONS (|IKBConstant|
+                |BinaryPredicate|
+                |AntiSymmetricBinaryPredicate|
+                |IrreflexiveBinaryPredicate|
+                |TransitiveBinaryPredicate|
+                |AsymmetricBinaryPredicate|
+                (DOCUMENTATION "This predicate is a specialization of subOrganizations      that requires a 'direct suborganizational relationship' with      no intervening organizations between the two related      organizations. It is like subOrganizations except that it is      intransitive. Thus, (subOrgs-Direct SUPER SUB) means that SUB      is 'immediately below' SUPER in the organizational hierarchy      in question     above SUB.")))
+
+(DEFRELATION |subOrgs-OnlyDuringOperation|
+  :ARITY 2
+  :IS-PRIMITIVE |subOrganizations|
+  :DOMAIN |Organization|
+  :RANGE |Organization|
+  :ANNOTATIONS (|BinaryPredicate|
+                |AntiSymmetricBinaryPredicate|
+                |IrreflexiveBinaryPredicate|
+                |AsymmetricBinaryPredicate|
+                (DOCUMENTATION "(subOrgs-OnlyDuringOperation SUPER SUB) means that SUB is      an organization subordinate to the organization SUPER for a      very short term -- during a particular task, trial or battle,      for example, or in a specific field operation. This kind of      relationship is often established between units in the course      of military field operations. This relationship is deemed      very temporary, more so than for subOrgs-Temporary. (See also      subOrgs-Permanent.)")))
+
+(DEFRELATION |subOrgs-Permanent|
+  :ARITY 2
+  :IS-PRIMITIVE |subOrganizations|
+  :DOMAIN |Organization|
+  :RANGE |Organization|
+  :ANNOTATIONS (|BinaryPredicate|
+                |AntiSymmetricBinaryPredicate|
+                |IrreflexiveBinaryPredicate|
+                |AsymmetricBinaryPredicate|
+                (DOCUMENTATION "(subOrgs-Permanent SUPER SUB) means that SUB is an      organization subordinate to SUPER in an organizational      hierarchy, that this relation has obtained for some time, and      that it is likely to obtain for the foreseeable future. For      example, the US Air Force is a subOrgs-Permanent of the      United States Armed Forces.")))
+
+(DEFRELATION |subOrgs-Temporary|
+  :ARITY 2
+  :IS-PRIMITIVE |subOrganizations|
+  :DOMAIN |Organization|
+  :RANGE |Organization|
+  :ANNOTATIONS (|BinaryPredicate|
+                |AntiSymmetricBinaryPredicate|
+                |IrreflexiveBinaryPredicate|
+                |AsymmetricBinaryPredicate|
+                (DOCUMENTATION "(subOrgs-Temporary SUPER SUB) means that SUB is a      subordinate organization to SUPER in an organizational      hierarchy only for the time being, and the relationship is      supposed to end prior to the dissolution of either      organization. This relation could be established in the course      of a particular major undertaking, enterprise or campaign, but      it is not likely to persist beyond the end of it. For example,      in the military a particular battalion might be attached to a      particular brigade to provide logistical support during a      military campaign: this relationship would be a      subOrgs-Temporary relation if it is expected to end in the      reasonably near future or at the end of the campaign. (See also      subOrgs-Permanent and #$subOrgs-DuringOperation.)")))
+
+(DEFRELATION |tacticalCPOfUnit|
+  :ARITY 2
+  :DOMAIN |CommandPost|
+  :RANGE |ModernMilitaryUnit-Deployable|
+  :ANNOTATIONS (|IKBConstant| |BinaryPredicate|))
+
+(DEFRELATION |troopStrengthOfUnit|
+  :ARITY 2
+  :DOMAIN |ModernMilitaryUnit-Deployable|
+  :RANGE |TroopStrengthAttribute|
+  :ANNOTATIONS (|IKBConstant|
+                |BinaryPredicate|
+                (DOCUMENTATION "(#$troopStrengthOfUnit UNIT STRENGTHATT) means that the #$ModernMilitaryUnit-Deployable UNIT has the troop strength status STRENGTHATT.")))
+
+
+
+;;; ******************** GENERAL ASSERTIONS ********************
+
+#|
+
+(TELL
+ (:ABOUT |AmmunitionStatus-Amber| |AmmunitionStatus|
+  (DOCUMENTATION "Unit has more than 60% of its ammunition, but less than 80%")))
+
+(TELL
+ (|followingValueOnScale| |AmmunitionStatus-Amber| |AmmunitionStatus-Green|
+  |AmmunitionStatus|))
+
+(TELL
+ (:ABOUT |AmmunitionStatus-Black| |AmmunitionStatus|
+  (DOCUMENTATION "Unit less than 40% of ammunition")))
+
+(TELL
+ (|followingValueOnScale| |AmmunitionStatus-Black| |AmmunitionStatus-Red|
+  |AmmunitionStatus|))
+
+(TELL
+ (:ABOUT |AmmunitionStatus-Green| |AmmunitionStatus|
+  (DOCUMENTATION "Unit has more than 80% of its ammunition")))
+
+(TELL
+ (:ABOUT |AmmunitionStatus-Red| |AmmunitionStatus|
+  (DOCUMENTATION "Unit has more than 40% of its ammunition, but less than 60%")))
+
+(TELL
+ (|followingValueOnScale| |AmmunitionStatus-Red| |AmmunitionStatus-Amber|
+  |AmmunitionStatus|))
+
+(TELL
+ (:ABOUT |Army-UnitDesignation| |MilitaryEchelon| |IKBConstant|
+  |IranianArmyEchelon| |USArmyEchelon|
+  (DOCUMENTATION "The attribute of being an army, in the sense of a deployable      field unit called an 'Army'. (This does not refer to 'the Army'      meaning the whole > Army-BranchOfService.) This is the      attribute of a maximal echelon unit in the military command      structure of the UnitedStatesArmy, as 'the 6th Army'. In the      USA, a military unit with the status of Army-UnitDesignation is      typically composed of three or more units with the status of      Corps-UnitDesignation.")))
+
+(TELL (|sourceOfTerm-PIT| |Army-UnitDesignation| |FM101-5-1WebPage|))
+
+(TELL
+ (|followingValueOnScale| |Army-UnitDesignation| |ArmyGroup-UnitDesignation|
+  |MilitaryEchelon|))
+
+(TELL (|prettyName| |Army-UnitDesignation| "army"))
+
+(TELL
+ (:ABOUT |ArmyGroup-UnitDesignation| |MilitaryEchelon| |IKBConstant|
+  (DOCUMENTATION "The attribute of being an army group. (This does not refer to 'the Army'      meaning the whole > Army-BranchOfService.) In the      USA, a military unit with the status of ArmyGroup-UnitDesignation is      composed of several units with the status of      Army-UnitDesignation. Note that this designation is rarely used but      refered to in standard army symbology")))
+
+(TELL (|sourceOfTerm-PIT| |ArmyGroup-UnitDesignation| |FM101-5-1WebPage|))
+
+(TELL
+ (|followingValueOnScale| |ArmyGroup-UnitDesignation| |Region-UnitDesignation|
+  |MilitaryEchelon|))
+
+(TELL
+ (:ABOUT |Battalion-UnitDesignation| |MilitaryEchelon| |IKBConstant|
+  |USArmyEchelon| |IranianArmyEchelon|
+  (DOCUMENTATION "The attribute of being a military battalion within a military      echelon structure. In the USA, a military unit with the status of      Division-UnitDesignation is typically composed of nine or more      units with the status of Battalion-UnitDesignation, and a unit with      the status of Battalion-UnitDesignation is typically composed of      three or more units with the status of Company-UnitDesignation.")))
+
+(TELL (|sourceOfTerm-PIT| |Battalion-UnitDesignation| |FM101-5-1WebPage|))
+
+(TELL
+ (|followingValueOnScale| |Battalion-UnitDesignation|
+  |Regiment-UnitDesignation| |MilitaryEchelon|))
+
+(TELL (|prettyName| |Battalion-UnitDesignation| "battalion"))
+
+(TELL
+ (:ABOUT |Brigade-UnitDesignation| |MilitaryEchelon| |IKBConstant|
+  |USArmyEchelon| |IranianArmyEchelon|
+  (DOCUMENTATION "Special-purpose subunits of military divisions are called      `brigades' and have Brigade-UnitDesignation. They are      somewhat similar to units with Regiment-UnitDesignation. A      brigade typically consists of two to five battalions, often      organized to fulfill a specific objective, and is commanded by a      brigadier general. See also Regiment-UnitDesignation and      Battalion-UnitDesignation.")))
+
+(TELL (|sourceOfTerm-PIT| |Brigade-UnitDesignation| |FM101-5-1WebPage|))
+
+(TELL
+ (|followingValueOnScale| |Brigade-UnitDesignation| |Division-UnitDesignation|
+  |MilitaryEchelon|))
+
+(TELL (|prettyName| |Brigade-UnitDesignation| "brigade"))
+
+(TELL
+ (:ABOUT |Company-UnitDesignation| |MilitaryEchelon| |IKBConstant|
+  |USArmyEchelon| |IranianArmyEchelon|
+  (DOCUMENTATION "The attribute of being a military company within a military      echelon structure. In the USA, a military unit with the status of      Battalion-UnitDesignation is typically composed of three or more      units with the status of Company-UnitDesignation, and a unit with      the status of Company-UnitDesignation is typically composed of      two or more units with the status of Platoon-UnitDesignation. In      the US armed forces structure, units with the designation of      Company-UnitDesignation are also the smallest units to have their      own administrative staffs.")))
+
+(TELL (|sourceOfTerm-PIT| |Company-UnitDesignation| |FM101-5-1WebPage|))
+
+(TELL
+ (|followingValueOnScale| |Company-UnitDesignation|
+  |Battalion-UnitDesignation| |MilitaryEchelon|))
+
+(TELL (|prettyName| |Company-UnitDesignation| "military company"))
+
+(TELL (|conceptuallyRelated| |Company-UnitDesignation| |Army-BranchOfService|))
+
+(TELL
+ (:ABOUT |Corps-UnitDesignation| |MilitaryEchelon| |IKBConstant|
+  |IranianArmyEchelon| |USArmyEchelon|
+  (DOCUMENTATION "The attribute of being a military corps within a military echelon      structure. In the USA, a military unit with the status of      Army-UnitDesignation is typically composed of three or more      units with the status of Corps-UnitDesignation, and a unit with the      status of Corps-UnitDesignation is typically composed of three or      more units with the status of Division-UnitDesignation.")))
+
+(TELL (|sourceOfTerm-PIT| |Corps-UnitDesignation| |FM101-5-1WebPage|))
+
+(TELL
+ (|followingValueOnScale| |Corps-UnitDesignation| |Army-UnitDesignation|
+  |MilitaryEchelon|))
+
+(TELL (|prettyName| |Corps-UnitDesignation| "corps"))
+
+(TELL (|conceptuallyRelated| |Corps-UnitDesignation| |Army-BranchOfService|))
+
+(TELL
+ (:ABOUT |Division-UnitDesignation| |MilitaryEchelon| |IKBConstant|
+  |USArmyEchelon| |IranianArmyEchelon|
+  (DOCUMENTATION "The attribute of being a military division within a military      echelon structure. In the USA, a military unit with the status of      Corps-UnitDesignation is typically composed of three or more      units with the status of Division-UnitDesignation, and a unit with      the status of Division-UnitDesignation is typically composed of      nine or more units with the status of Battalion-UnitDesignation.      See also Brigade-UnitDesignation and      Regiment-UnitDesignation.")))
+
+(TELL (|sourceOfTerm-PIT| |Division-UnitDesignation| |FM101-5-1WebPage|))
+
+(TELL
+ (|followingValueOnScale| |Division-UnitDesignation| |Corps-UnitDesignation|
+  |MilitaryEchelon|))
+
+(TELL (|prettyName| |Division-UnitDesignation| "military division"))
+
+(TELL
+ (:ABOUT |Installation-UnitDesignation| |MilitaryEchelon| |IKBConstant|
+  (DOCUMENTATION "The attribute of being a military team within a military echelon      structure. This is the minimal unit designation of Army symbology. Note that      this designation is part of standard army symbology but is rarely used.")))
+
+(TELL (|sourceOfTerm-PIT| |Installation-UnitDesignation| |FM101-5-1WebPage|))
+
+(TELL
+ (|followingValueOnScale| |Installation-UnitDesignation|
+  |Team-UnitDesignation| |MilitaryEchelon|))
+
+(TELL
+ (:ABOUT |JointTaskForce-Military| |IKBConstant| |UnitOrganizationalAttribute|
+  (DOCUMENTATION "Task organized units containing a mix of unit types that are headquartered by a division (communication Rob Rasch).")))
+
+(TELL (|prettyName| |JointTaskForce-Military| "military joint task force"))
+
+(TELL
+ (:ABOUT |Platoon-UnitDesignation| |MilitaryEchelon| |IKBConstant|
+  |IranianArmyEchelon| |USArmyEchelon|
+  (DOCUMENTATION "The attribute of being a military platoon within a military      echelon structure. In the USA, a military unit with the status of      Company-UnitDesignation is typically composed of two or more      units with the status of Platoon-UnitDesignation, and a unit with      the status of Platoon-UnitDesignation is typically composed of two      or more units with the status of Squad-UnitDesignation.")))
+
+(TELL (|sourceOfTerm-PIT| |Platoon-UnitDesignation| |FM101-5-1WebPage|))
+
+(TELL
+ (|followingValueOnScale| |Platoon-UnitDesignation| |Company-UnitDesignation|
+  |MilitaryEchelon|))
+
+(TELL (|prettyName| |Platoon-UnitDesignation| "platoon"))
+
+(TELL (:ABOUT |ReducedStatus| |IKBConstant| |TroopStrengthAttribute|))
+
+(TELL (|prettyName| |ReducedStatus| "reduced"))
+
+(TELL
+ (:ABOUT |Regiment-UnitDesignation| |MilitaryEchelon| |IKBConstant|
+  |USArmyEchelon| |IranianArmyEchelon|
+  (DOCUMENTATION "Military units that are special-purpose subunits of units with      Division-UnitDesignation are called 'regiments'.      Regiment-UnitDesignation represents this particular      echelon-level. A regiment typically consists of two to five      battalions, often organized to accomplish a specific kind of      objective. See also Brigade-UnitDesignation.")))
+
+(TELL (|sourceOfTerm-PIT| |Regiment-UnitDesignation| |FM101-5-1WebPage|))
+
+(TELL
+ (|followingValueOnScale| |Regiment-UnitDesignation| |Brigade-UnitDesignation|
+  |MilitaryEchelon|))
+
+(TELL (|prettyName| |Regiment-UnitDesignation| "regiment"))
+
+(TELL
+ (:ABOUT |Region-UnitDesignation| |MilitaryEchelon| |IKBConstant|
+  (DOCUMENTATION "The attribute of being an army region. In the      USA, a military unit with the status of Region-UnitDesignation is      composed of several units with the status of      ArmyGroup-UnitDesignation. Note that this is rarely used but is      refered to in standard army symbology")))
+
+(TELL (|sourceOfTerm-PIT| |Region-UnitDesignation| |FM101-5-1WebPage|))
+
+(TELL (:ABOUT |ReinforcedStatus| |IKBConstant| |TroopStrengthAttribute|))
+
+(TELL (|prettyName| |ReinforcedStatus| "reinforced"))
+
+(TELL
+ (:ABOUT |Section-UnitDesignation| |MilitaryEchelon| |IKBConstant|
+  (DOCUMENTATION "The attribute of being a military section within a military echelon      structure. In the USA, a military unit with the status of      Section-UnitDesignation is composed of      units with the status of Squad-UnitDesignation. The American Heritage      Dictionary, New College Edition, 1976 lists a Section as an army      tactical unit smaller than platoon and larger than a squad. This designation is      part of standard army symbology but somewhat rarely used.")))
+
+(TELL
+ (|sourceOfTerm-PIT| |Section-UnitDesignation|
+  |AmericanHeritageDictionary1976|))
+
+(TELL (|sourceOfTerm-PIT| |Section-UnitDesignation| |FM101-5-1WebPage|))
+
+(TELL
+ (|followingValueOnScale| |Section-UnitDesignation| |Platoon-UnitDesignation|
+  |MilitaryEchelon|))
+
+(TELL
+ (:ABOUT |Squad-UnitDesignation| |MilitaryEchelon| |IKBConstant|
+  |IranianArmyEchelon| |USArmyEchelon|
+  (DOCUMENTATION "The attribute of being a military squad within a military echelon      structure. In the USA, a military unit with the status of      Platoon-UnitDesignation is typically composed of two or more      units with the status of Squad-UnitDesignation. A squad is the      minimal unit within the armed forces of the United States.")))
+
+(TELL (|sourceOfTerm-PIT| |Squad-UnitDesignation| |FM101-5-1WebPage|))
+
+(TELL
+ (|followingValueOnScale| |Squad-UnitDesignation| |Section-UnitDesignation|
+  |MilitaryEchelon|))
+
+(TELL (|prettyName| |Squad-UnitDesignation| "squad"))
+
+(TELL
+ (:ABOUT |TaskForce-Military| |IKBConstant| |UnitOrganizationalAttribute|
+  (DOCUMENTATION "Task organized units containing a mix of unit types that are headquartered by a battalion or brigade level headquarters (communication Rob Rasch).")))
+
+(TELL
+ (:ABOUT |TaskForce-UnitDesignation| |MilitaryEchelon| |IKBConstant|
+  |USArmyEchelon| |IranianArmyEchelon|))
+
+(TELL (|prettyName| |TaskForce-UnitDesignation| "task force"))
+
+(TELL
+ (:ABOUT |Team-Military| |IKBConstant| |UnitOrganizationalAttribute|
+  (DOCUMENTATION "Task organized units containing a mix of unit types that are headquartered by a company (communication Rob Rasch).")))
+
+(TELL
+ (:ABOUT |Team-UnitDesignation| |MilitaryEchelon| |IKBConstant|
+  (DOCUMENTATION "The attribute of being a military team within a military echelon      structure. In the USA, a military unit with the status of      Team-UnitDesignation is typically composed      units with the status of Installation-UnitDesignation. A Team is      a subdivision of a squad, consisting of 2-4 soldiers      and led by a sergeant or corporal (specialist). Note that      this designation is part of standard army symbology but is rarely used.")))
+
+(TELL (|sourceOfTerm-PIT| |Team-UnitDesignation| |FM101-5-1WebPage|))
+
+(TELL
+ (|followingValueOnScale| |Team-UnitDesignation| |Squad-UnitDesignation|
+  |MilitaryEchelon|))
+
+|#

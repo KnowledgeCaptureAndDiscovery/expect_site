@@ -1,0 +1,340 @@
+
+(IN-PACKAGE "PLAN-EVALUATION")
+(DEFRELATION EVALUATION-STRUCTURE (?SELF) :=>
+ (AND (THING ?SELF)
+      (FORALL (?A)
+       (=> (WITH-RESPECT-TO ?SELF ?A) (EVALUATION-CRITERION ?A)))
+      (FORALL (?B) (=> (FACTOR ?SELF ?B) (ANALYSIS ?B)))
+      (EXISTS (?C) (AND (PRIORITY ?SELF ?C) (EVALUATION-PRIORITY ?C)))
+      (FORALL (?C ?D)
+       (=> (AND (PRIORITY ?SELF ?C) (PRIORITY ?SELF ?D)) (= ?C ?D))))
+ :AXIOM
+ (DOCUMENTATION EVALUATION-STRUCTURE "An evaluation structure captures a set
+of evaluations made about a plan or a task. The set probably has some
+cohesion, for example evaluations about viability. There may be
+sub-structures, for example a structure concerned with feasibility may
+be a sub-structure of one concerned with viability."))
+(DEFRELATION SUB-EVALUATION-STRUCTURE (?A ?B)
+ (DOCUMENTATION SUB-EVALUATION-STRUCTURE "Links a structure grouping a set of
+evaluations with a common theme to a sub-theme, for example a link from
+the structure for viability evaluations to the one for feasibility
+evaluations."))
+(FORALL (?B)
+ (=> (SUB-EVALUATION-STRUCTURE ?A ?B) (EVALUATION-STRUCTURE ?B)))
+(FORALL (?A)
+ (=> (SUB-EVALUATION-STRUCTURE ?A ?B) (EVALUATION-STRUCTURE ?A)))
+(DEFRELATION ANALYSIS (?SELF) :=>
+ (AND (THING ?SELF)
+      (EXISTS (?A) (AND (PRIORITY ?SELF ?A) (EVALUATION-PRIORITY ?A)))
+      (FORALL (?A ?B)
+       (=> (AND (PRIORITY ?SELF ?A) (PRIORITY ?SELF ?B)) (= ?A ?B)))
+      (FORALL (?C) (=> (ANALYSIS-ESTIMATE ?SELF ?C) (ESTIMATE ?C)))
+      (FORALL (?D) (=> (REASONS ?SELF ?D) (ANALYSIS-EXPLANATION ?D)))
+      (> (CARDINALITY (SETOFALL ?E (DESCRIPTION ?SELF ?E))) 0))
+ :AXIOM
+ (DOCUMENTATION ANALYSIS "An evaluation item represents the
+outcome of a particular evaluation. It may be an evaluation --- a
+comparison of some plan feature against some normal value --- or just a
+computation of some value such as the number of ships used."))
+(DEFRELATION FACTOR (?A ?B)
+ (DOCUMENTATION FACTOR "Links an evaluation structure to a
+component analysis"))
+(FORALL (?B) (=> (FACTOR ?A ?B) (ANALYSIS ?B)))
+(FORALL (?A) (=> (FACTOR ?A ?B) (EVALUATION-STRUCTURE ?A)))
+(DEFRELATION ANALYSIS-ESTIMATE (?A ?B)
+ (DOCUMENTATION ANALYSIS-ESTIMATE "Links an analysis to an estimate
+for the analysis"))
+(FORALL (?B) (=> (ANALYSIS-ESTIMATE ?A ?B) (ESTIMATE ?B)))
+(FORALL (?A) (=> (ANALYSIS-ESTIMATE ?A ?B) (ANALYSIS ?A)))
+(DEFRELATION ANALYSIS-EXPLANATION (?SELF) :=> (THING ?SELF) :AXIOM
+ (DOCUMENTATION ANALYSIS-EXPLANATION "An explanation for an evaluation
+may be a string or a more complicated object."))
+(DEFRELATION REASONS (?A ?B)
+ (DOCUMENTATION REASONS "The reason for an analysis.
+See the COA example for an example."))
+(FORALL (?B) (=> (REASONS ?A ?B) (ANALYSIS-EXPLANATION ?B)))
+(FORALL (?A) (=> (REASONS ?A ?B) (ANALYSIS ?A)))
+(DEFRELATION OBJECT-PROPERTY (?SELF) :=> (THING ?SELF) :AXIOM
+ (DOCUMENTATION OBJECT-PROPERTY "A property that is the subject
+of the analysis, for example fuel-usage."))
+(DEFRELATION STATED-PROPERTY (?SELF) :=> (OBJECT-PROPERTY ?SELF) :AXIOM
+ (DOCUMENTATION STATED-PROPERTY "An object-property that is
+explicitly stated in the representation of the object
+(eg plan or task) being analysed."))
+(DEFRELATION DEDUCED-PROPERTY (?SELF) :=> (OBJECT-PROPERTY ?SELF) :AXIOM
+ (DOCUMENTATION DEDUCED-PROPERTY "An object-property that is
+not explicitly stated in the representation of the object
+(eg plan or task) being analysed but is deduced by some mechanism."))
+(DEFRELATION ANALYSIS-PROPERTY (?A ?B)
+ (DOCUMENTATION ANALYSIS-PROPERTY "Links an analysis to the property
+being analysed."))
+(FORALL (?B) (=> (ANALYSIS-PROPERTY ?A ?B) (OBJECT-PROPERTY ?B)))
+(FORALL (?A) (=> (ANALYSIS-PROPERTY ?A ?B) (ANALYSIS ?A)))
+(DEFRELATION DESCRIPTION (?A ?B)
+ (DOCUMENTATION DESCRIPTION "A more detailed description of the
+result of the analysis. Could be represented as a string or a
+more structured object. See the COA example below for an example."))
+(FORALL (?A) (=> (DESCRIPTION ?A ?B) (ANALYSIS ?A)))
+(DEFRELATION EVALUATION (?SELF) :=>
+ (AND (ANALYSIS ?SELF) (EXISTS (?A) (NORMAL-VALUE ?SELF ?A))
+      (> (CARDINALITY (SETOFALL ?B (VALUE-COMPARISON ?SELF ?B))) 0))
+ :AXIOM
+ (DOCUMENTATION EVALUATION "An evaluation is an analysis
+that mentions some normal value for the analysis. For example,
+the normal value for fuel usage for a certain kind of plan
+may be 100 gallons"))
+(DEFRELATION NORMAL-VALUE (?A ?B)
+ (DOCUMENTATION NORMAL-VALUE "The normal value that this
+evaluation would be expected to yield for the object being
+evaluated."))
+(FORALL (?A) (=> (NORMAL-VALUE ?A ?B) (EVALUATION ?A)))
+(DEFRELATION VALUE-COMPARISON (?A ?B)
+ (DOCUMENTATION VALUE-COMPARISON "A comparison of the normal
+value with an estimated value for the evaluation."))
+(FORALL (?B) (=> (VALUE-COMPARISON ?A ?B) (NUMBER ?B)))
+(FORALL (?A) (=> (VALUE-COMPARISON ?A ?B) (EVALUATION ?A)))
+(DEFRELATION NORM (?A ?B)
+ (DOCUMENTATION NORM "An indication of the value
+range for which the critique would be considered to be violated.
+Could be absolute or proportional. For example, if the evaluation is on fuel
+consumption for a particular task, the normal-value might be the amount
+typically expected to be used by a task or plan of this kind.
+The norm might say that this critique is violated if the estimate
+goes more that 15% over the normal-value."))
+(FORALL (?A) (=> (NORM ?A ?B) (CRITIQUE ?A)))
+(DEFRELATION DISMISSED (?A ?B)
+ (DOCUMENTATION DISMISSED "Records that the critique has been
+dealt with in some way."))
+(FORALL (?A) (=> (DISMISSED ?A ?B) (CRITIQUE ?A)))
+(DEFRELATION USER-DISMISSED (?A ?B) :=> (DISMISSED ?A ?B) :AXIOM
+ (DOCUMENTATION USER-DISMISSED "Records that the critique has been
+indicated dealt with by the user."))
+(DEFRELATION OVERRIDDEN (?A ?B) :=> (DISMISSED ?A ?B) :AXIOM
+ (DOCUMENTATION OVERRIDDEN "Records that the critique has been
+made inapplicable by some other related analysis, perhaps defeating it
+or perhaps superseding it."))
+(FORALL (?B) (=> (OVERRIDDEN ?A ?B) (ANALYSIS ?B)))
+(DEFRELATION DEGREE-OF-VIOLATION (?A ?B)
+ (DOCUMENTATION DEGREE-OF-VIOLATION "Records how seriously a critique
+is violated. The range depends on the KBS using the ontology. A simple
+KBS might use boolean, so the critique is either violated or not. The
+air campaign planning domain might use the standard nomenclature including
+'note' and 'warning'."))
+(FORALL (?A) (=> (DEGREE-OF-VIOLATION ?A ?B) (CRITIQUE ?A)))
+(DEFRELATION VIOLATED (?A ?B) :=> (DEGREE-OF-VIOLATION ?A ?B) :AXIOM
+ (DOCUMENTATION VIOLATED "A specialized degree-of-violation
+relation with boolean range. A KBS using the ontology doesn't have
+to use this relation, it is provided for convenience"))
+(FORALL (?B) (=> (VIOLATED ?A ?B) (BOOLEAN ?B)))
+(DEFRELATION CRITIQUE (?SELF) :=>
+ (AND (EVALUATION ?SELF) (EXISTS (?A) (NORM ?SELF ?A))
+      (> (CARDINALITY (SETOFALL ?B (DEGREE-OF-VIOLATION ?SELF ?B))) 0)
+      (> (CARDINALITY (SETOFALL ?C (DISMISSED ?SELF ?C))) 0))
+ :AXIOM
+ (DOCUMENTATION CRITIQUE "A comparison of some factor of the plan
+or task against a norm. For example, if the evaluation is on fuel
+consumption for a particular task, the normal-value might be the amount
+typically expected to be used by a task or plan of this kind.
+The norm might say that this critique is violated if the estimate
+goes more that 15% over the normal-value."))
+(DEFRELATION CRITIQUE--NON-VIOLATED-CONSTRAINT (?SELF) :=
+ (AND (CRITIQUE ?SELF) (VIOLATED ?SELF FALSE)) :AXIOM
+ (DOCUMENTATION CRITIQUE--NON-VIOLATED-CONSTRAINT
+                "A non-violated constraint."))
+(DEFRELATION CRITIQUE--VIOLATED-CONSTRAINT (?SELF) :=
+ (AND (CRITIQUE ?SELF) (VIOLATED ?SELF TRUE)) :AXIOM
+ (DOCUMENTATION CRITIQUE--VIOLATED-CONSTRAINT "A violated constraint,
+based on the boolean-ranged degree-of-violation relation."))
+(DEFRELATION CONSTRUCTIVE-EVALUATION (?SELF) :=>
+ (AND (EVALUATION ?SELF)
+      (EXISTS (?A) (SUGGESTED-CORRECTIVE-ACTION ?SELF ?A)))
+ :AXIOM
+ (DOCUMENTATION CONSTRUCTIVE-EVALUATION "A constructive-evaluation is one that
+attempts to suggest some corrective action if the estimates deviate from
+the normal value. For instance if a task requires more fuel than is
+stored in the vehicle, the action suggested might be to add a task to
+re-fuel at some point."))
+(DEFRELATION SUGGESTED-CORRECTIVE-ACTION (?A ?B)
+ (DOCUMENTATION SUGGESTED-CORRECTIVE-ACTION
+                "A possible correction for a value that
+deviates from the normal value. For instance if a task requires more
+fuel than is stored in the vehicle, the action suggested might be to add
+a task to re-fuel at some point.  In some domains this might be
+represented as a simple string, in others it might have more
+structure."))
+(FORALL (?A)
+ (=> (SUGGESTED-CORRECTIVE-ACTION ?A ?B) (CONSTRUCTIVE-EVALUATION ?A)))
+(DEFRELATION CONSTRUCTIVE-CRITIQUE (?SELF) :=>
+ (AND (CRITIQUE ?SELF) (CONSTRUCTIVE-EVALUATION ?SELF)) :AXIOM
+ (DOCUMENTATION CONSTRUCTIVE-CRITIQUE "An evaluation that combines the
+properties of both a critique and a constructive evaluation."))
+(DEFRELATION ESTIMATE (?SELF) :=>
+ (AND (THING ?SELF) (EXISTS (?A) (VALUE ?SELF ?A))
+      (EXISTS (?B) (SOURCE ?SELF ?B))
+      (EXISTS (?C) (METHOD-USED ?SELF ?C))
+      (EXISTS (?D) (QUALITY ?SELF ?D))
+      (EXISTS (?E) (CONFIDENCE ?SELF ?E)))
+ :AXIOM
+ (DOCUMENTATION ESTIMATE "An estimate is a value for the
+analysis, produced by some recorded source, using a particular method.
+Attached to the estimate is a 'quality' or precision rating and a
+'confidence' in the value given."))
+(DEFRELATION VALUE (?A ?B)
+ (DOCUMENTATION VALUE "The value for this estimate of the analysis"))
+(FORALL (?A) (=> (VALUE ?A ?B) (ESTIMATE ?A)))
+(DEFRELATION SOURCE (?A ?B)
+ (DOCUMENTATION SOURCE "The source of this estimate of the
+analysis. For instance in the HPKB domain this would be one of the
+critiquers"))
+(FORALL (?A) (=> (SOURCE ?A ?B) (ESTIMATE ?A)))
+(DEFRELATION METHOD-USED (?A ?B)
+ (DOCUMENTATION METHOD-USED "An indication of the method used to provide
+the estimate, with different ranges for different domains. Examples are
+simulation, algebraic computation, heuristic approximation."))
+(FORALL (?A) (=> (METHOD-USED ?A ?B) (ESTIMATE ?A)))
+(DEFRELATION QUALITY (?A ?B)
+ (DOCUMENTATION QUALITY "An indication of the level of precision
+provided by the method used in the estimate.  The range depends on the
+KBS using the ontology, but a suggestion is the estimate-quality-value
+set."))
+(FORALL (?A) (=> (QUALITY ?A ?B) (ESTIMATE ?A)))
+(DEFRELATION ESTIMATE-QUALITY-VALUE (?SELF) :=
+ (AND (SYMBOL ?SELF) (MEMBER ?SELF (SETOF 'GROSS 'FAIR 'GOOD 'DETAILED))
+      (FORALL (?A ?B)
+       (AND (ITEM ?A (LISTOF 'GROSS 'FAIR 'GOOD 'DETAILED))
+            (ITEM ?B (LISTOF 'GROSS 'FAIR 'GOOD 'DETAILED))
+            (<=>
+             (=< (NTH ?A (LOOM::LISTOF 'GROSS 'FAIR 'GOOD 'DETAILED))
+              (NTH ?B (LISTOF 'GROSS 'FAIR 'GOOD 'DETAILED)))
+             (=< ?A ?B))))))
+(DEFRELATION CONFIDENCE (?A ?B)
+ (DOCUMENTATION CONFIDENCE "An indication of the reliability of the
+estimate given. This is separate from the quality, which is a precision
+measure. Range of values depends on the domain."))
+(FORALL (?A) (=> (CONFIDENCE ?A ?B) (ESTIMATE ?A)))
+(DEFRELATION EVALUATION-PRIORITY (?SELF) :=> (THING ?SELF) :AXIOM
+ (DOCUMENTATION EVALUATION-PRIORITY "The importance or interest of an
+evaluation structure or item. This is different from the seriousness of
+a judgment. For example, a fuel judgment might have moderate importance
+(and hence priority), while the over-use of fuel (ie seriousness of the
+critique) in some task is very bad, and an ammunition judgment might have
+high importance while the over-use in the task is slight. In the HPKB
+domain each priority is currently a number, while in the JFACC domain 
+it is symbolic."))
+(DEFRELATION PRIORITY (?A ?B)
+ (DOCUMENTATION PRIORITY "Links an evaluation structure or
+analysis to its priority. For example, a fuel judgment might have
+moderate importance (and hence priority), while the over-use of fuel (ie
+seriousness of the critique) in some task is very bad, and an ammunition
+judgment might have high importance while the over-use in the task is
+slight. In the HPKB domain each priority is currently a number, while in
+the JFACC domain it is symbolic."))
+(FORALL (?B) (=> (PRIORITY ?A ?B) (EVALUATION-PRIORITY ?B)))
+(FORALL (?A)
+ (=> (PRIORITY ?A ?B) (OR (EVALUATION-STRUCTURE ?A) (ANALYSIS ?A))))
+(DEFRELATION COA-CRITIQUING-STRUCTURE (?SELF) :=>
+ (AND (EVALUATION-STRUCTURE ?SELF)
+      (FORALL (?A)
+       (=> (SUB-EVALUATION-STRUCTURE ?SELF ?A)
+        (COA-FACET-EVALUATION-STRUCTURE ?A))))
+ :AXIOM
+ (DOCUMENTATION COA-CRITIQUING-STRUCTURE "An evaluation structure used for
+COA critiques."))
+(=> (COA-CRITIQUING-STRUCTURE ?SELF)
+ (FORALL (?B) (=> (FACTORS ?SELF ?B) (COA-CRITIQUE ?B))))
+(DEFRELATION COA-FACET-EVALUATION-STRUCTURE (?SELF) :=>
+ (EVALUATION-STRUCTURE ?SELF) :AXIOM
+ (DOCUMENTATION COA-FACET-EVALUATION-STRUCTURE
+                "An evaluation structure used for
+facets of a complete COA critique, eg viability"))
+(DEFRELATION VIABILITY-EVALUATION-STRUCTURE (?SELF) :=
+ (AND (COA-FACET-EVALUATION-STRUCTURE ?SELF)
+      (FORALL (?A)
+       (=> (SUB-EVALUATION-STRUCTURE ?SELF ?A)
+        (VIABILITY-FACET-EVALUATION-STRUCTURE ?A))))
+ :AXIOM
+ (DOCUMENTATION VIABILITY-EVALUATION-STRUCTURE
+                "An evaluation structure for the 
+viability analysis of a COA"))
+(DEFRELATION VIABILITY-FACET-EVALUATION-STRUCTURE (?SELF) :=>
+ (EVALUATION-STRUCTURE ?SELF) :AXIOM
+ (DOCUMENTATION VIABILITY-FACET-EVALUATION-STRUCTURE
+                "An evaluation structure used for a
+facet of the viability critique of a COA, eg feasibility"))
+(DEFRELATION FEASIBILITY-EVALUATION-STRUCTURE (?SELF) :=
+ (AND (EVALUATION-STRUCTURE ?SELF)
+      (FORALL (?A) (=> (FACTOR ?SELF ?A) (FEASIBILITY-CRITIQUE ?A))))
+ :AXIOM
+ (DOCUMENTATION FEASIBILITY-EVALUATION-STRUCTURE
+                "An evaluation structure used for
+the analyses related to the feasibility of a COA"))
+(DEFRELATION COA-ESTIMATE (?SELF) :=>
+ (AND (ESTIMATE ?SELF)
+      (FORALL (?A) (=> (SOURCE ?SELF ?A) (CRITIQUE-SOURCE ?A))))
+ :AXIOM (DOCUMENTATION COA-ESTIMATE "An estimate used in a COA critique"))
+(DEFRELATION COA-CRITIQUE (?SELF) :=>
+ (AND (CONSTRUCTIVE-CRITIQUE ?SELF)
+      (FORALL (?A) (=> (VALUE ?SELF ?A) (COA-ESTIMATE ?A))))
+ :AXIOM (DOCUMENTATION COA-CRITIQUE "A critique of a COA"))
+(=> (COA-CRITIQUE ?SELF)
+ (OR (MISSING-ELEMENTS-CRITIQUE ?SELF)
+     (STRENGTHS-AND-WEAKNESSES-CRITIQUE ?SELF) (CORRECTNESS-CRITIQUE ?SELF)
+     (VIABILITY-CRITIQUE ?SELF)))
+(=> (MISSING-ELEMENTS-CRITIQUE ?SELF)
+ (NOT (OR (STRENGTHS-AND-WEAKNESSES-CRITIQUE ?SELF)
+          (CORRECTNESS-CRITIQUE ?SELF) (VIABILITY-CRITIQUE ?SELF))))
+(=> (STRENGTHS-AND-WEAKNESSES-CRITIQUE ?SELF)
+ (NOT (OR (MISSING-ELEMENTS-CRITIQUE ?SELF) (CORRECTNESS-CRITIQUE ?SELF)
+          (VIABILITY-CRITIQUE ?SELF))))
+(=> (CORRECTNESS-CRITIQUE ?SELF)
+ (NOT (OR (MISSING-ELEMENTS-CRITIQUE ?SELF)
+          (STRENGTHS-AND-WEAKNESSES-CRITIQUE ?SELF)
+          (VIABILITY-CRITIQUE ?SELF))))
+(=> (VIABILITY-CRITIQUE ?SELF)
+ (NOT (OR (MISSING-ELEMENTS-CRITIQUE ?SELF)
+          (STRENGTHS-AND-WEAKNESSES-CRITIQUE ?SELF)
+          (CORRECTNESS-CRITIQUE ?SELF))))
+(DEFRELATION VIABILITY-CRITIQUE (?SELF) :=> (COA-CRITIQUE ?SELF) :AXIOM
+ (DOCUMENTATION VIABILITY-CRITIQUE "A critique of the viability of a COA"))
+(=> (VIABILITY-CRITIQUE ?SELF)
+ (OR (COMPLETENESS-CRITIQUE ?SELF) (ACCEPTABILITY-CRITIQUE ?SELF)
+     (FEASIBILITY-CRITIQUE ?SELF) (SUITABILITY-CRITIQUE ?SELF)))
+(=> (COMPLETENESS-CRITIQUE ?SELF)
+ (NOT (OR (ACCEPTABILITY-CRITIQUE ?SELF) (FEASIBILITY-CRITIQUE ?SELF)
+          (SUITABILITY-CRITIQUE ?SELF))))
+(=> (ACCEPTABILITY-CRITIQUE ?SELF)
+ (NOT (OR (COMPLETENESS-CRITIQUE ?SELF) (FEASIBILITY-CRITIQUE ?SELF)
+          (SUITABILITY-CRITIQUE ?SELF))))
+(=> (FEASIBILITY-CRITIQUE ?SELF)
+ (NOT (OR (COMPLETENESS-CRITIQUE ?SELF) (ACCEPTABILITY-CRITIQUE ?SELF)
+          (SUITABILITY-CRITIQUE ?SELF))))
+(=> (SUITABILITY-CRITIQUE ?SELF)
+ (NOT (OR (COMPLETENESS-CRITIQUE ?SELF) (ACCEPTABILITY-CRITIQUE ?SELF)
+          (FEASIBILITY-CRITIQUE ?SELF))))
+(DEFRELATION FEASIBILITY-CRITIQUE (?SELF) :=> (VIABILITY-CRITIQUE ?SELF)
+ :AXIOM
+ (DOCUMENTATION FEASIBILITY-CRITIQUE "A critique of the feasibility of a COA"))
+(DEFRELATION INADEQUATE-FORCES-CRITIQUE (?SELF) :=
+ (AND (FEASIBILITY-CRITIQUE ?SELF)
+      (EXISTS (?A)
+       (AND (ANALYSIS-PROPERTY ?SELF ?A) (OBJECT-PROPERTY ?A)))
+      (FORALL (?A ?B)
+       (=> (AND (ANALYSIS-PROPERTY ?SELF ?A) (ANALYSIS-PROPERTY ?SELF ?B))
+        (= ?A ?B)))
+      (PRIORITY ?SELF 1))
+ :AXIOM
+ (DOCUMENTATION INADEQUATE-FORCES-CRITIQUE "A critique on the adequacy of the
+forces assigned to a task in a COA. This is a feasibility critique."))
+(DEFRELATION TASK-FORCE-RATIO (?SELF) := (OBJECT-PROPERTY ?SELF) :AXIOM
+ (DOCUMENTATION TASK-FORCE-RATIO "The force ratio of a task
+is a task property, and as such we can record the critiquer that computed
+it and the level of precision used to compute it."))
+(DEFRELATION EVALUATED-TASK (?A ?B)
+ (DOCUMENTATION EVALUATED-TASK "Links an analysis property about a task
+to the task being analysed"))
+(FORALL (?B) (=> (EVALUATED-TASK ?A ?B) (PLAN-TASK ?B)))
+(FORALL (?A) (=> (EVALUATED-TASK ?A ?B) (OBJECT-PROPERTY ?A)))
+(DEFRELATION CRITIQUE-SOURCE (?SELF) :=
+ (AND (SYMBOL ?SELF)
+      (MEMBER ?SELF
+              (SETOF 'EXPECT-CRITIQUER 'GMU-CRITIQUER 'SMI-CRITIQUER))))

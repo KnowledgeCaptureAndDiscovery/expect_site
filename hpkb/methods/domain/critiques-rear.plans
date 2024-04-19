@@ -1,0 +1,11 @@
+;;; This file separates out the rear statement critique methods
+;;; so we can figure out their overall size. 
+
+(in-package "CYC")
+
+(defplan check-rear-unit
+  :capability (find-fillers (of (?a is (inst-of rear-identified-critique)))
+		        (in (?c is (inst-of coa))))
+  :result-type (set-of (inst-of thing))
+  :method (|unitOperatingInRear| (coa-operation ?c))
+  )

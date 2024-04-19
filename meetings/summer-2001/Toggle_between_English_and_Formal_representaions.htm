@@ -1,0 +1,103 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>Toggle between English and Formal representaions</TITLE>
+<META NAME="Template" CONTENT="C:\Program Files\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY LINK="#0000ff" VLINK="#800080">
+
+<B><U><FONT SIZE=4><P ALIGN="CENTER">Toggle between English and internal formal representation</P>
+</U></FONT><P>Expect Window Panel – Main EMeD window</P>
+<OL>
+
+</B><LI>MethodListPanel</LI>
+<LI>ExpectTabbedPanel</LI></OL>
+
+<B><P>1. MethodList Panel </P>
+</B><P>The MethodList Panel contains list of methods in formal representation. </P>
+<P>Currently there are 3 views of the same method in English</P>
+
+<UL TYPE="SQUARE">
+<LI>Show Method In English – This brings up another window showing the English description.Shows the method as unformatted lines of text.</LI></UL>
+
+
+<UL TYPE="SQUARE">
+<LI>Modify – Brings up the Structured Editor.The method is divided into 3 parts-</LI></UL>
+<DIR>
+<DIR>
+
+<P>Capability</P>
+<P>Method</P>
+<P>Result Type</P></DIR>
+</DIR>
+
+
+<UL TYPE="SQUARE">
+<LI>Modify in NL - Brings up the Method Editor which brings up the method as In order to …Returning format.</LI></UL>
+
+
+<UL TYPE="SQUARE">
+<LI>The English description for each method appears to be quite verbose. It should be rendered before display. My suggestion is to have a have a collapsed tree format with the capabilites as the nodes. The user can click on the capability to get a detailed description.</LI>
+<LI>The Method List panel contains a 'Method Organizer' to copy, paste, create a new  folder etc. These functions are performed on the rendered formal method representations.This might require some amount of work to get all of them working with the English representations.</LI>
+<LI>The 'Edit Methods' portion contains buttons to add new method , copy ,Modify which bring up the Structured Editor and the Modify in NL brings up the Method Editor.</LI></UL>
+
+<B><P>&nbsp;</P>
+<P>2. ExpectTabbed Panel</P>
+</B><P>Different views are- </P>
+
+<UL TYPE="SQUARE">
+<LI>MethodProposer – English , Methods are described using Formal Representation </LI></UL>
+
+
+<UL TYPE="SQUARE">
+<LI>Method Sub-Method Analyzer - English</LI></UL>
+
+
+<UL TYPE="SQUARE">
+<LI>Evaluation Result- English</LI></UL>
+
+
+<UL TYPE="SQUARE">
+<LI>Global Error Detector – English</LI>
+<LI>Method Seeker – Formal </LI>
+<LI>Capability Organizer – Formal</LI>
+<LI>Ontology Browser – English</LI></UL>
+
+<P>&nbsp;</P>
+<P>&nbsp;<B>Issues </P>
+</B><P>Whether equivalent English representations are present for all formal representations in the system.</P>
+<B><P>For eg -Method List Panel</P>
+
+<UL TYPE="SQUARE">
+</B><LI>English representation server side functions for Method List Panel (get-nl-description-of-method) is being used for getting the English description. The function did not work properly till yesterday. Norm got it working today.</LI></UL>
+
+
+<UL TYPE="SQUARE">
+<LI>Formal representation server side functions -</LI></UL>
+<DIR>
+<DIR>
+
+<P>(get-user-defined-method-name-list)</P>
+<P>(get-system-defined-method-name-list)</P>
+<P>(remove-plan)</P>
+<P>(delete-plan)</P>
+<P>(generate-method-defintion)</P>
+<P>(get-errors-for-plan)</P>
+<P>(post-process-nl-edit-for-ia)</P>
+<P>(add-or-change-concept)</P>
+<P>(check-and-create-plan)</P>
+<P>(check-and-modify-plan)</P></DIR>
+</DIR>
+
+
+<UL TYPE="SQUARE">
+<LI>For each view of the ExpectTabbedPanel there is a mix of English and formal representations.</LI>
+<LI>It will take time to segregate the English and formal representations, changes in the UI may be required </LI></UL>
+
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<B><P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P></B></BODY>
+</HTML>

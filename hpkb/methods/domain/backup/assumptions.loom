@@ -1,0 +1,112 @@
+;;; Main CP spec example COA -
+;;;
+;;; Last modified: April 26 1999
+;;; by Jihie Kim
+
+(in-package "EVALUATION")
+
+;(in-package "PLANET")
+;(loom:use-loom "PLANET")
+;(use-package "EXPECT")
+
+;;; ************************************************************
+;;;  Critical Events and Attrition Assumptions
+;;; ************************************************************
+
+
+(defconcept critical-event
+    :is-primitive (:and task-action
+			(:all action-obj military-unit)
+			(:all who military-unit))
+    )
+
+(defrelation critical-event-of
+  :domain COA
+  :range critical-event)
+
+(defconcept attrition-assumption
+    :is-primitive (:and thing
+			(:at-most 1 during-event)
+			(:the desc-of task-action))
+    )
+
+(defrelation during-event 
+    :range critical-event)
+
+(defrelation desc-of 
+    :domain attrition-assumption
+    :range task-action)
+  
+;;; ************************************************************
+;;; Examples (based on COA1)
+;;; ************************************************************
+
+;;; ?? don't know how to map this to grammar or HPKB ontology
+(defconcept hasty-defense :is-primitive task-action)
+
+;;; ************************
+;;; critical events
+;;;
+;;; CE1: Supporting Effort 1 fixes REDMECHREGIMENT1
+#|
+(tellm 
+ (critical-event-of coa1 ce-1)
+ )
+
+(tellm 
+ (critical-event ce-1)
+ (fix ce-1)
+ (who ce-1 Blue11)
+ (action-obj ce-1 Red1)
+ )
+
+;;; CE2: Supporting Effort 2 penetrates REDMECHREGIMENT2
+(tellm
+ (critical-event ce-2)
+ (penetrate ce-2)
+ (who ce-2 Blue12)
+ (action-obj ce-2 Red2)
+ )
+
+;;; CE3: Main Effort conducts hasty defense against REDTANKBATTALION1
+(tellm
+ (red-unit redTankBattalion1)
+ (|ArmoredUnit-MilitarySpecialty| redTankBattalion1)
+ (|echelonOfUnit| redTankBattalion1 |Battalion-UnitDesignation|)
+ (critical-event ce-3)
+ (hasty-defense ce-3)
+ (who ce-3 Blue13)
+ (action-obj ce-3 redTankBattalion1)
+ )
+
+;;; CE4: Main Effort conducts hasty defense against REDTANKREGIMENT1
+(tellm
+ (red-unit redTankRegiment1)
+ (|ArmoredUnit-MilitarySpecialty| redTankRegiment1)
+ (|echelonOfUnit|  redTankRegiment1 |Regiment-UnitDesignation|)
+ (critical-event ce-4)
+ (hasty-defense ce-4)
+ (who ce-4 Blue13)
+ (action-obj ce-4 redTankRegiment1)
+ )
+
+;;; CE1 and CE2 before CE3
+;;; CE3 before CE4
+
+(tellm (before ce-1 ce-3)
+       (before ce-2 ce-3)
+       (before ce-3 ce-4))
+
+;;; ************************
+;;; attrition assumptions
+;;;  NOTE:This is my own example for scenario1
+;;;  during CE3, redTankBattalion1 attrits Main effort to 90 %
+
+(tellm (attrition-assumption as-1)
+       (during-event as-1 ce-3)
+       (attrit attrit1)
+       (desc-of as-1 attrit1)
+       (who attrit1 redTankBattalion1)
+       (action-obj attrit1 Blue13)
+       (action-to attrit1 90))
+|#

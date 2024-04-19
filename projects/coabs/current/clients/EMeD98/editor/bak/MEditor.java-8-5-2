@@ -1,0 +1,282 @@
+// This example is from _Java Examples in a Nutshell_. (http://www.oreilly.com)
+// Copyright (c) 1997 by David Flanagan
+// This example is provided WITHOUT ANY WARRANTY either expressed or implied.
+// You may study, use, modify, and distribute it for non-commercial purposes.
+// For any commercial use, see http://www.davidflanagan.com/javaexamples
+
+import com.sun.java.swing.*;
+import java.awt.*;
+import java.util.*;
+import java.awt.event.*;
+import Connection.ExpectServer;
+import com.sun.java.swing.border.*;
+
+/** A simple applet that uses the Java 1.1 event handling model */
+public class MEditor extends JPanel
+                      implements MouseListener, LayoutManager {
+  private ExpectServer es;
+  Dimension   origin = new Dimension(0, 0); 
+  public static final String HIGHLIGHT = "highlight";
+  public static final String RESET = "reset";
+
+  private JPanel methodPanel;
+  private JPanel altPanel;
+
+  private JPanel namePanel;
+  private JPanel capPanel;
+  private JPanel resPanel;
+  private JPanel bodyPanel;
+
+  private JLabel nameLabel;
+  private JComponent capButtons[] = new JComponent[50];
+  private JComponent resButtons[] = new JComponent[10];
+  private JComponent bodyButtons[] = new JComponent[100];
+  private int capN = 6;
+  private int resN = 3;
+  private int bodyN = 3;
+  
+  Vector listOfAltButtons;
+  JScrollPane mscrollPane;
+  //JScrollPane ascrollPane;
+
+  private JButton altButtons[] = new JButton[100];
+
+  private JButton getDescButton = new JButton("get method description");
+
+  public MEditor (ExpectServer theServer) {
+    es = theServer;
+
+    //setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
+    altPanel  = new JPanel();
+    methodPanel = new JPanel();
+    methodPanel.setLayout(new BoxLayout(methodPanel, BoxLayout.Y_AXIS));
+    //setAlignmentX(LEFT_ALIGNMENT);
+    //setAlignmentY(TOP_ALIGNMENT);
+
+    namePanel = new JPanel();
+    capPanel = new JPanel();
+    resPanel = new JPanel();
+    bodyPanel = new JPanel();
+
+    nameLabel= new JLabel(" ((name method2001)");
+    namePanel.setLayout(new BoxLayout(namePanel, BoxLayout.X_AXIS));
+    namePanel.setAlignmentX(LEFT_ALIGNMENT);
+    namePanel.add(nameLabel);
+    methodPanel.add (namePanel);
+    
+    capButtons[1] = new eButton("(capability ",true);
+
+    capButtons[2] = new eButton("");
+    capButtons[2].setName("cap 2");
+    capButtons[2].addMouseListener(this);
+
+    capButtons[3] = new eButton("(",true);
+    capButtons[4] = new eButton("VERB");
+    capButtons[4].setName("cap 4");
+    capButtons[4].addMouseListener(this);
+
+    capButtons[5] = new eButton("PARAMS");
+    capButtons[5].addMouseListener(this);
+    capButtons[5].setName("cap 5");
+
+    capButtons[6] = new eButton("))",true);
+    capPanel.setLayout(new BoxLayout(capPanel, BoxLayout.X_AXIS));
+    capPanel.setAlignmentX(LEFT_ALIGNMENT);
+    capPanel.add(capButtons[1]);
+    capPanel.add(capButtons[2]);
+    capPanel.add(capButtons[3]);
+    capPanel.add(capButtons[4]);
+    capPanel.add(capButtons[5]);
+    capPanel.add(capButtons[6]);
+
+    methodPanel.add(capPanel);
+
+    resPanel.setLayout(new BoxLayout(resPanel, BoxLayout.X_AXIS));
+    resPanel.setAlignmentX(LEFT_ALIGNMENT);
+    resButtons[1] = new eButton("(result-type ",true);
+    resButtons[2] = new eButton(" DATA-TYPE");
+    resButtons[2].addMouseListener(this);
+    resButtons[2].setName("expect-complex-data");
+    resButtons[3] = new eButton(")",true);
+    resPanel.setAlignmentX(LEFT_ALIGNMENT);
+    resPanel.setAlignmentY(TOP_ALIGNMENT);
+    resPanel.add(resButtons[1]);
+    resPanel.add(resButtons[2]);
+    resPanel.add(resButtons[3]);
+
+    methodPanel.add(resPanel);
+    methodPanel.setBorder(new BevelBorder(BevelBorder.LOWERED)); 
+    bodyPanel.setLayout(new BoxLayout(bodyPanel, BoxLayout.X_AXIS));
+    bodyPanel.setAlignmentX(LEFT_ALIGNMENT);
+    bodyButtons[1] = new eButton("(method ",true);
+    bodyButtons[2] = new eButton(" EXPR");
+    bodyButtons[2].addMouseListener(this);
+    bodyButtons[2].setName("expect-form");
+    bodyButtons[3] = new eButton(")",true);
+    bodyPanel.add(bodyButtons[1]);
+    bodyPanel.add(bodyButtons[2]);
+    bodyPanel.add(bodyButtons[3]);
+    methodPanel.add(bodyPanel);
+    
+    //mscrollpane = new JScrollPane(methodPanel);
+    add(methodPanel);
+    eButton dummyButton = new eButton(" test ");
+    altPanel.add(dummyButton);
+    altPanel.setBorder(new BevelBorder(BevelBorder.LOWERED)); 
+    add (altPanel);
+
+    getDescButton.addActionListener(new getDescListener());
+    add(getDescButton);
+  }
+
+  // A method from the MouseListener interface.  Invoked when the
+  // user presses a mouse button.
+  public void mousePressed(MouseEvent e) {;  }
+
+  // The other, unused methods of the MouseListener interface.
+  public void mouseReleased(MouseEvent e) {;}
+  public void mouseClicked(MouseEvent e) {
+    Component c = e.getComponent();
+    String xmlInput = es.getEditAlts(c.getName());
+    System.out.println(xmlInput);
+    altListRenderer ar = new altListRenderer(xmlInput);
+    listOfAltButtons = ar.getAlts();
+    displayAlts();
+  }
+  public void mouseEntered(MouseEvent e) {
+
+    Component c = e.getComponent();
+    System.out.println("Selected component: "+c.getName());
+    mapSelections(c.getName(),HIGHLIGHT);
+  }
+  public void mouseExited(MouseEvent e) {
+    mapSelections(((eButton)e.getComponent()).getIndex(),RESET);
+    
+  }
+
+  private void displayAlts() {
+    int numAlts = listOfAltButtons.size();
+    altPanel.removeAll();    
+    JScrollPane ascrollpane = new JScrollPane();
+
+    for(int i=0; i < numAlts; i++){
+      String desc = "";
+      Vector buttons = (Vector)listOfAltButtons.elementAt(i);
+      int numBtns = buttons.size();
+      for (int j=0; j < numBtns; j++) {
+        desc = desc +" "+ ((eButton)buttons.elementAt(j)).getText();
+      }
+      eButton bt = new eButton (desc);
+      System.out.println(desc);
+      Integer ii = new Integer(i);
+      bt.setName (ii.toString());
+      bt.addMouseListener(this);
+      altPanel.add (bt);
+      //ascrollpane.add(bt);
+    }
+    //altPanel.add(ascrollpane);
+    repaint();
+  }
+
+
+
+
+
+  			
+  public void mapSelections (String id, String op) {
+    if (id.equals ("3")) {
+      if (op.equals(HIGHLIGHT)) highlight (4);
+      else resetColor (4);
+      if (op.equals(HIGHLIGHT))	highlight (5);
+      else resetColor(5);
+    }
+    else {
+      int i=0;
+      try {
+	i= Integer.parseInt(id);
+	if (op.equals(HIGHLIGHT))
+	  highlight(i);
+	else resetColor(i);
+      }
+      catch (Exception e) {
+	System.out.println("invalid ID:"+ id);
+      }
+    }
+  }
+
+  public void highlight (int id) {
+    //System.out.println("highlight " + id);
+    //buttons[id].setBackground(Color.red);
+    //buttons[id].repaint();
+
+  }
+
+  public void resetColor (int id) {
+    //buttons[id].setBackground(Color.lightGray);
+    //buttons[id].repaint();
+  }
+
+  class getDescListener implements ActionListener {
+    public void actionPerformed (ActionEvent e) {
+      getDesc();
+    }
+  }
+  public String getDesc () {
+    String res = "";
+    res = res + nameLabel.getText();
+    res = res + "\n";
+    for (int i = 1; i <= capN; i++) {
+      res = res + " "+ ((JButton)capButtons[i]).getText();
+    }
+    res = res + "\n";
+    for (int i = 1; i <= resN; i++) {
+      res = res + " "+ ((JButton)resButtons[i]).getText();
+    }
+    res = res + "\n";
+    for (int i = 1; i <= bodyN; i++) {
+      res = res + " "+((JButton)bodyButtons[i]).getText();
+    }
+    res = res + "\n";
+    System.out.println(res);
+    return res;
+  }
+
+  public boolean needParen (String expr) {
+    return false;
+  }
+
+  public Dimension preferredLayoutSize(Container c){return origin;}
+  public Dimension minimumLayoutSize(Container c){return origin;}
+  public void addLayoutComponent(String s, Component c) {}
+  public void removeLayoutComponent(Component c) {}
+  public void layoutContainer(Container c) {
+    Rectangle b = c.getBounds(); 
+    int topHeight = 90; 
+    int inset = 4; 
+    int paramHeight = 215;
+
+    methodPanel.setBounds(inset, inset, b.width-2*inset, 200); 
+    altPanel.setBounds(inset,inset*2 + 200, b.width-2*inset, 200); 
+    getDescButton.setBounds (inset, inset*3+400, 200, 30);
+    }
+
+
+  
+  public static void main(String[] args) {
+    JFrame frame = new JFrame("Expect Editor");
+    ExpectServer es = new ExpectServer();
+      frame.addWindowListener(new WindowAdapter() {
+        public void windowClosing(WindowEvent e) {
+                  System.exit(0);
+        }
+      });
+      
+      frame.getContentPane().add("Center", new MEditor(es));
+      frame.setLocation(50,50);
+      frame.setSize(500, 500); // demo mode
+      frame.setVisible(true);
+    }
+ 
+
+}

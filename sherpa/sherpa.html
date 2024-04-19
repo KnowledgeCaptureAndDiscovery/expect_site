@@ -1,0 +1,1069 @@
+<HTML>
+<HEAD>
+  <META NAME="GENERATOR" CONTENT="Adobe PageMill 2.0 Mac">
+  <TITLE>Sherpa: USC/Information Sciences Institute</TITLE>
+  <META NAME="AUTHOR" CONTENT="Bill Swartout">
+</HEAD>
+<BODY BGCOLOR="#e1e1ee" TEXT="#c2000f">
+
+<H2 ALIGN=CENTER><FONT COLOR="#000379" SIZE=+3>Knowledge Acquisition for
+</FONT></H2>
+
+<H2 ALIGN=CENTER><FONT COLOR="#000379" SIZE=+3>Large Knowledge Bases:</FONT></H2>
+
+<H3 ALIGN=CENTER><FONT COLOR="#000379" SIZE=+2>Integrating Problem-Solving
+Methods and Ontologies into Applications</FONT></H3>
+
+<DL>
+  <DT><P ALIGN=CENTER><A HREF="http://www.isi.edu/isd/swartout-homepage.html"><B>Bill
+  Swartout</B></A><B> <FONT COLOR="#000000">(co-PI)</FONT></B>
+  <DT><P ALIGN=CENTER><A HREF="http://www.isi.edu/~gil/yg-homepage.html"><B>Yolanda
+  Gil</B></A><B> <FONT COLOR="#000000">(co-PI)</FONT></B>
+  <DT><P ALIGN=CENTER><A HREF="http://www.isi.edu/~valente/valente.html"><B>Andre
+  Valente</B></A>
+  <DT><P ALIGN=CENTER><B><FONT COLOR="#000000">Marcelo Tallis</FONT></B>
+</DL>
+
+<P>&nbsp;</P>
+
+<P><B><FONT COLOR="#000000" SIZE=+2>A. Abstract</FONT></B></P>
+
+<P><FONT COLOR="#000000">The HPKB initiative seeks to develop large, reusable
+libraries of ontologies and problem solving methods and use them to construct
+and maintain applications that address military needs. When these resources
+are actually used in applications, several issues arise that this effort
+will address:</FONT></P>
+
+<UL>
+  <LI><FONT COLOR="#000000">How can a system builder search the library of
+  problem solving methods to find ones that are appropriate for his needs?</FONT>
+  <LI><FONT COLOR="#000000">If several applications use a shared ontology,
+  how will they be affected by a change to the ontology?</FONT>
+  <LI><FONT COLOR="#000000">If a domain expert seeks to use a knowledge acquisition
+  tool to add knowledge to an application, what additional information <I>must
+  </I>he add? What is optional?</FONT>
+</UL>
+
+<P><FONT COLOR="#000000">Answering these questions requires knowing <I>how
+knowledge in the libraries is used </I>in the construction of applications.
+For example, if one knows what aspects of an ontology were used in an application,
+it is then possible to determine whether or not a proposed change in the
+ontology will affect the application.</FONT></P>
+
+<P><FONT COLOR="#000000">To answer the questions posed above, we propose
+three tasks. First we will extend ISI's EXPECT knowledge based system (KBS)
+framework with a Method Library, called LIBRA, and associated set of tools
+which will allow a system builder to select from a set of existing problem
+solving methods and incorporate them into a KBS. Methods will be indexed
+in several ways, such as by the kinds of problems they solve (e.g. diagnosis
+vs. configuration tasks), the techniques they employ, and any assumptions
+they make about their inputs and outputs. We will develop a tool, the <I>Selection
+Tool, </I>that will help a user select appropriate method(s) for his system
+based on the nature of the problem being attacked and the desired behavior
+for the system.</FONT></P>
+
+<P><FONT COLOR="#000000">Second, we will construct SHERPA, a Knowledge Acquisition
+Mediator, which will use a model of how knowledge in the libraries is actually
+used in an operational knowledge based system, called an Interdependency
+Model (IM). This model details interdependencies within the system, such
+as how factual knowledge is used in problem solving, and what domain knowledge
+must be present to support the system's problem solving. The model will
+be used to support knowledge acquisition, by guiding a domain expert to
+ensure that he enters all the knowledge required to support problem solving.
+It will also be used to notify system builders of changes in the libraries
+that may affect their systems. Interdependency Models are created automatically
+when systems are developed in EXPECT, this effort will develop tools to
+create these models for systems developed outside the EXPECT framework.</FONT></P>
+
+<P><FONT COLOR="#000000">Third, our effort will create EXCALIBUR, based
+on the EXPECT framework, which already incorporates, in prototype form,
+several key elements of the HPKB initiative, including explicit representations
+for domain ontologies and problem solving, knowledge compilation for efficient
+performance, knowledge acquisition and explanation. The EXPECT framework
+has been used to create INSPECT, a knowledge based system that can critique
+air campaign plans. INSPECT was part of the DARPA/Rome Lab Planning Initiative's
+Fourth Integrated Feasibility Demo and is being incorporated into the JFACC
+Jumpstart. The work we propose here will expand the breadth and scope of
+support that EXPECT provides. LIBRA, our proposed method library, will assist
+system builders during the early phases of knowledge based system construction,
+while SHERPA, the Knowledge Acquisition Mediator, will support knowledge
+acquisition and ontology change notification, even for systems developed
+outside of the EXPECT framework.</FONT></P>
+
+<P><FONT COLOR="#000000">To demonstrate the utility of the tools we will
+create, we will work on the HPKB Challenge Problems. These efforts will
+be facilitated by the fact that we already are very familiar with the JFACC
+domain, one of the Challenge Problem domains. We will also work with the
+HPKB Integration Efforts to incorporate our tools into those integrated
+environments. By building on an established technology base in EXPECT and
+on our practical experience with transportation planning and air campaign
+planning, we are in a strong position to meet the challenges of HPKB.</FONT></P>
+
+<P><HR ALIGN=LEFT></P>
+
+<P><B><FONT COLOR="#000000" SIZE=+2>B. Innovative Claims<BR>
+<BR>
+</FONT></B><FONT COLOR="#000000">Our proposed effort addresses two important
+goals of the High Performance Knowledge Bases effort: 1) to support the
+construction and maintenance of operational knowledge based systems (KBSs)
+from libraries of <B>reusable ontologies and problem-solving methods</B>
+that can be extended, specialized and modified, and 2) to provide <B>knowledge
+acquisition tools</B> that allow domain experts to augment and modify a
+KBS. These goals raise specific questions our work will address:</FONT></P>
+
+<P><FONT COLOR="#000000">1. What problem solving methods are useful? How
+can they be indexed and represented? What help can be provided to system
+builders in finding methods that are appropriate to their needs?</FONT></P>
+
+<P><FONT COLOR="#000000">2. Shared ontologies are one of the keys to integrating
+collaboratively developed knowledge based systems. As these ontologies evolve
+and scale up, the KBSs that use them will need to be updated accordingly.
+Typically, a KBS will only use part of the shared ontology. How can system
+builders be informed of the ontological changes that affect their systems
+without being overwhelmed by notification of changes that are not relevant
+to them? Current ontology tools cannot provide this support because they
+do not track how ontologies are actually used in problem solving.</FONT></P>
+
+<P><FONT COLOR="#000000">3. Current knowledge acquisition (KA) tools, such
+as EXPECT [Swartout and Gil 1995, Gil and Paris 1994, Gil 1994, Gil and
+Melz 1996], empower users to change and update a knowledge based system
+without having to understand the details of its structure or implementation.
+By allowing people with less technical training to be directly involved,
+these tools can make it easier and cheaper to construct knowledge based
+systems and keep them up-to-date. However, current KA tools only support
+knowledge acquisition for systems that are built within their own particular
+framework. No support is provided for &quot;legacy&quot; systems or outside
+of the framework. How can KA benefits be expanded to these systems and others
+built using the HPKB libraries?</FONT></P>
+
+<P><FONT COLOR="#000000">To realize the goals of HPKB, the answers to these
+questions must be attuned to the needs of application developmentit is not
+enough to just construct libraries or tools without addressing how they
+will actually be used to build systems that solve problems.</FONT></P>
+
+<P><FONT COLOR="#000000"><BR>
+</FONT><HR ALIGN=LEFT></P>
+
+<P><B><FONT COLOR="#000000">LIBRA: A Problem Solving Method Library</FONT></B></P>
+
+<P><FONT COLOR="#000000">To address the first issue, we propose to extend
+ISI's EXPECT framework with a Method Library, called LIBRA, and associated
+set of tools which will allow a system builder to select from a set of existing
+problem solving methods and incorporate them into a KBS. The key innovations
+in LIBRA will be:</FONT></P>
+
+<P><FONT COLOR="#000000">&middot; Development of a problem solving method
+representation that is tightly integrated with Loom, and hence allows the
+use of powerful tools such Loom's classifier for indexing and retrieving
+methods and ensuring consistency;</FONT></P>
+
+<P><FONT COLOR="#000000">&middot; The representation of methods at multiple
+levels of granularity, which will allow a system builder work at the most
+appropriate level for his needs. The library will include both fine-grained
+methods, which solve small parts of a problem (such as estimating a value
+using a weighted sum), and coarse-grained methods that are &quot;complete&quot;
+problem solvers for some task such as diagnosis.</FONT></P>
+
+<P><FONT COLOR="#000000">&middot; The provision of tools to index methods
+and help system builders select appropriate methods based on the characteristics
+of their application.</FONT></P>
+
+<P><FONT COLOR="#000000">The library will build on other research on the
+structure of problem-solving methods, such as KADS [Schreiber et al. 1993].
+We regard the construction of the problem-solving method library as a community
+effort, and intend to collaborate with the Stanford Prot&eacute;g&eacute;
+group, who intend to use our method representation language in their work.
+As part of this effort, tools will be developed 1) to index the methods
+and browse the method library, 2) to compose coarse-grained problem solving
+modules from fine-grained methods, 3) to help a system builder select appropriate
+methods and modules for a particular problem, 4) to adapt and augment methods,
+and 5) to model modules developed by others and index them in the library.</FONT></P>
+
+<P><HR ALIGN=LEFT></P>
+
+<P><B><FONT COLOR="#000000">SHERPA: A Knowledge Acquisition Mediator </FONT></B></P>
+
+<P><FONT COLOR="#000000">To address the second and third issues, we will
+construct SHERPA, a Knowledge Acquisition Mediator, which will use models
+of the interdependencies between problem solving methods and ontologies
+for systems developed outside of the EXPECT framework to support knowledge
+acquisition and ontology change notification in much the way that EXPECT
+now supports KA for systems developed within the framework. In SHERPA, the
+key innovations will be:</FONT></P>
+
+<P><FONT COLOR="#000000">&middot; The creation of an <I>Interdependency
+Model (IM)</I> to capture the interdependencies that are created when ontologies
+and problem solving methods are brought together to create a knowledge based
+system;</FONT></P>
+
+<P><FONT COLOR="#000000">&middot; The development of tools that use the
+IM to notify system builders about ontology changes that affect their systems
+and knowledge acquisition tools that help users add knowledge to systems,
+even those developed outside of a KA framework; and</FONT></P>
+
+<P><FONT COLOR="#000000">&middot; The development of tools for automatically
+and semi-automatically creating the IM. These tools will use several techniques
+to construct the model. One tool will instrument a KBS and dynamically observe
+how knowledge is used at runtime. Another will statically analyze the explicit
+knowledge structures (such as plan operators) that a system employs. An
+additional tool will work with the ontology browsers to record what parts
+of an ontology are incorporated into a system, and a tool will be available
+for manually constructing a model.</FONT></P>
+
+<P><FONT COLOR="#000000"><BR>
+Based on the experience acquired with the acquisition mediator, we will
+identify specific guidelines for how a knowledge-based system can be designed
+and built so that it is easier to maintain.</FONT></P>
+
+<P><HR ALIGN=LEFT></P>
+
+<P><B><FONT COLOR="#000000">EXCALIBUR: a framework for Knowledge Acquisition</FONT></B></P>
+
+<P><FONT COLOR="#000000">The EXPECT framework, which will provide the basis
+for our work, already incorporates, in prototype form, several key elements
+of the HPKB initiative, including explicit representations for <B>domain
+ontologies and problem solving methods</B> [Swartout and Gil 95, Swartout
+et al. 91], <B>knowledge compilation</B> for efficient performance [Swartout
+et al 91, Neches et al. 85], <B>knowledge acquisition</B> [Gil 96, Gil and
+Paris 94] and <B>explanation</B> tools [Swartout and Moore 94, Swartout
+et al. 91] that make knowledge-based systems more accessible to domain experts.
+The EXPECT framework has been used to create INSPECT, a knowledge based
+system that can critique air campaign plans. INSPECT was part of the DARPA/Rome
+Lab Planning Initiative's Fourth Integrated Feasibility Demo and is being
+incorporated into the JFACC Jumpstart[Valente et al. 96]. EXPECT has been
+used to create other KBSs as well, such as a system for evaluating military
+transportation courses-of-action [Gil and Swartout 94]. As part of this
+effort, we will create a new knowledge acquisition framework, EXCALIBUR,
+which will be based on EXPECT. EXCALIBUR will provide an enhanced method
+language to support the multiple indices needed by LIBRA, and provide an
+enhanced knowledge compiler that will compile EXCALIBUR-based KBSs into
+Lisp, C++, or Java.</FONT></P>
+
+<P><FONT COLOR="#000000"><BR>
+In summary, our work will bring to the HPKB program the perspective of the
+applications that will use the knowledge library. The library will not be
+just an archive of knowledge but instead will be a live repository that
+is in tune with its usage, incorporating information that is relevant to
+applications and actively disseminating updates of its contents. By building
+on an established technology base in EXPECT and on our practical experience
+with transportation planning and air campaign planning, we are in a strong
+position to meet the challenges of HPKB.</FONT></P>
+
+<P><FONT COLOR="#000000"><BR>
+</FONT><HR ALIGN=LEFT SIZE="3"></P>
+
+<P><B><FONT COLOR="#000000" SIZE=+2>C. Technical Rationale, Approach, and
+Plan<BR>
+</FONT></B></P>
+
+<P><FONT COLOR="#000000">The HPKB initiative seeks to develop large, reusable
+libraries of ontologies and problem solving methods which will ease the
+construction and maintenance of large knowledge based systems. A critical
+facet of HPKB is to understand how these ontologies and problem solving
+methods can be brought together to produce applications and to develop tools
+and techniques that support that process.</FONT></P>
+
+<P><FONT COLOR="#000000">When the ontologies and problem solving methods
+are brought together, dependencies will be set up between them. If one problem
+solving method is chosen, certain parts of an ontology will be used, while
+others will not be needed. On the other hand, if a different method is chosen,
+different parts of the ontology will be required. Capturing these interdependencies
+that arise when ontologies and problem solving methods are actually used
+in building a KBS is critical to providing intelligent support for maintenance,
+evolution and knowledge acquisition. Our work focuses on capturing these
+interdependencies and developing tools that use them to support system builders
+and domain experts as they bring together the knowledge in the libraries
+and make it operational in knowledge based applications.</FONT></P>
+
+<P><FONT COLOR="#000000">Consider how this <I>knowledge of how knowledge
+is used</I> could be employed: if the shared ontology a KBS is based on
+changes after the system is built, the system builder should be notified,
+but only of the changes that affect his system. This can only be done if
+one understands how the ontology is used in that particular system. Similarly,
+in knowledge acquisition, when a user adds new knowledge to a KBS, he needs
+to be prompted for any additional knowledge that may be required to make
+use of that new information, but no extraneous knowledge should be requested.
+Both of these capabilities depend on understanding the tie between problem
+solving methods and ontologies: understanding how the problem solving methods
+make use of the ontologies and domain knowledge, and what domain knowledge
+is required to support problem solving.</FONT></P>
+
+<P><FONT COLOR="#000000">The work we propose here will build on our knowledge
+based systems framework, EXPECT, which already provides mechanisms for capturing
+the interdependencies that arise as ontologies and problem solving methods
+are brought together to construct a KBS. Specifically, we seek to:</FONT></P>
+
+<P><FONT COLOR="#000000">&shy; develop <I>LIBRA, </I>a framework for representing
+problem solving methods, and populate it with an extensible library of methods
+and tools for indexing and selecting them</FONT></P>
+
+<P><FONT COLOR="#000000">&shy; develop <I>SHERPA, </I>a knowledge acquisition
+mediator(see </FONT><A HREF="#FTNO">note <FONT SIZE=-1>1 )</FONT></A><FONT
+ COLOR="#000000">, that captures and uses the interdependencies between
+problem solving and ontologies to support ontology evolution and knowledge
+acquisition, even for systems developed outside of the EXPECT framework</FONT></P>
+
+<P><FONT COLOR="#000000">&shy; develop <I>EXCALIBUR</I>, a knowledge acquisition
+framework based on EXPECT which will provide an enhanced method language
+and knowledge compiler,</FONT></P>
+
+<P><FONT COLOR="#000000">&shy; integrate LIBRA and SHERPA with EXCALIBUR,
+and integrate the resulting system with the HPKB integration architecture.</FONT></P>
+
+<P><FONT COLOR="#000000">Our work will extend the EXPECT framework in two
+dimensions, first by supporting system developers during earlier phases
+of the KBS lifecycle, when problem solving methods are being selected, and
+second by supporting knowledge acquisition and ontology update notification
+for a much broader range of systems. The next section gives a brief overview
+of </FONT><A HREF="http://www.isi.edu/expect/expect-homepage.html">EXPECT</A><FONT
+ COLOR="#000000">, which provides the basis for the work proposed here.
+(Click </FONT><A HREF="http://www.isi.edu/expect/expect-movie.m4v" TARGET=
+"_top">here</A><FONT COLOR="#000000"> to see a Quicktime movie about EXPECT.)</FONT></P>
+
+<H2><I><FONT COLOR="#000000"><BR>
+</FONT></I><HR ALIGN=LEFT><I><FONT COLOR="#000000">C.1 EXCALIBUR: Extending
+the EXPECT Framework<BR>
+</FONT></I></H2>
+
+<P><FONT COLOR="#000000">The knowledge acquisition bottleneck is frequently
+cited as one of the major impediments to the wider dissemination and use
+of knowledge based systems. For many knowledge based systems the bottleneck
+persists throughout the maintenance and evolution phases of their lifecycle,
+since much of their knowledge needs to be changed and updated regularly.
+Knowledge acquisition tools, such as </FONT><A HREF="http://www.isi.edu/expect/expect-homepage.html">EXPECT</A><FONT
+ COLOR="#000000"> (shown in </FONT><A HREF="#_Ref374102209">Figure 1</A><FONT
+ COLOR="#000000">) , address these problems by empowering domain experts
+to change and update a knowledge based system without having to understand
+the details of its structure or implementation. To accomplish this, these
+tools use models of the structure of a knowledge based system to guide the
+user/expert through the modification process. These models detail the interdependencies
+within the system, such as how the factual knowledge is used in problem
+solving, and what domain knowledge needs to be present to support the system's
+problem solving approach. When new knowledge is added to a system, the knowledge
+acquisition tools use knowledge of the dependencies to ensure that all the
+required knowledge is added and that it is consistent.</FONT></P>
+
+<P ALIGN=CENTER><B><FONT COLOR="#000000">Figure 1: </FONT></B><A NAME="_Ref374102209"></A><B><FONT
+ COLOR="#000000">The EXPECT KBS Framework<BR>
+<IMG SRC="Image1.gif" WIDTH="534" HEIGHT="312" NATURALSIZEFLAG="0" ALIGN=
+"BOTTOM"> </FONT></B></P>
+
+<P>&nbsp;</P>
+
+<P><FONT COLOR="#000000">In EXPECT, this interdependency model is captured
+during the construction of a knowledge based system. Building a KBS in EXPECT
+is different than in most frameworks. In EXPECT, rather than building specific
+rules or procedures, a system builder starts with a general ontology and
+abstract problem solving strategies (shown on the left in </FONT><A HREF=
+"#_Ref374102209">Figure 1</A><FONT COLOR="#000000">). Problem solving methods
+have a capability description, which is a Loom concept that describes what
+the method can do, and a method body. To create a knowledge based system,
+the automatic method instantiator is given a high-level goal that specifies
+what the KBS is intended to do (e.g. &quot;evaluate COA with respect to
+logistics&quot;). The method instantiator searches the library of problem
+solving methods to find one whose capability matches the goal. That method's
+body is instantiated and may post additional goals that are recursively
+expanded. Using a form of partial evaluation and information in the ontologies
+and domain knowledge, the method instantiator &quot;compiles out&quot; any
+situation independent reasoning that can be done in advance. This process
+is recorded so that at completion the instantiator produces both a domain-specific
+KBS and an interdependency model that records how the problem solving methods
+make use of the domain knowledge and ontologies. EXPECT also provides a
+KBS compiler, which can transform the EXPECT-based KBS into Lisp. This compiler
+has been shown to speed up a system developed within EXPECT by two orders
+of magnitude. In the effort proposed here, we will create EXCALIBUR, a KA
+framework that will extend EXPECT to make it useful for a broader range
+of systems. Specifically, EXCALIBUR will provide:</FONT></P>
+
+<P><FONT COLOR="#000000">&shy; <B>An extended method language. </B>To date,
+EXPECT's method language has been used to create methods for particular
+systems. We now intend to use it for creating a general purpose problem
+solving library, and in addition, the Prot&eacute;g&eacute; group at Stanford
+plans to make use of our method language in their work and collaborate with
+us on the method library. </FONT></P>
+
+<P><FONT COLOR="#000000">&shy; <B>A multi-lingual KBS Compiler. </B>Currently,
+the KBS compiler produces Lisp code. To allow EXPECT to produce knowledge
+based systems that will work in a broader range of environments, we will
+create a version of the compiler that will output </FONT><A HREF="http://www.isi.edu/isd/LOOM/Stella/index.html">STELLA</A></P>
+
+<P><FONT COLOR="#000000">STELLA is a Lisp-like language that has been developed
+at ISI. The key advantage of STELLA is that ISI has developed translators
+that convert STELLA code into readable Lisp <I>or</I> C++ (and Java may
+be added in the future). STELLA is being used in the implementation of PowerLoom
+[MacGregor 1994] and approximately 20,000 lines of the PowerLoom system
+are currently in STELLA. For EXCALIBUR, the advantage of STELLA is that
+users will be able to take advantage of the powerful tools in the EXCALIBUR
+environment and then port the systems they develop to a variety of languages.</FONT></P>
+
+<P><FONT COLOR="#000000">EXCALIBUR will thus provide capabilities that are
+key to the HPKB program, including a representation for problem solving
+knowledge and tools for knowledge compilation and knowledge acquisition.
+The next section describes our proposed work on a problem solving method
+library.</FONT></P>
+
+<H4><I><FONT COLOR="#000000" SIZE=+2><BR>
+</FONT></I><HR ALIGN=LEFT><I><FONT COLOR="#000000" SIZE=+2>C.2 </FONT></I><A
+NAME="_Ref373909282"></A><I><FONT COLOR="#000000" SIZE=+2>LIBRA: A Problem-Solving
+Method Library<BR>
+</FONT></I></H4>
+
+<P><FONT COLOR="#000000">We propose to develop <I>LIBRA</I>, a framework
+for representing and managing a library of problem-solving methods (PSMs).
+The basic concept of LIBRA is to take advantage and, when appropriate, extend
+the EXCALIBUR framework to organize and index a library of problem-solving
+methods. The design of LIBRA is shown in </FONT><A HREF="#_Ref374102370">Figure
+2</A><FONT COLOR="#000000">.</FONT></P>
+
+<P><FONT COLOR="#000000">There are five main issues in designing a library
+of PSMs:</FONT></P>
+
+<P><B><FONT COLOR="#000000">1. How to represent and store methods. </FONT></B><FONT
+ COLOR="#000000">In order to represent the methods, we will take advantage
+of EXPECT (and soon EXCALIBUR), which provides a highly declarative representation
+for the specifying what a method can do. In our representation, a method
+has a <I>capability description </I>that expresses what kinds of goals it
+is able to solve, and a <I>body</I> that expresses how these goals can be
+achieved by posting other goals (i.e., by<I> goal decomposition</I>)<I>.</I>
+Method capability descriptions are represented as verb clauses using a form
+of case grammar. Each capability description has a main verb which specifies
+the main action (e.g. &quot;configure&quot;) and a set of slots which specify
+the parameters involved in the action and how they relate to the action.
+Thus <TT>(evaluate (obj COA) (with-respect-to LOGISTICS)) </TT>could be
+the capability description of a method that could evaluate a course-of-action
+with respect to logistics.</FONT></P>
+
+<P><B><FONT COLOR="#000000">2. How to organize and index the methods stored.</FONT></B><FONT
+ COLOR="#000000"> One of the most difficult problems in designing a library
+of problem-solving methods is how to <B>index</B> them in order to maximize
+reuse. The EXPECT framework provides a natural and powerful way to index
+methods, which is by their <B>capabilities. </B>Method capabilities are
+translated into Loom concepts. It is then possible to use the Loom classifier
+to organize the methods into a hierarchy and match capabilities against
+goals that must be achieved. In order to organize the methods available
+in a consistent manner, we will develop an initial vocabulary, that may
+be extended, for creating capability descriptions. In addition, we need
+to index methods not only by the problems they solve, but by the choices
+and tradeoffs they make in <B>how</B> they solve them. In order to do that,
+we will develop an ontology of <B>method features</B>. Method features represent
+high-level characteristics of the strategies used by a problem solver, for
+example its efficiency, or assumptions it makes with respect to the application
+domain. All these techniques will be integrated and operationalized in an<B>
+</B><I>Indexing Tool </I>(see </FONT><A HREF="#_Ref374102370">Figure 2</A><FONT
+ COLOR="#000000">)<B>.</B></FONT></P>
+
+<P><B><FONT COLOR="#000000">3. How to select a method that is adequate for
+a given problem</FONT></B><FONT COLOR="#000000">. System builders often
+need help in selecting a problem solving method that is appropriate for
+their needs. We will create a knowledge-based <I>Selection Tool.</I> This
+tool will guide the user in finding methods that are appropriate by querying
+him about the nature of the application problem (e.g. &quot;Will input values
+be uncertain?&quot; or &quot;Are there a fixed set of possible answers?&quot;)
+The answers to these questions will be used, in conjunction with the indexing
+mechanisms described above, to guide the system builder to a set of candidate
+methods.</FONT></P>
+
+<P><B><FONT COLOR="#000000">4. How to use the method retrieved. </FONT></B><FONT
+ COLOR="#000000">Once a method is selected from the library, support is
+needed to insert it in the application being built. We envision that methods
+in the library will be usable in two ways: 1) system builders will be able
+to incorporate methods in the library directly into their systems, or 2)
+they will use the methods and their decompositions as a <I>guide</I> for
+code they write themselves. This second approach has been supported in several
+other knowledge modeling frameworks, such as CommonKADS. These frameworks
+represent complex methods by expressing how a goal is decomposed until a
+certain level in which the methods called are taken as primitive (i.e.,
+not decomposable). The EXCALIBUR method language will support representing
+these complex methods as <B>macrocomponents</B>. These are aggregated, complex
+methods that are composed of smaller, primitive methods, but are stored
+and indexed as individual units. Macrocomponents are constructed using the
+<B>Composition Tool.</B></FONT></P>
+
+<P><B><FONT COLOR="#000000">5. How to support legacy systems (developed
+outside the framework). </FONT></B><FONT COLOR="#000000">We will want to
+be able to include externally developed reasoning methods in LIBRA, without
+completely re-implementing them within the framework. As part of SHERPA,
+which we describe below, we will develop a <I>System Modeling Tool </I>that
+will create a model of an external system and index it in the library. This
+model will be expressed at a level of detail which is sufficient to interface
+the external module with other components in the library, but the decomposition
+of the external module may be lacking. By doing this, we are able to index
+these external modules in the same way as we index methods in the library<B>.</B></FONT></P>
+
+<P><FONT COLOR="#000000">In the following sections, we will detail how these
+tools will work and how the library will be filled.</FONT></P>
+
+<P ALIGN=CENTER><B><FONT COLOR="#000000">Figure 2: </FONT></B><A NAME="_Ref374102370"></A><B><FONT
+ COLOR="#000000">The LIBRA Framework </FONT></B><FONT COLOR="#000000"><IMG SRC=
+"Image2.gif" WIDTH="420" HEIGHT="350" NATURALSIZEFLAG="0" ALIGN="BOTTOM"
+BORDER="0"></FONT></P>
+
+<P><B><FONT COLOR="#000000"><BR>
+C.2.1 The Indexing Tool<BR>
+</FONT></B></P>
+
+<P><FONT COLOR="#000000">The Indexing Tool intermediates the storage of
+knowledge components into the library by a human Librarian. To do that,
+it handles all indexing of components. As we discussed above, there are
+two types of indexes:</FONT></P>
+
+<DIR>
+  <LI><FONT COLOR="#000000">We will use a <B>taxonomy of problem-solving
+  goals</B> to index the capabilities of methods. The taxonomy of goals (and
+  thus method capabilities) will be constructed by defining standard vocabularies
+  for actions ( <TT>propose, revise, find</TT> ) and for goal arguments allowed
+  for each action.</FONT>
+</DIR>
+
+<P>&nbsp;</P>
+
+<UL>
+  <LI><FONT COLOR="#000000">We will also index methods by <B>method features</B>.
+  Method features represent high-level characteristics of the strategies
+  used by a problem solver. Some features are related to assumptions that
+  are made with respect to the domain. For example, to use the heuristic
+  classification method it must be possible to enumerate in advance all the
+  possible answers a system might give. Other features are related to tradeoffs
+  made in the way the problem is solved. For example, causal link-based planners
+  are more expensive in terms of memory and less expensive in terms of computation
+  than planners based on the modal truth criterion. We will develop an ontology
+  of method features. We will use the related work on CommonKADS [Aamodt
+  et. al., 1993] as a point of departure.</FONT>
+</UL>
+
+<P><FONT COLOR="#000000">The Indexing Tool will operate as follows. When
+the librarian inserts a new method in the library, he will first create
+and edit the method, as well as its associated domain definitions, using
+EXCALIBUR's standard editing tools. Then, the librarian will use the Indexing
+Tool. It will help the librarian classify the new method using the taxonomy
+of goals and report any problems in the process (such as the use of non-standard
+vocabulary). Then, the Indexing Tool will guide the librarian in selecting
+the appropriate method features from the existing ones, or by creating and
+classifying new features. The librarian will be able to browse other methods
+and their features in order to find adequate features for the new method.
+The Indexing Tool will also be able to suggest possible features by retrieving
+features of existing methods in the library to solve similar goals. When
+the feature selection process is finished, the Indexing Tool stores the
+new method, fully indexed.</FONT></P>
+
+<P><B><FONT COLOR="#000000"><BR>
+C.2.2 The Selection Tool<BR>
+</FONT></B></P>
+
+<P><FONT COLOR="#000000">The Selection Tool will operate as follows. When
+a knowledge engineer wants to find appropriate methods in the library for
+an application, he starts the Selection Tool and defines the goal of the
+application problem. The tool will help by advising the user of the available
+goal actions, and the known arguments for these actions. By selecting these
+elements, the user will define the application goal in terms of the goal
+taxonomy used in the indexing tool, which will enable the Selection Tool
+to retrieve all available methods for this type of goal. For example, the
+user can establish that the application goal is <TT>(diagnose (obj component</TT>
+)), and the tool will retrieve the methods available for diagnosis problems.
+Then, the Selection Tool will dialogue with the user to check which additional
+features of the application can be established to differentiate between
+the available methods and establish if some of the methods are preferable
+(or not adequate). The final result is a list of the methods available in
+the library for the given application problem, plus a list of the features
+of these methods that match (and don't match) the features needed by the
+application. In the example above, the Selection Tool would list available
+methods for diagnosis (e.g., cover-and-differentiate, heuristic classification,
+GDE), their features, and whether these features match the desired features
+for the application as specified by the user.</FONT></P>
+
+<P><B><FONT COLOR="#000000"><BR>
+C.2.3 The Composition Tool<BR>
+</FONT></B></P>
+
+<P><FONT COLOR="#000000">The Composition Tool provides support for defining
+and storing <I>macrocomponents</I> sets of LIBRA components (methods and
+domain knowledge) that together constitute a distinct unity, and are deemed
+to be reusable. For example, we can represent the method <I>propose-and-revise</I>
+as a macrocomponent. It would consist of a number of smaller-grain methods
+(propose, revise, and their decompositions) plus a number of definitions
+of domain concepts which are used by these methods (such as <TT>configuration</TT>
+and <TT>fix</TT> ). When an appropriate macrocomponent can be found for
+the task at hand, a great speed up in system construction can be obtained.
+Even when the methods as assembled are not completely reusable, they may
+be adapted, with perhaps a smaller speed-up.</FONT></P>
+
+<P><FONT COLOR="#000000">The Composition Tool will work as follows. In a
+user-driven mode, a macrocomponent can be constructed by assembling a number
+of components as directed by the user. A structured tool for editing macrocomponents
+allows the user to specify the set of methods and domain definitions, plus
+the connections between them. For example, the user could input the EXCALIBUR
+methods for propose and revise (using EXCALIBUR's method editing interface),
+and create a macrocomponent that bundles the two (plus domain definitions).
+In a semi-automatic mode, the Composition Tool can be asked to save a problem-solver
+(or part of it) that has been created in a given knowledge base into a composite
+component for later reuse. In either mode, the macrocomponent created can
+be indexed with the Indexing Tool.</FONT></P>
+
+<P><B><FONT COLOR="#000000"><BR>
+C.2.4 The System Modeling Tool<BR>
+</FONT></B></P>
+
+<P><FONT COLOR="#000000">The System Modeling Tool will be based on the modeling
+tools developed in SHERPA. It will work as follows. The model itself will
+be represented as a macrocomponent, constructed using the normal facilities
+for editing components (and macrocomponents), and indexed normally (using
+the Indexing Tool). There will be an annotation pointing out that the macrocomponent
+is in fact a model of an external system. The System Modeling Tool will
+enter in action to provide a gateway between the external system and the
+knowledge acquired by EXCALIBUR. Using the tool, a knowledge engineer will
+be able to specify a &quot;wrapper&quot; that specifies how the acquired
+knowledge (represented in Loom) should be translated into the representation
+formalism used by the external system.</FONT></P>
+
+<P><FONT COLOR="#000000"><BR>
+C.2.5 <B>Populating the LIBRA Library<BR>
+</B></FONT></P>
+
+<P><FONT COLOR="#000000">The strategy to populate the contents of LIBRA
+is the following:</FONT></P>
+
+<P><FONT COLOR="#000000">We will work with the PROT&Eacute;G&Eacute; group
+at Stanford University to represent their library of methods (that currently
+contains several methods, for example propose-and-revise) using the EXCALIBUR
+method language, and then store it in LIBRA. We foresee that this process
+will result in extensions to the EXCALIBUR method representation language.</FONT></P>
+
+<P><FONT COLOR="#000000">LIBRA will contain a relatively broad number of
+primitive methods that is, methods that can be directly executed. The set
+of primitive methods will provide three classes of operations. First, it
+will provide access to the basic mechanisms provided by LOOM: classification,
+matching, querying, etc. Second, it will provide a reasonable number of
+mathematic and set manipulation operations. Third, it will provide a canonical
+set of principled, abstract, higher-level inferences such as the primitive
+inferences used in KADS. The idea is to provide a broad enough set that
+the user does not have to program his own primitives, thus achieving a high
+level or portability and system independence.</FONT></P>
+
+<P><FONT COLOR="#000000">We will store in LIBRA well-known problem solving
+methods (such as propose-and-revise or heuristic classification), as well
+as methods that are relevant to the challenge problems and the systems that
+will be developed during the testing of SHERPA and LIBRA. Where appropriate
+methods will be drawn from the CommonKADS Library.</FONT></P>
+
+<P><FONT COLOR="#000000">We will extend LIBRA based on actual needs (of
+our own or others) and import external components using the System Modeling
+Tool as they are needed.</FONT></P>
+
+<H2><I><FONT COLOR="#000000"><BR>
+</FONT></I><HR ALIGN=LEFT><I><FONT COLOR="#000000">C.3 Building SHERPA,
+an Acquisition Mediator<BR>
+</FONT></I></H2>
+
+<P><FONT COLOR="#000000">In the Innovative Claims section, two of the important
+needs we outlined for the HPKB program were:</FONT></P>
+
+<P><B><FONT COLOR="#000000">1. Ontology change notification. </FONT></B><FONT
+ COLOR="#000000">As the large scale shared ontologies are developed and
+used in HPKB, they will change over time. System builders will need to be
+notified of these changes, but in a <I>focused </I>way: since any particular
+system will only use a portion of the overall ontology, builders will only
+want to know about changes that affect their particular systems, not changes
+that are irrelevant. Conversely, when a change is contemplated to the central,
+shared ontology library, the library maintainers will need to understand
+what systems may be impacted by the proposed change.</FONT></P>
+
+<P><B><FONT COLOR="#000000">2. Acquiring factual knowledge from domain experts.
+</FONT></B><FONT COLOR="#000000">In the crisis-oriented systems to be constructed
+in HPKB, we cannot rely on a phalanx of knowledge engineers to do all the
+maintenance and updates. To keep the maintenance problem manageable, we
+need to empower domain experts to make changes to a system's knowledge base
+themselves.</FONT></P>
+
+<P><FONT COLOR="#000000">The key to addressing both of these problems is
+understanding how knowledge is used by a system in problem solving. If one
+understands how a system makes use of an ontology, then when the ontology
+is changed, one can tell whether or not the system will be affected and
+in what parts. Similarly, if one understands what factual knowledge is needed
+to support problem solving by a system and how it is used, that information
+can be used to guide someone in adding new knowledge to a system that is
+similar to knowledge that is already present.</FONT></P>
+
+<P><FONT COLOR="#000000">In EXPECT, this model of how knowledge is used,
+which we call an <I>interdependency model (IM),</I> is automatically constructed
+as a knowledge based system is refined from abstract domain knowledge and
+abstract problem solving strategies. EXPECT already provides many of the
+mechanisms needed to address the issues above. SHERPA, which we propose
+to construct, will be based on EXPECT (and EXCALIBUR) and extend it so that
+these capabilities can be provided not only for EXCALIBUR-based systems
+but for those developed outside the EXCALIBUR framework as well.</FONT></P>
+
+<P><FONT COLOR="#000000">In particular, SHERPA will provide:</FONT></P>
+
+<P><B><FONT COLOR="#000000">Selective notification (to application builders)
+of ontology library updates and the potential consequences of those changes.
+</FONT></B></P>
+
+<P><B><FONT COLOR="#000000">Support queries (by library maintainers) to
+find out what systems will be affected by proposed ontology updates.</FONT></B></P>
+
+<P><B><FONT COLOR="#000000">A knowledge acquisition tool to enable domain
+experts to add knowledge to the declarative knowledge base of a knowledge
+based systems.</FONT></B></P>
+
+<P><B><FONT COLOR="#000000">A set of automatic and semi-automatic tools
+for constructing the Interdependency Model (IM) needed to support the other
+capabilities.</FONT></B></P>
+
+<P><B><FONT COLOR="#000000"><BR>
+C.3.1 Functionality of SHERPA<BR>
+</FONT></B></P>
+
+<P><A HREF="#_Ref374102446">Figure 3</A><FONT COLOR="#000000"> shows how
+we envision SHERPA being used. An instance of the SHERPA mediator is associated
+with each knowledge based system. When updates are made to the shared Ontology
+Library, these updates are transmitted to the SHERPA associated with each
+KBS. An individual SHERPA uses the Interdependency Model (labeled IM in
+the diagram) to determine how the KBS it is associated with uses the ontology
+and then notifies the system builder about those changes that affect that
+particular system.</FONT></P>
+
+<P ALIGN=CENTER><B><FONT COLOR="#000000">Figure 3: </FONT></B><A NAME="_Ref374102446"></A><B><FONT
+ COLOR="#000000">SHERPA: support for KA and Ontology Change Notification</FONT></B><FONT
+ COLOR="#000000"><IMG SRC="Image3.gif" WIDTH="646" HEIGHT="359" NATURALSIZEFLAG=
+"1" ALIGN="BOTTOM"> <BR>
+Consider for example an ontology that describes assets such as aircraft
+and ships. This ontology may be used to build an application for logistics
+transportation planning and another application for generating cost of maintenance
+and repair of those assets. The SHERPAs associated with each application
+would use the respective IMs to detect that the transportation application
+uses information such as the cargo capacity and the speed of aircraft and
+ships, while the cost estimation application uses information such as the
+suppliers of parts that may need replacing and their cost. Based on these
+models, it would know for example that if the &quot;speed&quot; relation
+was further refined into &quot;cruising speed&quot; and &quot;max speed&quot;
+that would affect only the former application, while a change in the flying
+hours required to pilot a certain kind of aircraft would not affect either
+one.</FONT></P>
+
+<P><FONT COLOR="#000000">Changes will be characterized by how much they
+affect the system, along the following lines:</FONT></P>
+
+<P><FONT COLOR="#000000">&shy; <B>Irrelevant:</B> a change in a part of
+the ontology that is not used in the system</FONT></P>
+
+<P><FONT COLOR="#000000">&shy; <B>Relevant but upward-compatible: </B>These
+changes affect parts of the ontology used by the system, but they should
+<I>not cause the KBS to stop working</I>, assuming that the system builder
+followed <I>ontology programming style guidelines</I> that we will develop.
+Examples of such changes could include adding a concept in a part of the
+ontology used by the KBS or adding a new role to a concept.</FONT></P>
+
+<P><FONT COLOR="#000000">&shy; <B>Incompatible:</B> these changes will require
+modifications to the KBS before they can be incorporated. Examples could
+include:</FONT></P>
+
+<UL>
+  <LI><FONT COLOR="#000000">changing the value restrictions on the possible
+  fillers of a slot. The system builder would need to check the places where
+  that slot is accessed to determine that the KBS could handle the new range
+  of values.</FONT>
+  <LI><FONT COLOR="#000000">splitting an existing concept into two new concepts.
+  The system builder would need to examine each of the uses of the original
+  concept in his KBS and decide which of the new concepts should be used
+  in each instance.</FONT>
+</UL>
+
+<P><FONT COLOR="#000000">SHERPA will not only identify the type of change
+involved, but whenever possible it will also use the Interdependency Model
+of the KBS to point out what parts of the KBS are affected by the change
+so that the system builder can rapidly locate problem areas. It will also
+be possible for the maintainers of the Shared Ontology Library to query
+the SHERPAs about these models so that they can evaluate the possible impact
+of a proposed extension to the library in terms of what applications might
+be affected by the change. This capability would enable the library developers
+to estimate the efforts involved in any changes that they plan to introduce
+in the library.</FONT></P>
+
+<P><FONT COLOR="#000000">Using the EXCALIBUR knowledge acquisition tools
+it will also be possible for domain expert/users to modify the declarative
+factual knowledge that a KBS uses. These KA tools (like those in EXPECT)
+will use an Interdependency Model to guide the knowledge acquisition process.
+Because the IM records what knowledge is used, the KA tools can direct the
+user to add just the knowledge that is actually needed in problem solving.
+For example, in the EXPECT-based Transportation COA Evaluator [Gil and Swartout
+1994], the concept &quot;location&quot; had a number of slots for specifying
+information about a location such as its airports, seaports, latitude, longitude,
+and so forth. However, only a few of these slots were actually used by the
+system in problem-solving. When the user added a new location to the system,
+EXPECT's KA facility ensured that the user added all the additional information
+that was actually needed to support problem solving, but did not require
+additional information that was unused. Thus, the user was required to add
+information about the seaports of a location, but information about access
+roads was not required, since the system didn't use it. If the problem solving
+methods used by the KBS changed so that other information was required,
+the IM was updated, and the user was queried for the additional information.</FONT></P>
+
+<P><B><FONT COLOR="#000000"><BR>
+C.3.2 Building the Interdependency Model<BR>
+</FONT></B></P>
+
+<P><FONT COLOR="#000000">The Interdependency Model is the key element in
+supporting ontology change notification and knowledge acquisition. We will
+define a modeling language that will capture the profiles of use of ontology
+library components. This language will be an extension of the one we currently
+use to specify these interdependencies in EXPECT. We will build a number
+of tools that support the construction of an Interdependency Model. These
+tools will provide system builders with a spectrum of choices concerning:</FONT></P>
+
+<P><FONT COLOR="#000000">&shy; automatic vs. manual model creation: how
+much effort does the system builder expend to create the model?</FONT></P>
+
+<P><FONT COLOR="#000000">&shy; completeness: does the model capture all
+the ways in which knowledge is used? (Note that a partial model can still
+be useful.)</FONT></P>
+
+<P><FONT COLOR="#000000">&shy; usage information: models can record just
+the fact that part of an ontology is used, or they can also indicate specifically
+what problem solving methods in the system use the ontology portion.</FONT></P>
+
+<P><A HREF="/Pippin/PageMill_Resources/temporary.html#_Ref374102446">Figure
+3</A> <FONT COLOR="#000000">shows several of the tools we will build to
+support the creation of an IM:</FONT></P>
+
+<P><FONT COLOR="#000000">&shy; <B>Automatic creation of complete Interdependency
+Models. </B>As we have described above, when a KBS is created within the
+EXPECT (or EXCALIBUR) framework, the IM is automatically derived by the
+Method Instantiator as the system is created. The model is complete, because
+the method instantiator explores all possible execution paths through the
+system (much as a compiler does in compiling a program). The model records
+both what parts of the ontology are used and also how they are used by particular
+problem solving methods. This approach creates the most sophisticated IM,
+but it does require that system builders work within the EXPECT/EXCALIBUR
+framework. To make SHERPA's benefits available for a broader range of systems,
+our other tools, described below, will create Interdependency Models for
+systems that were not built with EXPECT or EXCALIBUR.</FONT></P>
+
+<P><FONT COLOR="#000000">&shy; <B>Dynamic IM creation. </B>Another approach
+to creating an IM is to record the accesses that are made at runtime to
+the knowledge base in a KBS. Over time, a model can be built up reflecting
+what concepts are used by the KBS and which slots on the concepts are used.
+We will create tools that can be used to instrument commonly occurring knowledge
+representation systems such as Loom, PowerLoom, and the Generic Frame Protocol
+and dynamically record how knowledge is used. In PowerLoom, for example,
+we will use PowerLoom's demon mechanism. Demons will be associated with
+slots and concepts, and will fire when the concepts or slots are accessed.
+This information will then be recorded in the IM. Using this approach, model
+creation is automatic. The model is incomplete because only the dependencies
+that are actually used during runtime will be recorded. The model will,
+however, become more complete after a number of runs are monitored. This
+approach will also provide us with frequency information which we can use
+to prioritize changes that need to be made to a system when the ontology
+changes. That is, when the ontology changes it will be more important to
+resolve a problem with a concept that is used on every run than one that
+is only used occasionally. This approach will give SHERPA the information
+needed to set those priorities.</FONT></P>
+
+<P><FONT COLOR="#000000">&shy; <B>IM creation via static analysis. </B>Another
+approach to creating an IM is to analyze the declarative structures used
+by a system in problem solving. For example, the plan operators in a planning
+framework such as SIPE can be analyzed to determine what knowledge is used
+within the plan operators. In this approach, model construction is automatic
+but it may not be complete, because only the declarative knowledge structures
+in a system are analyzed. If some of the accesses to concepts are imbedded
+within procedural code this technique will not find them. Also, the analysis
+tool will only work for systems based on a particular framework, such as
+SIPE-based planners. Thus, it will be necessary to create several analysis
+tools. Based on the makeup of the HPKB program, and in consultation with
+DARPA, we will select several such frameworks and create analysis tools
+for them.</FONT></P>
+
+<P><FONT COLOR="#000000">&shy; <B>Translation-based IM creation. </B>Also
+not shown in </FONT><A HREF="/Pippin/PageMill_Resources/temporary.html#_Ref374102446">Figure
+3</A><FONT COLOR="#000000">, we will create a tool that will work with the
+ontology translators associated with ontology development tools such as
+Ontosaurus or Ontolingua. When a system builder translates a part of an
+ontology into some implementation language such as C++ or Java for incorporation
+into a KBS, the tool will record in the IM which parts of the ontology were
+translated. This approach to IM creation requires little extra effort on
+the part of the system builder. However, because this approach builds the
+IM based on what is translated rather than how it is actually used, detailed
+information about knowledge use will be missing from this model, and using
+such a model SHERPA may sometimes notify a system builder about ontology
+changes that in fact do not affect his system.</FONT></P>
+
+<P><FONT COLOR="#000000">&shy; <B>Manual IM creation. </B>We will also create
+a tool that will allow system builders to augment models created with one
+of the other tools manually, or create a model from scratch.</FONT></P>
+
+<P><FONT COLOR="#000000">We have outlined above a broad range of techniques
+for creating an Interdependency Model. Each technique has tradeoffs and
+benefits. For example, models created using EXCALIBUR are guaranteed to
+be complete, but the Dynamic IM Tool may be used with legacy systems. System
+builders will not be limited to using a single technique. Each is compatible
+with the others, and by using multiple approaches it will be possible to
+converge rapidly on a robust and accurate model to support both ontology
+change notification and knowledge acquisition.</FONT></P>
+
+<H2>&nbsp;</H2>
+
+<P><FONT COLOR="#000000">The tools we will develop will support system builders
+and domain experts in knowledge acquisition, ontology update, and problem
+solving method selection and use. Such support is critical to realize the
+goals of HPKB.</FONT></P>
+
+<P><HR ALIGN=LEFT SIZE="3"><B><FONT COLOR="#000000" SIZE=+2><BR>
+Bibliography<BR>
+</FONT></B><FONT COLOR="#000000">[Aamodt et. al., 1993] Aamodt, A. et. al.
+Task features and their use in CommonKADS. Technical report KADS-II/T1.5VUB/TR/014/1.0,
+Free University of Brussels, 1993.</FONT></P>
+
+<P><FONT COLOR="#000000">[Arens et al. 1996] Arens, Y., Knoblock, C., and
+Shen, w. Query Reformulation for Dynamic Information Integration. In Journal
+of Intelligent Information Systems, 1996.</FONT></P>
+
+<P><FONT COLOR="#000000">[Bennett 1985] Bennett, J. S. ROGET: A knowledge-based
+system for acquiring the conceptual structure of a diagnostic expert system.
+In Journal of Automated Reasoning, 1, pp. 49-74, 1985.</FONT></P>
+
+<P><FONT COLOR="#000000">[Breuker and van de Velde 1994] Breuker, J. and
+van de Velde, W. CommonKADS Library for Expertise Modelling. IOS Press,
+Amsterdam, 1994.</FONT></P>
+
+<P><FONT COLOR="#000000">[Chandrasekaran, 1986] B. Chandrasekaran. Generic
+tasks in knowledge-based reasoning. IEEE Expert , 1(3):23-30, 1986.</FONT></P>
+
+<P><FONT COLOR="#000000">[Clancey 1985] Clancey, W.J., Heuristic classification.
+Artificial Intelligence, 27(3):289-350, 1985.</FONT></P>
+
+<P><FONT COLOR="#000000">[Eshelman 1988] Eshelman, L. MOLE: A knowledge-acquisition
+system for cover-and-differentiate systems. In S. Marcus (Ed.), Automating
+Knowledge Acquisition for Expert Systems, Kluwer Academic Publishers, Boston,
+1988.</FONT></P>
+
+<P><FONT COLOR="#000000">[Gil et al. 1994] Gil, Y., Hoffman, M., and Tate,
+A. Domain-specific criteria to direct and evaluate planning systems. In
+ARPA/Rome Laboratory Knowledge-based Planning and Scheduling Initiative
+Workshop Proceedings, pp. 433-444, Tucson, Arizona, February 1994.</FONT></P>
+
+<P><FONT COLOR="#000000">[Gil and Paris 1994] Gil, Y., and Paris, C.L. Towards
+Method-Independent Knowledge Acquisition. In Knowledge Acquisition, 6 (2),
+pp. 163-178, 1994.</FONT></P>
+
+<P><FONT COLOR="#000000">[Gil and Swartout 1994] Gil, Y. and Swartout, W.
+EXPECT: a Reflective Architecture for Knowledge Acquisition. In ARPA/Rome
+Laboratory Knowledge-based Planning and Scheduling Initiative Workshop Proceedings,
+pp. 433-444, Tucson, Arizona, February 1994.</FONT></P>
+
+<P><FONT COLOR="#000000">[Gil 1994] Gil, Y. Knowledge Refinement in a Reflective
+Architecture. In Proceedings of the National Conference on Artificial Intelligence
+(AAAI-94), 1994.</FONT></P>
+
+<P><FONT COLOR="#000000">[Gil and Melz 1996] Gil, Y. and Melz, E. Explicit
+Representations of Problem-Solving Methods for Knowledge Acquisition. In
+Proceedings of the National Conference on Artificial Intelligence (AAAI-96),
+1996.</FONT></P>
+
+<P><FONT COLOR="#000000">[Klinker et al. 1991] Klinker, G., Bhola, C., Dallemagne,
+G., Marques, D., and McDermott, J. Usable and reusable programming constructs,
+In Knowledge Acquisition, 3 (2), pp. 117-135, 1991.</FONT></P>
+
+<P><FONT COLOR="#000000">[Langley and Simon 1995]. Langley, P. and Simon,
+H. A. Applications of Machine Learning and Rule Induction. Communications
+of the ACM, 38(11) 1995.</FONT></P>
+
+<P><FONT COLOR="#000000">[MacGregor 1988] MacGregor, R. A Deductive Pattern
+Matcher. In Proceedings of the Seventh National Conference on Artificial
+Intelligence (AAAI-88). St. Paul, MN, August 1988.</FONT></P>
+
+<P><FONT COLOR="#000000">[MacGregor 1990] MacGregor, R. The Evolving Technology
+of Classification-Based Knowledge Representation Systems. In John Sowa (ed.),
+Principles of Semantic Networks: Explorations in the Representation of Knowledge.
+Morgan Kaufmann, 1990.</FONT></P>
+
+<P><FONT COLOR="#000000">[MacGregor 1994] MacGregor, R. A Description Classifier
+for the Predicate Calculus. In Proceedings of the Twelfth National Conference
+on Artificial Intelligence, (AAAI-94), pp. 213-220, 1994.</FONT></P>
+
+<P><FONT COLOR="#000000">[Marcus and McDermott 1989] Marcus, S., and McDermott,
+J. SALT: A knowledge acquisition language for propose-and-revise systems.
+In Artificial Intelligence 39 (1), pp. 1-37, 1989.</FONT></P>
+
+<P><FONT COLOR="#000000">[McDermott 1988] McDermott, J, Preliminary steps
+toward a taxonomy of problem solving methods. In Automating Knowledge-acquisition
+for expert systems S.Marcus (ed), Kluwer Academic Publishing, 1988.</FONT></P>
+
+<P><FONT COLOR="#000000">[Mitchell et al. 1983]. Mitchell, T., Utgoff, P.,
+and Banerji, R. Learning by Experimentation: Acquiring and Refining Problem-Solving
+Heuristics. In &quot;Machine Learning: An Artificial Intelligence Approach,
+Volume I, R. Michalski, J. Carbonell, and T. Mitchell (Eds), Tioga, 1983.</FONT></P>
+
+<P><FONT COLOR="#000000">[Moore and Paris 1993] Moore, J. D., and Paris,
+C. L. Planning text for advisory dialogues: Capturing intentional and rhetorical
+information. In Computational Linguistics, 19 (4), 1993.</FONT></P>
+
+<P><FONT COLOR="#000000">[Moore and Swartout 1989] Moore, J. D., and W.
+R. Swartout. A reactive approach to explanations. In Proceedings of the
+Eleventh International Conference on Artificial Intelligence, pp. 1505-1510,
+Detroit, Michigan, August 1989.</FONT></P>
+
+<P><FONT COLOR="#000000">[Moore and Swartout 1990] Moore, J. D., and Swartout,
+W. R. Pointing: A way towards explanation dialogue. In Proceedings of the
+Eighth National Conference on Artificial Intelligence, pp. 457-464, Boston,
+Massachusetts, August 1990.</FONT></P>
+
+<P><FONT COLOR="#000000">[Musen 1992] Musen, M. A. Overcoming the limitations
+of role-limiting methods. In Knowledge Acquisition 4 (2), pp. 165-170, 1992.</FONT></P>
+
+<P><FONT COLOR="#000000">[Musen and Tu 1993] Musen, M. A., and Tu, S. W.
+Problem-solving models for generation of task-specific knowledge acquisition
+tools. In J. Cuena (Ed.), Knowledge-Oriented Software Design, Elsevier,
+Amsterdam, 1993.</FONT></P>
+
+<P><FONT COLOR="#000000">[Porter et al. 1990]. Porter, B., Bareiss, R.,
+and Holte, R. Concept Learning and Heuristic Classification in Weak-Theory
+Domains. Artificial Intelligence 45, pp229-263, 1990.</FONT></P>
+
+<P><FONT COLOR="#000000">[Schreiber et al. 1993] Schreiber, A., Wielinga,
+B. and Breuker, J. KADS: A Principled Approach to Knowledge-Based Development.
+Academic Press, London, 1993.</FONT></P>
+
+<P><FONT COLOR="#000000">[Swartout and Gil 1995] Swartout, W.R. and Gil,
+Y. Expect: Explicit Representations for Flexible Acquisition in Proceedings
+of the Ninth Knowledge Acquisition for Knowledge-Based Systems Workshop
+(KAW'95) Banff, Canada, February 26-March 3, 1995</FONT></P>
+
+<P><FONT COLOR="#000000">[Swartout and Moore 1993] Swartout, W. R., and
+Moore, J. D. Explanation in second-generation expert systems. In J.-M. David,
+J.-P. Krivine, and R. Simmons (Eds.), Second Generation Expert Systems,
+Springer-Verlag, 1993.</FONT></P>
+
+<P><FONT COLOR="#000000">[Swartout et al. 1991] Swartout, W.R., Paris, C.L.,
+and Moore, J.D. Design for Explainable Expert Systems, In IEEE Expert 6
+(3), pp. 5864, June 1991.</FONT></P>
+
+<P><FONT COLOR="#000000">[Valente et al. 1994] Valente, A., van de Velde,
+W. and Breuker, J. CommonKADS Library for Expertise Modelling. In CommonKADS
+Expertise Modeling Library, Chapter 3, pages 31-56, J. Breuker and W. van
+de Velde, editors. IOS Press, Amsterdam, 1994.</FONT></P>
+
+<P><FONT COLOR="#000000">[Valente et al. 1996] Valente, A., Gil, Y. and
+Swartout, W. R. INSPECT: an Intelligent System for Air Campaign Plan Evaluation
+based on EXPECT. ISI Technical memo, June 1996. Available on the Web at:
+the URL: <TT>http://www.isi.edu/~valente/inspect/inspect.html.</TT></FONT></P>
+
+<P><FONT COLOR="#000000">[Wilkins 1988] Wilkins, D. E. Practical Planning:
+Extending the Classical AI Planning Paradigm, Morgan Kaufmann, 1988.</FONT></P>
+
+<P><FONT COLOR="#000000"><BR>
+<BR>
+<BR>
+<BR>
+</FONT></P>
+
+<P ALIGN=CENTER><B><FONT COLOR="#000000" SIZE=+2><BR>
+</FONT></B></P>
+
+<P ALIGN=CENTER><TT><FONT COLOR="#000000"><BR>
+<HR></FONT></TT><A NAME="FTNO"></A><TT><FONT COLOR="#000000">1 The name
+reflects a metaphor with an information mediator (e.g., SIMS [Arens et al.
+1996]). An information mediator gathers infomation for an application from
+many sources (e.g., databases). An acquisition mediator routes information
+to many applications from one source (i.e., a large comprehensive knowledge
+base).</FONT></TT>
+</BODY>
+</HTML>

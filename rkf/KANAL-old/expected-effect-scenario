@@ -1,0 +1,181 @@
+(load-kb "virusinvade.km")
+(trace do-action)
+
+(km)
+
+(showme VirusInvadesCell)
+
+;; *************************************************
+;; 1. add a constraint 
+;; *************************************************
+
+;;; User asks whether the location of virus is inside the cell
+;;; an additional slot for VirusInvadesCell definition
+;;	 checkedValue: value to be checked
+;;	 expectedValue: expected value
+
+(every VirusInvadesCell has 
+      (expected-effect ((a Affect with
+        (affectedThing ((Self agent)))
+        (affectedSlot (location)) 
+        (checkedValue ((the location of ((Self agent)))))	
+        (expectedValue ((the inside of (the contains of ((Self patient))))))))))
+
+(checkedValue has 
+   (instance-of (Slot))
+   (domain (Affect))
+   (range (Thing))
+   (cardinality (N-to-1)))
+
+(expectedValue has 
+   (instance-of (Slot))
+   (domain (Affect))
+   (range (Thing))
+   (cardinality (N-to-1)))
+
+(showme VirusInvadesCell)
+
+;; affected slot of any Endocytosis is 'location'
+KM> (the affectedSlot of (the affect of (a Endocytosis)))
+(contains location)
+
+;; *************************************************
+;; 2. simulation
+;; *************************************************
+
+    (*start-situation has
+	(instance-of (Situation)))
+
+    (*dna has (instance-of (Dna)))
+    (*somewhere has 
+	    (instance-of (Space))
+	    (outside-of (*cell))
+	    (inside-of ((mustnt-be-a Vesicle))))
+
+    (*virus has 
+	(instance-of (Virus))
+	(parts (*dna)))
+
+    (*cell has (instance-of (Cell)))
+
+    (a VirusInvadesCell with
+  	 (agent (*virus))
+	 (patient (*cell)))
+
+    (in-situation *start-situation)
+
+    (*virus has 
+	(contains ((the Dna parts of Self)))
+        (location (*somewhere)))
+
+(forall (the actions of (thelast VirusInvadesCell)) (do-and-next It))
+
+ 0: (do-action |_Endocytosis19| :change-to-next-situation t)
+ 0: returned |_Situation26|
+ 0: (do-action |_Fuse22| :change-to-next-situation t)
+ 0: returned |_Situation47|
+ 0: (do-action |_Convey20| :change-to-next-situation t)
+ 0: returned |_Situation50|
+ 0: (do-action |_Degrade23| :change-to-next-situation t)
+ 0: returned |_Situation54|
+ 0: (do-action |_Exit24| :change-to-next-situation t)
+ 0: returned |_Situation55|
+ 0: (do-action |_Release21| :change-to-next-situation t)
+ 0: returned |_Situation63|
+ 0: (do-action |_Deliver14| :change-to-next-situation t)
+ 0: returned |_Situation64|
+ 0: (do-action |_VirusInvadesCell7| :change-to-next-situation t)
+ 0: returned |_Situation65|
+(_Situation26 _Situation47 _Situation50 _Situation54 _Situation55 _Situation63
+ _Situation64 _Situation65)
+
+;; *************************************************
+;; 3. check effect
+;; *************************************************
+
+;; what is the expected-effect
+[_Situation65] KM> (the expected-effect of (thelast VirusInvadesCell))
+(_Affect66)
+
+;; 
+[_Situation65] KM> (showme _Affect66)
+(_Affect66 has 
+  (affectedThing ((_VirusInvadesCell7 agent)))
+  (affectedSlot (location))
+  (checkedValue ((the location of ((_VirusInvadesCell7 agent)))))
+  (expectedValue ((the inside of (the contains of ((_VirusInvadesCell7 patient))))))
+  (instance-of (Affect))
+  (expected-effect-of (_VirusInvadesCell7)))
+
+[_Situation65] KM> (the affectedSlot of (the expected-effect of (thelast VirusInvadesCell)))
+(location)
+
+;; the location of the Virus (checkedValue) is the same as the expected value 
+[_Situation65] KM> (the checkedValue of (the expected-effect of (thelast VirusInvadesCell)))
+(_Space17)
+[_Situation65] KM> (the expectedValue of (the expected-effect of (thelast VirusInvadesCell)))
+(_Space17)
+
+
+;;; what sub-action of VirusInvadesCell caused location change?
+;; -> find all the sub-actions of thelast VirusInvadesCell where it affected
+;;    the achieved result 
+[_Situation65] KM> (forall (the affect of 
+			 (the actions of (thelast VirusInvadesCell))) where (t)
+ (forall2 (the expected-effect of (thelast VirusInvadesCell))
+ where (((the checkedValue of It2) = (the expectedValue of It2)) and
+        ((the affectedSlot of It) = (the affectedSlot of It2)) and 
+((the affectedThing of It) = (the affectedThing of It2)))
+(the affect-of of It)))
+
+(_Endocytosis19 _Convey20)
+
+;;; what locations have the virus been at?
+_Situation65] KM> (forall (the all-instances of Situation) 
+	       where (t) 
+	       (in-situation It (the location of (the Virus))))
+(_Space17 _Space31 *somewhere)
+
+;;; what actions can affect location
+;; find all the subclasses of Change which can affect 'location' slot
+KM> (forall (the subclasses of Change)
+  where ((the affectedSlot of (the affect of (a It))) = location)
+ (:seq It (the subclasses of It)))
+
+((:seq Move Convey Exit Enter PassThroughSeparator))
+
+;; find all the subclasses of Change which can affect the achieved slot (location)
+[_Situation65] KM> (forall (the subclasses of Change)
+(forall2 (the expected-effect of (thelast VirusInvadesCell))
+ where (((the checkedValue of It2) = (the expectedValue of It2)) and
+((the affectedSlot of (the affect of (a It))) = (the affectedSlot of It2)))
+(:seq It (the subclasses of It))))
+
+((:seq Move Convey Exit Enter PassThroughSeparator))
+
+;; The real expression should be:
+;; find all the subclasses of Change which can affect the unachieved slot
+(forall (the subclasses of Change)
+(forall2 (the expected-effect of (thelast VirusInvadesCell))
+ where (((the checkedValue of It2) /= (the expectedValue of It2)) and
+((the affectedSlot of (the affect of (a It))) = (the affectedSlot of It2)))
+(:seq It (the subclasses of It))))
+NIL
+
+;; Since the location change was achieved, this returns nothing (correctly)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; another way: specify post condition using 'after-situation' slot
+;;
+;; 
+KM> (in-situation
+      (the1 of (the after-situation of (thelast VirusInvadesCell)))
+      ((the location of (the agent of (thelast VirusInvadesCell))) = (the inside of
+       (the contains of (the patient of (thelast VirusInvadesCell))))))
+(t)
+
+;;; what actions can affect location
+KM> (forall (the subclasses of Change) where ((the affectedSlot of (the affect of (a It))) = location) (:seq It (the subclasses of It)))
+
+((:seq Move Convey Exit Enter PassThroughSeparator))

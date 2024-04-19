@@ -1,0 +1,327 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<BODY BGCOLOR="FFFFFF">
+<TITLE>4 Some Issues and Design Decisions</TITLE>
+<META NAME="description" CONTENT="4 Some Issues and Design Decisions">
+<META NAME="keywords" CONTENT="measures-of-merit">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="measures-of-merit.css">
+</HEAD>
+<BODY LANG="EN">
+ <H1><A NAME="SECTION00040000000000000000">4 Some Issues and Design Decisions</A></H1>
+<P>
+<A NAME="issues">&#160;</A>
+<P>
+Several issues were raised by the analysis of the set of examples of
+measures of effect available to the author. Because their solution
+implied design decisions in the representation which should be
+documented, in the following sections we will present these issues and
+discuss how they were solved.
+<P>
+<H2><A NAME="SECTION00041000000000000000">4.1 MOEs about forcing enemy actions</A></H2>
+<P>
+In the examples of MOEs we have available, one rather different type
+of MOE is the one that states that the enemy is forced to do something
+-- generally use a back-up or secondary system. The following are the
+examples found in the IFD-4 scenario plan:
+<P>
+
+<PRE>Force use of more vulnerable back-up modes of comm
+Force erroneous decision due to mis-information
+Force use of back-up information transfer systems
+Force use of more vulnerable transmission systems
+Force collections via back-up modes
+Force use of back-up modes of comm
+Force use of back-up comm nodes</PRE>
+
+<P>
+While this looks like a reasonable way to measure the effectiveness of
+an objective/task, several questions remain in our view.  These MOEs
+can have (at least) two meanings. Let's take the first MOE in the list
+above as an example. The first meaning for it is that the original
+(non back-up) systems were enough destroyed that cannot be used
+anymore.  The second meaning is that the back-up systems were used --
+perhaps only once.  (A third meaning is: both of the above). The
+difference may be crucial from the point of view of INTEL. For
+example, it may be that the backup systems are being used <EM>
+  together</EM> with (part of) the main systems. A situation like this
+looks like it would fit the MOE, but is it really what is meant? Or is
+it meant, for example, that back-up systems are being used
+exclusively, or perhaps only more than main systems?
+<P>
+<H4><A NAME="SECTION00041010000000000000">Decision</A></H4>
+<P>
+It was decided that these objectives are going to be reformulated to
+fit in to the present representation, because they are imprecise. The
+design decision was not to change the representation in order to
+accommodate a new format of MOEs.
+<P>
+Some of the MOEs of this type will be made into objectives, for
+example the MOE ``Force erroneous decision due to mis-information''.
+Others will probably be expressed in terms of a reduction in the
+number of main (non back-up) equipment/systems/modes and/or the number
+of back-up equipment/systems/nodes used as an effect of the objective.
+<P>
+<H2><A NAME="SECTION00042000000000000000">4.2 Measures of Effect that Specify Other Objectives</A></H2>
+<P>
+MOEs may contain what looks like the specification of another
+objective or task subordinated to the original objective. The example
+from IFD-4 is:
+<P>
+<PRE>Objective: Support GCC scheme of maneuver
+      MOE: Prep the Battlefield for Future Friendly Operations</PRE>
+<P>
+This case seems to be relatively clear cut; we don't see how this can
+be considered as measuring whether GCC's scheme of maneuver was
+supported, but rather saying what tasks (lower-level objectives) are
+to be done to accomplish it. The other MOE for this objective (Use CAS
+to Enable Friendly Ground Scheme of Maneuver) seems to support this
+interpretation, since it also looks a bit like a task by itself --
+notice the ``enable'' verb used. In this case, CAS may be in reality a
+means not to accomplish the air objective ``Support GCC scheme of
+maneuver'', but the implicit air task ``Enable Friendly Ground Scheme
+of Maneuver''.
+<P>
+<H4><A NAME="SECTION00042010000000000000">Solution</A></H4>
+<P>
+This MOE is indeed an objective. The design decision is not to alter
+the representation to accommodate this case.
+<P>
+Remaining related questions:
+<P>
+<UL><LI> If we look as the second MOE as also hiding an objective, this
+  objective would be ``Enable Friendly Ground Scheme of Maneuver''.
+  How is that different from the parent ``Support GCC scheme of
+  maneuver''?<LI> Again the problem came up in an objective nominated by another
+  component command.
+</UL><H2><A NAME="SECTION00043000000000000000">4.3 Verbs used in MOEs</A></H2>
+<P>
+In the list of example, five verbs were used: <EM>reduce, degrade,
+  decrease, limit</EM> and <EM>delay</EM>. While <EM>delay</EM> has clearly a
+different meaning, the other four verbs seem to be used in the same
+sense, which is to lower the value of something. Further, <EM>limit</EM>
+was used in only one MOE: ``Limit ability for troop movement on
+primary LOCs by 35%''. Are these verbs really different when used in
+MOEs? Would it be a viable option to simplify the grammar to adopt
+only one or a few of them?
+<P>
+<H4><A NAME="SECTION00043010000000000000">Solution</A></H4>
+<P>
+It was decided to limit the set of verbs to two: <EM>reduce</EM> and <EM>
+  degrade</EM>. Reduce is usually used in connection with a capability,
+while degrade usually refers to an action. However, this usage will
+not be enforced by the representation. The two remaining verbs are
+eliminated, and their appearances are going to be substituted by <EM>
+  reduce</EM>. The design decision is not to include the two verbs (<EM>
+  limit</EM> and <EM>decrease</EM>) in the grammar.
+<P>
+<H2><A NAME="SECTION00044000000000000000">4.4 Break the MOE in two parts</A></H2>
+<P>
+Current MOEs are written as a single sentence. However, one of the
+consequences is that the quantification may be scattered around the
+phrase, e.g., ``<EM>Degrade</EM> NCA Communications links <EM>by
+  50%</EM>''. It would be better to keep these elements together, making
+the MOE less a sentence and more a structure. For instance, the MOE
+above would be written ``NCA Communications links -- Degrade by
+50%''.
+<P>
+<H4><A NAME="SECTION00044010000000000000">Solution</A></H4>
+<P>
+It was decided to break in two parts instead of keeping it as a single
+English sentence. This format has already been used in exercises by
+Major Alred, and it seems to yield good results.
+<P>
+<H2><A NAME="SECTION00045000000000000000">4.5 The tense of the verbs</A></H2>
+<P>
+In current MOEs, the verbs are usually in the present tense. This is
+somewhat a consequence of the fact that they are written before the
+campaign, when the objectives are going to be achieved in the future.
+However, particularly when putting the verb in the end as in the
+format proposed, it may be better to use a language that describes a
+<EM>state</EM> instead of a <EM>goal</EM>.  For instance, to write
+``decrease by 30%'' has a strong flavor of an objective, while
+``decreased by 30%'' indicates the effect of achieving the objective,
+that is, a state in which the objective has been achieved. Further,
+the fact that verbs (degrade, limit, etc.) are being use can raise the
+suspicion that the MOEs that use them are in fact objectives in
+disguise. However, we believe that they are just a different way to
+phrase the effect. For example, one can read ``Degrade NCA
+Communications links by 50%'' as ``NCA Communications links degraded
+by 50%''.
+<P>
+<H4><A NAME="SECTION00045010000000000000">Solution</A></H4>
+<P>
+The form adopted for the verbs was the past tense. It helps avoiding
+the confusion of objectives and MOEs (which can be caused if they use
+similar sentence forms with verbs in the imperative form).
+<P>
+<H2><A NAME="SECTION00046000000000000000">4.6 No, None, Zero</A></H2>
+<P>
+Frequently, ``No'' is used in the examples of MOE available to mean
+the value zero in some countable quantification. For example. ``No
+loss of Allied Aircraft to Libyan surface or air forces'' means that
+the event ``loss of Allied Aircraft to Libyan surface or air''
+(measurable element) should occur zero times (quantification). Is this
+the correct interpretation?
+<P>
+<H4><A NAME="SECTION00046010000000000000">Solution</A></H4>
+<P>
+It was adopted to allow either ``Zero'' or ``None'' as a possible
+value. ``No'' was not used because of it does not read well in the
+structure adopted for the MOE (two parts instead of one sentence).
+<P>
+<H2><A NAME="SECTION00047000000000000000">4.7 Specifying Means in Measures of Effect</A></H2>
+<P>
+We have found that several MOEs contain a direct or indirect
+specification of the means the planner wishes to use in accomplishing
+the objective. Indeed, sometimes the MOE contains a disguised form of
+such specification, with no actual measurement of when we can
+consider the objective achieved. Consider the following examples,
+from the plan used in the IFD-4:
+<P>
+<PRE>Use PSYOPS techniques
+Use CAS to Enable Friendly Ground Scheme of Maneuver
+Exploit SOF Intelligence
+Exploit SOF Targeting Inputs
+Use of CAS to enable ground scheme of maneuver</PRE>
+<P>
+These MOEs do not define a way to measure the accomplishment or
+progress in the execution of the objective. Instead, they define an
+additional piece of the objective, which is the definition of <EM>
+  how</EM> -- that is, by which means -- is the objective to be
+accomplished. This information currently has no adequate place to go,
+which is likely to be the reason why they ended up in the measures of
+effect.
+<P>
+It is interesting to notice that the examples above refer to either a
+special asset or method (PSYOPS, Special forces) or a type of
+operation that is seen as a whole to be an asset by itself (combat air
+support, CAS). The examples do not refer to the ``usual'' assets, like
+aircraft or traditional weapons. We suppose this occurs because it is
+always assumed the objectives (which in the case are all force
+application objectives) will employ aircraft and related weapons. The
+need to specify that, say, an objective is to be accomplished using
+PSYOPS seems to appear because the assumed default was not valid.
+<P>
+<H4><A NAME="SECTION00047010000000000000">Solution</A></H4>
+<P>
+We will add a new slot to the specification of air campaign objectives
+(NOT to the measures of merit). This slot, called SPECIAL
+MEANS,<A NAME="tex2html6" HREF="footnode.html#107"><IMG  ALIGN=BOTTOM ALT="gif" SRC="http://www.isi.edu/~valente/images/icons/foot_motif.gif"></A>
+is optional, and filled by one or more of a small number of fillers
+that represent non-traditional force application means.  Known fillers
+are: <I>SOF</I> (which is the same as <I>special forces</I> or <I>
+  special operation forces</I>), <I>SOF Intelligence</I>, <I>SOF
+  Targeting Inputs</I>, <I>CAS</I>, and <I>PSYOPS</I>.
+<P>
+<H2><A NAME="SECTION00048000000000000000">4.8 Measures of Effect or Efficiency?</A></H2>
+<P>
+Consider the following objective and its measure of effect:
+<P>
+<PRE>Objective: Destroy fleeting targets
+      MOE: Strike Targets Designated by unconventional forces within 12 hours</PRE>
+<P>
+The first question is, is the objective above accomplished if its MOE
+is true (that is, if targets are indeed struck within 12 hours)? Or is
+this just a measure of the <EM>efficiency</EM> with which the objective
+is accomplished? In one case the measure of merit determine what it
+means for the objective to be accomplished. In the other, it
+determines how well (how fast, how precisely, etc.) it should be
+accomplished.
+<P>
+<H4><A NAME="SECTION00048010000000000000">Solution</A></H4>
+<P>
+It is important to represent measures of efficiency, but these are
+really different from MOEs. The example is more a guidance than a
+measure of effect or effectiveness, and should be restated or
+eliminated. A possible rephrasing in a genuine MOE could be
+``Nominated targets -- Reduce by 90%''.
+<P>
+In a related issue, many of these examples come from objectives that
+were nominated from other forces, and about which not much is known at
+planning time. Checkmate proposed that a good practice with respect to
+these objectives is to either find the missing information and define
+specific tasks for them, or not to decompose them altogether. An
+attempt to decompose these objectives into tasks without proper
+detailed knowledge can lead to problems such as the ones we pointed
+out in the measures of effect.
+<P>
+<H2><A NAME="SECTION00049000000000000000">4.9 MOEs that are states</A></H2>
+<P>
+Consider the following MOEs:
+<P>
+
+<PRE>Mediterranean remain free for commercial shipping
+Freedom of air movement over the battlespace</PRE>
+
+<P>
+These MOEs represent states directly, that is, they mean that the
+effect of the objective is that (taking the second MOE as an example)
+there is freedom of movement in the battlespace. The problem with
+these definitions is that states are not measured very easily, at
+least not directly. For instance, what exactly is meant by ``freedom''
+in the second MOE? Is it enough that there is no engagement, or is it
+necessary that these engagements do not represent a real threat (e.g.,
+because they are not coordinated)? It seems that while the state
+``freedom of air movement'' accurately describes the effect intended
+by the objective it is attached to, it is not really measurable. It
+would be more reasonable to establish quantified (indirect) measures
+of what this freedom is, e.g., ``no engagement during day time''.
+<P>
+<H4><A NAME="SECTION00049010000000000000">Solution</A></H4>
+<P>
+These are indeed effects, not measures of effect. These objectives can
+and should be rephrased into the proposed representation, in terms of
+measurable elements.
+<P>
+<H2><A NAME="SECTION000410000000000000000">4.10 Reference values</A></H2>
+<P>
+Frequently, the MOE omits the reference value, such as in ``Degrade
+NCA Communications links by 50%''. In other words, it is not clear
+(or at least explicit) which is the initial value of the NCA
+communication links that is the basis of comparison for the 50%.
+However, this may be clear in the context if we assume that the basis
+of comparison is the value at the beginning of the conflict. The
+question is, should we enforce an initial value or not? An option to
+make this more palatable is to assume a default value such as
+``pre-conflict levels''.
+<P>
+<H4><A NAME="SECTION000410010000000000000">Solution</A></H4>
+<P>
+It was adopted the option of using a default value ``pre-conflict
+levels'', and further, allow the specification of reference values in
+terms of a date: ``known by <I>date</I>'', or ``current as of <I>
+  date</I>''. The default for <I>date</I> will be the date in which the
+plan is produced.
+<P>
+<H2><A NAME="SECTION000411000000000000000">4.11 Value Restrictions</A></H2>
+<P>
+All the MOEs we have found use a specific value, mostly Zero (the same
+thing as ``No''), like in ``No Libyan aircraft deliver weapons against
+allied forces''.  However, it can be an interesting idea to use a
+value restriction (minimum/at least, maximum/at-most), like: ``At most
+three weapons deliveries by aircraft against allied forces'' or ``At
+most 10% reduction of Friendly shipping due to Enemy naval vessels''.
+While I can easily understand why in most of the cases the value is
+Zero, objectives with restrictions instead of hard values may be more
+realistic.  For example, it may be the case that an objective did not
+fail after all only because there was one single ``loss of friendly
+air forces''?  In other words, it makes sense to use hard limits
+sometimes, but the option of using a more flexible definition can be
+attractive too.
+<P>
+<H4><A NAME="SECTION000411010000000000000">Solution</A></H4>
+<P>
+It was adopted the option of specifying MOE quantifications with value
+restrictions (<I>at most</I>, <I>at least</I>).
+<P>
+<BR> <HR>
+<P><ADDRESS>
+<I>Andre Valente <BR>
+Fri Nov 22 19:21:57 PST 1996</I>
+</ADDRESS>
+</BODY>
+</HTML>

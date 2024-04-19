@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+  <head>
+    <title>Expect meeting Aug 12th 1998</title>
+  </head>
+
+  <body BGCOLOR=FFFFFF>
+    <h1>Expect meeting Aug 12th 1998</h1>
+
+<P>The group discussed a number of potential extensions to the current
+      version of Expect, picked a few to work on in the coming months
+      and assigned people to look at these
+</P>
+
+<P>Those present: Yolanda Gil, Bill Swartout, Surya Ramachandran,
+      Jim Blythe, Jihie Kim and Marcelo Tallis
+</P>
+
+<H2>Extensions under development</H2>
+
+<UL>
+<LI> Making the compiler handle more of the problem solver's capability.
+        <BR><EM>Jim, and probably Andre</EM>
+
+<LI> Improving the data passed back after node failure to contain
+        more information, and distinguish failure from empty sets.
+        <BR><EM>Yolanda, Jihie and Surya</EM>
+
+<LI> Providing explicit Expect constructs for modifying values in Loom
+        roles, and checking a value exists as well as retrieval.
+        <BR><EM>Jim</EM>
+
+<LI> Allowing the <code>desc</code> data type to be used by the problem
+        solver. 
+        <BR><EM>Marcelo</EM>
+
+<LI> Improving the Expect documentation.
+        <BR><EM>Surya</EM>
+
+<LI> Improving the Expect web pages.
+        <BR><EM>Yolanda and Bill</EM>
+
+</UL>
+
+<H2>Other extensions discussed</H2>
+
+<UL>
+
+<LI> Using nested data types in method capabilities
+        <BR> eg: <code> (diagnose (obj (?s is (and (inst-of decserver)
+(connected-to (?n is (inst-of network)))))))</code>
+        <BR> This is important, but hard. An intermediate approach might
+        be to handle nested descriptions that do not bind variables.
+
+<LI> Using variables to pass relations.
+
+<LI> Using variables to pass methods (we need an example of how this
+        would be used).
+
+<LI> Making the problem solver expand all specializations of a goal so
+        that, for example, it expands 
+        <BR><code>(compute (obj factorial) (of 1))</code>
+        as part of 
+        <code>(compute (obj factorial) (of (inst-of number)))</code>.
+        
+<LI> Using an explicit information availability specification to mark
+        knowledge as available at run-time, at compile time or to be
+        inferred. This also allows better control over what information
+        is used in partial evaluation, and how much partial evaluation
+        is performed.
+
+<LI> Providing explicit control over when a retrieval is desired to
+        return a value or a range. This is related to the information
+        availability specification - will that be suffucient?
+
+<LI> Grouping methods explicitly in user-defined groupings, for example,
+        the methods concerned with one kind of bridge.
+
+<LI> Language constructs giving more control:
+        <code>let</code>, <code>loop</code> and <code>sequence</code>
+
+<LI> Having more than one method for a given capability, with some kind
+        of search control. This led to a suggestion to allow optional
+        parameters in capabilities that specialise the capability based
+        for example on information about the method. Then another method
+        could encode the search control to choose between the competing
+        methods. The nested capability descriptions mentioned above
+        would also allow this specialisation.
+
+<P> For example, the goal 
+<code>(compute (obj sine) (of (inst-of number)))</code>
+could be matched by both capabilities 
+<BR><code>(compute (obj sine) (of (inst-of number)) (using table))</code>
+and
+<BR><code>(compute (obj sine) (of (inst-of number)) (using newton-raphson))</code>.
+<BR>A third method might match the capability without the <code>using</code>
+parameter and make a choice between the other two in its method body.
+
+<LI> Finer control over caching in the problem solver (ie, controlling
+        the problem solver's choice of using the same PS node for an
+        identical retrieve call or subgoal. This behaviour could be
+        turned off, for example, if the retrieval is one that can be
+        modified by another expect method, or if the subgoal has such a
+        retrieval as a descendant in the PS graph. 
+
+<LI> Building a comprehensive and consistent library of system methods.
+
+<LI> Detecting and reporting errors that originate with the Loom KB, for
+        example if a relation and a concept have the same name.
+
+<LI> Providing a more flexible and intuitive way to control domain
+        preferences, including handling non-standard reformulations and 
+        improving the default choice of input or covering
+        reformulations. (We need examples of where the current
+        reformulations can do the wrong thing).
+
+<LI> Making the <code>result-refiner</code> specification more explicit
+        to Expect, rather than using lisp code.
+
+<LI> Looking at the specification of result types for compound language
+        statements 
+        (for example, 
+        <code>if <EM>Test</EM> then <EM>A</EM> else <EM>B</EM></code>)
+        - whether to use the most specific user-defined generalisation
+        or to allow system-defined generalisations such as the
+        disjunction of the types of the two branches of the if
+        statement.
+
+</UL>
+
+    <hr>
+    <address><a href="mailto:blythe@camelot.isi.edu">Jim Blythe</a></address>
+<!-- Created: Wed Aug 12 17:05:29 PDT 1998 -->
+<!-- hhmts start -->
+Last modified: Thu Aug 13 10:58:48 PDT 1998
+<!-- hhmts end -->
+  </body>
+</html>

@@ -1,0 +1,360 @@
+<TITLE>Papers on Planning</TITLE>
+
+<H1> Papers on Planning </H1>
+
+
+<P><HR>
+
+Yolanda Gil.
+"Planning Experiments: Resolving Interactions between Two Planning Spaces".
+<i>Proceedings of the Third International Conference on 
+   Artificial Intelligence Planning Systems (AIPS-96)</i>, 
+May 29-31, 1996, 
+   Edinburgh, Scotland.
+(<A HREF="http://www.isi.edu/~gil/papers/gil-aips6.ps">Postscript file </A>) 
+<P>
+
+<B> Abstract: </B> 
+Learning from experimentation allows a system to acquire planning 
+domain knowledge by correcting its knowledge when an action execution 
+fails.  Experiments are designed and planned to bring the world to a state
+where a hypothesis (e.g., that an operator is missing a precondition) 
+can be tested.  When planning an experiment, the planner must take 
+into account the interactions between the execution of the main plan 
+and the execution of the experiment plans, since after the experiment 
+it must continue to carry on its main task.  In order for planners 
+to work in such environments where they can be given several tasks, 
+they must take into account the interactions between them.  A usual assumption 
+in current planning systems is that they are given a single task (or set 
+of goals to achieve).  However, a plan that 
+may seem adequate for a task in isolation may make other tasks harder 
+(or even impossible) to achieve.  Different tasks 
+may compete for resources, execute irreversible actions that make
+other tasks unachievable, or set the world in undesirable states.  
+This paper discusses what these interactions are and presents how the
+problem was adressed in EXPO, an implemented system that acquires 
+domain knowledge for planning through experimentation.
+<P>
+
+<P><HR>
+
+
+
+William R. Swartout and Yolanda Gil.
+"EXPECT: A User-Centered Environment for the Development  
+and Adaptation of Knowledge-Based Planning Aids".
+In <i>Advanced Planning Technology: Technological Achievements 
+of the ARPA/Rome Laboratory Planning Initiative</i>, 
+ed. Austin Tate. Menlo Park, Calif.: AAAI Press, 1996.
+(<A HREF="http://www.isi.edu/expect/papers/swartout-gil-arpi96.ps">Postscript file</A>) 
+<P>
+
+<B> Abstract: </B> 
+EXPECT provides an environment for developing knowledge-based
+systems that allows end-users to add new knowledge without needing
+to understand the details of system organization and
+implementation.  The key to EXPECT's approach is that it
+understands the structure of the knowledge-based system being
+built: how it solves problems and what knowledge it needs to
+support problem-solving. EXPECT uses this information to guide
+users in maintaining the knowledge-based system. We have used
+EXPECT to develop a tool for evaluating transportation plans.
+<P>
+
+
+<P><HR>
+
+
+Brian Drabble, Yolanda Gil, and Austin Tate.
+"Acquiring Criteria for Plan Quality Control".
+<i>AAAI Spring Symposium on "Planning Applications"</i>, 
+Stanford, CA, March 1995. 
+(<A HREF="http://www.isi.edu/expect/papers/dgt-sss95.ps">Postscript file </A>) 
+<P>
+
+<P><HR>
+
+Jaime Carbonell, 
+Oren Etzioni, 
+Yolanda Gil,
+Robert Joseph,
+Craig Knoblock,
+Steven Minton, 
+and Manuela Veloso.
+"Planning and Learning in PRODIGY: Overview of an Integrated Architecture".
+In <i>Goal-Driven Learning</i>, Aswin Ram and David Leake (Eds.),
+MIT Press 1995.
+<P>
+
+<P><HR>
+
+
+
+Yolanda Gil and Alicia Perez.
+"Applying a General-Purpose Planning and Learning Architecture
+to Process Planning".
+<i>AAAI Fall Symposium on "Planning and Learning: 
+On to Real Applications"</i>, 
+New Orleans, LA, November 1994.
+(<A HREF="http://www.isi.edu/~gil/papers/gil-perez-fss94.ps">Postscript file </A>) 
+<P>
+
+<B> Abstract: </B> 
+Process planning poses significant computational requirements
+due to the variety of alternative processes, their complexity, and
+their interactions.  General-purpose planners are generally not considered
+a practical approach, and most current research focuses on
+special-purpose planning systems.
+Research within the PRODIGY framework aims to provide
+expressive general-purpose planners together with
+learning algorithms that can improve their efficiency, the
+accuracy of their domain model, and the quality of their plans.
+Process planning is one of the large-scale complex domains that
+we have implemented in PRODIGY to demonstrate the feasibility
+of our approach.
+Our current model of process planning is still
+far from comprehensive and is limited in many ways,
+but it reflects many of the complexities involved in the task.
+This paper describes
+how PRODIGY learns control knowledge, acquires domain knowledge,
+and improves the quality of its plans for this application domain
+using general-purpose planning and learning algorithms.
+<P>
+
+<P><HR>
+Yolanda Gil and Marc Linster.
+"On Analyzing Planning Applications".
+<i>AAAI Fall Symposium on "Planning and Learning: 
+On to Real Applications"</i>, 
+New Orleans, LA, November 1994.
+(<A HREF="http://www.isi.edu/~gil/papers/gil-linster-fss94.ps">Postscript file </A>) 
+<P>
+
+<B> Abstract: </B> 
+It is hard to evaluate in current planning applications 
+what aspects of the approach address each of the complexities of the problem.
+This results from the fact that
+the planning community is lacking a vocabulary to describe planning tasks 
+and applications.
+This work is an effort towards descriptions of planning applications 
+in terms that are useful 1) to extract conclusions from particular implementations,
+2) to facilitate cross-comparisons among different planners applied to the same problem,
+and 3) to facilitate comparisons among different tasks.
+We analyze the Sisyphus experience, a 3-year old and still 
+ongoing effort in the knowledge acquisition community
+to enable a cross-comparison of
+their application systems as they implement a common pre-stated problem description.
+Based on this experience, we propose a set of dimensions to describe applications that
+distinghish between descriptions of the properties of the architecture, 
+the type of problem, and the data sets.
+We show how they can be used to
+produce useful distictions in the context of the first Sisyphus task, 
+which was an office assignment problem.
+Our hope is that the same dimensions will be useful to other researchers
+in describing and characterizing their applications, as well as a
+useful point of comparison for future Sisyphus efforts.
+<P>
+
+<P><HR>
+
+
+
+Yolanda Gil.
+"Learning by Experimentation: 
+Incremental Refinement of Incomplete Planning Domains".
+<i>Proceedings of the Eleventh International
+Conference on Machine Learning</i>July 10-13, 1994, Rutgers, NJ.
+(<A HREF="http://www.isi.edu/~gil/papers/gil-mlc94.ps">Postscript file </A>) 
+<P>
+
+<B> Abstract: </B> 
+Building a knowledge base requires iterative refinement to 
+correct imperfections that keep lurking after each new version of the system.
+This paper concentrates on the automatic refinement of 
+incomplete domain models for planning systems,
+presenting both a methodology for addressing the problem
+and empirical results.
+Planning knowledge may be refined automatically 
+through direct interaction with the environment.
+Missing conditions cause unreliable predictions of action outcomes.
+Missing effects cause unreliable predictions of facts about the state.
+We present a practical approach based on
+continuous and selective interaction with the 
+environment that pinpoints the type of
+fault in the domain knowledge that causes 
+any unexpected 
+behavior of the environment, 
+and resorts to experimentation 
+when additional information is needed to correct the fault.
+Our approach has been implemented in EXPO, a system that uses PRODIGY
+as a baseline planner and improves its domain knowledge in several domains
+when initial domain knowledge is up to
+50% incomplete.
+The empirical results presented show that EXPO 
+dramatically improves its 
+prediction accuracy and reduces the amount of unreliable action outcomes.
+<P>
+
+<P><HR>
+
+
+
+Yolanda Gil, Mark Hoffman, and Austin Tate.
+"Domain-Specific Criteria to Direct and Evaluate Planning Systems".
+<i>Proceedings of the 1994 Workshop of the Arpa/Rome
+Laboratories Planning Initiative</i>, February 21-25, 1994, Tucson, AZ. 
+ISI Technical Report ISI-93-365.
+(<A HREF="http://www.isi.edu/~gil/papers/gil-hof-tate-arpi94.ps">Postscript file </A>) 
+<P>
+
+<B> Abstract: </B> 
+This document is the result of a joint effort to understand what are relevant
+factors to consider when there are several possible courses of action (COAs)
+to accomplish a Non-combatant Evacuation Operation (NEO) military mission.
+These relevant factors are useful for generation and evaluation of COAs and
+provide the basis for a good decision in selecting a COA.  The document
+compiles the relevant factors from the perspective of logistics that are
+useful to evaluate whether or not alternative proposed COAs can be supported
+logistically, and which ones seem to be better alternatives compared to the
+others.  The ultimate goal of this joint effort is to use these factors to
+automate the evaluation and comparison of COAs and use the comparison to
+determine what are critical aspects of a COA that may be changed to produce a
+better option with a generative planner.  We discuss how we envision
+using EXPECT and O-Plan2 for this purpose. 
+<P>
+
+<P><HR>
+
+Paul Cohen, Tom Dean, Yolanda Gil, Matt Ginsberg, Lou Hoebel
+<A HREF="http://isx.com/pub/ARPI/ARPI-pub/hoebel/plan-eval.html">
+"Handbook of Evaluation for the ARPA/Rome Lab Planning Initiative"
+</A>, 1994.
+<P>
+
+<B> Abstract: </B> 
+This document describes methods for evaluating research and
+development progress in automated planning.
+It is meant as a resource for the members of the research community
+participating in the planning initiative.
+The document attempts to explain the goals of evaluation and provide
+concrete examples of evaluation methods that are currently being used.
+It also serves as a source of ideas for designing new methods for 
+evaluation and improving old ones.
+
+<P>
+
+<P><HR>
+
+Yolanda Gil.
+"Learning New Planning Operators by Exploration and Experimentation".
+<i>Proceedings of the AAAI Workshop on Learning Action
+  Models</i>, Washington, DC, July 1993.
+(<A HREF="http://www.isi.edu/~gil/papers/gil-aaaiwks93.ps">Postscript file </A>) 
+<P>
+
+<B> Abstract: </B> 
+This paper addresses a computational approach to the automated
+acquisition of domain knowledge for planning systems via 
+experimentation with the environment.  Our previous work has shown 
+how existing incomplete operators can be refined by adding missing 
+preconditions and effects.   Here we develop additional methods to 
+acquire new operators such as direct analogy with existing operators,
+decomposition of monolithic operators into meaningful sub-operators, 
+and experimentation with partially-specified operators.
+<P>
+
+<P><HR>
+
+
+
+Yolanda Gil.
+"Acquiring Domain Knowledge for Planning by Experimentation".
+<i>Ph.D. Thesis</i>, School of Computer Science, Carnegie Mellon
+University, Pittsburgh PA 15213.  August 1992.  
+Available as CMU Technical Report CMU-CS-92-175.
+<P>
+
+<B> Abstract: </B> 
+In order for autonomous systems to interact with their environment in an
+intelligent way, they must be given the ability to adapt and learn
+incrementally and deliberately. It is virtually impossible to devise 
+and hand code all potentially relevant domain knowledge for complex 
+dynamic tasks. This thesis describes a framework to acquire domain
+knowledge for planning by failure-driven experimentation with the 
+environment.  The initial domain knowledge in the system is an 
+approximate model for planning in the environment, defining the
+system's expectations.  The framework exploits the characteristics 
+of planning domains in order to search the space of plausible 
+hypotheses without the need for additional background knowledge to
+build causal explanations for expectation failures.   Plans are 
+executed while the external environment is monitored, and 
+differences between the internal state and external observations 
+are detected by various methods each correlated with a typical 
+cause for the expectation failure.  The methods also construct a 
+set of concrete hypotheses to repair the knowledge deficit.
+After being heuristically filtered, each hypothesis is tested in turn
+with an experiment.  After the experiment is designed,
+a plan is constructed to achieve the situation required to 
+carry out the experiment.  The experiment plan must meet 
+constraints such as minimizing plan length and negative 
+interference with the main goals.  The thesis describes a set of 
+domain-independent constraints for experiments and their 
+incorporation in the planning search space.  After the execution
+of the plan and the experiment, observations are collected to conclude if
+the experiment was successful or not.  Upon success, the hypothesis is
+confirmed and  the domain knowledge is adjusted.  Upon failure, the
+experimentation process is iterated on the remaining hypotheses 
+until success or until no more hypotheses are left to be considered.  
+This framework has shown to be an effective way to address incomplete 
+planning knowledge and is demonstrated in a system called EXPO, 
+implemented on the PRODIGY planning architecture.
+The effectiveness and efficiency of EXPO's methods is 
+empirically demonstrated in several domains, including a large-scale
+process planning task, where the planner can recover from situations 
+missing up to 50% of domain knowledge through repeated experimentation.
+<P>
+
+<P><HR>
+
+
+
+
+Yolanda Gil.
+"A Specification of Manufacturing Processes for Planning".
+<i>Technical Report CMU-CS-91-179</i>, School of Computer Science, 
+Carnegie Mellon University, Pittsburgh PA 15213.
+(<A HREF="http://www.isi.edu/~gil/papers/gil-processp91.ps">Postscript file </A>) 
+<P>
+
+<B> Abstract: </B> 
+Much research is being done on the 
+automation of manufacturing processes.
+The planning component in the production stage is very significant, 
+due to the variety of alternative processes, their complexity, and 
+their interactions.
+This document describes a specification of some manufacturing processes,
+including the machining, 
+joining, and finishing of parts. 
+The aim of this specification is not to be comprehensive or detailed, but to
+present the AI community with a model of a complex and realistic 
+application, and to use it to demonstrate
+the feasibility of effective implementations of 
+large-scale complex domains in a general-purpose architecture.
+This specification has been successfully demonstrated in the PRODIGY 
+architecture, and is one of the largest domains 
+available for general-purpose planners.<P>
+
+<P><HR>
+
+
+
+
+<A HREF="http://www.isi.edu/~gil/yg-homepage.html">
+<i>Yolanda Gil</i></A> 
+<A HREF=mailto:gil@isi.edu>gil@isi.edu</A>
+
+
+
+
+
+

@@ -1,0 +1,116 @@
+Agenda:
+   at Mon Jun 12 17:18:55 PDT 2000
+
+create method for goal from undefined capabilities
+   at Mon Jun 12 17:30:07 PDT 2000
+
+undefined goal:
+(check (obj (spec-of force-ratio)) (of (inst-of military-task)))  
+Expected Result:(inst-of yes-no)  
+Callers:(check-feasibility-for-military-task)  
+Capability:(capability (check (obj (?v20 is (spec-of force-ratio))) (of (?v21 is (inst-of military-task)))))  
+   at Mon Jun 12 17:30:07 PDT 2000
+
+select Button:expect-expression:EXPRESSION
+ TO become:((name _method0  )
+(capability    ( check   ( obj   ( ?v20 is   ( spec-of force-ratio ) ) )
+         ( of   ( ?v21 is   ( inst-of military-task ) ) ) )
+)
+(result-type  (inst-of yes-no)  )
+(method  SUB-GOAL 
+)
+)
+   at Mon Jun 12 17:30:36 PDT 2000
+
+select Button:expect-goal-form:SUB-GOAL
+ TO become:((name _method0  )
+(capability    ( check   ( obj   ( ?v20 is   ( spec-of force-ratio ) ) )
+         ( of   ( ?v21 is   ( inst-of military-task ) ) ) )
+)
+(result-type  (inst-of yes-no)  )
+(method    ( is-less-or-equal   ( obj (INST-OF NUMBER) )   ( than (INST-OF NUMBER) ) ) 
+)
+)
+   at Mon Jun 12 17:30:40 PDT 2000
+
+select Button:expect-expression:(INST-OF NUMBER)
+ TO become:((name _method0  )
+(capability    ( check   ( obj   ( ?v20 is   ( spec-of force-ratio ) ) )
+         ( of   ( ?v21 is   ( inst-of military-task ) ) ) )
+)
+(result-type  (inst-of yes-no)  )
+(method    ( is-less-or-equal   ( obj SUB-GOAL )   ( than (INST-OF NUMBER) ) ) 
+)
+)
+   at Mon Jun 12 17:30:45 PDT 2000
+
+select Button:expect-goal-form:SUB-GOAL
+ TO become:((name _method0  )
+(capability    ( check   ( obj   ( ?v20 is   ( spec-of force-ratio ) ) )
+         ( of   ( ?v21 is   ( inst-of military-task ) ) ) )
+)
+(result-type  (inst-of yes-no)  )
+(method    ( is-less-or-equal   ( obj   ( estimate   ( obj
+                           ( spec-of required-force-ratio ) )
+                     ( for (INST-OF MILITARY-TASK) ) ) )
+         ( than (INST-OF NUMBER) ) ) 
+)
+)
+   at Mon Jun 12 17:30:50 PDT 2000
+
+check tab:0
+   at Mon Jun 12 17:31:19 PDT 2000
+
+6check: Method Capability Hierarchy
+   at Mon Jun 12 17:31:21 PDT 2000
+
+7check: Method Sub-Method Relation
+   at Mon Jun 12 17:31:36 PDT 2000
+
+6check: Method Capability Hierarchy
+   at Mon Jun 12 17:31:38 PDT 2000
+
+3check: Describe PS Tree
+   at Mon Jun 12 17:31:38 PDT 2000
+
+check tab:8
+   at Mon Jun 12 17:31:39 PDT 2000
+
+7check: Method Sub-Method Relation
+   at Mon Jun 12 17:31:41 PDT 2000
+
+create method for goal from undefined capabilities
+   at Mon Jun 12 17:31:42 PDT 2000
+
+undefined goal:
+(check (obj (spec-of force-ratio)) (of (inst-of military-task)))  
+Expected Result:(inst-of yes-no)  
+Callers:(check-feasibility-for-military-task)  
+Capability:(capability (check (obj (?v20 is (spec-of force-ratio))) (of (?v21 is (inst-of military-task)))))  
+   at Mon Jun 12 17:31:42 PDT 2000
+
+select Button:expect-expression:EXPRESSION
+ TO become:((name _method0  )
+(capability    ( check   ( obj   ( ?v20 is   ( spec-of force-ratio ) ) )
+         ( of   ( ?v21 is   ( inst-of military-task ) ) ) )
+)
+(result-type  (inst-of yes-no)  )
+(method    ( is-less-or-equal   ( obj (inst-of number) )   ( than (inst-of number) ) ) 
+)
+)
+   at Mon Jun 12 17:31:52 PDT 2000
+
+select Button:expect-expression:(inst-of number)
+ TO become:((name _method0  )
+(capability    ( check   ( obj   ( ?v20 is   ( spec-of force-ratio ) ) )
+         ( of   ( ?v21 is   ( inst-of military-task ) ) ) )
+)
+(result-type  (inst-of yes-no)  )
+(method    ( is-less-or-equal   ( obj   ( estimate   ( obj
+                           ( spec-of required-force-ratio ) )
+                     ( for (inst-of military-task) ) ) )
+         ( than (inst-of number) ) ) 
+)
+)
+   at Mon Jun 12 17:32:00 PDT 2000
+

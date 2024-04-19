@@ -1,0 +1,352 @@
+<HTML>
+<HEAD>
+  <TITLE>
+  The Trellis Project at ISI
+  </TITLE>
+<STYLE TYPE="text/css">
+  BODY { background-color: white }
+  TD { background-color: #CCCCCC }
+  TD.b { background-color: white }
+
+</STYLE>
+</HEAD>
+<BODY style="FONT-FAMILY: Verdana; FONT-SIZE: 10pt" text='black'>
+<TABLE border='0' cellspacing='1' cellpadding='5' bgcolor='black'>
+<TR>
+  <TD class='top' align='center'><A href='http://www.isi.edu/expect'>
+   <IMG border='1' SRC='../expect.jpg'></A></TD>
+  <TD class='top' width='100%' align='center'><A href='./'>
+   <IMG border='1' SRC='logo.jpg'></A>&nbsp;<A HREF="http://www.isi.edu"><IMG border='1' SRC="../isi.gif"></A><BR>
+<B>Capturing and Exploiting Semantic Relationships for Information and Knowledge Management</B>
+ </TD>
+</TR>
+<TR>
+  <TD valign='top' align='right'>
+  <P><A HREF='./'><B>Main</B></A>
+  <P><A HREF='description.html'><B>Description</B></A>
+  <P><A HREF='demo.html'><B>Demo</B></A>
+  <P><A HREF='people.html'><B>People</B></A>
+  <P><A HREF='publications.html'><B>Publications</B></A>
+  <P><A HREF='research.html'><B>Research</B></A>
+  <P><A HREF='funding.html'><B>Funding</B></A>
+  <P><A HREF='links.html'><B>Links</B></A>
+  <P><A HREF='status.html'><B>Status</B></A>
+  </TD>
+  <TD class='b' valign='top'>
+<H2>Demo</H2>
+
+<center>
+<b><font face="Arial,Helvetica" size="+1">A Screen Walkthrough
+Demonstration of <b>Trellis</b></font></b>
+<p /><b><font face="Arial,Helvetica">Version 1.0, August 2001</font></b></center>
+
+<p /><b><i><font face="Arial,Helvetica">Brief Overview</font></i></b>
+<p /><b>Trellis</b> is an interactive environment that will allow users to add their
+observations, viewpoints, and conclusions as they analyze information by
+making semantic annotations to documents and other on-line resources. We
+view this as a knowledge acquisition problem, where users are adding new
+knowledge to the system based on their expertise as they analyze information.
+<p /><b>Trellis</b> can be accessed from the main project page at <a href="http://trellis.semanticweb.org">http://trellis.semanticweb.org</a>,
+or from <a href="http://www.isi.edu/expect/projects/trellis">http://www.isi.edu/expect/projects/trellis</a>.
+<p />Each analysis that the user performs has a purpose that is used to describe
+the issue analyzed. <b>Trellis</b> asks the user to specify a purpose, which
+is a short sentence that summarizes the issue or hypothesis in question.
+<p />Each piece of information or data that is used in the analysis is called
+a statement. A statement can be linked to a Web resource, it could
+be a manual or authoritative source. <b>Trellis</b> allows the user to access
+a Web search engine and use the results of the search to create new statements.
+Users can also enter statements that are not Web pages but instead have
+text such as an email message, or a note about a conversation, or any other
+text. The user can specify a URL but it is not necessary. In
+addition to input information and data, the user can add statements that
+indicate intermediate conclusions or hypothesis. Statements can also
+be used to indicate the sources of some information. Sources can
+be qualified according to the user's view on their reliability and credibility.
+The user can define new statements or modify existing ones at any time.
+<p />The overall analysis is composed of units, which are composed in turn
+of sub-units. Each unit relates individual statements using a construct
+from the <b>Trellis</b> vocabulary. All the statements within a unit are linked
+to some Web source or user-provided text. Users can provide reasons
+("because") or not, depending on the amount of detail that they wish to
+capture in each part of the analysis. Only some portions of a given
+unit are part of the <b>Trellis</b> language. The rest of the components
+of the unit (i.e., the statements) are treated as strings and <b>Trellis</b> will
+not process them further.
+At any time, users can compose their analysis from the statements that
+they have selected and created. The analysis of a purpose is made
+of units, which may have sub-units in turn. Users can collapse or
+expand any portions of the analysis and manipulate units and sub-units
+to refine their interdependencies. Users can also rearrange the units in
+the analysis by dragging and dropping them in the analysis window.
+This is useful in cases where the analysis is done bottom-up and the users
+wants to relate units that were created previously separately.
+<p />Sometimes a user does not know yet how to use a statement in an analysis
+but would like to have that statement included in the analysis frame.
+Users can select statements and include them in the analysis under a 'Notes
+and other information' category. This facility is also useful to
+drag and drop statements into the analysis.
+<p />Users can also import statements and units from other users if they
+are relevant to your purpose. The user can do keyword search in either
+purpose names or statement titles entered by other users.
+<p /><b>Trellis</b> can be used offline if you cache Web pages before disconnecting
+from the network. Statements can be selected and a cached copy of their
+corresponding Web pages is created and used until otherwise indicated.
+<p />Users can view the results of their analysis annotated in several markup
+languages: XML, RDF, and DAML, corresponding to the Schemas and ontologies
+that define the <b>Trellis</b> vocabulary.
+<br />
+<br />
+<p /><b><i><font face="Arial,Helvetica">Screen Walkthrough of an Example</font></i></b>
+<br />
+<p /><b><font face="Arial,Helvetica" size="-1">Start with the Login Screen.</font></b>
+<p /><img src="demoimages/imageRD5.JPG" />
+<br />
+<br />
+<br />
+<p /><b><font face="Arial,Helvetica" size="-1">Each analysis that the
+user performs has a "purpose" that is used to describe the issue analyzed.<br />
+After logging in, you are presented with the purposes which you have (or
+a person with your login ID has) made so far. By default, there are 3 purposes
+which are added for each new user.</font></b>
+<p /><img src="demoimages/imageRP6.JPG" />
+<br />
+<br />
+<br />
+<p /><b><font face="Arial,Helvetica" size="-1">You can make a new purpose
+by the "New Purpose" button, which prompts for the name of the new purpose</font></b>
+<p /><img src="demoimages/imageQJJ.JPG" />
+<br />
+<br />
+<br />
+<p /><b><font face="Arial,Helvetica" size="-1">After creating a new purpose
+OR when editing an existing purpose, you end up with the <i><u>purpose
+editor window </u></i>as shown below. The left side of the screen is used
+to find, select, and edit the statements used in analyzing the purpose.<br />
+The right side of the screen is used to construct and view the details
+of the analysis.</font></b><b><font face="Arial,Helvetica" size="-1"></font></b>
+<p /><b><font face="Arial,Helvetica" size="-1">A <i><u>query frame</u></i>
+is in the top left hand side, in which you can fire off queries to a search
+engine (in this version of <b>Trellis</b> the search engine is Google), and get
+the results in the <i><u>results frame</u></i> below.</font></b>
+<br /><b><font face="Arial,Helvetica" size="-1">There is nothing in the
+current selections here, since this is a new purpose. Nor is there anything
+in the <i><u>statements frame</u></i>, which is the frame shown in the
+lower left of the screen</font></b>
+<p /><img src="demoimages/image7GI.JPG" />
+<br />
+<br />
+<p /><b><font face="Arial,Helvetica" size="-1">The results from the search
+engine that you find relevant can be selected by clicking their icon and
+clicking on 'Add Selections'.<br /> The Web pages selected are added to
+the statements frame at the bottom left.</font></b>
+<br /><b><font face="Arial,Helvetica" size="-1"></font></b><br />
+<p /><img src="demoimages/imageCPO.JPG" />
+<br />
+<br />
+<br />
+<p /><b><font face="Arial,Helvetica" size="-1">The selected pages can
+be renamed to reflect the salient fact that they contain that needs to
+be brought up in the analysis of the overall purpose.<br /> You can rename
+something by selecting it and pressing Ren (one of the buttons for editing
+of current selections).<br /> A selected page can also be deleted (selecting
+it and then clicking on the Delete button).<br /> Anything in the statements
+frame can also be moved to the analysis frame on the right hand side to
+start building the analysis (by selecting it and clicking the "Move ->"
+button).</font></b>
+<p /><img src="demoimages/imageGEQ.JPG" />
+<br />
+<br />
+<br />
+<br />
+<p /><b><font face="Arial,Helvetica" size="-1">Not all statements come
+from Web pages.<br /> You can also add new statements manually, for example
+an email message, or a note about a conversation, or any other text.<br />
+This is done by clicking on "Add user data".<br /> You can specify a URL
+if you wish, but it is not necessary.</font></b><b><font face="Arial,Helvetica" size="-1"></font></b>
+<p /><b><font face="Arial,Helvetica" size="-1">Any new statements entered
+manually also have to be selected in order to be added to the statements
+frame and ultimately to the analysis.</font></b>
+<br /><b><font face="Arial,Helvetica" size="-1"></font></b><br />
+<p /><img src="demoimages/imageTGQ.JPG" />
+<br />
+<br />
+<br />
+<p /><b><font face="Arial,Helvetica" size="-1">Some statements denote
+a source (e.g., CNN) that you want to cite in your analysis.<br /> You
+can describe a source in detail using the 'Desc' button as shown. This
+description will be shown whenever you click on this source statement.</font></b>
+<p /><img src="demoimages/imageF1O.JPG" />
+<br />
+<br />
+<br />
+<p /><b><font face="Arial,Helvetica" size="-1">You can also view user-entered
+statements by clicking on them.</font></b>
+<p /><img src="demoimages/image3MG.JPG" />
+<br />
+<br />
+<br />
+<p /><b><font face="Arial,Helvetica" size="-1">To modify a user-entered
+statement, select it and click on the Edit button, then enter the new information.</font></b>
+<p /><img src="demoimages/imageFTV.JPG" />
+<br />
+<br />
+<br />
+<br />
+<p /><b><font face="Arial,Helvetica" size="-1">At any time, you can compose
+your analysis from the statements that you have selected and created.<br />
+The analysis of a purpose is made of units, which may have sub-units in
+turn.<br /> Click the "Add Unit" button, where you can select statements
+and constructs from the <b>Trellis</b> language in order to create an expression.<br />
+You can also annotate the source of the analysis and qualify the source
+for its reliability and credibility.</font></b><b><font face="Arial,Helvetica" size="-1"></font></b>
+<p /><b><font face="Arial,Helvetica" size="-1">You can build a unit using
+the default <b>Trellis</b> constructs, but you can also define your own by selecting
+"New".</font></b>
+<br /><b><font face="Arial,Helvetica" size="-1"></font></b><br />
+<p /><img src="demoimages/imageQLE.JPG" />
+<br />
+<br />
+<br />
+<br />
+<p /><b><font face="Arial,Helvetica" size="-1">Units are normally shown
+as a collapsible list that the user can select and expand. If any sub-units
+are added after selecting a statement, they will be added under this statement
+in the collapsible tree.</font></b>
+<p /><img src="demoimages/imageOEU.JPG" />
+<br />
+<br />
+<br />
+<p /><b><font face="Arial,Helvetica" size="-1">You can also use statements
+and units from other users if they are relevant to your purpose.<br />
+To do this, click on the "Import" button and you will be prompted for a
+keyword to search (here 'Iraq') in either Purpose names or Statement titles
+entered by other users.</font></b>
+<p /><img src="demoimages/imageKD4.JPG" />
+<br />
+<br />
+<br />
+<br />
+<p /><b><font face="Arial,Helvetica" size="-1">From the results obtained,
+you can select a purpose.<br /> The system will show an uneditable version
+of the analysis frame. You can select any unit and import it.<br /> Notice
+that if you select the top unit the entire analysis is imported.</font></b>
+<p /><img src="demoimages/imageVV3.JPG" />
+<br />
+<br />
+<br />
+<br />
+<p /><b><font face="Arial,Helvetica" size="-1">After importing, the selected
+units and sub-units (along with the statements used in them) as well as
+the sources are added to your own set.</font></b>
+<p /><img src="demoimages/image270.JPG" />
+<br />
+<br />
+<br />
+<br />
+<p /><b><font face="Arial,Helvetica" size="-1">You can also rearrange
+the units in the analysis by dragging and dropping them in the analysis
+frame.<br /> This is useful if you do your analysis bottom-up and want
+to relate units that you created previously separately.</font></b><b><font face="Arial,Helvetica" size="-1"></font></b>
+<p /><b><font face="Arial,Helvetica" size="-1">To move a unit, select
+it first by moving the mouse to the left side of the triangle widget and
+clicking on it.<br /> Hold down the mouse and move it to the place
+where you want the unit to be.<br /> A black line shows the position where
+the unit would be dropped.<br /> A transparent box shows its future parent
+unit. (So you can either drag to, or into).</font></b><b><font face="Arial,Helvetica" size="-1"></font></b>
+<p /><b><font face="Arial,Helvetica" size="-1">There are 2 modes of dragging
+: Left-click and drag drags the whole tree (as shown), and right click
+and drag just drags the particular unit.</font></b>
+<br /><b><font face="Arial,Helvetica" size="-1"></font></b><br />
+<p /><img src="demoimages/imageCE4.JPG" />
+<br />
+<br />
+<br />
+<br />
+<p /><b><font face="Arial,Helvetica" size="-1">After the unit has been
+moved:</font></b>
+<p /><img src="demoimages/imageF1H.JPG" />
+<br />
+<br />
+<br />
+<br />
+<p /><b><font face="Arial,Helvetica" size="-1"><b>Trellis</b> can be used offline
+if you cache Web pages before disconnecting from the network. Select a
+statement and click 'Toggle'. This link now points to a cached copy. A
+link pointing to a cached copy is highlighted in a darker green color.</font></b>
+<p /><img src="demoimages/imageTQT.JPG" />
+<br />
+<br />
+<br />
+<br />
+<p /><b><font face="Arial,Helvetica" size="-1">Sometimes you do not know
+yet how you want to use a statement in an analysis but you want to include
+it in the analysis frame. You can select statements and move them to the
+analysis frame with the 'Move->' button. These selections go under a 'Notes
+and other information' category.</font></b><b><font face="Arial,Helvetica" size="-1"></font></b>
+<p /><b><font face="Arial,Helvetica" size="-1">This facility is useful
+to drag and drop statements into the analysis.</font></b>
+<br /><b><font face="Arial,Helvetica" size="-1"></font></b><br />
+<p /><img src="demoimages/imageTLJ.JPG" />
+<br />
+<br />
+<p /><b><font face="Arial,Helvetica" size="-1">You can modify units in
+the analysis frame by clicking on the "Edit" button.</font></b>
+<br /><b><font face="Arial,Helvetica" size="-1"></font></b><br /><b><font face="Arial,Helvetica" size="-1"></font></b>
+<p /><b><font face="Arial,Helvetica" size="-1">The "Remove" button deletes
+the selected unit and all of its sub-units.</font></b>
+<br /><b><font face="Arial,Helvetica" size="-1"></font></b><br /><b><font face="Arial,Helvetica" size="-1"></font></b>
+<p /><b><font face="Arial,Helvetica" size="-1">The "Restore" button is
+used as a single-step undo.</font></b>
+<br /><b><font face="Arial,Helvetica" size="-1"></font></b><br /><b><font face="Arial,Helvetica" size="-1"></font></b>
+<p /><b><font face="Arial,Helvetica" size="-1">The "Extract" button is
+used after selecting a statement. Then all the sources that it finds inside
+the statement are added to the current selections.</font></b>
+<br /><b><font face="Arial,Helvetica" size="-1"></font></b><br />
+<br />
+<br />
+<br />
+<br />
+<p /><b><font face="Arial,Helvetica" size="-1">You can also view the
+results of your analysis annotated in several markup languages. To view
+this, go back to the Main Screen where you can see the marked up versions
+of the purposes that were just edited, by clicking on the 'XML' button
+for the XML markup, 'RDF' button for RDF markup and 'DAML' button for the
+DAML version.</font></b>
+<br /><b><font face="Arial,Helvetica" size="-1"></font></b><br /><b><font face="Arial,Helvetica" size="-1"></font></b>
+<p /><b><font face="Arial,Helvetica" size="-1">In this example, the XML
+version of the 'Use of chemical weapons by Iraq' purpose is shown:</font></b>
+<br /><b><font face="Arial,Helvetica" size="-1"></font></b><br />
+<p /><img src="demoimages/imageLS3.JPG" />
+<br />
+<br />
+<br />
+<br />
+<br />
+<p /><b><font face="Arial,Helvetica" size="-1">You can also see the Schemas
+(DTD, XML Schema) for the XML data, the RDF Schema for the RDF data, and
+the DAML ontology by clicking the respective buttons on top of the screen.</font></b>
+<p /><img src="demoimages/imageRP7.JPG" />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<p /><b><font face="Arial,Helvetica" size="-1">The 'Save' Button is used
+to take a single backup of all your purposes. If at a later time, the 'Restore'
+button is clicked, all the purposes from the time that 'Save' was clicked
+are restored.</font></b>
+<br /><b><font face="Arial,Helvetica" size="-1"></font></b><br /><b><font face="Arial,Helvetica" size="-1"></font></b>
+<p /><b><font face="Arial,Helvetica" size="-1">The 'Help' Button brings
+up a User Guide.</font></b>
+<br /><b><font face="Arial,Helvetica" size="-1"></font></b><br /><b><font face="Arial,Helvetica" size="-1"></font></b>
+<p /><b><font face="Arial,Helvetica" size="-1">The 'Logout' Button brings
+you back to the Login page.</font></b>
+<br /><b><font face="Arial,Helvetica" size="-1"></font></b><br /><b><font face="Arial,Helvetica" size="-1"></font></b>
+<p /><img src="demoimages/imageRP6.JPG" />
+
+</TD>
+</TR>
+</TABLE>
+</body>
+</html>

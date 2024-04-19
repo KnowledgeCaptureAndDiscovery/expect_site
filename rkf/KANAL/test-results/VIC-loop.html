@@ -1,0 +1,140 @@
+<html><title>Knowledge analysis</title><body bgcolor="#ffffff"><h1>Test Knowledge</h1><hr><ul><br>
+<font color="green">SHAKEN simulates your process model and checks several things:<p>
+<li>Check what happens before and after each step (the conditions and effects
+of each step) by running a simulation
+<br>e.g.: before executing Attach, check if virus is located near the cell
+<br>   after Breach the plasma membrane of the cell is broken
+<li>Check that all the overall <b>expected effects</b> (specified by you) are obtained
+<br>e.g.: after virus-invade-cell, viral-nucleic-acid is located in the
+cytoplasm
+<li>Check correctness of <b>assumptions</b> (especially initial conditions)
+<br>e.g., no location was specified for the virus, I'll assume it is next to the
+cell
+<li>Check combinations of substeps (execution paths) that are possible
+<li>Check steps that are never reached during simulation
+<li>Check how each step enables other steps to take place
+<li>Check if there are loops
+
+<hr>
+
+For each of these checks, SHAKEN will report
+<li>checks and assumptions that seemed ok
+<li>errors,i.e., serious problems that you should fix.</font>
+ <font color="red"> Errors are shown in<b>Red</b></font><font color="green">.
+<li>warnings/notes, i., e., things it wants you to take a look at so you decide
+for yourself whether there is a problem or not). </font><font color="orange">Warnings and notes are
+shown in <b>Orange</b></font><font color="green">.
+<p>
+For each error or warning, you can ask SHAKEN to show you a list of
+suggestions for how to fix them.  You can pick one of these suggested fixes,
+or you can decide to fix the problem in a different way.  SHAKEN will take
+you to the knowledge editor window in either case.</font><hr>
+<h1>Knowledge Analysis for vic-loop</h1>
+<p>Analysis performed at 2001/6/25  18:17:16</p><hr><ul>
+<br><br><li><strong>Step: _attach2832</strong><br><br><font color="blue"><b>Checking Preconditions:</b></font>
+<pre>(:|triple| user::|_Virus2830| user::|object-of|
+      (user::|mustnt-be-a| user::|Be-Touching| user::|with|
+       (user::|object|
+        ((user::|the| user::|base| user::|of| user::|_Attach2832|)))))
+(:|triple| user::|_Cell2831| user::|object-of|
+ (user::|mustnt-be-a| user::|Be-Touching| user::|with|
+  (user::|object|
+   ((user::|the| user::|object| user::|of| user::|_Attach2832|)))))
+</pre>
+<font color="blue">Succeeded preconditions:</font>
+<pre>(:|triple| user::|_Cell2831| user::|object-of|
+      (user::|mustnt-be-a| user::|Be-Touching| user::|with|
+       (user::|object|
+        ((user::|the| user::|object| user::|of| user::|_Attach2832|)))))
+(:|triple| user::|_Virus2830| user::|object-of|
+ (user::|mustnt-be-a| user::|Be-Touching| user::|with|
+  (user::|object|
+   ((user::|the| user::|base| user::|of| user::|_Attach2832|)))))
+</pre> 
+
+<br> EXECUTE _attach2832 in _situation2828
+<br><br><font color="blue"><b>Checking Effects:</b></font><br>
+
+<br>      <font color="blue">deleting</font>
+.. nothing to delete
+<br>      <font color="blue">adding</font>
+<pre>(:|triple| user::|_Be-Attached-To2847| user::|object| user::|_Virus2830|)
+(:|triple| user::|_Be-Attached-To2847| user::|object| user::|_Cell2831|)
+(:|triple| user::|_Cell2831| user::|abuts| user::|_Virus2830|)
+(:|triple| user::|_Virus2830| user::|abuts| user::|_Cell2831|)
+</pre></li>
+
+cannot progress
+   [steps (_breach2839) were undoable this iteration...]
+
+</ul>
+<hr><h2>Summary of alternative paths simulated</h2>
+<ul>
+<li>(user::|_Attach2832|)
+<br>(user::|_Traverse2841| user::|_Breach2839| user::|_Move2838|
+     user::|_Release2837| user::|_Penetrate2833|) were not reached in this path
+</li>
+</ul>
+<hr><h2>Check expected effects</h2>
+<p>We check each simulated path</p>
+<ul>
+
+<li><p>The overall effects for path (user::|_Attach2832|)</p>
+<ul><li>Added: <br>
+(:|triple| user::|_Be-Attached-To2847| user::|object| user::|_Virus2830|)<br>
+(:|triple| user::|_Be-Attached-To2847| user::|object| user::|_Cell2831|)<br>
+(:|triple| user::|_Cell2831| user::|abuts| user::|_Virus2830|)<br>
+(:|triple| user::|_Virus2830| user::|abuts| user::|_Cell2831|)<br>
+</li>
+<li>Deleted: <br>
+</li></ul>
+<p>No expected effects for vic-loop are specified yet.</p>
+
+</li>
+
+</ul>
+<hr><h2>Summary of Loops Found</h2>
+<br>   (user::|Breach| user::|Traverse| user::|Penetrate| user::|Release|
+        user::|Breach|)<hr><h2>Error items and their fixes</h2>
+<ul>
+
+<br><br><li>NOTE: Loops were found:<br> ((user::|_Breach2839|
+                                          user::|_Traverse2841|
+                                          user::|_Penetrate2833|
+                                          user::|_Release2837|
+                                          user::|_Breach2839|)) <br>
+<br>Fix details: <ul><li>((type . :delete-or-modify-link)
+                          (fix delete-or-modify ordering constraints in loops
+                           ((user::|_Breach2839| user::|_Traverse2841|
+                             user::|_Penetrate2833| user::|_Release2837|
+                             user::|_Breach2839|))))</li>
+</ul>
+
+<br><br><li>ERROR: Steps (user::|_Breach2839|) were undoable<br>
+<br>Fix details: <ul><li>((type . :change-or-add-link-between-steps)
+                          (fix
+                           change-or-add-link-between-steps-for-undoable-event
+                           (user::|_Breach2839|)))</li>
+</ul>
+
+<br><br><li>NOTE: These steps (user::|_Traverse2841| user::|_Breach2839|
+                               user::|_Move2838| user::|_Release2837|
+                               user::|_Penetrate2833|) were not reached in simulating the path (user::|_Attach2832|) <br> <br>Fix details: <ul><li>((type
+                                                                                                                                                     . :change-or-add-link-between-steps)
+                                                                                                                                                    (fix
+                                                                                                                                                     change-or-add-link-between-steps-for-unreached-events
+                                                                                                                                                     (user::|_Traverse2841|
+                                                                                                                                                      user::|_Breach2839|
+                                                                                                                                                      user::|_Move2838|
+                                                                                                                                                      user::|_Release2837|
+                                                                                                                                                      user::|_Penetrate2833|)))</li>
+</ul>
+
+</ul>
+<h2>Info items</h2>
+<ul><br><li>((source . user::|VIC-loop|) (content (user::|_Attach2832|))
+             (type . :simulated-paths) (id . |info-item-117|))</li>
+
+</ul>
+
+</body></html>

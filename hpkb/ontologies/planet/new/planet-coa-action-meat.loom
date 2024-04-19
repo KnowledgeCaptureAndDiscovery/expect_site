@@ -1,0 +1,77 @@
+;;; The portion of planet-coa-action that goes beyond renaming
+
+;;; ======================
+;;; Roles of actions.
+
+(defrelation action-role	       ; an abstract relation, not directly used
+  :domain task-action)
+
+(defrelation action-obj		       ; direct object of an action
+  :is-primitive action-role)
+
+(defrelation action-to
+  :is-primitive action-role)
+
+(defrelation action-from
+  :is-primitive action-role)
+
+(defrelation action-with
+  :is-primitive action-role)
+
+(defrelation through
+    :is-primitive action-role)
+
+(defrelation against  
+  :is-primitive action-role)
+
+;;; ====================
+;;; Subtypes of action
+
+(defconcept type-of-operation :is |MilitaryOperation|)
+
+(defconcept condition-action
+    :is-primitive task-action
+    )
+
+(defconcept purpose-action ;; action to describe purpose of given task
+    :is-primitive (:and task-action purpose)
+    )
+
+(defconcept event-action ;; action to describe event 
+    :is-primitive task-action)
+
+(defconcept enemy-action ;; action taken by a Red unit
+    :is (:and task-action 
+	      (:filled-by who red-unit)))
+
+
+;;; ======================
+;;; actions that establish/prevent conditions
+
+(defconcept prevent-action :is-primitive condition-action)
+(defconcept enable-action :is-primitive condition-action)
+(defconcept interfere-action :is-primitive condition-action)
+
+
+
+(defconcept move
+    :is-primitive task-action)
+
+(defconcept ensure
+    :is-primitive task-action)
+
+(defconcept resupply 
+    :is-primitive task-action)
+
+;;; ======================
+;;; actions for event description  
+(defconcept engage
+  :is-primitive event-action)
+
+;;; ======================
+;;; actions for rear statement  
+
+(defconcept rear-action :is-primitive task-action)
+
+(defconcept respond  :is-primitive rear-action)
+

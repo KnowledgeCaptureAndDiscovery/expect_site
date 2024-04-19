@@ -1,0 +1,89 @@
+<advertisement>
+<agent-id>flight-status</agent-id>
+
+<capability>
+<MethodGoal>
+<VarGoalForm>
+<GoalName>MONITOR</GoalName>
+<ManyVarGoalArgument>
+	<VarGoalArgument>
+		<ParameterName>obj</ParameterName>
+			<MethodGoalArgument>
+				<VariableName>?o</VariableName><is>IS</is>
+                 <ComplexData><edt-type>SPEC-OF</edt-type>
+                 
+<ConceptName>flight-status-on-departure-day</ConceptName></ComplexData>
+	</MethodGoalArgument>
+	</VarGoalArgument>
+
+	<VarGoalArgument>
+		<ParameterName>OF</ParameterName>
+			<MethodGoalArgument>
+				<VariableName>?f</VariableName><is>IS</is>
+					<ComplexData><edt-type>INST-OF</edt-type>
+					<ConceptName>airline</ConceptName></ComplexData>
+	</MethodGoalArgument>
+	</VarGoalArgument>
+
+	<VarGoalArgument>
+		<ParameterName>OF2</ParameterName>
+			<MethodGoalArgument>
+				<VariableName>?n</VariableName><is>IS</is>
+					<ComplexData><edt-type>INST-OF</edt-type>
+					<ConceptName>flight-number</ConceptName></ComplexData>
+	</MethodGoalArgument>
+	</VarGoalArgument>
+
+	<VarGoalArgument>
+		<ParameterName>ON</ParameterName>
+			<MethodGoalArgument>
+				<VariableName>?d</VariableName><is>IS</is>
+					<ComplexData><edt-type>INST-OF</edt-type>
+					<ConceptName>date</ConceptName></ComplexData>
+	</MethodGoalArgument>
+	</VarGoalArgument>
+
+	<VarGoalArgument>
+		<ParameterName>FROM</ParameterName>
+			<MethodGoalArgument>
+				<VariableName>?a</VariableName><is>IS</is>
+					<ComplexData><edt-type>INST-OF</edt-type>
+					<ConceptName>airport</ConceptName></ComplexData>
+	</MethodGoalArgument>
+	</VarGoalArgument>
+
+	<VarGoalArgument>
+		<ParameterName>FOR</ParameterName>
+			<MethodGoalArgument>
+				<VariableName>?u</VariableName><is>IS</is>
+					<ComplexData><edt-type>INST-OF</edt-type>
+					<ConceptName>user-id</ConceptName></ComplexData>
+	</MethodGoalArgument>
+	</VarGoalArgument>
+
+	<VarGoalArgument>
+		<ParameterName>NOTIFY</ParameterName>
+			<MethodGoalArgument>
+				<VariableName>?h</VariableName><is>IS</is>
+					<ComplexData><edt-type>INST-OF</edt-type>
+					<ConceptName>hotel-fax</ConceptName></ComplexData>
+	</MethodGoalArgument>
+	</VarGoalArgument>
+
+	<VarGoalArgument>
+		<ParameterName>NOTIFY2</ParameterName>
+			<MethodGoalArgument>
+				<VariableName>?c</VariableName><is>IS</is>
+					<ComplexData><edt-type>INST-OF</edt-type>
+					<ConceptName>car-rental-fax</ConceptName></ComplexData>
+	</MethodGoalArgument>
+	</VarGoalArgument>
+
+</ManyVarGoalArgument>
+</VarGoalForm>
+</MethodGoal>
+</capability>
+<result>
+<ComplexData><edt>INST-OF</edt><ConceptName>message</ConceptName></ComplexData>
+</result>
+</advertisement>

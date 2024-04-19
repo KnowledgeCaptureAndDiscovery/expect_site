@@ -1,0 +1,1658 @@
+;;; -*- Mode: Lisp; Package: BATTLE-SPACE; Syntax: COMMON-LISP; Base: 10 -*-
+
+;;; HPKB Military unit ontology
+
+;;; Version: $Id: military-units.loom,v 1.11 1998/06/12 04:00:43 hans Exp $
+
+(in-package "BATTLE-SPACE")
+
+  ;;
+;;;;;; Military units
+  ;;
+
+;; Related Cyc/Sensus concepts:
+#|
+
+|#
+
+;;; Representational issues:
+
+;;; - Type of military unit (e.g., tank, infantry, etc.)
+;;; - Typical structure, e.g., a (US) battalion has typically
+;;;   3 companies plus a command unit plus some support platoons
+;;; - Actual structure which might be quite different
+;;; - National affiliation and its influence on the structure of a unit,
+;;;   e.g., soviet-style battalions are smaller than US-style battalions.
+;;; - Kinds and quantities of equipment typically/actually maintained by a
+;;;   military unit
+;;; - Kinds and quantities of equipment typically/actually used by a
+;;;   military unit in a particular military operation
+;;; - Relationship between unit types, e.g., a battalion is "bigger" than
+;;;   a company and it commands only lower-level units.
+
+(defconcept Military-Unit
+    :is-primitive Military-Organization)
+
+(defconcept Military-Unit-Type
+    ;; A meta-class.  Currently not used.
+    :is-primitive Existing-Object-Type)
+
+(defset Military-Unit-Order
+    ;; This isn't quite true, since brigades and regiments can be considered
+    ;;    to be at the same level - I think.
+    ;; Also: Naval units are structured differently.
+    :is (:and (:the-ordered-set
+               'Squad 'Platoon 'Company 'Battalion 'Brigade 'Regiment 'Division 'Army-Unit 'Corps)
+              Military-Unit-Type))
+
+;; Use CYC's `affiliated-with' instead:
+;(defrelation affiliation
+;    :domain Military-Unit
+;    :range Social-Entity) ;; E.g., United-States, NATO, ...
+
+;; Maybe use CYC's `controls' instead?
+;; OPCOM sub-units
+(defrelation subordinate-unit
+    :domain (:or Military-Unit Concept)
+    :range Military-Unit
+    :inverse superordinate-unit
+    :annotations ((documentation "OPCOM - Operation control sub-units")))
+
+(defrelation subordinate-unit*
+    "Transitive and reflexive version of `subordinate-unit'."
+    :domain (:or Military-Unit Military-Unit-Type)
+    :range Military-Unit
+    :is (:satisfies (?x ?z)
+           (:or (:same-as ?x ?z)
+                (role-values ?x subordinate-unit ?z)
+                (:for-some ?y
+                           (:and (role-values ?x subordinate-unit ?y)
+                                 (role-values ?y subordinate-unit* ?z))))))
+
+;; Organic sub-units
+(defrelation organic-subordinate-unit
+    :domain (:or Military-Unit Concept)
+    :range Military-Unit
+    :annotations ((documentation "Organic can be thought of as peristent ownership.")))
+
+;; Attached sub-units
+(defrelation attached-subordinate-unit
+    :domain (:or Military-Unit Concept)
+    :range Military-Unit
+    :annotations ((documentation "Tatically attached sub-unit")))
+
+(defrelation superordinate-unit
+    :domain (:or Military-Unit Concept)
+    :range Military-Unit
+    :inverse subordinate-unit)
+
+;;; Corps units by echelon:
+
+(defconcept Corps
+    :is-primitive (:and Military-Unit
+                        (:all subordinate-unit
+                              (:or Squad Platoon Company Battalion
+                                   Brigade Regiment Division Army-Unit)))
+    :annotations (Military-Unit-Type))
+
+(defconcept Army-Unit  ;; fix this name
+    :is-primitive (:and Military-Unit
+                        (:all subordinate-unit
+                              (:or Squad Platoon Company Battalion
+                                   Brigade Regiment Division)))
+    :annotations (Military-Unit-Type))
+
+(defconcept Division
+    :is-primitive (:and Military-Unit
+                        (:all subordinate-unit
+                              (:or Squad Platoon Company Battalion
+                                   Brigade Regiment)))
+    :annotations (Military-Unit-Type))
+
+(defconcept Regiment
+    :is-primitive (:and Military-Unit
+                        (:all subordinate-unit
+                              (:or Squad Platoon Company Battalion)))
+    :annotations (Military-Unit-Type))
+
+(defconcept Brigade
+    :is-primitive (:and Military-Unit
+                        (:all subordinate-unit
+                              (:or Squad Platoon Company Battalion)))
+    :annotations (Military-Unit-Type))
+
+(defconcept Battalion
+    :is-primitive (:and Military-Unit
+                        (:all subordinate-unit
+                              (:or Squad Platoon Company)))
+    :annotations (Military-Unit-Type))
+
+(defconcept Company
+    :is-primitive (:and Military-Unit
+                        (:all subordinate-unit
+                              (:or Squad Platoon)))
+    :annotations (Military-Unit-Type))
+
+(defconcept Battery
+    :is-primitive (:and Military-Unit)
+    :annotations (Military-Unit-Type))
+
+(defconcept Platoon
+    :is-primitive (:and Military-Unit
+                        (:all subordinate-unit
+                              (:or Squad)))
+    :annotations (Military-Unit-Type))
+
+(defconcept Squad
+    :is-primitive Military-Unit
+    :annotations (Military-Unit-Type))
+
+;;; Army unit by type:
+
+(defconcept Infantry-Unit
+  :is-primitive Military-Unit
+  :annotations (Military-Unit-Type))
+
+(defconcept Mechanized-Unit
+  :is-primitive Military-Unit
+  :annotations (Military-Unit-Type))
+
+(defconcept Mechanized-Infantry-Unit
+  :is (:and Mechanized-Unit Infantry-Unit)
+  :annotations (Military-Unit-Type))
+
+(defconcept Armored-Unit
+  :is-primitive Military-Unit
+  :annotations (Military-Unit-Type))
+
+(defconcept Engineer-Unit
+  :is-primitive Military-Unit
+  :annotations (Military-Unit-Type))
+
+(defconcept Artillery-Unit
+  :is-primitive Military-Unit
+  :annotations (Military-Unit-Type))
+
+(defconcept Mortar-Unit
+  :is-primitive Artillery-Unit
+  :annotations (Military-Unit-Type))
+
+(defconcept Field-Artillery-Unit
+  :is-primitive Artillery-Unit
+  :annotations (Military-Unit-Type))
+
+(defconcept Air-defense-Artillery-Unit
+  :is-primitive Artillery-Unit
+  :annotations (Military-Unit-Type))
+
+(defconcept Towed-Field-Artillery-Unit
+  :is-primitive Field-Artillery-Unit
+  :annotations (Military-Unit-Type))
+
+(defconcept Self-Propelled-Field-Artillery-Unit
+  :is-primitive Field-Artillery-Unit
+  :annotations (Military-Unit-Type))
+
+(defconcept SSM-Unit
+  :is-primitive Military-Unit
+  :annotations (Military-Unit-Type))
+
+(defconcept SCUD-Unit
+  :is-primitive Military-Unit
+  :annotations (Military-Unit-Type))
+
+(defconcept HET-Unit
+  :is-primitive Military-Unit
+  :annotations (Military-Unit-Type))
+
+(defconcept Reconnaissance-Unit
+  :is-primitive Military-Unit
+  :annotations (Military-Unit-Type))
+
+(defconcept Headquarter-Unit
+  :is-primitive Military-Unit
+  :annotations (Military-Unit-Type))
+
+(defconcept Support-Unit
+  :is-primitive Military-Unit
+  :annotations (Military-Unit-Type))
+
+(defconcept Chemical-Unit
+  :is-primitive Military-Unit
+  :annotations (Military-Unit-Type))
+
+(defconcept Commando-Unit
+  :is-primitive Military-Unit
+  :annotations (Military-Unit-Type))
+
+(defconcept Weapons-Unit
+  :is-primitive Military-Unit
+  :annotations (Military-Unit-Type))
+
+(defconcept Anti-Tank-Unit
+  :is-primitive Military-Unit
+  :annotations (Military-Unit-Type))
+
+(defconcept Maintenance-Unit
+  :is-primitive Military-Unit
+  :annotations (Military-Unit-Type))
+
+(defconcept Transport-Unit
+  :is-primitive Military-Unit
+  :annotations (Military-Unit-Type))
+
+(defconcept Service-Unit
+  :is-primitive Military-Unit
+  :annotations (Military-Unit-Type))
+
+;;; Armored units:
+
+(defconcept Tank-Battalion
+  :is (:and Battalion Armored-Unit)
+  :annotations (Military-Unit-Type))
+
+(defconcept Tank-Company
+  :is (:and Company Armored-Unit)
+  :annotations (Military-Unit-Type))
+
+(defconcept Tank-Platoon
+  :is (:and Platoon Armored-Unit)
+  :annotations (Military-Unit-Type))
+
+(defconcept Armored-Battalion
+  :is (:and Battalion Armored-Unit)
+  :annotations (Military-Unit-Type))
+
+(defconcept Armored-Company
+  :is (:and Company Armored-Unit)
+  :annotations (Military-Unit-Type))
+
+(defconcept Armored-Platoon
+  :is (:and Platoon Armored-Unit)
+  :annotations (Military-Unit-Type))
+
+;;; Engineer units:
+
+(defconcept Engineer-Brigade
+  :is (:and Brigade Engineer-Unit)
+  :annotations (Military-Unit-Type))
+
+(defconcept Engineer-Battalion
+  :is (:and Battalion Engineer-Unit)
+  :annotations (Military-Unit-Type))
+
+(defconcept Engineer-Company
+  :is (:and Company Engineer-Unit)
+  :annotations (Military-Unit-Type))
+
+;;; Infantry units
+
+(defconcept Infantry-Division
+  :is (:and Division Infantry-Unit)
+  :annotations (Military-Unit-Type))
+
+(defconcept Infantry-Brigade
+  :is (:and Brigade Infantry-Unit)
+  :annotations (Military-Unit-Type))
+
+(defconcept Infantry-Battalion
+  :is (:and Battalion Infantry-Unit)
+  :annotations (Military-Unit-Type))
+
+(defconcept Infantry-Company
+  :is (:and Company Infantry-Unit)
+  :annotations (Military-Unit-Type))
+
+(defconcept Infantry-Platoon
+  :is (:and Platoon Infantry-Unit)
+  :annotations (Military-Unit-Type))
+
+;;; Artillery units:
+
+(defconcept Artillery-Brigade
+  :is (:and Brigade Artillery-Unit)
+  :annotations (Military-Unit-Type))
+
+(defconcept Artillery-Battalion
+  :is (:and Battalion Artillery-Unit)
+  :annotations (Military-Unit-Type))
+
+(defconcept Mortar-Battery
+  :is (:and Battery Mortar-Unit)
+  :annotations (Military-Unit-Type))
+
+(defconcept Mortar-Platoon
+  :is (:and Platoon Mortar-Unit)
+  :annotations (Military-Unit-Type))
+
+(defconcept Artillery-Battery
+  :is (:and Battery Artillery-Unit)
+  :annotations (Military-Unit-Type))
+
+(defconcept Field-Artillery-Brigade
+  :is (:and Brigade Field-Artillery-Unit)
+  :annotations (Military-Unit-Type))
+
+(defconcept Towed-Field-Artillery-Battalion
+  :is (:and Battalion Towed-Field-Artillery-Unit)
+  :annotations (Military-Unit-Type))
+
+(defconcept Towed-Field-Artillery-Battery
+  :is (:and Battery Towed-Field-Artillery-Unit)
+  :annotations (Military-Unit-Type))
+
+(defconcept Self-Propelled-Field-Artillery-Battalion
+  :is (:and Battalion Self-Propelled-Field-Artillery-Unit)
+  :annotations (Military-Unit-Type))
+
+(defconcept Self-Propelled-Field-Artillery-Battery
+  :is (:and Battery Self-Propelled-Field-Artillery-Unit)
+  :annotations (Military-Unit-Type))
+
+(defconcept Air-Defense-Artillery-Brigade
+  :is (:and Brigade Air-Defense-Artillery-Unit)
+  :annotations (Military-Unit-Type))
+
+(defconcept Air-Defense-Artillery-Battalion
+  :is (:and Battalion Air-Defense-Artillery-Unit)
+  :annotations (Military-Unit-Type))
+
+(defconcept Air-Defense-Artillery-Battery
+  :is (:and Battery Air-Defense-Artillery-Unit)
+  :annotations (Military-Unit-Type))
+
+;;; Mechanized units:
+
+(defconcept Mechanized-Infantry-Brigade
+  :is (:and Brigade Mechanized-Infantry-Unit)
+  :annotations (Military-Unit-Type))
+
+(defconcept Mechanized-Infantry-Battalion
+  :is (:and Battalion Mechanized-Infantry-Unit)
+  :annotations (Military-Unit-Type))
+
+(defconcept Mechanized-Infantry-Company
+    :is (:and Company Mechanized-Infantry-Unit)
+  :annotations (Military-Unit-Type))
+
+(defconcept SSM-Brigade
+  :is (:and Brigade SSM-Unit)
+  :annotations (Military-Unit-Type))
+
+(defconcept SSM-Battery
+  :is (:and Battery SSM-Unit)
+  :annotations (Military-Unit-Type))
+
+(defconcept SCUD-Brigade
+  :is (:and Brigade SCUD-Unit)
+  :annotations (Military-Unit-Type))
+
+(defconcept SCUD-Battalion
+  :is (:and Battalion SCUD-Unit)
+  :annotations (Military-Unit-Type))
+
+(defconcept SCUD-Battery
+  :is (:and Battery SCUD-Unit)
+  :annotations (Military-Unit-Type))
+
+(defconcept HET-Company
+  :is (:and Company HET-Unit)
+  :annotations (Military-Unit-Type))
+
+;;; Reconnaissance units:
+(defconcept Recon-Battalion
+  :is (:and Battalion Reconnaissance-Unit)
+  :annotations (Military-Unit-Type))
+
+(defconcept Recon-Company
+  :is (:and Company Reconnaissance-Unit)
+  :annotations (Military-Unit-Type))
+
+(defconcept Recon-Platoon
+  :is (:and Platoon Reconnaissance-Unit)
+  :annotations (Military-Unit-Type))
+
+;;; Anti-Tank units:
+(defconcept Anti-Tank-Battalion
+  :is (:and Battalion Anti-Tank-Unit)
+  :annotations (Military-Unit-Type))
+
+(defconcept Anti-Tank-Company
+  :is (:and Company Anti-Tank-Unit)
+  :annotations (Military-Unit-Type))
+
+(defconcept Anti-Tank-Platoon
+  :is (:and Platoon Anti-Tank-Unit)
+  :annotations (Military-Unit-Type))
+
+;;; Headquarter units:
+(defconcept Headquarter-Company
+  :is (:and Company Headquarter-Unit)
+  :annotations (Military-Unit-Type))
+
+;;; Support units:
+(defconcept Support-Battalion
+  :is (:and Battalion Support-Unit)
+  :annotations (Military-Unit-Type))
+
+(defconcept Support-Company
+  :is (:and Company Support-Unit)
+  :annotations (Military-Unit-Type))
+
+(defconcept Support-Platoon
+  :is (:and Platoon Support-Unit)
+  :annotations (Military-Unit-Type))
+
+;;; Chemical units:
+(defconcept Chemical-Platoon
+  :is (:and Platoon Chemical-Unit)
+  :annotations (Military-Unit-Type))
+
+;;; Commando units
+(defconcept Commando-Battalion
+  :is (:and Battalion Commando-Unit)
+  :annotations (Military-Unit-Type))
+
+(defconcept Commando-Company
+  :is (:and Company Commando-Unit)
+  :annotations (Military-Unit-Type))
+
+;;; Weapons units
+(defconcept Weapons-Company
+  :is (:and Company Weapons-Unit)
+  :annotations (Military-Unit-Type))
+
+;;; Maintenance units
+(defconcept Maintenance-Company
+  :is (:and Company Maintenance-Unit)
+  :annotations (Military-Unit-Type))
+
+;;; Transport units
+(defconcept Transport-Company
+  :is (:and Company Transport-Unit)
+  :annotations (Military-Unit-Type))
+
+;;; Service units
+(defconcept Service-Company
+  :is (:and Company Service-Unit)
+  :annotations (Military-Unit-Type))
+
+;;; Equipment maintained and operated by a unit:
+
+(defconcept Object-Collection
+  :is-primitive Group)
+
+;; We use CYC's `group-cardinality' and `group-member-type' to represent
+;; collections of certain sizes and types.
+
+(defconcept Equipment-Collection
+  :is-primitive Object-Collection)
+
+(defrelation maintained-equipment
+    "Maintained equipment encompasses all equipment a particular unit
+has (including spares, etc.).  All of that has to move if the whole
+unit moves.  Example: `(maintained-equipment 1-35 50-M60A3s-1)' means that
+the military unit 1-35 maintains the equipment collection 50 50-M60A3s-1,
+which is a collection of 50 M60A3 main battle tanks."
+  :domain Military-Organization
+  :range Equipment-Collection)
+
+(defrelation mission-equipment
+    "Mission equipment encompasses all equipment actively involved in a
+particular military operation.  Right now we don't model differences
+based on different types of operations, i.e., the value of that role
+describes the equipment involved in a typical mission of that unit.
+Example: `(mission-equipment 1-35 40-M60A3s-1)' means that the military
+unit 1-35 typically uses the collection 40-M60A3s-1, which is a collection
+of 40 M60A3 main battle tanks."
+  :domain Military-Organization
+  :range Equipment-Collection)
+
+  ;;
+;;;;;; Aggregating equipment:
+  ;;
+
+(defrelation total-mission-equipment
+  "An equipment collection which combines all `mission-equipment' collections
+of the same equipment type for a military unit and all its subordinate units.
+The collection of all `total-mission-equipment' collections of a military unit
+summarizes all different available equipment types and their associated
+cardinalities.
+Example: (retrieve ?e (total-mission-equipment
+                        1st-iranian-infantry-division ?e))
+generates a set of equipment collections, where each element represents a
+unique equipment type and equipment cardinalities are accumulated for
+all subordinate units."
+  :domain Military-Organization
+  :range Equipment-Collection
+  :characteristics :multiple-valued
+  :function
+  ((?unit)
+   (aggregate-collections
+    (retrieve ?equipment
+              (:for-some (?subUnit)
+                         (:and (subordinate-unit* ?unit ?subUnit)
+                               (mission-equipment ?subUnit ?equipment))))
+    nil)))
+
+(defrelation total-mission-equipment-of-type
+  "A computed relation yielding a single equipment collection that
+combines all `mission-equipment' collections whose equipment type is
+a subtype of some arbitrary type for a military unit and all its
+subordinate units.
+Example: (retrieve ?e (total-mission-equipment-of-type
+                        1st-iranian-infantry-division Tank--Vehicle ?e))
+generates the collection of all tanks of the 1st Iranian infantry division."
+  :arity 3
+  :domains (Military-Organization Concept)
+  :range Equipment-Collection
+  :characteristics :single-valued
+  :function
+  ((?unit ?type)
+   (aggregate-collections
+    (retrieve ?equipment
+              (:for-some (?subUnit)
+                         (:and (subordinate-unit* ?unit ?subUnit)
+                               (mission-equipment ?subUnit ?equipment))))
+    ?type)))
+
+(defun aggregate-collections (collections filterType)
+  ;; Aggregate `collections' into a new set of collections where each
+  ;;    element type is represented exactly once and where cardinalities
+  ;;    of same-type collections are combined.
+  ;; If `filterType' is non-NIL, generate a single collection with
+  ;;    `filterType' as the element type and the combined cardinalities
+  ;;    of all `collections' whose element type is a subtype of `filterType'.
+  (let* ((groupMemberType (get-relation 'group-member-type))
+         (groupCardinality (get-relation 'group-cardinality))
+         (equipmentCollections
+          (loop for col in collections
+              collect (cons (first (get-role-values col groupMemberType))
+                            (first (get-role-values col groupCardinality)))))
+         (combinedCollections nil)
+         (currentType nil)
+         (?collection nil))
+    (when filterType
+      (unless (or (symbolp filterType)
+                  (concept-p filterType))
+        (setq filterType (loom::name filterType)))
+      (setq filterType (get-concept filterType :no-error-p t))
+      (unless filterType
+        (setq equipmentCollections nil)))
+    (cond (filterType
+           (setq equipmentCollections
+             (list
+              (cons filterType
+                    (loop for (type . count) in equipmentCollections
+                        when (or (eq type filterType)
+                                 (and (concept-p type)
+                                      (member filterType
+                                              (get-superrelations type))))
+                        sum count)))))
+          (t
+           (setq equipmentCollections
+             (sort equipmentCollections
+                   #'(lambda (type1 type2)
+                       (let ((context1 (context type1))
+                             (context2 (context type2)))
+                         (cond ((eq context1 context2)
+                                (string< (loom::name type1)
+                                         (loom::name type2)))
+                               ((< (loom::ctxt-number
+                                    (loom::ctxt context1))
+                                   (loom::ctxt-number
+                                    (loom::ctxt context2)))))))
+                   :key #'car))))
+    (when equipmentCollections
+      (loop for (type . count) in equipmentCollections
+          do (cond ((not (eq type currentType))
+                    (setq currentType type)
+                    (push (cons type count) combinedCollections))
+                   (t (incf (rest (first combinedCollections)) count)))))
+    (setq combinedCollections
+      (loop for (?type . ?count) in (nreverse combinedCollections)
+          do (setq ?collection (create nil 'Equipment-Collection))
+          collect (tell (:about ?collection Equipment-Collection
+                                (group-member-type ?type)
+                                (group-cardinality ?count)))))
+    (if filterType
+        (first combinedCollections)
+      combinedCollections)))
+(compile 'aggregate-collections)
+
+#|
+;; The expression below computes the number of main battle tanks of
+;;    a typical US tank battalion from scratch:
+(apply #'+
+  (mapcar #'second
+    ;; We have to include the equipment collection instance in
+    ;;    every tuple, otherwise we only get the set of distinct
+    ;;    collection cardinalities, since duplicates get removed:
+    (retrieve (?e ?n)
+       (:for-some (?p ?u ?t)
+          (:and (prototypical-instance US-Tank-Battalion ?p)
+                (subordinate-unit* ?p ?u)
+                (mission-equipment ?u ?e)
+                (group-member-type ?e ?t)
+                (:or (:same-as ?t Main-Battle-Tank)
+                     (subrelations Main-Battle-Tank ?t))
+                (group-cardinality ?e ?n))))))
+|#
+
+(defrelation max-load-class-in-military-unit
+  "The load class of the heaviest piece of mission equipment operated
+by a military unit."
+  :domain Military-Organization
+  :range Integer
+  :characteristics :single-valued
+  :function
+  ((?unit)
+   (let ((equipmentMasses
+          (retrieve
+           ?mass (:for-some (?subUnit ?equipment ?type)
+                    (:and (subordinate-unit* ?unit ?subUnit)
+                          (mission-equipment ?subUnit ?equipment)
+                          (group-member-type ?equipment ?type)
+                          (role-values ?type mass-of-object ?mass)))))
+         (maxMass 0))
+     (when equipmentMasses
+       (setq maxMass (apply #'ms:dim-max equipmentMasses)))
+     (when (ms:dim-number-p maxMass)
+       (setq maxMass (ms:dim-value maxMass "kg")))
+     (ceiling maxMass 1000))))
+
+(defrelation min-max-fording-depth-in-military-unit
+  "The smallest maximum fording depth of all vehicles operated
+by a military unit."
+  :domain Military-Organization
+  :range Integer
+  :characteristics :single-valued
+  :function min-max-fording-depth-in-military-unit-fn)
+
+(defun min-max-fording-depth-in-military-unit-fn (?unit)
+   (let ((equipmentTypes
+          (retrieve
+           ?type (:for-some (?subUnit ?equipment)
+                    (:and (subordinate-unit* ?unit ?subUnit)
+                          (mission-equipment ?subUnit ?equipment)
+                          (group-member-type ?equipment ?type)
+                          (concept ?type)))))
+         (Vehicle (get-concept 'Military-Vehicle))
+         (FordingVehicle (get-concept 'Military-Fording-Vehicle))
+         (AmphibiousVehicle (get-concept 'Military-Amphibious-Vehicle))
+         (maxFordingDepths '(0.5))
+         (minMaxFordingDepth 0.5))
+     ;; Punt if there is any vehicle that's neither amphibious nor fording:
+     (when (not (loop for type in equipmentTypes
+                    thereis (and (subconcept-p type Vehicle)
+                                 (not (or (subconcept-p type FordingVehicle)
+                                          (subconcept-p
+                                           type AmphibiousVehicle))))))
+       ;; This is somewhat fishy, since it disregards any vehicle types
+       ;;    for which the fording depth isn't known - we could use a default:
+       (setq maxFordingDepths
+         (retrieve
+          ?depth (:for-some (?subUnit ?equipment ?type)
+                    (:and (subordinate-unit* ?unit ?subUnit)
+                          (mission-equipment ?subUnit ?equipment)
+                          (group-member-type ?equipment ?type)
+                          (role-values ?type max-fording-depth ?depth)))))
+       (when maxFordingDepths
+         (setq minMaxFordingDepth (apply #'ms:dim-min maxFordingDepths)))
+       (when (ms:dim-number-p minMaxFordingDepth)
+         (setq minMaxFordingDepth (ms:dim-value minMaxFordingDepth "m"))))
+     minMaxFordingDepth))
+(compile 'min-max-fording-depth-in-military-unit-fn)
+
+
+;;; Affiliated units:
+
+;; NOTE: Can't use :defaults to define a typical unit organization, since
+;;    a multi-valued relation cannot be overridden at the instance level,
+;;    i.e., every instance of `us-tank-battalion' will at least contain
+;;    the default values below as its subordinate units.  BUMMER!
+#|
+(defconcept US-Tank-Battalion
+    :is (:and Tank-Battalion
+        (:filled-by affiliated-with UNITED-STATES))
+    :defaults (:filled-by subordinate-unit
+                    typical-us-tank-battalion-command-unit
+                    typical-us-tank-company-1
+                    typical-us-tank-company-2
+                    typical-us-tank-company-3
+                    typical-us-medical-platoon))
+|#
+
+(defrelation prototypical-instance
+    :domain Concept
+    :range Thing
+    :characteristics :single-valued)
+
+;; Instead, we create prototype unit instances to define default organizations:
+(tell (Tank-Battalion typical-us-tank-battalion)
+      (Tank-Company typical-us-tank-company)
+      (Tank-Platoon typical-us-tank-platoon))
+
+(defconcept US-Tank-Battalion
+    :is (:and Tank-Battalion
+        (:filled-by affiliated-with UNITED-STATES))
+    :annotations ((prototypical-instance typical-us-tank-battalion)))
+
+(defconcept US-Tank-Company
+    :is (:and Tank-Company
+        (:filled-by affiliated-with UNITED-STATES))
+    :annotations ((prototypical-instance typical-us-tank-company)))
+
+(defconcept US-Tank-Platoon
+    :is (:and Tank-Platoon
+        (:filled-by affiliated-with UNITED-STATES))
+    :annotations ((prototypical-instance typical-us-tank-platoon)))
+
+;;;Iranian Corps
+
+(defconcept Iranian-Corps
+    :is (:and Corps
+        (:filled-by affiliated-with IRAN))
+    :annotations ((prototypical-instance 1st-iranian-corps)))
+
+;;; Iranian infantry units
+
+(defconcept Iranian-Infantry-Division
+    :is (:and Infantry-Division
+        (:filled-by affiliated-with IRAN))
+    :annotations ((prototypical-instance 1st-iranian-infantry-division)))
+
+(defconcept Iranian-Infantry-Brigade
+    :is (:and Infantry-Brigade
+        (:filled-by affiliated-with IRAN))
+    :annotations ((prototypical-instance typical-iranian-infantry-brigade)))
+
+(defconcept Iranian-Infantry-Battalion
+    :is (:and Infantry-Battalion
+        (:filled-by affiliated-with IRAN))
+    :annotations ((prototypical-instance typical-iranian-infantry-battalion)))
+
+(defconcept Iranian-Infantry-Company
+    :is (:and Infantry-Company
+        (:filled-by affiliated-with IRAN))
+    :annotations ((prototypical-instance typical-iranian-infantry-company)))
+
+(defconcept Iranian-Infantry-Platoon
+    :is (:and Infantry-Platoon
+        (:filled-by affiliated-with IRAN))
+    :annotations ((prototypical-instance typical-iranian-infantry-platoon)))
+
+;;; Iranian tank units
+
+(defconcept Iranian-Tank-Battalion
+    :is (:and Tank-Battalion
+        (:filled-by affiliated-with IRAN)))
+
+(defconcept Iranian-Tank-Company
+    :is (:and Tank-Company
+        (:filled-by affiliated-with IRANS)))
+
+(defconcept Iranian-Tank-Platoon
+    :is (:and Tank-Platoon
+        (:filled-by affiliated-with IRANS)))
+
+;;; Iranian engineer units
+
+(defconcept Iranian-Engineer-Brigade
+    :is (:and Engineer-Brigade
+        (:filled-by affiliated-with IRAN)))
+
+(defconcept Iranian-Engineer-Battalion
+    :is (:and Engineer-Battalion
+        (:filled-by affiliated-with IRAN)))
+
+(defconcept Iranian-Engineer-Company
+    :is (:and Engineer-Company
+        (:filled-by affiliated-with IRANS)))
+
+;;; Iranian mechanized infantry units
+
+(defconcept Iranian-Mechanized-Infantry-Brigade
+    :is (:and Mechanized-Infantry-Brigade
+        (:filled-by affiliated-with IRAN)))
+
+(defconcept Iranian-Mechanized-Infantry-Battalion
+    :is (:and Mechanized-Infantry-Battalion
+        (:filled-by affiliated-with IRAN))
+    :annotations ((prototypical-instance iranian-d1-mechanized-infantry-battalion)))
+
+(defconcept Iranian-Mechanized-Infantry-Company
+    :is (:and Mechanized-Infantry-Company
+        (:filled-by affiliated-with IRAN))
+    :annotations ((prototypical-instance iranian-d1-mechanized-infantry-company)))
+
+(defconcept Iranian-Artillery-Brigade
+    :is (:and Artillery-Brigade
+        (:filled-by affiliated-with IRAN)))
+
+(defconcept Iranian-Recon-Battalion
+    :is (:and Recon-Battalion
+        (:filled-by affiliated-with IRAN)))
+
+(defconcept Iranian-Recon-Company
+    :is (:and Recon-Company
+        (:filled-by affiliated-with IRAN)))
+
+(defconcept Iranian-Recon-Platoon
+    :is (:and Recon-Platoon
+        (:filled-by affiliated-with IRAN)))
+
+  ;;
+;;;;;; Definition support for military unit instances
+  ;;
+
+(defmacro retrieve-military-unit-definition (name)
+  `(get ,name :military-unit-definition))
+
+(defmacro store-military-unit-definition (name definition)
+  `(setf (get ,name :military-unit-definition) ,definition))
+
+(defun help-define-military-unit (name arguments &optional parent-name)
+  ;; Helper function for `define-military-unit'.
+  (let ((seen-type-p nil)
+        (assertions nil)
+        (other-assertions nil))
+    (when (not (symbolp name))
+      (error "define-military-unit: Illegal unit name `~s'" name))
+    (loop for arg in arguments
+        do (typecase arg
+             (CONS
+              (case (first arg)
+                (affiliation
+                 (push `(affiliated-with ,name ,(second arg)) assertions))
+                (subunits
+                 (setq assertions
+                   (append (yield-subordinate-unit-assertions name (rest arg))
+                           assertions)))
+                (equipment
+                 (setq assertions
+                   (append (yield-unit-equipment-assertions name (rest arg))
+                           assertions)))
+                (like
+                 (setq assertions
+                   (append (yield-prototype-unit-assertions
+                            name (second arg) parent-name)
+                           assertions))
+                 (setq seen-type-p t))
+                (otherwise
+                 (push arg other-assertions))))
+             (otherwise
+              (setq seen-type-p t)
+              (push `(,arg ,name) assertions))))
+    (when (not seen-type-p)
+      (error "define-military-unit: Missing unit type for unit `~s'" name))
+    (store-military-unit-definition name arguments)
+    `(,@(when other-assertions
+          `((:about ,name ,@(reverse other-assertions))))
+      ,@assertions)))
+
+(defun yield-absolute-military-unit-name
+    (parent-name child-name &optional soft-p)
+  (when (not (symbolp child-name))
+    (error "define-military-unit: Illegal subordinate unit name `~s' in ~
+            unit `~s'" child-name parent-name))
+  (let ((absolute-name (format nil "~a/~a" parent-name child-name)))
+    (if soft-p
+        (find-symbol absolute-name (symbol-package parent-name))
+      (intern absolute-name (symbol-package parent-name)))))
+
+(defun yield-subordinate-unit-assertions (name subunit-specs)
+  (let ((assertions nil))
+    (loop for sub in subunit-specs
+        do (when (consp sub)
+             (let ((subName
+                    (yield-absolute-military-unit-name name (first sub))))
+               (setq assertions
+                 (append (help-define-military-unit
+                          subName (rest sub) name)
+                         assertions))
+               (setq sub subName)))
+           (cond ((find-concept sub :no-warning-p t)
+                  (warn "define-military-unit: Subordinate unit ~
+                            `~s' of unit `~s' conflicts with a concept ~
+                            of the same name; ignoring it"
+                        sub name))
+                 (t (push `(subordinate-unit ,name ,sub)
+                          assertions))))
+    assertions))
+
+(defun yield-unit-equipment-assertions (name equipment-specs)
+  (let ((assertions nil))
+    (loop for spec in equipment-specs
+        do (when (not (and (consp spec)
+                           (numberp (first spec))
+                           (symbolp (second spec))))
+             (error "define-military-unit: Illegal equipment ~
+                     specification for unit `~s'" name))
+           (when (not (find-concept (second spec) :no-warning-p t))
+             (warn "define-military-unit: Equipment type `~s' ~
+                    for unit `~s' is not yet defined"
+                   (second spec) name))
+           (let ((collectionVar (gentemp "$EQUIP-")))
+             (push `(Equipment-Collection ,collectionVar) assertions)
+             (push `(group-cardinality ,collectionVar ,(first spec))
+                   assertions)
+             (push `(group-member-type ,collectionVar ,(second spec))
+                   assertions)
+             (push `(mission-equipment ,name ,collectionVar) assertions)))
+    assertions))
+
+(defun yield-prototype-unit-assertions (name prototype parent-name)
+  (when (not (symbolp prototype))
+    (error "define-military-unit: Illegal prototype unit name `~s' in ~
+            unit `~s'" prototype name))
+  (let ((prototype-definition
+         (or (retrieve-military-unit-definition
+              (yield-absolute-military-unit-name parent-name prototype t))
+             (retrieve-military-unit-definition prototype))))
+    (when (null prototype-definition)
+      (error "define-military-unit: Prototype unit `~s' used in ~
+            unit `~s' has not yet been defined" prototype name))
+    (help-define-military-unit
+     name (subst name prototype prototype-definition) parent-name)))
+
+(defmacro define-military-unit (name &rest arguments)
+  "Definition macro for military unit instances.
+Syntax:
+        (define-military-unit <name>
+           <unit-type>
+           [(subunits <subunit-spec>+)]
+           [(equipment (<count> <type>)+)]
+           [(like <prototype-name>)]
+           [(affiliation <country-name>)]
+           <other-assertion>*)
+
+Subunits in <subunit-spec> can be either symbols which are taken to be the
+absolute names of units defined elsewhere, or a list of the form
+
+        (<sub-unit-relative-name> <argument>+)
+
+where the accepted arguments to the subunit are the same as to
+`define-military-unit'.  This allows one to define complex unit structures
+in a single definition.  The relative name of the subunit is concatenated
+with the name of its parent unit to generate a unique absolute name for
+the generated instance.
+
+The syntax `(like <prototype-name>)' can be used to avoid repetitive
+definitions by including (or copying-in) the definition of a previously defined
+prototype unit.  The prototype name can be either absolute, or, within a
+<subunit-spec>, it can also be relative to the current parent unit and refer
+to a previously defined subunit."
+  (handler-case
+      `(tell ,@(reverse (help-define-military-unit name arguments)))
+    (error (condition)
+      (format t "Error: ~a" condition)
+      nil)))
+
+
+  ;;
+;;;;;; Unit instances
+  ;;
+
+;; Some typical US units:
+
+(define-military-unit typical-us-tank-platoon
+    US-Tank-Platoon
+  (equipment (4 M1)))
+
+(define-military-unit typical-us-tank-company
+    US-Tank-Company
+  (subunits (command-unit Military-Unit
+                          (affiliation UNITED-STATES))
+            (platoon1 (like typical-us-tank-platoon))
+            (platoon2 (like platoon1))
+            (platoon3 (like platoon1))))
+
+(define-military-unit typical-us-tank-battalion
+    US-Tank-Battalion
+  (subunits (command-unit Military-Unit
+                          (equipment (2 M1)))
+            (company1 (like typical-us-tank-company))
+            (company2 (like company1))
+            (company3 (like company1))
+            (medical-platoon Platoon)))
+
+;; Some typical Iranian units:
+
+(define-military-unit typical-iranian-infantry-platoon
+    Iranian-Infantry-Platoon)
+
+(define-military-unit typical-iranian-infantry-company
+    Iranian-Infantry-Company
+  (subunits (command-unit Military-Unit)
+            (platoon1 (like typical-iranian-infantry-platoon))
+            (platoon2 (like platoon1))
+            (platoon3 (like platoon1))))
+
+(define-military-unit typical-iranian-infantry-battalion
+    Iranian-Infantry-Battalion
+  (subunits (command-unit Military-Unit
+                          (equipment (3 M577)))
+            (recon-platoon Recon-Platoon
+                           (equipment (6 BRDM-2)))
+            (supply-and-transport-company
+             Company
+             (equipment (20 Cargo-truck)
+                        (2 Tank-truck)))
+            (weapons-company
+             Company
+             (equipment (2 Cargo-truck)
+                        (4 BRDM-2-AT-3)))
+            (company1 (like typical-iranian-infantry-company))
+            (company2 (like company1))
+            (company3 (like company1))))
+
+(define-military-unit typical-iranian-infantry-brigade
+    Iranian-Infantry-Brigade
+  (subunits (command-unit Military-Unit
+                          (equipment (9 Cargo-truck)
+                                     (1 Tank-truck)))
+            (command-company Company) ;; ???
+            (chemical-platoon Platoon
+                              (equipment (1 Cargo-truck)
+                                         (2 Tank-truck)
+                                         (1 Generic-Iranian-Decontamination-Truck)))
+            (recon-company Recon-Company
+                           (equipment (18 BRDM-2)))
+            (supply-and-transport-company
+             Company
+             (equipment (45 Cargo-truck)
+                        (15 Tank-truck)))
+            (mortar-battery Mortar-Battery
+                            (equipment (12 120mm-mortar)))
+            (battalion1 (like typical-iranian-infantry-battalion))
+            (battalion2 (like battalion1))
+            (battalion3 (like battalion1))))
+
+(define-military-unit typical-iranian-mechanized-infantry-brigade
+    Iranian-Mechanized-Infantry-Brigade)
+
+(define-military-unit typical-iranian-recon-battalion
+    Iranian-Recon-Battalion)
+
+
+  ;;
+;;;;;; Iranian unit instances
+  ;;
+
+;; 1st Iranian Infantry Division
+(define-military-unit 1st-iranian-infantry-division
+    Iranian-Infantry-Division
+  (subunits (headquarter-company Company
+                (affiliation IRAN)
+                (equipment
+                    (43 Cargo-truck)
+                    (3 Tank-truck)
+                    (3 M577)))
+            (infantry-brigade1 (like typical-iranian-infantry-brigade))
+            (infantry-brigade2 (like infantry-brigade1))
+            (infantry-brigade3 (like infantry-brigade1))
+            (mechanized-brigade Iranian-Mechanized-Infantry-Brigade
+                (subunits
+                     (command-unit Military-Unit
+                        (affiliation IRAN)
+                        (equipment
+                            (14 Cargo-truck)
+                            (1 Tank-truck)
+                            (4 M577)))
+                     (mechanized-infantry-battalion Military-Unit
+                         (affiliation IRAN)
+                         (subunits
+                            (command-unit Military-Unit
+                                (equipment
+                                    (3 M577)))
+                            (mechanized-recon-platoon Iranian-Recon-Platoon
+                                (affiliation Iran)
+                                (equipment
+                                    (6 BRDM-2)))
+                            (mechanized-supply-and-transport-company Company
+                                (affiliation Iran)
+                                (equipment
+                                    (12 Cargo-truck)
+                                    (2 Tank-truck)))
+                            (mechanized-weapons-company Company
+                                (affiliation Iran)
+                                (equipment
+                                    (2 Cargo-truck)
+                                    (4 BRDM-2-AT-3)))
+                            (mechanized-company1 Iranian-Mechanized-Infantry-Company
+                                (affiliation Iran)
+                                (equipment
+                                    (12 M113)))
+                            (mechanized-company2 (like mechanized-company1))
+                            (mechanized-company3 (like mechanized-company1))))))
+            (recon-battalion Iranian-Recon-Battalion
+                (subunits
+                    (command-unit Military-Unit
+                        (affiliation IRAN)
+                        (equipment
+                            (2 Cargo-truck)
+                            (1 M577)))
+                    (recon-company1 Iranian-Recon-Company
+                        (affiliation Iran)
+                        (equipment
+                            (15 BRDM-2)))
+                    (recon-company2 (like recon-company1))
+                    (recon-company3 (like recon-company1))))
+            (field-artillery-brigade Iranian-Artillery-Brigade
+                (subunits
+                    (command-unit Military-Unit
+                        (affiliation IRAN)
+                        (equipment
+                            (10 Cargo-truck)
+                            (5 M577)))
+                    (maintenance-company Company
+                        (affiliation Iran)
+                        (equipment
+                        (19 Cargo-truck)))
+                    (transport-company Company
+                        (affiliation Iran)
+                        (equipment
+                            (48 Cargo-truck)
+                            (3 Tank-truck)))
+                    (battalion1-transport Artillery-Battalion
+                        (subunits
+                            (command-unit Military-Unit
+                                (affiliation IRAN)
+                                (equipment
+                                    (7 Cargo-truck)))
+                            (battery1-transport Artillery-Battery
+                                (affiliation Iran)
+                                (equipment
+                                    (15 Cargo-truck)
+                                    (6 M101)))
+                            (battery2-transport (like battery1-transport))
+                            (battery3-transport (like battery1-transport))
+                            (battery-service Artillery-Battery
+                                (affiliation Iran)
+                                (equipment
+                                    (8 Cargo-truck)))))
+                    (battalion2-transport (like battalion1-transport))
+                    (battalion3-transport (like battalion1-transport))
+                    (battalion-supply Artillery-Battalion
+                        (subunits
+                            (command-unit Military-Unit
+                                (affiliation IRAN)
+                                (equipment
+                                (7 Cargo-truck)))
+                            (battery1-supply Artillery-Battery
+                                (affiliation Iran)
+                                (equipment
+                                (9 Cargo-truck)
+                                (6 M109)))
+                            (battery2-supply (like battery1-supply))
+                            (battery3-supply (like battery1-supply))
+                            (service-company Company
+                                (affiliation Iran)
+                                (equipment
+                                    (10 Cargo-truck)
+                                    (2 Tank-truck)))))))
+            (air-defense-artillery-brigade Iranian-Artillery-Brigade
+                (subunits
+                    (command-unit Military-Unit
+                        (affiliation IRAN)
+                        (equipment
+                        (15 Cargo-truck)))
+                    (battalion-zpu Artillery-Battalion
+                        (subunits
+                            (command-unit Military-Unit
+                                (affiliation IRAN)
+                                (equipment
+                                (6 Cargo-truck)))
+                            (battery-zpu4 Artillery-Battery
+                                (affiliation Iran)
+                                (equipment
+                                    (15 Cargo-truck)
+                                    (6 ZPU-4)))
+                            (battery-m1939 Artillery-Battery
+                                (affiliation Iran)
+                                (equipment
+                                (15 Cargo-truck)
+                                (6 M1939)))
+                            (battery-s60 Artillery-Battery
+                                (affiliation Iran)
+                                (equipment
+                                    (15 Cargo-truck)
+                                    (6 S-60)))))
+                    (battalion-zsu Artillery-Battalion
+                        (subunits
+                            (command-unit Military-Unit
+                                (affiliation IRAN)
+                                (equipment
+                                    (6 Cargo-truck)))
+                            (battery1-zsu Artillery-Battery
+                                (affiliation Iran)
+                                (equipment
+                                    (6 Cargo-truck)
+                                    (3 ZSU-23-4M)))
+                            (battery2-zsu (like battery1-zsu))
+                            (battery3-zsu (like battery1-zsu))
+                            (battery-sa Artillery-Battery
+                                (affiliation Iran)
+                                (equipment
+                                    (6 Cargo-truck)
+                                    (3 SA-9)))))
+                    (battalion-sa Artillery-Battalion
+                        (subunits
+                            (command-unit Military-Unit
+                                (affiliation IRAN)
+                                (equipment
+                                (6 Cargo-truck)))
+                            (battery1-sa Artillery-Battery
+                                (affiliation Iran)
+                                (equipment
+                                    (9 Cargo-truck)))
+                            (battery2-sa (like battery1-sa))
+                            (battery2-sa (like battery1-sa))))))
+
+            (anti-tank-battalion Battalion
+                (affiliation IRAN)
+                (subunits
+                    (command-unit Military-Unit
+                        (affiliation IRAN)
+                        (equipment
+                        (2 Cargo-truck)
+                        (1 M577)))
+                    (company1 Company
+                        (affiliation Iran)
+                        (equipment
+                            (15 BRDM-2-AT-3)))
+                    (company2 (like company1))
+                    (company3 (like company1))))
+
+            (tank-battalion Iranian-Tank-Battalion
+                (subunits
+                    (command-unit Military-Unit
+                        (affiliation IRAN)
+                        (equipment
+                            (6 Cargo-truck)
+                            (1 M60A1)
+                            (2 M577)))
+                    (service-company Company
+                        (affiliation IRAN)
+                        (equipment
+                            (13 Cargo-truck)
+                            (8 M113)
+                            (3 M88)))
+                    (company1 Iranian-Tank-Company
+                        (affiliation Iran)
+                        (equipment
+                            (13 M60A1)))
+                    (company2 (like company1))
+                    (company3 (like company1))))
+            (commando-battalion-command-unit Military-Unit
+                (affiliation IRAN)
+                (equipment
+                    (7 Cargo-truck)))
+
+            (engineer-battalion Iranian-Engineer-Battalion
+                (subunits
+                    (command-unit Military-Unit
+                        (affiliation IRAN)
+                        (equipment
+                            (5 Cargo-truck)))
+                    (service-company Iranian-Engineer-Company
+                        (equipment
+                            (32 Cargo-truck)
+                            (4 Tank-truck)))
+                    (company-large Iranian-Engineer-Company
+                        (equipment
+                            (3 AVLB)
+                            (15 Cargo-truck)
+                            (3 TMMBridge)))
+                    (company1-small Iranian-Engineer-Company
+                        (equipment
+                            (1 AVLB)
+                            (6 Cargo-truck)
+                            (1 CEV)))
+                    (company2-small (like company1-small))))
+            (support-battalion Battalion
+                (affiliation Iran)
+                (subunits
+                    (command-unit Military-Unit
+                        (affiliation IRAN)
+                        (equipment
+                        (5 Cargo-truck)))
+                    (support-company-small Company
+                        (affiliation Iran)
+                        (equipment
+                        (12 Cargo-truck)))
+                    (support-company1-large Company
+                        (affiliation Iran)
+                        (equipment
+                            (45 Cargo-truck)
+                            (14 Tank-truck)))
+                    (support-company2-large (like support-company1-large))))))
+
+;; 2nd Iranian Infantry Division
+(define-military-unit 2nd-iranian-infantry-division
+    Iranian-Infantry-Division
+  (subunits (headquarter-company Company
+                (affiliation IRAN)
+                (equipment
+                    (43 Cargo-truck)
+                    (3 Tank-truck)
+                    (3 M577)))
+            (infantry-brigade1 (like typical-iranian-infantry-brigade))
+            (infantry-brigade2 (like infantry-brigade1))
+            (infantry-brigade3 (like infantry-brigade1))
+            (mechanized-brigade Iranian-Mechanized-Infantry-Brigade
+                (subunits
+                     (command-unit Military-Unit
+                        (affiliation IRAN)
+                        (equipment
+                            (14 Cargo-truck)
+                            (1 Tank-truck)
+                            (4 M577)))
+                     (mechanized-infantry-battalion Military-Unit
+                         (affiliation IRAN)
+                         (subunits
+                            (command-unit Military-Unit
+                                (equipment
+                                    (3 M577)))
+                            (mechanized-recon-platoon Iranian-Recon-Platoon
+                                (affiliation Iran)
+                                (equipment
+                                    (6 BRDM-2)))
+                            (mechanized-supply-and-transport-company Company
+                                (affiliation Iran)
+                                (equipment
+                                    (12 Cargo-truck)
+                                    (2 Tank-truck)))
+                            (mechanized-weapons-company Company
+                                (affiliation Iran)
+                                (equipment
+                                    (2 Cargo-truck)
+                                    (4 BRDM-2-AT-3)))
+                            (mechanized-company1 Iranian-Mechanized-Infantry-Company
+                                (affiliation Iran)
+                                (equipment
+                                    (12 M113)))
+                            (mechanized-company2 (like mechanized-company1))
+                            (mechanized-company3 (like mechanized-company1))))))
+            (recon-battalion Iranian-Recon-Battalion
+                (subunits
+                    (command-unit Military-Unit
+                        (affiliation IRAN)
+                        (equipment
+                            (2 Cargo-truck)
+                            (1 M577)))
+                    (recon-company1 Iranian-Recon-Company
+                        (affiliation Iran)
+                        (equipment
+                            (15 BRDM-2)))
+                    (recon-company2 (like recon-company1))
+                    (recon-company3 (like recon-company1))))
+            (field-artillery-brigade Iranian-Artillery-Brigade
+                (subunits
+                    (command-unit Military-Unit
+                        (affiliation IRAN)
+                        (equipment
+                            (10 Cargo-truck)
+                            (5 M577)))
+                    (maintenance-company Company
+                        (affiliation Iran)
+                        (equipment
+                        (19 Cargo-truck)))
+                    (transport-company Company
+                        (affiliation Iran)
+                        (equipment
+                            (48 Cargo-truck)
+                            (3 Tank-truck)))
+                    (battalion1-transport Artillery-Battalion
+                        (subunits
+                            (command-unit Military-Unit
+                                (affiliation IRAN)
+                                (equipment
+                                    (7 Cargo-truck)))
+                            (battery1-transport Artillery-Battery
+                                (affiliation Iran)
+                                (equipment
+                                    (15 Cargo-truck)
+                                    (6 M101)))
+                            (battery2-transport (like battery1-transport))
+                            (battery3-transport (like battery1-transport))
+                            (battery-service Artillery-Battery
+                                (affiliation Iran)
+                                (equipment
+                                    (8 Cargo-truck)))))
+                    (battalion2-transport (like battalion1-transport))
+                    (battalion3-transport (like battalion1-transport))
+                    (battalion-supply Artillery-Battalion
+                        (subunits
+                            (command-unit Military-Unit
+                                (affiliation IRAN)
+                                (equipment
+                                (7 Cargo-truck)))
+                            (battery1-supply Artillery-Battery
+                                (affiliation Iran)
+                                (equipment
+                                (9 Cargo-truck)
+                                (6 M109)))
+                            (battery2-supply (like battery1-supply))
+                            (battery3-supply (like battery1-supply))
+                            (service-company Company
+                                (affiliation Iran)
+                                (equipment
+                                    (10 Cargo-truck)
+                                    (2 Tank-truck)))))))
+            (air-defense-artillery-brigade Iranian-Artillery-Brigade
+                (subunits
+                    (command-unit Military-Unit
+                        (affiliation IRAN)
+                        (equipment
+                        (15 Cargo-truck)))
+                    (battalion-zpu Artillery-Battalion
+                        (subunits
+                            (command-unit Military-Unit
+                                (affiliation IRAN)
+                                (equipment
+                                (6 Cargo-truck)))
+                            (battery-zpu4 Artillery-Battery
+                                (affiliation Iran)
+                                (equipment
+                                    (15 Cargo-truck)
+                                    (6 ZPU-4)))
+                            (battery-m1939 Artillery-Battery
+                                (affiliation Iran)
+                                (equipment
+                                (15 Cargo-truck)
+                                (6 M1939)))
+                            (battery-s60 Artillery-Battery
+                                (affiliation Iran)
+                                (equipment
+                                    (15 Cargo-truck)
+                                    (6 S-60)))))
+                    (battalion-zsu Artillery-Battalion
+                        (subunits
+                            (command-unit Military-Unit
+                                (affiliation IRAN)
+                                (equipment
+                                    (6 Cargo-truck)))
+                            (battery1-zsu Artillery-Battery
+                                (affiliation Iran)
+                                (equipment
+                                    (6 Cargo-truck)
+                                    (3 ZSU-23-4M)))
+                            (battery2-zsu (like battery1-zsu))
+                            (battery3-zsu (like battery1-zsu))
+                            (battery-sa Artillery-Battery
+                                (affiliation Iran)
+                                (equipment
+                                    (6 Cargo-truck)
+                                    (3 SA-9)))))
+                    (battalion-sa Artillery-Battalion
+                        (subunits
+                            (command-unit Military-Unit
+                                (affiliation IRAN)
+                                (equipment
+                                (6 Cargo-truck)))
+                            (battery1-sa Artillery-Battery
+                                (affiliation Iran)
+                                (equipment
+                                    (9 Cargo-truck)))
+                            (battery2-sa (like battery1-sa))
+                            (battery2-sa (like battery1-sa))))))
+
+            (anti-tank-battalion Battalion
+                (affiliation IRAN)
+                (subunits
+                    (command-unit Military-Unit
+                        (affiliation IRAN)
+                        (equipment
+                        (2 Cargo-truck)
+                        (1 M577)))
+                    (company1 Company
+                        (affiliation Iran)
+                        (equipment
+                            (15 BRDM-2-AT-3)))
+                    (company2 (like company1))
+                    (company3 (like company1))))
+
+            (101st-armor-battalion Iranian-Tank-Battalion
+                (subunits
+                    (command-unit Military-Unit
+                        (affiliation IRAN)
+                        (equipment
+                            (6 Generic-Iranian-Light-Wheeled-Vehicle)
+                            (1 M60A1)
+                            (2 M113)))
+                    (armor-supply-and-maint-platoon Iranian-Tank-Platoon
+                        (affiliation Iran)
+                        (equipment
+                            (2 M113)
+                            (1 M88)
+                            (2 Generic-Iranian-Light-Wheeled-Vehicle)
+                            (18 Generic-Iranian-Heavy-Wheeled-Vehicle)))
+                    (recon-platoon Iranian-Recon-Platoon
+                        (affiliation Iran)
+                        (equipment
+                            (6 Generic-Iranian-Light-Wheeled-Vehicle)
+                            (8 Bangalore-Torpedo)
+                            (8 Explosives)))
+                    (medical-sect Squad
+                        (affiliation Iran)
+                        (equipment
+                            (5 Generic-Iranian-Light-Wheeled-Vehicle)))
+                    (company1 Iranian-Tank-Company
+                        (affiliation Iran)
+                        (equipment
+                            (13 M60A1)
+                            (2 M113)
+                            (1 M88)
+                            (1 Generic-Iranian-Light-Wheeled-Vehicle)
+                            (2 Generic-Iranian-Heavy-Wheeled-Vehicle)
+                            (3 Tank-Plow)
+                            (1 Tank-Blade)))
+                    (company2 (like company1))
+                    (company3 (like company1))))
+            (commando-battalion-command-unit Military-Unit
+                (affiliation IRAN)
+                (equipment
+                    (7 Cargo-truck)))
+
+            (engineer-battalion Iranian-Engineer-Battalion
+                (subunits
+                    (command-unit Military-Unit
+                        (affiliation IRAN)
+                        (equipment
+                            (11 Generic-Iranian-Light-Wheeled-Vehicle)
+                            (1 Generic-Iranian-Heavy-Wheeled-Vehicle)
+                            (5 M113)))
+                    (service-company Iranian-Engineer-Company
+                        (affiliation Iran)
+                        (equipment
+                            (2 M88)
+                            (7 Generic-Iranian-Light-Wheeled-Vehicle)
+                            (18 Generic-Iranian-Heavy-Wheeled-Vehicle)
+                            (6 Military-Dozer)))
+                    (company1 Iranian-Engineer-Company
+                        (affiliation Iran)
+                        (equipment
+                            (14 M113)
+                            (6 Generic-Iranian-Light-Wheeled-Vehicle)
+                            (8 Generic-Iranian-Heavy-Wheeled-Vehicle)
+                            (4 AVLB)
+                            (2 CEV)
+                            (4 MICLIC)
+                            (10 Bangalore-Torpedo)))
+                    (company2 (like company1))
+                    (company3 (like company1))))
+            (support-battalion Battalion
+                (affiliation Iran)
+                (subunits
+                    (command-unit Military-Unit
+                        (affiliation IRAN)
+                        (equipment
+                        (5 Cargo-truck)))
+                    (support-company-small Company
+                        (affiliation Iran)
+                        (equipment
+                        (12 Cargo-truck)))
+                    (support-company1-large Company
+                        (affiliation Iran)
+                        (equipment
+                            (45 Cargo-truck)
+                            (14 Tank-truck)))
+                    (support-company2-large (like support-company1-large))))))
+
+;; 201st MGB Company
+;; 201st MGB Company of 1st Iranian Corps:
+(define-military-unit 201st-mgb-company
+    Company
+  (affiliation IRAN)
+  (equipment
+   (4 MGB)
+   (6 Generic-Iranian-Light-Wheeled-Vehicle)
+   (36 Generic-Iranian-Heavy-Wheeled-Vehicle)
+   (1 Military-Dozer)
+   (1 Military-Loader)
+   (1 Military-Crane)))
+
+;; 202nd M4T6 Float Company
+;; 202nd M4T6 Float Company of 1st Iranian Corps:
+(define-military-unit 202nd-m4t6-float-company
+    Company
+  (affiliation IRAN)
+  (equipment
+   (6 M4T6)
+   (18 BEB)
+   (10 Generic-Iranian-Light-Wheeled-Vehicle)
+   (68 Generic-Iranian-Heavy-Wheeled-Vehicle)
+   (1 Military-Dozer)
+   (1 Military-Crane)))
+
+;; 203rd Ribbon Company
+;; 203rd Ribbon Company of 1st Iranian Corps:
+(define-military-unit 203rd-ribbon-company
+    Company
+  (affiliation IRAN)
+  (equipment
+   (30 Ribbon-Bridge-Bay)
+   (12 Ribbon-Bridge-Ramp)
+   (14 BEB)
+   (9 Generic-Iranian-Light-Wheeled-Vehicle)
+   (70 Generic-Iranian-Heavy-Wheeled-Vehicle)
+   (1 Military-Dozer)
+   (1 Military-Crane)))
+
+;; Engineer Brigade
+(define-military-unit 1st-iranian-corps-engineer-brigade
+    Iranian-Engineer-Brigade
+  (subunits 201st-mgb-company
+            202nd-m4t6-float-company
+            203rd-ribbon-company))
+
+;; 1st Iranian Corps
+(define-military-unit 1st-iranian-corps
+    Iranian-Corps
+  (subunits 1st-iranian-infantry-division
+            2nd-iranian-infantry-division
+            1st-iranian-corps-engineer-brigade))
+
+(tellm)

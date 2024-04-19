@@ -1,0 +1,165 @@
+<HTML>
+<HEAD>
+   <TITLE>Y2 Plan</TITLE>
+
+ 
+
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+
+<TABLE  align=center WIDTH=730 border=0>
+<TR><TD colspan=3>
+
+<P ALIGN=CENTER>
+
+
+
+<TR><TD WIDTH=100></TD>
+
+<TD WIDTH=550>
+
+<BR><BR>
+
+<P align=center><B><FONT FACE=ARIAL COLOR=blue SIZE=+1>DIALOGUE MANAGEMENT</A> </FONT></B></P>
+
+
+<PRE>
+       
+       Yolanda Gil (gil@isi.edu, (310)448-8794) 
+       Jihie Kim (jihie@isi.edu, (310)448-8769) 
+       Jim Blythe (blythe@isi.edu, (310)448-8251) 
+</PRE>
+
+<HR> 
+
+<p>
+<B><I><FONT SIZE=+1>DIALOGUE MANAGEMENT</B></FONT></I>
+
+<p>
+One of the biology experts who have used SHAKEN during the summer evaluation
+said "I donnot really know whether there is a possibility of standardizing the
+entire process. But it would be better to document some of the processes which
+you think are standardized".
+
+<p> To be able to help them we'd like to develop a dialogue manager that uses
+KA plans to keep track of the user's actions and can make suggestions for how
+to proceed. There are several things we need to do in the process.
+
+<ul>
+<li> DEVELOP TYPICAL SEQUENCES OF STEPS THEY CAN FOLLOW TO BUILD/CHECK KBs
+
+<p>
+One of the experts describes his process of building cmaps step by step in his
+feedback:
+<ul>
+ <li> (find concepts)
+  make use of words that already exist in the Shaken and are mentioned
+exactly in the text
+ <li> if not, search for a simular concept. Read its specification and try to
+satisfy its requirements
+ <li> make my own entities/events starting from the bottom.  The cmap design has
+a hierarchy.  First, I create building blocks on which other cmaps are
+dependent. Thereafter expand the hierarchy.
+ <li> make a rough cmap and try to see wheter it fits the model, which Shaken
+accepts.
+ <li> go for completing the cmap
+</ul>
+<p>
+We can develop a set of typical sequences of KA steps/substeps they can follow
+in the process of building KBs.  The KA steps should also enable users to
+check if the KBs are consistent with what they expect to build and there is no
+error in the KBs.  We can use these sequences to design the KA dialog, which
+can highlight what they have done so far and what they need to do next. 
+<p>
+
+<li> BUILD & USE DIALOG PLANS TO REALIZE DIFFERENT KA TASKS
+
+<p>
+To develop the library of KA plans we would draw ideas from Intelligent
+Tutoring Systems, in effect trying to make SHAKEN a smarter student.  An
+initial (old) outline is posted at <A HREF="http://www.isi.edu/~gil/rkf/ITS.ppt">
+http://www.isi.edu/~gil/rkf/ITS.ppt</A>.  For example, ITS often start by showing the student the purpose of
+a lesson, partly to give the student a roadmap but also to detect any gaps in
+the student's prior knowledge assumed by the lesson.  There are many other
+interesting points about controlling nested subdialogues, teaching strategies,
+providing immediate feedback, etc.
+
+<p>There are also known strategies that are used by very best teachers in
+tutoring inquiries [Collins and Stevens], and we may adopt some of their
+strategies based on their applicabilities to the SHAKEN system.
+For example, there are a variety of strategies for elliciting k from students
+(in the process of teaching how to derive new rule or theory), suggesting what
+to do, or commenting.  Especially, there are strategies for eliciting missing
+steps in logical chains and strategies of asking for differences/similarities
+in factors between different cases.
+<p>
+
+<li> MAINTAIN AGENDA ("status" window)
+
+<p>
+The dialogue state would be shown to the user as a "status" 
+window, where the user could see the currently active KA plans as a 
+list of bullets and sub-bullets, each bullet would be checked if 
+completed and collapsed when all its sub-bullets are completed.  
+
+<p>
+The dialogue manager would support: 1) generation, to suggest to the user what
+to do next based on the library of KA plans, 2) recognition, to track what the
+user is doing in terms of the KA plans. The user could choose to toggle
+between a "suggest" mode (generation) and a "comment" mode (recognition).  We
+could also keep a history of the user's sessions, and be more forceful to
+impose the "suggest" mode to new users or when a more experience user tries a
+new feature/capability of the system.
+
+<p>
+The agenda items will be organized based on various priority rules and the
+user's experience level.  Some of the priority rules used in tutorial
+inquiries seem also useful.
+ 
+<ul> 
+ <li> errors before omissions
+ <li> shorter fixes before longer fixes
+ <li> prior steps before later steps (in temporal or causal sequence)
+ <li> simple (or easy) tasks before complex (or difficult) tasks
+</ul>
+
+Additional priority rules can be developed based on the typical KA tasks we
+find in 1.  We expect that this will allow them to allocate their time among
+various tasks more efficiently.
+
+<p>
+A new capability that we'd like to support with this work is 
+meta-level interaction with the user.  By allowing users to 
+manipulate/edit the status window, they could indicate whether a 
+certain task is completed (e.g., I'm done adding sub-steps).
+
+<p>
+
+</ul
+>
+<p>
+An intriguing possibility is to use this as a way to 
+determine/compare the quality of human tutors by looking at how and 
+how much they complete the KA plans (how organized their lessons are, 
+how thorough with details), and eventually to train human tutors 
+through practicing with the system.
+
+<p>
+We have done some previous work in this area on KA Scripts and 
+PSMTool, several papers are available at <A
+HREF="http://www.isi.edu/expect/link/papers-ka.html">
+http://www.isi.edu/expect/link/papers-ka.html</A>.
+
+<HR>
+<p> <A HREF="http://www.isi.edu/expect/"> EXPECT Homepage</A>.</P>
+<p> <A HREF="http://www.isi.edu/expect/projects/rkf/"> RKF Homepage</A>.</P>
+
+<HR SIZE=2>
+
+<TD WIDTH=100></TD>
+
+</TR>
+
+</TABLE>
+</BODY>
+</HTML>

@@ -1,0 +1,278 @@
+;; This file contains the ontology necessary to represent geographic
+
+;; information in terms of the Universal Transverse Mercator (UTM) format
+
+
+
+constant: NWUTrafficabilityMt.
+
+in Mt: BaseKB.
+
+isa: ApplicationContext IKBConstant.
+
+genlMt: GeographyMt MovementMt TerrestrialFrameOfReferenceMt NaiveSpatialMt.
+
+comment: "This #$ApplicationContext houses CycL versions of the
+
+coordinate system representations devised by #$Deyoe in the course of
+
+his work for NWU on terrain and trafficability.".
+
+F:
+
+(genlMt ModernMilitaryTacticsMt NWUTrafficabilityMt).
+
+
+
+constant: CartesianCoordinateSystem.
+
+in Mt: NWUTrafficabilityMt.
+
+isa: Collection IKBConstant.
+
+genls: CoordinateSystem.
+
+comment: "The collection of cartesian coordinate systems based upon a set
+
+of perpendicular coordinate planes.  Each CartesianCoordinateSystem has its
+
+own measure predicates.  In a CartesianCoordinateSystem, SYS, for a two- or
+
+three-dimensional space, the x distance coordinates, DISTANCE-X, (distance
+
+from the y axis, or from the yz plane) of a SpatialThing, THING,  are
+
+expressed using a xAxisPredOfSystem PRED-X, specified by
+
+(xAxisPredOfSystem PRED-X SYS), in assertions of the form (PRED-X THING
+
+DISTANCE-X).  In the same CartesianCoordinateSystem, SYS, the y distance
+
+coordinates, DISTANCE-Y, (distance from the x axis, or from the xz plane)
+
+of a SpatialThing, THING,  are expressed using a yAxisPredOfSystem PRED-Y,
+
+specified by (yAxisPredOfSystem PRED-Y SYS), in assertions of the form
+
+(PRED-Y THING DISTANCE-Y).  Similary, the z distance coordinates,
+
+DISTANCE-Z, (distance from the xy plane) of a SpatialThing, THING,  are
+
+expressed using a zDistancePredicate PRED-Z, specified by
+
+(zDistancePredicate PRED-Z SYS), in assertions of the form (PRED-Z THING
+
+DISTANCE-Z).".
+
+
+
+Constant: xAxisPredOfSystem.
+
+in Mt: NWUTrafficabilityMt.
+
+isa: IKBConstant BinaryPredicate.
+
+genlPreds: coordinateValuePredicate.
+
+arity: 2.
+
+arg1Isa: BinaryPredicate.
+
+arg2Isa: CartesianCoordinateSystem.
+
+arg1Format: SingleEntry.
+
+comment:  "(#$xAxisPredOfSystem PRED SYS) means that PRED is the
+
+#$BinaryPredicate used to express the distance from the Y axis (in
+
+2-dimensions) or the YZ plane (in 3-dimensions) of #$SpatialThings in the
+
+#$CartesianCoordinateSystem SYS.".
+
+
+
+Constant: yAxisPredOfSystem.
+
+in Mt: NWUTrafficabilityMt.
+
+isa: IKBConstant BinaryPredicate.
+
+genlPreds: coordinateValuePredicate.
+
+arity: 2.
+
+arg1Isa: BinaryPredicate.
+
+arg2Isa: CartesianCoordinateSystem.
+
+arg1Format: SingleEntry.
+
+comment:  "(#$yAxisPredOfSystem PRED SYS) means that PRED is the
+
+binaryPredicate used to express the distance from the X axis (in
+
+2-dimensions) or the XZ plane (in 3-dimensions) of #$SpatialThings in the
+
+#$CartesianCoordinateSystem SYS.".
+
+
+
+Constant: zAxisPredOfSystem.
+
+in Mt: NWUTrafficabilityMt.
+
+isa: IKBConstant BinaryPredicate.
+
+genlPreds: coordinateValuePredicate.
+
+arity: 2.
+
+arg1Isa: BinaryPredicate.
+
+arg2Isa: CartesianCoordinateSystem.
+
+arg1Format: SingleEntry.
+
+comment:  "(zAxisPredOfSystem PRED SYS) means that PRED is the
+
+binaryPredicate used to express the distance from the XY plane (in
+
+3-dimensions) of SpatialThings in the CartesianCoordinateSystem SYS.".
+
+
+
+Constant: UTMCoordinateSystem.
+
+in Mt: NWUTrafficabilityMt.
+
+isa: IKBConstant CartesianCoordinateSystem.
+
+comment: "A coordinateSystem based upon the CartesianCoordinateSystem, that
+
+sections the earth into many zones, each zone being a 6 degree latitudinal
+
+slice of the earth's surface.  X directions are measured relative to the
+
+central meridian of the zone, while y directions are measured relative to
+
+the equator.  Each THING within a UTMCoordinate system needs an easting,
+
+northing, and utmZone.".
+
+
+
+Constant: easting.
+
+in Mt: NWUTrafficabilityMt.
+
+isa: IKBConstant BinaryPredicate.
+
+arity: 2.
+
+arg1Isa: SpatialThing.
+
+arg2Isa: ScalarInterval.
+
+arg2Format: SingleEntry.
+
+xAxisPredOfSystem: UTMCoordinateSystem.
+
+comment: "#$easting is the #$xAxisPredOfSystem of the UTMCoordinateSystem,
+
+i.e. within the UTMCoordinateSystem, easting is the predicate used to
+
+measure the distance from the y-axis.  eastings are measured relative to a
+
+particular utmZone and the central meridian of that zone, and approximately
+
+represent distance in meters from the western boundry of the a UTM zone.
+
+By offsetting the easting of the central meridian to 500,000, all easting
+
+values are guaranteed to be postitive: a zone is at most 1,000,000 meters
+
+wide.  (#$easting THING DIST) means that SpatialThing THING is located at
+
+[DIST - 500,000] east of the central meridian, for DIST greater than 500,000, or
+
+[500,000 - DIST] west of the central meridian, for DIST less than 500,000.  All
+
+eastings are relative to a particular utmZone.".
+
+F:
+
+(xAxisPredOfSystem easting UTMCoordinateSystem).
+
+
+
+
+
+Constant: northing.
+
+in Mt: NWUTrafficabilityMt.
+
+isa: IKBConstant BinaryPredicate.
+
+arity: 2.
+
+arg1Isa: SpatialThing.
+
+arg2Isa: ScalarInterval.
+
+arg2Format: SingleEntry.
+
+yAxisPredOfSystem: UTMCoordinateSystem.
+
+comment: "#$northing is the #$yAxisPredOfSystem of the UTMCoordinateSystem,
+
+i.e. within the UTMCoordinateSystem, northing is the predicate used to
+
+measure the distance from the x-axis.  northings are measured relative to
+
+the equator, and represent distance in meters from the equator, positive
+
+for the northern hemisphere and negative for the southern.  (#$northing THING
+
+DIST) means that SpatialThing THING is located DIST meters north of the
+
+equator, for DIST greater than 0, and DIST meters south of the equator for DIST less than 0.".
+
+F:
+
+(yAxisPredOfSystem northing UTMCoordinateSystem). 
+
+
+
+
+
+Constant: utmZone.
+
+in Mt: NWUTrafficabilityMt.
+
+isa: IKBConstant BinaryPredicate.
+
+arity: 2.
+
+arg1Isa: SpatialThing-Localized.
+
+arg2Isa: ScalarInterval.
+
+arg2Format: SingleEntry.
+
+coordinateValuePredicate: UTMCoordinateSystem.
+
+comment: "(utmZone THING ZONE) represents the UTM Zone that THING can be
+
+found in.  A utmZone is 6 degrees latitude wide, and mapped directly to the
+
+surface of the earth.  Hence, any stationary object has a unique utmZone,
+
+the utmZone in which the longitude line of the object falls.".
+
+
+
+
+
+
+

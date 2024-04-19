@@ -1,0 +1,243 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<BODY BGCOLOR="FFFFFF">
+<TITLE>4 A Library of Action Templates</TITLE>
+<META NAME="description" CONTENT="4 A Library of Action Templates">
+<META NAME="keywords" CONTENT="grammar">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="grammar.css">
+</HEAD>
+<BODY LANG="EN">
+ <H1><A NAME="SECTION00040000000000000000">4 A Library of Action Templates</A></H1>
+<P>
+In the contact with the CHECKMATE experts, it became clear only
+certain verbs are actually used as action types. Further, some may be
+used but are not recommended (e.g. <I>conduct</I>). Thus, it is
+possible to list the recommended verbs so as to create a library of
+them, which can be made available to the user when s/he is specifying
+an objective.
+<P>
+The number of verbs used in practice seems surprisingly small: not
+more than 30 verbs have been used in the examples we got from
+CHECKMATE. This is due in part to the fact that objectives in air
+campaign planning in ACPT are actually <em>force application</em>
+objectives, and thus several other types of actions related to
+logistics, intelligence, etc. are not used. If ACPT is used to plan
+these other aspects then more verbs would have to be introduced.
+<P>
+Further, each of these actions carries limitations with respect to the
+types of action objects that can be used. For instance, all known
+occurrences of the action type <I>establish</I> refer to an
+<em>aspect</em> -- indeed, most of the times this aspect is <I>air
+  superiority</I> or <I>air supremacy</I>. Further, all actions admit only
+very few action roles, most of them only the direct object. This
+indicates that, more than a list of verbs or action types, it is
+possible to provide a library of <em>action templates</em>: an action
+type plus one or more pairs role/object type.
+<P>
+The proposed library of action templates is listed below. The direct
+object is indicated as DOB. Action roles that admit more than one type
+of filler have them indicated as <I>A | B</I>. For example, a role
+DOB with filler <I>action | aspect</I> allow either an action or an
+aspect as their role object.
+<P>
+<PRE>Attrit                DOB object
+
+Damage                DOB object
+
+Deceive               DOB object
+
+Defend                DOB object
+                      FROM action
+
+Defend against        DOB action | object
+
+Degrade               DOB action-capability | aspect
+
+Deny                  DOB action
+                      TO object
+
+Deny use              OF object
+                      TO action
+
+Deploy                DOB object
+
+Destroy               DOB object | aspect | action-capability
+
+Deter                 DOB action
+
+Disable               DOB action-capability | object
+
+Discourage            DOB action
+
+Disrupt               DOB action-capability | object | action
+
+Drive                 DOB object
+                      INTO area
+
+Eliminate             DOB action-capability | object
+
+Ensure                DOB aspect
+
+Establish             DOB aspect
+
+Exploit               DOB action | action-capability
+
+Gain                  DOB aspect
+
+Isolate               DOB object
+
+Limit                 DOB action-capability
+
+Maintain              DOB aspect
+
+Neutralize            DOB object | action
+
+Prevent               DOB action | aspect
+
+Promote               DOB aspect
+
+Protect               DOB object
+
+Reduce                DOB object
+                      TO aspect
+
+Reduce                DOB action-capability
+
+Separate              DOB object
+                      FROM object
+
+Sever                 DOB object
+
+Stop                  DOB action
+
+Support               DOB action</PRE>
+<P>
+<H2><A NAME="SECTION00041000000000000000">4.1 Some Issues about the Library</A></H2>
+<P>
+In this section, we discuss some issues on the choice of the elements
+that were included or not included in the library, and the modelling
+decisions behind these choices.
+<P>
+<H4><A NAME="SECTION00041010000000000000">Templates versus examples</A></H4>
+<P>
+This library does not contain ready-made objectives or examples of
+objectives, but according to CHECKMATE this is a feature rather than
+a bug: ready-made objectives can make the users (particularly less
+experienced ones) lazy in composing their own objectives. A library of
+templates imposes a structure but leaves open several elements of the
+objective to be filled by the user. This is particularly important in
+training contexts, when the user might be interested to know what
+types of objectives s/he may write but must be led to think about the
+problem instead of accepting a ready-made solution. Another advantage
+of a library such as this is that it helps to maintain some degree of
+consistency and uniformity in writing the objectives, thus improving
+communication and reducing the chances of any misunderstandings.
+<P>
+<H4><A NAME="SECTION00041020000000000000">Action Verbs that Were Not Included</A></H4>
+<P>
+Many verbs have been proposed to be included in the library but were
+discarded for specific reasons:
+<P>
+<DL ><DT><STRONG>vague verbs</STRONG>
+<DD> These are:
+  <UL><LI> <I>Provide for</I><LI> <I>Conduct</I><LI> <I>Execute</I><LI> <I>Employ</I><LI> <I>Build</I><LI> <I>Attack</I>
+  </UL>
+<P>
+  These verbs are not specific enough to be used in the levels of CINC
+  Objectives and below (though they may be used in the levels above,
+  e.g. National Objectives).
+<P>
+<DT><STRONG>verbs that have a better substitute</STRONG>
+<DD> Some verbs or verb
+  expressions are commonly used but may have substitutes that convey
+  with more clarity their meaning:
+  <UL><LI> <I>Deny access</I> is substituted by <I>Isolate</I><LI> <I>Interrupt the flow of something</I> is substituted by <I>
+      Disrupt OBJ the flow of something ON medium</I><LI> <I>Render ineffective</I> is substituted by either <I>
+      Disrupt</I> or <I>Isolate</I>, depending on the context.<LI> <I>Establish</I> is substituted by <I>Gain</I> if the object is
+    air superiority. 
+  </UL> 
+ </DL><H4><A NAME="SECTION00041030000000000000">Conjunctions of Action Verbs</A></H4>
+<P>
+There are several occurences in practice of objectives with two action
+verbs in conjunction. The two most frequent examples are <I>Gain and
+  Maintain</I> and <I>Isolate and Neutralize</I>. CHECKMATE experts have
+pointed out that this is common practice (culture) in the air force,
+but it is in fact wrong, since these verbs actually refer to rather
+different processes. For instance, different types of force and
+different tasks are necessary to gain air superiority and to maintain
+it once it has been gained. Therefore, the library does not contain
+these conjunctions, and they are not allowed in the grammar either. Of
+course, the user may still want to employ these in the free text
+description of the objectives.
+<P>
+<H4><A NAME="SECTION00041040000000000000">A Typology of Action Verbs</A></H4>
+<P>
+The following is a first draft of a typology of action verbs prepared
+based on (i) the division of action verbs in groups drawn by the types
+of action objects they use (aspect, object, action capability, etc.)
+and (ii) a number of distinctions proposed by CHECKMATE experts. The
+first principle leads to a division in four basic groups: <EM>
+  aspect-related</EM>, <EM>capability-related</EM>, <EM>action-related</EM> and
+<EM>object-related</EM>. The second principle defines four subtypes of
+<EM>object-related</EM> action verbs: <EM>denial</EM>, <EM>disconnection</EM>
+(or <EM>separation</EM>), <EM>protection</EM> and <EM>physical
+  destruction</EM>. The typology is pictured in a tree-like form in
+Figure&nbsp;<A HREF="node4.html#figactionverbs">2</A>.
+<P>
+This typology is not a taxonomy (where alternatives are mutually
+exclusive) -- that is, certain action verbs fit in more than one
+place.  Two verbs presently don't fit in any category: <I>Deceive</I>
+and <I>Drive</I>. They may be assigned to categories of their own, but
+a final decision depends on CHECKMATE's advice. The set of types is
+not definitive, and more types/sub-types may be proposed.
+<P>
+<P><A NAME="173">&#160;</A><A NAME="figactionverbs">&#160;</A><A NAME="tex2htmlfigure173" HREF="img2.gif">[IMAGE ]</A><BR>
+<STRONG>Figure 2:</STRONG> Typology of action verbs (draft).<BR>
+<P>
+<P>
+Below is a list of the action verbs belonging to each of the types:
+<P>
+<DL ><DT><STRONG>Aspect-related</STRONG>
+<DD>  
+  <UL><LI> Gain<LI> Maintain<LI> Provide for<LI> Ensure<LI> Reduce
+  </UL>
+<DT><STRONG>Capability-related</STRONG>
+<DD>  
+  <UL><LI> Disrupt<LI> Destroy<LI> Degrade<LI> Disable<LI> Elminate<LI> Reduce<LI> Limit
+  </UL>
+<DT><STRONG>Action-related</STRONG>
+<DD>  
+  <UL><LI> Prevent<LI> Defend-against<LI> Deter<LI> Disrupt<LI> Destriy<LI> Stop<LI> Discourage
+  </UL>
+<DT><STRONG>Object-related</STRONG>
+<DD>  
+  <DL ><DT><STRONG>Denial</STRONG>
+<DD>  
+    <UL><LI> Deny<LI> Deny use<LI> Disrupt<LI> Degrade
+    </UL>
+  <DT><STRONG>Disconnection (separation)</STRONG>
+<DD>  
+    <UL><LI> Isolate<LI> Neutralize<LI> Separate<LI> Disable<LI> Sever
+    </UL>
+  <DT><STRONG>Protection</STRONG>
+<DD> 
+    <UL><LI> Protect<LI> Defend-against
+    </UL>
+  <DT><STRONG>Physical destruction</STRONG>
+<DD>  
+    <UL><LI> Destroy<LI> Degrade<LI> Attrit<LI> Eliminate<LI> Damage<LI> Reduce
+    </UL> 
+ </DL> 
+ </DL>
+<P>
+<BR> <HR>
+<P><ADDRESS>
+<I>Andre Valente <BR>
+Fri Sep 13 20:17:45 PDT 1996</I>
+</ADDRESS>
+</BODY>
+</HTML>

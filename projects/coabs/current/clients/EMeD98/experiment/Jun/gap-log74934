@@ -1,0 +1,2243 @@
+select: add new button
+   at Thu May 27 19:50:26 PDT 1999
+
+ done editing:((name estimate-time-to-fill-crater)
+(capability (estimate (obj (?t is (spec-of time)))
+		      (for (?f is (inst-of fill-crater)))))
+(result-type (inst-of number))
+(method (divide (obj (esimate (spec-of volume)) (of (crater-of ?f)))
+		(by (obj (estimate (spec-of earthmoving-rate) of
+				   (crater-of ?f))))))
+)
+
+   at Thu May 27 20:07:53 PDT 1999
+
+added New method:((name estimate-time-to-fill-crater)
+(capability (estimate (obj (?t is (spec-of time)))
+		      (for (?f is (inst-of fill-crater)))))
+(result-type (inst-of number))
+(method (divide (obj (esimate (spec-of volume)) (of (crater-of ?f)))
+		(by (obj (estimate (spec-of earthmoving-rate) of
+				   (crater-of ?f))))))
+)
+
+   at Thu May 27 20:07:53 PDT 1999
+
+check: All Agenda
+   at Thu May 27 20:07:53 PDT 1999
+
+check: Method Sub-Method Relation
+   at Thu May 27 20:07:53 PDT 1999
+
+check: Method Capability Hierarchy
+   at Thu May 27 20:08:00 PDT 1999
+
+select: modify button
+   at Thu May 27 20:08:16 PDT 1999
+
+ done editing:((name estimate-time-to-fill-crater)
+(capability (estimate (obj (?t is (spec-of time)))
+		      (for (?f is (inst-of fill-crater)))))
+(result-type (inst-of number))
+(method (divide (obj (estimate (spec-of dirt-volume)) (of (crater-of ?f)))
+		(by (obj (estimate (spec-of earthmoving-rate) of
+				   (crater-of ?f))))))
+)
+
+   at Thu May 27 20:09:09 PDT 1999
+
+modified method:((name estimate-time-to-fill-crater)
+(capability (estimate (obj (?t is (spec-of time)))
+		      (for (?f is (inst-of fill-crater)))))
+(result-type (inst-of number))
+(method (divide (obj (estimate (spec-of dirt-volume)) (of (crater-of ?f)))
+		(by (obj (estimate (spec-of earthmoving-rate) of
+				   (crater-of ?f))))))
+)
+
+   at Thu May 27 20:09:09 PDT 1999
+
+check: All Agenda
+   at Thu May 27 20:09:09 PDT 1999
+
+check: Method Sub-Method Relation
+   at Thu May 27 20:09:09 PDT 1999
+
+check: Method Capability Hierarchy
+   at Thu May 27 20:09:11 PDT 1999
+
+check: Method Sub-Method Relation
+   at Thu May 27 20:09:15 PDT 1999
+
+select: add new button
+   at Thu May 27 20:09:20 PDT 1999
+
+ done editing:((name estimate-compute-volume)
+ (capability (estimate (obj (?v is (spec-of volume))) (of (?f is crater))))
+ (result-type (inst-of number))
+ (method (multiply (obj (multiply
+			 (obj (multiply
+			       (obj (multiply
+				     (obj (multiply
+					   (obj (multiply
+						 (obj 3.141592) (by 0.5)))
+					   (by 0.5)))
+				     (by (width-of-object ?f))))
+			       (by (length-of-object ?f))))
+			 (by 1/3)))
+		   (by (height-of-object ?f)))))
+   at Thu May 27 20:20:59 PDT 1999
+
+added New method:((name estimate-compute-volume)
+ (capability (estimate (obj (?v is (spec-of volume))) (of (?f is crater))))
+ (result-type (inst-of number))
+ (method (multiply (obj (multiply
+			 (obj (multiply
+			       (obj (multiply
+				     (obj (multiply
+					   (obj (multiply
+						 (obj 3.141592) (by 0.5)))
+					   (by 0.5)))
+				     (by (width-of-object ?f))))
+			       (by (length-of-object ?f))))
+			 (by 1/3)))
+		   (by (height-of-object ?f)))))
+   at Thu May 27 20:21:00 PDT 1999
+
+check: All Agenda
+   at Thu May 27 20:21:00 PDT 1999
+
+check: Method Sub-Method Relation
+   at Thu May 27 20:21:00 PDT 1999
+
+check: Method Capability Hierarchy
+   at Thu May 27 20:21:07 PDT 1999
+
+select: modify button
+   at Thu May 27 20:25:38 PDT 1999
+
+ done editing:((name estimate-compute-volume)
+ (capability (estimate (obj (?v is (spec-of volume))) (of (?f is (inst-of crater)))))
+ (result-type (inst-of number))
+ (method (multiply (obj (multiply
+			 (obj (multiply
+			       (obj (multiply
+				     (obj (multiply
+					   (obj (multiply
+						 (obj 3.141592) (by 0.5)))
+					   (by 0.5)))
+				     (by (width-of-object ?f))))
+			       (by (length-of-object ?f))))
+			 (by 1/3)))
+		   (by (height-of-object ?f)))))
+   at Thu May 27 20:25:51 PDT 1999
+
+check: All Agenda
+   at Thu May 27 20:25:52 PDT 1999
+
+check: Method Sub-Method Relation
+   at Thu May 27 20:25:52 PDT 1999
+
+check: Method Capability Hierarchy
+   at Thu May 27 20:25:55 PDT 1999
+
+check: Method Sub-Method Relation
+   at Thu May 27 20:25:56 PDT 1999
+
+select: modify button
+   at Thu May 27 20:26:09 PDT 1999
+
+ done editing:((name estimate-time-to-fill-crater)
+(capability (estimate (obj (?t is (spec-of time)))
+		      (for (?f is (inst-of fill-crater)))))
+(result-type (inst-of number))
+(method (divide (obj (estimate
+		      (obj (spec-of dirt-volume))
+		      (of (crater-of ?f))))
+		(by (obj (estimate
+			  (obj (spec-of earthmoving-rate))
+			  (of (crater-of ?f)))))))
+)
+
+   at Thu May 27 20:34:04 PDT 1999
+
+modified method:((name estimate-time-to-fill-crater)
+(capability (estimate (obj (?t is (spec-of time)))
+		      (for (?f is (inst-of fill-crater)))))
+(result-type (inst-of number))
+(method (divide (obj (estimate
+		      (obj (spec-of dirt-volume))
+		      (of (crater-of ?f))))
+		(by (obj (estimate
+			  (obj (spec-of earthmoving-rate))
+			  (of (crater-of ?f)))))))
+)
+
+   at Thu May 27 20:34:05 PDT 1999
+
+check: All Agenda
+   at Thu May 27 20:34:05 PDT 1999
+
+check: Method Sub-Method Relation
+   at Thu May 27 20:34:05 PDT 1999
+
+check: Method Capability Hierarchy
+   at Thu May 27 20:34:12 PDT 1999
+
+select: add new button
+   at Thu May 27 20:34:22 PDT 1999
+
+select: modify button
+   at Thu May 27 20:36:01 PDT 1999
+
+ done editing:((name estimate-compute-volume)
+ (capability (estimate (obj (?v is (spec-of dirt-volume))) (of (?f is crater))))
+ (result-type (inst-of number))
+ (method (multiply (obj (multiply
+			 (obj (multiply
+			       (obj (multiply
+				     (obj (multiply
+					   (obj (multiply
+						 (obj 3.141592) (by 0.5)))
+					   (by 0.5)))
+				     (by (width-of-object ?f))))
+			       (by (length-of-object ?f))))
+			 (by 1/3)))
+		   (by (height-of-object ?f)))))
+   at Thu May 27 20:36:09 PDT 1999
+
+check: All Agenda
+   at Thu May 27 20:36:09 PDT 1999
+
+check: Method Sub-Method Relation
+   at Thu May 27 20:36:09 PDT 1999
+
+select: modify button
+   at Thu May 27 20:36:16 PDT 1999
+
+ done editing:((name estimate-compute-volume)
+ (capability (estimate (obj (?v is (spec-of volume))) (of (?f is (inst-of crater)))))
+ (result-type (inst-of number))
+ (method (multiply (obj (multiply
+			 (obj (multiply
+			       (obj (multiply
+				     (obj (multiply
+					   (obj (multiply
+						 (obj 3.141592) (by 0.5)))
+					   (by 0.5)))
+				     (by (width-of-object ?f))))
+			       (by (length-of-object ?f))))
+			 (by 1/3)))
+		   (by (height-of-object ?f)))))
+   at Thu May 27 20:36:27 PDT 1999
+
+check: All Agenda
+   at Thu May 27 20:36:27 PDT 1999
+
+check: Method Sub-Method Relation
+   at Thu May 27 20:36:27 PDT 1999
+
+select: modify button
+   at Thu May 27 20:36:33 PDT 1999
+
+ done editing:((name estimate-compute-volume)
+ (capability (estimate (obj (?v is (spec-of dirt-volume))) (of (?f is (inst-of crater)))))
+ (result-type (inst-of number))
+ (method (multiply (obj (multiply
+			 (obj (multiply
+			       (obj (multiply
+				     (obj (multiply
+					   (obj (multiply
+						 (obj 3.141592) (by 0.5)))
+					   (by 0.5)))
+				     (by (width-of-object ?f))))
+			       (by (length-of-object ?f))))
+			 (by 1/3)))
+		   (by (height-of-object ?f)))))
+   at Thu May 27 20:37:02 PDT 1999
+
+modified method:((name estimate-compute-volume)
+ (capability (estimate (obj (?v is (spec-of dirt-volume))) (of (?f is (inst-of crater)))))
+ (result-type (inst-of number))
+ (method (multiply (obj (multiply
+			 (obj (multiply
+			       (obj (multiply
+				     (obj (multiply
+					   (obj (multiply
+						 (obj 3.141592) (by 0.5)))
+					   (by 0.5)))
+				     (by (width-of-object ?f))))
+			       (by (length-of-object ?f))))
+			 (by 1/3)))
+		   (by (height-of-object ?f)))))
+   at Thu May 27 20:37:02 PDT 1999
+
+check: All Agenda
+   at Thu May 27 20:37:02 PDT 1999
+
+check: Method Sub-Method Relation
+   at Thu May 27 20:37:02 PDT 1999
+
+ done editing:((name find-adjustment-rate-for-soil)
+ (capability (find (obj (?ad is (spec-of adjustment-rate)))
+		   (of (?s is (spec-of earth-stuff)))))
+ (result-type (inst-of number))
+ (method (primitive-find-adjustment-rate-for-soil ?s))
+ (primitivep t))
+   at Thu May 27 20:45:41 PDT 1999
+
+select: add new button
+   at Thu May 27 20:45:48 PDT 1999
+
+ done editing:((name find-adjustment-rate-for-soil)
+ (capability (find (obj (?ad is (spec-of adjustment-rate)))
+		   (of (?s is (spec-of earth-stuff)))))
+ (result-type (inst-of number))
+ (method (primitive-find-adjustment-rate-for-soil ?s))
+ (primitivep t))
+   at Thu May 27 20:46:02 PDT 1999
+
+added New method:((name find-adjustment-rate-for-soil)
+ (capability (find (obj (?ad is (spec-of adjustment-rate)))
+		   (of (?s is (spec-of earth-stuff)))))
+ (result-type (inst-of number))
+ (method (primitive-find-adjustment-rate-for-soil ?s))
+ (primitivep t))
+   at Thu May 27 20:46:02 PDT 1999
+
+check: All Agenda
+   at Thu May 27 20:46:02 PDT 1999
+
+check: Method Sub-Method Relation
+   at Thu May 27 20:46:02 PDT 1999
+
+check: Method Capability Hierarchy
+   at Thu May 27 20:46:08 PDT 1999
+
+select: add new button
+   at Thu May 27 20:47:27 PDT 1999
+
+ done editing:((name compute-earthmoving-rate)
+ (capability (estimate (obj (?er is (spec-of earthmoving-rate)))
+		       (of (?f is (inst-of crater)))))
+(result-type (inst-of number))
+(method (multiply (obj 250)
+		  (by (find (obj (spec-of adjustment-rate))
+			    (of (soil-of ?f))))))
+)
+
+   at Thu May 27 20:47:42 PDT 1999
+
+added New method:((name compute-earthmoving-rate)
+ (capability (estimate (obj (?er is (spec-of earthmoving-rate)))
+		       (of (?f is (inst-of crater)))))
+(result-type (inst-of number))
+(method (multiply (obj 250)
+		  (by (find (obj (spec-of adjustment-rate))
+			    (of (soil-of ?f))))))
+)
+
+   at Thu May 27 20:47:42 PDT 1999
+
+check: All Agenda
+   at Thu May 27 20:47:42 PDT 1999
+
+check: Method Sub-Method Relation
+   at Thu May 27 20:47:42 PDT 1999
+
+check: Method Capability Hierarchy
+   at Thu May 27 20:47:45 PDT 1999
+
+check: Method Sub-Method Relation
+   at Thu May 27 20:47:57 PDT 1999
+
+ select: get ps tree all
+   at Thu May 27 20:47:59 PDT 1999
+
+ [ps-en1] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-PLAN)))
+[ps-en1] < NIL
+   X[ps-an2: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-PLAN)))
+    [ps-an2: METHOD] < NIL
+    [ps-en3] > (ADD (OBJ (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (WORKAROUND-OF (INST-OF WORKAROUND-PLAN))))))
+    [ps-en3] < NIL
+     [ps-en4] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (WORKAROUND-OF (INST-OF WORKAROUND-PLAN))))
+     [ps-en4]   (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF WORKAROUND-STEP))))
+     [ps-en4] < NIL
+      [ps-en5] > (WORKAROUND-OF (INST-OF WORKAROUND-PLAN))
+      [ps-en5] < (SET-OF (INST-OF WORKAROUND-STEP))
+       -[ps-an6: RETRIEVE-R] > (WORKAROUND-OF (INST-OF WORKAROUND-PLAN))
+        [ps-an6: RETRIEVE-R] < (SET-OF (INST-OF WORKAROUND-STEP))
+      X[ps-an7: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF WORKAROUND-STEP))))
+       [ps-an7: METHOD]   *** NO METHOD FOUND ***
+       [ps-an7: METHOD] < NIL
+      X[ps-an8: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF WORKAROUND-STEP))))
+       [ps-an8: SET] < NIL
+       [ps-en9] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-STEP)))
+       [ps-en9] < NIL
+        X[ps-an10: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-STEP)))
+         [ps-an10: METHOD]   *** NO METHOD FOUND ***
+         [ps-an10: METHOD] < NIL
+        X[ps-an11: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-STEP)))
+         [ps-an11: SET] < NIL
+        X[ps-an12: COVERING] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-STEP)))
+         [ps-an12: COVERING] < NIL
+         [ps-en13] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+         [ps-en13] < NIL
+          X[ps-an15: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+           [ps-an15: METHOD]   *** NO METHOD FOUND ***
+           [ps-an15: METHOD] < NIL
+          X[ps-an16: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+           [ps-an16: SET] < NIL
+          X[ps-an17: COVERING] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+           [ps-an17: COVERING] < NIL
+          X[ps-an18: INPUT] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+           [ps-an18: INPUT] < NIL
+         [ps-en14] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF FILL-CRATER)))
+         [ps-en14] < NIL
+          -[ps-an19: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF FILL-CRATER)))
+           [ps-an19: METHOD] < NIL
+           [ps-en20] > (DIVIDE (OBJ (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (CRATER-OF (INST-OF FILL-CRATER))))) (BY (OBJ (ESTIMATE (OBJ (SPEC-OF EARTHMOVING-RATE)) (OF (CRATER-OF (INST-OF FILL-CRATER)))))))
+           [ps-en20]   (DIVIDE (OBJ (INST-OF NUMBER)) (BY NIL))
+           [ps-en20] < NIL
+            [ps-en21] > (OBJ (ESTIMATE (OBJ (SPEC-OF EARTHMOVING-RATE)) (OF (CRATER-OF (INST-OF FILL-CRATER)))))
+            [ps-en21] < NIL
+            [ps-en22] > (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (CRATER-OF (INST-OF FILL-CRATER))))
+            [ps-en22]   (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (INST-OF CRATER)))
+            [ps-en22] < (INST-OF NUMBER)
+             [ps-en23] > (CRATER-OF (INST-OF FILL-CRATER))
+             [ps-en23] < (INST-OF CRATER)
+              -[ps-an24: RETRIEVE-R] > (CRATER-OF (INST-OF FILL-CRATER))
+               [ps-an24: RETRIEVE-R] < (INST-OF CRATER)
+             -[ps-an25: METHOD] > (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (INST-OF CRATER)))
+              [ps-an25: METHOD] < (INST-OF NUMBER)
+              [ps-en26] > (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))) (BY (LENGTH-OF-OBJECT (INST-OF CRATER))))) (BY 1/3))) (BY (HEIGHT-OF-OBJECT (INST-OF CRATER))))
+              [ps-en26]   (MULTIPLY (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+              [ps-en26] < (INST-OF NUMBER)
+               [ps-en27] > (HEIGHT-OF-OBJECT (INST-OF CRATER))
+               [ps-en27] < (INST-OF NUMBER)
+                -[ps-an29: RETRIEVE-R] > (HEIGHT-OF-OBJECT (INST-OF CRATER))
+                 [ps-an29: RETRIEVE-R] < (INST-OF NUMBER)
+               [ps-en28] > (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))) (BY (LENGTH-OF-OBJECT (INST-OF CRATER))))) (BY 1/3))
+               [ps-en28]   (MULTIPLY (OBJ (INST-OF NUMBER)) (BY 1/3))
+               [ps-en28] < (INST-OF NUMBER)
+                [ps-en30] > (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))) (BY (LENGTH-OF-OBJECT (INST-OF CRATER))))
+                [ps-en30]   (MULTIPLY (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+                [ps-en30] < (INST-OF NUMBER)
+                 [ps-en31] > (LENGTH-OF-OBJECT (INST-OF CRATER))
+                 [ps-en31] < (INST-OF NUMBER)
+                  -[ps-an33: RETRIEVE-R] > (LENGTH-OF-OBJECT (INST-OF CRATER))
+                   [ps-an33: RETRIEVE-R] < (INST-OF NUMBER)
+                 [ps-en32] > (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))
+                 [ps-en32]   (MULTIPLY (OBJ 0.785398) (BY (INST-OF NUMBER)))
+                 [ps-en32] < (INST-OF NUMBER)
+                  [ps-en34] > (WIDTH-OF-OBJECT (INST-OF CRATER))
+                  [ps-en34] < (INST-OF NUMBER)
+                   -[ps-an36: RETRIEVE-R] > (WIDTH-OF-OBJECT (INST-OF CRATER))
+                    [ps-an36: RETRIEVE-R] < (INST-OF NUMBER)
+                  [ps-en35] > (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))
+                  [ps-en35]   (MULTIPLY (OBJ 1.570796) (BY 0.5))
+                  [ps-en35] < 0.785398
+                   [ps-en37] > (MULTIPLY (OBJ 3.141592) (BY 0.5))
+                   [ps-en37] < 1.570796
+                    -[ps-an38: METHOD] > (MULTIPLY (OBJ 3.141592) (BY 0.5))
+                     [ps-an38: METHOD] < 1.570796
+                   -[ps-an39: METHOD] > (MULTIPLY (OBJ 1.570796) (BY 0.5))
+                    [ps-an39: METHOD] < 0.785398
+                  -[ps-an40: METHOD] > (MULTIPLY (OBJ 0.785398) (BY (INST-OF NUMBER)))
+                   [ps-an40: METHOD] < (INST-OF NUMBER)
+                 -[ps-an41: METHOD] > (MULTIPLY (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+                  [ps-an41: METHOD] < (INST-OF NUMBER)
+                -[ps-an42: METHOD] > (MULTIPLY (OBJ (INST-OF NUMBER)) (BY 1/3))
+                 [ps-an42: METHOD] < (INST-OF NUMBER)
+               -[ps-an41: METHOD] > (MULTIPLY (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+                [ps-an41: METHOD] < (INST-OF NUMBER)
+            -[ps-an44: SET] > (DIVIDE (OBJ (INST-OF NUMBER)) (BY NIL))
+             [ps-an44: SET]   (APPEND)
+             [ps-an44: SET] < NIL
+            X[ps-an43: METHOD] > (DIVIDE (OBJ (INST-OF NUMBER)) (BY NIL))
+             [ps-an43: METHOD]   *** NO METHOD FOUND ***
+             [ps-an43: METHOD] < NIL
+        X[ps-an45: INPUT] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-STEP)))
+         [ps-an45: INPUT] < NIL
+         [ps-en13] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+         [ps-en13] < NIL
+          X[ps-an15: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+           [ps-an15: METHOD]   *** NO METHOD FOUND ***
+           [ps-an15: METHOD] < NIL
+          X[ps-an16: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+           [ps-an16: SET] < NIL
+          X[ps-an17: COVERING] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+           [ps-an17: COVERING] < NIL
+          X[ps-an18: INPUT] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+           [ps-an18: INPUT] < NIL
+         [ps-en14] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF FILL-CRATER)))
+         [ps-en14] < NIL
+          -[ps-an19: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF FILL-CRATER)))
+           [ps-an19: METHOD] < NIL
+           [ps-en20] > (DIVIDE (OBJ (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (CRATER-OF (INST-OF FILL-CRATER))))) (BY (OBJ (ESTIMATE (OBJ (SPEC-OF EARTHMOVING-RATE)) (OF (CRATER-OF (INST-OF FILL-CRATER)))))))
+           [ps-en20]   (DIVIDE (OBJ (INST-OF NUMBER)) (BY NIL))
+           [ps-en20] < NIL
+            [ps-en21] > (OBJ (ESTIMATE (OBJ (SPEC-OF EARTHMOVING-RATE)) (OF (CRATER-OF (INST-OF FILL-CRATER)))))
+            [ps-en21] < NIL
+            [ps-en22] > (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (CRATER-OF (INST-OF FILL-CRATER))))
+            [ps-en22]   (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (INST-OF CRATER)))
+            [ps-en22] < (INST-OF NUMBER)
+             [ps-en23] > (CRATER-OF (INST-OF FILL-CRATER))
+             [ps-en23] < (INST-OF CRATER)
+              -[ps-an24: RETRIEVE-R] > (CRATER-OF (INST-OF FILL-CRATER))
+               [ps-an24: RETRIEVE-R] < (INST-OF CRATER)
+             -[ps-an25: METHOD] > (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (INST-OF CRATER)))
+              [ps-an25: METHOD] < (INST-OF NUMBER)
+              [ps-en26] > (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))) (BY (LENGTH-OF-OBJECT (INST-OF CRATER))))) (BY 1/3))) (BY (HEIGHT-OF-OBJECT (INST-OF CRATER))))
+              [ps-en26]   (MULTIPLY (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+              [ps-en26] < (INST-OF NUMBER)
+               [ps-en27] > (HEIGHT-OF-OBJECT (INST-OF CRATER))
+               [ps-en27] < (INST-OF NUMBER)
+                -[ps-an29: RETRIEVE-R] > (HEIGHT-OF-OBJECT (INST-OF CRATER))
+                 [ps-an29: RETRIEVE-R] < (INST-OF NUMBER)
+               [ps-en28] > (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))) (BY (LENGTH-OF-OBJECT (INST-OF CRATER))))) (BY 1/3))
+               [ps-en28]   (MULTIPLY (OBJ (INST-OF NUMBER)) (BY 1/3))
+               [ps-en28] < (INST-OF NUMBER)
+                [ps-en30] > (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))) (BY (LENGTH-OF-OBJECT (INST-OF CRATER))))
+                [ps-en30]   (MULTIPLY (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+                [ps-en30] < (INST-OF NUMBER)
+                 [ps-en31] > (LENGTH-OF-OBJECT (INST-OF CRATER))
+                 [ps-en31] < (INST-OF NUMBER)
+                  -[ps-an33: RETRIEVE-R] > (LENGTH-OF-OBJECT (INST-OF CRATER))
+                   [ps-an33: RETRIEVE-R] < (INST-OF NUMBER)
+                 [ps-en32] > (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))
+                 [ps-en32]   (MULTIPLY (OBJ 0.785398) (BY (INST-OF NUMBER)))
+                 [ps-en32] < (INST-OF NUMBER)
+                  [ps-en34] > (WIDTH-OF-OBJECT (INST-OF CRATER))
+                  [ps-en34] < (INST-OF NUMBER)
+                   -[ps-an36: RETRIEVE-R] > (WIDTH-OF-OBJECT (INST-OF CRATER))
+                    [ps-an36: RETRIEVE-R] < (INST-OF NUMBER)
+                  [ps-en35] > (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))
+                  [ps-en35]   (MULTIPLY (OBJ 1.570796) (BY 0.5))
+                  [ps-en35] < 0.785398
+                   [ps-en37] > (MULTIPLY (OBJ 3.141592) (BY 0.5))
+                   [ps-en37] < 1.570796
+                    -[ps-an38: METHOD] > (MULTIPLY (OBJ 3.141592) (BY 0.5))
+                     [ps-an38: METHOD] < 1.570796
+                   -[ps-an39: METHOD] > (MULTIPLY (OBJ 1.570796) (BY 0.5))
+                    [ps-an39: METHOD] < 0.785398
+                  -[ps-an40: METHOD] > (MULTIPLY (OBJ 0.785398) (BY (INST-OF NUMBER)))
+                   [ps-an40: METHOD] < (INST-OF NUMBER)
+                 -[ps-an41: METHOD] > (MULTIPLY (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+                  [ps-an41: METHOD] < (INST-OF NUMBER)
+                -[ps-an42: METHOD] > (MULTIPLY (OBJ (INST-OF NUMBER)) (BY 1/3))
+                 [ps-an42: METHOD] < (INST-OF NUMBER)
+               -[ps-an41: METHOD] > (MULTIPLY (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+                [ps-an41: METHOD] < (INST-OF NUMBER)
+            -[ps-an44: SET] > (DIVIDE (OBJ (INST-OF NUMBER)) (BY NIL))
+             [ps-an44: SET]   (APPEND)
+             [ps-an44: SET] < NIL
+            X[ps-an43: METHOD] > (DIVIDE (OBJ (INST-OF NUMBER)) (BY NIL))
+             [ps-an43: METHOD]   *** NO METHOD FOUND ***
+             [ps-an43: METHOD] < NIL
+      X[ps-an46: COVERING] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF WORKAROUND-STEP))))
+       [ps-an46: COVERING] < NIL
+       [ps-en47] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF NARROW-GAP-WITH-BULLDOZER))))
+       [ps-en47] < NIL
+        X[ps-an49: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF NARROW-GAP-WITH-BULLDOZER))))
+         [ps-an49: METHOD]   *** NO METHOD FOUND ***
+         [ps-an49: METHOD] < NIL
+        X[ps-an50: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF NARROW-GAP-WITH-BULLDOZER))))
+         [ps-an50: SET] < NIL
+         [ps-en13] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+         [ps-en13] < NIL
+          X[ps-an15: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+           [ps-an15: METHOD]   *** NO METHOD FOUND ***
+           [ps-an15: METHOD] < NIL
+          X[ps-an16: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+           [ps-an16: SET] < NIL
+          X[ps-an17: COVERING] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+           [ps-an17: COVERING] < NIL
+          X[ps-an18: INPUT] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+           [ps-an18: INPUT] < NIL
+        X[ps-an51: COVERING] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF NARROW-GAP-WITH-BULLDOZER))))
+         [ps-an51: COVERING] < NIL
+        X[ps-an52: INPUT] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF NARROW-GAP-WITH-BULLDOZER))))
+         [ps-an52: INPUT] < NIL
+       [ps-en48] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF FILL-CRATER))))
+       [ps-en48] < NIL
+        -[ps-an54: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF FILL-CRATER))))
+         [ps-an54: SET]   (APPEND NIL)
+         [ps-an54: SET] < NIL
+         [ps-en14] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF FILL-CRATER)))
+         [ps-en14] < NIL
+          -[ps-an19: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF FILL-CRATER)))
+           [ps-an19: METHOD] < NIL
+           [ps-en20] > (DIVIDE (OBJ (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (CRATER-OF (INST-OF FILL-CRATER))))) (BY (OBJ (ESTIMATE (OBJ (SPEC-OF EARTHMOVING-RATE)) (OF (CRATER-OF (INST-OF FILL-CRATER)))))))
+           [ps-en20]   (DIVIDE (OBJ (INST-OF NUMBER)) (BY NIL))
+           [ps-en20] < NIL
+            [ps-en21] > (OBJ (ESTIMATE (OBJ (SPEC-OF EARTHMOVING-RATE)) (OF (CRATER-OF (INST-OF FILL-CRATER)))))
+            [ps-en21] < NIL
+            [ps-en22] > (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (CRATER-OF (INST-OF FILL-CRATER))))
+            [ps-en22]   (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (INST-OF CRATER)))
+            [ps-en22] < (INST-OF NUMBER)
+             [ps-en23] > (CRATER-OF (INST-OF FILL-CRATER))
+             [ps-en23] < (INST-OF CRATER)
+              -[ps-an24: RETRIEVE-R] > (CRATER-OF (INST-OF FILL-CRATER))
+               [ps-an24: RETRIEVE-R] < (INST-OF CRATER)
+             -[ps-an25: METHOD] > (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (INST-OF CRATER)))
+              [ps-an25: METHOD] < (INST-OF NUMBER)
+              [ps-en26] > (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))) (BY (LENGTH-OF-OBJECT (INST-OF CRATER))))) (BY 1/3))) (BY (HEIGHT-OF-OBJECT (INST-OF CRATER))))
+              [ps-en26]   (MULTIPLY (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+              [ps-en26] < (INST-OF NUMBER)
+               [ps-en27] > (HEIGHT-OF-OBJECT (INST-OF CRATER))
+               [ps-en27] < (INST-OF NUMBER)
+                -[ps-an29: RETRIEVE-R] > (HEIGHT-OF-OBJECT (INST-OF CRATER))
+                 [ps-an29: RETRIEVE-R] < (INST-OF NUMBER)
+               [ps-en28] > (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))) (BY (LENGTH-OF-OBJECT (INST-OF CRATER))))) (BY 1/3))
+               [ps-en28]   (MULTIPLY (OBJ (INST-OF NUMBER)) (BY 1/3))
+               [ps-en28] < (INST-OF NUMBER)
+                [ps-en30] > (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))) (BY (LENGTH-OF-OBJECT (INST-OF CRATER))))
+                [ps-en30]   (MULTIPLY (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+                [ps-en30] < (INST-OF NUMBER)
+                 [ps-en31] > (LENGTH-OF-OBJECT (INST-OF CRATER))
+                 [ps-en31] < (INST-OF NUMBER)
+                  -[ps-an33: RETRIEVE-R] > (LENGTH-OF-OBJECT (INST-OF CRATER))
+                   [ps-an33: RETRIEVE-R] < (INST-OF NUMBER)
+                 [ps-en32] > (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))
+                 [ps-en32]   (MULTIPLY (OBJ 0.785398) (BY (INST-OF NUMBER)))
+                 [ps-en32] < (INST-OF NUMBER)
+                  [ps-en34] > (WIDTH-OF-OBJECT (INST-OF CRATER))
+                  [ps-en34] < (INST-OF NUMBER)
+                   -[ps-an36: RETRIEVE-R] > (WIDTH-OF-OBJECT (INST-OF CRATER))
+                    [ps-an36: RETRIEVE-R] < (INST-OF NUMBER)
+                  [ps-en35] > (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))
+                  [ps-en35]   (MULTIPLY (OBJ 1.570796) (BY 0.5))
+                  [ps-en35] < 0.785398
+                   [ps-en37] > (MULTIPLY (OBJ 3.141592) (BY 0.5))
+                   [ps-en37] < 1.570796
+                    -[ps-an38: METHOD] > (MULTIPLY (OBJ 3.141592) (BY 0.5))
+                     [ps-an38: METHOD] < 1.570796
+                   -[ps-an39: METHOD] > (MULTIPLY (OBJ 1.570796) (BY 0.5))
+                    [ps-an39: METHOD] < 0.785398
+                  -[ps-an40: METHOD] > (MULTIPLY (OBJ 0.785398) (BY (INST-OF NUMBER)))
+                   [ps-an40: METHOD] < (INST-OF NUMBER)
+                 -[ps-an41: METHOD] > (MULTIPLY (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+                  [ps-an41: METHOD] < (INST-OF NUMBER)
+                -[ps-an42: METHOD] > (MULTIPLY (OBJ (INST-OF NUMBER)) (BY 1/3))
+                 [ps-an42: METHOD] < (INST-OF NUMBER)
+               -[ps-an41: METHOD] > (MULTIPLY (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+                [ps-an41: METHOD] < (INST-OF NUMBER)
+            -[ps-an44: SET] > (DIVIDE (OBJ (INST-OF NUMBER)) (BY NIL))
+             [ps-an44: SET]   (APPEND)
+             [ps-an44: SET] < NIL
+            X[ps-an43: METHOD] > (DIVIDE (OBJ (INST-OF NUMBER)) (BY NIL))
+             [ps-an43: METHOD]   *** NO METHOD FOUND ***
+             [ps-an43: METHOD] < NIL
+        X[ps-an53: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF FILL-CRATER))))
+         [ps-an53: METHOD]   *** NO METHOD FOUND ***
+         [ps-an53: METHOD] < NIL
+      X[ps-an55: INPUT] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF WORKAROUND-STEP))))
+       [ps-an55: INPUT] < NIL
+       [ps-en47] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF NARROW-GAP-WITH-BULLDOZER))))
+       [ps-en47] < NIL
+        X[ps-an49: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF NARROW-GAP-WITH-BULLDOZER))))
+         [ps-an49: METHOD]   *** NO METHOD FOUND ***
+         [ps-an49: METHOD] < NIL
+        X[ps-an50: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF NARROW-GAP-WITH-BULLDOZER))))
+         [ps-an50: SET] < NIL
+         [ps-en13] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+         [ps-en13] < NIL
+          X[ps-an15: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+           [ps-an15: METHOD]   *** NO METHOD FOUND ***
+           [ps-an15: METHOD] < NIL
+          X[ps-an16: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+           [ps-an16: SET] < NIL
+          X[ps-an17: COVERING] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+           [ps-an17: COVERING] < NIL
+          X[ps-an18: INPUT] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+           [ps-an18: INPUT] < NIL
+        X[ps-an51: COVERING] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF NARROW-GAP-WITH-BULLDOZER))))
+         [ps-an51: COVERING] < NIL
+        X[ps-an52: INPUT] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF NARROW-GAP-WITH-BULLDOZER))))
+         [ps-an52: INPUT] < NIL
+       [ps-en48] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF FILL-CRATER))))
+       [ps-en48] < NIL
+        -[ps-an54: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF FILL-CRATER))))
+         [ps-an54: SET]   (APPEND NIL)
+         [ps-an54: SET] < NIL
+         [ps-en14] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF FILL-CRATER)))
+         [ps-en14] < NIL
+          -[ps-an19: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF FILL-CRATER)))
+           [ps-an19: METHOD] < NIL
+           [ps-en20] > (DIVIDE (OBJ (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (CRATER-OF (INST-OF FILL-CRATER))))) (BY (OBJ (ESTIMATE (OBJ (SPEC-OF EARTHMOVING-RATE)) (OF (CRATER-OF (INST-OF FILL-CRATER)))))))
+           [ps-en20]   (DIVIDE (OBJ (INST-OF NUMBER)) (BY NIL))
+           [ps-en20] < NIL
+            [ps-en21] > (OBJ (ESTIMATE (OBJ (SPEC-OF EARTHMOVING-RATE)) (OF (CRATER-OF (INST-OF FILL-CRATER)))))
+            [ps-en21] < NIL
+            [ps-en22] > (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (CRATER-OF (INST-OF FILL-CRATER))))
+            [ps-en22]   (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (INST-OF CRATER)))
+            [ps-en22] < (INST-OF NUMBER)
+             [ps-en23] > (CRATER-OF (INST-OF FILL-CRATER))
+             [ps-en23] < (INST-OF CRATER)
+              -[ps-an24: RETRIEVE-R] > (CRATER-OF (INST-OF FILL-CRATER))
+               [ps-an24: RETRIEVE-R] < (INST-OF CRATER)
+             -[ps-an25: METHOD] > (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (INST-OF CRATER)))
+              [ps-an25: METHOD] < (INST-OF NUMBER)
+              [ps-en26] > (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))) (BY (LENGTH-OF-OBJECT (INST-OF CRATER))))) (BY 1/3))) (BY (HEIGHT-OF-OBJECT (INST-OF CRATER))))
+              [ps-en26]   (MULTIPLY (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+              [ps-en26] < (INST-OF NUMBER)
+               [ps-en27] > (HEIGHT-OF-OBJECT (INST-OF CRATER))
+               [ps-en27] < (INST-OF NUMBER)
+                -[ps-an29: RETRIEVE-R] > (HEIGHT-OF-OBJECT (INST-OF CRATER))
+                 [ps-an29: RETRIEVE-R] < (INST-OF NUMBER)
+               [ps-en28] > (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))) (BY (LENGTH-OF-OBJECT (INST-OF CRATER))))) (BY 1/3))
+               [ps-en28]   (MULTIPLY (OBJ (INST-OF NUMBER)) (BY 1/3))
+               [ps-en28] < (INST-OF NUMBER)
+                [ps-en30] > (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))) (BY (LENGTH-OF-OBJECT (INST-OF CRATER))))
+                [ps-en30]   (MULTIPLY (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+                [ps-en30] < (INST-OF NUMBER)
+                 [ps-en31] > (LENGTH-OF-OBJECT (INST-OF CRATER))
+                 [ps-en31] < (INST-OF NUMBER)
+                  -[ps-an33: RETRIEVE-R] > (LENGTH-OF-OBJECT (INST-OF CRATER))
+                   [ps-an33: RETRIEVE-R] < (INST-OF NUMBER)
+                 [ps-en32] > (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))
+                 [ps-en32]   (MULTIPLY (OBJ 0.785398) (BY (INST-OF NUMBER)))
+                 [ps-en32] < (INST-OF NUMBER)
+                  [ps-en34] > (WIDTH-OF-OBJECT (INST-OF CRATER))
+                  [ps-en34] < (INST-OF NUMBER)
+                   -[ps-an36: RETRIEVE-R] > (WIDTH-OF-OBJECT (INST-OF CRATER))
+                    [ps-an36: RETRIEVE-R] < (INST-OF NUMBER)
+                  [ps-en35] > (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))
+                  [ps-en35]   (MULTIPLY (OBJ 1.570796) (BY 0.5))
+                  [ps-en35] < 0.785398
+                   [ps-en37] > (MULTIPLY (OBJ 3.141592) (BY 0.5))
+                   [ps-en37] < 1.570796
+                    -[ps-an38: METHOD] > (MULTIPLY (OBJ 3.141592) (BY 0.5))
+                     [ps-an38: METHOD] < 1.570796
+                   -[ps-an39: METHOD] > (MULTIPLY (OBJ 1.570796) (BY 0.5))
+                    [ps-an39: METHOD] < 0.785398
+                  -[ps-an40: METHOD] > (MULTIPLY (OBJ 0.785398) (BY (INST-OF NUMBER)))
+                   [ps-an40: METHOD] < (INST-OF NUMBER)
+                 -[ps-an41: METHOD] > (MULTIPLY (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+                  [ps-an41: METHOD] < (INST-OF NUMBER)
+                -[ps-an42: METHOD] > (MULTIPLY (OBJ (INST-OF NUMBER)) (BY 1/3))
+                 [ps-an42: METHOD] < (INST-OF NUMBER)
+               -[ps-an41: METHOD] > (MULTIPLY (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+                [ps-an41: METHOD] < (INST-OF NUMBER)
+            -[ps-an44: SET] > (DIVIDE (OBJ (INST-OF NUMBER)) (BY NIL))
+             [ps-an44: SET]   (APPEND)
+             [ps-an44: SET] < NIL
+            X[ps-an43: METHOD] > (DIVIDE (OBJ (INST-OF NUMBER)) (BY NIL))
+             [ps-an43: METHOD]   *** NO METHOD FOUND ***
+             [ps-an43: METHOD] < NIL
+        X[ps-an53: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF FILL-CRATER))))
+         [ps-an53: METHOD]   *** NO METHOD FOUND ***
+         [ps-an53: METHOD] < NIL
+   X[ps-an56: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-PLAN)))
+    [ps-an56: SET] < NIL
+   X[ps-an57: COVERING] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-PLAN)))
+    [ps-an57: COVERING] < NIL
+   X[ps-an58: INPUT] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-PLAN)))
+    [ps-an58: INPUT] < NIL
+
+   at Thu May 27 20:48:02 PDT 1999
+
+ select: get ps tree pretty
+   at Thu May 27 20:48:52 PDT 1999
+
+ Node ps-en1: (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-PLAN)))
+Node ps-en1 result: NIL
+   Node ps-en3: (ADD (OBJ (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (WORKAROUND-OF (INST-OF WORKAROUND-PLAN))))))
+   Node ps-en3 expands to: NIL
+   Node ps-en3 result: NIL
+    Node ps-en4: (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (WORKAROUND-OF (INST-OF WORKAROUND-PLAN))))
+    Node ps-en4 expands to: (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF WORKAROUND-STEP))))
+    Node ps-en4 result: NIL
+     Node ps-en5: retrieve (WORKAROUND-OF (INST-OF WORKAROUND-PLAN))
+     Node ps-en5 result: (SET-OF (INST-OF WORKAROUND-STEP))
+     Node ps-en9: (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-STEP)))
+     Node ps-en9 result: NIL
+      Node ps-en13: (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+      Node ps-en13 result: NIL
+      Node ps-en14: (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF FILL-CRATER)))
+      Node ps-en14 result: NIL
+       Node ps-en20: (DIVIDE (OBJ (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (CRATER-OF (INST-OF FILL-CRATER))))) (BY (OBJ (ESTIMATE (OBJ (SPEC-OF EARTHMOVING-RATE)) (OF (CRATER-OF (INST-OF FILL-CRATER)))))))
+       Node ps-en20 expands to: (DIVIDE (OBJ (INST-OF NUMBER)) (BY NIL))
+       Node ps-en20 result: NIL
+        Node ps-en21: (OBJ (ESTIMATE (OBJ (SPEC-OF EARTHMOVING-RATE)) (OF (CRATER-OF (INST-OF FILL-CRATER)))))
+        Node ps-en21 result: NIL
+        Node ps-en22: (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (CRATER-OF (INST-OF FILL-CRATER))))
+        Node ps-en22 expands to: (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (INST-OF CRATER)))
+        Node ps-en22 result: (INST-OF NUMBER)
+         Node ps-en23: retrieve (CRATER-OF (INST-OF FILL-CRATER))
+         Node ps-en23 result: (INST-OF CRATER)
+         Node ps-en26: (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))) (BY (LENGTH-OF-OBJECT (INST-OF CRATER))))) (BY 1/3))) (BY (HEIGHT-OF-OBJECT (INST-OF CRATER))))
+         Node ps-en26 expands to: (MULTIPLY (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+         Node ps-en26 result: (INST-OF NUMBER)
+          Node ps-en27: retrieve (HEIGHT-OF-OBJECT (INST-OF CRATER))
+          Node ps-en27 result: (INST-OF NUMBER)
+          Node ps-en28: (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))) (BY (LENGTH-OF-OBJECT (INST-OF CRATER))))) (BY 1/3))
+          Node ps-en28 expands to: (MULTIPLY (OBJ (INST-OF NUMBER)) (BY 1/3))
+          Node ps-en28 result: (INST-OF NUMBER)
+           Node ps-en30: (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))) (BY (LENGTH-OF-OBJECT (INST-OF CRATER))))
+           Node ps-en30 expands to: (MULTIPLY (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+           Node ps-en30 result: (INST-OF NUMBER)
+            Node ps-en31: retrieve (LENGTH-OF-OBJECT (INST-OF CRATER))
+            Node ps-en31 result: (INST-OF NUMBER)
+            Node ps-en32: (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))
+            Node ps-en32 expands to: (MULTIPLY (OBJ 0.785398) (BY (INST-OF NUMBER)))
+            Node ps-en32 result: (INST-OF NUMBER)
+             Node ps-en34: retrieve (WIDTH-OF-OBJECT (INST-OF CRATER))
+             Node ps-en34 result: (INST-OF NUMBER)
+             Node ps-en35: (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))
+             Node ps-en35 expands to: (MULTIPLY (OBJ 1.570796) (BY 0.5))
+             Node ps-en35 result: 0.785398
+              Node ps-en37: (MULTIPLY (OBJ 3.141592) (BY 0.5))
+              Node ps-en37 result: 1.570796
+      Node ps-en13: (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+      Node ps-en13 result: NIL
+      Node ps-en14: (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF FILL-CRATER)))
+      Node ps-en14 result: NIL
+       Node ps-en20: (DIVIDE (OBJ (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (CRATER-OF (INST-OF FILL-CRATER))))) (BY (OBJ (ESTIMATE (OBJ (SPEC-OF EARTHMOVING-RATE)) (OF (CRATER-OF (INST-OF FILL-CRATER)))))))
+       Node ps-en20 expands to: (DIVIDE (OBJ (INST-OF NUMBER)) (BY NIL))
+       Node ps-en20 result: NIL
+        Node ps-en21: (OBJ (ESTIMATE (OBJ (SPEC-OF EARTHMOVING-RATE)) (OF (CRATER-OF (INST-OF FILL-CRATER)))))
+        Node ps-en21 result: NIL
+        Node ps-en22: (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (CRATER-OF (INST-OF FILL-CRATER))))
+        Node ps-en22 expands to: (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (INST-OF CRATER)))
+        Node ps-en22 result: (INST-OF NUMBER)
+         Node ps-en23: retrieve (CRATER-OF (INST-OF FILL-CRATER))
+         Node ps-en23 result: (INST-OF CRATER)
+         Node ps-en26: (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))) (BY (LENGTH-OF-OBJECT (INST-OF CRATER))))) (BY 1/3))) (BY (HEIGHT-OF-OBJECT (INST-OF CRATER))))
+         Node ps-en26 expands to: (MULTIPLY (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+         Node ps-en26 result: (INST-OF NUMBER)
+          Node ps-en27: retrieve (HEIGHT-OF-OBJECT (INST-OF CRATER))
+          Node ps-en27 result: (INST-OF NUMBER)
+          Node ps-en28: (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))) (BY (LENGTH-OF-OBJECT (INST-OF CRATER))))) (BY 1/3))
+          Node ps-en28 expands to: (MULTIPLY (OBJ (INST-OF NUMBER)) (BY 1/3))
+          Node ps-en28 result: (INST-OF NUMBER)
+           Node ps-en30: (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))) (BY (LENGTH-OF-OBJECT (INST-OF CRATER))))
+           Node ps-en30 expands to: (MULTIPLY (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+           Node ps-en30 result: (INST-OF NUMBER)
+            Node ps-en31: retrieve (LENGTH-OF-OBJECT (INST-OF CRATER))
+            Node ps-en31 result: (INST-OF NUMBER)
+            Node ps-en32: (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))
+            Node ps-en32 expands to: (MULTIPLY (OBJ 0.785398) (BY (INST-OF NUMBER)))
+            Node ps-en32 result: (INST-OF NUMBER)
+             Node ps-en34: retrieve (WIDTH-OF-OBJECT (INST-OF CRATER))
+             Node ps-en34 result: (INST-OF NUMBER)
+             Node ps-en35: (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))
+             Node ps-en35 expands to: (MULTIPLY (OBJ 1.570796) (BY 0.5))
+             Node ps-en35 result: 0.785398
+              Node ps-en37: (MULTIPLY (OBJ 3.141592) (BY 0.5))
+              Node ps-en37 result: 1.570796
+     Node ps-en47: (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF NARROW-GAP-WITH-BULLDOZER))))
+     Node ps-en47 result: NIL
+      Node ps-en13: (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+      Node ps-en13 result: NIL
+     Node ps-en48: (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF FILL-CRATER))))
+     Node ps-en48 result: NIL
+      Node ps-en14: (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF FILL-CRATER)))
+      Node ps-en14 result: NIL
+       Node ps-en20: (DIVIDE (OBJ (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (CRATER-OF (INST-OF FILL-CRATER))))) (BY (OBJ (ESTIMATE (OBJ (SPEC-OF EARTHMOVING-RATE)) (OF (CRATER-OF (INST-OF FILL-CRATER)))))))
+       Node ps-en20 expands to: (DIVIDE (OBJ (INST-OF NUMBER)) (BY NIL))
+       Node ps-en20 result: NIL
+        Node ps-en21: (OBJ (ESTIMATE (OBJ (SPEC-OF EARTHMOVING-RATE)) (OF (CRATER-OF (INST-OF FILL-CRATER)))))
+        Node ps-en21 result: NIL
+        Node ps-en22: (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (CRATER-OF (INST-OF FILL-CRATER))))
+        Node ps-en22 expands to: (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (INST-OF CRATER)))
+        Node ps-en22 result: (INST-OF NUMBER)
+         Node ps-en23: retrieve (CRATER-OF (INST-OF FILL-CRATER))
+         Node ps-en23 result: (INST-OF CRATER)
+         Node ps-en26: (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))) (BY (LENGTH-OF-OBJECT (INST-OF CRATER))))) (BY 1/3))) (BY (HEIGHT-OF-OBJECT (INST-OF CRATER))))
+         Node ps-en26 expands to: (MULTIPLY (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+         Node ps-en26 result: (INST-OF NUMBER)
+          Node ps-en27: retrieve (HEIGHT-OF-OBJECT (INST-OF CRATER))
+          Node ps-en27 result: (INST-OF NUMBER)
+          Node ps-en28: (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))) (BY (LENGTH-OF-OBJECT (INST-OF CRATER))))) (BY 1/3))
+          Node ps-en28 expands to: (MULTIPLY (OBJ (INST-OF NUMBER)) (BY 1/3))
+          Node ps-en28 result: (INST-OF NUMBER)
+           Node ps-en30: (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))) (BY (LENGTH-OF-OBJECT (INST-OF CRATER))))
+           Node ps-en30 expands to: (MULTIPLY (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+           Node ps-en30 result: (INST-OF NUMBER)
+            Node ps-en31: retrieve (LENGTH-OF-OBJECT (INST-OF CRATER))
+            Node ps-en31 result: (INST-OF NUMBER)
+            Node ps-en32: (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))
+            Node ps-en32 expands to: (MULTIPLY (OBJ 0.785398) (BY (INST-OF NUMBER)))
+            Node ps-en32 result: (INST-OF NUMBER)
+             Node ps-en34: retrieve (WIDTH-OF-OBJECT (INST-OF CRATER))
+             Node ps-en34 result: (INST-OF NUMBER)
+             Node ps-en35: (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))
+             Node ps-en35 expands to: (MULTIPLY (OBJ 1.570796) (BY 0.5))
+             Node ps-en35 result: 0.785398
+              Node ps-en37: (MULTIPLY (OBJ 3.141592) (BY 0.5))
+              Node ps-en37 result: 1.570796
+     Node ps-en47: (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF NARROW-GAP-WITH-BULLDOZER))))
+     Node ps-en47 result: NIL
+      Node ps-en13: (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+      Node ps-en13 result: NIL
+     Node ps-en48: (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF FILL-CRATER))))
+     Node ps-en48 result: NIL
+      Node ps-en14: (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF FILL-CRATER)))
+      Node ps-en14 result: NIL
+       Node ps-en20: (DIVIDE (OBJ (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (CRATER-OF (INST-OF FILL-CRATER))))) (BY (OBJ (ESTIMATE (OBJ (SPEC-OF EARTHMOVING-RATE)) (OF (CRATER-OF (INST-OF FILL-CRATER)))))))
+       Node ps-en20 expands to: (DIVIDE (OBJ (INST-OF NUMBER)) (BY NIL))
+       Node ps-en20 result: NIL
+        Node ps-en21: (OBJ (ESTIMATE (OBJ (SPEC-OF EARTHMOVING-RATE)) (OF (CRATER-OF (INST-OF FILL-CRATER)))))
+        Node ps-en21 result: NIL
+        Node ps-en22: (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (CRATER-OF (INST-OF FILL-CRATER))))
+        Node ps-en22 expands to: (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (INST-OF CRATER)))
+        Node ps-en22 result: (INST-OF NUMBER)
+         Node ps-en23: retrieve (CRATER-OF (INST-OF FILL-CRATER))
+         Node ps-en23 result: (INST-OF CRATER)
+         Node ps-en26: (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))) (BY (LENGTH-OF-OBJECT (INST-OF CRATER))))) (BY 1/3))) (BY (HEIGHT-OF-OBJECT (INST-OF CRATER))))
+         Node ps-en26 expands to: (MULTIPLY (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+         Node ps-en26 result: (INST-OF NUMBER)
+          Node ps-en27: retrieve (HEIGHT-OF-OBJECT (INST-OF CRATER))
+          Node ps-en27 result: (INST-OF NUMBER)
+          Node ps-en28: (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))) (BY (LENGTH-OF-OBJECT (INST-OF CRATER))))) (BY 1/3))
+          Node ps-en28 expands to: (MULTIPLY (OBJ (INST-OF NUMBER)) (BY 1/3))
+          Node ps-en28 result: (INST-OF NUMBER)
+           Node ps-en30: (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))) (BY (LENGTH-OF-OBJECT (INST-OF CRATER))))
+           Node ps-en30 expands to: (MULTIPLY (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+           Node ps-en30 result: (INST-OF NUMBER)
+            Node ps-en31: retrieve (LENGTH-OF-OBJECT (INST-OF CRATER))
+            Node ps-en31 result: (INST-OF NUMBER)
+            Node ps-en32: (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))
+            Node ps-en32 expands to: (MULTIPLY (OBJ 0.785398) (BY (INST-OF NUMBER)))
+            Node ps-en32 result: (INST-OF NUMBER)
+             Node ps-en34: retrieve (WIDTH-OF-OBJECT (INST-OF CRATER))
+             Node ps-en34 result: (INST-OF NUMBER)
+             Node ps-en35: (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))
+             Node ps-en35 expands to: (MULTIPLY (OBJ 1.570796) (BY 0.5))
+             Node ps-en35 result: 0.785398
+              Node ps-en37: (MULTIPLY (OBJ 3.141592) (BY 0.5))
+              Node ps-en37 result: 1.570796
+
+   at Thu May 27 20:48:53 PDT 1999
+
+ select: get ps tree all
+   at Thu May 27 20:49:23 PDT 1999
+
+select: modify button
+   at Thu May 27 20:50:35 PDT 1999
+
+select: modify button
+   at Thu May 27 20:51:35 PDT 1999
+
+ done editing:((name find-adjustment-rate-for-soil)
+ (capability (find (obj (?ad is (spec-of adjustment-rate)))
+		   (of (?s is (inst-of earth-stuff)))))
+ (result-type (inst-of number))
+ (method (primitive-find-adjustment-rate-for-soil ?s))
+ (primitivep t))
+   at Thu May 27 20:51:46 PDT 1999
+
+check: All Agenda
+   at Thu May 27 20:51:46 PDT 1999
+
+check: Method Sub-Method Relation
+   at Thu May 27 20:51:46 PDT 1999
+
+select: modify button
+   at Thu May 27 20:51:59 PDT 1999
+
+ done editing:((name find-adjustment-rate-for-soil)
+ (capability (find (obj (?ad is (spec-of adjustment-rate)))
+		   (of (?s is (inst-of earth-stuff)))))
+ (result-type (inst-of number))
+ (method (primitive-find-adjustment-rate-for-soil ?s))
+ (primitivep t))
+   at Thu May 27 20:52:08 PDT 1999
+
+check: All Agenda
+   at Thu May 27 20:52:08 PDT 1999
+
+check: Method Sub-Method Relation
+   at Thu May 27 20:52:08 PDT 1999
+
+select: modify button
+   at Thu May 27 20:52:29 PDT 1999
+
+ done editing:((name find-adjustment-rate-for-soil)
+ (capability (find (obj (?ad is (spec-of adjustment-rate)))
+		   (of (?s is (inst-of earth-stuff)))))
+ (result-type (inst-of number))
+ (method (primitive-find-adjustment-rate-for-soil ?s))
+ (primitivep t))
+   at Thu May 27 20:52:40 PDT 1999
+
+check: All Agenda
+   at Thu May 27 20:52:40 PDT 1999
+
+check: Method Sub-Method Relation
+   at Thu May 27 20:52:40 PDT 1999
+
+select: add new button
+   at Thu May 27 20:52:51 PDT 1999
+
+select: copy and create button
+   at Thu May 27 20:53:01 PDT 1999
+
+select: delete button
+   at Thu May 27 20:53:11 PDT 1999
+
+ done editing:((name find-adjustment-rate-for-soil2)
+ (capability (find (obj (?ad is (spec-of adjustment-rate)))
+		   (of (?s is (inst-of earth-stuff)))))
+ (result-type (inst-of number))
+ (method (primitive-find-adjustment-rate-for-soil ?s))
+ (primitivep t))
+   at Thu May 27 20:53:34 PDT 1999
+
+select: add new button
+   at Thu May 27 20:53:49 PDT 1999
+
+ done editing:((name find-adjustment-rate-for-soil2)
+ (capability (find (obj (?ad is (spec-of adjustment-rate)))
+                   (of (?s is (inst-of earth-stuff)))))
+ (result-type (inst-of number))
+ (method (primitive-find-adjustment-rate-for-soil ?s))
+ (primitivep t))
+
+   at Thu May 27 20:54:05 PDT 1999
+
+added New method:((name find-adjustment-rate-for-soil2)
+ (capability (find (obj (?ad is (spec-of adjustment-rate)))
+                   (of (?s is (inst-of earth-stuff)))))
+ (result-type (inst-of number))
+ (method (primitive-find-adjustment-rate-for-soil ?s))
+ (primitivep t))
+
+   at Thu May 27 20:54:05 PDT 1999
+
+check: All Agenda
+   at Thu May 27 20:54:05 PDT 1999
+
+check: Method Sub-Method Relation
+   at Thu May 27 20:54:05 PDT 1999
+
+ select: get ps tree all
+   at Thu May 27 20:54:16 PDT 1999
+
+ [ps-en1] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-PLAN)))
+[ps-en1] < NIL
+   X[ps-an2: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-PLAN)))
+    [ps-an2: METHOD] < NIL
+    [ps-en3] > (ADD (OBJ (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (WORKAROUND-OF (INST-OF WORKAROUND-PLAN))))))
+    [ps-en3] < NIL
+     [ps-en4] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (WORKAROUND-OF (INST-OF WORKAROUND-PLAN))))
+     [ps-en4]   (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF WORKAROUND-STEP))))
+     [ps-en4] < NIL
+      [ps-en5] > (WORKAROUND-OF (INST-OF WORKAROUND-PLAN))
+      [ps-en5] < (SET-OF (INST-OF WORKAROUND-STEP))
+       -[ps-an6: RETRIEVE-R] > (WORKAROUND-OF (INST-OF WORKAROUND-PLAN))
+        [ps-an6: RETRIEVE-R] < (SET-OF (INST-OF WORKAROUND-STEP))
+      X[ps-an7: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF WORKAROUND-STEP))))
+       [ps-an7: METHOD]   *** NO METHOD FOUND ***
+       [ps-an7: METHOD] < NIL
+      X[ps-an8: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF WORKAROUND-STEP))))
+       [ps-an8: SET] < NIL
+       [ps-en9] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-STEP)))
+       [ps-en9] < NIL
+        X[ps-an10: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-STEP)))
+         [ps-an10: METHOD]   *** NO METHOD FOUND ***
+         [ps-an10: METHOD] < NIL
+        X[ps-an11: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-STEP)))
+         [ps-an11: SET] < NIL
+        X[ps-an12: COVERING] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-STEP)))
+         [ps-an12: COVERING] < NIL
+         [ps-en13] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+         [ps-en13] < NIL
+          X[ps-an15: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+           [ps-an15: METHOD]   *** NO METHOD FOUND ***
+           [ps-an15: METHOD] < NIL
+          X[ps-an16: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+           [ps-an16: SET] < NIL
+          X[ps-an17: COVERING] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+           [ps-an17: COVERING] < NIL
+          X[ps-an18: INPUT] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+           [ps-an18: INPUT] < NIL
+         [ps-en14] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF FILL-CRATER)))
+         [ps-en14] < NIL
+          -[ps-an19: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF FILL-CRATER)))
+           [ps-an19: METHOD] < NIL
+           [ps-en20] > (DIVIDE (OBJ (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (CRATER-OF (INST-OF FILL-CRATER))))) (BY (OBJ (ESTIMATE (OBJ (SPEC-OF EARTHMOVING-RATE)) (OF (CRATER-OF (INST-OF FILL-CRATER)))))))
+           [ps-en20]   (DIVIDE (OBJ (INST-OF NUMBER)) (BY NIL))
+           [ps-en20] < NIL
+            [ps-en21] > (OBJ (ESTIMATE (OBJ (SPEC-OF EARTHMOVING-RATE)) (OF (CRATER-OF (INST-OF FILL-CRATER)))))
+            [ps-en21] < NIL
+            [ps-en22] > (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (CRATER-OF (INST-OF FILL-CRATER))))
+            [ps-en22]   (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (INST-OF CRATER)))
+            [ps-en22] < (INST-OF NUMBER)
+             [ps-en23] > (CRATER-OF (INST-OF FILL-CRATER))
+             [ps-en23] < (INST-OF CRATER)
+              -[ps-an24: RETRIEVE-R] > (CRATER-OF (INST-OF FILL-CRATER))
+               [ps-an24: RETRIEVE-R] < (INST-OF CRATER)
+             -[ps-an25: METHOD] > (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (INST-OF CRATER)))
+              [ps-an25: METHOD] < (INST-OF NUMBER)
+              [ps-en26] > (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))) (BY (LENGTH-OF-OBJECT (INST-OF CRATER))))) (BY 1/3))) (BY (HEIGHT-OF-OBJECT (INST-OF CRATER))))
+              [ps-en26]   (MULTIPLY (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+              [ps-en26] < (INST-OF NUMBER)
+               [ps-en27] > (HEIGHT-OF-OBJECT (INST-OF CRATER))
+               [ps-en27] < (INST-OF NUMBER)
+                -[ps-an29: RETRIEVE-R] > (HEIGHT-OF-OBJECT (INST-OF CRATER))
+                 [ps-an29: RETRIEVE-R] < (INST-OF NUMBER)
+               [ps-en28] > (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))) (BY (LENGTH-OF-OBJECT (INST-OF CRATER))))) (BY 1/3))
+               [ps-en28]   (MULTIPLY (OBJ (INST-OF NUMBER)) (BY 1/3))
+               [ps-en28] < (INST-OF NUMBER)
+                [ps-en30] > (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))) (BY (LENGTH-OF-OBJECT (INST-OF CRATER))))
+                [ps-en30]   (MULTIPLY (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+                [ps-en30] < (INST-OF NUMBER)
+                 [ps-en31] > (LENGTH-OF-OBJECT (INST-OF CRATER))
+                 [ps-en31] < (INST-OF NUMBER)
+                  -[ps-an33: RETRIEVE-R] > (LENGTH-OF-OBJECT (INST-OF CRATER))
+                   [ps-an33: RETRIEVE-R] < (INST-OF NUMBER)
+                 [ps-en32] > (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))
+                 [ps-en32]   (MULTIPLY (OBJ 0.785398) (BY (INST-OF NUMBER)))
+                 [ps-en32] < (INST-OF NUMBER)
+                  [ps-en34] > (WIDTH-OF-OBJECT (INST-OF CRATER))
+                  [ps-en34] < (INST-OF NUMBER)
+                   -[ps-an36: RETRIEVE-R] > (WIDTH-OF-OBJECT (INST-OF CRATER))
+                    [ps-an36: RETRIEVE-R] < (INST-OF NUMBER)
+                  [ps-en35] > (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))
+                  [ps-en35]   (MULTIPLY (OBJ 1.570796) (BY 0.5))
+                  [ps-en35] < 0.785398
+                   [ps-en37] > (MULTIPLY (OBJ 3.141592) (BY 0.5))
+                   [ps-en37] < 1.570796
+                    -[ps-an38: METHOD] > (MULTIPLY (OBJ 3.141592) (BY 0.5))
+                     [ps-an38: METHOD] < 1.570796
+                   -[ps-an39: METHOD] > (MULTIPLY (OBJ 1.570796) (BY 0.5))
+                    [ps-an39: METHOD] < 0.785398
+                  -[ps-an40: METHOD] > (MULTIPLY (OBJ 0.785398) (BY (INST-OF NUMBER)))
+                   [ps-an40: METHOD] < (INST-OF NUMBER)
+                 -[ps-an41: METHOD] > (MULTIPLY (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+                  [ps-an41: METHOD] < (INST-OF NUMBER)
+                -[ps-an42: METHOD] > (MULTIPLY (OBJ (INST-OF NUMBER)) (BY 1/3))
+                 [ps-an42: METHOD] < (INST-OF NUMBER)
+               -[ps-an41: METHOD] > (MULTIPLY (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+                [ps-an41: METHOD] < (INST-OF NUMBER)
+            -[ps-an44: SET] > (DIVIDE (OBJ (INST-OF NUMBER)) (BY NIL))
+             [ps-an44: SET]   (APPEND)
+             [ps-an44: SET] < NIL
+            X[ps-an43: METHOD] > (DIVIDE (OBJ (INST-OF NUMBER)) (BY NIL))
+             [ps-an43: METHOD]   *** NO METHOD FOUND ***
+             [ps-an43: METHOD] < NIL
+        X[ps-an45: INPUT] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-STEP)))
+         [ps-an45: INPUT] < NIL
+         [ps-en13] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+         [ps-en13] < NIL
+          X[ps-an15: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+           [ps-an15: METHOD]   *** NO METHOD FOUND ***
+           [ps-an15: METHOD] < NIL
+          X[ps-an16: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+           [ps-an16: SET] < NIL
+          X[ps-an17: COVERING] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+           [ps-an17: COVERING] < NIL
+          X[ps-an18: INPUT] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+           [ps-an18: INPUT] < NIL
+         [ps-en14] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF FILL-CRATER)))
+         [ps-en14] < NIL
+          -[ps-an19: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF FILL-CRATER)))
+           [ps-an19: METHOD] < NIL
+           [ps-en20] > (DIVIDE (OBJ (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (CRATER-OF (INST-OF FILL-CRATER))))) (BY (OBJ (ESTIMATE (OBJ (SPEC-OF EARTHMOVING-RATE)) (OF (CRATER-OF (INST-OF FILL-CRATER)))))))
+           [ps-en20]   (DIVIDE (OBJ (INST-OF NUMBER)) (BY NIL))
+           [ps-en20] < NIL
+            [ps-en21] > (OBJ (ESTIMATE (OBJ (SPEC-OF EARTHMOVING-RATE)) (OF (CRATER-OF (INST-OF FILL-CRATER)))))
+            [ps-en21] < NIL
+            [ps-en22] > (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (CRATER-OF (INST-OF FILL-CRATER))))
+            [ps-en22]   (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (INST-OF CRATER)))
+            [ps-en22] < (INST-OF NUMBER)
+             [ps-en23] > (CRATER-OF (INST-OF FILL-CRATER))
+             [ps-en23] < (INST-OF CRATER)
+              -[ps-an24: RETRIEVE-R] > (CRATER-OF (INST-OF FILL-CRATER))
+               [ps-an24: RETRIEVE-R] < (INST-OF CRATER)
+             -[ps-an25: METHOD] > (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (INST-OF CRATER)))
+              [ps-an25: METHOD] < (INST-OF NUMBER)
+              [ps-en26] > (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))) (BY (LENGTH-OF-OBJECT (INST-OF CRATER))))) (BY 1/3))) (BY (HEIGHT-OF-OBJECT (INST-OF CRATER))))
+              [ps-en26]   (MULTIPLY (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+              [ps-en26] < (INST-OF NUMBER)
+               [ps-en27] > (HEIGHT-OF-OBJECT (INST-OF CRATER))
+               [ps-en27] < (INST-OF NUMBER)
+                -[ps-an29: RETRIEVE-R] > (HEIGHT-OF-OBJECT (INST-OF CRATER))
+                 [ps-an29: RETRIEVE-R] < (INST-OF NUMBER)
+               [ps-en28] > (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))) (BY (LENGTH-OF-OBJECT (INST-OF CRATER))))) (BY 1/3))
+               [ps-en28]   (MULTIPLY (OBJ (INST-OF NUMBER)) (BY 1/3))
+               [ps-en28] < (INST-OF NUMBER)
+                [ps-en30] > (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))) (BY (LENGTH-OF-OBJECT (INST-OF CRATER))))
+                [ps-en30]   (MULTIPLY (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+                [ps-en30] < (INST-OF NUMBER)
+                 [ps-en31] > (LENGTH-OF-OBJECT (INST-OF CRATER))
+                 [ps-en31] < (INST-OF NUMBER)
+                  -[ps-an33: RETRIEVE-R] > (LENGTH-OF-OBJECT (INST-OF CRATER))
+                   [ps-an33: RETRIEVE-R] < (INST-OF NUMBER)
+                 [ps-en32] > (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))
+                 [ps-en32]   (MULTIPLY (OBJ 0.785398) (BY (INST-OF NUMBER)))
+                 [ps-en32] < (INST-OF NUMBER)
+                  [ps-en34] > (WIDTH-OF-OBJECT (INST-OF CRATER))
+                  [ps-en34] < (INST-OF NUMBER)
+                   -[ps-an36: RETRIEVE-R] > (WIDTH-OF-OBJECT (INST-OF CRATER))
+                    [ps-an36: RETRIEVE-R] < (INST-OF NUMBER)
+                  [ps-en35] > (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))
+                  [ps-en35]   (MULTIPLY (OBJ 1.570796) (BY 0.5))
+                  [ps-en35] < 0.785398
+                   [ps-en37] > (MULTIPLY (OBJ 3.141592) (BY 0.5))
+                   [ps-en37] < 1.570796
+                    -[ps-an38: METHOD] > (MULTIPLY (OBJ 3.141592) (BY 0.5))
+                     [ps-an38: METHOD] < 1.570796
+                   -[ps-an39: METHOD] > (MULTIPLY (OBJ 1.570796) (BY 0.5))
+                    [ps-an39: METHOD] < 0.785398
+                  -[ps-an40: METHOD] > (MULTIPLY (OBJ 0.785398) (BY (INST-OF NUMBER)))
+                   [ps-an40: METHOD] < (INST-OF NUMBER)
+                 -[ps-an41: METHOD] > (MULTIPLY (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+                  [ps-an41: METHOD] < (INST-OF NUMBER)
+                -[ps-an42: METHOD] > (MULTIPLY (OBJ (INST-OF NUMBER)) (BY 1/3))
+                 [ps-an42: METHOD] < (INST-OF NUMBER)
+               -[ps-an41: METHOD] > (MULTIPLY (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+                [ps-an41: METHOD] < (INST-OF NUMBER)
+            -[ps-an44: SET] > (DIVIDE (OBJ (INST-OF NUMBER)) (BY NIL))
+             [ps-an44: SET]   (APPEND)
+             [ps-an44: SET] < NIL
+            X[ps-an43: METHOD] > (DIVIDE (OBJ (INST-OF NUMBER)) (BY NIL))
+             [ps-an43: METHOD]   *** NO METHOD FOUND ***
+             [ps-an43: METHOD] < NIL
+      X[ps-an46: COVERING] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF WORKAROUND-STEP))))
+       [ps-an46: COVERING] < NIL
+       [ps-en47] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF NARROW-GAP-WITH-BULLDOZER))))
+       [ps-en47] < NIL
+        X[ps-an49: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF NARROW-GAP-WITH-BULLDOZER))))
+         [ps-an49: METHOD]   *** NO METHOD FOUND ***
+         [ps-an49: METHOD] < NIL
+        X[ps-an50: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF NARROW-GAP-WITH-BULLDOZER))))
+         [ps-an50: SET] < NIL
+         [ps-en13] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+         [ps-en13] < NIL
+          X[ps-an15: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+           [ps-an15: METHOD]   *** NO METHOD FOUND ***
+           [ps-an15: METHOD] < NIL
+          X[ps-an16: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+           [ps-an16: SET] < NIL
+          X[ps-an17: COVERING] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+           [ps-an17: COVERING] < NIL
+          X[ps-an18: INPUT] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+           [ps-an18: INPUT] < NIL
+        X[ps-an51: COVERING] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF NARROW-GAP-WITH-BULLDOZER))))
+         [ps-an51: COVERING] < NIL
+        X[ps-an52: INPUT] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF NARROW-GAP-WITH-BULLDOZER))))
+         [ps-an52: INPUT] < NIL
+       [ps-en48] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF FILL-CRATER))))
+       [ps-en48] < NIL
+        -[ps-an54: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF FILL-CRATER))))
+         [ps-an54: SET]   (APPEND NIL)
+         [ps-an54: SET] < NIL
+         [ps-en14] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF FILL-CRATER)))
+         [ps-en14] < NIL
+          -[ps-an19: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF FILL-CRATER)))
+           [ps-an19: METHOD] < NIL
+           [ps-en20] > (DIVIDE (OBJ (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (CRATER-OF (INST-OF FILL-CRATER))))) (BY (OBJ (ESTIMATE (OBJ (SPEC-OF EARTHMOVING-RATE)) (OF (CRATER-OF (INST-OF FILL-CRATER)))))))
+           [ps-en20]   (DIVIDE (OBJ (INST-OF NUMBER)) (BY NIL))
+           [ps-en20] < NIL
+            [ps-en21] > (OBJ (ESTIMATE (OBJ (SPEC-OF EARTHMOVING-RATE)) (OF (CRATER-OF (INST-OF FILL-CRATER)))))
+            [ps-en21] < NIL
+            [ps-en22] > (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (CRATER-OF (INST-OF FILL-CRATER))))
+            [ps-en22]   (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (INST-OF CRATER)))
+            [ps-en22] < (INST-OF NUMBER)
+             [ps-en23] > (CRATER-OF (INST-OF FILL-CRATER))
+             [ps-en23] < (INST-OF CRATER)
+              -[ps-an24: RETRIEVE-R] > (CRATER-OF (INST-OF FILL-CRATER))
+               [ps-an24: RETRIEVE-R] < (INST-OF CRATER)
+             -[ps-an25: METHOD] > (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (INST-OF CRATER)))
+              [ps-an25: METHOD] < (INST-OF NUMBER)
+              [ps-en26] > (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))) (BY (LENGTH-OF-OBJECT (INST-OF CRATER))))) (BY 1/3))) (BY (HEIGHT-OF-OBJECT (INST-OF CRATER))))
+              [ps-en26]   (MULTIPLY (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+              [ps-en26] < (INST-OF NUMBER)
+               [ps-en27] > (HEIGHT-OF-OBJECT (INST-OF CRATER))
+               [ps-en27] < (INST-OF NUMBER)
+                -[ps-an29: RETRIEVE-R] > (HEIGHT-OF-OBJECT (INST-OF CRATER))
+                 [ps-an29: RETRIEVE-R] < (INST-OF NUMBER)
+               [ps-en28] > (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))) (BY (LENGTH-OF-OBJECT (INST-OF CRATER))))) (BY 1/3))
+               [ps-en28]   (MULTIPLY (OBJ (INST-OF NUMBER)) (BY 1/3))
+               [ps-en28] < (INST-OF NUMBER)
+                [ps-en30] > (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))) (BY (LENGTH-OF-OBJECT (INST-OF CRATER))))
+                [ps-en30]   (MULTIPLY (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+                [ps-en30] < (INST-OF NUMBER)
+                 [ps-en31] > (LENGTH-OF-OBJECT (INST-OF CRATER))
+                 [ps-en31] < (INST-OF NUMBER)
+                  -[ps-an33: RETRIEVE-R] > (LENGTH-OF-OBJECT (INST-OF CRATER))
+                   [ps-an33: RETRIEVE-R] < (INST-OF NUMBER)
+                 [ps-en32] > (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))
+                 [ps-en32]   (MULTIPLY (OBJ 0.785398) (BY (INST-OF NUMBER)))
+                 [ps-en32] < (INST-OF NUMBER)
+                  [ps-en34] > (WIDTH-OF-OBJECT (INST-OF CRATER))
+                  [ps-en34] < (INST-OF NUMBER)
+                   -[ps-an36: RETRIEVE-R] > (WIDTH-OF-OBJECT (INST-OF CRATER))
+                    [ps-an36: RETRIEVE-R] < (INST-OF NUMBER)
+                  [ps-en35] > (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))
+                  [ps-en35]   (MULTIPLY (OBJ 1.570796) (BY 0.5))
+                  [ps-en35] < 0.785398
+                   [ps-en37] > (MULTIPLY (OBJ 3.141592) (BY 0.5))
+                   [ps-en37] < 1.570796
+                    -[ps-an38: METHOD] > (MULTIPLY (OBJ 3.141592) (BY 0.5))
+                     [ps-an38: METHOD] < 1.570796
+                   -[ps-an39: METHOD] > (MULTIPLY (OBJ 1.570796) (BY 0.5))
+                    [ps-an39: METHOD] < 0.785398
+                  -[ps-an40: METHOD] > (MULTIPLY (OBJ 0.785398) (BY (INST-OF NUMBER)))
+                   [ps-an40: METHOD] < (INST-OF NUMBER)
+                 -[ps-an41: METHOD] > (MULTIPLY (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+                  [ps-an41: METHOD] < (INST-OF NUMBER)
+                -[ps-an42: METHOD] > (MULTIPLY (OBJ (INST-OF NUMBER)) (BY 1/3))
+                 [ps-an42: METHOD] < (INST-OF NUMBER)
+               -[ps-an41: METHOD] > (MULTIPLY (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+                [ps-an41: METHOD] < (INST-OF NUMBER)
+            -[ps-an44: SET] > (DIVIDE (OBJ (INST-OF NUMBER)) (BY NIL))
+             [ps-an44: SET]   (APPEND)
+             [ps-an44: SET] < NIL
+            X[ps-an43: METHOD] > (DIVIDE (OBJ (INST-OF NUMBER)) (BY NIL))
+             [ps-an43: METHOD]   *** NO METHOD FOUND ***
+             [ps-an43: METHOD] < NIL
+        X[ps-an53: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF FILL-CRATER))))
+         [ps-an53: METHOD]   *** NO METHOD FOUND ***
+         [ps-an53: METHOD] < NIL
+      X[ps-an55: INPUT] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF WORKAROUND-STEP))))
+       [ps-an55: INPUT] < NIL
+       [ps-en47] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF NARROW-GAP-WITH-BULLDOZER))))
+       [ps-en47] < NIL
+        X[ps-an49: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF NARROW-GAP-WITH-BULLDOZER))))
+         [ps-an49: METHOD]   *** NO METHOD FOUND ***
+         [ps-an49: METHOD] < NIL
+        X[ps-an50: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF NARROW-GAP-WITH-BULLDOZER))))
+         [ps-an50: SET] < NIL
+         [ps-en13] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+         [ps-en13] < NIL
+          X[ps-an15: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+           [ps-an15: METHOD]   *** NO METHOD FOUND ***
+           [ps-an15: METHOD] < NIL
+          X[ps-an16: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+           [ps-an16: SET] < NIL
+          X[ps-an17: COVERING] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+           [ps-an17: COVERING] < NIL
+          X[ps-an18: INPUT] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+           [ps-an18: INPUT] < NIL
+        X[ps-an51: COVERING] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF NARROW-GAP-WITH-BULLDOZER))))
+         [ps-an51: COVERING] < NIL
+        X[ps-an52: INPUT] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF NARROW-GAP-WITH-BULLDOZER))))
+         [ps-an52: INPUT] < NIL
+       [ps-en48] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF FILL-CRATER))))
+       [ps-en48] < NIL
+        -[ps-an54: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF FILL-CRATER))))
+         [ps-an54: SET]   (APPEND NIL)
+         [ps-an54: SET] < NIL
+         [ps-en14] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF FILL-CRATER)))
+         [ps-en14] < NIL
+          -[ps-an19: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF FILL-CRATER)))
+           [ps-an19: METHOD] < NIL
+           [ps-en20] > (DIVIDE (OBJ (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (CRATER-OF (INST-OF FILL-CRATER))))) (BY (OBJ (ESTIMATE (OBJ (SPEC-OF EARTHMOVING-RATE)) (OF (CRATER-OF (INST-OF FILL-CRATER)))))))
+           [ps-en20]   (DIVIDE (OBJ (INST-OF NUMBER)) (BY NIL))
+           [ps-en20] < NIL
+            [ps-en21] > (OBJ (ESTIMATE (OBJ (SPEC-OF EARTHMOVING-RATE)) (OF (CRATER-OF (INST-OF FILL-CRATER)))))
+            [ps-en21] < NIL
+            [ps-en22] > (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (CRATER-OF (INST-OF FILL-CRATER))))
+            [ps-en22]   (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (INST-OF CRATER)))
+            [ps-en22] < (INST-OF NUMBER)
+             [ps-en23] > (CRATER-OF (INST-OF FILL-CRATER))
+             [ps-en23] < (INST-OF CRATER)
+              -[ps-an24: RETRIEVE-R] > (CRATER-OF (INST-OF FILL-CRATER))
+               [ps-an24: RETRIEVE-R] < (INST-OF CRATER)
+             -[ps-an25: METHOD] > (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (INST-OF CRATER)))
+              [ps-an25: METHOD] < (INST-OF NUMBER)
+              [ps-en26] > (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))) (BY (LENGTH-OF-OBJECT (INST-OF CRATER))))) (BY 1/3))) (BY (HEIGHT-OF-OBJECT (INST-OF CRATER))))
+              [ps-en26]   (MULTIPLY (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+              [ps-en26] < (INST-OF NUMBER)
+               [ps-en27] > (HEIGHT-OF-OBJECT (INST-OF CRATER))
+               [ps-en27] < (INST-OF NUMBER)
+                -[ps-an29: RETRIEVE-R] > (HEIGHT-OF-OBJECT (INST-OF CRATER))
+                 [ps-an29: RETRIEVE-R] < (INST-OF NUMBER)
+               [ps-en28] > (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))) (BY (LENGTH-OF-OBJECT (INST-OF CRATER))))) (BY 1/3))
+               [ps-en28]   (MULTIPLY (OBJ (INST-OF NUMBER)) (BY 1/3))
+               [ps-en28] < (INST-OF NUMBER)
+                [ps-en30] > (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))) (BY (LENGTH-OF-OBJECT (INST-OF CRATER))))
+                [ps-en30]   (MULTIPLY (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+                [ps-en30] < (INST-OF NUMBER)
+                 [ps-en31] > (LENGTH-OF-OBJECT (INST-OF CRATER))
+                 [ps-en31] < (INST-OF NUMBER)
+                  -[ps-an33: RETRIEVE-R] > (LENGTH-OF-OBJECT (INST-OF CRATER))
+                   [ps-an33: RETRIEVE-R] < (INST-OF NUMBER)
+                 [ps-en32] > (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))
+                 [ps-en32]   (MULTIPLY (OBJ 0.785398) (BY (INST-OF NUMBER)))
+                 [ps-en32] < (INST-OF NUMBER)
+                  [ps-en34] > (WIDTH-OF-OBJECT (INST-OF CRATER))
+                  [ps-en34] < (INST-OF NUMBER)
+                   -[ps-an36: RETRIEVE-R] > (WIDTH-OF-OBJECT (INST-OF CRATER))
+                    [ps-an36: RETRIEVE-R] < (INST-OF NUMBER)
+                  [ps-en35] > (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))
+                  [ps-en35]   (MULTIPLY (OBJ 1.570796) (BY 0.5))
+                  [ps-en35] < 0.785398
+                   [ps-en37] > (MULTIPLY (OBJ 3.141592) (BY 0.5))
+                   [ps-en37] < 1.570796
+                    -[ps-an38: METHOD] > (MULTIPLY (OBJ 3.141592) (BY 0.5))
+                     [ps-an38: METHOD] < 1.570796
+                   -[ps-an39: METHOD] > (MULTIPLY (OBJ 1.570796) (BY 0.5))
+                    [ps-an39: METHOD] < 0.785398
+                  -[ps-an40: METHOD] > (MULTIPLY (OBJ 0.785398) (BY (INST-OF NUMBER)))
+                   [ps-an40: METHOD] < (INST-OF NUMBER)
+                 -[ps-an41: METHOD] > (MULTIPLY (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+                  [ps-an41: METHOD] < (INST-OF NUMBER)
+                -[ps-an42: METHOD] > (MULTIPLY (OBJ (INST-OF NUMBER)) (BY 1/3))
+                 [ps-an42: METHOD] < (INST-OF NUMBER)
+               -[ps-an41: METHOD] > (MULTIPLY (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+                [ps-an41: METHOD] < (INST-OF NUMBER)
+            -[ps-an44: SET] > (DIVIDE (OBJ (INST-OF NUMBER)) (BY NIL))
+             [ps-an44: SET]   (APPEND)
+             [ps-an44: SET] < NIL
+            X[ps-an43: METHOD] > (DIVIDE (OBJ (INST-OF NUMBER)) (BY NIL))
+             [ps-an43: METHOD]   *** NO METHOD FOUND ***
+             [ps-an43: METHOD] < NIL
+        X[ps-an53: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF FILL-CRATER))))
+         [ps-an53: METHOD]   *** NO METHOD FOUND ***
+         [ps-an53: METHOD] < NIL
+   X[ps-an56: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-PLAN)))
+    [ps-an56: SET] < NIL
+   X[ps-an57: COVERING] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-PLAN)))
+    [ps-an57: COVERING] < NIL
+   X[ps-an58: INPUT] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-PLAN)))
+    [ps-an58: INPUT] < NIL
+
+   at Thu May 27 20:54:22 PDT 1999
+
+select: modify button
+   at Thu May 27 20:55:40 PDT 1999
+
+ done editing:((name estimate-time-to-fill-crater)
+(capability (estimate (obj (?t is (spec-of time)))
+		      (for (?f is (inst-of fill-crater)))))
+(result-type (inst-of number))
+(method (divide (obj (estimate
+		      (obj (spec-of dirt-volume))
+		      (of (crater-of ?f))))
+		(by (estimate
+			  (obj (spec-of earthmoving-rate))
+			  (of (crater-of ?f))))))
+)
+
+   at Thu May 27 20:55:56 PDT 1999
+
+modified method:((name estimate-time-to-fill-crater)
+(capability (estimate (obj (?t is (spec-of time)))
+		      (for (?f is (inst-of fill-crater)))))
+(result-type (inst-of number))
+(method (divide (obj (estimate
+		      (obj (spec-of dirt-volume))
+		      (of (crater-of ?f))))
+		(by (estimate
+			  (obj (spec-of earthmoving-rate))
+			  (of (crater-of ?f))))))
+)
+
+   at Thu May 27 20:55:56 PDT 1999
+
+check: All Agenda
+   at Thu May 27 20:55:56 PDT 1999
+
+check: Method Sub-Method Relation
+   at Thu May 27 20:55:56 PDT 1999
+
+ select: get ps tree all
+   at Thu May 27 20:56:01 PDT 1999
+
+ [ps-en1] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-PLAN)))
+[ps-en1] < NIL
+   X[ps-an2: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-PLAN)))
+    [ps-an2: METHOD] < NIL
+    [ps-en3] > (ADD (OBJ (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (WORKAROUND-OF (INST-OF WORKAROUND-PLAN))))))
+    [ps-en3] < NIL
+     [ps-en4] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (WORKAROUND-OF (INST-OF WORKAROUND-PLAN))))
+     [ps-en4]   (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF WORKAROUND-STEP))))
+     [ps-en4] < NIL
+      [ps-en5] > (WORKAROUND-OF (INST-OF WORKAROUND-PLAN))
+      [ps-en5] < (SET-OF (INST-OF WORKAROUND-STEP))
+       -[ps-an6: RETRIEVE-R] > (WORKAROUND-OF (INST-OF WORKAROUND-PLAN))
+        [ps-an6: RETRIEVE-R] < (SET-OF (INST-OF WORKAROUND-STEP))
+      X[ps-an7: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF WORKAROUND-STEP))))
+       [ps-an7: METHOD]   *** NO METHOD FOUND ***
+       [ps-an7: METHOD] < NIL
+      X[ps-an8: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF WORKAROUND-STEP))))
+       [ps-an8: SET] < NIL
+       [ps-en9] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-STEP)))
+       [ps-en9] < NIL
+        X[ps-an10: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-STEP)))
+         [ps-an10: METHOD]   *** NO METHOD FOUND ***
+         [ps-an10: METHOD] < NIL
+        X[ps-an11: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-STEP)))
+         [ps-an11: SET] < NIL
+        X[ps-an12: COVERING] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-STEP)))
+         [ps-an12: COVERING] < NIL
+         [ps-en13] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+         [ps-en13] < NIL
+          X[ps-an15: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+           [ps-an15: METHOD]   *** NO METHOD FOUND ***
+           [ps-an15: METHOD] < NIL
+          X[ps-an16: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+           [ps-an16: SET] < NIL
+          X[ps-an17: COVERING] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+           [ps-an17: COVERING] < NIL
+          X[ps-an18: INPUT] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+           [ps-an18: INPUT] < NIL
+         [ps-en14] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF FILL-CRATER)))
+         [ps-en14] < (INST-OF NUMBER)
+          -[ps-an19: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF FILL-CRATER)))
+           [ps-an19: METHOD] < (INST-OF NUMBER)
+           [ps-en20] > (DIVIDE (OBJ (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (CRATER-OF (INST-OF FILL-CRATER))))) (BY (ESTIMATE (OBJ (SPEC-OF EARTHMOVING-RATE)) (OF (CRATER-OF (INST-OF FILL-CRATER))))))
+           [ps-en20]   (DIVIDE (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+           [ps-en20] < (INST-OF NUMBER)
+            [ps-en21] > (ESTIMATE (OBJ (SPEC-OF EARTHMOVING-RATE)) (OF (CRATER-OF (INST-OF FILL-CRATER))))
+            [ps-en21]   (ESTIMATE (OBJ (SPEC-OF EARTHMOVING-RATE)) (OF (INST-OF CRATER)))
+            [ps-en21] < (INST-OF NUMBER)
+             [ps-en23] > (CRATER-OF (INST-OF FILL-CRATER))
+             [ps-en23] < (INST-OF CRATER)
+              -[ps-an24: RETRIEVE-R] > (CRATER-OF (INST-OF FILL-CRATER))
+               [ps-an24: RETRIEVE-R] < (INST-OF CRATER)
+             -[ps-an25: METHOD] > (ESTIMATE (OBJ (SPEC-OF EARTHMOVING-RATE)) (OF (INST-OF CRATER)))
+              [ps-an25: METHOD] < (INST-OF NUMBER)
+              [ps-en26] > (MULTIPLY (OBJ 250) (BY (FIND (OBJ (SPEC-OF ADJUSTMENT-RATE)) (OF (SOIL-OF (INST-OF CRATER))))))
+              [ps-en26]   (MULTIPLY (OBJ 250) (BY (INST-OF NUMBER)))
+              [ps-en26] < (INST-OF NUMBER)
+               [ps-en27] > (FIND (OBJ (SPEC-OF ADJUSTMENT-RATE)) (OF (SOIL-OF (INST-OF CRATER))))
+               [ps-en27]   (FIND (OBJ (SPEC-OF ADJUSTMENT-RATE)) (OF (INST-OF EARTH-STUFF)))
+               [ps-en27] < (INST-OF NUMBER)
+                [ps-en28] > (SOIL-OF (INST-OF CRATER))
+                [ps-en28] < (INST-OF EARTH-STUFF)
+                 -[ps-an29: RETRIEVE-R] > (SOIL-OF (INST-OF CRATER))
+                  [ps-an29: RETRIEVE-R] < (INST-OF EARTH-STUFF)
+                -[ps-an30: METHOD] > (FIND (OBJ (SPEC-OF ADJUSTMENT-RATE)) (OF (INST-OF EARTH-STUFF)))
+                 [ps-an30: METHOD] < (INST-OF NUMBER)
+               -[ps-an31: METHOD] > (MULTIPLY (OBJ 250) (BY (INST-OF NUMBER)))
+                [ps-an31: METHOD] < (INST-OF NUMBER)
+            [ps-en22] > (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (CRATER-OF (INST-OF FILL-CRATER))))
+            [ps-en22]   (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (INST-OF CRATER)))
+            [ps-en22] < (INST-OF NUMBER)
+             [ps-en23] > (CRATER-OF (INST-OF FILL-CRATER))
+             [ps-en23] < (INST-OF CRATER)
+              -[ps-an24: RETRIEVE-R] > (CRATER-OF (INST-OF FILL-CRATER))
+               [ps-an24: RETRIEVE-R] < (INST-OF CRATER)
+             -[ps-an32: METHOD] > (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (INST-OF CRATER)))
+              [ps-an32: METHOD] < (INST-OF NUMBER)
+              [ps-en33] > (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))) (BY (LENGTH-OF-OBJECT (INST-OF CRATER))))) (BY 1/3))) (BY (HEIGHT-OF-OBJECT (INST-OF CRATER))))
+              [ps-en33]   (MULTIPLY (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+              [ps-en33] < (INST-OF NUMBER)
+               [ps-en34] > (HEIGHT-OF-OBJECT (INST-OF CRATER))
+               [ps-en34] < (INST-OF NUMBER)
+                -[ps-an36: RETRIEVE-R] > (HEIGHT-OF-OBJECT (INST-OF CRATER))
+                 [ps-an36: RETRIEVE-R] < (INST-OF NUMBER)
+               [ps-en35] > (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))) (BY (LENGTH-OF-OBJECT (INST-OF CRATER))))) (BY 1/3))
+               [ps-en35]   (MULTIPLY (OBJ (INST-OF NUMBER)) (BY 1/3))
+               [ps-en35] < (INST-OF NUMBER)
+                [ps-en37] > (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))) (BY (LENGTH-OF-OBJECT (INST-OF CRATER))))
+                [ps-en37]   (MULTIPLY (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+                [ps-en37] < (INST-OF NUMBER)
+                 [ps-en38] > (LENGTH-OF-OBJECT (INST-OF CRATER))
+                 [ps-en38] < (INST-OF NUMBER)
+                  -[ps-an40: RETRIEVE-R] > (LENGTH-OF-OBJECT (INST-OF CRATER))
+                   [ps-an40: RETRIEVE-R] < (INST-OF NUMBER)
+                 [ps-en39] > (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))
+                 [ps-en39]   (MULTIPLY (OBJ 0.785398) (BY (INST-OF NUMBER)))
+                 [ps-en39] < (INST-OF NUMBER)
+                  [ps-en41] > (WIDTH-OF-OBJECT (INST-OF CRATER))
+                  [ps-en41] < (INST-OF NUMBER)
+                   -[ps-an43: RETRIEVE-R] > (WIDTH-OF-OBJECT (INST-OF CRATER))
+                    [ps-an43: RETRIEVE-R] < (INST-OF NUMBER)
+                  [ps-en42] > (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))
+                  [ps-en42]   (MULTIPLY (OBJ 1.570796) (BY 0.5))
+                  [ps-en42] < 0.785398
+                   [ps-en44] > (MULTIPLY (OBJ 3.141592) (BY 0.5))
+                   [ps-en44] < 1.570796
+                    -[ps-an45: METHOD] > (MULTIPLY (OBJ 3.141592) (BY 0.5))
+                     [ps-an45: METHOD] < 1.570796
+                   -[ps-an46: METHOD] > (MULTIPLY (OBJ 1.570796) (BY 0.5))
+                    [ps-an46: METHOD] < 0.785398
+                  -[ps-an47: METHOD] > (MULTIPLY (OBJ 0.785398) (BY (INST-OF NUMBER)))
+                   [ps-an47: METHOD] < (INST-OF NUMBER)
+                 -[ps-an48: METHOD] > (MULTIPLY (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+                  [ps-an48: METHOD] < (INST-OF NUMBER)
+                -[ps-an49: METHOD] > (MULTIPLY (OBJ (INST-OF NUMBER)) (BY 1/3))
+                 [ps-an49: METHOD] < (INST-OF NUMBER)
+               -[ps-an48: METHOD] > (MULTIPLY (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+                [ps-an48: METHOD] < (INST-OF NUMBER)
+            -[ps-an50: METHOD] > (DIVIDE (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+             [ps-an50: METHOD] < (INST-OF NUMBER)
+        X[ps-an51: INPUT] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-STEP)))
+         [ps-an51: INPUT] < NIL
+         [ps-en13] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+         [ps-en13] < NIL
+          X[ps-an15: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+           [ps-an15: METHOD]   *** NO METHOD FOUND ***
+           [ps-an15: METHOD] < NIL
+          X[ps-an16: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+           [ps-an16: SET] < NIL
+          X[ps-an17: COVERING] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+           [ps-an17: COVERING] < NIL
+          X[ps-an18: INPUT] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+           [ps-an18: INPUT] < NIL
+         [ps-en14] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF FILL-CRATER)))
+         [ps-en14] < (INST-OF NUMBER)
+          -[ps-an19: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF FILL-CRATER)))
+           [ps-an19: METHOD] < (INST-OF NUMBER)
+           [ps-en20] > (DIVIDE (OBJ (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (CRATER-OF (INST-OF FILL-CRATER))))) (BY (ESTIMATE (OBJ (SPEC-OF EARTHMOVING-RATE)) (OF (CRATER-OF (INST-OF FILL-CRATER))))))
+           [ps-en20]   (DIVIDE (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+           [ps-en20] < (INST-OF NUMBER)
+            [ps-en21] > (ESTIMATE (OBJ (SPEC-OF EARTHMOVING-RATE)) (OF (CRATER-OF (INST-OF FILL-CRATER))))
+            [ps-en21]   (ESTIMATE (OBJ (SPEC-OF EARTHMOVING-RATE)) (OF (INST-OF CRATER)))
+            [ps-en21] < (INST-OF NUMBER)
+             [ps-en23] > (CRATER-OF (INST-OF FILL-CRATER))
+             [ps-en23] < (INST-OF CRATER)
+              -[ps-an24: RETRIEVE-R] > (CRATER-OF (INST-OF FILL-CRATER))
+               [ps-an24: RETRIEVE-R] < (INST-OF CRATER)
+             -[ps-an25: METHOD] > (ESTIMATE (OBJ (SPEC-OF EARTHMOVING-RATE)) (OF (INST-OF CRATER)))
+              [ps-an25: METHOD] < (INST-OF NUMBER)
+              [ps-en26] > (MULTIPLY (OBJ 250) (BY (FIND (OBJ (SPEC-OF ADJUSTMENT-RATE)) (OF (SOIL-OF (INST-OF CRATER))))))
+              [ps-en26]   (MULTIPLY (OBJ 250) (BY (INST-OF NUMBER)))
+              [ps-en26] < (INST-OF NUMBER)
+               [ps-en27] > (FIND (OBJ (SPEC-OF ADJUSTMENT-RATE)) (OF (SOIL-OF (INST-OF CRATER))))
+               [ps-en27]   (FIND (OBJ (SPEC-OF ADJUSTMENT-RATE)) (OF (INST-OF EARTH-STUFF)))
+               [ps-en27] < (INST-OF NUMBER)
+                [ps-en28] > (SOIL-OF (INST-OF CRATER))
+                [ps-en28] < (INST-OF EARTH-STUFF)
+                 -[ps-an29: RETRIEVE-R] > (SOIL-OF (INST-OF CRATER))
+                  [ps-an29: RETRIEVE-R] < (INST-OF EARTH-STUFF)
+                -[ps-an30: METHOD] > (FIND (OBJ (SPEC-OF ADJUSTMENT-RATE)) (OF (INST-OF EARTH-STUFF)))
+                 [ps-an30: METHOD] < (INST-OF NUMBER)
+               -[ps-an31: METHOD] > (MULTIPLY (OBJ 250) (BY (INST-OF NUMBER)))
+                [ps-an31: METHOD] < (INST-OF NUMBER)
+            [ps-en22] > (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (CRATER-OF (INST-OF FILL-CRATER))))
+            [ps-en22]   (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (INST-OF CRATER)))
+            [ps-en22] < (INST-OF NUMBER)
+             [ps-en23] > (CRATER-OF (INST-OF FILL-CRATER))
+             [ps-en23] < (INST-OF CRATER)
+              -[ps-an24: RETRIEVE-R] > (CRATER-OF (INST-OF FILL-CRATER))
+               [ps-an24: RETRIEVE-R] < (INST-OF CRATER)
+             -[ps-an32: METHOD] > (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (INST-OF CRATER)))
+              [ps-an32: METHOD] < (INST-OF NUMBER)
+              [ps-en33] > (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))) (BY (LENGTH-OF-OBJECT (INST-OF CRATER))))) (BY 1/3))) (BY (HEIGHT-OF-OBJECT (INST-OF CRATER))))
+              [ps-en33]   (MULTIPLY (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+              [ps-en33] < (INST-OF NUMBER)
+               [ps-en34] > (HEIGHT-OF-OBJECT (INST-OF CRATER))
+               [ps-en34] < (INST-OF NUMBER)
+                -[ps-an36: RETRIEVE-R] > (HEIGHT-OF-OBJECT (INST-OF CRATER))
+                 [ps-an36: RETRIEVE-R] < (INST-OF NUMBER)
+               [ps-en35] > (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))) (BY (LENGTH-OF-OBJECT (INST-OF CRATER))))) (BY 1/3))
+               [ps-en35]   (MULTIPLY (OBJ (INST-OF NUMBER)) (BY 1/3))
+               [ps-en35] < (INST-OF NUMBER)
+                [ps-en37] > (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))) (BY (LENGTH-OF-OBJECT (INST-OF CRATER))))
+                [ps-en37]   (MULTIPLY (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+                [ps-en37] < (INST-OF NUMBER)
+                 [ps-en38] > (LENGTH-OF-OBJECT (INST-OF CRATER))
+                 [ps-en38] < (INST-OF NUMBER)
+                  -[ps-an40: RETRIEVE-R] > (LENGTH-OF-OBJECT (INST-OF CRATER))
+                   [ps-an40: RETRIEVE-R] < (INST-OF NUMBER)
+                 [ps-en39] > (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))
+                 [ps-en39]   (MULTIPLY (OBJ 0.785398) (BY (INST-OF NUMBER)))
+                 [ps-en39] < (INST-OF NUMBER)
+                  [ps-en41] > (WIDTH-OF-OBJECT (INST-OF CRATER))
+                  [ps-en41] < (INST-OF NUMBER)
+                   -[ps-an43: RETRIEVE-R] > (WIDTH-OF-OBJECT (INST-OF CRATER))
+                    [ps-an43: RETRIEVE-R] < (INST-OF NUMBER)
+                  [ps-en42] > (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))
+                  [ps-en42]   (MULTIPLY (OBJ 1.570796) (BY 0.5))
+                  [ps-en42] < 0.785398
+                   [ps-en44] > (MULTIPLY (OBJ 3.141592) (BY 0.5))
+                   [ps-en44] < 1.570796
+                    -[ps-an45: METHOD] > (MULTIPLY (OBJ 3.141592) (BY 0.5))
+                     [ps-an45: METHOD] < 1.570796
+                   -[ps-an46: METHOD] > (MULTIPLY (OBJ 1.570796) (BY 0.5))
+                    [ps-an46: METHOD] < 0.785398
+                  -[ps-an47: METHOD] > (MULTIPLY (OBJ 0.785398) (BY (INST-OF NUMBER)))
+                   [ps-an47: METHOD] < (INST-OF NUMBER)
+                 -[ps-an48: METHOD] > (MULTIPLY (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+                  [ps-an48: METHOD] < (INST-OF NUMBER)
+                -[ps-an49: METHOD] > (MULTIPLY (OBJ (INST-OF NUMBER)) (BY 1/3))
+                 [ps-an49: METHOD] < (INST-OF NUMBER)
+               -[ps-an48: METHOD] > (MULTIPLY (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+                [ps-an48: METHOD] < (INST-OF NUMBER)
+            -[ps-an50: METHOD] > (DIVIDE (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+             [ps-an50: METHOD] < (INST-OF NUMBER)
+      X[ps-an52: COVERING] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF WORKAROUND-STEP))))
+       [ps-an52: COVERING] < NIL
+       [ps-en53] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF NARROW-GAP-WITH-BULLDOZER))))
+       [ps-en53] < NIL
+        X[ps-an55: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF NARROW-GAP-WITH-BULLDOZER))))
+         [ps-an55: METHOD]   *** NO METHOD FOUND ***
+         [ps-an55: METHOD] < NIL
+        X[ps-an56: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF NARROW-GAP-WITH-BULLDOZER))))
+         [ps-an56: SET] < NIL
+         [ps-en13] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+         [ps-en13] < NIL
+          X[ps-an15: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+           [ps-an15: METHOD]   *** NO METHOD FOUND ***
+           [ps-an15: METHOD] < NIL
+          X[ps-an16: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+           [ps-an16: SET] < NIL
+          X[ps-an17: COVERING] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+           [ps-an17: COVERING] < NIL
+          X[ps-an18: INPUT] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+           [ps-an18: INPUT] < NIL
+        X[ps-an57: COVERING] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF NARROW-GAP-WITH-BULLDOZER))))
+         [ps-an57: COVERING] < NIL
+        X[ps-an58: INPUT] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF NARROW-GAP-WITH-BULLDOZER))))
+         [ps-an58: INPUT] < NIL
+       [ps-en54] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF FILL-CRATER))))
+       [ps-en54] < (SET-OF (INST-OF NUMBER))
+        -[ps-an60: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF FILL-CRATER))))
+         [ps-an60: SET]   (APPEND (INST-OF NUMBER))
+         [ps-an60: SET] < (SET-OF (INST-OF NUMBER))
+         [ps-en14] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF FILL-CRATER)))
+         [ps-en14] < (INST-OF NUMBER)
+          -[ps-an19: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF FILL-CRATER)))
+           [ps-an19: METHOD] < (INST-OF NUMBER)
+           [ps-en20] > (DIVIDE (OBJ (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (CRATER-OF (INST-OF FILL-CRATER))))) (BY (ESTIMATE (OBJ (SPEC-OF EARTHMOVING-RATE)) (OF (CRATER-OF (INST-OF FILL-CRATER))))))
+           [ps-en20]   (DIVIDE (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+           [ps-en20] < (INST-OF NUMBER)
+            [ps-en21] > (ESTIMATE (OBJ (SPEC-OF EARTHMOVING-RATE)) (OF (CRATER-OF (INST-OF FILL-CRATER))))
+            [ps-en21]   (ESTIMATE (OBJ (SPEC-OF EARTHMOVING-RATE)) (OF (INST-OF CRATER)))
+            [ps-en21] < (INST-OF NUMBER)
+             [ps-en23] > (CRATER-OF (INST-OF FILL-CRATER))
+             [ps-en23] < (INST-OF CRATER)
+              -[ps-an24: RETRIEVE-R] > (CRATER-OF (INST-OF FILL-CRATER))
+               [ps-an24: RETRIEVE-R] < (INST-OF CRATER)
+             -[ps-an25: METHOD] > (ESTIMATE (OBJ (SPEC-OF EARTHMOVING-RATE)) (OF (INST-OF CRATER)))
+              [ps-an25: METHOD] < (INST-OF NUMBER)
+              [ps-en26] > (MULTIPLY (OBJ 250) (BY (FIND (OBJ (SPEC-OF ADJUSTMENT-RATE)) (OF (SOIL-OF (INST-OF CRATER))))))
+              [ps-en26]   (MULTIPLY (OBJ 250) (BY (INST-OF NUMBER)))
+              [ps-en26] < (INST-OF NUMBER)
+               [ps-en27] > (FIND (OBJ (SPEC-OF ADJUSTMENT-RATE)) (OF (SOIL-OF (INST-OF CRATER))))
+               [ps-en27]   (FIND (OBJ (SPEC-OF ADJUSTMENT-RATE)) (OF (INST-OF EARTH-STUFF)))
+               [ps-en27] < (INST-OF NUMBER)
+                [ps-en28] > (SOIL-OF (INST-OF CRATER))
+                [ps-en28] < (INST-OF EARTH-STUFF)
+                 -[ps-an29: RETRIEVE-R] > (SOIL-OF (INST-OF CRATER))
+                  [ps-an29: RETRIEVE-R] < (INST-OF EARTH-STUFF)
+                -[ps-an30: METHOD] > (FIND (OBJ (SPEC-OF ADJUSTMENT-RATE)) (OF (INST-OF EARTH-STUFF)))
+                 [ps-an30: METHOD] < (INST-OF NUMBER)
+               -[ps-an31: METHOD] > (MULTIPLY (OBJ 250) (BY (INST-OF NUMBER)))
+                [ps-an31: METHOD] < (INST-OF NUMBER)
+            [ps-en22] > (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (CRATER-OF (INST-OF FILL-CRATER))))
+            [ps-en22]   (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (INST-OF CRATER)))
+            [ps-en22] < (INST-OF NUMBER)
+             [ps-en23] > (CRATER-OF (INST-OF FILL-CRATER))
+             [ps-en23] < (INST-OF CRATER)
+              -[ps-an24: RETRIEVE-R] > (CRATER-OF (INST-OF FILL-CRATER))
+               [ps-an24: RETRIEVE-R] < (INST-OF CRATER)
+             -[ps-an32: METHOD] > (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (INST-OF CRATER)))
+              [ps-an32: METHOD] < (INST-OF NUMBER)
+              [ps-en33] > (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))) (BY (LENGTH-OF-OBJECT (INST-OF CRATER))))) (BY 1/3))) (BY (HEIGHT-OF-OBJECT (INST-OF CRATER))))
+              [ps-en33]   (MULTIPLY (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+              [ps-en33] < (INST-OF NUMBER)
+               [ps-en34] > (HEIGHT-OF-OBJECT (INST-OF CRATER))
+               [ps-en34] < (INST-OF NUMBER)
+                -[ps-an36: RETRIEVE-R] > (HEIGHT-OF-OBJECT (INST-OF CRATER))
+                 [ps-an36: RETRIEVE-R] < (INST-OF NUMBER)
+               [ps-en35] > (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))) (BY (LENGTH-OF-OBJECT (INST-OF CRATER))))) (BY 1/3))
+               [ps-en35]   (MULTIPLY (OBJ (INST-OF NUMBER)) (BY 1/3))
+               [ps-en35] < (INST-OF NUMBER)
+                [ps-en37] > (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))) (BY (LENGTH-OF-OBJECT (INST-OF CRATER))))
+                [ps-en37]   (MULTIPLY (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+                [ps-en37] < (INST-OF NUMBER)
+                 [ps-en38] > (LENGTH-OF-OBJECT (INST-OF CRATER))
+                 [ps-en38] < (INST-OF NUMBER)
+                  -[ps-an40: RETRIEVE-R] > (LENGTH-OF-OBJECT (INST-OF CRATER))
+                   [ps-an40: RETRIEVE-R] < (INST-OF NUMBER)
+                 [ps-en39] > (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))
+                 [ps-en39]   (MULTIPLY (OBJ 0.785398) (BY (INST-OF NUMBER)))
+                 [ps-en39] < (INST-OF NUMBER)
+                  [ps-en41] > (WIDTH-OF-OBJECT (INST-OF CRATER))
+                  [ps-en41] < (INST-OF NUMBER)
+                   -[ps-an43: RETRIEVE-R] > (WIDTH-OF-OBJECT (INST-OF CRATER))
+                    [ps-an43: RETRIEVE-R] < (INST-OF NUMBER)
+                  [ps-en42] > (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))
+                  [ps-en42]   (MULTIPLY (OBJ 1.570796) (BY 0.5))
+                  [ps-en42] < 0.785398
+                   [ps-en44] > (MULTIPLY (OBJ 3.141592) (BY 0.5))
+                   [ps-en44] < 1.570796
+                    -[ps-an45: METHOD] > (MULTIPLY (OBJ 3.141592) (BY 0.5))
+                     [ps-an45: METHOD] < 1.570796
+                   -[ps-an46: METHOD] > (MULTIPLY (OBJ 1.570796) (BY 0.5))
+                    [ps-an46: METHOD] < 0.785398
+                  -[ps-an47: METHOD] > (MULTIPLY (OBJ 0.785398) (BY (INST-OF NUMBER)))
+                   [ps-an47: METHOD] < (INST-OF NUMBER)
+                 -[ps-an48: METHOD] > (MULTIPLY (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+                  [ps-an48: METHOD] < (INST-OF NUMBER)
+                -[ps-an49: METHOD] > (MULTIPLY (OBJ (INST-OF NUMBER)) (BY 1/3))
+                 [ps-an49: METHOD] < (INST-OF NUMBER)
+               -[ps-an48: METHOD] > (MULTIPLY (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+                [ps-an48: METHOD] < (INST-OF NUMBER)
+            -[ps-an50: METHOD] > (DIVIDE (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+             [ps-an50: METHOD] < (INST-OF NUMBER)
+        X[ps-an59: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF FILL-CRATER))))
+         [ps-an59: METHOD]   *** NO METHOD FOUND ***
+         [ps-an59: METHOD] < NIL
+      X[ps-an61: INPUT] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF WORKAROUND-STEP))))
+       [ps-an61: INPUT] < NIL
+       [ps-en53] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF NARROW-GAP-WITH-BULLDOZER))))
+       [ps-en53] < NIL
+        X[ps-an55: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF NARROW-GAP-WITH-BULLDOZER))))
+         [ps-an55: METHOD]   *** NO METHOD FOUND ***
+         [ps-an55: METHOD] < NIL
+        X[ps-an56: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF NARROW-GAP-WITH-BULLDOZER))))
+         [ps-an56: SET] < NIL
+         [ps-en13] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+         [ps-en13] < NIL
+          X[ps-an15: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+           [ps-an15: METHOD]   *** NO METHOD FOUND ***
+           [ps-an15: METHOD] < NIL
+          X[ps-an16: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+           [ps-an16: SET] < NIL
+          X[ps-an17: COVERING] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+           [ps-an17: COVERING] < NIL
+          X[ps-an18: INPUT] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+           [ps-an18: INPUT] < NIL
+        X[ps-an57: COVERING] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF NARROW-GAP-WITH-BULLDOZER))))
+         [ps-an57: COVERING] < NIL
+        X[ps-an58: INPUT] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF NARROW-GAP-WITH-BULLDOZER))))
+         [ps-an58: INPUT] < NIL
+       [ps-en54] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF FILL-CRATER))))
+       [ps-en54] < (SET-OF (INST-OF NUMBER))
+        -[ps-an60: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF FILL-CRATER))))
+         [ps-an60: SET]   (APPEND (INST-OF NUMBER))
+         [ps-an60: SET] < (SET-OF (INST-OF NUMBER))
+         [ps-en14] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF FILL-CRATER)))
+         [ps-en14] < (INST-OF NUMBER)
+          -[ps-an19: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF FILL-CRATER)))
+           [ps-an19: METHOD] < (INST-OF NUMBER)
+           [ps-en20] > (DIVIDE (OBJ (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (CRATER-OF (INST-OF FILL-CRATER))))) (BY (ESTIMATE (OBJ (SPEC-OF EARTHMOVING-RATE)) (OF (CRATER-OF (INST-OF FILL-CRATER))))))
+           [ps-en20]   (DIVIDE (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+           [ps-en20] < (INST-OF NUMBER)
+            [ps-en21] > (ESTIMATE (OBJ (SPEC-OF EARTHMOVING-RATE)) (OF (CRATER-OF (INST-OF FILL-CRATER))))
+            [ps-en21]   (ESTIMATE (OBJ (SPEC-OF EARTHMOVING-RATE)) (OF (INST-OF CRATER)))
+            [ps-en21] < (INST-OF NUMBER)
+             [ps-en23] > (CRATER-OF (INST-OF FILL-CRATER))
+             [ps-en23] < (INST-OF CRATER)
+              -[ps-an24: RETRIEVE-R] > (CRATER-OF (INST-OF FILL-CRATER))
+               [ps-an24: RETRIEVE-R] < (INST-OF CRATER)
+             -[ps-an25: METHOD] > (ESTIMATE (OBJ (SPEC-OF EARTHMOVING-RATE)) (OF (INST-OF CRATER)))
+              [ps-an25: METHOD] < (INST-OF NUMBER)
+              [ps-en26] > (MULTIPLY (OBJ 250) (BY (FIND (OBJ (SPEC-OF ADJUSTMENT-RATE)) (OF (SOIL-OF (INST-OF CRATER))))))
+              [ps-en26]   (MULTIPLY (OBJ 250) (BY (INST-OF NUMBER)))
+              [ps-en26] < (INST-OF NUMBER)
+               [ps-en27] > (FIND (OBJ (SPEC-OF ADJUSTMENT-RATE)) (OF (SOIL-OF (INST-OF CRATER))))
+               [ps-en27]   (FIND (OBJ (SPEC-OF ADJUSTMENT-RATE)) (OF (INST-OF EARTH-STUFF)))
+               [ps-en27] < (INST-OF NUMBER)
+                [ps-en28] > (SOIL-OF (INST-OF CRATER))
+                [ps-en28] < (INST-OF EARTH-STUFF)
+                 -[ps-an29: RETRIEVE-R] > (SOIL-OF (INST-OF CRATER))
+                  [ps-an29: RETRIEVE-R] < (INST-OF EARTH-STUFF)
+                -[ps-an30: METHOD] > (FIND (OBJ (SPEC-OF ADJUSTMENT-RATE)) (OF (INST-OF EARTH-STUFF)))
+                 [ps-an30: METHOD] < (INST-OF NUMBER)
+               -[ps-an31: METHOD] > (MULTIPLY (OBJ 250) (BY (INST-OF NUMBER)))
+                [ps-an31: METHOD] < (INST-OF NUMBER)
+            [ps-en22] > (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (CRATER-OF (INST-OF FILL-CRATER))))
+            [ps-en22]   (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (INST-OF CRATER)))
+            [ps-en22] < (INST-OF NUMBER)
+             [ps-en23] > (CRATER-OF (INST-OF FILL-CRATER))
+             [ps-en23] < (INST-OF CRATER)
+              -[ps-an24: RETRIEVE-R] > (CRATER-OF (INST-OF FILL-CRATER))
+               [ps-an24: RETRIEVE-R] < (INST-OF CRATER)
+             -[ps-an32: METHOD] > (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (INST-OF CRATER)))
+              [ps-an32: METHOD] < (INST-OF NUMBER)
+              [ps-en33] > (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))) (BY (LENGTH-OF-OBJECT (INST-OF CRATER))))) (BY 1/3))) (BY (HEIGHT-OF-OBJECT (INST-OF CRATER))))
+              [ps-en33]   (MULTIPLY (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+              [ps-en33] < (INST-OF NUMBER)
+               [ps-en34] > (HEIGHT-OF-OBJECT (INST-OF CRATER))
+               [ps-en34] < (INST-OF NUMBER)
+                -[ps-an36: RETRIEVE-R] > (HEIGHT-OF-OBJECT (INST-OF CRATER))
+                 [ps-an36: RETRIEVE-R] < (INST-OF NUMBER)
+               [ps-en35] > (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))) (BY (LENGTH-OF-OBJECT (INST-OF CRATER))))) (BY 1/3))
+               [ps-en35]   (MULTIPLY (OBJ (INST-OF NUMBER)) (BY 1/3))
+               [ps-en35] < (INST-OF NUMBER)
+                [ps-en37] > (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))) (BY (LENGTH-OF-OBJECT (INST-OF CRATER))))
+                [ps-en37]   (MULTIPLY (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+                [ps-en37] < (INST-OF NUMBER)
+                 [ps-en38] > (LENGTH-OF-OBJECT (INST-OF CRATER))
+                 [ps-en38] < (INST-OF NUMBER)
+                  -[ps-an40: RETRIEVE-R] > (LENGTH-OF-OBJECT (INST-OF CRATER))
+                   [ps-an40: RETRIEVE-R] < (INST-OF NUMBER)
+                 [ps-en39] > (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))
+                 [ps-en39]   (MULTIPLY (OBJ 0.785398) (BY (INST-OF NUMBER)))
+                 [ps-en39] < (INST-OF NUMBER)
+                  [ps-en41] > (WIDTH-OF-OBJECT (INST-OF CRATER))
+                  [ps-en41] < (INST-OF NUMBER)
+                   -[ps-an43: RETRIEVE-R] > (WIDTH-OF-OBJECT (INST-OF CRATER))
+                    [ps-an43: RETRIEVE-R] < (INST-OF NUMBER)
+                  [ps-en42] > (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))
+                  [ps-en42]   (MULTIPLY (OBJ 1.570796) (BY 0.5))
+                  [ps-en42] < 0.785398
+                   [ps-en44] > (MULTIPLY (OBJ 3.141592) (BY 0.5))
+                   [ps-en44] < 1.570796
+                    -[ps-an45: METHOD] > (MULTIPLY (OBJ 3.141592) (BY 0.5))
+                     [ps-an45: METHOD] < 1.570796
+                   -[ps-an46: METHOD] > (MULTIPLY (OBJ 1.570796) (BY 0.5))
+                    [ps-an46: METHOD] < 0.785398
+                  -[ps-an47: METHOD] > (MULTIPLY (OBJ 0.785398) (BY (INST-OF NUMBER)))
+                   [ps-an47: METHOD] < (INST-OF NUMBER)
+                 -[ps-an48: METHOD] > (MULTIPLY (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+                  [ps-an48: METHOD] < (INST-OF NUMBER)
+                -[ps-an49: METHOD] > (MULTIPLY (OBJ (INST-OF NUMBER)) (BY 1/3))
+                 [ps-an49: METHOD] < (INST-OF NUMBER)
+               -[ps-an48: METHOD] > (MULTIPLY (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+                [ps-an48: METHOD] < (INST-OF NUMBER)
+            -[ps-an50: METHOD] > (DIVIDE (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+             [ps-an50: METHOD] < (INST-OF NUMBER)
+        X[ps-an59: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF FILL-CRATER))))
+         [ps-an59: METHOD]   *** NO METHOD FOUND ***
+         [ps-an59: METHOD] < NIL
+   X[ps-an62: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-PLAN)))
+    [ps-an62: SET] < NIL
+   X[ps-an63: COVERING] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-PLAN)))
+    [ps-an63: COVERING] < NIL
+   X[ps-an64: INPUT] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-PLAN)))
+    [ps-an64: INPUT] < NIL
+
+   at Thu May 27 20:56:11 PDT 1999
+
+select: add new button
+   at Thu May 27 20:56:33 PDT 1999
+
+select: copy and create button
+   at Thu May 27 20:57:13 PDT 1999
+
+select: modify button
+   at Thu May 27 21:08:12 PDT 1999
+
+ done editing:((name compute-earthmoving-rate)
+ (capability (estimate (obj (?er is (spec-of earthmoving-rate)))
+		       (of (?f is (inst-of geographical-region)))))
+(result-type (inst-of number))
+(method (multiply (obj 250)
+		  (by (find (obj (spec-of adjustment-rate))
+			    (of (soil-of ?f))))))
+)
+
+   at Thu May 27 21:08:29 PDT 1999
+
+modified method:((name compute-earthmoving-rate)
+ (capability (estimate (obj (?er is (spec-of earthmoving-rate)))
+		       (of (?f is (inst-of geographical-region)))))
+(result-type (inst-of number))
+(method (multiply (obj 250)
+		  (by (find (obj (spec-of adjustment-rate))
+			    (of (soil-of ?f))))))
+)
+
+   at Thu May 27 21:08:30 PDT 1999
+
+check: All Agenda
+   at Thu May 27 21:08:30 PDT 1999
+
+check: Method Sub-Method Relation
+   at Thu May 27 21:08:30 PDT 1999
+
+select: add new button
+   at Thu May 27 21:08:34 PDT 1999
+
+ done editing:((name estimate-time-to-narrow-gap)
+ (capability (estimate (obj (?t is (spec-of time)))
+		       (for (?f is (inst-of narrow-gap-with-bull)))))
+ (result-type (inst-of number))
+ (method (divide (obj (estimate
+		       (obj (spec-of dirt-volume))
+		       (of (bank-of ?f))
+		       (to (obstacle-of ?f))
+		       (with (desired-width ?f))))
+		 (by (estimate
+		      (obj (spec-of earthmoving-rate))
+		      (of (region-of ?f))))))
+ )
+
+   at Thu May 27 21:08:44 PDT 1999
+
+added New method:((name estimate-time-to-narrow-gap)
+ (capability (estimate (obj (?t is (spec-of time)))
+		       (for (?f is (inst-of narrow-gap-with-bull)))))
+ (result-type (inst-of number))
+ (method (divide (obj (estimate
+		       (obj (spec-of dirt-volume))
+		       (of (bank-of ?f))
+		       (to (obstacle-of ?f))
+		       (with (desired-width ?f))))
+		 (by (estimate
+		      (obj (spec-of earthmoving-rate))
+		      (of (region-of ?f))))))
+ )
+
+   at Thu May 27 21:08:44 PDT 1999
+
+check: All Agenda
+   at Thu May 27 21:08:44 PDT 1999
+
+check: Method Sub-Method Relation
+   at Thu May 27 21:08:44 PDT 1999
+
+check: Method Capability Hierarchy
+   at Thu May 27 21:08:59 PDT 1999
+
+select: modify button
+   at Thu May 27 21:10:11 PDT 1999
+
+ done editing:((name estimate-time-to-narrow-gap)
+ (capability (estimate (obj (?t is (spec-of time)))
+		       (for (?f is (inst-of narrow-gap-with-bulldozer)))))
+ (result-type (inst-of number))
+ (method (divide (obj (estimate
+		       (obj (spec-of dirt-volume))
+		       (of (bank-of ?f))
+		       (to (obstacle-of ?f))
+		       (with (desired-width ?f))))
+		 (by (estimate
+		      (obj (spec-of earthmoving-rate))
+		      (of (region-of ?f))))))
+ )
+
+   at Thu May 27 21:10:24 PDT 1999
+
+modified method:((name estimate-time-to-narrow-gap)
+ (capability (estimate (obj (?t is (spec-of time)))
+		       (for (?f is (inst-of narrow-gap-with-bulldozer)))))
+ (result-type (inst-of number))
+ (method (divide (obj (estimate
+		       (obj (spec-of dirt-volume))
+		       (of (bank-of ?f))
+		       (to (obstacle-of ?f))
+		       (with (desired-width ?f))))
+		 (by (estimate
+		      (obj (spec-of earthmoving-rate))
+		      (of (region-of ?f))))))
+ )
+
+   at Thu May 27 21:10:25 PDT 1999
+
+check: All Agenda
+   at Thu May 27 21:10:25 PDT 1999
+
+check: Method Sub-Method Relation
+   at Thu May 27 21:10:25 PDT 1999
+
+select: add new button
+   at Thu May 27 21:12:38 PDT 1999
+
+ done editing:((name compute-narrow-gap-dirt-volume)
+ (capability (estimate (obj (?v is (spec-of dirt-volume)))
+		       (of (?gb is (inst-of geographical-bank)))
+		       (to (?gg is (inst-of geographical-gap)))
+		       (with (?n is (inst-of number)))))
+ (result-type (inst-of number))
+ (method (multiply (obj (multiply
+			 (obj (subtract (obj (width-of-object ?gg))
+					(from ?n)))
+			 (by 8)))
+		   (by (height-of-object ?gb))))
+ )
+   at Thu May 27 21:22:25 PDT 1999
+
+added New method:((name compute-narrow-gap-dirt-volume)
+ (capability (estimate (obj (?v is (spec-of dirt-volume)))
+		       (of (?gb is (inst-of geographical-bank)))
+		       (to (?gg is (inst-of geographical-gap)))
+		       (with (?n is (inst-of number)))))
+ (result-type (inst-of number))
+ (method (multiply (obj (multiply
+			 (obj (subtract (obj (width-of-object ?gg))
+					(from ?n)))
+			 (by 8)))
+		   (by (height-of-object ?gb))))
+ )
+   at Thu May 27 21:22:26 PDT 1999
+
+check: All Agenda
+   at Thu May 27 21:22:26 PDT 1999
+
+check: Method Sub-Method Relation
+   at Thu May 27 21:22:26 PDT 1999
+
+check: Method Capability Hierarchy
+   at Thu May 27 21:22:41 PDT 1999
+
+check: Method Sub-Method Relation
+   at Thu May 27 21:22:43 PDT 1999
+
+ select: get ps tree success
+   at Thu May 27 21:22:46 PDT 1999
+
+ [ps-en1] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-PLAN)))
+[ps-en1] < (INST-OF NUMBER)
+   -[ps-an2: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-PLAN)))
+    [ps-an2: METHOD] < (INST-OF NUMBER)
+    [ps-en3] > (ADD (OBJ (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (WORKAROUND-OF (INST-OF WORKAROUND-PLAN))))))
+    [ps-en3]   (ADD (OBJ (SET-OF (INST-OF NUMBER))))
+    [ps-en3] < (INST-OF NUMBER)
+     [ps-en4] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (WORKAROUND-OF (INST-OF WORKAROUND-PLAN))))
+     [ps-en4]   (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF WORKAROUND-STEP))))
+     [ps-en4] < (SET-OF (INST-OF NUMBER))
+      [ps-en5] > (WORKAROUND-OF (INST-OF WORKAROUND-PLAN))
+      [ps-en5] < (SET-OF (INST-OF WORKAROUND-STEP))
+       -[ps-an6: RETRIEVE-R] > (WORKAROUND-OF (INST-OF WORKAROUND-PLAN))
+        [ps-an6: RETRIEVE-R] < (SET-OF (INST-OF WORKAROUND-STEP))
+      -[ps-an8: SET] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF WORKAROUND-STEP))))
+       [ps-an8: SET]   (APPEND (SET-OF (INST-OF NUMBER)))
+       [ps-an8: SET] < (SET-OF (INST-OF NUMBER))
+       [ps-en9] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-STEP)))
+       [ps-en9] < (SET-OF (INST-OF NUMBER))
+        -[ps-an12: COVERING] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-STEP)))
+         [ps-an12: COVERING]   (APPEND (INST-OF NUMBER) (INST-OF NUMBER))
+         [ps-an12: COVERING] < (SET-OF (INST-OF NUMBER))
+         [ps-en13] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+         [ps-en13] < (INST-OF NUMBER)
+          -[ps-an15: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF NARROW-GAP-WITH-BULLDOZER)))
+           [ps-an15: METHOD] < (INST-OF NUMBER)
+           [ps-en16] > (DIVIDE (OBJ (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (BANK-OF (INST-OF NARROW-GAP-WITH-BULLDOZER))) (TO (OBSTACLE-OF (INST-OF NARROW-GAP-WITH-BULLDOZER))) (WITH (DESIRED-WIDTH (INST-OF NARROW-GAP-WITH-BULLDOZER))))) (BY (ESTIMATE (OBJ (SPEC-OF EARTHMOVING-RATE)) (OF (REGION-OF (INST-OF NARROW-GAP-WITH-BULLDOZER))))))
+           [ps-en16]   (DIVIDE (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+           [ps-en16] < (INST-OF NUMBER)
+            [ps-en17] > (ESTIMATE (OBJ (SPEC-OF EARTHMOVING-RATE)) (OF (REGION-OF (INST-OF NARROW-GAP-WITH-BULLDOZER))))
+            [ps-en17]   (ESTIMATE (OBJ (SPEC-OF EARTHMOVING-RATE)) (OF (INST-OF GEOGRAPHICAL-REGION)))
+            [ps-en17] < (INST-OF NUMBER)
+             [ps-en19] > (REGION-OF (INST-OF NARROW-GAP-WITH-BULLDOZER))
+             [ps-en19] < (INST-OF GEOGRAPHICAL-REGION)
+              -[ps-an20: RETRIEVE-R] > (REGION-OF (INST-OF NARROW-GAP-WITH-BULLDOZER))
+               [ps-an20: RETRIEVE-R] < (INST-OF GEOGRAPHICAL-REGION)
+             -[ps-an21: METHOD] > (ESTIMATE (OBJ (SPEC-OF EARTHMOVING-RATE)) (OF (INST-OF GEOGRAPHICAL-REGION)))
+              [ps-an21: METHOD] < (INST-OF NUMBER)
+              [ps-en22] > (MULTIPLY (OBJ 250) (BY (FIND (OBJ (SPEC-OF ADJUSTMENT-RATE)) (OF (SOIL-OF (INST-OF GEOGRAPHICAL-REGION))))))
+              [ps-en22]   (MULTIPLY (OBJ 250) (BY (INST-OF NUMBER)))
+              [ps-en22] < (INST-OF NUMBER)
+               [ps-en23] > (FIND (OBJ (SPEC-OF ADJUSTMENT-RATE)) (OF (SOIL-OF (INST-OF GEOGRAPHICAL-REGION))))
+               [ps-en23]   (FIND (OBJ (SPEC-OF ADJUSTMENT-RATE)) (OF (INST-OF EARTH-STUFF)))
+               [ps-en23] < (INST-OF NUMBER)
+                [ps-en24] > (SOIL-OF (INST-OF GEOGRAPHICAL-REGION))
+                [ps-en24] < (INST-OF EARTH-STUFF)
+                 -[ps-an25: RETRIEVE-R] > (SOIL-OF (INST-OF GEOGRAPHICAL-REGION))
+                  [ps-an25: RETRIEVE-R] < (INST-OF EARTH-STUFF)
+                -[ps-an26: METHOD] > (FIND (OBJ (SPEC-OF ADJUSTMENT-RATE)) (OF (INST-OF EARTH-STUFF)))
+                 [ps-an26: METHOD] < (INST-OF NUMBER)
+               -[ps-an27: METHOD] > (MULTIPLY (OBJ 250) (BY (INST-OF NUMBER)))
+                [ps-an27: METHOD] < (INST-OF NUMBER)
+            [ps-en18] > (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (BANK-OF (INST-OF NARROW-GAP-WITH-BULLDOZER))) (TO (OBSTACLE-OF (INST-OF NARROW-GAP-WITH-BULLDOZER))) (WITH (DESIRED-WIDTH (INST-OF NARROW-GAP-WITH-BULLDOZER))))
+            [ps-en18]   (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (INST-OF GEOGRAPHICAL-BANK)) (TO (INST-OF GEOGRAPHICAL-GAP)) (WITH (INST-OF NUMBER)))
+            [ps-en18] < (INST-OF NUMBER)
+             [ps-en28] > (DESIRED-WIDTH (INST-OF NARROW-GAP-WITH-BULLDOZER))
+             [ps-en28] < (INST-OF NUMBER)
+              -[ps-an31: RETRIEVE-R] > (DESIRED-WIDTH (INST-OF NARROW-GAP-WITH-BULLDOZER))
+               [ps-an31: RETRIEVE-R] < (INST-OF NUMBER)
+             [ps-en29] > (OBSTACLE-OF (INST-OF NARROW-GAP-WITH-BULLDOZER))
+             [ps-en29] < (INST-OF GEOGRAPHICAL-GAP)
+              -[ps-an32: RETRIEVE-R] > (OBSTACLE-OF (INST-OF NARROW-GAP-WITH-BULLDOZER))
+               [ps-an32: RETRIEVE-R] < (INST-OF GEOGRAPHICAL-GAP)
+             [ps-en30] > (BANK-OF (INST-OF NARROW-GAP-WITH-BULLDOZER))
+             [ps-en30] < (INST-OF GEOGRAPHICAL-BANK)
+              -[ps-an33: RETRIEVE-R] > (BANK-OF (INST-OF NARROW-GAP-WITH-BULLDOZER))
+               [ps-an33: RETRIEVE-R] < (INST-OF GEOGRAPHICAL-BANK)
+             -[ps-an34: METHOD] > (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (INST-OF GEOGRAPHICAL-BANK)) (TO (INST-OF GEOGRAPHICAL-GAP)) (WITH (INST-OF NUMBER)))
+              [ps-an34: METHOD] < (INST-OF NUMBER)
+              [ps-en35] > (MULTIPLY (OBJ (MULTIPLY (OBJ (SUBTRACT (OBJ (WIDTH-OF-OBJECT (INST-OF GEOGRAPHICAL-GAP))) (FROM (INST-OF NUMBER)))) (BY 8))) (BY (HEIGHT-OF-OBJECT (INST-OF GEOGRAPHICAL-BANK))))
+              [ps-en35]   (MULTIPLY (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+              [ps-en35] < (INST-OF NUMBER)
+               [ps-en36] > (HEIGHT-OF-OBJECT (INST-OF GEOGRAPHICAL-BANK))
+               [ps-en36] < (INST-OF NUMBER)
+                -[ps-an38: RETRIEVE-R] > (HEIGHT-OF-OBJECT (INST-OF GEOGRAPHICAL-BANK))
+                 [ps-an38: RETRIEVE-R] < (INST-OF NUMBER)
+               [ps-en37] > (MULTIPLY (OBJ (SUBTRACT (OBJ (WIDTH-OF-OBJECT (INST-OF GEOGRAPHICAL-GAP))) (FROM (INST-OF NUMBER)))) (BY 8))
+               [ps-en37]   (MULTIPLY (OBJ (INST-OF NUMBER)) (BY 8))
+               [ps-en37] < (INST-OF NUMBER)
+                [ps-en39] > (SUBTRACT (OBJ (WIDTH-OF-OBJECT (INST-OF GEOGRAPHICAL-GAP))) (FROM (INST-OF NUMBER)))
+                [ps-en39]   (SUBTRACT (OBJ (INST-OF NUMBER)) (FROM (INST-OF NUMBER)))
+                [ps-en39] < (INST-OF NUMBER)
+                 [ps-en40] > (WIDTH-OF-OBJECT (INST-OF GEOGRAPHICAL-GAP))
+                 [ps-en40] < (INST-OF NUMBER)
+                  -[ps-an41: RETRIEVE-R] > (WIDTH-OF-OBJECT (INST-OF GEOGRAPHICAL-GAP))
+                   [ps-an41: RETRIEVE-R] < (INST-OF NUMBER)
+                 -[ps-an42: METHOD] > (SUBTRACT (OBJ (INST-OF NUMBER)) (FROM (INST-OF NUMBER)))
+                  [ps-an42: METHOD] < (INST-OF NUMBER)
+                -[ps-an43: METHOD] > (MULTIPLY (OBJ (INST-OF NUMBER)) (BY 8))
+                 [ps-an43: METHOD] < (INST-OF NUMBER)
+               -[ps-an44: METHOD] > (MULTIPLY (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+                [ps-an44: METHOD] < (INST-OF NUMBER)
+            -[ps-an45: METHOD] > (DIVIDE (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+             [ps-an45: METHOD] < (INST-OF NUMBER)
+         [ps-en14] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF FILL-CRATER)))
+         [ps-en14] < (INST-OF NUMBER)
+          -[ps-an46: METHOD] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF FILL-CRATER)))
+           [ps-an46: METHOD] < (INST-OF NUMBER)
+           [ps-en47] > (DIVIDE (OBJ (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (CRATER-OF (INST-OF FILL-CRATER))))) (BY (ESTIMATE (OBJ (SPEC-OF EARTHMOVING-RATE)) (OF (CRATER-OF (INST-OF FILL-CRATER))))))
+           [ps-en47]   (DIVIDE (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+           [ps-en47] < (INST-OF NUMBER)
+            [ps-en48] > (ESTIMATE (OBJ (SPEC-OF EARTHMOVING-RATE)) (OF (CRATER-OF (INST-OF FILL-CRATER))))
+            [ps-en48]   (ESTIMATE (OBJ (SPEC-OF EARTHMOVING-RATE)) (OF (INST-OF CRATER)))
+            [ps-en48] < (INST-OF NUMBER)
+             [ps-en50] > (CRATER-OF (INST-OF FILL-CRATER))
+             [ps-en50] < (INST-OF CRATER)
+              -[ps-an51: RETRIEVE-R] > (CRATER-OF (INST-OF FILL-CRATER))
+               [ps-an51: RETRIEVE-R] < (INST-OF CRATER)
+             -[ps-an52: METHOD] > (ESTIMATE (OBJ (SPEC-OF EARTHMOVING-RATE)) (OF (INST-OF CRATER)))
+              [ps-an52: METHOD] < (INST-OF NUMBER)
+              [ps-en53] > (MULTIPLY (OBJ 250) (BY (FIND (OBJ (SPEC-OF ADJUSTMENT-RATE)) (OF (SOIL-OF (INST-OF CRATER))))))
+              [ps-en53]   (MULTIPLY (OBJ 250) (BY (INST-OF NUMBER)))
+              [ps-en53] < (INST-OF NUMBER)
+               [ps-en54] > (FIND (OBJ (SPEC-OF ADJUSTMENT-RATE)) (OF (SOIL-OF (INST-OF CRATER))))
+               [ps-en54]   (FIND (OBJ (SPEC-OF ADJUSTMENT-RATE)) (OF (INST-OF EARTH-STUFF)))
+               [ps-en54] < (INST-OF NUMBER)
+                [ps-en55] > (SOIL-OF (INST-OF CRATER))
+                [ps-en55] < (INST-OF EARTH-STUFF)
+                 -[ps-an56: RETRIEVE-R] > (SOIL-OF (INST-OF CRATER))
+                  [ps-an56: RETRIEVE-R] < (INST-OF EARTH-STUFF)
+                -[ps-an26: METHOD] > (FIND (OBJ (SPEC-OF ADJUSTMENT-RATE)) (OF (INST-OF EARTH-STUFF)))
+                 [ps-an26: METHOD] < (INST-OF NUMBER)
+               -[ps-an27: METHOD] > (MULTIPLY (OBJ 250) (BY (INST-OF NUMBER)))
+                [ps-an27: METHOD] < (INST-OF NUMBER)
+            [ps-en49] > (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (CRATER-OF (INST-OF FILL-CRATER))))
+            [ps-en49]   (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (INST-OF CRATER)))
+            [ps-en49] < (INST-OF NUMBER)
+             [ps-en50] > (CRATER-OF (INST-OF FILL-CRATER))
+             [ps-en50] < (INST-OF CRATER)
+              -[ps-an51: RETRIEVE-R] > (CRATER-OF (INST-OF FILL-CRATER))
+               [ps-an51: RETRIEVE-R] < (INST-OF CRATER)
+             -[ps-an57: METHOD] > (ESTIMATE (OBJ (SPEC-OF DIRT-VOLUME)) (OF (INST-OF CRATER)))
+              [ps-an57: METHOD] < (INST-OF NUMBER)
+              [ps-en58] > (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))) (BY (LENGTH-OF-OBJECT (INST-OF CRATER))))) (BY 1/3))) (BY (HEIGHT-OF-OBJECT (INST-OF CRATER))))
+              [ps-en58]   (MULTIPLY (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+              [ps-en58] < (INST-OF NUMBER)
+               [ps-en59] > (HEIGHT-OF-OBJECT (INST-OF CRATER))
+               [ps-en59] < (INST-OF NUMBER)
+                -[ps-an61: RETRIEVE-R] > (HEIGHT-OF-OBJECT (INST-OF CRATER))
+                 [ps-an61: RETRIEVE-R] < (INST-OF NUMBER)
+               [ps-en60] > (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))) (BY (LENGTH-OF-OBJECT (INST-OF CRATER))))) (BY 1/3))
+               [ps-en60]   (MULTIPLY (OBJ (INST-OF NUMBER)) (BY 1/3))
+               [ps-en60] < (INST-OF NUMBER)
+                [ps-en62] > (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))) (BY (LENGTH-OF-OBJECT (INST-OF CRATER))))
+                [ps-en62]   (MULTIPLY (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+                [ps-en62] < (INST-OF NUMBER)
+                 [ps-en63] > (LENGTH-OF-OBJECT (INST-OF CRATER))
+                 [ps-en63] < (INST-OF NUMBER)
+                  -[ps-an65: RETRIEVE-R] > (LENGTH-OF-OBJECT (INST-OF CRATER))
+                   [ps-an65: RETRIEVE-R] < (INST-OF NUMBER)
+                 [ps-en64] > (MULTIPLY (OBJ (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))) (BY (WIDTH-OF-OBJECT (INST-OF CRATER))))
+                 [ps-en64]   (MULTIPLY (OBJ 0.785398) (BY (INST-OF NUMBER)))
+                 [ps-en64] < (INST-OF NUMBER)
+                  [ps-en66] > (WIDTH-OF-OBJECT (INST-OF CRATER))
+                  [ps-en66] < (INST-OF NUMBER)
+                   -[ps-an68: RETRIEVE-R] > (WIDTH-OF-OBJECT (INST-OF CRATER))
+                    [ps-an68: RETRIEVE-R] < (INST-OF NUMBER)
+                  [ps-en67] > (MULTIPLY (OBJ (MULTIPLY (OBJ 3.141592) (BY 0.5))) (BY 0.5))
+                  [ps-en67]   (MULTIPLY (OBJ 1.570796) (BY 0.5))
+                  [ps-en67] < 0.785398
+                   [ps-en69] > (MULTIPLY (OBJ 3.141592) (BY 0.5))
+                   [ps-en69] < 1.570796
+                    -[ps-an70: METHOD] > (MULTIPLY (OBJ 3.141592) (BY 0.5))
+                     [ps-an70: METHOD] < 1.570796
+                   -[ps-an71: METHOD] > (MULTIPLY (OBJ 1.570796) (BY 0.5))
+                    [ps-an71: METHOD] < 0.785398
+                  -[ps-an72: METHOD] > (MULTIPLY (OBJ 0.785398) (BY (INST-OF NUMBER)))
+                   [ps-an72: METHOD] < (INST-OF NUMBER)
+                 -[ps-an44: METHOD] > (MULTIPLY (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+                  [ps-an44: METHOD] < (INST-OF NUMBER)
+                -[ps-an73: METHOD] > (MULTIPLY (OBJ (INST-OF NUMBER)) (BY 1/3))
+                 [ps-an73: METHOD] < (INST-OF NUMBER)
+               -[ps-an44: METHOD] > (MULTIPLY (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+                [ps-an44: METHOD] < (INST-OF NUMBER)
+            -[ps-an45: METHOD] > (DIVIDE (OBJ (INST-OF NUMBER)) (BY (INST-OF NUMBER)))
+             [ps-an45: METHOD] < (INST-OF NUMBER)
+     -[ps-an74: METHOD] > (ADD (OBJ (SET-OF (INST-OF NUMBER))))
+      [ps-an74: METHOD] < (INST-OF NUMBER)
+
+   at Thu May 27 21:22:48 PDT 1999
+

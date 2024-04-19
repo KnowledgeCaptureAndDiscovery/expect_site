@@ -1,0 +1,99 @@
+(in-package "EVALUATION")
+#|
+
+<Fusion output>
+(isa Attack2 MilitaryOffensiveOperation)
+(isa Fix1 Fix-MilitaryTask)
+(isa BlueMechBgd1 ArmoredUnit-MilitarySpecialty)
+(sovereignAllegianceOfOrg BlueMechBgd1 Blue-Side)
+(echelonOfUnit BlueMechBgd1 Brigade-UnitDesignation)
+
+(unitAssignedToTask Fix1 BlueMechBgd1)
+(unitAssignedToOperation Attack2 BlueMechBgd1)
+(taskOfOperation Attack2 Fix1)
+(objectActedOn Fix1 RedMechRegt1)
+(objectActedOn Fix1 RedTankBn1)
+
+(troopStrengthOfUnit BlueMechBgd1 RegularStatus)
+(relationInstanceExistsCount subOrgs-Direct BlueMechBgd1 
+			     ArmoredUnit-MilitarySpecialty 1)
+(relationInstanceExistsCount subOrgs-Direct BlueMechBgd1 
+			     MechanizedUnit-MilitarySpecialty 2)
+
+(assignedMilitaryOrg RedMechRegt1 RedMechInfantryBattalion2)
+(relationInstanceExistsMany equipmentOfUnit RedMechInfantryBattalion1
+      ArmoredPersonnelCarrier-BTR60)
+(relationInstanceExistsMany equipmentOfUnit RedTankBn1
+      BattleTank-T64)
+|#
+(tell (|echelonOfUnit| |BlueMechBgd1| |Brigade-UnitDesignation|))
+(TELL (|MilitaryOffensiveOperation| |Attack2|))
+(TELL (|WHO| |Attack2| |BlueMechBgd1|))
+(TELL (|taskOfOperation| |Attack2| |Fix1|))
+(TELL (|FIX| |Fix1|))
+(TELL (|WHO| |Fix1| |BlueMechBgd1|))
+(TELL (|objectActedOn| |Fix1| |RedMechRegt1|))
+(TELL (|objectActedOn| |Fix1| |RedTankBn1|))
+(TELL (|eventOccursAt| |Fix1| |Location1|))
+(TELL (|ArmoredUnit-MilitarySpecialty| |BlueMechBgd1|))
+(TELL (|MechanizedInfantryUnit-MilitarySpecialty| |BlueMechBgd1|))
+
+(TELL (|troopStrengthOfUnit| |BlueMechBgd1| |RegularStatus|))
+(TELL
+ (:ABOUT
+  |BlueMechBgd1|
+  (:EXACTLY 1 |subOrgs-Direct| |ArmoredUnit-MilitarySpecialty|)))
+(TELL
+ (:ABOUT
+  |BlueMechBgd1|
+  (:EXACTLY 2 |subOrgs-Direct| |MechanizedUnit-MilitarySpecialty|)))
+
+;; Stuff grafted from fusion0504... SR
+(TELL (|MechanizedInfantryUnit-MilitarySpecialty| |RedMechRegt1|))
+(TELL (|echelonOfUnit| |RedMechRegt1| |Regiment-UnitDesignation|))
+(TELL (|sovereignAllegianceOfOrg| |RedMechRegt1| |Red-Side|))
+(TELL (|troopStrengthOfUnit| |RedMechRegt1| |ReducedStatus|))
+(TELL (|ArmoredUnit-MilitarySpecialty| |RedTankBn1|))
+(TELL (|MechanizedInfantryUnit-MilitarySpecialty| |RedMechRegt1|))
+(TELL (|echelonOfUnit| |RedTankRegt1| |Regiment-UnitDesignation|))
+(TELL (|echelonOfUnit| |RedTankBn1| |Battalion-UnitDesignation|))
+;;(TELL (|SUB-UNIT| |REDMECHDIVISION1| |RedTankBn1|))
+(TELL (|SUB-UNIT| |REDMECHDIVISION1| |RedTankBn1|))
+(TELL (|BattleTank-T64| |BattleTank-T64-prototype|))
+(TELL (|MechanizedInfantryUnit-MilitarySpecialty| |RedMechRegt1|))
+(TELL (|MechanizedInfantryUnit-MilitarySpecialty| |RedMechInfantryBattalion2|))
+(TELL (|ArmoredPersonnelCarrier-BTR60| |ArmoredPersonnelCarrier-BTR60-prototype|))
+
+;;  (|PROTOTYPE| |BattleTank-T64-prototype|)
+;;  (|PROTOTYPICAL-INSTANCE| |BattleTank-T64| |BattleTank-T64-prototype|)
+;;  (|equipmentOfUnit| |RedTankBn1| |BattleTank-T64-prototype|)))
+
+
+
+;; how to retrieve the number
+;;(qualified-role-cardinality |BlueMechBgd1|  |subOrgs-Direct|
+;;			    |MechanizedUnit-MilitarySpecialty| ?n)
+			    
+;;; added by jihie
+
+(tellm (sub-unit |RedMechRegt1| |RedMechInfantryBattalion2|)
+       (|echelonOfUnit| |RedMechInfantryBattalion2| 
+		     |Battalion-UnitDesignation|)
+       (|equipmentOfUnit| |RedMechInfantryBattalion2|
+		       |ArmoredPersonnelCarrier-BTR60-prototype|)
+       (|equipmentOfUnit| |RedTankBn1| |BattleTank-T64-prototype|)
+       )
+#|
+(defun aa (unit type)
+  (let ((cardinally
+	 (qualified-role-cardinality unit  |subOrgs-Direct|
+				     type ?n))))
+  (if (not (null cardinality)
+	   cardinality)
+      0))
+|#
+
+
+
+
+

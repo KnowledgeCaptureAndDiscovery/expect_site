@@ -1,0 +1,31 @@
+;;; This file separates out the close battle critique methods so we can 
+;;; figure out their overall size.
+;;;
+
+(in-package "CYC")
+
+(defplan check-for-close-battle-statement
+  :capability (evaluate (obj (?c is (inst-of coa)))
+		    (with-respect-to 
+		     (?s is (spec-of closed-battle-statement))))
+  :result-type (inst-of boolean)
+  :method (and (check-existence (obj (spec-of |mainTask|))
+			  (with-respect-to ?s))
+	     (check-existence (obj (spec-of |supportingTask|))
+			  (with-respect-to ?s))))
+(defplan check-existence-of-main-task-of-operation
+  :capability (check-existence (obj (?t is (spec-of |mainTask|)))
+			 (with-respect-to (?s is (inst-of military-unit))))
+  :result-type (inst-of boolean)
+  :method (if (there-is-not-any (obj (|mainTaskOfOperation| ?k ?s)))
+	    then false
+	    else true))
+
+
+(defplan check-existence-of-supporting-task-of-operation
+  :capability (check-existence (obj (?t is (spec-of |supportingTask|)))
+			 (with-respect-to (?s is (inst-of military-unit))))
+  :result-type (inst-of boolean)
+  :method (if (there-is-not-any (obj (|supportingTaskOfOperation| ?k ?s)))
+	    then false
+	    else true))

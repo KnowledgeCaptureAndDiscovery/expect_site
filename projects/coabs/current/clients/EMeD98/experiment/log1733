@@ -1,0 +1,105 @@
+Agenda:
+   at Tue Sep 21 13:08:27 PDT 1999
+
+select: modify button
+   at Tue Sep 21 13:09:45 PDT 1999
+
+select Button:?u:?u
+ TO become:((name ESTIMATE-COMBAT-POWER-OF-A-UNIT)
+(capability    ( estimate   ( obj   ( ?o is   ( spec-of combat-power ) ) )
+         ( of   ( ?u is   ( inst-of military-unit ) ) ) )
+)
+(result-type    ( inst-of number ))
+(method    ( find   ( obj   ( spec-of combat-power ) )
+         ( of   ( echelon-of ?u ) )
+         ( with   ( main-equipment-of ?t ) )
+         ( with-respect-to   ( spec-of m2-battalion ) ) )
+)
+)
+   at Tue Sep 21 13:10:03 PDT 1999
+
+ From sketch:(Capability): This method can be used to estimate the combat power of a military unit.
+(Body)To do that, find the combat power of the echelon of of the military unit with the main equipment of of the military unit with respect to the m2 battalion.
+
+   at Tue Sep 21 13:10:06 PDT 1999
+
+ done editing:((name ESTIMATE-COMBAT-POWER-OF-A-UNIT)
+(capability    ( estimate   ( obj   ( ?o is   ( spec-of combat-power ) ) )
+         ( of   ( ?u is   ( inst-of military-unit ) ) ) )
+)
+(result-type    ( inst-of number ))
+(method    ( find   ( obj   ( spec-of combat-power ) )
+         ( of   ( echelon-of ?u ) )
+         ( with   ( main-equipment-of ?t ) )
+         ( with-respect-to   ( spec-of m2-battalion ) ) )
+)
+)
+   at Tue Sep 21 13:10:06 PDT 1999
+
+modified method:((name estimate-combat-power-of-a-unit)
+ (capability (estimate
+                (obj (?o is (spec-of combat-power)))
+                (of (?u is (inst-of military-unit)))
+                ))
+ (result-type (inst-of number))
+ (method  (find
+            (obj (spec-of combat-power))
+            (of ( echelon-of ?u))
+            (with ( main-equipment-of ?t))
+            (with-respect-to (spec-of m2-battalion))
+            ))
+)
+   at Tue Sep 21 13:10:08 PDT 1999
+
+check tab:-1
+   at Tue Sep 21 13:10:08 PDT 1999
+
+check tab:0
+   at Tue Sep 21 13:10:08 PDT 1999
+
+Agenda:
+ Error: In the method to estimate the combat power of a military unit, I don't know what ?T is
+   at Tue Sep 21 13:10:10 PDT 1999
+
+select: show error button
+   at Tue Sep 21 13:10:16 PDT 1999
+
+checked error:((name estimate-combat-power-of-a-unit)
+ (capability (estimate
+                (obj (?o is (spec-of combat-power)))
+                (of (?u is (inst-of military-unit)))
+                ))
+ (result-type (inst-of number))
+ (method  (find
+            (obj (spec-of combat-power))
+            (of ( echelon-of ?u))
+            (with ( main-equipment-of ?t))
+            (with-respect-to (spec-of m2-battalion))
+            ))
+)
+MESSAGES** LOCAL ERROR ** In the method to estimate the combat power of a military unit, I don't know what ?T is
+ ***** Editing Processed *****
+   at Tue Sep 21 13:10:16 PDT 1999
+
+select: show error button
+   at Tue Sep 21 13:10:18 PDT 1999
+
+checked error:((name compute-required-force-ratio)
+ (capability (estimate
+                (obj (?f is (spec-of required-force-ratio)))
+                (for (?s is (inst-of military-task)))
+                ))
+ (result-type (inst-of number))
+ (method  ( if (is-it-a
+            (obj ( operation-of ?s))
+            (of (spec-of military-offensive-operation))
+            ) 
+         then 3 
+         else 1/3))
+)
+MESSAGES
+   at Tue Sep 21 13:10:18 PDT 1999
+
+select: modify button
+   at Tue Sep 21 13:10:22 PDT 1999
+

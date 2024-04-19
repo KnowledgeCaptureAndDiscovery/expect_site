@@ -1,0 +1,109 @@
+<html>
+<head>
+<script>
+var limit="0:30"
+if (document.images){
+  var parselimit=limit.split(":");
+  parselimit=parselimit[0]*60+parselimit[1]*1;
+  }
+function resubmit(val) {
+    var myform = eval("document.form"+val);
+    myform.submit();
+}
+function beginrefresh(){
+  if (!document.images)
+      return;
+   if (parselimit==1)
+      window.location.reload();
+   else {
+      parselimit-=1;
+      curmin=Math.floor(parselimit/60);
+      cursec=parselimit%60;
+      if (curmin!=0)
+         curtime=curmin+" minutes and "+cursec+" seconds left until page refresh!";
+      else
+         curtime=cursec+" seconds left until page refresh!";
+      window.status=curtime
+      setTimeout("beginrefresh()",1000)
+   }
+ }
+window.onload=beginrefresh;
+</script>
+</head>
+<table>
+<tr><td colspan=2>----Mon Apr  8 16:37:01 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>American Airlines</td></tr>
+<tr><td><b>of outbound flight number</b></td><td>2446</td></tr>
+<tr><td><b>of return flight number</b></td><td>2838</td></tr>
+<tr><td><b>on outbound departure date</b></td><td>4/19/2002</td></tr>
+<tr><td><b>on return departure date</b></td><td>5/5/2002</td></tr>
+<tr><td><b>at outbound departure time</b></td><td>1:10 PM</td></tr>
+<tr><td><b>at return departure time</b></td><td>3:09 PM</td></tr>
+<tr><td><b>from outbound departure airport</b></td><td>LAX</td></tr>
+<tr><td><b>to outbound arrival airport</b></td><td>CLT</td></tr>
+<tr><td><b>from return departure airport</b></td><td>CLT</td></tr>
+<tr><td><b>to return arrival airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>philpot@isi.edu</td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;ack&gt;OK&lt;/ack&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1018309021)'></td></tr>
+</table><br>
+<form name='form1018309021' action="/cgi-bin/portal/agent-req.pl" target="_blank" method="post">
+<input type='hidden' name='val0' value='American Airlines'>
+<input type='hidden' name='val1' value='2446'>
+<input type='hidden' name='val2' value='2838'>
+<input type='hidden' name='val3' value='4/19/2002'>
+<input type='hidden' name='val4' value='5/5/2002'>
+<input type='hidden' name='val5' value='1:10 PM'>
+<input type='hidden' name='val6' value='3:09 PM'>
+<input type='hidden' name='val7' value='LAX'>
+<input type='hidden' name='val8' value='CLT'>
+<input type='hidden' name='val9' value='CLT'>
+<input type='hidden' name='val10' value='LAX'>
+<input type='hidden' name='val11' value='philpot@isi.edu'>
+<input type='hidden' name='agent' value='flight-schedule'>
+<input type='hidden' name='email' value='philpot@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Mon Apr  8 16:36:22 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>US Airways</td></tr>
+<tr><td><b>of outbound flight number</b></td><td>2954</td></tr>
+<tr><td><b>of return flight number</b></td><td>1205</td></tr>
+<tr><td><b>on outbound departure date</b></td><td>4/20/2002</td></tr>
+<tr><td><b>on return departure date</b></td><td>5/5/2002</td></tr>
+<tr><td><b>at outbound departure time</b></td><td>12:55 AM</td></tr>
+<tr><td><b>at return departure time</b></td><td>7:55 AM</td></tr>
+<tr><td><b>from outbound departure airport</b></td><td>LAX</td></tr>
+<tr><td><b>to outbound arrival airport</b></td><td>CLT</td></tr>
+<tr><td><b>from return departure airport</b></td><td>CLT</td></tr>
+<tr><td><b>to return arrival airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>philpot@isi.edu</td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;ack&gt;OK&lt;/ack&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1018308982)'></td></tr>
+</table><br>
+<form name='form1018308982' action="/cgi-bin/portal/agent-req.pl" target="_blank" method="post">
+<input type='hidden' name='val0' value='US Airways'>
+<input type='hidden' name='val1' value='2954'>
+<input type='hidden' name='val2' value='1205'>
+<input type='hidden' name='val3' value='4/20/2002'>
+<input type='hidden' name='val4' value='5/5/2002'>
+<input type='hidden' name='val5' value='12:55 AM'>
+<input type='hidden' name='val6' value='7:55 AM'>
+<input type='hidden' name='val7' value='LAX'>
+<input type='hidden' name='val8' value='CLT'>
+<input type='hidden' name='val9' value='CLT'>
+<input type='hidden' name='val10' value='LAX'>
+<input type='hidden' name='val11' value='philpot@isi.edu'>
+<input type='hidden' name='agent' value='flight-schedule'>
+<input type='hidden' name='email' value='philpot@isi.edu'>
+</form>
+
+</html>

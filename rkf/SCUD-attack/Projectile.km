@@ -1,0 +1,31 @@
+
+#|
+;;; INFORMAL SKETCH OF THIS PROTOTYPE:
+
+Projectile
+  location(o): Place
+
+|#
+
+;;; KM REPRESENTATION OF THIS PROTOTYPE
+
+(Projectile has (superclasses (Tangible-Entity)))
+
+(Projectile now-has (prototypes (_Tangible-Entity1158)))
+
+(_Tangible-Entity1158 has
+  (prototype-of (Projectile))
+  (prototype-scope (Projectile))
+  (prototype-participants (_Tangible-Entity1158 _Place1159)))
+
+(_Tangible-Entity1158 has (instance-of (Projectile))
+ (location (_Place1159)))
+
+(_Place1159 has (instance-of (Place)))
+
+
+#|
+;;; TRADITIONAL FORMAT FOR SME'S LAST ACTIONS WOULD HAVE LOOKED:
+
+
+|#

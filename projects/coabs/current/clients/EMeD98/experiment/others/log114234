@@ -1,0 +1,33 @@
+select: delete button
+   at Fri Jun 11 11:43:43 PDT 1999
+
+check: All Agenda
+   at Fri Jun 11 11:43:48 PDT 1999
+
+check: Method Sub-Method Relation
+   at Fri Jun 11 11:43:49 PDT 1999
+
+deleted method:((name estimate-dirt-volume-for-bulldozer)
+ (capability (estimate
+                (obj (?v is (spec-of dirt-volume)))
+                (of (?b is (inst-of geographical-bank)))
+                (with (?g is (inst-of geographical-gap)))
+                (with (?n is (inst-of narrow-gap-with-bulldozer)))
+                ))
+ (result-type (inst-of number))
+ (method (multiply
+            (obj (subtract
+                    (obj ( desired-width ?n))
+                    (from ( width-of-object ?g))
+                    ))
+            (by (multiply
+                   (obj 8)
+                   (by ( height-of-object ?b))
+                   ))
+             ))
+)
+   at Fri Jun 11 11:43:50 PDT 1999
+
+select: add new button
+   at Fri Jun 11 11:43:54 PDT 1999
+

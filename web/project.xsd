@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2000/10/XMLSchema">
+	<xsd:element name="project">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="name" type="xsd:string"/>
+				<xsd:element name="title" type="xsd:string"/>
+				<xsd:element name="description">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="short" type="xsd:string"/> <!--  FIX THIS - EMBEDDED HTML -->
+							<xsd:element name="long" type="xsd:string"/>   <!--  FIX THIS - EMBEDDED HTML -->
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="research">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="short" type="xsd:string"/>  <!--  FIX THIS - EMBEDDED HTML -->
+							<xsd:element name="long" type="xsd:string"/>  <!--  FIX THIS - EMBEDDED HTML -->
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="funding">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="program" type="xsd:string"/>
+							<xsd:element name="url" type="xsd:uriReference"/>
+							<xsd:element name="awardnumber" type="xsd:string"/>
+							<xsd:element name="startdate" type="xsd:string"/>
+							<xsd:element name="enddate" type="xsd:string"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="link" maxOccurs="unbounded">
+					<xsd:complexType mixed="true">
+						<xsd:choice minOccurs="0" maxOccurs="unbounded">
+							<xsd:element name="a">
+								<xsd:complexType>
+									<xsd:simpleContent>
+										<xsd:restriction base="xsd:string">
+											<xsd:attribute name="href" type="xsd:uriReference" use="required"/>
+										</xsd:restriction>
+									</xsd:simpleContent>
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:choice>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

@@ -1,0 +1,251 @@
+Agenda:
+ In the method to compute the combat power of a military unit with respect to a military task, ?T is not used
+   at Fri Sep 17 16:31:29 PDT 1999
+
+create method for goal from undefined capabilities
+   at Fri Sep 17 16:31:38 PDT 1999
+
+undefined goal:
+(check (obj (spec-of force-ratio)) (of (inst-of military-task)) (in (inst-of coa)))  
+Expected Result:(inst-of yes-no)  
+Callers:(check-force-ratio-for-main-task)  
+Capability:(capability (check (obj (?v834 is (spec-of force-ratio))) (of (?v835 is (inst-of military-task))) (in (?v836 is (inst-of coa)))))  
+   at Fri Sep 17 16:31:38 PDT 1999
+
+select Button:expect-expression:EXPRESSION
+ TO become:((name _method802  )
+(capability    ( check   ( obj   ( ?v834 is   ( spec-of force-ratio ) ) )
+         ( of   ( ?v835 is   ( inst-of military-task ) ) )
+         ( in   ( ?v836 is   ( inst-of coa ) ) ) )
+)
+(result-type  (inst-of yes-no)  )
+(method  SUB-GOAL 
+)
+)
+   at Fri Sep 17 16:31:46 PDT 1999
+
+select: add new button
+   at Fri Sep 17 16:32:07 PDT 1999
+
+select Button:expect-expression:EXPRESSION
+ TO become:((name _method4327)
+(capability    ( VERB PARAM1 PARAM2 ... )
+)
+(result-type  DATA-TYPE)
+(method  SUB-GOAL 
+)
+)
+   at Fri Sep 17 16:32:18 PDT 1999
+
+5check: Undefined Capabilities
+   at Fri Sep 17 16:33:43 PDT 1999
+
+check tab:0
+   at Fri Sep 17 16:34:03 PDT 1999
+
+7check: Method Sub-Method Relation
+   at Fri Sep 17 16:34:05 PDT 1999
+
+create method for goal from undefined capabilities
+   at Fri Sep 17 16:34:07 PDT 1999
+
+undefined goal:
+(check (obj (spec-of force-ratio)) (of (inst-of military-task)) (in (inst-of coa)))  
+Expected Result:(inst-of yes-no)  
+Callers:(check-force-ratio-for-main-task)  
+Capability:(capability (check (obj (?v834 is (spec-of force-ratio))) (of (?v835 is (inst-of military-task))) (in (?v836 is (inst-of coa)))))  
+   at Fri Sep 17 16:34:07 PDT 1999
+
+6check: Method Capability Hierarchy
+   at Fri Sep 17 16:34:16 PDT 1999
+
+check tab:0
+   at Fri Sep 17 16:34:25 PDT 1999
+
+select Button:expect-expression:EXPRESSION
+ TO become:((name _method802  )
+(capability    ( check   ( obj   ( ?v834 is   ( spec-of force-ratio ) ) )
+         ( of   ( ?v835 is   ( inst-of military-task ) ) )
+         ( in   ( ?v836 is   ( inst-of coa ) ) ) )
+)
+(result-type  (inst-of yes-no)  )
+(method    ( is-less-or-equal   ( obj expression )   ( than expression ) ) 
+)
+)
+   at Fri Sep 17 16:34:35 PDT 1999
+
+select Button:expect-expression:expression
+ TO become:((name _method802  )
+(capability    ( check   ( obj   ( ?v834 is   ( spec-of force-ratio ) ) )
+         ( of   ( ?v835 is   ( inst-of military-task ) ) )
+         ( in   ( ?v836 is   ( inst-of coa ) ) ) )
+)
+(result-type  (inst-of yes-no)  )
+(method    ( is-less-or-equal   ( obj   ( estimate   ( obj
+                           ( spec-of required-force-ratio ) )
+                     ( for expression ) ) )
+         ( than expression ) ) 
+)
+)
+   at Fri Sep 17 16:34:47 PDT 1999
+
+select Button:expect-expression:expression
+ TO become:((name _method802  )
+(capability    ( check   ( obj   ( ?v834 is   ( spec-of force-ratio ) ) )
+         ( of   ( ?v835 is   ( inst-of military-task ) ) )
+         ( in   ( ?v836 is   ( inst-of coa ) ) ) )
+)
+(result-type  (inst-of yes-no)  )
+(method    ( is-less-or-equal   ( obj   ( estimate   ( obj
+                           ( spec-of required-force-ratio ) )
+                     ( for expression ) ) )
+         ( than   ( estimate   ( obj
+                           ( spec-of available-force-ratio ) )
+                     ( for expression ) ) ) ) 
+)
+)
+   at Fri Sep 17 16:34:58 PDT 1999
+
+ From sketch:To do what(Capability):
+Do(Method Body):
+
+The result will be(Result Type):
+   at Fri Sep 17 16:35:08 PDT 1999
+
+ done editing:((name _method802  )
+(capability    ( check   ( obj   ( ?v834 is   ( spec-of force-ratio ) ) )
+         ( of   ( ?v835 is   ( inst-of military-task ) ) )
+         ( in   ( ?v836 is   ( inst-of coa ) ) ) )
+)
+(result-type  (inst-of yes-no)  )
+(method    ( is-less-or-equal   ( obj   ( estimate   ( obj
+                           ( spec-of required-force-ratio ) )
+                     ( for expression ) ) )
+         ( than   ( estimate   ( obj
+                           ( spec-of available-force-ratio ) )
+                     ( for expression ) ) ) ) 
+)
+)
+   at Fri Sep 17 16:35:08 PDT 1999
+
+added New method:((name _method802)
+ (capability (check
+                (obj (?v834 is (spec-of force-ratio)))
+                (of (?v835 is (inst-of military-task)))
+                (in (?v836 is (inst-of coa)))
+                ))
+ (result-type (inst-of yes-no))
+ nil)
+   at Fri Sep 17 16:35:11 PDT 1999
+
+check tab:-1
+   at Fri Sep 17 16:35:11 PDT 1999
+
+check tab:0
+   at Fri Sep 17 16:35:11 PDT 1999
+
+Agenda:
+ In the method to check the force ratio of a military task in a coa, ?V835 is not used
+ In the method to check the force ratio of a military task in a coa, ?V836 is not used
+ In the method to _METHOD802, I cannot understand EXPRESSION
+ In the method to compute the combat power of a military unit with respect to a military task, ?T is not used
+   at Fri Sep 17 16:35:13 PDT 1999
+
+7check: Method Sub-Method Relation
+   at Fri Sep 17 16:35:17 PDT 1999
+
+select: modify button
+   at Fri Sep 17 16:35:24 PDT 1999
+
+select: delete button
+   at Fri Sep 17 16:47:29 PDT 1999
+
+check tab:-1
+   at Fri Sep 17 16:47:30 PDT 1999
+
+check tab:0
+   at Fri Sep 17 16:47:30 PDT 1999
+
+Agenda:
+ In the method to compute the combat power of a military unit with respect to a military task, ?T is not used
+   at Fri Sep 17 16:47:31 PDT 1999
+
+7check: Method Sub-Method Relation
+   at Fri Sep 17 16:47:35 PDT 1999
+
+deleted method:((name _method802)
+ (capability (check
+                (obj (?v834 is (spec-of force-ratio)))
+                (of (?v835 is (inst-of military-task)))
+                (in (?v836 is (inst-of coa)))
+                ))
+ (result-type (inst-of yes-no))
+ nil)
+   at Fri Sep 17 16:47:35 PDT 1999
+
+check tab:-1
+   at Fri Sep 17 16:47:35 PDT 1999
+
+check tab:0
+   at Fri Sep 17 16:47:35 PDT 1999
+
+Agenda:
+ In the method to compute the combat power of a military unit with respect to a military task, ?T is not used
+   at Fri Sep 17 16:47:36 PDT 1999
+
+7check: Method Sub-Method Relation
+   at Fri Sep 17 16:47:39 PDT 1999
+
+create method for goal from undefined capabilities
+   at Fri Sep 17 16:47:48 PDT 1999
+
+undefined goal:
+(check (obj (spec-of force-ratio)) (of (inst-of military-task)) (in (inst-of coa)))  
+Expected Result:UNDEFINED
+Callers:(check-force-ratio-for-main-task)  
+Capability:(capability (check (obj (?v875 is (spec-of force-ratio))) (of (?v876 is (inst-of military-task))) (in (?v877 is (inst-of coa)))))  
+   at Fri Sep 17 16:47:48 PDT 1999
+
+ From sketch:To do what(Capability):
+Do(Method Body):
+
+The result will be(Result Type):
+   at Fri Sep 17 16:47:59 PDT 1999
+
+ done editing:((name _method861  )
+(capability    ( check   ( obj   ( ?v875 is   ( spec-of force-ratio ) ) )
+         ( of   ( ?v876 is   ( inst-of military-task ) ) )
+         ( in   ( ?v877 is   ( inst-of coa ) ) ) )
+)
+(result-type  DATA-TYPE)
+(method  EXPRESSION 
+)
+)
+   at Fri Sep 17 16:47:59 PDT 1999
+
+added New method:((name _method861)
+ (capability (check
+                (obj (?v875 is (spec-of force-ratio)))
+                (of (?v876 is (inst-of military-task)))
+                (in (?v877 is (inst-of coa)))
+                ))
+ nil (nil)
+   at Fri Sep 17 16:48:00 PDT 1999
+
+check tab:-1
+   at Fri Sep 17 16:48:00 PDT 1999
+
+check tab:0
+   at Fri Sep 17 16:48:00 PDT 1999
+
+Agenda:
+ In the method to check the force ratio of a military task in a coa, ?V876 is not used
+ In the method to check the force ratio of a military task in a coa, ?V877 is not used
+ In the method to _METHOD861, I cannot understand DATA-TYPE
+ In the method to _METHOD861, I cannot understand EXPRESSION
+ In the method to compute the combat power of a military unit with respect to a military task, ?T is not used
+   at Fri Sep 17 16:48:01 PDT 1999
+
+7check: Method Sub-Method Relation
+   at Fri Sep 17 16:48:06 PDT 1999
+

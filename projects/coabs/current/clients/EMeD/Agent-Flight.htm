@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=Content-Type content="text/html; charset=windows-1252">
+<SCRIPT event=onload for=window type=text/javascript>
+var xmlDoc = new ActiveXObject("Microsoft.XMLDOM")
+xmlDoc.async="false"
+xmlDoc.load("Flight.xml")
+
+goal.innerText=xmlDoc.getElementsByTagName("GoalName").item(0).text
+arg.innerText=xmlDoc.getElementsByTagName("ConceptName").item(0).text
+
+arg1.innerText=xmlDoc.getElementsByTagName("ParameterName").item(1).text
+arg2.innerText=xmlDoc.getElementsByTagName("ConceptName").item(1).text
+
+arg3.innerText=xmlDoc.getElementsByTagName("ParameterName").item(2).text
+arg4.innerText=xmlDoc.getElementsByTagName("ConceptName").item(2).text
+
+arg5.innerText=xmlDoc.getElementsByTagName("ParameterName").item(3).text
+arg6.innerText=xmlDoc.getElementsByTagName("ConceptName").item(3).text
+
+arg7.innerText=xmlDoc.getElementsByTagName("ParameterName").item(4).text
+arg8.innerText=xmlDoc.getElementsByTagName("ConceptName").item(4).text
+
+
+var xmlDoc1= new ActiveXObject("Microsoft.XMLDOM")
+xmlDoc1.async="false"
+xmlDoc1.load("constraints.xml")
+arg9.innerText=xmlDoc1.getElementsByTagName("type-ctr").item(0).text
+
+function y2k(number) { return (number < 1000) ? number + 1900 : number; }
+
+var reason = '';
+
+function isValidDate (myDate,sep) {
+// checks if date passed is in valid dd/mm/yyyy format
+
+    if (myDate.length == 10) {
+        if (myDate.substring(2,3) == sep && myDate.substring(5,6) == sep) {
+            var month  = myDate.substring(0,2);
+            var date = myDate.substring(3,5);
+            var year  = myDate.substring(6,10);
+
+            var test = new Date(year,month-1,date);
+
+            if (year == y2k(test.getYear()) && (month-1 == test.getMonth()) && (date == test.getDate())) {
+                reason = '';
+                return true;
+            }
+            else {
+                reason = 'valid format but an invalid date';
+                return false;
+            }
+        }
+        else {
+            reason = 'invalid spearators';
+            return false;
+        }
+    }
+    else {
+        reason = 'invalid length';
+        return false;
+    }
+}
+
+function checkDate(myDate) {
+    if (isValidDate(myDate,'/'))
+    
+ 
+	alert(myDate + ' = valid date<BR>');
+    else
+        alert(myDate + ' = ' + reason + '<BR>');
+}
+
+
+function validate()
+{
+alert("in here")
+var flag = 0
+
+
+
+}
+
+</SCRIPT>
+
+<META content="MSHTML 5.50.4522.1800" name=GENERATOR></HEAD>
+<BODY bgColor=white>
+
+<form name="AgentForm" method="post" >
+
+<H1>Flight Status Monitor Agent </H1><SPAN id=goal></SPAN>&nbsp;&nbsp;&nbsp;<SPAN id=arg></SPAN> <BR><BR><SPAN 
+id=arg1></SPAN>&nbsp;&nbsp;<SPAN id=arg2></SPAN> &nbsp;&nbsp;&nbsp;<INPUT type=text name=arg2> 
+<BR><BR><SPAN id=arg3></SPAN>&nbsp;&nbsp;<SPAN id=arg4></SPAN> 
+&nbsp;&nbsp;&nbsp;<INPUT type=text name=arg4> <BR><BR><SPAN id=arg5></SPAN>&nbsp;&nbsp;&nbsp;&nbsp;<SPAN id=arg6></SPAN> 
+&nbsp;&nbsp;&nbsp;<INPUT type=text name=arg6> <BR><BR><SPAN id=arg7></SPAN>&nbsp;&nbsp;&nbsp;&nbsp;<SPAN id=arg8></SPAN> 
+&nbsp;&nbsp;&nbsp;<SPAN id=arg9></SPAN><INPUT type=text name=arg8> <BR><BR><BR><INPUT type=button value="Show Results" ONCLICK = "validate()"> 
+
+
+
+<HR>
+<B><SPAN id=header></SPAN></B>
+<HR>
+<SPAN id=body></SPAN>
+</form>
+</BODY></HTML>

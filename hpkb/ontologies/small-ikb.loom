@@ -1,0 +1,214 @@
+;;;
+;;; This is an attempt to generate all the concepts that are needed from 
+;;; the IKB, so I can present the user with a manageable set of alternatives.
+;;; 
+
+(in-package "CYC")
+
+(defconcept |Action|
+  :is-primitive thing)
+
+
+;;; These are automatically defined from list-undefined-concepts
+;;; defrelations don't mention any domain or range after the first 3
+;;; (I got bored).
+
+(DEFRELATION CYC::|affiliatedWith| 
+  :domain |Agent| :range |Agent|)
+(defrelation CYC::|subOrganizations| )
+(defrelation CYC::|formsBorderBetween|
+  :arity 3
+  :domains (|SpatialThing| |SpatialThing|)
+  :range |SpatialThing|)
+(defrelation CYC::|subOrgs-MaterialSupport| )
+(DEFRELATION CYC::|spatiallyIntersects| 
+  :domain |SpatialThing| :range |SpatialThing|)
+(DEFRELATION CYC::|constrainingObject| 
+  :domain |TransportationEvent| :range |SolidTangibleThing|)
+(defconcept |TransportationEvent| :is-primitive thing)
+(defconcept |SolidTangibleThing| :is-primitive thing)
+(defrelation CYC::|subOrgs-AdministrativeServiceSupport| )
+  
+(defrelation CYC::|positiveVestedInterest|)
+(defrelation CYC::|subEvents| )
+(defrelation CYC::|eventOccursAt| )
+(defrelation CYC::|startsAfterStartingOf| )
+(defrelation CYC::|startsAfterEndingOf| )
+(defrelation CYC::|possesses| )
+(defrelation CYC::|preActors| )
+(defrelation CYC::|goals| )
+(defrelation CYC::|postActors| )
+(defrelation CYC::|hasAttributes| )
+(defrelation CYC::|subOrgs-Financial| )
+(DEFCONCEPT CYC::|Agent| :is-primitive THING)
+(DEFCONCEPT CYC::|UnitVectorInterval| :is-primitive THING)
+(DEFCONCEPT CYC::|PhysicalEvent| :is-primitive THING)
+(DEFCONCEPT CYC::|MovementEvent| :is-primitive THING)
+(DEFCONCEPT CYC::|AttributeValue| :is-primitive THING)
+(DEFCONCEPT CYC::|ScriptType| :is-primitive THING)
+(DEFCONCEPT CYC::|Translation-SingleTrajectory| :is-primitive THING)
+(DEFCONCEPT CYC::|AttackOnTangible| :is-primitive THING)
+(DEFCONCEPT CYC::|PartiallyTangible| :is-primitive THING)
+(DEFCONCEPT CYC::|genlMt| :is-primitive THING)
+(DEFCONCEPT CYC::|InformationGathering| :is-primitive THING)
+(DEFCONCEPT CYC::|TangibleThing| :is-primitive THING)
+(DEFCONCEPT CYC::|LandTopographicalFeature| :is-primitive THING)
+(DEFCONCEPT CYC::|AvenueOfApproach| :is-primitive THING)
+(DEFCONCEPT CYC::|SpatialThing| :is-primitive THING)
+(DEFCONCEPT CYC::|TemporalThing| :is-primitive THING)
+(DEFCONCEPT CYC::|ModernMilitaryOrganization| :is-primitive THING)
+(DEFCONCEPT CYC::|Situation| :is-primitive THING)
+(DEFCONCEPT CYC::|SituationType| :is-primitive THING)
+(DEFCONCEPT CYC::|Surprise-MilitaryTask| :is-primitive |MilitaryTask|)
+(DEFCONCEPT CYC::|CooperationEvent| :is-primitive THING)
+(DEFCONCEPT CYC::|IntangibleObjectPredicate| :is-primitive THING)
+(DEFCONCEPT CYC::|COASpecificationMicrotheory| :is-primitive THING)
+(DEFCONCEPT CYC::|ActorSlot| :is-primitive THING)
+(DEFCONCEPT CYC::|SpatialThing-Localized| :is-primitive THING)
+(DEFCONCEPT CYC::|Cannon| :is-primitive THING)
+(DEFCONCEPT CYC::|TransferOut| :is-primitive THING)
+(DEFCONCEPT CYC::|MilitaryEvent| :is-primitive THING)
+(DEFCONCEPT CYC::|SingleDoerAction| :is-primitive THING)
+(DEFCONCEPT CYC::|LookingForSomething| :is-primitive THING)
+(DEFCONCEPT CYC::|MilitaryOperation| :is-primitive |MilitaryEvent|)
+(DEFCONCEPT CYC::|Goal| :is-primitive THING)
+(DEFCONCEPT CYC::|GeographicalThing-Intangible-MovableLocation| :is-primitive THING)
+(DEFCONCEPT CYC::|PhysicalCollectionEvent| :is-primitive THING)
+(DEFCONCEPT CYC::|\|(GroupFn)\|| :is-primitive THING)
+(DEFCONCEPT CYC::|AppropriatingSomething| :is-primitive THING)
+(DEFCONCEPT CYC::|SupposedToBeMicrotheory| :is-primitive THING)
+(DEFCONCEPT CYC::|LineOfMilitaryForces| :is-primitive THING)
+(DEFCONCEPT CYC::|PathSystem| :is-primitive THING)
+(DEFCONCEPT CYC::|Organization| :is-primitive THING)
+(DEFCONCEPT CYC::|ArmoredFightingVehicle| :is-primitive THING)
+(DEFCONCEPT CYC::|Microtheory| :is-primitive THING)
+(DEFCONCEPT CYC::|AirTransportationDevice| :is-primitive THING)
+(DEFCONCEPT CYC::|Cyc_Integer| :is-primitive THING)
+(DEFCONCEPT CYC::|CycFormula| :is-primitive THING)
+(DEFCONCEPT CYC::|SetOrCollection| :is-primitive THING)
+(DEFCONCEPT CYC::|CounterattackOperation| :is-primitive THING)
+(DEFCONCEPT CYC::|AirAssaultUnit-MilitarySpecialty| :is-primitive THING)
+(DEFCONCEPT CYC::|TerrainTrafficabilityLevel| :is-primitive THING)
+(DEFCONCEPT CYC::|AntiArmorUnit-MilitarySpecialty| :is-primitive THING)
+(DEFCONCEPT CYC::|CycSystemVariable| :is-primitive THING)
+(DEFCONCEPT CYC::|AirDefenseUnit-MilitarySpecialty| :is-primitive THING)
+(DEFCONCEPT CYC::|Border| :is-primitive THING)
+(DEFCONCEPT CYC::|Movement-TranslationEvent| :is-primitive THING)
+(DEFCONCEPT CYC::|ConflictEvent| :is-primitive THING)
+(DEFCONCEPT CYC::|PurposefulAction| :is-primitive THING)
+(DEFCONCEPT CYC::|Weapon| :is-primitive THING)
+(DEFCONCEPT CYC::|Cyc_Predicate| :is-primitive THING)
+(DEFCONCEPT CYC::|GainingUserRights| :is-primitive THING)
+(DEFCONCEPT CYC::|ConstructionArtifact| :is-primitive THING)
+(DEFCONCEPT CYC::|LogisticsUnit-MilitarySpecialty| :is-primitive THING)
+(DEFCONCEPT CYC::|CompositePhysicalAndMentalEvent| :is-primitive THING)
+(DEFCONCEPT CYC::|MilitaryEnablingTask| :is-primitive THING)
+(DEFCONCEPT CYC::|Artillery-SelfPropelled| :is-primitive THING)
+(DEFCONCEPT CYC::|MultipleRocketLauncher| :is-primitive THING)
+(DEFCONCEPT CYC::|AirborneUnit-MilitarySpecialty| :is-primitive THING)
+(DEFCONCEPT CYC::|Event| :is-primitive THING)
+(DEFCONCEPT CYC::|SupportHelicopter| :is-primitive THING)
+(DEFCONCEPT CYC::|ExistingObjectType| :is-primitive THING)
+(DEFCONCEPT CYC::|ScalarInterval| :is-primitive THING)
+(DEFCONCEPT CYC::|ViolentAction| :is-primitive THING)
+(DEFCONCEPT CYC::|TransportationDevice| :is-primitive THING)
+(DEFCONCEPT CYC::|ActionOnObject| :is-primitive THING)
+(DEFCONCEPT CYC::|Tank-Vehicle| :is-primitive THING)
+(DEFCONCEPT CYC::|HumanActivity| :is-primitive THING)
+(DEFCONCEPT CYC::|Set-Mathematical| :is-primitive THING)
+(DEFCONCEPT CYC::|Cyc_Thing| :is-primitive THING)
+(DEFCONCEPT CYC::|DestructionEvent| :is-primitive THING)
+(DEFCONCEPT CYC::|SomethingExisting| :is-primitive THING)
+(DEFCONCEPT CYC::|GeographicalRegion| :is-primitive THING)
+(DEFCONCEPT CYC::|Counterattack-MilitaryTask| :is-primitive |MilitaryTask|)
+(DEFCONCEPT CYC::|MilitaryDecoyTask| :is-primitive THING)
+(DEFCONCEPT CYC::|TemporalStuffType| :is-primitive THING)
+(DEFCONCEPT CYC::|InanimateThing| :is-primitive THING)
+(DEFCONCEPT CYC::|AviationUnit-MilitarySpecialty| :is-primitive THING)
+(DEFCONCEPT CYC::|Translation-LocationChange| :is-primitive THING)
+(DEFCONCEPT CYC::|PositiveInteger| :is-primitive THING)
+(DEFCONCEPT CYC::|AmphibiousUnit-MilitarySpecialty| :is-primitive THING)
+(DEFCONCEPT CYC::|HelpingAnAgent| :is-primitive THING)
+(DEFCONCEPT CYC::|Cyc_Collection| :is-primitive THING)
+(DEFCONCEPT CYC::|AttackHelicopter| :is-primitive THING)
+(DEFCONCEPT CYC::|ArmoredPersonnelCarrier| :is-primitive THING)
+
+;;; These were added to allow the annotations to go through.
+
+(DEFCONCEPT CYC::|ConventionalClassificationType| :is-primitive THING)
+(DEFCONCEPT CYC::|ObjectType| :is-primitive THING)
+(DEFCONCEPT CYC::|TemporalObjectType| :is-primitive THING)
+(DEFCONCEPT CYC::|MicrotheoryType| :is-primitive THING)
+
+(DEFCONCEPT CYC::|CollectionType| :is-primitive THING)
+
+(DEFCONCEPT CYC::|ProductType| :is-primitive THING)
+
+(DEFCONCEPT CYC::|AttributeType| :is-primitive THING)
+(DEFCONCEPT CYC::|PartialOrderAttributeType| :is-primitive THING)
+(DEFCONCEPT CYC::|UnorderedAttributeType| :is-primitive THING)
+(DEFCONCEPT CYC::|PrimitiveAttributeType| :is-primitive THING)
+(DEFCONCEPT CYC::|LinearOrderAttributeType| :is-primitive THING)
+
+(DEFCONCEPT CYC::|DefaultDisjointScriptType| :is-primitive THING)
+
+(DEFCONCEPT CYC::|Cyc_Role| :is-primitive THING)
+
+
+(DEFCONCEPT CYC::|ReifiableFunction| :is-primitive THING)
+(DEFCONCEPT CYC::|Cyc_Unary-Function| :is-primitive THING)
+
+
+(DEFCONCEPT CYC::|PredicateCategory| :is-primitive THING)
+(DEFCONCEPT CYC::|UnaryPredicate| :is-primitive THING)
+(DEFCONCEPT CYC::|BinaryPredicate| :is-primitive THING)
+(DEFCONCEPT CYC::|TransitiveBinaryPredicate| :is-primitive THING)
+(DEFCONCEPT CYC::|AntiTransitiveBinaryPredicate| :is-primitive THING)
+(DEFCONCEPT CYC::|AntiSymmetricBinaryPredicate| :is-primitive THING)
+(DEFCONCEPT CYC::|AsymmetricBinaryPredicate| :is-primitive THING)
+(DEFCONCEPT CYC::|ReflexiveBinaryPredicate| :is-primitive THING)
+(DEFCONCEPT CYC::|IrreflexiveBinaryPredicate| :is-primitive THING)
+(DEFCONCEPT CYC::|TernaryPredicate| :is-primitive THING)
+(DEFCONCEPT CYC::|QuaternaryPredicate| :is-primitive THING)
+(DEFCONCEPT CYC::|QuintaryPredicate| :is-primitive THING)
+(DEFCONCEPT CYC::|FunctionalPredicate| :is-primitive THING)
+(DEFCONCEPT CYC::|DefaultMonotonicPredicate| :is-primitive THING)
+(DEFCONCEPT CYC::|SlotTrendPredicate| :is-primitive THING)
+(DEFCONCEPT CYC::|NonPhysicalPartPredicate| :is-primitive THING)
+(DEFCONCEPT CYC::|MicrotheoryPredicate| :is-primitive THING)
+(DEFCONCEPT CYC::|RuleMacroPredicate| :is-primitive THING)
+
+(DEFCONCEPT CYC::|ComplexTemporalRelation| :is-primitive THING)
+(DEFCONCEPT CYC::|ScopingRelation| :is-primitive THING)
+
+(DEFCONCEPT CYC::|FunctionalSlot| :is-primitive THING)
+(DEFCONCEPT CYC::|CotemporalObjectsSlot| :is-primitive THING)
+(DEFCONCEPT CYC::|PropositionalAttitudeSlot| :is-primitive THING)
+(DEFCONCEPT CYC::|SubProcessSlot| :is-primitive THING)
+
+(DEFCONCEPT CYC::|BinaryFunction| :is-primitive THING)
+(DEFCONCEPT CYC::|TernaryFunction| :is-primitive THING)
+
+(DEFCONCEPT CYC::|CollectionDenotingFunction| :is-primitive THING)
+(DEFCONCEPT CYC::|IndividualDenotingFunction| :is-primitive THING)
+
+(defrelation |genlMt|)
+
+(defconcept |GeneralMicrotheory|)
+
+;;; Others added by hand
+
+(defrelation |operationOfCOA|)
+(defrelation |objectActedOn|)
+(defconcept |RealNumber| :is-primitive THING)
+
+;;; This may be replaced with something more readable once the whole
+;;; thing loads ok.
+(defconcept |ArmoredVehicleLanchedBridge| :is-primitive THING)
+
+(defconcept military-task)
+
+(defconcept evaluaton-criterion)
+
+(defconcept |IntervalBasedQuantitySlot|)
+

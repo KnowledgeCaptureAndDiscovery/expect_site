@@ -1,0 +1,759 @@
+KANAL(4): (test-knowledge 'user::|Virus-Invades-Cell|)
+
+
+ ===============================================
+ Start testing user::|Virus-Invades-Cell| with 
+   user::|_Virus-Invades-Cell480| in user::|_Situation479|
+
+ simulate-events-1 ((user::|_Attach481| user::|_Situation479| nil))
+
+
+  -----------------------------------------------------------
+  step: user::|_Attach481|
+  -----------------------------------------------------------
+   preconditions:((:|triple| user::|_Virus485| user::|location| (user::|the| user::|location| user::|of| user::|_Attach481|))
+                  (:|triple| (user::|the| user::|object| user::|of| user::|_Attach481|) user::|object-of|
+                   (user::|mustnt-be-a| user::|Be-Touching| user::|with|
+                    (user::|object| ((user::|the| user::|destination| user::|of| user::|_Attach481|)))))
+                  (:|triple| user::|_Virus485| user::|object-of|
+                   (user::|mustnt-be-a| user::|Be-Inaccessible| user::|with| (user::|object| (user::|_Virus485|))))) 
+
+
+ WARNING: 
+ (:|triple| user::|_Virus485| user::|location| (user::|the| user::|location| user::|of| user::|_Attach481|)) 
+  "The location of the virus is the location of the attach." 
+     is not explicitly true but consistent with the KB
+    => we will assume it is true and continue ..
+
+   succeeded preconditions:((:|triple| user::|_Virus485| user::|object-of|
+                             (user::|mustnt-be-a| user::|Be-Inaccessible| user::|with| (user::|object| (user::|_Virus485|))))
+                            (:|triple| (user::|the| user::|object| user::|of| user::|_Attach481|) user::|object-of|
+                             (user::|mustnt-be-a| user::|Be-Touching| user::|with|
+                              (user::|object| ((user::|the| user::|destination| user::|of| user::|_Attach481|)))))) 
+
+ ... EXECUTE _attach481 in _situation479...
+
+      deleting nil
+      adding ((:|triple| user::|_Be-Attached-To496| user::|object| user::|_Virus485|)
+              (:|triple| user::|_Be-Attached-To496| user::|object| user::|_Cell487|)) becoming _situation498
+
+ simulate-events-1 ((user::|_Breach499| user::|_Situation498| nil))
+
+
+  -----------------------------------------------------------
+  step: user::|_Breach499|
+  -----------------------------------------------------------
+   preconditions:((:|triple| user::|_Plasma-Membrane502| user::|object-of|
+                   (user::|mustnt-be-a| user::|Be-Inaccessible| user::|with| (user::|object| (user::|_Plasma-Membrane502|))
+                    (user::|destination| ((user::|the| user::|agent| user::|of| user::|_Breach499|)))))) 
+
+   succeeded preconditions:((:|triple| user::|_Plasma-Membrane502| user::|object-of|
+                             (user::|mustnt-be-a| user::|Be-Inaccessible| user::|with| (user::|object| (user::|_Plasma-Membrane502|))
+                              (user::|destination| ((user::|the| user::|agent| user::|of| user::|_Breach499|)))))) 
+
+ ... EXECUTE _breach499 in _situation498...
+      deleting nil
+      adding ((:|triple| user::|_Portal506| user::|is-part-of| user::|_Plasma-Membrane502|)
+              (:|triple| user::|_Be-Broken507| user::|object| user::|_Plasma-Membrane502|)) becoming _situation510
+
+ simulate-events-1 ((user::|_Traverse500| user::|_Situation510| nil))
+
+
+  -----------------------------------------------------------
+  step: user::|_Traverse500|
+  -----------------------------------------------------------
+   preconditions:((:|triple| user::|_Virus485| user::|object-of| (user::|mustnt-be-a| user::|Be-Restrained|))
+                  (:|triple| (user::|the| user::|path| user::|of| user::|_Traverse500|) user::|object-of| (user::|mustnt-be-a| user::|Be-Blocked|))
+                  (:|triple| user::|_Virus485| user::|object-of|
+                   (user::|mustnt-be-a| user::|Be-Inaccessible| user::|with| (user::|object| (user::|_Virus485|))
+                    (user::|destination| ((user::|the| user::|agent| user::|of| user::|_Traverse500|)))))) 
+
+   succeeded preconditions:((:|triple| user::|_Virus485| user::|object-of|
+                             (user::|mustnt-be-a| user::|Be-Inaccessible| user::|with| (user::|object| (user::|_Virus485|))
+                              (user::|destination| ((user::|the| user::|agent| user::|of| user::|_Traverse500|)))))
+                            (:|triple| (user::|the| user::|path| user::|of| user::|_Traverse500|) user::|object-of|
+                             (user::|mustnt-be-a| user::|Be-Blocked|))
+                            (:|triple| user::|_Virus485| user::|object-of| (user::|mustnt-be-a| user::|Be-Restrained|))) 
+
+ ... EXECUTE _traverse500 in _situation510...
+      deleting ((:|triple| user::|_Virus485| user::|location| user::|_Place494|))
+      adding nil becoming _situation517
+
+ simulate-events-1 ((user::|_Release483| user::|_Situation517| nil))
+
+
+  -----------------------------------------------------------
+  step: user::|_Release483|
+  -----------------------------------------------------------
+   preconditions:((:|triple| user::|_Viral-Nucleic-Acid519| user::|object-of|
+                   (user::|a| user::|Be-Confined| user::|with|
+                    (user::|the-enclosure| ((user::|the| user::|the-enclosure| user::|of| user::|_Release483|)))))) 
+
+
+ WARNING: 
+ (:|triple| user::|_Viral-Nucleic-Acid519| user::|object-of|
+  (user::|a| user::|Be-Confined| user::|with| (user::|the-enclosure| ((user::|the| user::|the-enclosure| user::|of| user::|_Release483|))))) 
+  "The object-of of the viral-nucleic-acid is a be-confined with the-enclosure the the-enclosure of the release." 
+     is not explicitly true but consistent with the KB
+    => we will assume it is true and continue ..
+
+
+ ... EXECUTE _release483 in _situation517...
+
+ WARNING : no effect was produced by user::|_Release483|
+
+      deleting nil
+      adding nil becoming _situation572
+
+ simulate-events-1 ((user::|_Move484| user::|_Situation572| nil))
+
+
+  -----------------------------------------------------------
+  step: user::|_Move484|
+  -----------------------------------------------------------
+   preconditions:((:|triple| user::|_Viral-Nucleic-Acid519| user::|object-of| (user::|mustnt-be-a| user::|Be-Restrained|))
+                  (:|triple| user::|_Viral-Nucleic-Acid519| user::|object-of|
+                   (user::|mustnt-be-a| user::|Be-Inaccessible| user::|with| (user::|object| (user::|_Viral-Nucleic-Acid519|))))) 
+
+
+ WARNING: 
+ (:|triple| user::|_Viral-Nucleic-Acid519| user::|object-of|
+  (user::|mustnt-be-a| user::|Be-Inaccessible| user::|with| (user::|object| (user::|_Viral-Nucleic-Acid519|)))) 
+  "The object-of of the viral-nucleic-acid is mustnt-be-a be-inaccessible with object the viral-nucleic-acid." 
+     is not explicitly true but consistent with the KB
+    => we will assume it is true and continue ..
+
+   succeeded preconditions:((:|triple| user::|_Viral-Nucleic-Acid519| user::|object-of| (user::|mustnt-be-a| user::|Be-Restrained|))) 
+
+
+ ***** user::|_Release483| enabled user::|_Move484| by achieving
+    ((:|triple| user::|_Viral-Nucleic-Acid519| user::|object-of|
+      (user::|mustnt-be-a| user::|Be-Inaccessible| user::|with| (user::|object| (user::|_Viral-Nucleic-Acid519|)))))
+
+ ... EXECUTE _move484 in _situation572...(do _Move484): Can't do this action as it would be inconsistent to assert precondition(s):
+  (:triple _Viral-Nucleic-Acid519 object-of (mustnt-be-a Be-Inaccessible with (object (_Viral-Nucleic-Acid519))))
+
+      deleting ((:|triple| user::|_Viral-Nucleic-Acid519| user::|location| user::|_Place576|))
+      adding ((:|triple| user::|_Viral-Nucleic-Acid519| user::|location| user::|_Place578|)) becoming _situation572
+
+
+  ************************************************
+          Summary of Paths Simulated
+  ************************************************
+
+  These are the simulated paths: 
+     (user::|_Attach481| user::|_Breach499| user::|_Traverse500| user::|_Release483| user::|_Move484|)
+
+
+  ************************************************
+                check expected effects
+  ************************************************
+    we check each simulated path
+
+
+  ------------------------------------------------
+    The overall effects for path
+        (user::|_Attach481| user::|_Breach499| user::|_Traverse500| user::|_Release483| user::|_Move484|)
+  ------------------------------------------------
+   added:   
+             (:|triple| user::|_Be-Attached-To496| user::|object| user::|_Virus485|)
+             (:|triple| user::|_Be-Attached-To496| user::|object| user::|_Cell487|)
+             (:|triple| user::|_Portal506| user::|is-part-of| user::|_Plasma-Membrane502|)
+             (:|triple| user::|_Be-Broken507| user::|object| user::|_Plasma-Membrane502|)
+             (:|triple| user::|_Viral-Nucleic-Acid519| user::|location| user::|_Place578|)
+
+   deleted: 
+             (:|triple| user::|_Virus485| user::|location| user::|_Place494|)
+             (:|triple| user::|_Viral-Nucleic-Acid519| user::|location| user::|_Place576|)
+
+  .............................................
+ The expected effects for virus-invades-cell is not specified yet!
+
+
+  ************************************************
+          Summary of Causal Links
+  ************************************************
+ user::|_Release483| enabled user::|_Move484| by achieving
+    ((:|triple| user::|_Viral-Nucleic-Acid519| user::|object-of|
+      (user::|mustnt-be-a| user::|Be-Inaccessible| user::|with| (user::|object| (user::|_Viral-Nucleic-Acid519|)))))
+
+
+
+  ************************************************
+          Summary of Loops Found
+  ************************************************
+       -->  NO LOOP FOUND! 
+
+ Test Output 
+(((source . user::|_Attach481|) (success) (level . :warning) (type . :inexplicit-precondition)
+  (constraint (:|triple| user::|_Virus485| user::|location| (user::|the| user::|location| user::|of| user::|_Attach481|))) (id . |error-item-1|))
+ ((source . user::|_Attach481|) (success . t) (level . :error) (type . :precondition)
+  (constraint
+   (:|triple| user::|_Virus485| user::|object-of| (user::|mustnt-be-a| user::|Be-Inaccessible| user::|with| (user::|object| (user::|_Virus485|))))
+   (:|triple| (user::|the| user::|object| user::|of| user::|_Attach481|) user::|object-of|
+    (user::|mustnt-be-a| user::|Be-Touching| user::|with| (user::|object| ((user::|the| user::|destination| user::|of| user::|_Attach481|))))))
+  (id . |error-item-3|))
+ ((source . user::|_Breach499|) (success . t) (level . :error) (type . :precondition)
+  (constraint
+   (:|triple| user::|_Plasma-Membrane502| user::|object-of|
+    (user::|mustnt-be-a| user::|Be-Inaccessible| user::|with| (user::|object| (user::|_Plasma-Membrane502|))
+     (user::|destination| ((user::|the| user::|agent| user::|of| user::|_Breach499|))))))
+  (id . |error-item-5|))
+ ((source . user::|_Traverse500|) (success . t) (level . :error) (type . :precondition)
+  (constraint
+   (:|triple| user::|_Virus485| user::|object-of|
+    (user::|mustnt-be-a| user::|Be-Inaccessible| user::|with| (user::|object| (user::|_Virus485|))
+     (user::|destination| ((user::|the| user::|agent| user::|of| user::|_Traverse500|)))))
+   (:|triple| (user::|the| user::|path| user::|of| user::|_Traverse500|) user::|object-of| (user::|mustnt-be-a| user::|Be-Blocked|))
+   (:|triple| user::|_Virus485| user::|object-of| (user::|mustnt-be-a| user::|Be-Restrained|)))
+  (id . |error-item-7|))
+ ((source . user::|_Release483|) (success) (level . :warning) (type . :inexplicit-precondition)
+  (constraint
+   (:|triple| user::|_Viral-Nucleic-Acid519| user::|object-of|
+    (user::|a| user::|Be-Confined| user::|with| (user::|the-enclosure| ((user::|the| user::|the-enclosure| user::|of| user::|_Release483|))))))
+  (id . |error-item-9|))
+ ((source . user::|_Release483|) (success) (level . :warning) (type . :no-effect) (constraint) (id . |error-item-11|))
+ ((source . user::|_Move484|) (success) (level . :warning) (type . :inexplicit-precondition)
+  (constraint
+   (:|triple| user::|_Viral-Nucleic-Acid519| user::|object-of|
+    (user::|mustnt-be-a| user::|Be-Inaccessible| user::|with| (user::|object| (user::|_Viral-Nucleic-Acid519|)))))
+  (id . |error-item-13|))
+ ((source . user::|_Move484|) (success . t) (level . :error) (type . :precondition)
+  (constraint (:|triple| user::|_Viral-Nucleic-Acid519| user::|object-of| (user::|mustnt-be-a| user::|Be-Restrained|))) (id . |error-item-15|))
+ ((source (user::|_Attach481| before user::|_Breach499|) (user::|_Attach481| before user::|_Traverse500|)
+   (user::|_Attach481| before user::|_Release483|) (user::|_Attach481| before user::|_Move484|) (user::|_Breach499| before user::|_Traverse500|)
+   (user::|_Breach499| before user::|_Release483|) (user::|_Breach499| before user::|_Move484|) (user::|_Traverse500| before user::|_Release483|)
+   (user::|_Traverse500| before user::|_Move484|))
+  (success) (level . :warning) (type . :unnecessary-link) (constraint . ordering) (id . |error-item-17|))
+ ((source . user::|Virus-Invades-Cell|) (success . t) (level . :warning) (type . :loop) (constraint) (id . |error-item-21|))
+ ((source . user::|Virus-Invades-Cell|) (content (user::|_Attach481| user::|_Breach499| user::|_Traverse500| user::|_Release483| user::|_Move484|))
+  (type . :simulated-paths) (id . |info-item-18|))
+ ((source . user::|Virus-Invades-Cell|)
+  (content
+   (user::|_Release483| user::|_Move484|
+    ((:|triple| user::|_Viral-Nucleic-Acid519| user::|object-of|
+      (user::|mustnt-be-a| user::|Be-Inaccessible| user::|with| (user::|object| (user::|_Viral-Nucleic-Acid519|)))))))
+  (type . :causal-links) (id . |info-item-19|)))
+
+KANAL(5): (get-proposed-fixes '|error-item-1|)
+
+
+ ===============================================
+ Getting fixes for |error-item-1|
+
+ ..............................................................
+   checking how to change user::|location| value of user::|_Virus485| .. 
+ ..............................................................
+
+     .. checking if there are missing steps .. 
+ proposed fix : add a user::|Move| step with "the destination of the move" as (user::|the| user::|location| user::|of|
+                                                                               user::|_Attach481|) before step user::|_Attach481| to change user::|location| of user::|_Virus485|
+ proposed fix : add a user::|Transcribe| step with "the destination of the transcribe" as (user::|the| user::|location| user::|of|
+                                                                                           user::|_Attach481|) before step user::|_Attach481| to change user::|location| of user::|_Virus485|
+
+     .. checking if steps can be modified .. 
+       -> no step modification applicable
+
+     .. checking if ordering changes may fix the problem .. 
+       -> no ordering change applicable
+
+
+ ..............................................................
+   checking if there are unnecessary steps .. 
+ ..............................................................
+
+ proposed fix :  delete or modify user::|_Attach481|
+
+ FIX ITEMS 
+(((type . :add-step-before-step)
+  (fix add user::|Move| {with "the destination of the move" as (user::|the| user::|location| user::|of| user::|_Attach481|) } before
+   user::|_Attach481| to-make user::|location| of user::|_Virus485| become (user::|the| user::|location| user::|of| user::|_Attach481|)))
+ ((type . :add-step-before-step)
+  (fix add user::|Transcribe| {with "the destination of the transcribe" as (user::|the| user::|location| user::|of| user::|_Attach481|) } before
+   user::|_Attach481| to-make user::|location| of user::|_Virus485| become (user::|the| user::|location| user::|of| user::|_Attach481|)))
+ ((type . :delete-or-modify-step) (fix delete-or-modify user::|_Attach481|)))
+
+KANAL(6): (get-proposed-fixes '|error-item-9|)
+
+
+ ===============================================
+ Getting fixes for |error-item-9|
+
+ steps : nil (user::|_Traverse500|)
+ ..............................................................
+   checking how to change user::|object-of| value of user::|_Viral-Nucleic-Acid519| .. 
+ ..............................................................
+
+     .. checking if there are missing steps .. 
+ proposed fix : add a user::|Shut-Out| step with "the resulting-state of the shut-out" as (user::|a| user::|Be-Confined| user::|with|
+                                                                                           (user::|the-enclosure|
+                                                                                            ((user::|the| user::|the-enclosure| user::|of|
+                                                                                              user::|_Release483|)))) before step user::|_Release483| to change user::|object-of| of user::|_Viral-Nucleic-Acid519|
+
+     .. checking if steps can be modified .. 
+       -> no step modification applicable
+
+     .. checking if ordering changes may fix the problem .. 
+       -> no ordering change applicable
+
+
+ ..............................................................
+   checking if there are unnecessary steps .. 
+ ..............................................................
+
+ proposed fix :  delete or modify user::|_Release483|
+
+ FIX ITEMS 
+(((type . :add-step-before-step)
+  (fix add user::|Shut-Out| {with "the resulting-state of the shut-out" as
+   (user::|a| user::|Be-Confined| user::|with| (user::|the-enclosure| ((user::|the| user::|the-enclosure| user::|of| user::|_Release483|)))) } before
+   user::|_Release483| to-make user::|object-of| of user::|_Viral-Nucleic-Acid519| become
+   (user::|a| user::|Be-Confined| user::|with| (user::|the-enclosure| ((user::|the| user::|the-enclosure| user::|of| user::|_Release483|))))))
+ ((type . :delete-or-modify-step) (fix delete-or-modify user::|_Release483|)))
+
+KANAL(7): (get-proposed-fixes '|error-item-11|)
+
+
+ ===============================================
+ Getting fixes for |error-item-11|
+
+ FIX ITEMS 
+(((type . :modify-step) (fix modify user::|_Release483| to-achieve-something)))
+
+KANAL(8): (get-proposed-fixes '|error-item-13|)
+
+
+ ===============================================
+ Getting fixes for |error-item-13|
+
+ steps : nil (user::|_Release483|)
+ ..............................................................
+   checking how to change user::|object-of| value of user::|_Viral-Nucleic-Acid519| .. 
+ ..............................................................
+
+     .. checking if there are missing steps .. 
+ proposed fix : add a user::|Shut-Out| step with "the resulting-state of the shut-out" as (user::|mustnt-be-a| user::|Be-Inaccessible| user::|with|
+                                                                                           (user::|object|
+                                                                                            (user::|_Viral-Nucleic-Acid519|))) before step user::|_Move484| to change user::|object-of| of user::|_Viral-Nucleic-Acid519|
+
+     .. checking if steps can be modified .. 
+       -> no step modification applicable
+
+     .. checking if ordering changes may fix the problem .. 
+       -> no ordering change applicable
+
+
+ ..............................................................
+   checking if there are unnecessary steps .. 
+ ..............................................................
+
+ proposed fix :  delete or modify user::|_Move484|
+
+ FIX ITEMS 
+(((type . :add-step-before-step)
+  (fix add user::|Shut-Out| {with "the resulting-state of the shut-out" as
+   (user::|mustnt-be-a| user::|Be-Inaccessible| user::|with| (user::|object| (user::|_Viral-Nucleic-Acid519|))) } before user::|_Move484| to-make
+   user::|object-of| of user::|_Viral-Nucleic-Acid519| become
+   (user::|mustnt-be-a| user::|Be-Inaccessible| user::|with| (user::|object| (user::|_Viral-Nucleic-Acid519|)))))
+ ((type . :delete-or-modify-step) (fix delete-or-modify user::|_Move484|)))
+
+KANAL(9): (get-proposed-fixes '|error-item-17|)
+
+
+ ===============================================
+ Getting fixes for |error-item-17|
+
+ FIX ITEMS 
+(((type . :delete-or-modify-link)
+  (fix delete-or-modify ordering constraints in
+   ((user::|_Attach481| before user::|_Breach499|) (user::|_Attach481| before user::|_Traverse500|) (user::|_Attach481| before user::|_Release483|)
+    (user::|_Attach481| before user::|_Move484|) (user::|_Breach499| before user::|_Traverse500|) (user::|_Breach499| before user::|_Release483|)
+    (user::|_Breach499| before user::|_Move484|) (user::|_Traverse500| before user::|_Release483|) (user::|_Traverse500| before user::|_Move484|)))))
+
+KANAL(10): (test-knowledge 'user::|Bacterial-DNA-Transcription|)
+
+
+ ===============================================
+ Start testing user::|Bacterial-DNA-Transcription| with 
+   user::|_Bacterial-DNA-Transcription709| in user::|_Situation708|
+
+ simulate-events-1 ((user::|_Collide710| user::|_Situation708| nil))
+
+
+  -----------------------------------------------------------
+  step: user::|_Collide710|
+  -----------------------------------------------------------
+   preconditions:((:|triple| user::|_RNA-Polymerase715| user::|location| (user::|the| user::|location| user::|of| user::|_Collide710|))
+                  (:|triple| (user::|the| user::|object| user::|of| user::|_Collide710|) user::|object-of|
+                   (user::|mustnt-be-a| user::|Be-Touching| user::|with|
+                    (user::|object| ((user::|the| user::|destination| user::|of| user::|_Collide710|)))))
+                  (:|triple| user::|_RNA-Polymerase715| user::|object-of|
+                   (user::|mustnt-be-a| user::|Be-Inaccessible| user::|with| (user::|object| (user::|_RNA-Polymerase715|))))) 
+
+
+ WARNING: 
+ (:|triple| user::|_RNA-Polymerase715| user::|location| (user::|the| user::|location| user::|of| user::|_Collide710|)) 
+  "The location of the rna-polymerase is the location of the collide." 
+     is not explicitly true but consistent with the KB
+    => we will assume it is true and continue ..
+
+   succeeded preconditions:((:|triple| user::|_RNA-Polymerase715| user::|object-of|
+                             (user::|mustnt-be-a| user::|Be-Inaccessible| user::|with| (user::|object| (user::|_RNA-Polymerase715|))))
+                            (:|triple| (user::|the| user::|object| user::|of| user::|_Collide710|) user::|object-of|
+                             (user::|mustnt-be-a| user::|Be-Touching| user::|with|
+                              (user::|object| ((user::|the| user::|destination| user::|of| user::|_Collide710|)))))) 
+
+ ... EXECUTE _collide710 in _situation708...
+      deleting nil
+      adding ((:|triple| user::|_Be-Touching725| user::|object| user::|_RNA-Polymerase715|)
+              (:|triple| user::|_Be-Touching725| user::|object| user::|_Bacterial-DNA717|)) becoming _situation727
+
+ simulate-events-1 ((user::|_Slide711| user::|_Situation727| nil))
+
+
+  -----------------------------------------------------------
+  step: user::|_Slide711|
+  -----------------------------------------------------------
+   preconditions:((:|triple| user::|_RNA-Polymerase715| user::|object-of|
+                   (user::|a| user::|Be-Touching| user::|with|
+                    (user::|object|
+                     ((user::|the| user::|object| user::|of| user::|_Slide711|)
+                      (user::|the| user::|location-of| user::|of| (user::|the| user::|path| user::|of| user::|_Slide711|))))))
+                  (:|triple| user::|_RNA-Polymerase715| user::|location| (user::|the| user::|source| user::|of| user::|_Slide711|))
+                  (:|triple| user::|_RNA-Polymerase715| user::|object-of| (user::|mustnt-be-a| user::|Be-Restrained|))
+                  (:|triple| (user::|the| user::|path| user::|of| user::|_Slide711|) user::|object-of| (user::|mustnt-be-a| user::|Be-Blocked|))
+                  (:|triple| user::|_RNA-Polymerase715| user::|object-of|
+                   (user::|mustnt-be-a| user::|Be-Inaccessible| user::|with| (user::|object| (user::|_RNA-Polymerase715|))))) 
+
+
+ WARNING: 
+ (:|triple| user::|_RNA-Polymerase715| user::|object-of|
+  (user::|a| user::|Be-Touching| user::|with|
+   (user::|object|
+    ((user::|the| user::|object| user::|of| user::|_Slide711|)
+     (user::|the| user::|location-of| user::|of| (user::|the| user::|path| user::|of| user::|_Slide711|)))))) 
+  "The object-of of the rna-polymerase is a be-touching with object the object of the slide the location-of of the path of the slide." 
+     is not explicitly true but consistent with the KB
+    => we will assume it is true and continue ..
+
+   succeeded preconditions:((:|triple| user::|_RNA-Polymerase715| user::|object-of|
+                             (user::|mustnt-be-a| user::|Be-Inaccessible| user::|with| (user::|object| (user::|_RNA-Polymerase715|))))
+                            (:|triple| (user::|the| user::|path| user::|of| user::|_Slide711|) user::|object-of|
+                             (user::|mustnt-be-a| user::|Be-Blocked|))
+                            (:|triple| user::|_RNA-Polymerase715| user::|object-of| (user::|mustnt-be-a| user::|Be-Restrained|))
+                            (:|triple| user::|_RNA-Polymerase715| user::|location| (user::|the| user::|source| user::|of| user::|_Slide711|))) 
+
+
+ ***** user::|_Collide710| enabled user::|_Slide711| by achieving
+    ((:|triple| user::|_RNA-Polymerase715| user::|object-of|
+      (user::|a| user::|Be-Touching| user::|with|
+       (user::|object|
+        ((user::|the| user::|object| user::|of| user::|_Slide711|)
+         (user::|the| user::|location-of| user::|of| (user::|the| user::|path| user::|of| user::|_Slide711|)))))))
+
+ ... EXECUTE _slide711 in _situation727...
+      deleting ((:|triple| user::|_Tangible-Entity728| user::|location| user::|_Place733|))
+      adding ((:|triple| user::|_Tangible-Entity728| user::|location| user::|_Promoter747|)) becoming _situation749
+
+ simulate-events-1 ((user::|_Move750| user::|_Situation749| nil))
+
+
+  -----------------------------------------------------------
+  step: user::|_Move750|
+  -----------------------------------------------------------
+   preconditions:((:|triple| user::|_Tangible-Entity728| user::|location| (user::|the| user::|source| user::|of| user::|_Move750|))
+                  (:|triple| user::|_Tangible-Entity728| user::|object-of| (user::|mustnt-be-a| user::|Be-Restrained|))
+                  (:|triple| (user::|the| user::|path| user::|of| user::|_Move750|) user::|object-of| (user::|mustnt-be-a| user::|Be-Blocked|))
+                  (:|triple| user::|_Tangible-Entity728| user::|object-of|
+                   (user::|mustnt-be-a| user::|Be-Inaccessible| user::|with| (user::|object| (user::|_Tangible-Entity728|))))) 
+
+   succeeded preconditions:((:|triple| user::|_Tangible-Entity728| user::|object-of|
+                             (user::|mustnt-be-a| user::|Be-Inaccessible| user::|with| (user::|object| (user::|_Tangible-Entity728|))))
+                            (:|triple| (user::|the| user::|path| user::|of| user::|_Move750|) user::|object-of|
+                             (user::|mustnt-be-a| user::|Be-Blocked|))
+                            (:|triple| user::|_Tangible-Entity728| user::|object-of| (user::|mustnt-be-a| user::|Be-Restrained|))
+                            (:|triple| user::|_Tangible-Entity728| user::|location| (user::|the| user::|source| user::|of| user::|_Move750|))) 
+
+
+ ***** user::|_Slide711| enabled user::|_Move750| by achieving
+    ((:|triple| user::|_Tangible-Entity728| user::|location| (user::|the| user::|source| user::|of| user::|_Move750|)))
+
+ ... EXECUTE _move750 in _situation749...
+      deleting ((:|triple| user::|_Tangible-Entity728| user::|location| user::|_Promoter747|))
+      adding ((:|triple| user::|_Tangible-Entity728| user::|location| user::|_Terminator748|)) becoming _situation754
+
+      canceling effects: deleting (:|triple| user::|_Tangible-Entity728| user::|location| user::|_Promoter747|) 
+         which has been added by earlier action user::|_Slide711|
+ simulate-events-1 ((user::|_Detach713| user::|_Situation754| nil))
+
+
+  -----------------------------------------------------------
+  step: user::|_Detach713|
+  -----------------------------------------------------------
+   preconditions:((:|triple| user::|_RNA-Transcript755| user::|object-of|
+                   (user::|mustnt-be-a| user::|Be-Inaccessible| user::|with| (user::|object| (user::|_RNA-Transcript755|))))
+                  (:|triple| user::|_Tangible-Entity758| user::|object-of|
+                   (user::|mustnt-be-a| user::|Be-Inaccessible| user::|with| (user::|object| (user::|_Tangible-Entity758|))))) 
+
+   succeeded preconditions:((:|triple| user::|_Tangible-Entity758| user::|object-of|
+                             (user::|mustnt-be-a| user::|Be-Inaccessible| user::|with| (user::|object| (user::|_Tangible-Entity758|))))
+                            (:|triple| user::|_RNA-Transcript755| user::|object-of|
+                             (user::|mustnt-be-a| user::|Be-Inaccessible| user::|with| (user::|object| (user::|_RNA-Transcript755|))))) 
+
+ ... EXECUTE _detach713 in _situation754...
+
+ WARNING : no effect was produced by user::|_Detach713|
+
+      deleting nil
+      adding nil becoming _situation766
+
+ simulate-events-1 ((user::|_Break-Contact714| user::|_Situation766| nil))
+
+
+  -----------------------------------------------------------
+  step: user::|_Break-Contact714|
+  -----------------------------------------------------------
+   preconditions:((:|triple| user::|_Tangible-Entity728| user::|object-of|
+                   (user::|mustnt-be-a| user::|Be-Inaccessible| user::|with| (user::|object| (user::|_Tangible-Entity728|))))
+                  (:|triple| user::|_Tangible-Entity729| user::|object-of|
+                   (user::|mustnt-be-a| user::|Be-Inaccessible| user::|with| (user::|object| (user::|_Tangible-Entity729|))))) 
+
+   succeeded preconditions:((:|triple| user::|_Tangible-Entity729| user::|object-of|
+                             (user::|mustnt-be-a| user::|Be-Inaccessible| user::|with| (user::|object| (user::|_Tangible-Entity729|))))
+                            (:|triple| user::|_Tangible-Entity728| user::|object-of|
+                             (user::|mustnt-be-a| user::|Be-Inaccessible| user::|with| (user::|object| (user::|_Tangible-Entity728|))))) 
+
+ ... EXECUTE _break-contact714 in _situation766...
+      deleting ((:|triple| user::|_Be-Touching725| user::|object| user::|_Tangible-Entity728|))
+      adding nil becoming _situation771
+
+      canceling effects: deleting (:|triple| user::|_Be-Touching725| user::|object| user::|_Tangible-Entity728|) 
+         which has been added by earlier action user::|_Collide710|
+
+  ************************************************
+          Summary of Paths Simulated
+  ************************************************
+
+  These are the simulated paths: 
+     (user::|_Collide710| user::|_Slide711| user::|_Move750| user::|_Detach713| user::|_Break-Contact714|)
+
+
+  ************************************************
+                check expected effects
+  ************************************************
+    we check each simulated path
+
+
+  ------------------------------------------------
+    The overall effects for path
+        (user::|_Collide710| user::|_Slide711| user::|_Move750| user::|_Detach713| user::|_Break-Contact714|)
+  ------------------------------------------------
+   added:   
+             (:|triple| user::|_Be-Touching725| user::|object| user::|_Bacterial-DNA717|)
+             (:|triple| user::|_Tangible-Entity728| user::|location| user::|_Terminator748|)
+
+   deleted: 
+             (:|triple| user::|_Tangible-Entity728| user::|location| user::|_Place733|)
+
+  .............................................
+ The expected effects for bacterial-dna-transcription is not specified yet!
+
+
+  ************************************************
+          Summary of Causal Links
+  ************************************************
+ user::|_Collide710| enabled user::|_Slide711| by achieving
+    ((:|triple| user::|_RNA-Polymerase715| user::|object-of|
+      (user::|a| user::|Be-Touching| user::|with|
+       (user::|object|
+        ((user::|the| user::|object| user::|of| user::|_Slide711|)
+         (user::|the| user::|location-of| user::|of| (user::|the| user::|path| user::|of| user::|_Slide711|)))))))
+ user::|_Slide711| enabled user::|_Move750| by achieving
+    ((:|triple| user::|_Tangible-Entity728| user::|location| (user::|the| user::|source| user::|of| user::|_Move750|)))
+
+
+
+  ************************************************
+          Summary of Loops Found
+  ************************************************
+       -->  NO LOOP FOUND! 
+
+ Test Output 
+(((source . user::|_Collide710|) (success) (level . :warning) (type . :inexplicit-precondition)
+  (constraint (:|triple| user::|_RNA-Polymerase715| user::|location| (user::|the| user::|location| user::|of| user::|_Collide710|)))
+  (id . |error-item-23|))
+ ((source . user::|_Collide710|) (success . t) (level . :error) (type . :precondition)
+  (constraint
+   (:|triple| user::|_RNA-Polymerase715| user::|object-of|
+    (user::|mustnt-be-a| user::|Be-Inaccessible| user::|with| (user::|object| (user::|_RNA-Polymerase715|))))
+   (:|triple| (user::|the| user::|object| user::|of| user::|_Collide710|) user::|object-of|
+    (user::|mustnt-be-a| user::|Be-Touching| user::|with| (user::|object| ((user::|the| user::|destination| user::|of| user::|_Collide710|))))))
+  (id . |error-item-25|))
+ ((source . user::|_Slide711|) (success) (level . :warning) (type . :inexplicit-precondition)
+  (constraint
+   (:|triple| user::|_RNA-Polymerase715| user::|object-of|
+    (user::|a| user::|Be-Touching| user::|with|
+     (user::|object|
+      ((user::|the| user::|object| user::|of| user::|_Slide711|)
+       (user::|the| user::|location-of| user::|of| (user::|the| user::|path| user::|of| user::|_Slide711|)))))))
+  (id . |error-item-27|))
+ ((source . user::|_Slide711|) (success . t) (level . :error) (type . :precondition)
+  (constraint
+   (:|triple| user::|_RNA-Polymerase715| user::|object-of|
+    (user::|mustnt-be-a| user::|Be-Inaccessible| user::|with| (user::|object| (user::|_RNA-Polymerase715|))))
+   (:|triple| (user::|the| user::|path| user::|of| user::|_Slide711|) user::|object-of| (user::|mustnt-be-a| user::|Be-Blocked|))
+   (:|triple| user::|_RNA-Polymerase715| user::|object-of| (user::|mustnt-be-a| user::|Be-Restrained|))
+   (:|triple| user::|_RNA-Polymerase715| user::|location| (user::|the| user::|source| user::|of| user::|_Slide711|)))
+  (id . |error-item-29|))
+ ((source . user::|_Move750|) (success . t) (level . :error) (type . :precondition)
+  (constraint
+   (:|triple| user::|_Tangible-Entity728| user::|object-of|
+    (user::|mustnt-be-a| user::|Be-Inaccessible| user::|with| (user::|object| (user::|_Tangible-Entity728|))))
+   (:|triple| (user::|the| user::|path| user::|of| user::|_Move750|) user::|object-of| (user::|mustnt-be-a| user::|Be-Blocked|))
+   (:|triple| user::|_Tangible-Entity728| user::|object-of| (user::|mustnt-be-a| user::|Be-Restrained|))
+   (:|triple| user::|_Tangible-Entity728| user::|location| (user::|the| user::|source| user::|of| user::|_Move750|)))
+  (id . |error-item-31|))
+ ((source . user::|_Detach713|) (success . t) (level . :error) (type . :precondition)
+  (constraint
+   (:|triple| user::|_Tangible-Entity758| user::|object-of|
+    (user::|mustnt-be-a| user::|Be-Inaccessible| user::|with| (user::|object| (user::|_Tangible-Entity758|))))
+   (:|triple| user::|_RNA-Transcript755| user::|object-of|
+    (user::|mustnt-be-a| user::|Be-Inaccessible| user::|with| (user::|object| (user::|_RNA-Transcript755|)))))
+  (id . |error-item-33|))
+ ((source . user::|_Detach713|) (success) (level . :warning) (type . :no-effect) (constraint) (id . |error-item-35|))
+ ((source . user::|_Break-Contact714|) (success . t) (level . :error) (type . :precondition)
+  (constraint
+   (:|triple| user::|_Tangible-Entity729| user::|object-of|
+    (user::|mustnt-be-a| user::|Be-Inaccessible| user::|with| (user::|object| (user::|_Tangible-Entity729|))))
+   (:|triple| user::|_Tangible-Entity728| user::|object-of|
+    (user::|mustnt-be-a| user::|Be-Inaccessible| user::|with| (user::|object| (user::|_Tangible-Entity728|)))))
+  (id . |error-item-37|))
+ ((source (user::|_Collide710| before user::|_Move750|) (user::|_Collide710| before user::|_Detach713|)
+   (user::|_Collide710| before user::|_Break-Contact714|) (user::|_Slide711| before user::|_Detach713|)
+   (user::|_Slide711| before user::|_Break-Contact714|) (user::|_Move750| before user::|_Detach713|)
+   (user::|_Move750| before user::|_Break-Contact714|) (user::|_Detach713| before user::|_Break-Contact714|))
+  (success) (level . :warning) (type . :unnecessary-link) (constraint . ordering) (id . |error-item-39|))
+ ((source . user::|Bacterial-DNA-Transcription|) (success . t) (level . :warning) (type . :loop) (constraint) (id . |error-item-43|))
+ ((source . user::|Bacterial-DNA-Transcription|)
+  (content (user::|_Collide710| user::|_Slide711| user::|_Move750| user::|_Detach713| user::|_Break-Contact714|)) (type . :simulated-paths)
+  (id . |info-item-40|))
+ ((source . user::|Bacterial-DNA-Transcription|)
+  (content
+   (user::|_Collide710| user::|_Slide711|
+    ((:|triple| user::|_RNA-Polymerase715| user::|object-of|
+      (user::|a| user::|Be-Touching| user::|with|
+       (user::|object|
+        ((user::|the| user::|object| user::|of| user::|_Slide711|)
+         (user::|the| user::|location-of| user::|of| (user::|the| user::|path| user::|of| user::|_Slide711|))))))))
+   (user::|_Slide711| user::|_Move750|
+    ((:|triple| user::|_Tangible-Entity728| user::|location| (user::|the| user::|source| user::|of| user::|_Move750|)))))
+  (type . :causal-links) (id . |info-item-41|)))
+
+KANAL(11): (get-proposed-fixes '|error-item-23|)
+
+
+ ===============================================
+ Getting fixes for |error-item-23|
+
+ ..............................................................
+   checking how to change user::|location| value of user::|_RNA-Polymerase715| .. 
+ ..............................................................
+
+     .. checking if there are missing steps .. 
+ proposed fix : add a user::|Move| step with "the destination of the move" as (user::|the| user::|location| user::|of|
+                                                                               user::|_Collide710|) before step user::|_Collide710| to change user::|location| of user::|_RNA-Polymerase715|
+ proposed fix : add a user::|Transcribe| step with "the destination of the transcribe" as (user::|the| user::|location| user::|of|
+                                                                                           user::|_Collide710|) before step user::|_Collide710| to change user::|location| of user::|_RNA-Polymerase715|
+
+     .. checking if steps can be modified .. 
+       -> no step modification applicable
+
+     .. checking if ordering changes may fix the problem .. 
+       -> no ordering change applicable
+
+
+ ..............................................................
+   checking if there are unnecessary steps .. 
+ ..............................................................
+
+ proposed fix :  delete or modify user::|_Collide710|
+
+ FIX ITEMS 
+(((type . :add-step-before-step)
+  (fix add user::|Move| {with "the destination of the move" as (user::|the| user::|location| user::|of| user::|_Collide710|) } before
+   user::|_Collide710| to-make user::|location| of user::|_RNA-Polymerase715| become (user::|the| user::|location| user::|of| user::|_Collide710|)))
+ ((type . :add-step-before-step)
+  (fix add user::|Transcribe| {with "the destination of the transcribe" as (user::|the| user::|location| user::|of| user::|_Collide710|) } before
+   user::|_Collide710| to-make user::|location| of user::|_RNA-Polymerase715| become (user::|the| user::|location| user::|of| user::|_Collide710|)))
+ ((type . :delete-or-modify-step) (fix delete-or-modify user::|_Collide710|)))
+
+KANAL(12): (get-proposed-fixes '|error-item-27|)
+
+
+ ===============================================
+ Getting fixes for |error-item-27|
+
+ steps : nil (user::|_Collide710|)
+ ..............................................................
+   checking how to change user::|object-of| value of user::|_RNA-Polymerase715| .. 
+ ..............................................................
+
+     .. checking if there are missing steps .. 
+ proposed fix : add a user::|Shut-Out| step with "the resulting-state of the shut-out" as (user::|a| user::|Be-Touching| user::|with|
+                                                                                           (user::|object|
+                                                                                            ((user::|the| user::|object| user::|of| user::|_Slide711|)
+                                                                                             (user::|the| user::|location-of| user::|of|
+                                                                                              (user::|the| user::|path| user::|of|
+                                                                                               user::|_Slide711|))))) before step user::|_Slide711| to change user::|object-of| of user::|_RNA-Polymerase715|
+
+     .. checking if steps can be modified .. 
+       -> no step modification applicable
+
+     .. checking if ordering changes may fix the problem .. 
+       -> no ordering change applicable
+
+
+ ..............................................................
+   checking if there are unnecessary steps .. 
+ ..............................................................
+
+ proposed fix :  delete or modify user::|_Slide711|
+
+ FIX ITEMS 
+(((type . :add-step-before-step)
+  (fix add user::|Shut-Out| {with "the resulting-state of the shut-out" as
+   (user::|a| user::|Be-Touching| user::|with|
+    (user::|object|
+     ((user::|the| user::|object| user::|of| user::|_Slide711|)
+      (user::|the| user::|location-of| user::|of| (user::|the| user::|path| user::|of| user::|_Slide711|)))))
+   } before user::|_Slide711| to-make user::|object-of| of user::|_RNA-Polymerase715| become
+   (user::|a| user::|Be-Touching| user::|with|
+    (user::|object|
+     ((user::|the| user::|object| user::|of| user::|_Slide711|)
+      (user::|the| user::|location-of| user::|of| (user::|the| user::|path| user::|of| user::|_Slide711|)))))))
+ ((type . :delete-or-modify-step) (fix delete-or-modify user::|_Slide711|)))
+
+KANAL(13): (get-proposed-fixes '|error-item-35|)
+
+
+ ===============================================
+ Getting fixes for |error-item-35|
+
+ FIX ITEMS 
+(((type . :modify-step) (fix modify user::|_Detach713| to-achieve-something)))
+
+KANAL(14): (get-proposed-fixes '|error-item-39|)
+
+
+ ===============================================
+ Getting fixes for |error-item-39|
+
+ FIX ITEMS 
+(((type . :delete-or-modify-link)
+  (fix delete-or-modify ordering constraints in
+   ((user::|_Collide710| before user::|_Move750|) (user::|_Collide710| before user::|_Detach713|)
+    (user::|_Collide710| before user::|_Break-Contact714|) (user::|_Slide711| before user::|_Detach713|)
+    (user::|_Slide711| before user::|_Break-Contact714|) (user::|_Move750| before user::|_Detach713|)
+    (user::|_Move750| before user::|_Break-Contact714|) (user::|_Detach713| before user::|_Break-Contact714|)))))
+
+KANAL(15): 

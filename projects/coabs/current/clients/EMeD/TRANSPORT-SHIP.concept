@@ -1,0 +1,122 @@
+<!--- This is HTML created by conceptRenderer. --->
+<HTML>
+<BODY bgcolor="#00bbbb" text="#000000">
+<TITLE>CONCEPT: TRANSPORT-SHIP</TITLE>
+ <H4>CONCEPT <A HREF = "TRANSPORT-SHIP.concept">TRANSPORT-SHIP</A> </H4><br>
+
+<H5>Definition: </H5>
+<P>
+<pre>(defconcept <A HREF ="TRANSPORT-SHIP.concept">TRANSPORT-SHIP</A> 
+    :is-primitive <A HREF ="SHIP.concept">SHIP</A> 
+    :constraints (:and (:exactly   1 <A HREF ="R-IS-SHIP-CARGO-CAPACITY.relation">R-IS-SHIP-CARGO-CAPACITY</A> )
+                       (:exactly   1 <A HREF ="R-IS-SHIP-PEACETIME-UNLOADING-TIME.relation">R-IS-SHIP-PEACETIME-UNLOADING-TIME</A> )
+                       (:exactly   1 <A HREF ="R-IS-SHIP-PEACETIME-LOADING-TIME.relation">R-IS-SHIP-PEACETIME-LOADING-TIME</A> )))
+</P></pre>
+
+<H5>Subconcepts: </H5>
+<pre>
+
+     <li>  <A HREF ="FAST-SS-CONTAINER.concept">FAST-SS-CONTAINER</A> 
+
+     <li>  <A HREF ="BREAK-BULK.concept">BREAK-BULK</A> 
+
+     <li>  <A HREF ="RO-RO.concept">RO-RO</A> 
+
+     <li>  <A HREF ="LASH.concept">LASH</A> 
+
+     <li>  <A HREF ="SEA-BARGE.concept">SEA-BARGE</A> 
+
+     <li>  <A HREF ="SMALL-TANKER.concept">SMALL-TANKER</A> 
+
+     <li>  <A HREF ="MEDIUM-TANKER.concept">MEDIUM-TANKER</A> 
+
+     <li>  <A HREF ="LARGE-TANKER.concept">LARGE-TANKER</A> 
+</pre> <BR>
+
+<H5>Superconcepts: </H5><br>
+<pre>
+
+     <li>  <A HREF ="SHIP.concept">SHIP</A> 
+</pre><BR>
+
+<H5>Siblings: </H5><br>
+
+Siblings with the common parent: <A HREF="SHIP.concept">SHIP</A> <pre>
+
+     <li>  <A HREF ="COMBAT-SHIP.concept">COMBAT-SHIP</A> 
+
+     <li>  <A HREF ="SHIP-BASIC-UNIT.concept">SHIP-BASIC-UNIT</A> 
+
+     <li>  <A HREF ="SUPPORT-SHIP.concept">SUPPORT-SHIP</A> 
+</pre><br>
+
+<p><H5>Roles: </H5>
+<pre>
+
+     <li>  <A HREF ="R-DEPTH.relation">R-DEPTH</A> 
+     -- 
+
+     <A HREF ="DISTANCE-VALUE.concept">DISTANCE-VALUE</A> 
+</Type>
+
+
+     <li>  <A HREF ="R-IS-SHIP-CARGO-CAPACITY.relation">R-IS-SHIP-CARGO-CAPACITY</A> 
+     -- 
+
+     <A HREF ="WEIGHT-VALUE.concept">WEIGHT-VALUE</A> 
+</Type>
+
+
+     <li>  <A HREF ="R-IS-SHIP-PEACETIME-LOADING-TIME.relation">R-IS-SHIP-PEACETIME-LOADING-TIME</A> 
+     -- 
+
+     <A HREF ="TIME-VALUE.concept">TIME-VALUE</A> 
+</Type>
+
+
+     <li>  <A HREF ="R-IS-SHIP-PEACETIME-UNLOADING-TIME.relation">R-IS-SHIP-PEACETIME-UNLOADING-TIME</A> 
+     -- 
+
+     <A HREF ="TIME-VALUE.concept">TIME-VALUE</A> 
+</Type>
+
+
+     <li>  <A HREF ="R-LENGTH.relation">R-LENGTH</A> 
+     -- 
+
+     <A HREF ="DISTANCE-VALUE.concept">DISTANCE-VALUE</A> 
+</Type>
+
+
+     <li>  <A HREF ="R-SPEED.relation">R-SPEED</A> 
+     -- 
+
+     <A HREF ="SPEED-VALUE.concept">SPEED-VALUE</A> 
+</Type>
+
+
+     <li>  <A HREF ="R-WEIGHT.relation">R-WEIGHT</A> 
+     -- 
+
+     <A HREF ="WEIGHT-VALUE.concept">WEIGHT-VALUE</A> 
+</Type>
+
+
+     <li>  <A HREF ="R-WIDTH.relation">R-WIDTH</A> 
+     -- 
+
+     <A HREF ="DISTANCE-VALUE.concept">DISTANCE-VALUE</A> 
+</Type>
+</pre>
+
+<H5>Number of Instances: </H5> 0 (0 direct, 0 inferred)<BR>
+
+<p>Direct Instances:
+<BR>
+
+
+<p>Inferred Instances:
+<pre></pre><BR>
+</BODY>
+</HTML>
+<!--- End of HTML. --->

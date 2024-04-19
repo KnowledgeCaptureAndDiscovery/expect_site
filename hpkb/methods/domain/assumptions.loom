@@ -1,0 +1,238 @@
+;;; Main CP spec example COA -
+;;;
+;;; Last modified: April 26 1999
+;;; by Jihie Kim
+
+(in-package "EVALUATION")
+
+;(in-package "PLANET")
+;(loom:use-loom "PLANET")
+;(use-package "EXPECT")
+
+;;; ************************************************************
+;;;  Critical Events and Attrition Assumptions
+;;; ************************************************************
+
+
+(defconcept critical-event :is |MilitaryEvent|)
+
+(defrelation critical-event-of
+  :domain COA
+  :range |MilitaryEvent| ;;critical-event
+  )
+
+(defrelation coa-of-ce
+    :domain |MilitaryEvent|
+    :range COA
+    :characteristics :single-valued
+    )
+
+
+(implies (:satisfies (?x ?y) (critical-event-of ?y ?x))
+	 coa-of-ce)
+
+(defconcept attrition-assumption
+    :is-primitive (:and thing
+			(:at-most 1 during-event)
+			(:the desc-of task-action))
+    )
+
+(defrelation during-event 
+    :range critical-event)
+
+(defrelation desc-of 
+    :domain attrition-assumption
+    :range task-action)
+
+;;; ************************************************************
+;;; Temporal relations
+;;; ************************************************************
+
+(defrelation ce-temporal-ordering
+    :domain critical-event
+    :range critical-event)
+
+(defrelation ce-before :is-primitive ce-temporal-ordering)
+(defrelation ce-meet :is-primitive ce-temporal-ordering)
+(defrelation ce-equal :is-primitive ce-temporal-ordering)
+(defrelation ce-overlap :is-primitive ce-temporal-ordering)
+(defrelation ce-during :is-primitive ce-temporal-ordering)
+(defrelation ce-finish :is-primitive ce-temporal-ordering)
+(defrelation ce-start :is-primitive ce-temporal-ordering)
+
+(defrelation all-events-before :is-primitive ce-temporal-ordering)
+
+
+(tellm (critical-event ce-1)
+       (critical-event ce-2)
+       (critical-event ce-3)
+       (ce-before ce-2 ce-3) ;; ce-2 is before ce-3
+       (ce-start ce-1 ce-2)  
+       )
+
+(implies (:satisfies (?x ?y) (ce-before ?y ?x))
+	 all-events-before)
+
+(implies (:satisfies (?x ?y) (|startsAfterEndingOf| ?x ?y))
+	 all-events-before)
+
+(implies (:satisfies (?y ?x) (:and (critical-event ?x)
+				   (critical-event ?y)
+				   (:for-some ?z
+					      (:and (ce-meet ?x ?z)
+						    (ce-meet ?z ?y)))))
+	 all-events-before)
+
+(implies (:satisfies (?y ?x) (:and (critical-event ?x)
+				   (critical-event ?y)
+				   (:for-some ?z
+					      (:and (ce-before ?x ?z)
+						    (ce-before ?z ?y)))))
+	 all-events-before)
+
+(implies (:satisfies (?y ?x) (:and (critical-event ?x)
+				   (critical-event ?y)
+				   (:for-some ?z
+					   (:and (ce-start ?x ?z)
+						 (ce-before ?z ?y)))))
+	 all-events-before)
+
+(implies (:satisfies (?y ?x) (:and (critical-event ?x)
+				   (critical-event ?y)
+				   (:for-some ?z
+					   (:and (ce-start ?x ?z)
+						 (ce-meet ?z ?y)))))
+	 all-events-before)
+
+(implies (:satisfies (?x ?y) (:and (critical-event ?x)
+				   (critical-event ?y)
+				   (:for-some ?z
+					   (:and (ce-finish ?x ?z)
+						 (ce-before ?y ?z)))))
+	 all-events-before)
+
+(implies (:satisfies (?x ?y) (:and (critical-event ?x)
+				   (critical-event ?y)
+				   (:for-some ?z
+					   (:and (ce-finish ?x ?z)
+						 (ce-meet ?y ?z)))))
+	 all-events-before)
+
+(defrelation all-engagements-before
+  :is-primitive ce-temporal-ordering
+  :annotations ((documentation "The restriction of all-events-before to
+proper engagements, ie, all-events-before but not including attrit tasks")))
+
+(implies (:satisfies (?x ?y) (:and (all-events-before ?x ?y)
+			     (not (|Attrit-MilitaryTask| ?y))))
+         all-engagements-before)
+
+
+;; example
+;(tellm (critical-event ce-1)
+;      (critical-event ce-2)
+;       (critical-event ce-3)
+;       (ce-before ce-2 ce-3) ;; ce-2 is before ce-3
+;       (ce-start ce-1 ce-2)  
+;       )
+
+;;; ************************************************************
+;;; definitions to find general attrition assumptions
+;;; use:  (kb-get-values 'main-operation-of '|THE-COA|)
+
+(defrelation main-operation-of 
+    :domain |COA|
+    :range |MilitaryOperation|
+    :characteristics :single-valued
+    :is (:satisfies (?c ?o)
+		    (:for-some ?y
+			    (:and 
+			     (|TASK-OF| ?y ?c)
+			     (|taskOfOperation| ?o ?y))))
+    )
+#|
+(defrelation main-task-of-mission
+    :domain |COA|
+    :range |MilitaryTask|
+    :is (:satisfies (?c ?t)
+		    (:for-some ?o
+			       (:for-some ?u
+					  (:and
+					   (main-operation-of ?c ?o)
+					   (|WHO| ?o ?u)
+					   (unitAssignedToTask ?t ?u))))))
+|#
+; |Team-Military|
+;;; ************************************************************
+;;; Examples (based on COA1)
+;;; ************************************************************
+
+;;; ?? don't know how to map this to grammar or HPKB ontology
+(defconcept hasty-defense :is-primitive task-action)
+
+;;; ************************
+;;; critical events
+;;;
+;;; CE1: Supporting Effort 1 fixes REDMECHREGIMENT1
+#|
+(tellm 
+ (critical-event-of coa1 ce-1)
+ )
+
+(tellm 
+ (critical-event ce-1)
+ (fix ce-1)
+ (who ce-1 Blue11)
+ (action-obj ce-1 Red1)
+ )
+
+;;; CE2: Supporting Effort 2 penetrates REDMECHREGIMENT2
+(tellm
+ (critical-event ce-2)
+ (penetrate ce-2)
+ (who ce-2 Blue12)
+ (action-obj ce-2 Red2)
+ )
+
+;;; CE3: Main Effort conducts hasty defense against REDTANKBATTALION1
+(tellm
+ (red-unit redTankBattalion1)
+ (|ArmoredUnit-MilitarySpecialty| redTankBattalion1)
+ (|echelonOfUnit| redTankBattalion1 |Battalion-UnitDesignation|)
+ (critical-event ce-3)
+ (hasty-defense ce-3)
+ (who ce-3 Blue13)
+ (action-obj ce-3 redTankBattalion1)
+ )
+
+;;; CE4: Main Effort conducts hasty defense against REDTANKREGIMENT1
+(tellm
+ (red-unit redTankRegiment1)
+ (|ArmoredUnit-MilitarySpecialty| redTankRegiment1)
+ (|echelonOfUnit|  redTankRegiment1 |Regiment-UnitDesignation|)
+ (critical-event ce-4)
+ (hasty-defense ce-4)
+ (who ce-4 Blue13)
+ (action-obj ce-4 redTankRegiment1)
+ )
+
+;;; CE1 and CE2 before CE3
+;;; CE3 before CE4
+
+(tellm (before ce-1 ce-3)
+       (before ce-2 ce-3)
+       (before ce-3 ce-4))
+
+;;; ************************
+;;; attrition assumptions
+;;;  NOTE:This is my own example for scenario1
+;;;  during CE3, redTankBattalion1 attrits Main effort to 90 %
+
+(tellm (attrition-assumption as-1)
+       (during-event as-1 ce-3)
+       (attrit attrit1)
+       (desc-of as-1 attrit1)
+       (who attrit1 redTankBattalion1)
+       (action-obj attrit1 Blue13)
+       (action-to attrit1 90))
+|#

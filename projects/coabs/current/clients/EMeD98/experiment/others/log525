@@ -1,0 +1,407 @@
+select: add new button
+   at Wed Jun 16 17:02:58 PDT 1999
+
+check: Undefined Capabilities
+   at Wed Jun 16 17:03:04 PDT 1999
+
+create method for goal from undefined capabilities
+   at Wed Jun 16 17:03:08 PDT 1999
+
+undefined goal:
+Reformulated Goal:
+(estimate (obj (spec-of time)) (for (inst-of emplace-avlb)))  
+Expected Result:UNDEFINED
+Capability:(capability (estimate (obj (?v548 is (spec-of time))) (for (?v549 is (inst-of emplace-avlb)))))  
+   at Wed Jun 16 17:03:08 PDT 1999
+
+ done editing:((name method543  )
+(capability (estimate (obj (?v548 is (spec-of time))) (for (?v549 is (inst-of emplace-avlb)))))  
+
+ (method (find (obj (spec-of maximum))
+	       (of (find (obj (spec-of time-for-emplacement))
+			 (for (bridge-of ?s))))))
+ )
+   at Wed Jun 16 17:03:36 PDT 1999
+
+added New method:((name method543  )
+(capability (estimate (obj (?v548 is (spec-of time))) (for (?v549 is (inst-of emplace-avlb)))))  
+
+ (method (find (obj (spec-of maximum))
+	       (of (find (obj (spec-of time-for-emplacement))
+			 (for (bridge-of ?s))))))
+ )
+   at Wed Jun 16 17:03:36 PDT 1999
+
+check: All Agenda
+   at Wed Jun 16 17:03:36 PDT 1999
+
+check: Method Sub-Method Relation
+   at Wed Jun 16 17:03:37 PDT 1999
+
+select: delete button
+   at Wed Jun 16 17:07:08 PDT 1999
+
+select: add new button
+   at Wed Jun 16 17:07:37 PDT 1999
+
+ done editing:((name method543  )(capability (estimate (obj (?v548 is (spec-of time))) (for (?v549 is (inst-of emplace-avlb)))))  
+ (method (find (obj (spec-of maximum))
+	       (of (find (obj (spec-of time-for-emplacement))
+			 (for (bridge-of ?s))))))
+ )
+   at Wed Jun 16 17:07:49 PDT 1999
+
+added New method:((name method543  )(capability (estimate (obj (?v548 is (spec-of time))) (for (?v549 is (inst-of emplace-avlb)))))  
+ (method (find (obj (spec-of maximum))
+	       (of (find (obj (spec-of time-for-emplacement))
+			 (for (bridge-of ?s))))))
+ )
+   at Wed Jun 16 17:07:49 PDT 1999
+
+check: All Agenda
+   at Wed Jun 16 17:07:49 PDT 1999
+
+check: Method Sub-Method Relation
+   at Wed Jun 16 17:07:49 PDT 1999
+
+select: modify button
+   at Wed Jun 16 17:07:58 PDT 1999
+
+ done editing:((name method543  )(capability (estimate (obj (?v548 is (spec-of time)))
+(for (?s is (inst-of emplace-avlb)))))  
+(result-type (inst-of number))
+ (method (find (obj (spec-of maximum))
+	       (of (find (obj (spec-of time-for-emplacement))
+			 (for (bridge-of ?s))))))
+ )
+   at Wed Jun 16 17:08:29 PDT 1999
+
+modified method:((name method543  )(capability (estimate (obj (?v548 is (spec-of time)))
+(for (?s is (inst-of emplace-avlb)))))  
+(result-type (inst-of number))
+ (method (find (obj (spec-of maximum))
+	       (of (find (obj (spec-of time-for-emplacement))
+			 (for (bridge-of ?s))))))
+ )
+   at Wed Jun 16 17:08:29 PDT 1999
+
+check: All Agenda
+   at Wed Jun 16 17:08:29 PDT 1999
+
+check: Method Sub-Method Relation
+   at Wed Jun 16 17:08:30 PDT 1999
+
+select: delete button
+   at Wed Jun 16 17:08:38 PDT 1999
+
+check: All Agenda
+   at Wed Jun 16 17:08:40 PDT 1999
+
+check: Method Sub-Method Relation
+   at Wed Jun 16 17:08:41 PDT 1999
+
+deleted method:((name method543  )(capability (estimate (obj (?v548 is (spec-of time)))
+(for (?s is (inst-of emplace-avlb)))))  
+(result-type (inst-of number))
+ (method (find (obj (spec-of maximum))
+	       (of (find (obj (spec-of time-for-emplacement))
+			 (for (bridge-of ?s))))))
+ )
+   at Wed Jun 16 17:08:41 PDT 1999
+
+select: add new button
+   at Wed Jun 16 17:09:37 PDT 1999
+
+select: delete button
+   at Wed Jun 16 17:10:00 PDT 1999
+
+check: All Agenda
+   at Wed Jun 16 17:10:02 PDT 1999
+
+check: Method Sub-Method Relation
+   at Wed Jun 16 17:10:02 PDT 1999
+
+deleted method:((name method503)
+ (capability (find
+                (obj (?v506 is (spec-of time-for-emplacement)))
+                (for (?b is (inst-of avlb)))
+                ))
+ (result-type (inst-of number))
+ (method if (is-less-or-equal
+            (obj ( emplacement-time ?b))
+            (than 0.5)
+            ) then 0.5 else ( emplacement-time ?b))
+)
+   at Wed Jun 16 17:10:03 PDT 1999
+
+select: add new button
+   at Wed Jun 16 17:10:08 PDT 1999
+
+ done editing::((name method503  )
+(capability (find (obj (?v506 is (spec-of time-for-emplacement))) (for (?v507 is (inst-of avlb)))))  
+ (method (if (is-less-or-equal (obj (emplacement-time ?b))
+			       (than 0.5))
+	     then 0.5
+	     else (emplacement-time ?b)))
+ )
+   at Wed Jun 16 17:10:42 PDT 1999
+
+added New method::((name method503  )
+(capability (find (obj (?v506 is (spec-of time-for-emplacement))) (for (?v507 is (inst-of avlb)))))  
+ (method (if (is-less-or-equal (obj (emplacement-time ?b))
+			       (than 0.5))
+	     then 0.5
+	     else (emplacement-time ?b)))
+ )
+   at Wed Jun 16 17:10:43 PDT 1999
+
+check: All Agenda
+   at Wed Jun 16 17:10:43 PDT 1999
+
+check: Method Sub-Method Relation
+   at Wed Jun 16 17:10:43 PDT 1999
+
+select: modify button
+   at Wed Jun 16 17:10:56 PDT 1999
+
+ done editing:((name method503  )
+(capability (find (obj (?v506 is (spec-of time-for-emplacement))) (for (?v507 is (inst-of avlb)))))  
+ (method (if (is-less-or-equal (obj (emplacement-time ?b))
+			       (than 0.5))
+	     then 0.5
+	     else (emplacement-time ?b)))
+ )
+   at Wed Jun 16 17:11:02 PDT 1999
+
+check: All Agenda
+   at Wed Jun 16 17:11:02 PDT 1999
+
+check: Method Sub-Method Relation
+   at Wed Jun 16 17:11:03 PDT 1999
+
+select: modify button
+   at Wed Jun 16 17:11:23 PDT 1999
+
+ done editing:((name method503  )
+(capability (find (obj (?v506 is (spec-of time-for-emplacement))) (for (?v507 is (inst-of avlb)))))  
+(result-type (inst-of number))
+ (method (if (is-less-or-equal (obj (emplacement-time ?b))
+			       (than 0.5))
+	     then 0.5
+	     else (emplacement-time ?b)))
+ )
+   at Wed Jun 16 17:11:47 PDT 1999
+
+modified method:((name method503  )
+(capability (find (obj (?v506 is (spec-of time-for-emplacement))) (for (?v507 is (inst-of avlb)))))  
+(result-type (inst-of number))
+ (method (if (is-less-or-equal (obj (emplacement-time ?b))
+			       (than 0.5))
+	     then 0.5
+	     else (emplacement-time ?b)))
+ )
+   at Wed Jun 16 17:11:47 PDT 1999
+
+check: All Agenda
+   at Wed Jun 16 17:11:47 PDT 1999
+
+check: Method Sub-Method Relation
+   at Wed Jun 16 17:11:47 PDT 1999
+
+select: modify button
+   at Wed Jun 16 17:11:55 PDT 1999
+
+ done editing:((name method503  )
+(capability (find (obj (?v506 is (spec-of time-for-emplacement))) (for (?b is (inst-of avlb)))))  
+(result-type (inst-of number))
+ (method (if (is-less-or-equal (obj (emplacement-time ?b))
+			       (than 0.5))
+	     then 0.5
+	     else (emplacement-time ?b)))
+ )
+   at Wed Jun 16 17:12:17 PDT 1999
+
+modified method:((name method503  )
+(capability (find (obj (?v506 is (spec-of time-for-emplacement))) (for (?b is (inst-of avlb)))))  
+(result-type (inst-of number))
+ (method (if (is-less-or-equal (obj (emplacement-time ?b))
+			       (than 0.5))
+	     then 0.5
+	     else (emplacement-time ?b)))
+ )
+   at Wed Jun 16 17:12:17 PDT 1999
+
+check: All Agenda
+   at Wed Jun 16 17:12:17 PDT 1999
+
+check: Method Sub-Method Relation
+   at Wed Jun 16 17:12:17 PDT 1999
+
+select: delete button
+   at Wed Jun 16 17:12:28 PDT 1999
+
+deleted method:((name method503  )
+(capability (find (obj (?v506 is (spec-of time-for-emplacement))) (for (?b is (inst-of avlb)))))  
+(result-type (inst-of number))
+ (method (if (is-less-or-equal (obj (emplacement-time ?b))
+			       (than 0.5))
+	     then 0.5
+	     else (emplacement-time ?b)))
+ )
+   at Wed Jun 16 17:12:28 PDT 1999
+
+select: modify button
+   at Wed Jun 16 17:22:46 PDT 1999
+
+ done editing:((name method503  )
+(capability (find (obj (?v506 is (spec-of time-for-emplacement))) (for (?b is (inst-of avlb)))))  
+(result-type (inst-of number))
+ (method (if (is-less-or-equal (obj (emplacement-time ?b))
+			       (than 0.5))
+	     then 0.5
+	     else (emplacement-time ?b)))
+ )
+   at Wed Jun 16 17:22:49 PDT 1999
+
+modified method:((name method503  )
+(capability (find (obj (?v506 is (spec-of time-for-emplacement))) (for (?b is (inst-of avlb)))))  
+(result-type (inst-of number))
+ (method (if (is-less-or-equal (obj (emplacement-time ?b))
+			       (than 0.5))
+	     then 0.5
+	     else (emplacement-time ?b)))
+ )
+   at Wed Jun 16 17:22:49 PDT 1999
+
+check: All Agenda
+   at Wed Jun 16 17:22:49 PDT 1999
+
+check: Method Sub-Method Relation
+   at Wed Jun 16 17:22:50 PDT 1999
+
+select: delete button
+   at Wed Jun 16 17:22:53 PDT 1999
+
+check: All Agenda
+   at Wed Jun 16 17:22:55 PDT 1999
+
+check: Method Sub-Method Relation
+   at Wed Jun 16 17:22:56 PDT 1999
+
+deleted method:((name method503  )
+(capability (find (obj (?v506 is (spec-of time-for-emplacement))) (for (?b is (inst-of avlb)))))  
+(result-type (inst-of number))
+ (method (if (is-less-or-equal (obj (emplacement-time ?b))
+			       (than 0.5))
+	     then 0.5
+	     else (emplacement-time ?b)))
+ )
+   at Wed Jun 16 17:22:57 PDT 1999
+
+select: add new button
+   at Wed Jun 16 17:23:49 PDT 1999
+
+ done editing:((name method503  )
+(capability (find (obj (?v506 is (spec-of time-for-emplacement))) (for (?v507 is (inst-of avlb)))))  
+ (method (if (is-less-or-equal (obj (emplacement-time ?b))
+			       (than 0.5))
+	     then 0.5
+	     else (emplacement-time ?b)))
+ )
+   at Wed Jun 16 17:23:58 PDT 1999
+
+added New method:((name method503  )
+(capability (find (obj (?v506 is (spec-of time-for-emplacement))) (for (?v507 is (inst-of avlb)))))  
+ (method (if (is-less-or-equal (obj (emplacement-time ?b))
+			       (than 0.5))
+	     then 0.5
+	     else (emplacement-time ?b)))
+ )
+   at Wed Jun 16 17:23:58 PDT 1999
+
+check: All Agenda
+   at Wed Jun 16 17:23:58 PDT 1999
+
+check: Method Sub-Method Relation
+   at Wed Jun 16 17:23:59 PDT 1999
+
+select: modify button
+   at Wed Jun 16 17:24:05 PDT 1999
+
+ done editing:((name method503  )
+(capability (find (obj (?v506 is (spec-of time-for-emplacement))) (for (?v507 is (inst-of avlb)))))  
+(result-type (inst-of number))
+ (method (if (is-less-or-equal (obj (emplacement-time ?b))
+			       (than 0.5))
+	     then 0.5
+	     else (emplacement-time ?b)))
+ )
+   at Wed Jun 16 17:24:17 PDT 1999
+
+modified method:((name method503  )
+(capability (find (obj (?v506 is (spec-of time-for-emplacement))) (for (?v507 is (inst-of avlb)))))  
+(result-type (inst-of number))
+ (method (if (is-less-or-equal (obj (emplacement-time ?b))
+			       (than 0.5))
+	     then 0.5
+	     else (emplacement-time ?b)))
+ )
+   at Wed Jun 16 17:24:17 PDT 1999
+
+check: All Agenda
+   at Wed Jun 16 17:24:17 PDT 1999
+
+check: Method Sub-Method Relation
+   at Wed Jun 16 17:24:18 PDT 1999
+
+select: modify button
+   at Wed Jun 16 17:24:26 PDT 1999
+
+ done editing:((name method503  )
+(capability (find (obj (?v506 is (spec-of time-for-emplacement))) (for (?b is (inst-of avlb)))))  
+(result-type (inst-of number))
+ (method (if (is-less-or-equal (obj (emplacement-time ?b))
+			       (than 0.5))
+	     then 0.5
+	     else (emplacement-time ?b)))
+ )
+   at Wed Jun 16 17:24:34 PDT 1999
+
+modified method:((name method503  )
+(capability (find (obj (?v506 is (spec-of time-for-emplacement))) (for (?b is (inst-of avlb)))))  
+(result-type (inst-of number))
+ (method (if (is-less-or-equal (obj (emplacement-time ?b))
+			       (than 0.5))
+	     then 0.5
+	     else (emplacement-time ?b)))
+ )
+   at Wed Jun 16 17:24:35 PDT 1999
+
+check: All Agenda
+   at Wed Jun 16 17:24:35 PDT 1999
+
+check: Method Sub-Method Relation
+   at Wed Jun 16 17:24:35 PDT 1999
+
+select: delete button
+   at Wed Jun 16 17:24:41 PDT 1999
+
+check: All Agenda
+   at Wed Jun 16 17:24:42 PDT 1999
+
+check: Method Sub-Method Relation
+   at Wed Jun 16 17:24:43 PDT 1999
+
+deleted method:((name method503  )
+(capability (find (obj (?v506 is (spec-of time-for-emplacement))) (for (?b is (inst-of avlb)))))  
+(result-type (inst-of number))
+ (method (if (is-less-or-equal (obj (emplacement-time ?b))
+			       (than 0.5))
+	     then 0.5
+	     else (emplacement-time ?b)))
+ )
+   at Wed Jun 16 17:24:44 PDT 1999
+
+check: Undefined Capabilities
+   at Wed Jun 16 17:24:48 PDT 1999
+

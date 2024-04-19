@@ -1,0 +1,801 @@
+;;05/12/99 added candidateBattlePositionOfCOA
+;;05/13/99 added missionEssentialCriterion
+;;06/16/99 added unitHasExtendedFrontage
+
+
+;===========================================================================
+;KEY TERRAIN
+ 
+;constant already in IKB
+constant: KeyFeatureMark.
+in Mt: ModernMilitaryTacticsMt.
+isa: CombatTheaterSiteAttribute IKBConstant.
+comment : "Characteristic attribute of terrain that is
+          considered to be 'key' for the execution of a military
+          Course of Action, insofar as controlling it enables the
+          realization of some critical feature of the COA." .
+
+conceptuallyRelated : Control-MilitaryTask significantCOAArea .
+
+;;new assertions for KeyFeatureMark:
+
+F:
+(interArgIsa2-1 positionStatusOfArea KeyFeatureMark GeographicalRegion).
+
+F:
+(implies
+ (and
+  (isa ?COAMT COASpecificationMicrotheory)
+  (ist ?COAMT
+    (positionStatusOfArea ?REG KeyFeatureMark)))
+ (significantCOAArea ?COAMT ?REG)).  
+
+constant: keyTerrainOfCOA.
+in Mt: ModernMilitaryTacticsMt.
+isa: BinaryPredicate IKBConstant.
+arg1Isa: COASpecificationMicrotheory.
+arg2Isa: GeographicalRegion.
+comment: "(#$keyTerrainOfCOA COAMT REGION) means that REGION has the
+attribute of being #$KeyFeatureMark in the course of action specified:
+i.e., it is a position from which some enemy position can be observed
+or controlled.".
+
+
+F:
+(implies
+  (and
+    (isa ?COAMT COASpecificationMicrotheory)
+    (ist ?COAMT (positionStatusOfArea ?REG KeyFeatureMark)))
+  (keyTerrainOfCOA ?COAMT ?REG)).
+
+F:
+(implies
+    (keyTerrainOfCOA ?COAMT ?REG)
+    (ist ?COAMT (positionStatusOfArea ?REG KeyFeatureMark))).
+
+
+constant: keyTerrainAdvantage.
+in Mt: ModernMilitaryTacticsMt.
+isa: BinaryPredicate IKBConstant.
+arg1Isa: GeographicalRegion.
+arg2Isa: ScriptType.
+comment: "(#$keyTerrainAdvantage REGION EVT_TYPE) means that REGION
+is considered 'key terrain' in the context of the assertion because
+the agent controlling that terrain is thereby enabled to perform
+instances of EVT_TYPE.".
+
+F:
+(implies
+ (and
+   (keyTerrainAdvantage ?REGION ?EVTTYPE)
+   (zoneControlled ?UNIT ?REGION))
+ (behaviorCapable ?UNIT ?EVTTYPE performedBy)).
+
+F:
+(salientAssertions keyTerrainAdvantage
+(implies
+ (and
+   (keyTerrainAdvantage ?REGION ?EVTTYPE)
+   (zoneControlled ?UNIT ?REGION))
+ (behaviorCapable ?UNIT ?EVTTYPE performedBy))).
+
+F:
+(implies
+  (keyTerrainAdvantage ?REGION ?EVTTYPE)
+  (positionStatusOfArea ?REGION KeyFeatureMark)).
+
+
+constant: keyObservationTerrainOfCOA.
+in Mt: ModernMilitaryTacticsMt.
+isa: BinaryPredicate IKBConstant.
+arg1Isa: COASpecificationMicrotheory.
+arg2Isa: GeographicalRegion.
+genlPreds: keyTerrainOfCOA.
+comment: "(#$keyObservationTerrainOfCOA COAMT REGION) means that
+REGION is an area from which friendly forces can observe important
+enemy positions, and which it is therefore important that friendly
+forces control.  See #$controlPermitsObserving.".
+
+constant: keyControllingTerrainOfCOA.
+in Mt: ModernMilitaryTacticsMt.
+isa: BinaryPredicate IKBConstant.
+arg1Isa: COASpecificationMicrotheory.
+arg2Isa: GeographicalRegion.
+genlPreds: keyTerrainOfCOA. 
+comment: "(#$keyControllingTerrainOfCOA COAMT REG) means that it is
+true in the planning context of COAMT that there exists an instance
+INST of SpatialThing-Localized such that (#$controlPermitsObserving
+?REG ?INST).  In general ?INST will be a hostile force whose behavior
+is central to the successful development of the COA.".
+
+constant: controlPermitsObserving.
+in Mt: ModernMilitaryTacticsMt.
+isa: BinaryPredicate IKBConstant.
+arg1Isa: GeographicalRegion.
+arg2Isa: SpatialThing-Localized.
+comment: "(#$controlPermitsObserving REG THING) means that if an
+#$Agent AGENT #$controls REG, then under normal circumstances AGENT is 
+#$behaviorCapable of an #$Observing in which THING is the
+#$objectObserved and the observing-event #$eventOccursAt ?REG.".
+
+F:
+(implies
+  (keyObservationTerrainOfCOA ?COAMT ?REG)
+  (ist ?COAMT
+    (relationInstanceExists controlPermitsObserving ?REG
+SpatialThing-Localized))).
+
+;The above is, of course, a pretty weak rule.  Assuming we can get the
+;relevant criteria from Jim D. and Rob R., we can write the converse
+;as something potentially much more powerful: i.e., from knowing that
+;control of a region permits the observation of a certain class of
+;unit under certain conditions, we can get the conclusion that the
+;region is keyObservationTerrainOfCOA.
+
+F:
+(implies
+  (and
+    (controlPermitsObserving ?REG ?THING)
+    (controls ?AGENT ?REG))
+  (behaviorCapable ?AGENT
+     (CollectionSubsetFn Observing
+       (TheSetOf ?OBJ
+         (and
+           (objectObserved ?OBJ ?THING)
+           (eventOccursAt ?OBJ ?REG)))) performedBy)).
+
+
+constant: controlPermitsControl.
+in Mt: ModernMilitaryTacticsMt.          
+isa: BinaryPredicate IKBConstant.
+arg1Isa: GeographicalRegion.
+arg2Isa: GeographicalRegion.
+comment: "(#$controlPermitsControl REG ZONE) means that if an #$Agent
+AGENT controls REG, then AGENT is #$behaviorCapable of a
+#$Control-MilitaryTask in which the #$zoneControlled is ZONE.".
+
+
+F:
+(implies
+  (keyControllingTerrainOfCOA ?COAMT ?REG)
+  (ist ?COAMT
+    (relationInstanceExists controlPermitsControl ?REG GeographicalRegion))).
+
+F:
+(implies
+  (and
+    (controlPermitsControl ?REG ?THING)
+    (controls ?AGENT ?REG))
+  (behaviorCapable ?AGENT
+     (CollectionSubsetFn Control-MilitaryTask
+       (TheSetOf ?OBJ
+         (zoneControlled ?OBJ ?THING))) performedBy)).
+
+;==========================================================================
+;==========================================================================
+
+;AVENUES OF APPROACH, MOBILITY CORRIDORS, and INFILTRATION LANES
+
+;We already have AvenueOfApproach, MobilityCorridor, and
+;InfiltrationLane represented: some question, however, of whether we
+;need to adjust the definitional info on any of these.  Currently,
+;MobilityCorridor and InfiltrationLane are specs of AvenueOfApproach,
+;and it seems like that may be infelicitous.
+
+;Based on the latest word we have from Jim and Rob on this subject, it
+;appears that it is correct to treat instances of AvenueOfApproach as
+;being 'built up from' instances of MobilityCorridor: however, COAs
+;can also feature MobilityCorridors that are not part of any specified
+;AvenueOfApproach.  InfiltrationLanes are not mobility corridors and
+;not AvenuesOfApproach.
+
+; delete.
+
+; F:
+; (genls MobilityCorridor AvenueOfApproach).
+; F:
+; (relationAllInstance degreeOfTrafficability MobilityCorridor
+; TerrainUnrestricted).
+; F:
+; (genls InfiltrationLane AvenueOfApproach).
+
+
+; enter.
+F:
+(genls MobilityCorridor GeographicalRegion).
+F:
+(genls MobilityCorridor Path-Customary).
+
+F:
+(relationAllExists subPaths AvenueOfApproach MobilityCorridor).
+
+F:
+(genls InfiltrationLane Path-Customary).
+F:
+(genls InfiltrationLane GeographicalRegion).
+
+
+constant: AvenueOfApproachSystem.
+in Mt: ModernMilitaryTacticsMt.
+isa: ExistingObjectType IKBConstant.
+genls: PathSystem.
+comment: "A collection of networks of instances of #$AvenueOfApproach:
+more specifically, a collection of #$PathSystems such that all of the
+paths composing each instance are themselves instances of
+#$AvenueOfApproach.  Such networks can include 'loops' and are not
+necessarily connected in the sense that, for any two points in the
+system, there must exist an #$AvenueOfApproach between them. See the
+definition of #$PathSystem for more details.  See also
+#$pointInSystem, #$nodeInSystem, #$linkInSystem,
+#$linkBetweenInSystem, #$pathInSystem, #$pathBetweenInSystem,
+#$pointOnPath, #$betweenOnPath, #$loopInSystem, #$pointOnCycle,
+#$junctionInSystem, #$deadEndInSystem, #$isolatedNodeInSystem and
+#$connectedInSystem.".
+
+F:
+(implies
+  (and
+    (isa ?SYSTEM AvenueOfApproachSystem)
+    (pathInSystem ?PATH ?SYSTEM))
+  (isa ?PATH AvenueOfApproach)).
+F:
+(salientAssertions AvenueOfApproachSystem
+(implies
+  (and
+    (isa ?SYSTEM AvenueOfApproachSystem)
+    (pathInSystem ?PATH ?SYSTEM))
+  (isa ?PATH AvenueOfApproach))).
+
+
+;==========================================================================
+;TERRAIN RESTRICTION
+
+;broaden the constraint on the arg1 of trafficabilityLevelForUnitType from
+;AvenueOfApproach to GeographicalRegion.
+
+constant: trafficabilityLevelForUnitType .
+in Mt : ModernMilitaryTacticsMt .
+isa : IKBConstant QuintaryPredicate .
+arg1Isa : GeographicalRegion  .
+arg2Isa : MilitaryUnitSpecialtyType  .
+arg2Genl : ModernMilitaryUnit-Deployable .
+arg3Isa : ScriptType .
+arg3Genl : Movement-TranslationEvent .
+arg4Isa : ActorSlot .
+arg5Isa : TerrainTrafficabilityLevel .
+comment : "This quintary predicate allows us to use
+          TerrainTrafficabilityLevel attributes to do more than
+          just make a blanket attribution of trafficability level
+          for a certain piece of terrain.
+          (trafficabilityLevelForUnitType REGION UNITTYPE
+          MANEUVERTYPE ROLE TTL) means that the GeographicalRegion
+          REGION has the TerrainTrafficabilityLevel TTL for
+          military units of specialty UNITTYPE playing the role
+          ROLE in maneuvers of MANEUVERTYPE." .
+
+F : (conceptuallyRelated TroopMovement trafficabilityLevelForUnitType) .
+
+constant: terrainRestrictionForUnitEchelon .
+in Mt: ModernMilitaryTacticsMt.
+isa: QuaternaryPredicate.
+arg1Isa: GeographicalRegion.
+arg2Isa: MilitaryEchelon.
+arg3Isa: MilitaryOperationType.
+arg3Genl: MilitaryOperation.
+arg4Isa: TerrainTrafficabilityLevel.
+comment: "(#$terrainRestrictionForUnitEchelon REGION ECHELON OP LEVEL)
+means that REGION has #$TerrainTrafficabilityLevel LEVEL for a unit of any
+specialty and of echelon level up to ECHELON undertaking military operation
+type OP." .
+
+F:
+(implies
+  (and
+    (terrainRestrictionForUnitEchelon ?REG ?ECH ?OP TerrainUnrestricted)
+    (allFollowingValueOnScale ?LOWER-ECH ?ECH MilitaryEchelon))
+  (terrainRestrictionForUnitEchelon  ?REG ?LOWER-ECH  ?OP TerrainUnrestricted).
+
+F:
+(implies
+  (and
+    (terrainRestrictionForUnitEchelon ?REG ?ECH ?OP TerrainRestricted)
+    (allFollowingValueOnScale ?ECH ?HIGHER-ECH  MilitaryEchelon))
+  (terrainRestrictionForUnitEchelon  ?REG  ?HIGHER-ECH ?OP
+      TerrainRestricted)).
+F:
+(implies
+  (and
+    (terrainRestrictionForUnitEchelon ?REG ?ECH ?OP TerrainSeverelyRestricted)
+    (allFollowingValueOnScale ?ECH ?HIGHER-ECH  MilitaryEchelon))
+  (terrainRestrictionForUnitEchelon  ?REG  ?HIGHER-ECH ?OP
+      TerrainSeverelyRestricted)).
+
+F:
+(implies
+  (terrainRestrictionForUnitEchelon ?REG ?ECH ?OP-TYPE TerrainUnrestricted)
+    (behaviorCapable ?REG
+      (CollectionSubsetFn Movement-TranslationEvent
+        (TheSetOf ?OBJ
+         (thereExists ?UNIT
+           (thereExists ?OP
+             (and
+               (isa ?UNIT ModernMilitaryUnit-Deployable)
+               (echelonOfUnit ?UNIT ?ECH)
+               (isa ?OP ?OP-TYPE)
+               (primaryObjectMoving ?OBJ ?UNIT)
+               (subEvents ?OP  ?OBJ)
+               (performedBy ?OP  ?UNIT)))))) pathway-Complete)).
+
+constant: terrainRestrictionForUnitSpecialty .
+in Mt: ModernMilitaryTacticsMt.
+isa: QuaternaryPredicate IKBConstant.
+arg1Isa: GeographicalRegion.
+arg2Isa: MilitaryUnitSpecialtyType .
+arg2Genl : ModernMilitaryUnit-Deployable .
+arg3Isa: MilitaryOperationType.
+arg3Genl: MilitaryOperation.
+arg4Isa: TerrainTrafficabilityLevel.
+comment: "(#$terrainRestrictionForUnitSpecialty REGION SPECIALTY OP LEVEL)
+means that REGION has #$TerrainTrafficabilityLevel LEVEL for a unit of any
+echelon level and of military specialty SPECIALTY undertaking military
+operation type OP." .
+
+F:
+(implies
+  (terrainRestrictionForUnitSpecialty  ?REG ?SPECIALTY ?OP-TYPE
+        TerrainUnrestricted) 
+   (behaviorCapable ?REG
+      (CollectionSubsetFn Movement-TranslationEvent
+        (TheSetOf ?OBJ
+         (thereExists ?UNIT
+           (thereExists ?OP
+             (and
+               (isa ?UNIT ?SPECIALTY)
+               (isa ?OP ?OP-TYPE)
+               (primaryObjectMoving ?OBJ ?UNIT)
+               (subEvents ?OP  ?OBJ)
+               (performedBy ?OP  ?UNIT)))))) pathway-Complete)).
+
+
+constant: terrainRestrictionForUnitType.
+In Mt : ModernMilitaryTacticsMt.
+isa: QuintaryPredicate  IKBConstant.
+arg1Isa :  GeographicalRegion .
+arg2Isa: MilitaryUnitSpecialtyType .
+arg2Genl : ModernMilitaryUnit-Deployable .
+arg3Isa : MilitaryEchelon .
+arg4Isa: MilitaryOperationType.
+arg4Genl: MilitaryOperation.
+arg5Isa :  TerrainTrafficabilityLevel.
+comment: "(#$terrainRestrictionForUnitType REGION SPECIALTY ECHELON  OP LEVEL)
+means that REGION has #$TerrainTrafficabilityLevel LEVEL for a unit of 
+military specialty SPECIALTY and of echelon level up to ECHELON undertaking
+military operation type OP." . 
+
+F:
+(implies
+  (and
+    (terrainRestrictionForUnitType  ?REG ?SPECIALTY  ?ECH ?OP
+          TerrainUnrestricted) 
+    (allFollowingValueOnScale ?LOWER-ECH ?ECH MilitaryEchelon))
+ (terrainRestrictionForUnitType  ?REG ?SPECIALTY  ?LOWER-ECH ?OP
+          TerrainUnrestricted)).
+
+F:
+(implies
+  (and
+    (terrainRestrictionForUnitType ?REG ?SPECIALTY  ?ECH ?OP
+          TerrainRestricted)
+     (allFollowingValueOnScale ?ECH ?HIGHER-ECH  MilitaryEchelon))
+  (terrainRestrictionForUnitType ?REG ?SPECIALTY  ?HIGHER-ECH  ?OP
+       TerrainRestricted)) .
+
+F:
+(implies
+  (and
+    (terrainRestrictionForUnitType ?REG ?SPECIALTY  ?ECH ?OP
+          TerrainSeverelyRestricted)
+     (allFollowingValueOnScale ?ECH ?HIGHER-ECH  MilitaryEchelon))
+  (terrainRestrictionForUnitType ?REG ?SPECIALTY  ?HIGHER-ECH  ?OP
+       TerrainSeverelyRestricted)) .
+
+F:
+(implies
+  (and
+    (terrainRestrictionForUnitEchelon ?REG ?ECH ?OP ?LEVEL)
+    (isa ?SPECIALTY MilitaryUnitSpecialtyType))
+  (terrainRestrictionForUnitType ?REG ?SPECIALTY ?ECH ?OP ?LEVEL) .
+
+F:
+(implies
+  (and
+     (terrainRestrictionForUnitSpecialty  ?REG ?SPECIALTY ?OP-TYPE ?LEVEL)
+      (isa ?ECH MilitaryEchelon))
+    (terrainRestrictionForUnitType ?REG ?SPECIALTY ?ECH ?OP ?LEVEL) .
+
+
+
+F:
+(implies
+     (terrainRestrictionForUnitType ?REG ?SPECIALTY  ?ECH ?OP
+          TerrainUnrestricted) 
+   (behaviorCapable ?REG
+      (CollectionSubsetFn Movement-TranslationEvent
+        (TheSetOf ?OBJ
+         (thereExists ?UNIT
+           (thereExists ?OP
+             (and
+               (isa ?UNIT ?SPECIALTY)
+               (echelonOfUnit ?UNIT ?ECH)
+               (isa ?OP ?OP-TYPE)
+               (primaryObjectMoving ?OBJ ?UNIT)
+               (subEvents ?OP  ?OBJ)
+               (performedBy ?OP  ?UNIT)))))) pathway-Complete)).
+
+;=======================================================================
+
+;ENGAGEMENTS AND ENGAGEMENT AREAS
+
+;#$EngagementArea already exists, as an attribute.
+;It is not currenlty an IKB constant. However, 
+;it's posted in the sketch output ontology. Its definition
+;is given below.
+
+;One thing to keep in mind is that what we
+;are dealing with are regions that have the potential for being
+;engagement areas, not with 'actual' engagement areas.
+
+constant: EngagementArea .
+in Mt : ModernMilitaryTacticsMt .
+isa :  IKBConstant CombatTheaterSiteAttribute .
+comment : "An area along an enemy avenue of approach where the
+          commander intends to contain and destroy an enemy force
+          with the massed fires of all available weapons. The size
+          and shape of the engagement area is determined by the
+          relatively unobstructed intervisibility from the weapon
+          systems in their firing positions and the maximum range
+          of those weapons. Sectors of fire are usually assigned
+          to subordinates to prevent fratricide. See FMs 1-111,
+          1-112, 7-10, 7-20, 7-30, 17-95, 71-100, 71-123, 100-5,
+          and 100-15." .
+sourceOfTerm-PIT : FM101-5-1Mt .
+sourceOfTerm-WebPage : FM101-5-1WebPage .
+
+;;additional assertion
+
+in Mt: ModernMilitaryTacticsMt.
+F:
+(interArgIsa2-1 positionStatusOfArea EngagementArea GeographicalRegion). 
+
+
+constant: candidateEngagementAreaOfCOA.
+in Mt: ModernMilitaryTacticsMt.
+isa: BinaryPredicate IKBConstant.
+arg1Isa: COASpecificationMicrotheory.
+arg2Isa: GeographicalRegion.
+comment: "(#$candidateEngagementAreaOfCOA COAMT REGION) means that in
+the planning context of COAMT, REGION is an area in which friendly and
+hostile forces involved could become militarily engaged with one another.".
+
+F:
+(implies
+  (and
+    (isa ?COAMT COASpecificationMicrotheory)
+    (ist ?COAMT (positionStatusOfArea ?COAMT  EngagementArea)))
+  (candidateEngagementAreaOfCOA ?COAMT ?REG)).
+
+F:
+(implies
+    (candidateEngagementAreaOfCOA ?COAMT ?REG)
+     (ist ?COAMT (positionStatusOfArea ?COAMT  EngagementArea))).
+
+
+constant: Engagement-Military.
+in Mt: ModernMilitaryTacticsMt.
+isa: ScriptType TemporalObjectType SitutationType.
+genls: MilitaryEvent ConflictEvent IKBConstant.
+sourceOfTerm-WebPage: FM101-5-1WebPage.
+comment: "A limited tactical conflict, usually between opposing
+maneuver force,such as might occur between opposing units in a course
+of action." .
+
+F:
+(implies
+  (and
+   (isa ?FORCE ModernMilitaryUnit-Deployable)
+   (isa ?OPPFORCE ModernMilitaryUnit-Deployable)
+   (opponentsInConflict ?FORCE ?OPPFORCE ?EVT)
+   (operationOfCOA ?COAMT ?OP)
+   (subEvents ?OP ?EVT))
+  (isa ?EVT EngagementMilitary)).
+
+F:
+(salientAssertions EngagementMilitary
+(implies
+  (and
+   (isa ?FORCE ModernMilitaryUnit-Deployable)
+   (isa ?OPPFORCE ModernMilitaryUnit-Deployable)
+   (opponentsInConflict ?FORCE ?OPPFORCE ?EVT)
+   (operationOfCOA ?COAMT ?OP)
+   (subEvents ?OP ?EVT))
+  (isa ?EVT EngagementMilitary))).
+
+;not needed to translate PMA poducts:
+
+constant: candidateEngagementArea.
+in Mt: ModernMilitaryTacticsMt.
+isa: ActorSlot IKBConstant.
+arg1Isa: MilitaryEvent ScriptType.
+arg2Isa: GeographicalRegion.
+comment: "(#$candidateEngagementArea MILEVENT REGION) means that
+during MILEVENT, REGION is an area in which friendly and hostile
+forces participating in MilEVENT may become militarily engaged with
+one another.".
+;note that the event in question could be 'task', 'operation', or 'other'.
+
+;It may also be useful to cite the specific units that may be involved
+;in the candidate engagement.
+
+;not needed to translate PMA poducts:
+
+constant: candidateEngagementAreaOfCOAForForces.
+in Mt: ModernMilitaryTacticsMt.
+isa: QuaternaryPredicate IKBConstant.
+arg1Isa: COASpecificationMicrotheory.
+arg2Isa: GeographicalRegion.
+arg3Isa: ModernMilitaryUnit-Deployable.
+arg4Isa: ModernMilitaryUnit-Deployable.
+interArgReln3-4: opponents.
+comment: "(#$candidateEngagementAreaOfCOAForForces COAMT REG FORCE
+OPPFORCE) means that in the planning context of COAMT, REG is
+considered to be a viable potential engagement area for FORCE and
+OPPFORCE.".
+F:
+(implies
+  (candidateEngagementAreaOfCOAForForces ?COAMT ?REG ?FORCE ?OPPFORCE)
+  (candidateEngagementAreaOfCOAForForces ?COAMT ?REG ?OPPFORCE ?FORCE)).
+F:
+(implies
+ (and
+  (candidateEngagementAreaOfCOAForForces  ?EVT ?REG ?FORCE ?OPPFORCE)
+  (behaviorCapable ?FORCE
+    (CollectionSubsetFn Engagement-Military
+       (TheSetOf ?OBJ
+         (and
+           (opponentsInConflict ?FORCE ?OPPFORCE ?OBJ)
+           (subEvents ?EVT ?OBJ)
+           (eventOccursAt ?OBJ ?REG)))) performedBy)).
+
+
+F:
+(salientAssertions candidateEngagementAreaForForces
+(implies 
+  (candidateEngagementAreaForForces ?EVT ?REG ?FORCE ?OPPFORCE)
+  (candidateEngagementAreaForForces ?EVT ?REG ?OPPFORCE ?FORCE)))
+
+F:
+(salientAssertions candidateEngagementAreaForForces
+(implies
+  (candidateEngagementAreaForForces ?EVT ?REG ?FORCE ?OPPFORCE)
+  (behaviorCapable ?FORCE
+    (CollectionSubsetFn Engagement-Military
+       (TheSetOf ?OBJ
+         (and
+           (opponentsInConflict ?FORCE ?OPPFORCE ?OBJ)
+           (subEvents ?EVT ?OBJ)
+           (eventOccursAt ?OBJ ?REG)))) performedBy))) .
+
+;=======================================================================
+
+;BATTLE POSITIONS
+
+;We currently have the #$CombatTheaterSiteAttributes
+;     #$BattlePositionOccupied
+;     #$BattlePositionOrdered
+;     #$BattlePositionProposed
+;used in the sketch output.
+
+;additional assertions
+
+in Mt: ModernMilitaryTacticsMt.
+F:
+(interArgIsa2-1 positionStatusOfArea BattlePositionOccupied
+   GeographicalRegion). 
+F:
+(interArgIsa2-1 positionStatusOfArea BattlePositionOrdered
+GeographicalRegion).  
+F:
+(interArgIsa2-1 positionStatusOfArea BattlePositionProposed
+    GeographicalRegion).  
+
+constant : candidateBattlePositionForUnitType .
+in Mt: ModernMilitaryTacticsMt.
+isa: TernaryPredicate IKBConstant.
+arg1Isa: GeographicalRegion.
+arg2Isa: ExistingObjectType  .
+arg2Genl: ModernMilitaryUnit-Deployable.
+arg3Isa : MilitaryEchelon .
+comment: "(#$candidateBattlePositionForUnitType REGION UNIT-TYPE ECHELON)
+means that REGION is a suitable battle position for a unit of echelon level up
+to ECHELON and of type 
+UNIT-TYPE." . 
+
+F:
+(implies
+   (candidateBattlePositionForUnitType ?REGION ?UNIT-TYPE ?ECHELON)
+   (ist ?COAMT
+      (or (positionStatusOfArea ?REGION BattlePositionOccupied)
+          (positionStatusOfArea ?REGION BattlePositionOrdered)
+          (BattlePositionProposed ?REGION BattlePositionProposed)))).
+
+;;added
+constant : candidateBattlePositionOfCOA .
+in Mt: ModernMilitaryTacticsMt.
+isa: BinaryPredicate IKBConstant.
+arg1Isa: COASpecificationMicrotheory .
+arg2Isa: GeographicalRegion.
+comment: "(#$candidateBattlePositionOfCOA COA REGION) means that REGION is a
+suitable battle position  in the battlefield of the course of action COA.".
+
+
+;======================================================================
+
+;MISSION  1 UP.
+
+constant: missionLevelTaskSquaredOfCOA.
+in Mt: ModernMilitaryTacticsMt.
+isa: IKBConstant FunctionalSlot.
+arg1Isa: COASpecificationMicrotheory.
+arg2Isa: MilitaryTask.
+functionalInTheNthArg: 2.
+comment: "(#$missionLevelTaskSquaredOfCOA COAMT TASK) means that TASK is
+the assigned task of the military unit that has operational control of
+the unit to which the #$missionLevelTaskOfCOA of COAMT is assigned.".
+
+F:
+(implies
+  (and
+    (missionLevelTaskSquaredOfCOA ?COAMT ?SUPER)
+    (missionLevelTaskOfCOA ?COAMT ?SUB))
+  (subTasks-Military ?SUPER ?SUB)).
+
+F:
+(implies
+  (and
+    (missionLevelTaskSquaredOfCOA ?COAMT ?SUPERTASK)
+    (missionLevelTaskOfCOA ?COAMT ?SUBTASK)
+    (unitAssignedToTask ?SUPERTASK ?UNIT)
+    (unitAssignedToTask ?SUPERTASK ?SUBUNIT))
+  (operationalControlMilitaryOrg ?UNIT ?SUBUNIT)).
+
+constant: operationSquaredOfCOA .
+in Mt: ModernMilitaryTacticsMt.
+isa: IKBConstant BinaryPredicate .
+arg1Isa : COASpecificationMicrotheory .
+arg2Isa : MilitaryOperation .
+comment : "(#$operationSquaredOfCOA COAMT OP) means that OP is the operation
+assigned to the military unit that has operational control of
+the unit to which #$operationOfCOA of COAMT is assigned.".
+
+
+F:
+(implies
+  (and
+    (operationSquaredOfCOA ?COAMT ?SUPER-OP)
+    (operationOfCOA ?COAMT ?OP))
+ (subEvents ?SUPER-OP ?OP)).
+
+F:
+(implies
+  (and   
+    (operationSquaredOfCOA ?COAMT ?SUPER-OP)
+    (operationOfCOA ?COAMT ?OP)
+    (unitAssignedToOperation  ?SUPER-OP ?UNIT)
+    (unitAssignedToOperation  ?OP  ?SUBUNIT))
+  (operationalControlMilitaryOrg ?UNIT ?SUBUNIT)).
+
+;=====================================================================
+;THE RED AND THE BLUE
+
+constant: COAAlignmentAttribute.
+in Mt: ModernMilitaryTacticsMt.
+isa: UnorderedAttributeType IKBConstant.
+genls: AttributeValue.
+comment: "An unordered collection of attributes.  Instances are
+attributes indicating whether a particular COA has been devised for a
+friendly force or a hostile force.".
+
+constant: alignmentOfCOA.
+in Mt: ModernMilitaryTacticsMt.
+isa: BinaryPredicate IKBConstant.
+arg1Isa: COASpecificationMicrotheory.
+arg2Isa: COAAlignmentAttribute.
+comment: "(#$alignmentOfCOA COAMT ATT) means that the
+#$COAAlignmentAttribute of the #$COASpecificationMicrotheory COAMT is
+ATT.  The two general options here are #$COAForFriendlyForce and
+#$COAForHostileForce.".
+
+constant: COAForFriendlyForce.
+in Mt: ModernMilitaryTacticsMt.
+isa: COAAlignmentAttribute.
+comment: "Characteristic attribute of a COA that has been devised for
+a force that is considered 'friendly' (#$Blue-Side) in the planning
+context.".
+
+
+
+constant: COAForHostileForce.
+in Mt: ModernMilitaryTacticsMt.
+isa: COAAlignmentAttribute.
+negationAttributes: COAForFriendlyForce.
+comment: "Characteristic attribute of a COA that has been devised for
+a force that is considered 'hostile' (#$Red-Side) in the planning
+context.".
+
+
+constant: potentialAdversarialCOA.
+in Mt: ModernMilitaryTacticsMt.
+isa: RuleMacroPredicate BaseKBPredicate MicrotheoryPredicate
+DefaultMonotonicPredicate AntiTransitiveBinaryPredicate IrreflexiveBinaryPredicate.
+genls: genlMt.
+comment: "(#$potentialAdversarialCOA COAMT OPPCOAMT) means that COAMT
+and OPPCOAMT must have opposing alignments.  See #$alignmentOfCOA,
+#$COAForFriendlyForce, and #$COAForHostileForce.".
+cyclistNotes: "This predicate is both antitransitive and irreflexive.
+One might suppose that it would be asymmetric as well; however we do
+not explicitly assert this.  The reason for this is that it also
+implies a genlMt link between the instances of
+#$COASpecificationMicrotheory involved, and the exigencies of
+critiquing will in most cases demand that this link not be
+bidirectional.".
+
+F:
+(not (isa potentialAdversarialCOA AntiSymmetricBinaryPredicate)).
+
+direction: forward.
+F:
+(implies
+  (and
+   (potentialAdversarialCOA ?COAMT1 ?COAMT2)
+   (alignmentOfCOA ?COAMT1 ?FORFORCE)
+   (negationAttributes ?FORFORCE ?FOROPPFORCE))
+  (alignmentOfCOA ?COAMT2 ?FOROPPFORCE)).
+
+direction: forward.
+F:
+(implies
+  (and
+   (potentialAdversarialCOA ?COAMT1 ?COAMT2)
+   (alignmentOfCOA ?COAMT2 ?FORFORCE)
+   (negationAttributes ?FORFORCE ?FOROPPFORCE))
+  (alignmentOfCOA ?COAMT1 ?FOROPPFORCE)).
+
+;;=======================================================================
+
+MISSION ESSENTIAL TASKS
+
+
+
+constant : missionEssentialCriterion .
+in Mt : ModernMilitaryTacticsMt.
+isa : IKBConstant BinaryPredicate.
+arg1Isa : CycFormula .
+arg2Isa : COASpecificationMicrotheory .
+comment : "(#$missionEssentialCriterion PROP COA-MT) means that PROP specifies
+one of the mission essential tasks in the products of mission analysis
+associated with the course of action specified in  COA-MT.".
+
+
+;;=======================================================================
+
+ENEMY VULNERABILITIES
+
+
+constant : unitHasExtendedFrontage.
+in Mt : ModernMilitaryTacticsMt.
+isa : IKBConstant BinaryPredicate.
+arg1Isa : COASpecificationMicrotheory .
+arg2Isa : ModernMilitaryUnit-Deployable .
+comment : "(#$unitHasExtendedFrontage COAMT UNIT) means that during the course
+of action specified in COAMT the front line of UNIT is more spread out than is
+usually the case. This is a potential vulnerability for UNIT.".

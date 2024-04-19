@@ -1,0 +1,389 @@
+(unless (find-package "PLANET-COA")
+  (make-package "PLANET-COA"))
+
+;;;
+;;; Last modified: Mar 18 19 1999
+;;; by Jihie Kim
+
+(in-package "PLANET")
+
+(loom:use-loom "PLANET")
+(loom:defcontext PLANET-COA :theory (PLANET))
+(in-context 'PLANET-COA)
+
+;;; ============================================================
+;;; the portion of the COA specialization of
+;;; PLANET that can be viewed as simple specializations of the
+;;; concepts in PLANET, relabelling the concepts and not providing
+;;; additional info.
+ 
+
+(defconcept COA-problem-context
+  :is-primitive (:and planning-problem-context
+                      (:the scenario COA-scenario)
+		      (:all possible-COA-problem COA-problem)
+	              )
+  :annotations ((documentation "A problem context captures the input
+ information in which any alternative plans or COAs are considered.
+ In the COA domain, this is given as a 'scenario' that contains selected
+ products of mission analysis.")))
+
+(defrelation possible-COA-problem 
+  :range COA-problem
+  :annotations ((documentation "Links an object (such as the COA-problem-context) to a
+COA-problem."))
+  )
+
+(defconcept COA-problem
+  :is-primitive Planning-problem
+  :annotations ((documentation "The scenario given in the problem
+context is then broken down into what every item means in terms of
+planning.  For example, the mission statement contains the top level
+goal and the top level task to be done.  Other items in the scenario,
+such as assets available, turn into assertions to be made as part of the
+initial state.")))
+
+(defrelation accomplish 
+    :domain COA-task
+    :range purpose)
+
+(defconcept COA-task :is-primitive
+	    (:and plan-task
+		(:the structured-statement structured-task-statement)
+		(:the human-readable-description-of 
+		  human-readable-task-description)
+		(:at-least 0 accomplish) ;;; purpose may not be specified
+		;; (:the accomplishes purpose COA-task)
+		))
+
+(defconcept purpose
+  :is-primitive (:and goal-specification
+                      (:the structured-statement structured-purpose-statement)
+                      (:the human-readable-description-of 
+			human-readable-task-description))
+  :annotations ((documentation "Purposes are a kind of goal.  Sometimes they
+ seem to be state-based and other times they seem to be objective-based.
+ The ontology does not commit purpose to being either, i.e., it defines purpose
+ to be in their parent class 'goal-specification'.")))
+
+(defconcept COA :is-primitive
+  (:and Plan
+        (:all task-of COA-task)
+        (:the Close Close-COA)
+        (:the Reserve Reserve-COA)
+        (:the Security Security-COA)
+        (:the Deep Deep-COA)
+        (:the Rear Rear-COA)
+        (:the Fires Fires-COA)
+        (:the Obstacles Obstacles-COA))
+  :annotations ((documentation "COAs are plans.  A COA has many tasks,
+and the tasks are grouped into six conceptually related subplans (close,
+reserve, security, deep, rear, fires, and obstacles.")))
+
+(defrelation before :is-primitive
+  (:and ordering-commitment temporal-commitment)
+  :annotations ((documentation ""))	; is this Allen's "meets" ?
+  )
+
+;; ===============================================================
+;;; the portion of the COA specialization of PLANET
+;;; that populate existing concepts, ie they are "knowledge stuffing"
+;;; that adds new information but does not contribute to the structure.
+ 
+
+(defrelation Close :is-primitive sub-plan
+  :range Close-COA
+  :annotations ((documentation "Links a COA to the sub-plan describing
+the close battle"))
+  )
+
+(defrelation Reserve :is-primitive sub-plan  
+  :range Reserve-COA
+  :annotations ((documentation "Links a COA to the sub-plan concerning
+the reserve forces"))
+  )
+
+(defrelation Security :is-primitive sub-plan
+  :range Security-COA
+  :annotations ((documentation "Links a COA to the sub-plan concerned
+with security"))
+  )
+
+(defrelation Deep :is-primitive sub-plan
+  :range Deep-COA
+  :annotations ((documentation "Links a COA to the sub-plan concerned
+with deep fires"))
+  )
+
+(defrelation Rear :is-primitive sub-plan
+  :range Rear-COA
+  :annotations ((documentation "Links a COA to the sub-plan concerned
+with rear action"))
+  )
+
+(defrelation Fires :is-primitive sub-plan
+  :range Fires-COA
+  :annotations ((documentation "Links a COA to the sub-plan concerned
+with fires"))
+  )
+
+(defrelation Obstacles :is-primitive sub-plan
+  :range Obstacles-COA
+  :annotations ((documentation "Links a COA to the sub-plan concerned
+with obstacles"))
+  )
+
+(defconcept Close-COA :is-primitive Plan
+  :annotations ((documentation "A sub-plan describing
+the close battle"))
+  )
+
+(defconcept Reserve-COA :is-primitive Plan
+  :annotations ((documentation "A sub-plan concerned with
+reserve forces"))
+  )
+
+(defconcept Security-COA :is-primitive Plan
+  :annotations ((documentation "A sub-plan concerned with security"))
+  )
+
+(defconcept Deep-COA :is-primitive Plan
+  :annotations ((documentation "A sub-plan concerned with deep fires"))
+  )
+
+(defconcept Rear-COA :is-primitive Plan
+  :annotations ((documentation "A sub-plan concerned with rear action"))
+  )
+
+(defconcept Fires-COA :is-primitive Plan
+  :annotations ((documentation "A sub-plan concerned with fires"))
+  )
+
+(defconcept Obstacles-COA :is-primitive Plan
+  :annotations ((documentation "A sub-plan concerned with obstacles"))
+  )
+
+
+(defconcept Close-COA-task :is-primitive
+  (:and COA-task
+	(:the main-effort-of main-effort)
+	(:all supporting-effort-of COA-task))
+  :annotations ((documentation "A task that is part of a close-COA"))
+  )
+
+
+;;; ============================================================
+;;; the portion of the COA specialization of PLANET
+;;; that are extensions to the concepts in PLANET, containing significant
+;;; new information.
+
+(defconcept COA-scenario
+  :is-primitive (:and thing
+                      (:all staff-products staff-product)
+                      (:all commander-products commander-product))
+  :annotations ((documentation ""))
+  )
+
+(defrelation scenario :domain COA-scenario)
+
+;; for now we only have the mission statement, need to add other products.
+
+(defconcept commander-product
+  :is-primitive thing)
+
+(defrelation commander-products :domain commander-product)
+
+(defconcept mission-statement
+  :is-primitive (:and commander-product
+                      (:the structured-statement structured-mission-statement)
+                      (:the human-readable-description-of 
+			human-readable-task-description)))
+
+(defconcept structured-mission-statement :is-primitive 
+  (:and grammar-object
+	(:the description task-action)
+	(:at-most 1 operation-type)
+	(:the purpose-of purpose)
+	)
+  )
+
+(defrelation purpose-of 
+    :domain grammar-object
+    :range purpose)
+
+(defrelation structured-statement)
+
+(defconcept grammar-object  
+    :annotations ((documentation "This is going to be used to hook
+    the given object to components in the COA Grammar.")))
+
+(defconcept staff-product)
+
+(defrelation staff-products :domain staff-product)
+
+(defrelation threat-COAs :is-primitive staff-products)
+
+(defconcept enemy-COA :is-primitive 
+  (:and staff-product
+        plan
+        (:all possible-task-of enemy-COA-task)))
+
+(defrelation possible-task-of :range enemy-COA-task)
+
+(defconcept enemy-COA-task :is-primitive plan-task
+  :annotations ((documentation "A COA task performed by an 
+enemy unit or units"))
+  )
+
+(defconcept enemy-task-action :is-primitive task-action)
+
+
+(defrelation operation-type :range type-of-operation)
+
+(defrelation description :range task-action)
+
+;;;;;;;;;;;;;;;;;;;;;;;
+;; <TaskSpec0> =
+;; [{if, when, unless} [not] <EventStatement> ","] [{on order, be prepared to}]
+;; [<TypeOfOperationSpec> to] <Task>
+;; [in order to <PurposeSpec>]
+;;
+(defconcept structured-task-statement :is-primitive 
+  (:and grammar-object 
+	(:the description task-action)
+	(:at-most 1 operation-type)
+	(:at-most 1 purpose-of)
+	(:at-most 1 event-task-statement-of) 
+	(:at-most 1 prepare-desc-of)         
+	)
+  )
+
+;;************************************************************
+;; purpose
+;; <PurposeSpec> =
+;; {<EventSpec>,
+;; {ensure, deny} [<Unit>] <Capability>,
+;; protect {<Resource>, <Location>, <Capability>}}
+;; [[","] and [then] <PurposeSpec>]
+
+(defconcept structured-purpose-statement
+    :is-primitive (:and grammar-object action))       
+
+(defconcept capability :is-primitive grammar-object)
+
+;;************************************************************
+;; event
+
+;(defconcept event :is-primitive thing)
+
+(defrelation event-task-statement-of
+  :domain structured-task-statement
+  :range event-task-statement)
+
+(defconcept event-task-statement :is-primitive 
+  (:and grammar-object
+	(:the event-statement-of event-statement)
+	(:the condition-desc-of condition-desc)
+	(:at-most 1 not-desc-of)))
+
+(defrelation event-statement-of :range event-statement)
+(defconcept event-statement :is-primitive grammar-object )
+
+(defconcept event-spec :is-primitive
+  (and thing ;;; needs to be linked
+       (:the structured-statement event-task-statement)
+       (:the human-readable-description-of 
+	 human-readable-task-description))
+  :annotations ((documentation "Event spec in COA grammar. Needs to be aligned
+  with other definitions")))
+
+;;************************************************************
+;; prepared & not 
+
+(defrelation prepare-desc-of :range prepare-desc)
+
+(defconcept prepare-desc :is-primitive grammar-object)
+(tellm (prepare-desc be-prepared-to)
+       (prepare-desc on-order))
+
+(defrelation not-desc-of :range not-desc)
+(defconcept not-desc :is-primitive grammar-object)
+(tellm (not-desc not))
+
+;;************************************************************
+;; condition
+
+(defrelation condition-desc-of :range condition-desc)
+(defconcept condition-desc :is-primitive grammar-object)
+(tellm (condition-desc if)
+       (condition-desc when)
+       (condition-desc unless))
+
+;;************************************************************
+;;
+;; <RearBattleSpec> =
+;; {<TypeOfOperationSpec> to respond, responds}
+;; to threats <LocationSpec>
+;; [with priority to level  <ThreatLevels> threats against
+;; <CombatSupportAsset>]
+;; in order to <PurposeSpec>
+
+(defconcept threat-level :is-primitive grammar-object)
+(defconcept threat :is-primitive grammar-object)
+(defconcept combat-support-asset :is-primitive grammar-object)
+
+;;************************************************************
+;;
+;; <LogisticsTask0> =
+;; {resupplies [<Unit>] [with <SupplyClass>],
+;; moves <Unit> to <LocationSpec>}
+
+(defconcept supply-class :is-primitive grammar-object)
+  
+
+
+;;************************************************************
+(defconcept supporting-COA-task :is-primitive COA-task  ;;??
+  :annotations ((documentation "")))
+
+(defconcept main-effort :is-primitive COA-task
+  :annotations ((documentation "A task that is part of the main effort"))
+  )
+
+(defrelation main-effort-of :is-primitive sub-task
+    :domain Close-COA-task
+    :range main-effort
+    :annotations ((documentation "The main effort consists of one or more tasks
+    (e.g., conduct forward passage and attack to seize).")))
+
+(defrelation supporting-effort-of :is-primitive sub-task)
+
+
+;;; *********************************
+;;; relations to describe purpose-spec
+
+
+;;; ============================================================
+;;;  These should be aligned with COA ontologies
+ 
+(defconcept enemy-unit :is-primitive military-unit)
+(defconcept geographical-area :is-primitive thing)
+(defconcept military-unit :is-primitive thing)
+(defconcept time-specifier :is-primitive thing)
+ 
+(defconcept Division-UnitDesignation :is-primitive thing)
+(defconcept MechanizedUnit-MilitarySpecialty  :is-primitive thing)
+(defconcept ArmoredUnit-MilitarySpecialty  :is-primitive thing)
+(defconcept Brigade-UnitDesignation :is-primitive thing)
+(defrelation location)
+(defrelation vicinity)
+ 
+ 
+;; added to test COA example
+(defconcept phase-line :is-primitive thing)
+ 
+ 
+(defconcept TaskForce-UnitDesignation :is-primitive thing)
+(defconcept Squadron-UnitDesignation :is-primitive thing)
+(defconcept Cavalry-MilitarySpecialty :is-primitive thing)
+(defconcept Team-UnitDesignation :is-primitive thing)

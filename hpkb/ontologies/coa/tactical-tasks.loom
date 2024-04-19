@@ -1,0 +1,765 @@
+;;; -*- Mode: Lisp; Package: CYC; Syntax: COMMON-LISP; Base: 10 -*-
+
+(in-package "CYC")
+
+
+;;; ******************** CONCEPTS ********************
+
+(DEFCONCEPT |Ambush-MilitaryTask|
+  :IS-PRIMITIVE (:and |Surprise-MilitaryTask| |MilitaryOffensiveTask|)
+  :ANNOTATIONS (|IKBConstant|
+                |ScriptType|
+                |TemporalObjectType|
+                (DOCUMENTATION "A collection of instances of MilitaryTask, characterized      by the assigned unit's mounting a surprise offensive against      a designated hostile unit.")))
+
+(DEFCONCEPT |ApproachMarch-MilitaryOperation|
+  :IS-PRIMITIVE |MovementToContact-MilitaryOperation|
+  :ANNOTATIONS (|IKBConstant|
+                |ScriptType|
+                |MilitaryOperationType|
+                (DOCUMENTATION "#$ApproachMarch-MilitaryOperation is the collection of instances of #$MilitaryOperation that are conducted in order to close the distance between the unit(s) in question and the enemy, whose location is relatively certain. FM 100-5.")))
+
+(DEFCONCEPT |AreaDefense-MilitaryOperation|
+  :IS-PRIMITIVE |MilitaryDefensiveOperation|
+  :ANNOTATIONS (|IKBConstant|
+                |ScriptType|
+                |MilitaryOperationType|
+                (DOCUMENTATION "The collection of those defensive operations which concentrate on denying enemy access to designated terrain for a specified period of time rather than on the outright destruction of the enemy. FM 100-40.")))
+
+(DEFCONCEPT |AreaSecurity-MilitaryOperation|
+  :IS-PRIMITIVE |MilitaryOperation|
+  :ANNOTATIONS (|MilitaryOperationType| |TemporalObjectType| |ScriptType|))
+
+(DEFCONCEPT |Artifact|
+  :IS-PRIMITIVE |InanimateThing|
+  :ANNOTATIONS (|ObjectType|
+                |Cyc_Collection|
+                (DOCUMENTATION "A collection of tangible things.  An instance of #$Artifact is a tangible which was more or less intentionally created by an #$Agent (or a group of #$Agents working together) to serve some purpose or perform some function.  By `created', we don't require that the matter itself be created, it is often just the result of some sort of assemblage or modification process, such as a wooden flute that's been whittled from a tree branch, a sawhorse that's been put together out of boards and nails, a coin that's been minted by embossing or by melting liquid silver into a mold, etc.
+
+Let's consider some positive and negative examples.
+
+In addition to the obvious human artifacts (buildings, tools, textiles, power lines), this collection includes certain sorts of things made by #$Animals, such as bird nests, termite mounds, and beaver dams.
+
+Something which just barely squeaks through the intended meaning of this concept is #$YaleUniversity.  In addition to the abstract legal entity, it consists of a set of physical buildings, furnishings, etc.  By contrast, an organization that had no headquarters building, equipment, tangible property, etc. would not be an artifact.  Similarly, a fictional character such as Tom Sawyer is not an artifact (in the context of the story, Tom is not an artifact because he is a real boy; in the context of the real world, Tom is not an artifact because he has no tangible component whatsoever.)
+
+While some artifacts may be alive, or contain living subparts, we do not intend this collection to encompass all organisms which resulted from normal biological reproductive processes.  Your child is not an artifact.
+
+If you do an oil painting of a house that is an artifact, but much more borderline is what you get if you take a rock and just paint it a solid color, say white.  In general that won't be an artifact unless it serves some purpose, such as marking the shoulder of a roadway, but more questionable cases are if the purpose of the white rock is just `to be sold as art' or `to look pretty.'  The white rock might thus be an artifact in certain contexts, but not in others.
+
+Not every instance of #$Path-Generic (q.v.) is necessarily an instance of #$Artifact.  For example, some channels used for navigation may not be artifacts, because even though they are marked with human artifacts (i.e., channel markers) as locations where ships may safely travel, the channel itself may have been a naturally occurring pre-existing thing -- e.g., the #$EnglishChannel.  If a #$ChannelOrStrait were produced or maintained only by constant dredging, it might count as an artifact.  By contrast, each #$Canal, such as #$SuezCanal, is almost certain to be an #$Artifact.  See also #$Product.")))
+
+(DEFCONCEPT |AttackByDirectFire-MilitaryTask|
+  :IS-PRIMITIVE |AttackByFire-MilitaryTask|
+  :ANNOTATIONS (|IKBConstant|
+                |ScriptType|
+                |TemporalObjectType|
+                (DOCUMENTATION "Instances of this collection are instances of #$AttackByFire-MilitaryTask carried out using instances of #$DirectFireWeapon--i.e., projectile weapons such as guns which are aimed directly at the target.")))
+
+(DEFCONCEPT |AttackByFire-MilitaryTask|
+  :IS-PRIMITIVE (:and |MilitaryTask| |MilitaryOffensiveTask| |MilitaryAttack|)
+  :ANNOTATIONS (|IKBConstant|
+                |TemporalObjectType|
+                |ScriptType|
+                (DOCUMENTATION "To attack by fire is to engage the enemy with      direct and indirect fire: to fix, destroy, suppress,      or deceive him. The friendly force does not close      with the enemy or occupy the objective. An attack by      fire is usually a supporting effort during offensive      operations and a counterattack by fire option for the      reserve during defensive operations. It is not done      in conjunction with another maneuvering force. The      force conducting an attack by fire may be assigned a      battle position with either a sector of fire or an      engagement area, or it may be assigned an axis of      advance and a force-oriented objective. The enemy may      be stationary or moving. An attack by fire closely      resembles the task of support by fire. The chief      difference is that support by fire is conducted to      support another force so that force can maneuver      against the enemy.")))
+
+(DEFCONCEPT |AttackByIndirectFire-MilitaryTask|
+  :IS-PRIMITIVE |AttackByFire-MilitaryTask|
+  :ANNOTATIONS (|IKBConstant|
+                |ScriptType|
+                |TemporalObjectType|
+                (DOCUMENTATION "Instances of this collection are instances of #$AttackByFire-MilitaryTask carried out using instances of #$IndirectFireWeapon--i.e., projectile weapons such as guns which deliver projectiles to the target area via ballistic trajectories.")))
+
+(DEFCONCEPT |Attrit-MilitaryTask|
+  :IS-PRIMITIVE (:and |HarmingSomething| |MilitaryOffensiveTask|)
+  :ANNOTATIONS (|IKBConstant|
+                |ScriptType|
+                |TemporalObjectType|
+                (DOCUMENTATION "A specialization of MilitaryOffensiveTask. A unit charged      with performing an instance of Attrit-MilitaryTask will      endeavor to reduce the number of combatants in a specified      hostile unit, either by outright killing or by rendering them      combat-ineffective by other means, physical and/or      psychological.")))
+
+(DEFCONCEPT |Block-MilitaryTask|
+  :IS-PRIMITIVE (:and |MilitaryTask| |BlockingAnOpponent|)
+  :ANNOTATIONS (|IKBConstant|
+                |ScriptType|
+                |TemporalObjectType|
+                (DOCUMENTATION "To block is to deny the enemy access to a given      area or prevent his advance in a given direction or      along an avenue of approach. A blocking task normally      requires the friendly force to block the enemy force      for a certain time period or until a specific event      has occurred. A blocking unit may have to hold      terrain and accept decisive engagement. A block      differs from a fix because a blocked enemy force can      move in any direction other than the obstructed one      while a fixed enemy force cannot move in any      direction.")))
+
+(DEFCONCEPT |Breach-MilitaryTask|
+  :IS-PRIMITIVE (:and |Translation-LocationChange| |MilitaryTask|)
+  :ANNOTATIONS (|IKBConstant|
+                |ScriptType|
+                |TemporalObjectType|
+                (DOCUMENTATION "A Breach is both a tactical task and an enabling      operation in which any means available are employed      to break through or secure a passage through an enemy      defense, obstacle, minefield, or fortification. To      maintain his tempo and momentum, a commander attempts      to bypass and avoid obstacles to the maximum extent      possible. Breaching enemy obstacle systems is      normally his last choice. When they occur, they are a      synchronized combined arms operation under the      control of the maneuver commander. There are three      types of breaching operations: hasty, deliberate, or      assault. The type of breach conducted depends on the      nature of the obstacle and the capabilities of the      enemy force covering the obstacle.")))
+
+(DEFCONCEPT |Bypass-MilitaryTask|
+  :IS-PRIMITIVE (:and |Translation-LocationChange| |MilitaryTask|)
+  :ANNOTATIONS (|IKBConstant|
+                |ScriptType|
+                |TemporalObjectType|
+                (DOCUMENTATION "To bypass is to maneuver around an obstacle,      position, or enemy force to maintain the momentum of      the operation. A bypass can take place in both      offensive or defensive operations. When conducting a      bypass, the commander deliberately avoids combat with      an enemy force so that all of his combat power is      directed toward mission accomplishment.")))
+
+(DEFCONCEPT |BypassNoCombatJoined|
+  :IS-PRIMITIVE |Bypass-MilitaryTask|
+  :ANNOTATIONS (|IKBConstant|
+                |ScriptType|
+                |TemporalObjectType|
+                (DOCUMENTATION "The collection of all instances of #$Bypass-MilitaryTask in which a friendly unit bypasses a hostile unit without attempting to join combat. Note that, despite its 'negative' character, this collection is limited to cases where what is being bypassed is a military unit and not some kind of merely geographical obstacle.")))
+
+(DEFCONCEPT |BypassWithFixByFire|
+  :IS-PRIMITIVE (:and |ComplexMilitaryTask|
+                      |FixByFire-MilitaryTask|
+                      |Bypass-MilitaryTask|)
+  :ANNOTATIONS (|IKBConstant|
+                |ScriptType|
+                |TemporalObjectType|
+                (DOCUMENTATION "The collection of all instances of #$Bypass-MilitaryTask where a friendly unit endeavors to bypass a hostile one and a major component of the bypass is a fixing of the hostile force by one or more maneuver elements from the bypassing force.")))
+
+(DEFCONCEPT |Canalize-MilitaryTask|
+  :IS-PRIMITIVE |MilitaryTask|
+  :ANNOTATIONS (|IKBConstant|
+                |TemporalObjectType|
+                |ScriptType|
+                (DOCUMENTATION "To canalize is to restrict enemy movement to a narrow zone by exploiting terrain coupled with the use of obstacles, fires, or friendly maneuver. Successful canalization results in moving the enemy formation into a predetermined position where it is vulnerable to piecemeal destruction by direct and indirect fires. The same effect occurs when an enemy force is taken under fire and individual enemy soldiers and combat systems seek positions that are masked from the effects of friendly fires. When this occurs, further enemy movements are usually canalized into areas outside of the `beaten 25 zone' established by the effects of the friendly force's fire, and thus can be fairly easy to predict.")))
+
+(DEFCONCEPT |Clear-MilitaryTask|
+  :IS-PRIMITIVE (:and |HarmingSomething| |MilitaryTask| |DestructionEvent|)
+  :ANNOTATIONS (|IKBConstant|
+                |ScriptType|
+                |TemporalObjectType|
+                (DOCUMENTATION "To clear is to remove all enemy forces and eliminate organized resistance in an assigned zone, area, or location. The force accomplishes this by destroying, capturing, or forcing the withdrawal of enemy forces so they cannot interfere with the friendly unit's ability to accomplish its mission. In all cases, this task requires a thorough reconnaissance to 12 discover the enemy's locations. Once this is known, the clearing force maneuvers against the enemy force.  This task requires significant time and other resources. In his mission statement, a commander can modify the objective associated with this task to destroying, capturing, or forcing the withdrawal of only enemy forces larger than a stated size. In this case, enemy forces smaller than that specified are kept under observation while the rest of the friendly force bypasses them.")))
+
+(DEFCONCEPT |ComplexMilitaryTask|
+  :IS-PRIMITIVE |MilitaryTask|
+  :ANNOTATIONS (|IKBConstant|
+                |ScriptType|
+                |TemporalObjectType|
+                (DOCUMENTATION "A collection of military tasks which require special coordination efforts in order to be effective.")))
+
+(DEFCONCEPT |Contain-MilitaryTask|
+  :IS-PRIMITIVE (:and |ImpedingMovement| |MilitaryTask|)
+  :ANNOTATIONS (|IKBConstant|
+                |TemporalObjectType|
+                |ScriptType|
+                (DOCUMENTATION "To contain is to stop, hold, or surround enemy forces or to cause them to center their activity on a given front and prevent them from withdrawing any part of their forces for use elsewhere. The limits of the containment may be expressed in terms of geography or time. Containment allows an enemy to reposition himself within the designated geographic area, whereas fixing an enemy does not.")))
+
+(DEFCONCEPT |Control-MilitaryTask|
+  :IS-PRIMITIVE (:and |ImpedingMovement| |MilitaryTask|)
+  :ANNOTATIONS (|IKBConstant|
+                |ScriptType|
+                |TemporalObjectType|
+                (DOCUMENTATION "To control the enemy is to maintain physical influence over him by occupying an area or dominating the area through the use of direct fire weapon systems. The tactical task of control differs from that of secure because secure does not allow enemy fires to impact on the area being secured. In control, the enemy can engage targets within the controlled area but cannot move his ground forces through the area at will.")))
+
+(DEFCONCEPT |Counterattack-MilitaryOperation|
+  :IS-PRIMITIVE (:and |MilitaryTask| |MilitaryAttack|)
+  :ANNOTATIONS (|ScriptType|
+                |MilitaryOperationType|
+                |TemporalObjectType|
+                (DOCUMENTATION "The collection of instances of MilitartyOffensiveOperation and MilitaryAttack which are conducted in response to an attack initiated by an enemy force.")))
+
+(DEFCONCEPT |CounterattackByFire|
+  :IS-PRIMITIVE (:and |Counterattack-MilitaryOperation|
+                      |CounterattackOperation|)
+  :ANNOTATIONS (|IKBConstant| |ScriptType| |TemporalObjectType|))
+
+(DEFCONCEPT |CounterattackByFire-MilitaryTask|
+  :IS-PRIMITIVE (:and |Counterattack-MilitaryTask|
+                      |Counterattack-MilitaryOperation|)
+  :ANNOTATIONS (|IKBConstant| |ScriptType| |TemporalObjectType|))
+
+(DEFCONCEPT |Counterreconnaissance-MilitaryTask|
+  :IS-PRIMITIVE |MilitaryTask|
+  :ANNOTATIONS (|IKBConstant|
+                |ScriptType|
+                |TemporalObjectType|
+                (DOCUMENTATION "Counterreconnaissance is all measures taken to counter enemy reconnaissance and surveillance efforts throughout the depth of the area of operations (AO). Counterreconnaissance is not a distinct mission, but a component of security operations. It prevents hostile observation of a force, area, or place. Counterreconnaissance is an element of all security operations and most local security measures. It involves both active and passive elements and includes combat action to destroy or repel enemy reconnaissance units. Stripping away enemy ground reconnaissance while denying the enemy information through other collection systems allows friendly force commanders to operate against an enemy who is operating blindly. The enemy commander's inability to see the battlefield will eventually desynchronize his actions and render his command vulnerable to aggressive action by friendly forces.")))
+
+(DEFCONCEPT |Defeat-MilitaryTask|
+  :IS-PRIMITIVE |MilitaryTask|
+  :ANNOTATIONS (|IKBConstant|
+                |ScriptType|
+                |TemporalObjectType|
+                (DOCUMENTATION "To defeat the enemy is to disrupt or nullify the enemy commander's plan or subdue his will to fight so that he is unwilling or unable to further pursue his adopted course of action and yields to the will of his opponent. Defeat has to manifest itself in some sort of physical action. Defeat occurs when a unit no longer has the resources in terms of personnel, weapon systems, and supplies to accomplish its assigned mission or when the soldiers have become so physically or mentally exhausted that they can no longer continue. This can occur as a result of catastrophic combat or accidental losses inflicted over a very short time or it can result from attrition over a period of days, weeks, and months.")))
+
+(DEFCONCEPT |DefenseInDepth-MilitaryManeuver|
+  :IS-PRIMITIVE |MilitaryManeuver-Defensive|
+  :ANNOTATIONS (|IKBConstant|
+                |TemporalObjectType|
+                |ScriptType|
+                (DOCUMENTATION "The collection of those defensive military maneuvers in which units are positioned in depth along likely enemy avenues of approach.")))
+
+(DEFCONCEPT |Delay-MilitaryTask|
+  :IS-PRIMITIVE (:and |ImpedingMovement| |MilitaryTask|)
+  :ANNOTATIONS (|IKBConstant|
+                |ScriptType|
+                |TemporalObjectType|
+                (DOCUMENTATION "Instances are assigned instances of MilitaryTask where the assigned      unit delays the progress of a specified hostile unit, usually until a      specified time. See also #$delayUntilTime.")))
+
+(DEFCONCEPT |Demonstration-MilitaryOperation|
+  :IS-PRIMITIVE (:and |MilitaryOperation| |MilitaryDecoyTask|)
+  :ANNOTATIONS (|MilitaryOperationType|
+                |IKBConstant|
+                |TemporalObjectType|
+                |ScriptType|
+                (DOCUMENTATION "A demonstration is a show of force in a location where the commander does nt seek to conduct decisive operations. Its aim is to deceive the enemy. It is similar to a feint, except that contact with the enemy is not sought. FM 100-40, p. 3-8.")))
+
+(DEFCONCEPT |Destroy-MilitaryTask|
+  :IS-PRIMITIVE (:and |DestructionEvent| |MilitaryTask|)
+  :ANNOTATIONS (|IKBConstant|
+                |ScriptType|
+                |TemporalObjectType|
+                (DOCUMENTATION "To destroy is to physically render an enemy force combat-ineffective until it is reconstituted. Alternatively, to destroy a combat system is to damage it so badly that it cannot perform any function or be restored to a usable condition without being entirely rebuilt. The amount of damage needed to render a unit combat-ineffective depends on the unit's type, discipline, and morale. It normally requires greater than percent personnel or equipment casualties. Destroying armored or dug-in targets with area fire weapons requires a large amount of ammunition and considerable time, so forces do not normally attempt it unless they have terminally guided munitions.")))
+
+(DEFCONCEPT |Disengage-MilitaryTask|
+  :IS-PRIMITIVE (:and |MilitaryTask| |WithdrawalFromCombat|)
+  :ANNOTATIONS (|IKBConstant|
+                |ScriptType|
+                |TemporalObjectType|
+                (DOCUMENTATION "Disengagement is breaking contact with the enemy so      as to allow the conduct of another mission. It involves      moving to a location where the enemy can neither engage      the friendly force with direct fires or observed      indirect fires. Disengaging from the enemy while      displacing from one position to the next is a difficult      procedure.")))
+
+(DEFCONCEPT |Disrupt-MilitaryTask|
+  :IS-PRIMITIVE |MilitaryDefensiveTask|
+  :ANNOTATIONS (|IKBConstant|
+                |ScriptType|
+                |TemporalObjectType|
+                (DOCUMENTATION "To disrupt is to integrate direct and indirect fires, terrain, and obstacles to upset an enemy's formation or tempo, interrupt his timetable, or cause his forces to commit prematurely or attack in a piecemeal fashion. This increases the enemy's vulnerability to friendly fires. It may temporarily knock a unit out of the battle. Disruption is never an ends in itself, it is the means to an end.  The maneuver force attempting to disrupt an enemy must attack the enemy force with enough combat power to achieve the desired results with one mass attack or sustain the attack until it achieves the desired results. It may involve the attacking of the enemy in depth. The commander determines the amount of risk he is willing to accept based on the friendly losses he is willing to accept, the location of the attack, and the number of attacks that will be made.  Disrupt is also one of the four primary functions (disrupt, fix, turn, and block) of tactical obstacles that integrates fire planning and obstacle effect to slow an attacker within a specified area, normally an engagement area. See FM 5-100, Engineer Combat Operations, for more information on tactical obstacles.")))
+
+(DEFCONCEPT |DoubleEnvelopment-MilitaryManeuver|
+  :IS-PRIMITIVE |Envelopment-MilitaryManeuver|
+  :ANNOTATIONS (|IKBConstant|
+                |TemporalObjectType|
+                |ScriptType|
+                (DOCUMENTATION "Consists of a frontal attack (supporting effort) and two enveloping forces (main effort and supporting effort). FM 100-40.")))
+
+(DEFCONCEPT |Enabling-MilitaryOperation|
+  :IS-PRIMITIVE |MilitaryOperation|
+  :ANNOTATIONS (|IKBConstant|
+                |ScriptType|
+                |TemporalObjectType|
+                |MilitaryOperationType|
+                (DOCUMENTATION "The collection of military operations conducted to facilitate other types of military operations. As such, enabling operations are not ends unto themselves.")))
+
+(DEFCONCEPT |Encirclement-MilitaryManeuver|
+  :IS-PRIMITIVE |Envelopment-MilitaryManeuver|
+  :ANNOTATIONS (|IKBConstant|
+                |TemporalObjectType|
+                |ScriptType|
+                (DOCUMENTATION "Encirclements are intended to enclose and capture or defeat large enemy forces. Typically, encirclements either result from penetrations and envelopments or are an extension of exploitation and pursuit operations. ... They may be planned sequels or result from the exploitation of an unforeseen opportunity. They usually result from the linkup of two forces conducting a double envelopment. However, they can occur in situations where a major obstacle such as a shoreline can be used as the second encircling wing by the attacking commander. Although terrain objectives may be designated in an encirclement, isolation and defeat of enemy forces are the primary goals. FM 100-40, p. 9-7.")))
+
+(DEFCONCEPT |Envelopment-MilitaryManeuver|
+  :IS-PRIMITIVE |MilitaryManeuver-Offensive|
+  :ANNOTATIONS (|IKBConstant|
+                |TemporalObjectType|
+                |ScriptType|
+                (DOCUMENTATION "In an envelopment, the main attack focuses on seizing      an objective in the enemy rear that cuts his escape routes      and subjects him to destruction in his current positions.      In an envelopment operation, the commander seeks to      strike an assailable flank. It avoids the enemy's strength      - his front - where the effects of his fires and obstacles      are the greatest. FM100-40, p3-18. ")))
+
+(DEFCONCEPT |Exfiltrate-MilitaryTask|
+  :IS-PRIMITIVE (:and |MilitaryTask| |WithdrawalFromCombat|)
+  :ANNOTATIONS (|IKBConstant|
+                |ScriptType|
+                |TemporalObjectType|
+                (DOCUMENTATION "To exfiltrate is to remove personnel or units from areas under enemy control by stealth, deception, surprise, or clandestine means. Exfiltration is conducted by friendly forces that have been encircled by enemy forces and cannot conduct a breakout or be relieved by other friendly forces. Forces returning from a raid, an infiltration, or a patrol behind enemy lines can also conduct an exfiltration. Exfiltration by an encircled force is used only as a last resort to preserve a portion of the force. It is preferable to the capture of the force. The exfiltrating force conducts it after destroying or incapacitating all equipment (less medical) not accompanying the force. The exfiltrating force may have to leave casualties in place with supplies, chaplain support, and medical attendants. Exfiltration is most feasible over rough or difficult terrain through areas lightly covered by enemy observation and fire. These conditions often allow undetected movement of small elements when movement of the entire force would present more risk. Exfiltration requires resourcefulness, a high degree of discipline, expert land navigational skills, and motivation. It is unlikely that the entire force will be able to exfiltrate since part of it may have to create a diversion. Good small-unit leadership is essential in this type of operation. Before starting the exfiltration, the exfiltrating force establishes its rally points and exfiltration lanes. It coordinates its linkup plans with other friendly units. The exfiltration lanes are designated restricted fire areas (RFAs) or no fire areas (NFAs). The exfiltrating force uses preparatory fires to cover its movement as well as a means of expending stockpiled ammunition. Based on reconnaissance and available intelligence, the exfiltrating force subdivides into small groups and exfiltrates during periods of limited visibility by passing through and around enemy defensive positions. If detected, it tries to bypass the enemy. Exfiltration may be more difficult with combat and tactical vehicles because of the noise that they make and the limitations they impose on exfiltration routes, which makes their detection by the enemy more likely.")))
+
+(DEFCONCEPT |Fix-MilitaryTask|
+  :IS-PRIMITIVE (:and |ImpedingMovement| |MilitaryTask|)
+  :ANNOTATIONS (|IKBConstant|
+                |TemporalObjectType|
+                |ScriptType|
+                (DOCUMENTATION "To fix is to prevent the enemy from moving any part of his forces either from a specific location or for a specific period of time by holding or surrounding them to prevent their withdrawal for use elsewhere. Usually, it requires a friendly force to fix an enemy force for a specified time period while another unit maneuvers against it. Fix is used in both offensive and defensive operations. An instance of #$Fix-MilitaryTask differs from that of #$Block-MilitaryTask in that a fixed enemy force cannot move from a given location but a blocked enemy force can move in any direction other than the obstructed one. Fix is also one of the four primary functions of tactical obstacles that integrates fire planning and obstacle effect to slow an attacker within 18 a specified area, normally an engagement area.")))
+
+(DEFCONCEPT |FixByFire-MilitaryTask|
+  :IS-PRIMITIVE (:and |Fix-MilitaryTask| |ComplexMilitaryTask|)
+  :ANNOTATIONS (|IKBConstant|
+                |ScriptType|
+                |TemporalObjectType|
+                (DOCUMENTATION "The collection of all instances of #$Fix-MilitaryTask where the fixing is facilitated by one or more instances of #$AttackByFire-MilitaryTask performed by subunits of the unit performing the fix.")))
+
+(DEFCONCEPT |FollowAndAssume-MilitaryTask|
+  :IS-PRIMITIVE (:and |Translation-LocationChange| |MilitaryOffensiveTask|)
+  :ANNOTATIONS (|ScriptType|
+                |TemporalObjectType|
+                (DOCUMENTATION "Follow and assume is a task in which a committed force follows a force conducting an offensive operation. The committed force is prepared to continue the mission of the force it is following when that force is fixed, attrited, or unable to continue. The follow and assume force is not a reserve but is committed to accomplish specific tasks. Subordinate tasks for a follow and assume force are   (a) Maintain contact with the trail elements of the force it is following.    (b) Be prepared to conduct a forward passage of lines through the force it is following.   (c) Monitor all combat information and intelligence being    provided to and from the force it is following.   (d) Do not become engaged with enemy forces bypassed by the force it is    following.")))
+
+(DEFCONCEPT |FollowAndSupport-MilitaryTask|
+  :IS-PRIMITIVE (:and |Translation-LocationChange|
+                      |MilitaryOffensiveTask|
+                      |MilitaryTask|)
+  :ANNOTATIONS (|IKBConstant|
+                |ScriptType|
+                |TemporalObjectType|
+                (DOCUMENTATION "Collection of all instances of #$MilitaryTask in which a committed force follows and supports the mission accomplishment of a force conducting an offensive operation. The follow and support force is not a reserve but is a force committed to specific tasks. Subordinate tasks for a follow and support force are:    * Destroy bypassed enemy units, when the lead unit does not clear the    Area of Operations as it advances.   * Relieve in place any direct pressure or    encircling force halted to contain the enemy.   * Block movement of enemy reinforcements.   * Secure lines of communication.   * Clear obstacles.   * Guard prisoners, key areas, and installations.   * Recover friendly battle losses.   * Secure key terrain.   * Control refugees.  Follow and support is used to avoid the force being supported from having to commit its combat power among tasks other than those of the main mission, which would slow the momentum of the offensive. The follow and support force must accomplish its tasks to prevent the enemy, obstacles, and other factors from interfering with offensive operations, especially along the lines of communications. The commander assigning the follow and support task has two options in establishing the relationship between the supported and the supporting units. He can place the follow and support unit in a standard command relationship with the supported unit, such as attached or operational control. Alternatively, he can require that all tasking from the supported unit go through his headquarters for transmittal to the follow and support unit.")))
+
+(DEFCONCEPT |ForwardDefense-MilitaryManeuver|
+  :IS-PRIMITIVE |MilitaryManeuver-Defensive|
+  :ANNOTATIONS (|IKBConstant|
+                |ScriptType|
+                |TemporalObjectType|
+                (DOCUMENTATION "The collection of those defensive military maneuvers which are used to prevent significant enemy penetration into the defensive sector. The majority of the unit's combat power deploys into forward defensive positions near the forward edge of the battle area.")))
+
+(DEFCONCEPT |ForwardPassageOfLines-MilitaryOperation|
+  :IS-PRIMITIVE (:and |AttackOnTangible|
+                      |MovementAgainstResistance-Military|
+                      |Translation-LocationChange|
+                      |PassageOfLines-MilitaryOperation|)
+  :ANNOTATIONS (|IKBConstant|
+                |ScriptType|
+                |MilitaryOperationType|
+                |TemporalObjectType|
+                (DOCUMENTATION "A forward passage of lines occurs when a unit passes through another unit's positions while moving toward the enemy. FM 100-40 p. 18-2. The purpose of a forward passage of lines is to conduct operations, such as an attack, reconnaissance, or security. This operation is designed to ensure maintenance of enemy contact. FM 100-40, p. 18-8.")))
+
+(DEFCONCEPT |ForwardPassageOfLines-MilitaryTask|
+  :IS-PRIMITIVE |PassageOfLines-MilitaryTask|
+  :ANNOTATIONS (|IKBConstant|
+                |ScriptType|
+                |TemporalObjectType|
+                (DOCUMENTATION "A forward passage of lines occurs when a unit passes      through a unit's positions while moving toward the enemy.      FM100-40, p18-2. The purpose of a forward passage of lines is      to conduct operations, such as an attack, reconnaissance, or      security. This operation is designed to ensure maintenance of      enemy contact. FM100-40, p18-8.")))
+
+(DEFCONCEPT |FrontalAttack-MilitaryManeuver|
+  :IS-PRIMITIVE |MilitaryManeuver-Offensive|
+  :ANNOTATIONS (|IKBConstant|
+                |TemporalObjectType|
+                |ScriptType|
+                (DOCUMENTATION "In a turning movement, an attacking force seeks to      pass around and avoid the enemy's main force, then      secure an objective deep in the hostile rear area that      causes the enemy to move out of its current positions or      divert major forces to meet the threat. A commander      uses this choice of maneuver when the opportunity      exists to seize vital areas in the hostile rear before the      main enemy force can withdraw or receive support or      reinforcements. A supporting effort may be required to      fix the enemy, such as an envelopment. However, a      turning movement is not always accompanied by a      supporting effort. A turning movement differs from an      envelopment because the force conducting a turning      movement is normally out of supporting range of the      main body but is within supporting distance. This choice      of maneuver frequently transitions from the attack into      an exploitation or pursuit. Although the turning force is      frequently the main force, it may not always be.      FM100-40.")))
+
+(DEFCONCEPT |Infiltrate-MilitaryManeuver|
+  :IS-PRIMITIVE (:and |MilitaryManeuver-Offensive| |Translation-LocationChange|)
+  :ANNOTATIONS (|IKBConstant|
+                |TemporalObjectType|
+                |ScriptType|
+                (DOCUMENTATION "An infiltration is the covert movement through or into an area occupied by enemy forces to occupy a position of advantage in the enemy's rear while exposing only small elements to enemy defensive fires. ...To successfully infiltrate, the force must avoid detection and engagement. Since this requirement limits the size of the infiltrating force, infiltration is normally used in conjunction with, and in support of, the other choices of maneuver. Infiltration is also a movement technique used within friendly territory to move forces in small groups at extended or irregular intervals. FM 100-40, p. 3-27, 28.")))
+
+(DEFCONCEPT |Interdict-MilitaryTask|
+  :IS-PRIMITIVE (:and |ImpedingMovement| |MilitaryTask|)
+  :ANNOTATIONS (|IKBConstant|
+                |TemporalObjectType|
+                |ScriptType|
+                (DOCUMENTATION "To interdict is to prevent, hinder, or delay the      enemy's use of an area or route. Interdiction is      conducted to complement and reinforce other ongoing      offensive or defensive operations. An interdiction      tasking must specify the enemy force to be interdicted.      It must also specify the area or route to be      interdicted, how long the interdiction is to be in      effect, defined either as a length of time or some      event that must occur before the interdiction is lifted      or the exact effect desired from the interdiction.")))
+
+(DEFCONCEPT |Isolate-MilitaryTask|
+  :IS-PRIMITIVE |Contain-MilitaryTask|
+  :ANNOTATIONS (|IKBConstant|
+                |ScriptType|
+                |TemporalObjectType|
+                (DOCUMENTATION "To isolate is to seal off both physically and psychologically an enemy force from his sources of support, to deny the enemy freedom of movement, and to prevent the enemy unit from having contact with other enemy forces. Physical and psychological isolation are interdependent factors. Once isolated, an enemy unit must not be allowed sanctuary within his present position. It is attacked as often as possible. Usually associated with encirclement operations, isolate as a task can be a part of a deliberate attack to facilitate the breach of an enemy's defensive perimeter. This leads to the resulting piecemeal destruction of the enemy force.  Subordinate tasks for isolate include:    * Cutting of all ground lines of communication (LOCs) to the enemy force.  * Preventing all support to the isolated force from outside forces,   including aerial delivery of supplies, fires, and intelligence.  * Conducting PSYOP against the isolated force to hamper morale and   induce surrender.")))
+
+(DEFCONCEPT |Linkup-MilitaryTask|
+  :IS-PRIMITIVE |MilitaryTask|
+  :ANNOTATIONS (|IKBConstant|
+                |ScriptType|
+                |TemporalObjectType|
+                (DOCUMENTATION "A linkup is a meeting of friendly ground forces and occurs in a variety of circumstances. It happens when an advancing force reaches an objective area previously seized by an airborne or air assaultwhen an encircled element breaks out to rejoin friendly forces or a force comes to the relief of an encircled forcemaneuver forces meet. Both forces may be moving toward each other or one may be stationary. Whenever possible, joining forces exchange as much information as possible prior to the start of an operation. ")))
+
+(DEFCONCEPT |MassCombatPower|
+  :IS-PRIMITIVE (:and |MilitaryEvent| |PhysicalCollectionEvent|)
+  :ANNOTATIONS (|ScriptType|
+                |TemporalObjectType|
+                |IKBConstant|
+                (DOCUMENTATION "The collection of military events in which some military force masses combat power to a particular area.")))
+
+(DEFCONCEPT |MilitaryCSSTask|
+  :IS-PRIMITIVE |MilitaryTask|
+  :ANNOTATIONS (|IKBConstant|
+                |TemporalObjectType|
+                |ScriptType|
+                (DOCUMENTATION "A collection of tasks normally executed by Combat Service Support units. In this case, we are considering COA Logistics functions.")))
+
+(DEFCONCEPT |MilitaryDefensiveOperation|
+  :IS-PRIMITIVE (:and |ProtectingSomething| |MilitaryOperation|)
+  :ANNOTATIONS (|IKBConstant|
+                |ScriptType|
+                |MilitaryOperationType|
+                |TemporalObjectType|
+                (DOCUMENTATION "The collection of all instances of #$MilitaryOperation where      the primary purpose or goal is defensive in nature. This      collection is inclusive of concerted operations carried out by      multiple units. For individual MilitaryTasks carried out by      particular units, see #$MilitaryDefensiveTask.      #$MilitaryDefensiveOperation is the 'defensive' analog of      #$MilitaryOffensiveOperation.")))
+
+(DEFCONCEPT |MilitaryManeuver|
+  :IS-PRIMITIVE (:and |MilitaryOperation| |MovementEvent|)
+  :ANNOTATIONS (|IKBConstant|
+                |ScriptType|
+                |TemporalObjectType|
+                (DOCUMENTATION "The collection of events in which a military force moves relative to the enemy in an effort to achieve positionaladvantage over him and to achieve tactical, operational or strategic objectives. FM 100-5 pp. 2-13.")))
+
+(DEFCONCEPT |MilitaryManeuver-Defensive|
+  :IS-PRIMITIVE (:and |MilitaryDefensiveOperation| |MilitaryManeuver|)
+  :ANNOTATIONS (|IKBConstant|
+                |ScriptType|
+                |TemporalObjectType|
+                (DOCUMENTATION "The collection of instances of #$MilitaryManeuver that are used in defensive actions.")))
+
+(DEFCONCEPT |MilitaryManeuver-Offensive|
+  :IS-PRIMITIVE |MilitaryManeuver|
+  :ANNOTATIONS (|IKBConstant|
+                |ScriptType|
+                |TemporalObjectType|
+                (DOCUMENTATION "The collection of instances of #$MilitaryManeuver which are used in offensive actions.")))
+
+(DEFCONCEPT |MilitaryOffensiveOperation|
+  :IS-PRIMITIVE (:and |MilitaryAttack| |MilitaryOperation|)
+  :ANNOTATIONS (|IKBConstant|
+                |ScriptType|
+                |MilitaryOperationType|
+                |TemporalObjectType|
+                (DOCUMENTATION "The collection of all instances of      MilitaryOperation where the primary purpose or goal      is offensive in nature. This collection is inclusive      of concerted operations carried out by multiple      units. For individual MilitaryTasks carried out by      particular units, see MilitaryOffensiveTask.      MilitaryOffensiveOperation is the 'defensive' analog      of MilitaryDefensiveOperation.")))
+
+(DEFCONCEPT |MilitaryOperationType|
+  :IS-PRIMITIVE |ScriptType|
+  :ANNOTATIONS (|Cyc_Collection|
+                |CollectionType|
+                (DOCUMENTATION "A collection of collections: every element of MilitaryOperationType is a collection of instances of MilitaryOperation.")))
+
+(DEFCONCEPT |MilitarySupplyPoint|
+  :IS-PRIMITIVE |GeographicalThing-Intangible-MovableLocation|
+  :ANNOTATIONS (|IKBConstant|
+                |ExistingObjectType|
+                (DOCUMENTATION "The collection of intangible geographical locations where supplies, services and materials are located and issues. These locations are temporary and mobile, normally being occupied for up to 72 hours. FM 101-5-1.")))
+
+(DEFCONCEPT |MobileDefense-MilitaryOperation|
+  :IS-PRIMITIVE |MilitaryDefensiveOperation|
+  :ANNOTATIONS (|IKBConstant|
+                |ScriptType|
+                |MilitaryOperationType|
+                |TemporalObjectType|
+                (DOCUMENTATION "The mobile defense operation focuses on defeating or destroying the enemy force by allowing him to advance to a point where he is exposed to a decisive counterattack by the striking force. The commander organizes his force into two principal groups: the fixing force and the striking force. The primary defeat mechanism, the counterattack, is supplemented by the fires of the fixing force. The mobile defense is normally conducted by brigades, divisions and corps. Battalions and smaller units do not conduct a mobile defense because they are incapable of conducting operations in depth and fighting multiple engagements while resourcing the striking force, the fixing force, and a reserve. FM 100-40, Ch. 12.")))
+
+(DEFCONCEPT |MovementToContact-MilitaryOperation|
+  :IS-PRIMITIVE (:and |MilitaryOffensiveOperation| |Translation-LocationChange|)
+  :ANNOTATIONS (|ScriptType|
+                |MilitaryOperationType|
+                |TemporalObjectType|
+                (DOCUMENTATION "A movement to contact is an attack to gain or reestablish contact witht the enemy. A properly executed movement to contact develops the combat situation and maintains the commander's freedom of action after contact is gained. This flexibility is essential in maintaining the initiative. Enemy forces (other than the final objective) within the assigned area will be put at a disadvantage by being disrupted, fixed or defeated. The movement to contact terminates when it reahces its final objective or limit of advance, or must conduct a deliberate attack, a hasty defense, or retrograde. FM 100-40, Ch. 4.")))
+
+(DEFCONCEPT |Neutralize-MilitaryTask|
+  :IS-PRIMITIVE |MilitaryOffensiveTask|
+  :ANNOTATIONS (|IKBConstant|
+                |ScriptType|
+                |TemporalObjectType|
+                (DOCUMENTATION "To neutralize is to render enemy personnel or material incapable of interfering with a particular operation. When assigning a task to neutralize, the commander must specify the enemy force or material to be neutralized and the duration of the neutralization, which is time-driven or event-driven. The neutralized target may become effective again when the casualties are replaced, damage is repaired, or effort resulting in the neutralization is lifted. Neutralization is usually accomplished by both lethal and nonlethal fires. The assets required to neutralize a target vary according to the type and size of the target and the weapon and munitions combination used.")))
+
+(DEFCONCEPT |ObstacleSystem-Military|
+  :IS-PRIMITIVE (:and |\|(GroupFn)\|| |TangibleThing|)
+  :ANNOTATIONS (|IKBConstant|
+                |ProductType|
+                |ExistingObjectType|
+                (DOCUMENTATION "A structured system of artifacts intended to play the collective role of #$constrainingObject in a non-trivial subset of the collection of #$Movement-TranslationEvents such that the #$objectMoving is an instance of #$ModernMilitaryUnit-Deployble. Collections of #$ObstacleSystems designed to impede the movements of certain kinds of military unit can be referenced via #$MilitaryObstacleFn.")))
+
+(DEFCONCEPT |Occupy-MilitaryTask|
+  :IS-PRIMITIVE (:and |GainingUserRights| |MilitaryTask|)
+  :ANNOTATIONS (|IKBConstant|
+                |ScriptType|
+                |TemporalObjectType|
+                (DOCUMENTATION "To occupy is to move onto an objective, key terrain, or other man-made or natural terrain area without opposition and to control that entire area. (See the section on control.) Occupation of territory requires that the territory be under the authority and effective control of an armed force. To control the territory, the armed force conducts area security operations supported by information operations. This is not applicable to territory being administered in accordance with peace terms, treaty, or other agreement, express or implied, with civil authority of the territory.")))
+
+(DEFCONCEPT |PassageOfLines-MilitaryOperation|
+  :IS-PRIMITIVE (:and |Movement-TranslationEvent|
+                      |Enabling-MilitaryOperation|
+                      |CooperationEvent|
+                      |Translation-LocationChange|)
+  :ANNOTATIONS (|IKBConstant|
+                |ScriptType|
+                |MilitaryOperationType|
+                |TemporalObjectType|
+                (DOCUMENTATION "The collection of all military operations in which one unit moves through another unit's position with the intent of moving into or out of enemy contact. FM 100-40.")))
+
+(DEFCONCEPT |PassageOfLines-MilitaryTask|
+  :IS-PRIMITIVE (:and |CooperationEvent|
+                      |Translation-LocationChange|
+                      |ComplexMilitaryTask|
+                      |MilitaryTask|)
+  :ANNOTATIONS (|IKBConstant|
+                |TemporalObjectType|
+                |ScriptType|
+                (DOCUMENTATION "A passage of lines is generally a task in which one unit      moves through another unit's position with the intent of moving into      or out of enemy contact. It involves the transfer of responsibility      for fighting an enemy force from one unit to another in close      operations. The commander's reason for conducting a passage of lines      is to sustain the tempo of an offensive operation with fresh forces      to a defense task. FM100-40, p. 18-2.")))
+
+(DEFCONCEPT |Penetrate-MilitaryTask|
+  :IS-PRIMITIVE (:and |MilitaryOffensiveTask| |MilitaryTask|)
+  :ANNOTATIONS (|IKBConstant|
+                |TemporalObjectType|
+                |ScriptType|
+                (DOCUMENTATION "A type of #$MilitaryOffensiveTask which seeks to break through the enemy's defense and disrupt the defensive system. (Source FM 101-5-1).")))
+
+(DEFCONCEPT |Penetration-MilitaryManeuver|
+  :IS-PRIMITIVE (:and |MilitaryAttack| |MilitaryManeuver-Offensive|)
+  :ANNOTATIONS (|IKBConstant|
+                |ScriptType|
+                |TemporalObjectType|
+                (DOCUMENTATION "This is the collection of instances of MilitaryManeuver-Offensive which are used when enemy flanks are not assailable. In a penetration, commanders mass sufficient combat power at the point of penetration to overwhelm the enemy and gain the advantage. FM 100-5.")))
+
+(DEFCONCEPT |RearwardPassageOfLines-MilitaryOperation|
+  :IS-PRIMITIVE (:and |MilitaryDefensiveOperation|
+                      |PassageOfLines-MilitaryOperation|)
+  :ANNOTATIONS (|ScriptType| |MilitaryOperationType| |TemporalObjectType|))
+
+(DEFCONCEPT |Reconnaissance-MilitaryOperation|
+  :IS-PRIMITIVE |MilitaryEvent|
+  :ANNOTATIONS (|MilitaryOperationType|
+                |ScriptType|
+                (DOCUMENTATION "The collection of all military missions whose purpose is to survey
+terrain for the purpose of gaining information.")))
+
+(DEFCONCEPT |ReconnaissanceInForce-MilitaryOperation|
+  :IS-PRIMITIVE (:and |InformationGathering|
+                      |MovementToContact-MilitaryOperation|
+                      |Enabling-MilitaryOperation|)
+  :ANNOTATIONS (|IKBConstant|
+                |ScriptType|
+                |MilitaryOperationType|
+                |TemporalObjectType|
+                (DOCUMENTATION "The collection of instances of MovementToContact in which a considerable military force locates the enemy and test its dispositions, strengths and reactions. Its purpose is to discover enemy weaknesses.")))
+
+(DEFCONCEPT |ReinforcingAMilitaryForce|
+  :IS-PRIMITIVE |HelpingAnAgent|
+  :ANNOTATIONS (|ScriptType|
+                |TemporalObjectType|
+                |IKBConstant|
+                (DOCUMENTATION "The collection of events in which some military force reinforces another.")))
+
+(DEFCONCEPT |Relieve-MilitaryTask|
+  :IS-PRIMITIVE |MilitaryTask|
+  :ANNOTATIONS (|IKBConstant|
+                |ScriptType|
+                |TemporalObjectType|
+                (DOCUMENTATION "Instances are instances of MilitaryTask such that the assigned      unit relieves another specified friendly unit.")))
+
+(DEFCONCEPT |RelieveInPlace-MilitaryTask|
+  :IS-PRIMITIVE (:and |MilitaryEnablingTask|
+                      |ComplexMilitaryTask|
+                      |Relieve-MilitaryTask|)
+  :ANNOTATIONS (|IKBConstant|
+                |ScriptType|
+                |TemporalObjectType|
+                (DOCUMENTATION "A relief in place is an enabling operation in which ...      all or part of a unit is replaced in an area by an incoming      unit. ... Normally, the unit relieved is defending. However,      a relief may set the stage for a resumption of offensive      operations. A relief may also serve to free the relieved unit      for other tasks, such as decontamination, reconstitution,      routine rest, resupply, maintenance, or specialized training.      Sometimes, as part of a larger operation, a commander wants      the enemy to discover the relief because it will cause the      enemy to do something in response that is prejudicial to his      interest, such as move reserves from an area where the      friendly commander wants to conduct a penetration. FM100-40,      p18- 14,15.")))
+
+(DEFCONCEPT |Retain-MilitaryTask|
+  :IS-PRIMITIVE |MilitaryTask|
+  :ANNOTATIONS (|IKBConstant|
+                |ScriptType|
+                |TemporalObjectType|
+                (DOCUMENTATION "To retain is to occupy and hold a terrain 18 feature so that the enemy can not occupy or use it. The commander assigning this task must specify the area to be retained and the duration of the retention, which is time- or event-driven. While a unit is conducting this task, decisive engagement can occur.")))
+
+(DEFCONCEPT |Retirement-MilitaryOperation|
+  :IS-PRIMITIVE (:and |MilitaryDefensiveOperation| |Translation-LocationChange|)
+  :ANNOTATIONS (|IKBConstant|
+                |ScriptType|
+                |MilitaryOperationType|
+                |TemporalObjectType|
+                (DOCUMENTATION "A retirement is a task in a retrograde operation in which a force out of contact with the enemy moves away from the enemy, usually to the rear. A retiring unit organizes for combat but does not anticipate interference by enemy ground forces. FM 100-40, p. 13-29.")))
+
+(DEFCONCEPT |RetrogradeDefense-MilitaryOperation|
+  :IS-PRIMITIVE |MilitaryDefensiveOperation|
+  :ANNOTATIONS (|ScriptType|
+                |MilitaryOperationType|
+                (DOCUMENTATION "The collection of those defensive operations in which there is an organized movement to the rear or away from the enemy. FM 100-40.")))
+
+(DEFCONCEPT |RiverCrossing-Deliberate|
+  :IS-PRIMITIVE |RiverCrossing-MilitaryTask|
+  :ANNOTATIONS (|IKBConstant|
+                |ScriptType|
+                |TemporalObjectType|
+                (DOCUMENTATION "There are three basic types of river crossings: hasty,      deliberate, and retrograde. A hasty river crossing is a task      conducted as part of a larger operation, typically an attack,      with no intentional pause at the water line. When a hasty      river crossing is not feasible such as when the enemy or      terrain situations prevent it, a hasty crossing attempt      fails, or friendly offensive operations resume at a river      line after a pause, the force conducts a deliberate river      crossing operation. A retrograde river crossing is a movement      to the rear across a water obstacle while in contact with the      enemy. A river crossing is both a tactical task and an      enabling operation. Field Manual 90-13, River Crossing      Operations, gives detailed information concerning the conduct      of a river crossing.")))
+
+(DEFCONCEPT |RiverCrossing-Hasty|
+  :IS-PRIMITIVE |RiverCrossing-MilitaryTask|
+  :ANNOTATIONS (|IKBConstant|
+                |ScriptType|
+                |TemporalObjectType|
+                (DOCUMENTATION "There are three basic types of river crossings: hasty,      deliberate, and retrograde. A hasty river crossing is a task      conducted as part of a larger operation, typically an attack,      with no intentional pause at the water line. When a hasty      river crossing is not feasible such as when the enemy or      terrain situations prevent it, a hasty crossing attempt      fails, or friendly offensive operations resume at a river      line after a pause, the force conducts a deliberate river      crossing operation. A retrograde river crossing is a movement      to the rear across a water obstacle while in contact with the      enemy. A river crossing is both a tactical task and an      enabling operation. Field Manual 90-13, River Crossing      Operations, gives detailed information concerning the conduct      of a river crossing.")))
+
+(DEFCONCEPT |RiverCrossing-MilitaryOperation|
+  :IS-PRIMITIVE |Enabling-MilitaryOperation|
+  :ANNOTATIONS (|IKBConstant|
+                |ScriptType|
+                |MilitaryOperationType|
+                |TemporalObjectType|
+                (DOCUMENTATION "A river crossing operation is an enabling operation conducted in order to project combat power across a water obstacle.")))
+
+(DEFCONCEPT |RiverCrossing-MilitaryTask|
+  :IS-PRIMITIVE |MilitaryTask|
+  :ANNOTATIONS (|IKBConstant|
+                |ScriptType|
+                |TemporalObjectType|
+                (DOCUMENTATION "A river crossing is an operation required before ground combat power can be projected and sustained across a water obstacle. It is a centrally planned and controlled operation that requires the allocation of external crossing means and a force dedicated to the security of the bridgehead. River crossings require specific procedures for success because the water obstacle prevents normal ground maneuver. There are three basic types of river crossings: hasty, deliberate, and retrograde. A hasty river crossing is a task conducted as part of a larger operation, typically an attack, with no intentional pause at the water line. When a hasty river crossing is not feasible such as when the enemy or terrain situations prevent it, a hasty crossing attempt fails, or friendly offensive operations resume at a river line after a pause, the force conducts a deliberate river crossing operation. A retrograde river crossing is a movement to the rear across a water obstacle while in contact with the enemy. A river crossing is both a tactical task and an enabling operation. Field Manual 90-13, River Crossing Operations, gives detailed information concerning the conduct of a river crossing.")))
+
+(DEFCONCEPT |RiverCrossing-Retrograde|
+  :IS-PRIMITIVE |RiverCrossing-MilitaryTask|
+  :ANNOTATIONS (|IKBConstant|
+                |ScriptType|
+                |TemporalObjectType|
+                (DOCUMENTATION "There are three basic types of river crossings: hasty,      deliberate, and retrograde. A hasty river crossing is a task      conducted as part of a larger operation, typically an attack,      with no intentional pause at the water line. When a hasty      river crossing is not feasible such as when the enemy or      terrain situations prevent it, a hasty crossing attempt      fails, or friendly offensive operations resume at a river      line after a pause, the force conducts a deliberate river      crossing operation. A retrograde river crossing is a movement      to the rear across a water obstacle while in contact with the      enemy. A river crossing is both a tactical task and an      enabling operation. Field Manual 90-13, River Crossing      Operations, gives detailed information concerning the conduct      of a river crossing.")))
+
+(DEFCONCEPT |Rupture-MilitaryTask|
+  :IS-PRIMITIVE |MilitaryTask|
+  :ANNOTATIONS (|IKBConstant|
+                |ScriptType|
+                |TemporalObjectType|
+                (DOCUMENTATION "To rupture is to create a gap in enemy defensive positions quickly. Rupture is directed against an enemy defensive force. Breach is the term used in conjunction with an obstacle. For more information, see the penetration discussion in Chapter 5. There is no mission graphic associated with this tactical task.")))
+
+(DEFCONCEPT |Screen-MilitaryTask|
+  :IS-PRIMITIVE (:and |InformationGathering| |MilitaryTask|)
+  :ANNOTATIONS (|IKBConstant|
+                |ScriptType|
+                |TemporalObjectType|
+                (DOCUMENTATION "A screen provides primarily early warning. It observes,      identifies and reports enemy actions. Generally, a      screening force engages and destroys enemy reconnaissance      elements within its capabilities (thereby helping to deny      information to the enemy), but otherwise fights only in      self-defense. ... A screen lacks combat power to develop      the situation. FM100-40, P16-17.")))
+
+(DEFCONCEPT |SearchAndAttack-MilitaryOperation|
+  :IS-PRIMITIVE |MovementToContact-MilitaryOperation|
+  :ANNOTATIONS (|IKBConstant|
+                |ScriptType|
+                |MilitaryOperationType|
+                |TemporalObjectType|
+                (DOCUMENTATION "The collection of instances of ModernMilitaryUnit-Deployable that are involved in offensive operations such as #$SearchAndAttack-MilitaryOperation.")))
+
+(DEFCONCEPT |Secure-MilitaryTask|
+  :IS-PRIMITIVE (:and |AppropriatingSomething| |MilitaryTask|)
+  :ANNOTATIONS (|IKBConstant|
+                |ScriptType|
+                |TemporalObjectType|
+                (DOCUMENTATION "To secure is to gain possession of a position or terrain feature with or without force and try to prevent its destruction or loss by enemy action. A unit does not have to physically occupy a geographical location to secure it if the unit can prevent the enemy from occupying or firing at that location by other means. The subordinate tasks associated with secure are to prevent enemy direct and observed indirect fire from impacting on the secured area and to prevent any enemy forces from occupying or using the secured area. The unit securing the area must normally conduct area security activities. (See Chapter 16.) The tasks of secure differs from that of control because control allows enemy direct and indirect fires to affect the area being controlled. When assigning a mission to secure, the commander must state the area to be secured and the duration of the mission, which is a time- or event-driven constraint.")))
+
+(DEFCONCEPT |Security-MilitaryOperation|
+  :IS-PRIMITIVE |Enabling-MilitaryOperation|
+  :ANNOTATIONS (|IKBConstant|
+                |ScriptType|
+                |MilitaryOperationType|
+                |TemporalObjectType|
+                (DOCUMENTATION "The collection of all military operations conducted to protect the friendly force by providing early and accurate warning of enemy operations, to provide the force being protected with time and maneuver space within which to react to the enemy, and to develop the situation to allow the commander to effectively use the protected force. Security operations orient on the force or facility to be protected, rather than on the enemy. FM 100-40.")))
+
+(DEFCONCEPT |Seize-MilitaryTask|
+  :IS-PRIMITIVE (:and |MilitaryTask| |GainingUserRights|)
+  :ANNOTATIONS (|IKBConstant|
+                |TemporalObjectType|
+                |ScriptType|
+                (DOCUMENTATION "To seize is to clear a designated area or objective and obtain control of it. This task is a combination of the clear and control tasks.  This task differs from that of secure because it requires offensive action to obtain control of the designated area or objective. Once the force gains control, it clears the terrain within that designated area or objective by killing, capturing, or forcing the withdrawal of all enemy forces.")))
+
+(DEFCONCEPT |SingleEnvelopment-MilitaryManeuver|
+  :IS-PRIMITIVE |Envelopment-MilitaryManeuver|
+  :ANNOTATIONS (|IKBConstant|
+                |TemporalObjectType|
+                |ScriptType|
+                (DOCUMENTATION "A military operation which primarily consists of a single enveloping force (main effort and a fixing force (supporting effort).")))
+
+(DEFCONCEPT |SupportByFire-MilitaryTask|
+  :IS-PRIMITIVE |MilitaryTask|
+  :ANNOTATIONS (|IKBConstant|
+                |ScriptType|
+                |TemporalObjectType|
+                (DOCUMENTATION "An instance of #$SupportByFire-MilitaryTask closely      resembles the task of #$AttackByFire-MilitaryTask. The chief      difference is that support by fire is conducted to support      another force so that force can maneuver against the enemy.")))
+
+(DEFCONCEPT |Suppress-MilitaryTask|
+  :IS-PRIMITIVE |MilitaryTask|
+  :ANNOTATIONS (|ScriptType|
+                |TemporalObjectType|
+                |IKBConstant|
+                (DOCUMENTATION "A tactical task employing direct or indirect fires , electronic attack, or smoke on enemy personnel, weapons or equipment to prevent or degrade enemy fires and observation of the friendly forces.")))
+
+(DEFCONCEPT |SurprisingOpponent|
+  :IS-PRIMITIVE (:and |PurposefulAction| |HumanActivity|)
+  :ANNOTATIONS (|ScriptType| |TemporalObjectType| |IKBConstant|))
+
+
+
+;;; ******************** FUNCTIONS AND RELATIONS ********************
+
+(DEFRELATION |delayUntilTime|
+  :ARITY 3
+  :DOMAINS (|MilitaryOperation| |TemporalThing|)
+  :RANGE |ModernMilitaryUnit-Deployable|
+  :ANNOTATIONS (|TernaryPredicate|
+                |Cyc_Role|
+                (DOCUMENTATION "(delayUntilTime OP TEMP UNIT) means that in the instance of #$MilitaryOperation, OP, UNIT has been tasked with delaying enemy movement until the time interval started by TEMP.")))
+
+(DEFRELATION |fireOperationTask|
+  :ARITY 2
+  :DOMAIN |MilitaryOperation|
+  :RANGE |MilitaryTask|
+  :ANNOTATIONS (|BinaryPredicate|
+                |IKBConstant|
+                (DOCUMENTATION "(#$fireOperationTask MISSION TASK) means that TASK is assigned to the fire support of MISSION .")))
+
+(DEFPROPERTY |FlanksOfUnitFn| :ARITY 1 :DOMAIN |ModernMilitaryUnit-Deployable|
+ :ANNOTATIONS
+ (|Cyc_Unary-Function| |IKBConstant| |IndividualDenotingFunction|
+  |ReifiableFunction|
+  (DOCUMENTATION "#$FlanksOfUnitFn is a function which applied to      UNIT, an instance of #$ModernMilitaryUnit-Deployable, yields the      #$GeographicalThing-Intangible-MovableLocation that      constitutes the 'flanks' of UNIT.")))
+
+(DEFRELATION |maneuverElement|
+  :ARITY 2
+  :IS-PRIMITIVE |assignedMilitaryOrg|
+  :DOMAIN |ModernMilitaryUnit-Deployable|
+  :RANGE |ModernMilitaryUnit-Deployable|
+  :ANNOTATIONS (|IKBConstant|
+                |AntiSymmetricBinaryPredicate|
+                |IrreflexiveBinaryPredicate|
+                |TransitiveBinaryPredicate|
+                |AsymmetricBinaryPredicate|
+                (DOCUMENTATION "(#$maneuverElement UNIT SUBUNIT) means that SUBUNIT is subordinate      to and shares a headquarters with UNIT in a particular theater of      combat, and that SUBUNIT is key to the maneuvering capability of      UNIT.")))
+
+(DEFPROPERTY |MilitarySpecialtyObstacleFn| :ARITY 1 :DOMAIN
+ |MilitaryUnitSpecialtyType| :ANNOTATIONS
+ (|Cyc_Unary-Function| |CollectionDenotingFunction|
+  (DOCUMENTATION "(#$MilitarySpecialtyObstacleFn SPECIALTY) returns the collection of all instances of #$ObstacleSystem-Military specifically designed to impede movements of military units of specialty type SPECIALTY.")))
+
+(DEFPROPERTY |MilitaryTaskObstacleFn| :ARITY 1 :DOMAIN
+ (:AND |ExistingObjectType| (:FILLED-BY SUPERRELATIONS |MilitaryTask|))
+ :ANNOTATIONS
+ (|CollectionDenotingFunction|
+  (DOCUMENTATION "(#$MilitaryTaskObstacleFn TASKTYPE) returns the collection of all instances of #$ObstacleSystem-Military specifically designed to interfere with or prevent the performance of tasks of type TASKTYPE.")))
+
+(DEFRELATION |objectSought|
+  :ARITY 2
+  :IS-PRIMITIVE |preActors|
+  :DOMAIN |LookingForSomething|
+  :RANGE |PartiallyTangible|
+  :ANNOTATIONS (|ActorSlot|
+                |BinaryPredicate|
+                (DOCUMENTATION "#$objectSought is a predicate that relates an instance of PurposefulAction in which something is being looked for to the thing sought. (objectSought ACTION OBJECT) means that one of the purposes of ACTION is to locate OBJECT.")))
+
+(DEFRELATION |potentialDutyOfAgentType|
+  :ARITY 3
+  :DOMAINS ((:AND |ExistingObjectType| (:FILLED-BY SUPERRELATIONS |Agent|))
+            |SetOrCollection|)
+  :RANGE |ActorSlot|
+  :ANNOTATIONS (|IKBConstant|
+                |TernaryPredicate|
+                (DOCUMENTATION "#$potentialDutyOfAgentType is a variant of #$potentialDutyOfAgent whose first argument is a type of #$Agent rather than an instance of #$Agent.")))
+
+(DEFRELATION |riskFactorForCOA|
+  :ARITY 2
+  :DOMAIN |COASpecificationMicrotheory|
+  :RANGE |CycFormula|
+  :ANNOTATIONS (|BinaryPredicate|
+                |IKBConstant|
+                (DOCUMENTATION "(#$riskFactorForCOA COAMT PROP) means that PROP is a risk factor in the course of action specified in COAMT.")))
+
+(DEFRELATION |unitAssignedNthSuppEffort|
+  :ARITY 3
+  :DOMAINS (|MilitaryOperation| |ModernMilitaryUnit-Deployable|)
+  :RANGE |Cyc_Integer|
+  :ANNOTATIONS (|TernaryPredicate|
+                |IKBConstant|
+                (DOCUMENTATION "(unitAssignedNthSuppEffort MISSION UNIT N) means that      UNIT is the Nth supporting effort during MISSION.")))
+
+(DEFRELATION |unitHasInsufficientCombatPower|
+  :ARITY 2
+  :DOMAIN |COASpecificationMicrotheory|
+  :RANGE |ModernMilitaryUnit-Deployable|
+  :ANNOTATIONS (|BinaryPredicate|
+                |IKBConstant|
+                (DOCUMENTATION "(#$unitHasInsufficientCombatPower COAMT UNIT) means that UNIT has insufficient combat power for the task(s) assigned to it in the course of action specified in COAMT.")))
+
+(DEFRELATION |unitOperatingInRear|
+  :ARITY 2
+  :DOMAIN |MilitaryOperation|
+  :RANGE |ModernMilitaryUnit-Deployable|
+  :ANNOTATIONS (|BinaryPredicate|
+                |IKBConstant|
+                (DOCUMENTATION "(#$unitOperatingInRear MISSION UNIT) means that UNIT operates in the rear of the battlefield during MISSION.")))
+
+(DEFRELATION |unitWithInsufficientCombatPowerForTask|
+  :ARITY 2
+  :DOMAIN |ModernMilitaryUnit-Deployable|
+  :RANGE |MilitaryTask|
+  :ANNOTATIONS (|BinaryPredicate|
+                |IKBConstant|
+                (DOCUMENTATION "(#$unitWithInsufficientCombatPowerForTask UNIT TASK) means that UNIT has insufficient combat power for TASK.")))
+
+
+
+;;; ******************** GENERAL ASSERTIONS ********************
+

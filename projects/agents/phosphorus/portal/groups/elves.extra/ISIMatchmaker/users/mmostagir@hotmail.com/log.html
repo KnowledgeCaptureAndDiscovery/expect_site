@@ -1,0 +1,68 @@
+<html>
+<head>
+<script>
+var limit="0:30"
+if (document.images){
+  var parselimit=limit.split(":");
+  parselimit=parselimit[0]*60+parselimit[1]*1;
+  }
+function resubmit(val) {
+    var myform = eval("document.form"+val);
+    myform.submit();
+}
+function beginrefresh(){
+  if (!document.images)
+      return;
+   if (parselimit==1)
+      window.location.reload();
+   else {
+      parselimit-=1;
+      curmin=Math.floor(parselimit/60);
+      cursec=parselimit%60;
+      if (curmin!=0)
+         curtime=curmin+" minutes and "+cursec+" seconds left until page refresh!";
+      else
+         curtime=cursec+" seconds left until page refresh!";
+      window.status=curtime
+      setTimeout("beginrefresh()",1000)
+   }
+ }
+window.onload=beginrefresh;
+</script>
+</head>
+<table>
+<tr><td colspan=2>----Fri Mar 29 15:47:11 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>at institution</b></td><td>INFORMATION-SCIENCES-INSTITUTE</td></tr>
+<tr><td><b>for user id</b></td><td>mmostagir@hotmail.com</td></tr>
+<tr><td><b>with interest</b></td><td>KNOWLEDGE-ACQUISITION</td></tr>
+<tr><td><b>with interest</b></td><td></td></tr>
+<tr><td><b>with interest</b></td><td></td></tr>
+<tr><td><b>with interest</b></td><td></td></tr>
+<tr><td><b>with interest</b></td><td></td></tr>
+<tr><td><b>with interest</b></td><td></td></tr>
+<tr><td><b>with interest</b></td><td></td></tr>
+<tr><td><b>using combinator</b></td><td>OR</td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+<b>YOLANDA GIL, JEFF RICKEL, THOMAS A RUSS, </b></td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1017445631)'></td></tr>
+</table><br>
+<form name='form1017445631' action="/cgi-bin/portal/agent-req.pl" target="_blank" method="post">
+<input type='hidden' name='val0' value='INFORMATION-SCIENCES-INSTITUTE'>
+<input type='hidden' name='val1' value='mmostagir@hotmail.com'>
+<input type='hidden' name='val2' value='KNOWLEDGE-ACQUISITION'>
+<input type='hidden' name='val3' value=''>
+<input type='hidden' name='val4' value=''>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='val7' value=''>
+<input type='hidden' name='val8' value=''>
+<input type='hidden' name='val9' value='OR'>
+<input type='hidden' name='agent' value='ISIMatchmaker'>
+<input type='hidden' name='email' value='mmostagir@hotmail.com'>
+</form>
+
+<p>
+</html>

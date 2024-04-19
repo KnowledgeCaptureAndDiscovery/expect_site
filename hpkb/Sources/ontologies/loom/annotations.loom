@@ -1,0 +1,49 @@
+;;; -*- Mode: Lisp; Package: BATTLE-SPACE; Syntax: COMMON-LISP; Base: 10 -*-
+
+;;; Support for Cross-references and source annotations
+
+;;; Version: $Id: annotations.loom,v 1.1 1998/04/07 18:51:34 hans Exp $
+
+(in-package "BATTLE-SPACE")
+
+
+(defconcept Web-Source-Link
+  :is-primitive See-Also-Link
+  :defaults (:filled-by qv-display-text "Source Data"))
+
+(defconcept Non-Web-Source-Link
+  :is-primitive See-Also-Link
+  :defaults (:filled-by qv-display-text "Off-line Source Data"))
+
+(defconcept Home-Page-Link
+  :is-primitive See-Also-Link
+  :defaults (:filled-by qv-display-text "Home Page"))
+
+(defconcept Full-Image-Link
+  :is-primitive See-Also-Link
+  :defaults (:filled-by qv-display-text "Full Image"))
+
+(defrelation content-created-by)
+(defrelation content-modified-by)
+
+(tell (:about Jim-Donlon-link
+              Home-Page-Link
+              (;; http://www.cs.nwu.edu/people/grads.html
+               qv-url "http://donlonpc.ils.nwu.edu/")))
+
+(tell (:about Jim-Donlon
+              (see-also Jim-Donlon-link)))
+
+(tell (:about CYCORP-link
+              Home-Page-Link
+              (qv-url "http://www.cyc.com/")))
+
+(tell (:about CYCORP
+              (see-also CYCORP-link)))
+
+(tell (:about Hans-Chalupsky-link
+              Home-Page-Link
+              (qv-url "http://www.isi.edu/isd/LOOM/Chalupsky-home.html")))
+
+(tell (:about Hans-Chalupsky
+              (see-also Hans-Chalupsky-link)))

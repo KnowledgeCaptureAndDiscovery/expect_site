@@ -1,0 +1,165 @@
+<!-- <?xml version='1.0'?> -->
+
+<!--
+
+IF YOU CAN READ THIS, YOUR BROWSER DOESN'T SUPPORT XML.
+
+PLEASE UPDATE YOUR BROWSER, OR VIEW THE HTML VERSION OF THIS PAGE.
+
+-->
+<!--
+When the schema works, reference it like this; change the project tag below to this
+<project xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation = "isd-personnel.xsd">
+-->
+<project>
+  <name>dialog-manager</name>
+  <title>Dialogue Management for Knowledge Acquisition</title>
+
+  <status>
+    <short>
+   We just started to work on the initial spec.
+  </short>
+  <long>
+
+</long>
+ 
+  </status>
+
+  <description>
+    <short>
+     We are trying to build a Dialog Manager that can
+keep track of the user's actions and can make suggestions for how to proceed
+in building knowledge base.
+    </short>
+
+    <long>
+
+<p />
+We are developing a dialogue manager that uses KA plans to keep 
+track of the user's actions and can make suggestions for how to 
+proceed.  The dialogue manager would support: 1) generation, to 
+suggest to the user what to do next based on the library of KA plans, 
+2) recognition, to track what the user is doing in terms of the KA 
+plans.  The dialogue state would be shown to the user as a "status" 
+window, where the user could see the currently active KA plans as a 
+list of bullets and sub-bullets, each bullet would be checked if 
+completed and collapsed when all its sub-bullets are completed.  The 
+user could choose to toggle between a "suggest" mode (generation) and 
+a "comment" mode (recognition).  We could also keep a history of the 
+user's sessions, and be more forceful to impose the "suggest" mode to 
+new users or when a more experience user tries a new 
+feature/capability of the system.
+
+<p />
+A new capability that we'd like to support with this work is 
+meta-level interaction with the user.  By allowing users to 
+manipulate/edit the status window, they could indicate whether a 
+certain task is completed (e.g., I'm done adding sub-steps).
+
+<p />
+To develop the library of KA plans we would draw ideas from 
+Intelligent Tutoring Systems, in effect trying to make SHAKEN a 
+smarter student.  An initial (old) outline is posted at 
+ <a href="http://www.isi.edu/~gil/rkf/ITS.ppt">
+http://www.isi.edu/~gil/rkf/ITS.ppt</a>.  For example, ITS often start by 
+showing the student the purpose of a lesson, partly to give the 
+student a roadmap but also to detect any gaps in the student's prior 
+knowledge assumed by the lesson.  There are many other interesting 
+points about controlling nested subdialogues, teaching strategies, 
+providing immediate feedback, etc.
+
+<p />
+An intriguing possibility is to use this as a way to 
+determine/compare the quality of human tutors by looking at how and 
+how much they complete the KA plans (how organized their lessons are, 
+how thorough with details), and eventually to train human tutors 
+through practicing with the system.
+
+<p />
+We have done some previous work in this area on KA Scripts and 
+PSMTool, several papers are available at 
+<a href="http://www.isi.edu/expect/link/papers-ka.html">
+http://www.isi.edu/expect/link/papers-ka.html</a>.
+<p />
+
+More details are available at 
+<a href="http://www.isi.edu/expect/projects/rkf/dialog-manager.html">
+http://www.isi.edu/expect/projects/rkf/dialog-manager.html</a>.
+<p />
+    </long>
+  </description>
+
+  <research>
+    <short>
+     Dialog Management, Dialog Strategies, Mixed-Initiative systems, Agenda
+    </short>
+    <long>
+    Please see our <a
+href="http://www.isi.edu/expect/projects/rkf/dialog-manager.html">initial
+sketch</a> of the dialog manager.
+    </long>
+  </research>
+
+  <link>
+   <a href="http://www.isi.edu/expect/projects/rkf/dialog-manager.html">Initial Sketch</a>
+  </link>
+  <link>
+   <a href="http://www.isi.edu/~gil/rkf/ITS.ppt">
+   Drawing ideas from Tutoral Dialogs</a>
+  <ul>
+  <li><a
+href="http://www.pitt.edu/~circle/Projects.html">CIRCLE project</a> 
+  </li>
+
+  <li>CIRCSIM
+  </li>
+  <li>Why project 
+  </li>
+ <li> ...</li>
+  </ul>
+  </link>
+
+  <link>
+  Dialog Systems
+  <ul>
+   <li><a
+href="http://www.cs.rochester.edu/research/cisd/projects/">Trips/Trains</a> 
+  </li>
+   <li><a
+href="http://www.merl.com/projects/collagen/">Collagen</a> 
+  </li>
+  <li> ...</li>
+  </ul>
+  </link>
+
+  <link>
+  Our previous work in this area
+  <ul>
+  <li><a
+href="http://www.isi.edu/expect/web/ka-scripts/">KA
+script</a></li>
+
+  <li><a
+href="http://www.isi.edu/expect/web/psmtool/">
+PSM Tool</a></li>
+  </ul>
+  </link>
+
+
+
+<!-- Demo -->
+<demo>
+<P>
+
+</P>
+
+
+
+     <center>
+	  <img src="../tn_comingsoon.jpg"/>
+	  </center>
+
+
+</demo>
+</project>

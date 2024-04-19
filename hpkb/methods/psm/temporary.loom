@@ -1,0 +1,70 @@
+;;; This stuff was in resources-and-constraints, but doesn't fit in that
+;;; ontology. Most of it should be aligned with our critique ontology,
+;;; which evolved a little.
+
+(in-package "EVALUATION")
+(use-package '("EXPECT" "PLANET"))
+(loom::use-loom "EVALUATION" :dont-create-context-p t)
+
+#|
+;;; Belongs in the critiquing ontology.
+(defconcept aspect
+  "An aspect of an evaluation is a point-of-view, such as logistics, or
+feasibility or adherence to doctrine. Each factor of the aspect yields
+a value - for instance a resource or constraint check."
+  :is-primitive (:and ; domain-concept
+	       thing
+	       (:all facet-factor evaluation-facet)))
+|#
+
+;;; belongs in the critiquing ontology
+(defrelation evaluation-aspect
+  :domain plan
+  :range evaluation-structure)
+
+;;; This is a default aspect, not used in the HPKB critiquer.
+;;;(tellm (about resource-usage evaluation-structure 
+	    ;;aspect
+;;;	    ))
+
+;;; This object is basically used as a truth value, like "true" and
+;;; "false", but I haven't made it an instance of a generalised version
+;;; of "Boolean" because the domain is currently set up to expect
+;;; failure when a relation access returns "unknown".
+
+;;;(tellm (about unknown top-domain-concept))
+
+;;; All individual constraints, resource checks etc are instances of
+;;; this concept.
+(defconcept evaluation-facet
+  "An evaluation-facet is an element of the set of constraint checks
+made for a particular aspect. Eg for the feasibility aspect, the
+force-ratio check is a factor."
+  :is-primitive  critique ;;domain-concept
+  )
+
+;;; By default, a plan is evaluated wrt resource usage by checking that
+;;; each used-resource is available to satisfy each military-task. This is
+;;; not done for HPKB COA's, where specific aspects and their factors
+;;; are declared.
+#|
+No longer used
+(defrelation used-resource
+  :domain plan-to-critique
+  :range resource-check)
+|#
+
+#|
+;;; belongs in the critiquing ontology
+(defrelation facet-factor
+  "The relation 'facet-factor' links an aspect of a plan to the
+evaluation-facets (the particular constraint checks) that make up the
+aspect."
+  :domain aspect
+  :range evaluation-facet)
+|#
+
+
+(defrelation max-allowed-parents
+  :domain plan-task
+  :range number)

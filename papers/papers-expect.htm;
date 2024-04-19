@@ -1,0 +1,247 @@
+<TITLE> Papers on EXPECT</TITLE>
+
+<H1> Papers on EXPECT </H1>
+
+
+<P><HR>
+
+Yolanda Gil and Eric Melz.
+"Explicit Representations of Problem-Solving Strategies
+to Support Knowledge Acquisition".
+<i>Proceedings of the Thirteen National Conference on Artificial 
+Intelligence (AAAI-96)</i>, Portland, OR, August 4-8, 1996.
+(<A HREF="http://www.isi.edu/expect/papers/gil-melz-aaai96.ps">Postscript file </A>) 
+<P>
+
+<B> Abstract: </B>
+Role-limiting approaches support knowledge acquisition (KA) by centering 
+knowledge base construction on common types of tasks or domain-independent 
+problem-solving strategies.  Within a particular problem-solving strategy, 
+domain-dependent knowledge plays specific roles.  A KA tool then helps a user 
+to fill these roles.  Although role-limiting approaches are useful for 
+guiding KA, they are limited because they only support users in filling 
+knowledge roles that have been built in by the designers of the KA system.  
+EXPECT takes a different approach to KA by representing problem-solving 
+knowledge explicitly, and deriving from the current knowledge base the 
+knowledge gaps that must be resolved by the user during KA.  This paper 
+contrasts role-limiting approaches and EXPECT's approach, using the 
+propose-and-revise strategy as an example.  EXPECT not only supports users in 
+filling knowledge roles, but also provides support in 1) adapting the 
+problem-solving strategy, 2) changing the types of information to be 
+acquired about a knowledge role, 3) adding new knowledge roles, and 
+4) acquiring additional background information about the domain needed 
+by the knowledge-based system.  EXPECT's guidance changes as the knowledge 
+base changes, providing a more flexible approach to knowledge acquisition.  
+This work provides evidence supporting the need for explicit representations 
+in building knowledge-based systems.
+<P>
+
+<P><HR>
+
+
+
+
+William R. Swartout and Yolanda Gil.
+"EXPECT: A User-Centered Environment for the Development  
+and Adaptation of Knowledge-Based Planning Aids".
+In <i>Advanced Planning Technology: Technological Achievements 
+of the ARPA/Rome Laboratory Planning Initiative</i>, 
+ed. Austin Tate. Menlo Park, Calif.: AAAI Press, 1996.
+(<A HREF="http://www.isi.edu/expect/papers/swartout-gil-arpi96.ps">Postscript file</A>) 
+<P>
+
+<B> Abstract: </B> 
+EXPECT provides an environment for developing knowledge-based
+systems that allows end-users to add new knowledge without needing
+to understand the details of system organization and
+implementation.  The key to EXPECT's approach is that it
+understands the structure of the knowledge-based system being
+built: how it solves problems and what knowledge it needs to
+support problem-solving. EXPECT uses this information to guide
+users in maintaining the knowledge-based system. We have used
+EXPECT to develop a tool for evaluating transportation plans.
+<P>
+
+
+<P><HR>
+
+
+
+Bill Swartout and Yolanda Gil.
+"Flexible Knowledge Acquisition Through 
+Explicit Representation of Knowledge Roles".
+<i>1996 AAAI Spring Symposium on Acquisition, Learning, and Demonstration:
+Automating Tasks for Users</i>, Stanford, CA, March 1996.
+(<A HREF="http://www.isi.edu/expect/papers/swartout-gil-sss96.ps">Postscript file </A>) 
+<P>
+
+<B> Abstract: </B> 
+A system that acquires knowledge from a user should be able to
+reflect upon the knowledge that it has - at each moment - and
+understand what kinds of new knowledge it needs to learn. For the
+past two decades, research in the area of knowledge acquisition has
+been moving towards systems that have access to richer
+representations of knowledge about their task.  This paper reviews
+some well-known knowledge acquisition tools representative of this
+trend.  It also describes our recent work in EXPECT, a system with
+explicit representations of knowledge about the task and the domain 
+that supports knowledge acquisition for a wider range of tasks and
+applications than its predecessors.  We hope our observations will
+be useful to researchers in user interfaces and in machine learning
+concerned with acquiring information from users.
+<P>
+
+
+
+<P><HR>
+
+
+
+Yolanda Gil and Marcelo Tallis.
+"Transaction-Based Knowledge Acquisition: 
+Complex Modifications Made Easier".
+<i>In Proceedings of the Ninth Knowledge Acquisition for 
+Knowledge-Based Systems Workshop</i>, February 26-March 3, 1995.
+Banff, Alberta, Canada. 
+(<A HREF="http://www.isi.edu/expect/papers/gil-tallis-kaw95.ps">Postscript file</A>) 
+<P>
+
+<B> Abstract: </B> Our goal is to build knowledge acquisition tools that 
+support users in making a broad range of changes to a knowledge 
+base, including both factual and problem-solving knowledge.  These 
+changes may require several individual modifications to various 
+parts of the knowledge base, that need to be carefully coordinated 
+to prevent users from introducing errors in the knowledge base.
+Thus, it becomes essential that our KA tools understand the 
+consequences of each kind of change that the user may initiate, 
+detect any harmful side-effects that can be introduced in the
+system, and guide the user in resolving them.  To address this 
+issue, we have developed a transaction-based approach to knowledge
+acquisition that can support users in making complex modifications
+to a knowledge base.  A transaction is a sequence of changes that
+together modify some aspect of the behavior of a knowledge-based
+system, and that when only partially carried out may leave the 
+knowledge base in an undesirable state.  If a user executes a
+transaction partially, the knowledge acquisition tool must provide 
+guidance to finish it and support the user in achieving the desired
+modification.  This paper also describes our work in extending 
+EXPECT's knowledge acquisition tool to support transaction-based 
+mechanisms.  EXPECT tracks the possible problems that arise
+as a consequence of each individual change to the knowledge base,
+keeps information about the context of each change, and uses this 
+context to resolve the problems detected and to request the user's 
+intervention if additional information is needed. 
+<P>
+
+<P><HR>
+
+Bill Swartout and Yolanda Gil.
+"EXPECT: Explicit Representations for Flexible Acquisition".
+<i>In Proceedings of the Ninth Knowledge Acquisition for 
+Knowledge-Based Systems Workshop</i>, February 26-March 3, 1995.
+Banff, Alberta, Canada. 
+(<A HREF="http://www.isi.edu/expect/papers/swartout-gil-kaw95.ps">Postscript file</A>)
+<P>
+
+<B> Abstract: </B> To create more powerful knowledge acquisition systems, we
+not only need better acquisition tools, but we need to change the
+architecture of the knowledge based systems we create so that their
+structure will provide better support for acquisition.  Current
+acquisition tools permit users to modify factual knowledge but they
+provide limited support for modifying problem solving knowledge. 
+In this paper, we argue that this limitation (and others) stem from
+the use of incomplete models of problem solving knowledge and
+inflexible specification of the interdependencies between problem
+solving and factual knowledge.  We describe the EXPECT architecture
+which addresses these problems by providing an explicit
+representation for problem solving knowledge and intent. Using this
+more explicit representation, EXPECT can automatically derive the
+interdependencies between problem solving and factual knowledge. 
+By deriving these interdependencies from the structure of the
+system itself EXPECT supports more flexible and powerful knowledge
+acquisition.
+<P>
+
+
+<P><HR>
+
+
+
+Yolanda Gil and Cecile Paris.
+"Towards Method-Independent Knowledge Acquisition".
+<i>Knowledge Acquisition</i>, Special issue on
+Machine Learning and Knowledge Acquisition, 
+Volume 6 Number 2, June 1994.
+(<A HREF="http://www.isi.edu/expect/papers/gil-paris-kaj94.ps">Postscript file</A>) 
+<P>
+
+<B> Abstract: </B> 
+Rapid prototyping and tool reusability have pushed knowledge
+acquisition research to investigate method-specific knowledge
+acquisition tools appropriate for predetermined problem-solving
+methods.  We believe that method-dependent knowledge acquisition is 
+not the only
+approach.  The aim of our research is to develop powerful yet
+versatile machine learning mechanisms that can be incorporated into
+general-purpose but practical knowledge acquisition tools.  This paper
+shows through examples the practical advantages of this approach.  In
+particular, we illustrate how existing knowledge can be used to
+facilitate knowledge acquisition through analogy mechanisms within a
+domain and across domains.
+Our sample knowledge acquisition dialogues with a
+domain expert illustrate which parts of the process are addressed by
+the human and which parts are automated by the tool, in a synergistic
+cooperation for knowledge-base extension and refinement.  The paper
+also describes briefly the EXPECT problem-solving architecture
+that facilitates this approach to knowledge acquisition.
+<P>
+
+
+<P><HR>
+
+
+
+Yolanda Gil.
+"Knowledge Refinement in a Reflective Architecture".
+<i>Proceedings of the Twelfth National Conference of Artificial 
+Intelligence (AAAI-94)</i>,  Seattle, WA, August 1994. 
+(<A HREF="http://www.isi.edu/expect/papers/gil-aaai94.ps">Postscript file</A>) <P>
+
+
+<B> Abstract: </B> 
+A knowledge acquisition tool should provide a user with
+maximum guidance in extending and debugging a knowledge base, by preventing
+inconsistencies and knowledge gaps that may arise inadvertently.  Most
+current acquisition tools are not very flexible in that they are built
+for a predetermined inference structure or problem-solving mechanism,
+and the guidance they provide is specific to that inference structure
+and hard-coded by their designer.  This paper focuses on EXPECT, a
+reflective architecture that supports knowledge acquisition 
+based on an explicit analysis of the structure of a knowledge-based     system,
+rather than on a fixed set of acquisition guidelines.
+EXPECT's problem solver is tightly integrated with LOOM, a
+state-of-the-art knowledge representation system.  Domain facts and
+goals are represented declaratively, and the problem solver keeps
+records of their functionality within the task domain.  When the user
+corrects the system's knowledge, EXPECT tracks any possible
+implications of this change in the overall system and cooperates with
+the user to correct any potential problems that may arise. The key to
+the flexibility of this knowledge acquisition tool is that it
+adapts its guidance as the knowledge bases evolve in response to
+changes introduced by the user.
+<P>
+
+
+<P><HR>
+
+
+
+<A HREF="http://www.isi.edu/~gil/yg-homepage.html">
+<i>Yolanda Gil</i></A> 
+<A HREF=mailto:gil@isi.edu>gil@isi.edu</A>
+
+
+
+
+
+

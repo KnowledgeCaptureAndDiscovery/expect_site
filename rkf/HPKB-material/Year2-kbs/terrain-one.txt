@@ -1,0 +1,512 @@
+;; Terrain and Trafficability
+
+;; see also the militarily significant areas file
+
+
+
+constant: AvenueOfApproach.  
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ExistingObjectType IKBConstant.
+
+genls: Path-Customary GeographicalRegion.
+
+comment: "Collection of air and ground routes that an attacking force
+
+of a given size may use to approach its objective.  Instances are
+
+lanes or paths whereby supplies, forces, weapons and materiel can be
+
+conveyed from one location to another by directed traversals in the
+
+circumscribed planning context of a #$COASpecificationMicrotheory.
+
+Not all instances are trafficable for all kinds cited; trafficability
+
+depends upon terrain-type and many other factors.  See
+
+#$terrainTypeOfAvenue and #$trafficableForUnit.  From FM101-5-1.".
+
+
+
+constant: AvenueOfApproach-Air.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ExistingObjectType IKBConstant.
+
+genls: AvenueOfApproach.
+
+comment: "Collection of aerial routes by which a air-based units may
+
+approach their objectives, either autonomously or in support of
+
+ground-based units, and either for purposes of attack or in order to transport
+
+supplies.".
+
+
+
+constant: AvenueOfApproach-Ground.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ExistingObjectType IKBConstant.
+
+genls: AvenueOfApproach.
+
+comment: "Collection of all surface routes by which ground-based
+
+military unitsmay approach their objectives, either for purposes of
+
+attack or in order to transport supplies.".
+
+
+
+constant: MobilityCorridor.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ExistingObjectType IKBConstant.
+
+genls: AvenueOfApproach.
+
+comment: "Areas where a mobile military force will be effectively
+
+canalized due to terrain constructions and outlay. The mobility
+
+corridor is relatively free of obstacles and allows military forces to
+
+capitalize on the principles of mass and speed.  From FM 101-5-1,
+
+p.1-104.".
+
+
+
+constant: InfiltrationLane.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ExistingObjectType IKBConstant.
+
+genls: AvenueOfApproach.
+
+comment: "Region through which forces may be infiltrated, in small
+
+groups or individually, at extended or irredular intervals, avoiding
+
+contact with the enemy.  FM 101-5-1.".
+
+
+
+constant: terrainTypeOfAvenue.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: BinaryPredicate IKBConstant.
+
+genlPreds: terrainAttributes.
+
+arg1Isa: AvenueOfApproach.
+
+arg2Isa: TerrainAttribute.
+
+comment: "(#$terrainTypeOfAvenue AVENUE TERRAINATT) means that the
+
+#$AvenueOfApproach has the #$TerrainAttribute TERRAINATT for the
+
+majority of its extent.  Since many #$TerrainAttributes will vary
+
+depending on, e.g., local meteorological conditions, time of year,
+
+&c., assertions involving #$terrainTypeOfAvenue should ordinarily be
+
+asserted within a temporally constrained context, preferably within an
+
+instance of #$COASpecificationMicrotheory.".
+
+
+
+constant: trafficableForUnit.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: BinaryPredicate IKBConstant.
+
+arg1Isa: AvenueOfApproach.
+
+arg2Isa: ModernMilitaryUnit-Deployable.
+
+comment: "(#$trafficableForUnit PATH UNIT) means that the instance of
+
+#$ModernMilitaryUnit-Deployable UNIT is #$behaviorCapable playing
+
+the role of #$performedBy with respect to the class of instances of
+
+#$Movement-TranslationEvent wherein the #$AvenueOfApproach PATH has
+
+the role #$pathway-Partial.".
+
+cyclistNotes: "This is an instance-level predicate, used for
+
+concluding that a particular unit is capable of traversing a
+
+particular region in certain specified conditions.".
+
+F:
+
+(implies
+
+  (trafficableForUnit ?PATH ?UNIT)
+
+  (behaviorCapable ?UNIT 
+
+   (SituationFn ?MOVE 
+
+    (and
+
+      (isa ?MOVE Movement-TranslationEvent)
+
+      (pathway-Partial ?MOVE ?PATH))) performedBy)).
+
+    
+
+constant: trafficableForUnitTypeInRole.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: QuaternaryPredicate IKBConstant.
+
+arg1Isa: AvenueOfApproach.
+
+arg2Isa: MilitaryUnitSpecialtyType.
+
+arg2Genl: ModernMilitaryUnit-Deployable.
+
+arg3Isa: ScriptType.
+
+arg3Genl: Movement-TranslationEvent. 
+
+arg4Isa: ActorSlot.
+
+comment: "(#$trafficableForUnitTypeInRole AVENUE UNITTYPE SITTYPE
+
+ROLE) means that terrain conditions in the instance of
+
+#$AvenueOfApproach are such as to permit an instance of the
+
+#$MilitaryUnitSpecialtyType UNITTYPE to play the role ROLE in
+
+movements of type SITTYPE.  It does not mean that every instance of
+
+UNITTYPE is capable of playing ROLE in every
+
+#$Movement-TranslationEvent of type SITTYPE, only that the terrain is
+
+generally suitable for units of said type to play said role in events
+
+of this kind.  For talking about *levels* of restriction with respect
+
+to trafficability for unit- and maneuver-type, see
+
+#$trafficabilityLevelForUnitType.".
+
+cyclistNotes: "This is probably the most specific and versatile of the
+
+terrain trafficability predicates. An avenue of approach that will be
+
+trafficable for one kind of unit performing one kind of task or
+
+maneuver will not necessarily be trafficable for another kind of unit
+
+performing a different kind of task or maneuver: this predicate allows
+
+us to take account of that possibility should it prove necessary.  The
+
+predicate #$degreeOfTrafficability refers to a kind of generic
+
+trafficability level for all kinds military units and does not allow
+
+us to make this distinction; the predicate #$trafficableForUnit is
+
+instance level and not type.  These other predicates do have their
+
+uses, however, and so for the moment we will keep the whole
+
+ensemble.".
+
+ 
+
+constant: TerrainTrafficabilityLevel.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: LinearOrderAttributeType PrimitiveAttributeType.
+
+genls: ScalarInterval.
+
+comment: "A collection of attributes: instances are attributes that
+
+describe the general trafficability of a particular instance of
+
+#$AvenueOfApproach or #$MobilityCorridor without being particularly
+
+specific as to the nature and character of the terrain, or the nature
+
+and character of the agents for whom the terrain is trafficable.  Such
+
+attributes will often be referenced with the instances of
+
+#$GenericValueFunction.  In addition, there are three instances
+
+explicitly reified: #$TerrainUnrestricted, #$TerrainRestricted, and
+
+#$TerrainSeverelyRestricted.".
+
+cyclistNotes: "The instances of this class of attributes are to be
+
+used primarily in circumstances where it is possible to talk about the
+
+'level' of trafficability of a particular region independent of the
+
+characteristics and capabilities of the agents that are traveling in
+
+that region.  Five of the six levels of #$TerrainTrafficabilityLevel that
+
+can be reified via the five instances of #$GenericValueFunction correspond
+
+to the
+
+Avenue of Approach and Mobility Corridor attributes reference on p. 68
+
+of v.1.0 of the COA CP specification.  If the user is dealing with a
+
+situation where the terrain trafficability varies with the kind and
+
+situation of the agent, he or she is strongly urged to use
+
+#$trafficableForUnitTypeInRole instead.".
+
+
+
+constant: TerrainUnrestricted.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: TerrainTrafficabilityLevel.
+
+comment: "TerrainUnrestricted is defined in FM 34-130 as terrain free
+
+of any restriction to movement.".
+
+F:
+
+(genlAttributes (HighAmountFn TerrainTrafficabilityLevel)
+
+TerrainUnrestricted).
+
+F:
+
+(genlAttributes (VeryHighAmountFn TerrainTrafficabilityLevel)
+
+TerrainUnrestricted).
+
+
+
+constant: TerrainRestricted.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: TerrainTrafficabilityLevel.
+
+comment: "Restricted terrain is defined in FM 34-130 as terrain that
+
+hinders movement to some degree.  Little effort is needed to enhance
+
+mobility, but units have difficulty maintaining preferred speeds.  For
+
+armored and mech forces, this is typically characterized b moderate to
+
+steep slopes or moderate to densely spaced obstacles such as trees,
+
+rocks, or buildings.".
+
+F:
+
+(genlAttributes (LowAmountFn TerrainTrafficabilityLevel) TerrainRestricted).
+
+F:
+
+(genlAttributes (MediumAmountFn TerrainTrafficabilityLevel)
+
+TerrainRestricted).
+
+
+
+constant: TerrainSeverelyRestricted.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: TerrainTrafficabilityLevel.
+
+comment: "Severely restricted terrain defined in FM 34-130 as terrain
+
+that severely hinders or slows movement formations unless some effort
+
+is made to enhance mobility.  For armored and mechanized forces, this
+
+is typically characterized by steep slopes and large or densely spaced
+
+obstacles with little or no supporting roads.".
+
+F:
+
+(genlAttributes (NoAmountFn TerrainTrafficabilityLevel) TerrainRestricted).
+
+F:
+
+(genlAttributes (VeryLowAmountFn TerrainTrafficabilityLevel)
+
+TerrainRestricted).
+
+F:
+
+(followingValue TerrainRestricted TerrainSeverelyRestricted).
+
+F:
+
+(followingValue TerrainUnrestricted TerrainRestricted).
+
+
+
+constant: degreeOfTrafficability.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: BinaryPredicate IKBConstant. 
+
+genlPreds: hasAttributes.
+
+arg1Isa: GeographicalRegion.
+
+arg2Isa: TerrainTrafficabilityLevel.
+
+comment: "(#$degreeOfTrafficability REGION TTL) means that the
+
+#$TerrainTrafficabilityLevel of REGION is, generally speaking, TTL for
+
+agents or more specifically military units attempting to cross it.
+
+This predicate is used for making fairly sweeping, generic statements
+
+about terrain trafficability and should not be employed in situations
+
+where it is necessary to talk about variant trafficability for
+
+different kinds of unit.  For this purpose, see
+
+#$trafficableForUnitTypeInRole and #$trafficabilityLevelForUnitType.".
+
+
+
+constant: trafficabilityLevelForUnitType.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: QuintaryPredicate IKBConstant.
+
+arg1Isa: AvenueOfApproach.
+
+arg2Isa: MilitaryUnitSpecialtyType.
+
+arg2Genl: ModernMilitaryUnit-Deployable.
+
+arg3Isa: ScriptType.
+
+arg3Genl: Movement-TranslationEvent. 
+
+arg4Isa: ActorSlot.
+
+arg5Isa: TerrainTrafficabilityLevel.
+
+comment: "This quintary predicate allows us to use
+
+#$TerrainTrafficabilityLevel attributes to do more than just make a
+
+blanket attribution of trafficability level for a certain piece of
+
+terrain.  (#$trafficabilityLevelForUnitType AVENUE UNITTYPE
+
+MANEUVERTYPE ROLE TTL) means that the #$AvenueOfApproach AVENUE has
+
+the #$TerrainTrafficabilityLevel TTL for military units of specialty
+
+UNITTYPE playing the role ROLE in maneuvers of MANEUVERTYPE.".
+
+
+
+F:
+
+(implies
+
+  (isa ?CORRIDOR MobilityCorridor)
+
+  (degreeOfTrafficability ?CORRIDOR TerrainUnrestricted)).
+
+F:
+
+(implies
+
+  (and
+
+    (isa ?AVENUE AvenueOfApproach)
+
+    (isa ?UNIT ModernMilitaryUnit-Deployable)
+
+    (isa ?UNIT ?UNITTYPE)
+
+    (isa ?UNITTYPE MilitaryUnitSpecialtyType)
+
+    (isa ?MOVEMENT Movement-TranslationEvent)
+
+    (isa ?MOVEMENT ?MOVETYPE)
+
+    (genlPreds ?ROLE objectMoving)
+
+    (?ROLE ?MOVEMENT ?UNIT)
+
+    (pathway-Partial ?MOVEMENT ?AVENUE))
+
+  (preconditionFor-PropSit
+
+    (trafficabilityLevelForUnitType
+
+       ?AVENUE ?UNITTYPE ?MOVETYPE ?ROLE TerrainUnrestricted) ?MOVEMENT)).
+
+
+
+constant: trafficabilityOfTerrainForUnitType  .
+
+In Mt : ModernMilitaryTacticsMt.
+
+isa : TernaryPredicate IKBConstant .
+
+arg1Isa : GeographicalRegion .
+
+arg2Isa: MilitaryUnitSpecialtyType .
+
+arg2Genl: ModernMilitaryUnit-Deployable .
+
+arg3Isa:  TerrainTrafficabilityLevel .
+
+comment: "(#$trafficabilityOfTerrainForUnitType AREA UNIT-TYPE
+
+TRAFFICABILITY-LEVEL) means that AREA has the
+
+#$TerrainTrafficabilityLevel TRAFFICABILITY-LEVEL for military units of
+
+specialty UNIT-TYPE." .
+
+
+

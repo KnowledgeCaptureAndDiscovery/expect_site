@@ -1,0 +1,400 @@
+#!/local/bin/perl
+
+if(!$ARGV[0]) {
+	print "Usage: ./xml2html <project directory>\n";
+	exit(0);
+}
+
+$projdir=$ARGV[0];
+
+if(! -d $projdir) {
+	print "Usage: ./xml2html <project directory>\n";
+	print "Make sure the project directory exists in the current directory\n";
+	exit(0);
+}
+
+sub ResetVals {
+   $projname="";
+   $title="";
+   $shortstatus="";
+   $longstatus="";
+   $shortdesc="";
+   $longdesc="";
+   $demo="";
+   $links="";
+   $mainlinks="";
+	$people="";
+	$longpeople="";
+	$shortpubs="";
+	$longpubs="";
+	$people="";
+	$longpeople="";
+	$shortfund="";
+	$longfund="";
+	$shortresearch="";
+	$longresearch="";
+}
+
+sub GetPeople {
+   open(XML,"<isd-personnel.xml");
+   $/="\004";
+   $xmldata = <XML>;
+   close(XML);
+   $xmldata =~ s/\n/\001/g;
+   @pplname=();
+   @pplid=();
+	$temp="";
+	$fl=0;
+   foreach (split(/\s+/,$xmldata)) {
+   	 if(/<person>/) {
+   		  $fl=1;
+   	 } elsif(/<\/person>/) {
+   		  $fl=0;
+			  if($temp =~ /<project>[\s\001]*$projname[\s\001]*<\/project>/) {
+               $temp =~ /<userid>(.+)<\/userid>/g;
+               $id=$1;
+					$id=~ s/\001/ /g;
+               $id=~ s/^\s+//g;
+               $id=~ s/\s+$//g;
+
+               $temp =~ /<name>(.+)<\/name>/g;
+               $name=$1;
+					$name=~ s/\001/ /g;
+               $name=~ s/^\s+//g;
+               $name=~ s/\s+$//g;
+					push(@pplid,$id);
+					push(@pplname,$name);
+			  }
+   		  $temp="";
+   	 } elsif($fl) {
+   		  $temp .= "$_ ";
+   	 }
+   }
+	$people = "<ul>\n";
+	$longpeople = "";
+	for($i=0; $i<@pplname; $i++) {
+		 $people.= "<li>$pplname[$i]</li>\n";
+		 $longpeople.= "<p><a href=\"/~".$pplid[$i]."\"><img src=\"../".$pplid[$i].".jpg\"> $pplname[$i]</a><br />\n";
+	}
+	$people.= "</ul>\n";
+}
+
+
+sub GetFunding {
+   open(XML,"<isd-funding.xml");
+   $/="\004";
+   $xmldata = <XML>;
+   close(XML);
+   $xmldata =~ s/\n/\001/g;
+   @program=();
+   @fullprogram=();
+	$temp="";
+	$fl=0;
+   foreach (split(/\s+/,$xmldata)) {
+   	 if(/<funding>/) {
+   		  $fl=1;
+   	 } elsif(/<\/funding>/) {
+   		  $fl=0;
+			  if($temp =~ /<project>[\s\001]*$projname[\s\001]*<\/project>/) {
+               $temp =~ /<program>(.+)<\/program>/g;
+               $program=$1;
+					$program=~ s/\001/ /g;
+               $program=~ s/^\s+//g;
+               $program=~ s/\s+$//g;
+					push(@program,$program);
+
+               $temp =~ /<url>(.+)<\/url>/g;
+               $url=$1;
+					$url=~ s/\001/ /g;
+               $url=~ s/^\s+//g;
+               $url=~ s/\s+$//g;
+
+               $temp =~ /<awardnumber>(.+)<\/awardnumber>/g;
+               $awardnumber=$1;
+					$awardnumber=~ s/\001/ /g;
+               $awardnumber=~ s/^\s+//g;
+               $awardnumber=~ s/\s+$//g;
+
+               $temp =~ /<startdate>(.+)<\/startdate>/g;
+               $startdate=$1;
+					$startdate=~ s/\001/ /g;
+               $startdate=~ s/^\s+//g;
+               $startdate=~ s/\s+$//g;
+
+               $temp =~ /<enddate>(.+)<\/enddate>/g;
+               $enddate=$1;
+					$enddate=~ s/\001/ /g;
+               $enddate=~ s/^\s+//g;
+               $enddate=~ s/\s+$//g;
+
+					push(@fullprogram,"<a href=\"$url\">$program</a>, award number <font color=\"red\">$awardnumber</font>, from $startdate through $enddate");
+			  }
+   		  $temp="";
+   	 } elsif($fl) {
+   		  $temp .= "$_ ";
+   	 }
+   }
+	$shortfund = "<ul>\n";
+	$longfund = "We would like to acknowledge that the <b>$projname</b> project is funded by the following:\n<p>\n<ul>\n";
+	for($i=0; $i<@program; $i++) {
+		 if($i<5) {
+		    $shortfund.= "<li>$program[$i]</li>\n";
+		 }
+		 $longfund.= "<li>$fullprogram[$i]<br /></li><br />\n";
+	}
+	$shortfund.= "</ul>\n";
+	$longfund.= "</ul>\n";
+}
+
+
+sub GetPubs {
+   open(XML,"<isd-publications.xml");
+   $/="\004";
+   $xmldata = <XML>;
+   close(XML);
+   $xmldata =~ s/\n/\001/g;
+
+	@pubmain=();
+	@where=();
+
+	$temp="";
+	$fl=0;
+   foreach (split(/\s+/,$xmldata)) {
+   	 if(/<publication>/) {
+   		  $fl=1;
+   	 } elsif(/<\/publication>/) {
+   		  $fl=0;
+			  if($temp =~ /<project>[\s\001]*$projname[\s\001]*<\/project>/) {
+               $temp =~ /<title>(.+)<\/title>/g;
+               $pubtitle=$1;
+					$pubtitle=~ s/\001//g;
+               $pubtitle=~ s/^\s+//g;
+               $pubtitle=~ s/\s+$//g;
+
+               $temp =~ /<url>(.+)<\/url>/g;
+               $puburl=$1;
+					$puburl=~ s/\001/ /g;
+               $puburl=~ s/^\s+//g;
+               $puburl=~ s/\s+$//g;
+
+               if($temp =~ /<where>(.+)<\/where>/g) {
+                   $where=$1;
+					    $where=~ s/\001/ /g;
+                   $where=~ s/^\s+//g;
+                   $where=~ s/\s+$//g;
+					} else {
+						 $where=0;
+					}
+					push(@where,$where);
+
+					@authors=();
+					$authfl=0;
+					$authtmp="";
+
+               foreach (split(/\s+/,$temp)) {
+               	 if(/<person>/) {
+               		  $authfl=1;
+               	 } 
+            		 if($authfl) {
+               		  $authtmp .= "$_ ";
+   	             }
+            		 if(/<\/person>/) {
+               		  $authfl=0;
+			              $authtmp =~ s/<person>//g;
+            			  $authtmp =~ s/<\/person>.+//g;
+   		              $authtmp =~ s/\001//g;
+               		  push(@authors,$authtmp);
+   		              $authtmp="";
+   	             }
+					}
+					$pubmain = "<a href=\"$puburl\">$pubtitle</a>";
+					foreach(@authors) {
+						 $pubmain .= ", $_";
+					}
+					push(@pubmain,$pubmain);
+			  }
+   		  $temp="";
+   	 } elsif($fl) {
+   		  $temp .= "$_ ";
+   	 }
+   }
+	$shortpubs = "<ul>\n";
+	$longpubs = "<ul>\n";
+	for($i=0; $i<@pubmain; $i++) {
+		 if($i<5) {
+		    $shortpubs.= "<li>$pubmain[$i]<br /></li><br />\n";
+		 }
+		 $longpubs.= "<li>$pubmain[$i]";
+		 if($where[$i]) {
+		     $longpubs.= "<br /><font size=\"-1\"><i>In $where[$i]</i></font>";
+		 }
+		 $longpubs.="<br /></li><br />\n";
+	}
+	$shortpubs.= "</ul>\n";
+	$longpubs.= "</ul>\n";
+}
+
+
+sub GetVals {
+   open(XML,"<$projdir/content.xml");
+   $/="\004";
+   $xmldata = <XML>;
+   close(XML);
+   $xmldata =~ s/\n/\001/g;
+
+   $xmldata =~ /<name>(.+)<\/name>/gm;
+   $projname=$1;
+   $projname=~ s/^\s+//g;
+   $projname=~ s/\s+$//g;
+
+   if($xmldata =~ /<title>(.+)<\/title>/gm) {
+      $title=$1;
+      $title=~ s/^\s+//g;
+      $title=~ s/\s+$//g;
+	}
+
+   if($xmldata =~ /<status>.*<short>(.+)<\/short>.*<\/status>/m) {
+      $shortstatus=$1;
+      $shortstatus =~ s/\001/\n/g;
+      $shortstatus =~ s/<n\s*\/>/<b>$projname<\/b>/g;
+	}
+
+   if($xmldata =~ /<status>.*<long>(.+)<\/long>.*<\/status>/m) {
+      $longstatus=$1;
+      $longstatus =~ s/\001/\n/g;
+      $longstatus =~ s/<n\s*\/>/<b>$projname<\/b>/g;
+	}
+
+   if($xmldata =~ /<research>.*<short>(.+)<\/short>.*<\/research>/m) {
+       $shortresearch=$1;
+       $shortresearch =~ s/\001/\n/g;
+       $shortresearch =~ s/<n\s*\/>/<b>$projname<\/b>/g;
+	}
+
+   if($xmldata =~ /<research>.*<long>(.+)<\/long>.*<\/research>/m) {
+      $longresearch=$1;
+      $longresearch =~ s/\001/\n/g;
+      $longresearch =~ s/<n\s*\/>/<b>$projname<\/b>/g;
+	}
+
+   if($xmldata =~ /<demo>(.+)<\/demo>/m) {
+      $demo=$1;
+      $demo =~ s/\001/\n/g;
+      $demo =~ s/<n\s*\/>/<b>$projname<\/b>/g;
+	}
+
+   if($xmldata =~ /<description>.*<short>(.+)<\/short>.*<\/description>/m) {
+      $shortdesc=$1;
+      $shortdesc =~ s/\001/\n/g;
+      $shortdesc =~ s/<n\s*\/>/<b>$projname<\/b>/g;
+	}
+
+   if($xmldata =~ /<description>.*<long>(.+)<\/long>.*<\/description>/m) {
+      $longdesc=$1;
+      $longdesc =~ s/\001/\n/g;
+      $longdesc =~ s/<n\s*\/>/<b>$projname<\/b>/g;
+	}
+
+   $fl=0;
+	$mfl=0;
+   @links;
+   $link="";
+   $links="<ul>\n";
+
+	@mainlinks;
+	$mainlink="";
+	$mainlinks="<ul>\n";
+
+   foreach (split(/\s+/,$xmldata)) {
+   	 if(/<link>/) {
+   		  $fl=1;
+   	 } 
+		 if($fl) {
+   		  $link .= "$_ ";
+   	 }
+		 if(/<\/link>/) {
+   		  $fl=0;
+			  $link =~ s/<link>//g;
+			  $link =~ s/<\/link>.+//g;
+   		  $link =~ s/\001/\n/g;
+   		  push(@links,$link);
+   		  $link="";
+   	 }
+
+   	 if(/<mainlink>/) {
+   		  $mfl=1;
+   	 } 
+		 if($mfl) {
+   		  $mainlink .= "$_ ";
+   	 }
+		 if(/<\/mainlink>/) {
+   		  $mfl=0;
+			  $mainlink =~ s/<mainlink>//g;
+			  $mainlink =~ s/<\/mainlink>.+//g;
+   		  $mainlink =~ s/\001/\n/g;
+   		  push(@mainlinks,$mainlink);
+   		  $mainlink="";
+   	 } 
+   }
+
+   foreach(@links) {
+   	 $links .= "<li>$_</li>\n";
+   }
+   $links .= "</ul>\n";
+
+   foreach(@mainlinks) {
+   	 $mainlinks .= "<li>$_</li>\n";
+   }
+   $mainlinks .= "</ul>\n";
+}
+
+
+ResetVals();
+GetVals();
+GetPeople();
+GetFunding();
+GetPubs();
+
+$/="\n";
+@files = `ls .htmltemplates/*.tmpl`;
+foreach $file(@files) {
+	 chop($file);
+
+	 print "Processing $file\n";
+	 open(TMPL,"<$file");
+    $/="\004";
+    $htmldata = <TMPL>;
+    close(TMPL);
+
+	 $newfile=$file;
+	 $newfile =~ s/\.htmltemplates/\.\/$projdir/;
+	 $newfile =~ s/\.tmpl/\.html/;
+	 print "Writing to $newfile\n";
+	 if(-e $newfile) {
+		  system("cp $newfile $newfile.bak");
+		  print "Old $newfile saved as $newfile.bak\n";
+	 }
+	 open(HTML,">$newfile");
+
+	 $htmldata =~ s/\n/\001/g;
+	 $htmldata =~ s/\*projname\*/$projname/g;
+	 $htmldata =~ s/\*title\*/$title/g;
+	 $htmldata =~ s/\*shortdesc\*/$shortdesc/g;
+	 $htmldata =~ s/\*longdesc\*/$longdesc/g;
+	 $htmldata =~ s/\*shortresearch\*/$shortresearch/g;
+	 $htmldata =~ s/\*longresearch\*/$longresearch/g;
+	 $htmldata =~ s/\*shortstatus\*/$shortstatus/g;
+	 $htmldata =~ s/\*longstatus\*/$longstatus/g;
+	 $htmldata =~ s/\*demo\*/$demo/g;
+	 $htmldata =~ s/\*mainlinks\*/$mainlinks/g;
+	 $htmldata =~ s/\*links\*/$links/g;
+	 $htmldata =~ s/\*shortfund\*/$shortfund/g;
+	 $htmldata =~ s/\*longfund\*/$longfund/g;
+	 $htmldata =~ s/\*people\*/$people/g;
+	 $htmldata =~ s/\*longpeople\*/$longpeople/g;
+	 $htmldata =~ s/\*shortpubs\*/$shortpubs/g;
+	 $htmldata =~ s/\*longpubs\*/$longpubs/g;
+	 $htmldata =~ s/\001/\n/g;
+	 print HTML $htmldata;
+	 close(HTML);
+}

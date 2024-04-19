@@ -1,0 +1,113 @@
+(DNA-Transcription1 has (superclasses (Scenario)))
+(every DNA-Transcription1 has (some-associated-attach4 ((a Attach)))
+ (some-associated-polymerase3
+  ((((a Polymerase)) &&
+    ((the object of (the some-associated-attach4 of Self))))))
+ (some-associated-procaryotic-gene5
+  ((((a Procaryotic-Gene)) &&
+    ((the base of (the some-associated-attach4 of Self))))))
+ (first-subevent ((the some-associated-attach4 of Self)))
+ (subevent
+  ((((the first-subevent of Self)) &&
+    ((a Attach with
+      (base
+       ((a Procaryotic-Gene with
+         (has-part
+          ((a DNA-Codon) (a Deoxyribonucleotide) (a 3-Prime-Nucleotide)
+           (a 5-Prime-Nucleotide)
+           (the some-associated-dna-molecule7 of Self))))))))
+    &&
+    ((a Attach with
+      (site
+       ((the fifth of
+         (the has-part of (the base of (the subevent of Self))))))))
+    &&
+    ((a Attach with
+      (next-event ((the some-associated-take-apart2 of Self)))))
+    &&
+    ((a Attach with
+      (base
+       ((the object of (the next-event of (the subevent of Self)))))))
+    &&
+    ((a Attach with
+      (next-event
+       ((a Take-Apart with
+         (instrument ((the object of (the subevent of Self)))))))))
+    &&
+    ((a Attach with
+      (next-event
+       ((a Take-Apart with
+         (next-event ((the some-associated-copy3 of Self))))))))
+    &&
+    ((a Attach with
+      (base
+       ((a Procaryotic-Gene with
+         (element-type
+          ((a Thing with
+            (element-type-of
+             ((a DNA-Codon) (a Operon) (a Operon)
+              (a Procaryotic-Gene))))
+           (a Thing))))))))
+    &&
+    ((a Attach with
+      (base
+       ((a Procaryotic-Gene with
+         (element-type
+          ((a Thing with
+            (element-type-of
+             ((a DNA-Codon)
+              (the object of
+               (the next-event of
+                (the next-event of (the subevent of Self))))
+              (a Operon) (a Procaryotic-Gene))))
+           (a Thing))))))))
+    &&
+    ((a Attach with
+      (next-event
+       ((a Take-Apart with
+         (next-event ((a Copy with (result ((a RNA-Sequence)))))))))))
+    &&
+    ((a Attach with
+      (next-event
+       ((a Take-Apart with
+         (next-event
+          ((a Copy with
+            (instrument
+             ((the object of (the subevent of Self))))))))))))
+    &&
+    ((a Attach with
+      (next-event
+       ((a Take-Apart with
+         (next-event
+          ((a Copy with
+            (first-subevent
+             ((the some-associated-add of Self)))))))))))
+    &&
+    ((a Attach with
+      (next-event
+       ((a Take-Apart with
+         (next-event
+          ((a Copy with
+            (subevent
+             ((the first-subevent of
+               (the next-event of
+                (the next-event of (the subevent of Self))))))))))))))
+    &&
+    ((a Attach with
+      (next-event
+       ((a Take-Apart with
+         (next-event
+          ((a Copy with
+            (subevent
+             ((a Add with (object ((a Ribonucleotide))))))))))))))
+    &&
+    ((a Attach with
+      (next-event
+       ((a Take-Apart with
+         (next-event
+          ((a Copy with
+            (subevent
+             ((a Add with (base ((a RNA-Sequence)))))))))))))))))
+ (some-associated-dna-molecule7 ((a DNA-Molecule)))
+ (some-associated-take-apart2 ((a Take-Apart)))
+ (some-associated-copy3 ((a Copy))) (some-associated-add ((a Add))))

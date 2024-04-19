@@ -1,0 +1,173 @@
+Return-Path: <rkf-tkcp-bounce@ai.sri.com>
+Received: from nitro.isi.edu (nitro.isi.edu [128.9.208.207])
+	by tonga.isi.edu (8.9.3/8.9.3) with ESMTP id QAA22472
+	for <jihie@isi.zmbx.net>; Tue, 16 Apr 2002 16:24:51 -0700 (PDT)
+Received: from tnt.isi.edu (tnt.isi.edu [128.9.128.128])
+	by nitro.isi.edu (8.11.6/8.11.2) with ESMTP id g3GNOZA17924;
+	Tue, 16 Apr 2002 16:24:35 -0700 (PDT)
+Received: from Labrea.AI.SRI.COM (Labrea.AI.SRI.COM [130.107.64.124])
+	by tnt.isi.edu (8.11.6/8.11.2) with ESMTP id g3GNOYp25746;
+	Tue, 16 Apr 2002 16:24:34 -0700 (PDT)
+Received: from labrea (Labrea.AI.SRI.COM [130.107.64.124])
+	by Labrea.AI.SRI.COM (8.9.3/8.9.3) with ESMTP id QAA07462;
+	Tue, 16 Apr 2002 16:23:02 -0700 (PDT)
+Received: with LISTAR (v1.0.0; list rkf-tkcp); Tue, 16 Apr 2002 16:23:02 %z (PDT)
+Received: from nitro.isi.edu (nitro.isi.edu [128.9.208.207])
+	by Seacliff.AI.SRI.COM (8.9.3/8.9.3) with ESMTP id QAA06214
+	for <rkf-tkcp@ai.sri.com>; Tue, 16 Apr 2002 16:19:46 -0700 (PDT)
+Received: from ISI.EDU (excalibur.isi.edu [128.9.208.247])
+	by nitro.isi.edu (8.11.6/8.11.2) with ESMTP id g3GNJGA14711;
+	Tue, 16 Apr 2002 16:19:16 -0700 (PDT)
+Message-Id: <200204162319.g3GNJGA14711@nitro.isi.edu>
+To: rkf-tkcp@ai.sri.com, COtstott@aol.com
+Subject: [rkf-tkcp] Critiques for the blue attack COAs
+Date: Tue, 16 Apr 2002 16:19:15 -0700
+From: Jim Blythe <blythe@venera.isi.edu>
+X-archive-position: 1303
+X-listar-version: Listar v1.0.0
+Sender: rkf-tkcp-bounce@ai.sri.com
+Errors-to: rkf-tkcp-bounce@ai.sri.com
+X-original-sender: blythe@ISI.EDU
+Precedence: bulk
+Reply-to: blythe@venera.isi.edu
+X-list: rkf-tkcp
+X-UIDL: c30fc1d1dbfd47a6b424ea2feea83cd4
+
+
+Charley,
+
+The COAs and their critiques that you've prepared for this scenario are
+highly informative - thanks. We again looked at how these critiques, or
+an approximation, might be generated automatically. Your feedback on the
+critiques for Dadmamian swamp was quite encouraging, so we'd like to
+continue this line and ask for your opinions on these.
+
+thanks,
+Jim and Jihie
+
+
+
+
+Mission accomplishment
+----------------------
+
+Mission: Seizure of Obj JAYHAWK and destruction of 29th Guards
+
+As in the Damamian Swamp scenario, we may use expected effects of the
+COA and check the results from a normative simulation or detailed
+simulation, including the location of the units and their remaining
+strength.
+
+- Remaining strength
+  o RED: destroyed
+  o BLUE: ;; SME may specify the expected strength after the attack
+
+- Location of units
+  o BLUE: are they now at JAYHAWK?
+
+
+Speed
+-----
+
+We may retrieve the path/route of the moving operations involved in the
+COAs and check if the units can traverse the path quickly.  We may also
+compare the overall time taken to accomplish the mission.
+
+
+Simplicity
+----------
+
+One simple check we can do is comparing the number of different tasks
+assigned to the units.  We may also check the degree of
+connections/coordination among the tasks.  For example, in COA #2 the
+coordination of close fight, fires and aviation in the main attack may
+require relatively complex links among the tasks.
+
+
+Use of terrain
+--------------
+
+If we can assume that terrain features are known, we can show how they
+are used in the tasks.  We are not sure how we can check for the
+'lateral movement' of the battalion. Perhaps this can be done by the
+geo/spatial reasoner, or it may be the case that noting when a unit
+switches from one axis to another is adequate.
+
+
+Fire support:
+-------------
+
+We can look at the tasks fire support is involved in in each COA:
+
+COA 1:
+
+Aviation artillery will attack deep initially on red artillery while
+main attack is moving.  Aviation artillery in support of main attack
+troops in contact.
+
+
+COA 2:
+
+Support main attack initially. On order, destroy retreating enemy forces
+in deep battle area.
+
+
+If the system were simply to count the artillery tasks, the two COAs
+appear to make equal use of the artillery.  Is there an approach by
+which we can tell that the two tasks in COA1 (attack red artillery &
+support main attack) make better use of the artillery than the two tasks
+in COA2 (support main attack & destroy retreating forces)?
+
+
+Risk:
+--------
+
+As well as by using detailed simulation and summing up the other
+features, as you mentioned in your last message, it seems important to
+know when an attack is in the rear or in a flank as compared with
+head-on. This is explicitly mentioned in the commander's intent in COA
+1, and it would be simple to check if it was always explicitly mentioned
+when present. Is this a reasonable thing to expect?  If not, it might be
+computable from the sketch, by looking at the angles of approach and the
+way that the enemy forces are arrayed, but this seems harder.
+
+As well as attacking in the flank or the rear, the concept of
+'enveloping' the enemy seems important here, and this may be easier to
+detect at least in that the attack comes from several different angles.
+
+
+Position from follow-on operations
+----------------------------------
+
+We are not sure how we could arrive at the prediction that the 2nd
+brigade arrives intact in COA 1, while the reserve forces may have to
+assist in the main effort in COA 2. Could this be inferred from the fact
+that more forces may be required to mount the direct attack? There does
+not seem to be an explicit mention of the extra task in the reserve
+statement.
+
+
+Not mentioned: force protection/ratios
+----------------------------------------
+
+Presumably the task force ratios are important to determine the risks
+involved in the two COAs. However, it seems that more information is
+needed to determine them. For example, what kind of tanks are used by
+the 29th Guards, eg Abrams, M60 or T62/64/../80?
+
+
+List of relevant criteria
+-------------------------
+
+As was discussed in the telecon, can we start to develop a set of
+critique criteria, at least for the CP? We might be able to divide them
+into two sets: those that are used frequently, like mission
+accomplishment, use of terrain and risk, and those that appear less
+frequently but still often enough to be of general use, like perhaps
+speed and position for follow-on operations. Given these, one viable
+approach might be for a user to select the criteria of interest in a
+given situation. Another might be to always include the core criteria,
+and append any of the less frequent criteria whose values differ across
+the COAs under consideration.
+
+

@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XML Spy v3.0.7 (http://www.xmlspy.com) by pablo yanez (isi usc) -->
+<?xml-stylesheet type="text/xsl" href="russ.xsl"?>
+<!DOCTYPE person SYSTEM "yolanda.dtd">
+<person>
+	<Name>Tom russ</Name>
+	<UserId>tar</UserId>
+	<Photo>photo/russ</Photo>
+	<projects>Electric Elves</projects>
+	<projects>loom</projects>
+	<projects>RKF</projects>
+	<projects>PowerLoom</projects>
+	<projects>CoABS</projects>
+	<systems>loom</systems>
+	<systems>PowerLoom</systems>
+	<systems>stella</systems>
+	<systems>ontosaurus</systems>
+	<topics>Knowledge representation
+</topics>
+	<topics>Medical reasoning
+      </topics>
+	<topics>Interfaces for KB editting</topics>
+	<position>Research Scientist</position>
+	<capabilities>
+		<capability>
+			<NlDescription>answer questions about loom (often by mail)</NlDescription>
+			<MethodGoal>
+				<VarGoalForm>
+					<GoalName>answer </GoalName>
+					<ManyVarGoalArgument>
+						<VarGoalArgument>
+							<ParameterName>OBJ</ParameterName>
+							<MethodGoalArgument>
+								<t name="ESPEC-OF"/>
+								<ComplexData>
+									<t name="INST-OF"/>
+									<ConceptName>Question</ConceptName>
+								</ComplexData>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+						<VarGoalArgument>
+							<ParameterName>about</ParameterName>
+							<MethodGoalArgument>
+								<t name=""/>
+								<ComplexData>
+									<t name="EXPC-OF"/>
+									<ConceptName>loom</ConceptName>
+								</ComplexData>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+					</ManyVarGoalArgument>
+				</VarGoalForm>
+			</MethodGoal>
+		</capability>
+		<capability>
+			<NlDescription>give a demo of Ontosaurus to anyone</NlDescription>
+			<MethodGoal>
+				<VarGoalForm>
+					<GoalName>give </GoalName>
+					<ManyVarGoalArgument>
+						<VarGoalArgument>
+							<ParameterName>OBJ</ParameterName>
+							<MethodGoalArgument>
+								<t name="INST-OF"/>
+								<InstanceName>DEMO</InstanceName>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+						<VarGoalArgument>
+							<ParameterName>of</ParameterName>
+							<MethodGoalArgument>
+								<t name="INST-OF"/>
+								<InstanceName>interest matcher</InstanceName>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+					</ManyVarGoalArgument>
+				</VarGoalForm>
+			</MethodGoal>
+		</capability>
+		<capability>
+			<NlDescription>give a demo of interest matcher</NlDescription>
+			<MethodGoal>
+				<VarGoalForm>
+					<GoalName>give </GoalName>
+					<ManyVarGoalArgument>
+						<VarGoalArgument>
+							<ParameterName>OBJ</ParameterName>
+							<MethodGoalArgument>
+								<t name="EXPC-OF"/>
+								<InstanceName>DEMO</InstanceName>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+						<VarGoalArgument>
+							<ParameterName>of</ParameterName>
+							<MethodGoalArgument>
+								<t name="EXPC-OF"/>
+								<InstanceName>interest matcher</InstanceName>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+					</ManyVarGoalArgument>
+				</VarGoalForm>
+			</MethodGoal>
+		</capability>
+		<capability>
+			<NlDescription>Write technical paper about knowledge representation for journals and conferences</NlDescription>
+			<MethodGoal>
+				<VarGoalForm>
+					<GoalName>write</GoalName>
+					<ManyVarGoalArgument>
+						<VarGoalArgument>
+							<ParameterName>obj</ParameterName>
+							<MethodGoalArgument>
+								<VariableName>?m</VariableName>
+								<t name="is"/>
+								<ComplexData>
+									<t name="EXPC-OF"/>
+									<ConceptName>technical paper</ConceptName>
+								</ComplexData>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+						<VarGoalArgument>
+							<ParameterName>of</ParameterName>
+							<MethodGoalArgument>
+								<VariableName>?m</VariableName>
+								<t name="is"/>
+								<ComplexData>
+									<t name="EXPC-OF"/>
+									<ConceptName>knowledge adquisition</ConceptName>
+								</ComplexData>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+						<VarGoalArgument>
+							<ParameterName>in</ParameterName>
+							<MethodGoalArgument>
+								<VariableName>?m</VariableName>
+								<t name="is"/>
+								<ComplexData>
+									<t name="INST-OF"/>
+									<ConceptName>conferences</ConceptName>
+								</ComplexData>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+						<VarGoalArgument>
+							<ParameterName>in</ParameterName>
+							<MethodGoalArgument>
+								<VariableName>?m</VariableName>
+								<t name="is"/>
+								<ComplexData>
+									<t name="INST-OF"/>
+									<ConceptName>journals</ConceptName>
+								</ComplexData>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+					</ManyVarGoalArgument>
+				</VarGoalForm>
+			</MethodGoal>
+		</capability>
+		<capability>
+			<NlDescription>Give demo of Powerloom</NlDescription>
+			<MethodGoal>
+				<VarGoalForm>
+					<GoalName>give demo</GoalName>
+					<ManyVarGoalArgument>
+						<VarGoalArgument>
+							<ParameterName>OBJ</ParameterName>
+							<MethodGoalArgument>
+								<t name="IS/"/>
+								<ComplexData>
+									<t name="EXPC-OF"/>
+									<ConceptName>DEMO</ConceptName>
+								</ComplexData>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+						<VarGoalArgument>
+							<ParameterName>of</ParameterName>
+							<MethodGoalArgument>
+								<t name="IS"/>
+								<ComplexData>
+									<t name="EXPC-OF"/>
+									<ConceptName>powerloom</ConceptName>
+								</ComplexData>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+					</ManyVarGoalArgument>
+				</VarGoalForm>
+			</MethodGoal>
+		</capability>
+		<capability>
+			<NlDescription>Present the research results</NlDescription>
+			<MethodGoal>
+				<VarGoalForm>
+					<GoalName>PRESENT</GoalName>
+					<ManyVarGoalArgument>
+						<VarGoalArgument>
+							<ParameterName>obj</ParameterName>
+							<MethodGoalArgument>
+								<VariableName>?m</VariableName>
+								<t name="is"/>
+								<ComplexData>
+									<t name="INST-OF"/>
+									<ConceptName>RESEARCH RESULTS</ConceptName>
+								</ComplexData>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+					</ManyVarGoalArgument>
+				</VarGoalForm>
+			</MethodGoal>
+		</capability>
+		<capability>
+			<NlDescription>review papers about knowledge representation</NlDescription>
+			<MethodGoal>
+				<VarGoalForm>
+					<GoalName>review</GoalName>
+					<ManyVarGoalArgument>
+						<VarGoalArgument>
+							<ParameterName>obj</ParameterName>
+							<MethodGoalArgument>
+								<VariableName>?m</VariableName>
+								<t name="is"/>
+								<ComplexData>
+									<t name="EXPC-OF"/>
+									<ConceptName>technical paper</ConceptName>
+								</ComplexData>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+						<VarGoalArgument>
+							<ParameterName>about</ParameterName>
+							<MethodGoalArgument>
+								<VariableName>?m</VariableName>
+								<t name="is"/>
+								<ComplexData>
+									<t name="EXPC-OF"/>
+									<ConceptName>knowledge adquisition</ConceptName>
+								</ComplexData>
+							</MethodGoalArgument>
+						</VarGoalArgument>
+					</ManyVarGoalArgument>
+				</VarGoalForm>
+			</MethodGoal>
+		</capability>
+	</capabilities>
+</person>

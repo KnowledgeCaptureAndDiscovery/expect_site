@@ -1,0 +1,176 @@
+<HTML>
+<HEAD>
+   <TITLE>Research in Planning</TITLE>
+
+  <SCRIPT language="javascript">
+
+  about_on = new Image();
+  about_on.src = "./exp-about.gif";
+
+  research_on = new Image();
+  research_on.src = "./exp-research.gif"; 
+
+  projectmemb_on = new Image();
+  projectmemb_on.src = "./exp-pr-members.gif";
+
+  publications_on = new Image();
+  publications_on.src = "./exp-publ.gif";
+
+  movie_on = new Image();
+  movie_on.src = "./exp-mov.gif";  
+
+  projects_on = new Image();
+  projects_on.src = "./exp-projects.gif"; 
+    
+function swampImages(imagename, cimage)
+  {
+      imgsrc = './' + cimage;
+      document[imagename].src = imgsrc;
+  } 
+  </SCRIPT>
+ 
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+
+<TABLE ALIGN=CENTER WIDTH=730>
+<TR><TD colspan=3>
+<P  ALIGN=CENTER>
+<A HREF="../"
+onmouseover="swampImages('About','exp-about.gif'); return true"
+onmouseout="swampImages('About','exp-about-bl.gif');return true"><IMG
+SRC="exp-about-bl.gif" BORDER=0 NAME="About"></A>
+
+<A HREF="./research.html"
+onmouseover="swampImages('Research','exp-research.gif'); return true"
+onmouseout="swampImages('Research','exp-research-bl.gif');return
+true"><IMG SRC="exp-research-bl.gif" BORDER=0 NAME="Research"></A>
+
+<A HREF="./projects.html"
+onmouseover="swampImages('Projects','exp-projects.gif'); return true"
+onmouseout="swampImages('Projects','exp-projects-bl.gif');return
+true"><IMG SRC="./exp-projects-bl.gif" BORDER=0 NAME="Projects"></A>
+
+
+<A HREF="./pr-members.html"
+onmouseover="swampImages('Members','exp-pr-members.gif'); return true"
+onmouseout="swampImages('Members','exp-pr-members-bl.gif');return true"><IMG
+SRC="exp-pr-members-bl.gif" BORDER=0 NAME="Members"></A>
+
+<A HREF="./publications.html"
+onmouseover="swampImages('Publ','exp-publ.gif'); return true"
+onmouseout="swampImages('Publ','exo-publ-bl.gif');return true"
+onclick="return false"><IMG
+SRC="exo-publ-bl.gif" BORDER=0 NAME="Publ"></A>
+
+<A HREF="./demo.html"
+onmouseover="swampImages('Demo','exp-mov.gif'); return true"
+onmouseout="swampImages('Demo','exp-mov-bl.gif');return true"><IMG
+SRC="exp-mov-bl.gif" BORDER=0 NAME="Demo"></A>
+</TD></TR>
+
+<TR><TD width=50></TD>
+
+
+
+<TD WIDTH=550>
+<BR>
+<P ALIGN=CENTER><B><FONT SIZE=+2 FACE=ARIAL>Research in Planning</B></FONT><BR>
+
+
+<HR>
+
+<P><FONT FACE=ARIAL><B>Research in <A HREF="./ka-research.html">Knowledge Acquisition</A></P>
+<P>Research in <A HREF="./ontos-research.html">Ontologies and
+Problem-Solving Methods</A></P>
+<P>Research in <A HREF="./multi-research.html">Multi-Agent Communication
+and Coordination</A></P></FONT></B>
+
+<HR SIZE=2>
+
+<P ALIGN=JUSTIFY>A main focus of the knowledge bases that we have built with EXPECT are planning tools, in particular tools for evaluating and critiquing plans.  The application domains include: air campaign planning, transportation planning, enemy workarounds to damaged targets, and course of action critiquing.</P>
+
+<BR>
+<P><B><I><FONT FACE="Helvetica" SIZE=+1>1. Plan Evaluation and Critiquing</FONT></B></I></P>
+
+<P ALIGN=JUSTIFY>We are developing a general-purpose reusable Problem Solving Method (PSM) for plan evaluation and critiquing that includes both ontologies and problem-solving knowledge.   This PSM can be seen as a middle-level theory about plan evaluation.  A user can build plan evaluation and critiquing tools by adapting this PSM to new domains using EXPECT's knowledge acquisition capabilities.  These methods capture knowledge about desirable constraints in the structure of plans and about how to evaluate the use of different types of resources.  The methods are structured so that the user does not have to be aware of the details of how the evaluation system works.  EXPECT identifies the domain-specific knowledge that is needed to create a plan evaluation system for a new domain, and guides the user to provide it.</P>
+
+<BLOCKQUOTE>
+<P>"Developing plan evaluation and critiquing tools based on reuse and
+capture of general principles".  J. Blythe and
+Y. Gil. Available from <A HREF="http://www.isi.edu/~blythe/evaluation-psm">http://www.isi.edu/~blythe/evaluation-psm</A></P>
+</BLOCKQUOTE>
+
+<BR>
+<P><B><I><FONT FACE="Helvetica" SIZE=+1>2.  Knowledge-Rich
+Environments for Planning and Problem Solving</FONT></B></I></P>
+
+<P ALIGN=JUSTIFY>We are investigating how ontologies as well as explicit representations of problem-solving knowledge enable intelligent systems to operate in environments with large amounts of knowledge.  We are developing expressive languages to represent problem-solving goals and objectives, both domain independent and domain specific.  We are also investigating how to use and reuse of large ontologies in problem-solving contexts.</P>
+
+<BLOCKQUOTE>
+<P>"EXPECT: Explicit Representation for Flexible Acquisition".  
+W. Swartout and Y. Gil.  Proceedings of 1995 Knowledge Acquisition Workshop."
+(<A HREF="./papers/swartout-gil-kaw95.pdf">PDF file</A>)</P>
+
+<P>"Using Description Logics to Match Goals".  Y. Gil and P. Gonzalez.  
+Proceedings of the 1996 Workshop on Description Logics.</P>
+
+<P>"Building and (Re)Using an Ontology of Air Campaign Planning". 
+A. Valente, T. Russ, R. MacGregor, and W. Swartout.  IEEE Intelligent Systems 14(1), 1999.</P>
+
+<P>"Representing Capabilities of Problem-Solving Methods". W. Swartout,
+Y. Gil, and A. Valente.  Proceedings of 1999 IJCAI Workshop on Ontologies and
+Problem-Solving Methods. (<a href="http://www.isi.edu/expect/papers/swartout-ijcai99.pdf">PDF
+file </a>) </P>
+
+<P>"A Representation and Library for Objectives in Air Campaign Plans".  A. Valente, W. Swartout, and Y. Gil.  Available from <A HREF="http://www.isi.edu/expect/inspect.html">http://www.isi.edu/expect/inspect.html</A></P>
+</BLOCKQUOTE>
+
+<BR>
+<P><B><I><FONT FACE="Helvetica" SIZE=+1>3. Plan Representation</FONT></B></I></P>
+
+<P ALIGN=JUSTIFY>PLANET is a reusable ontology for representing plans that is designed to accomodate a diverse range of real-world plans, both manually and automatically created. We have drawn from our past experience in designing, developing and integrating planning tools, and expect planet to ease these tasks in the future in three ways. First, we have already found it useful for knowledge modelling. By providing a structure that formalizes useful distinctions for reasoning about states and actions, a knowledge engineer can find the semantics of informal expressions of plans (e.g., textual or domain-specific) through designing mappings to the ontology. Second, a plan ontology can be a central vehicle for knowledge reuse across planning applications. Planet contains general, domain-independent definitions that are common and useful across planning domains. Third, PLANET should facilitate integration of planning tools through knowledge sharing.</P>
+
+<P ALIGN=JUSTIFY>A related effort is CommonP, a language to represent plans that supports the needs of a plan evaluation tool, a plan editor, a generative planner, and a scheduler. </P>
+
+<BLOCKQUOTE>
+<P>"PLANET: A shareable and reusable ontology for representing plans".  Y. Gil and J. Blythe.  Available from <A HREF="http://www.isi.edu/isd/HPKB/planet/">http://www.isi.edu/isd/HPBK/planet/</A></P>
+
+<P>"CommonP: A Language to Represent Air Campaign Plans".  Y. Gil, R. MacGregor, K. Myers, S. Smith, W. Swartout.  Internal project report.</P>
+</BLOCKQUOTE>
+
+<BR>
+<P><B><I><FONT FACE="Helvetica" SIZE=+1>4. Air Campaign Planning</FONT></B></I></P>
+
+<P ALIGN=JUSTIFY>We have developed a tool that evaluates and critiques air campaign plans called INSPECT.  It takes an air campaign plan that has been manually developed and looks for possible problems that a user may have overlooked, such as inconsistencies or unrealistic use of resources.  We extended INSPECT to support cross-functional planning by catching problems due to the interdependencies between operational, logistics, and ISR objectives.  An important part of the work on INSPECT was the development of structured representations (or grammars) for air campaign plans.  INSPECT was an integral part of two important demonstrations: ARPI's Fourth Integrated Feasibility Demonstration (IFD-4) in June 1996 and the Jumpstart Demonstration of the DARPA JFACC program in January 1997.  It is also integrated with the ARPI TIE 97-1 Multi-Agent Planning, Simulation, and Visualization Experiment. INSPECT was also demonstrated at the recent EFX-98 Air Force exercise.</P>
+
+<BLOCKQUOTE>
+
+<P>"INSPECT: an Intelligent System for Air Campaign Plan Evaluation
+based on EXPECT". A. Valente, Y. Gil, and W. Swartout.  Available from
+<A HREF="http://www.isi.edu/expect/inspect.html">http://www.isi.edu/expect/inspect.html</A>.</P>
+
+<P>"Building and (Re)Using an Ontology of Air Campaign Planning". A. Valente, T. Russ, R. MacGregor, and W. Swartout.  IEEE Intelligent Systems 14(1), 1999.</P>
+
+<P"A Representation and Library for Objectives in Air Campaign Plans".  A. Valente, W. Swartout, and Y. Gil.  Available from <A HREF="http://www.isi.edu/expect/inspect.html">http://www.isi.edu/expect/inspect.html</A></P>
+</BLOCKQUOTE>
+
+<HR SIZE=2>
+
+<P ALIGN=CENTER><FONT FACE=ARIAL SIZE=-1><A
+HREF="./EXPECT.html">About EXPECT</A> |
+Research | <A
+HREF="./pr-members.html">Project Members</A> | <A
+HREF="./publications.html">Publications</A> | <A
+HREF="./demo.html">Movie</A> | <BR>
+| <A HREF="http://www.isi.edu/divisions/div3">Intelligent Systems
+Division</A> | <A HREF="http://www.isi.edu">Information Sciences
+Institute</A> | <A HREF="http://www.usc.edu">USC</A> |</P>
+</TD>
+
+<TD width=50></TD>
+
+</TR>
+
+</TABLE>
+</BODY>
+</HTML>

@@ -1,0 +1,6 @@
+(forall (?Activate1389)
+ (=> (isa ?Activate1389 Reload)
+  (exists
+   ((?Be-Activated1391 (Be-Activated)) (?Weapon1392 (Weapon Entity)))
+   (and (resulting-state ?Activate1389 ?Be-Activated1391)
+    (object ?Activate1389 ?Weapon1392)))))

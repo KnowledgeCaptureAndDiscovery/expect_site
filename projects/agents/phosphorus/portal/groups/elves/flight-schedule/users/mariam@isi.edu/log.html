@@ -1,0 +1,604 @@
+<html>
+<head>
+<script>
+var limit="0:30"
+if (document.images){
+  var parselimit=limit.split(":");
+  parselimit=parselimit[0]*60+parselimit[1]*1;
+  }
+function resubmit(val) {
+    var myform = eval("document.form"+val);
+    myform.submit();
+}
+function beginrefresh(){
+  if (!document.images)
+      return;
+   if (parselimit==1)
+      window.location.reload();
+   else {
+      parselimit-=1;
+      curmin=Math.floor(parselimit/60);
+      cursec=parselimit%60;
+      if (curmin!=0)
+         curtime=curmin+" minutes and "+cursec+" seconds left until page refresh!";
+      else
+         curtime=cursec+" seconds left until page refresh!";
+      window.status=curtime
+      setTimeout("beginrefresh()",1000)
+   }
+ }
+window.onload=beginrefresh;
+</script>
+</head>
+<table>
+<tr><td colspan=2>----Tue Nov 19 18:40:52 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>Delta Air Lines</td></tr>
+<tr><td><b>of outbound flight number</b></td><td>324</td></tr>
+<tr><td><b>on outbound departure date</b></td><td>11/18/2002</td></tr>
+<tr><td><b>at outbound departure time (e.g. 12:30pm no space please)</b></td><td>6:10 PM</td></tr>
+<tr><td><b>from outbound departure airport</b></td><td>LAX</td></tr>
+<tr><td><b>to outbound arrival airport</b></td><td>SFO</td></tr>
+<tr><td><b>of return flight number</b></td><td>2162</td></tr>
+<tr><td><b>on return departure date</b></td><td>11/19/2002</td></tr>
+<tr><td><b>at return departure time</b></td><td>6:25 AM</td></tr>
+<tr><td><b>from return departure airport</b></td><td>SFO</td></tr>
+<tr><td><b>to return arrival airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;error&gt;&lt;type&gt;Date passed&lt;/type&gt;&lt;attr&gt;date&lt;/attr&gt;&lt;/error&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1037760052)'></td></tr>
+</table><br>
+<form name='form1037760052' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='Delta Air Lines'>
+<input type='hidden' name='val1' value='324'>
+<input type='hidden' name='val2' value='11/18/2002'>
+<input type='hidden' name='val3' value='6:10 PM'>
+<input type='hidden' name='val4' value='LAX'>
+<input type='hidden' name='val5' value='SFO'>
+<input type='hidden' name='val6' value='2162'>
+<input type='hidden' name='val7' value='11/19/2002'>
+<input type='hidden' name='val8' value='6:25 AM'>
+<input type='hidden' name='val9' value='SFO'>
+<input type='hidden' name='val10' value='LAX'>
+<input type='hidden' name='val11' value='mariam@isi.edu'>
+<input type='hidden' name='agent' value='flight-schedule'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Tue Nov 19 06:29:47 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>Delta Air Lines</td></tr>
+<tr><td><b>of outbound flight number</b></td><td>324</td></tr>
+<tr><td><b>on outbound departure date</b></td><td>11/18/2002</td></tr>
+<tr><td><b>at outbound departure time (e.g. 12:30pm no space please)</b></td><td>6:10 PM</td></tr>
+<tr><td><b>from outbound departure airport</b></td><td>LAX</td></tr>
+<tr><td><b>to outbound arrival airport</b></td><td>SFO</td></tr>
+<tr><td><b>of return flight number</b></td><td>2162</td></tr>
+<tr><td><b>on return departure date</b></td><td>11/19/2002</td></tr>
+<tr><td><b>at return departure time</b></td><td>6:25 AM</td></tr>
+<tr><td><b>from return departure airport</b></td><td>SFO</td></tr>
+<tr><td><b>to return arrival airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;error&gt;&lt;type&gt;Date passed&lt;/type&gt;&lt;attr&gt;date&lt;/attr&gt;&lt;/error&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1037716187)'></td></tr>
+</table><br>
+<form name='form1037716187' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='Delta Air Lines'>
+<input type='hidden' name='val1' value='324'>
+<input type='hidden' name='val2' value='11/18/2002'>
+<input type='hidden' name='val3' value='6:10 PM'>
+<input type='hidden' name='val4' value='LAX'>
+<input type='hidden' name='val5' value='SFO'>
+<input type='hidden' name='val6' value='2162'>
+<input type='hidden' name='val7' value='11/19/2002'>
+<input type='hidden' name='val8' value='6:25 AM'>
+<input type='hidden' name='val9' value='SFO'>
+<input type='hidden' name='val10' value='LAX'>
+<input type='hidden' name='val11' value='mariam@isi.edu'>
+<input type='hidden' name='agent' value='flight-schedule'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Fri Nov  8 02:43:34 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>of outbound flight number</b></td><td>888</td></tr>
+<tr><td><b>on outbound departure date</b></td><td>11/7/2002</td></tr>
+<tr><td><b>at outbound departure time (e.g. 12:30pm no space please)</b></td><td>5:00 PM</td></tr>
+<tr><td><b>from outbound departure airport</b></td><td>LAX</td></tr>
+<tr><td><b>to outbound arrival airport</b></td><td>SFO</td></tr>
+<tr><td><b>of return flight number</b></td><td>1801</td></tr>
+<tr><td><b>on return departure date</b></td><td>11/8/2002</td></tr>
+<tr><td><b>at return departure time</b></td><td>6:10 AM</td></tr>
+<tr><td><b>from return departure airport</b></td><td>SFO</td></tr>
+<tr><td><b>to return arrival airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;error&gt;&lt;type&gt;Date passed&lt;/type&gt;&lt;attr&gt;date&lt;/attr&gt;&lt;/error&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1036752214)'></td></tr>
+</table><br>
+<form name='form1036752214' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='888'>
+<input type='hidden' name='val2' value='11/7/2002'>
+<input type='hidden' name='val3' value='5:00 PM'>
+<input type='hidden' name='val4' value='LAX'>
+<input type='hidden' name='val5' value='SFO'>
+<input type='hidden' name='val6' value='1801'>
+<input type='hidden' name='val7' value='11/8/2002'>
+<input type='hidden' name='val8' value='6:10 AM'>
+<input type='hidden' name='val9' value='SFO'>
+<input type='hidden' name='val10' value='LAX'>
+<input type='hidden' name='val11' value='mariam@isi.edu'>
+<input type='hidden' name='agent' value='flight-schedule'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Thu Nov  7 01:01:09 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>of outbound flight number</b></td><td>1828</td></tr>
+<tr><td><b>on outbound departure date</b></td><td>11/6/2002</td></tr>
+<tr><td><b>at outbound departure time (e.g. 12:30pm no space please)</b></td><td>4:00 PM</td></tr>
+<tr><td><b>from outbound departure airport</b></td><td>LAX</td></tr>
+<tr><td><b>to outbound arrival airport</b></td><td>SFO</td></tr>
+<tr><td><b>of return flight number</b></td><td>1801</td></tr>
+<tr><td><b>on return departure date</b></td><td>11/7/2002</td></tr>
+<tr><td><b>at return departure time</b></td><td>6:10 AM</td></tr>
+<tr><td><b>from return departure airport</b></td><td>SFO</td></tr>
+<tr><td><b>to return arrival airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;error&gt;&lt;type&gt;Date passed&lt;/type&gt;&lt;attr&gt;date&lt;/attr&gt;&lt;/error&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1036659669)'></td></tr>
+</table><br>
+<form name='form1036659669' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='1828'>
+<input type='hidden' name='val2' value='11/6/2002'>
+<input type='hidden' name='val3' value='4:00 PM'>
+<input type='hidden' name='val4' value='LAX'>
+<input type='hidden' name='val5' value='SFO'>
+<input type='hidden' name='val6' value='1801'>
+<input type='hidden' name='val7' value='11/7/2002'>
+<input type='hidden' name='val8' value='6:10 AM'>
+<input type='hidden' name='val9' value='SFO'>
+<input type='hidden' name='val10' value='LAX'>
+<input type='hidden' name='val11' value='mariam@isi.edu'>
+<input type='hidden' name='agent' value='flight-schedule'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Wed Nov  6 04:06:07 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>America West Airlines</td></tr>
+<tr><td><b>of outbound flight number</b></td><td>33</td></tr>
+<tr><td><b>on outbound departure date</b></td><td>11/5/2002</td></tr>
+<tr><td><b>at outbound departure time (e.g. 12:30pm no space please)</b></td><td>6:25 PM</td></tr>
+<tr><td><b>from outbound departure airport</b></td><td>LAX</td></tr>
+<tr><td><b>to outbound arrival airport</b></td><td>SFO</td></tr>
+<tr><td><b>of return flight number</b></td><td>110</td></tr>
+<tr><td><b>on return departure date</b></td><td>11/6/2002</td></tr>
+<tr><td><b>at return departure time</b></td><td>11:10 AM</td></tr>
+<tr><td><b>from return departure airport</b></td><td>SFO</td></tr>
+<tr><td><b>to return arrival airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;error&gt;&lt;type&gt;Date passed&lt;/type&gt;&lt;attr&gt;date&lt;/attr&gt;&lt;/error&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1036584367)'></td></tr>
+</table><br>
+<form name='form1036584367' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='America West Airlines'>
+<input type='hidden' name='val1' value='33'>
+<input type='hidden' name='val2' value='11/5/2002'>
+<input type='hidden' name='val3' value='6:25 PM'>
+<input type='hidden' name='val4' value='LAX'>
+<input type='hidden' name='val5' value='SFO'>
+<input type='hidden' name='val6' value='110'>
+<input type='hidden' name='val7' value='11/6/2002'>
+<input type='hidden' name='val8' value='11:10 AM'>
+<input type='hidden' name='val9' value='SFO'>
+<input type='hidden' name='val10' value='LAX'>
+<input type='hidden' name='val11' value='mariam@isi.edu'>
+<input type='hidden' name='agent' value='flight-schedule'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Wed Nov  6 02:35:23 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>American Airlines</td></tr>
+<tr><td><b>of outbound flight number</b></td><td>1950</td></tr>
+<tr><td><b>on outbound departure date</b></td><td>11/5/2002</td></tr>
+<tr><td><b>at outbound departure time (e.g. 12:30pm no space please)</b></td><td>5:20 PM</td></tr>
+<tr><td><b>from outbound departure airport</b></td><td>LAX</td></tr>
+<tr><td><b>to outbound arrival airport</b></td><td>SFO</td></tr>
+<tr><td><b>of return flight number</b></td><td>1915</td></tr>
+<tr><td><b>on return departure date</b></td><td>11/6/2002</td></tr>
+<tr><td><b>at return departure time</b></td><td>10:55 AM</td></tr>
+<tr><td><b>from return departure airport</b></td><td>SFO</td></tr>
+<tr><td><b>to return arrival airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;error&gt;&lt;type&gt;Date passed&lt;/type&gt;&lt;attr&gt;date&lt;/attr&gt;&lt;/error&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1036578923)'></td></tr>
+</table><br>
+<form name='form1036578923' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='American Airlines'>
+<input type='hidden' name='val1' value='1950'>
+<input type='hidden' name='val2' value='11/5/2002'>
+<input type='hidden' name='val3' value='5:20 PM'>
+<input type='hidden' name='val4' value='LAX'>
+<input type='hidden' name='val5' value='SFO'>
+<input type='hidden' name='val6' value='1915'>
+<input type='hidden' name='val7' value='11/6/2002'>
+<input type='hidden' name='val8' value='10:55 AM'>
+<input type='hidden' name='val9' value='SFO'>
+<input type='hidden' name='val10' value='LAX'>
+<input type='hidden' name='val11' value='mariam@isi.edu'>
+<input type='hidden' name='agent' value='flight-schedule'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Wed Nov  6 01:35:29 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>National Airlines</td></tr>
+<tr><td><b>of outbound flight number</b></td><td>104</td></tr>
+<tr><td><b>on outbound departure date</b></td><td>11/5/2002</td></tr>
+<tr><td><b>at outbound departure time (e.g. 12:30pm no space please)</b></td><td>2:00 PM</td></tr>
+<tr><td><b>from outbound departure airport</b></td><td>LAX</td></tr>
+<tr><td><b>to outbound arrival airport</b></td><td>IAD</td></tr>
+<tr><td><b>of return flight number</b></td><td>99</td></tr>
+<tr><td><b>on return departure date</b></td><td>11/6/2002</td></tr>
+<tr><td><b>at return departure time</b></td><td>9:10 PM</td></tr>
+<tr><td><b>from return departure airport</b></td><td>IAD</td></tr>
+<tr><td><b>to return arrival airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;error&gt;&lt;type&gt;Date passed&lt;/type&gt;&lt;attr&gt;date&lt;/attr&gt;&lt;/error&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1036575329)'></td></tr>
+</table><br>
+<form name='form1036575329' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='National Airlines'>
+<input type='hidden' name='val1' value='104'>
+<input type='hidden' name='val2' value='11/5/2002'>
+<input type='hidden' name='val3' value='2:00 PM'>
+<input type='hidden' name='val4' value='LAX'>
+<input type='hidden' name='val5' value='IAD'>
+<input type='hidden' name='val6' value='99'>
+<input type='hidden' name='val7' value='11/6/2002'>
+<input type='hidden' name='val8' value='9:10 PM'>
+<input type='hidden' name='val9' value='IAD'>
+<input type='hidden' name='val10' value='LAX'>
+<input type='hidden' name='val11' value='mariam@isi.edu'>
+<input type='hidden' name='agent' value='flight-schedule'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Wed Nov  6 01:35:24 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>National Airlines</td></tr>
+<tr><td><b>of outbound flight number</b></td><td>104</td></tr>
+<tr><td><b>on outbound departure date</b></td><td>11/5/2002</td></tr>
+<tr><td><b>at outbound departure time (e.g. 12:30pm no space please)</b></td><td>2:00 PM</td></tr>
+<tr><td><b>from outbound departure airport</b></td><td>LAX</td></tr>
+<tr><td><b>to outbound arrival airport</b></td><td>IAD</td></tr>
+<tr><td><b>of return flight number</b></td><td>99</td></tr>
+<tr><td><b>on return departure date</b></td><td>11/6/2002</td></tr>
+<tr><td><b>at return departure time</b></td><td>9:10 PM</td></tr>
+<tr><td><b>from return departure airport</b></td><td>IAD</td></tr>
+<tr><td><b>to return arrival airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;error&gt;&lt;type&gt;Date passed&lt;/type&gt;&lt;attr&gt;date&lt;/attr&gt;&lt;/error&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1036575324)'></td></tr>
+</table><br>
+<form name='form1036575324' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='National Airlines'>
+<input type='hidden' name='val1' value='104'>
+<input type='hidden' name='val2' value='11/5/2002'>
+<input type='hidden' name='val3' value='2:00 PM'>
+<input type='hidden' name='val4' value='LAX'>
+<input type='hidden' name='val5' value='IAD'>
+<input type='hidden' name='val6' value='99'>
+<input type='hidden' name='val7' value='11/6/2002'>
+<input type='hidden' name='val8' value='9:10 PM'>
+<input type='hidden' name='val9' value='IAD'>
+<input type='hidden' name='val10' value='LAX'>
+<input type='hidden' name='val11' value='mariam@isi.edu'>
+<input type='hidden' name='agent' value='flight-schedule'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Wed Nov  6 01:35:14 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>of outbound flight number</b></td><td>1814</td></tr>
+<tr><td><b>on outbound departure date</b></td><td>11/5/2002</td></tr>
+<tr><td><b>at outbound departure time (e.g. 12:30pm no space please)</b></td><td>2:15 PM</td></tr>
+<tr><td><b>from outbound departure airport</b></td><td>LAX</td></tr>
+<tr><td><b>to outbound arrival airport</b></td><td>SFO</td></tr>
+<tr><td><b>of return flight number</b></td><td>1801</td></tr>
+<tr><td><b>on return departure date</b></td><td>11/6/2002</td></tr>
+<tr><td><b>at return departure time</b></td><td>6:10 AM</td></tr>
+<tr><td><b>from return departure airport</b></td><td>SFO</td></tr>
+<tr><td><b>to return arrival airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;error&gt;&lt;type&gt;Date passed&lt;/type&gt;&lt;attr&gt;date&lt;/attr&gt;&lt;/error&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1036575314)'></td></tr>
+</table><br>
+<form name='form1036575314' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='1814'>
+<input type='hidden' name='val2' value='11/5/2002'>
+<input type='hidden' name='val3' value='2:15 PM'>
+<input type='hidden' name='val4' value='LAX'>
+<input type='hidden' name='val5' value='SFO'>
+<input type='hidden' name='val6' value='1801'>
+<input type='hidden' name='val7' value='11/6/2002'>
+<input type='hidden' name='val8' value='6:10 AM'>
+<input type='hidden' name='val9' value='SFO'>
+<input type='hidden' name='val10' value='LAX'>
+<input type='hidden' name='val11' value='mariam@isi.edu'>
+<input type='hidden' name='agent' value='flight-schedule'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Wed Nov  6 01:35:04 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>of outbound flight number</b></td><td>1814</td></tr>
+<tr><td><b>on outbound departure date</b></td><td>11/5/2002</td></tr>
+<tr><td><b>at outbound departure time (e.g. 12:30pm no space please)</b></td><td>2:15 PM</td></tr>
+<tr><td><b>from outbound departure airport</b></td><td>LAX</td></tr>
+<tr><td><b>to outbound arrival airport</b></td><td>SFO</td></tr>
+<tr><td><b>of return flight number</b></td><td>1801</td></tr>
+<tr><td><b>on return departure date</b></td><td>11/6/2002</td></tr>
+<tr><td><b>at return departure time</b></td><td>6:10 AM</td></tr>
+<tr><td><b>from return departure airport</b></td><td>SFO</td></tr>
+<tr><td><b>to return arrival airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;error&gt;&lt;type&gt;Date passed&lt;/type&gt;&lt;attr&gt;date&lt;/attr&gt;&lt;/error&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1036575304)'></td></tr>
+</table><br>
+<form name='form1036575304' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='1814'>
+<input type='hidden' name='val2' value='11/5/2002'>
+<input type='hidden' name='val3' value='2:15 PM'>
+<input type='hidden' name='val4' value='LAX'>
+<input type='hidden' name='val5' value='SFO'>
+<input type='hidden' name='val6' value='1801'>
+<input type='hidden' name='val7' value='11/6/2002'>
+<input type='hidden' name='val8' value='6:10 AM'>
+<input type='hidden' name='val9' value='SFO'>
+<input type='hidden' name='val10' value='LAX'>
+<input type='hidden' name='val11' value='mariam@isi.edu'>
+<input type='hidden' name='agent' value='flight-schedule'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Wed Oct 16 16:24:25 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>of outbound flight number</b></td><td>95</td></tr>
+<tr><td><b>on outbound departure date</b></td><td>10/15/2002</td></tr>
+<tr><td><b>at outbound departure time (e.g. 12:30pm no space please)</b></td><td>12:45 PM</td></tr>
+<tr><td><b>from outbound departure airport</b></td><td>LAX</td></tr>
+<tr><td><b>to outbound arrival airport</b></td><td>SFO</td></tr>
+<tr><td><b>of return flight number</b></td><td>1835</td></tr>
+<tr><td><b>on return departure date</b></td><td>10/16/2002</td></tr>
+<tr><td><b>at return departure time</b></td><td>2:30 PM</td></tr>
+<tr><td><b>from return departure airport</b></td><td>SFO</td></tr>
+<tr><td><b>to return arrival airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;error&gt;&lt;type&gt;Date passed&lt;/type&gt;&lt;attr&gt;date&lt;/attr&gt;&lt;/error&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1034810665)'></td></tr>
+</table><br>
+<form name='form1034810665' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='95'>
+<input type='hidden' name='val2' value='10/15/2002'>
+<input type='hidden' name='val3' value='12:45 PM'>
+<input type='hidden' name='val4' value='LAX'>
+<input type='hidden' name='val5' value='SFO'>
+<input type='hidden' name='val6' value='1835'>
+<input type='hidden' name='val7' value='10/16/2002'>
+<input type='hidden' name='val8' value='2:30 PM'>
+<input type='hidden' name='val9' value='SFO'>
+<input type='hidden' name='val10' value='LAX'>
+<input type='hidden' name='val11' value='mariam@isi.edu'>
+<input type='hidden' name='agent' value='flight-schedule'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Wed Oct 16 04:16:23 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>of outbound flight number</b></td><td>95</td></tr>
+<tr><td><b>on outbound departure date</b></td><td>10/15/2002</td></tr>
+<tr><td><b>at outbound departure time (e.g. 12:30pm no space please)</b></td><td>12:45 PM</td></tr>
+<tr><td><b>from outbound departure airport</b></td><td>LAX</td></tr>
+<tr><td><b>to outbound arrival airport</b></td><td>SFO</td></tr>
+<tr><td><b>of return flight number</b></td><td>1823</td></tr>
+<tr><td><b>on return departure date</b></td><td>10/16/2002</td></tr>
+<tr><td><b>at return departure time</b></td><td>12:50 PM</td></tr>
+<tr><td><b>from return departure airport</b></td><td>SFO</td></tr>
+<tr><td><b>to return arrival airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;error&gt;&lt;type&gt;Date passed&lt;/type&gt;&lt;attr&gt;date&lt;/attr&gt;&lt;/error&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1034766983)'></td></tr>
+</table><br>
+<form name='form1034766983' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='95'>
+<input type='hidden' name='val2' value='10/15/2002'>
+<input type='hidden' name='val3' value='12:45 PM'>
+<input type='hidden' name='val4' value='LAX'>
+<input type='hidden' name='val5' value='SFO'>
+<input type='hidden' name='val6' value='1823'>
+<input type='hidden' name='val7' value='10/16/2002'>
+<input type='hidden' name='val8' value='12:50 PM'>
+<input type='hidden' name='val9' value='SFO'>
+<input type='hidden' name='val10' value='LAX'>
+<input type='hidden' name='val11' value='mariam@isi.edu'>
+<input type='hidden' name='agent' value='flight-schedule'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Wed Oct 16 04:16:17 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>of outbound flight number</b></td><td>1836</td></tr>
+<tr><td><b>on outbound departure date</b></td><td>10/15/2002</td></tr>
+<tr><td><b>at outbound departure time (e.g. 12:30pm no space please)</b></td><td>7:05 PM</td></tr>
+<tr><td><b>from outbound departure airport</b></td><td>LAX</td></tr>
+<tr><td><b>to outbound arrival airport</b></td><td>SFO</td></tr>
+<tr><td><b>of return flight number</b></td><td>1823</td></tr>
+<tr><td><b>on return departure date</b></td><td>10/16/2002</td></tr>
+<tr><td><b>at return departure time</b></td><td>12:50 PM</td></tr>
+<tr><td><b>from return departure airport</b></td><td>SFO</td></tr>
+<tr><td><b>to return arrival airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;error&gt;&lt;type&gt;Date passed&lt;/type&gt;&lt;attr&gt;date&lt;/attr&gt;&lt;/error&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1034766977)'></td></tr>
+</table><br>
+<form name='form1034766977' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='1836'>
+<input type='hidden' name='val2' value='10/15/2002'>
+<input type='hidden' name='val3' value='7:05 PM'>
+<input type='hidden' name='val4' value='LAX'>
+<input type='hidden' name='val5' value='SFO'>
+<input type='hidden' name='val6' value='1823'>
+<input type='hidden' name='val7' value='10/16/2002'>
+<input type='hidden' name='val8' value='12:50 PM'>
+<input type='hidden' name='val9' value='SFO'>
+<input type='hidden' name='val10' value='LAX'>
+<input type='hidden' name='val11' value='mariam@isi.edu'>
+<input type='hidden' name='agent' value='flight-schedule'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Wed Oct 16 04:16:12 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>of outbound flight number</b></td><td>95</td></tr>
+<tr><td><b>on outbound departure date</b></td><td>10/15/2002</td></tr>
+<tr><td><b>at outbound departure time (e.g. 12:30pm no space please)</b></td><td>12:45 PM</td></tr>
+<tr><td><b>from outbound departure airport</b></td><td>LAX</td></tr>
+<tr><td><b>to outbound arrival airport</b></td><td>SFO</td></tr>
+<tr><td><b>of return flight number</b></td><td>1835</td></tr>
+<tr><td><b>on return departure date</b></td><td>10/16/2002</td></tr>
+<tr><td><b>at return departure time</b></td><td>2:30 PM</td></tr>
+<tr><td><b>from return departure airport</b></td><td>SFO</td></tr>
+<tr><td><b>to return arrival airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;error&gt;&lt;type&gt;Date passed&lt;/type&gt;&lt;attr&gt;date&lt;/attr&gt;&lt;/error&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1034766972)'></td></tr>
+</table><br>
+<form name='form1034766972' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='95'>
+<input type='hidden' name='val2' value='10/15/2002'>
+<input type='hidden' name='val3' value='12:45 PM'>
+<input type='hidden' name='val4' value='LAX'>
+<input type='hidden' name='val5' value='SFO'>
+<input type='hidden' name='val6' value='1835'>
+<input type='hidden' name='val7' value='10/16/2002'>
+<input type='hidden' name='val8' value='2:30 PM'>
+<input type='hidden' name='val9' value='SFO'>
+<input type='hidden' name='val10' value='LAX'>
+<input type='hidden' name='val11' value='mariam@isi.edu'>
+<input type='hidden' name='agent' value='flight-schedule'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Wed Oct 16 04:05:57 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>American Airlines</td></tr>
+<tr><td><b>of outbound flight number</b></td><td>1950</td></tr>
+<tr><td><b>on outbound departure date</b></td><td>10/15/2002</td></tr>
+<tr><td><b>at outbound departure time (e.g. 12:30pm no space please)</b></td><td>05:20 pm</td></tr>
+<tr><td><b>from outbound departure airport</b></td><td>LAX</td></tr>
+<tr><td><b>to outbound arrival airport</b></td><td>SFO</td></tr>
+<tr><td><b>of return flight number</b></td><td>1939</td></tr>
+<tr><td><b>on return departure date</b></td><td>10/17/2002</td></tr>
+<tr><td><b>at return departure time</b></td><td>05:40 pm</td></tr>
+<tr><td><b>from return departure airport</b></td><td>SFO</td></tr>
+<tr><td><b>to return arrival airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;error&gt;&lt;type&gt;Date passed&lt;/type&gt;&lt;attr&gt;date&lt;/attr&gt;&lt;/error&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1034766357)'></td></tr>
+</table><br>
+<form name='form1034766357' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='American Airlines'>
+<input type='hidden' name='val1' value='1950'>
+<input type='hidden' name='val2' value='10/15/2002'>
+<input type='hidden' name='val3' value='05:20 pm'>
+<input type='hidden' name='val4' value='LAX'>
+<input type='hidden' name='val5' value='SFO'>
+<input type='hidden' name='val6' value='1939'>
+<input type='hidden' name='val7' value='10/17/2002'>
+<input type='hidden' name='val8' value='05:40 pm'>
+<input type='hidden' name='val9' value='SFO'>
+<input type='hidden' name='val10' value='LAX'>
+<input type='hidden' name='val11' value='mariam@isi.edu'>
+<input type='hidden' name='agent' value='flight-schedule'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<p>
+</html>

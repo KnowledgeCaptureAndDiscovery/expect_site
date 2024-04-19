@@ -1,0 +1,41 @@
+<html>
+<head>
+	<title>Main Agent Window</title>
+</head>
+
+
+<SCRIPT LANGUAGE="JAVASCRIPT">
+<!--
+var counter = 0;
+var componentwindow = Array(20);
+
+function popUp(location, xsize, ysize) {
+	loc = location + "?" + counter;
+	window.open(loc,"floating"+counter,"toolbar=0,location=1,directories=0,status=1,top=" + (counter*20) + ",left=" + (counter*20) + ",menubar=0,scrollbars=0,resizable=1,screenX=" + (20*counter) + ",screenY=" + (20*counter) + ",width=" + xsize + ",height=" + ysize);
+	counter++;
+}
+
+function getvalue()
+{
+	return "hi"
+
+}
+
+//-->
+
+</SCRIPT>
+
+
+<body>
+	
+	<br>
+	<br>
+	<input type = button value="Airfare" onclick = "popUp('airfare.html',320,184)">
+	<br>
+	<br>
+	<input type = button value="Flight Schedule monitoring agent" onclick = "popUp('sched.html',320,184)">
+	<br>
+	<br>
+	<input type = button value="Flight Status monitoring agent" onclick = "popUp('flight-status-agent.html',400,400)">
+	
+</body>

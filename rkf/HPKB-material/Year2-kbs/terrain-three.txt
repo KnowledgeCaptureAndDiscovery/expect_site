@@ -1,0 +1,1578 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+
+;There are at least three KR-related issues in this file that are
+
+;worth focusing on.
+
+
+
+;1: TerrainAttributes vs. EcologicalRegions.  When should terrain
+
+;collections should be reified around terrain features, and when should
+
+;the features be TerrainAttributes?  
+
+
+
+;2: ExistingStuffType and the granularity limit.  There seems to be a
+
+;strong case to be made for making many specializations of
+
+;EcologicalRegion instances of ExistingStuffType.  What should the
+
+;granuleOfStuff relations be for these collections?
+
+
+
+;3: Where should these constants be defined?  We need them to be at a
+
+;comparatively high level.  We don't want them limited to the
+
+;PhysicalGeographyMt or its specs, since mts that have access to the
+
+;DualistGeopoliticalMt will need to have access to them.  That to me
+
+;seems to suggest either the GeographyMt or the
+
+;TerrestrialFrameOfReferenceMt.
+
+;--A slightly related question, here: should there be any sort of
+
+;  genlMt access in either direction between the 'geography' mts and the
+
+;  TerrestrialFrameOfReferenceMt?  Right now there does not seem to be
+
+;  any such link, or else I have not yet discovered it.  Something we
+
+;  might want to consider.
+
+
+
+
+
+
+
+
+
+;Terrain Types
+
+
+
+;Certain terrain types, especially those that have a clear definition
+
+;in the ecological sciences, are probably best represented as
+
+;collections, more specifically, as specializations of
+
+;EcologicalRegion.  Others, especially those with vague or intuitive
+
+;definitions, are probably better represented as instances of
+
+;TerrainAttribute.  The attributes are less precise and due caution
+
+;should be exercised when using them in the antecedents of rules
+
+;absent other qualifications.  For instance, both a golf course and
+
+;the Argentine Pampas might have the TerrainAttribute Grassy, but
+
+;many, many other features would distinguish the two regions.
+
+
+
+;With many terrain collections, there is a further question of whether
+
+;it is more appropriate to make the collection an instance of
+
+;ExistingObjectType, or an instance of ExistingStuffType bounded by a
+
+;granuleOfStuff assertion.  For most specializations of
+
+;EcologicalRegion I recommend the latter: e.g., a spatial piece of a
+
+;Wetland is also a Wetland, down to some comparatively small granule
+
+;size.
+
+
+
+;In many cases it is unclear precisely what the optimal granularity
+
+;boundary should be--albeit this is often not a decision of much
+
+;moment.  We can take our best guess for now and modify that as the
+
+;necessity arises.
+
+
+
+
+
+;Terrain Attributes.
+
+
+
+constant: WetlandTerrainAttribute.
+
+in Mt: GeographyMt.
+
+isa: UnorderedAttributeType.
+
+genls: TerrainAttribute.
+
+comment: "Collection of attributes which may be used to more
+
+specifically characterize instances of #$Wetland; e.g. #$Marshy,
+
+#$Swampy, &c..".
+
+
+
+constant: Marshy.
+
+in Mt: GeographyMt.
+
+isa: WetlandTerrainAttribute.
+
+comment: "Characteristic attribute of instances of #$Wetland whose
+
+vegetation is composed primarily of marsh grasses and rushes.".
+
+
+
+constant: Swampy.
+
+in Mt: GeographyMt.
+
+isa: WetlandTerrainAttribute.
+
+comment: "Characteristic attribute of instances of #$Wetland whose
+
+vegetation includes trees and woody shrubs.".
+
+
+
+constant: Scrubby.
+
+in Mt: GeographyMt.
+
+isa: TerrainAttribute.
+
+comment: "Characteristic attribute of semiarid-to-temperate areas
+
+where the vegetation pattern consists primarily of low shrubs
+
+interspersed with grasses.".
+
+
+
+;;add
+
+constant: GrassFamily.
+
+in Mt : BaseKB.
+
+isa : OrganismClassificationType .
+
+genls : Plant-NonWoody .
+
+comment : "All individual plants from the order of Grasses,
+
+          which includes cereal grains, bamboo, turf grass,
+
+          etc." .
+
+
+
+;;add
+
+constant: Grass-Plant.
+
+in Mt: BaseKB .
+
+isa : ExistingObjectType. 
+
+genls : GrassFamily .
+
+comment : "Individual plants which are part of a mass of turf
+
+          grass." .
+
+;F : (termOfUnit (MobFn Grass-Plant) (MobFn Grass-Plant))
+
+
+
+
+
+constant: Grassy.
+
+in Mt: GeographyMt.
+
+isa: TerrainAttribute.
+
+comment: "Characteristic attribute arid-to-temperate
+
+#$EcologicalRegions where grasses predominate, also of human-tended
+
+regions where #$GrassTurf has been extensively planted and
+
+maintained.".
+
+F:
+
+(implies
+
+  (terrainAttributes ?REGION Grassy)
+
+  (relationInstanceExists physicalDecompositions ?REGION (MobFn
+
+Grass-Plant))).
+
+
+
+constant: Forested.
+
+in Mt: GeographyMt.
+
+isa: TerrainAttribute.
+
+comment: "Characteristic attribute of terrain where there is
+
+comparatively dense growth of medium-to-large sized trees.".
+
+F:
+
+(implies
+
+  (terrainAttributes ?REGION Forested)
+
+  (relationInstanceExistsMany physicalDecompositions ?REGION Tree-ThePlant)).
+
+
+
+constant: Barren.
+
+in Mt: GeographyMt.
+
+isa: TerrainAttribute.
+
+comment: "General attribute of terrain which for any one of a number
+
+of climatic reasons will not support much plant growth beyond lichen,
+
+moss, and very small shrubs.".
+
+F: (not
+
+    (and
+
+     (isa ?TREE Plant-Woody)
+
+     (terrainAttributes ?LAND Barren)
+
+     (objectFoundInLocation ?TREE ?LAND))).
+
+
+
+constant: GroundHasPermaFrost.
+
+in Mt: GeographyMt.
+
+isa: TerrainAttribute.
+
+comment: "Characteristic attribute of much terrain near and above the
+
+#$ArcticCircle: the chief distinguishing feature is a layer of
+
+permanently frozen ground insulated by a shallow layer of soil that
+
+thaws during the spring and summer.".
+
+F:
+
+(genlAttributes GroundHasPermaFrost Barren).
+
+
+
+;;add
+
+constant: MountainClimateCycle .
+
+in Mt : BaseKB.
+
+isa : ClimateCycleType .
+
+genls : AnnualClimateCycle TemperateClimateCycle  .
+
+comment : "climate of moutainous areas. Usually cooler and
+
+          wetter than the climate of the surrounding lowlands".
+
+
+
+constant: Mountainous.
+
+in Mt: GeographyMt.
+
+isa: TerrainAttribute.
+
+comment: "Characteristic attribute of terrain found on the upper
+
+slopes of mountains of mid- and high-altitude.  There is little plant
+
+growth apart from mosses and lichens.".
+
+F:
+
+(genlAttributes Mountainous Barren).
+
+F:
+
+(implies
+
+  (terrainAttributes ?TERRAIN Mountainous)
+
+  (hasClimateType ?TERRAIN MountainClimateCycle)).
+
+
+
+;Terrain Collections
+
+
+
+
+
+;;add
+
+constant: Soil .
+
+in Mt: BaseKB.
+
+isa: ExistingStuffType .
+
+genls : SolidTangibleThing (SolidFn EarthStuff) .
+
+comment : "Soil, as in earth - the stuff plants grow in." .
+
+
+
+;;add
+
+constant: soilComponent.
+
+in Mt: BaseKB.
+
+isa: BinaryPredicate CotemporalObjectsSlot FunctionalSlot 
+
+  CompositionPredicate   InterExistingObjectSlot .
+
+genlPreds : physicalParts .
+
+arg1Isa : GeographicalRegion. 
+
+arg2Isa : Soil .
+
+arg2Format : SingleEntry . 
+
+comment : "The piece of soil within this physical-geographic
+
+          region." . 
+
+
+
+
+
+constant: Wetland.
+
+in Mt: GeographyMt.
+
+isa: ExistingStuffType IKBConstant.
+
+genls: EcologicalRegion OutdoorLocation.
+
+comment: "The collection of all terrain types characterized by land
+
+containing much soil moisture.  A predicate mapped in from the NWU
+
+Trafficability and Terrain Engine.".
+
+F:
+
+(interArgIsa2-1 terrainAttributes WetlandTerrainAttribute Wetland).
+
+F: (implies 
+
+     (and
+
+      (isa ?WETLAND Wetland)
+
+      (isa ?WATER Water)
+
+      (soilComponent ?WETLAND ?SOIL))
+
+     (constituents ?SOIL ?WATER)).
+
+
+
+
+
+
+
+;;add
+
+constant: TundraClimateCycle .
+
+in Mt: BaseKB .
+
+isa : ClimateCycleType .
+
+genls : AnnualClimateCycle.
+
+comment : "climate of tundra near poles. Always cold, short
+
+          summer, little precipitation." .
+
+;;add
+
+constant: taxonMembers  .
+
+in Mt:  BaseKB. 
+
+isa :  ReflexiveBinaryPredicate AntiSymmetricBinaryPredicate
+
+        BinaryPredicate NonPhysicalPartPredicate  .
+
+genlInverse : genls .
+
+arg1Isa : BiologicalTaxon  .
+
+arg2Isa : OrganismClassificationType  .
+
+arg2Format : SetTheFormat  .
+
+comment : "The predicate #$taxonMembers is used to relate
+
+          taxonomic groups to the types of organism that belong
+
+          to those groups. (#$taxonMembers TAXON ORGTYPE) means
+
+          that the #$BiologicalTaxon TAXON includes the
+
+          #$OrganismClassificationType ORGTYPE. ORGTYPE may or
+
+          may not be a scientific category; nonetheless, in Cyc
+
+          it is classified under the scientific taxon TAXON.
+
+          Example: (#$taxonMembers #$Mammal #$Person). Organism types
+
+          may be related to more than one taxon." .
+
+
+
+
+
+;;add
+
+constant: EmbryophyteSubkingdom .
+
+in Mt: BaseKB .
+
+isa : BiologicalSubkingdom  .
+
+superTaxons : Plant .
+
+comment : "A major group within the plant kingdom which
+
+          includes those taxa whose members have an embryonic
+
+          stage which is dependetn on the parent plant for some
+
+          period. Includes vascular plants (tracheophyta
+
+          division) and mosses/liverworts/etc. (bryophyte
+
+          division)." .
+
+
+
+
+
+
+
+
+
+;;add
+
+constant: BryophytaDivision  .
+
+in Mt: BaseKB.
+
+isa : BiologicalDivision .
+
+superTaxons : EmbryophyteSubkingdom .
+
+
+
+;;add
+
+constant: Bryophyte .
+
+in Mt: BaseKB.
+
+isa : OrganismClassificationType  .
+
+genls: Plant  .
+
+comment: "Those plants lacking vascular tissue." .
+
+F : (taxonMembers BryophytaDivision Bryophyte).
+
+
+
+;;add
+
+constant: MusciClass .
+
+in Mt: BaseKB.
+
+isa :  BiologicalClass  .
+
+superTaxons : BryophytaDivision .
+
+
+
+;;add
+
+constant: Moss.
+
+in Mt: BaseKB .
+
+isa : OrganismClassificationType .
+
+genls : Bryophyte .
+
+F : (taxonMembers MusciClass Moss) .
+
+
+
+
+
+;;add
+
+constant: Lichen.
+
+in Mt: BaseKB .
+
+isa :  OrganismClassificationType      .
+
+genls : Organism-Whole  .
+
+
+
+constant: TundraRegion.
+
+in Mt: GeographyMt.
+
+isa: ExistingStuffType IKBConstant.
+
+genls: EcologicalRegion OutdoorLocation.
+
+comment: "The collection of all terrain types characterized by
+
+permanently frozen treeless land supporting a growth of mosses,
+
+lichens, grasses, rushes, and very few other forms of plant life.
+
+Source: The Times Atlas of the World (1995).".
+
+F: (relationAllExistsMany objectFoundInLocation TundraRegion Moss).
+
+F: (relationAllExistsMany objectFoundInLocation TundraRegion Lichen).
+
+F:
+
+(relationAllExists hasClimateType TundraRegion TundraClimateCycle).
+
+F:
+
+(relationAllInstance terrainAttributes TundraRegion GroundHasPermaFrost).
+
+
+
+;;add
+
+constant: TaigaClimateCycle .
+
+in Mt: BaseKB.
+
+isa: ClimateCycleType .
+
+genls: TemperateClimateCycle .
+
+comment: "climate of the great forests of Northern #$Canada
+
+          and Russia. Long cold winter, short cool
+
+     summer." .
+
+
+
+
+
+;;add
+
+constant: BiologicalSubdivision .
+
+in Mt: BaseKB.
+
+isa: BiologicalTaxonType .
+
+genls : BiologicalTaxon  .
+
+comment : "A more specific partition than Biological
+
+          Division, more general than Biological Class." .
+
+
+
+;;add
+
+constant: TracheophytaDivision .
+
+in Mt: BaseKB.
+
+isa: BiologicalDivision .
+
+superTaxons : Plant EmbryophyteSubkingdom .
+
+comment : "The division in the plant kingdom that contains
+
+          the vascular plants." .
+
+
+
+;;add
+
+constant: PterophytinaSubdivision .
+
+in Mt: BaseKB.
+
+isa: BiologicalSubdivision  .
+
+superTaxons : TracheophytaDivision.
+
+comment : "A biologicalSubdivision including ferns and seed
+
+          plants." .
+
+
+
+
+
+
+
+;;add
+
+constant: GymnospermGroup .
+
+in Mt: BaseKB .
+
+isa: BiologicalTaxon BiologicalClass
+
+        OrganismClassificationType .
+
+superTaxons : PterophytinaSubdivision .
+
+comment : "A biological group of plant classes within the
+
+          PterophytinaSubdivision whose members all bear seeds
+
+          which are not protected by a carpel. The
+
+          GymnospermGroup includes the Conifers and gingkos.
+
+          See also Seed, Carpel." .
+
+
+
+
+
+;;add
+
+constant: ConiferopsidaClass .
+
+in Mt: BaseKB  .
+
+isa : BiologicalClass  .
+
+superTaxons : PterophytinaSubdivision GymnospermGroup .
+
+comment : "A BiologicalClass within the GymnospermGroup in
+
+          the plant kingdom which contains the Conifer taxa,
+
+          such as species of PineTree, SpruceTree, sequoia,
+
+          etc." .
+
+
+
+
+
+;;add
+
+constant: Conifer .
+
+in Mt: BaseKB  .
+
+isa: OrganismClassificationType  .
+
+genls: Plant-Woody .
+
+comment: "A member of the coniferopsida class. Usually a
+
+          tree, usually evergreen." .
+
+F : (taxonMembers ConiferopsidaClass Conifer) .
+
+
+
+constant: TaigaRegion.
+
+in Mt: GeographyMt.
+
+isa: ExistingStuffType IKBConstant.
+
+genls: EcologicalRegion OutdoorLocation.
+
+comment: "Collection of subarctic regions characterized by extensive
+
+forestation, short, cool summers, and long, cold winters with heavy
+
+snowfall.  Also known as boreal forests.  Predominant trees are pine,
+
+larch, spruce, and fir.  Source: The Times Atlas of the World (1995).".
+
+F:
+
+(relationAllExists hasClimateType TaigaRegion TaigaClimateCycle).
+
+F:
+
+(relationAllInstance terrainAttributes TaigaRegion Forested).
+
+F:
+
+(relationAllExistsMany physicalDecompositions TaigaRegion Conifer).
+
+F:
+
+(granuleOfStuff TaigaRegion Conifer).
+
+
+
+
+
+;;add
+
+constant: TemperateMarineClimateCycle.
+
+in Mt : BaseKB .
+
+isa : ClimateCycleType  .
+
+genls : AnnualClimateCycle TemperateClimateCycle .
+
+comment : "climate of coastal areas in temperate regions,
+
+          such as Seattle. Warm summer, cool winter,
+
+          precipitation throughout.".
+
+
+
+constant: ConiferForestRegion.
+
+in Mt: GeographyMt.
+
+isa: ExistingStuffType IKBConstant.
+
+genls: EcologicalRegion OutdoorLocation.
+
+comment: "Collection of forests in which conifers predominate, but
+
+with a different pattern of forestation from that found in instances
+
+of #$Taiga.  Examples are found in western North America, southeastern
+
+USA, and southern Brazil.  Source: The Times Atlas of the World (1995).".
+
+F:
+
+(relationAllInstance terrainAttributes ConiferForestRegion Forested).
+
+F:
+
+(relationAllExists hasClimateType ConiferForestRegion
+
+TemperateMarineClimateCycle).
+
+F:
+
+(relationAllExistsMany physicalDecompositions ConiferForestRegion Conifer).
+
+F:
+
+(granuleOfStuff ConiferForestRegion Conifer).
+
+
+
+
+
+;;add
+
+constant: SnowyClimateCycle .
+
+in Mt: BaseKB.
+
+isa: ClimateCycleType .
+
+genls: AnnualClimateCycle .
+
+comment: "The collection of climate cycles that have
+
+          frequent cases of snow in the winter." .
+
+
+
+constant: MidLatitudeMixedForestRegion.
+
+in Mt: GeographyMt.
+
+isa: ExistingStuffType IKBConstant.
+
+genls: EcologicalRegion OutdoorLocation.
+
+comment: "Collection of instances of #$EcologicalRegions.  Instances
+
+are transition zones between boreal #$TaigaRegion and #$BroadLeafForestRegion
+
+wherein conifers and broadleaf trees exist in roughly equal
+
+proporitions.  Source: The Times Atlas of the World (1995).".
+
+F:
+
+(relationAllInstance terrainAttributes MidLatitudeMixedForestRegion Forested).
+
+F:
+
+(relationAllExists 
+
+  hasClimateType MidLatitudeMixedForestRegion SnowyClimateCycle).
+
+F:
+
+(granuleOfStuff MidLatitudeMixedForestRegion Tree-ThePlant).
+
+
+
+constant: BroadleafForestRegion.
+
+in Mt: GeographyMt.
+
+isa: ExistingStuffType IKBConstant.
+
+genls: EcologicalRegion OutdoorLocation.
+
+comment: "Collection of instances of #$EcologicalRegions.  Instances
+
+are deciduous forest regions found mainly in the
+
+#$NorthernHemisphere-Region.  In Western Europe and North America
+
+before 1600, a wide variety of tree species occupied these regions,
+
+e.g., oak, ash, beech, elm, maple, hickory, alder, and birch, but due
+
+to exploitation little of the original forest regions remain.  Source:
+
+The Times Atlas of the World (1995).".
+
+F:
+
+(relationAllInstance terrainAttributes BroadleafForestRegion Forested).
+
+F:
+
+(relationAllExists hasClimateType BroadleafForestRegion
+
+TemperateClimateCycle).
+
+F:
+
+(granuleOfStuff BroadleafForestRegion DeciduousPlant).
+
+
+
+
+
+;;add
+
+constant: MediterraneanClimateCycle .
+
+in Mt:  BaseKB.
+
+isa:  ClimateCycleType.
+
+genls:  AnnualClimateCycle TemperateClimateCycle .
+
+comment: "climate like that of european countries bordering
+
+          the Mediterranean, such as Greece and Southern
+
+          California. Hot dry summer and mild rainy winter.".
+
+
+
+constant: MediterraneanScrubRegion.
+
+in Mt: GeographyMt.
+
+isa: ExistingStuffType IKBConstant.
+
+genls: EcologicalRegion OutdoorLocation.
+
+comment: "Instances are areas of shrub-dominated vegetation located in
+
+the Mediterranean basinand similar climatic regions in coastal parts
+
+of California, Chile, South Africa, and southern Australia.  A variety
+
+of aromatic herbaceous plants grow beneath low shrub thickets.
+
+Source: The Times Atlas of the World (1995).".
+
+F:
+
+(relationAllInstance terrainAttributes BroadleafForestRegion Scrubby).
+
+F:
+
+(relationAllExists hasClimateType BroadleafForestRegion
+
+MediterraneanClimateCycle).
+
+F:
+
+(granuleOfStuff MediterraneanScrubRegion Bush).
+
+
+
+;;add
+
+constant: Plain .
+
+in Mt:  BaseKB.
+
+isa:  ExistingObjectType .
+
+genls: LandTopographicalFeature OutdoorLocation   .
+
+;comment:   .
+
+;F : (implies 
+
+;       (isa ?PLAIN Plain) 
+
+;       (terrainAttributes ?PLAIN NotHilly)) .
+
+
+
+
+
+;;add
+
+constant: Grassland .
+
+in Mt:  BaseKB.
+
+isa:  ExistingObjectType .
+
+genls:  Plain.
+
+comment:  "Grassy land with deep, rich soil and few trees or
+
+          shrubs.".
+
+
+
+
+
+constant: PrairieRegion.
+
+in Mt: GeographyMt.
+
+isa: ExistingStuffType IKBConstant.
+
+genls: Grassland.
+
+comment: "Instances are areas of #$Grassland where long grasses are
+
+dominant, found in central North America, eastern South Africa and the
+
+Pampas of Argentina.  Source: The Times Atlas of the World (1995).".
+
+F:
+
+(relationAllInstance terrainAttributes PrairieRegion Grassy).
+
+F:
+
+(relationAllExists hasClimateType PrairieRegion TemperateClimateCycle).
+
+F:
+
+(granuleOfStuff PrairieRegion Grass-Plant).
+
+
+
+
+
+
+
+
+
+constant: SteppeRegion.
+
+in Mt: GeographyMt.
+
+isa: ExistingStuffType IKBConstant.
+
+genls: Grassland.
+
+comment: "Instances are areas of #$Grassland where short grasses are
+
+dominant: traditionally, the wild grasslands of Eurasia, but also
+
+found extensively in central North America, central and southern
+
+Africa, and Australia.  Source: The Times Atlas of the World (1995).".
+
+F:
+
+(relationAllInstance terrainAttributes SteppeRegion Grassy).
+
+F:
+
+(relationAllExists hasClimateType SteppeRegion SteppeClimateCycle).
+
+F:
+
+(granuleOfStuff SteppeRegion Bush).
+
+
+
+;;add
+
+constant: SunnyClimateCycle .
+
+in Mt:  BaseKB .
+
+isa  : ClimateCycleType   .
+
+genls:   AnnualClimateCycle .
+
+comment: "The collection of climate cycles that are
+
+          primarily sunny."     .
+
+
+
+
+
+constant: SavannahRegion.
+
+in Mt: GeographyMt.
+
+isa: ExistingStuffType IKBConstant.
+
+genls: Grassland.
+
+comment: "Instances are instances of #$Grassland found to the north
+
+and south of the #$TropicalRainForestRegions of South America and
+
+central Africa and around the desert fringes of Australia.  Grasses
+
+are interspersed with scattered thorn bushes or deciduous trees.
+
+Source: The Times Atlas of the World (1995).".
+
+F:
+
+(relationAllInstance terrainAttributes SavannahRegion Grassy).
+
+F:
+
+(relationAllExists hasClimateType SavannahRegion SunnyClimateCycle).
+
+F:
+
+(granuleOfStuff SavannahRegion Bush).
+
+
+
+
+
+
+
+
+
+;;add
+
+constant: RainForestClimateCycle .
+
+in Mt:   BaseKB  .
+
+isa  :  ClimateCycleType .
+
+genls:   AnnualClimateCycle   .
+
+comment:  "climate of the rain forests. Always hot, always
+
+          wet, little or no seasonal changes at all."    .
+
+
+
+
+
+
+
+constant: TropicalRainForestRegion.
+
+in Mt: GeographyMt.
+
+isa: ExistingStuffType IKBConstant.
+
+genls: EcologicalRegion OutdoorLocation.
+
+comment: "Instances are areas of dense forest located in the tropics
+
+and characterized by high annual rainfall and continuous high
+
+temperature.  Up to three tree layers grow above a variable shrub
+
+layer.  Source: The Times Atlas of the World (1995).".
+
+F:
+
+(relationAllInstance terrainAttributes TropicalRainForestRegion Forested).
+
+F:
+
+(relationAllExists hasClimateType TropicalRainForestRegion
+
+RainForestClimateCycle).
+
+;F:
+
+;(relationAllExists physicalDecompositions TropicalRainForestRegion
+
+;RainForest).
+
+;or maybe just merge with already extant #$RainForest.
+
+F:
+
+(granuleOfStuff TropicalRainForestRegion Tree-ThePlant).
+
+
+
+
+
+
+
+;;add
+
+constant:  MonsoonClimateCycle .
+
+in Mt:  BaseKB  .
+
+isa  : ClimateCycleType  .
+
+genls:   AnnualClimateCycle HumidClimateCycle   .
+
+comment: "climate of tropical areas that have a distinct wet
+
+          and dry season, such as Bangladesh. Always hot."     .
+
+
+
+constant: MonsoonForestRegion.
+
+in Mt: GeographyMt.
+
+isa: ExistingStuffType IKBConstant.
+
+genls: EcologicalRegion OutdoorLocation.
+
+comment: "Instances are deciduous forest areas in eastern India, in
+
+parts of Southeast Asia, and in northeastern Australia.  Growth is
+
+associated with the #$MonsoonClimateCycles prevailing in those
+
+regions.  Source: The Times Atlas of the World (1995).".
+
+F:
+
+(relationAllInstance terrainAttributes MonsoonForestRegion Forested).
+
+F:
+
+(relationAllExists hasClimateType MonsoonForestRegion MonsoonClimateCycle).
+
+F:
+
+(granuleOfStuff MonsoonForestRegion DeciduousPlant).
+
+ 
+
+
+
+
+
+constant: DryTropicalForestRegion.
+
+in Mt: GeographyMt.
+
+isa: ExistingStuffType IKBConstant.
+
+genls: EcologicalRegion OutdoorLocation.
+
+comment: "Instances are areas of semi-deciduous forest growing in
+
+semi-arid areas of South America and the Indian subcontinent.
+
+Rainfall in these areas usually averages less than 250mm per annum.
+
+Thorny scrub and low- to medium-sized trees with thick bark and deep
+
+roots characterize the vegetation.  Source: The Times Atlas of the
+
+World (1995).".
+
+F:
+
+(relationAllInstance terrainAttributes DryTropicalForestRegion Forested).
+
+F:
+
+(relationAllExists hasClimateType DryTropicalForestRegion DesertClimateCycle).
+
+F:
+
+(granuleOfStuff DryTropicalForestRegion Bush).
+
+
+
+
+
+
+
+constant: SubtropicalForestRegion.
+
+in Mt: GeographyMt.
+
+isa: ExistingStuffType IKBConstant.
+
+genls: EcologicalRegion OutdoorLocation.
+
+comment: "Instances are hardleaf evergreen forest regions growing
+
+between the latitudes of 15-40 degrees north and south of the equator
+
+in China, Japan, Australia, New Zealand, and South Africa.  Source:
+
+The Times Atlas of the World (1995).".
+
+F:
+
+(relationAllInstance terrainAttributes SubtropicalForestRegion Forested).
+
+F:
+
+(relationAllExists hasClimateType SubtropicalForestRegion
+
+HumidSubtropicalClimateCycle).
+
+F:
+
+(granuleOfStuff SubtropicalForestRegion Conifer).
+
+
+
+
+
+constant: DryTropicalScrubAndThornRegion.
+
+in Mt: GeographyMt.
+
+isa: ExistingStuffType IKBConstant.
+
+genls: EcologicalRegion OutdoorLocation.
+
+comment: "Instances are areas of low-growing, widely spaced shrubs,
+
+bushes, and succulents, found in extensive areas of Central and South
+
+America, Africa, the Indian subcontinent, and Australia.  Source: The
+
+Times Atlas of the World (1995).".
+
+F:
+
+(relationAllInstance 
+
+ terrainAttributes DryTropicalScrubAndThornRegion Scrubby). 
+
+F:
+
+(relationAllExists hasClimateType DryTropicalScrubAndThornRegion
+
+DesertClimateCycle).
+
+F:
+
+(granuleOfStuff DryTropicalScrubAndThornRegion Bush).
+
+
+
+
+
+constant: PeriodicallyFloodedTerrain.
+
+in Mt: GeographyMt.
+
+isa: ExistingObjectType.
+
+genls: EcologicalRegion OutdoorLocation.
+
+comment: "A collection of regions that are characterized by periodic
+
+seasonal flooding, such that instances can veritably be said to become
+
+standing bodies of water during the flood season.  In some cases the
+
+periodic flooding may be the deliberate work of human agents.  See
+
+#$CultivatedTerrain-IntermittentlyFlooded.".
+
+
+
+constant: Playa.
+
+in Mt: GeographyMt.
+
+isa: ExistingObjectType.
+
+genls: PeriodicallyFloodedTerrain.
+
+comment: "A collection of desert basins with limited drainage.  Each
+
+instance is capable of becoming the bed of a shallow lake during the
+
+rainy season.".
+
+
+
+constant: Sabkhat.
+
+in Mt: GeographyMt.
+
+isa: ExistingObjectType.
+
+genls: PeriodicallyFloodedTerrain.
+
+comment: "A collection of African desert plains.  Each can become the
+
+bed of a lake during the rainy season.".
+
+
+
+;;add
+
+constant: Ground  .
+
+in Mt: BaseKB   .
+
+isa  : ExistingObjectType   .
+
+genls:  Surface-Physical SolidTangibleThing
+
+          EcologicalRegion   .
+
+disjointWith : FluidTangibleThing .
+
+comment:  "The collection of land surfaces -- chunks or plots
+
+          of land -- that make up the land surface of the
+
+          earth."    .
+
+
+
+;;add
+
+constant:  RuralArea   .
+
+in Mt:   BaseKB   .
+
+isa  :  ExistingObjectType  .
+
+genls:   GeographicalRegion   .
+
+disjointWith : UrbanArea   .
+
+comment:  "A geographical region outside cities or suburbs.
+
+          Ruralness is an intrinsic property of these areas,
+
+          i.e. every piece of a #$RuralArea is an instance of
+
+          #$RuralArea."    .
+
+
+
+;;add
+
+constant:  OpenArea .
+
+in Mt:  BaseKB  .
+
+isa  :  ExistingObjectType .
+
+genls:  OutdoorLocation    .
+
+comment:  "An outdoor space, exposed to the sky, where things
+
+          can move unimpeded in any direction."   .
+
+
+
+
+
+;;add
+
+constant: Field-Land .
+
+in Mt: BaseKB    .
+
+isa  : ExistingObjectType   .
+
+genls:  OutdoorLocation OpenArea LandTopographicalFeature 
+
+          Ground RuralArea   .
+
+comment: "The collection of plots of ground covered by low
+
+          vegetation. Might be crops grown, or naturally
+
+          occuring grass, etc."    .
+
+
+
+
+
+;;add
+
+constant: Field-Agricultural .
+
+in Mt:  BaseKB  .
+
+isa  :  ExistingObjectType  .
+
+genls:  LandTopographicalFeature OutdoorLocation
+
+          Field-Land    .
+
+;comment:     .
+
+
+
+
+
+
+
+constant: CultivatedTerrain.
+
+in Mt: GeographyMt.
+
+isa: ExistingStuffType.
+
+genls: ArableLand.
+
+comment: "Collection of all instances of #$GeographicalRegions which
+
+have been subjected to deliberat human cultivation for agricultural
+
+purposes: e.g., a farmer's field.  Distinct from, but a specialization
+
+of #$ArableLand, which does not presuppose that human cultivation has
+
+actually taken place.".
+
+F:
+
+(genls Field-Agricultural CultivatedTerrain).
+
+
+
+
+
+constant: CultivatedTerrain-IntermittentlyFlooded.
+
+in Mt: GeographyMt.
+
+isa: ExistingStuffType.
+
+genls: CultivatedTerrain PeriodicallyFloodedTerrain.
+
+comment: "Collection of all instances of #$CultivatedTerrain which are
+
+periodically and deliberately flooded for agricultural purposes.  Rice
+
+paddies would be examples.".
+
+
+
+constant: Vineyard-Terrain.
+
+in Mt: GeographyMt.
+
+isa: ExistingObjectType.
+
+genls: CultivatedTerrain.
+
+comment: "Collection of all instances of #$CultivatedTerrain
+
+systematically employed for grape-growing using traditional methods,
+
+and usually for purposes of wine production.".
+
+cyclistNotes: "This constant should be used to refer exclusively to
+
+physical terrain.  If the need arises to refer to
+
+vineyards-qua-commercial-operations, then a separate constant, e.g.,
+
+Vineyard-Organization, needs to be reified.  An instance of
+
+#$Vineyard-Terrain may be a borderline case of #$Field-Agricultural.".
+
+
+

@@ -1,0 +1,317 @@
+;;; -*- Mode: Lisp; Package: CYC; Syntax: COMMON-LISP; Base: 10 -*-
+
+(in-package "CYC")
+
+
+;;; ******************** CONCEPTS ********************
+
+(DEFCONCEPT |CombatTheaterSiteAttribute|
+  :IS-PRIMITIVE |AttributeValue|
+  :ANNOTATIONS (|IKBConstant|
+                |UnorderedAttributeType|
+                (DOCUMENTATION "An unordered collection of attributes. Instances are attributes which geographical sites may be specifically vested in a the context of a theater of combat operations. Examples include #$ControlMeasure, #$NoFireArea, etc.")))
+
+(DEFCONCEPT |CoordinatedFireLine|
+  :IS-PRIMITIVE |LineOfMilitaryForces|
+  :ANNOTATIONS (|ExistingObjectType|
+                (DOCUMENTATION "A line beyond which conventional surface fire support means (mortars, field artillery, naval gunfire ships) may fire at any time within the zone of the establishing headquarters without additional coordination. It is usually established by brigade or division but may be established by a maneuver battalion.")))
+
+(DEFCONCEPT |FinalCoordinationLine|
+  :IS-PRIMITIVE |LineOfMilitaryForces|
+  :ANNOTATIONS (|IKBConstant|
+                |ExistingObjectType|
+                (DOCUMENTATION "A line close to the enemy position used to coordinate the lifting or shifting of supporting fires with the final deployment of maneuver elements. It should be recognizable on the ground. It is not a fire support coordination measure.")))
+
+(DEFCONCEPT |NoFireLine|
+  :IS-PRIMITIVE |LineOfMilitaryForces|
+  :ANNOTATIONS (|IKBConstant|
+                |ExistingObjectType|
+                (DOCUMENTATION "A line short of which artillery or ships do not fire except on request or approval of the supported commander, but beyond which they may fire at any time without danger to friendly troops.")))
+
+(DEFCONCEPT |PhaseLine|
+  :IS-PRIMITIVE (:and |Border| |LineOfMilitaryForces|)
+  :ANNOTATIONS (|ExistingObjectType|
+                (DOCUMENTATION "A line used for control and coordination of military operations, usually a terrain feature extending across the zone of action. (Army) - It is usually along a recognizable terrain feature extending across the sector or zone of action. Units normally report crossing PLs, but do not halt unless specifically directed.")))
+
+(DEFCONCEPT |PhaseLineBoundedArea|
+  :IS-PRIMITIVE |GeographicalRegion|
+  :ANNOTATIONS (|IKBConstant|
+                |ExistingObjectType|
+                (DOCUMENTATION "Instances are instances of #$GeographicalRegion represented as being bounded on at least some of its sides by #$PhaseLines in a military Course Of Action Sketch. #$PhaseLineBoundedAreas ordinarily are of high military significance within the planning context, and are typically assigned to individual units as areas of responsibility (see also #$sectorOfResponsibility).")))
+
+(DEFCONCEPT |ProbableLineOfDeployment|
+  :IS-PRIMITIVE |LineOfMilitaryForces|
+  :ANNOTATIONS (|IKBConstant|
+                |ExistingObjectType|
+                (DOCUMENTATION "A line selected on the ground, usually in the region of the last covered and concealed position prior to the objective and forward of the line of departure, where attacking units deploy prior to beginning an assaultvisibility. From FM101-5-1.")))
+
+(DEFCONCEPT |RestrictiveFireLine|
+  :IS-PRIMITIVE |LineOfMilitaryForces|
+  :ANNOTATIONS (|ExistingObjectType|
+                (DOCUMENTATION " A line established between converging friendly forces (one or both may be moving) that prohibits fires or effects from fires across the line without coordination with the affected force. It is established by the next higher common commander of the converging forces.")))
+
+
+
+;;; ******************** FUNCTIONS AND RELATIONS ********************
+
+(DEFRELATION |coaControlMeasure|
+  :ARITY 2
+  :DOMAIN |COASpecificationMicrotheory|
+  :RANGE |SpatialThing-Localized|
+  :ANNOTATIONS (|IKBConstant|
+                |BinaryPredicate|
+                |Cyc_Role|
+                (DOCUMENTATION "(#$coaControlMeasure COAMT SPATIALTHING) means that in the special Course of Action context represented by COAMT, SPATIALTHING has the special status of 'Control Measure'. This means that SPATIALTHING is a coordination feature which aids in the development process of that particular COA. Instances are used in order to to assign responsibilities, coordinate fires and maneuver, and control combat operations. Each control measure can be portrayed graphically. In general, all control measures should be easily identifiable on the ground. Examples of control measures include boundaries, objectives, coordinating points, contact point, and direction of attack. From FM 101-5-1.")))
+
+(DEFRELATION |combatZoneOfCOA|
+  :ARITY 2
+  :DOMAIN |COASpecificationMicrotheory|
+  :RANGE |GeographicalRegion|
+  :ANNOTATIONS (|IKBConstant|
+                |BinaryPredicate|
+                (DOCUMENTATION "(#$combatZoneOfCOA COAMT REGION)means that REGION is designated a #$CombatZone in COAMT.")))
+
+(DEFRELATION |combatZoneOfOperation|
+  :ARITY 2
+  :IS-PRIMITIVE |eventOccursAt|
+  :DOMAIN |MilitaryOperation|
+  :RANGE |GeographicalRegion|
+  :ANNOTATIONS (|IKBConstant| |ActorSlot|))
+
+(DEFRELATION |containmentConstraint-Spatial|
+  :ARITY 2
+  :IS-PRIMITIVE |constrainingObject|
+  :DOMAIN |Contain-MilitaryTask|
+  :RANGE |LandTopographicalFeature|
+  :ANNOTATIONS (|IKBConstant|
+                |AntiSymmetricBinaryPredicate|
+                |IrreflexiveBinaryPredicate|
+                |AsymmetricBinaryPredicate|
+                |ActorSlot|
+                (DOCUMENTATION "(#$containmentConstraint-Spatial TASK FEATURE) means that FEATURE is a topographical feature used for identifying and demarcating the #$ContainmentZone that plays the role of #$taskContainmentZone in TASK.")))
+
+(DEFRELATION |noFireAreaOfCOA|
+  :ARITY 2
+  :DOMAIN |COASpecificationMicrotheory|
+  :RANGE |GeographicalRegion|
+  :ANNOTATIONS (|IKBConstant|
+                |BinaryPredicate|
+                (DOCUMENTATION "(#$noFireAreaOfCOA COAMT AREA) means that AREA is designated a #$NoFireArea in COAMT.")))
+
+(DEFRELATION |noFireAreaOfOperation|
+  :ARITY 2
+  :DOMAIN |MilitaryOperation|
+  :RANGE |GeographicalRegion|
+  :ANNOTATIONS (|IKBConstant|
+                |ActorSlot|
+                (DOCUMENTATION "(#$noFireAreaOfOperation OP AREA) means that AREA is designated a #$NoFireArea for #$MilitaryOperation OP.")))
+
+(DEFRELATION |objectiveOfTask|
+  :ARITY 2
+  :DOMAIN |MilitaryTask|
+  :RANGE |SpatialThing-Localized|
+  :ANNOTATIONS (|IKBConstant|
+                |ActorSlot|
+                (DOCUMENTATION "(#$objectiveOfTask TASK OBJECTIVE) means that that OBJECTIVE has the status of 'task objective' in the planned execution of TASK as represented in an instance of #$COASpecificationMicrotheory. A task objective may be an instance of #$GeographicalRegion, #$ModernMilitaryUnit-Deployable, or #$Artifact, and it may be possible for other kinds of things to play this role as well.")))
+
+(DEFRELATION |phaseLineBetweenRegions|
+  :ARITY 3
+  :IS-PRIMITIVE |formsBorderBetween|
+  :DOMAINS (|PhaseLine| |PhaseLineBoundedArea|)
+  :RANGE |PhaseLineBoundedArea|
+  :ANNOTATIONS (|IKBConstant|
+                |TernaryPredicate|
+                (DOCUMENTATION "(#$phaseLineBoundsRegion LINE REGION1 REGION2) means that LINE is part of the boundary between REGION2 and REGION1.")))
+
+(DEFRELATION |phaseLineBoundsRegion|
+  :ARITY 2
+  :IS-PRIMITIVE |formsBorderPart|
+  :DOMAIN |PhaseLine|
+  :RANGE |PhaseLineBoundedArea|
+  :ANNOTATIONS (|IKBConstant|
+                |BinaryPredicate|
+                (DOCUMENTATION "(#$phaseLineBoundsRegion LINE REGION) means that LINE is used in part for the purpose of demarcating REGION.")))
+
+(DEFRELATION |restrictiveFireAreaOfCOA|
+  :ARITY 2
+  :DOMAIN |COASpecificationMicrotheory|
+  :RANGE |GeographicalRegion|
+  :ANNOTATIONS (|IKBConstant|
+                |BinaryPredicate|
+                (DOCUMENTATION "(#$restrictiveFireAreaOfCOA COAMT AREA) means that AREA is designated a #$RestrictiveFireArea in COAMT.")))
+
+(DEFRELATION |restrictiveFireAreaOfOperation|
+  :ARITY 2
+  :DOMAIN |MilitaryOperation|
+  :RANGE |GeographicalRegion|
+  :ANNOTATIONS (|IKBConstant|
+                |ActorSlot|
+                (DOCUMENTATION "(#$restrictiveFireAreaOfOperation OP AREA) means that AREA is designated a #RestrictiveFireArea for #$MilitaryOperation OP.")))
+
+(DEFRELATION |rFLForUnits|
+  :ARITY 3
+  :DOMAINS (|ModernMilitaryUnit-Deployable| |ModernMilitaryUnit-Deployable|)
+  :RANGE |RestrictiveFireLine|
+  :ANNOTATIONS (|IKBConstant| |TernaryPredicate|))
+
+(DEFRELATION |sectorOfResponsibility|
+  :ARITY 2
+  :DOMAIN |ModernMilitaryUnit-Deployable|
+  :RANGE |GeographicalRegion|
+  :ANNOTATIONS (|IKBConstant| |BinaryPredicate|))
+
+(DEFRELATION |significantCOAArea|
+  :ARITY 2
+  :DOMAIN |COASpecificationMicrotheory|
+  :RANGE |GeographicalRegion|
+  :ANNOTATIONS (|IKBConstant|
+                |BinaryPredicate|
+                (DOCUMENTATION "This #$Predicate is used to link an instance of #$COASpecificationMicrotheory to all the implicitly or explicitly sketch-identified 'significant' regions or areas relating to the COA for critiquing purposes. Significant regions include, but are not limited to, instances of #$PhaseLineBoundedArea and items playing the role #$objectiveOfTask when these are #$GeographicalRegions.")))
+
+(DEFRELATION |taskAreaOfOperations|
+  :ARITY 2
+  :DOMAIN |MilitaryTask|
+  :RANGE |GeographicalRegion|
+  :ANNOTATIONS (|IKBConstant|
+                |ActorSlot|
+                (DOCUMENTATION "(#$taskAreaOfOperations TASK AO) means that AO is designated the #$AreaOfOperations of the unit assigned to perform TASK and, by extension, that unit's #$sectorOfResponsibility.")))
+
+(DEFRELATION |taskBeatenZone|
+  :ARITY 2
+  :DOMAIN |MilitaryOffensiveTask|
+  :RANGE |GeographicalRegion|
+  :ANNOTATIONS (|IKBConstant|
+                |ActorSlot|
+                (DOCUMENTATION "(#$taskBeatenZone TASK AREA) means that AREA is circumscribed by the cone of fire generated by the offensive task TASK. This predicate is generally used for specifying the beaten zone of an #$AttackByIndirectFire-MilitaryTask.")))
+
+(DEFRELATION |taskCFL|
+  :ARITY 2
+  :DOMAIN |MilitaryOffensiveTask|
+  :RANGE |RestrictiveFireLine|
+  :ANNOTATIONS (|IKBConstant|
+                |ActorSlot|
+                (DOCUMENTATION "(#$taskCFL TASK CFL) means that CFL is the #$CoordinatedFireLine for the offensive task TASK.")))
+
+(DEFRELATION |taskContainmentZone|
+  :ARITY 2
+  :DOMAIN |Contain-MilitaryTask|
+  :RANGE |GeographicalRegion|
+  :ANNOTATIONS (|IKBConstant|
+                |ActorSlot|
+                (DOCUMENTATION "(#$taskContainmentZone TASK ZONE) means that ZONE is the designated #$ContainmentZone for TASK.")))
+
+(DEFRELATION |taskFCL|
+  :ARITY 2
+  :DOMAIN |MilitaryOffensiveTask|
+  :RANGE |FinalCoordinationLine|
+  :ANNOTATIONS (|IKBConstant|
+                |ActorSlot|
+                (DOCUMENTATION "(#$taskFCL TASK FCL) means that FCL is the #$FinalCoordinationLine for the offensive task TASK.")))
+
+(DEFRELATION |taskLimitOfAdvance|
+  :ARITY 2
+  :DOMAIN |MilitaryTask|
+  :RANGE |SpatialThing-Localized|
+  :ANNOTATIONS (|IKBConstant|
+                |ActorSlot|
+                (DOCUMENTATION "(#$taskLimitOfAdvance TASK LOA) means that LOA is an easily recognized terrain feature beyond which the attacking element which is #$unitAssignedToTask TASK will not advance, in the plan specification context in which the assertion is made. From FM 101-5-1.")))
+
+(DEFRELATION |taskNFL|
+  :ARITY 2
+  :DOMAIN |MilitaryTask|
+  :RANGE |NoFireLine|
+  :ANNOTATIONS (|IKBConstant|
+                |ActorSlot|
+                (DOCUMENTATION "(#$taskNFL ?TASK ?NFL) means that ?NFL is a #$NoFireLine for the #$MilitaryTask TASK.")))
+
+(DEFRELATION |taskPLD|
+  :ARITY 2
+  :DOMAIN |MilitaryTask|
+  :RANGE |ProbableLineOfDeployment|
+  :ANNOTATIONS (|IKBConstant|
+                |ActorSlot|
+                (DOCUMENTATION "(#$taskPLD TASK PLD) means that PLD is the #$ProbableLineOfDeployment for the military unit that is #$unitAssignedToTask TASK.")))
+
+(DEFRELATION |taskRFL|
+  :ARITY 2
+  :DOMAIN |MilitaryOffensiveTask|
+  :RANGE |RestrictiveFireLine|
+  :ANNOTATIONS (|IKBConstant|
+                |ActorSlot|
+                (DOCUMENTATION "(#$taskRFL TASK RFL) means that RFL is the #$RestrictiveFireLine for TASK.")))
+
+(DEFRELATION |taskZoneOfFire|
+  :ARITY 2
+  :DOMAIN |MilitaryOffensiveTask|
+  :RANGE |GeographicalRegion|
+  :ANNOTATIONS (|IKBConstant|
+                |ActorSlot|
+                (DOCUMENTATION "(#$taskZoneOfFire TASK ZONE) means that ZONE is designated the #$ZoneOfFire for the #$MilitaryOffensiveTask TASK.")))
+
+
+
+;;; ******************** GENERAL ASSERTIONS ********************
+
+#|
+
+(TELL
+ (:ABOUT |AreaOfOperations| |IKBConstant| |CombatTheaterSiteAttribute|
+  (DOCUMENTATION "An operational area defined by the joint force commander for land and naval forces. Areas of operation do not typically encompass the entire operational area of the joint force commander, but should be large enough for component commanders to accomplish their missions and protect their forces. (Army) - A geographical area, usually defined by lateral, forward, and rear boundaries assigned to a commander, by a higher commander, in which he has responsibility and the authority to conduct military operations. ")))
+
+(TELL (|sourceOfTerm-WebPage| |AreaOfOperations| |FM101-5-1WebPage|))
+
+(TELL (|sourceOfTerm-PIT| |AreaOfOperations| |FM101-5-1Mt|))
+
+(TELL
+ (:ABOUT |BeatenZone| |IKBConstant| |CombatTheaterSiteAttribute|
+  (DOCUMENTATION "The area on the ground upon which the cone of fire falls.")))
+
+(TELL (|sourceOfTerm-WebPage| |BeatenZone| |FM101-5-1WebPage|))
+
+(TELL (|sourceOfTerm-PIT| |BeatenZone| |FM101-5-1Mt|))
+
+(TELL
+ (:ABOUT |CombatZone| |IKBConstant| |CombatTheaterSiteAttribute|
+  (DOCUMENTATION "The area in the Course of Action representation that is required by combat forces for the conduct of operations has the attribute #$CombatZone.")))
+
+(TELL (|sourceOfTerm-WebPage| |CombatZone| |FM101-5-1WebPage|))
+
+(TELL (|sourceOfTerm-PIT| |CombatZone| |FM101-5-1Mt|))
+
+(TELL
+ (:ABOUT |ContainmentZone| |IKBConstant| |CombatTheaterSiteAttribute|
+  (DOCUMENTATION "An operational area in which a hostile force is to be contained in the execution of an instance of #$Contain-MilitaryTask.")))
+
+(TELL
+ (:ABOUT |ControlMeasure| |IKBConstant| |CombatTheaterSiteAttribute|
+  (DOCUMENTATION "Instances of #$SpatialThing-Localized which are accorded this attribute in a particular COA development scenario gain the status ofcoordination features which aid in that particular COA development process. Instances are used in order to to assign responsibilities, coordinate fires and maneuver, and control combat operations. Each control measure can be portrayed graphically. In general, all control measures should be easily identifiable on the ground. Examples of control measures include boundaries, objectives, coordinating points, contact point, and direction of attack. From FM 101-5-1.")))
+
+(TELL (|sourceOfTerm-WebPage| |ControlMeasure| |FM101-5-1WebPage|))
+
+(TELL (|sourceOfTerm-PIT| |ControlMeasure| |FM101-5-1Mt|))
+
+(TELL
+ (:ABOUT |NoFireArea| |IKBConstant| |CombatTheaterSiteAttribute|
+  (DOCUMENTATION "Areas with this attribute in a COA context are areas in which no fires or effects of fires are allowed. Two exceptions are (1) when establishing headquarters approves fires temporarily within the NFA on a mission basis, and (2) when the enemy force within the NFA engages a friendly force, the commander may engage the enemy to defend his force.")))
+
+(TELL (|sourceOfTerm-WebPage| |NoFireArea| |FM101-5-1WebPage|))
+
+(TELL (|sourceOfTerm-PIT| |NoFireArea| |FM101-5-1Mt|))
+
+(TELL
+ (:ABOUT |RestrictiveFireArea| |IKBConstant| |CombatTheaterSiteAttribute|
+  (DOCUMENTATION "An area in which specific restrictions are imposed and into which fires that exceed those restrictions may not be delivered without prior coordination with the establishing headquarters. ")))
+
+(TELL (|sourceOfTerm-WebPage| |RestrictiveFireArea| |FM101-5-1WebPage|))
+
+(TELL (|sourceOfTerm-PIT| |RestrictiveFireArea| |FM101-5-1Mt|))
+
+(TELL
+ (:ABOUT |ZoneOfFire| |IKBConstant| |CombatTheaterSiteAttribute|
+  (DOCUMENTATION "The offensive operational area assigned to a unit or commander that is defined by a forward boundary, rear boundary, lateral boundaries, and a coordinating altitude. From FM 101-5-1.")))
+
+(TELL (|sourceOfTerm-WebPage| |ZoneOfFire| |FM101-5-1WebPage|))
+
+(TELL (|sourceOfTerm-PIT| |ZoneOfFire| |FM101-5-1Mt|))
+
+|#

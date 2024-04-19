@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head><title>Meet The Elves</title></head>
+
+
+<script>
+var componentwindow = Array(20);
+
+function popUp(location, xsize, ysize) {
+	//loc = location + "?" + counter;
+	loc = location;
+	//window.open(loc,"floating"+counter,"toolbar=0,location=1,directories=0,status=1,top=" + (counter*20) + ",left=" + (counter*20) + ",menubar=0,scrollbars=1,resizable=1,screenX=" + (20*counter) + ",screenY=" + (20*counter) + ",width=" + xsize + ",height=" + ysize);
+	window.open(loc);
+} 
+
+function getvalue()
+{
+	return "hi"
+}
+
+function goBack() {
+	top.location.href="Login.htm";
+}
+
+function getCookie(name) {
+	 var bikky = document.cookie;
+    var index = bikky.indexOf(name + "=");
+    if (index == -1) return null;
+    index = bikky.indexOf("=", index) + 1;
+    var endstr = bikky.indexOf(";", index);
+    if (endstr == -1) endstr = bikky.length;
+    return unescape(bikky.substring(index, endstr));
+}
+
+</script>
+
+<body bgcolor="white">
+
+<script>
+	var xmlDoc = new ActiveXObject("Microsoft.XMLDOM")
+	var email = getCookie("email");
+   xmlDoc.async="false"
+   xmlDoc.load("agents-list.xml");
+	var dirnames = new Array();
+	var titles = new Array();
+	var agentnames = new Array();
+	var agentcount = 0;
+	var agents = xmlDoc.getElementsByTagName("name");
+
+	var str = "";
+	str += "<table cellpadding=5 cellspacing=0 border=0 width=100%>";
+	str += "<tr><td align=left><a href='http://www.isi.edu/agents-united' target='_blank'><img src=\"elves.gif\" border=0></a></td>";
+	str += "<td align=left><img src=\"meet.jpg\"></td>";
+	str += "<td align=right><b>User-ID:</b><br><font size=-1 face='Arial'>"+email+"</b>";
+	str += "<br><br>[If you haven't registered yet, click <a href='http://www.isi.edu/teamcore/elves/' target='_blank'>here</a>]</td></tr>";
+	str += "</table>";
+
+	str += "<table cellpadding=5 cellspacing=0 border=1 width=100%>";
+	str += "<tr><td colspan=4 bgcolor=#c0a0b8>";
+	str += "<input type=button value=\"Exit\" onclick='goBack()'>";
+	str += "</td></tr>";
+
+	for(var i=0; i<agents.length; i++) {
+		 agentnames[i] = agents.item(i).text;
+		 dirnames[i] = agentnames[i].toLowerCase();
+		 dirnames[i] = dirnames[i].replace(/ /g,"-");
+		 var xmlHttp = new ActiveXObject("Microsoft.XMLHTTP")
+		 xmlHttp.open("GET","groups/elves/"+dirnames[i]+"/capabilities.xml", false);
+       xmlHttp.send();
+       xmldata=xmlHttp.responseText;
+		 if(xmlHttp.statusText == "OK") {
+		    var xmlDoc2 = new ActiveXObject("Microsoft.XMLDOM");
+		    xmlDoc2.async="false";
+		    xmlDoc2.loadXML(xmldata);
+		    var conceptname = xmlDoc2.getElementsByTagName("ConceptName").item(0).text;
+		    conceptname = conceptname.replace(/-/g," ");
+			 var goalname = xmlDoc2.getElementsByTagName("GoalName").item(0).text;
+		    goalname = goalname.toLowerCase();
+		    titles[i] = "Hi, I am the "+agentnames[i]+" agent, and I can "+goalname+" the "+conceptname;
+	       str += "<tr><td><font color=green face=\'Arial\' size=-1>"+titles[i]+"</font></td><td><input type=button value='Go' onclick=\"popUp(\'"+dirnames[i]+".html\')\"></td>";
+			 str += "<td><input type=button value='Capabilities in XML' onclick=\"popUp(\'groups/elves/"+dirnames[i]+"/capabilities.xml\')\"></td>";
+		         str += "<td><input type=button value='History' onclick=\"popUp(\'groups/elves/"+dirnames[i]+"/users/"+email+"/log\')\"></td>";
+		 } else {
+		    titles[i] = "Hi, I am the "+agentnames[i]+" agent, but I CANNOT do anything right now !";
+	       str += "<tr><td><font color=red face=\'Arial\' size=-1>"+titles[i]+"</font></td><td><input type=button disabled value='Go'></td>";
+			 str += "<td><input type=button disabled value='Capabilities in XML'></td>";
+		         str += "<td><input type=button disabled value='History'></td>";
+		 }
+	}
+	str += "</table>";
+	document.writeln(str);
+	document.writeln("</body></html>\n");
+	document.close();
+</script>

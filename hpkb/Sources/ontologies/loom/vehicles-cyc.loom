@@ -1,0 +1,1032 @@
+;;; -*- Mode: Lisp; Package: BATTLE-SPACE; Syntax: COMMON-LISP; Base: 10 -*-
+
+(in-package "BATTLE-SPACE")
+
+
+;;; ******************** CONCEPTS ********************
+
+(defconcept Airplane
+  :is-primitive Fixed-Wing-Aircraft
+  :annotations (Product-Type
+                Existing-Object-Type
+                (documentation "The collection of all heavier-than-air, self-powered flying machines (excluding cruise missiles) that get their lift while flying from #$AirplaneWings. Thus, #$Helicopters are excluded because the lift is caused by rotors. A borderline case are planes that take-off vertically, using a turbojet engine, so initially the lift is not due to their wings. In flight, however, such planes will need their wings to stay up in the air.")))
+
+(defconcept Air-To-Air-Missile
+  :is-primitive Missile
+  :annotations (Existing-Object-Type
+                (documentation "The collection of #$Missiles launched from airborne #$Platform-Militarys intended to attack aircraft.")))
+
+(defconcept Air-To-Surface-Missile
+  :is-primitive Missile
+  :annotations (Existing-Object-Type
+                (documentation "The collection of #$Missiles launched from #$MilitaryAircraft intended to attack other #$MilitaryAircraft.")))
+
+(defconcept Air-Transportation-Device
+  :is-primitive Transportation-Device
+  :annotations (Existing-Object-Type
+                (documentation "In the #$ModernMilitaryVehiclesMt, #$AirTransportationDevice parallels the military concept of 'air platform'; namely, an air vehicle commonly used in military operations to transport weapons, goods, or personnel by air.")))
+
+(defconcept Ambulance
+  :is-primitive (:and Special-Purpose-Vehicle Road-Vehicle)
+  :annotations (Product-Type
+                Existing-Object-Type
+                (documentation "The collection of all RoadVehicles that are equipped primarily for transporting wounded, injured or sick persons.")))
+
+(defconcept Ammunition-Ship
+  :is-primitive Underway-Replenishment-Ship
+  :annotations (Existing-Object-Type
+                (documentation "The collection of military ships intended for use in ammunition re-supply.")))
+
+(defconcept Amphibious-Assault-Ship
+  :is-primitive (:and Weapon Amphibious-Warfare-Ship)
+  :annotations (Existing-Object-Type
+                (documentation "The collection of amphibious craft 
+intended to be used as primary landing ships in an amphibious attack.")))
+
+(defconcept Amphibious-Cargo-Ship
+  :is-primitive Amphibious-Warfare-Ship
+  :annotations (Existing-Object-Type
+                (documentation "The collection of amphibious craft intended for use in cargo transport.")))
+
+(defconcept Amphibious-Command-Ship
+  :is-primitive (:and Military-Amphibious-Platform Command-Ship)
+  :annotations (Existing-Object-Type
+                (documentation "A collection. Amphibious command military watercraft, which are intended to provide command and control in major amphibious operations.")))
+
+(defconcept Amphibious-Transport-Dock
+  :is-primitive Amphibious-Warfare-Ship
+  :annotations (Existing-Object-Type
+                (documentation "The collection of military amphibious transport docks. These craft are used to transport and land 
+Marines and their equipment by embarked landing craft or 
+amphibious vehicles augmented by helicopters in amphibious assault.")))
+
+(defconcept Amphibious-Warfare-Ship
+  :is-primitive Modern-Naval-Ship
+  :annotations (Existing-Object-Type
+                (documentation "The collection of ships used in amphibious warfare.")))
+
+(defconcept Anti-Ship-Cruise-Missile
+  :is-primitive Cruise-Missile
+  :annotations (Existing-Object-Type
+                (documentation "The collection of #$CruiseMissiles that are designed to attack instances of #$ModernNavalShips.")))
+
+(defconcept Anti-Tank-Weapon
+  :is-primitive Missile
+  :annotations (Existing-Object-Type
+                (documentation "The collection of #$Weapons intended for use against #$Tank-Vehicles and usually capable of piercing armor. In the modern military all #$AntiTankWeapons are #$Missiles, that is self-powered. This collection does not include #$IndirectFireWeapons such as #$Mortars, that although effective against #$Tank-Vehicles are not called anti-tank weapons.")))
+
+(defconcept Armored-C2-Recon-Vehicle
+  :is-primitive (:and Armored-Vehicle Special-Purpose-Vehicle)
+  :annotations (Existing-Object-Type
+                (documentation "The collection of armored C2 reconnaisance vehicles.")))
+
+(defconcept Armored-Fighting-Vehicle
+  :is-primitive (:and Weapon Armored-Vehicle)
+  :annotations (Existing-Object-Type
+                (documentation "A collection.  Instances are vehicles used for transport and protection of infantry.  These vehicles are equipped with armor and arms, enabling it to fight like a tank, but not against tanks.")))
+
+(defconcept Armored-Personnel-Carrier
+  :is-primitive Armored-Vehicle
+  :annotations (Existing-Object-Type
+                (documentation "The collection of #$ArmoredVehicles that are intended to carry #$MilitaryPersons during a #$Battle. They are sometimes called a 'battle taxi'. ")))
+
+(defconcept Armored-Recon-Carrier
+  :is-primitive (:and Armored-Vehicle Special-Purpose-Vehicle)
+  :annotations (Existing-Object-Type
+                (documentation "A collection. Armored reconnaisance vehicles.")))
+
+(defconcept Armored-Vehicle
+  :is-primitive (:and Military-Vehicle Land-Transportation-Device)
+  :annotations (Existing-Object-Type
+                (documentation "A general collection whose instances are vehicles protected by armor.  Includes both tracked and wheeled vehicles.")))
+
+(defconcept Attack-Aircraft-Carrier
+  :is-primitive (:and Weapon Modern-Naval-Ship)
+  :annotations (Existing-Object-Type
+                (documentation "The collection of #$AircraftCarriers intended for use in transporting attack aircraft.")))
+
+(defconcept Attack-Helicopter
+  :is-primitive (:and Military-Aircraft Helicopter)
+  :annotations (Existing-Object-Type
+                (documentation "The collection of #$Helicopters used for attacking ground or water targets in a military context.")))
+
+(defconcept Autogyro
+  :is-primitive Rotary-Wing-Aircraft
+  :annotations (Existing-Object-Type
+                (documentation "The collection of aircraft whose lift is provided by unpowered rotating blades, but whose propulsion is provided by a propeller.")))
+
+(defconcept Automobile
+  :is-primitive (:and Humanly-Occupied-Spatial-Object
+                      Road-Vehicle
+                      Contact-Location)
+  :annotations (Product-Type
+                Existing-Object-Type
+                (documentation "A collection of transportation devices -- those commonly known as `passenger cars.'  An instance of #$Automobile is an element of #$RoadVehicle which was designed for carrying about 4 passengers (give or take a factor of 2).  In addition to midsize cars, #$Automobile includes elements belonging to the subsets #$SportsCar and #$Van.  This collection does NOT include motorcycles, pickups, buses, tractors, etc.")))
+
+(defconcept Ballistic-Missile
+  :is-primitive (:and Fuel-Powered-Device Missile Indirect-Fire-Weapon)
+  :annotations (Existing-Object-Type
+                (documentation "A collection. Each instance is a #$Missile propelled from a #$MissileLauncher that is often mounted on a #$Platform-Military. A #$BallisticMissile is generally propelled by rockets into the upper atmosphere, and uses the gravitational pull to make its high-speed return to the surface -- either land or water surface -- where it detonates on contact with the target.")))
+
+(defconcept Ballistic-Missile--Battlefield-Short-Range
+  :is-primitive Ballistic-Missile
+  :annotations (Existing-Object-Type
+                (documentation "A ballistic missile with a range of up to 94 miles")))
+
+(defconcept Ballistic-Missile--Css-8
+  :is-primitive Ballistic-Missile--Short-Range
+  :annotations (Existing-Object-Type
+                (documentation "A short range missile produced in China")))
+
+(defconcept Ballistic-Missile--Intermediate-Range
+  :is-primitive Ballistic-Missile
+  :annotations (Existing-Object-Type
+                (documentation "A ballistic missile with a range of 1,500-3,437 miles")))
+
+(defconcept Ballistic-Missile--M-11
+  :is-primitive Ballistic-Missile--Short-Range
+  :annotations (Existing-Object-Type
+                (documentation "A short range missile produced in China")))
+
+(defconcept Ballistic-Missile--Medium-Range
+  :is-primitive Ballistic-Missile
+  :annotations (Existing-Object-Type
+                (documentation "A ballistic missile with a range of 500-1499 miles")))
+
+(defconcept Ballistic-Missile--Mushak-120
+  :is-primitive Ballistic-Missile--Battlefield-Short-Range
+  :annotations (Existing-Object-Type
+                (documentation "A battlefield short range ballistic missile produced by Iran")))
+
+(defconcept Ballistic-Missile--Mushak-160
+  :is-primitive Ballistic-Missile--Short-Range
+  :annotations (Existing-Object-Type
+                (documentation "A short range missile produced in Iran")))
+
+(defconcept Ballistic-Missile--Mushak-200
+  :is-primitive Ballistic-Missile--Short-Range
+  :annotations (Existing-Object-Type
+                (documentation "A short range missile produced in Iran")))
+
+(defconcept Ballistic-Missile--Scudb
+  :is-primitive Ballistic-Missile--Short-Range
+  :annotations (Existing-Object-Type
+                (documentation "A short range missile produced in North Korea")))
+
+(defconcept Ballistic-Missile--Scudc
+  :is-primitive Ballistic-Missile--Short-Range
+  :annotations (Existing-Object-Type
+                (documentation "A short range missile produced in North Korea")))
+
+(defconcept Ballistic-Missile--Short-Range
+  :is-primitive Ballistic-Missile
+  :annotations (Existing-Object-Type
+                (documentation "A ballistic missile with a range of 94 - 499 miles")))
+
+(defconcept Ballistic-Missile--Submarine-Launched
+  :is-primitive Ballistic-Missile
+  :annotations (Existing-Object-Type
+                (documentation "The collection of #$BallisticMissiles whose instances are launched from #$Submarines.")))
+
+(defconcept Battle-Cruiser
+  :is-primitive Cruiser
+  :annotations (Existing-Object-Type
+                (documentation "The collection of warships which are large and fast, with a great deal of firepower.")))
+
+(defconcept Bicycle
+  :is-primitive (:and Device--User-Controlled
+                      Land-Transportation-Device
+                      Device--User-Powered)
+  :annotations (Existing-Object-Type
+                (documentation "The collection of all bicycles, personal wheeled transport devices powered by human peddling.   Most Bicycles have two main wheels arranged in-line, but some tandem bicycles have more than two wheels.")))
+
+(defconcept Blimp-The-Airship
+  :is-primitive (:and Lighter-Than-Air-Craft
+                      Transportation-Device--Vehicle
+                      Container-Product)
+  :annotations (Product-Type
+                Existing-Object-Type
+                (documentation "The collection of all dirigible, motorized, lighter-than-air craft (airships).  Each generally consists of a gas-filled gas-sack from which a control and passenger cabin hangs (the gas-sack may or may not have rigid reinforcement such as ribs).  A BlimpTheAirship flies more slowly than an #$Airplane.  They are also called blimps, dirigibles and Zeppelins.")))
+
+(defconcept Boat--Water-Transportation-Device
+  :is-primitive (:and Container-Product Water-Transportation-Device)
+  :annotations (Product-Type
+                Existing-Object-Type
+                (documentation "A collection of water transportation devices.  An instance of #$Boat-WaterTransportationDevice is a device for transporting people and/or objects through or over water without getting them wet; thus, instances of #$Rowboat or #$Ship (as opposed to #$JetSki or #$Surfboard or #$Sailboard).")))
+
+(defconcept Bomber-Plane
+  :is-primitive (:and Weapon Warplane)
+  :annotations (Product-Type
+                Existing-Object-Type
+                (documentation "The collection of military #$Airplanes which are designed to be used in #$Bombing target sites.")))
+
+(defconcept Bus--Road-Vehicle
+  :is-primitive Road-Vehicle
+  :annotations (Product-Type
+                Existing-Object-Type
+                (documentation "The collection of all buses, transport vehicles for ground transportation of many (they have room for at least 10, probably fewer than 60) people.  A bus usually is driven by a professional bus driver.")))
+
+(defconcept Canoe
+  :is-primitive (:and Boat--Water-Transportation-Device Device--User-Powered)
+  :annotations (Product-Type
+                Existing-Object-Type
+                (documentation "The collection of all canoes, small, narrow watercraft that are powered by human paddling, poling or by a small boat-engine.")))
+
+(defconcept Cargo-Helicopter
+  :is-primitive (:and Military-Aircraft Helicopter)
+  :annotations (Existing-Object-Type
+                (documentation "The collection of #$Helicopters used for cargo transport.")))
+
+(defconcept Cargo-Ship
+  :is-primitive Ship
+  :annotations (Product-Type
+                Existing-Object-Type
+                (documentation "The collection of all cargo ships, i.e., ships that by design can transport large amount of goods.")))
+
+(defconcept Coastal-Escort-Boat
+  :is-primitive Modern-Naval-Ship
+  :annotations (Existing-Object-Type
+                (documentation "The collection of boats intended for use in a military context as escorts for other watercraft involved in a military operation.")))
+
+(defconcept Coastal-Patrol-Craft
+  :is-primitive Patrol-Craft
+  :annotations (Existing-Object-Type
+                (documentation "A collection. Boats meant to be used in coastal patrol operations.")))
+
+(defconcept Combat-Store-Ship
+  :is-primitive Underway-Replenishment-Ship
+  :annotations (Existing-Object-Type
+                (documentation "A collection. Ships intended for use in a military context to replenish supplies for other ships involved in combat.")))
+
+(defconcept Command-Ship
+  :is-primitive Modern-Naval-Ship
+  :annotations (Existing-Object-Type
+                (documentation "The collection of military command ships.")))
+
+(defconcept Commercial-Fishing-Boat
+  :is-primitive Boat--Water-Transportation-Device
+  :annotations (Existing-Object-Type
+                Product-Type
+                (documentation "The subcollection of Boat-WaterTransportationDevice that contains all fishing boats, including trawlers, seiners, junks etc. that are marine-life-catching devices, and the main purpose of the fishing is commercial.  Note that not all instances of CommercialFishingBoat have to be used exclusively in the ocean--they can also be used in rivers and lakes, etc.")))
+
+(defconcept Communication-Vehicle
+  :is-primitive Special-Purpose-Vehicle
+  :annotations (Existing-Object-Type
+                (documentation "The collection of vehicles intended to transport communications equipment.")))
+
+(defconcept Converted-Command-Ship
+  :is-primitive Command-Ship
+  :annotations (Existing-Object-Type
+                (documentation "The collection of military converted command ships.")))
+
+(defconcept Cruise-Missile
+  :is-primitive Missile
+  :annotations (Existing-Object-Type
+                (documentation "A collection whose instances are #$Missiles which travel at low elevation, dodging fire if necessary, then climb, find the target with its own sensors, and make a final high-speed diving attack.  Although grouped with #$Missiles, #$CruiseMissiles are actually unmanned drone aircraft directed in flight by remote control.")))
+
+(defconcept Cruise-Missile--Air-Launched
+  :is-primitive Cruise-Missile
+  :annotations (Existing-Object-Type
+                (documentation "The collection of #$CruiseMissiles which are deployed from #$MilitaryAircraft.")))
+
+(defconcept Cruise-Missile--Ground-Launched
+  :is-primitive Cruise-Missile
+  :annotations (Existing-Object-Type
+                (documentation "The collection of #$CruiseMissiles whose instances are launched from either a #$LandPlatform-Towed or a #$LandPlatform-SelfPropelled.")))
+
+(defconcept Cruise-Missile--Sea-Launched
+  :is-primitive Cruise-Missile
+  :annotations (Existing-Object-Type))
+
+(defconcept Cruise-Missile--Submarine-Launched
+  :is-primitive Cruise-Missile
+  :annotations (Existing-Object-Type))
+
+(defconcept Cruiser
+  :is-primitive (:and Weapon Modern-Naval-Ship)
+  :annotations (Existing-Object-Type
+                (documentation "The collection of warships which are relatively large and fast. Cruisers are usually smaller than battleships, but larger than destroyers.")))
+
+(defconcept Cutter
+  :is-primitive Modern-Naval-Ship
+  :annotations (Existing-Object-Type
+                (documentation "The collection of military cutters.")))
+
+(defconcept Decontamination-Vehicle
+  :is-primitive Special-Purpose-Vehicle
+  :annotations (Existing-Object-Type
+                (documentation "The collection of vehicles intended for use in decontamination processes.")))
+
+(defconcept Destroyer-Tender
+  :is-primitive Material-Support-Ship
+  :annotations (Existing-Object-Type
+                (documentation "A collection. Military destroyer tender ships.")))
+
+(defconcept Dock-Landing-Ship
+  :is-primitive Amphibious-Warfare-Ship
+  :annotations (Existing-Object-Type
+                (documentation "A collection. Military dock landing ships, which are intended to .")))
+
+(defconcept Electronic-Box-Bodied-Vehicle
+  :is-primitive Special-Purpose-Vehicle
+  :annotations (Existing-Object-Type
+                (documentation "A collection. Electronic box bodied military vehicles.")))
+
+(defconcept Electronic-Countermeasures-Vehicle
+  :is-primitive Special-Purpose-Vehicle
+  :annotations (Existing-Object-Type
+                (documentation "The collection of vehicles intended for use in electronic countermeasure operations.")))
+
+(defconcept Electronic-Equipment-Vehicle
+  :is-primitive Special-Purpose-Vehicle
+  :annotations (Existing-Object-Type
+                (documentation "The collection of vehicles intended to be used for the transport of electronic equipment.")))
+
+(defconcept F-4d-Fighter
+  :is-primitive (:and Fighter-Plane Bomber-Plane)
+  :annotations (Product-Type
+                Existing-Object-Type
+                (documentation "A collection. The F-4D is an American all-weather attack fighterplane.")))
+
+(defconcept F-4e-Fighter
+  :is-primitive (:and Fighter-Plane Bomber-Plane)
+  :annotations (Product-Type
+                Existing-Object-Type
+                (documentation "A collection. The F-4E is an American fighter-bomber plane.")))
+
+(defconcept F-5e-Fighter
+  :is-primitive (:and Fighter-Plane Bomber-Plane)
+  :annotations (Product-Type
+                Existing-Object-Type
+                (documentation "A collection. The F-5E is an American light tactical fighter plane.")))
+
+(defconcept Fast-Attack-Craft
+  :is-primitive Patrol-Craft
+  :annotations (Existing-Object-Type
+                (documentation "The collection of military fast attack craft.")))
+
+(defconcept Fast-Combat-Store-Ship
+  :is-primitive Underway-Replenishment-Ship
+  :annotations (Existing-Object-Type
+                (documentation "A collection. Military fast combat store ships.")))
+
+(defconcept Fast-Frigate
+  :is-primitive Frigate
+  :annotations (Existing-Object-Type
+                (documentation "The colletion of military fast frigates.")))
+
+(defconcept Ferry
+  :is-primitive Ship
+  :annotations (Existing-Object-Type
+                (documentation "The subcollection of Boat-WaterTransportationDevice that contains all ferryboats, i.e., boats that are used to carry people, goods or vehicles across rivers, lakes, canals or channels etc. or even from one side of a harbor to another, but normally not used to cross oceans.")))
+
+(defconcept Fighter-Plane
+  :is-primitive (:and Weapon Warplane)
+  :annotations (Product-Type
+                Existing-Object-Type
+                (documentation "The collection of aircraft whose primary mission is armed assault on airborne or surface targets.")))
+
+(defconcept Fire-Fighting-Vehicle--Military
+  :is-primitive (:and Truck Special-Purpose-Vehicle)
+  :annotations (Existing-Object-Type
+                (documentation "The collection of #$FireTrucks used in a military context.")))
+
+(defconcept Fixed-Wing-Aircraft
+  :is-primitive (:and Air-Transportation-Device
+                      Fuel-Powered-Device
+                      Container-Product
+                      Transportation-Device--Vehicle)
+  :annotations (Existing-Object-Type
+                (documentation "The collection of air vehicles which have a fixed wing structure as the primary source of lift.")))
+
+(defconcept Fleet-Support-Ship
+  :is-primitive Modern-Naval-Ship
+  :annotations (Existing-Object-Type
+                (documentation "The collection of ships intended to be used in operations supporting some fleet.")))
+
+(defconcept Frigate
+  :is-primitive (:and Weapon Modern-Naval-Ship)
+  :annotations (Existing-Object-Type
+                (documentation "A collection. Warships which are larger than destroyers and smaller than cruisers.")))
+
+(defconcept Fuel-Tank-Truck
+  :is-primitive Special-Purpose-Vehicle
+  :annotations (Existing-Object-Type
+                (documentation "The collection of trucks intended for use to transport fuel.")))
+
+(defconcept Golf-Cart
+  :is-primitive (:and Transportation-Device--Vehicle Land-Transportation-Device)
+  :annotations (Product-Type
+                Existing-Object-Type
+                (documentation "The collection of all motorized vehicles that are designed for golfers to use to drive around on #$GolfCourses while they are playing #$GolfGames.  GolfCarts drive very slowly compared with #$Automobiles.")))
+
+(defconcept Guided-Missile-Cruiser
+  :is-primitive Cruiser
+  :annotations (Existing-Object-Type
+                (documentation "The collection of #$Cruisers intended to be used for transporting #$GuidedMissiles.")))
+
+(defconcept Guided-Missile-Destroyer
+  :is-primitive (:and Weapon Modern-Naval-Ship)
+  :annotations (Existing-Object-Type
+                (documentation "The collection of #$Destroyers intended to be used for transporting #$GuidedMissiles.")))
+
+(defconcept Guided-Missile-Frigate
+  :is-primitive Frigate
+  :annotations (Existing-Object-Type
+                (documentation "The collection of #$Frigates intended to be used for transporting #$GuidedMissiles.")))
+
+(defconcept Gun-Cruiser
+  :is-primitive Cruiser
+  :annotations (Existing-Object-Type
+                (documentation "A collection. Military gun cruiser ships.")))
+
+(defconcept Helicopter
+  :is-primitive (:and Container-Product
+                      Transportation-Device--Vehicle
+                      Rotary-Wing-Aircraft)
+  :annotations (Existing-Object-Type
+                Product-Type
+                (documentation "The collection of rotary wing, self-powered mechanical devices that fly.")))
+
+(defconcept Helicopter-Carrier
+  :is-primitive (:and Weapon Modern-Naval-Ship)
+  :annotations (Existing-Object-Type
+                (documentation "The collection of #$AircraftCarriers intended for use in transporting #$Helicopters.")))
+
+(defconcept Helicopter-Cruiser
+  :is-primitive Cruiser
+  :annotations (Existing-Object-Type
+                (documentation "A collection. #$Cruisers specialized for carrying #$Helicopters.")))
+
+(defconcept High-Endurance-Cutter
+  :is-primitive Cutter
+  :annotations (Existing-Object-Type
+                (documentation "A collection. Military high-endurance cutter ships.")))
+
+(defconcept High-Explosive-Anti-Tank
+  :is-primitive Anti-Tank-Weapon
+  :annotations (Existing-Object-Type
+                (documentation "The collection of #$Warheads that are meant to be used against #$Tank-Vehicles and other #$ArmoredVehicles.")))
+
+(defconcept Hot-Air-Balloon
+  :is-primitive (:and Lighter-Than-Air-Craft Container-Product)
+  :annotations (Product-Type
+                Existing-Object-Type
+                (documentation "The collection of all hot-air buoyant balloons, #$AirTransportationDevices that usually lack a motor or a means of steering.  Each consistes of a gas-bag into which hot air is introduced, and from which a basket or passenger compartment hangs.")))
+
+(defconcept Infantry-Landing-Ship
+  :is-primitive Landing-Ship
+  :annotations (Existing-Object-Type
+                (documentation "A collection. Ships used in a military context to bring personnel onto land.")))
+
+(defconcept Inflatable-Boat
+  :is-primitive Boat--Water-Transportation-Device
+  :annotations (Existing-Object-Type
+                (documentation "The collection of all inflatable boats, that is, boats (mostly small watercraft) that are composed of some fabric or membrane and are inflated with air to give them buoyancy in water.")))
+
+(defconcept Landing-Craft
+  :is-primitive Amphibious-Warfare-Ship
+  :annotations (Existing-Object-Type
+                (documentation "The collection of watercraft or amphibious craft used in landing operations.")))
+
+(defconcept Landing-Ship
+  :is-primitive Amphibious-Warfare-Ship
+  :annotations (Existing-Object-Type
+                (documentation "The collection of military amphibious landing ships.")))
+
+(defconcept Land-Platform--Self-Propelled
+  :is-primitive Military-Land-Platform
+  :annotations (Existing-Object-Type
+                (documentation "The collection of military land platforms which are self-propelled.")))
+
+(defconcept Land-Platform--Towed
+  :is-primitive Military-Land-Platform
+  :annotations (Existing-Object-Type
+                (documentation "The collection of military land platforms which are not self-propelled; they are usually towed into place by another vehicle.")))
+
+(defconcept Land-Transportation-Device
+  :is-primitive Transportation-Device
+  :annotations (Existing-Object-Type
+                (documentation "A collection of physical devices. An instance of #$LandTransportationDevice is a device used for transportation on land.  Subsets of #$LandTransportationDevice include the collections #$Automobile, #$Snowmobile, #$TrainCar, #$HorseCarriage, #$BabyCarriage, #$Bicycle, #$SkateBoard, and more.")))
+
+(defconcept Light-Aircraft-Carrier
+  :is-primitive (:and Weapon Modern-Naval-Ship)
+  :annotations (Existing-Object-Type
+                (documentation "A collection. Military light #$AircraftCarriers.")))
+
+(defconcept Light-Cruiser
+  :is-primitive Cruiser
+  :annotations (Existing-Object-Type
+                (documentation "The collection of light cruiser ships.")))
+
+(defconcept Lighter-Than-Air-Craft
+  :is-primitive Air-Transportation-Device
+  :annotations (Existing-Object-Type
+                (documentation "The collection of aircraft which depend on lighter-than-air gaseous substances for lift.")))
+
+(defconcept Light-Frigate
+  :is-primitive Frigate
+  :annotations (Existing-Object-Type
+                (documentation "The collection of light frigate ships.")))
+
+(defconcept Light-Guided-Missile-Frigate
+  :is-primitive Frigate
+  :annotations (Existing-Object-Type
+                (documentation "The collection of military light frigates intended for use in carrying guided missiles.")))
+
+(defconcept Logistic-Landing-Ship
+  :is-primitive Landing-Ship
+  :annotations (Existing-Object-Type
+                (documentation "A collection. Military logistic landing ships.")))
+
+(defconcept Maintenance-Vehicle
+  :is-primitive Special-Purpose-Vehicle
+  :annotations (Existing-Object-Type
+                (documentation "The collection of vehicles intended for use in the maintenance of other objects.")))
+
+(defconcept Material-Landing-Ship
+  :is-primitive Amphibious-Warfare-Ship
+  :annotations (Existing-Object-Type
+                (documentation "A collection. Military material landing ships.")))
+
+(defconcept Material-Support-Ship
+  :is-primitive Modern-Naval-Ship
+  :annotations (Existing-Object-Type
+                (documentation "A collection. Military material support ships.")))
+
+(defconcept Mechanized-Landing-Craft
+  :is-primitive Landing-Craft
+  :annotations (Existing-Object-Type
+                (documentation "The collection of mechanized watercraft used in military landing operations.")))
+
+(defconcept Medium-Endurance-Cutter
+  :is-primitive Cutter
+  :annotations (Existing-Object-Type
+                (documentation "The collection of military medium endurance cutters.")))
+
+(defconcept Military-Aircraft
+  :is-primitive (:and Military-Vehicle Air-Transportation-Device)
+  :annotations (Existing-Object-Type
+                Product-Type
+                (documentation "The collection of all aircraft used for military purposes, or equipped to be used for such purposes.")))
+
+(defconcept Military-Amphibious-Platform
+  :is-primitive Platform--Military
+  :annotations (Existing-Object-Type
+                (documentation "The collection of military platforms intended to be used on land and in water. These are usually amphibious craft which can transport military equipment and personnel.")))
+
+(defconcept Military-Land-Platform
+  :is-primitive (:and Land-Transportation-Device Platform--Military)
+  :annotations (Existing-Object-Type
+                (documentation "The collection of military land platforms. These are #$LandTransportationDevices which can transport military equipment and personnel.")))
+
+(defconcept Military-Vehicle
+  :is-primitive (:and Platform--Military Transportation-Device--Vehicle)
+  :annotations (Existing-Object-Type
+                (documentation "The collection of military platforms (see #$Platform-Military) which are also vehicles (see #$TransportationDevice-Vehicle). This would include things like airplanes and tanks, but exclude things like towed platforms.")))
+
+(defconcept Mine-Countermeasures-Vessel
+  :is-primitive Mine-Warfare-Ship
+  :annotations (Existing-Object-Type
+                (documentation "The collection of watercraft intended for use in mine countermeasure operations.")))
+
+(defconcept Mine-Layer-Ship
+  :is-primitive Modern-Naval-Ship
+  :annotations (Existing-Object-Type
+                (documentation "The collection of ships intended for use in laying undersea mines.")))
+
+(defconcept Minesweeper--Coastal
+  :is-primitive Mine-Warfare-Ship
+  :annotations (Existing-Object-Type
+                (documentation "The collection of minesweepers designed to operate in coastal areas.")))
+
+(defconcept Minesweeper--Ocean
+  :is-primitive Mine-Warfare-Ship
+  :annotations (Existing-Object-Type
+                (documentation "The collection of minesweepers designed to operate in open-sea areas.")))
+
+(defconcept Mine-Warfare-Ship
+  :is-primitive Modern-Naval-Ship
+  :annotations (Existing-Object-Type
+                (documentation "The collection of ships intended for use in placing, detecting, or destroying underwater mines.")))
+
+(defconcept Missile
+  :is-primitive Unmanned-Aircraft
+  :annotations (Existing-Object-Type
+                (documentation "A subcollection of #$ProjectileWeapon, the instances of which are self-powered and unmanned. A #$Missile may be jet-propelled or rocket-propelled. The traversal of a missile when launched may be controlled in different ways: launch-guided, midterm-guided or terminal-guided. The subcollection #$CruiseMissile contains instances that adjust their course while flying, so they are midterm-guided and terminal-guided. ")))
+
+(defconcept Modern-Naval-Ship
+  :is-primitive (:and Water-Platform--Surface Ship)
+  :annotations (Existing-Object-Type
+                (documentation "The collection of all #$Ships that have been used since the Nineteenth Century primarily for naval purposes, including military attack and defense, reconnaisance, support, rescue, coastal monitoring, etc.  Such a ship is naval in this sense even if it is not operated by a #$Navy. Most ModernNavalShips are specifically constructed for naval purposes.")))
+
+(defconcept Motorboat
+  :is-primitive (:and Transportation-Device--Vehicle
+                      Fuel-Powered-Device
+                      Boat--Water-Transportation-Device)
+  :annotations (Product-Type
+                Existing-Object-Type
+                (documentation "The collection of all boats usually powered by motors (including in-board and out-board motors).  If a boat is primarily a #$Sailboat, but has a back-up motor to use when becalmed or piloting, that is not enough to make it a Motorboat.  To be more precise, this collection is the intersection of #$Boat-WaterTransportationDevice, #$InternalCombustionPoweredDevice and #$TransportationDevice-Vehicle.")))
+
+(defconcept Motorcycle
+  :is-primitive (:and Transportation-Device--Vehicle
+                      Fuel-Powered-Device
+                      Land-Transportation-Device)
+  :annotations (Existing-Object-Type
+                (documentation "The collection of all motorcycles, two-wheeled motorized personal transport devices.  A motorcycle lacks a cab or compartment to protect the driver from wind and weather.  Since motorcycles are used both on and off road, this is not a spec of #$RoadVehicle.")))
+
+(defconcept Nuclear-Aircraft-Carrier
+  :is-primitive (:and Nuclear-Powered-Device Weapon Modern-Naval-Ship)
+  :annotations (Existing-Object-Type
+                (documentation "The collection of #$AircraftCarriers which are nuclear-powered.")))
+
+(defconcept Nuclear-Guided-Missile-Cruiser
+  :is-primitive (:and Nuclear-Powered-Device Cruiser)
+  :annotations (Existing-Object-Type
+                (documentation "The collection of #$Cruiser ships which are nuclear-powered, and which are intended to carry #$GuidedMissiles.")))
+
+(defconcept Ocean-Liner
+  :is-primitive (:and Transportation-Device--Vehicle Ship)
+  :annotations (Existing-Object-Type
+                (documentation "The subcollection of Ship that contains all ocean liners, i.e., ships that by design can transport a large number of people across oceans.")))
+
+(defconcept Oiler
+  :is-primitive (:and Tanker-Ship Underway-Replenishment-Ship)
+  :annotations (Existing-Object-Type
+                (documentation "The collection of tanker ships intended to be used for replenishment of petroleum products to other ships.")))
+
+(defconcept Over-Snow-Vehicle
+  :is-primitive Special-Purpose-Vehicle
+  :annotations (Existing-Object-Type
+                (documentation "The collection of vehicles which are intended to travel easily over snow-covered terrain.")))
+
+(defconcept Patrol-Boat
+  :is-primitive Patrol-Craft
+  :annotations (Existing-Object-Type
+                (documentation "The collection of boats which are intended for use in patrolling.")))
+
+(defconcept Patrol-Craft
+  :is-primitive Modern-Naval-Ship
+  :annotations (Existing-Object-Type
+                (documentation "The collection of watercraft intended to be used for patrolling.")))
+
+(defconcept Platform--Military
+  :is-primitive (:and Transportation-Device Physical-Device)
+  :annotations (Existing-Object-Type
+                (documentation "The collection of military platforms. These are usually mobile entities which can carry military equipment such as #$Weapons and communications equipment. Often, as with a tank outfitted with a gun, a #$Platform-Military carrying some #$Weapon results in a #$WeaponSystem.")))
+
+(defconcept Raid-Vehicle
+  :is-primitive Special-Purpose-Vehicle
+  :annotations (Existing-Object-Type
+                (documentation "The collection of vehicles intended to be used in military or police raids.")))
+
+(defconcept Reconnaissance-Helicopter
+  :is-primitive (:and Military-Aircraft Helicopter)
+  :annotations (Existing-Object-Type
+                (documentation "The collection of #$Helicopters used for reconnaissance and information gathering in a military context.")))
+
+(defconcept Repair-Ship
+  :is-primitive Fleet-Support-Ship
+  :annotations (Existing-Object-Type
+                (documentation "The collection of ships intended to be used in repairs.")))
+
+(defconcept Replenishment-Oiler
+  :is-primitive Underway-Replenishment-Ship
+  :annotations (Existing-Object-Type
+                (documentation "A collection. Underway replenishment oiler ships.")))
+
+(defconcept Rescue-Helicopter
+  :is-primitive (:and Military-Aircraft Helicopter)
+  :annotations (Existing-Object-Type
+                (documentation "The collection of #$Helicopters used for entering enemy territory in order to rescue personnel. These aircraft are usually heavily armored.")))
+
+(defconcept Road-Vehicle
+  :is-primitive (:and Transportation-Device--Vehicle
+                      Fuel-Powered-Device
+                      Land-Transportation-Device
+                      Container-Product)
+  :annotations (Product-Type
+                Existing-Object-Type
+                (documentation "A collection of transportation devices.  An instance of #$RoadVehicle is a vehicle which would typically be found travelling on roads and (optionally) carrying passengers: cars, busses, vans, pickup trucks, fire trucks, RVs, motorcycles, etc..  Since #$RoadVehicles are vehicles, i.e. self powered (e.g. see #$vehicle), #$LandTransportationDevices such as #$Bicycles, or #$Wheelchairs are not in this class.")))
+
+(defconcept Road-Work-Vehicle
+  :is-primitive (:and Land-Transportation-Device
+                      Transportation-Device--Vehicle
+                      Fuel-Powered-Device)
+  :annotations (Existing-Object-Type
+                (documentation "The class of heavy construction equipment vehicles that are used to make roads and in other situations where one needs to move quantities of earth, rocks, etc. around.  These are powered by internal combustion engines, and often have wheels but just as  often have treads like tanks.")))
+
+(defconcept Rotary-Wing-Aircraft
+  :is-primitive Air-Transportation-Device
+  :annotations (Existing-Object-Type
+                (documentation "The collection of aircraft with rotary blades used as the primary lift mechanism.")))
+
+(defconcept Rowboat
+  :is-primitive (:and Boat--Water-Transportation-Device Device--User-Powered)
+  :annotations (Product-Type
+                Existing-Object-Type
+                (documentation "A subcollection of 
+#$Boat-WaterTransportationDevice that contains all boats each 
+of which is usually powered by one or more persions' rowing.")))
+
+(defconcept Salvage-Ship
+  :is-primitive Fleet-Support-Ship
+  :annotations (Existing-Object-Type
+                (documentation "The collection of ships intended to be used in salvage operations.")))
+
+(defconcept Ship
+  :is-primitive (:and Device--User-Controlled Boat--Water-Transportation-Device)
+  :annotations (Existing-Object-Type
+                (documentation "A subcollection of #$Boat-WaterTransportationDevice, whose instances are large, typically ocean-going vessels.")))
+
+(defconcept Silkworm-Missile
+  :is-primitive Anti-Ship-Cruise-Missile
+  :annotations (Existing-Object-Type))
+
+(defconcept Spacecraft
+  :is-primitive Transportation-Device
+  :annotations (Existing-Object-Type
+                (documentation "The collection of transportation devices deployed entirely in outer space, or whose trajectories leave the atmosphere of the planet they're launched from, in order to orbit the planet or to travel away from it beyond its gravitational field.")))
+
+(defconcept Space-Platform--Manned
+  :is-primitive (:and Platform--Military Spacecraft)
+  :annotations (Existing-Object-Type
+                (documentation "The collection of manned military space platforms.")))
+
+(defconcept Space-Platform--Unmanned
+  :is-primitive (:and Platform--Military Spacecraft)
+  :annotations (Existing-Object-Type
+                (documentation "The collection of unmanned military space platforms.")))
+
+(defconcept Special-Purpose-Vehicle
+  :is-primitive (:and Military-Vehicle Military-Land-Platform)
+  :annotations (Existing-Object-Type
+                (documentation "The collection of vehicles which are built and/or adapted for a specific purpose (other than generic passenger and cargo transport.")))
+
+(defconcept Spy-Plane
+  :is-primitive (:and Airplane Military-Aircraft)
+  :annotations (Existing-Object-Type
+                (documentation "The collection of aircraft intended for use in reconnaisance. Such planes often carry #$Sensors, cameras, and other surveillance equipment.")))
+
+(defconcept Submarine
+  :is-primitive (:and Transportation-Device--Vehicle
+                      Ship
+                      Water-Platform--Subsurface)
+  :annotations (Product-Type
+                Existing-Object-Type
+                (documentation "Submarine is the collection of all boats that can operate underwater.")))
+
+(defconcept Submarine-Tender
+  :is-primitive Material-Support-Ship
+  :annotations (Existing-Object-Type
+                (documentation "A collection. Military submarine tender ships.")))
+
+(defconcept Support-Vehicle
+  :is-primitive (:and Military-Vehicle Land-Transportation-Device)
+  :annotations (Existing-Object-Type
+                (documentation "A collection. Vehicles meant to be used for support in a military context.")))
+
+(defconcept Surface-To-Air-Missile
+  :is-primitive (:and Weapon Missile)
+  :annotations (Existing-Object-Type
+                (documentation "A collection.  Each instance is a #$Missile shot from a surface #$Platform-Military in order to bring down aircraft.")))
+
+(defconcept Surface-To-Surface-Missile
+  :is-primitive Ballistic-Missile
+  :annotations (Existing-Object-Type
+                (documentation "A collection.  Each instance is a #$Missile propelled from a surface #$Platform-Military (located on land or on water) into the upper atmosphere by rockets.  The #$Missile uses gravitational pull to make its high-speed return to the surface--either land or water surface--where it detonates on contact with the target.")))
+
+(defconcept Tank--Vehicle
+  :is-primitive (:and Military-Land-Platform
+                      Weapon
+                      Tracked-Vehicle
+                      Armored-Vehicle
+                      Weapon)
+  :annotations (Product-Type
+                Existing-Object-Type
+                (documentation "The collection of all tanks, armored vehicles designed for military purposes, with mounted guns, heavy armor, and often tracked wheels.")))
+
+(defconcept Tanker-Ship
+  :is-primitive (:and Cargo-Ship Transportation-Device--Vehicle)
+  :annotations (Existing-Object-Type
+                Product-Type
+                (documentation "The subcollection of CargoShip that contains all tankers, i.e., ships that by design can transport large amount of liquid or gas materials.")))
+
+(defconcept Tank-Landing-Ship
+  :is-primitive Amphibious-Warfare-Ship
+  :annotations (Existing-Object-Type
+                (documentation "The collection of ships intended for use in transporting and landing amphibious vehicles, tanks, combat vehicles, and equipment in amphibious assault.")))
+
+(defconcept Tracked-Vehicle
+  :is-primitive (:and Military-Vehicle Land-Transportation-Device)
+  :annotations (Existing-Object-Type
+                (documentation "A collection.  Each instance of #$TrackedVehicle used caterpillar-like tracks instead of, or in addition to, wheels for propulsion.  Only #$Tank-Vehicles are necessarily tracked.")))
+
+(defconcept Train--Transportation-Device
+  :is-primitive (:and Transportation-Device--Vehicle
+                      Container-Product
+                      Land-Transportation-Device)
+  :annotations (Product-Type
+                Existing-Object-Type
+                (documentation "The collection of all trains, the transportation devices that run on #$Railways and consist of multiple #$TrainCars coupled together.")))
+
+(defconcept Train-Car
+  :is-primitive (:and Land-Transportation-Device Container-Product)
+  :annotations (Product-Type
+                Existing-Object-Type
+                (documentation "The collection of train cars (or train carriages), non-motored wheeled vehicles that run on #$Railways.  When they are to be moved they are coupled together to form trains pulled by train engines.  There are freight TrainCars, and passenger TrainCars for transporting people.")))
+
+(defconcept Train-Engine
+  :is-primitive (:and Fuel-Powered-Device Land-Transportation-Device)
+  :annotations (Existing-Object-Type
+                Product-Type
+                (documentation "The collection of all train engines, each being a fuel-powered, non-steerable, wheeled vehicle that runs on #$Railway tracks, and has enough power to pull or push a group of #$TrainCars with it.")))
+
+(defconcept Transportation-Device
+  :is-primitive (:and Artifact Conveyance)
+  :annotations (Existing-Object-Type
+                Product-Type
+                (documentation "A collection of transportation devices; a subset of #$Conveyance.  Each element of #$TransportationDevice is an artifact designed to play the role of #$transporter in transportation events.  Such devices enable something to be moved, by (for example) carrying, pulling, or pushing the transported things (#$transportees).  Transportation devices may or may not have their own power source (see #$SelfPoweredDevice).  Those which do, such as automobiles and speedboats, constitute the specialization #$TransportationDevice-Vehicle.  Other transportation devices require an external motive force, e.g., instances of #$Wheelbarrow or #$Bicycle.  (For more examples, see #$MusclePoweredDevice.)  Because #$transporter and #$transportees are specializations of #$objectMoving, it follows that any object in the role of #$transporter moves as a whole with those objects playing the role of #$transportees.  Since any instance of #$TransportationDevice has playing the role of #$transporter as its intendend function, stationary objects which cause motion, such as conveyor belts, escalators, rocket launchers, slingshots, etc. are excluded from the category of #$TransportationDevice.  Also excluded are devices which, although they facilitate travel, are worn rather than 'ridden on', 'ridden with', or 'ridden in'.  Ice skates, shoes, skis and other specializations of #$WearableConveyance fit this exclusionary criterion. 
+Note that this is not the collection of all objects that can be used as transporters. For example, in an event of a man riding on a horse, the horse is the transporter but not an instance of #$TransportationDevice since a horse is not an artifact. So the main difference between transporters and transportation devices is that the latter have to be artifacts while the former do not.")))
+
+(defconcept Transportation-Device--Vehicle
+  :is-primitive (:and Device--User-Controlled
+                      Self-Powered-Device
+                      Transportation-Device)
+  :annotations (Existing-Object-Type
+                (documentation "#$TransportationDevice-Vehicle is the subcollection of #$TransportationDevice whose instances are also instances of #$SelfPoweredDevices, i.e., those that move under their own power.  E.g. jet airplanes, automobiles, but not skateboards, gliders, or rowboats.  Note that hand pushed gas powered lawnmowers, even though they are #$SelfPoweredDevices, are not instances of #$TransportationDevice-Vehicle because they are not their own #$providerOfMotiveForce when they move, whereas instances of #$LawnMower-Riding are vehicles.")))
+
+(defconcept Troop-Transport-Vehicle
+  :is-primitive (:and Military-Vehicle Land-Transportation-Device)
+  :annotations (Existing-Object-Type
+                (documentation "The collection of #$MilitaryVehicles whose main purpose is the transport of military personnel.")))
+
+(defconcept Truck
+  :is-primitive Road-Vehicle
+  :annotations (Product-Type
+                Existing-Object-Type
+                (documentation "The collection of all trucks, large #$RoadVehicles for ground transportation.  Trucks are most often used to haul freight, garbage, materials, liquids and other heavy loads.  #$FireTrucks take firemen to fires.  In many parts of the world, people routinely ride in the backs of Trucks.  A Truck has a cab for the driver, separate from the cargo area of the Truck.")))
+
+(defconcept Underway-Replenishment-Ship
+  :is-primitive Modern-Naval-Ship
+  :annotations (Existing-Object-Type
+                (documentation "The collection of ships intended to be used to transport materiel to other ships which are engaged in some kind of operation.")))
+
+(defconcept Unmanned-Aircraft
+  :is-primitive Air-Transportation-Device
+  :annotations (Existing-Object-Type
+                (documentation "The collection of #$AirTransportationDevices which are designed to travel without human #$driverActor. These craft may be steered by remote control.")))
+
+(defconcept Wagon
+  :is-primitive (:and Muscle-Powered-Device
+                      Land-Transportation-Device
+                      Container-Product)
+  :annotations (Product-Type
+                Existing-Object-Type
+                (documentation "The collection of all carts and wagons, relatively small non-motorized wheeled devices with two or more wheels, used for moving goods.  Usually they are human-powered or #$EquineAnimal driven.")))
+
+(defconcept Warplane
+  :is-primitive (:and Military-Aircraft Airplane)
+  :annotations (Product-Type
+                Existing-Object-Type
+                (documentation "The collection of all #$Airplanes which are designed (and often used) as weapons of war.")))
+
+(defconcept Water-Platform--Subsurface
+  :is-primitive (:and Platform--Military Water-Transportation-Device)
+  :annotations (Existing-Object-Type
+                (documentation "The collection of military water platforms meant to travel underwater.")))
+
+(defconcept Water-Platform--Surface
+  :is-primitive (:and Platform--Military Water-Transportation-Device)
+  :annotations (Existing-Object-Type
+                (documentation "The collection of military water platforms meant to travel on the surface of a body of water.")))
+
+(defconcept Water-Transportation-Device
+  :is-primitive Transportation-Device
+  :annotations (Existing-Object-Type
+                (documentation "A collection of transportation devices.  An instance of #$WaterTransportationDevice is a vehicle used for transportation on or through water (not a device for transporting water).  Subsets of #$WaterTransportationDevice include the collections #$Ship, #$Boat-WaterTransportationDevice, #$Sailboard, #$JetSki, etc.")))
+
+(defconcept Wheeled-Vehicle
+  :is-primitive (:and Military-Vehicle Land-Transportation-Device)
+  :annotations (Existing-Object-Type
+                (documentation "The collection of vehicles that use wheels (as opposed to tracks).")))
+
+(defconcept Wild-Weasel
+  :is-primitive Unmanned-Aircraft
+  :annotations (Existing-Object-Type
+                (documentation "The collection of F-4G #$UnmannedAircraft used by the #$UnitedStatesOfAmerica during Desert Storm to act as decoys against enemy #$SurfaceToAirMissiles.")))
+
+
+
+;;; ******************** FUNCTIONS AND RELATIONS ********************
+
+(defrelation axial-tilt-range
+  :arity 2
+  :domain Transportation-Device
+  :range (:and Physical-Attribute Scalar-Interval)
+  :annotations (Binary-Predicate
+                Functional-Predicate
+                (documentation "(#$axialTiltRange VEHICLE ANGLE-RANGE) is the range of angles at which VEHICLE can be tilted along the front to back axis and still be able to travel in a straight line (cars are generally able to drive through much steeper turns). For a #$JeepCar the range is probably something like (#$Degree-UnitOfAngularMeasure -40 40) which means that it will tip over when tilted sideways at a 45 degree angle. This range need not be symmetrical. For #$WaterTransportationDevices the #$axialTiltRange may be surprisingly wide, even (#$Degree-UnitOfAngularMeasure -180 180) for boats which have such a heavy keel that they return to an upright position even when upside-down.")))
+
+(defrelation max-gap
+  :arity 2
+  :domain Tank--Vehicle
+  :range Distance
+  :annotations (Binary-Predicate
+                Functional-Predicate
+                (documentation "(#$ditchWidth TANK HEIGHT) indicates the widest ditch that can be crossed by TANK")))
+
+(defrelation max-fording-depth
+  :arity 2
+  :domain Tank--Vehicle
+  :range Distance
+  :annotations (Binary-Predicate
+                Functional-Predicate
+                (documentation "(#$fordingDepth TANK HEIGHT) indicates the deepest waterlevel that can be crossed by TANK")))
+
+(defrelation max-number-of-passengers
+  :arity 2
+  :domain Transportation-Device--Vehicle
+  :range Positive-Integer
+  :annotations (Functional-Predicate
+                Binary-Predicate
+                (documentation "(#$maxNrOfPassengers VEHICLE NR) states that the number of #$passengers (not #$crewMembers) is NR. In a military context this is often referred to as 'infantry dismounts' or 'cavalry scouts' depending what type of vehicle we are considering. ")))
+
+(defrelation max-reverse-speed
+  :arity 2
+  :domain Conveyance
+  :range Speed
+  :annotations (Functional-Predicate
+                Binary-Predicate
+                (documentation "(#$maxSpeed CAR SPEED) states that CAR can go at the maximum speed SPEED when traveling in reverse direction along a 'normal' pathway. This is especially relevant for #$LandTransportationDevices and #$WaterTransportationDevices")))
+
+(defrelation max-speed-on-road
+  :arity 2
+  :domain Conveyance
+  :range Speed
+  :annotations (Functional-Predicate
+                Binary-Predicate
+                (documentation "(#$maxSpeed CAR SPEED) states that CAR can go at the maximum speed SPEED when traveling in forward direction along a 'normal' pathway. For #$AirTransportationDevices this is through the air when cruising - not climbing or descending - in calm weather. For #$LandTransportationDevices this is on normal flat terrain and calm weather. ")))
+
+(defrelation slope-range
+  :arity 2
+  :domain Transportation-Device
+  :range (:and Physical-Attribute Scalar-Interval)
+  :annotations (Binary-Predicate
+                Functional-Predicate
+                (documentation "(#$slopeRange VEHICLE ANGLE-RANGE) is the range of angles (downward to upward) at which VEHICLE is able to travel. For a #$JeepCar the range is probably something like (#$Degree-UnitOfAngularMeasure -60 45) which means that it can go down at a 60 degree angle, and up at a 45 degree angle. The upward angle generally depends on the power of the #$Engine and the type of vehicle. A #$RotaryAircraft can go straight up and down so (#$slopeRange ?HELICOPTER (#$Degree-UnitOfAngularMeasure -90 90).")))
+
+(defrelation min-turning-radius
+  :arity 2
+  :domain Transportation-Device
+  :range Distance
+  :annotations (Binary-Predicate
+                Functional-Predicate
+                (documentation "(#$turnRadius VEHICLE RADIUS) is the minimum achievable radius of the circle that is partially traversed when VEHICLE is #$Turning. For #$AirTransportationDevices this is for turns in a horizontal plane; a vertical turn (as in a looping) is not expressed as a predicate. ")))
+
+(defrelation vehicle-cargo-capacity--mass
+  :arity 2
+  :domain Transportation-Device
+  :range Mass
+  :annotations (Binary-Predicate
+                (documentation "(#$vehicleCargoCapacity-Mass ?VEH ?MASS) means that ?MASS is the mass of material that can safely be transported in the cargo-carrying region of ?VEH (a vehicle).")))
+
+(defrelation vehicle-cargo-capacity--volume
+  :arity 2
+  :is-primitive volume-contained
+  :domain Transportation-Device
+  :range Volume
+  :annotations (Interval-Based-Quantity-Slot
+                (documentation "(#$vehicleCargoCapacity-Volume ?VEH ?VOL) means that ?VOL is the volume of material that can be transported in the cargo-carrying region of ?VEH (a vehicle).")))
+
+(defrelation max-range-on-road
+  :arity 2
+  :domain Transportation-Device
+  :range Distance
+  :annotations (Binary-Predicate
+                (documentation "(#$vehicleRange ?VEH ?DIST) means that ?DIST is the maximum distance that can be translated using the vehicle ?VEH, without intermediate refueling.")))
+
+(defrelation max-step
+  :arity 2
+  :domain Tank--Vehicle
+  :range Distance
+  :annotations (Binary-Predicate
+                Functional-Predicate
+                (documentation "(#$verticalClimb TANK HEIGHT) indicates the highest vertical climb that TANK can make. ")))
+
+(defrelation wing-span
+  :arity 2
+  :domain Airplane
+  :range Distance
+  :annotations (Binary-Predicate
+                Functional-Predicate
+                (documentation "(#$wingSpan PLANE DISTANCE) indicates the total distance between the wingtips of an #$Airplane. It is a specialization of #$widthOfObject because for #$Airplanes the widest part is along the wings. ")))
+
+
+
+;;; ******************** GENERAL ASSERTIONS ********************
+
+
+
+;;; ******************** SYMBOLIZED FUNCTION VALUES ********************
+

@@ -1,0 +1,186 @@
+;;; Last modified: April 27 1999
+;;; by Jihie Kim
+
+;;; will be aligned with military-task/action ontology
+
+
+;;;    - added to planet-coa context and made some more
+;;;      concepts inherit from planet (specifically task-action
+;;;      and type-of-operation).
+;;;
+
+(in-package "PLANET") ;;
+
+
+;(in-package "PLANET")
+;(loom:use-loom "PLANET")
+;(use-package "EXPECT")
+
+;(in-context 'planet-coa)
+
+
+(defconcept task-action    
+    :is |MilitaryEvent|
+    )
+
+(defrelation who
+  :domain task-action
+  :range military-unit)
+
+(defrelation where
+  :domain task-action
+  :range |GeographicalRegion|)
+
+;;; Might specialise this to begin and end for actions. Will certainly
+;;; use a more expressive representation for tasks (COA objectives).
+(defrelation when
+  :domain task-action 
+  :range time-specifier)
+;;; The "what" that usually accompanies these relations is encoded in
+;;; the action type. In addition to the relations above, a TASK has a
+;;; set of relations that together define the "what": in-order-to,
+;;; type-of-operation and to.
+
+;;; ======================
+;;; Roles of actions.
+
+(defrelation action-role	       ; an abstract relation, not directly used
+  :domain task-action)
+
+(defrelation action-obj		       ; direct object of an action
+  :is-primitive action-role)
+
+(defrelation action-to
+  :is-primitive action-role)
+
+(defrelation action-from
+  :is-primitive action-role)
+
+(defrelation action-with
+  :is-primitive action-role)
+
+(defrelation through
+    :is-primitive action-role)
+
+(defrelation against  
+  :is-primitive action-role)
+
+;;; ====================
+;;; Subtypes of action
+
+(defconcept type-of-operation :is |MilitaryOperation|)
+
+(defconcept condition-action
+    :is-primitive task-action
+    )
+
+(defconcept purpose-action ;; action to describe purpose of given task
+    :is-primitive (:and task-action purpose)
+    )
+
+(defconcept event-action ;; action to describe event 
+    :is-primitive task-action)
+
+(defconcept enemy-action ;; action taken by a Red unit
+    :is (:and task-action 
+	      (:filled-by who red-unit)))
+
+
+;;; ======================
+;;; actions that establish/prevent conditions
+
+(defconcept prevent-action :is-primitive condition-action)
+(defconcept enable-action :is-primitive condition-action)
+(defconcept interfere-action :is-primitive condition-action)
+
+
+
+;;; ======================
+;;; task actions
+
+(defconcept fix 
+  :is-primitive (:and task-action |Fix-MilitaryTask|
+		  ;; can simultaneously fix more than one object in
+		  ;; the same task
+		  (:all action-obj military-unit)))
+
+(defconcept delay 
+  :is-primitive (:and task-action |Delay-MilitaryTask|
+		  ;; can simultaneously fix more than one object in
+		  ;; the same task
+		  (:all action-obj military-unit)))
+
+(defconcept seize
+  :is-primitive (:and task-action |Seize-MilitaryTask|
+		  (:all action-obj |GeographicalRegion|)))
+
+(defconcept hastyDefense
+  :is-primitive (:and task-action
+		  (:all action-obj |GeographicalRegion|)))
+
+(defconcept penetrate
+  :is-primitive (:and task-action |Penetrate-MilitaryTask|
+		  (:all action-obj military-unit)))
+
+
+;;; Different uses of the verb can be defined as subconcepts.
+;;; The roles used in these subconcepts match the grammar.
+
+(defconcept forward-passage-of-lines
+    :is-primitive (:and task-action |ForwardPassageOfLines-MilitaryTask|
+			(:at-least 1 through)))
+
+
+(defconcept follow 
+    :is-primitive  (:and task-action 
+			 |FollowAndSupport-MilitaryTask|))
+
+(defconcept contain
+    :is-primitive  (:and task-action
+			 |Contain-MilitaryTask|))
+
+(defconcept screen
+    :is-primitive  (:and task-action 
+			 |Screen-MilitaryTask|))
+
+(defconcept attrit
+    :is-primitive  (:and task-action
+			 |Attrit-MilitaryTask|))
+
+(defconcept interdict
+    :is-primitive  (:and task-action
+			 |Interdict-MilitaryTask|))
+
+(defconcept protect
+    :is-primitive  task-action)
+
+(defconcept gaining-access
+    :is-primitive  task-action)
+
+
+(defconcept block-action ;;  seems that concept 'block' is already defined.
+    :is-primitive (:and task-action 
+			|Block-MilitaryTask|))
+
+(defconcept move
+    :is-primitive task-action)
+
+(defconcept ensure
+    :is-primitive task-action)
+
+(defconcept resupply 
+    :is-primitive task-action)
+
+;;; ======================
+;;; actions for event description  
+(defconcept engage
+  :is-primitive event-action)
+
+;;; ======================
+;;; actions for rear statement  
+
+(defconcept rear-action :is-primitive task-action)
+
+(defconcept respond  :is-primitive rear-action)
+
+

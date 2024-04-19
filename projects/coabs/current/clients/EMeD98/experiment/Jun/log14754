@@ -1,0 +1,104 @@
+check: Method Capability Hierarchy
+   at Fri May 28 13:48:14 PDT 1999
+
+select: modify button
+   at Fri May 28 13:48:20 PDT 1999
+
+ done editing:((name find-length-of-minefield)
+ (capability (find
+                (obj (?l is (spec-of length)))
+                (of (?f is (inst-of minefield)))
+                ))
+ (result-type (inst-of number))
+ (method ( length-of ?a))
+)
+   at Fri May 28 13:48:27 PDT 1999
+
+modified method:((name find-length-of-minefield)
+ (capability (find
+                (obj (?l is (spec-of length)))
+                (of (?f is (inst-of minefield)))
+                ))
+ (result-type (inst-of number))
+ (method ( length-of ?a))
+)
+   at Fri May 28 13:48:27 PDT 1999
+
+check: All Agenda
+   at Fri May 28 13:48:27 PDT 1999
+
+check: Method Sub-Method Relation
+   at Fri May 28 13:48:27 PDT 1999
+
+check: Method Capability Hierarchy
+   at Fri May 28 13:48:29 PDT 1999
+
+select: modify button
+   at Fri May 28 13:48:39 PDT 1999
+
+ done editing:((name find-length-of-minefield)
+ (capability (find
+                (obj (?l is (spec-of length)))
+                (of (?f is (inst-of minefield)))
+                ))
+ (result-type (inst-of number))
+ (method ( length-of ?f))
+)
+   at Fri May 28 13:48:45 PDT 1999
+
+modified method:((name find-length-of-minefield)
+ (capability (find
+                (obj (?l is (spec-of length)))
+                (of (?f is (inst-of minefield)))
+                ))
+ (result-type (inst-of number))
+ (method ( length-of ?f))
+)
+   at Fri May 28 13:48:45 PDT 1999
+
+check: All Agenda
+   at Fri May 28 13:48:45 PDT 1999
+
+check: Method Sub-Method Relation
+   at Fri May 28 13:48:45 PDT 1999
+
+check: Method Capability Hierarchy
+   at Fri May 28 13:48:47 PDT 1999
+
+select: delete button
+   at Fri May 28 13:48:48 PDT 1999
+
+select: add new button
+   at Fri May 28 13:49:07 PDT 1999
+
+ done editing:((name get-emplacement-time)
+ (capability (find (obj (?t is (spec-of time-for-emplacement)))
+		   (for (?b is (inst-of military-bridge)))))
+ (result-type (inst-of number)) ;; standard emplacement time
+ (method (if (is-less-or-equal (obj (emplacement-time ?b))
+			       (than 0.5))
+	     then 0.5
+	     else (emplacement-time ?b)))
+ )
+   at Fri May 28 13:49:27 PDT 1999
+
+added New method:((name get-emplacement-time)
+ (capability (find (obj (?t is (spec-of time-for-emplacement)))
+		   (for (?b is (inst-of military-bridge)))))
+ (result-type (inst-of number)) ;; standard emplacement time
+ (method (if (is-less-or-equal (obj (emplacement-time ?b))
+			       (than 0.5))
+	     then 0.5
+	     else (emplacement-time ?b)))
+ )
+   at Fri May 28 13:49:27 PDT 1999
+
+check: All Agenda
+   at Fri May 28 13:49:27 PDT 1999
+
+check: Method Sub-Method Relation
+   at Fri May 28 13:49:27 PDT 1999
+
+check: Method Capability Hierarchy
+   at Fri May 28 13:49:29 PDT 1999
+

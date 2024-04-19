@@ -1,0 +1,1076 @@
+;======================================================================
+
+;======================================================================
+
+
+
+;MILITARILY SIGNIFICANT AREAS, AND SOME OF TERRAIN, AND TRAFFICABILITY
+
+
+
+; !!! Note! This file presupposes prior loading of the 'objective slam' file, 
+
+; the 'mission purpose' file, and the 'sourcing constants' file.  !!!
+
+
+
+constant: objectiveOfTask.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ActorSlot IKBConstant.
+
+arg1Isa: MilitaryTask.
+
+arg2Isa: SpatialThing-Localized.
+
+comment: "(#$objectiveOfTask TASK OBJECTIVE) means that that OBJECTIVE
+
+has the status of 'task objective' in the planned execution of TASK as
+
+represented in an instance of #$COASpecificationMicrotheory.  A task
+
+objective may be an instance of #$GeographicalRegion,
+
+#$ModernMilitaryUnit-Deployable, or #$Artifact, and it may be possible
+
+for other kinds of things to play this role as well.".
+
+
+
+constant: significantCOAArea.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: BinaryPredicate IKBConstant.
+
+arg1Isa: COASpecificationMicrotheory.
+
+arg2Isa: GeographicalRegion.
+
+comment: "This #$Predicate is used to link an instance of
+
+#$COASpecificationMicrotheory to all the implicitly or explicitly
+
+sketch-identified 'significant' regions or areas relating to the COA
+
+for critiquing purposes.  Significant regions include, but are not
+
+limited to, instances of #$PhaseLineBoundedArea and items playing the
+
+role #$objectiveOfTask when these are #$GeographicalRegions.".
+
+
+
+constant: CombatTheaterSiteAttribute.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: UnorderedAttributeType IKBConstant.
+
+genls: AttributeValue.
+
+comment: "An unordered collection of attributes.  Instances are
+
+attributes which geographical sites may be specifically vested in a
+
+the context of a theater of combat operations.  Examples include
+
+#$ControlMeasure, #$NoFireArea, etc.".
+
+F:
+
+(interArgIsa2-1 hasAttributes CombatTheaterSiteAttribute SpatialThing-Localized).
+
+
+
+
+
+constant: ControlMeasure.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: CombatTheaterSiteAttribute IKBConstant.
+
+sourceOfTerm-PIT: FM101-5-1Mt.
+
+sourceOfTerm-WebPage: FM101-5-1WebPage.
+
+comment: "Instances of #$SpatialThing-Localized which are accorded
+
+this attribute in a particular COA development scenario gain the
+
+status ofcoordination features which aid in that particular COA
+
+development process.  Instances are used in order to to assign
+
+responsibilities, coordinate fires and maneuver, and control combat
+
+operations. Each control measure can be portrayed graphically. In
+
+general, all control measures should be easily identifiable on the
+
+ground. Examples of control measures include boundaries, objectives,
+
+coordinating points, contact point, and direction of attack. From FM
+
+101-5-1.".
+
+cyclistNotes: "Since practically any terrain feature or human
+
+construct can be a 'control measure' in the right circumstances, most
+
+types of #$ControlMeasure are not represented using collections: the
+
+concept does not in any sense delineate a natural kind.  Instances of
+
+certain kinds of things: e.g., instances of #$PhaseLine, will always
+
+be control measures, but many other things: hills, valleys, telephone
+
+poles, office buildings, and so forth, will only have the status of
+
+'control measure' within a particular #$COASpecificationMicrotheory.".
+
+
+
+constant: coaControlMeasure.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: Role IKBConstant BinaryPredicate.
+
+arg1Isa: COASpecificationMicrotheory.
+
+arg2Isa: SpatialThing-Localized.
+
+comment: "(#$coaControlMeasure COAMT SPATIALTHING) means that in the
+
+special Course of Action context represented by COAMT, SPATIALTHING
+
+has the special status of 'Control Measure'.  This means that
+
+SPATIALTHING is a coordination feature which aids in the development
+
+process of that particular COA.  Instances are used in order to to
+
+assign responsibilities, coordinate fires and maneuver, and control
+
+combat operations. Each control measure can be portrayed
+
+graphically.  In general, all control measures should be easily
+
+identifiable on the ground. Examples of control measures include
+
+boundaries, objectives, coordinating points, contact point, and
+
+direction of attack. From FM 101-5-1.".
+
+cyclistNotes: "Since practically any terrain feature or human
+
+construct can be a 'control measure' in the right circumstances, most
+
+types of #$ControlMeasure are not represented using collections: the
+
+concept does not in any sense delineate a natural kind.".
+
+;F:
+
+;(implies
+
+;  (coaControlMeasure ?COAMT ?THING)
+
+;  (ist ?COAMT (hasAttributes ?THING ControlMeasure))).
+
+
+
+constant: PhaseLineBoundedArea.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ExistingObjectType IKBConstant.
+
+genls: GeographicalRegion.
+
+comment: "Instances are instances of #$GeographicalRegion represented
+
+as being bounded on at least some of its sides by #$PhaseLines in a
+
+military Course Of Action Sketch.  #$PhaseLineBoundedAreas ordinarily
+
+are of high military significance within the planning context, and are
+
+typically assigned to individual units as areas of responsibility (see
+
+also #$sectorOfResponsibility).".
+
+ 
+
+constant: PhaseLine.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ExistingObjectType.
+
+genls: LineOfMilitaryForces.
+
+sourceOfTerm-PIT: FM101-5-1Mt.
+
+sourceOfTerm-WebPage: FM101-5-1WebPage.
+
+comment: "A line used for control and coordination of military
+
+operations, usually a terrain feature extending across the zone of
+
+action. (Army) - It is usually along a recognizable terrain feature
+
+extending across the sector or zone of action. Units normally report
+
+crossing PLs, but do not halt unless specifically directed.".
+
+F:
+
+(relationAllInstance hasAttributes PhaseLine ControlMeasure).
+
+
+
+constant: phaseLineBoundsRegion.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: BinaryPredicate IKBConstant.
+
+genlPreds: formsBorderPart.
+
+arg1Isa: PhaseLine.
+
+arg2Isa: PhaseLineBoundedArea.
+
+comment: "(#$phaseLineBoundsRegion LINE REGION) means that LINE is
+
+used in part for the purpose of demarcating REGION.".
+
+
+
+constant: phaseLineBetweenRegions.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: TernaryPredicate IKBConstant.
+
+genlPreds: formsBorderBetween.
+
+arg1Isa: PhaseLine.
+
+arg2Isa: PhaseLineBoundedArea.
+
+arg3Isa: PhaseLineBoundedArea.
+
+comment: "(#$phaseLineBoundsRegion LINE REGION1 REGION2) means that
+
+LINE is part of the boundary between REGION2 and REGION1.".
+
+
+
+constant: taskLimitOfAdvance.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ActorSlot IKBConstant.
+
+arg1Isa: MilitaryTask.
+
+arg2Isa: SpatialThing-Localized.
+
+comment: "(#$taskLimitOfAdvance TASK LOA) means that LOA is an easily
+
+recognized terrain feature beyond which the attacking element which is
+
+#$unitAssignedToTask TASK will not advance, in the plan specification
+
+context in which the assertion is made.  From FM 101-5-1.".
+
+
+
+constant: ProbableLineOfDeployment.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ExistingObjectType IKBConstant.
+
+genls: LineOfMilitaryForces.
+
+sourceOfTerm-PIT: FM101-5-1Mt.
+
+sourceOfTerm-WebPage: FM101-5-1WebPage.
+
+comment: "A line selected on the ground, usually in the region of the
+
+last covered and concealed position prior to the objective and forward
+
+of the line of departure, where attacking units deploy prior to
+
+beginning an assault; it is generally used under conditions of limited
+
+visibility.  From FM101-5-1.".
+
+F:
+
+(relationAllInstance hasAttributes ProbableLineOfDeployment ControlMeasure).
+
+
+
+constant: taskPLD.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ActorSlot IKBConstant.
+
+arg1Isa: MilitaryTask.
+
+arg2Isa: ProbableLineOfDeployment.
+
+comment: "(#$taskPLD TASK PLD) means that PLD is the
+
+#$ProbableLineOfDeployment for the military unit that is
+
+#$unitAssignedToTask TASK.".
+
+
+
+
+
+;It may be that an internal hierarchy should be established between
+
+;FinalCoordinationLine, RestrictiveFireLine, CoordinatedFireLine, &c.
+
+;If that is deemed desireable, it can be accomplished by making
+
+;subordinate collections specializations of the superordinate
+
+;collections, with concomitant specpred relations being established for
+
+;the associated tasks.  E.G., if (genls CoordinatedFireLine
+
+;FinalCoordinationLine) were asserted, (genlPreds taskCFL taskFCL)
+
+;should also be asserted.
+
+
+
+constant: FinalCoordinationLine.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ExistingObjectType IKBConstant.
+
+genls: LineOfMilitaryForces.
+
+sourceOfTerm-PIT: FM101-5-1Mt.
+
+sourceOfTerm-WebPage: FM101-5-1WebPage.
+
+comment: "A line close to the enemy position used to coordinate the
+
+lifting or shifting of supporting fires with the final deployment of
+
+maneuver elements. It should be recognizable on the ground. It is not
+
+a fire support coordination measure.".
+
+F:
+
+(relationAllInstance hasAttributes FinalCoordinationLine ControlMeasure).
+
+
+
+constant: taskFCL.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ActorSlot IKBConstant.
+
+arg1Isa: MilitaryOffensiveTask.
+
+arg2Isa: FinalCoordinationLine.
+
+comment: "(#$taskFCL TASK FCL) means that FCL is the
+
+#$FinalCoordinationLine for the offensive task TASK.".
+
+
+
+constant: RestrictiveFireLine.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ExistingObjectType.
+
+genls: LineOfMilitaryForces.
+
+sourceOfTerm-PIT: FM101-5-1Mt.
+
+sourceOfTerm-WebPage: FM101-5-1WebPage.
+
+comment: " A line established between converging friendly forces (one
+
+or both may be moving) that prohibits fires or effects from fires
+
+across the line without coordination with the affected force. It is
+
+established by the next higher common commander of the converging
+
+forces.".
+
+F:
+
+(relationAllInstance hasAttributes RestrictiveFireLine ControlMeasure).
+
+
+
+
+
+constant: taskRFL.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ActorSlot IKBConstant.
+
+arg1Isa: MilitaryOffensiveTask.
+
+arg2Isa: RestrictiveFireLine.
+
+comment: "(#$taskRFL TASK RFL) means that RFL is the #$RestrictiveFireLine for TASK.".
+
+
+
+constant: rFLForUnits.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: TernaryPredicate IKBConstant.
+
+arg1Isa: ModernMilitaryUnit-Deployable.
+
+arg2Isa: ModernMilitaryUnit-Deployable.
+
+arg3Isa: RestrictiveFireLine.
+
+
+
+F:
+
+(implies
+
+  (and
+
+    (rFLForUnits ?UNIT1 ?UNIT2 ?RFL)
+
+    (unitAssignedToTask ?TASK1 ?UNIT1)
+
+    (unitAssignedToTask ?TASK2 ?UNIT2))
+
+  (taskRFL ?TASK1 ?RFL)).
+
+F:
+
+(implies
+
+  (and
+
+    (rFLForUnits ?UNIT1 ?UNIT2 ?RFL)
+
+    (unitAssignedToTask ?TASK1 ?UNIT1)
+
+    (unitAssignedToTask ?TASK2 ?UNIT2))
+
+  (taskRFL ?TASK2 ?RFL)).     
+
+
+
+constant: CoordinatedFireLine.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ExistingObjectType.
+
+genls: LineOfMilitaryForces.
+
+sourceOfTerm-WebPage: FM101-5-1WebPage.
+
+sourceOfTerm-PIT: FM101-5-1Mt.
+
+comment: "A line beyond which conventional surface fire support means
+
+(mortars, field artillery, naval gunfire ships) may fire at any time
+
+within the zone of the establishing headquarters without additional
+
+coordination. It is usually established by brigade or division but may
+
+be established by a maneuver battalion.".
+
+F:
+
+(relationAllInstance hasAttributes CoordinatedFireLine ControlMeasure).
+
+
+
+constant: taskCFL.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ActorSlot IKBConstant.
+
+arg1Isa: MilitaryOffensiveTask.
+
+arg2Isa: RestrictiveFireLine.
+
+comment: "(#$taskCFL TASK CFL) means that CFL is the
+
+#$CoordinatedFireLine for the offensive task TASK.".
+
+
+
+constant: NoFireLine.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ExistingObjectType IKBConstant.
+
+genls: LineOfMilitaryForces.
+
+sourceOfTerm-PIT: FM101-5-1Mt.
+
+sourceOfTerm-WebPage: FM101-5-1WebPage.
+
+comment: "A line short of which artillery or ships do not fire except
+
+on request or approval of the supported commander, but beyond which
+
+they may fire at any time without danger to friendly troops.".
+
+F:
+
+(relationAllInstance hasAttributes NoFireLine ControlMeasure).
+
+
+
+constant: taskNFL.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ActorSlot IKBConstant.
+
+arg1Isa: MilitaryTask.
+
+arg2Isa: NoFireLine.
+
+comment: "(#$taskNFL ?TASK ?NFL) means that ?NFL is a #$NoFireLine for
+
+the #$MilitaryTask TASK.".
+
+
+
+
+
+
+
+constant: CombatZone.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: CombatTheaterSiteAttribute IKBConstant.
+
+sourceOfTerm-PIT: FM101-5-1Mt.
+
+sourceOfTerm-WebPage: FM101-5-1WebPage.
+
+comment: "The area in the Course of Action representation that is
+
+required by combat forces for the conduct of operations has the
+
+attribute #$CombatZone.".
+
+
+
+constant: combatZoneOfCOA.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: BinaryPredicate IKBConstant.
+
+arg1Isa: COASpecificationMicrotheory.
+
+arg2Isa: GeographicalRegion.
+
+comment: "(#$combatZoneOfCOA COAMT REGION)means that REGION is
+
+designated a #$CombatZone in COAMT.".
+
+;F:
+
+;(implies
+
+;  (combatZoneOfCOA ?COAMT ?REGION)
+
+;  (ist ?COAMT (hasAttributes ?REGION CombatZone))).
+
+
+
+constant: combatZoneOfOperation.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ActorSlot IKBConstant.
+
+genlPreds: eventOccursAt.
+
+
+
+F:
+
+(implies
+
+  (and
+
+   (combatZoneOfOperation ?OP ?REGION)
+
+   (operationOfCOA ?COAMT ?OP))
+
+  (combatZoneOfCOA ?COAMT ?REGION)).
+
+F:
+
+(implies
+
+ (combatZoneOfOperation ?OP ?REGION)
+
+ (hasAttributes ?REGION CombatZone)).
+
+
+
+constant: NoFireArea.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: CombatTheaterSiteAttribute IKBConstant.
+
+sourceOfTerm-PIT: FM101-5-1Mt.
+
+sourceOfTerm-WebPage: FM101-5-1WebPage.
+
+comment: "Areas with this attribute in a COA context are areas in
+
+which no fires or effects of fires are allowed. Two exceptions are (1)
+
+when establishing headquarters approves fires temporarily within the
+
+NFA on a mission basis, and (2) when the enemy force within the NFA
+
+engages a friendly force, the commander may engage the enemy to defend
+
+his force.".
+
+
+
+constant: noFireAreaOfCOA.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: BinaryPredicate IKBConstant.
+
+arg1Isa: COASpecificationMicrotheory.
+
+arg2Isa: GeographicalRegion.
+
+comment: "(#$noFireAreaOfCOA COAMT AREA) means that AREA is designated
+
+a #$NoFireArea in COAMT.".
+
+;F:
+
+;(implies
+
+;  (noFireAreaOfCOA ?COAMT ?REGION)
+
+;  (ist ?COAMT (hasAttributes ?REGION NoFireArea))).
+
+
+
+constant: noFireAreaOfOperation.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ActorSlot IKBConstant.
+
+arg1Isa: MilitaryOperation.
+
+arg2Isa: GeographicalRegion.
+
+comment: "(#$noFireAreaOfOperation OP AREA) means that AREA is
+
+designated a #$NoFireArea for #$MilitaryOperation OP.".
+
+F:
+
+(implies
+
+  (and
+
+    (noFireAreaOfOperation ?OP ?AREA)
+
+    (operationOfCOA ?COAMT ?OP))
+
+  (noFireAreaOfCOA ?COAMT ?AREA)).
+
+F:
+
+(implies
+
+  (noFireAreaOfOperation ?OP ?AREA)
+
+  (hasAttributes ?AREA NoFireArea)).
+
+
+
+
+
+constant: RestrictiveFireArea.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: CombatTheaterSiteAttribute IKBConstant.
+
+sourceOfTerm-PIT: FM101-5-1Mt.
+
+sourceOfTerm-WebPage: FM101-5-1WebPage.
+
+comment: "An area in which specific restrictions are imposed and into
+
+which fires that exceed those restrictions may not be delivered
+
+without prior coordination with the establishing headquarters. ".
+
+
+
+constant: restrictiveFireAreaOfCOA.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: BinaryPredicate IKBConstant.
+
+arg1Isa: COASpecificationMicrotheory.
+
+arg2Isa: GeographicalRegion.
+
+comment: "(#$restrictiveFireAreaOfCOA COAMT AREA) means that AREA is designated
+
+a #$RestrictiveFireArea in COAMT.".
+
+;F:
+
+;(implies
+
+;  (restrictiveFireAreaOfCOA ?COAMT ?REGION)
+
+;  (ist ?COAMT (hasAttributes ?REGION RestrictiveFireArea))).
+
+
+
+constant: restrictiveFireAreaOfOperation.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ActorSlot IKBConstant.
+
+arg1Isa: MilitaryOperation.
+
+arg2Isa: GeographicalRegion.
+
+comment: "(#$restrictiveFireAreaOfOperation OP AREA) means that AREA is
+
+designated a #RestrictiveFireArea for #$MilitaryOperation OP.".
+
+F:
+
+(implies
+
+  (and
+
+    (restrictiveFireAreaOfOperation ?OP ?AREA)
+
+    (operationOfCOA ?COAMT ?OP))
+
+  (restrictiveFireAreaOfCOA ?COAMT ?AREA)).
+
+F:
+
+(implies
+
+  (restrictiveFireAreaOfOperation ?OP ?AREA)
+
+  (hasAttributes ?AREA RestrictiveFireArea)).
+
+
+
+constant: BeatenZone.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: CombatTheaterSiteAttribute IKBConstant.
+
+sourceOfTerm-PIT: FM101-5-1Mt.
+
+sourceOfTerm-WebPage: FM101-5-1WebPage.
+
+comment: "The area on the ground upon which the cone of fire falls.". 
+
+
+
+constant: taskBeatenZone.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ActorSlot IKBConstant.
+
+arg1Isa: MilitaryOffensiveTask.
+
+arg2Isa: GeographicalRegion.
+
+comment: "(#$taskBeatenZone TASK AREA) means that AREA is
+
+circumscribed by the cone of fire generated by the offensive task
+
+TASK.  This predicate is generally used for specifying the beaten zone
+
+of an #$AttackByIndirectFire-MilitaryTask.".
+
+F:
+
+(implies
+
+  (taskBeatenZone ?TASK ?BZ)
+
+  (hasAttributes ?BZ BeatenZone)).
+
+
+
+
+
+constant: ZoneOfFire.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: CombatTheaterSiteAttribute IKBConstant.
+
+sourceOfTerm-PIT: FM101-5-1Mt.
+
+sourceOfTerm-WebPage: FM101-5-1WebPage.
+
+comment: "The offensive operational area assigned to
+
+a unit or commander that is defined by a forward boundary, rear
+
+boundary, lateral boundaries, and a coordinating altitude.  From FM
+
+101-5-1.".
+
+
+
+constant: taskZoneOfFire.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ActorSlot IKBConstant.
+
+arg1Isa: MilitaryOffensiveTask.
+
+arg2Isa: GeographicalRegion.
+
+comment: "(#$taskZoneOfFire TASK ZONE) means that ZONE is designated
+
+the #$ZoneOfFire for the #$MilitaryOffensiveTask TASK.".
+
+F:
+
+(implies
+
+  (taskZoneOfFire ?TASK ?REGION)
+
+  (hasAttributes ?REGION ZoneOfFire)).
+
+
+
+constant: AreaOfOperations.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: CombatTheaterSiteAttribute IKBConstant.
+
+sourceOfTerm-PIT: FM101-5-1Mt.
+
+sourceOfTerm-WebPage: FM101-5-1WebPage.
+
+comment: "An operational area defined by the joint force commander for
+
+land and naval forces. Areas of operation do not typically encompass
+
+the entire operational area of the joint force commander, but should
+
+be large enough for component commanders to accomplish their missions
+
+and protect their forces. (Army) - A geographical area, usually
+
+defined by lateral, forward, and rear boundaries assigned to a
+
+commander, by a higher commander, in which he has responsibility and
+
+the authority to conduct military operations. ".
+
+
+
+constant: taskAreaOfOperations.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ActorSlot IKBConstant.
+
+arg1Isa: MilitaryTask.
+
+arg2Isa: GeographicalRegion.
+
+comment: "(#$taskAreaOfOperations TASK AO) means that AO is designated the #$AreaOfOperations
+
+of the unit assigned to perform TASK and, by extension, that unit's
+
+#$sectorOfResponsibility.".
+
+F:
+
+(implies
+
+  (taskAreaOfOperations ?TASK ?AO)
+
+  (hasAttributes ?AO AreaOfOperations)).
+
+
+
+constant: ContainmentZone.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: CombatTheaterSiteAttribute IKBConstant.
+
+comment: "An operational area in which a hostile force is to be
+
+contained in the execution of an instance of #$Contain-MilitaryTask.".
+
+
+
+constant: taskContainmentZone.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ActorSlot IKBConstant.
+
+arg1Isa: Contain-MilitaryTask.
+
+arg2Isa: GeographicalRegion.
+
+comment: "(#$taskContainmentZone TASK ZONE) means that ZONE is the
+
+designated #$ContainmentZone for TASK.".
+
+F:
+
+(implies
+
+  (taskContainmentZone ?TASK ?CZ)
+
+  (hasAttributes ?CZ ContainmentZone)).
+
+
+
+constant: containmentConstraint-Spatial.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ActorSlot IKBConstant.
+
+genlPreds: constrainingObject.
+
+arg1Isa: Contain-MilitaryTask.
+
+arg2Isa: LandTopographicalFeature.
+
+comment: "(#$containmentConstraint-Spatial TASK FEATURE) means that
+
+FEATURE is a topographical feature used for identifying and
+
+demarcating the #$ContainmentZone that plays the role of
+
+#$taskContainmentZone in TASK.".
+
+
+
+
+
+
+
+constant: sectorOfResponsibility.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: BinaryPredicate IKBConstant.
+
+arg1Isa: ModernMilitaryUnit-Deployable.
+
+arg2Isa: GeographicalRegion.
+
+constant: "(#$sectorOfResponsibility UNIT AREA) means that UNIT is
+
+'responsible for' the instance of #$PhaseLineBoundedArea AREA within
+
+the context of a particular #$COASpecificationMicrotheory.  What
+
+constitutes 'responsibility' varies with the echelon and
+
+specialization of #$ModernMilitaryUnit-Deployable and the kind of
+
+#$PhaseLineBoundedArea referenced.".
+
+
+
+F:
+
+(implies
+
+  (and
+
+    (taskAreaOfOperations ?TASK ?AO)
+
+    (unitAssignedToTask ?TASK ?UNIT))
+
+  (sectorOfResponsibility ?UNIT ?AO)).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

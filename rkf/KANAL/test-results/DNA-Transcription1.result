@@ -1,0 +1,397 @@
+
+
+ ===============================================
+ start test-knowledge 
+"2001/6/25  17:30:53"
+
+(DNA-Transcription1 has 
+  (superclasses (Scenario))
+  (instances (_DNA-Transcription11142
+              _DNA-Transcription13164)))
+
+(every DNA-Transcription1 has 
+  (some-associated-attach4 ((a Attach)))
+  (some-associated-polymerase3 ((((a Polymerase)) && ((the object of (the some-associated-attach4 of Self))))))
+  (some-associated-procaryotic-gene5 ((((a Procaryotic-Gene)) && ((the base of (the some-associated-attach4 of Self))))))
+  (first-subevent ((the some-associated-attach4 of Self)))
+  (subevent ((((the first-subevent of Self)) && ((a Attach with (base ((a Procaryotic-Gene with (has-part ((a DNA-Codon) (a Deoxyribonucleotide) (a 3-Prime-Nucleotide) (a 5-Prime-Nucleotide) (the some-associated-dna-molecule7 of Self)))))))) && ((a Attach with (site ((the fifth of (the has-part of (the base of (the subevent of Self)))))))) && ((a Attach with (next-event ((the some-associated-take-apart2 of Self))))) && ((a Attach with (base ((the object of (the next-event of (the subevent of Self))))))) && ((a Attach with (next-event ((a Take-Apart with (instrument ((the object of (the subevent of Self))))))))) && ((a Attach with (next-event ((a Take-Apart with (next-event ((the some-associated-copy3 of Self)))))))) && ((a Attach with (base ((a Procaryotic-Gene with (element-type ((a Thing with (element-type-of ((a DNA-Codon) (a Operon) (a Operon) (a Procaryotic-Gene)))) (a Thing)))))))) && ((a Attach with (base ((a Procaryotic-Gene with (element-type ((a Thing with (element-type-of ((a DNA-Codon) (the object of (the next-event of (the next-event of (the subevent of Self)))) (a Operon) (a Procaryotic-Gene)))) (a Thing)))))))) && ((a Attach with (next-event ((a Take-Apart with (next-event ((a Copy with (result ((a RNA-Sequence))))))))))) && ((a Attach with (next-event ((a Take-Apart with (next-event ((a Copy with (instrument ((the object of (the subevent of Self)))))))))))) && ((a Attach with (next-event ((a Take-Apart with (next-event ((a Copy with (first-subevent ((the some-associated-add of Self))))))))))) && ((a Attach with (next-event ((a Take-Apart with (next-event ((a Copy with (subevent ((the first-subevent of (the next-event of (the next-event of (the subevent of Self)))))))))))))) && ((a Attach with (next-event ((a Take-Apart with (next-event ((a Copy with (subevent ((a Add with (object ((a Ribonucleotide)))))))))))))) && ((a Attach with (next-event ((a Take-Apart with (next-event ((a Copy with (subevent ((a Add with (base ((a RNA-Sequence)))))))))))))))))
+  (some-associated-dna-molecule7 ((a DNA-Molecule)))
+  (some-associated-take-apart2 ((a Take-Apart)))
+  (some-associated-copy3 ((a Copy)))
+  (some-associated-add ((a Add))))
+
+
+
+ ===============================================
+ Start testing user::|DNA-Transcription1| with 
+   user::|_DNA-Transcription14039| in user::|_Situation4038|
+
+
+  -----------------------------------------------------------
+  step: user::|_Attach4040|
+  -----------------------------------------------------------
+   preconditions:((:|triple| user::|_Tangible-Entity4137| user::|object-of|
+                   (user::|mustnt-be-a| user::|Be-Touching| user::|with|
+                    (user::|object|
+                     ((user::|the| user::|base| user::|of|
+                       user::|_Attach4040|)))))
+                  (:|triple| user::|_Procaryotic-Gene4199| user::|object-of|
+                   (user::|mustnt-be-a| user::|Be-Touching| user::|with|
+                    (user::|object|
+                     ((user::|the| user::|object| user::|of|
+                       user::|_Attach4040|)))))) 
+
+   succeeded preconditions:((:|triple| user::|_Procaryotic-Gene4199|
+                             user::|object-of|
+                             (user::|mustnt-be-a| user::|Be-Touching|
+                              user::|with|
+                              (user::|object|
+                               ((user::|the| user::|object| user::|of|
+                                 user::|_Attach4040|)))))
+                            (:|triple| user::|_Tangible-Entity4137|
+                             user::|object-of|
+                             (user::|mustnt-be-a| user::|Be-Touching|
+                              user::|with|
+                              (user::|object|
+                               ((user::|the| user::|base| user::|of|
+                                 user::|_Attach4040|)))))) 
+
+ ... EXECUTE _attach4040 in _situation4038...
+      deleting nil
+      adding ((:|triple| user::|_Be-Attached-To4249| user::|object|
+               user::|_Tangible-Entity4137|)
+              (:|triple| user::|_Be-Attached-To4249| user::|object|
+               user::|_Procaryotic-Gene4199|)
+              (:|triple| user::|_Procaryotic-Gene4199| user::|abuts|
+               user::|_Tangible-Entity4137|)
+              (:|triple| user::|_Tangible-Entity4137| user::|abuts|
+               user::|_Procaryotic-Gene4199|)) becoming _situation4250
+
+
+  -----------------------------------------------------------
+  step: user::|_Take-Apart4243|
+  -----------------------------------------------------------
+   preconditions:((:|triple| user::|_Tangible-Entity4137| user::|instance-of|
+                   (user::|mustnt-be-a| user::|Entity| user::|with|
+                    (user::|plays|
+                     ((user::|a| user::|Instrument| user::|with|
+                       (user::|in-event| (user::|_Take-Apart4243|)))))
+                    (user::|object-of|
+                     ((user::|a| user::|Be-Broken| user::|with|
+                       (user::|object| (user::|_Tangible-Entity4137|)))))))) 
+
+
+ WARNING: 
+ (:|triple| user::|_Tangible-Entity4137| user::|instance-of|
+  (user::|mustnt-be-a| user::|Entity| user::|with|
+   (user::|plays|
+    ((user::|a| user::|Instrument| user::|with|
+      (user::|in-event| (user::|_Take-Apart4243|)))))
+   (user::|object-of|
+    ((user::|a| user::|Be-Broken| user::|with|
+      (user::|object| (user::|_Tangible-Entity4137|))))))) 
+  "The instance-of of the tangible-entity is mustnt-be-a entity with plays a instrument with in-event the take-apart object-of a be-broken with object the tangible-entity." 
+     is not explicitly true but consistent with the KB
+    => we will assume it is true and continue ..
+
+
+ ... EXECUTE _take-apart4243 in _situation4250...
+      deleting ((:|triple| user::|_Procaryotic-Gene4199| user::|has-part|
+                 user::|_DNA-Codon4251|))
+      adding ((:|triple| user::|_Be-Broken4253| user::|object|
+               user::|_Procaryotic-Gene4199|)) becoming _situation4255
+
+
+  -----------------------------------------------------------
+  step: user::|_Add4264|
+  -----------------------------------------------------------
+   preconditions:nil 
+
+
+ ... EXECUTE _add4264 in _situation4255...
+      deleting nil
+      adding ((:|triple| user::|_Ribonucleotide4268| user::|is-part-of|
+               user::|_RNA-Sequence4269|)) becoming _situation4272
+
+
+  -----------------------------------------------------------
+  step: user::|_Copy4256|
+  -----------------------------------------------------------
+   preconditions:((:|triple| user::|_Tangible-Entity4137| user::|instance-of|
+                   (user::|mustnt-be-a| user::|Entity| user::|with|
+                    (user::|plays|
+                     ((user::|a| user::|Instrument| user::|with|
+                       (user::|in-event| (user::|_Copy4256|)))))
+                    (user::|object-of|
+                     ((user::|a| user::|Be-Broken| user::|with|
+                       (user::|object| (user::|_Tangible-Entity4137|)))))))) 
+
+
+ WARNING: 
+ (:|triple| user::|_Tangible-Entity4137| user::|instance-of|
+  (user::|mustnt-be-a| user::|Entity| user::|with|
+   (user::|plays|
+    ((user::|a| user::|Instrument| user::|with|
+      (user::|in-event| (user::|_Copy4256|)))))
+   (user::|object-of|
+    ((user::|a| user::|Be-Broken| user::|with|
+      (user::|object| (user::|_Tangible-Entity4137|))))))) 
+  "The instance-of of the tangible-entity is mustnt-be-a entity with plays a instrument with in-event the copy object-of a be-broken with object the tangible-entity." 
+     is not explicitly true but consistent with the KB
+    => we will assume it is true and continue ..
+
+
+ ... EXECUTE _copy4256 in _situation4272...
+      deleting nil
+      adding ((:|triple| user::|_Copy4256| user::|result|
+               user::|_Tangible-Entity4274|)) becoming _situation4275
+
+
+  ************************************************
+          Summary of Paths Simulated
+  ************************************************
+
+  These are the simulated paths: 
+     (user::|_Attach4040| user::|_Take-Apart4243| user::|_Add4264|
+      user::|_Copy4256|)
+
+
+  ************************************************
+                check expected effects
+  ************************************************
+    we check each simulated path
+
+
+  ------------------------------------------------
+    The overall effects for path
+        (user::|_Attach4040| user::|_Take-Apart4243| user::|_Add4264|
+         user::|_Copy4256|)
+  ------------------------------------------------
+   added:   
+             (:|triple| user::|_Be-Attached-To4249| user::|object|
+              user::|_Tangible-Entity4137|)
+             (:|triple| user::|_Be-Attached-To4249| user::|object|
+              user::|_Procaryotic-Gene4199|)
+             (:|triple| user::|_Procaryotic-Gene4199| user::|abuts|
+              user::|_Tangible-Entity4137|)
+             (:|triple| user::|_Tangible-Entity4137| user::|abuts|
+              user::|_Procaryotic-Gene4199|)
+             (:|triple| user::|_Be-Broken4253| user::|object|
+              user::|_Procaryotic-Gene4199|)
+             (:|triple| user::|_Ribonucleotide4268| user::|is-part-of|
+              user::|_RNA-Sequence4269|)
+             (:|triple| user::|_Copy4256| user::|result|
+              user::|_Tangible-Entity4274|)
+
+   deleted: 
+             (:|triple| user::|_Procaryotic-Gene4199| user::|has-part|
+              user::|_DNA-Codon4251|)
+
+  .............................................
+ The expected effects for dna-transcription1 is not specified yet!
+
+
+  ************************************************
+          Summary of Loops Found
+  ************************************************
+       -->  NO LOOP FOUND! 
+
+ Test Output 
+(((source . user::|_Attach4040|) (success . t) (level . :error)
+  (type . :precondition)
+  (constraint
+   (:|triple| user::|_Procaryotic-Gene4199| user::|object-of|
+    (user::|mustnt-be-a| user::|Be-Touching| user::|with|
+     (user::|object|
+      ((user::|the| user::|object| user::|of| user::|_Attach4040|)))))
+   (:|triple| user::|_Tangible-Entity4137| user::|object-of|
+    (user::|mustnt-be-a| user::|Be-Touching| user::|with|
+     (user::|object|
+      ((user::|the| user::|base| user::|of| user::|_Attach4040|))))))
+  (id . |error-item-205|))
+ ((source . user::|_Attach4040|) (success . t) (level . :warning)
+  (type . :no-effect)
+  (constraint
+   ((:|triple| user::|_Be-Attached-To4249| user::|object|
+     user::|_Tangible-Entity4137|)
+    (:|triple| user::|_Be-Attached-To4249| user::|object|
+     user::|_Procaryotic-Gene4199|)
+    (:|triple| user::|_Procaryotic-Gene4199| user::|abuts|
+     user::|_Tangible-Entity4137|)
+    (:|triple| user::|_Tangible-Entity4137| user::|abuts|
+     user::|_Procaryotic-Gene4199|))
+   nil)
+  (id . |error-item-206|))
+ ((source . user::|_Take-Apart4243|) (success) (level . :warning)
+  (type . :inexplicit-precondition)
+  (constraint
+   (:|triple| user::|_Tangible-Entity4137| user::|instance-of|
+    (user::|mustnt-be-a| user::|Entity| user::|with|
+     (user::|plays|
+      ((user::|a| user::|Instrument| user::|with|
+        (user::|in-event| (user::|_Take-Apart4243|)))))
+     (user::|object-of|
+      ((user::|a| user::|Be-Broken| user::|with|
+        (user::|object| (user::|_Tangible-Entity4137|))))))))
+  (id . |error-item-207|))
+ ((source . user::|_Take-Apart4243|) (success . t) (level . :warning)
+  (type . :no-effect)
+  (constraint
+   ((:|triple| user::|_Be-Broken4253| user::|object|
+     user::|_Procaryotic-Gene4199|))
+   ((:|triple| user::|_Procaryotic-Gene4199| user::|has-part|
+     user::|_DNA-Codon4251|)))
+  (id . |error-item-208|))
+ ((source . user::|_Add4264|) (success . t) (level . :warning)
+  (type . :no-effect)
+  (constraint
+   ((:|triple| user::|_Ribonucleotide4268| user::|is-part-of|
+     user::|_RNA-Sequence4269|))
+   nil)
+  (id . |error-item-209|))
+ ((source . user::|_Copy4256|) (success) (level . :warning)
+  (type . :inexplicit-precondition)
+  (constraint
+   (:|triple| user::|_Tangible-Entity4137| user::|instance-of|
+    (user::|mustnt-be-a| user::|Entity| user::|with|
+     (user::|plays|
+      ((user::|a| user::|Instrument| user::|with|
+        (user::|in-event| (user::|_Copy4256|)))))
+     (user::|object-of|
+      ((user::|a| user::|Be-Broken| user::|with|
+        (user::|object| (user::|_Tangible-Entity4137|))))))))
+  (id . |error-item-210|))
+ ((source . user::|_Copy4256|) (success . t) (level . :warning)
+  (type . :no-effect)
+  (constraint
+   ((:|triple| user::|_Copy4256| user::|result| user::|_Tangible-Entity4274|))
+   nil)
+  (id . |error-item-211|))
+ ((source (user::|_Attach4040| before user::|_Take-Apart4243|)
+   (user::|_Take-Apart4243| before user::|_Copy4256|))
+  (success) (level . :warning) (type . :unnecessary-link)
+  (constraint . ordering) (id . |error-item-212|))
+ ((source . user::|DNA-Transcription1|) (success . t) (level . :warning)
+  (type . :loop) (constraint) (id . |error-item-214|))
+ ((source . user::|DNA-Transcription1|)
+  (content
+   (user::|_Attach4040| user::|_Take-Apart4243| user::|_Add4264|
+    user::|_Copy4256|))
+  (type . :simulated-paths) (id . |info-item-213|)))
+====================================
+ Error Items and Their Fixes
+====================================
+
+((source . user::|_Take-Apart4243|) (success) (level . :warning)
+ (type . :inexplicit-precondition)
+ (constraint
+  (:|triple| user::|_Tangible-Entity4137| user::|instance-of|
+   (user::|mustnt-be-a| user::|Entity| user::|with|
+    (user::|plays|
+     ((user::|a| user::|Instrument| user::|with|
+       (user::|in-event| (user::|_Take-Apart4243|)))))
+    (user::|object-of|
+     ((user::|a| user::|Be-Broken| user::|with|
+       (user::|object| (user::|_Tangible-Entity4137|))))))))
+ (id . |error-item-207|)) 
+
+
+ --------------------
+ "2001/6/25  17:31:5" -- Getting fixes for |error-item-207|
+
+ ..............................................................
+   checking how to change user::|instance-of| value of user::|_Tangible-Entity4137| .. 
+ ..............................................................
+
+     .. checking if there are missing steps .. 
+       -> no step addition applicable
+
+     .. checking if steps can be modified .. 
+       -> no step modification applicable
+
+     .. checking if ordering changes may fix the problem .. 
+       -> no ordering change applicable
+
+
+ ..............................................................
+   checking if there are unnecessary steps .. 
+ ..............................................................
+
+ proposed fix :  delete or modify user::|_Take-Apart4243|
+
+ FIX ITEMS 
+(((type . :delete-or-modify-step)
+  (fix delete-or-modify user::|_Take-Apart4243|)))
+==> fixes (((type . :delete-or-modify-step)
+            (fix delete-or-modify user::|_Take-Apart4243|))) 
+
+((source . user::|_Copy4256|) (success) (level . :warning)
+ (type . :inexplicit-precondition)
+ (constraint
+  (:|triple| user::|_Tangible-Entity4137| user::|instance-of|
+   (user::|mustnt-be-a| user::|Entity| user::|with|
+    (user::|plays|
+     ((user::|a| user::|Instrument| user::|with|
+       (user::|in-event| (user::|_Copy4256|)))))
+    (user::|object-of|
+     ((user::|a| user::|Be-Broken| user::|with|
+       (user::|object| (user::|_Tangible-Entity4137|))))))))
+ (id . |error-item-210|)) 
+
+
+ --------------------
+ "2001/6/25  17:31:12" -- Getting fixes for |error-item-210|
+
+ ..............................................................
+   checking how to change user::|instance-of| value of user::|_Tangible-Entity4137| .. 
+ ..............................................................
+
+     .. checking if there are missing steps .. 
+       -> no step addition applicable
+
+     .. checking if steps can be modified .. 
+       -> no step modification applicable
+
+     .. checking if ordering changes may fix the problem .. 
+       -> no ordering change applicable
+
+
+ ..............................................................
+   checking if there are unnecessary steps .. 
+ ..............................................................
+
+ proposed fix :  delete or modify user::|_Copy4256|
+
+ FIX ITEMS 
+(((type . :delete-or-modify-step) (fix delete-or-modify user::|_Copy4256|)))
+==> fixes (((type . :delete-or-modify-step)
+            (fix delete-or-modify user::|_Copy4256|))) 
+
+((source (user::|_Attach4040| before user::|_Take-Apart4243|)
+  (user::|_Take-Apart4243| before user::|_Copy4256|))
+ (success) (level . :warning) (type . :unnecessary-link)
+ (constraint . ordering) (id . |error-item-212|)) 
+
+
+ --------------------
+ "2001/6/25  17:31:13" -- Getting fixes for |error-item-212|
+
+ FIX ITEMS 
+(((type . :delete-or-modify-link)
+  (fix delete-or-modify ordering constraints in
+   ((user::|_Attach4040| before user::|_Take-Apart4243|)
+    (user::|_Take-Apart4243| before user::|_Copy4256|)))))
+==> fixes (((type . :delete-or-modify-link)
+            (fix delete-or-modify ordering constraints in
+             ((user::|_Attach4040| before user::|_Take-Apart4243|)
+              (user::|_Take-Apart4243| before user::|_Copy4256|))))) 
+
+
+======================
+ Info Items
+======================
+(((source . user::|DNA-Transcription1|)
+  (content
+   (user::|_Attach4040| user::|_Take-Apart4243| user::|_Add4264|
+    user::|_Copy4256|))
+  (type . :simulated-paths) (id . |info-item-213|))) 

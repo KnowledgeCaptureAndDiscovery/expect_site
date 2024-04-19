@@ -1,0 +1,124 @@
+<!-- <?xml version='1.0'?> -->
+
+<!--
+
+IF YOU CAN READ THIS, YOUR BROWSER DOESN'T SUPPORT XML.
+
+PLEASE UPDATE YOUR BROWSER, OR VIEW THE HTML VERSION OF THIS PAGE.
+
+-->
+<!--
+When the schema works, reference it like this; change the project tag below to this
+<project xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation = "isd-personnel.xsd">
+-->
+<project>
+  <name>English method editor</name>
+  <title>Editing problem-solving knowledge using a structured English paraphrase, navigation and expression composition</title>
+
+  <status>
+   Work on the English method editor began in 1998 and is ongoing. The
+   editor is implemented in Java and integrated with the main Expect
+   interface. It was used in experiments conducted at Fort Leavenworth
+   in 1998 under HPKB and in several subsequent experiments. The
+   current focus is on the expression composer, which suggests
+   alternatives to sentence fragments based on search terms.
+  </status>
+
+  <description>
+    <short>
+      The English editor allows the user to examine and modify
+      problem-solving knowledge through an automatically-generated
+      English paraphrase of that knowledge. When users select parts of
+      the paraphrase to modify, the editor suggests replacements, also
+      paraphrased. The editor can also compose expressions based on
+      search terms from the user.
+    </short>
+
+    <long>
+     <p />Users often face a barrier in specifying problem-solving
+     knowledge for use in an intelligent system because they are not
+     familiar with available constructs in the language used by the
+     system for problem-solving knowledge, or with the syntax of that
+     language. The English method editor provides an interface for
+     users to examine and modify problem-solving knowledge through an
+     English paraphrase that is automatically generated from the
+     executable specification of the knowledge in Expect. The English
+     text has a structure that corresponds to the structure of the
+     problem-solving knowledge, so that users can select parts of the
+     paraphrase that correspond to sub-expressions in the
+     specification. When a sub-expression is selected, the editor
+     generates alternative expressions that the sub-expression could
+     be changed to, and presents them to the user in English
+     paraphrase. In this way the editor helps a user with both the
+     available constructs and the syntax in the underlying
+     language.
+    </long>
+  </description>
+
+  <research>
+    <short>
+     problem-solving knowledge, knowledge acquisition, 
+     intelligent user interfaces
+    </short>
+    <long>
+     <p /> For more details on an older version of the paraphrase and
+     alternatives generators used in the English method editor, see <a
+     href="http://www.isi.edu/expect/link/publications.html#Blythe-Ramachandran-KAW99">
+     Blythe and Ramachandran KAW-99</a>.
+
+     <p />The editor includes an Expression Composer that
+     generates compound syntactic expressions based on search terms
+     and provides them as suggestions for the user. This is designed
+     to help users begin with imprecise terms and choose from
+     alternatives to find an appropriate yet precise and syntactically
+     correct term. For examples and more details see <a
+     href="http://www.isi.edu/expect/rkf/expression-composer.ppt">these
+     slides</a>.
+
+     <p />The editor makes use of other components of Expect's
+     integrated UI to allow users to modify knowledge about instances,
+     concepts and relations in concert with modifying problem-solving
+     knowledge. At the same time the editor is able to help the user
+     more by having the larger context of the integrated UI. See <a
+     href="http://www.isi.edu/expect/link/publications.html#Blythe-Ramachandran-KAW99">
+     Blythe et al. IUI 01</a> and <a
+     href="http://www.isi.edu/expect/link/publications.html#Blythe-Ramachandran-KAW99">
+     Blythe IJCAI 01</a> for more information about this synergy.
+    </long>
+  </research>
+
+  <link>
+   <a href="http://www.isi.edu/expect">You can add hyperlinks here</a>
+  </link>
+
+  <link>
+  <b>You can organize them in categories</b>
+  <ul>
+  <li><a href="http://www.isi.edu">One link here</a></li>
+  <li><a href="http://www.isi.edu">Another link here</a></li>
+  <li><a href="http://www.isi.edu">Yet another link here</a></li>
+  </ul>
+  </link>
+
+  <link>
+   <a href="http://www.isi.edu/expect">You can add as many links as you want</a>
+  </link>
+
+<!-- Demo -->
+<demo>
+
+<P />
+Screenshots
+<P />
+
+<img src="pittsburgh.gif"/>
+
+     <center>
+<P />More coming soon<P />
+	  <img src="tn_comingsoon.jpg"/>
+	  </center>
+
+
+</demo>
+</project>

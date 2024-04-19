@@ -1,0 +1,135 @@
+<HTML>
+<HEAD>
+   <TITLE>Knowledge Analysis on Process Models</TITLE>
+
+ 
+
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+
+<TABLE  align=center WIDTH=730 border=0>
+<TR><TD colspan=3>
+
+<P ALIGN=CENTER>
+
+
+
+<TR><TD WIDTH=100></TD>
+
+<TD WIDTH=550>
+
+<BR><BR>
+
+<P align=center><B><FONT FACE=ARIAL COLOR=blue SIZE=+1>Knowledge Analysis on Process Models</A> </FONT></B></P>
+
+
+<PRE>
+       Jihie Kim (jihie@isi.edu, (310)448-8769) 
+       Yolanda Gil (gil@isi.edu, (310)448-8794) 
+       
+</PRE>
+
+<HR> 
+
+<p>
+Helping end users build and check process models is a challenge for many
+science and engineering fields.  Many AI researchers have investigated useful
+ways of verifying and validating knowledge bases for ontologies and rules, but
+it is not easy to directly apply them to checking process models.  Other
+techniques developed for checking and refining planning knowledge tend to
+focus on automated plan generation rather than helping users author process
+information.  In this paper, we propose a complementary approach which helps
+users author and check process models.  Our system, called <A HREF="KANAL-description.txt">KANAL</A> (Knowledge
+ANALysis), relates pieces of information in process models among themselves
+and to the existing KB, analyzing how different pieces of input are put
+together to achieve some effect.  It builds interdependency models from this
+analysis and uses them to find errors and propose fixes.  
+(<A
+HREF="http://www.isi.edu/expect/projects/rkf/KANAL/kanal-ijcai01.pdf">Kim and Gil, IJCAI-01</A>)
+
+<p>
+KANAL builds upon previous work on <A
+HREF="http://www.isi.edu/expect/">EXPECT</A> using Interdependency Models (<A
+HREF="http://www.isi.edu/expect/link/publications.html#Kim-Gil-AAAI-99">Kim and Gil
+AAAI-99</A>, <A
+HREF="http://www.isi.edu/expect/link/publications.html#Kim-Gil-AAAI-2000">Kim and Gil
+AAAI-2000</A>).  The work on EXPECT analyzed problem-solving interdependencies,
+which model how different pieces of problem solving (procedural) knowledge
+relate to each other and to the class definitions in domain ontologies.  Our
+initial work concentrates on <i>process models</i>, i.e., knowledge
+describing activities and subprocesses as well as their relationships.
+
+<p>
+Currently, KANAL's checks are done on the simulated execution of the process
+model.  Using skolem instances, we can check general scenarios of the
+animation of a process. The result of each animation are used as a model of
+interdependencies among the sub-steps of the process model.  KANAL performs a
+variety of verification checks to process models, including <i>unachieved
+conditions of steps</i> in a process model, <i>expected and unexpected
+effects, potential loops</i>, and <i>disjunctive model branches</i>.  KANAL
+will also help users with validation checks of <i> redundancies</i>, and
+<i>resource use</i> within a process model.
+
+
+<HR> 
+<B><I><FONT SIZE=+1>Knowledge Analysis</B></FONT></I>
+<p>
+<ul><li> <A
+HREF="http://www.isi.edu/expect/projects/rkf/KANAL/kanal-ijcai01.pdf">KANAL
+paper</A>, <i>Knowledge Analysis on Process Models</i>, Kim and Gil, IJCAI-01. <p>
+<li> <A HREF="KANAL-description.txt">KANAL initial design</A>: Knowledge ANALysis using
+interdependency models.
+(Updated 9/12/00)<p>
+<li> <A HREF="api.txt">KANAL API</A>
+<p>
+</ul>
+
+<HR> 
+
+<B><I><FONT SIZE=+1>Knowledge Analysis in <A
+HREF="http://reliant.teknowledge.com/RKF/">Rapid Knowledge Formation(RKF)</A></B></FONT></I>
+<ul>
+The role of Knowledge Analysis within the architecture of the
+RKF SRI team is to guard the Knowledge Server (KS) against possibly
+invalid statements entered by the user and to point out to the
+Interaction Manager (IM) what additional knowledge needs to be acquired.
+Its main functions are: 
+<p> - relating different knowledge inputs among themselves and to the existing KB
+<p> - detecting inconsistencies and knowledge gaps
+<P>
+
+<li> <A HREF="kanal-10-01.ppt">KANAL presentation (Oct 01)</A>
+ (powerpoint slides)</A><p>
+
+<li> <A HREF="senario-from-sme.htm">KANAL demo</A>
+ <A HREF="senario-from-sme.ppt">(powerpoint slides)</A><p>
+
+<li> <A HREF="KANAL-documentation-7-18-00.htm">What kinds of checks are
+performed and what kinds of fixes are proposed (in SHAKEN)</A> (Updated 7/18/01)<p>
+<p>
+
+<li> <A HREF="http://www.isi.edu/expect/projects/rkf/"> more details </A>
+<p>
+
+
+
+</ul>
+
+
+<p>For more information, send mail to <A
+HREF=mailto:jihie@isi.edu>jihie@isi.edu</A>.</P>
+
+<HR>
+<p> <A HREF="http://www.isi.edu/expect/"> EXPECT Homepage</A>.</P>
+
+<HR SIZE=2>
+
+
+
+<TD WIDTH=100></TD>
+
+</TR>
+
+</TABLE>
+</BODY>
+</HTML>

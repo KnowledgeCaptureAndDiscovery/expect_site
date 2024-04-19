@@ -1,0 +1,262 @@
+select: add new button
+   at Wed Jun 23 13:37:42 PDT 1999
+
+select: copy and create button
+   at Wed Jun 23 13:41:03 PDT 1999
+
+select: modify button
+   at Wed Jun 23 13:42:39 PDT 1999
+
+ done editing:((name find-length-of-minefield)
+ (capability (find
+                (obj (?l is (spec-of length)))
+                (of (?s is (inst-of minefield)))
+                ))
+ (result-type (inst-of number))
+ (method ( length-of ?f))
+)
+   at Wed Jun 23 13:43:32 PDT 1999
+
+modified method:((name find-length-of-minefield)
+ (capability (find
+                (obj (?l is (spec-of length)))
+                (of (?s is (inst-of minefield)))
+                ))
+ (result-type (inst-of number))
+ (method ( length-of ?f))
+)
+   at Wed Jun 23 13:43:32 PDT 1999
+
+check: All Agenda
+   at Wed Jun 23 13:43:32 PDT 1999
+
+check: Method Sub-Method Relation
+   at Wed Jun 23 13:43:32 PDT 1999
+
+select: show error button
+   at Wed Jun 23 13:44:31 PDT 1999
+
+checked error:((name estimate-time-to-tank-plow-minefield)
+ (capability (estimate
+                (obj (?t is (spec-of time)))
+                (for (?s is (inst-of tank-plow-minefield)))
+                ))
+ (result-type (inst-of number))
+ (method (multiply
+            (obj (find
+                    (obj (spec-of length))
+                    (of ( minefield-of ?s))
+                    ))
+              (by 25/3)
+              ))
+)
+   at Wed Jun 23 13:44:31 PDT 1999
+
+select: show error button
+   at Wed Jun 23 13:44:36 PDT 1999
+
+checked error:((name find-length-of-minefield)
+ (capability (find
+                (obj (?l is (spec-of length)))
+                (of (?s is (inst-of minefield)))
+                ))
+ (result-type (inst-of number))
+ (method ( length-of ?f))
+)
+   at Wed Jun 23 13:44:36 PDT 1999
+
+check: Search Methods
+   at Wed Jun 23 13:47:10 PDT 1999
+
+check: Method Sub-Method Relation
+   at Wed Jun 23 13:47:19 PDT 1999
+
+check: Method Capability Hierarchy
+   at Wed Jun 23 13:47:23 PDT 1999
+
+check: Describe PS Tree
+   at Wed Jun 23 13:47:26 PDT 1999
+
+check: Method Capability Hierarchy
+   at Wed Jun 23 13:47:45 PDT 1999
+
+check: Method Sub-Method Relation
+   at Wed Jun 23 13:54:03 PDT 1999
+
+check: Undefined Capabilities
+   at Wed Jun 23 14:09:26 PDT 1999
+
+create method for goal from undefined capabilities
+   at Wed Jun 23 14:17:25 PDT 1999
+
+undefined goal:
+Reformulated Goal:
+(estimate (obj (spec-of time)) (for (inst-of emplace-avlb)))  
+Expected Result:UNDEFINED
+Capability:(capability (estimate (obj (?v2014 is (spec-of time))) (for (?v2015 is (inst-of emplace-avlb)))))  
+   at Wed Jun 23 14:17:25 PDT 1999
+
+check: Search Methods
+   at Wed Jun 23 14:22:14 PDT 1999
+
+select: modify button
+   at Wed Jun 23 14:24:31 PDT 1999
+
+check: Method Capability Hierarchy
+   at Wed Jun 23 14:26:04 PDT 1999
+
+check: Search Methods
+   at Wed Jun 23 14:26:45 PDT 1999
+
+check: Undefined Capabilities
+   at Wed Jun 23 14:27:02 PDT 1999
+
+create method for goal from undefined capabilities
+   at Wed Jun 23 14:27:15 PDT 1999
+
+undefined goal:
+Reformulated Goal:
+(estimate (obj (spec-of time)) (for (inst-of emplace-avlb)))  
+Expected Result:UNDEFINED
+Capability:(capability (estimate (obj (?v2014 is (spec-of time))) (for (?v2015 is (inst-of emplace-avlb)))))  
+   at Wed Jun 23 14:27:15 PDT 1999
+
+check: Describe PS Tree
+   at Wed Jun 23 14:28:18 PDT 1999
+
+ select: get ps tree short
+   at Wed Jun 23 14:28:37 PDT 1999
+
+ [ps-en1]   (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-PLAN)))
+
+   at Wed Jun 23 14:28:37 PDT 1999
+
+ select: get ps tree pretty
+   at Wed Jun 23 14:28:40 PDT 1999
+
+ Node ps-en1: (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-PLAN)))
+Node ps-en1 result: NIL
+   Node ps-en3: (ADD (OBJ (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (WORKAROUND-OF (INST-OF WORKAROUND-PLAN))))))
+   Node ps-en3 expands to: NIL
+   Node ps-en3 result: NIL
+    Node ps-en4: (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (WORKAROUND-OF (INST-OF WORKAROUND-PLAN))))
+    Node ps-en4 expands to: (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF WORKAROUND-STEP))))
+    Node ps-en4 result: NIL
+     Node ps-en5: retrieve (WORKAROUND-OF (INST-OF WORKAROUND-PLAN))
+     Node ps-en5 result: (SET-OF (INST-OF WORKAROUND-STEP))
+     Node ps-en9: (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-STEP)))
+     Node ps-en9 result: NIL
+      Node ps-en13: (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+      Node ps-en13 result: NIL
+      Node ps-en14: (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF TANK-PLOW-MINEFIELD)))
+      Node ps-en14 result: NIL
+       Node ps-en20: (MULTIPLY (OBJ (FIND (OBJ (SPEC-OF LENGTH)) (OF (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))))) (BY 25/3))
+       Node ps-en20 expands to: (MULTIPLY (OBJ NIL) (BY 25/3))
+       Node ps-en20 result: NIL
+        Node ps-en21: (FIND (OBJ (SPEC-OF LENGTH)) (OF (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))))
+        Node ps-en21 expands to: (FIND (OBJ (SPEC-OF LENGTH)) (OF (INST-OF MINEFIELD)))
+        Node ps-en21 result: NIL
+         Node ps-en22: retrieve (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))
+         Node ps-en22 result: (INST-OF MINEFIELD)
+         Node ps-en25: (LENGTH-OF ?F)
+         Node ps-en25 expands to: (LENGTH-OF NIL)
+         Node ps-en25 result: NIL
+      Node ps-en13: (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+      Node ps-en13 result: NIL
+      Node ps-en14: (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF TANK-PLOW-MINEFIELD)))
+      Node ps-en14 result: NIL
+       Node ps-en20: (MULTIPLY (OBJ (FIND (OBJ (SPEC-OF LENGTH)) (OF (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))))) (BY 25/3))
+       Node ps-en20 expands to: (MULTIPLY (OBJ NIL) (BY 25/3))
+       Node ps-en20 result: NIL
+        Node ps-en21: (FIND (OBJ (SPEC-OF LENGTH)) (OF (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))))
+        Node ps-en21 expands to: (FIND (OBJ (SPEC-OF LENGTH)) (OF (INST-OF MINEFIELD)))
+        Node ps-en21 result: NIL
+         Node ps-en22: retrieve (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))
+         Node ps-en22 result: (INST-OF MINEFIELD)
+         Node ps-en25: (LENGTH-OF ?F)
+         Node ps-en25 expands to: (LENGTH-OF NIL)
+         Node ps-en25 result: NIL
+     Node ps-en31: (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF EMPLACE-AVLB))))
+     Node ps-en31 result: NIL
+      Node ps-en13: (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+      Node ps-en13 result: NIL
+     Node ps-en32: (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF TANK-PLOW-MINEFIELD))))
+     Node ps-en32 result: NIL
+      Node ps-en14: (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF TANK-PLOW-MINEFIELD)))
+      Node ps-en14 result: NIL
+       Node ps-en20: (MULTIPLY (OBJ (FIND (OBJ (SPEC-OF LENGTH)) (OF (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))))) (BY 25/3))
+       Node ps-en20 expands to: (MULTIPLY (OBJ NIL) (BY 25/3))
+       Node ps-en20 result: NIL
+        Node ps-en21: (FIND (OBJ (SPEC-OF LENGTH)) (OF (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))))
+        Node ps-en21 expands to: (FIND (OBJ (SPEC-OF LENGTH)) (OF (INST-OF MINEFIELD)))
+        Node ps-en21 result: NIL
+         Node ps-en22: retrieve (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))
+         Node ps-en22 result: (INST-OF MINEFIELD)
+         Node ps-en25: (LENGTH-OF ?F)
+         Node ps-en25 expands to: (LENGTH-OF NIL)
+         Node ps-en25 result: NIL
+     Node ps-en31: (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF EMPLACE-AVLB))))
+     Node ps-en31 result: NIL
+      Node ps-en13: (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF EMPLACE-AVLB)))
+      Node ps-en13 result: NIL
+     Node ps-en32: (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (SET-OF (INST-OF TANK-PLOW-MINEFIELD))))
+     Node ps-en32 result: NIL
+      Node ps-en14: (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF TANK-PLOW-MINEFIELD)))
+      Node ps-en14 result: NIL
+       Node ps-en20: (MULTIPLY (OBJ (FIND (OBJ (SPEC-OF LENGTH)) (OF (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))))) (BY 25/3))
+       Node ps-en20 expands to: (MULTIPLY (OBJ NIL) (BY 25/3))
+       Node ps-en20 result: NIL
+        Node ps-en21: (FIND (OBJ (SPEC-OF LENGTH)) (OF (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))))
+        Node ps-en21 expands to: (FIND (OBJ (SPEC-OF LENGTH)) (OF (INST-OF MINEFIELD)))
+        Node ps-en21 result: NIL
+         Node ps-en22: retrieve (MINEFIELD-OF (INST-OF TANK-PLOW-MINEFIELD))
+         Node ps-en22 result: (INST-OF MINEFIELD)
+         Node ps-en25: (LENGTH-OF ?F)
+         Node ps-en25 expands to: (LENGTH-OF NIL)
+         Node ps-en25 result: NIL
+
+   at Wed Jun 23 14:28:41 PDT 1999
+
+ select: get ps tree success
+   at Wed Jun 23 14:28:50 PDT 1999
+
+ [ps-en1] > (ESTIMATE (OBJ (SPEC-OF TIME)) (FOR (INST-OF WORKAROUND-PLAN)))
+[ps-en1] < NIL
+
+   at Wed Jun 23 14:28:51 PDT 1999
+
+check: Method Sub-Method Relation
+   at Wed Jun 23 14:29:27 PDT 1999
+
+check: All Agenda
+   at Wed Jun 23 14:37:15 PDT 1999
+
+select: modify button
+   at Wed Jun 23 14:38:18 PDT 1999
+
+ done editing:((name find-length-of-minefield)
+ (capability (find
+                (obj (?l is (spec-of length)))
+                (of (?f is (inst-of minefield)))
+                ))
+ (result-type (inst-of number))
+ (method ( length-of ?f))
+)
+   at Wed Jun 23 14:38:30 PDT 1999
+
+modified method:((name find-length-of-minefield)
+ (capability (find
+                (obj (?l is (spec-of length)))
+                (of (?f is (inst-of minefield)))
+                ))
+ (result-type (inst-of number))
+ (method ( length-of ?f))
+)
+   at Wed Jun 23 14:38:30 PDT 1999
+
+check: All Agenda
+   at Wed Jun 23 14:38:30 PDT 1999
+
+check: Method Sub-Method Relation
+   at Wed Jun 23 14:38:30 PDT 1999
+

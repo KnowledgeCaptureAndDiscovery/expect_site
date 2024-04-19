@@ -1,0 +1,66 @@
+;;; -*- Mode: Lisp; Package: BATTLE-SPACE; Syntax: COMMON-LISP; Base: 10 -*-
+
+(in-package "BATTLE-SPACE")
+
+
+;; Relations:
+
+(defrelation height-of-object
+  :arity 2
+  :domain Partially-Tangible
+  :range loom::Distance-Quantity
+  :characteristics :single-valued
+  :annotations
+  (Physical-Amount-Slot
+   (output-unit "m")
+   (documentation
+    "(#$heightOfObject OBJ HEIGHT) means that the #$Distance from OBJ's top
+boundary to its bottom boundary is HEIGHT.  Note that top and bottom are
+determined by an object's default orientation, if it has one (as do, e.g.,
+people, houses, cars, trees); otherwise, by the orientation of the object in
+its environment.")))
+
+(defrelation length-of-object
+  :arity 2
+  :is-primitive
+  (:and |(meaning-in-system-fn sensus--information-1997 SIZE-PROPERTY-ASCRIPTION)|
+        |(meaning-in-system-fn sensus--information-1997 LINEAR-SIZE)|)
+  :domain Spatial-Thing
+  :range loom::Distance-Quantity
+  :characteristics :single-valued
+  :annotations
+  (Physical-Amount-Slot
+   (output-unit "m")
+   (documentation
+    "(#$lengthOfObject OBJ LEN) means that the tangible object OBJ has a
+length LEN.  Which dimension counts as length depends upon the object's
+orientation (which may be intrinsic or determined relative to its
+environment).")))
+
+(defrelation mass-of-object
+  :arity 2
+  :domain Partially-Tangible
+  :range loom::Mass-Quantity
+  :characteristics :single-valued
+  :annotations
+  (Physical-Amount-Slot
+   (output-unit "kg")
+   Physical-Attribute-Description-Slot
+   (documentation
+    "(#$massOfObject OBJ MASS) means that the tangible object OBJ has
+#$Mass MASS.")))
+
+(defrelation width-of-object
+  :arity 2
+  :domain Spatial-Thing
+  :range loom::Distance-Quantity
+  :characteristics :single-valued
+  :annotations
+  (Physical-Amount-Slot
+   (output-unit "m")
+   (documentation
+    "(#$widthOfObject OBJ WIDTH) means that the #$Distance across OBJ from one
+side boundary to the opposite side boundary is WIDTH.  Side boundaries are
+roughly perpendicular to the top and bottom of the object.  Note that some
+objects have an intrinsic default orientation (i.e., a top and bottom); for
+others, orientation is determined only in relation to the environment.")))

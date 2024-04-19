@@ -1,0 +1,76 @@
+<html><title>Knowledge analysis</title><body bgcolor="#ffffff"><h1>Knowledge Analysis for rna-direction</h1> <p>Analysis performed at 2001/7/10  11:6:44</p><hr><ul>
+<h1>Test Knowledge</h1><hr><ul><br>
+<font color="green">SHAKEN simulates your process model and checks several things:<p>
+<li>Check what happens before and after each step (the conditions and effects
+of each step) by running a simulation
+<br>e.g.: before executing Attach, check if virus is located near the cell
+<br>   after Breach the plasma membrane of the cell is broken
+<li>Check that all the overall <b>expected effects</b> (specified by you) are obtained
+<br>e.g.: after virus-invade-cell, viral-nucleic-acid is located in the
+cytoplasm
+<li>Check correctness of <b>assumptions</b> (especially initial conditions)
+<br>e.g., no location was specified for the virus, I'll assume it is next to the
+cell
+<li>Check combinations of substeps (execution paths) that are possible
+<li>Check steps that are never reached during simulation
+<li>Check how each step enables other steps to take place
+<li>Check if there are loops
+
+<hr>
+
+For each of these checks, SHAKEN will report
+<li>checks and assumptions that seemed ok
+<li>errors,i.e., serious problems that you should fix.</font>
+ <font color="red"> Errors are shown in <b>Red</b></font><font color="green">.
+<li>warnings/notes, i., e., things it wants you to take a look at so you decide
+for yourself whether there is a problem or not). </font><font color="orange">Warnings and notes are
+shown in <b>Orange</b></font><font color="green">.
+<p>
+For each error or warning, you can ask SHAKEN to show you a list of
+suggestions for how to fix them.  You can pick one of these suggested fixes,
+or you can decide to fix the problem in a different way.  SHAKEN will take
+you to the knowledge editor window in either case.</font><hr>
+<br><font color="#ff9933">WARNING (missing first subevent)<br>
+  the first event of user::|_RNA-Direction9380| isn't defined<br>
+  the system cannot execute these subevents: (user::|_Attach9381|)</font>
+<br> ==> please see the bottom of this page for suggestions<br>
+<br><font color="red">cannot progress
+   [steps (_rna-direction9380) were undoable this iteration...]</font><br> ==> please see the bottom of this page for suggestions<br>
+
+</ul>
+<br> There was no simulation path<br><br> ==> please see the bottom of this page for suggestions<br>
+<hr><h2>Check expected effects</h2>
+<p>We check each simulated path</p>
+<ul>
+
+</ul>
+<hr><h2>Error items and their fixes</h2>
+<ul>
+
+<br><br><li>ERROR: the first event of (user::|_RNA-Direction9380|
+                                       (user::|_Attach9381|)) isn't defined<br>
+<br>Fix details: <ul><li>((type . :add-first-event)
+                          (fix add first-subevent constraint for
+                           user::|_RNA-Direction9380|))</li>
+</ul>
+
+<br><br><li>ERROR: Steps (user::|_RNA-Direction9380|) were undoable<br>
+<br>Fix details: <ul><li>((type . :change-or-add-link-between-steps)
+                          (fix
+                           change-or-add-link-between-steps-for-undoable-event
+                           (user::|_RNA-Direction9380|)))</li>
+</ul>
+
+<br><br><li>NOTE: These steps (user::|_Attach9381|) were not reached in simulating the path no-simulation-path-exist <br> <br>Fix details: <ul><li>((type
+                                                                                                                                                     . :change-or-add-link-between-steps)
+                                                                                                                                                    (fix
+                                                                                                                                                     change-or-add-link-between-steps-for-unreached-events
+                                                                                                                                                     (user::|_Attach9381|)))</li>
+</ul>
+
+</ul>
+<h2>Info items</h2>
+<ul>
+</ul>
+
+</body></html>

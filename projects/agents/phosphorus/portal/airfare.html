@@ -1,0 +1,272 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=Content-Type content="text/html; charset=windows-1252">
+<title>Agent Requestor</title>
+</HEAD>
+
+<BODY bgColor=white>
+<SCRIPT>
+
+function y2k(number) { return (number < 1000) ? number + 1900 : number; }
+
+var reason = '';
+
+function isValidDate (myDate,sep) {
+// checks if date passed is in valid dd/mm/yyyy format
+
+    if (myDate.length == 10) {
+        if (myDate.substring(2,3) == sep && myDate.substring(5,6) == sep) {
+            var month  = myDate.substring(0,2);
+            var date = myDate.substring(3,5);
+            var year  = myDate.substring(6,10);
+
+            var test = new Date(year,month-1,date);
+
+            if (year == y2k(test.getYear()) && (month-1 == test.getMonth()) && (date == test.getDate())) {
+                reason = '';
+                return true;
+            }
+            else {
+                reason = 'valid format but an invalid date';
+                return false;
+            }
+        }
+        else {
+            reason = 'invalid spearators';
+            return false;
+        }
+    }
+    else {
+        reason = 'invalid length';
+        return false;
+    }
+}
+
+function checkDate(myDate) {
+    //if (isValidDate(myDate,'/'))
+	return 1;    
+    //else
+     //   return 0;
+	
+}
+
+function chkconstraints(param,constraint)
+{
+
+alert("here"); 
+switch(constraint)
+ {
+  case "string":
+		alert("Must be a string");
+  		break;
+  case "number":
+		alert("Must be a number");
+		break;
+ }
+
+
+
+}
+
+
+
+function validate()
+{
+
+var flag = 0
+alert("hi")
+for(var i=0;i<name.length;i++)
+{
+
+chkconstraints(name.item(i).text,type_ctr.item(i).text);
+
+}
+
+/*
+if(!checkDate(document.AgentForm.date.value))
+{ 
+	alert(document.AgentForm.date.name+" Must be a valid date mm/dd/yyyy");
+	flag = 1
+}
+if(document.AgentForm.airline.value == "")
+{ 
+	alert(document.AgentForm.airline.name+" Must be a string");
+	flag = 1
+}
+	
+if(document.AgentForm.airport.value == "")
+{ 
+	alert(document.AgentForm.airport.name+" Must be a string");
+	flag = 1
+}
+
+if(isNaN(document.AgentForm.flight_number.value))
+{ 
+	alert(document.AgentForm.flight_number.name+" Must be a number");
+	flag = 1
+}
+
+if(flag == 1)
+ return false
+else
+ {
+	//alert("CHECKED");
+	 
+	return true;
+}
+*/	
+
+}
+
+function getUserInfo()
+{
+	alert("hi");
+	return false
+}
+var params = new Array(30)
+var concepts = new Array(30)
+var response="";
+function getResponse()
+{
+   //mywin = window.open("","mywin");
+	//var doc = document;
+	//var chk = validate()
+	//if(chk == true)
+	//{
+	var xmlDoc = new ActiveXObject("Microsoft.XMLDOM")
+	xmlDoc.async="false"
+	xmlDoc.load("groups/elves/airfare/capabilities.xml")
+ 
+	
+        
+        //alert(document.AgentForm.airline.value);
+	for(var i=1;i<params.length;i++)
+	{
+        var it = concepts.item(i).text.replace(/-/g,"_");
+        var str= "document.AgentForm."+it+".value";
+        
+        txt=eval(str);
+        
+	
+	//xmlDoc.documentElement.appendChild(newnode);
+	var itemarray = xmlDoc.getElementsByTagName("MethodGoalArgument");
+        //for(var i=0; i<itemarray.length; i++) {
+            
+            var newnode=xmlDoc.createElement("InstanceName")
+            var newtext=xmlDoc.createTextNode(txt);
+	    newnode.appendChild(newtext);
+            xmlDoc.getElementsByTagName("MethodGoalArgument").item(i).appendChild(newnode);
+        //}
+	
+	}
+	//doc.open();
+	//doc.write("After using the interface we generate the request using EXPECT grammer")
+	//doc.write("<xmp>"+xmlDoc.xml+"</xmp>");
+	//doc.close();
+	instances = xmlDoc.getElementsByTagName("InstanceName")
+	var xmlDoc1 = new ActiveXObject("Microsoft.XMLDOM")
+	xmlDoc1.async="false"
+	xmlDoc1.load("groups/elves/airfare/tag-mapping.xml")
+	prname = xmlDoc1.getElementsByTagName("ParameterName")
+	trans = xmlDoc1.getElementsByTagName("TransName")
+	response="";
+	
+	for(i=0;i<instances.length;i++)
+	{
+		//alert(trans.item(i).text+instances.item(i).text);
+		response = response+"<"+trans.item(i).text+">"+instances.item(i).text+"</"+trans.item(i).text+">"
+	}
+	//alert("Translated response is as follows")
+	//alert(response);
+	return true;
+
+	//} else return false;
+}
+
+function sendReq() {
+         var emailid = opener.getCookie("email");
+	 if(getResponse()) {
+	    var str = "<font face='Arial' size=-1><b>Your request has been sent to the agent.</b></font>";
+	    Message.innerHTML = str;
+		 toScript.agentname.value="flight-status";
+		 toScript.agent.value="FlightStatus";
+		 toScript.xmldata.value=response;
+                 toScript.email.value=emailid;
+		 toScript.submit();
+	 }
+}
+
+
+
+var xmlDoc = new ActiveXObject("Microsoft.XMLDOM")
+xmlDoc.async="false"
+xmlDoc.load("groups/elves/airfare/capabilities.xml")
+
+	var str = "";
+	var email = opener.getCookie("email");
+	str += "<table cellpadding=5 cellspacing=0 border=0 width=100%>";
+	str += "<tr><td align=left><a href='http://www.isi.edu/agents-united' target='_blank'><img src=\"elves.gif\" border=0></a></td>";
+	str += "<td align=left><img src=\"meet.jpg\"></td>";
+	str += "<td align=right><b>User-ID:</b><br><font size=-1 face='Arial'>"+email+"</b>";
+	str += "<br><br>[If you haven't registered yet, click <a href='http://www.isi.edu/teamcore/elves/' target='_blank'>here</a>]</td></tr>";
+	str += "</table>";
+	document.write(str);
+	document.write("<hr><br>");
+
+params = xmlDoc.getElementsByTagName("ParameterName")
+concepts = xmlDoc.getElementsByTagName("ConceptName")
+var conceptname = concepts.item(0).text;
+conceptname = conceptname.replace(/-/g," ");
+/*
+var xmlDoc2 = new ActiveXObject("Microsoft.XMLDOM")
+xmlDoc2.async="false"
+xmlDoc2.load("groups/elves/airfare/constraints.xml")
+name = xmlDoc2.getElementsByTagName("name")
+type_ctr = xmlDoc2.getElementsByTagName("type_ctr")
+var nmtxt = name.item(0).text;
+alert(nmtxt);
+*/
+
+document.write("<b><font face='Arial'>"+xmlDoc.getElementsByTagName("GoalName").item(0).text+" the "+conceptname+"</b>");
+document.write("<br><font size=-1>");
+document.write('<FORM name=AgentForm>');
+document.write('<table cellpadding=1 cellspacing=1 border=0>');
+for(var i=1;i<params.length;i++)
+{
+	var paramtext = params.item(i).text;
+	paramtext = paramtext.toLowerCase();
+	paramtext = paramtext.replace(/\d/g,"");
+	document.write("<tr><td><font size=-1>"+paramtext+"</font></td>");
+	var edt = xmlDoc.getElementsByTagName("edt-type");	
+	var paramval = concepts.item(i).text;
+	paramval = paramval.replace(/-/g," ");
+	document.write("<td><font size=-1>"+paramval+"</font></td>");
+   var it = concepts.item(i).text.replace(/-/g,"_");
+   str="<td><font size=-1><INPUT type=text name=\""+it+"\"></font></td></tr>";
+	document.write(str);
+	//document.write('<br><br>');
+}
+document.write("</table><br>");
+document.write("<b>Result:</b><br>");
+
+document.write(concepts.item(i).text);
+
+
+</SCRIPT>
+
+<br><br>
+<INPUT type=button value="Send Request" onclick="sendReq()">
+<INPUT type=button value="Show History" disabled>
+<!--<br><br>
+<TEXTAREA rows=15 cols=70></TEXTAREA>    
+<HR>-->
+</FORM>
+<br>
+<div ID="Message"></div>
+<form name=toScript action="http://excalibur.isi.edu:8888/cgi-bin/elves/getResults.pl" method=post target='_blank'>
+<input type=hidden name=agentname>
+<input type=hidden name=agent>
+<input type=hidden name=xmldata>
+<input type=hidden name=email>
+</form>
+</BODY></HTML>

@@ -1,0 +1,302 @@
+<HTML>
+<HEAD>
+   <TITLE>Papers on Ontology Modeling and Construction</TITLE>
+
+  <SCRIPT language="javascript">
+
+  about_on = new Image();
+  about_on.src = "./exp-about.gif";
+
+  research_on = new Image();
+  research_on.src = "./exp-research.gif"; 
+
+  projectmemb_on = new Image();
+  projectmemb_on.src = "./exp-pr-members.gif";
+
+  publications_on = new Image();
+  publications_on.src = "./exp-publ.gif";
+
+  movie_on = new Image();
+  movie_on.src = "./exp-movie.gif";  
+
+  projects_on = new Image();
+  projects_on.src = "./exp-projects.gif"; 
+    
+function swampImages(imagename, cimage)
+  {
+      imgsrc = './' + cimage;
+      document[imagename].src = imgsrc;
+  } 
+  </SCRIPT>
+ 
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+
+<TABLE align=center WIDTH=730>
+<TR><TD colspan=3>
+
+<P align=center>
+<A HREF="../"
+onmouseover="swampImages('About','exp-about.gif'); return true"
+onmouseout="swampImages('About','exp-about-bl.gif');return true"><IMG
+SRC="exp-about-bl.gif" BORDER=0 NAME="About"></A>
+
+<A HREF="./research.html"
+onmouseover="swampImages('Research','exp-research.gif'); return true"
+onmouseout="swampImages('Research','exp-research-bl.gif');return
+true"><IMG SRC="exp-research-bl.gif" BORDER=0 NAME="Research"></A>
+
+<A HREF="./projects.html"
+onmouseover="swampImages('Projects','exp-projects.gif'); return true"
+onmouseout="swampImages('Projects','exp-projects-bl.gif');return
+true"><IMG SRC="./exp-projects-bl.gif" BORDER=0 NAME="Projects"></A>
+
+<A HREF="./pr-members.html"
+onmouseover="swampImages('Members','exp-pr-members.gif'); return true"
+onmouseout="swampImages('Members','exp-pr-members-bl.gif');return true"><IMG
+SRC="exp-pr-members-bl.gif" BORDER=0 NAME="Members"></A>
+
+<A HREF="./"
+onmouseover="swampImages('Publ','exp-publ.gif'); return true"
+onmouseout="swampImages('Publ','exo-publ-bl.gif');return true" onclick="return false"><IMG
+SRC="exo-publ-bl.gif" BORDER=0 NAME="Publ"></A>
+
+<A HREF="./demo.html"
+onmouseover="swampImages('Demo','exp-mov.gif'); return true"
+onmouseout="swampImages('Demo','exp-mov-bl.gif');return true"><IMG
+SRC="exp-mov-bl.gif" BORDER=0 NAME="Demo"></A>
+</TD></TR>
+
+<TR><TD width=50></TD>
+
+
+
+<TD WIDTH=550>
+<BR>
+<P ALIGN=CENTER><B><FONT SIZE=+2 FACE=ARIAL>Publications</B></FONT><BR>
+
+
+<HR>
+
+<P><FONT FACE=ARIAL><B>Papers on <A HREF="./publications.html#EXPECT">EXPECT</A></P>
+<P>Papers on <A HREF="./papers-planning.html">Planning</A></P>
+<P>Papers on <A HREF="./papers-ka.html">Knowledge Acquisition</A></P>
+<P>Papers on <A HREF="./papers-ontos.html">Ontologies and
+Problem-Solving Methods</A></P>
+<P>Papers on <A HREF="./papers-dialog.html">Proactive Dialogue</A></P>
+<P>Papers on <A HREF="./papers-ml.html">Machine Learning</A></P></FONT></B>
+
+
+
+<HR>
+
+<P ALIGN=LEFT><B><FONT SIZE=+2 FACE=ARIAL>Papers on Ontologies and
+Problem-Solving Methods</B></FONT></P>
+
+<P><HR>
+Jim Blythe, Jihie Kim, Surya Ramachandran and Yolanda Gil. 
+"An Integrated Environment for Knowledge Acquisition".
+Proceedings of the <I>International Conference on Intelligent User
+Interfaces 2001</I>
+(<A
+HREF="http://www.isi.edu/expect/papers/blythe-kim-rama-gil-iui01.pdf">
+PDF file</A>)
+</P>
+
+<P><B>Abstract:</B> This paper describes an integrated acquisition
+interface that includes several techniques previously developed to
+support users in various ways as they add new knowledge to an
+intelligent system.  As a result of this integration, the individual
+techniques can take better advantage of the context in which they are
+invoked and provide stronger guidance to users.  We describe the current
+implementation using examples from a travel planning domain, and
+demonstrate how users can add complex knowledge to the system.
+</P>
+
+
+<P><HR>
+Yolanda Gil and Jim Blythe. "PLANET: A Shareable and Reusable Ontology for Representing Plans".
+In <i>AAAI 2000 workshop on Representational Issues for
+Real-world Planning Systems</i>
+(<A HREF="http://www.isi.edu/expect/papers/gil-blythe-aaai00-2.pdf">
+PDF file</A>)
+</P>
+
+<P><B>Abstract:</B> 
+Ontologies are becoming a recognized vehicle for knowledge reuse,
+knowledge sharing, and modeling.  This paper presents PLANET, an
+ontology for representing plans.  To show that PLANET is a comprehensive
+ontology that can be <em>reused</em> to build new applications, we
+describe several specializations of it to represent plans in three
+different real-world domains that were made by adding minor extensions
+to PLANET's general definitions and classes.  In past work, we have
+developed several plan evaluation systems in these domains, and have
+integrated them in several occasions with plan editors and plan
+generation systems.  For each of these integrations, and often for each
+system in the integration, a new format for exchanging plans was
+devised.  PLANET can represent all of the plans that we and others have
+used in these domains, providing a standard universal format for
+knowledge <em>sharing</em> that can be used as an interlingua in
+integrated planning applications.  Finally, the paper discusses how we
+have used PLANET as a <em>knowledge modelling</em> tool to design
+representations for courses of action in a military domain, guiding us
+to make useful distinctions and modelling choices.
+</P>
+
+
+<HR>
+
+<P>
+Jim Blythe and Yolanda Gil. "A Problem-Solving Method for Plan
+Evaluation and Critiquing".
+<i>Proceedings of the Twelfth Banff Knowledge Acquisition for
+Knowledge-Based Systems Workshop (KAW-99).</i>
+(<A HREF="papers/blythe-gil-kaw99.pdf">PDF file</A>)
+</P>
+
+<B>Abstract:</B>
+As intelligent systems become larger and work in increasingly more
+complex and knowledge intensive environments, it becomes impractical to
+develop knowledge bases from scratch.  A practical alternative is to
+develop knowledge bases out of reusable components, either ontologies or
+domain-independent problem solving methods.  This paper describes a
+reusable knowledge base of general principles about plan evaluation and
+critiquing.  It includes ontologies to represent plans and critiques, an
+ontology of evaluation criteria, and problem-solving knowledge about how
+to evaluate plans with respect to those criteria.  Currently, the
+evaluation criteria analyze various aspects of the plan structure and
+its use of resources.  We performed a study of three evaluation and
+critiquing task domains, and found that our framework covers
+approximately 75 percent of the critiquing criteria related to plan
+structure and resource use (and over 90 percent within the framework's
+declared scope).  Our framework also enables a systematic approach to
+the development of plan evaluation tools by following the organization
+of the criteria in the method.
+
+<HR>
+
+Jim Blythe and Yolanda Gil.  "Developing Plan Evaluation and
+Critiquing Tools Based on Reuse and Capture of General Principles".
+Available from <A HREF="http://www.isi.edu/~blythe/evaluation-psm/">http://www.isi.edu/~blythe/evaluation-psm/</A>.</P>
+
+
+<P><HR>
+
+Yolanda Gil and Jim Blythe.  "PLANET: A Shareable and Reusable
+Ontology for Representing Plans".
+Available from <A HREF="http://www.isi.edu/~blythe/planet/">http://www.isi.edu/~blythe/planet/</A>.</P>
+
+<P><HR>
+Andre Valente, Tom Russ, Robert MacGregor, and William
+Swartout. "Building, Using and Reusing an Ontology of Air Campaign
+Planning".  <I>IEEE Intelligent Systems, special issue on
+Ontologies</I>, 14(1), January 1999.</P>
+
+<P><B>Abstract:</B>
+
+</P>
+
+<HR>
+
+Bill Swartout, Ramesh Patil, Kevin Knight and Tom Russ.
+"Toward Distributed Use of Large-Scale Ontologies".
+<i>Proceedings of the Tenth Knowledge Acquisition for 
+Knowledge-Based Systems Workshop</i>, November 9-14, 1996.
+Banff, Alberta, Canada.
+<P>
+
+<B> Abstract: </B>
+If we could share knowledge across systems, costs would be
+reduced.  However, because knowledge bases are typically constructed from
+scratch, each with their own idiosyncratic structure, sharing is difficult.
+Recent research has focused on the use of ontologies to promote sharing. An
+ontology is a hierarchically structured set of terms for describing a domain
+that can be used as a skeletal foundation for a knowledge base.  If two
+knowledge bases are built on a common ontology, knowledge can be more readily
+shared, since they share a common underlying structure.  This paper outlines a
+set of desiderata for ontologies, and then describes how we have used a
+large-scale (50,000+ concept) ontology to develop a specialized,
+domain-specific ontology semi-automatically.  We then discuss the relation
+between ontologies and the process of developing a system, arguing that to be
+useful, an ontology needs to be created as a "living document", whose
+development is tightly integrated with the system's.  We conclude with a
+discussion of Web-based ontology tools we are developing to support this
+approach.<P>
+
+
+<HR>
+<P ALIGN=LEFT><B><FONT SIZE=+2 FACE=ARIAL>Related Papers</B></FONT></P>
+
+
+<P>Andre Valente, J. Breuker, and W. van de Velde.  "The CommonKADS
+Library in Perspective". <I>International Journal of Human-Computer
+Studies</I>, 1998.</P>
+
+
+
+<HR>
+
+J. Breuker and Andre Valente. "Guidelines for Principled Core
+Ontologies".  <I>Poster Session Abstracts of IJCAI-97</I>.</P>
+
+<HR>
+
+Jihie Kim, Ringo Ling and Peter Will. "Ontology Engineering for
+Active Catalog". <I>AAAI workshop on Using AI in Electronic Commerce, Virtual
+Organizations and Enterprise Knowledge Manageent to Reengineer the
+Corporation</I>, 1997.
+(<A HREF="./aaai-wsp-97.pdf">PDF file</A>)</P>
+
+<HR>
+
+Ringo Ling, Jihie Kim and Peter Will. "Active Catalog: Searching and Using Catalog 
+Information in Internet-based Design". <I>Proceedings of the American Society of Mechanical Engineers,
+17th Computers in Engineering Conference</I>, 1997.
+(<A HREF="./asme-97.pdf">PDF file</A>)</P>
+
+<HR>
+Murilo Coutinho, Ragy Eleish, Jihie Kim, Vished Kumar, Ringo Ling, Robert Neches, and Peter Will. 
+"Active Catalogs: Integrated Support for
+Component Engineering". <I>Proceedings of the American Society of Mechanical Engineers,
+18th Computers in Engineering Conference</I>, 1998.
+(<A HREF="http://www.isi.edu/~jihie/asme-98.ps">Postscript file </A>)</P>
+
+<HR>
+
+J. Breuker, Andre Valente, and R. Winkels. "Legal Ontologies: A
+Functional View".  <I>In Proceedings of the First International
+Workshop on Legal Ontologies</I>.</P>
+
+
+<HR>
+
+J. Breuker and Andre Valente. "Legal Modeling and Automated
+Reasoning with ON-LINE".  <I>Submitted to International Journal of
+Human-Computer Studies, special issue on Model-Based reasoning</I>.</P>
+
+
+
+<HR SIZE=2>
+
+<P ALIGN=CENTER><FONT FACE=ARIAL SIZE=-1><A
+HREF="./EXPECT.html">About EXPECT</A> |
+<A HREF="./research.html">Research</A> | <A
+HREF="./pr-members.html">Project Members</A> | Publications | <A
+HREF="./demo.html">Movie</A> | <BR>
+| <A HREF="http://www.isi.edu/divisions/div3">Intelligent Systems
+Division</A> | <A HREF="http://www.isi.edu">Information Sciences
+Institute</A> | <A HREF="http://www.usc.edu">USC</A> |</P>
+</TD>
+
+<TD width=50></TD>
+
+</TR>
+
+</TABLE>
+</BODY>
+</HTML>
+
+
+
+
+

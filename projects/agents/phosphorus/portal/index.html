@@ -1,0 +1,72 @@
+<html>
+<head><title>The Phosphorus Portal</title></head>
+<style>
+body{color:black;font-family:times}
+</style>
+<script>
+   function opendisclaimer() {
+		var str="The University of Southern California (USC), and the Information Sciences Institute (ISI) do not make, and expressly disclaim, any expressed or implied warranties, representations or endorsements of any kind whatsoever, including, without limitation, the implied warranties of merchantability or fitness for a particular purpose, and the warranties of title or non-infringement. In no event shall USC, or ISI be liable for: <br><br>(a) Any incidental, consequential, or indirect damages (including, without limitation, damages for loss of profits, business interruption, loss of programs or information, and the like) arising out of the use of or inability to use the software, even if usc or any of its authorized representatives has been advised of the possibility of such damages, <br>(b) Any claim attributable to errors, omissions, or other inaccuracies in the software, or <br>(c) Any claim by any third party<br>";
+
+		diswin = window.open("","diswin","width=400, height=300, scrollbars=yes, resizable=yes");
+		diswin.document.writeln("<html><body bgcolor=white>");
+		diswin.document.writeln("<font face='Arial,Helvetica'><b>Disclaimer :</b><font size=-1>");
+		diswin.document.writeln("<br>"+str);
+		diswin.document.writeln("</font>");
+	}
+
+	function SetAndGo() {
+		 alert("in here");
+		 if(document.login.email.value == "") {
+			  alert("Please enter an Email ID");
+			  return;
+		 }
+		 var email=document.login.email.value;
+		 // Set cookie here
+		 document.cookie="email="+escape(email);
+		 //document.login.submit();
+		 //top.location.href="elves.htm";
+	}
+
+</script>
+
+<body bgcolor=white link="black" vlink="black" alink="#555555">
+<form name=login method=post action="/cgi-bin/portal/main.pl">
+<table width=100% height=100%>
+   <tr><td valign=center align=center>
+	<table>
+
+	<tr><td align=center colspan=3>
+	   <img src="logo.jpg"><br>
+		<!--<font size=-1>(No Password)</font>
+		<br><br>-->
+	</td></tr>
+
+	<tr><td>
+	   <b>Email ID:</b>
+	</td><td>
+	   <input type=text name=email>
+	</td>
+	</tr><tr><td>
+	   <b>Password :</b>
+	</td><td>
+	   <input type=password name=password>
+	</td></tr>
+	<tr><td></td>
+	<td align=left>
+	   <input type=submit value="Go !">
+   </td></tr>
+
+	</table>
+	</td></tr>
+	<tr><td colspan = 2 align=center>
+	<a href="http://www.isi.edu/expect/">EXPECT</a>&nbsp;
+	<a href="http://www.usc.edu/">USC</a>&nbsp;
+	<a href="http://www.isi.edu/">ISI</a>&nbsp;<br>
+	<a href="javascript:opendisclaimer()">Disclaimer</a>
+	<br><br>
+	</td></tr>
+</table>
+</form>
+<center>
+</body>
+</html>

@@ -1,0 +1,11 @@
+;;; This file separates out the rear statement critique methods
+;;; so we can figure out their overall size. 
+
+(in-package "CYC")
+
+(defplan check-fire-task
+  :capability (find-fillers (of (?a is (inst-of fire-task-identified-critique)))
+		        (in (?c is (inst-of coa))))
+  :result-type (set-of (inst-of thing))
+  :method (|fireOperationTask| (coa-operation ?c))
+  )

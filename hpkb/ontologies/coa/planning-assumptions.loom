@@ -1,0 +1,31 @@
+;;; -*- Mode: Lisp; Package: CYC; Syntax: COMMON-LISP; Base: 10 -*-
+
+(in-package "CYC")
+
+
+;;; ******************** CONCEPTS ********************
+
+
+
+;;; ******************** FUNCTIONS AND RELATIONS ********************
+
+(DEFRELATION |criticalEventInCoa|
+  :ARITY 2
+  :DOMAIN |COASpecificationMicrotheory|
+  :RANGE |MilitaryEvent|
+  :ANNOTATIONS (|IKBConstant|
+                |BinaryPredicate|
+                (DOCUMENTATION "(#$criticalEventInCoa COA-MT EVENT) means that EVENT is a critical event in the context of a particular course of action as specified in COA-MT EVENT. Critical events and their temporal ordering are required information for calculating the #$forceRatioOfUnits of opposing units as the course of action unfolds.")))
+
+(DEFRELATION |sustainsAttritionDuringEvent|
+  :ARITY 3
+  :DOMAINS (|MilitaryEvent| |ModernMilitaryUnit-Deployable|)
+  :RANGE |ScalarInterval|
+  :ANNOTATIONS (|IKBConstant|
+                |TernaryPredicate|
+                (DOCUMENTATION "(#$sustainsAttritionDuringEvent EVENT UNIT N-PERCENT) means that during EVENT UNIT is attrited to N-PERCENT of its original combat force value.")))
+
+
+
+;;; ******************** GENERAL ASSERTIONS ********************
+

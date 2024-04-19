@@ -1,0 +1,118 @@
+<html>
+<head>
+<script>
+var limit="0:30"
+if (document.images){
+  var parselimit=limit.split(":");
+  parselimit=parselimit[0]*60+parselimit[1]*1;
+  }
+function resubmit(val) {
+    var myform = eval("document.form"+val);
+    myform.submit();
+}
+function beginrefresh(){
+  if (!document.images)
+      return;
+   if (parselimit==1)
+      window.location.reload();
+   else {
+      parselimit-=1;
+      curmin=Math.floor(parselimit/60);
+      cursec=parselimit%60;
+      if (curmin!=0)
+         curtime=curmin+" minutes and "+cursec+" seconds left until page refresh!";
+      else
+         curtime=cursec+" seconds left until page refresh!";
+      window.status=curtime
+      setTimeout("beginrefresh()",1000)
+   }
+ }
+window.onload=beginrefresh;
+</script>
+</head>
+<table>
+<tr><td colspan=2>----Tue Aug 13 00:17:33 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>Air Canada</td></tr>
+<tr><td><b>of flight number</b></td><td>681</td></tr>
+<tr><td><b>on date</b></td><td>8/12/2002</td></tr>
+<tr><td><b>from airport</b></td><td>YEG</td></tr>
+<tr><td><b>for user id</b></td><td>ambite@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;error&gt;&lt;type&gt;Date passed&lt;/type&gt;&lt;attr&gt;date&lt;/attr&gt;&lt;/error&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1029223053)'></td></tr>
+</table><br>
+<form name='form1029223053' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='Air Canada'>
+<input type='hidden' name='val1' value='681'>
+<input type='hidden' name='val2' value='8/12/2002'>
+<input type='hidden' name='val3' value='YEG'>
+<input type='hidden' name='val4' value='ambite@isi.edu'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='ambite@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Sun Jul 28 00:08:51 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>Air Canada</td></tr>
+<tr><td><b>of flight number</b></td><td>682</td></tr>
+<tr><td><b>on date</b></td><td>7/27/2002</td></tr>
+<tr><td><b>from airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>ambite@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;error&gt;&lt;type&gt;Date passed&lt;/type&gt;&lt;attr&gt;date&lt;/attr&gt;&lt;/error&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1027840131)'></td></tr>
+</table><br>
+<form name='form1027840131' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='Air Canada'>
+<input type='hidden' name='val1' value='682'>
+<input type='hidden' name='val2' value='7/27/2002'>
+<input type='hidden' name='val3' value='LAX'>
+<input type='hidden' name='val4' value='ambite@isi.edu'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='ambite@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Sun Jul 28 00:08:34 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>Air Canada</td></tr>
+<tr><td><b>of flight number</b></td><td>682</td></tr>
+<tr><td><b>on date</b></td><td>7/27/2002</td></tr>
+<tr><td><b>from airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>ambite@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;error&gt;&lt;type&gt;Date passed&lt;/type&gt;&lt;attr&gt;date&lt;/attr&gt;&lt;/error&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1027840114)'></td></tr>
+</table><br>
+<form name='form1027840114' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='Air Canada'>
+<input type='hidden' name='val1' value='682'>
+<input type='hidden' name='val2' value='7/27/2002'>
+<input type='hidden' name='val3' value='LAX'>
+<input type='hidden' name='val4' value='ambite@isi.edu'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='ambite@isi.edu'>
+</form>
+
+<p>
+</html>

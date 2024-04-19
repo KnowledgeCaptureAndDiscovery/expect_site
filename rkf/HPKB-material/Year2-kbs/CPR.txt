@@ -1,0 +1,490 @@
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;;;;RELEVANT PLANNING AND ACTION ONTOLOGY AND AXIOMS
+
+
+
+;Microtheory-Types
+
+
+
+
+
+constant: COASpecificationMicrotheory.
+
+in Mt: ModernMilitaryMissionsMt.
+
+isa: IKBConstant MicrotheoryType ObjectType.
+
+genls: Plan.
+
+disjointWith: Need Obligation SomethingExisting.
+
+comment: "The collection of all instances of #$Plan, such that the
+
+plan being outlined constitutes the specification of a military
+
+course-of-action (COA).  A COA will, as a rule, only outline the
+
+intended course of action at a certain level of specificity.  The
+
+sequence and character of the intended actions will be represented,
+
+but COAs seldom include assumptions about the units performing the
+
+actions apart from specifying echelon and unit specialization.  More
+
+assumptions are made about enemy units, as a rule, than about friendly
+
+fources.  Information about terrain and trafficability issues, unit
+
+commanders, and subunits below a certain level will often be
+
+scanted.".
+
+
+
+constant: COASupplementMicrotheory.  
+
+isa: IKBConstant MicrotheoryType ObjectType.  
+
+genls: HypotheticalMicrotheory.  
+
+disjointWith: Need Obligation SomethingExisting.
+
+comment: "A military Course Of Action (COA) sketch only outlines the
+
+intended course of action at a certain level of specificity.  For
+
+purposes of evaluating COAs, users may on occasion wish to supply
+
+supplementary hypotheses concerning terrain conditions, climate, time
+
+of day, and character of the military forces involved.  These can be
+
+supplied in instances of #$COASupplementMicrotheory.  Instances are
+
+microtheories that consist of sets of assertions that posit specific
+
+hypotheses whose effect on a proposed plan execution we wish to test.
+
+Some of these hypotheses might involve adjustments to critical
+
+background parameters--e.g., suppositions to the effect that it is
+
+raining heavily or that it is nighttime--or they might involve further
+
+assumptions about the friendly forces charged with carrying out the
+
+tasks represented in the COA.  See also #$Plan,
+
+#$COASpecificationMicrotheory.".
+
+
+
+constant: COAExecutionMicrotheory.
+
+isa: IKBConstant MicrotheoryType ObjectType.
+
+genls: HypotheticalMicrotheory.
+
+disjointWith: Need Obligation SomethingExisting.
+
+comment: "An instance of #$PlanExecutionMicrotheory is a microtheory
+
+consisting of a set of assertions about a certain sequence of actions,
+
+including detailed information about who performs them, when they are
+
+performed, and what their effects are.  The sequence in toto is
+
+intended to represent the attempted execution of a plan.  Every
+
+instance of PlanExecutionMicrotheory will have access to some instance
+
+of #$Plan, and it is expected that it will be possible
+
+to query whether or not the plan as executed is successful from within
+
+the instance of #$PlanExecutionMicrotheory.  Also the instance of
+
+#$PlanExecutionMicrotheory might be given access to some instance of
+
+#$HypotheticalMicrotheory, spelling out further hypothetical
+
+background conditions that might or might not bear on the success of
+
+the plan.".                          
+
+
+
+constant: subPlans.
+
+isa: BinaryPredicate IKBConstant.
+
+genlPreds: genlMt.
+
+arg1Isa: Plan.
+
+arg2Isa: Plan.
+
+comment: "(#$subPlans PLAN SUBPLAN) means that the set of plan
+
+specification assertions in SUBPLAN is a proper subset of the set of
+
+plan specification assertions in PLAN.  In addition, it follows that
+
+if there is a SUBGOAL such that it is the objective of SUBPLAN,
+
+SUBGOAL will also be a sub-objective of PLAN.  Note that because
+
+(subPlans PLAN SUBPLAN) means that the assertions in SUBPLAN are a
+
+proper subset of the assertions in PLAN, it follows that everything
+
+that is true in SUBPLAN is also true in PLAN.  Thus, (#$subPlans PLAN
+
+SUBPLAN) implies (#$genlMt PLAN SUBPLAN).  See also #$objectiveOfPlan,
+
+#$subObjectiveOfPlan.".
+
+
+
+constant: hypothesisSetForPlan.
+
+in Mt: BaseKB.
+
+isa: BinaryPredicate.
+
+genlPreds: genlMt.
+
+arg1Isa: PlanHypothesisMicrotheory. 
+
+arg2Isa: Plan.
+
+comment: "This is a specialized form of #$genlMt which we use to
+
+assert that a particular set of plan-relevant hypotheses will be put
+
+in place for a particular instance of #$Plan.
+
+Note that it is a specialization of #$genlMt: asserting
+
+(#$hypothesesSetForPlan HYPMT PLANMT) has the effect of giving HYPMT
+
+'access' to the information in PLANMT (see also #$genlMt).".
+
+cyclistNotes: "As of 9/18/98, it is still unclear what additional work
+
+we may want the link between an instance of
+
+#$PlanHypothesisMicrotheory and an instance of
+
+#$Plan to do, beyond 'furnishing access'.
+
+That is why we have, for the moment, foregone merely using #$genlMt to
+
+establish this link.".
+
+
+
+constant: executesPlanWithHypotheses.
+
+in Mt: BaseKB.
+
+isa: TernaryPredicate.
+
+arg1Isa: PlanExecutionMicrotheory.
+
+arg2Isa: PlanHypothesisMicrotheory.
+
+arg3Isa: Plan.
+
+comment: "(executesPlanWithHypotheses EXMT HYPMT PLANMT)" .
+
+
+
+cyclistNotes: "It should be emphasized that
+
+(executesPlanWithHypotheses EXMT HYPMT PLANMT) merely asserts that
+
+EXMT is a *purported* or *attempted* execution of the plan outlined in
+
+PLANMT.  In other words, EXMT may or may not count as 'successful'.".
+
+
+
+F:
+
+(implies
+
+   (executesPlanWithHypotheses ?EXMT ?HYPMT ?PLANMT)
+
+   (hypothesisSetForPlan ?HYPMT ?PLANMT)).
+
+F:
+
+(implies
+
+   (executesPlanWithHypotheses ?EXMT ?HYPMT ?PLANMT)
+
+   (genlMt ?HYPMT ?EXMT)).    
+
+
+
+
+
+constant: objectiveOfPlan.  
+
+in Mt: BaseKB.  
+
+isa: BinaryPredicate.
+
+arg1Isa: Plan.  
+
+arg2Isa: CycSystemFormula.
+
+comment: "(#$objectiveOfPlan MT GOAL) means that making GOAL true is
+
+the overall purpose and objective of the plan sketched in the instance
+
+of Plan MT.  This means, among other things,
+
+that GOAL will be a #$goals for any agent charged with carrying out
+
+PLAN.  Assertions involving #$objectiveOfPlan are usually made in the
+
+relevant instance of #$Plan: that is, the
+
+microtheory in which the assertion is made is usually the same as the
+
+microtheory referenced in the first argument.".
+
+
+
+constant: subObjectiveOfPlan.
+
+in Mt: BaseKB.
+
+isa: BinaryPredicate. 
+
+arg1Isa: Plan.
+
+arg2Isa: CycSystemFormula.
+
+comment: "(subObjectiveOfPlan PLAN SUBGOAL) means that, given that
+
+(objectiveOfPlan PLAN GOAL), (preconditionFor-Props SUBGOAL GOAL).  It
+
+also means that if there is a SUBPLAN such that (#$subPlans PLAN
+
+SUBPLAN) and SUBGOAL is the objective of SUBPLAN, i.e.,
+
+(#$objectiveOfPlan SUBPLAN SUBGOAL), then SUBGOAL is a subObjective of
+
+PLAN, i.e., (#$subObjectiveOfPlan PLAN SUBGOAL).  See also #$subPlans,
+
+#$SubPlanSpecificationMt.".
+
+
+
+F:
+
+(implies
+
+   (and
+
+     (subObjectiveOfPlan ?PSMT ?SUBGOAL)
+
+     (objectiveOfPlan ?PSMT ?GOAL))
+
+   (preconditionFor-Props ?SUBGOAL ?GOAL)).
+
+F:
+
+(implies
+
+   (and
+
+     (subPlans ?PLAN ?SUBPLAN)
+
+     (objectiveOfPlan ?SUBPLAN ?SUBGOAL))
+
+   (subObjectiveOfPlan ?PLAN ?SUBGOAL)).
+
+
+
+
+
+constant: CriterionOfSuccess.
+
+in Mt: BaseKB.
+
+isa: Function-Denotational ScopingRelation TernaryRelation
+
+SetFormingFunction IKBConstant.
+
+arg1Isa: Goal.
+
+arg2Isa: CycSystemVariable.
+
+arg3Isa: CycSystemFormula.
+
+resultIsa: SetOrCollection.
+
+comment: "A function that returns a set of instances satisfying a Cyc
+
+formula, to be 'considered' in an evaluation of whether a particular
+
+objective has been attained and/or whether a particular action has
+
+been #$successfulForAgents.  The first argument is the instance of
+
+#$Goal whose attainment is being evaluated, the second is a CycSystem
+
+variable, and the third is a CycSystemFormula in which that variable
+
+is 'open'--in effect, a specification for a set of bindings.  The
+
+individuals satisfying these bindings will be the individuals
+
+considered in evaluating the success or failure of the first argument
+
+in the context in which the assertion is made.".
+
+cyclistNotes: "As of 9/18/98, we are uncertain about what the
+
+'consideration' described in the comment actually means, how it will
+
+be implemented, and whether the form it takes needs to be somehow
+
+referenced as an argument to the function.  Probably we are talking
+
+about a comparison between a specification of events in an instance of
+
+#$PlanExecutionMicrotheory and a plan sketched out in a
+
+#$Plan.  Success criteria will play some role
+
+in guiding the comparison process and determining its result.".
+
+
+
+;=========================================================================
+
+
+
+;RESOURCE REQUIREMENTS AND ALLOCATIONS
+
+
+
+constant:  resourceOfTask.
+
+in Mt: ModernMilitaryTacticsMt.
+
+isa: ActorSlot IKBConstant.
+
+genlPreds: preActors instrument-Generic.
+
+arg1Isa: MilitaryTask.
+
+arg2Isa: SomethingExisting.
+
+comment: "(#$resourceOfTask TASK RESOURCE) means that RESOURCE is a
+
+pre-existing object or substance that is assigned to play an
+
+instrumental role in the performance of TASK.  In the
+
+#$ModernMilitaryTacticsMt and in any particular instance of
+
+#$COASpecificationMicrotheory, if (#$resourceOfTask TASK RESOURCE) and
+
+(#$unitAssignedToTask TASK UNIT), then it is a precondition for TASK
+
+that (#$possesses UNIT RESOURCE).".
+
+
+
+F:
+
+(implies
+
+  (and
+
+    (resourceOfTask ?TASK ?RESOURCE)
+
+    (unitAssignedToTask ?TASK ?UNIT))
+
+  (preconditionFor-PropSit
+
+     (possesses ?UNIT ?RESOURCE) ?TASK)).
+
+
+
+constant: consumableResourceOfTask.
+
+isa: ActorSlot IKBConstant.
+
+arg1Isa: MilitaryTask.
+
+arg2Isa: SomethingExisting.
+
+comment: "(#$consumableResourceOfTask TASK RESOURCE) means that there
+
+is only a finite amount of RESOURCE available for TASK, in the sense
+
+that there will be less of RESOURCE after TASK is performed than there
+
+was before TASK was started, and that if less than a certain minimal
+
+amount of RESOURCE is possessed by the unit assigned to perform TASK,
+
+TASK cannot be performed.".
+
+
+
+constant: taskTypeRequiresAmount.
+
+isa: BinaryPredicate .
+
+arg1Isa: ScriptType.
+
+arg1Genl: MilitaryTask.
+
+arg2Isa: SomethingExisting.
+
+arg3Isa: ScalarInterval.
+
+
+
+constant: possessesAmount.
+
+arg1Isa: Agent.
+
+arg2Isa: ExistingStuffType.
+
+arg3Isa: ScalarInterval.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

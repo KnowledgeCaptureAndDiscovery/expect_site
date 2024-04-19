@@ -1,0 +1,118 @@
+<html>
+<head>
+<script>
+var limit="0:30"
+if (document.images){
+  var parselimit=limit.split(":");
+  parselimit=parselimit[0]*60+parselimit[1]*1;
+  }
+function resubmit(val) {
+    var myform = eval("document.form"+val);
+    myform.submit();
+}
+function beginrefresh(){
+  if (!document.images)
+      return;
+   if (parselimit==1)
+      window.location.reload();
+   else {
+      parselimit-=1;
+      curmin=Math.floor(parselimit/60);
+      cursec=parselimit%60;
+      if (curmin!=0)
+         curtime=curmin+" minutes and "+cursec+" seconds left until page refresh!";
+      else
+         curtime=cursec+" seconds left until page refresh!";
+      window.status=curtime
+      setTimeout("beginrefresh()",1000)
+   }
+ }
+window.onload=beginrefresh;
+</script>
+</head>
+<table>
+<tr><td colspan=2>----Sat Jun  8 00:40:41 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>than flight number</b></td><td>5572</td></tr>
+<tr><td><b>connecting-to flight number2</b></td><td>1891</td></tr>
+<tr><td><b>on date</b></td><td>6/7/2002</td></tr>
+<tr><td><b>from airport</b></td><td>MSN</td></tr>
+<tr><td><b>to airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>barish@isi.edu</td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;error&gt;&lt;type&gt;Date passed&lt;/type&gt;&lt;attr&gt;date&lt;/attr&gt;&lt;/error&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1023522041)'></td></tr>
+</table><br>
+<form name='form1023522041' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='5572'>
+<input type='hidden' name='val2' value='1891'>
+<input type='hidden' name='val3' value='6/7/2002'>
+<input type='hidden' name='val4' value='MSN'>
+<input type='hidden' name='val5' value='LAX'>
+<input type='hidden' name='val6' value='barish@isi.edu'>
+<input type='hidden' name='agent' value='earlier-flight'>
+<input type='hidden' name='email' value='barish@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Sat Jun  8 00:20:45 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>than flight number</b></td><td>5572</td></tr>
+<tr><td><b>connecting-to flight number2</b></td><td>1891</td></tr>
+<tr><td><b>on date</b></td><td>6/7/2002</td></tr>
+<tr><td><b>from airport</b></td><td>MSN</td></tr>
+<tr><td><b>to airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>barish@isi.edu</td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;error&gt;&lt;type&gt;Date passed&lt;/type&gt;&lt;attr&gt;date&lt;/attr&gt;&lt;/error&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1023520845)'></td></tr>
+</table><br>
+<form name='form1023520845' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='5572'>
+<input type='hidden' name='val2' value='1891'>
+<input type='hidden' name='val3' value='6/7/2002'>
+<input type='hidden' name='val4' value='MSN'>
+<input type='hidden' name='val5' value='LAX'>
+<input type='hidden' name='val6' value='barish@isi.edu'>
+<input type='hidden' name='agent' value='earlier-flight'>
+<input type='hidden' name='email' value='barish@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Sat Jun  8 00:00:55 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>than flight number</b></td><td>5572</td></tr>
+<tr><td><b>connecting-to flight number2</b></td><td>1891</td></tr>
+<tr><td><b>on date</b></td><td>6/7/2002</td></tr>
+<tr><td><b>from airport</b></td><td>MSN</td></tr>
+<tr><td><b>to airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>barish@isi.edu</td></tr>
+
+<tr><td colspan=2>CONTENT:<br>
+&lt;error&gt;&lt;type&gt;Date passed&lt;/type&gt;&lt;attr&gt;date&lt;/attr&gt;&lt;/error&gt;</td></tr>
+
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1023519655)'></td></tr>
+</table><br>
+<form name='form1023519655' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='5572'>
+<input type='hidden' name='val2' value='1891'>
+<input type='hidden' name='val3' value='6/7/2002'>
+<input type='hidden' name='val4' value='MSN'>
+<input type='hidden' name='val5' value='LAX'>
+<input type='hidden' name='val6' value='barish@isi.edu'>
+<input type='hidden' name='agent' value='earlier-flight'>
+<input type='hidden' name='email' value='barish@isi.edu'>
+</form>
+
+<p>
+</html>

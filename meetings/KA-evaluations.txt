@@ -1,0 +1,140 @@
+
+
+
+TAQL (Yost 93)
+==============
+- Hypothesis: Taql has more breadth than other KA tools & still effective
+- Tasks: 10 puzzle tasks + 9 ES tasks
+- Users: Soar programmers, three subjects (incl. Yost)
+- Setup: 
+    - each subject given a task description domain-oriented, not 
+      implementation specs) + (at most) 3 test cases
+    - three rounds of evaluations, starting with simple tasks
+- Recorded: 
+    - times for task understanding, design, coding, debugging
+    - bug information: how found, what error, when & how fixed
+- Reported:
+    - encoding rate (minutes per Soar production) for each subject 
+        at each task
+    - average fix time for catchable & uncatchable errors pre & post tool
+- Results: 
+    - subjects reduced their encoding rates over time 
+        (i.e., programmed faster)
+    - encoding rate did not slow down as task size increased
+
+* Comparing Taql, Knack, & Salt
+ - Users:
+    - one subject for each case
+    - reimplementation of original system (Knack & Salt cases)
+ - Reported:
+    - development time (hours) for Taql and two tools (Knack & Salt)
+        at their task (time reported for reimplementation)
+ - Results:
+    - Taql outperformed role-limiting KA tools (this was a surprise)
+
+
+ETM (Tallis 97)
+===============
+- Hypothesis:
+    - ETM's guidance will allow users to complete KBSs modifications more 
+      efficiently, i.e., in less time and with less errors)
+- Tasks:
+    - Two modification scenarios of different level of difficulty over the 
+       same KBS, using EXPECT and ETM
+- Users:
+    - 4 subjects (AI researchers and programmers) already familiar with EXPECT 
+       but not with ETM.
+- Setup:
+    - Preliminary tutorials and exercises introducing the domain, the tools 
+       and the procedures for the experiment.
+    - Each subject was given:
+         - Domain oriented descriptions of the domain (including PSK).
+  		 - Domain oriented descriptions of the tasks
+         - 1 sample problem with its correct result for each task
+         - First change for each scenario (after phase 1)
+    - Each subject performed two different tasks, one with ETM, one with EXPECT. 
+        Each task was performed with both tools and in different order.
+    - Phase 1: Subjects analyzed the task specifications and KBs, then decided 
+        on the first change to the KB (but did not start the modification yet)
+    - Phase 2: Subjects executed the first change (given) and then completed the 
+        modification until no errors were reported in the agenda and the sample 
+        problems yielded correct results.
+- Recorded:
+    - Beginning and end time of each phase of the experiment
+    - KB modification commands executed (what and when)
+    - KA Scripts executed (what and when)
+    - Errors in the agenda after each command
+    - Detailed transcript of each session (subjects were asked to talk
+        about what they were thinking and doing)
+    - Questionnaire regarding their impressions about both tools
+
+- Reported:
+   - Time in completing each phase of the task for each user and tool
+   - number of changes performed
+   - number changes made automatically (by ETM)
+
+- Results:
+   - Subjects using EMT completed the modification in less time. The
+      difference was more significant for the more complex task.
+   - Subjects not using ETM forgot to perform some changes specified 
+      in the instructions and corrected this after getting wrong results 
+      in the sample problems.  Subjects using ETM were remined of these
+      changes by the tool (this was a surprise).
+
+
+TURVY study (Maulsby 93)
+========================
+
+- Hypotheses:
+   - H1: all users would employ same set of commands even if told nothing
+           in advance about the instructions that Turvy understands, 
+           a table of predicted set of commands was compiled in advance
+   - H2: users would end up communicating using Turvy's terms 
+   - H4: users would tech Turvy simple tasks easily and complex tasks with 
+           reasonable effort
+- Task: modify bibliography format (main), file selection, graphical editing
+- Users: non-programmers
+- Setup:
+   - "Wizard of Oz" experiment (no real software, user interacts 
+       with facilitator)
+   - several rounds, different types of subjects
+       - on main task:
+           - pre-pilot experiment 
+           - pilot experiment (4 users)
+           - main experiment (8 subjects)
+       - on other task domains:
+           - 3 subjects
+            - 2 subjects
+- Recorded:
+   - videotapes, notes, interviews
+- Reported:
+   - qualitative results mostly (their intention)
+   - some quantitative results were obtained by post-analysis
+- Results:
+   - Evidence for H1, H2, H4
+   - Interesting findings: quiet vs talkative users
+      
+      
+Other related evaluations in KA
+===============================
+
+- Sisyphus experiments (Linster 92; Schreiber & Birmingham 95)
+    - comparing different approaches for same task
+    - no user evaluation
+    
+- Use and reuse of PSMs (Runkel & Birmingham 94; Eriksson et al. 95; ...)
+    - measure how much PSM reuse occurs when new system is developed
+    - no user evaluation
+
+- (Shadbolt et al. 95)
+    - determine whether KE models are useful
+    - no system evaluation, but k elicitation through models
+    - 29 subjects, expert knowledge engineers
+
+      
+      
+Summary
+=======
+
+- Not a whole lot of empirical evaluations: very costly
+- Not a whole lot of sample points: not many tasks, takes long time

@@ -1,0 +1,170 @@
+/*
+ * @(#)expectTreeCellRenderer.java	1.8 98/01/07
+ *
+ * Copyright (c) 1997 Sun Microsystems, Inc. All Rights Reserved.
+ *
+ * This software is the confidential and proprietary information of Sun
+ * Microsystems, Inc. ("Confidential Information").  You shall not
+ * disclose such Confidential Information and shall use it only in
+ * accordance with the terms of the license agreement you entered into
+ * with Sun.
+ *
+ * SUN MAKES NO REPRESENTATIONS OR WARRANTIES ABOUT THE SUITABILITY OF THE
+ * SOFTWARE, EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+ * PURPOSE, OR NON-INFRINGEMENT. SUN SHALL NOT BE LIABLE FOR ANY DAMAGES
+ * SUFFERED BY LICENSEE AS A RESULT OF USING, MODIFYING OR DISTRIBUTING
+ * THIS SOFTWARE OR ITS DERIVATIVES.
+ *
+ */
+
+import com.sun.java.swing.Icon;
+import com.sun.java.swing.ImageIcon;
+import com.sun.java.swing.JLabel;
+import com.sun.java.swing.JTree;
+import com.sun.java.swing.tree.TreeCellRenderer;
+import com.sun.java.swing.tree.DefaultMutableTreeNode;
+import java.awt.Component;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Image;
+import com.sun.java.swing.JTextField;
+public class expectTreeCellRenderer extends JTextField implements TreeCellRenderer
+{
+    /** Font used if the string to be displayed isn't a font. */
+    static protected Font             defaultFont;
+    /** Icon to use when the item is collapsed. */
+    static protected ImageIcon        collapsedIcon;
+    /** Icon to use when the item is expanded. */
+    static protected ImageIcon        expandedIcon;
+    static protected ImageIcon        lockIcon;
+
+    /** Color to use for the background when selected. */
+    static protected final Color SelectedBackgroundColor = Color.yellow;//new Color(0, 0, 128);
+  static Icon theIcon = null;
+    static
+    {
+	try {
+	    defaultFont = new Font("Dialog", Font.BOLD, 14);
+	    collapsedIcon =new ImageIcon("images/foot.gif");
+	    expandedIcon = new ImageIcon("images/foot.gif");
+	    lockIcon = new ImageIcon("images/foot.gif");
+	} catch (Exception e) {}
+	try {
+	  collapsedIcon =new ImageIcon("images/foot.gif");
+	  expandedIcon = new ImageIcon("images/foot.gif");
+	    lockIcon = new ImageIcon("images/foot.gif");
+	} catch (Exception e) {
+	    System.out.println("Couldn't load images: " + e);
+	}
+    }
+
+    /** Whether or not the item that was last configured is selected. */
+    protected boolean            selected;
+
+    /**
+      * This is messaged from JTree whenever it needs to get the size
+      * of the component or it wants to draw it.
+      * This attempts to set the font based on value, which will be
+      * a TreeNode.
+      */
+  public void setIcon (ImageIcon ic) {
+    theIcon = ic;
+  }
+  public Icon getIcon () {
+    return theIcon;
+  }
+  public int getIconTextGap () {
+    return 4;
+  }
+    public Component getTreeCellRendererComponent(JTree tree, Object value,
+					  boolean selected, boolean expanded,
+					  boolean leaf, int row,
+						  boolean hasFocus) {
+	Font            font;
+	String          stringValue = tree.convertValueToText(value, selected,
+					   expanded, leaf, row, hasFocus);
+
+	/* Set the text. */
+	//System.out.println(" stringValue:"+stringValue);
+	setText(stringValue);
+	/* Tooltips used by the tree. */
+	setToolTipText(stringValue);
+
+	/* Set the image. */
+	if(expanded)
+	    setIcon(expandedIcon);
+	else if(!leaf)
+	    setIcon(collapsedIcon);
+	else
+	    setIcon(lockIcon);
+
+	/* Set the color and the font based on the SampleData userObject. */
+	setFont(defaultFont);
+	/* Update the selected flag for the next paint. */
+	this.selected = selected;
+
+	return this;
+    }
+
+    /**
+      * paint is subclassed to draw the background correctly.  JLabel
+      * currently does not allow backgrounds other than white, and it
+      * will also fill behind the icon.  Something that isn't desirable.
+      */
+    public void paint(Graphics g) {
+	Color            bColor;
+	Icon             currentI = getIcon();
+
+	String lines[] = new String[50];
+	int idx;
+	int i = 0;
+	int width = 0;
+	String temp = getText();
+	while ((idx = temp.indexOf("\n")) >= 0) {
+	  lines[i] = temp.substring(0,idx);
+	  //System.out.println("new string:"+lines[i]);
+	  temp = temp.substring(idx+1);
+	  width = Math.max(width, lines[i].length());
+	  i++;
+	}
+	lines[i] = temp;
+	width = Math.max(width, lines[i].length());
+	i++;
+
+	int nn = i;
+	//System.out.println ("nn:"+nn);
+	g.setColor(Color.black);
+
+	int  offset;
+	if(currentI != null && getText() != null) {
+	  offset = currentI.getIconWidth() + getIconTextGap();
+	  //System.out.println("IconWidth:"+  currentI.getIconWidth());
+	  //System.out.println("IconTextGap:"+ getIconTextGap());
+	  //g.fillRect(offset, 0, width - 1 - offset,(getHeight() - 1)*nn);
+	}
+	else {
+	  //g.fillRect(0, 0, width, (getHeight()-1)*nn);
+	    offset = 0;
+	}
+	int w = width;
+	int h = getHeight();
+	int hoff = 14;
+	
+	if (getText().equals("Method")) {
+	  g.drawString("Method",0,hoff);
+	  return;
+	}
+	if (currentI !=null)  g.drawImage(((ImageIcon)currentI).getImage(), 0, 0, null);
+	for (i=0; i<nn;i++) {
+	  //System.out.println (" h:"+h);
+	  int gap = i*(h/nn) + hoff;
+	  //System.out.println ("   $$ draw:"+lines[i]+"|"+offset+"|"+gap);
+	  if (i==0) g.setFont(new Font("Dialog", Font.BOLD, 14));
+	  else g.setFont(new Font("Dialog", Font.PLAIN, 14));
+	  g.drawString(lines[i], offset, gap);
+	}
+	//super.paint(g);
+    }
+}

@@ -1,0 +1,375 @@
+Agenda:
+ In the method to compute the combat power of a military unit with respect to a military task, ?T is not used
+ In the method to estimate the required force ratio of a military defensive operation for a military task, ?O is not used
+ In the method to estimate the required force ratio of a military defensive operation for a military task, ?CE is not used
+ In the method to estimate the required force ratio of a military offensive operation for a military task, ?O is not used
+ In the method to estimate the required force ratio of a military offensive operation for a military task, ?CE is not used
+   at Thu Sep 09 15:44:50 PDT 1999
+
+1check: Evaluation Result
+   at Thu Sep 09 15:45:00 PDT 1999
+
+2check: All Agenda
+   at Thu Sep 09 15:45:26 PDT 1999
+
+3check: Describe PS Tree
+   at Thu Sep 09 15:45:28 PDT 1999
+
+6check: Method Capability Hierarchy
+   at Thu Sep 09 15:45:29 PDT 1999
+
+check tab:8
+   at Thu Sep 09 15:45:35 PDT 1999
+
+6check: Method Capability Hierarchy
+   at Thu Sep 09 15:45:58 PDT 1999
+
+5check: Undefined Capabilities
+   at Thu Sep 09 15:45:59 PDT 1999
+
+6check: Method Capability Hierarchy
+   at Thu Sep 09 15:46:25 PDT 1999
+
+check tab:8
+   at Thu Sep 09 15:46:33 PDT 1999
+
+7check: Method Sub-Method Relation
+   at Thu Sep 09 15:46:34 PDT 1999
+
+4check: Search Methods
+   at Thu Sep 09 15:46:36 PDT 1999
+
+check tab:0
+   at Thu Sep 09 15:46:38 PDT 1999
+
+5check: Undefined Capabilities
+   at Thu Sep 09 15:46:39 PDT 1999
+
+1check: Evaluation Result
+   at Thu Sep 09 15:46:40 PDT 1999
+
+4check: Search Methods
+   at Thu Sep 09 15:46:41 PDT 1999
+
+1check: Evaluation Result
+   at Thu Sep 09 15:46:43 PDT 1999
+
+5check: Undefined Capabilities
+   at Thu Sep 09 15:46:57 PDT 1999
+
+7check: Method Sub-Method Relation
+   at Thu Sep 09 15:46:59 PDT 1999
+
+create method for goal from undefined capabilities
+   at Thu Sep 09 15:47:01 PDT 1999
+
+undefined goal:
+(check (obj (spec-of force-ratio)) (of (inst-of military-task)) (in (inst-of coa)))  
+Expected Result:(inst-of yes-no)  
+Callers:(check-force-ratio-for-main-task)  
+Capability:(capability (check (obj (?v433 is (spec-of force-ratio))) (of (?v434 is (inst-of military-task))) (in (?v435 is (inst-of coa)))))  
+   at Thu Sep 09 15:47:01 PDT 1999
+
+select Button:expect-expression:EXPRESSION
+ TO become:((name _method396  )
+(capability    ( check   ( obj   ( ?v433 is   ( spec-of force-ratio ) ) )
+         ( of   ( ?v434 is   ( inst-of military-task ) ) )
+         ( in   ( ?v435 is   ( inst-of coa ) ) ) )
+)
+(result-type  (inst-of yes-no)  )
+(method  SUB-GOAL 
+)
+)
+   at Thu Sep 09 15:47:33 PDT 1999
+
+select Button:expect-goal-form:SUB-GOAL
+ TO become:((name _method396  )
+(capability    ( check   ( obj   ( ?v433 is   ( spec-of force-ratio ) ) )
+         ( of   ( ?v434 is   ( inst-of military-task ) ) )
+         ( in   ( ?v435 is   ( inst-of coa ) ) ) )
+)
+(result-type  (inst-of yes-no)  )
+(method    ( is-less-or-equal   ( obj EXPRESSION )   ( than EXPRESSION ) ) 
+)
+)
+   at Thu Sep 09 15:47:42 PDT 1999
+
+select Button:expect-expression:EXPRESSION
+ TO become:((name _method396  )
+(capability    ( check   ( obj   ( ?v433 is   ( spec-of force-ratio ) ) )
+         ( of   ( ?v434 is   ( inst-of military-task ) ) )
+         ( in   ( ?v435 is   ( inst-of coa ) ) ) )
+)
+(result-type  (inst-of yes-no)  )
+(method    ( is-less-or-equal   ( obj SUB-GOAL )   ( than EXPRESSION ) ) 
+)
+)
+   at Thu Sep 09 15:47:55 PDT 1999
+
+select Button:expect-goal-form:SUB-GOAL
+ TO become:((name _method396  )
+(capability    ( check   ( obj   ( ?v433 is   ( spec-of force-ratio ) ) )
+         ( of   ( ?v434 is   ( inst-of military-task ) ) )
+         ( in   ( ?v435 is   ( inst-of coa ) ) ) )
+)
+(result-type  (inst-of yes-no)  )
+(method    ( is-less-or-equal   ( obj   ( estimate   ( obj
+                           ( spec-of required-force-ratio ) )
+                     ( for EXPRESSION ) ) )
+         ( than EXPRESSION ) ) 
+)
+)
+   at Thu Sep 09 15:48:01 PDT 1999
+
+select Button:expect-expression:EXPRESSION
+ TO become:((name _method396  )
+(capability    ( check   ( obj   ( ?v433 is   ( spec-of force-ratio ) ) )
+         ( of   ( ?v434 is   ( inst-of military-task ) ) )
+         ( in   ( ?v435 is   ( inst-of coa ) ) ) )
+)
+(result-type  (inst-of yes-no)  )
+(method    ( is-less-or-equal   ( obj   ( estimate   ( obj
+                           ( spec-of required-force-ratio ) )
+                     ( for VARIABLE ) ) )
+         ( than EXPRESSION ) ) 
+)
+)
+   at Thu Sep 09 15:48:08 PDT 1999
+
+select Button:expect-variable-name:VARIABLE
+ TO become:((name _method396  )
+(capability    ( check   ( obj   ( ?v433 is   ( spec-of force-ratio ) ) )
+         ( of   ( ?v434 is   ( inst-of military-task ) ) )
+         ( in   ( ?v435 is   ( inst-of coa ) ) ) )
+)
+(result-type  (inst-of yes-no)  )
+(method    ( is-less-or-equal   ( obj   ( estimate   ( obj
+                           ( spec-of required-force-ratio ) )
+                     ( for ?v434 ) ) )
+         ( than EXPRESSION ) ) 
+)
+)
+   at Thu Sep 09 15:48:11 PDT 1999
+
+select Button:(estimate (obj (?f is (spec-of required-force-ratio))) (for (?s is (inst-of military-task)))): 
+ TO become:((name _method396  )
+(capability    ( check   ( obj   ( ?v433 is   ( spec-of force-ratio ) ) )
+         ( of   ( ?v434 is   ( inst-of military-task ) ) )
+         ( in   ( ?v435 is   ( inst-of coa ) ) ) )
+)
+(result-type  (inst-of yes-no)  )
+(method    ( is-less-or-equal   ( obj EXPRESSION )   ( than EXPRESSION ) ) 
+)
+)
+   at Thu Sep 09 15:48:22 PDT 1999
+
+select Button:expect-expression:EXPRESSION
+ TO become:((name _method396  )
+(capability    ( check   ( obj   ( ?v433 is   ( spec-of force-ratio ) ) )
+         ( of   ( ?v434 is   ( inst-of military-task ) ) )
+         ( in   ( ?v435 is   ( inst-of coa ) ) ) )
+)
+(result-type  (inst-of yes-no)  )
+(method    ( is-less-or-equal   ( obj   ( estimate   ( obj
+                           ( spec-of required-force-ratio ) )
+                     ( for ?v434 ) ) )
+         ( than EXPRESSION ) ) 
+)
+)
+   at Thu Sep 09 15:48:25 PDT 1999
+
+select Button:expect-expression:EXPRESSION
+ TO become:((name _method396  )
+(capability    ( check   ( obj   ( ?v433 is   ( spec-of force-ratio ) ) )
+         ( of   ( ?v434 is   ( inst-of military-task ) ) )
+         ( in   ( ?v435 is   ( inst-of coa ) ) ) )
+)
+(result-type  (inst-of yes-no)  )
+(method    ( is-less-or-equal   ( obj   ( estimate   ( obj
+                           ( spec-of required-force-ratio ) )
+                     ( for ?v434 ) ) )
+         ( than   ( estimate   ( obj
+                           ( spec-of required-force-ratio ) )
+                     ( for ?v434 ) ) ) ) 
+)
+)
+   at Thu Sep 09 15:48:32 PDT 1999
+
+select Button:required-force-ratio:required-force-ratio
+ TO become:((name _method396  )
+(capability    ( check   ( obj   ( ?v433 is   ( spec-of force-ratio ) ) )
+         ( of   ( ?v434 is   ( inst-of military-task ) ) )
+         ( in   ( ?v435 is   ( inst-of coa ) ) ) )
+)
+(result-type  (inst-of yes-no)  )
+(method    ( is-less-or-equal   ( obj   ( estimate   ( obj
+                           ( spec-of required-force-ratio ) )
+                     ( for ?v434 ) ) )
+         ( than   ( estimate   ( obj
+                           ( spec-of available-force-ratio ) )
+                     ( for ?v434 ) ) ) ) 
+)
+)
+   at Thu Sep 09 15:48:42 PDT 1999
+
+ From sketch:To do what(Capability):
+Do(Method Body):
+
+The result will be(Result Type):
+   at Thu Sep 09 15:48:47 PDT 1999
+
+ done editing:((name _method396  )
+(capability    ( check   ( obj   ( ?v433 is   ( spec-of force-ratio ) ) )
+         ( of   ( ?v434 is   ( inst-of military-task ) ) )
+         ( in   ( ?v435 is   ( inst-of coa ) ) ) )
+)
+(result-type  (inst-of yes-no)  )
+(method    ( is-less-or-equal   ( obj   ( estimate   ( obj
+                           ( spec-of required-force-ratio ) )
+                     ( for ?v434 ) ) )
+         ( than   ( estimate   ( obj
+                           ( spec-of available-force-ratio ) )
+                     ( for ?v434 ) ) ) ) 
+)
+)
+   at Thu Sep 09 15:48:47 PDT 1999
+
+added New method:((name _method396)
+ (capability (check
+                (obj (?v433 is (spec-of force-ratio)))
+                (of (?v434 is (inst-of military-task)))
+                (in (?v435 is (inst-of coa)))
+                ))
+ (result-type (inst-of yes-no))
+ (method (is-less-or-equal
+            (obj (estimate
+                    (obj (spec-of required-force-ratio))
+                    (for ?v434)
+                    ))
+             (than (estimate
+                      (obj (spec-of available-force-ratio))
+                      (for ?v434)
+                      ))
+               ))
+)
+   at Thu Sep 09 15:48:49 PDT 1999
+
+check tab:-1
+   at Thu Sep 09 15:48:49 PDT 1999
+
+check tab:0
+   at Thu Sep 09 15:48:49 PDT 1999
+
+Agenda:
+ In the method to check the force ratio of a military task in a coa, ?V435 is not used
+ In the method to compute the combat power of a military unit with respect to a military task, ?T is not used
+ In the method to estimate the required force ratio of a military defensive operation for a military task, ?O is not used
+ In the method to estimate the required force ratio of a military defensive operation for a military task, ?CE is not used
+ In the method to estimate the required force ratio of a military offensive operation for a military task, ?O is not used
+ In the method to estimate the required force ratio of a military offensive operation for a military task, ?CE is not used
+   at Thu Sep 09 15:48:54 PDT 1999
+
+7check: Method Sub-Method Relation
+   at Thu Sep 09 15:48:58 PDT 1999
+
+check tab:8
+   at Thu Sep 09 15:49:01 PDT 1999
+
+2check: All Agenda
+   at Thu Sep 09 15:49:36 PDT 1999
+
+3check: Describe PS Tree
+   at Thu Sep 09 15:49:39 PDT 1999
+
+select: show error button
+   at Thu Sep 09 15:49:42 PDT 1999
+
+checked error:((name required-force-ratio-for-task)
+ (capability (estimate
+                (obj (?f is (spec-of required-force-ratio)))
+                (for (?s is (inst-of military-task)))
+                ))
+ (result-type (inst-of number))
+ (method (estimate
+            (obj (spec-of required-force-ratio))
+            (of ( operation-of ?s))
+            (for ?s)
+            ))
+)
+MESSAGES
+   at Thu Sep 09 15:49:42 PDT 1999
+
+select: show error button
+   at Thu Sep 09 15:49:44 PDT 1999
+
+checked error:((name default-required-force-ratio-for-military-defensive-operation)
+ (capability (estimate
+                (obj (?f is (spec-of required-force-ratio)))
+                (of (?o is (inst-of military-defensive-operation)))
+                (for (?ce is (inst-of military-task)))
+                ))
+ (result-type (inst-of number))
+ (method 1/3)
+)
+MESSAGES** LOCAL ERROR ** In the method to estimate the required force ratio of a military defensive operation for a military task, ?CE is not used
+** LOCAL ERROR ** In the method to estimate the required force ratio of a military defensive operation for a military task, ?O is not used
+
+   at Thu Sep 09 15:49:44 PDT 1999
+
+select: creat label button
+   at Thu Sep 09 15:49:52 PDT 1999
+
+created label:force-ratio
+   at Thu Sep 09 15:49:59 PDT 1999
+
+select: cut button
+   at Thu Sep 09 15:50:02 PDT 1999
+
+cut to move method:((name required-force-ratio-for-task)
+ (capability (estimate
+                (obj (?f is (spec-of required-force-ratio)))
+                (for (?s is (inst-of military-task)))
+                ))
+ (result-type (inst-of number))
+ (method (estimate
+            (obj (spec-of required-force-ratio))
+            (of ( operation-of ?s))
+            (for ?s)
+            ))
+)
+MESSAGES
+   at Thu Sep 09 15:50:02 PDT 1999
+
+select: embrace into button
+   at Thu Sep 09 15:50:05 PDT 1999
+
+select: show in English button
+   at Thu Sep 09 15:50:26 PDT 1999
+
+shown in English:COMPUTE-COMBAT-POWER
+   at Thu Sep 09 15:50:27 PDT 1999
+
+select: show in English button
+   at Thu Sep 09 15:50:36 PDT 1999
+
+shown in English:CHECK-FORCE-RATIO-FOR-MAIN-TASK
+   at Thu Sep 09 15:50:36 PDT 1999
+
+select: show in English button
+   at Thu Sep 09 15:50:53 PDT 1999
+
+shown in English:REQUIRED-FORCE-RATIO-FOR-TASK
+   at Thu Sep 09 15:50:54 PDT 1999
+
+select: show in English button
+   at Thu Sep 09 15:51:12 PDT 1999
+
+shown in English:COMPUTE-AVAILABLE-FORCE-RATIO
+   at Thu Sep 09 15:51:12 PDT 1999
+
+select: show in English button
+   at Thu Sep 09 15:51:19 PDT 1999
+
+shown in English:FIND-COMBAT-POWER-OF-UNIT-WRT-M2-BN
+   at Thu Sep 09 15:51:19 PDT 1999
+

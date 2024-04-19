@@ -1,0 +1,37 @@
+(in-package "EVALUATION")
+;; *******************************************************
+;; for experiment
+;; *******************************************************
+   
+(defconcept echelon :is-primitive |MilitaryEchelon|
+    :exhaustive-partitions (($types-of-echelon$ 
+			     battalion
+			     company
+			     brigade
+			     division))
+			     )
+(defconcept battalion 
+    :is-primitive echelon
+    :in-partition $types-of-echelon$)
+(defconcept company 
+    :is-primitive echelon
+    :in-partition $types-of-echelon$)
+(defconcept brigade 
+    :is-primitive echelon
+    :in-partition $types-of-echelon$)
+(defconcept division 
+    :is-primitive echelon
+    :in-partition $types-of-echelon$)
+
+(tellm (brigade |Brigade-UnitDesignation|))
+(tellm (company |Company-UnitDesignation|))
+(tellm (division |Division-UnitDesignation|))
+(tellm (battalion |Battalion-UnitDesignation|))
+
+(defrelation echelon-of 
+    :domain military-unit
+    :range echelon
+    :is (:satisfies (?u ?e)
+		    (:and (military-unit ?u)
+			  (|echelonOfUnit| ?u ?e)))
+    :characteristics :single-valued)

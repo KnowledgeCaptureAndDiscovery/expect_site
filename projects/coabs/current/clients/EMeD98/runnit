@@ -1,0 +1,11 @@
+#!/bin/sh
+#
+# @(#)runnit    1.2 97/10/14
+ 
+#AF_CLASSES=/nfs/v2/jihie/Active-Catalogs/AF/java/af-1.5.jar
+ 
+#CMD="${JDKHOME}/bin/java -classpath ${CLASSPATH}:${AF_CLASSES}:classes Start"
+CMD="${JDKHOME}/bin/java -classpath ${CLASSPATH}:classes Start"
+ 
+echo ${CMD}
+${CMD}

@@ -1,0 +1,1518 @@
+<html>
+<head>
+<script>
+var limit="0:30"
+if (document.images){
+  var parselimit=limit.split(":");
+  parselimit=parselimit[0]*60+parselimit[1]*1;
+  }
+function resubmit(val) {
+    var myform = eval("document.form"+val);
+    myform.submit();
+}
+function beginrefresh(){
+  if (!document.images)
+      return;
+   if (parselimit==1)
+      window.location.reload();
+   else {
+      parselimit-=1;
+      curmin=Math.floor(parselimit/60);
+      cursec=parselimit%60;
+      if (curmin!=0)
+         curtime=curmin+" minutes and "+cursec+" seconds left until page refresh!";
+      else
+         curtime=cursec+" seconds left until page refresh!";
+      window.status=curtime
+      setTimeout("beginrefresh()",1000)
+   }
+ }
+window.onload=beginrefresh;
+</script>
+</head>
+<table>
+<tr><td colspan=2>----Tue Nov 19 14:40:46 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>947</td></tr>
+<tr><td><b>on date</b></td><td>11/19/2002</td></tr>
+<tr><td><b>from airport</b></td><td>IAD</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td>3108220751</td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2><b>United Airlines flight 947</b></td></tr>
+<tr><td colspan=2>Attention : Registration Desk<br/><br/> I am sending this message on behalf of mariam_at_isi_edu, who has a reservation at your hotel. mariam_at_isi_edu is on United Airlines 947, which is now scheduled to arrive at at 7:53 PM. Since the flight will be arriving late, I would like to request that you indicate this in the reservation so that the room is not given away.<br/><br/> Thank you,<br/><br/> Personal Assistant to mariam_at_isi_edu</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1037745646)'></td></tr>
+</table><br>
+<form name='form1037745646' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='947'>
+<input type='hidden' name='val2' value='11/19/2002'>
+<input type='hidden' name='val3' value='IAD'>
+<input type='hidden' name='val4' value='mariam@isi.edu'>
+<input type='hidden' name='val5' value='3108220751'>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Tue Nov 19 12:50:34 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>947</td></tr>
+<tr><td><b>on date</b></td><td>11/19/2002</td></tr>
+<tr><td><b>from airport</b></td><td>IAD</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td>3108220751</td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2><b>United Airlines flight 947</b></td></tr>
+<tr><td colspan=2>Dear mariam_at_isi_edu,<br/><br/>Your United Airlines flight 947 is still scheduled to depart IAD on-time at 5:50 PM Gate C27 and is scheduled to arrive LAX at 7:53 PM Gate 72.<br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1037739034)'></td></tr>
+</table><br>
+<form name='form1037739034' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='947'>
+<input type='hidden' name='val2' value='11/19/2002'>
+<input type='hidden' name='val3' value='IAD'>
+<input type='hidden' name='val4' value='mariam@isi.edu'>
+<input type='hidden' name='val5' value='3108220751'>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Tue Nov 19 08:00:10 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>Delta Air Lines</td></tr>
+<tr><td><b>of flight number</b></td><td>1111</td></tr>
+<tr><td><b>on date</b></td><td>11/19/2002</td></tr>
+<tr><td><b>from airport</b></td><td>SLC</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2><b>Delta Air Lines flight 1111</b></td></tr>
+<tr><td colspan=2>Dear mariam_at_isi_edu,<br/><br/>Your Delta Air Lines flight 1111 is still scheduled to depart SLC on-time at 10:00 AM Gate Not Available and is scheduled to arrive LAX at 10:50 AM Gate Not Available.<br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1037721610)'></td></tr>
+</table><br>
+<form name='form1037721610' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='Delta Air Lines'>
+<input type='hidden' name='val1' value='1111'>
+<input type='hidden' name='val2' value='11/19/2002'>
+<input type='hidden' name='val3' value='SLC'>
+<input type='hidden' name='val4' value='mariam@isi.edu'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Tue Nov 19 04:19:57 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>Delta Air Lines</td></tr>
+<tr><td><b>of flight number</b></td><td>2162</td></tr>
+<tr><td><b>on date</b></td><td>11/19/2002</td></tr>
+<tr><td><b>from airport</b></td><td>SFO</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2><b>Delta Air Lines flight 2162</b></td></tr>
+<tr><td colspan=2>Dear mariam_at_isi_edu,<br/><br/>Your Delta Air Lines flight 2162 is still scheduled to depart SFO on-time at 6:25 AM Gate Not Available and is scheduled to arrive SLC at 9:04 AM Gate Not Available.<br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1037708397)'></td></tr>
+</table><br>
+<form name='form1037708397' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='Delta Air Lines'>
+<input type='hidden' name='val1' value='2162'>
+<input type='hidden' name='val2' value='11/19/2002'>
+<input type='hidden' name='val3' value='SFO'>
+<input type='hidden' name='val4' value='mariam@isi.edu'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Mon Nov 18 21:09:24 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>Delta Air Lines</td></tr>
+<tr><td><b>of flight number</b></td><td>2049</td></tr>
+<tr><td><b>on date</b></td><td>11/18/2002</td></tr>
+<tr><td><b>from airport</b></td><td>SLC</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td>3108220751</td></tr>
+<tr><td><b>notify car rental fax</b></td><td>3108220751</td></tr>
+
+<tr><td colspan=2><b>Delta Air Lines flight 2049</b></td></tr>
+<tr><td colspan=2>Attention : Car Rental Counter <br/> <br/> I am sending this message on behalf of mariam_at_isi_edu to confirm the reservation. mariam_at_isi_edu is on Delta Air Lines 2049, which is now scheduled to arrive at SFO on 11/18/2002 at 10:41 PM.<br/><br/> Thank you,<br/><br/> Personal Assistant to mariam_at_isi_edu</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1037682564)'></td></tr>
+</table><br>
+<form name='form1037682564' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='Delta Air Lines'>
+<input type='hidden' name='val1' value='2049'>
+<input type='hidden' name='val2' value='11/18/2002'>
+<input type='hidden' name='val3' value='SLC'>
+<input type='hidden' name='val4' value='mariam@isi.edu'>
+<input type='hidden' name='val5' value='3108220751'>
+<input type='hidden' name='val6' value='3108220751'>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Mon Nov 18 20:29:16 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>Delta Air Lines</td></tr>
+<tr><td><b>of flight number</b></td><td>2049</td></tr>
+<tr><td><b>on date</b></td><td>11/18/2002</td></tr>
+<tr><td><b>from airport</b></td><td>SLC</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td>3108220751</td></tr>
+<tr><td><b>notify car rental fax</b></td><td>3108220751</td></tr>
+
+<tr><td colspan=2><b>Delta Air Lines flight 2049</b></td></tr>
+<tr><td colspan=2>Dear mariam_at_isi_edu,<br/><br/>Your Delta Air Lines flight 2049 is still scheduled to depart SLC on-time at 10:05 PM Gate Not Available and is scheduled to arrive SFO at 11:00 PM Gate Not Available.<br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1037680156)'></td></tr>
+</table><br>
+<form name='form1037680156' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='Delta Air Lines'>
+<input type='hidden' name='val1' value='2049'>
+<input type='hidden' name='val2' value='11/18/2002'>
+<input type='hidden' name='val3' value='SLC'>
+<input type='hidden' name='val4' value='mariam@isi.edu'>
+<input type='hidden' name='val5' value='3108220751'>
+<input type='hidden' name='val6' value='3108220751'>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Mon Nov 18 18:20:00 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>Delta Air Lines</td></tr>
+<tr><td><b>of flight number</b></td><td>2049</td></tr>
+<tr><td><b>on date</b></td><td>11/18/2002</td></tr>
+<tr><td><b>from airport</b></td><td>SLC</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td>3108220751</td></tr>
+<tr><td><b>notify car rental fax</b></td><td>3108220751</td></tr>
+
+<tr><td colspan=2><b>Delta Air Lines flight 2049</b></td></tr>
+<tr><td colspan=2>Attention : Registration Desk<br/><br/> I am sending this message on behalf of mariam_at_isi_edu, who has a reservation at your hotel. mariam_at_isi_edu is on Delta Air Lines 2049, which is now scheduled to arrive at at 11:00 PM. Since the flight will be arriving late, I would like to request that you indicate this in the reservation so that the room is not given away.<br/><br/> Thank you,<br/><br/> Personal Assistant to mariam_at_isi_edu</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1037672400)'></td></tr>
+</table><br>
+<form name='form1037672400' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='Delta Air Lines'>
+<input type='hidden' name='val1' value='2049'>
+<input type='hidden' name='val2' value='11/18/2002'>
+<input type='hidden' name='val3' value='SLC'>
+<input type='hidden' name='val4' value='mariam@isi.edu'>
+<input type='hidden' name='val5' value='3108220751'>
+<input type='hidden' name='val6' value='3108220751'>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Mon Nov 18 18:19:31 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>Delta Air Lines</td></tr>
+<tr><td><b>of flight number</b></td><td>324</td></tr>
+<tr><td><b>on date</b></td><td>11/18/2002</td></tr>
+<tr><td><b>from airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2><b>Delta Air Lines flight 324</b></td></tr>
+<tr><td colspan=2>Dear mariam_at_isi_edu,<br/><br/>Your Delta Air Lines flight 324 is still scheduled to depart LAX on-time at 6:19 PM Gate Not Available and is scheduled to arrive SLC at 9:05 PM Gate Not Available.<br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1037672371)'></td></tr>
+</table><br>
+<form name='form1037672371' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='Delta Air Lines'>
+<input type='hidden' name='val1' value='324'>
+<input type='hidden' name='val2' value='11/18/2002'>
+<input type='hidden' name='val3' value='LAX'>
+<input type='hidden' name='val4' value='mariam@isi.edu'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Thu Nov 14 13:06:14 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>947</td></tr>
+<tr><td><b>on date</b></td><td>11/14/2002</td></tr>
+<tr><td><b>from airport</b></td><td>IAD</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2><b>United Airlines flight 947</b></td></tr>
+<tr><td colspan=2>Dear mariam_at_isi_edu,<br/><br/>Your United Airlines flight 947 is still scheduled to depart IAD on-time at 5:50 PM Gate D5 and is scheduled to arrive LAX at 8:10 PM Gate 72.<br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1037307974)'></td></tr>
+</table><br>
+<form name='form1037307974' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='947'>
+<input type='hidden' name='val2' value='11/14/2002'>
+<input type='hidden' name='val3' value='IAD'>
+<input type='hidden' name='val4' value='mariam@isi.edu'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Tue Nov 12 17:12:39 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>7333</td></tr>
+<tr><td><b>on date</b></td><td>11/12/2002</td></tr>
+<tr><td><b>from airport</b></td><td>PHL</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2><b>United Airlines flight 7333</b></td></tr>
+<tr><td colspan=2><br/> Dear mariam_at_isi_edu, <br/><br/>Your United Airlines flight 7333 has been delayed. It was originally scheduled to depart at 8:00 PM and is now scheduled to depart at 8:26 PM. The gate is D5 and the new arrival time is 9:28 PM.<br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1037149959)'></td></tr>
+</table><br>
+<form name='form1037149959' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='7333'>
+<input type='hidden' name='val2' value='11/12/2002'>
+<input type='hidden' name='val3' value='PHL'>
+<input type='hidden' name='val4' value='mariam@isi.edu'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Tue Nov 12 15:42:31 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>7333</td></tr>
+<tr><td><b>on date</b></td><td>11/12/2002</td></tr>
+<tr><td><b>from airport</b></td><td>PHL</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2><b>United Airlines flight 7333</b></td></tr>
+<tr><td colspan=2><br/> Dear mariam_at_isi_edu, <br/><br/>Your United Airlines flight 7333 has been delayed. It was originally scheduled to depart at 7:40 PM and is now scheduled to depart at 8:00 PM. The gate is D5 and the new arrival time is 9:02 PM.<br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1037144551)'></td></tr>
+</table><br>
+<form name='form1037144551' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='7333'>
+<input type='hidden' name='val2' value='11/12/2002'>
+<input type='hidden' name='val3' value='PHL'>
+<input type='hidden' name='val4' value='mariam@isi.edu'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Tue Nov 12 14:42:30 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>7333</td></tr>
+<tr><td><b>on date</b></td><td>11/12/2002</td></tr>
+<tr><td><b>from airport</b></td><td>PHL</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2><b>United Airlines flight 7333</b></td></tr>
+<tr><td colspan=2><br/> Dear mariam_at_isi_edu, <br/><br/>Your United Airlines flight 7333 has been delayed. It was originally scheduled to depart at 7:10 PM and is now scheduled to depart at 7:40 PM. The gate is D5 and the new arrival time is 8:49 PM.<br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1037140950)'></td></tr>
+</table><br>
+<form name='form1037140950' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='7333'>
+<input type='hidden' name='val2' value='11/12/2002'>
+<input type='hidden' name='val3' value='PHL'>
+<input type='hidden' name='val4' value='mariam@isi.edu'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Tue Nov 12 14:02:28 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>7333</td></tr>
+<tr><td><b>on date</b></td><td>11/12/2002</td></tr>
+<tr><td><b>from airport</b></td><td>PHL</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2><b>United Airlines flight 7333</b></td></tr>
+<tr><td colspan=2>Dear mariam_at_isi_edu,<br/><br/>Your United Airlines flight 7333 is still scheduled to depart PHL on-time at 7:10 PM Gate D5 and is scheduled to arrive IAD at 8:19 PM Gate A7.<br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1037138548)'></td></tr>
+</table><br>
+<form name='form1037138548' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='7333'>
+<input type='hidden' name='val2' value='11/12/2002'>
+<input type='hidden' name='val3' value='PHL'>
+<input type='hidden' name='val4' value='mariam@isi.edu'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Thu Nov  7 17:03:04 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>888</td></tr>
+<tr><td><b>on date</b></td><td>11/7/2002</td></tr>
+<tr><td><b>from airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2><b>United Airlines flight 888</b></td></tr>
+<tr><td colspan=2><br/> Dear mariam_at_isi_edu, <br/><br/>Your United Airlines flight 888 will be departing early. It was originally scheduled to depart at 5:15 PM and is now scheduled to dpeart at 5:00 PM. The gate is 83 and the new arrival time is 6:15 PM.<br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1036717384)'></td></tr>
+</table><br>
+<form name='form1036717384' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='888'>
+<input type='hidden' name='val2' value='11/7/2002'>
+<input type='hidden' name='val3' value='LAX'>
+<input type='hidden' name='val4' value='mariam@isi.edu'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Thu Nov  7 16:52:57 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>1828</td></tr>
+<tr><td><b>on date</b></td><td>11/7/2002</td></tr>
+<tr><td><b>from airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2><b>United Airlines flight 1828</b></td></tr>
+<tr><td colspan=2><br/> Dear mariam_at_isi_edu, <br/><br/>Your United Airlines flight 1828 has been delayed. It was originally scheduled to depart at 5:00 PM and is now scheduled to depart at 5:30 PM. The gate is 67A and the new arrival time is 6:45 PM.<br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1036716777)'></td></tr>
+</table><br>
+<form name='form1036716777' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='1828'>
+<input type='hidden' name='val2' value='11/7/2002'>
+<input type='hidden' name='val3' value='LAX'>
+<input type='hidden' name='val4' value='mariam@isi.edu'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Thu Nov  7 16:42:57 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>888</td></tr>
+<tr><td><b>on date</b></td><td>11/7/2002</td></tr>
+<tr><td><b>from airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2><b>United Airlines flight 888</b></td></tr>
+<tr><td colspan=2><br/> Dear mariam_at_isi_edu, <br/><br/>Your United Airlines flight 888 has been delayed. It was originally scheduled to depart at 5:00 PM and is now scheduled to depart at 5:15 PM. The gate is 83 and the new arrival time is 6:30 PM.<br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1036716177)'></td></tr>
+</table><br>
+<form name='form1036716177' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='888'>
+<input type='hidden' name='val2' value='11/7/2002'>
+<input type='hidden' name='val3' value='LAX'>
+<input type='hidden' name='val4' value='mariam@isi.edu'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Thu Nov  7 15:52:56 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>1828</td></tr>
+<tr><td><b>on date</b></td><td>11/7/2002</td></tr>
+<tr><td><b>from airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2><b>United Airlines flight 1828</b></td></tr>
+<tr><td colspan=2><br/> Dear mariam_at_isi_edu, <br/><br/>Your United Airlines flight 1828 has been delayed. It was originally scheduled to depart at 4:30 PM and is now scheduled to depart at 5:00 PM. The gate is 67A and the new arrival time is 6:15 PM.<br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1036713176)'></td></tr>
+</table><br>
+<form name='form1036713176' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='1828'>
+<input type='hidden' name='val2' value='11/7/2002'>
+<input type='hidden' name='val3' value='LAX'>
+<input type='hidden' name='val4' value='mariam@isi.edu'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Thu Nov  7 14:52:55 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>888</td></tr>
+<tr><td><b>on date</b></td><td>11/7/2002</td></tr>
+<tr><td><b>from airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2><b>United Airlines flight 888</b></td></tr>
+<tr><td colspan=2>Dear mariam_at_isi_edu,<br/><br/>Your United Airlines flight 888 is still scheduled to depart LAX on-time at 5:00 PM Gate 83 and is scheduled to arrive SFO at 6:15 PM Gate 77.<br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1036709575)'></td></tr>
+</table><br>
+<form name='form1036709575' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='888'>
+<input type='hidden' name='val2' value='11/7/2002'>
+<input type='hidden' name='val3' value='LAX'>
+<input type='hidden' name='val4' value='mariam@isi.edu'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Thu Nov  7 14:52:51 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>1828</td></tr>
+<tr><td><b>on date</b></td><td>11/7/2002</td></tr>
+<tr><td><b>from airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2><b>United Airlines flight 1828</b></td></tr>
+<tr><td colspan=2><br/> Dear mariam_at_isi_edu, <br/><br/>Your United Airlines flight 1828 has been delayed. It was originally scheduled to depart at 4:15 PM and is now scheduled to depart at 4:30 PM. The gate is 80 and the new arrival time is 5:45 PM.<br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1036709571)'></td></tr>
+</table><br>
+<form name='form1036709571' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='1828'>
+<input type='hidden' name='val2' value='11/7/2002'>
+<input type='hidden' name='val3' value='LAX'>
+<input type='hidden' name='val4' value='mariam@isi.edu'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Thu Nov  7 14:12:51 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>1828</td></tr>
+<tr><td><b>on date</b></td><td>11/7/2002</td></tr>
+<tr><td><b>from airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2><b>United Airlines flight 1828</b></td></tr>
+<tr><td colspan=2><br/> Dear mariam_at_isi_edu, <br/><br/>Your United Airlines flight 1828 has been delayed. It was originally scheduled to depart at 4:00 PM and is now scheduled to depart at 4:15 PM. The gate is 80 and the new arrival time is 5:30 PM.<br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1036707171)'></td></tr>
+</table><br>
+<form name='form1036707171' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='1828'>
+<input type='hidden' name='val2' value='11/7/2002'>
+<input type='hidden' name='val3' value='LAX'>
+<input type='hidden' name='val4' value='mariam@isi.edu'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Thu Nov  7 14:12:51 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>1828</td></tr>
+<tr><td><b>on date</b></td><td>11/7/2002</td></tr>
+<tr><td><b>from airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2><b>United Airlines flight 1828</b></td></tr>
+<tr><td colspan=2>Dear mariam_at_isi_edu,<br/><br/>Your United Airlines flight 1828 is still scheduled to depart LAX on-time at 4:15 PM Gate 80 and is scheduled to arrive SFO at 5:30 PM Gate 68.<br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1036707171)'></td></tr>
+</table><br>
+<form name='form1036707171' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='1828'>
+<input type='hidden' name='val2' value='11/7/2002'>
+<input type='hidden' name='val3' value='LAX'>
+<input type='hidden' name='val4' value='mariam@isi.edu'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Wed Nov  6 13:59:56 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>1828</td></tr>
+<tr><td><b>on date</b></td><td>11/6/2002</td></tr>
+<tr><td><b>from airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2><b>United Airlines flight 1828</b></td></tr>
+<tr><td colspan=2>Dear mariam_at_isi_edu,<br/><br/>Your United Airlines flight 1828 is still scheduled to depart LAX on-time at 4:00 PM Gate 81 and is scheduled to arrive SFO at 5:11 PM Gate 77A.<br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1036619996)'></td></tr>
+</table><br>
+<form name='form1036619996' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='1828'>
+<input type='hidden' name='val2' value='11/6/2002'>
+<input type='hidden' name='val3' value='LAX'>
+<input type='hidden' name='val4' value='mariam@isi.edu'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Tue Nov  5 15:54:17 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>America West Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>33</td></tr>
+<tr><td><b>on date</b></td><td>11/5/2002</td></tr>
+<tr><td><b>from airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2><b>America West Airlines flight 33</b></td></tr>
+<tr><td colspan=2><br/> Dear mariam_at_isi_edu, <br/><br/>Your America West Airlines flight 33 has been delayed. It was originally scheduled to depart at 3:59 PM and is now scheduled to depart at 6:25 PM. The gate is 11 and the new arrival time is 8:48 PM.<br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1036540457)'></td></tr>
+</table><br>
+<form name='form1036540457' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='America West Airlines'>
+<input type='hidden' name='val1' value='33'>
+<input type='hidden' name='val2' value='11/5/2002'>
+<input type='hidden' name='val3' value='LAX'>
+<input type='hidden' name='val4' value='mariam@isi.edu'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Tue Nov  5 15:53:40 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>America West Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>813</td></tr>
+<tr><td><b>on date</b></td><td>11/5/2002</td></tr>
+<tr><td><b>from airport</b></td><td>PHX</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2><b>America West Airlines flight 813</b></td></tr>
+<tr><td colspan=2><br/> Dear mariam_at_isi_edu, <br/><br/>Your America West Airlines flight 813 has been delayed. It was originally scheduled to depart at 3:59 PM and is now scheduled to depart at 10:38 PM. The gate is A19 and the new arrival time is 11:34 PM.<br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1036540420)'></td></tr>
+</table><br>
+<form name='form1036540420' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='America West Airlines'>
+<input type='hidden' name='val1' value='813'>
+<input type='hidden' name='val2' value='11/5/2002'>
+<input type='hidden' name='val3' value='PHX'>
+<input type='hidden' name='val4' value='mariam@isi.edu'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Tue Nov  5 15:53:38 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>America West Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>110</td></tr>
+<tr><td><b>on date</b></td><td>11/6/2002</td></tr>
+<tr><td><b>from airport</b></td><td>SFO</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2><b>America West Airlines flight 110</b></td></tr>
+<tr><td colspan=2><br/> Dear mariam_at_isi_edu, <br/><br/>Your America West Airlines flight 110 has been delayed. It was originally scheduled to depart at 3:59 PM and is now scheduled to depart at 11:10 AM. The gate is Not Available and the new arrival time is 12:34 PM.<br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1036540418)'></td></tr>
+</table><br>
+<form name='form1036540418' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='America West Airlines'>
+<input type='hidden' name='val1' value='110'>
+<input type='hidden' name='val2' value='11/6/2002'>
+<input type='hidden' name='val3' value='SFO'>
+<input type='hidden' name='val4' value='mariam@isi.edu'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Tue Nov  5 14:59:55 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>104</td></tr>
+<tr><td><b>on date</b></td><td>11/5/2002</td></tr>
+<tr><td><b>from airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2><b>United Airlines flight 104</b></td></tr>
+<tr><td colspan=2><br/> Dear mariam_at_isi_edu, <br/><br/>Your United Airlines flight 104 has been delayed. It was originally scheduled to depart at 3:40 PM and is now scheduled to depart at 3:55 PM. The gate is 76 and the new arrival time is 9:30 PM.<br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1036537195)'></td></tr>
+</table><br>
+<form name='form1036537195' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='104'>
+<input type='hidden' name='val2' value='11/5/2002'>
+<input type='hidden' name='val3' value='LAX'>
+<input type='hidden' name='val4' value='mariam@isi.edu'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Tue Nov  5 14:59:49 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>104</td></tr>
+<tr><td><b>on date</b></td><td>11/5/2002</td></tr>
+<tr><td><b>from airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2><b>United Airlines flight 104</b></td></tr>
+<tr><td colspan=2><br/> Dear mariam_at_isi_edu, <br/><br/>Your United Airlines flight 104 has been delayed. It was originally scheduled to depart at 3:40 PM and is now scheduled to depart at 3:55 PM. The gate is 76 and the new arrival time is 9:30 PM.<br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1036537189)'></td></tr>
+</table><br>
+<form name='form1036537189' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='104'>
+<input type='hidden' name='val2' value='11/5/2002'>
+<input type='hidden' name='val3' value='LAX'>
+<input type='hidden' name='val4' value='mariam@isi.edu'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Tue Nov  5 14:39:53 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>104</td></tr>
+<tr><td><b>on date</b></td><td>11/5/2002</td></tr>
+<tr><td><b>from airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2><b>United Airlines flight 104</b></td></tr>
+<tr><td colspan=2><br/> Dear mariam_at_isi_edu, <br/><br/>Your United Airlines flight 104 has been delayed. It was originally scheduled to depart at 3:15 PM and is now scheduled to depart at 3:40 PM. The gate is 76 and the new arrival time is 9:15 PM.<br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1036535993)'></td></tr>
+</table><br>
+<form name='form1036535993' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='104'>
+<input type='hidden' name='val2' value='11/5/2002'>
+<input type='hidden' name='val3' value='LAX'>
+<input type='hidden' name='val4' value='mariam@isi.edu'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Tue Nov  5 14:39:42 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>104</td></tr>
+<tr><td><b>on date</b></td><td>11/5/2002</td></tr>
+<tr><td><b>from airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2><b>United Airlines flight 104</b></td></tr>
+<tr><td colspan=2><br/> Dear mariam_at_isi_edu, <br/><br/>Your United Airlines flight 104 has been delayed. It was originally scheduled to depart at 3:15 PM and is now scheduled to depart at 3:40 PM. The gate is 76 and the new arrival time is 9:15 PM.<br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1036535982)'></td></tr>
+</table><br>
+<form name='form1036535982' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='104'>
+<input type='hidden' name='val2' value='11/5/2002'>
+<input type='hidden' name='val3' value='LAX'>
+<input type='hidden' name='val4' value='mariam@isi.edu'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Tue Nov  5 14:29:52 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>American Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>1950</td></tr>
+<tr><td><b>on date</b></td><td>11/5/2002</td></tr>
+<tr><td><b>from airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2><b>American Airlines flight 1950</b></td></tr>
+<tr><td colspan=2><br/> Dear mariam_at_isi_edu, <br/><br/>Your American Airlines flight 1950 has been delayed. It was originally scheduled to depart at 3:59 PM and is now scheduled to depart at 5:20 PM. The gate is 37A and the new arrival time is 6:39 PM.<br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1036535392)'></td></tr>
+</table><br>
+<form name='form1036535392' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='American Airlines'>
+<input type='hidden' name='val1' value='1950'>
+<input type='hidden' name='val2' value='11/5/2002'>
+<input type='hidden' name='val3' value='LAX'>
+<input type='hidden' name='val4' value='mariam@isi.edu'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Tue Nov  5 14:29:46 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>American Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>1915</td></tr>
+<tr><td><b>on date</b></td><td>11/6/2002</td></tr>
+<tr><td><b>from airport</b></td><td>SFO</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2><b>American Airlines flight 1915</b></td></tr>
+<tr><td colspan=2><br/> Dear mariam_at_isi_edu, <br/><br/>Your American Airlines flight 1915 has been delayed. It was originally scheduled to depart at 3:59 PM and is now scheduled to depart at 10:55 AM. The gate is 62B and the new arrival time is 12:19 PM.<br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1036535386)'></td></tr>
+</table><br>
+<form name='form1036535386' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='American Airlines'>
+<input type='hidden' name='val1' value='1915'>
+<input type='hidden' name='val2' value='11/6/2002'>
+<input type='hidden' name='val3' value='SFO'>
+<input type='hidden' name='val4' value='mariam@isi.edu'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Tue Nov  5 13:32:09 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>104</td></tr>
+<tr><td><b>on date</b></td><td>11/5/2002</td></tr>
+<tr><td><b>from airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2><b>United Airlines flight 104</b></td></tr>
+<tr><td colspan=2>Dear mariam_at_isi_edu,<br/><br/>Your United Airlines flight 104 is still scheduled to depart LAX on-time at 3:15 PM Gate 76 and is scheduled to arrive ORD at 8:50 PM Gate B17.<br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1036531929)'></td></tr>
+</table><br>
+<form name='form1036531929' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='104'>
+<input type='hidden' name='val2' value='11/5/2002'>
+<input type='hidden' name='val3' value='LAX'>
+<input type='hidden' name='val4' value='mariam@isi.edu'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Tue Nov  5 13:32:09 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>104</td></tr>
+<tr><td><b>on date</b></td><td>11/5/2002</td></tr>
+<tr><td><b>from airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2><b>United Airlines flight 104</b></td></tr>
+<tr><td colspan=2><br/> Dear mariam_at_isi_edu, <br/><br/>Your United Airlines flight 104 has been delayed. It was originally scheduled to depart at 3:59 PM and is now scheduled to depart at 3:15 PM. The gate is 76 and the new arrival time is 8:50 PM.<br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1036531929)'></td></tr>
+</table><br>
+<form name='form1036531929' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='104'>
+<input type='hidden' name='val2' value='11/5/2002'>
+<input type='hidden' name='val3' value='LAX'>
+<input type='hidden' name='val4' value='mariam@isi.edu'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Tue Nov  5 13:31:53 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>104</td></tr>
+<tr><td><b>on date</b></td><td>11/5/2002</td></tr>
+<tr><td><b>from airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2><b>United Airlines flight 104</b></td></tr>
+<tr><td colspan=2>Dear mariam_at_isi_edu,<br/><br/>Your United Airlines flight 104 is still scheduled to depart LAX on-time at 3:15 PM Gate 76 and is scheduled to arrive ORD at 8:50 PM Gate B17.<br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1036531913)'></td></tr>
+</table><br>
+<form name='form1036531913' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='104'>
+<input type='hidden' name='val2' value='11/5/2002'>
+<input type='hidden' name='val3' value='LAX'>
+<input type='hidden' name='val4' value='mariam@isi.edu'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Tue Nov  5 13:31:52 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>104</td></tr>
+<tr><td><b>on date</b></td><td>11/5/2002</td></tr>
+<tr><td><b>from airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2><b>United Airlines flight 104</b></td></tr>
+<tr><td colspan=2><br/> Dear mariam_at_isi_edu, <br/><br/>Your United Airlines flight 104 has been delayed. It was originally scheduled to depart at 3:59 PM and is now scheduled to depart at 3:15 PM. The gate is 76 and the new arrival time is 8:50 PM.<br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1036531912)'></td></tr>
+</table><br>
+<form name='form1036531912' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='104'>
+<input type='hidden' name='val2' value='11/5/2002'>
+<input type='hidden' name='val3' value='LAX'>
+<input type='hidden' name='val4' value='mariam@isi.edu'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Tue Nov  5 13:31:31 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>1244</td></tr>
+<tr><td><b>on date</b></td><td>11/5/2002</td></tr>
+<tr><td><b>from airport</b></td><td>ORD</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2><b>United Airlines flight 1244</b></td></tr>
+<tr><td colspan=2><br/> Dear mariam_at_isi_edu, <br/><br/>Your United Airlines flight 1244 has been delayed. It was originally scheduled to depart at 3:59 PM and is now scheduled to depart at 8:50 PM. The gate is C9 and the new arrival time is 11:31 PM.<br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1036531891)'></td></tr>
+</table><br>
+<form name='form1036531891' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='1244'>
+<input type='hidden' name='val2' value='11/5/2002'>
+<input type='hidden' name='val3' value='ORD'>
+<input type='hidden' name='val4' value='mariam@isi.edu'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Tue Nov  5 13:31:23 PST 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>1801</td></tr>
+<tr><td><b>on date</b></td><td>11/6/2002</td></tr>
+<tr><td><b>from airport</b></td><td>SFO</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2><b>United Airlines flight 1801</b></td></tr>
+<tr><td colspan=2><br/> Dear mariam_at_isi_edu, <br/><br/>Your United Airlines flight 1801 has been delayed. It was originally scheduled to depart at 3:59 PM and is now scheduled to depart at 6:10 AM. The gate is 72 and the new arrival time is 7:26 AM.<br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1036531883)'></td></tr>
+</table><br>
+<form name='form1036531883' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='1801'>
+<input type='hidden' name='val2' value='11/6/2002'>
+<input type='hidden' name='val3' value='SFO'>
+<input type='hidden' name='val4' value='mariam@isi.edu'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Wed Oct 23 17:59:37 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>American Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>1950</td></tr>
+<tr><td><b>on date</b></td><td>10/23/2002</td></tr>
+<tr><td><b>from airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td>1-310-822-0751</td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2><b>American Airlines flight 1950</b></td></tr>
+<tr><td colspan=2><br/> Dear mariam_at_isi_edu, <br/><br/>Your American Airlines flight 1950 has been delayed. It was originally scheduled to depart at 6:10 PM and is now scheduled to depart at 6:25 PM. The gate is 35 and the new arrival time is 7:34 PM.<br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1035421177)'></td></tr>
+</table><br>
+<form name='form1035421177' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='American Airlines'>
+<input type='hidden' name='val1' value='1950'>
+<input type='hidden' name='val2' value='10/23/2002'>
+<input type='hidden' name='val3' value='LAX'>
+<input type='hidden' name='val4' value='mariam@isi.edu'>
+<input type='hidden' name='val5' value='1-310-822-0751'>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Wed Oct 23 16:59:23 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>American Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>1950</td></tr>
+<tr><td><b>on date</b></td><td>10/23/2002</td></tr>
+<tr><td><b>from airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td>1-310-822-0751</td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2><b>American Airlines flight 1950</b></td></tr>
+<tr><td colspan=2><br/> Dear mariam_at_isi_edu, <br/><br/>Your American Airlines flight 1950 has been delayed. It was originally scheduled to depart at 5:50 PM and is now scheduled to depart at 6:10 PM. The gate is 35 and the new arrival time is 7:19 PM.<br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1035417563)'></td></tr>
+</table><br>
+<form name='form1035417563' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='American Airlines'>
+<input type='hidden' name='val1' value='1950'>
+<input type='hidden' name='val2' value='10/23/2002'>
+<input type='hidden' name='val3' value='LAX'>
+<input type='hidden' name='val4' value='mariam@isi.edu'>
+<input type='hidden' name='val5' value='1-310-822-0751'>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Wed Oct 23 16:39:18 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>American Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>1950</td></tr>
+<tr><td><b>on date</b></td><td>10/23/2002</td></tr>
+<tr><td><b>from airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td>1-310-822-0751</td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2><b>American Airlines flight 1950</b></td></tr>
+<tr><td colspan=2><br/> Dear mariam_at_isi_edu, <br/><br/>Your American Airlines flight 1950 has been delayed. It was originally scheduled to depart at 5:20 PM and is now scheduled to depart at 5:50 PM. The gate is 35 and the new arrival time is 6:59 PM.<br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1035416358)'></td></tr>
+</table><br>
+<form name='form1035416358' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='American Airlines'>
+<input type='hidden' name='val1' value='1950'>
+<input type='hidden' name='val2' value='10/23/2002'>
+<input type='hidden' name='val3' value='LAX'>
+<input type='hidden' name='val4' value='mariam@isi.edu'>
+<input type='hidden' name='val5' value='1-310-822-0751'>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Wed Oct 23 15:09:26 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>American Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>1950</td></tr>
+<tr><td><b>on date</b></td><td>10/23/2002</td></tr>
+<tr><td><b>from airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td>1-310-822-0751</td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2><b>American Airlines flight 1950</b></td></tr>
+<tr><td colspan=2>Dear mariam_at_isi_edu,<br/><br/>Your American Airlines flight 1950 is still scheduled to depart LAX on-time at 5:20 PM Gate 35 and is scheduled to arrive SFO at 6:31 PM Gate 64A.<br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1035410966)'></td></tr>
+</table><br>
+<form name='form1035410966' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='American Airlines'>
+<input type='hidden' name='val1' value='1950'>
+<input type='hidden' name='val2' value='10/23/2002'>
+<input type='hidden' name='val3' value='LAX'>
+<input type='hidden' name='val4' value='mariam@isi.edu'>
+<input type='hidden' name='val5' value='1-310-822-0751'>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Wed Oct 23 15:09:26 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>American Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>1950</td></tr>
+<tr><td><b>on date</b></td><td>10/23/2002</td></tr>
+<tr><td><b>from airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td>1-310-822-0751</td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2><b>American Airlines flight 1950</b></td></tr>
+<tr><td colspan=2>Attention : Registration Desk<br/><br/> I am sending this message on behalf of mariam_at_isi_edu, who has a reservation at your hotel. mariam_at_isi_edu is on American Airlines 1950, which is now scheduled to arrive at at 6:31 PM. Since the flight will be arriving late, I would like to request that you indicate this in the reservation so that the room is not given away.<br/><br/> Thank you,<br/><br/> Personal Assistant to mariam_at_isi_edu</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1035410966)'></td></tr>
+</table><br>
+<form name='form1035410966' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='American Airlines'>
+<input type='hidden' name='val1' value='1950'>
+<input type='hidden' name='val2' value='10/23/2002'>
+<input type='hidden' name='val3' value='LAX'>
+<input type='hidden' name='val4' value='mariam@isi.edu'>
+<input type='hidden' name='val5' value='1-310-822-0751'>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Tue Oct 22 13:36:01 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>Delta Air Lines</td></tr>
+<tr><td><b>of flight number</b></td><td>1297</td></tr>
+<tr><td><b>on date</b></td><td>10/22/2002</td></tr>
+<tr><td><b>from airport</b></td><td>DCA</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2><b>Delta Air Lines flight 1297</b></td></tr>
+<tr><td colspan=2>Dear mariam_at_isi_edu,<br/><br/>Your Delta Air Lines flight 1297 is still scheduled to depart DCA on-time at 7:05 PM Gate Not Available and is scheduled to arrive ATL at 8:57 PM Gate Not Available.<br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1035318961)'></td></tr>
+</table><br>
+<form name='form1035318961' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='Delta Air Lines'>
+<input type='hidden' name='val1' value='1297'>
+<input type='hidden' name='val2' value='10/22/2002'>
+<input type='hidden' name='val3' value='DCA'>
+<input type='hidden' name='val4' value='mariam@isi.edu'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Thu Oct 17 15:44:32 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>American Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>1939</td></tr>
+<tr><td><b>on date</b></td><td>10/17/2002</td></tr>
+<tr><td><b>from airport</b></td><td>SFO</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2><b>American Airlines flight 1939</b></td></tr>
+<tr><td colspan=2>Dear mariam_at_isi_edu,<br/><br/>Your American Airlines flight 1939 is still scheduled to depart SFO on-time at 5:40 PM Gate 63 and is scheduled to arrive LAX at 7:03 PM Gate 35.<br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1034894672)'></td></tr>
+</table><br>
+<form name='form1034894672' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='American Airlines'>
+<input type='hidden' name='val1' value='1939'>
+<input type='hidden' name='val2' value='10/17/2002'>
+<input type='hidden' name='val3' value='SFO'>
+<input type='hidden' name='val4' value='mariam@isi.edu'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Wed Oct 16 13:24:00 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>American Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>1942</td></tr>
+<tr><td><b>on date</b></td><td>10/16/2002</td></tr>
+<tr><td><b>from airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2><b>American Airlines flight 1942</b></td></tr>
+<tr><td colspan=2>Dear mariam_at_isi_edu,<br/><br/>Your American Airlines flight 1942 is still scheduled to depart LAX on-time at 3:40 PM Gate 35 and is scheduled to arrive SFO at 4:54 PM Gate 62B.<br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1034799840)'></td></tr>
+</table><br>
+<form name='form1034799840' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='American Airlines'>
+<input type='hidden' name='val1' value='1942'>
+<input type='hidden' name='val2' value='10/16/2002'>
+<input type='hidden' name='val3' value='LAX'>
+<input type='hidden' name='val4' value='mariam@isi.edu'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Tue Oct 15 16:54:47 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>1836</td></tr>
+<tr><td><b>on date</b></td><td>10/15/2002</td></tr>
+<tr><td><b>from airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2><b>United Airlines flight 1836</b></td></tr>
+<tr><td colspan=2>Dear mariam_at_isi_edu,<br/><br/>Your United Airlines flight 1836 is still scheduled to depart LAX on-time at 7:05 PM Gate 80 and is scheduled to arrive SFO at 8:15 PM Gate 71.<br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1034726087)'></td></tr>
+</table><br>
+<form name='form1034726087' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='1836'>
+<input type='hidden' name='val2' value='10/15/2002'>
+<input type='hidden' name='val3' value='LAX'>
+<input type='hidden' name='val4' value='mariam@isi.edu'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Tue Oct 15 15:04:13 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>American Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>1950</td></tr>
+<tr><td><b>on date</b></td><td>10/15/2002</td></tr>
+<tr><td><b>from airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2><b>American Airlines flight 1950</b></td></tr>
+<tr><td colspan=2>Dear mariam_at_isi_edu,<br/><br/>Your American Airlines flight 1950 is still scheduled to depart LAX on-time at 5:20 PM Gate 35 and is scheduled to arrive SFO at 6:31 PM Gate 63.<br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1034719453)'></td></tr>
+</table><br>
+<form name='form1034719453' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='American Airlines'>
+<input type='hidden' name='val1' value='1950'>
+<input type='hidden' name='val2' value='10/15/2002'>
+<input type='hidden' name='val3' value='LAX'>
+<input type='hidden' name='val4' value='mariam@isi.edu'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Tue Oct 15 10:34:37 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>95</td></tr>
+<tr><td><b>on date</b></td><td>10/15/2002</td></tr>
+<tr><td><b>from airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2><b>United Airlines flight 95</b></td></tr>
+<tr><td colspan=2>Dear mariam_at_isi_edu,<br/><br/>Your United Airlines flight 95 is still scheduled to depart LAX on-time at 12:45 PM Gate 83 and is scheduled to arrive SFO at 2:09 PM Gate 87.<br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1034703277)'></td></tr>
+</table><br>
+<form name='form1034703277' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='95'>
+<input type='hidden' name='val2' value='10/15/2002'>
+<input type='hidden' name='val3' value='LAX'>
+<input type='hidden' name='val4' value='mariam@isi.edu'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Tue Oct 15 10:34:37 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>95</td></tr>
+<tr><td><b>on date</b></td><td>10/15/2002</td></tr>
+<tr><td><b>from airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2><b>United Airlines flight 95</b></td></tr>
+<tr><td colspan=2>Dear mariam_at_isi_edu,<br/><br/>Your United Airlines flight 95 is still scheduled to depart LAX on-time at 12:45 PM Gate 83 and is scheduled to arrive SFO at 2:09 PM Gate 87.<br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1034703277)'></td></tr>
+</table><br>
+<form name='form1034703277' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='95'>
+<input type='hidden' name='val2' value='10/15/2002'>
+<input type='hidden' name='val3' value='LAX'>
+<input type='hidden' name='val4' value='mariam@isi.edu'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Mon Oct 14 19:15:39 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>America West Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>120</td></tr>
+<tr><td><b>on date</b></td><td>10/14/2002</td></tr>
+<tr><td><b>from airport</b></td><td>LAS</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2><b>America West Airlines flight 120</b></td></tr>
+<tr><td colspan=2>Dear mariam_at_isi_edu,<br/><br/>Your America West Airlines flight 120 is still scheduled to depart LAS on-time at 9:30 PM Gate B12 and is scheduled to arrive LAX at 10:39 PM Gate 9.<br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1034648139)'></td></tr>
+</table><br>
+<form name='form1034648139' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='America West Airlines'>
+<input type='hidden' name='val1' value='120'>
+<input type='hidden' name='val2' value='10/14/2002'>
+<input type='hidden' name='val3' value='LAS'>
+<input type='hidden' name='val4' value='mariam@isi.edu'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Mon Oct 14 15:05:32 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>1819</td></tr>
+<tr><td><b>on date</b></td><td>10/14/2002</td></tr>
+<tr><td><b>from airport</b></td><td>SFO</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2><b>United Airlines flight 1819</b></td></tr>
+<tr><td colspan=2>Dear mariam_at_isi_edu,<br/><br/>Your United Airlines flight 1819 is still scheduled to depart SFO on-time at 4:55 PM Gate 76 and is scheduled to arrive LAX at 6:05 PM Gate 80.<br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1034633132)'></td></tr>
+</table><br>
+<form name='form1034633132' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='1819'>
+<input type='hidden' name='val2' value='10/14/2002'>
+<input type='hidden' name='val3' value='SFO'>
+<input type='hidden' name='val4' value='mariam@isi.edu'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Mon Oct 14 13:55:19 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>1837</td></tr>
+<tr><td><b>on date</b></td><td>10/14/2002</td></tr>
+<tr><td><b>from airport</b></td><td>SFO</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2><b>United Airlines flight 1837</b></td></tr>
+<tr><td colspan=2>Dear mariam_at_isi_edu,<br/><br/>Your United Airlines flight 1837 is still scheduled to depart SFO on-time at 3:35 PM Gate 73 and is scheduled to arrive LAX at 4:46 PM Gate 83.<br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1034628919)'></td></tr>
+</table><br>
+<form name='form1034628919' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='1837'>
+<input type='hidden' name='val2' value='10/14/2002'>
+<input type='hidden' name='val3' value='SFO'>
+<input type='hidden' name='val4' value='mariam@isi.edu'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Mon Oct 14 13:45:22 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>American Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>1942</td></tr>
+<tr><td><b>on date</b></td><td>10/14/2002</td></tr>
+<tr><td><b>from airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2><b>American Airlines flight 1942</b></td></tr>
+<tr><td colspan=2>Dear mariam_at_isi_edu,<br/><br/>Your American Airlines flight 1942 is still scheduled to depart LAX on-time at 3:40 PM Gate 35 and is scheduled to arrive SFO at 4:54 PM Gate 62B.<br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1034628322)'></td></tr>
+</table><br>
+<form name='form1034628322' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='American Airlines'>
+<input type='hidden' name='val1' value='1942'>
+<input type='hidden' name='val2' value='10/14/2002'>
+<input type='hidden' name='val3' value='LAX'>
+<input type='hidden' name='val4' value='mariam@isi.edu'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Fri Oct 11 17:33:55 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>Alaska Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>665</td></tr>
+<tr><td><b>on date</b></td><td>10/11/2002</td></tr>
+<tr><td><b>from airport</b></td><td>LAS</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2><b>Alaska Airlines flight 665</b></td></tr>
+<tr><td colspan=2>Dear mariam_at_isi_edu,<br/><br/>Your Alaska Airlines flight 665 is still scheduled to depart LAS on-time at 5:58 PM Gate Not Available and is scheduled to arrive SEA at 8:28 PM Gate Not Available.<br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1034382835)'></td></tr>
+</table><br>
+<form name='form1034382835' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='Alaska Airlines'>
+<input type='hidden' name='val1' value='665'>
+<input type='hidden' name='val2' value='10/11/2002'>
+<input type='hidden' name='val3' value='LAS'>
+<input type='hidden' name='val4' value='mariam@isi.edu'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+<table>
+<tr><td colspan=2>----Fri Oct 11 14:43:49 PDT 2002-----</td></tr>
+<tr><td colspan=2>REPLY FOR REQUEST:</td></tr>
+<tr><td><b>of airline</b></td><td>United Airlines</td></tr>
+<tr><td><b>of flight number</b></td><td>200</td></tr>
+<tr><td><b>on date</b></td><td>10/11/2002</td></tr>
+<tr><td><b>from airport</b></td><td>LAX</td></tr>
+<tr><td><b>for user id</b></td><td>mariam@isi.edu</td></tr>
+<tr><td><b>notify hotel fax</b></td><td></td></tr>
+<tr><td><b>notify car rental fax</b></td><td></td></tr>
+
+<tr><td colspan=2><b>United Airlines flight 200</b></td></tr>
+<tr><td colspan=2>Dear mariam_at_isi_edu,<br/><br/>Your United Airlines flight 200 is still scheduled to depart LAX on-time at 3:50 PM Gate 75B and is scheduled to arrive IAD at 11:32 PM Gate C14.<br/><br/> -- Your personal elf</td></tr>
+<tr><td colspan=2><input type='button' value='Re-Submit' onclick='resubmit(1034372629)'></td></tr>
+</table><br>
+<form name='form1034372629' action="/cgi-bin/portal/agent-req.pl" method="post">
+<input type='hidden' name='val0' value='United Airlines'>
+<input type='hidden' name='val1' value='200'>
+<input type='hidden' name='val2' value='10/11/2002'>
+<input type='hidden' name='val3' value='LAX'>
+<input type='hidden' name='val4' value='mariam@isi.edu'>
+<input type='hidden' name='val5' value=''>
+<input type='hidden' name='val6' value=''>
+<input type='hidden' name='agent' value='flight-status'>
+<input type='hidden' name='email' value='mariam@isi.edu'>
+</form>
+
+</html>

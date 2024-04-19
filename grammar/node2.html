@@ -1,0 +1,177 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<BODY BGCOLOR="FFFFFF">
+<TITLE>2 A Representation for Air Campaign Plan Objectives</TITLE>
+<META NAME="description" CONTENT="2 A Representation for Air Campaign Plan Objectives">
+<META NAME="keywords" CONTENT="grammar">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="grammar.css">
+</HEAD>
+<BODY LANG="EN">
+ <H1><A NAME="SECTION00020000000000000000">2 A Representation for Air Campaign Plan Objectives</A></H1>
+<P>
+The proposed representation for air campaign plan objectives is
+basically an extension of the present representation used in ACPT. The
+main goals of the proposed representation:
+<P>
+<UL><LI> To enrich and correct the representation presently used in order
+  to enable automated reasoning (in some degree) about objectives.<LI> To support error checking during the editing of objectives.<LI> To serve as a focal-point to think about the elements of
+  objectives in air campaign planning and their representation. For
+  instance, to discuss a representation for objectives as proposed
+  here raises several methodological issues which are important even
+  outside the realm of making systems for supporting air campaign
+  planning.
+</UL>
+<P>
+ACPT currently distinguishes the following components of an
+objective:
+<P>
+<DL ><DT><STRONG>title</STRONG>
+<DD> This is a textual description of the objective, for
+  example, <I>Disrupt SAM sites in the Changjon region</I>. 
+<DT><STRONG>measures of merit</STRONG>
+<DD> This field contains one or more descriptions
+  of success criteria for the objective, for instance, <I>
+    Uncoordinated and delayed Red air attacks</I>.
+<DT><STRONG>action</STRONG>
+<DD> This is a verb, chosen from a menu. There are currently
+  four actions: <I>Attack, Defend, Jam</I> and <I>Monitor</I>.
+<DT><STRONG>effect</STRONG>
+<DD> This is also a verb from a menu with the following
+  choices: <I>Destroy, Attrit, Disrupt</I> and <I>Influence</I>.
+<DT><STRONG>location</STRONG>
+<DD> This is filled (with text) from a list of locations
+  set in ACPT for the scenario or theater at hand.
+<DT><STRONG>% complete</STRONG>
+<DD> A slider allows the user to specify a number
+  between 0 and 100.
+<DT><STRONG>review status</STRONG>
+<DD> This may be either <I>Default, Reviewed</I> or
+  <I>Changed</I>. 
+<DT><STRONG>parents</STRONG>
+<DD> This field contains a list of objectives at a higher
+  level to which the current objective is to be considered a child. It
+  is usually filled by selecting one (previously edited) such higher
+  objective.
+<P>
+ </DL>
+<P>
+The representation proposed in this document extends the above
+representation in order to address two main problems. First, it
+proposes a more detailed and structured representation for the
+<em>Title</em> field, that also makes superfluous the fields
+<em>Effect</em> and <em>Action</em>. Second, it proposes a new field
+<em>Sequence restrictions</em>, that clears up a difference between
+prioritization and sequencing which is currently not made and which
+(according to CHECKMATE) has caused considerable confusion among ACPT
+users.
+<P>
+<H2><A NAME="SECTION00021000000000000000">2.1 Structuring the <EM>Title</EM></A></H2>
+<P>
+The <EM>Title</EM> field actually contains a statement or specification
+of the objective -- for instance, <I>Disrupt SAM sites in the
+  Western region</I>. This is presently a free text field in ACPT. The
+<em>action</em> field and <em>effect</em> fields hint at specifying the
+desired effect and action types. However, they fall short of
+specifying the objective in adequate richness of detail.  Further,
+they are filled from a menu of options which is currently extremely
+minimal and consequently poor.
+<P>
+The proposed representation provides structure to what is currently
+the <em>title</em>, decomposing it as follows:
+<P>
+<DL ><DT><STRONG>action type</STRONG>
+<DD> This is a verb or verb expression, such as <I>
+    Destroy</I>, <I>Disrupt</I>, <I>Deny use</I>.
+<DT><STRONG>action roles</STRONG>
+<DD> These are descriptions of the objects the action
+  type refers to, in terms of pairs of <em>role name</em> and
+  <em>action object</em>:
+  <DL ><DT><STRONG>role names</STRONG>
+<DD> are either a preposition (<I>to</I>, <I>from</I>,
+    <I>over</I>) or DOB (symbolyzing the direct object).
+  <DT><STRONG>role objects</STRONG>
+<DD> belong to four basic types:
+    <UL><LI> <em>actions</em> or <em>activities</em> such as <I>production
+        of chemical products</I> or <I>artillery fire in Changjon
+        region</I>.<LI> <em>action capabilities</em> such as <I>radio transmission
+        capability</I> or <I>ability to conduct ofensive operations</I>.<LI> <em>objects</em> such as <I>key command centers</I>, <I>SAM
+        radars</I> or <I>electrical power grid</I>.<LI> <em>aspects</em> such as <I>freedom of navigation</I> or <I>
+        air superiority</I>.<LI> <em>areas</em> There is only one known example of a goal that
+      uses an area (or location) as an object, which is <I>Drive Red
+        into desired chokepoints and restricted LOCs</I>.
+    </UL>
+    Action objects may also specify who controls or owns the action
+    object (e.g. <I>air superiority OF Blue</I> or <I>production of
+      chemical products OF Red</I>). In more complex descriptions, they
+    may use time and space modifiers similar to the ones used to
+    qualify the whole objective (see below).
+<P>
+ </DL>
+<DT><STRONG>modifiers</STRONG>
+<DD> specify time and space restrictions on the objective,
+  for instance <I>within 21 days</I>, or <I>in Western Black Sea</I>. In
+  other words, they specify the ``when'' and ``where'' of the
+  objective as a whole.
+<P>
+ </DL>
+<P>
+This structure is inspired in <em>case grammars</em>. The basic idea of
+case grammars is that there is normally a limited number of roles
+(called <em>thematic</em> or <em>case</em> roles) that an argument of a
+verb can play with relation to the verb. While case grammars have been
+dismissed as a general solution for natural language interpretation,
+they can be an interesting and powerful device in restricted settings
+such as the one we have in the air campaign planning domain.
+<P>
+The proposed structured representation eliminates the fields <EM>
+  action</EM>, <EM>effect</EM> and <EM>location</EM> of the current ACPT
+representation.
+<P>
+<H2><A NAME="SECTION00022000000000000000">2.2 Distinguishing Sequence from Priority</A></H2>
+<P>
+ACPT allows the specification of the relative priorities of
+objectives, which are inherited by their children. If Air Objective O1
+has priority over Air Objective O2, the Air Tasks which are specified
+as their children will also obey that order, i.e. all tasks children
+of O1 have a higher priority over all tasks children of O2. The
+priorities may be overridden when the level of targets is reached,
+i.e. the user may reprioritize any target at his/her will.
+<P>
+While this mechanism has been useful, interviews with CHECKMATE have
+revealed that users often confuse priority with sequence. In general,
+the fact that objective O1 has a higher priority than O2 does
+<em>not</em> mean that it should be executed first. Indeed, if O2 is an
+objective whose effect is a prerequisite for executing O1, O2 is the
+one that should be executed first.
+<P>
+We believe that one of the reasons why this confusion exists is
+because users are currently not allowed to specify that an objective
+is to be accomplished before (or after, or at the same time than)
+another. Therefore, we propose to introduce a new field <em>Sequence
+  restrictions</em>, where the user can specify (if known) which objectives
+are to be accomplished before/after/simultaneous with
+others.<A NAME="tex2html2" HREF="footnode.html#79"><IMG  ALIGN=BOTTOM ALT="gif" SRC="http://www.isi.edu/~valente/images/icons/foot_motif.gif"></A>
+<P>
+Further, we have noticed that it is frequently difficult for air
+campaign planners to make definite sequencing commitments. These
+commitments have some gradation: sometimes one objective must be
+accomplished before another is to be pursued, while in other cases it
+is better but not strictly obligatory to do so. For this reason, we
+have specified that the three basic sequence relations (<I>before</I>,
+<I>after</I> and <I>simultaneous with</I> can be modified by one of the
+following: <I>must, better, better not, must not</I>.  These modifiers
+specify the ``hardness'' or ``certainty'' of the sequence restriction,
+i.e.  how serious they should be taken in the actual sequencing of the
+objectives and activities later on.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+<I>Andre Valente <BR>
+Fri Sep 13 20:17:45 PDT 1996</I>
+</ADDRESS>
+</BODY>
+</HTML>

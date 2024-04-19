@@ -1,0 +1,37 @@
+;; 
+;;    VIC-loop
+;;    ;; add a loop for testing -- jihie
+
+
+(VIC-loop has (superclasses (Action)))
+
+(every VIC-loop has 
+  (agent 	((a Virus)))
+  (object       ((a Cell)))
+
+  (first-subevent (((the Attach subevent of Self) called "AdhereToCell")))
+
+  (subevent (
+    (a Attach called "AdhereToCell" with
+       (object ((the Virus agent of Self)))
+       (base ((the Cell object of Self)))
+       (next-event (((the Penetrate subevent of Self) called "PenetrateCell"))))
+    (a Penetrate called "PenetrateCell" with
+       (agent ((the Virus agent of Self)))
+       (object ((the Plasma-Membrane has-part of (the Cell object of Self))))
+       (next-event (((the Release subevent of Self) called "Uncoat"))))
+    (a Release called "Uncoat" with 
+       (object ((the Viral-Nucleic-Acid has-part of 
+		     (the Virus agent of Self))))
+       (base ((the Protein-Coat has-part of 
+	           (the Virus agent of Self))))
+       (next-event (((the Move subevent of Self) called "MoveIntoCytoplasm")
+	            ((the Penetrate subevent of Self) called "PenetrateCell")
+	)))
+    (a Move called "MoveIntoCytoplasm" with 
+       (object ((the Viral-Nucleic-Acid has-part of 
+		     (the Virus agent of Self))))
+       (destination ((the Cytoplasm has-part of 
+			  (the Cell object of Self)))))
+)))
+

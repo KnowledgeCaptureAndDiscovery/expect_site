@@ -1,0 +1,23 @@
+<undefined-goals>
+<goal id="method352"
+ capability-desc="(CAPABILITY
+                   (ESTIMATE (OBJ (?v387 IS (SPEC-OF REQUIRED-FORCE-RATIO)))
+                    (OF (?v388 IS (INST-OF OFFENSIVE-OPERATION)))
+                    (FOR (?v389 IS (INST-OF MILITARY-TASK)))))"
+ expected-result="UNDEFINED"
+ callers="(REQUIRED-FORCE-RATIO-FOR-TASK)"
+> (ESTIMATE (OBJ (SPEC-OF REQUIRED-FORCE-RATIO))
+   (OF (INST-OF OFFENSIVE-OPERATION)) (FOR (INST-OF MILITARY-TASK)))
+<rfmls-for-method> (INPUT COVERING-OR-INPUT) -- REQUIRED-FORCE-RATIO-FOR-TASK </rfmls-for-method>
+ </goal>
+<goal id="method351"
+ capability-desc="(CAPABILITY
+                   (ESTIMATE (OBJ (?v390 IS (SPEC-OF REQUIRED-FORCE-RATIO)))
+                    (OF (?v391 IS (INST-OF MILITARY-OPERATION)))
+                    (FOR (?v392 IS (INST-OF MILITARY-TASK)))))"
+ expected-result="(INST-OF NUMBER)"
+ callers="(REQUIRED-FORCE-RATIO-FOR-TASK)"
+> (ESTIMATE (OBJ (SPEC-OF REQUIRED-FORCE-RATIO))
+   (OF (INST-OF MILITARY-OPERATION)) (FOR (INST-OF MILITARY-TASK)))
+ </goal>
+</undefined-goals>

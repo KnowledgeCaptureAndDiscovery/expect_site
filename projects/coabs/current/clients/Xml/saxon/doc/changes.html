@@ -1,0 +1,35 @@
+<HTML>
+<HEAD><TITLE>SAXON: What's New</TITLE></HEAD>
+<BODY>
+<H1>SAXON: What's New</H1>
+
+<H2>Changes from 1998-05-12 to 1998-06-16</H2>
+
+<UL>
+<LI>Performance improvements (SAXON is now a factor of 2-to-3 faster)
+<LI>added variant write() and writeEscape() methods to ElementInfo
+<LI>added exception handling. Element handlers now have to catch/throw SAXException
+<LI>setErrorOutput() method in Distributor to collect diagnostics
+<LI>Renderer main program outputs elapsed time in milliseconds
+<LI>new interface setOption(); maintenance of character content as a pseudo-attribute
+<LI>is now optional (off by default); keeping a copy of attributes beyond startElement()
+  is also optional.
+<LI>can now work in conjunction with FREEDOM. This builds the DOM, then does a depth
+  first walk of the tree calling the application element handlers as usual, but with
+  a reference to the underlying Element object in the DOM model
+<LI>minor bug fix:package name in sample ShowBooks program
+</UL>
+
+Future enhancements under consideration:<UL>
+<LI>withdraw freestanding escape() and format() methods?
+<LI>sort out getAttribute() versus getExtendedAttribute() interfaces
+<LI>map new options to command-line switches in Renderer
+<LI>switch to control output of performance info
+<LI>named parsers in ParserManager
+<LI>detect use of parameters in setItemRenderer and swicth attribute retention on 
+  as necessary.
+</UL>
+
+<HR><CENTER>Michael H. Kay<BR>16 June 1998</CENTER>
+</BODY>
+</HTML>

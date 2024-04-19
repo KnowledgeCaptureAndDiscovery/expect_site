@@ -1,0 +1,1768 @@
+;;March 18:
+;;added Screen-MilitaryTask (already in Cyc but missing from the file)
+;;added  InformationGathering as genls of Screen-MilitaryTask
+
+
+
+
+;;ONTOLOGY OF SPECIFIC COA TASKS
+
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;Military Task subtypes from GMU's ontology
+
+
+constant : Surprise-MilitaryTask .
+in Mt: ModernMilitaryTacticsMt .
+isa : ScriptType TemporalObjectType IKBConstant.
+genls : MilitaryTask .
+comment : "This is a collection of tasks which are performed covertly, are
+used to deceive or decoy enemy forces away from the main body, or are designed
+to catch the enemy unawares." .
+
+constant : ComplexMilitaryTask .
+in Mt: ModernMilitaryTacticsMt.
+isa: ScriptType TemporalObjectType IKBConstant.
+genls : MilitaryTask .
+comment : "A collection of military tasks which require special
+coordination efforts in order to be effective." .
+
+constant : MilitaryEnablingTask .
+in Mt: ModernMilitaryTacticsMt .
+isa : ScriptType TemporalObjectType IKBConstant.
+genls : MilitaryTask .
+comment : "A collection of tasks which are transition operations that lead to
+the active prosecution of one of the types or forms of military operations. FM
+100-40, p18-1." .
+
+constant : MilitaryCSSTask .
+in Mt: ModernMilitaryTacticsMt .
+isa : ScriptType TemporalObjectType IKBConstant.
+genls : MilitaryTask .
+comment: "A collection of tasks normally executed by Combat Service
+Support units. In this case, we are considering COA Logistics
+functions." .
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;Specific Military Tasks
+
+;AMBUSH
+
+constant: Ambush-MilitaryTask.
+in Mt: ModernMilitaryTacticsMt.
+isa: TemporalObjectType ScriptType IKBConstant.
+genls: MilitaryOffensiveTask Surprise-MilitaryTask.
+comment : "A collection of instances of MilitaryTask, characterized
+          by the assigned unit's mounting a surprise offensive against
+          a designated hostile unit." .
+;---------------
+
+;ATTACK BY FIRE
+
+
+;TO REIFY: SectorOfFire, EngagementArea, axisOfAdvance,
+;ForceOrientedObjective, BattlePosition(?), FiringPosition(?),
+;BattleZone(?), HidePosition(?), OPSEC(?)
+
+
+constant: AttackByFire-MilitaryTask.
+in Mt: ModernMilitaryTacticsMt. 
+isa: TemporalObjectType ScriptType IKBConstant.
+genls: MilitaryAttack MilitaryTask.
+comment : "To attack by fire is to engage the enemy with
+          direct and indirect fire: to fix, destroy, suppress,
+          or deceive him. The friendly force does not close
+          with the enemy or occupy the objective. An attack by
+          fire is usually a supporting effort during offensive
+          operations and a counterattack by fire option for the
+          reserve during defensive operations. It is not done
+          in conjunction with another maneuvering force. The
+          force conducting an attack by fire may be assigned a
+          battle position with either a sector of fire or an
+          engagement area, or it may be assigned an axis of
+          advance and a force-oriented objective. The enemy may
+          be stationary or moving. An attack by fire closely
+          resembles the task of support by fire. The chief
+          difference is that support by fire is conducted to
+          support another force so that force can maneuver
+          against the enemy." .
+
+F:
+(relationAllExistsMany deviceUsed AttackByFire-MilitaryTask ProjectileWeapon).
+F:
+(implies 
+   (isa ?FIREATTACK AttackByFire-MilitaryTask)
+   (relationInstanceExistsMany
+      subEvents ?FIREATTACK ShootingAProjectileWeapon)).
+F:
+(implies
+  (and
+    (isa ?FIREATTACK AttackByFire-MilitaryTask)
+    (subEvents ?ATTACKOP ?FIREATTACK)  
+    (isa ?ATTACKOP MilitaryOffensiveOperation))
+  (supportingTaskOfOperation ?ATTACKOP ?FIREATTACK)).
+
+
+constant: AttackByDirectFire-MilitaryTask.
+in Mt: ModernMilitaryTacticsMt.
+isa: TemporalObjectType ScriptType IKBConstant.
+genls: AttackByFire-MilitaryTask.
+comment: "Instances of this collection are instances of
+#$AttackByFire-MilitaryTask 
+carried out using instances of #$DirectFireWeapon--i.e., projectile
+weapons such as guns which are aimed directly at the target.".
+
+F:
+(relationAllExistsMany deviceUsed AttackByFire-MilitaryTask DirectFireWeapon).
+
+constant: AttackByIndirectFire-MilitaryTask.
+in Mt: ModernMilitaryTacticsMt.
+isa: TemporalObjectType ScriptType IKBConstant.
+genls: AttackByFire-MilitaryTask.
+comment: "Instances of this collection are instances of
+#$AttackByFire-MilitaryTask 
+carried out using instances of #$IndirectFireWeapon--i.e., projectile
+weapons such as guns which deliver projectiles to the target area via
+ballistic trajectories.".
+
+F:
+(relationAllExistsMany deviceUsed AttackByIndirectFire-MilitaryTask
+   IndirectFireWeapon).  
+  
+
+
+
+;------
+;BLOCK 
+
+;TO REIFY: BlockingObstacle
+
+
+constant: Block-MilitaryTask.
+in Mt: ModernMilitaryTacticsMt. 
+isa: TemporalObjectType ScriptType IKBConstant.
+genls: BlockingAnOpponent.
+comment: "To block is to deny the enemy access to a given
+          area or prevent his advance in a given direction or
+          along an avenue of approach. A blocking task normally
+          requires the friendly force to block the enemy force
+          for a certain time period or until a specific event
+          has occurred. A blocking unit may have to hold
+          terrain and accept decisive engagement. A block
+          differs from a fix because a blocked enemy force can
+          move in any direction other than the obstructed one
+          while a fixed enemy force cannot move in any
+          direction." .
+
+;comment: "To block is to deny the enemy access to a given area or prevent
+;his advance in a given direction or along an avenue of approach. A
+;blocking task normally requires the friendly force to block the enemy
+;force for a certain time period or until a specific event has
+;occurred. A blocking unit may have to hold terrain and accept
+;decisive engagement. Figure A-3 illustrates the tactical mission
+;graphic for a blocking task. The vertical end of the symbol marks
+;where the commander wants to stop the enemy. 
+
+;A blocking force may employ blocking obstacles to assist in the
+;task. Blocking obstacles are complex, employed in depth, and
+;integrated with fires to prevent the enemy from proceeding along an
+;avenue of approach or to proceed only at unacceptable cost. When
+;employed, blocking obstacles should serve as a limit, beyond which
+;the enemy will not be allowed to go. Obstacles by themselves cannot
+;accomplish a blocking task. 
+
+
+;A blocking force may employ blocking obstacles to assist in the
+;task. Blocking obstacles are complex. They are employed in depth and
+;integrated with fires and other obstacles to prevent the enemy from
+;proceeding along an avenue of approach or proceeding only at
+;unacceptable cost. When used, blocking obstacles should serve as a
+;limit beyond which the enemy is not allowed to go. Obstacles alone
+;cannot accomplish a blocking task. 
+
+;A block differs from a fix because a blocked enemy force can move in
+;any direction other than the obstructed one while a fixed enemy force
+;cannot move in any direction.".
+
+F:
+(relationAllExists subEvents MilitaryContainment Block-MilitaryTask).
+F : (implies
+       (isa ?PATH Path-Customary)
+      (sitResultsInProp
+       (thereExists ?BLOCK
+         (isa ?BLOCK Block-MilitaryTask))
+       (pathState ?PATH PathBlocked)
+       Block-MilitaryTask
+       pathState)) .
+
+
+
+
+
+;;add so that ObstacleSystem-Military can have (GroupFn Artifact) as genls
+in Mt: BaseKB .
+F : (isa Artifact ObjectType) .
+
+
+constant: ObstacleSystem-Military.
+in Mt: ModernMilitaryWeaponsMt.
+isa: ExistingObjectType ProductType IKBConstant.
+genls: (GroupFn Artifact) TangibleThing.
+comment: "A structured system of artifacts intended to play the
+collective role of #$constrainingObject in a non-trivial subset of the
+collection of #$Movement-TranslationEvents such that the
+#$objectMoving is an instance of #$ModernMilitaryUnit-Deployble.
+Collections of #$ObstacleSystems designed to impede the movements of
+certain kinds of military unit can be referenced via
+#$MilitaryObstacleFn.".
+
+F:
+(implies 
+  (and
+    (isa ?BARRIER ObstacleSystem-Military)
+    (genls ?MOVETYPE Movement-TranslationEvent)
+    (relationAllExists objectMoving ?MOVETYPE ModernMilitaryUnit-Deployable)) 
+  (intendedBehaviorCapable 
+     ?BARRIER ?MOVETYPE constrainingObject)).
+
+constant: MilitarySpecialtyObstacleFn.
+;;in Mt: ModernMilitaryWeaponsMt.
+in Mt: ModernMilitaryTacticsMt.
+isa: CollectionDenotingFunction.
+arg1Isa: MilitaryUnitSpecialtyType.
+resultIsa: ObstacleSystem-Military.
+comment: "(#$MilitarySpecialtyObstacleFn SPECIALTY) returns the
+collection of all instances of #$ObstacleSystem-Military specifically
+designed to impede movements of military units of specialty type SPECIALTY.".
+
+ 
+constant: MilitaryTaskObstacleFn.
+;;in Mt: ModernMilitaryWeaponsMt.
+in Mt: ModernMilitaryTacticsMt.
+isa: CollectionDenotingFunction.
+arg1Isa: ExistingObjectType.
+arg1Genl: MilitaryTask.
+resultIsa: ObstacleSystem-Military.
+comment: "(#$MilitaryTaskObstacleFn TASKTYPE) returns the collection
+of all instances of #$ObstacleSystem-Military specifically designed to
+interfere with or prevent the performance of tasks of type TASKTYPE.".
+
+;----------
+;BREACH
+
+;A Breach is both a tactical task and an enabling operation in which any
+;means available are employed to break through or secure a passage
+;through an enemy defense, obstacle, minefield, or fortification. 
+;To maintain his tempo and momentum, a commander attempts to bypass
+;and avoid obstacles to the maximum extent possible. Breaching enemy
+;obstacle systems is normally his last choice. When they occur, they
+;are a synchronized combined arms operation under the control of the
+;maneuver commander. There are three types of breaching operations:
+;hasty, deliberate, or assault. The type of breach conducted depends
+;on the nature of the obstacle and the capabilities of the enemy 
+;force covering the obstacle.
+
+;A unit may breach an enemy's obstacle system using covert means before
+;beginning a ground attack. Primarily used by dismounted forces,
+;covert breaching centers around using stealth to reduce the obstacle,
+;with support and assault forces executing their mission only if the
+;breach force is detected. Achieving surprise is the primary reason
+;for employing a covert breach. 
+
+;TO REIFY: ObstacleSystem, CovertBreachingTask, CombinedArmsOperation,
+;CombinedArmsBreachingOperation(?), ManeuverCommander(?),
+;HastyBreachingOperation, DeliberateBreachingOperation,
+;AssaultBreachingOperation.
+ 
+constant: Breach-MilitaryTask.
+in Mt: ModernMilitaryTacticsMt. 
+isa: TemporalObjectType ScriptType IKBConstant.
+genls: MilitaryTask Translation-LocationChange. 
+;;genls: PathCreatingEvent.
+comment: "A Breach is both a tactical task and an enabling
+          operation in which any means available are employed
+          to break through or secure a passage through an enemy
+          defense, obstacle, minefield, or fortification. To
+          maintain his tempo and momentum, a commander attempts
+          to bypass and avoid obstacles to the maximum extent
+          possible. Breaching enemy obstacle systems is
+          normally his last choice. When they occur, they are a
+          synchronized combined arms operation under the
+          control of the maneuver commander. There are three
+          types of breaching operations: hasty, deliberate, or
+          assault. The type of breach conducted depends on the
+          nature of the obstacle and the capabilities of the
+          enemy force covering the obstacle." .
+
+;comment : "A Breach is both a tactical task and an enabling operation
+;in which any means available are employed to break through or secure a
+;passage through an enemy defense, obstacle, minefield, or
+;fortification.  To maintain his tempo and momentum, a commander
+;attempts to bypass and avoid obstacles to the maximum extent
+;possible. Breaching enemy obstacle systems is normally his last
+;choice. When they occur, they are a synchronized combined arms
+;operation under the control of the maneuver commander. There are three
+;types of breaching operations: hasty, deliberate, or assault. The type
+;of breach conducted depends on the nature of the obstacle and the
+;capabilities of the enemy force covering the obstacle.
+
+;A unit may breach an enemy's obstacle system using covert means before
+;beginning a ground attack. Primarily used by dismounted forces,
+;covert breaching centers around using stealth to reduce the obstacle,
+;with support and assault forces executing their mission only if the
+;breach force is detected. Achieving surprise is the primary reason
+;for employing a covert breach.".
+
+
+ 
+F : (implies
+     (and
+       (isa ?PATH Path-Customary)
+       (pathState ?PATH PathBlocked))
+      (sitResultsInProp
+       (thereExists ?BREACH
+         (isa ?BLOCK Breach-MilitaryTask))
+       (pathState ?PATH PathOpen)
+       Breach-MilitaryTask
+       pathState)) .
+ 
+F : (implies
+     (and
+       (isa ?BREACH Breach-MilitaryTask)
+       (isa ?MF MineField)
+       (objectActedOn ?BREACH ?MF))
+     (isa ?BREACH (RemovalFn Mine-Weapon))) .
+
+F : (implies
+     (and
+       (isa ?BREACH Breach-MilitaryTask)
+     (objectActedOn ?BREACH ?UNIT)
+     (isa ?UNIT ModernMilitaryUnit-Deployable))
+     (isa ?BREACH ConflictEvent)) .
+
+F : (implies
+     (and
+       (isa ?BREACH Breach-MilitaryTask)
+     (objectActedOn ?BREACH ?UNIT)
+     (isa ?UNIT ModernMilitaryUnit-Deployable))
+     (isa ?BREACH MovementAgainstResistance-Military)) .
+
+
+;-----------
+;BYPASS
+
+
+;TO REIFY: OperationalMomentum(?), bypassCriteria,
+;bypassRoute(routeOfBypass?), combat power, RelievingUnit(relievingUnit
+;(role)?), ManeuverElement, ReinforcementOfForces,
+
+
+constant: Bypass-MilitaryTask.
+in Mt: ModernMilitaryTacticsMt.
+isa: TemporalObjectType ScriptType IKBConstant.
+genls: MilitaryTask Translation-LocationChange.
+comment : "To bypass is to maneuver around an obstacle,
+          position, or enemy force to maintain the momentum of
+          the operation. A bypass can take place in both
+          offensive or defensive operations. When conducting a
+          bypass, the commander deliberately avoids combat with
+          an enemy force so that all of his combat power is
+          directed toward mission accomplishment." .
+cyclistNotes : "The force conducting the bypass conducts
+               several subordinate tasks. These include
+               reporting any bypassed obstacles and enemy
+               forces to higher headquarters immediately. They
+               also include keeping the bypassed enemy under
+               observation until relieved by another force." .
+
+;comment: "To bypass is to maneuver around an obstacle, position, or enemy
+;force to maintain the momentum of the operation. A bypass can take
+;place in both offensive or defensive operations. When conducting
+;a bypass, the commander deliberately avoids combat with an enemy
+;force so that all of his combat power is directed toward mission
+;accomplishment.
+
+;The decision to bypass is based on 
+; * Analysis of the mission. 
+; * The requirement to maintain momentum and aggressive action. 
+; * The commander's knowledge of enemy strength, intent or mission. 
+; * The degree to which the bypassed enemy can interfere with the advance. 
+; * The general state of the enemy force; for example, if enemy resistance
+;   is crumbling, the 4 friendly force can take greater risks. 
+; * Any bypass criteria established by a higher headquarters. 
+
+;The force conducting the bypass conducts several subordinate
+;tasks. These include reporting any bypassed obstacles and enemy
+;forces to higher headquarters immediately. They also include keeping
+;the bypassed enemy under observation until relieved by another
+;force. 
+
+;Authority to bypass is not normally delegated below battalion task
+;force level. A bypass criteria is established that limits the size
+;of the enemy force that can be bypassed without the authority of the
+;next higher commander. Generally a force does not attempt bypass if
+;it requires more than 40 percent of that force's combat power to
+;fix the enemy in current positions. Before starting the bypass, the
+;commander ensures that the bypass route is checked for enemy
+;presence and trafficability. At no time can the enemy force be allowed
+;to interfere with the bypassing unit. 
+
+;The two bypass techniques that the force can employ are avoid the
+;enemy, and fix the enemy by fire and bypass. If the force cannot avoid
+;the enemy, the bypassing force must fix the enemy with part of its
+;maneuver elements and bypass with the balance of the force.  The
+;commander normally directs a subordinate element to fix and maintain
+;contact with the enemy until it is relieved. This may require the
+;reinforcement of the fixing force. If the commander assigns more than
+;one subordinate element the appoints an overall commander of the
+;fixing force. The fixing force commander coordinates with the unit
+;assigned to relieve him as soon as possible and provides that
+;commander with all available information about the enemy and
+;terrain. The relieving unit is normally another unit assigned a follow
+;and support task. Once relieved, the force fixing the enemy either
+;rejoins its parent organization or becomes part of the following
+;element and comes under its control.
+
+;Occasionally the fixing force may be directed to break contact with
+;the enemy after the bypassing force has completed the bypass. This
+;occurs when the bypassing force has no requirement to maintain an
+;uninterrupted logistics flow, such as in a raid. In this case, the
+;fixing force blocks the enemy through employing defensive, delaying,
+;and limited offensive actions in synchronization with all available
+;fire support until ordered to rejoin the bypassing force.".
+
+F:
+(interArgIsa1-2 objectActedOn Bypass-MilitaryTask PartiallyTangible).
+
+
+;;move after Fix-MilitaryTask
+;constant: BypassWithFixByFire.
+;in Mt: ModernMilitaryTacticsMt.
+;isa : TemporalObjectType ScriptType IKBConstant.
+;genls: Bypass-MilitaryTask.
+;comment: "The collection of all instances of #$Bypass-MilitaryTask
+;where a friendly unit endeavors to bypass a hostile one and a major
+;component of the bypass is a fixing of the hostile force by one or
+;more maneuver elements from the bypassing force.".
+
+;F:
+;(implies
+;  (isa ?BYPASS BypassWithFixByFire)
+;  (preconditionFor-PropSit
+;   (relationInstanceExists subTasks-Military ?BYPASS FixByFire-MilitaryTask) ?;BYPASS)). 
+
+;;move after Fix-MilitaryTask
+;constant: BypassNoCombatJoined.
+;in Mt: ModernMilitaryTacticsMt.
+;isa : TemporalObjectType ScriptType IKBConstant.
+;genls: Bypass-MilitaryTask.
+;disjointWith: BypassWithFixByFire.
+;comment: "The collection of all instances of #$Bypass-MilitaryTask in
+;which a friendly unit bypasses a hostile unit without attempting to
+;join combat.  Note that, despite its 'negative' character, this
+;collection is limited to cases where what is being bypassed is a
+;military unit and not some kind of merely geographical obstacle.".
+
+;F:
+;(interArgIsa1-2 
+;  objectActedOn BypassNoCombatJoined ModernMilitaryUnit-Deployable).
+
+
+
+
+
+
+;;add to Cyc 
+;F: (isa maneuverElement IKBConstant) .
+
+constant: maneuverElement.
+in Mt: ModernMilitaryTacticsMt.
+isa: IrreflexiveBinaryPredicate AsymmetricBinaryPredicate IKBConstant.
+genlPreds: assignedMilitaryOrg.
+arg1Isa: ModernMilitaryUnit-Deployable.
+arg2Isa: ModernMilitaryUnit-Deployable.
+comment: "(#$maneuverElement UNIT SUBUNIT) means that SUBUNIT is subordinate
+          to and shares a headquarters with UNIT in a particular theater of
+          combat, and that SUBUNIT is key to the maneuvering capability of
+          UNIT.".
+
+F:
+(not (isa maneuverElement TransitiveBinaryPredicate)).
+
+;NOTE: Query Jim on precise meaning of 'maneuver element'
+
+
+
+;-----------
+;CANALIZE
+
+;To canalize is to restrict enemy movement to a narrow zone by
+;exploiting terrain coupled with the use of obstacles, fires, or
+;friendly maneuver. Successful canalization results in moving the
+;enemy formation into a predetermined position where it is
+;vulnerable to piecemeal destruction by direct and indirect
+;fires. The same effect occurs when an enemy force is taken under fire
+;and individual enemy soldiers and combat systems seek positions that
+;are masked from the effects of friendly fires. When this occurs,
+;further enemy movements are usually canalized into areas outside of
+;the "beaten zone" established by the effects of the friendly
+;force's fire; and thus can be fairly easy to predict.
+
+;TO REIFY: Formation, BeatenZone. MaskedPosition.
+
+constant: Canalize-MilitaryTask.
+in Mt: ModernMilitaryTacticsMt.
+isa: ScriptType TemporalObjectType IKBConstant.
+genls : MilitaryTask .
+comment: "To canalize is to restrict enemy movement to a narrow zone by
+exploiting terrain coupled with the use of obstacles, fires, or
+friendly maneuver. Successful canalization results in moving the
+enemy formation into a predetermined position where it is
+vulnerable to piecemeal destruction by direct and indirect
+fires. The same effect occurs when an enemy force is taken under fire
+and individual enemy soldiers and combat systems seek positions that
+are masked from the effects of friendly fires. When this occurs,
+further enemy movements are usually canalized into areas outside of
+the `beaten 25 zone' established by the effects of the friendly
+force's fire, and thus can be fairly easy to predict.".
+
+
+;TO REIFY: AssignedBattleZone (AssignedMilitaryZone?)
+
+
+
+
+constant: Clear-MilitaryTask.
+in Mt: ModernMilitaryTacticsMt. 
+isa: TemporalObjectType ScriptType IKBConstant.
+genls: HarmingSomething MilitaryTask.
+;genls: DestructionEvent .
+comment: "To clear is to remove all enemy forces and eliminate organized
+resistance in an assigned zone, area, or location. The force
+accomplishes this by destroying, capturing, or forcing the
+withdrawal of enemy forces so they cannot interfere with the 
+friendly unit's ability to accomplish its mission. In all cases,
+this task requires a thorough reconnaissance to 12 discover the
+enemy's locations. Once this is known, the clearing force maneuvers
+against the enemy force. 
+
+This task requires significant time and other resources. In his
+mission statement, a commander can modify the objective associated
+with this task to destroying, capturing, or forcing the withdrawal of
+only enemy forces larger than a stated size. In this case, enemy
+forces smaller than that specified are kept under observation while
+the rest of the friendly force bypasses them.".
+
+F:
+(interArgIsa1-2 objectActedOn Clear-MilitaryTask PartiallyTangible).
+
+;F:
+;(implies
+;  (isa ?CLEAR Clear-MilitaryTask)
+;  (eventOccursAt ?CLEAR ?LOC)
+;  (preconditionFor-PropSit
+;     (thereExists ?RECON
+;        (and
+;          (isa ?RECON ReconnaissanceMission)
+;          (startsAfterStartingOf ?CLEAR ?RECON)
+;          (eventOccursAt ?RECON ?LOC)
+;          ("purpose of ?RECON is to identify enemy location"))) ?CLEAR)).
+
+
+
+
+;----------
+;CONTAIN
+
+;TO REIFY: RepositioningOperation(RepositioningOfForces?),
+;AreaOfContainment(ZoneOfContainment?) ContainmentConstraint-Spatial
+
+
+constant: Contain-MilitaryTask.
+in Mt: ModernMilitaryTacticsMt. 
+isa: TemporalObjectType ScriptType IKBConstant.
+genls: ImpedingMovement MilitaryTask.
+;disjointWith: Fix-MilitaryTask.
+comment: "To contain is to stop, hold, or surround enemy forces or to
+cause them to center their activity on a given front and prevent them
+from withdrawing any part of their forces for use elsewhere. The
+limits of the containment may be expressed in terms of geography or
+time. Containment allows an enemy to reposition himself within the
+designated geographic area, whereas fixing an enemy does not.".
+
+F: (relationAllExists subEvents MilitaryContainment
+        Contain-MilitaryTask).
+F: (interArgIsa1-2 objectActedOn Contain-MilitaryTask
+        ModernMilitaryUnit-Deployable).
+
+;;RepositioningOperation(RepositioningOfForces?) not defined yet:
+
+;F:
+;(implies
+;  (and
+;    (isa ?CONTAIN Contain-MilitaryTask)
+;    (objectActedOn ?CONTAIN ?UNIT))
+;  (behaviorCapable ?UNIT RepositioningOperation performedBy)).  
+
+
+
+
+;----------
+;CONTROL
+
+;To control the enemy is to maintain physical influence over him by
+;occupying an area or dominating the area through the use of direct
+;fire weapon systems. The tactical task of control differs from that
+;of secure because secure does not allow enemy fires to impact on the
+;area being secured. In control, the enemy can engage targets within
+;the controlled area but can not move his ground forces through the
+;area at will. 
+
+;TO REIFY:
+;Comments suggest a supercollection with Fix, Contain, Control, and
+;Secure as specs.  (How about ImpedingMovement, which we have already?)
+
+
+constant: Control-MilitaryTask.
+in Mt: ModernMilitaryTacticsMt.
+isa: TemporalObjectType ScriptType IKBConstant.
+genls: ImpedingMovement MilitaryTask .
+comment: "To control the enemy is to maintain physical influence over him by
+occupying an area or dominating the area through the use of direct
+fire weapon systems. The tactical task of control differs from that
+of secure because secure does not allow enemy fires to impact on the
+area being secured. In control, the enemy can engage targets within
+the controlled area but cannot move his ground forces through the
+area at will.".
+
+F:
+(interArgIsa1-2 
+   objectActedOn Control-MilitaryTask ModernMilitaryUnit-Deployable) .
+F:
+(implies
+  (isa ?CONTROL Control-MilitaryTask)
+  (preconditionFor-PropSit
+     (relationInstanceExists subTasks-Military ?CONTROL
+            AttackByDirectFire-MilitaryTask) ?CONTROL)). 
+F:
+(implies
+  (and
+    (objectActedOn ?CONTROL ?UNIT)
+    (genls ?MOVETYPE Movement-TranslationEvent)
+    (relationInstanceAll temporallySubsumes ?CONTROL ?MOVETYPE))
+  (not (behaviorCapable ?UNIT ?MOVETYPE objectMoving))).
+F:
+(implies
+  (and 
+    (objectActedOn ?CONTROL ?UNIT)
+    (genls ?FIRETYPE AttackByFire-MilitaryTask)
+    (relationInstanceAll temporallySubsumes ?CONTROL ?FIRETYPE))
+  (behaviorCapable ?UNIT ?FIRETYPE performedBy)). 
+ 
+
+;---------------
+;COUNTERATTACK
+
+
+constant: CounterattackOperation.
+in Mt: ModernMilitaryTacticsMt.
+isa: TemporalObjectType ScriptType IKBConstant.
+genls: MilitaryOffensiveOperation MilitaryAttack.
+
+
+constant: Counterattack-MilitaryTask.
+in Mt: ModernMilitaryTacticsMt.
+isa: TemporalObjectType ScriptType IKBConstant.
+genls: MilitaryAttack MilitaryTask.
+
+;------------
+;COUNTERATTACK BY FIRE
+
+
+
+constant: CounterattackByFire.
+in Mt: ModernMilitaryTacticsMt.
+isa: TemporalObjectType ScriptType IKBConstant.
+genls: CounterattackOperation .
+
+
+constant: CounterattackByFire-MilitaryTask.
+in Mt: ModernMilitaryTacticsMt.
+isa: TemporalObjectType ScriptType IKBConstant.
+genls: Counterattack-MilitaryTask.
+
+
+
+;-----------
+;COUNTERRECONNAISSANCE
+
+constant: Counterreconnaissance-MilitaryTask.
+in Mt: ModernMilitaryTacticsMt.
+isa: TemporalObjectType ScriptType IKBConstant.
+genls: MilitaryTask.
+comment: "Counterreconnaissance is all measures taken to counter enemy
+reconnaissance and surveillance efforts throughout the depth of the
+area of operations (AO). Counterreconnaissance is not a distinct
+mission, but a component of security operations. It prevents
+hostile observation of a force, area, or place. Counterreconnaissance is 
+an element of all security operations and most local
+security measures. It involves both active and passive elements and
+includes combat action to destroy or repel enemy reconnaissance
+units.
+
+Stripping away enemy ground reconnaissance while denying the enemy
+information through other collection systems allows friendly force
+commanders to operate against an enemy who is operating blindly. The
+enemy commander's inability to see the battlefield will eventually
+desynchronize his actions and render his command vulnerable to
+aggressive action by friendly forces.".
+
+
+
+;----------
+;DEFEAT
+
+
+constant: Defeat-MilitaryTask.
+in Mt: ModernMilitaryTacticsMt.
+isa: TemporalObjectType ScriptType IKBConstant. 
+genls: MilitaryTask.
+comment: "To defeat the enemy is to disrupt or nullify the enemy commander's
+plan or subdue his will to fight so that he is unwilling or unable to
+further pursue his adopted course of action and yields to the will of
+his opponent. Defeat has to manifest itself in some sort of physical
+action. Defeat occurs when a unit no longer has the resources in terms
+of personnel, weapon systems, and supplies to accomplish its assigned
+mission or when the soldiers have become so physically or mentally
+exhausted that they can no longer continue. This can occur as a result
+of catastrophic combat or accidental losses inflicted over a very
+short time or it can result from attrition over a period of days,
+weeks, and months.".
+
+;TO REIFY: Surrender.  
+
+
+F:
+(interArgIsa1-2 
+  objectActedOn Defeat-MilitaryTask ModernMilitaryUnit-Deployable).
+
+;Return to this when comprehensive working-out of resources is available. 
+
+
+;------
+;DELAY
+
+constant: Delay-MilitaryTask.
+in Mt: ModernMilitaryTacticsMt.
+isa: TemporalObjectType ScriptType IKBConstant.
+genls: MilitaryTask ImpedingMovement.
+comment: "Instances are assigned instances of MilitaryTask where the assigned
+          unit delays the progress of a specified hostile unit, usually until a
+          specified time. See also #$delayUntilTime.".
+F:
+(interArgIsa1-2 objectActedOn Delay-MilitaryTask
+ModernMilitaryUnit-Deployable).
+
+constant: delayUntilTime .
+in Mt: ModernMilitaryTacticsMt.
+isa: TernaryPredicate Role.
+arg1Isa: MilitaryOperation.
+arg2Isa: TemporalThing.
+arg3Isa: ModernMilitaryUnit-Deployable.
+comment: "(delayUntilTime OP TEMP UNIT) means that in the instance of
+#$MilitaryOperation, OP, UNIT has been tasked with delaying enemy
+movement until the time interval started by TEMP.".
+
+F:
+(implies
+  (delayUntilTime ?OP ?TEMP ?UNIT) 
+  (temporallySubsumes ?OP ?TEMP)).
+
+F:
+(implies
+  (delayUntilTime ?OP ?TEMP ?UNIT) 
+  (thereExists ?DELAYING
+     (and
+       (isa ?DELAYING (AttemptingFn Delay-MilitaryTask))
+       (performedBy ?DELAYING ?UNIT)
+       (startsAfterStartingOf ?DELAYING ?OP)
+       (startsAfterEndingOf ?TEMP ?DELAYING)))).
+
+;--------
+;DESTROY
+
+
+;TO REIFY: Discipline-Attribute, Morale-Attribute, UnitDiscipline,
+;UnitMorale, TerminallyGuidedMunitions(?)
+
+constant: Destroy-MilitaryTask.
+in Mt: ModernMilitaryTacticsMt.
+isa: TemporalObjectType ScriptType IKBConstant.
+genls: MilitaryTask DestructionEvent.
+comment: "To destroy is to physically render an enemy 
+force combat-ineffective until it is reconstituted. Alternatively,
+to destroy a combat system is to damage it so badly that it cannot
+perform any function or be restored to a usable condition without
+being entirely rebuilt. The amount of damage needed to render a
+unit combat-ineffective depends on the unit's type, discipline, and
+morale. It normally requires greater than percent personnel or
+equipment casualties. Destroying armored or dug-in targets with
+area fire weapons requires a large amount of ammunition and 
+considerable time, so forces do not normally attempt it unless they
+have terminally guided munitions.".
+
+F:
+(interArgIsa1-2 objectActedOn Destroy-MilitaryTask
+ModernMilitaryUnit-Deployable).
+F:
+(implies
+  (and
+    (isa ?DESTROY Destroy-MilitaryTask)
+    (objectActedOn ?DESTROY ?UNIT))
+  (not (behaviorCapable ?UNIT MilitaryTask performedBy))).
+
+
+;----------- 
+;DISENGAGE 
+
+;TO REIFY: 'Open' Terrain, 'Close' Terrain, 'short-range system',
+;'long-range system'.
+
+
+
+constant: Disengage-MilitaryTask.
+in Mt : ModernMilitaryTacticsMt .
+isa: TemporalObjectType ScriptType IKBConstant.
+genls: WithdrawalFromCombat MilitaryTask.
+comment : "Disengagement is breaking contact with the enemy so
+          as to allow the conduct of another mission. It involves
+          moving to a location where the enemy can neither engage
+          the friendly force with direct fires or observed
+          indirect fires. Disengaging from the enemy while
+          displacing from one position to the next is a difficult
+          procedure." .
+cyclistNotes : "To facilitate disengagement, the commander
+               suppresses the enemy by bombarding him with large
+               volumes of both direct and indirect fires from
+               outside the disengaging unit. In open terrain, the
+               unit generally moves its short-range systems
+               first. In close terrain, it generally moves its
+               long-range systems first to overwatching
+               positions. The time involved to move a system to
+               its next position also affects when that system
+               moves. Since the situation will vary across a
+               unit's front and because of communications
+               considerations, small-unit leaders usually direct
+               this movement. The process repeats as necessary.
+               Once disengagement starts, units must complete it
+               rapidly. The commander can employ supporting units
+               or reserves to protect the disengaging unit's
+               flanks and assist in freeing any closely engaged
+               elements. The unit then moves to its next position
+               using the appropriate movement technique, such as
+               traveling, traveling overwatch, or bounding
+               overwatch." .
+
+;comment: "Disengagement is breaking contact with the enemy so as to allow the
+;conduct of another mission. It involves moving to a location where the
+;enemy can neither engage the friendly force with direct fires or
+;observed indirect fires. Disengaging from the enemy while displacing
+;from one position to the next is a difficult procedure. A
+;disengagement plan includes: 
+
+;       (a) The maneuver concept of operations for
+;         tactical elements after disengagement, 
+;         which includes the movement routes for each subordinate unit. 
+;       (b) Fires to suppress the enemy and cover the unit's movement. 
+;       (c) Screening smoke to conceal the unit's movement, 
+;         conduct a deception operation, or cover passage points. 
+;       (d) Contact and passage points if moving through friendly lines. (See
+;        Chapter 18.) 
+;       * The time disengagement starts. 
+;       *  The earliest time that CS and CSS elements are to move. 
+
+;The senior headquarters conducts operations to support the disengaging
+;forces and relieve pressure on units in contact with the enemy. For
+;example, if a division is conducting a delay, the division commander
+;can use his aviation assets to help a ground maneuver brigade
+;disengage from the close fight. Simultaneously, the division uses its
+;long-range artillery, rocket, and EW systems to destroy or disrupt
+;enemy follow on echelons to prevent them from interfering with the
+;disengagement. The intent is to create conditions that allow the unit
+;to disengage while avoiding decisive combat. 
+
+;To facilitate disengagement, the commander suppresses the enemy by
+;bombarding him with large volumes of both direct and indirect fires
+;from outside the disengaging unit. In open terrain, the unit generally
+;moves its short-range systems first. In close terrain, it generally
+;moves its long-range systems first to overwatching positions. The time
+;involved to move a system to its next position also affects when that
+;system moves. Since the situation will vary across a unit's front and
+;because of communications considerations, small-unit leaders usually
+;direct this movement. The process repeats as necessary. Once
+;disengagement starts, units must complete it rapidly. The commander
+;can employ supporting units or reserves to protect the disengaging
+;unit's flanks and assist in freeing any closely engaged elements. The
+;unit then moves to its next position using the appropriate movement
+;technique, such as traveling, traveling overwatch, or bounding
+;overwatch. 
+
+;If the enemy combat systems have not closed within direct fire range
+;of the friendly disengaging unit, all its elements may be able to move
+;simultaneously under the cover of intense fires and smoke. Speed and
+;coordination are essential.".
+
+
+
+F: (relationAllExistsMany supportingTask Disengage-MilitaryTask
+AttackByDirectFire-MilitaryTask). 
+
+
+F: (relationAllExistsMany supportingTask Disengage-MilitaryTask
+AttackByIndirectFire-MilitaryTask) .
+
+
+ 
+;----------
+;DISRUPT
+;TO REIFY:  TacticalObstacle
+
+constant: Disrupt-MilitaryTask.
+in Mt: ModernMilitaryTacticsMt.
+isa: TemporalObjectType ScriptType IKBConstant.
+genls: MilitaryDefensiveTask.
+comment: "To disrupt is to integrate direct and indirect 
+fires, terrain, and obstacles to upset an enemy's formation or
+tempo, interrupt his timetable, or cause his forces to commit
+prematurely or attack in a piecemeal fashion. This increases the
+enemy's vulnerability to friendly fires. It may temporarily knock
+a unit out of the battle. Disruption is never an ends in itself,
+it is the means to an end. 
+
+The maneuver force attempting to disrupt an enemy must attack the
+enemy force with enough combat power to achieve the desired results
+with one mass attack or sustain the attack until it achieves the
+desired results.  It may involve the attacking of the enemy in
+depth. The commander determines the amount of risk he is willing to
+accept based on the friendly losses he is willing to accept, the
+location of the attack, and the number of attacks that will be
+made. 
+
+Disrupt is also one of the four primary functions (disrupt, fix, turn,
+and block) of tactical obstacles that integrates fire planning and
+obstacle effect to slow an attacker within a specified area, normally
+an engagement area. See FM 5-100, Engineer Combat Operations, for
+more information on tactical obstacles.".
+
+;-----------
+;EXFILTRATE
+
+
+
+
+;TO REIFY:  RallyPoint ExfiltrationLane RestrictedFireArea NoFireArea.
+
+
+constant: Exfiltrate-MilitaryTask.
+in Mt: ModernMilitaryTacticsMt.
+isa: TemporalObjectType ScriptType IKBConstant.
+genls: WithdrawalFromCombat MilitaryTask.
+comment: "To exfiltrate is to remove personnel or units from areas under enemy
+control by stealth, deception, surprise, or clandestine
+means. Exfiltration is conducted by friendly forces that have been
+encircled by enemy forces and cannot conduct a breakout or be relieved
+by other friendly forces. Forces returning from a raid, an
+infiltration, or a patrol behind enemy lines can also conduct an
+exfiltration. Exfiltration by an encircled force is used only as a
+last resort to preserve a portion of the force. It is preferable to
+the capture of the force. The exfiltrating force conducts it after
+destroying or incapacitating all equipment (less medical) not
+accompanying the force. The exfiltrating force may have to leave
+casualties in place with supplies, chaplain support, and medical
+attendants.
+
+Exfiltration is most feasible over rough or difficult terrain through
+areas lightly covered by enemy observation and fire. These conditions
+often allow undetected movement of small elements when movement of the
+entire force would present more risk. Exfiltration requires
+resourcefulness, a high degree of discipline, expert land navigational
+skills, and motivation. It is unlikely that the entire force will be
+able to exfiltrate since part of it may have to create a
+diversion. Good small-unit leadership is essential in this type of
+operation.
+
+Before starting the exfiltration, the exfiltrating force establishes
+its rally points and exfiltration lanes. It coordinates its linkup
+plans with other friendly units. The exfiltration lanes are designated
+restricted fire areas (RFAs) or no fire areas (NFAs). The exfiltrating
+force uses preparatory fires to cover its movement as well as a means
+of expending stockpiled ammunition. Based on reconnaissance and
+available intelligence, the exfiltrating force subdivides into small
+groups and exfiltrates during periods of limited visibility by passing
+through and around enemy defensive positions. If detected, it tries to
+bypass the enemy. Exfiltration may be more difficult with combat and
+tactical vehicles because of the noise that they make and the
+limitations they impose on exfiltration routes, which makes their
+detection by the enemy more likely.".
+
+
+;-------------
+;FIX
+
+
+constant: Fix-MilitaryTask.
+in Mt: ModernMilitaryTacticsMt.
+isa: TemporalObjectType ScriptType IKBConstant.
+genls: ImpedingMovement MilitaryTask.
+disjointWith: Contain-MilitaryTask.
+comment: "To fix is to prevent the enemy from moving any part of his forces
+either from a specific location or for a specific period of time by
+holding or surrounding them to prevent their withdrawal for use 
+elsewhere. Usually, it requires a friendly force to fix an enemy
+force for a specified time period while another unit maneuvers
+against it. Fix is used in both offensive and defensive operations.
+
+An instance of #$Fix-MilitaryTask differs from that of
+#$Block-MilitaryTask in that a fixed enemy force cannot move from a
+given location but a blocked enemy force can move in any direction
+other than the obstructed one. Fix is also one of the four primary
+functions of tactical obstacles that integrates fire planning and
+obstacle effect to slow an attacker within 18 a specified area,
+normally an engagement area.".
+
+
+
+F:
+(interArgIsa1-2 objectActedOn Fix-MilitaryTask ModernMilitaryUnit-Deployable).
+
+;;RepositioningOperation(RepositioningOfForces not defined yet)
+
+;F:
+;(implies
+;  (and
+;   (isa ?FIX FixingTask)
+;    (objectActedOn ?CONTAIN ?UNIT))
+;  (not (behaviorCapable ?UNIT RepositioningOperation performedBy))).  
+
+
+
+
+constant: FixByFire-MilitaryTask.
+in Mt: ModernMilitaryTacticsMt.
+isa: TemporalObjectType ScriptType IKBConstant.
+genls : Fix-MilitaryTask ComplexMilitaryTask. 
+comment: "The collection of all instances of #$Fix-MilitaryTask where
+the fixing is facilitated by one or more instances of
+#$AttackByFire-MilitaryTask 
+performed by subunits of the unit performing the fix.".
+
+
+F:
+(implies
+  (isa ?TASK FixByFire-MilitaryTask)
+  (relationInstanceExists subTasks-Military ?TASK AttackByFire-MilitaryTask)).
+
+constant: BypassWithFixByFire.
+in Mt: ModernMilitaryTacticsMt.
+isa : TemporalObjectType ScriptType IKBConstant.
+genls: Bypass-MilitaryTask.
+comment: "The collection of all instances of #$Bypass-MilitaryTask
+where a friendly unit endeavors to bypass a hostile one and a major
+component of the bypass is a fixing of the hostile force by one or
+more maneuver elements from the bypassing force.".
+
+F:
+(implies
+  (isa ?BYPASS BypassWithFixByFire)
+  (preconditionFor-PropSit
+    (relationInstanceExists subTasks-Military ?BYPASS FixByFire-MilitaryTask) ?BYPASS)). 
+
+
+constant: BypassNoCombatJoined.
+in Mt: ModernMilitaryTacticsMt.
+isa : TemporalObjectType ScriptType IKBConstant.
+genls: Bypass-MilitaryTask.
+disjointWith: BypassWithFixByFire.
+comment: "The collection of all instances of #$Bypass-MilitaryTask in
+which a friendly unit bypasses a hostile unit without attempting to
+join combat.  Note that, despite its 'negative' character, this
+collection is limited to cases where what is being bypassed is a
+military unit and not some kind of merely geographical obstacle.".
+
+F:
+(interArgIsa1-2 
+  objectActedOn BypassNoCombatJoined ModernMilitaryUnit-Deployable).
+
+
+
+;-------------
+;FOLLOW AND ASSUME
+
+;constant: unitFollowsAndAssumes.
+;in Mt: ModernMilitaryTacticsMt.
+;isa: ScriptType TemporalObjectType IKBConstant.
+;arg1Isa: MilitaryOffensiveOperation.
+;arg2Isa: ModernMilitaryUnit-Deployable.
+;comment: "(unitFollowsAndAssumes MISSION UNIT2) means that where UNIT1 has
+;been assigned to be the primary agent responsible for MISSION, UNIT2
+;is to follow UNIT1 and be prepared to continue the mission of the
+;force it is following should that force be fixed, attrited, or be
+;otherwise incapable of performing its mission.".
+
+;F:
+;(implies 
+;   (and 
+;     (isa ?OP MilitaryOffensiveOperation)
+;     (assertedFormula (isa ?OP ?OPTYPE))
+;     (assignedMissionOfUnit ?UNIT1 ?OP ?TEMP)
+;     (unitFollowsAndAssumes ?OP ?UNIT2)
+;     (holdsIn ?TEMP
+;       (not
+;         (behaviorCapable ?UNIT1 ?OPTYPE performedBy))))
+;   (holdsIn ?TEMP
+;     (relationExistsInstance performedBy (AttemptingFn ?OPTYPE) ?UNIT2))).
+
+;The rule says that if OP is an offensive operation and it is
+;explicitly asserted that OP is an operation of kind OPTYPE and OP is
+;the assigned mission of UNIT1 during TEMP and UNIT2 is to follow and
+;assume in OP, and it holds in TEMP that UNIT1 is not capable of
+;performing actions of OPTYPE, then it holds in TEMP that UNIT2 will
+;attempt top perform an operation of kind OPTYPE. If it turns out that
+;the Cyc temporal reasoning scheme is not ready in time for our
+;implementation, we shall need to eliminate the holdsIn wrappings.
+
+constant: FollowAndAssume-MilitaryTask.
+in Mt: ModernMilitaryTacticsMt.
+isa: TemporalObjectType ScriptType.
+genls: MilitaryTask.
+comment: "Follow and assume is a task in which a committed force
+follows a force conducting an offensive operation. The committed force
+is prepared to continue the mission of the force it is following when
+that force is fixed, attrited, or unable to continue. The follow and
+assume force is not a reserve but is committed to accomplish specific
+tasks. Subordinate tasks for a follow and assume force are
+
+    (a)  Maintain contact with the trail elements of the force it is
+following.   
+    (b) Be prepared to conduct a forward passage of lines through the force
+it is following. 
+    (c) Monitor all combat information and intelligence being
+      provided to and from the force it is following. 
+    (d) Do not become engaged with enemy forces bypassed by the force it is 
+      following.".
+
+
+
+;-------------
+;FOLLOW AND SUPPORT
+
+
+;constant: followsAndSupports.
+;in Mt: ModernMilitaryTacticsMt.
+;isa: ActorSlot IKBConstant.
+;arg1Isa: MilitaryOffensiveOperation.
+;arg2Isa: ModernMilitaryUnit-Deployable.
+
+;F:
+;(implies 
+;   (and 
+;     (isa ?OP MilitaryOffensiveOperation)
+;     (assertedFormula (isa ?OP ?OPTYPE))
+;     (assignedMissionOfUnit ?UNIT1 ?OP ?TEMP)
+;     (followsAndSupports ?OP ?UNIT2))
+;   (holdsIn (STIF ?TEMP)
+;     (assistingAgents ?OP ?UNIT2))).
+
+constant: FollowAndSupport-MilitaryTask .
+in Mt: ModernMilitaryTacticsMt.
+isa: TemporalObjectType IKBConstant.
+genls: MilitaryTask.
+comment: "Collection of all instances of #$MilitaryTask in which a committed
+force follows and supports the mission accomplishment of a force
+conducting an offensive operation. The follow and support force is not
+a reserve but is a force committed to specific tasks.
+
+Subordinate tasks for a follow and support force are:  
+
+    * Destroy bypassed enemy units, when the lead unit does not clear the
+      Area of Operations as it advances. 
+    * Relieve in place any direct pressure or
+      encircling force halted to contain the enemy. 
+    * Block movement of enemy reinforcements. 
+    * Secure lines of communication. 
+    * Clear obstacles. 
+    * Guard prisoners, key areas, and installations. 
+    * Recover friendly battle losses. 
+    * Secure key terrain. 
+    * Control refugees. 
+
+Follow and support is used to avoid the force being supported from
+having to commit its combat power among tasks other than those of the
+main mission, which would slow the momentum of the offensive. The
+follow and support force must accomplish its tasks to prevent the
+enemy, obstacles, and other factors from interfering with offensive
+operations, especially along the lines of communications.
+
+The commander assigning the follow and support task has two options in
+establishing the relationship between the supported and the
+supporting units. He can place the follow and support unit in a
+standard command relationship with the supported unit, such as
+attached or operational control. Alternatively, he can require that 
+all tasking from the supported unit go through his headquarters for
+transmittal to the follow and support unit.".
+
+
+;----------------
+;INTERDICT
+
+constant: Interdict-MilitaryTask.
+in Mt: ModernMilitaryTacticsMt.
+isa: TemporalObjectType ScriptType IKBConstant.
+genls: ImpedingMovement MilitaryTask.
+comment: "To interdict is to prevent, hinder, or delay the
+          enemy's use of an area or route. Interdiction is
+          conducted to complement and reinforce other ongoing
+          offensive or defensive operations. An interdiction
+          tasking must specify the enemy force to be interdicted.
+          It must also specify the area or route to be
+          interdicted, how long the interdiction is to be in
+          effect, defined either as a length of time or some
+          event that must occur before the interdiction is lifted
+          or the exact effect desired from the interdiction.".
+
+
+
+;Aerial and ground maneuver should be designed to present an
+;interdicted enemy with a dilemma. Actual or threatened ground maneuver
+;can force an enemy to respond by attempting rapid movement or
+;resupply, which provides targets to the unit interdicting that
+;location. This creates a dilemma for the enemy. If he attempts to
+;counter the ground maneuver, his forces will be exposed to
+;unacceptable losses from aerial maneuver. If he employs measures to
+;reduce such losses, his forces will not be able to counter the ground
+;maneuver. Taking full advantage of the enemy's dilemma depends on the
+;ability of friendly ground forces to exploit his delays and
+;disruption.
+
+;The depth at which the attacking force conduct the interdiction
+;generally determines the friendly force's freedom of
+;action. Increasing the depth of operations reduces the danger of
+;fratricide to friendly air and surface forces, reduces the
+;coordination required, and allows increasingly flexible
+;operations. With more freedom of action, aerial forces leave the
+;enemy with no location that is immune from attack. 
+
+;The depth at which the task is conducted often determines the speed
+;with which its effects are seen. Normally, ground maneuver units
+;first focus on targets close to the forward line own troops
+;(FLOT). Interdiction efforts there will have immediate impact on
+;those enemy forces in the vicinity of the attacks but do not effect
+;the enemy's ability to mass force effects. Attacks at greater
+;distances from the FLOT will have a delayed impact on the direct
+;fire fight but do eventually effect the enemy's ability to mass direct
+;fire effects.
+
+;The friendly force's capability to interdict may have a devastating
+;impact on the enemy's plans and ability to respond to friendly
+;actions. For example, delaying or disrupting enemy maneuver enhances
+;the friendly force's ability to achieve tactical advantages. Delaying
+;or disrupting enemy resupply efforts limits the enemy's ability to
+;sustain intense, high-tempo offensive or defensive operations and
+;restricts the mobility of his forces.
+
+;Interdicting the movement of enemy units can be extremely effective in
+;assisting their encirclement and eventual destruction. Fixed enemy
+;ground forces or those trapped by the loss of their mobility provide
+;lucrative targets. The commander should plan to interdict withdrawing
+;enemy forces to enhance his pursuit. While interdiction can contribute
+;to success by hampering reinforcement and resupply, it can also
+;contribute by trapping enemy forces or channeling their maneuvers,
+;thus leading to their destruction in detail." .
+
+;belongs in 'terrain-and-trafficability' file: 
+
+;constant: routeInterdicted.
+;in Mt: ModernMilitaryTacticsMt.
+;isa: ActorSlot IKBConstant.
+;genlPreds: pathBlocked.
+;arg1Isa: Interdiction-MilitaryTask.
+;arg2Isa: AvenueOfApproach.
+;comment "(#$routeInterdicted INTERDICT AVE) means that AVE is the instance
+;of #$AvenueOfApproach." .   
+
+;constant: areaInterdicted.
+
+;constant: forceInterdicted.
+
+
+;constant: interdictionConstraint-Time.
+
+;constant: interdictionConstraint-Sit.
+
+;constant: interdictionConstraint-Prop.
+
+
+
+;--------------------------------
+;ISOLATE
+
+constant: Isolate-MilitaryTask.
+in Mt: ModernMilitaryTacticsMt.
+isa: TemporalObjectType ScriptType IKBConstant.
+genls: Contain-MilitaryTask .
+comment: "To isolate is to seal off both physically and psychologically an
+enemy force from his sources of support, to deny the enemy freedom
+of movement, and to prevent the enemy unit from having contact
+with other enemy forces. Physical and psychological isolation are
+interdependent factors. Once isolated, an enemy unit must not be
+allowed sanctuary within his present position. It is attacked as
+often as possible. Usually associated with encirclement operations,
+isolate as a task can be a part of a deliberate attack to
+facilitate the breach of an enemy's defensive perimeter. This leads to
+the resulting piecemeal destruction of the enemy force. 
+
+Subordinate tasks for isolate include:   
+
+  * Cutting of all ground lines of communication (LOCs) to the enemy force.
+  * Preventing all support to the isolated force from outside forces,
+    including aerial delivery of supplies, fires, and intelligence.
+  * Conducting PSYOP against the isolated force to hamper morale and
+    induce surrender.".
+
+
+
+;---------------
+;LINKUP
+
+constant: Linkup-MilitaryTask.
+in Mt: ModernMilitaryTacticsMt.
+isa: TemporalObjectType ScriptType IKBConstant.
+genls: MilitaryTask.
+comment: "A linkup is a meeting of friendly ground forces and occurs in a
+variety of circumstances. It happens when an advancing force reaches
+an objective area previously seized by an airborne or air assault;
+when an encircled element breaks out to rejoin friendly forces or a
+force comes to the relief of an encircled force; and when converging
+maneuver forces meet. Both forces may be moving toward each other or
+one may be stationary. Whenever possible, joining forces exchange as
+much information as possible prior to the start of an operation. " .
+
+;The headquarters ordering the linkup establishes 
+
+;    * The command relationship and responsibilities of each force before,
+;      during, and after linkup.
+;    * Coordination of fire support before, during, and
+;      after linkup, including control measures. 
+;    * Method of linkup. 
+;    * Both near and far recognition signals and communications procedures to
+;      be used, including pyrotechnics, armbands, vehicle markings,
+;      gun-tube orientation, panels, colored smoke, lights, and challenge
+;      and passwords. 
+;    * Operations to be conducted following linkup and
+;      exchange of priority information.".
+
+;SEE ALSO: 'Control Measures for Linkup', 'Execution' on pp. A-19, A-20
+;in Appendix A.
+
+;---------------
+;NEUTRALIZE
+
+constant: Neutralize-MilitaryTask.
+in Mt: ModernMilitaryTacticsMt.
+isa: TemporalObjectType ScriptType IKBConstant.
+;;genls: MilitaryOffensiveOperation.
+genls : MilitaryOffensiveTask . 
+comment: "To neutralize is to render enemy personnel or material incapable of
+interfering with a particular operation.
+
+When assigning a task to neutralize, the commander must specify the
+enemy force or material to be neutralized and the duration of the
+neutralization, which is time-driven or event-driven. The neutralized
+target may become effective again when the casualties are replaced,
+damage is repaired, or effort resulting in the neutralization is
+lifted. Neutralization is usually accomplished by both lethal and
+nonlethal fires. The assets required to neutralize a target vary 
+according to the type and size of the target and the weapon and
+munitions combination used.".
+
+
+;---------------
+;OCCUPY
+
+constant: Occupy-MilitaryTask.
+in Mt: ModernMilitaryTacticsMt.
+isa: TemporalObjectType ScriptType IKBConstant.
+genls: MilitaryTask GainingUserRights.
+comment: "To occupy is to move onto an objective, key terrain, or
+other man-made or natural terrain area without opposition and to
+control that entire area. (See the section on control.)
+
+Occupation of territory requires that the territory be under the
+authority and effective control of an armed force. To control the
+territory, the armed force conducts area security operations supported
+by information operations. This is not applicable to territory being
+administered in accordance with peace terms, treaty, or other
+agreement, express or implied, with civil authority of the territory.".
+
+
+;---------------
+;PENETRATE
+
+
+constant: Penetrate-MilitaryTask.
+in Mt: ModernMilitaryTacticsMt.
+isa: TemporalObjectType ScriptType IKBConstant.
+genls: MilitaryOffensiveTask.
+comment : "A type of #$MilitaryOffensiveTask which seeks to break through the
+enemy's defense and disrupt the defensive system. (Source FM 101-5-1).".
+
+F : (interArgIsa1-2 damages Penetrate-MilitaryTask
+ModernMilitaryUnit-Deployable). 
+
+;---------------
+;RELIEVE
+
+constant: Relieve-MilitaryTask.
+in Mt: ModernMilitaryTacticsMt.
+isa: TemporalObjectType ScriptType IKBConstant.
+genls: MilitaryTask.
+comment : "Instances are instances of MilitaryTask such that the assigned
+          unit relieves another specified friendly unit." .
+
+
+
+;---------------
+;RETAIN
+
+constant: Retain-MilitaryTask.
+in Mt: ModernMilitaryTacticsMt.
+isa: TemporalObjectType ScriptType IKBConstant.
+genls: MilitaryTask.
+comment: "To retain is to occupy and hold a terrain 18 feature so that
+the enemy can not occupy or use it. The commander assigning this task
+must specify the area to be retained and the duration of the
+retention, which is time- or event-driven. While a unit is conducting
+this task, decisive engagement can occur.".
+
+
+;--------------
+;RIVER CROSSING
+
+constant: RiverCrossing-MilitaryTask.
+in Mt: ModernMilitaryTacticsMt.
+isa: TemporalObjectType ScriptType IKBConstant.
+genls: MilitaryTask.
+comment: "A river crossing is an operation required before ground combat power
+can be projected and sustained across a water obstacle. It is a
+centrally planned and controlled operation that requires the
+allocation of external crossing means and a force dedicated to the
+security of the bridgehead. River crossings require specific 
+procedures for success because the water obstacle prevents normal
+ground maneuver. There are three basic types of river crossings:
+hasty, deliberate, and retrograde. A hasty river crossing is a task
+conducted as part of a larger operation, typically an attack, with
+no intentional pause at the water line. When a hasty river crossing is
+not feasible such as when the enemy or terrain situations prevent
+it, a hasty crossing attempt fails, or friendly offensive operations
+resume at a river line after a pause, the force conducts a deliberate
+river crossing operation. A retrograde river crossing is a movement
+to the rear across a water obstacle while in contact with the
+enemy.  A river crossing is both a tactical task and an enabling
+operation. Field Manual 90-13, River Crossing Operations, gives
+detailed information concerning the conduct of a river crossing.".
+
+constant: RiverCrossing-Hasty.
+in Mt: ModernMilitaryTacticsMt.
+isa: TemporalObjectType ScriptType IKBConstant.
+genls: RiverCrossing-MilitaryTask.
+comment : "There are three basic types of river crossings: hasty,
+          deliberate, and retrograde. A hasty river crossing is a task
+          conducted as part of a larger operation, typically an attack,
+          with no intentional pause at the water line. When a hasty
+          river crossing is not feasible such as when the enemy or
+          terrain situations prevent it, a hasty crossing attempt
+          fails, or friendly offensive operations resume at a river
+          line after a pause, the force conducts a deliberate river
+          crossing operation. A retrograde river crossing is a movement
+          to the rear across a water obstacle while in contact with the
+          enemy. A river crossing is both a tactical task and an
+          enabling operation. Field Manual 90-13, River Crossing
+          Operations, gives detailed information concerning the conduct
+          of a river crossing." .
+
+
+constant: RiverCrossing-Deliberate.
+in Mt: ModernMilitaryTacticsMt.
+isa: TemporalObjectType ScriptType IKBConstant.
+genls: RiverCrossing-MilitaryTask.
+comment : "There are three basic types of river crossings: hasty,
+          deliberate, and retrograde. A hasty river crossing is a task
+          conducted as part of a larger operation, typically an attack,
+          with no intentional pause at the water line. When a hasty
+          river crossing is not feasible such as when the enemy or
+          terrain situations prevent it, a hasty crossing attempt
+          fails, or friendly offensive operations resume at a river
+          line after a pause, the force conducts a deliberate river
+          crossing operation. A retrograde river crossing is a movement
+          to the rear across a water obstacle while in contact with the
+          enemy. A river crossing is both a tactical task and an
+          enabling operation. Field Manual 90-13, River Crossing
+          Operations, gives detailed information concerning the conduct
+          of a river crossing." .
+
+
+constant: RiverCrossing-Retrograde.
+in Mt: ModernMilitaryTacticsMt.
+isa: TemporalObjectType ScriptType IKBConstant.
+genls: RiverCrossing-MilitaryTask.
+comment : "There are three basic types of river crossings: hasty,
+          deliberate, and retrograde. A hasty river crossing is a task
+          conducted as part of a larger operation, typically an attack,
+          with no intentional pause at the water line. When a hasty
+          river crossing is not feasible such as when the enemy or
+          terrain situations prevent it, a hasty crossing attempt
+          fails, or friendly offensive operations resume at a river
+          line after a pause, the force conducts a deliberate river
+          crossing operation. A retrograde river crossing is a movement
+          to the rear across a water obstacle while in contact with the
+          enemy. A river crossing is both a tactical task and an
+          enabling operation. Field Manual 90-13, River Crossing
+          Operations, gives detailed information concerning the conduct
+          of a river crossing.".
+
+
+
+;------------
+;RUPTURE
+
+constant: Rupture-MilitaryTask.
+in Mt: ModernMilitaryTacticsMt.
+isa: TemporalObjectType ScriptType IKBConstant.
+genls: MilitaryTask.
+comment: "To rupture is to create a gap in enemy defensive positions
+quickly. Rupture is directed against an enemy defensive force. Breach
+is the term used in conjunction with an obstacle. For more
+information, see the penetration discussion in Chapter 5. There is no
+mission graphic associated with this tactical task.".
+
+
+
+;--------------
+;SECURE
+
+constant: Secure-MilitaryTask.
+in Mt: ModernMilitaryTacticsMt.
+isa: TemporalObjectType ScriptType IKBConstant.
+genls: MilitaryTask AppropriatingSomething.
+disjointWith: Control-MilitaryTask.
+comment:"To secure is to gain possession of a position or terrain feature with
+or without force and try to prevent its destruction or loss by enemy
+action. A unit does not have to physically occupy a geographical
+location to secure it if the unit can prevent the enemy from occupying
+or firing at that location by other means. The subordinate tasks
+associated with secure are to prevent enemy direct and observed
+indirect fire from impacting on the secured area and to prevent any
+enemy forces from occupying or using the secured area.
+
+The unit securing the area must normally conduct area security
+activities. (See Chapter 16.) The tasks of secure differs from that of
+control because control allows enemy direct and indirect fires to
+affect the area being controlled. When assigning a mission to secure,
+the commander must state the area to be secured and the duration of
+the mission, which is a time- or event-driven constraint.".
+
+;belongs in 'terrain and traffic' file:
+
+;constant: areaSecured.
+;in Mt: ModernMilitaryTacticsMt.
+;isa: ActorSlot IKBConstant.
+;arg1Isa: Secure-MilitaryTask.
+;arg2Isa: SecurityZone.
+;comment: "(#$areaSecured TASK ZONE) means that ZONE is an instance of
+;#$GeographicalRegion secured by the instance of #$Secure-MilitaryTask
+;TASK.  If a military unit is the #$unitAssignedToTask TASK, then ZONE
+;is the unit's #$zoneOfResponsibility.".
+
+;F:
+;(implies
+;  (and
+;    (areaSecured ?TASK ?ZONE)
+;    (unitAssignedToTask ?TASK ?UNIT))
+;  (zoneOfResponsibility ?UNIT ?ZONE)). 
+
+;---------------
+;SEIZE
+
+constant: Seize-MilitaryTask.
+in Mt: ModernMilitaryTacticsMt.
+isa: TemporalObjectType ScriptType IKBConstant.
+genls: MilitaryTask GainingUserRights.
+comment: "To seize is to clear a designated area or objective and obtain
+control of it. This task is a combination of the clear and control
+tasks.  
+
+This task differs from that of secure because it requires offensive
+action to obtain control of the designated area or objective. Once the
+force gains control, it clears the terrain within that designated area
+or objective by killing, capturing, or forcing the withdrawal of all
+enemy forces.".
+
+F:
+(relationAllExists subEvents Seize-MilitaryTask Control-MilitaryTask).
+F:
+(relationAllExists subEvents Seize-MilitaryTask Clear-MilitaryTask).
+
+
+;----------------
+;SUPPORT BY FIRE
+
+constant: SupportByFire-MilitaryTask.
+in Mt: ModernMilitaryTacticsMt.
+isa: TemporalObjectType ScriptType IKBConstant.
+genls: MilitaryTask.
+comment : "An instance of #$SupportByFire-MilitaryTask closely
+          resembles the task of #$AttackByFire-MilitaryTask. The chief
+          difference is that support by fire is conducted to support
+          another force so that force can maneuver against the enemy." .
+
+
+;constant: supportByFire.
+;in Mt: ModernMilitaryTacticsMt.
+;isa: ActorSlot CotemporalObjectSlot IKBConstant.
+;F:
+;(implies
+;  (and 
+;    (assignedMissionOfUnit ?UNIT1 ?OP ?TEMP)
+;    (supportByFire ?OP ?UNIT2)
+;    (performedBy ?UNIT1 ?OP))
+;  (assistingAgents ?OP ?UNIT2)).
+;F:
+;(implies
+;  (and
+;    (supportByFire ?OP ?UNIT)
+;    (subEvents ?OP ?SUPPORT)
+;    (isa ?SUPPORT MilitaryTask)
+;    (performedBy ?UNIT ?SUPPORT))
+;  (relationInstanceExistsMany subevents ?SUPPORT ShootingAProjectileWeapon)).
+
+
+
+;---------------
+
+;ATTRIT
+
+constant: Attrit-MilitaryTask. 
+in Mt: ModernMilitaryTacticsMt.
+isa: TemporalObjectType ScriptType IKBConstant.
+genls: HarmingSomething MilitaryOffensiveTask. 
+comment : "A specialization of MilitaryOffensiveTask. A unit charged
+          with performing an instance of Attrit-MilitaryTask will
+          endeavor to reduce the number of combatants in a specified
+          hostile unit, either by outright killing or by rendering them
+          combat-ineffective by other means, physical and/or
+          psychological." .
+
+F : (interArgIsa1-2 performedBy Attrit-MilitaryTask
+ModernMilitaryUnit-Deployable) .
+F :   (interArgIsa1-2 objectActedOn Attrit-MilitaryTask
+ModernMilitaryUnit-Deployable).
+F : (implies 
+       (isa ?TASK Attrit-MilitaryTask) 
+       (relationInstanceExistsMany deviceUsed ?ATTRIT MilitaryWeapon)) .
+
+
+;---------------
+
+;PASSAGE OF LINES
+
+
+constant : PassageOfLines-MilitaryTask . 
+in Mt: ModernMilitaryTacticsMt .
+isa: ScriptType TemporalObjectType IKBConstant.
+genls : MilitaryTask ComplexMilitaryTask 
+       Translation-LocationChange CooperationEvent .
+comment: "A passage of lines is generally a task in which one unit
+
+          moves through another unit's position with the intent of moving into
+
+          or out of enemy contact. It involves the transfer of responsibility
+
+          for fighting an enemy force from one unit to another in close
+
+          operations. The commander's reason for conducting a passage of lines
+
+          is to sustain the tempo of an offensive operation with fresh forces
+
+          to a defense task. FM100-40, p. 18-2.".
+
+ 
+cyclistNotes: "Please also see PassageOfLines-MilitaryOperation and
+
+               the cyclistNotes thereon.".
+
+
+
+sourceOfTerm-PIT: FM100-40AppendixAMt.
+
+
+;---------------
+
+
+;FORWARD PASSAGE OF LINES
+
+constant : ForwardPassageOfLines-MilitaryTask.
+in Mt: ModernMilitaryTacticsMt.
+isa: TemporalObjectType ScriptType IKBConstant.
+genls: PassageOfLines-MilitaryTask . 
+comment: "A forward passage of lines occurs when a unit passes
+          through a unit's positions while moving toward the enemy.
+          FM100-40, p18-2. The purpose of a forward passage of lines is
+          to conduct operations, such as an attack, reconnaissance, or
+          security. This operation is designed to ensure maintenance of
+          enemy contact. FM100-40, p18-8." .
+
+sourceOfTerm-PIT: FM100-40AppendixAMt.
+
+
+;---------------
+ 
+;RELIEVES IN PLACE 
+
+constant: RelieveInPlace-MilitaryTask.
+in Mt: ModernMilitaryTacticsMt.
+isa: TemporalObjectType ScriptType IKBConstant.
+genls: Relieve-MilitaryTask ComplexMilitaryTask MilitaryEnablingTask.
+comment : "A relief in place is an enabling operation in which ...
+          all or part of a unit is replaced in an area by an incoming
+          unit. ... Normally, the unit relieved is defending. However,
+          a relief may set the stage for a resumption of offensive
+          operations. A relief may also serve to free the relieved unit
+          for other tasks, such as decontamination, reconstitution,
+          routine rest, resupply, maintenance, or specialized training.
+          Sometimes, as part of a larger operation, a commander wants
+          the enemy to discover the relief because it will cause the
+          enemy to do something in response that is prejudicial to his
+          interest, such as move reserves from an area where the
+          friendly commander wants to conduct a penetration. FM100-40,
+          p18- 14,15." .
+
+;---------------
+
+;SCREEN
+
+constant: Screen-MilitaryTask .
+in Mt: ModernMilitaryTacticsMt.
+isa: IKBConstant TemporalObjectType .
+genls: MilitaryTask InformationGathering .
+comment : "A screen provides primarily early warning. It observes,
+          identifies and reports enemy actions. Generally, a
+          screening force engages and destroys enemy reconnaissance
+          elements within its capabilities (thereby helping to deny
+          information to the enemy), but otherwise fights only in
+          self-defense. ... A screen lacks combat power to develop
+          the situation. FM100-40, P16-17." .
+sourceOfTerm-PIT : FM100-40AppendixAMt .

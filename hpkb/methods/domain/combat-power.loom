@@ -1,0 +1,273 @@
+;;; Main CP spec example COA -
+;;;
+;;; Last modified: April 26 1999
+;;; by Jihie Kim
+
+(in-package "EVALUATION")
+;(in-package "PLANET")
+;(loom:use-loom "PLANET")
+;(use-package "EXPECT")
+
+;;;**********************************
+;;; The values are based on KF 611.1
+;;;**********************************
+
+;brigade -> battalion
+;battalion-> company
+
+(defconcept M2-Bn 
+    :is-primitive military-unit
+    :defaults (:filled-by |echelonOfUnit| |Battalion-UnitDesignation|)
+    :roles ((|equipmentOfUnit| :type |BradleyFightingVehicle-M2|))
+    )
+
+(defrelation sub-echelon
+    :domain |MilitaryEchelon|
+    :range |MilitaryEchelon|
+    :characteristics :single-valued)
+
+(defconcept mechanized-subunit :is-primitive |ModernMilitaryUnit-Deployable|)
+(defconcept armored-subunit :is-primitive |ModernMilitaryUnit-Deployable|)
+(defconcept subunit-count :is-primitive thing)
+
+
+(defrelation sub-unit   
+    :domain military-unit
+    :range military-unit)
+
+;;; This one should be translated in PMA.loom, but isn't for some reason
+
+(defconcept |unitHasExtendedFrontage|
+  :is-primitive |ModernMilitaryUnit-Deployable|)
+
+
+(tellm
+ ;; ?? these are in CYC IKB
+ ;; (but all assertions are commented out there because they don't load
+ ;;  properly)
+ (|MilitaryEchelon| |Division-UnitDesignation|)
+ (|MilitaryEchelon| |Regiment-UnitDesignation|)
+ (|MilitaryEchelon| |Battalion-UnitDesignation|)
+ (|MilitaryEchelon| |Brigade-UnitDesignation|)
+ (|MilitaryEchelon| |Company-UnitDesignation|)
+ (|MilitaryEchelon| |Platoon-UnitDesignation|)
+ (|MilitaryEchelon| |Squadron-UnitDesignation|)
+ ;; This is what "squadron" in the fusion output was supposed to be.
+ (|MilitaryEchelon| |Squad-UnitDesignation|)
+ (|MilitaryEchelon| |Troop-UnitDesignation|)
+ (|MilitaryEchelon| |Battery-UnitDesignation|)
+ ;;
+ (sub-echelon |Regiment-UnitDesignation| |Battalion-UnitDesignation|)
+ (sub-echelon |Brigade-UnitDesignation| |Battalion-UnitDesignation|)
+ (sub-echelon |Battalion-UnitDesignation| |Company-UnitDesignation|)
+ )
+	      
+
+
+;;;*************************
+;;; example (based on COA1)
+;;;*************************
+
+#|
+Blue unit is a mechanized infantry division (BLUEDIVISION1) consisting of [
+[2 of mechanized infantry brigade (BLUEMECHBRIGADE1, BLUEMECHBRIGADE2)
+consisting of 
+  [2 of mechanized infantry battalions equipped with M2 
+  1 of tank battalion equipped with M1A2 
+  1 of artillery battalion
+  (BLUEARTILLERYBATTALION1, BLUEARTILLERYBATTALION2) equipped 
+  with 155 SP (in direct support)]] 
+
+[An armor brigade (BLUEARMORBRIGADE1) consisting of 
+  [2 of armor battalions equipped with M1A2
+  1 of mechanized infantry battalion
+  equipped with M2 
+  1 of artillery battalion (BLUEARTILLERYBATTALION3) equipped
+  with 155 SP (in direct support)]] 
+  
+[An armor battalion task force
+  (BLUEARMORBATTALION1) consisting of 
+  [3 of armor companies equipped with M1A2 
+  1 of mechanized infantry company equipped with M2]] 
+  
+[1 of Armored Cavalry
+  Squadron consisting of 
+  [3 of armored cavalry troops equipped with M3 and M1A2
+  2 of air cavalry troops equipped with OH58D KW]]
+|#
+
+(tellm 
+ (|BradleyFightingVehicle-M2| BradleyFightingVehicle-M2-prototype)
+ (|M1A2AbramsTank| M1A2AbramsTank-prototype)
+ (|Howitzer-155mmSelfPropelled| Howitzer-155mmSelfPropelled-prototype)
+ (|BradleyFightingVehicle-M3| BradleyFightingVehicle-M3-prototype)
+ (|SupportHelicopter-OH58DKW| SupportHelicopter-OH58DKW-prototype)
+ (|AH-64A-Helicopter| AH-64A-Helicopter-prototype) 
+ (|ArmoredPersonnelCarrier-BTR60| ArmoredPersonnelCarrier-BTR60-prototype)
+ (|MultipleRocketLauncherSystem-MLRS| MultipleRocketLauncherSystem-MLRS-prototype)
+ )
+
+(tellm 
+ (|MechanizedUnit-MilitarySpecialty| mechInfantryBrigade1) 
+ (|echelonOfUnit| mechInfantryBrigade1 |Brigade-UnitDesignation|)
+ (|MechanizedUnit-MilitarySpecialty| mechInfantryBrigade2) 
+ (|echelonOfUnit| mechInfantryBrigade2 |Brigade-UnitDesignation|)
+
+ (|ArmoredUnit-MilitarySpecialty| armorBrigade1) 
+ (|echelonOfUnit| armorBrigade1 |Brigade-UnitDesignation|)
+ (|ArmoredUnit-MilitarySpecialty| armorBattalion1) 
+ (|echelonOfUnit| armorBattalion1 |Battalion-UnitDesignation|)
+ (|CavalryUnit-MilitarySpecialty| armorCavalrySquadron1) 
+
+ (|AviationUnit-MilitarySpecialty| aviationBrigade1)
+ (|echelonOfUnit| aviationBrigade1 |Brigade-UnitDesignation|)
+ 
+ (|ArtilleryUnit-MilitarySpecialty| artilleryBrigade1)
+ (|echelonOfUnit| artilleryBrigade1 |Brigade-UnitDesignation|)
+ 
+ (|assignedMilitaryOrg| Blue1 mechInfantryBrigade1)
+ (|assignedMilitaryOrg| Blue1 mechInfantryBrigade2)
+ (|assignedMilitaryOrg| Blue1 armorBrigade1)
+ 
+ (|assignedMilitaryOrg| Blue1 armorBattalion1)
+ (|assignedMilitaryOrg| Blue1 armorCavalrySquadron1)
+ (|assignedMilitaryOrg| Blue1 aviationBrigade1)
+ (|assignedMilitaryOrg| Blue1 artilleryBrigade1)
+ )
+
+
+(tellm
+ 
+ (|MechanizedUnit-MilitarySpecialty| mechInfantryBattalion1) 
+ (|echelonOfUnit| mechInfantryBattalion1 |Battalion-UnitDesignation|)
+ (|MechanizedUnit-MilitarySpecialty| mechInfantryBattalion2) 
+ (|echelonOfUnit| mechInfantryBattalion2 |Battalion-UnitDesignation|)
+ 
+ (|ModernMilitaryUnit-Deployable| tankBattalion1)
+ (|echelonOfUnit| tankBattalion1 |Battalion-UnitDesignation|)
+ 
+ (|ArtilleryUnit-MilitarySpecialty| artilleryBattalion1)
+ (|echelonOfUnit| artilleryBattalion1 |Battalion-UnitDesignation|)
+  
+ (sub-unit mechInfantryBrigade1 mechInfantryBattalion1)
+ (sub-unit mechInfantryBrigade1 mechInfantryBattalion2)
+ (sub-unit mechInfantryBrigade1 tankBattalion1)
+ (sub-unit mechInfantryBrigade1 artilleryBattalion1)
+
+ (|equipmentOfUnit| mechInfantryBattalion1 BradleyFightingVehicle-M2-prototype)
+ (|equipmentOfUnit| mechInfantryBattalion2 BradleyFightingVehicle-M2-prototype)
+ (|equipmentOfUnit| tankBattalion1 M1A2AbramsTank-prototype)
+ (|equipmentOfUnit| artilleryBattalion1 Howitzer-155mmSelfPropelled-prototype)
+ )
+#|
+(tellm (:about mechInfantryBattalion1
+	       (:at-least 1 |equipmentOfUnit| |BradleyFightingVehicle-M2|))
+       (:about mechInfantryBattalion2
+	       (:at-least 1 |equipmentOfUnit| |BradleyFightingVehicle-M2|))
+       (:about tankBattalion1
+	       (:at-least 1 |equipmentOfUnit| |M1A2AbramsTank|))
+       (:about artilleryBattalion1
+	       (:at-least 1 |equipmentOfUnit| |Howitzer-155mmSelfPropelled|)))
+|#       
+	       
+       
+
+(tellm
+ 
+ (|MechanizedUnit-MilitarySpecialty| mechInfantryBattalion21) 
+ (|echelonOfUnit| mechInfantryBattalion21 |Battalion-UnitDesignation|)
+ (|MechanizedUnit-MilitarySpecialty| mechInfantryBattalion22) 
+ (|echelonOfUnit| mechInfantryBattalion22 |Battalion-UnitDesignation|)
+ 
+ (|ModernMilitaryUnit-Deployable| tankBattalion21)
+ (|echelonOfUnit| tankBattalion21 |Battalion-UnitDesignation|)
+ 
+ (|ArtilleryUnit-MilitarySpecialty| artilleryBattalion21)
+ (|echelonOfUnit| artilleryBattalion21 |Battalion-UnitDesignation|)
+  
+ (|assignedMilitaryOrg| mechInfantryBrigade2 mechInfantryBattalion3)
+ (|assignedMilitaryOrg| mechInfantryBrigade2 mechInfantryBattalion4)
+ (|assignedMilitaryOrg| mechInfantryBrigade2 tankBattalion21)
+ (|assignedMilitaryOrg| mechInfantryBrigade2 artilleryBattalion21)
+
+ (|equipmentOfUnit| mechInfantryBattalion21 BradleyFightingVehicle-M2-prototype)
+ (|equipmentOfUnit| mechInfantryBattalion22 BradleyFightingVehicle-M2-prototype)
+ (|equipmentOfUnit| tankBattalion21 M1A2AbramsTank-prototype)
+ (|equipmentOfUnit| artilleryBattalion21 Howitzer-155mmSelfPropelled-prototype)
+ )
+
+(tellm 
+ (|ArmoredUnit-MilitarySpecialty| armorBattalion31) 
+ (|echelonOfUnit| armorBattalion31 |Battalion-UnitDesignation|)
+ (|ArmoredUnit-MilitarySpecialty| armorBattalion32) 
+ (|echelonOfUnit| armorBattalion32 |Battalion-UnitDesignation|)
+ (|MechanizedUnit-MilitarySpecialty| mechInfantryBattalion31) 
+ (|echelonOfUnit| mechInfantryBattalion31 |Battalion-UnitDesignation|)
+
+ (sub-unit armorBrigade1 armorBattalion31)
+ (sub-unit armorBrigade1 armorBattalion32)
+ (sub-unit armorBrigade1 mechInfantryBattalion31)
+ (sub-unit armorBrigade1 artilleryBattalion31)
+ 
+ (|equipmentOfUnit| armorBattalion31 M1A2AbramsTank-prototype)
+ (|equipmentOfUnit| armorBattalion32 M1A2AbramsTank-prototype)
+ (|equipmentOfUnit| mechInfantryBattalion31 BradleyFightingVehicle-M2-prototype)
+ (|equipmentOfUnit| artilleryBattalion21 Howitzer-155mmSelfPropelled-prototype)
+ )
+
+(tellm
+ (|CavalryUnit-MilitarySpecialty| ArmoredCavalyTroop1)
+ (|CavalryUnit-MilitarySpecialty| ArmoredCavalyTroop2)
+ (|CavalryUnit-MilitarySpecialty| ArmoredCavalyTroop3)
+ (|CavalryUnit-MilitarySpecialty| AirCavalryTroop1)
+ (|CavalryUnit-MilitarySpecialty| AirCavalryTroop2)
+ 
+ (sub-unit armorCavalrySquadron1 ArmoredCavalyTroop1)
+ (sub-unit armorCavalrySquadron1 ArmoredCavalyTroop2)
+ (sub-unit armorCavalrySquadron1 ArmoredCavalyTroop3)
+ (sub-unit armorCavalrySquadron1 AirCavalryTroop1)
+ (sub-unit armorCavalrySquadron1 AirCavalryTroop2)
+ 
+ (|equipmentOfUnit| ArmoredCavalyTroop1 M1A2AbramsTank-prototype)
+ (|equipmentOfUnit| ArmoredCavalyTroop2 M1A2AbramsTank-prototype)
+ (|equipmentOfUnit| ArmoredCavalyTroop3 M1A2AbramsTank-prototype)
+ (|equipmentOfUnit| ArmoredCavalyTroop1 BradleyFightingVehicle-M3-prototype)
+ (|equipmentOfUnit| ArmoredCavalyTroop2 BradleyFightingVehicle-M3-prototype)
+ (|equipmentOfUnit| ArmoredCavalyTroop3 BradleyFightingVehicle-M3-prototype)
+ (|equipmentOfUnit| AirCavalryTroop1 SupportHelicopter-OH58DKW-prototype)
+ (|equipmentOfUnit| AirCavalryTroop2 SupportHelicopter-OH58DKW-prototype)
+)
+
+(tellm
+ (|ModernMilitaryUnit-Deployable| AttackHelicopterBattalion1)
+ (|echelonOfUnit| AttackHelicopterBattalion1 |Battalion-UnitDesignation|)
+ (sub-unit aviationBrigade1 AttackHelicopterBattalion1)
+ (|equipmentOfUnit| AttackHelicopterBattalion1 AH-64A-Helicopter-prototype)
+ )
+
+(tellm
+ (|ModernMilitaryUnit-Deployable| MLRS-battery1)
+ (|ModernMilitaryUnit-Deployable| MLRS-battery2)
+ (sub-unit artilleryBrigade1 MLRS-battery1)
+ (sub-unit artilleryBrigade1 MLRS-battery2)
+ (|equipmentOfUnit| MLRS-battery1 MultipleRocketLauncherSystem-MLRS-prototype)
+ (|equipmentOfUnit| MLRS-battery2 MultipleRocketLauncherSystem-MLRS-prototype)
+ )
+#|
+Red unit is a tank division (REDMECHDIVISION1), consisting of 
+[ [2 of mechanized infantry regiment (REDMECHREGIMENT1, REDMECHREGIMENT2) equipped
+with BTR-60, consisting of 
+  [2 of mechanized infantry battalions, equipped with BTR-60 
+   1 of tank battalion, equipped with T-64 
+   1 of artillery battalion equipped with 122mm SP (in direct support)]] 
+
+[1 of tank regiment (REDTANKREGIMENT1) equipped withT-64, consisting of 
+  [2 of tank battalions, equipped with T-64 
+   1 of artillery battalion equipped with 122mm SP 
+   (in direct support of REDTANKREGIMENT1)]] 
+
+[1 of tank battalion (REDTANKBATTALION1) equipped with T-64] 
+[1 of division artillery group (REDARTILLERYGROUP), consisting of 
+   [2 of artillery battalion equipped with 152mm SP 
+    1 of artillery battalion equipped with 122mm MRL]] ]
+|#

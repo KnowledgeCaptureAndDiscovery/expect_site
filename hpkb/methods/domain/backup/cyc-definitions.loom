@@ -1,0 +1,157 @@
+(in-package "EVALUATION")
+
+;(in-package "PLANET")
+;(loom:use-loom "PLANET")
+;(use-package "EXPECT")
+;(in-context 'planet-coa)
+;;; ******************************
+;;; cyc definitions  directly used
+#|
+
+<concepts>
+|Fix-MilitaryTask| 
+|Seize-MilitaryTask|
+|Penetrate-MilitaryTask|
+|ForwardPassageOfLines-MilitaryTask|
+|Contain-MilitaryTask|
+|Screen-MilitaryTask|
+|Attrit-MilitaryTask|
+|Interdict-MilitaryTask|
+|FollowAndSupport-MilitaryTask|
+|Block-MilitaryTask|
+
+|MechanizedUnit-MilitarySpecialty|
+|ArmoredUnit-MilitarySpecialty|
+|ArtilleryUnit-MilitarySpecialty|
+|CavalryUnit-MilitarySpecialty|
+|AviationUnit-MilitarySpecialty|
+
+|PhaseLine|
+|GeographicalRegion|
+
+|BradleyFightingVehicle-M3|
+|SupportHelicopter-OH58DKW|
+|AH-64A-Helicopter|
+|M1A2AbramsTank|
+|MultipleRocketLauncherSystem-MLRS|1
+|BradleyFightingVehicle-M2|
+|Howitzer-155mmSelfPropelled|
+
+|ModernMilitaryUnit-Deployable|
+|MilitaryEchelon|
+
+<instances>
+|Division-UnitDesignation|
+|Brigade-UnitDesignation|
+|Regiment-UnitDesignation|
+|Division-UnitDesignation|
+|TaskForce-UnitDesignation|
+|Squadron-UnitDesignation|
+|Team-UnitDesignation|
+|Battalion-UnitDesignation|
+|Company-UnitDesignation|
+|Red-Side|
+|Blue-Side|
+
+<relations>
+|assignedMilitaryOrg|
+|equipmentOfUnit|
+|echelonOfUnit|
+|sovereignAllegianceOfOrg|
+|eventOccursNear| 
+|subOrgs-Direct|
+
+|#
+
+
+#|
+(TELL (:ABOUT JOE (:CREATE NIL) PERSON (:AT-LEAST 1 CHILD PERSON)
+       (:ALL CHILD PERSON) (:AT-MOST 1 CHILD)))
+|#
+
+(defconcept |Fix-MilitaryTask| :is-primitive thing) 
+(defconcept |Defeat-MilitaryTask| :is-primitive thing) 
+(defconcept |Delay-MilitaryTask| :is-primitive thing) 
+(defconcept |Seize-MilitaryTask| :is-primitive thing)
+(defconcept |Penetrate-MilitaryTask| :is-primitive thing)
+(defconcept |ForwardPassageOfLines-MilitaryTask| :is-primitive thing)
+(defconcept |Contain-MilitaryTask| :is-primitive thing)
+(defconcept |Screen-MilitaryTask| :is-primitive thing)
+(defconcept |Attrit-MilitaryTask| :is-primitive thing)
+(defconcept |Interdict-MilitaryTask| :is-primitive thing)
+(defconcept |FollowAndSupport-MilitaryTask| :is-primitive thing)
+(defconcept |Block-MilitaryTask| :is-primitive thing)
+
+(defconcept |MechanizedUnit-MilitarySpecialty| :is-primitive |ModernMilitaryUnit-Deployable|)
+(defconcept |MechanizedInfantryUnit-MilitarySpecialty| :is-primitive |MechanizedUnit-MilitarySpecialty|)
+(defconcept |ArmoredUnit-MilitarySpecialty| :is-primitive |ModernMilitaryUnit-Deployable|)
+(defconcept |ArtilleryUnit-MilitarySpecialty| :is-primitive |ModernMilitaryUnit-Deployable|)
+(defconcept |CavalryUnit-MilitarySpecialty| :is-primitive |ModernMilitaryUnit-Deployable|)
+(defconcept |AviationUnit-MilitarySpecialty| :is-primitive |ModernMilitaryUnit-Deployable|)
+(defconcept |PhaseLine| :is-primitive thing)
+(defconcept |GeographicalRegion| :is-primitive thing)
+(defconcept |BradleyFightingVehicle-M3| :is-primitive thing)
+(defconcept |SupportHelicopter-OH58DKW| :is-primitive thing)
+(defconcept |AH-64A-Helicopter| :is-primitive thing)
+(defconcept |M1A2AbramsTank| :is-primitive thing)
+(defconcept |MultipleRocketLauncherSystem-MLRS| :is-primitive thing)
+(defconcept |BradleyFightingVehicle-M2| :is-primitive thing)
+(defconcept |Howitzer-155mmSelfPropelled| :is-primitive thing)
+(defconcept |ArmoredPersonnelCarrier-BTR60| :is-primitive thing)
+(defconcept |BattleTank-T64| :is-primitive thing)
+
+(defconcept |ModernMilitaryUnit-Deployable| :is-primitive military-unit)
+(defconcept |MilitaryEchelon| :is-primitive thing)
+(defconcept |Agent| :is-primitive thing)
+(defconcept |MilitaryAttack| :is-primitive thing)
+(defconcept |MilitaryDefensiveOperation| :is-primitive thing)
+(defconcept |MilitaryOffensiveOperation| :is-primitive thing)
+
+(defrelation |assignedMilitaryOrg|)
+(defrelation |equipmentOfUnit|)
+
+(defrelation |echelonOfUnit|
+  :characteristics :single-valued
+  :range |MilitaryEchelon|)
+
+(defrelation |sovereignAllegianceOfOrg|)
+(defrelation |eventOccursNear|)
+(defrelation |subOrgs-Direct|)
+(defrelation |objectActedOn| :range |ModernMilitaryUnit-Deployable|)
+(defrelation |taskOfOperation|)
+(defrelation |eventOccursAt|)
+(defrelation |troopStrengthOfUnit|)
+
+
+(tellm
+ (|MilitaryEchelon| |Division-UnitDesignation|)
+ (|MilitaryEchelon| |Brigade-UnitDesignation|)
+ (|MilitaryEchelon| |Division-UnitDesignation|)
+ (|MilitaryEchelon| |TaskForce-UnitDesignation|)
+ (|MilitaryEchelon| |Squadron-UnitDesignation|)
+ (|MilitaryEchelon| |Team-UnitDesignation|)
+ (|MilitaryEchelon| |Battalion-UnitDesignation|)
+ (|MilitaryEchelon| |Regiment-UnitDesignation|)
+ (|MilitaryEchelon| |Company-UnitDesignation|)
+ (|Agent| |Red-Side|)
+ (|Agent| |Blue-Side|)
+ )
+
+(defconcept |Counterattack-MilitaryOperation|
+  :is-primitive thing)
+(defconcept |Artifact|
+  :is-primitive thing)
+
+;; surya's definition
+(defconcept Defendfrompreparedposition-MilitaryOperation
+   :is-primitive thing)
+
+(defconcept Defendfromhastyposition-MilitaryOperation
+  :is-primitive thing)
+(defconcept MilitaryDefensiveOperation
+  :is-primitive thing)
+(defconcept Attackhastydefence-MilitaryOperation
+  :is-primitive thing)
+(defconcept Attackprepareddefence-MilitaryOperation
+  :is-primitive thing)
+

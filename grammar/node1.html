@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<!--Converted with LaTeX2HTML 96.1 (Feb 5, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<BODY BGCOLOR="FFFFFF">
+<TITLE>1 Introduction and Rationale</TITLE>
+<META NAME="description" CONTENT="1 Introduction and Rationale">
+<META NAME="keywords" CONTENT="grammar">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="grammar.css">
+</HEAD>
+<BODY LANG="EN">
+ <H1><A NAME="SECTION00010000000000000000">1 Introduction and Rationale</A></H1>
+<P>
+This document proposes a representation for objectives<A NAME="tex2html1" HREF="footnode.html#206"><IMG  ALIGN=BOTTOM ALT="gif" SRC="http://www.isi.edu/~valente/images/icons/foot_motif.gif"></A> This representation is based on
+discussions with CHECKMATE, and was developed for use in IFD-4.  More
+specifically, its development is part of the ISI work in developing
+INSPECT (INtelligent System for air campaign Plans evaluation based on
+ExpeCT). INSPECT is a knowledge-based system developed using ISI's
+EXPECT framework. The system checks the consistency of air campaign
+plans with respect to several criteria.  INSPECT provides consistency
+checking for operational plans developed (or modified) using ACPT. For
+a detailed description of INSPECT, see [<A HREF="node5.html#Valente96a">Valente <EM>et al.</EM>, 1996</A>].
+<P>
+The representation proposed in this document has as its main focus
+providing a richer and more structured representation for air campaign
+plan objectives than the one that is present in ACPT at the moment,
+specifically as needed by INSPECT and the other IFD-4 systems.
+However, since it has been submitted to a detailed validation process
+with the experts in CHECKMATE, it may be used by other groups within
+the initiative. It must be noted, however, that the work presented
+here is still in progress, and this document should not be seen as
+final or officially approved.
+<P>
+In addition to a representation for objectives, this document proposes
+a library of objectives. More precisely, the elements of this library
+are <em>templates</em> for the specification of the central part of the
+objectives, namely their action (or activity) descriptions. The
+templates make use of the structure defined in the proposed
+representation for objectives. They can provide a basis for a
+structured objectives editor in ACPT, that enforces to some extent the
+correctness of the specification of objectives. They also provide a
+set of coherent (and hopefully sufficient) elements to construct
+objectives, and thus it is complementary to current work in the
+initiative about plan ontologies and air campaign planning ontologies.
+Specifically, the work presented in this document can be used as an
+input to an ontology of the air campaign planning domain.
+<P>
+Both grammar and library have been built using a ``bottom-up''
+process. We departed from a set of prototypical examples of objectives
+proposed by CHECKMATE. We abstracted an initial set of elements and
+some common patterns in that set, and then refined these by
+interviewing CHECKMATE experts. The coverage of the library is
+mostly limited to force application objectives -- a consequence of
+the set of examples we departed from. However, this coverage can be
+extended if necessary in the future.
+<P>
+The representation of objectives and the library of objetive templates
+propose here is an intermediary solution between providing the ACPT
+user with a set of predefined examples of objectives and leaving the
+user free to write whatever seems to work. CHECKMATE has expressed
+preference for the approach adopted here.
+<P>
+<H4><A NAME="SECTION00010010000000000000">Acknowledgements</A></H4>
+<P>
+Knowledge acquisition was a critical task in building this grammar,
+and demanded much effort from the experts. Many thanks to all
+Checkmate members who interacted with us, and most especially to
+Colonel Plebanek, who allowed us to have this interaction, Major
+Cardenas, for coordinating the knowledge acquisition sessions, and to
+the Checkmate members we used as experts and worked with closely:
+Major Allison (``Coach''), Major Cardenas, Major Cunico, and Major
+Jackson (``J.J.''). Special thanks to Major Alred (``Yogi''), who was
+the major expert in the construction of this representation. Their
+support to our work and their patience in answering our questions has
+been vital to this effort. We hope they like the results.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+<I>Andre Valente <BR>
+Fri Sep 13 20:17:45 PDT 1996</I>
+</ADDRESS>
+</BODY>
+</HTML>

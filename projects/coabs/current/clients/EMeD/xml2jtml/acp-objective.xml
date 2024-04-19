@@ -1,0 +1,119 @@
+<?xml version=\"1.0\"?>
+<!DOCTYPE conceptDescription SYSTEM \"concept.dtd\">
+
+<conceptDescription name=\"ACP-OBJECTIVE\"> 
+
+<Definition> (defconcept <concept>ACP-OBJECTIVE</concept>
+   :IS-PRIMITIVE <concept>GRAMMAR-CONCEPT</concept>)
+
+ </Definition><Documentation>  </Documentation><subConcepts> 
+<concept> OBJECTIVE-REQUIRING-INTERDICTION </concept>
+<concept> OBJECTIVE-REQUIRING-STRATEGIC-ATTACK </concept>
+<concept> ACP-OBJECTIVE-TO-BE-INSPECTED </concept>
+<concept> OBJECTIVE-REQUIRING-SURFACE-WARFARE </concept>
+<concept> OBJECTIVE-REQUIRING-ANTI-SUBMARINE-WARFARE </concept>
+<concept> OBJECTIVE-REQUIRING-NAVAL-MISSION </concept>
+<concept> OBJECTIVE-REQUIRING-AIR-REFUELING </concept>
+<concept> OBJECTIVE-REQUIRING-AIRLIFT </concept>
+<concept> OBJECTIVE-REQUIRING-COMBAT-SUPPORT </concept>
+<concept> OBJECTIVE-REQUIRING-SPECIAL-OPERATIONS </concept>
+<concept> OBJECTIVE-REQUIRING-SURVEILLANCE-AND-RECONNAISSANCE </concept>
+<concept> OBJECTIVE-REQUIRING-ELECTRONIC-COMBAT </concept>
+<concept> OBJECTIVE-REQUIRING-CLOSE-AIR-SUPPORT </concept>
+<concept> OBJECTIVE-REQUIRING-DEFENSIVE-COUNTERAIR </concept>
+<concept> OBJECTIVE-REQUIRING-OFFENSIVE-COUNTERAIR </concept>
+<concept> NATIONAL-MILITARY-OBJECTIVE </concept>
+<concept> NATIONAL-OBJECTIVE </concept> </subConcepts><superConcepts> 
+<concept> GRAMMAR-CONCEPT </concept> </superConcepts><Siblings> 
+<WithCommonParent name=\"GRAMMAR-CONCEPT\">
+<concept>ACP-PHASE</concept>
+<concept>ACPLAN</concept>
+<concept>AREA-RESTRICTION</concept>
+<concept>COG-TYPE</concept>
+<concept>CONOPS</concept>
+<concept>OPTION</concept>
+<concept>ROLE-OBJECT</concept>
+<concept>SCENARIO</concept>
+<concept>STRUCTURED-OBJECTIVE-DESCRIPTION</concept>
+<concept>THEATRE</concept>
+<concept>TIME-POINT</concept>
+<concept>VERB</concept>
+</WithCommonParent> </Siblings><Roles> <DetailedRole> <Relation> R-ACPT-OBJ-STRING </Relation>
+<Type>
+<concept>STRING</concept>
+</Type><MinCardinality> 0 </MinCardinality><MaxCardinality>  </MaxCardinality>
+<StrictValues>
+</StrictValues>
+<DefaultValues>
+</DefaultValues> </DetailedRole><DetailedRole> <Relation> R-OBJECTIVE-PARENTS </Relation>
+<Type>
+<concept>ACP-OBJECTIVE</concept>
+</Type><MinCardinality> 0 </MinCardinality><MaxCardinality>  </MaxCardinality>
+<StrictValues>
+</StrictValues>
+<DefaultValues>
+</DefaultValues> </DetailedRole><DetailedRole> <Relation> R-OBJECTIVE-STRUCTURED-DESCRIPTION </Relation>
+<Type>
+<concept>STRUCTURED-OBJECTIVE-DESCRIPTION</concept>
+</Type><MinCardinality> 0 </MinCardinality><MaxCardinality>  </MaxCardinality>
+<StrictValues>
+</StrictValues>
+<DefaultValues>
+</DefaultValues> </DetailedRole><DetailedRole> <Relation> R-OBJECTIVE-TEXT-DESCRIPTION </Relation>
+<Type>
+<concept>THING</concept>
+</Type><MinCardinality> 0 </MinCardinality><MaxCardinality>  </MaxCardinality>
+<StrictValues>
+</StrictValues>
+<DefaultValues>
+</DefaultValues> </DetailedRole><DetailedRole> <Relation> R-REFERENCES-OBJECT-TYPE </Relation>
+<Type>
+<concept>OBJECT-TYPE</concept>
+</Type><MinCardinality> 0 </MinCardinality><MaxCardinality>  </MaxCardinality>
+<StrictValues>
+</StrictValues>
+<DefaultValues>
+</DefaultValues> </DetailedRole><DetailedRole> <Relation> R-REFERS-DIRECTLY-TO-ROLE-OBJECT </Relation>
+<Type>
+<concept>ROLE-OBJECT</concept>
+</Type><MinCardinality> 0 </MinCardinality><MaxCardinality>  </MaxCardinality>
+<StrictValues>
+</StrictValues>
+<DefaultValues>
+</DefaultValues> </DetailedRole><DetailedRole> <Relation> R-REFERS-INDIRECTLY-TO-ROLE-OBJECT-1 </Relation>
+<Type>
+<concept>OBJECT</concept>
+</Type><MinCardinality> 0 </MinCardinality><MaxCardinality>  </MaxCardinality>
+<StrictValues>
+</StrictValues>
+<DefaultValues>
+</DefaultValues> </DetailedRole><DetailedRole> <Relation> R-REFERS-INDIRECTLY-TO-ROLE-OBJECT-2 </Relation>
+<Type>
+<concept>ACTION</concept>
+</Type><MinCardinality> 0 </MinCardinality><MaxCardinality>  </MaxCardinality>
+<StrictValues>
+</StrictValues>
+<DefaultValues>
+</DefaultValues> </DetailedRole><DetailedRole> <Relation> R-REFERS-TO-ROLE-OBJECT </Relation>
+<Type>
+<concept>ROLE-OBJECT</concept>
+</Type><MinCardinality> 0 </MinCardinality><MaxCardinality>  </MaxCardinality>
+<StrictValues>
+</StrictValues>
+<DefaultValues>
+</DefaultValues> </DetailedRole><DetailedRole> <Relation> R-USES-VERB </Relation>
+<Type>
+<concept>VERB</concept>
+</Type><MinCardinality> 0 </MinCardinality><MaxCardinality>  </MaxCardinality>
+<StrictValues>
+</StrictValues>
+<DefaultValues>
+</DefaultValues> </DetailedRole><DetailedRole> <Relation> R-USUALLY-REQUIRED-MISSION-TYPES </Relation>
+<Type>
+<concept>MISSION-TYPE</concept>
+</Type><MinCardinality> 0 </MinCardinality><MaxCardinality>  </MaxCardinality>
+<StrictValues>
+</StrictValues>
+<DefaultValues>
+</DefaultValues> </DetailedRole> </Roles><Instances total=\"0\" nonDirect=\"0\" direct=\"0\"> <DirectInstances>  </DirectInstances>
+<NonDirectInstances>  </NonDirectInstances> </Instances> </conceptDescription>
